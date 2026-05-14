@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/tech/kubernetes-pod-design.html
   
   
   
+  
+  
+  
+
+
+# Kubernetes Pod Design: Patterns and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Kubernetes Pod Design: Patterns and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Kubernetes Pod Design: Patterns and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pods are the smallest deployable units in Kubernetes. Effective pod design determines application reliability, resource efficiency, and operational simplicity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Pods are the smallest deployable units in Kubernetes. Effective pod design deter
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Init containers run before application containers start. They handle setup tasks: database migrations, permission changes, configuration generation, and waiting for dependencies. Init containers run sequentially and must complete successfully before the app starts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Init containers use different images than the application. A migration init cont
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Container Probes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Three probe types manage container lifecycle. Liveness probes check if the conta
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Configure probes for your application's startup characteristics. A Java application might need a 60-second startup probe while a Go binary starts in milliseconds. Set failure thresholds appropriately for your recovery time.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Configure probes for your application's startup characteristics. A Java applicat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Always set resource requests and limits. Requests guarantee resources for scheduling. Limits prevent resource exhaustion. Set requests based on steady-state usage and limits at peak usage plus headroom.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ CPU limits throttle containers rather than terminating them. Memory limits cause
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Pod Lifecycle
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Pod lifecycle states: Pending (scheduling), Running (at least one container runn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pod lifecycle hooks: PostStart (runs after container creation—not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination—use for graceful shutdown). PreStop hooks are blocking—Kubernetes waits for completion or the terminationGracePeriodSeconds timeout.
@@ -279,10 +456,28 @@ Pod lifecycle hooks: PostStart (runs after container creation—not guaranteed t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Pod Disruption Budgets
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

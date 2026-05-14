@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-review-tools.html
   
 
 
+# Code Review Tools and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Code Review Tools and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Code Review Tools and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Code review is the most effective practice for improving code quality and sharin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  GitHub Pull Requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,6 +225,15 @@ GitHub's PR workflow is the most widely adopted code review system:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .github/PULL_REQUEST_TEMPLATE.md
@@ -146,10 +251,28 @@ GitHub's PR workflow is the most widely adopted code review system:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ name: Feature Request
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 about: Describe a new feature or enhancement
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -251,6 +410,15 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Type of Change
@@ -268,31 +436,6 @@ title: "[FEATURE] "
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Bug fix
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- [ ] New feature
-
-  
-  
-  
-  
   
   
   
@@ -304,8 +447,17 @@ title: "[FEATURE] "
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Refactoring
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Bug fix
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -321,7 +473,7 @@ title: "[FEATURE] "
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Documentation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] New feature
 
   
   
@@ -336,10 +488,80 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Performance improvement
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Refactoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Documentation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Performance improvement
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -370,14 +592,6 @@ title: "[FEATURE] "
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Unit tests added/updated
-
-  
-  
-  
-  
   
   
   
@@ -389,7 +603,7 @@ title: "[FEATURE] "
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Integration tests added/updated
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Unit tests added/updated
 
   
   
@@ -404,10 +618,54 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Manual testing completed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Integration tests added/updated
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Manual testing completed
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -438,31 +696,6 @@ title: "[FEATURE] "
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Code follows project style guidelines
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- [ ] Self-review completed
-
-  
-  
-  
-  
   
   
   
@@ -474,8 +707,17 @@ title: "[FEATURE] "
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Documentation updated
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Code follows project style guidelines
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -491,7 +733,7 @@ title: "[FEATURE] "
   
 
 
-\\\\\\\\\\\\\\\\- [ ] No new warnings introduced
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Self-review completed
 
   
   
@@ -506,10 +748,80 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Breaking changes documented
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Documentation updated
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] No new warnings introduced
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Breaking changes documented
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -543,10 +855,28 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Required Reviews via Branch Protection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -577,6 +907,15 @@ title: "[FEATURE] "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 branches:
@@ -594,10 +933,28 @@ branches:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: main
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -628,10 +985,28 @@ protection:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 required_status_checks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -662,6 +1037,15 @@ strict: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 contexts:
@@ -679,14 +1063,6 @@ contexts:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- "continuous-integration/tests"
-
-  
-  
-  
-  
   
   
   
@@ -698,7 +1074,7 @@ contexts:
   
 
 
-\\\\\\\\\\\\\\\\- "codecov/patch"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "continuous-integration/tests"
 
   
   
@@ -713,10 +1089,54 @@ contexts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- "lint"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "codecov/patch"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "lint"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -747,10 +1167,28 @@ required_pull_request_reviews:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 required_approving_review_count: 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -781,10 +1219,28 @@ dismiss_stale_reviews: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 require_code_owner_reviews: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -815,10 +1271,28 @@ require_last_push_approval: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 restrictions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -849,10 +1323,28 @@ users: []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 teams: ["core-committers"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -883,6 +1375,15 @@ teams: ["core-committers"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitLab's MR workflow includes merge trains and pipeline-integrated reviews:
@@ -900,10 +1401,28 @@ GitLab's MR workflow includes merge trains and pipeline-integrated reviews:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .gitlab/merge_request_templates/Default.md
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -937,10 +1456,28 @@ GitLab's MR workflow includes merge trains and pipeline-integrated reviews:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Related Issues
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -971,10 +1508,28 @@ Closes #ISSUE_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  MR Type
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1005,6 +1560,15 @@ Closes #ISSUE_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Merge Checklist
@@ -1022,31 +1586,6 @@ Closes #ISSUE_ID
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Pipeline passes
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- [ ] Code reviewed by at least one team member
-
-  
-  
-  
-  
   
   
   
@@ -1058,8 +1597,17 @@ Closes #ISSUE_ID
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Performance impact assessed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Pipeline passes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1075,7 +1623,7 @@ Closes #ISSUE_ID
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Database migrations reviewed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Code reviewed by at least one team member
 
   
   
@@ -1090,10 +1638,80 @@ Closes #ISSUE_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] API documentation updated
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Performance impact assessed
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Database migrations reviewed
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] API documentation updated
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1124,14 +1742,6 @@ Closes #ISSUE_ID
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Squash commits
-
-  
-  
-  
-  
   
   
   
@@ -1143,7 +1753,7 @@ Closes #ISSUE_ID
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Delete source branch
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Squash commits
 
   
   
@@ -1158,10 +1768,54 @@ Closes #ISSUE_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Add to merge train
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Delete source branch
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add to merge train
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1192,10 +1846,28 @@ GitLab merge trains prevent broken main by serializing merges with validation:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .gitlab-ci.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1226,10 +1898,28 @@ merge_train:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: pre-merge
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1260,10 +1950,28 @@ rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- if: $CI_PIPELINE_SOURCE == "merge_request_event"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- if: $CI_PIPELINE_SOURCE == "merge_request_event"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1294,10 +2002,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- echo "Validating merge train entry"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- echo "Validating merge train entry"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1328,10 +2054,28 @@ environment:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: merge_train
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1362,10 +2106,28 @@ name: merge_train
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Linting and Static Analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1396,10 +2158,28 @@ name: merge_train
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Automated Code Review
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1430,10 +2210,28 @@ on: [pull_request]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1464,10 +2262,28 @@ lint-review:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1498,14 +2314,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -1517,8 +2325,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1536,6 +2379,15 @@ steps:
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1566,10 +2418,28 @@ node-version: "20"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- run: npm ci
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm ci
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1600,10 +2470,28 @@ node-version: "20"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: reviewdog/action-eslint@v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: reviewdog/action-eslint@v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1621,6 +2509,15 @@ node-version: "20"
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1651,10 +2548,28 @@ reporter: github-pr-review
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 level: warning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1685,6 +2600,15 @@ filter_mode: diff_context
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # TypeScript type checking
@@ -1702,10 +2626,28 @@ filter_mode: diff_context
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- run: npm run type-check
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm run type-check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1736,10 +2678,28 @@ filter_mode: diff_context
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: actions/dependency-review-action@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/dependency-review-action@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1770,10 +2730,28 @@ with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fail-on-severity: high
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1804,10 +2782,28 @@ fail-on-severity: high
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Check complexity
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check complexity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1838,10 +2834,28 @@ run: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npx complexity-report src/ --threshold 10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1872,10 +2886,28 @@ npx complexity-report src/ --threshold 10
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Custom AI review bot (pseudo-code)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1906,10 +2938,28 @@ import { Octokit } from '@octokit/rest';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 async function reviewPullRequest(owner, repo, prNumber) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1940,10 +2990,28 @@ const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Get PR diff
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1974,10 +3042,28 @@ const { data: diff } = await octokit.pulls.get({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 owner, repo, pull_number: prNumber,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2008,10 +3094,28 @@ mediaType: { format: 'diff' },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2042,10 +3146,28 @@ mediaType: { format: 'diff' },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const review = await aiReview(diff);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2076,10 +3198,28 @@ const review = await aiReview(diff);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 await octokit.pulls.createReview({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2110,10 +3250,28 @@ owner, repo, pull_number: prNumber,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 body: review.summary,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2144,10 +3302,28 @@ event: 'COMMENT', // or APPROVE / REQUEST_CHANGES
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 comments: review.comments.map(c => ({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2178,10 +3354,28 @@ path: c.file,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 line: c.line,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2212,10 +3406,28 @@ body: c.comment,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2246,10 +3458,28 @@ body: c.comment,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2280,10 +3510,28 @@ body: c.comment,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Security Review Items
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2314,31 +3562,6 @@ security_checklist:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- "SQL injection: use parameterized queries, not string interpolation"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- "XSS: sanitize user input before rendering"
-
-  
-  
-  
-  
   
   
   
@@ -2350,8 +3573,17 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- "CSRF: verify tokens on state-changing endpoints"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "SQL injection: use parameterized queries, not string interpolation"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2367,7 +3599,7 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- "Authentication: use existing auth middleware"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "XSS: sanitize user input before rendering"
 
   
   
@@ -2378,14 +3610,6 @@ security_checklist:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- "Authorization: verify permissions, not just authentication"
-
   
   
   
@@ -2401,7 +3625,7 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- "Secrets: no API keys or passwords in code"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "CSRF: verify tokens on state-changing endpoints"
 
   
   
@@ -2416,10 +3640,106 @@ security_checklist:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- "Rate limiting: validate limits on public endpoints"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Authentication: use existing auth middleware"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Authorization: verify permissions, not just authentication"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Secrets: no API keys or passwords in code"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Rate limiting: validate limits on public endpoints"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2450,6 +3770,15 @@ security_checklist:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Performance Checklist
@@ -2467,31 +3796,6 @@ security_checklist:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] N+1 queries eliminated?
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- [ ] Database indexes cover new queries?
-
-  
-  
-  
-  
   
   
   
@@ -2503,8 +3807,17 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Caching strategy appropriate for access pattern?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] N+1 queries eliminated?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2520,7 +3833,7 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Large payloads paginated or streamed?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Database indexes cover new queries?
 
   
   
@@ -2531,14 +3844,6 @@ security_checklist:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- [ ] Expensive operations async or deferred?
-
   
   
   
@@ -2554,7 +3859,7 @@ security_checklist:
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Memory leak risks from closures or event listeners?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Caching strategy appropriate for access pattern?
 
   
   
@@ -2569,10 +3874,106 @@ security_checklist:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Bundle size impact for frontend changes?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Large payloads paginated or streamed?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Expensive operations async or deferred?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Memory leak risks from closures or event listeners?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Bundle size impact for frontend changes?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2603,10 +4004,28 @@ security_checklist:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Small PRs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2637,10 +4056,28 @@ Keep PRs under 400 lines of code. Research shows review effectiveness drops shar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check diff size
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2671,10 +4108,28 @@ git diff main...HEAD --stat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Warn on large PRs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2705,10 +4160,28 @@ git diff main...HEAD --stat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CHANGES=$(git diff main...HEAD --numstat | awk '{sum+=$1+$2} END {print sum}')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2739,10 +4212,28 @@ if [ "$CHANGES" -gt 400 ]; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "Warning: $CHANGES lines changed. Consider splitting into smaller PRs."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2773,10 +4264,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Reviewer Rotation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2807,10 +4316,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 *.ts @team-frontend @team-backend
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2841,10 +4368,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 *.sql @team-data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2875,10 +4420,28 @@ Dockerfile @team-infra
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 *.yml @team-infra
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2909,10 +4472,28 @@ docs/*.md @team-docs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dangerfile.js @team-leads
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2943,10 +4524,28 @@ dangerfile.js @team-leads
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Slack reminder for stale reviews
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2977,10 +4576,28 @@ const STALE_THRESHOLD = 24 * 60 * 60 * 1000; // 24 hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 async function checkStaleReviews() {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3011,10 +4628,28 @@ const { data: pulls } = await octokit.pulls.list({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 owner: 'my-org',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3045,10 +4680,28 @@ repo: 'my-repo',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 state: 'open',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3079,10 +4732,28 @@ state: 'open',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for (const pull of pulls) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3113,10 +4784,28 @@ const age = Date.now() - new Date(pull.created_at).getTime();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if (age > STALE_THRESHOLD) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3147,6 +4836,41 @@ await remindReviewers(pull);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -3164,6 +4888,15 @@ await remindReviewers(pull);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -3177,14 +4910,6 @@ await remindReviewers(pull);
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -3215,10 +4940,28 @@ await remindReviewers(pull);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Large repositories require optimization:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3249,10 +4992,28 @@ Large repositories require optimization:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git clone --filter=blob:none --sparse 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3283,10 +5044,28 @@ git sparse-checkout set services/payment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Use git blame with ignore-revs for formatting changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3317,10 +5096,28 @@ git blame --ignore-revs-file .git-blame-ignore-revs file.go
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Building a Review Culture
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3351,6 +5148,15 @@ Effective code review is about culture, not just tools:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Review within 24 hours**: set explicit SLAs for review turnaround.
@@ -3368,31 +5174,6 @@ Effective code review is about culture, not just tools:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Explain the "why"**: comments should explain rationale, not just state problems.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Assume good intent**: phrase feedback as questions ("What do you think about...?").
-
-  
-  
-  
-  
   
   
   
@@ -3404,8 +5185,17 @@ Effective code review is about culture, not just tools:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Celebrate good code**: leave positive comments on well-written sections.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Explain the "why"**: comments should explain rationale, not just state problems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3421,8 +5211,69 @@ Effective code review is about culture, not just tools:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Automate the obvious**: let linters catch style issues so humans focus on logic.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Assume good intent**: phrase feedback as questions ("What do you think about...?").
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Celebrate good code**: leave positive comments on well-written sections.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Automate the obvious**: let linters catch style issues so humans focus on logic.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

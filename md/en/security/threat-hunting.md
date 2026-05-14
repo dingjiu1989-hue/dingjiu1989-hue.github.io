@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-hunting.html
   
 
 
+# Threat Hunting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Hunting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Hunting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Threat hunting is the proactive search for malicious activity that evades existi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The Hunting Maturity Model 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -91,10 +178,28 @@ The Hunting Maturity Model (HMM) describes an organization's hunting capability 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **HMM0 — Initial**: Relies on automated alerts only; no proactive hunting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -113,6 +218,15 @@ The Hunting Maturity Model (HMM) describes an organization's hunting capability 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **HMM2 — Procedural**: Hunting follows documented procedures
@@ -124,10 +238,28 @@ The Hunting Maturity Model (HMM) describes an organization's hunting capability 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **HMM3 — Innovative**: Creates novel data analysis techniques
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -149,6 +281,15 @@ The Hunting Maturity Model (HMM) describes an organization's hunting capability 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Hypothesis-Driven Hunting 
@@ -160,10 +301,28 @@ Hypothesis-Driven Hunting
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -188,10 +347,28 @@ The hypothesis is the foundation of every hunt. It should be testable, specific,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Test: Find PowerShell processes making outbound connections
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -216,10 +393,28 @@ def hunt_powershell_c2(time_window_hours=72):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query = f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -244,10 +439,28 @@ SELECT p.pid, p.command_line, p.start_time,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 u.username, h.dest_ip, h.dest_port
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -272,10 +485,28 @@ FROM processes p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JOIN users u ON p.user_id = u.id
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -300,10 +531,28 @@ JOIN network_connections h ON p.pid = h.pid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE p.name = 'powershell.exe'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -328,10 +577,28 @@ AND h.remote_port IN (80, 443, 8080)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND p.start_time > NOW() - INTERVAL '{time_window_hours} hours'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -356,10 +623,28 @@ AND p.command_line NOT LIKE '%WindowsPowerShell%'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +669,28 @@ results = execute_hunt(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for row in results:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -412,10 +715,28 @@ if suspicious_patterns.match(row.command_line):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 yield HuntingFinding(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -440,10 +761,28 @@ hypothesis="PowerShell C2",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 evidence=row,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -468,10 +807,28 @@ severity="high"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -493,10 +850,28 @@ MITRE ATT&CK; Mapping
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The MITRE ATT&CK; framework provides a common taxonomy for adversary behavior. Mapping hunts to ATT&CK; techniques ensures comprehensive coverage. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -521,10 +896,28 @@ hunt:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: "DLL Search Order Hijacking"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -549,10 +942,28 @@ technique_id: T1574.001
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tactic: Persistence, Privilege Escalation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -577,25 +988,6 @@ data_sources:
   
   
   
-
-
-\\\\\\\\- Windows Event ID 4688 (Process Creation)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- Sysmon Event ID 7 (Image Loaded)
-
-  
   
   
   
@@ -607,8 +999,63 @@ data_sources:
   
 
 
-\\\\\\\\- File creation events in system directories
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Windows Event ID 4688 (Process Creation)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sysmon Event ID 7 (Image Loaded)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- File creation events in system directories
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -633,10 +1080,28 @@ hypothesis: "Adversary places malicious DLL in search path before legitimate app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -661,10 +1126,28 @@ platform: kql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 text: >
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -689,6 +1172,15 @@ Sysmon
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | where EventID == 7
@@ -703,11 +1195,6 @@ Sysmon
   
   
   
-
-
-| where ImageLoaded contains "\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\" 
-
-  
   
   
   
@@ -719,8 +1206,40 @@ Sysmon
   
 
 
-or ImageLoaded contains "\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\"
+| where ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+or ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -745,10 +1264,28 @@ or ImageLoaded contains "\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | join kind=inner (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -773,10 +1310,28 @@ Sysmon | where EventID == 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ) on ProcessGuid
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -798,10 +1353,28 @@ Data Sources for Hunting
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective hunting requires rich telemetry. The best sources include: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -823,41 +1396,6 @@ Effective hunting requires rich telemetry. The best sources include:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -869,8 +1407,70 @@ Effective hunting requires rich telemetry. The best sources include:
   
 
 
-C:\Windows\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\*
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -913,10 +1513,28 @@ Hunting Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Velociraptor: collect process listing across fleet
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -941,11 +1559,6 @@ velociraptor --config client.config.yaml
   
   
   
-
-
-\\\\\\\\--artifacts Windows.System.TaskScheduler 
-
-  
   
   
   
@@ -957,8 +1570,40 @@ velociraptor --config client.config.yaml
   
 
 
-\\\\\\\\--format json > scheduled_tasks.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json > scheduled_tasks.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -983,6 +1628,15 @@ velociraptor --config client.config.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 zeek-cut dns.query < dns.log | \
@@ -997,10 +1651,28 @@ zeek-cut dns.query < dns.log | \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-grep -v '\\\\\\\\\\\\\\\\.$' | \
+grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1025,10 +1697,28 @@ awk '{len=length($1)} len>20 {print $1, len}' | \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sort | uniq -c | sort -rn | head -20
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1053,10 +1743,28 @@ sort | uniq -c | sort -rn | head -20
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DeviceProcessEvents
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1789,28 @@ DeviceProcessEvents
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | where ProcessVersionInfoProductName == "PsExec"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1109,10 +1835,28 @@ DeviceProcessEvents
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | summarize LatestProcess=arg_max(Timestamp, *) by DeviceName
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1137,10 +1881,28 @@ DeviceProcessEvents
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Data Analysis Techniques 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1165,10 +1927,28 @@ Data Analysis Techniques
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def stack_count(events, field, top_n=10):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1193,10 +1973,28 @@ def stack_count(events, field, top_n=10):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 counts = Counter(getattr(e, field) for e in events)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1221,10 +2019,28 @@ total = sum(counts.values())
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for value, count in counts.most_common(top_n):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1249,10 +2065,28 @@ ratio = count / total
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 baseline = expected_ratio.get(field, value, 0.01)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1277,6 +2111,15 @@ if ratio > baseline * 3: # 3x expected baseline
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 yield Anomaly(field, value, ratio, baseline)
@@ -1291,10 +2134,28 @@ yield Anomaly(field, value, ratio, baseline)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

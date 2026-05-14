@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/geospatial-data.html
   
 
 
+# Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Geospatial Data with PostGIS: Geometry, Geography, and Spatial Queries 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ PostGIS transforms PostgreSQL into a full-featured spatial database. It adds sup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Setting Up PostGIS 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -94,6 +181,15 @@ CREATE EXTENSION postgis;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE EXTENSION postgis_topology;
@@ -108,10 +204,28 @@ CREATE EXTENSION postgis_topology;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Verify installation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Verify installation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -136,10 +250,28 @@ SELECT postgis_version();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- 3.4.0 or similar
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3.4.0 or similar
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ Geometry vs Geography
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The most important design decision in PostGIS is choosing between the `geometry` and `geography` data types. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -186,10 +336,28 @@ The most important design decision in PostGIS is choosing between the `geometry`
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Local datasets where Earth curvature is negligible.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -208,10 +376,28 @@ The most important design decision in PostGIS is choosing between the `geometry`
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Operations that require planar spatial functions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -236,6 +422,15 @@ CREATE TABLE buildings (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
@@ -250,10 +445,28 @@ id BIGSERIAL PRIMARY KEY,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name TEXT,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -278,6 +491,15 @@ location GEOMETRY(Point, 4326), -- SRID 4326 = WGS84 lon/lat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 footprint GEOMETRY(Polygon, 4326)
@@ -292,10 +514,28 @@ footprint GEOMETRY(Polygon, 4326)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -320,10 +560,28 @@ INSERT INTO buildings (name, location) VALUES
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ('City Hall', ST_SetSRID(ST_MakePoint(-73.9857, 40.7484), 4326));
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -348,10 +606,28 @@ INSERT INTO buildings (name, location) VALUES
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Global datasets spanning large distances.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -370,10 +646,28 @@ INSERT INTO buildings (name, location) VALUES
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Queries like "find all points within 10 km."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -398,10 +692,28 @@ CREATE TABLE pois (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -426,10 +738,28 @@ name TEXT,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 location GEOGRAPHY(Point, 4326)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -454,10 +784,28 @@ location GEOGRAPHY(Point, 4326)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 INSERT INTO pois (name, location) VALUES
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -482,10 +830,28 @@ INSERT INTO pois (name, location) VALUES
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Performance note**: Geography calculations are 2-3x slower than geometry because they use more complex spherical math. For local datasets, cast geography to geometry when precision is not critical. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -504,10 +870,28 @@ Spatial Indexes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PostGIS uses GiST (Generalized Search Tree) indexes for spatial data: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -532,10 +916,28 @@ CREATE INDEX idx_buildings_location ON buildings USING GIST (location);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_pois_location ON pois USING GIST (location);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -557,10 +959,28 @@ GiST indexes enable indexed spatial operators: `ST_DWithin`, `ST_Intersects`, `S
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Common Spatial Queries 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -582,10 +1002,28 @@ Distance Queries
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find all POIs within 1000 meters of a point
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find all POIs within 1000 meters of a point
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -610,10 +1048,28 @@ SELECT name, ST_Distance(location, ST_SetSRID(ST_MakePoint(-74.006, 40.7128), 43
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pois
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -638,10 +1094,28 @@ WHERE ST_DWithin(location, ST_SetSRID(ST_MakePoint(-74.006, 40.7128), 4326), 100
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY dist_meters;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -663,6 +1137,15 @@ ORDER BY dist_meters;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Spatial Joins 
@@ -677,10 +1160,28 @@ Spatial Joins
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find all buildings within each neighborhood
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find all buildings within each neighborhood
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -705,10 +1206,28 @@ SELECT n.name AS neighborhood, COUNT(b.id) AS building_count
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM neighborhoods n
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -733,10 +1252,28 @@ JOIN buildings b ON ST_Contains(n.geom, b.location)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY n.name
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -761,6 +1298,15 @@ ORDER BY building_count DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Area Calculations 
@@ -775,10 +1321,28 @@ Area Calculations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Calculate building footprint areas in square meters
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Calculate building footprint areas in square meters
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -803,10 +1367,28 @@ SELECT name, ST_Area(footprint::geography) AS area_sqm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM buildings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -831,6 +1413,15 @@ ORDER BY area_sqm DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Nearest Neighbor Search 
@@ -842,10 +1433,28 @@ Nearest Neighbor Search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The `<->` operator enables efficient nearest-neighbor searches using the GiST index: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -870,10 +1479,28 @@ SELECT name, location,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 location <-> ST_SetSRID(ST_MakePoint(-73.9857, 40.7484), 4326) AS dist
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -898,10 +1525,28 @@ FROM buildings
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY location <-> ST_SetSRID(ST_MakePoint(-73.9857, 40.7484), 4326)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -926,10 +1571,28 @@ LIMIT 5;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Data Import and Export 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -951,10 +1614,28 @@ Importing GeoJSON
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Cast GeoJSON to geometry
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cast GeoJSON to geometry
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1660,28 @@ INSERT INTO pois (name, location)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1007,10 +1706,28 @@ properties ->> 'name',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ST_SetSRID(ST_GeomFromGeoJSON(properties ->> 'location'), 4326)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1035,10 +1752,28 @@ FROM jsonb_array_elements('...geojson array...') AS features;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Importing Shapefiles 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1063,10 +1798,28 @@ shp2pgsql -s 4326 -I -g geom neighborhoods.shp public.neighborhoods | psql -d my
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Exporting as GeoJSON 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1091,6 +1844,15 @@ SELECT row_to_json(fc) AS geojson
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM (
@@ -1105,10 +1867,28 @@ FROM (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1133,10 +1913,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 json_agg(f) AS features
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1161,10 +1959,28 @@ FROM (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1189,10 +2005,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ST_AsGeoJSON(location)::jsonb AS geometry,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +2051,28 @@ jsonb_build_object('name', name) AS properties
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pois
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1245,10 +2097,28 @@ FROM pois
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ) AS fc;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1273,10 +2143,28 @@ Common Spatial Functions
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Transform between coordinate systems
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Transform between coordinate systems
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1301,6 +2189,15 @@ SELECT ST_Transform(location, 3857) FROM buildings; -- to Web Mercator
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT ST_Transform(location, 32618) FROM buildings; -- to UTM zone 18N
@@ -1315,10 +2212,28 @@ SELECT ST_Transform(location, 32618) FROM buildings; -- to UTM zone 18N
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Simplify geometry for map display
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Simplify geometry for map display
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1343,10 +2258,28 @@ SELECT ST_Simplify(footprint, 1.0) FROM buildings; -- 1.0 threshold
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Buffer around a point
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Buffer around a point
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1371,10 +2304,28 @@ SELECT ST_Buffer(location::geography, 500) AS five_hundred_m_buffer FROM pois;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Compute convex hull
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compute convex hull
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1399,10 +2350,28 @@ SELECT ST_ConvexHull(ST_Collect(location)) FROM pois;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Intersection of two geometries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Intersection of two geometries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1427,10 +2396,28 @@ SELECT ST_Intersection(n.geom, b.footprint)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM neighborhoods n, buildings b
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,6 +2442,15 @@ WHERE ST_Intersects(n.geom, b.footprint);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Performance Optimization 
@@ -1469,10 +2465,28 @@ Performance Optimization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Cluster a table on its spatial index for faster range scans
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cluster a table on its spatial index for faster range scans
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1497,6 +2511,15 @@ CLUSTER buildings USING idx_buildings_location;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ANALYZE buildings;
@@ -1511,10 +2534,28 @@ ANALYZE buildings;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Use ST_Subdivide for very large geometries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Use ST_Subdivide for very large geometries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1539,10 +2580,28 @@ CREATE TABLE neighborhoods_subdivided AS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT id, name,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1567,10 +2626,28 @@ ST_SubDivide(geom, 200) AS geom
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM neighborhoods;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1595,6 +2672,15 @@ CREATE INDEX idx_neighborhoods_subdivided ON neighborhoods_subdivided USING GIST
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PostGIS vs Other Tools 
@@ -1606,10 +2692,28 @@ PostGIS vs Other Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | PostGIS | MongoDB 2dsphere | Elasticsearch Geo | |---------|---------|------------------|-------------------| | CRS support | 5000+ SRIDs | WGS84 only | WGS84 only | | Spatial functions | 400+ | 30+ | 20+ | | Topology | Full support | None | None | | Raster support | Yes (PostGIS raster) | No | No | | Routing | pgRouting extension | No | No | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

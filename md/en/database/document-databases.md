@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/document-databases.html
   
   
   
+  
+  
+  
+
+
+# Document Databases: MongoDB, CouchDB, Firestore
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Document Databases: MongoDB, CouchDB, Firestore
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Document Databases: MongoDB, CouchDB, Firestore
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document databases store data as flexible, self-describing documents (typically JSON or BSON). Unlike relational databases with rigid schemas, document databases allow different documents in the same collection to have different fields. This flexibility makes them popular for rapid development and evolving data models.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Document databases store data as flexible, self-describing documents (typically 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MongoDB is the most popular document database. It stores documents in BSON format, supports rich queries, secondary indexes, aggregation pipelines, and change streams. MongoDB Atlas provides a managed cloud service with automated scaling and backups.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ MongoDB's document model allows embedding related data within a single document,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  CouchDB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ CouchDB uses a different philosophy. It stores JSON documents and uses MapReduce
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CouchDB's conflict resolution model allows multiple replicas to accept writes independently. Conflicts are detected during replication and stored as conflicting revisions. The application resolves conflicts at read time.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ CouchDB's conflict resolution model allows multiple replicas to accept writes in
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Firestore is Google's serverless document database. It provides real-time synchronization, automatic scaling, and strong consistency guarantees. The real-time listener feature makes it ideal for collaborative applications where multiple clients watch the same data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Firestore pricing is based on read, write, and delete operations rather than com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Choose Document Databases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ Choose document databases when your data has a natural document structure, when 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Avoid document databases when you need complex joins across multiple data types, when data integrity constraints are critical (no foreign keys), or when you need strict ACID transactions across multiple collections.
@@ -223,10 +391,28 @@ Avoid document databases when you need complex joins across multiple data types,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Performance Considerations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

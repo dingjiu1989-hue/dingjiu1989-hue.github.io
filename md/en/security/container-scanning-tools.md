@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/security/container-scanning-tools.html
   
   
   
+  
+  
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Container Scanning Tools: Securing Images in CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Container image scanning identifies vulnerabilities in container images before deployment. Scanning integrates into CI/CD pipelines to prevent vulnerable images from reaching production.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Container image scanning identifies vulnerabilities in container images before d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Trivy is open-source and covers OS packages and language dependencies. Fast scanning with comprehensive vulnerability database. Integrates with CI/CD and Kubernetes. Free for all use cases.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Snyk provides developer-friendly scanning with fix suggestions. Supports contain
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Clair is CoreOS's open-source scanner. Static analysis of container layers. Good for self-hosted scanning infrastructure. Limited language-specific scanning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Docker Scout integrates with Docker Desktop and Hub. Provides contextual vulnera
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  CI/CD Integration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Scan images after build, before push to registry. Gate deployments on scan resul
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

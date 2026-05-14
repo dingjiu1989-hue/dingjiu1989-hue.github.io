@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-migration.html
   
 
 
+# Database Migration Tools and Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Migration Tools and Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Migration Tools and Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Database Migrations Matter 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Database migrations are how you version-control your schema changes. Without a m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Migration Tools by Language 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,6 +175,15 @@ Migration Tools by Language
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Alembic (Python) 
@@ -99,10 +195,28 @@ Alembic (Python)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Setup 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -127,10 +241,28 @@ pip install alembic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic init alembic
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -155,10 +287,28 @@ alembic init alembic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from myapp.models import Base
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -183,10 +333,28 @@ target_metadata = Base.metadata
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Creating Migrations 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -211,10 +379,28 @@ Creating Migrations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic revision --autogenerate -m "add user roles table"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -239,10 +425,28 @@ alembic revision --autogenerate -m "add user roles table"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic upgrade head
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -267,10 +471,28 @@ alembic upgrade head
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic downgrade -1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -295,10 +517,28 @@ Migration File
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """add user roles table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -323,10 +563,28 @@ Revision ID: abc123
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Revises: def456
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -351,10 +609,28 @@ Revises: def456
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from alembic import op
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -379,10 +655,28 @@ import sqlalchemy as sa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def upgrade():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -407,10 +701,28 @@ op.create_table(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'user_roles',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +747,28 @@ sa.Column('id', sa.Integer(), nullable=False),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sa.Column('user_id', sa.Integer(), nullable=False),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -463,10 +793,28 @@ sa.Column('role', sa.String(length=50), nullable=False),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -491,6 +839,15 @@ sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sa.PrimaryKeyConstraint('id')
@@ -505,10 +862,28 @@ sa.PrimaryKeyConstraint('id')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -533,10 +908,28 @@ op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id'])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def downgrade():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -561,10 +954,28 @@ op.drop_index('ix_user_roles_user_id')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 op.drop_table('user_roles')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -589,10 +1000,28 @@ Flyway (Java)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Migration naming convention:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -617,10 +1046,28 @@ Flyway (Java)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # V2__add_email_column.sql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -645,10 +1092,28 @@ Flyway (Java)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Apply migrations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1138,28 @@ flyway migrate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check status
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -701,10 +1184,28 @@ flyway info
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Repair checksums
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -729,10 +1230,28 @@ flyway repair
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- V2__add_email_column.sql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -757,10 +1276,28 @@ ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- V3__create_orders_table.sql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V3__create_orders_table.sql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -785,10 +1322,28 @@ CREATE TABLE orders (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -813,10 +1368,28 @@ user_id BIGINT NOT NULL REFERENCES users(id),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 total DECIMAL(10,2) NOT NULL,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -841,10 +1414,28 @@ status VARCHAR(20) NOT NULL DEFAULT 'pending',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -869,10 +1460,28 @@ created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_orders_user_id ON orders(user_id);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,6 +1503,15 @@ Strategies for Complex Migrations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Expand-Contract Pattern (Zero Downtime) 
@@ -905,10 +1523,28 @@ Expand-Contract Pattern (Zero Downtime)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For making backward-incompatible changes without downtime: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -930,10 +1566,28 @@ For making backward-incompatible changes without downtime:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Add new column alongside old one
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add new column alongside old one
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -958,11 +1612,6 @@ ALTER TABLE users ADD COLUMN email_new VARCHAR(255);
   
   
   
-
-
-\\\\\\\\-- Start writing to both columns
-
-  
   
   
   
@@ -974,8 +1623,40 @@ ALTER TABLE users ADD COLUMN email_new VARCHAR(255);
   
 
 
-\\\\\\\\-- Backfill existing rows
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Start writing to both columns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1000,10 +1681,28 @@ UPDATE users SET email_new = email WHERE email_new IS NULL;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Phase 2: Migrate** 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1028,10 +1727,28 @@ UPDATE users SET email_new = email WHERE email_new IS NULL;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Deploy application update
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1056,10 +1773,28 @@ UPDATE users SET email_new = email WHERE email_new IS NULL;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Stop writing to old column
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1084,10 +1819,28 @@ ALTER TABLE users DROP COLUMN email;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Or rename
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or rename
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1112,10 +1865,28 @@ ALTER TABLE users RENAME COLUMN email TO email_old;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Batch Migrations for Large Tables 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1140,6 +1911,15 @@ Batch Migrations for Large Tables
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from sqlalchemy import text
@@ -1154,10 +1934,28 @@ from sqlalchemy import text
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def upgrade():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1182,10 +1980,28 @@ batch_size = 10000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 offset = 0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1210,10 +2026,28 @@ while True:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 result = op.execute(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1238,10 +2072,28 @@ text("""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 UPDATE users
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1266,10 +2118,28 @@ SET email_lower = LOWER(email)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE id IN (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1294,10 +2164,28 @@ SELECT id FROM users
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE email_lower IS NULL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1322,6 +2210,15 @@ ORDER BY id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT :batch_size
@@ -1336,10 +2233,28 @@ LIMIT :batch_size
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1364,10 +2279,28 @@ RETURNING id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1392,10 +2325,28 @@ RETURNING id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1420,10 +2371,28 @@ if result.rowcount == 0:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 break
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1448,10 +2417,28 @@ offset += batch_size
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"Updated {offset} rows...")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1476,10 +2463,28 @@ Online Schema Change (pt-online-schema-change)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # For MySQL without downtime
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1504,10 +2509,28 @@ pt-online-schema-change \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1532,10 +2555,28 @@ D=database,t=users \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\--execute
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--execute
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,6 +2598,15 @@ Migration Best Practices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Always Have a Rollback 
@@ -1568,10 +2618,28 @@ Always Have a Rollback
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Every migration must have a tested downgrade path: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1596,10 +2664,28 @@ def upgrade():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 op.add_column('users', sa.Column('email', sa.String(255)))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1624,10 +2710,28 @@ def downgrade():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 op.drop_column('users', 'email')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1652,6 +2756,15 @@ Test Migrations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Test upgrade and downgrade
@@ -1666,10 +2779,28 @@ Test Migrations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic upgrade head
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1694,10 +2825,28 @@ alembic downgrade base
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic upgrade head
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1722,10 +2871,28 @@ CI/CD Integration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .github/workflows/migrate.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1750,10 +2917,28 @@ jobs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 migrate:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,6 +2963,15 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -1792,11 +2986,6 @@ steps:
   
   
   
-
-
-\\\\\\\\- uses: actions/checkout@v4
-
-  
   
   
   
@@ -1808,8 +2997,40 @@ steps:
   
 
 
-\\\\\\\\- name: Run migrations
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run migrations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1834,6 +3055,15 @@ env:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -1848,10 +3078,28 @@ DATABASE_URL: ${{ secrets.DATABASE_URL }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 run: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1876,10 +3124,28 @@ alembic upgrade head
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: Verify schema
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Verify schema
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1904,10 +3170,28 @@ run: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alembic check # Detect schema drift
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1929,6 +3213,15 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | 
@@ -1940,10 +3233,28 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

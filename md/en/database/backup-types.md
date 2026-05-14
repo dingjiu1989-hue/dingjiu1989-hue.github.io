@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/backup-types.html
   
 
 
+# Database Backup Types: Full, Incremental, Differential, WAL Archiving
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Backup Types: Full, Incremental, Differential, WAL Archiving
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Backup Types: Full, Incremental, Differential, WAL Archiving
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Backup Types: Full, Incremental, Differential, WAL Archiving 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ No database backup strategy is complete until it has been tested with a real res
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Backup Types 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Full Backup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A full backup copies the entire database cluster. It is the foundation of any backup strategy. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -116,10 +221,28 @@ A full backup copies the entire database cluster. It is the foundation of any ba
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_dump -h localhost -U admin -Fc -f prod_backup.dump proddb
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -144,10 +267,28 @@ pg_dump -h localhost -U admin -Fc -f prod_backup.dump proddb
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_dump -h localhost -U admin -Fd -j 4 -f /backups/proddb proddb
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -172,10 +313,28 @@ pg_dump -h localhost -U admin -Fd -j 4 -f /backups/proddb proddb
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_basebackup -h localhost -U replicator \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -200,10 +359,28 @@ pg_basebackup -h localhost -U replicator \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -X stream -P -v
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -225,6 +402,15 @@ pg_basebackup -h localhost -U replicator \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Incremental Backup 
@@ -236,10 +422,28 @@ Incremental Backup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 An incremental backup captures only changes since the last backup (of any type). PostgreSQL achieves this via WAL archiving: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -264,6 +468,15 @@ An incremental backup captures only changes since the last backup (of any type).
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # In postgresql.conf:
@@ -278,10 +491,28 @@ An incremental backup captures only changes since the last backup (of any type).
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 archive_mode = on
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -306,6 +537,15 @@ archive_command = 'cp %p /backups/wal/%f'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Each 16 MB WAL segment is an incremental backup. 
@@ -317,10 +557,28 @@ Each 16 MB WAL segment is an incremental backup.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Differential Backup 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -342,10 +600,28 @@ A differential backup captures changes since the last full backup. It is larger 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- pgBackRest differential backup
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgBackRest differential backup
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -370,10 +646,28 @@ pgbackrest --stanza=prod --type=diff backup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WAL Archiving and Point-in-Time Recovery 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -392,10 +686,28 @@ WAL archiving is PostgreSQL's mechanism for continuous archiving. Combined with 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Configuration 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -420,10 +732,28 @@ Configuration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 wal_level = replica
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -448,10 +778,28 @@ archive_mode = on
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 archive_command = 'aws s3 cp %p s3://my-backups/wal/%f'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -476,6 +824,15 @@ archive_timeout = 60
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Recovery 
@@ -487,10 +844,28 @@ Recovery
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 To restore to a specific point in time: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -515,10 +890,28 @@ To restore to a specific point in time:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 restore_command = 'aws s3 cp s3://my-backups/wal/%f %p'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -543,10 +936,28 @@ recovery_target_time = '2026-05-10 14:30:00 UTC'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 recovery_target_action = promote
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -568,6 +979,15 @@ Start PostgreSQL. It replays WAL segments until it reaches the target time and t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Complete PITR Workflow 
@@ -582,10 +1002,28 @@ Complete PITR Workflow
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# 1\\\\. Take a base backup
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Take a base backup
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -610,11 +1048,6 @@ pg_basebackup -h prod-db -U replicator -D /backups/base_20260512 -X stream
   
   
   
-
-
-# 2\\\\. Archive WAL continuously (configured in postgresql.conf)
-
-  
   
   
   
@@ -626,8 +1059,40 @@ pg_basebackup -h prod-db -U replicator -D /backups/base_20260512 -X stream
   
 
 
-# 3\\\\. Restore to a point in time
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Archive WAL continuously (configured in postgresql.conf)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore to a point in time
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -652,10 +1117,28 @@ mkdir /var/lib/postgresql/restored
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cp -r /backups/base_20260512/* /var/lib/postgresql/restored/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -680,10 +1163,28 @@ touch /var/lib/postgresql/restored/recovery.signal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cat > /var/lib/postgresql/restored/postgresql.conf << EOF
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -708,10 +1209,28 @@ restore_command = 'aws s3 cp s3://my-backups/wal/%f %p'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 recovery_target_time = '2026-05-12 03:15:00 UTC'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -736,10 +1255,28 @@ recovery_target_action = promote
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EOF
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -764,10 +1301,28 @@ pg_ctl start -D /var/lib/postgresql/restored
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Backup Strategies Compared 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -786,10 +1341,28 @@ Backup Strategies Compared
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_dump vs pg_basebackup 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -811,10 +1384,28 @@ Use `pg_dump` for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Logical backup of specific databases or schemas.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -833,10 +1424,28 @@ Use `pg_dump` for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Selective restoration (single table or schema).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -861,10 +1470,28 @@ Use `pg_basebackup` for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Full-cluster physical backup.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -883,10 +1510,28 @@ Use `pg_basebackup` for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Point-in-time recovery capability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -908,6 +1553,15 @@ Use `pg_basebackup` for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgBackRest 
@@ -919,10 +1573,28 @@ pgBackRest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgBackRest is the most popular dedicated backup tool for PostgreSQL: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -947,10 +1619,28 @@ pgBackRest is the most popular dedicated backup tool for PostgreSQL:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbackrest --stanza=prod stanza-create
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -975,10 +1665,28 @@ pgbackrest --stanza=prod stanza-create
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbackrest --stanza=prod --type=full backup
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1003,10 +1711,28 @@ pgbackrest --stanza=prod --type=full backup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbackrest --stanza=prod --type=incr backup
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1031,10 +1757,28 @@ pgbackrest --stanza=prod --type=incr backup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbackrest --stanza=prod info
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1059,6 +1803,15 @@ pgbackrest --stanza=prod info
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbackrest --stanza=prod --type=time \
@@ -1073,10 +1826,28 @@ pgbackrest --stanza=prod --type=time \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\--target="2026-05-12 03:15:00" restore
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target="2026-05-12 03:15:00" restore
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1869,28 @@ Testing Backups
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A backup that cannot be restored is worthless. Regular restore testing is mandatory: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1126,10 +1915,28 @@ A backup that cannot be restored is worthless. Regular restore testing is mandat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 #!/bin/bash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1154,10 +1961,28 @@ set -e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RESTORE_DIR=/tmp/restore_test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1182,10 +2007,28 @@ BACKUP_DIR=/backups/weekly
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rm -rf $RESTORE_DIR
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1210,10 +2053,28 @@ pgbackrest --stanza=prod --db-path=$RESTORE_DIR restore
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_ctl start -D $RESTORE_DIR -l $RESTORE_DIR/logfile
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1238,10 +2099,28 @@ sleep 10
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 psql -d postgres -c "SELECT count(*) FROM pg_database;"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1266,10 +2145,28 @@ pg_ctl stop -D $RESTORE_DIR
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rm -rf $RESTORE_DIR
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1294,10 +2191,28 @@ echo "Restore test PASSED at $(date)"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cloud Backup Integration 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2234,28 @@ Most cloud providers offer managed backup services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **RDS Automated Backups**: Daily snapshot + 5 minutes of WAL. PITR enabled by default.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1341,10 +2274,28 @@ Most cloud providers offer managed backup services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Aurora**: Continuous backup to S3 with PITR, no performance impact.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

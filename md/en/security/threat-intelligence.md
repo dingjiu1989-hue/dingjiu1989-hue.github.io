@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intelligence.html
   
 
 
+# Threat Intelligence: Gathering and Applying Intel
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Intelligence: Gathering and Applying Intel
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Intelligence: Gathering and Applying Intel
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Threat intelligence is evidence-based knowledge about existing or emerging threats to an organization. It transforms raw data into actionable insights that help security teams prevent attacks, detect intrusions faster, and respond more effectively. This article covers the sources, frameworks, and tools for operational threat intelligence.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Threat intelligence is evidence-based knowledge about existing or emerging threa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Threat intelligence follows a structured lifecycle:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,31 +225,6 @@ Threat intelligence follows a structured lifecycle:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Collection**: Gather data from open sources, commercial feeds, internal telemetry, and human intelligence.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Processing**: Convert raw data into a usable format. Normalize timestamps, de-duplicate indicators, enrich with context.
-
-  
-  
-  
-  
   
   
   
@@ -165,8 +236,17 @@ Threat intelligence follows a structured lifecycle:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analysis**: Interpret processed data to answer the intelligence requirements.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Collection**: Gather data from open sources, commercial feeds, internal telemetry, and human intelligence.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -182,7 +262,7 @@ Threat intelligence follows a structured lifecycle:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Dissemination**: Deliver actionable intelligence to the right consumers (SOC analysts, incident responders, executives).
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Processing**: Convert raw data into a usable format. Normalize timestamps, de-duplicate indicators, enrich with context.
 
   
   
@@ -197,10 +277,80 @@ Threat intelligence follows a structured lifecycle:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Feedback**: Refine requirements and collection based on what was useful.
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analysis**: Interpret processed data to answer the intelligence requirements.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Dissemination**: Deliver actionable intelligence to the right consumers (SOC analysts, incident responders, executives).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Feedback**: Refine requirements and collection based on what was useful.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Threat intelligence follows a structured lifecycle:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OSINT is intelligence derived from publicly available sources. It is free, accessible, and provides valuable context about threats.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Shodan**: Search engine for internet-connected devices. Find exposed databases, industrial control systems, and vulnerable services.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -293,10 +479,28 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **VirusTotal**: File and URL analysis with multi-antivirus scanning. Identify malware samples and related indicators.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -321,6 +525,15 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **GitHub**: Search for leaked credentials, API keys, or configuration files in public repositories.
@@ -335,10 +548,28 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Telegram channels / Discord servers**: Some threat actor groups communicate openly about tactics and targets.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -369,10 +600,28 @@ OSINT is intelligence derived from publicly available sources. It is free, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -s "https://censys.io/api/v1/search/ipv4" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,10 +652,28 @@ curl -s "https://censys.io/api/v1/search/ipv4" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -u "$API_ID:$API_SECRET" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -437,10 +704,28 @@ curl -s "https://censys.io/api/v1/search/ipv4" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check if a domain appears in breach data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,10 +756,28 @@ curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -H "hibp-api-key: $API_KEY"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -505,10 +808,28 @@ curl -s "https://haveibeenpwned.com/api/v3/breacheddomain/example.com" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Threat feeds provide structured data about known malicious indicators. Feeds range from free community lists to premium commercial services.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -539,10 +860,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **IP reputation feeds**: Lists of known malicious IP addresses (spam sources, C2 servers, scanners).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -567,10 +906,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **URL feeds**: Specific URLs hosting malware or phishing pages.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -595,10 +952,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Behavioral feeds**: Descriptions of attacker behaviors and TTPs rather than static indicators.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -629,10 +1004,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **AlienVault OTX**: Community-driven threat feed with thousands of pulses. Free API access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -657,6 +1050,15 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CrowdStrike Falcon Intelligence**: Commercial feed with actor profiles and contextual enrichment.
@@ -671,10 +1073,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Abuse.ch**: Free feeds for malware URLs (URLhaus), C2 servers (Feodo Tracker), and ransomware domains.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -705,10 +1125,28 @@ Threat feeds provide structured data about known malicious indicators. Feeds ran
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -739,10 +1177,28 @@ OTX_API_KEY = "your-api-key"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 headers = {"X-OTX-API-KEY": OTX_API_KEY}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -773,10 +1229,28 @@ headers = {"X-OTX-API-KEY": OTX_API_KEY}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response = requests.get(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -807,10 +1281,28 @@ response = requests.get(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 headers=headers
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -841,10 +1333,28 @@ headers=headers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for pulse in response.json()["results"][:5]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -875,10 +1385,28 @@ print(f"Pulse: {pulse['name']}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for indicator in pulse["indicators"][:3]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -909,10 +1437,28 @@ print(f" {indicator['type']}: {indicator['indicator']}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  MITRE ATT&CK; Framework
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -943,10 +1489,28 @@ MITRE ATT&CK; is a globally accessible knowledge base of adversary tactics and t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### ATT&CK; Matrix
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -977,10 +1541,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Initial Access**: T1078 Valid Accounts, T1190 Exploit Public-Facing Application, T1566 Phishing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1005,10 +1587,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Persistence**: T1098 Account Manipulation, T1133 External Remote Services
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1033,10 +1633,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Defense Evasion**: T1562 Impair Defenses, T1027 Obfuscated Files or Information
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1061,10 +1679,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Discovery**: T1087 Account Discovery, T1046 Network Service Scanning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1089,10 +1725,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Collection**: T1005 Data from Local System, T1074 Data Staged
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1117,10 +1771,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Exfiltration**: T1041 Exfiltration Over C2 Channel, T1567 Exfiltration Over Web Service
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1151,10 +1823,28 @@ The framework organizes attacks into tactics (the "why") and techniques (the "ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Map observed indicators and behaviors to ATT&CK; techniques to understand attacker objectives and capabilities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1185,10 +1875,28 @@ Map observed indicators and behaviors to ATT&CK; techniques to understand attack
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 threat_actor: "APT-Example"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1219,10 +1927,28 @@ motivation: "Financial gain"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 targeted_sectors: ["Finance", "Technology"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1253,31 +1979,6 @@ techniques_observed:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- T1566.001: "Spearphishing Attachment"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- T1204.002: "Malicious File Execution"
-
-  
-  
-  
-  
   
   
   
@@ -1289,8 +1990,17 @@ techniques_observed:
   
 
 
-\\\\\\\\\\\\\\\\- T1059.001: "PowerShell"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- T1566.001: "Spearphishing Attachment"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1306,7 +2016,7 @@ techniques_observed:
   
 
 
-\\\\\\\\\\\\\\\\- T1041: "Exfiltration Over C2 Channel"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- T1204.002: "Malicious File Execution"
 
   
   
@@ -1321,10 +2031,80 @@ techniques_observed:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- T1573.001: "Symmetric Encryption for C2"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- T1059.001: "PowerShell"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- T1041: "Exfiltration Over C2 Channel"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- T1573.001: "Symmetric Encryption for C2"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1355,10 +2135,28 @@ Mapping to ATT&CK; helps security teams prioritize defenses and detection rules 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Indicators of Compromise (IoC) Sharing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1389,10 +2187,28 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### IoC Types
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1420,6 +2236,15 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Computed indicators**: Derived from analysis (file hash, YARA rule).
@@ -1434,10 +2259,28 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Behavioral indicators**: Describe patterns (network traffic patterns, registry changes).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1468,6 +2311,15 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **MISP**: Self-hosted platform for IoC management and sharing. Supports automatic correlation and feed generation.
@@ -1482,10 +2334,28 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **STIX/TAXII**: Standardized exchange protocols.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1516,10 +2386,28 @@ IoC sharing enables organizations to benefit from each other's detection experie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Structured Threat Information Expression (STIX) is a language for describing threat information. Trusted Automated Exchange of Intelligence Information (TAXII) is a protocol for exchanging STIX data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1550,10 +2438,28 @@ Structured Threat Information Expression (STIX) is a language for describing thr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 STIX 2.1 defines domain objects including:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1581,10 +2487,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Attack Pattern**: A type of TTP describing how an attacker achieves a tactic.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1609,10 +2533,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Threat Actor**: Individuals or groups causing malicious events.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1637,10 +2579,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Malware**: Malicious software.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1671,10 +2631,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1705,10 +2683,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "spec_version": "2.1",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1739,10 +2735,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "created": "2026-05-12T10:00:00Z",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1773,10 +2787,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "name": "Malicious IP",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1807,10 +2839,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "pattern_type": "stix",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1841,6 +2891,15 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "indicator_types": ["malicious-activity"]
@@ -1858,10 +2917,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1892,10 +2969,28 @@ STIX 2.1 defines domain objects including:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TAXII defines two service types:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1923,10 +3018,28 @@ TAXII defines two service types:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Channel**: A publish-subscribe mechanism for real-time intelligence sharing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1957,10 +3070,28 @@ TAXII defines two service types:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -s -H "Accept: application/taxii+json" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1991,10 +3122,28 @@ curl -s -H "Accept: application/taxii+json" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 https://taxii.example.com/api/v2/collections/collection-id/objects/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2025,10 +3174,28 @@ https://taxii.example.com/api/v2/collections/collection-id/objects/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Operationalizing threat intelligence is the hardest part. Raw intelligence without action is just noise.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2059,10 +3226,28 @@ Operationalizing threat intelligence is the hardest part. Raw intelligence witho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Create detection rules based on intel. If a threat feed shows a new C2 IP range, add a firewall block rule. If a campaign uses a specific file hash, create a YARA rule.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2093,10 +3278,28 @@ rule Example_Malware_2026 {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 meta:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2127,10 +3330,28 @@ description = "Detects Example Malware sample"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 author = "SOC Team"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2161,10 +3382,28 @@ date = "2026-05-12"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hash = "sha256:abcdef..."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2195,10 +3434,28 @@ strings:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 $s1 = "c2.example.com" wide ascii
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2229,10 +3486,28 @@ $s2 = { 6A 40 68 00 30 00 00 6A 14 }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 condition:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2263,10 +3538,28 @@ condition:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2297,10 +3590,28 @@ condition:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Not all intelligence is equally relevant. Prioritize based on:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2328,6 +3639,15 @@ Not all intelligence is equally relevant. Prioritize based on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Veracity**: Is the intelligence from a trusted source with low false-positive rates?
@@ -2342,10 +3662,28 @@ Not all intelligence is equally relevant. Prioritize based on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Actionability**: Can you do something about it? Can you block, detect, or mitigate?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,10 +3711,28 @@ Not all intelligence is equally relevant. Prioritize based on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html
   
   
   
+  
+  
+  
+
+
+# Wide-Column Databases: Cassandra, HBase, ScyllaDB
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Wide-Column Databases: Cassandra, HBase, ScyllaDB
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Wide-Column Databases: Cassandra, HBase, ScyllaDB
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Wide-column databases store data in rows with a variable number of columns. Unlike relational databases where every row has the same columns, wide-column stores treat columns as part of the data model. This design optimizes for high-throughput writes and large-scale analytical workloads.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Wide-column databases store data in rows with a variable number of columns. Unli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Apache Cassandra is the most widely deployed wide-column database. It offers linear scalability, no single point of failure, and tunable consistency. Cassandra's data model uses partition keys for distribution and clustering columns for ordering within a partition.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Cassandra excels at write-heavy workloads. Write throughput scales linearly as n
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  ScyllaDB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ ScyllaDB is a Cassandra-compatible database written in C++ instead of Java. It c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ScyllaDB's performance advantage is most apparent on modern hardware with many cores and NVMe drives. Each core manages its own portion of data, eliminating contention. The trade-off is operational complexity—ScyllaDB requires careful hardware selection.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ ScyllaDB's performance advantage is most apparent on modern hardware with many c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 HBase is built on top of HDFS (Hadoop Distributed File System). It provides strong consistency and integrates deeply with the Hadoop ecosystem. HBase is commonly used for real-time access to large datasets that also support MapReduce or Spark jobs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ HBase's architecture uses a master node (HMaster) managing region servers. Autom
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Data Modeling for Wide-Column Stores
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ Wide-column data modeling differs fundamentally from relational modeling. Design
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The primary key design determines query efficiency. Cassandra queries can only filter by partition key (equality) or clustering columns (range). Queries that do not filter by partition key require full table scans.
@@ -223,10 +391,28 @@ The primary key design determines query efficiency. Cassandra queries can only f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Choose Wide-Column Databases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

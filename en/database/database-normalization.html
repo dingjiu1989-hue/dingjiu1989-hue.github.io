@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "735",
+      "wordCount": "1170",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-normalization.html"},
-      "articleBody": "Database Normalization Explained Database Normalization Explained Database Normalization Explained Database Normalization Explained What is Normalization? Normalization organizes data to reduce redundancy and improve integrity. Each piece of data is stored in exactly one place. Normal Forms First Normal Form (1NF) Each column contains atomic values. Each row is unique. \\\\\\\\-- Violates 1NF CREATE TABLE orders (id SERIAL, products TEXT); -- \"Laptop,Mouse\" \\\\\\\\-- 1NF compliant CREATE TABLE order_items ( order_id INT REFERENCES orders(id), product_name TEXT, PRIMARY KEY (order_id, product_name) ); Second Normal Form (2NF) Must be in 1NF. All non-key columns depend on the entire primary key. \\\\\\\\-- Violates 2NF: product_name depends only on product_id, not order_id CREATE TABLE order_details ( order_id INT, product_id INT, product_name TEXT, quantity INT, PRIMARY KEY (order_id, product_id) ); Third Normal Form (3NF) Must be in 2NF. No transitive dependencies (non-key depends on non-key). \\\\\\\\-- Violates 3NF: customer_name depends on customer_id CREATE TABLE orders (id SERIAL, customer_id INT, customer_name TEXT); BCNF through 5NF BCNF: Every determinant is a candidate key. 4NF: No multi-valued dependencies. 5NF: Join dependencies only from candidate keys. Practical Guidance Most production databases aim for 3NF: * Design in 3NF 2\\\\\\\\\\\\\\\\. Profile performance 3\\\\\\\\\\\\\\\\. Denormalize selectively for performance 4\\\\\\\\\\\\\\\\. Document all denormalization decisions Denormalization Denormalize for: reporting, high-read/low-write workloads, distributed databases, cached aggregates. Conclusion Normalize to 3NF for transactional integrity. Denormalize selectively for performance. Document your decisions. The key is \"the key, the whole key, and nothing but the key.\""
+      "articleBody": "Database Normalization Explained Database Normalization Explained Database Normalization Explained Database Normalization Explained Database Normalization Explained Database Normalization Explained Database Normalization Explained What is Normalization? Normalization organizes data to reduce redundancy and improve integrity. Each piece of data is stored in exactly one place. Normal Forms First Normal Form (1NF) Each column contains atomic values. Each row is unique. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 1NF CREATE TABLE orders (id SERIAL, products TEXT); -- \"Laptop,Mouse\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 1NF compliant CREATE TABLE order_items ( order_id INT REFERENCES orders(id), product_name TEXT, PRIMARY KEY (order_id, product_name) ); Second Normal Form (2NF) Must be in 1NF. All non-key columns depend on the entire primary key. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 2NF: product_name depends only on product_id, not order_id CREATE TABLE order_details ( order_id INT, product_id INT, product_name TEXT, quantity INT, PRIMARY KEY (order_id, product_id) ); Third Normal Form (3NF) Must be in 2NF. No transitive dependencies (non-key depends on non-key). \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 3NF: customer_name depends on customer_id CREATE TABLE orders (id SERIAL, customer_id INT, customer_name TEXT); BCNF through 5NF BCNF: Every determinant is a candidate key. 4NF: No multi-valued dependencies. 5NF: Join dependencies only from candidate keys. Practical Guidance Most production databases aim for 3NF: * Design in 3NF 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Profile performance 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Denormalize selectively for performance 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document all denormalization decisions Denormalization Denormalize for: reporting, high-read/low-write workloads, distributed databases, cached aggregates. Conclusion Normalize to 3NF for transactional integrity. Denormalize selectively for performance. Document your decisions. The key is \"the key, the whole key, and nothing but the key.\""
     }
     </script>
     <script type="application/ld+json">
@@ -73,7 +73,7 @@
       <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Normalization Explained</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-normalization.png" alt="Database Normalization Explained" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Normalization Explained</h1>
 <br>
@@ -101,7 +101,67 @@
 <br>
 <br>
 <br>
+<h1>Database Normalization Explained</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Database Normalization Explained</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Database Normalization Explained</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>What is Normalization? </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -117,6 +177,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Normal Forms </p>
 <br>
 <br>
@@ -125,7 +194,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>First Normal Form (1NF) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -144,7 +231,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- Violates 1NF</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 1NF</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -166,7 +271,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- 1NF compliant</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 1NF compliant</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -188,7 +311,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>order_id INT REFERENCES orders(id),</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -210,7 +351,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>PRIMARY KEY (order_id, product_name)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -232,7 +391,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Second Normal Form (2NF) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -251,7 +428,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- Violates 2NF: product_name depends only on product_id, not order_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 2NF: product_name depends only on product_id, not order_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -273,7 +468,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>order_id INT, product_id INT,</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -295,7 +508,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>PRIMARY KEY (order_id, product_id)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -317,7 +548,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Third Normal Form (3NF) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +585,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- Violates 3NF: customer_name depends on customer_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 3NF: customer_name depends on customer_id</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -358,7 +625,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>BCNF through 5NF </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +659,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Practical Guidance </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -393,6 +696,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>* Design in 3NF</p>
 <br>
 <br>
@@ -401,7 +713,25 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\. Profile performance 3\\\\\\\\. Denormalize selectively for performance 4\\\\\\\\. Document all denormalization decisions </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Profile performance 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Denormalize selectively for performance 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document all denormalization decisions </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -417,6 +747,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Denormalize for: reporting, high-read/low-write workloads, distributed databases, cached aggregates. </p>
 <br>
 <br>
@@ -425,7 +764,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

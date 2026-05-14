@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/architecture/throttling-pattern.html
   
   
   
+  
+  
+  
+
+
+# Throttling Pattern for System Protection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Throttling Pattern for System Protection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Throttling Pattern for System Protection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Throttling controls the rate at which requests are processed to protect backend systems from overload. When request volume exceeds capacity, throttling rejects or delays excess requests instead of allowing the system to fail under load.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Throttling controls the rate at which requests are processed to protect backend 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rate limiting controls how many requests a client can make within a time window. Throttling controls the overall processing rate of the system, regardless of client distribution. Rate limiting is typically client-specific. Throttling is system-wide.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Both patterns protect systems, but they operate at different levels. Rate limiti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Implementation Approaches
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Token bucket is the most common throttling algorithm. Tokens are added to a buck
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Leaky bucket queues requests at a fixed processing rate. Burst requests are buffered and processed at the controlled rate. Excess requests beyond the buffer capacity are rejected.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Concurrency limiter controls the number of in-flight requests. New requests are 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Throttling Responses
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Throttled requests should return appropriate HTTP status codes. 429 Too Many Req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Distributed Throttling
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ In distributed systems, throttling requires shared state. Redis is commonly used
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Throttle
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

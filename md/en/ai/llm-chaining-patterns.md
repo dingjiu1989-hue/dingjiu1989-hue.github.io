@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-chaining-patterns.html
   
 
 
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Chaining and Pipeline Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Single LLM calls are rarely sufficient for complex tasks. Chaining — connectin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Why Chain?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ A single LLM call has limitations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Attention dilution**: Long, complex prompts dilute attention across too many requirements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -157,6 +271,15 @@ A single LLM call has limitations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Token waste**: Including all context and instructions in one call is inefficient
@@ -171,10 +294,28 @@ A single LLM call has limitations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Debugging difficulty**: When output is wrong, isolating which instruction caused the problem is hard
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -205,10 +346,28 @@ Chaining addresses these by decomposing complex tasks into focused steps, each w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Core Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -239,10 +398,28 @@ Chaining addresses these by decomposing complex tasks into focused steps, each w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The simplest pattern: output of step N becomes input to step N+1.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +450,28 @@ The simplest pattern: output of step N becomes input to step N+1.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Raw text → Extract key facts → Verify facts → Format output
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -307,10 +502,28 @@ def sequential_chain(text):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 facts = extract_facts(text)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -341,10 +554,28 @@ verified = verify_facts(facts)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 formatted = format_output(verified)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -375,10 +606,28 @@ return formatted
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def extract_facts(text):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -409,10 +658,28 @@ return call_llm("Extract all factual claims from this text:", text)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def verify_facts(claims):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -443,10 +710,28 @@ return call_llm("Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:", 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def format_output(verified):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -477,10 +762,28 @@ return call_llm("Format the verified claims as a clean bullet list:", verified)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Map-Reduce Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -511,10 +814,28 @@ Process multiple items independently, then combine results.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Use case**: Summarizing many documents, analyzing multiple customer reviews
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -545,10 +866,28 @@ def map_reduce(items, map_prompt, reduce_prompt):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Map: process each item independently
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -579,10 +918,28 @@ intermediate = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for item in items:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -613,10 +970,28 @@ result = call_llm(map_prompt, item)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 intermediate.append(result)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -647,10 +1022,28 @@ intermediate.append(result)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 combined = "\n---\n".join(intermediate)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,10 +1074,28 @@ final = call_llm(reduce_prompt, combined)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return final
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1126,28 @@ return final
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reviews = load_reviews()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -749,10 +1178,28 @@ map_prompt = "Summarize this customer review in one sentence, focusing on sentim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -783,10 +1230,28 @@ analysis = map_reduce(reviews, map_prompt, reduce_prompt)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Parallel Processing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -817,10 +1282,28 @@ Run multiple independent chains simultaneously, then merge results.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Use case**: Generating different sections of a document simultaneously
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -851,10 +1334,28 @@ import asyncio
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 async def parallel_chain(topic):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -885,10 +1386,28 @@ intro, specs, pricing, conclusion = await asyncio.gather(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 generate_intro(topic),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -919,10 +1438,28 @@ generate_specs(topic),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 generate_pricing(topic),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -953,10 +1490,28 @@ generate_conclusion(topic)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -987,10 +1542,28 @@ return assemble_document(intro, specs, pricing, conclusion)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Parallel processing reduces wall-clock time significantly when chains are independent.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1021,10 +1594,28 @@ Parallel processing reduces wall-clock time significantly when chains are indepe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Route input to different sub-chains based on classification.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1055,10 +1646,28 @@ Route input to different sub-chains based on classification.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def routing_chain(query):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1089,10 +1698,28 @@ def routing_chain(query):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 category = classify_query(query)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1123,10 +1750,28 @@ category = classify_query(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if category == "billing":
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1157,10 +1802,28 @@ return billing_chain(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 elif category == "technical":
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1191,10 +1854,28 @@ return technical_support_chain(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 elif category == "account":
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1225,10 +1906,28 @@ return account_management_chain(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1259,10 +1958,28 @@ return general_inquiry_chain(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def classify_query(query):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1293,10 +2010,28 @@ categories = call_llm("""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Classify this customer query into one of: billing, technical, account, general
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1327,10 +2062,28 @@ Respond with only the category name.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """, query)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1361,10 +2114,28 @@ return categories.strip().lower()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Branching Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1395,10 +2166,28 @@ Pursue multiple investigation paths from a single input, then synthesize.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Use case**: Research and analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1429,10 +2218,28 @@ Query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├→ Factual research chain (what are the known facts?)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1463,10 +2270,28 @@ Query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├→ Stakeholder chain (who is affected?)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1497,10 +2322,28 @@ Query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 └→ Synthesis: combine all branches into comprehensive report
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1531,10 +2374,28 @@ Query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Add verification steps between generation steps to catch errors early.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1565,10 +2426,28 @@ def generate_with_validation(topic):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 draft = generate_draft(topic)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1599,10 +2478,28 @@ draft = generate_draft(topic)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 issues = validate_draft(draft)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1633,10 +2530,28 @@ if issues:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 draft = revise_draft(draft, issues)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1667,10 +2582,28 @@ draft = revise_draft(draft, issues)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 issues = validate_draft(draft)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1701,10 +2634,28 @@ if not issues:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return draft
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1735,10 +2686,28 @@ return draft
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {"draft": draft, "issues": issues, "needs_review": True}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1769,10 +2738,28 @@ def validate_draft(draft):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return call_llm("""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1803,31 +2790,6 @@ Check this draft for:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\. Factual accuracy
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-2\\\\\\\\\\\\\\\\. Internal consistency
-
-  
-  
-  
-  
   
   
   
@@ -1839,8 +2801,17 @@ Check this draft for:
   
 
 
-3\\\\\\\\\\\\\\\\. Tone appropriateness
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Factual accuracy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1856,8 +2827,69 @@ Check this draft for:
   
 
 
-4\\\\\\\\\\\\\\\\. Completeness
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Internal consistency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tone appropriateness
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1888,10 +2920,28 @@ List any issues found. If none, respond with "NO ISSUES".
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """, draft)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1922,10 +2972,28 @@ List any issues found. If none, respond with "NO ISSUES".
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Recursive Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1956,10 +3024,28 @@ Apply the same chain repeatedly until a condition is met:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def recursive_refine(text, max_iterations=5):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1990,10 +3076,28 @@ for i in range(max_iterations):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 improved = call_llm("Improve this text: make it clearer and more concise:", text)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2024,10 +3128,28 @@ quality_score = evaluate_quality(improved)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if quality_score >= 0.9:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2058,10 +3180,28 @@ return improved
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 text = improved
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2092,10 +3232,28 @@ return text
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Feedback Loop Chain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2126,10 +3284,28 @@ Use the model's own output to identify and correct its mistakes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def self_correcting_generation(task):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2160,10 +3336,28 @@ output = generate(task)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 critique = call_llm("Critique this output. What's wrong or missing?", output)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2194,10 +3388,28 @@ if "nothing wrong" in critique.lower():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return output
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2228,10 +3440,28 @@ revision = call_llm(f"Revise this output based on this feedback: {critique}", ou
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return revision
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2262,10 +3492,28 @@ return revision
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Error handling**: Each chain step should have a timeout, retry logic, and fallback behavior.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2296,10 +3544,28 @@ return revision
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Caching**: Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2330,10 +3596,28 @@ return revision
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

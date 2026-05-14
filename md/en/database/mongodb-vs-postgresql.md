@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/mongodb-vs-postgresql.html
   
 
 
+# MongoDB vs PostgreSQL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# MongoDB vs PostgreSQL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# MongoDB vs PostgreSQL
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Great Database Debate 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ MongoDB and PostgreSQL are two of the most popular databases. Each excels in dif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Choose MongoDB 
@@ -77,10 +155,28 @@ When to Choose MongoDB
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MongoDB shines with flexible schemas and nested data: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ db.orders.insertOne({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 orderId: "ORD-5001",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ customer: { id: "CUST-42", name: "Alice", email: "alice@example.com" },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 items: [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ items: [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ total: 59.98,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 status: "shipped",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ createdAt: new Date()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,6 +431,15 @@ db.orders.findOne({ orderId: "ORD-5001" });
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Choose PostgreSQL 
@@ -256,10 +451,28 @@ When to Choose PostgreSQL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PostgreSQL excels with relational data and complex queries: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,10 +497,28 @@ SELECT c.name, COUNT(o.id) as order_count, SUM(o.total) as total_spent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM customers c
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -312,10 +543,28 @@ LEFT JOIN orders o ON c.id = o.customer_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE o.created_at >= '2026-01-01'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -340,10 +589,28 @@ GROUP BY c.id, c.name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 HAVING COUNT(o.id) > 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -368,10 +635,28 @@ ORDER BY total_spent DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Decision Matrix 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -390,10 +675,28 @@ Decision Matrix
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

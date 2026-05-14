@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/tools/note-taking-apps.html
   
   
   
+  
+  
+  
+
+
+# Note-Taking and Knowledge Management Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Note-Taking and Knowledge Management Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Note-Taking and Knowledge Management Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective note-taking and knowledge management are essential for technical professionals. Modern tools support bidirectional linking, graph views, and local-first storage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Effective note-taking and knowledge management are essential for technical profe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Obsidian stores notes as plain Markdown files on your local filesystem. Notes are portable, future-proof, and work with any text editor. Bidirectional links create a knowledge graph. The graph view visualizes connections between notes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Obsidian's plugin ecosystem extends functionality: Kanban boards, spaced repetit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Notion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Notion combines notes, databases, wikis, and project management. Its block-based
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Notion excels at team collaboration. Shared workspaces, real-time editing, comments, and permissions make it suitable for team knowledge bases. Notion AI provides writing assistance, summarization, and Q&A; over your notes. Notion is web-based with offline support in the desktop app.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Notion excels at team collaboration. Shared workspaces, real-time editing, comme
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Logseq is an open-source, local-first knowledge management tool. It uses an outliner format where everything is a bullet point. Block-level referencing creates fine-grained connections. The journal-based workflow captures daily notes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Logseq's query language enables structured data retrieval from notes. Whiteboard
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Roam Research
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Roam Research pioneered bidirectional linking and block-level referencing. Daily
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Roam's power comes from its database-like structure. Every block has a unique ID, enabling precise references and queries. Roam is subscription-based and cloud-hosted. It is best for researchers and writers who value deep interconnectedness over simplicity.
@@ -279,10 +456,28 @@ Roam's power comes from its database-like structure. Every block has a unique ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

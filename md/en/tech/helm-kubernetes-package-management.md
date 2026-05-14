@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-managemen
   
   
   
+  
+  
+  
+
+
+# Helm Charts: Kubernetes Package Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Charts: Kubernetes Package Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Charts: Kubernetes Package Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Helm is the de facto package manager for Kubernetes, enabling developers to defi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ This guide covers advanced Helm concepts including chart structure, templating, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A well-organized Helm chart follows a standard directory layout:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ my-app/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Chart.yaml # Metadata: name, version, dependencies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ values.yaml # Default configuration values
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values.schema.json # JSON Schema for values validation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ charts/ # Sub-charts (managed by helm dependency)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 templates/ # Go template YAML files
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ _helpers.tpl # Named template definitions
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deployment.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ service.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ingress.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ hpa.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tests/ # Test pods for chart validation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ test-connection.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 crds/ # Custom Resource Definitions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ README.md
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The `Chart.yaml` file defines metadata and dependencies:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ apiVersion: v2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ description: A production-grade web application
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: 1.2.3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ appVersion: 2.0.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubeVersion: ">=1.25.0-0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,6 +875,15 @@ type: application
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dependencies:
@@ -571,10 +901,28 @@ dependencies:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ version: "12.x"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 repository: https://charts.bitnami.com/bitnami
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ condition: postgresql.enabled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: redis
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: redis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ version: "18.x"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 repository: https://charts.bitnami.com/bitnami
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ condition: redis.enabled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Advanced Templating
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ Helm uses Go templates with the Sprig function library for dynamic resource gene
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- /* Conditional resource creation */}}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ Helm uses Go templates with the Sprig function library for dynamic resource gene
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: networking.k8s.io/v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ kind: Ingress
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ name: {{ include "my-app.fullname" . }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 annotations:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ annotations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ ingressClassName: {{ .Values.ingress.className }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rules:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: {{ .host | quote }}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: {{ .host | quote }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ http:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 paths:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: {{ .path }}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: {{ .path }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ pathType: {{ .pathType }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 backend:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ service:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: {{ include "my-app.fullname" $ }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,6 +1733,15 @@ port:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 number: {{ $.Values.service.port }}
@@ -1132,6 +1759,41 @@ number: {{ $.Values.service.port }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+{{- end }}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- end }}
@@ -1149,6 +1811,15 @@ number: {{ $.Values.service.port }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- end }}
@@ -1162,14 +1833,6 @@ number: {{ $.Values.service.port }}
   
   
   
-  
-  
-  
-  
-
-
-{{- end }}
-
   
   
   
@@ -1200,10 +1863,28 @@ Named templates in `_helpers.tpl` promote reuse:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- define "my-app.labels" -}}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ app.kubernetes.io/name: {{ include "my-app.name" . }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app.kubernetes.io/instance: {{ .Release.Name }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ app.kubernetes.io/version: {{ .Chart.AppVersion }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ helm.sh/chart: {{ include "my-app.chart" . }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- end -}}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ helm.sh/chart: {{ include "my-app.chart" . }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 initialDelaySeconds: {{ .initialDelay | default 5 }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ periodSeconds: {{ .period | default 10 }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 timeoutSeconds: {{ .timeout | default 3 }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ successThreshold: {{ .successThreshold | default 1 }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 failureThreshold: {{ .failureThreshold | default 3 }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ failureThreshold: {{ .failureThreshold | default 3 }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Values Management and Validation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,6 +2331,15 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "object",
@@ -1523,10 +2357,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "integer",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,6 +2461,15 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "maximum": 100
@@ -1608,10 +2487,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,6 +2539,15 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "object",
@@ -1659,10 +2565,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "tag": { "type": "string", "pattern": "^v?[0-9]" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,10 +2669,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "string",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,6 +2721,15 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1778,10 +2747,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "object",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "limits": { "$ref": "#/$defs/ResourceSpec" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,6 +2955,15 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1931,10 +2981,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "required": ["image", "replicaCount"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ JSON Schema validation catches configuration errors early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Environment-specific overrides keep values DRY:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,6 +3137,15 @@ Environment-specific overrides keep values DRY:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 replicaCount: 1
@@ -2050,10 +3163,28 @@ replicaCount: 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ tag: latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # values-staging.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3267,28 @@ replicaCount: 2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3319,28 @@ tag: staging-abc123
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ingress:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,6 +3371,15 @@ enabled: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hosts:
@@ -2203,10 +3397,28 @@ hosts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: staging.my-app.com
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: staging.my-app.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ hosts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 replicaCount: 6
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ image:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tag: v2.0.0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,10 +3553,28 @@ resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 limits:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,10 +3605,28 @@ cpu: 2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 memory: 4Gi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,10 +3657,28 @@ requests:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cpu: 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2407,10 +3709,28 @@ memory: 2Gi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ingress:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2441,6 +3761,15 @@ enabled: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hosts:
@@ -2458,14 +3787,6 @@ hosts:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: my-app.com
-
-  
-  
-  
-  
   
   
   
@@ -2477,8 +3798,43 @@ hosts:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: www.my-app.com
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: my-app.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: www.my-app.com
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2509,10 +3865,28 @@ hosts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Lock dependency versions with `Chart.lock`:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2543,10 +3917,28 @@ helm dependency update ./charts/my-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use alias and condition fields for environment-optimized dependencies:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2577,10 +3969,28 @@ dependencies:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2611,6 +4021,15 @@ alias: primary-db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: "12.x"
@@ -2628,10 +4047,28 @@ version: "12.x"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 repository: https://charts.bitnami.com/bitnami
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ condition: primary-db.enabled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgresql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4151,28 @@ alias: replica-db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: "12.x"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,10 +4203,28 @@ repository: https://charts.bitnami.com/bitnami
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 condition: replica-db.enabled
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2764,10 +4255,28 @@ condition: replica-db.enabled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integrate Helm linting and testing into pipelines:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ Integrate Helm linting and testing into pipelines:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Helm Release
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 push:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,10 +4411,28 @@ branches: [main]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ lint:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2934,14 +4515,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -2953,8 +4526,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: azure/setup-helm@v3
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: azure/setup-helm@v3
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2985,6 +4593,15 @@ with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: "v3.14.0"
@@ -3002,14 +4619,6 @@ version: "v3.14.0"
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: helm lint ./charts/my-app
-
-  
-  
-  
-  
   
   
   
@@ -3021,8 +4630,43 @@ version: "v3.14.0"
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: helm template --validate ./charts/my-app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: helm lint ./charts/my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: helm template --validate ./charts/my-app
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3053,10 +4697,28 @@ release:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 needs: lint
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3087,6 +4749,15 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -3104,14 +4775,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -3123,7 +4786,7 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: azure/setup-helm@v3
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
   
   
@@ -3138,10 +4801,54 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Package and push to OCI registry
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: azure/setup-helm@v3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Package and push to OCI registry
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3172,10 +4879,28 @@ run: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm package ./charts/my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3206,10 +4931,28 @@ helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Chart Versioning and Publishing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3240,10 +4983,28 @@ Use OCI registries for chart distribution:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Login and push
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3274,10 +5035,28 @@ helm registry login ghcr.io -u $USER
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3308,10 +5087,28 @@ helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3342,10 +5139,28 @@ Follow semantic versioning strictly. Breaking template changes require a major v
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3376,10 +5191,28 @@ Follow semantic versioning strictly. Breaking template changes require a major v
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Validate in CI**: run `helm lint`, `helm template --validate`, and `kubeconform` on every PR.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3410,10 +5243,28 @@ Follow semantic versioning strictly. Breaking template changes require a major v
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Library charts**: extract common helpers into a library chart (`type: library`) shared across microservices.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3444,10 +5295,28 @@ Follow semantic versioning strictly. Breaking template changes require a major v
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Resource policy annotations**: use `helm.sh/resource-policy: keep` sparingly and document its use.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

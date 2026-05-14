@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-agent-patterns.html
   
 
 
+# RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Basic RAG retrieves documents once and generates an answer. RAG agents take this
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Self-Query RAG
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Instead of using the raw user question as the search query, the agent generates 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def self_query_rag(question: str) -> str:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ def self_query_rag(question: str) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 search_query = call_llm(f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Generate an optimal search query for a vector database.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Extract key terms, rephrase questions as search statements.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,6 +381,15 @@ Output ONLY the search query, nothing else.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 User question: {question}
@@ -248,10 +407,28 @@ User question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ User question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chunks = vector_search(search_query, k=5)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ chunks = vector_search(search_query, k=5)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 context = "\n\n".join(chunks)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ answer = call_llm(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Answer the question based on the context below.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ If the context does not contain enough information, say so.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Context: {context}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ return answer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The self-query pattern resolves the fundamental mismatch between natural language questions and keyword-optimized search indices. A question like "How do I handle rate limiting?" becomes the search query "rate limiting strategies implementation patterns error handling."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ The self-query pattern resolves the fundamental mismatch between natural languag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Corrective RAG adds a verification step between retrieval and generation. If retrieved documents are irrelevant, the agent takes corrective action:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ def corrective_rag(question: str, max_attempts: int = 3) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for attempt in range(max_attempts):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ for attempt in range(max_attempts):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chunks = vector_search(question, k=5)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ chunks = vector_search(question, k=5)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 relevance_scores = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ for chunk in chunks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 score = call_llm(f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ On a scale of 0-10, how relevant is this document to:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '{question}'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ Respond with only a number.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """, chunk)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ relevance_scores.append(float(score.strip()))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 avg_relevance = sum(relevance_scores) / len(relevance_scores)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ if avg_relevance >= 7:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # High confidence: generate answer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ context = "\n\n".join(chunks[:3])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return generate_answer(question, context)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ elif avg_relevance >= 4:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Medium confidence: try query decomposition
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ sub_questions = decompose_question(question)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sub_answers = [corrective_rag(sq) for sq in sub_questions]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ return synthesize_answers(question, sub_answers)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ else:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 question = reformulate_query(question, chunks)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ return "Unable to find sufficient information to answer this question."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CRAG prevents the "hallucinate confidently from irrelevant context" failure mode common in naive RAG. Each attempt either improves the query or escalates to a more sophisticated strategy.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ CRAG prevents the "hallucinate confidently from irrelevant context" failure mode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Adaptive retrieval dynamically selects the retrieval strategy based on question characteristics:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ class AdaptiveRetriever:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ self.strategies = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "factoid": self.factoid_retrieval,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ self.strategies = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "procedural": self.procedural_retrieval,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ self.strategies = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ def retrieve(self, question: str) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Classify the question type
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ q_type = call_llm(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Classify this question as one of: factoid, comparison, procedural, analytical
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,6 +1915,15 @@ Respond with only the type name.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Question: {question}
@@ -1251,10 +1941,28 @@ Question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ strategy = self.strategies.get(q_type.strip(), self.factoid_retrieval)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return strategy(question)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ def factoid_retrieval(self, question: str) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Simple direct retrieval
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ return vector_search(question, k=3)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def comparison_retrieval(self, question: str) -> list[str]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,6 +2149,15 @@ def comparison_retrieval(self, question: str) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entities = extract_comparison_entities(question)
@@ -1404,10 +2175,28 @@ entities = extract_comparison_entities(question)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docs = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ for entity in entities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docs.extend(vector_search(entity, k=3))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ return docs[:6]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def procedural_retrieval(self, question: str) -> list[str]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ def procedural_retrieval(self, question: str) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps = decompose_steps(question)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ docs = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for step in steps:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ docs.extend(vector_search(step, k=2))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return docs[:8]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ def analytical_retrieval(self, question: str) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Retrieve broadly then narrow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ broad = vector_search(question, k=20)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reranked = rerank(question, broad)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ return reranked[:5]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Multi-Hop Retrieval
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ Some questions require retrieving information about entities discovered during r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def multi_hop_rag(question: str, max_hops=3):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ context_chunks = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 current_query = question
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ for hop in range(max_hops):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chunks = vector_search(current_query, k=3)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ context_chunks.extend(chunks)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check if we need another hop
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ needs_more = call_llm(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Can you answer '{question}' with the information retrieved so far?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,6 +2903,15 @@ Answer YES or NO. If NO, specify what additional information is needed.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Context so far: {' '.join(context_chunks[:5])}
@@ -1897,10 +2929,28 @@ Context so far: {' '.join(context_chunks[:5])}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ if needs_more.startswith("YES"):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 break
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ break
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 current_query = call_llm(f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ What additional information do we need to answer '{question}'?
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Output a single search query.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ Context: {' '.join(context_chunks[-3:])}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ return generate_answer(question, context_chunks)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

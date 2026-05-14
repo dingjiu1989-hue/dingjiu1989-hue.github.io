@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-encryption.html
   
   
   
+  
+  
+  
+
+
+# Database Encryption: Data at Rest and in Transit
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Encryption: Data at Rest and in Transit
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Encryption: Data at Rest and in Transit
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database encryption protects data from unauthorized access at multiple levels: encryption at rest protects stored data from physical theft or unauthorized disk access, and encryption in transit protects data during network transmission.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Database encryption protects data from unauthorized access at multiple levels: e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transparent Data Encryption (TDE) is available in most commercial databases (SQL Server, Oracle, MySQL Enterprise). The database automatically encrypts data files and backups. Encryption is transparent to applications—no code changes needed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Application-level encryption encrypts sensitive fields before they reach the dat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Column-level encryption encrypts specific columns. The database manages encryption keys and handles encryption and decryption transparently. This is a middle ground between TDE and application-level encryption.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Column-level encryption encrypts specific columns. The database manages encrypti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The security of any encryption system depends on key management. Use a dedicated key management service (AWS KMS, Azure Key Vault, HashiCorp Vault). Rotate keys regularly. Never store encryption keys in the database, application configuration files, or source code.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Implement key hierarchies: a master key protects data keys, and data keys protec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Encryption in Transit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Always use TLS for database connections. Configure TLS 1.2 or higher. Disable ol
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For replication traffic, enable TLS between primary and replica instances. Replication streams contain all data changes, including schema definitions and credentials.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ For replication traffic, enable TLS between primary and replica instances. Repli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encryption adds CPU overhead for encryption and decryption operations. TDE typically adds 3-5% overhead. Application-level encryption can add more depending on the amount of encrypted data. Test encryption performance with production-like workloads.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -237,10 +414,28 @@ Querying encrypted columns prevents standard indexing. Searchable encryption tec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Compliance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

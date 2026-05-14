@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/http-security-headers.html
   
   
   
+  
+  
+  
+
+
+# HTTP Security Headers Checklist
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# HTTP Security Headers Checklist
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# HTTP Security Headers Checklist
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Why Security Headers Matter 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ HTTP security headers are the first line of defense for any web application. The
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Essential Headers 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Strict-Transport-Security
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Forces all communication to use HTTPS, preventing man-in-the-middle attacks and protocol downgrades. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set `max-age` to at least 1 year (31536000 seconds) once you are confident HTTPS is stable. `includeSubDomains` extends protection to all subdomains. `preload` allows your domain to be included in browser preload lists. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Content-Security-Policy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The most powerful defense against XSS attacks. CSP restricts which resources the browser can load and execute. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Content-Security-Policy: default-src 'self';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script-src 'self' https://analytics.example.com;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ style-src 'self' 'unsafe-inline';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 img-src 'self' data: https:;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ font-src 'self' https://fonts.gstatic.com;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 connect-src 'self' https://api.example.com;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ frame-ancestors 'none';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 form-action 'self'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Start with a report-only policy to identify violations before enforcing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy-Report-Only: default-src 'self';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ report-uri /csp-violations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 X-Content-Type-Options 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Prevents browsers from MIME-type sniffing, which can be used to bypass content t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 X-Content-Type-Options: nosniff
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ X-Frame-Options
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prevents clickjacking by controlling whether your page can be embedded in a frame. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ X-Frame-Options: DENY
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use `DENY` to block all framing, or `SAMEORIGIN` to allow framing on pages sharing the same origin. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Referrer-Policy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Controls how much referrer information is included with requests. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ Referrer-Policy: strict-origin-when-cross-origin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This sends the full URL as referrer for same-origin requests, only the origin for cross-origin requests, and nothing when navigating from HTTPS to HTTP. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ Recommended Headers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Permissions-Policy (formerly Feature-Policy) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ Controls which browser features your page can use.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ Disable all features you do not need. This prevents malicious scripts from acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cross-Origin-Opener-Policy 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ Isolates your page from cross-origin windows, preventing Spectre-type side-chann
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cross-Origin-Opener-Policy: same-origin-allow-popups
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ Cross-Origin-Resource-Policy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Controls which origins can load your resources. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ Cross-Origin-Resource-Policy: same-origin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cross-Origin-Embedder-Policy 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ Requires cross-origin resources to explicitly grant permission to load.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cross-Origin-Embedder-Policy: require-corp
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ Implementation Checklist
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Header | Value | Risk if Missing | |--------|-------|-----------------| | Strict-Transport-Security | `max-age=63072000; includeSubDomains` | SSL stripping | | Content-Security-Policy | Custom policy | XSS, data injection | | X-Content-Type-Options | `nosniff` | MIME confusion | | X-Frame-Options | `DENY` | Clickjacking | | Referrer-Policy | `strict-origin-when-cross-origin` | Privacy leakage | | Permissions-Policy | Restrictive policy | API abuse | | Cross-Origin-Opener-Policy | `same-origin-allow-popups` | Side-channel attacks | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ Testing Your Headers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Several tools can validate your security headers: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ Several tools can validate your security headers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Observatory by Mozilla**: Provides an overall security score.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Several tools can validate your security headers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **curl**: Quick manual check:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ curl -sI https://example.com | grep -i '^strict-transport\|^content-security\|^x
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Common Mistakes 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Missing report-uri on CSP**: Without a reporting endpoint, you will not know when violations occur.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Not preloading HSTS**: The first request is still vulnerable without preloading.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

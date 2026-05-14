@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/multi-cloud-strategy.html
   
   
   
+  
+  
+  
+
+
+# Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Multi-Cloud Strategy: When and Why, Abstraction Layers, and Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Multi-cloud architecture — using two or more cloud providers simultaneously �
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article analyzes multi-cloud strategy: when it makes sense, abstraction layers, data gravity, and cost considerations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ This article analyzes multi-cloud strategy: when it makes sense, abstraction lay
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-cloud is justified in specific scenarios. Geographic presence is a strong driver — no single provider covers every region equally. Azure excels in enterprise data center regions, AWS dominates US-based deployments, and GCP has unique strengths in Asia-Pacific.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Best-of-breed services justify multi-cloud for specific workloads. An organizati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Regulatory requirements sometimes mandate multi-cloud. Financial services regulations may require data residency across providers, or industry standards may demand no single vendor lock-in for critical infrastructure.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Regulatory requirements sometimes mandate multi-cloud. Financial services regula
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Abstracting away cloud differences to avoid lock-in is rarely worth the effort. The "portable cloud" dream — writing once, running anywhere — fails because each provider's differentiated value lies in its unique services, not its compute instances.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Storage services (S3 vs. Cloud Storage vs. Blob), database services (RDS vs. Clo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Operational complexity is the hidden cost of multi-cloud. Each provider has different monitoring tools, IAM systems, networking concepts, billing models, and support processes. A team that can expertly manage two clouds is rarer and more expensive than a team focused on one.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Operational complexity is the hidden cost of multi-cloud. Each provider has diff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Several approaches abstract cloud differences:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Infrastructure-as-code tools like Terraform and Pulumi provide a unified configu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Container orchestration with Kubernetes provides workload portability across cloud Kubernetes services (EKS, AKS, GKE). However, portability is limited to stateless workloads. Cloud-specific services like load balancers, storage classes, and IAM remain distinct.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Multi-cloud frameworks like Crossplane and Google Anthos attempt to provide unif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Data Gravity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Data gravity — the tendency of data to attract applications and services — i
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A realistic multi-cloud architecture limits data movement between clouds. Each cloud hosts self-contained workloads that consume and produce data within that provider. Cross-cloud communication is limited to APIs and small data payloads, not database replication or bulk data transfer.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ A realistic multi-cloud architecture limits data movement between clouds. Each c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Comparing cloud costs across providers is notoriously difficult due to different pricing models, discount structures, and hidden costs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Compute: AWS EC2 and Azure VMs use per-hour billing; GCP uses per-second billing
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Storage: Object storage costs are similar across providers ($0.020-0.026/GB/month for hot storage). Egress bandwidth dominates cost for data-heavy workloads and is the primary differentiator in multi-cloud total cost.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Discount structures differ significantly. AWS Reserved Instances commit to speci
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-consistency-levels.h
   
   
   
+  
+  
+  
+
+
+# Database Consistency Levels Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Consistency Levels Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Consistency Levels Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Consistency in distributed databases describes how up-to-date the data is across all nodes when a read occurs after a write. Different consistency levels offer trade-offs between correctness, availability, and performance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Consistency in distributed databases describes how up-to-date the data is across
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Strong consistency guarantees that after a write completes, all subsequent reads return the most recent write. Every node sees the same data at the same time. This is the standard in single-node databases and distributed databases using consensus protocols.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Strong consistency requires coordination between nodes before confirming a write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Eventual Consistency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Eventual consistency guarantees that if no new writes occur, all nodes will even
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Eventual consistency is common in DNS systems, CDN caches, and some NoSQL databases (Cassandra with consistency level ONE). Most applications use eventual consistency for non-critical data where temporary staleness is acceptable.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Eventual consistency is common in DNS systems, CDN caches, and some NoSQL databa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cassandra popularized tunable consistency. Each read and write operation specifies the consistency level. Write ONE acknowledges after one node. Write QUORUM acknowledges after a majority. Write ALL acknowledges after all nodes. Applications choose the appropriate level per operation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Tunable consistency enables performance optimization. Use higher consistency for
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  PACELC Trade-offs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ The PACELC theorem extends CAP: in a distributed system, if a partition occurs (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Understanding PACELC helps choose the right consistency model. Systems that favor consistency (Spanner) have higher latency within a partition. Systems that favor availability (Cassandra with weak consistency) provide lower latency but may serve stale data.
@@ -223,10 +391,28 @@ Understanding PACELC helps choose the right consistency model. Systems that favo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Choosing Consistency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

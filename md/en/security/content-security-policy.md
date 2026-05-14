@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/content-security-policy.html
   
   
   
+  
+  
+  
+
+
+# Content Security Policy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Content Security Policy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Content Security Policy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Content Security Policy (CSP) is a browser security mechanism that mitigates Cro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CSP Directives 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,6 +251,15 @@ CSP uses HTTP headers with directives that control specific resource types.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy: 
@@ -163,10 +277,28 @@ Content-Security-Policy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 default-src 'self';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ script-src 'self' https://cdn.trusted.com;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 style-src 'self' 'unsafe-inline';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ img-src 'self' data: https://*.cloudfront.net;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 connect-src 'self' https://api.example.com;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,6 +433,15 @@ font-src 'self' https://fonts.gstatic.com;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 frame-src 'none';
@@ -282,10 +459,28 @@ frame-src 'none';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 object-src 'none';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ base-uri 'self';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 form-action 'self';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Key directives:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Directive | Controls | Example | |-----------|----------|---------| | `default-src` | Fallback for all resource types | `default-src 'self'` | | `script-src` | JavaScript sources | `script-src 'self' https://cdn.example.com` | | `style-src` | CSS sources | `style-src 'self' 'unsafe-inline'` | | `img-src` | Image sources | `img-src 'self' data:` | | `connect-src` | XMLHttpRequest, fetch, WebSocket | `connect-src 'self'` | | `frame-ancestors` | Parent page framing | `frame-ancestors 'none'` | | `form-action` | Form submission targets | `form-action 'self'` | | `base-uri` | `` tag URLs | `base-uri 'self'` | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Nonce and Hash Strategies
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Using `'unsafe-inline'` for scripts weakens CSP. Nonce and hash strategies provide secure inline script handling. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Nonce-Based CSP
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A nonce is a cryptographically random token generated per-request and included in both the CSP header and the script tag. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ import secrets
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from flask import Flask, render_template
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ app = Flask(__name__)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 @app.route('/')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ def index():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nonce = secrets.token_urlsafe(16)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ response = make_response(render_template('index.html', nonce=nonce))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response.headers['Content-Security-Policy'] = \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ f"script-src 'nonce-{nonce}'; object-src 'none'; base-uri 'self'"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return response
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ Hash-Based CSP
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For static inline scripts, use a hash of the script content instead of a nonce. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ import hashlib
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import base64
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ def generate_script_hash(script_content):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hash_bytes = hashlib.sha256(script_content.encode()).digest()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ hash_b64 = base64.b64encode(hash_bytes).decode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return f"'sha256-{hash_b64}'"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ return f"'sha256-{hash_b64}'"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script = "document.getElementById('app').innerHTML = '
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ Hello
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ';"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,6 +1291,15 @@ script_hash = generate_script_hash(script)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # CSP: script-src 'sha256-abc123...'
@@ -843,10 +1317,28 @@ script_hash = generate_script_hash(script)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ script-src 'sha256-abc123def456...';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 object-src 'none';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ CSP Reporting
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CSP violations can be reported to an endpoint for monitoring and debugging. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ Content-Security-Policy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 default-src 'self';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ script-src 'self';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 report-uri /csp-violation-report;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "document-uri": "https://example.com/page",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "blocked-uri": "https://evil.com/script.js",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "effective-directive": "script-src",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "source-file": "https://example.com/page",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,6 +1837,15 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "column-number": 10
@@ -1200,6 +1863,15 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1217,10 +1889,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ report-to csp-endpoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 @app.route('/csp-violation-report', methods=['POST'])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ def csp_report():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 report = request.get_json(force=True)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ blocked = report['csp-report']['blocked-uri']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 directive = report['csp-report']['violated-directive']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ page = report['csp-report']['document-uri']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Log to security monitoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ security_logger.warning(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f"CSP violation on {page}: {directive} blocked {blocked}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ f"CSP violation on {page}: {directive} blocked {blocked}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Alert if critical pattern
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ if 'exfiltration' in blocked.lower():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 security_logger.critical(f"Potential data exfiltration: {blocked}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ return '', 204
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Strict CSP Migration 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,6 +2357,15 @@ Migrating from allowlist CSP to strict CSP provides better security.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Allowlist CSP (vulnerable to CDN-based bypass)
@@ -1540,10 +2383,28 @@ Migrating from allowlist CSP to strict CSP provides better security.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Strict CSP (nonce-based, resistant to bypass)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ Content-Security-Policy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script-src 'nonce-random123' 'strict-dynamic' https: 'unsafe-inline';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ object-src 'none';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 base-uri 'none';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ The `'strict-dynamic'` keyword propagates trust from nonced scripts to their dyn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Deployment Strategy 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ Deployment Strategy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy-Report-Only: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,6 +2695,15 @@ default-src 'self';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script-src 'nonce-abc123';
@@ -1761,10 +2721,28 @@ script-src 'nonce-abc123';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 report-uri /csp-reports;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ report-uri /csp-reports;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 3: Fix violations identified in reports
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ report-uri /csp-reports;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content-Security-Policy:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ default-src 'self';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script-src 'nonce-abc123';
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,6 +2929,15 @@ report-uri /csp-reports;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 5: Gradually remove report-uri when confident
@@ -1914,10 +2955,28 @@ report-uri /csp-reports;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

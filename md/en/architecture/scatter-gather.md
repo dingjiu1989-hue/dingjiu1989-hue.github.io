@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/architecture/scatter-gather.html
   
   
   
+  
+  
+  
+
+
+# Scatter-Gather Pattern for Parallel Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Scatter-Gather Pattern for Parallel Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Scatter-Gather Pattern for Parallel Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The scatter-gather pattern sends a request to multiple recipients simultaneously, then aggregates their responses into a single result. This is useful when you need information from multiple sources or want to run parallel operations for fault tolerance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ The scatter-gather pattern sends a request to multiple recipients simultaneously
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A scatter-gather implementation has three phases. First, the scatter phase broadcasts the request to all recipients. Second, the recipients process the request in parallel. Third, the gather phase collects responses and combines them according to aggregation rules.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ A scatter-gather implementation has three phases. First, the scatter phase broad
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Topic-based scatter publishes a request to a pub-sub topic. All subscribers receive the request simultaneously. This is the most common approach and works well when the recipients are known to the broker.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Recipient list scatter maintains a list of recipient addresses and sends the req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Aggregation Strategies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Wait-for-all aggregation collects responses from all recipients before returning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Quorum-based aggregation returns results after receiving a configurable number of responses (typically a majority). This is useful for fault tolerance—if some recipients fail, the result is still valid.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Quorum-based aggregation returns results after receiving a configurable number o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use scatter-gather when you need to query multiple data sources for a comprehensive view, when you want fault tolerance through redundant processing, or when you can parallelize independent operations to reduce total response time.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ Common applications include search engines querying multiple indexes, credit che
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Performance Considerations
@@ -223,10 +391,28 @@ Common applications include search engines querying multiple indexes, credit che
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The total latency is determined by the slowest recipient. Set timeouts to bound worst-case latency. Consider caching responses from slower recipients. Use asynchronous processing where possible to avoid blocking on aggregation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/certificate-management.html
   
   
   
+  
+  
+  
+
+
+# Certificate Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Certificate Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Certificate Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ TLS certificate management is a critical operational responsibility. Expired cer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Let's Encrypt 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Let's Encrypt is a free, automated, and open certificate authority (CA) that pro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install Certbot (Let's Encrypt client)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ sudo apt install certbot python3-certbot-nginx
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Obtain certificate with webroot authentication
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ sudo certbot certonly --webroot \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -w /var/www/example.com -d example.com \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,14 +407,6 @@ sudo certbot certonly --webroot \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--email admin@example.com \
-
-  
-  
-  
-  
   
   
   
@@ -267,7 +418,7 @@ sudo certbot certonly --webroot \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--agree-tos \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--email admin@example.com \
 
   
   
@@ -282,10 +433,54 @@ sudo certbot certonly --webroot \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--non-interactive
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--agree-tos \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--non-interactive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,6 +511,15 @@ sudo certbot certonly --webroot \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sudo certbot certonly --manual \
@@ -333,10 +537,28 @@ sudo certbot certonly --manual \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preferred-challenges dns \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preferred-challenges dns \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ sudo certbot certonly --manual \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ACME Protocol 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ The Automated Certificate Management Environment (ACME) protocol automates certi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import josepy as jose
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ from acme import client, messages
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from cryptography import x509
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ from cryptography.hazmat.primitives import hashes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class ACMEClient:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ def __init__(self, directory_url, email):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.directory_url = directory_url
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ self.email = email
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.net = client.ClientNetwork(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,6 +901,15 @@ jose.JWKRSA(key=rsa_private_key),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 user_agent="my-acme-client/1.0"
@@ -588,10 +927,28 @@ user_agent="my-acme-client/1.0"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,6 +979,15 @@ self.directory = messages.Directory.from_json(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.net.get(directory_url).json()
@@ -639,10 +1005,28 @@ self.net.get(directory_url).json()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ self.acme = client.ClientV2(self.directory, self.net)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def register_account(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ def register_account(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 terms = self.directory.meta.terms_of_service
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ registration = self.acme.new_account(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 messages.NewRegistration(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ key=self.net.key,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 terms_of_service_agreed=True,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,6 +1265,15 @@ contact=[f"mailto:{self.email}"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
@@ -826,10 +1291,28 @@ contact=[f"mailto:{self.email}"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ return registration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def request_certificate(self, domain, csr_pem):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ def request_certificate(self, domain, csr_pem):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create authorization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ order = self.acme.new_order(csr_pem)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Complete challenges for each identifier
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ for auth in order.authorizations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # HTTP-01 or DNS-01 challenge
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ challenge = auth.body.challenges[0]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.respond_challenge(challenge)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ self.respond_challenge(challenge)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 order = self.acme.finalize_order(order, csr_pem)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ return order.fullchain_pem
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Automated Renewal 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Certificate renewal should be fully automated with monitoring and alerting.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Certbot systemd timer for automatic renewal
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ Certificate renewal should be fully automated with monitoring and alerting.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [Unit]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ Description=Certbot Renewal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [Service]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ Type=oneshot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ExecStart=/usr/bin/certbot renew --quiet --pre-hook "systemctl reload nginx"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ ExecStartPost=/usr/bin/systemctl reload nginx
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # /etc/systemd/system/certbot-renewal.timer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ ExecStartPost=/usr/bin/systemctl reload nginx
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Description=Run certbot renewal twice daily
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ Description=Run certbot renewal twice daily
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OnCalendar=*-*-* 00:00,12:00
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ RandomizedDelaySec=3600
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Persistent=true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ Persistent=true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WantedBy=timers.target
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ WantedBy=timers.target
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sudo systemctl enable certbot-renewal.timer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ sudo systemctl start certbot-renewal.timer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Test renewal process
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ sudo certbot renew --dry-run
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Certificate Monitoring 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ Monitor certificate expiration to catch renewal failures before they cause outag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import ssl
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ import datetime
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import socket
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ from typing import Dict, List
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class CertificateMonitor:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ def __init__(self, warning_days: int = 30, critical_days: int = 7):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.warning_days = warning_days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ self.critical_days = critical_days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def check_certificate(self, hostname: str, port: int = 443) -> Dict:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ context = ssl.create_default_context()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 context.check_hostname = True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ with socket.create_connection((hostname, port), timeout=10) as sock:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with context.wrap_socket(sock, server_hostname=hostname) as ssock:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ cert = ssock.getpeercert()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Parse expiration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ expires = datetime.datetime.strptime(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cert['notAfter'], '%b %d %H:%M:%S %Y %Z'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ cert['notAfter'], '%b %d %H:%M:%S %Y %Z'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 remaining = (expires - datetime.datetime.utcnow()).days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ remaining = (expires - datetime.datetime.utcnow()).days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 issuer = dict(x[0] for x in cert['issuer'])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ issuer = dict(x[0] for x in cert['issuer'])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sans = [san[1] for san in cert.get('subjectAltName', [])]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'hostname': hostname,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'issuer': issuer.get('organizationName', 'Unknown'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'remaining_days': remaining,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,10 +3111,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'serial': cert.get('serialNumber'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2050,10 +3163,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ def _get_status(self, remaining_days: int) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if remaining_days <= 0:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3267,28 @@ return 'EXPIRED'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 elif remaining_days <= self.critical_days:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3319,28 @@ return 'CRITICAL'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 elif remaining_days <= self.warning_days:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,10 +3371,28 @@ return 'WARNING'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return 'OK'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2220,10 +3423,28 @@ def monitor_domains(self, domains: List[str]) -> List[Dict]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2254,10 +3475,28 @@ for domain in domains:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 try:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,10 +3527,28 @@ result = self.check_certificate(domain)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results.append(result)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2322,10 +3579,28 @@ if result['status'] in ('CRITICAL', 'EXPIRED'):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.alert(result)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2356,10 +3631,28 @@ except Exception as e:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2390,10 +3683,28 @@ results.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'status': 'ERROR',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ results.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,10 +3787,28 @@ return results
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # OpenSSL-based certificate check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2492,10 +3839,28 @@ echo | openssl s_client -connect example.com:443 -servername example.com 2>/dev/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl x509 -noout -enddate -subject -issuer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,10 +3891,28 @@ openssl x509 -noout -enddate -subject -issuer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for domain in $(cat domains.txt); do
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ expires=$(echo | openssl s_client -connect $domain:443 -servername $domain 2>/de
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl x509 -noout -enddate | cut -d= -f2)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,10 +3995,28 @@ remaining=$(( ($(date -d "$expires" +%s) - $(date +%s)) / 86400 ))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "$domain: expires in $remaining days ($expires)"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2628,10 +4047,28 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Certificate Revocation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ Certificate Revocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl ocsp -issuer chain.pem -cert cert.pem \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4151,28 @@ openssl ocsp -issuer chain.pem -cert cert.pem \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -header "Host" $(openssl x509 -in cert.pem -noout -ocsp_uri | cut -d/ -f3) \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,10 +4203,28 @@ openssl ocsp -issuer chain.pem -cert cert.pem \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # CRL check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2764,6 +4255,15 @@ curl -O http://crl.example.com/intermediate.crl
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl crl -in intermediate.crl -noout -text | grep -A1 "Serial Number"
@@ -2781,10 +4281,28 @@ openssl crl -in intermediate.crl -noout -text | grep -A1 "Serial Number"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

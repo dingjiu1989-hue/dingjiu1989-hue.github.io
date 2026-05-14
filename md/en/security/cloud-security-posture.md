@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-posture.html
   
   
   
+  
+  
+  
+
+
+# Cloud Security Posture Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud Security Posture Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud Security Posture Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Cloud Security Posture Management (CSPM) continuously monitors cloud environment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Core CSPM Capabilities 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ CSPM tools provide automated discovery, assessment, and remediation across cloud
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-Cloud Visibility 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ import boto3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from google.cloud import resource_manager
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,6 +355,15 @@ from azure.mgmt.resource import ResourceManagementClient
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class CSPMScanner:
@@ -231,10 +381,28 @@ class CSPMScanner:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ self.aws = boto3.client('config')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.gcp = resource_manager.Client()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ self.findings = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def scan_aws(self, account_id):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ def scan_aws(self, account_id):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check S3 public access
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ s3 = boto3.client('s3')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 buckets = s3.list_buckets()['Buckets']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ for bucket in buckets:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 try:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ acl = s3.get_public_access_block(Bucket=bucket['Name'])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 block_config = acl['PublicAccessBlockConfiguration']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ if not all([
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 block_config['BlockPublicAcls'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ block_config['BlockPublicPolicy'],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 block_config['IgnorePublicAcls'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,6 +849,15 @@ block_config['RestrictPublicBuckets'],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]):
@@ -554,10 +875,28 @@ block_config['RestrictPublicBuckets'],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.findings.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,6 +927,15 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'service': 'S3',
@@ -605,10 +953,28 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'resource': bucket['Name'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,6 +1005,15 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'framework': 'CIS AWS 2.1'
@@ -656,10 +1031,28 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ except:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.findings.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'service': 'S3',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'issue': 'Public access block not configured',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ self.findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ Automated Checks
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cspm_checks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ aws:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-1.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-1.1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,6 +1395,15 @@ title: "Avoid root user usage"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: critical
@@ -911,10 +1421,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-2.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-2.1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,6 +1473,15 @@ title: "S3 buckets should have public access blocked"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: high
@@ -962,10 +1499,28 @@ severity: high
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-3.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-3.1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,6 +1551,15 @@ title: "Ensure CloudTrail is enabled"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: high
@@ -1013,10 +1577,28 @@ severity: high
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-4.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-4.1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ title: "Ensure no security groups allow SSH from 0.0.0.0/0"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: critical
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ gcp:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-1.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-1.1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,6 +1733,15 @@ title: "Ensure IAM users are managed centrally"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: high
@@ -1132,10 +1759,28 @@ severity: high
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-2.2"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-2.2"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,6 +1811,15 @@ title: "Ensure default network does not exist"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: medium
@@ -1183,10 +1837,28 @@ severity: medium
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-3.3"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "CIS-3.3"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ title: "Ensure VPC flow logging is enabled"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: medium
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ Compliance Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CSPM maps security findings to compliance frameworks, enabling automated audit evidence collection. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ class ComplianceMapper:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 frameworks = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ frameworks = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'SOC2': 'SOC 2 Trust Services Criteria',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ frameworks = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'HIPAA': 'Health Insurance Portability and Accountability Act',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ frameworks = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ def map_finding(self, finding):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Map a security finding to applicable compliance frameworks."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ mapped_to = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Example mapping
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ if finding['issue'] == 'S3 bucket publicly accessible':
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mapped_to.extend([
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ mapped_to.extend([
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ('SOC2', 'CC6.1'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ mapped_to.extend([
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ('HIPAA', '164.312(a)(1)'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ mapped_to.extend([
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return mapped_to
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ Drift Detection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CSPM continuously monitors for configuration drift — when cloud resources deviate from the security baseline. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ import hashlib
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ class DriftDetector:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,10 +2669,28 @@ self.baseline = {}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def capture_baseline(self, resources):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,6 +2721,15 @@ def capture_baseline(self, resources):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for resource in resources:
@@ -1778,10 +2747,28 @@ for resource in resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource_id = resource['id']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,6 +2799,15 @@ config_hash = hashlib.sha256(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 json.dumps(resource['config'], sort_keys=True).encode()
@@ -1829,10 +2825,28 @@ json.dumps(resource['config'], sort_keys=True).encode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ).hexdigest()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ self.baseline[resource_id] = config_hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def detect_drift(self, current_state):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2929,28 @@ def detect_drift(self, current_state):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 drifts = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ for resource in current_state:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource_id = resource['id']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ current_hash = hashlib.sha256(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 json.dumps(resource['config'], sort_keys=True).encode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ json.dumps(resource['config'], sort_keys=True).encode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 baseline_hash = self.baseline.get(resource_id)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ if baseline_hash and baseline_hash != current_hash:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 drifts.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ drifts.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'type': resource['type'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ drifts.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'current': current_hash[:8],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ drifts.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ return drifts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Remediation Automation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ CSPM tools can automatically remediate common misconfigurations.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class AutoRemediator:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ def remediate_open_security_group(self, group_id, region):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ec2 = boto3.client('ec2', region_name=region)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ ec2 = boto3.client('ec2', region_name=region)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sg = ec2.describe_security_groups(GroupIds=[group_id])['SecurityGroups'][0]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,10 +3553,28 @@ for permission in sg['IpPermissions']:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for ip_range in permission.get('IpRanges', []):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,10 +3605,28 @@ if ip_range['CidrIp'] == '0.0.0.0/0':
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if permission.get('FromPort') in (22, 3389, 3306, 5432):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,10 +3657,28 @@ if permission.get('FromPort') in (22, 3389, 3306, 5432):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ec2.revoke_security_group_ingress(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2407,10 +3709,28 @@ GroupId=group_id,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 IpPermissions=[{
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2441,10 +3761,28 @@ IpPermissions=[{
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'FromPort': permission['FromPort'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2475,10 +3813,28 @@ IpPermissions=[{
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'IpRanges': [{'CidrIp': '0.0.0.0/0'}]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2509,10 +3865,28 @@ IpPermissions=[{
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2543,10 +3917,28 @@ return {'action': 'removed_rule', 'port': permission['FromPort']}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {'action': 'none'}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2577,10 +3969,28 @@ CSPM Integration Pipeline
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cspm_pipeline:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2611,6 +4021,15 @@ schedule: continuous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 collectors:
@@ -2628,31 +4047,6 @@ collectors:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: aws_config
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-interval: 15_minutes
-
-  
-  
-  
-  
   
   
   
@@ -2664,8 +4058,17 @@ interval: 15_minutes
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: gcp_asset_inventory
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: aws_config
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4099,28 @@ interval: 15_minutes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: azure_policy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: gcp_asset_inventory
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2717,6 +4138,67 @@ interval: 15_minutes
 
 interval: 15_minutes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source: azure_policy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+interval: 15_minutes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2747,6 +4229,15 @@ evaluation:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 frameworks:
@@ -2764,14 +4255,6 @@ frameworks:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cis_v1.5
-
-  
-  
-  
-  
   
   
   
@@ -2783,7 +4266,7 @@ frameworks:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- soc2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cis_v1.5
 
   
   
@@ -2798,10 +4281,54 @@ frameworks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pci_dss_v4.0
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- soc2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pci_dss_v4.0
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ alerting:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 critical: pagerduty_immediate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,10 +4411,28 @@ high: slack_15_minutes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 medium: jira_daily
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ low: monthly_report
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 remediation:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2934,14 +4515,6 @@ auto_remediate:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- open_ssh_from_internet
-
-  
-  
-  
-  
   
   
   
@@ -2953,7 +4526,7 @@ auto_remediate:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unencrypted_s3_bucket
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- open_ssh_from_internet
 
   
   
@@ -2968,10 +4541,54 @@ auto_remediate:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- disabled_cloudtrail
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unencrypted_s3_bucket
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- disabled_cloudtrail
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3002,14 +4619,6 @@ approval_required:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- iam_policy_changes
-
-  
-  
-  
-  
   
   
   
@@ -3021,8 +4630,43 @@ approval_required:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cross_account_access
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- iam_policy_changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cross_account_access
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3040,6 +4684,15 @@ approval_required:
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

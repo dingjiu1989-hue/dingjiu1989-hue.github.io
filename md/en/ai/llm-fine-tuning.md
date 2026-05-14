@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-fine-tuning.html
   
 
 
+# LLM Fine-Tuning Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Fine-Tuning Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# LLM Fine-Tuning Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Fine-tuning adapts a pre-trained language model to a specific task or domain. Wh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Fine-Tune
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Before investing in fine-tuning, consider whether simpler approaches suffice:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Prompt engineering**: Good for simple formatting changes and basic instructions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -157,10 +271,28 @@ Before investing in fine-tuning, consider whether simpler approaches suffice:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Fine-tuning**: Necessary for specialized output formats, tone adaptation, and consistent behavior patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -191,10 +323,28 @@ Fine-tuning becomes cost-effective when you need to run many similar queries and
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Fine-Tuning Approaches
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -225,10 +375,28 @@ Fine-tuning becomes cost-effective when you need to run many similar queries and
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute — full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -259,10 +427,28 @@ Full fine-tuning updates all model parameters on a target dataset. This approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You have access to high-memory GPUs (A100 80GB or H100)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -287,6 +473,15 @@ Full fine-tuning updates all model parameters on a target dataset. This approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * The domain shift from pre-training data is significant
@@ -301,10 +496,28 @@ Full fine-tuning updates all model parameters on a target dataset. This approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Maximum quality is critical
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -335,10 +548,28 @@ Full fine-tuning updates all model parameters on a target dataset. This approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -369,10 +600,28 @@ from peft import LoraConfig, get_peft_model
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lora_config = LoraConfig(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,10 +652,28 @@ r=16, # Rank of the update matrices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lora_alpha=32, # Scaling factor
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -437,10 +704,28 @@ target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lora_dropout=0.05,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,6 +756,15 @@ bias="none",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 task_type="CAUSAL_LM"
@@ -488,10 +782,28 @@ task_type="CAUSAL_LM"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -522,10 +834,28 @@ model = get_peft_model(base_model, lora_config)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -556,10 +886,28 @@ print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key hyperparameters:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -587,6 +935,15 @@ print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **alpha**: Typically double the rank value (alpha = 2 * r)
@@ -601,10 +958,28 @@ print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Target modules**: Include all attention projection matrices for best results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -635,10 +1010,28 @@ print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -669,10 +1062,28 @@ from transformers import BitsAndBytesConfig
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bnb_config = BitsAndBytesConfig(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -703,10 +1114,28 @@ load_in_4bit=True,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bnb_4bit_use_double_quant=True,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -737,6 +1166,15 @@ bnb_4bit_quant_type="nf4",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bnb_4bit_compute_dtype=torch.bfloat16
@@ -754,10 +1192,28 @@ bnb_4bit_compute_dtype=torch.bfloat16
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -788,10 +1244,28 @@ model = AutoModelForCausalLM.from_pretrained(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "meta-llama/Llama-2-7b-hf",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -822,6 +1296,15 @@ quantization_config=bnb_config,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 device_map="auto"
@@ -839,10 +1322,28 @@ device_map="auto"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -873,10 +1374,28 @@ QLoRA achieves approximately 99% of full fine-tuning performance while reducing 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Dataset Preparation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -907,10 +1426,28 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Guidelines for instruction tuning datasets:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -941,31 +1478,6 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Correct responses**: Each response must be factually accurate and follow the desired format
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consistent formatting**: Use the same chat template throughout
-
-  
-  
-  
-  
   
   
   
@@ -977,8 +1489,17 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Balanced distribution**: Avoid over-representing common patterns
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Correct responses**: Each response must be factually accurate and follow the desired format
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -994,8 +1515,69 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation split**: Hold out 5-10% for evaluation
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consistent formatting**: Use the same chat template throughout
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Balanced distribution**: Avoid over-representing common patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation split**: Hold out 5-10% for evaluation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1026,10 +1608,28 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1060,10 +1660,28 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "input": "Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1094,10 +1712,28 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1128,10 +1764,28 @@ Dataset quality matters more than quantity. A well-curated 1,000-example dataset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1162,10 +1816,28 @@ from trl import SFTTrainer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 trainer = SFTTrainer(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1196,10 +1868,28 @@ model=model,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 train_dataset=train_dataset,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1230,10 +1920,28 @@ eval_dataset=eval_dataset,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dataset_text_field="text",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1264,10 +1972,28 @@ max_seq_length=2048,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 args=TrainingArguments(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1298,10 +2024,28 @@ per_device_train_batch_size=4,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gradient_accumulation_steps=4,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1332,10 +2076,28 @@ learning_rate=2e-4,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 num_train_epochs=3,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1366,6 +2128,15 @@ logging_steps=10,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 save_strategy="epoch",
@@ -1383,6 +2154,15 @@ save_strategy="epoch",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
@@ -1400,10 +2180,28 @@ save_strategy="epoch",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1434,10 +2232,28 @@ trainer.train()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Evaluation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1468,10 +2284,28 @@ Evaluate fine-tuned models on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Task accuracy**: Does the model produce correct outputs?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1496,6 +2330,15 @@ Evaluate fine-tuned models on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Hallucination rate**: Does it invent facts?
@@ -1510,10 +2353,28 @@ Evaluate fine-tuned models on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Regression**: Has performance degraded on unrelated tasks?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1544,10 +2405,28 @@ Use an automated evaluation harness comparing the fine-tuned model against the b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

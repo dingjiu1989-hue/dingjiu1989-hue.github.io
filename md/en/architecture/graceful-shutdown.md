@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
   
 
 
+# Graceful Shutdown Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Graceful Shutdown Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Graceful Shutdown Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Signal handling is the foundation. The service should register handlers for SIGT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The shutdown sequence follows a well-defined order. First, the service should stop accepting new requests. This means unregistering from the service discovery registry, failing readiness probes, closing listener sockets, and rejecting incoming connections. The service should not return to "accepting" state once shutdown begins, even if the signal was spurious. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Second, the service drains in-flight requests. It waits for currently processing
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connection draining for different protocol types varies. HTTP/1.1 connections have a one-request-at-a-time model — the server stops accepting new requests and waits for the current one. HTTP/2 and gRPC support multiplexed streams — the server sends GOAWAY frames, stops accepting new streams, and drains existing ones. WebSocket connections may need application-level messages to notify clients of impending disconnection. Database connection pools should be drained by returning connections to the pool and waiting for all to be returned. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Third, the service cleans up resources. Close database connections. Flush caches
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fourth, the service notifies its termination to dependent systems. This might include publishing a "shutdown" event, updating a registry, or writing a final health state. Downstream services that rely on this instance should know that it is going away and can adapt their behavior accordingly. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,6 +255,15 @@ Kubernetes lifecycle hooks integrate with graceful shutdown. The preStop hook ru
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Orchestrated shutdown in service mesh environments adds complexity. When Istio or Linkerd is present, the sidecar proxy must also shutdown gracefully — and the order matters. The application container should stop before the sidecar proxy. If the proxy stops first, in-flight request processing through the proxy will fail. Container lifecycle dependencies and preStop hooks can enforce the correct ordering. 
@@ -143,10 +275,28 @@ Orchestrated shutdown in service mesh environments adds complexity. When Istio o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Testing graceful shutdown is critical but often overlooked. Deploy a canary instance and kill it while monitoring request success rates. Verify that no requests are lost during the shutdown window. Test with various in-flight request durations. Test with dependencies intentionally slow to close. Automated chaos testing (Litmus, Chaos Mesh) can incorporate graceful shutdown testing into regular CI/CD pipelines. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

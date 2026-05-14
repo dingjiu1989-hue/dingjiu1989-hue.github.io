@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-bookkeeping.html
   
 
 
+# SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Bookkeeping: Revenue Recognition, Taxes, Accounting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SaaS Bookkeeping for Solo Founders
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Bookkeeping is the least glamorous but most essential aspect of running a SaaS b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Revenue Recognition
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ SaaS revenue is recognized differently from traditional product sales. Subscript
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ASC 606 (the revenue recognition standard) requires: identify the contract, identify performance obligations, determine transaction price, allocate price to obligations, and recognize revenue when obligations are satisfied. For most SaaS products, monthly subscription is a single performance obligation satisfied over the subscription period.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Annual prepayments create deferred revenue (a liability). Record unearned revenu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### SaaS-Specific Accounting Metrics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Monthly Recurring Revenue (MRR) is the normalized monthly subscription revenue. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Net Revenue Retention (NRR) measures revenue growth from existing customers. NRR above 100% means expansion revenue exceeds churned revenue. Calculate as (starting MRR + expansion - churn - contraction) / starting MRR. NRR above 120% is exceptional for SaaS.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Gross Margin = (Revenue - Cost of Revenue) / Revenue. Cost of Revenue includes h
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Sales Tax Compliance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Sales tax is the most complex tax obligation for SaaS businesses. In the US, sal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use tax automation tools to reduce complexity. Stripe Tax automatically determines tax rates and remits collected tax. TaxJar (now Stripe Tax) handles multi-state filing. Anrok specializes in SaaS tax compliance, including state nexus tracking.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ International tax obligations: EU requires VAT collection on digital services so
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Accounting Software
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ QuickBooks Online is the standard for SaaS startups. It integrates with Stripe, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Xero is the alternative cloud accounting platform with good Stripe integration. Its reporting capabilities handle recurring revenue schedules and deferred revenue calculations. Wave is a free alternative for micro-SaaS operations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Pilot or Bench provide bookkeeping services combined with accounting software. F
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Tax Planning for SaaS Founders
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Quarterly estimated tax payments prevent underpayment penalties. Calculate based
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Business structure matters. LLC taxed as S-Corp (once revenue exceeds $60,000) reduces self-employment tax. C-Corp is preferred for venture-backed startups. Consult a CPA specializing in SaaS for entity selection guidance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,6 +693,15 @@ Business structure matters. LLC taxed as S-Corp (once revenue exceeds $60,000) r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monthly financial reports should include: profit and loss statement, balance sheet, cash flow statement, MRR and ARR, churn rate, gross margin, and deferred revenue schedule. Review these monthly to understand business health and identify issues early.
@@ -452,10 +719,28 @@ Monthly financial reports should include: profit and loss statement, balance she
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

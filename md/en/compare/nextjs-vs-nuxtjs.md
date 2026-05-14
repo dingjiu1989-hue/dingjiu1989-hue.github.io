@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-nuxtjs.html
   
   
   
+  
+  
+  
+
+
+# Next.js vs Nuxt.js: Meta-Framework Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Next.js vs Nuxt.js: Meta-Framework Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Next.js vs Nuxt.js: Meta-Framework Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Next.js and Nuxt.js are meta-frameworks that add server-side rendering, static generation, routing, and optimization to React and Vue respectively. Both have evolved into full-featured application frameworks.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Next.js and Nuxt.js are meta-frameworks that add server-side rendering, static g
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Next.js uses file-based routing in the app directory. Folders define routes, page.tsx defines the UI, layout.tsx defines shared layouts, and loading.tsx defines loading states. Next.js 13+ supports nested layouts, error boundaries, and parallel routes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Nuxt.js uses file-based routing in the pages directory. The pages directory stru
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Data Fetching
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Next.js provides Server Components that fetch data on the server. The fetch API 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Nuxt.js provides useFetch and useAsyncData composables for data fetching. Server Routes (server/) create API endpoints within the Nuxt project. useHead manages metadata and SEO tags for each page.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Nuxt.js provides useFetch and useAsyncData composables for data fetching. Server
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Next.js supports Static Site Generation (SSG), Server-Side Rendering (SSR), Incremental Static Regeneration (ISR), and client-side rendering. The rendering model is chosen per-component or per-page.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Nuxt.js supports SSG, SSR, and Universal rendering (hybrid mode). Nuxt's Nitro e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Ecosystem
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Next.js is backed by Vercel. Deployment to Vercel provides optimized builds, edg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Nuxt.js is framework-agnostic. Deployment works with any Node.js server, serverless platform (Cloudflare Workers, Netlify Functions, AWS Lambda), or static hosting. Nuxt's module ecosystem extends functionality.
@@ -279,10 +456,28 @@ Nuxt.js is framework-agnostic. Deployment works with any Node.js server, serverl
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

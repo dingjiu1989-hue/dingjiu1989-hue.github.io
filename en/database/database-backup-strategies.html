@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-strategies.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "709",
+      "wordCount": "1094",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.html"},
-      "articleBody": "Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies RPO and RTO RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. | System | RPO | RTO | |--------|-----|-----| | Banking | Backup Types | Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | Point-in-Time Recovery (WAL Archiving) postgresql.conf wal_level = replica archive_mode = on archive_command = 'cp %p /backups/wal/%f' archive_timeout = 60 Full base backup pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P Restore to point in time recovery.conf restore_command = 'cp /backups/wal/%f %p' recovery_target_time = '2026-05-11 14:23:45' Cloud Backups AWS RDS aws rds create-db-snapshot --db-instance-identifier mydb aws rds restore-db-instance-from-db-snapshot \\ \\\\\\\\--db-instance-identifier mydb-restored \\ \\\\\\\\--db-snapshot-identifier mydb-snapshot Point-in-time restore aws rds restore-db-instance-to-point-in-time \\ \\\\\\\\--source-db-instance-identifier mydb \\ \\\\\\\\--target-db-instance-identifier mydb-restored \\ \\\\\\\\--restore-time \"2026-05-11T14:23:45Z\" The 3-2-1 Rule 3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. Conclusion Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process."
+      "articleBody": "Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies Database Backup and Recovery Strategies RPO and RTO RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time Objective): Maximum acceptable downtime. | System | RPO | RTO | |--------|-----|-----| | Banking | Backup Types | Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | Point-in-Time Recovery (WAL Archiving) postgresql.conf wal_level = replica archive_mode = on archive_command = 'cp %p /backups/wal/%f' archive_timeout = 60 Full base backup pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P Restore to point in time recovery.conf restore_command = 'cp /backups/wal/%f %p' recovery_target_time = '2026-05-11 14:23:45' Cloud Backups AWS RDS aws rds create-db-snapshot --db-instance-identifier mydb aws rds restore-db-instance-from-db-snapshot \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-restored \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot Point-in-time restore aws rds restore-db-instance-to-point-in-time \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-db-instance-identifier mydb-restored \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--restore-time \"2026-05-11T14:23:45Z\" The 3-2-1 Rule 3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. Conclusion Define RPO/RTO before designing backup strategy. Use continuous WAL archiving for PITR. Follow the 3-2-1 rule. Test restores regularly. Automate the entire process."
     }
     </script>
     <script type="application/ld+json">
@@ -101,7 +101,67 @@
 <br>
 <br>
 <br>
+<h1>Database Backup and Recovery Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Database Backup and Recovery Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Database Backup and Recovery Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>RPO and RTO </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -117,7 +177,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| System | RPO | RTO | |--------|-----|-----| | Banking | < 1 min | < 5 min | | E-commerce | < 5 min | < 1 hour | | Analytics | < 24 hours | < 24 hours | </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -133,6 +211,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>| Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | </p>
 <br>
 <br>
@@ -141,7 +228,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Point-in-Time Recovery (WAL Archiving) </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -163,7 +268,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>wal_level = replica</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -185,7 +308,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>archive_command = 'cp %p /backups/wal/%f'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -207,7 +348,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>Full base backup</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -229,7 +388,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>Restore to point in time</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -251,7 +428,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>restore_command = 'cp /backups/wal/%f %p'</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -273,7 +468,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Cloud Backups </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -295,7 +508,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>aws rds create-db-snapshot --db-instance-identifier mydb</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -317,7 +548,16 @@
 <br>
 <br>
 <br>
-<p>\\\\--db-instance-identifier mydb-restored \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-restored \</p>
 <br>
 <br>
 <br>
@@ -328,7 +568,25 @@
 <br>
 <br>
 <br>
-<p>\\\\--db-snapshot-identifier mydb-snapshot</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,6 +608,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>aws rds restore-db-instance-to-point-in-time \</p>
 <br>
 <br>
@@ -361,7 +628,16 @@
 <br>
 <br>
 <br>
-<p>\\\\--source-db-instance-identifier mydb \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
 <br>
 <br>
 <br>
@@ -372,7 +648,16 @@
 <br>
 <br>
 <br>
-<p>\\\\--target-db-instance-identifier mydb-restored \</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-db-instance-identifier mydb-restored \</p>
 <br>
 <br>
 <br>
@@ -383,7 +668,25 @@
 <br>
 <br>
 <br>
-<p>\\\\--restore-time "2026-05-11T14:23:45Z"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--restore-time "2026-05-11T14:23:45Z"</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -402,6 +705,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. </p>
 <br>
 <br>
@@ -410,7 +722,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

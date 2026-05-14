@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/azure-networking.html
   
   
   
+  
+  
+  
+
+
+# Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Microsoft Azure provides a comprehensive networking portfolio designed for hybri
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article covers Azure VNet design, VNet peering, Azure Firewall, Load Balancer, Application Gateway, and network security practices.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ This article covers Azure VNet design, VNet peering, Azure Firewall, Load Balanc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Azure VNets are regional resources. Each VNet has a CIDR block and contains subnets within a single region. Subnets can be delegated to specific Azure services like Azure App Service or Azure SQL Managed Instance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Azure reserves five IP addresses per subnet (network, first, second, last two). 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Network Security Groups (NSGs) filter traffic at the subnet or network interface level. NSGs support both allow and deny rules with stateful behavior. Default rules block all inbound traffic from the internet and allow outbound traffic, as well as internal VNet traffic and Azure Load Balancer health probes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,31 +355,6 @@ az network nsg rule create \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-group my-rg --nsg-name web-nsg \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--name Allow-HTTP --priority 100 \
-
-  
-  
-  
-  
   
   
   
@@ -250,8 +366,17 @@ az network nsg rule create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--direction Inbound --access Allow \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-group my-rg --nsg-name web-nsg \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -267,8 +392,69 @@ az network nsg rule create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--protocol Tcp --destination-port-ranges 80
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--name Allow-HTTP --priority 100 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--direction Inbound --access Allow \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--protocol Tcp --destination-port-ranges 80
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ az network nsg rule create \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VNet Peering connects two VNets within the same region (or different regions via Global VNet Peering) using Azure's backbone network. Peered VNets enable resources to communicate with private IP addresses with low latency.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Peering is not transitive — VNet A to VNet B and VNet B to VNet C does not con
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Gateway transit enables spoke VNets to use the hub's VPN gateway for hybrid connectivity without deploying VPN gateways in every spoke — a significant cost optimization.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Gateway transit enables spoke VNets to use the hub's VPN gateway for hybrid conn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Azure Firewall is a managed cloud-native firewall service with built-in high availability and auto-scaling. It provides application (FQDN) and network-level filtering, threat intelligence integration, and outbound SNAT support.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Application rules filter outbound HTTP/HTTPS traffic by FQDN. Network rules filt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Azure Firewall Manager provides centralized policy management across multiple firewalls in a hub-and-spoke topology. Firewall policies are resources that can be assigned to multiple firewalls, enabling consistent security rules across Azure regions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ For organizations requiring web application firewall (WAF) capabilities, Azure A
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Azure Load Balancer and Application Gateway
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ Azure Load Balancer distributes inbound traffic at Layer 4 (TCP/UDP) across virt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key features include:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ Key features include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Health probes (TCP, HTTP, HTTPS) that determine backend availability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ Key features include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Outbound rules for SNAT configuration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,6 +901,15 @@ Azure Application Gateway operates at Layer 7, providing HTTP/HTTPS load balanci
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 az network application-gateway create \
@@ -588,31 +927,6 @@ az network application-gateway create \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--name app-gateway --resource-group my-rg \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--sku WAF_v2 --capacity 2 \
-
-  
-  
-  
-  
   
   
   
@@ -624,8 +938,17 @@ az network application-gateway create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--frontend-port 443 \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--name app-gateway --resource-group my-rg \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -641,8 +964,69 @@ az network application-gateway create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--http-settings-cookie-based-affinity Enabled
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--sku WAF_v2 --capacity 2 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--frontend-port 443 \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--http-settings-cookie-based-affinity Enabled
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ az network application-gateway create \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Azure DNS hosts domains and provides name resolution using Azure infrastructure. Azure Private DNS Zones enable internal name resolution within VNets without custom DNS servers. Private zones can be linked to multiple VNets, providing consistent internal DNS resolution across peered networks.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ Auto-registration in private zones automatically creates DNS records for VMs, el
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Hybrid Connectivity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,6 +1161,15 @@ Azure VPN Gateway connects on-premises networks to Azure via IPsec tunnels. Acti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ExpressRoute with Global Reach enables on-premises sites connected to different ExpressRoute circuits to communicate through Microsoft's network, eliminating the need for MPLS between data centers.
@@ -758,10 +1187,28 @@ ExpressRoute with Global Reach enables on-premises sites connected to different 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

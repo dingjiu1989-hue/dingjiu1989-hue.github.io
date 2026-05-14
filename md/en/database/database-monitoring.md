@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-monitoring.html
   
 
 
+# Database Monitoring and Performance Alerting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Monitoring and Performance Alerting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Monitoring and Performance Alerting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Monitor Databases? 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Database monitoring catches problems before they become incidents. Track key met
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key Metrics 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -91,10 +178,28 @@ Query Performance
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- PostgreSQL slow queries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL slow queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -119,10 +224,28 @@ SELECT query, mean_exec_time, calls
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_statements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -147,10 +270,28 @@ ORDER BY mean_exec_time DESC LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Active queries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Active queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -175,10 +316,28 @@ SELECT pid, state, query_start, query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_activity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -203,10 +362,28 @@ WHERE state = 'active';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connection Pools 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -225,10 +402,28 @@ Monitor active vs idle connections. Alert when connection count exceeds 80% of m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Disk and Memory 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -247,10 +442,28 @@ Track cache hit ratio (aim for 99%+), disk usage, and IOPS. Low cache hit ratio 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Replication Lag 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -275,10 +488,28 @@ SELECT application_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -303,10 +534,28 @@ now() - pg_last_xact_replay_timestamp() AS lag_time
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_replication;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -331,10 +580,28 @@ Prometheus Setup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # prometheus.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -359,10 +626,28 @@ scrape_configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- job_name: 'postgres'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: 'postgres'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -387,10 +672,28 @@ static_configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- targets: ['postgres_exporter:9187']
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['postgres_exporter:9187']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -412,6 +715,15 @@ Alert Thresholds
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Metric | Warning | Critical | |--------|---------|----------| | Cache hit ratio | < 97% | < 95% | | Connections | > 80% | > 90% | | Replication lag | > 30s | > 300s | | Disk usage | > 80% | > 90% | 
@@ -423,10 +735,28 @@ Alert Thresholds
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

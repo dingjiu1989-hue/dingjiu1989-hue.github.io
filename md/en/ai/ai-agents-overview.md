@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html
   
   
   
+  
+  
+  
+
+
+# AI Agents: Architecture and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Agents: Architecture and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Agents: Architecture and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AI agents are autonomous systems that use large language models to perceive environments, reason about goals, and take actions. They represent the next frontier of LLM applications beyond simple chat and generation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ AI agents are autonomous systems that use large language models to perceive envi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A basic agent consists of an LLM core, a set of tools, and a reasoning loop. The LLM processes input and decides which tool to call. The tool executes and returns results. The LLM incorporates results into its reasoning and decides the next action. This loop continues until the task is complete.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Tool definitions include name, description, parameters (JSON schema), and implem
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Planning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Agents plan by breaking complex tasks into subtasks. ReAct (Reasoning + Acting) 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective planning requires the agent to self-evaluate progress. Ask the agent "Have I completed the original goal?" at each step. Implement maximum iteration limits to prevent infinite loops. Add human-in-the-loop checkpoints for critical actions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Effective planning requires the agent to self-evaluate progress. Ask the agent "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Agent memory has three levels: short-term (conversation context), long-term (external storage like vector databases), and episodic (past task experiences). Context window limits constrain short-term memory. Implement summarization to compress long conversations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ External memory stores embeddings of past interactions. Retrieve relevant memori
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Multi-Agent Systems
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Complex tasks benefit from multiple specialized agents. A research agent gathers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Define clear handoff protocols between agents. Each agent should have a specific role, tools, and success criteria. Shared memory allows agents to access each other's outputs. Human supervision monitors agent-to-agent interactions.
@@ -279,10 +456,28 @@ Define clear handoff protocols between agents. Each agent should have a specific
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Safety
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

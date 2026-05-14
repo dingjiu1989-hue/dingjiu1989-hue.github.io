@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/security/security-information-event-ma
   
   
   
+  
+  
+  
+
+
+# SIEM: Security Information and Event Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SIEM: Security Information and Event Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SIEM: Security Information and Event Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Security Information and Event Management (SIEM) systems collect, analyze, and correlate security logs from across your infrastructure to detect threats in real time.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Security Information and Event Management (SIEM) systems collect, analyze, and c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SIEM aggregates logs from multiple sources: servers, network devices, firewalls, endpoints, cloud services, and applications. Normalization converts logs into a common format. Correlation rules identify patterns that indicate security incidents.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ A single failed login is normal. 100 failed logins from different IPs in 5 minut
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Key Features
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Log collection and aggregation from any data source. Real-time correlation with 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Threat intelligence feeds enrich logs with known malicious indicators. Incident response automation (SOAR) triggers playbooks for common incidents. Case management tracks investigations from detection to resolution. Dashboards visualize security posture.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Threat intelligence feeds enrich logs with known malicious indicators. Incident 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 On-premises SIEM (Splunk Enterprise, Elastic Security) gives full control over data. Data never leaves your network. Requires significant infrastructure and administration. Best for organizations with strict data residency requirements or existing Elastic/Splunk investments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Cloud SIEM (Splunk Cloud, Microsoft Sentinel, Sumo Logic) reduces operational ov
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Open source SIEM (Wazuh, Security Onion) provides SIEM capabilities without licensing costs. Wazuh combines log analysis, intrusion detection, and compliance monitoring. Security Onion bundles Elastic Security, Kibana, and network security monitoring tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ Open source SIEM (Wazuh, Security Onion) provides SIEM capabilities without lice
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Critical log sources include: authentication logs (AD, SSO, VPN), firewall logs (allow/deny), web proxy logs (URL filtering), DNS logs (domain queries), cloud audit logs (AWS CloudTrail, Azure Activity Log), database audit logs, and endpoint detection logs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -237,6 +414,15 @@ Prioritize log sources based on risk. Start with perimeter devices and authentic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Correlation Rules
@@ -251,10 +437,28 @@ Prioritize log sources based on risk. Start with perimeter devices and authentic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Design correlation rules for specific threat scenarios. Example: "10 failed logins from same IP in 5 minutes" alerts on brute force. "New admin user created outside business hours" detects unauthorized privilege escalation. "Data export exceeding baseline" identifies data exfiltration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/hexagonal-architecture.ht
   
 
 
+# Hexagonal Architecture (Ports and Adapters)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Hexagonal Architecture (Ports and Adapters)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Hexagonal Architecture (Ports and Adapters)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Hexagonal Architecture, also known as the Ports and Adapters pattern, was introduced by Alistair Cockburn to create applications that are isolated from their technical infrastructure. The core idea is that the application's business logic is at the center, communicating with the outside world through well-defined ports and adapters. This separation makes the application testable, maintainable, and adaptable to changing infrastructure. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Core Concept
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 In Hexagonal Architecture, the application core contains the domain logic and business rules. It defines ports—interfaces that express what the application needs from the outside world (driven ports) and what the outside world can do with the application (driving ports). Adapters implement these ports to connect the core to specific technologies. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ A driving adapter (like a web controller) triggers the application by calling a 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Domain Isolation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ The greatest benefit of Hexagonal Architecture is domain isolation. The business
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For example, if you replace PostgreSQL with MongoDB, you write a new repository adapter that implements the same port interface. The core remains completely unchanged. This isolation also makes it feasible to run the same application on different infrastructure configurations for different environments. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Ports
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A port is an interface that defines a boundary interaction. Driving ports are use case interfaces that expose application capabilities to the outside world. They are called "inbound ports" and typically correspond to service methods or command handlers. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Driven ports are interfaces for capabilities the application needs from infrastr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Adapters 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Adapters implement ports to connect the core to specific technologies. A web con
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Adapters can contain significant complexity related to their technology, but this complexity is contained and does not leak into the core. Adapters can also be replaced or configured differently per environment. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ Testing Benefits
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Hexagonal Architecture enables a testing strategy where the core is tested with unit tests using mock adapters, and adapters are tested with integration tests. Domain logic tests run in milliseconds with no infrastructure setup. Adapter tests verify that the implementation correctly interacts with the actual technology. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ This testing approach gives high confidence with fast feedback. The core tests v
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Practical Implementation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -242,10 +455,28 @@ In practice, Hexagonal Architecture requires careful project structure. A common
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The key to success is discipline about dependency direction. The core must never import infrastructure code. Tools like ArchUnit (Java) or custom linting rules can enforce this constraint automatically. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

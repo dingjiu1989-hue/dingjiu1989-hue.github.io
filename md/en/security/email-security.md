@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/email-security.html
   
   
   
+  
+  
+  
+
+
+# Email Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Email Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Email Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Email remains the primary attack vector for most organizations. Phishing, busine
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SPF, DKIM, and DMARC 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ These three DNS-based authentication protocols work together to verify email sen
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SPF (Sender Policy Framework) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ SPF specifies which mail servers are authorized to send email for a domain via D
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 example.com. TXT "v=spf1 ip4:203.0.113.0/24 include:_spf.google.com ~all"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Mechanisms: `ip4`, `ip6`, `include`, `a`, `mx`, `exists`. Qualifiers: `+` (pass)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DKIM (DomainKeys Identified Mail) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ DKIM adds a digital signature to email headers, allowing receivers to verify the
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Generate DKIM key pair with OpenSSL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ openssl genrsa -out dkim-private.pem 2048
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl rsa -in dkim-private.pem -pubout -out dkim-public.pem
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ openssl rsa -in dkim-private.pem -pubout -out dkim-public.pem
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 openssl rsa -pubin -in dkim-public.pem -outform DER | base64
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ DNS record for DKIM:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 default._domainkey.example.com. TXT "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ DMARC (Domain-based Message Authentication, Reporting, and Conformance)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DMARC tells receiving mail servers how to handle messages that fail SPF or DKIM checks, and provides reporting on authentication results. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ _dmarc.example.com. TXT "v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com; r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key tags: `p` (policy: none/quarantine/reject), `rua` (aggregate reports), `ruf` (forensic reports), `pct` (sampling percentage), `sp` (subdomain policy), `adkim`/`aspf` (strict alignment). 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Email Gateway Deployment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Email gateways filter inbound and outbound traffic, applying policy controls, antivirus scanning, URL rewriting, and attachment sandboxing. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,6 +771,15 @@ Email gateways filter inbound and outbound traffic, applying policy controls, an
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 inbound_policies:
@@ -503,10 +797,28 @@ inbound_policies:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Block executable attachments"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Block executable attachments"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ condition: attachment.extension in ['.exe', '.scr', '.bat', '.cmd', '.js']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: quarantine
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ notify: security@example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "URL rewrite for external links"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "URL rewrite for external links"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ condition: contains_any(body.urls)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: rewrite_urls
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ rewrite_domain: click.example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Suspicious header analysis"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Suspicious header analysis"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ condition: mismatch(spf, dkim)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: add_header "X-Suspicious: yes"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ score: +30
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Phishing Protection 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,6 +1161,15 @@ Phishing defense requires multiple layers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Attachment scanning**: Sandbox all attachments in isolated environments
@@ -758,10 +1187,28 @@ Phishing defense requires multiple layers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **URL inspection**: Rewrite and scan links at click-time for malicious content 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Impersonation detection**: Identify display-name spoofing and lookalike domains 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **AI-based analysis**: ML models detect anomalous language patterns and social engineering 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **URL inspection**: Rewrite and scan links at click-time for malicious content 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Impersonation detection**: Identify display-name spoofing and lookalike domains 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **AI-based analysis**: ML models detect anomalous language patterns and social engineering 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ Phishing defense requires multiple layers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import re
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ def detect_lookalike(domain, trusted_domains):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lookalike_patterns = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ lookalike_patterns = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ normalized = domain.lower()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for trusted in trusted_domains:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ for trusted in trusted_domains:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if normalized != trusted:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,6 +1499,15 @@ if normalized != trusted:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if levenshtein_distance(normalized, trusted) <= 2:
@@ -979,10 +1525,28 @@ if levenshtein_distance(normalized, trusted) <= 2:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ return True
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for pattern, replacement in lookalike_patterns.items():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ if pattern in normalized:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test = normalized.replace(pattern, replacement)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ if test == trusted:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ return False
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Business Email Compromise Defense 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ BEC attacks target executives through impersonation and social engineering, ofte
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key BEC defenses:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ Key BEC defenses:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Internal email anomalies**: Flag external replies to internal threads
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ Key BEC defenses:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **User training**: Simulated BEC campaigns and reporting mechanisms
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ Key BEC defenses:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def flag_bec_email(email):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ flags = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if email.display_name in executive_names and email.from_domain != org_domain:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ flags.append("display_name_spoofing")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if email.urgency_indicators and email.request_type == "payment":
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ flags.append("urgent_payment_request")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if email.reply_to_domain and email.reply_to_domain != org_domain:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,6 +2149,15 @@ flags.append("suspicious_reply_to")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return flags
@@ -1404,10 +2175,28 @@ return flags
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

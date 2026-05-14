@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/monitoring-alerting-setup.html
   
   
   
+  
+  
+  
+
+
+# Monitoring and Alerting Setup
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Monitoring and Alerting Setup
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Monitoring and Alerting Setup
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ A robust monitoring and alerting system is the backbone of reliable production i
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Google's SRE book defines four key metrics for user-facing systems:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,14 +251,6 @@ Google's SRE book defines four key metrics for user-facing systems:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Traffic** -- Request rate (RPS, QPS) or throughput.
-
-  
-  
-  
-  
   
   
   
@@ -165,7 +262,7 @@ Google's SRE book defines four key metrics for user-facing systems:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Errors** -- Rate of failed requests (5xx, timeouts, explicit error responses).
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Traffic** -- Request rate (RPS, QPS) or throughput.
 
   
   
@@ -180,10 +277,54 @@ Google's SRE book defines four key metrics for user-facing systems:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Saturation** -- How full the service is (CPU, memory, queue depth).
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Errors** -- Rate of failed requests (5xx, timeouts, explicit error responses).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Saturation** -- How full the service is (CPU, memory, queue depth).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Every monitoring system should capture these four signals for each service.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Metrics Collection Stack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,6 +407,15 @@ The Prometheus ecosystem has become the standard for metrics collection:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Application → Metrics Export → Prometheus → Grafana
@@ -265,10 +433,28 @@ Application → Metrics Export → Prometheus → Grafana
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ↑ ↓
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Node Exporter Alertmanager
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ↑ ↓
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ System Notification
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Metrics Channels
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Install Prometheus and configure it to scrape targets:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # prometheus.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ global:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scrape_interval: 15s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,6 +693,15 @@ evaluation_interval: 15s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scrape_configs:
@@ -452,31 +719,6 @@ scrape_configs:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: 'node'
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-static_configs:
-
-  
-  
-  
-  
   
   
   
@@ -488,7 +730,7 @@ static_configs:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['localhost:9100']
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: 'node'
 
   
   
@@ -499,14 +741,6 @@ static_configs:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: 'app'
-
   
   
   
@@ -537,10 +771,106 @@ static_configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['localhost:3000']
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['localhost:9100']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: 'app'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+static_configs:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['localhost:3000']
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ Use `scrape_interval` of 15 seconds for most metrics. For high-cardinality metri
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Application Instrumentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ Export application metrics in Prometheus format:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Node.js with prom-client
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ const client = require('prom-client');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const httpRequestDuration = new client.Histogram({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ name: 'http_request_duration_seconds',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 help: 'HTTP request duration in seconds',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,6 +1109,15 @@ labelNames: ['method', 'route', 'status'],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
@@ -724,10 +1135,28 @@ buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ buckets: [0.01, 0.05, 0.1, 0.5, 1, 5]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app.use((req, res, next) => {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ const end = httpRequestDuration.startTimer();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 res.on('finish', () => {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ end({ method: req.method, route: req.route?.path || 'unknown', status: res.statu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ next();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ Use Histogram metrics for latency, Counter for request counts, and Gauge for cur
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Centralized Logging
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # docker-compose for Loki + Promtail
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 loki:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ image: grafana/loki:3.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ports: ["3100:3100"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ promtail:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: grafana/promtail:3.0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,14 +1655,6 @@ volumes:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log:/var/log
-
-  
-  
-  
-  
   
   
   
@@ -1083,8 +1666,43 @@ volumes:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ./promtail.yml:/etc/promtail/promtail.yml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log:/var/log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ./promtail.yml:/etc/promtail/promtail.yml
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ grafana:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: grafana/grafana:latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ ports: ["3000:3000"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ Promtail tails log files, adds labels, and ships them to Loki. Grafana queries b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Design alerts that are actionable and meaningful:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,6 +1889,15 @@ Design alerts that are actionable and meaningful:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 groups:
@@ -1234,10 +1915,28 @@ groups:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: application
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: application
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighErrorRate
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighErrorRate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1289,6 +2006,15 @@ rules:
 
 expr: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ sum(rate(http_requests_total{status=~"5.."}[5m]))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 /
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ sum(rate(http_requests_total[5m])) > 0.05
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for: 5m
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,6 +2149,15 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: critical
@@ -1404,10 +2175,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 annotations:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ summary: "High error rate ({{ $value | humanizePercentage }})"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighLatency
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighLatency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ expr: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 histogram_quantile(0.99,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ rate(http_request_duration_seconds_bucket[5m])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ) > 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,6 +2383,15 @@ for: 5m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 labels:
@@ -1557,10 +2409,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: warning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,6 +2461,15 @@ annotations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 summary: "p99 latency is {{ $value }}s"
@@ -1608,10 +2487,28 @@ summary: "p99 latency is {{ $value }}s"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: InstanceDown
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: InstanceDown
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ expr: up == 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for: 1m
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: critical
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Alert on symptoms, not causes.** Alert on error rate, not on "CPU is high." CPU spikes may be normal; error rate spikes always require investigation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Set appropriate severity.** Critical alerts page someone immediately. Warning alerts create a ticket for next-day investigation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Notification Channels
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ Route alerts through Alertmanager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # alertmanager.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ route:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 receiver: 'team-page'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ routes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ severity: warning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 receiver: 'team-slack'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ receivers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: 'team-page'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: 'team-page'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,14 +3059,6 @@ pagerduty_configs:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- routing_key: '...'
-
-  
-  
-  
-  
   
   
   
@@ -2001,8 +3070,43 @@ pagerduty_configs:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: 'team-slack'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- routing_key: '...'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: 'team-slack'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ slack_configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- api_url: 'https://hooks.slack.com/services/...'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- api_url: 'https://hooks.slack.com/services/...'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ channel: '#alerts'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go to Slack for team awareness.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective Grafana dashboards follow these principles:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ Effective Grafana dashboards follow these principles:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Show what matters**, not everything. Start with RED metrics (Rate, Errors, Duration).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ Effective Grafana dashboards follow these principles:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Link to logs** -- a metric spike should have a one-click path to relevant logs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ Effective Grafana dashboards follow these principles:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Complement real-user monitoring with synthetic checks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ Complement real-user monitoring with synthetic checks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 modules:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ http_2xx:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prober: http
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,10 +3553,28 @@ http:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 preferred_ip_protocol: "ip4"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,6 +3605,15 @@ valid_status_codes: [200, 201, 204]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Run synthetic checks from multiple geographic locations to detect regional outages.
@@ -2356,10 +3631,28 @@ Run synthetic checks from multiple geographic locations to detect regional outag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

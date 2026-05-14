@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-pricing.html
   
 
 
+# SaaS Pricing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Pricing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Pricing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Pricing is the single most impactful lever for SaaS revenue. A 1% price increase can yield an 8-12% increase in operating profit. Yet many developers treat pricing as an afterthought, setting numbers arbitrarily based on gut feel or competitor rates. This article covers proven SaaS pricing strategies backed by data and psychology.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Pricing is the single most impactful lever for SaaS revenue. A 1% price increase
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Before diving into models, understand the psychological principles that influence purchasing decisions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Before diving into models, understand the psychological principles that influenc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **The decoy effect.** Add a deliberately less attractive option to make your target option look better. If you have Basic ($10) and Pro ($25), add Standard ($24) with slightly fewer features than Pro. Customers will flock to Pro, seeing it as exceptional value.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Before diving into models, understand the psychological principles that influenc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Flat-Rate Pricing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ One price, one product. Simple and transparent.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Example: Basecamp costs a flat monthly fee.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Example: Basecamp costs a flat monthly fee.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons:** Leaves money on the table. Light users get the same value as power users. Hard to grow revenue without raising prices for everyone.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Flat-rate works best when your product has a clear, narrow use case and a homoge
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Tiered Pricing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Multiple plans at different price points with graduated feature sets:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Free: $0 - 1 project, 100MB storage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Starter: $19/mo - 5 projects, 5GB storage
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pro: $49/mo - Unlimited projects, 50GB storage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Enterprise: Custom - Everything + SSO, SLA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros:** Captures value across different customer segments. Free tier drives adoption. Enterprise tier captures high-value customers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Enterprise: Custom - Everything + SSO, SLA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Limit to 3-4 tiers. Too many choices paralyze decision-making.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -429,6 +687,15 @@ Enterprise: Custom - Everything + SSO, SLA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Price the top tier high to make the middle tier look reasonable.
@@ -443,10 +710,28 @@ Enterprise: Custom - Everything + SSO, SLA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Ensure each tier has a clear value story, not just "more of everything."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -477,10 +762,28 @@ Enterprise: Custom - Everything + SSO, SLA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Customers pay for what they consume:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -511,10 +814,28 @@ AWS Lambda: $0.20 per 1 million requests
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Stripe: 2.9% + $0.30 per transaction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -545,10 +866,28 @@ Stripe: 2.9% + $0.30 per transaction
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons:** Unpredictable bills create customer anxiety. Hard to forecast revenue. May discourage usage, which is counterproductive for network-effect products.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -579,10 +918,28 @@ Usage-based pricing works well when value is directly proportional to usage (com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Per-Seat Pricing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -613,10 +970,28 @@ Charge per user:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Slack: $8.75/user/month (Pro)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -647,10 +1022,28 @@ GitHub: $4/user/month (Team)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros:** Scales naturally with the customer's team size. Easy to understand. Predictable revenue per account.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,10 +1074,28 @@ GitHub: $4/user/month (Team)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Per-seat pricing is the standard for collaboration and productivity tools. Combine with tiered plans (free tier for small teams, paid plans for larger teams).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1126,28 @@ Per-seat pricing is the standard for collaboration and productivity tools. Combi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Most successful SaaS companies use hybrid pricing:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -746,6 +1175,15 @@ Most successful SaaS companies use hybrid pricing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Overages** (usage): Captures additional value from power users.
@@ -760,10 +1198,28 @@ Most successful SaaS companies use hybrid pricing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Add-ons** (flat): Optional premium features.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -794,10 +1250,28 @@ Example: SendGrid charges a base monthly fee for email credits, then overages fo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Choosing Your Model
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -828,10 +1302,28 @@ Consider these factors:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Customer willingness to pay.** Survey potential customers. Ask what they would pay. Run pricing experiments with landing pages at different price points.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -862,10 +1354,28 @@ Consider these factors:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Competitive landscape.** You can price above competitors if you offer more value. You can price below if you are entering a crowded market. Avoid pricing wars -- they destroy value for everyone.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -896,10 +1406,28 @@ Consider these factors:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Pricing Experiments
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -930,10 +1458,28 @@ Do not set your pricing once and forget it. Run continuous experiments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **A/B test price points** on your landing page.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -958,6 +1504,15 @@ Do not set your pricing once and forget it. Run continuous experiments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Measure conversion rates** at each price point.
@@ -972,10 +1527,28 @@ Do not set your pricing once and forget it. Run continuous experiments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Track churn by pricing tier**. High churn in a tier suggests a value gap.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1006,10 +1579,28 @@ Tools like ProfitWell and Baremetrics help track pricing metrics.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Common Mistakes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1040,10 +1631,28 @@ Tools like ProfitWell and Baremetrics help track pricing metrics.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Too many options.** Analysis paralysis kills conversions. Limit plans to 3-4 tiers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1074,6 +1683,15 @@ Tools like ProfitWell and Baremetrics help track pricing metrics.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Free tier that is too generous.** Your free tier should solve enough of a problem to demonstrate value, but leave customers wanting more. Otherwise, they have no incentive to upgrade.
@@ -1091,10 +1709,28 @@ Tools like ProfitWell and Baremetrics help track pricing metrics.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

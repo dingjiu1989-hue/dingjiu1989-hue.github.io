@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/debugging-techniques.html
   
   
   
+  
+  
+  
+
+
+# Debugging Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Debugging Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Debugging Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Debugging is an essential skill that separates effective engineers from frustrated ones. Modern distributed systems introduce complexities that make debugging harder: multiple services, asynchronous communication, and ephemeral infrastructure. This article covers systematic debugging techniques from logging and tracing through profiling and interactive debugging.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Debugging is an essential skill that separates effective engineers from frustrat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The foundation of debugging is effective logging. Structured logging outputs logs as structured data (JSON) rather than free text, making them machine-parseable and searchable. Each log entry includes a timestamp, severity level, service name, request ID, and structured context.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Good logging follows principles. Log at appropriate levels: DEBUG for detailed d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Log aggregation tools (Elasticsearch, Loki, CloudWatch Logs) centralize logs from all services. The ability to search across all logs, filter by time range and severity, and correlate related entries is essential for debugging distributed systems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Log aggregation tools (Elasticsearch, Loki, CloudWatch Logs) centralize logs fro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distributed tracing tracks a single request as it flows through multiple services. Each service adds a span to the trace, recording the operation, timing, and metadata. The complete trace shows the full path of a request and identifies which service caused slowdowns or failures.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ OpenTelemetry has become the standard for distributed tracing. Services instrume
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tracing is invaluable for debugging latency issues. A trace shows exactly which service call consumed the most time, whether calls were sequential when they could have been parallel, and whether retries contributed to overall latency. Without tracing, latency debugging in distributed systems is guesswork.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Tracing is invaluable for debugging latency issues. A trace shows exactly which 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Profiling measures where a program spends its time and memory. CPU profiling identifies the functions that consume the most CPU time. Memory profiling identifies allocation hotspots and objects that consume the most memory. IO profiling identifies blocking operations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Available profiling tools differ by platform. Go's pprof provides CPU, memory, g
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Profiling should be done on production-like workloads. Hot paths in development may differ from production. Continuous profiling in production (using tools like Pyroscope or Google Cloud Profiler) provides ongoing insight into performance characteristics.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Profiling should be done on production-like workloads. Hot paths in development 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Interactive debuggers allow stepping through code, inspecting variables, and evaluating expressions at runtime. They are most useful during development for understanding unexpected behavior. Tools like VS Code's debugger, GDB (for compiled languages), and pdb (for Python) provide interactive debugging capabilities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Debuggers have limitations in distributed systems. A debugger breakpoint in one 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A pragmatic approach uses interactive debugging during development and logging, tracing, and profiling for production issues. The time spent setting up a debugger in production is usually better spent adding logging and deploying a fix.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ A pragmatic approach uses interactive debugging during development and logging, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective debugging follows a systematic process. Reproduce the issue reliably. Collect all available information (logs, traces, metrics). Form a hypothesis about the root cause. Test the hypothesis through experiments or additional analysis. Confirm the root cause with a targeted fix. Verify the fix resolves the issue.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,6 +667,15 @@ This scientific method prevents common debugging mistakes: jumping to conclusion
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Using the Right Tool
@@ -435,10 +693,28 @@ This scientific method prevents common debugging mistakes: jumping to conclusion
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Different debugging scenarios require different tools. A slow response needs tracing to find the bottleneck. An error needs log analysis to understand the failure. A crash needs a core dump and stack trace analysis. A memory leak needs heap profiling and diff analysis. A performance regression needs before/after profiling comparison.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

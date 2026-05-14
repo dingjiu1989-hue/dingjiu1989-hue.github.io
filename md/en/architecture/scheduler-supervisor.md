@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/scheduler-supervisor.html
   
 
 
+# Scheduler Supervisor Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Scheduler Supervisor Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Scheduler Supervisor Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The scheduler supervisor pattern manages the execution of scheduled and background jobs in a distributed system. It separates the scheduling responsibility from the execution responsibility, using a supervisor to monitor job execution, handle failures, and manage retries. This pattern is essential for reliable background processing in production systems. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Core Concepts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The scheduler supervisor pattern has three components: the scheduler, which determines when jobs should run based on schedules or triggers; the executor, which runs the job's business logic; and the supervisor, which monitors execution, handles failures, and enforces retry policies. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ This separation of concerns allows each component to be scaled and managed indep
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Job Scheduling 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Job scheduling defines when and how often a job should run. Common scheduling pa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The scheduler should be designed for reliability. It must persist schedules to survive restarts, handle time zone changes correctly, and manage overlapping executions (prevent a second instance from starting if the first is still running). Distributed locking ensures that only one scheduler instance fires a job, even when multiple scheduler instances are running for high availability. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Fault Tolerance
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The supervisor handles job failures. When a job fails, the supervisor can retry with configurable policies, escalate to a dead-letter queue, send alerts, or execute compensating actions. The supervisor tracks execution history and uses it to make retry decisions. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Retry policies should be configurable per job. A simple email notification job m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The supervisor also handles timeout detection. If a job does not complete within its expected duration, the supervisor can mark it as failed, kill the executor process, and trigger retry or escalation. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Execution Isolation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Job execution should be isolated from other system components. Each job runs in its own execution context, with its own resource limits, error boundaries, and security permissions. Isolation prevents a misbehaving job from affecting other jobs or the scheduling infrastructure. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ Execution isolation can be achieved through separate processes, containers, or w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distributed Job Management 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ In distributed systems, job management must handle multiple instances of the sch
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Job state must be stored in a shared, durable store. The scheduler writes job definitions and schedules to the store. The supervisor writes execution results and failure history. The store must support concurrent access and conflict resolution. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -242,10 +455,28 @@ Modern distributed job frameworks handle these concerns automatically. Apache Ai
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Failure Escalation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -264,10 +495,28 @@ When automatic retries are exhausted, the supervisor escalates the failure. Esca
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The escalation path should be clearly defined for each job. Critical jobs may escalate to pager duty within minutes. Lower-priority jobs may generate a daily failure report. The supervisor provides a consistent escalation mechanism across all job types. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -286,6 +535,15 @@ Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monitoring scheduled job execution requires tracking several metrics: job execution time, success rate, failure rate by failure reason, time between scheduled and actual execution (scheduling delay), and dead-letter queue depth. Alerts should fire when failure rates exceed thresholds or when jobs are significantly delayed. 
@@ -297,10 +555,28 @@ Monitoring scheduled job execution requires tracking several metrics: job execut
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dashboard visibility into job execution history is essential for operations teams. Each job should show its last N executions, current status, next scheduled time, and execution statistics. Historical trends help identify degrading jobs before they fail completely. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

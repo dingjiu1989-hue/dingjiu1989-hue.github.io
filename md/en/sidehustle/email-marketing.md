@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/email-marketing.html
   
 
 
+# Email Marketing for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Email Marketing for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Email Marketing for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Email marketing remains the most effective digital marketing channel. For developers, an email list is a direct line to an engaged audience that trusts your recommendations. Whether you are promoting a side project, selling a course, or building a personal brand, email is the channel with the highest return on investment.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Email marketing remains the most effective digital marketing channel. For develo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Unlike social media, where algorithms control reach, email delivers directly to your subscribers' inboxes:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Unlike social media, where algorithms control reach, email delivers directly to 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Engagement.** Email open rates for developer newsletters average 30-50%, compared to 1-5% social media engagement.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +268,28 @@ Unlike social media, where algorithms control reach, email delivers directly to 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Longevity.** A good email list retains value for years. Social media followers fade without constant content.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -188,10 +320,28 @@ Unlike social media, where algorithms control reach, email delivers directly to 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Before worrying about content, you need subscribers. The most effective growth strategies for developer email lists:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -222,10 +372,28 @@ Before worrying about content, you need subscribers. The most effective growth s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * "Get the free checklist: 10 Deployment Mistakes to Avoid"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -250,10 +418,28 @@ Before worrying about content, you need subscribers. The most effective growth s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * "Get the Figma template for SaaS landing pages"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,10 +470,28 @@ Place signup forms at the end of your blog posts, on your landing page, and in y
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Guest contributions.** Write for established developer publications (Dev.to, FreeCodeCamp, CSS-Tricks). Include a subtle call-to-action for your newsletter at the end. Each guest post can generate 50-200 new subscribers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -318,10 +522,28 @@ Place signup forms at the end of your blog posts, on your landing page, and in y
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **GitHub projects.** If you maintain popular repositories, add a "Subscribe to my newsletter" link in the README. For developers who use your code, your newsletter is a natural next step.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -352,10 +574,28 @@ Place signup forms at the end of your blog posts, on your landing page, and in y
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Newsletter Content That Works
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -386,10 +626,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Curated content format:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -417,10 +675,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your commentary on why each link matters (2-3 sentences).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -445,10 +721,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * One question to engage subscribers (reply to this email).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -479,10 +773,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Deep dive into a specific technical topic.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -507,6 +819,15 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Code examples and explanations.
@@ -521,10 +842,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * When and when not to use the approach.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -555,10 +894,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Something you built or learned.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -583,6 +940,15 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * What you would do differently.
@@ -597,10 +963,28 @@ Developer newsletters succeed by providing consistent value:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Lessons applicable to the reader's work.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -631,10 +1015,28 @@ The most successful developer newsletters mix all three formats. Consistency mat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Email Marketing Platforms for Developers
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -665,10 +1067,28 @@ Choose your platform based on list size and features:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **ConvertKit:** The gold standard for creator newsletters. Strong automation, landing pages, and segmentation. $29/month for up to 1,000 subscribers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -693,10 +1113,28 @@ Choose your platform based on list size and features:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Substack:** Zero upfront cost. Built-in discovery and paid subscription features. Takes 10% of revenue if you charge.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -721,10 +1159,28 @@ Choose your platform based on list size and features:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Mailchimp:** Widely used but increasingly expensive. Less developer-friendly than alternatives.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -755,10 +1211,28 @@ Choose your platform based on list size and features:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 After your initial burst of subscribers, growth requires ongoing effort:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -789,10 +1263,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Referral programs.** Offer incentives for subscribers who refer others. Beehiiv has built-in referral tracking. A "Top referrers" leaderboard can drive significant growth.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -823,10 +1315,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Community building.** Create a Discord or Slack community for subscribers. Community membership adds value to the newsletter and reduces churn.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -857,10 +1367,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Sponsored content.** Companies pay to be featured in your newsletter. Rates depend on subscriber count and engagement:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -888,10 +1416,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * 5,000-20,000 subscribers: $200-1,000 per mention.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -916,10 +1462,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * 50,000+ subscribers: $3,000-10,000+ per mention.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -950,10 +1514,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Paid subscriptions.** Offer premium content (deeper dives, exclusive tutorials, code libraries) behind a paywall. Substack and ConvertKit support paid subscriptions natively.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -984,10 +1566,28 @@ After your initial burst of subscribers, growth requires ongoing effort:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Email Deliverability
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1018,10 +1618,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Use a custom sending domain (newsletter@yourdomain.com, not @gmail.com).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1046,10 +1664,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Encourage replies (engagement signals quality to email providers).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1074,6 +1710,15 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Avoid spam trigger words ("free," "guaranteed," "act now") in subject lines.
@@ -1088,10 +1733,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Use double opt-in (confirms the subscriber genuinely wants your emails).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1122,10 +1785,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Too salesy too early.** Build trust through value before asking for money. A general rule: 80% valuable content, 20% promotional.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1156,10 +1837,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **No personal touch.** Newsletters that feel automated get ignored. Write as if you are emailing a friend. Use "I" and "you." Share personal stories.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1190,10 +1889,28 @@ A newsletter that lands in spam does not exist. Maximize deliverability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

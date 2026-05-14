@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/git-workflows-2026.html
   
   
   
+  
+  
+  
+
+
+# Git Workflows for Teams
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Git Workflows for Teams
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Git Workflows for Teams
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Git workflows define how teams collaborate on code. Choosing the right workflow impacts productivity, release cadence, and code quality. In 2026, several mature patterns dominate, each suited to different team structures and deployment strategies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Git workflows define how teams collaborate on code. Choosing the right workflow 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Trunk-based development has become the default for teams practicing continuous deployment. Developers work on short-lived feature branches (hours to a couple of days) and merge directly into `main` multiple times per day.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Key practices:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Branch from `main`, commit frequently, merge back quickly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Key practices:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Run CI on every push to catch integration issues early.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Key practices:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Trunk-based development minimizes merge conflicts and keeps integration pain low. It pairs well with feature flagging systems like LaunchDarkly or Flagsmith.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Trunk-based development minimizes merge conflicts and keeps integration pain low
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Flow is a simplified trunk-based variant popular with open source and small teams:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,14 +459,6 @@ GitHub Flow is a simplified trunk-based variant popular with open source and sma
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Make changes and open a pull request.
-
-  
-  
-  
-  
   
   
   
@@ -301,7 +470,7 @@ GitHub Flow is a simplified trunk-based variant popular with open source and sma
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Discuss, review, and iterate.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Make changes and open a pull request.
 
   
   
@@ -316,10 +485,54 @@ GitHub Flow is a simplified trunk-based variant popular with open source and sma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Merge to `main` and deploy immediately.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Discuss, review, and iterate.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Merge to `main` and deploy immediately.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ The simplicity is its strength -- there is no `develop` branch, no release branc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  GitFlow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ GitFlow remains relevant for projects with scheduled releases and strict version
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `main` stores the release history.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ GitFlow remains relevant for projects with scheduled releases and strict version
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `feature/*` branches branch from `develop`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ GitFlow remains relevant for projects with scheduled releases and strict version
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `hotfix/*` branches fix production issues directly from `main`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ GitFlow provides clear separation between work-in-progress and released code. Ho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Pull Request Best Practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Regardless of workflow, effective pull requests are critical:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Keep PRs small.** A PR should represent a single logical change. Research shows that reviews are most effective under 250 lines changed. Large PRs get less thorough reviews and take longer to merge.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Regardless of workflow, effective pull requests are critical:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Use draft PRs for early feedback.** Open a draft PR before the code is complete to get architectural feedback early.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ Regardless of workflow, effective pull requests are critical:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The debate between rebasing and merging continues. Most teams adopt a pragmatic hybrid:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ The debate between rebasing and merging continues. Most teams adopt a pragmatic 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git checkout feature/xyz
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ git rebase main
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Merge with --no-ff for pull requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ git checkout main
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git merge --no-ff feature/xyz
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ Use rebase to keep feature branches up to date and maintain a clean history. Use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Commit Message Conventions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ Conventional Commits has become the standard:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 feat(api): add user authentication endpoint
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ fix(parser): handle null input gracefully
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docs(readme): update installation instructions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ This format enables automated changelog generation, semantic versioning, and cha
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Branch Naming Conventions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ Adopt a consistent branch naming scheme:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `feat/description` for features
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ Adopt a consistent branch naming scheme:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `chore/description` for maintenance tasks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ Adopt a consistent branch naming scheme:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use hyphens to separate words and keep names under 50 characters.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Use hyphens to separate words and keep names under 50 characters.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern Git platforms support automated checks that must pass before merging:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ Modern Git platforms support automated checks that must pass before merging:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Unit and integration tests.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ Modern Git platforms support automated checks that must pass before merging:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Coverage thresholds.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ Configure branch protection rules to require passing CI checks and approved revi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Handling Merge Conflicts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Conflicts are inevitable. Best practices for resolution:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Update your branch first
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ git fetch origin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git rebase origin/main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ git rebase origin/main
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git add resolved-file.py
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ git rebase --continue
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code's built-in merge editor. Always test after resolving conflicts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ For complex conflicts, use a visual merge tool like `kdiff3`, `meld`, or VS Code
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Client-side hooks enforce local standards:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ Client-side hooks enforce local standards:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .git/hooks/pre-commit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,6 +2019,15 @@ npm run lint && npm run typecheck
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-language). Server-side hooks in CI prevent non-compliant commits from being merged.
@@ -1319,10 +2045,28 @@ Team-wide hooks can be managed with `husky` (JavaScript) or `lefthook` (multi-la
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

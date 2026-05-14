@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/compare/playwright-vs-cypress.html
   
 
 
+# Playwright vs Cypress
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Playwright vs Cypress
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Playwright vs Cypress
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Playwright and Cypress are the two dominant end-to-end testing frameworks in 202
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Architecture
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Playwright and Cypress are the two dominant end-to-end testing frameworks in 202
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cypress runs inside the browser alongside your application:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Cypress runs inside the browser alongside your application:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Automatic waiting**: Cypress automatically waits for elements and assertions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -188,10 +320,28 @@ Cypress runs inside the browser alongside your application:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **DOM snapshot**: Hovering over each command shows the DOM state at that moment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -222,10 +372,28 @@ Cypress runs inside the browser alongside your application:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 describe("Login Flow", () => {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -256,6 +424,15 @@ beforeEach(() => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cy.visit("/login");
@@ -273,10 +450,28 @@ cy.visit("/login");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -307,10 +502,28 @@ it("should log in successfully", () => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cy.get("[data-testid=email]").type("user@example.com");
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -341,10 +554,28 @@ cy.get("[data-testid=password]").type("password123");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cy.get("[data-testid=submit]").click();
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -375,6 +606,15 @@ cy.url().should("include", "/dashboard");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cy.contains("Welcome back").should("be.visible");
@@ -392,6 +632,15 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
@@ -409,10 +658,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -443,10 +710,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Excellent debugging experience (time-travel, snapshots)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,6 +756,15 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Interactive Test Runner for development
@@ -485,10 +779,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Network stubbing is built-in and powerful
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -519,10 +831,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Limited to Chromium-family browsers (Chrome, Edge, Firefox) — no Safari or mobile Safari
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -547,6 +877,15 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No native web component support for shadow DOM
@@ -561,10 +900,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Limited to JavaScript/TypeScript
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -595,10 +952,28 @@ cy.contains("Welcome back").should("be.visible");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Playwright controls browsers via the Chrome DevTools Protocol (CDP):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -626,10 +1001,28 @@ Playwright controls browsers via the Chrome DevTools Protocol (CDP):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Multi-browser**: Chrome, Firefox, Safari (WebKit) — all supported
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -654,10 +1047,28 @@ Playwright controls browsers via the Chrome DevTools Protocol (CDP):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Browser contexts**: Isolated sessions for parallel testing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -688,10 +1099,28 @@ Playwright controls browsers via the Chrome DevTools Protocol (CDP):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import { test, expect } from "@playwright/test";
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -722,10 +1151,28 @@ test.describe("Login Flow", () => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test.beforeEach(async ({ page }) => {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -756,10 +1203,28 @@ await page.goto("/login");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -790,10 +1255,28 @@ test("should log in successfully", async ({ page }) => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 await page.getByTestId("email").fill("user@example.com");
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -824,10 +1307,28 @@ await page.getByTestId("password").fill("password123");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 await page.getByTestId("submit").click();
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -858,6 +1359,15 @@ await expect(page).toHaveURL(/.*dashboard/);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 await expect(page.getByText("Welcome back")).toBeVisible();
@@ -875,6 +1385,15 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
@@ -892,10 +1411,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -926,10 +1463,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Full browser coverage (Chromium, Firefox, WebKit/Safari)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -954,10 +1509,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Multi-page and multi-tab support
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -982,10 +1555,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Superior parallel execution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1016,10 +1607,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Less intuitive debugging experience than Cypress
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1044,6 +1653,15 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Steeper setup for CI/CD
@@ -1058,10 +1676,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Heavier dependency footprint
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1092,10 +1728,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Capability | Playwright | Cypress |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1126,10 +1780,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | CSS selectors | Yes | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1160,10 +1832,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | ARIA selectors | `getByRole()`, `getByLabel()` | Via plugins |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1194,10 +1884,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | XPath | Yes | Limited |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1228,10 +1936,28 @@ await expect(page.getByText("Welcome back")).toBeVisible();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | nth/time utilities | Built-in | Built-in |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1262,10 +1988,28 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Parallel Execution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1296,10 +2040,28 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Test sharding across multiple machines
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1324,6 +2086,15 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Browser contexts provide complete isolation
@@ -1338,10 +2109,28 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Built-in retry logic for flaky tests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1372,10 +2161,28 @@ Playwright's `getByRole()` and `getByLabel()` encourage accessible selectors by 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 export default defineConfig({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1406,10 +2213,28 @@ workers: process.env.CI ? 4 : 1,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 retries: process.env.CI ? 2 : 0,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1440,10 +2265,28 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1474,10 +2317,28 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Parallelization requires Cypress Cloud (subscription)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1502,6 +2363,15 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Test analytics and flakiness detection
@@ -1516,10 +2386,28 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Free tier is limited to 3 parallel runs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1550,10 +2438,28 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Playwright** has excellent API testing built in:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1584,10 +2490,28 @@ fullyParallel: true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const apiContext = await request.newContext();
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1618,6 +2542,15 @@ const response = await apiContext.post("/api/login", {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 data: { email: "user@example.com", password: "password123" }
@@ -1635,10 +2568,28 @@ data: { email: "user@example.com", password: "password123" }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1669,10 +2620,28 @@ expect(response.ok()).toBeTruthy();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const body = await response.json();
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1703,10 +2672,28 @@ expect(body.token).toBeDefined();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cypress** has `cy.request()` and `cy.intercept()` for API testing:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1737,10 +2724,28 @@ expect(body.token).toBeDefined();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cy.request("POST", "/api/login", {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1771,10 +2776,28 @@ email: "user@example.com",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 password: "password123"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1805,10 +2828,28 @@ password: "password123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 expect(response.status).to.eq(200);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1839,10 +2880,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1873,10 +2932,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | Playwright | Cypress |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1907,10 +2984,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Docker support | Official image | Official image |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1941,10 +3036,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Parallel execution | Built-in (free) | Cypress Cloud (paid) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1975,10 +3088,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Report formats | HTML, JSON, JUnit, Allure | MOCHA, JUnit + Cloud |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2009,10 +3140,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Choose Playwright when:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2040,10 +3189,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You want maximum parallel execution without paid services
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2068,10 +3235,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your team prefers Python/Java/.NET over JavaScript
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2096,10 +3281,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You want native mobile device emulation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2130,10 +3333,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Developer experience and debugging are your top priority
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2158,6 +3379,15 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You primarily need Chrome-based testing
@@ -2172,10 +3402,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You're OK with the Cypress Cloud subscription for parallelism
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3451,28 @@ expect(response.body.token).to.exist;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

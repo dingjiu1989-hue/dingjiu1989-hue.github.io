@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-horizontal-scaling.h
   
   
   
+  
+  
+  
+
+
+# Database Horizontal Scaling Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Horizontal Scaling Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Horizontal Scaling Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Horizontal scaling distributes database load across multiple machines. Unlike ve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Choosing the right shard key is critical. A good shard key evenly distributes da
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Read Replicas
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Read replicas handle read-only queries. The primary database handles writes and 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Read replicas are simpler than sharding—no data partitioning needed. They work best for read-heavy applications: content management systems, reporting dashboards, analytics queries. The trade-off is replication lag—read replicas may serve slightly stale data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Read replicas are simpler than sharding—no data partitioning needed. They work
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Federation splits a database schema across multiple databases by domain. User data in one database, product data in another, orders in a third. Each database is independently scaled based on its workload characteristics.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Federation reduces contention between domains. A heavy reporting query on the or
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Distributed SQL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ Modern distributed SQL databases (CockroachDB, YugabyteDB, Google Spanner) provi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distributed SQL databases offer the scalability of NoSQL with the consistency and query capabilities of SQL. The trade-off is higher latency for distributed transactions and higher resource overhead.
@@ -223,10 +391,28 @@ Distributed SQL databases offer the scalability of NoSQL with the consistency an
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Choosing a Strategy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

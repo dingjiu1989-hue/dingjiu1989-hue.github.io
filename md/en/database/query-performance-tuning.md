@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/query-performance-tuning.html
   
 
 
+# Query Performance Tuning Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Query Performance Tuning Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Query Performance Tuning Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Performance Tuning Process 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Database performance tuning is a systematic process of identifying slow queries,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Step 1: Identify Slow Queries 
@@ -77,10 +155,28 @@ Step 1: Identify Slow Queries
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PostgreSQL Slow Query Log 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ PostgreSQL Slow Query Log
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log_min_duration_statement = 1000 # Log queries slower than 1 second
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ log_Queries = on
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log_line_prefix = '%t [%p]: [%l-1] user=%u,db=%d,app=%a,client=%h '
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,6 +293,15 @@ log_checkpoints = on
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log_lock_waits = on
@@ -175,10 +316,28 @@ log_lock_waits = on
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Query log directly from the database
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query log directly from the database
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -203,6 +362,15 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query,
@@ -217,10 +385,28 @@ query,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 calls,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,10 +431,28 @@ total_exec_time / calls AS avg_time_ms,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rows / calls AS avg_rows,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +477,28 @@ mean_exec_time,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 max_exec_time,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +523,28 @@ stddev_exec_time
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_statements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -329,10 +569,28 @@ ORDER BY total_exec_time DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 20;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -357,10 +615,28 @@ MySQL Slow Query Log
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # my.cnf
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -385,10 +661,28 @@ slow_query_log = 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 slow_query_log_file = /var/log/mysql/slow.log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -413,10 +707,28 @@ long_query_time = 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log_queries_not_using_indexes = 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -441,10 +753,28 @@ log_queries_not_using_indexes = 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pt-query-digest /var/log/mysql/slow.log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,25 +799,6 @@ pt-query-digest /var/log/mysql/slow.log
   
   
   
-
-
-# \\\\- Worst queries by execution time
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# \\\\- Worst queries by frequency
-
-  
   
   
   
@@ -499,8 +810,63 @@ pt-query-digest /var/log/mysql/slow.log
   
 
 
-# \\\\- Query patterns and response time distribution
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by execution time
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Worst queries by frequency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query patterns and response time distribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -522,10 +888,28 @@ Step 2: Analyze Query Plans
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EXPLAIN ANALYZE 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -550,10 +934,28 @@ EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -578,10 +980,28 @@ u.name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COUNT(o.id) AS order_count,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -606,10 +1026,28 @@ SUM(o.total) AS total_spent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM users u
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -634,10 +1072,28 @@ LEFT JOIN orders o ON u.id = o.user_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE u.created_at > '2026-01-01'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -662,10 +1118,28 @@ GROUP BY u.id, u.name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 HAVING COUNT(o.id) > 3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1164,28 @@ ORDER BY total_spent DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 50;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1207,28 @@ Key Metrics to Analyze
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Metric | What It Tells You | |--------|-------------------| | `actual time` | Real execution time (first row, all rows) | | `rows` vs `rows est` | Accuracy of planner estimates (off by 10x+ needs ANALYZE) | | `buffers` | How much data was read (shared hit=from cache, read=from disk) | | `Seq Scan` | Full table scan (may need index) | | `Sort Method` | `quicksort` (memory) vs `external merge` (disk) | | `loops` | How many times a node executed (high loops on Nested Loop = problem) | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -740,10 +1250,28 @@ Example Analysis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Problematic query
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Problematic query
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -768,10 +1296,28 @@ EXPLAIN ANALYZE
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT *
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -796,10 +1342,28 @@ FROM orders
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE status = 'pending'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -824,10 +1388,28 @@ ORDER BY created_at DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Output:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -852,10 +1434,28 @@ Sort (cost=8921.4..9123.5 rows=80842 width=72)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sort Key: created_at DESC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -880,10 +1480,28 @@ Sort Method: external merge Disk: 6128kB
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -> Seq Scan on orders (cost=0.0..1234.5 rows=80842 width=72)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -908,6 +1526,15 @@ Filter: (status = 'pending')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Diagnosis**: Sequential scan on 80K rows, sort spilling to disk. 
@@ -919,10 +1546,28 @@ Filter: (status = 'pending')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Fix**: Add a composite index:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -947,10 +1592,28 @@ CREATE INDEX idx_orders_status_created
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ON orders(status, created_at DESC);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -975,10 +1638,28 @@ After fix:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Index Only Scan using idx_orders_status_created (cost=0.29..341.2 rows=80842 width=72)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1003,10 +1684,28 @@ Index Cond: (status = 'pending')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Step 3: Database Profiling Tools 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1028,10 +1727,28 @@ pg_stat_statements (PostgreSQL)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Install extension
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install extension
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1056,10 +1773,28 @@ CREATE EXTENSION pg_stat_statements;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Reset statistics
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reset statistics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1084,10 +1819,28 @@ SELECT pg_stat_statements_reset();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find queries with highest total time
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find queries with highest total time
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1112,10 +1865,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 queryid,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1140,10 +1911,28 @@ left(query, 80) AS query_preview,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 calls,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1168,10 +1957,28 @@ round(total_exec_time::numeric, 1) AS total_ms,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 round(mean_exec_time::numeric, 1) AS avg_ms,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1196,10 +2003,28 @@ round(shared_blks_hit::numeric / (shared_blks_hit + shared_blks_read + 1) * 100,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_statements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1224,10 +2049,28 @@ WHERE query NOT LIKE '%pg_%'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY total_exec_time DESC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1252,10 +2095,28 @@ LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find queries reading the most data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find queries reading the most data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1270,6 +2131,15 @@ LIMIT 10;
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1294,10 +2164,28 @@ queryid,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 left(query, 80) AS query_preview,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1322,10 +2210,28 @@ calls,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 shared_blks_read + local_blks_read AS blocks_read,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1350,10 +2256,28 @@ temp_blks_written AS temp_blocks -- spilled to disk
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_statements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1378,10 +2302,28 @@ ORDER BY blocks_read DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 10;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1406,25 +2348,6 @@ Performance Schema (MySQL)
   
   
   
-
-
-\\\\\\\\-- Enable performance schema
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\-- my.cnf: performance_schema=ON
-
-  
   
   
   
@@ -1436,8 +2359,63 @@ Performance Schema (MySQL)
   
 
 
-\\\\\\\\-- Find queries with full table scans
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable performance schema
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- my.cnf: performance_schema=ON
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find queries with full table scans
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1462,10 +2440,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 digest_text,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1490,10 +2486,28 @@ count_star,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sum_rows_examined,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1518,6 +2532,15 @@ sum_rows_sent,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 (sum_rows_examined / NULLIF(sum_rows_sent, 0)) AS exam_sent_ratio
@@ -1532,10 +2555,28 @@ sum_rows_sent,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM performance_schema.events_statements_summary_by_digest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1560,6 +2601,15 @@ ORDER BY exam_sent_ratio DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 20;
@@ -1574,10 +2624,28 @@ LIMIT 20;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find queries with temporary tables
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find queries with temporary tables
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1592,6 +2660,15 @@ LIMIT 20;
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1616,10 +2693,28 @@ digest_text,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sum_created_tmp_tables,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1644,10 +2739,28 @@ sum_created_tmp_disk_tables
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM performance_schema.events_statements_summary_by_digest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1672,10 +2785,28 @@ WHERE sum_created_tmp_disk_tables > 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY sum_created_tmp_disk_tables DESC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1700,6 +2831,15 @@ LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Step 4: Lock Monitoring 
@@ -1714,10 +2854,28 @@ Step 4: Lock Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- PostgreSQL: Blocked queries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Blocked queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1732,6 +2890,15 @@ Step 4: Lock Monitoring
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1756,10 +2923,28 @@ blocked_locks.pid AS blocked_pid,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 blocked_activity.query AS blocked_query,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1784,10 +2969,28 @@ blocking_locks.pid AS blocking_pid,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 blocking_activity.query AS blocking_query,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +3015,28 @@ blocked_activity.wait_event_type,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 blocked_activity.state,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1840,10 +3061,28 @@ now() - blocked_activity.query_start AS blocked_duration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_catalog.pg_locks blocked_locks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1868,10 +3107,28 @@ JOIN pg_catalog.pg_stat_activity blocked_activity ON blocked_locks.pid = blocked
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JOIN pg_catalog.pg_locks blocking_locks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1896,10 +3153,28 @@ ON blocking_locks.locktype = blocked_locks.locktype
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND blocking_locks.database = blocked_locks.database
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1924,10 +3199,28 @@ AND blocking_locks.relation = blocked_locks.relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND blocking_locks.pid != blocked_locks.pid
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1952,6 +3245,15 @@ JOIN pg_catalog.pg_stat_activity blocking_activity ON blocking_locks.pid = block
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE NOT blocked_locks.granted;
@@ -1966,10 +3268,28 @@ WHERE NOT blocked_locks.granted;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Check for long-running transactions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check for long-running transactions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1984,6 +3304,15 @@ WHERE NOT blocked_locks.granted;
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2008,10 +3337,28 @@ pid,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 state,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2036,10 +3383,28 @@ query,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 now() - query_start AS query_duration,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2064,10 +3429,28 @@ now() - xact_start AS transaction_duration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_activity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2092,10 +3475,28 @@ WHERE state IN ('active', 'idle in transaction')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND now() - query_start > interval '5 minutes'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2120,10 +3521,28 @@ AND query NOT LIKE '%pg_stat%'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY query_duration DESC;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2148,10 +3567,28 @@ Step 5: Index Usage Analysis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- PostgreSQL: Index usage statistics
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Index usage statistics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2166,6 +3603,15 @@ Step 5: Index Usage Analysis
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2190,10 +3636,28 @@ schemaname || '.' || relname AS table_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 seq_scan,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2218,10 +3682,28 @@ seq_tup_read,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 idx_scan,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2246,10 +3728,28 @@ idx_tup_fetch,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 seq_tup_read / NULLIF(seq_scan, 0) AS avg_rows_per_seq_scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2274,10 +3774,28 @@ FROM pg_stat_user_tables
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE seq_scan > 0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2302,6 +3820,15 @@ ORDER BY seq_scan DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 20;
@@ -2316,10 +3843,28 @@ LIMIT 20;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Find unused indexes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Find unused indexes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2344,10 +3889,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 schemaname || '.' || relname AS table,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2372,10 +3935,28 @@ indexrelname AS index_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 idx_scan,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2400,10 +3981,28 @@ pg_size_pretty(pg_relation_size(indexrelid)) AS index_size
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_user_indexes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2428,10 +4027,28 @@ WHERE idx_scan = 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND indexrelname NOT LIKE '%_pkey%'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2456,6 +4073,15 @@ ORDER BY pg_relation_size(indexrelid) DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Automated Tuning Tools 
@@ -2467,10 +4093,28 @@ Automated Tuning Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Tool | Database | Features | |------|----------|----------| | pgBadger | PostgreSQL | Log analysis with visual reports | | pgbadger | PostgreSQL | Query distribution, temp files, locks | | pg_stat_monitor | PostgreSQL | Enhanced pg_stat_statements with query groups | | MySQLTuner | MySQL | Configuration recommendations | | pt-query-digest | MySQL | Query analysis and pattern matching | | mongostat | MongoDB | Real-time MongoDB metrics | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2495,10 +4139,28 @@ Automated Tuning Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgbadger /var/log/postgresql/postgresql.log -o report.html
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2523,25 +4185,6 @@ pgbadger /var/log/postgresql/postgresql.log -o report.html
   
   
   
-
-
-# \\\\- Most time-consuming queries
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# \\\\- Temporary file usage
-
-  
   
   
   
@@ -2553,8 +4196,17 @@ pgbadger /var/log/postgresql/postgresql.log -o report.html
   
 
 
-# \\\\- Lock wait events
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Most time-consuming queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2567,8 +4219,63 @@ pgbadger /var/log/postgresql/postgresql.log -o report.html
   
 
 
-# \\\\- Checkpoint frequency
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Temporary file usage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Lock wait events
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Checkpoint frequency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2593,6 +4300,15 @@ Performance Tuning Workflow
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Establish baseline**: Measure current performance with representative queries.
@@ -2604,10 +4320,28 @@ Performance Tuning Workflow
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\. **Identify bottlenecks**: Use pg_stat_statements, slow query log, or APM tools. 3\\\\\\\\\\\\\\\\. **Analyze specific queries**: Run EXPLAIN ANALYZE with buffers enabled. 4\\\\\\\\\\\\\\\\. **Create targeted index**: Add or modify indexes based on the plan. 5\\\\\\\\\\\\\\\\. **Test the fix**: Re-run the query and compare execution time. 6\\\\\\\\\\\\\\\\. **Verify no regressions**: Check that other queries did not get slower. 7\\\\\\\\\\\\\\\\. **Repeat**: Continue with the next slowest query. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Identify bottlenecks**: Use pg_stat_statements, slow query log, or APM tools. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analyze specific queries**: Run EXPLAIN ANALYZE with buffers enabled. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Create targeted index**: Add or modify indexes based on the plan. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test the fix**: Re-run the query and compare execution time. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Verify no regressions**: Check that other queries did not get slower. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Repeat**: Continue with the next slowest query. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2619,6 +4353,15 @@ Performance Tuning Workflow
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-connection-pooling.h
   
   
   
+  
+  
+  
+
+
+# Connection Pooling: Tuning, Best Practices, and Pitfalls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Connection Pooling: Tuning, Best Practices, and Pitfalls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Connection Pooling: Tuning, Best Practices, and Pitfalls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Connection pooling reuses database connections to avoid the overhead of establis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The optimal pool size depends on your database's capability. PostgreSQL handles connections with one process per connection. Each idle connection consumes roughly 5-10 MB of memory. A pool of 100 connections uses 500 MB to 1 GB of memory even when idle.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ The HikariCP formula provides guidance: pool_size = (core_count * 2) + effective
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Measure your database's connection handling capacity. Monitor active connections, wait events, and query throughput. Increase the pool size only when the database has capacity and the application needs more concurrent queries.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Measure your database's connection handling capacity. Monitor active connections
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Always validate connections before use. Idle connections may be closed by firewalls, the database server, or network intermediaries. Set a validation query or use connection test functionality.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ PostgreSQL offers several validation methods: setConnectionTestQuery("SELECT 1")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Timeout Configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Connection timeout controls how long to wait when all connections are busy. Set 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Idle timeout closes connections after they remain unused. Set it based on database resource constraints—5-30 minutes typically. Maximum lifetime prevents connections from living forever; set to 30-60 minutes to avoid memory leaks and stale state.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,6 +368,15 @@ Idle timeout closes connections after they remain unused. Set it based on databa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connection leaks are the most common pooling issue. Every connection obtained from the pool must be returned. Use try-with-resources (Java) or context managers (Python) to guarantee release.
@@ -223,10 +391,28 @@ Connection leaks are the most common pooling issue. Every connection obtained fr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Stale connections cause mysterious failures. A connection opened before a database restart becomes invalid. Always validate connections before use, not just when creating them.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

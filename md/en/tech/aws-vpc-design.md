@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/aws-vpc-design.html
   
   
   
+  
+  
+  
+
+
+# AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Amazon Virtual Private Cloud (VPC) is the foundational networking layer for AWS 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article covers subnet design, NAT strategies, VPC peering, Transit Gateway, security groups, and network ACLs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ This article covers subnet design, NAT strategies, VPC peering, Transit Gateway,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A VPC spans all Availability Zones (AZs) in a region. The CIDR block must be large enough to accommodate current and future workloads. The standard RFC 1918 ranges are used: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16. A /16 CIDR (65,536 addresses) provides sufficient capacity for most organizations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Subnets are associated with a single AZ and can be public or private. Public sub
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VPC: 10.0.0.0/16
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ us-east-1a:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Public: 10.0.1.0/24
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Private: 10.0.11.0/24
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Data: 10.0.21.0/24
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ us-east-1b:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Public: 10.0.2.0/24
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Private: 10.0.12.0/24
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Data: 10.0.22.0/24
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Data: 10.0.22.0/24
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 NAT Gateways enable private subnet resources to access the internet for updates, downloads, and external API calls while preventing unsolicited inbound connections. They are highly available within an AZ and managed by AWS, eliminating the maintenance burden of NAT Instances.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Each NAT Gateway costs approximately $0.045/hour plus data processing charges. F
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  VPC Peering
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ VPC Peering connects two VPCs using AWS's internal network, providing low-latenc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key limitations: transitive peering is not supported (A to B and B to C does not imply A to C), overlapping CIDR blocks cannot be peered, and route tables must be manually configured on both sides. For more than a few VPCs, Transit Gateway is a better solution.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Key limitations: transitive peering is not supported (A to B and B to C does not
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transit Gateway (TGW) is a network transit hub connecting VPCs, VPN connections, and AWS Direct Connect. It supports transitive routing, eliminating the mesh complexity of VPC peering at scale.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Transit Gateway
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├── VPC: Production (us-east-1)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Transit Gateway
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├── VPC: Shared Services (us-east-1)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Transit Gateway
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├── VPN: Branch Office
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ Transit Gateway
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TGW supports route tables per attachment, enabling network segmentation. The default behavior is full mesh, but route table associations limit traffic flow between specific VPCs. TGW Peering connects transit gateways across regions, providing inter-region connectivity at premium data transfer rates.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ TGW supports route tables per attachment, enabling network segmentation. The def
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Security groups act as virtual stateful firewalls at the instance level. They support allow rules only (no explicit deny), evaluate all rules before returning a decision, and track connection state automatically. Security groups are the primary security mechanism for AWS resources.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,6 +1031,15 @@ Network ACLs (NACLs) are stateless firewalls at the subnet level. They support b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Defense in depth combines both: security groups for traffic control between logical application tiers, and NACLs for broad traffic filtering such as blocking known malicious IP ranges at the subnet boundary.
@@ -673,10 +1057,28 @@ Defense in depth combines both: security groups for traffic control between logi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/best-ide-extensions-2026.html
   
 
 
+# Best IDE Extensions 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best IDE Extensions 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best IDE Extensions 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The right IDE extensions can dramatically improve your development speed, code quality, and overall experience. This roundup covers the most valuable extensions for VS Code, JetBrains IDEs, and the rising Zed editor in 2026.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ The right IDE extensions can dramatically improve your development speed, code q
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AI coding assistants have become essential tools rather than novelties:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ AI coding assistants have become essential tools rather than novelties:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cursor** extends VS Code with AI-native features: inline chat, AI-powered codebase search, and automatic diff generation. For teams working with large codebases, Cursor's ability to understand your entire project context is transformative.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ AI coding assistants have become essential tools rather than novelties:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For VS Code:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ code --install-extension github.copilot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension github.copilot-chat
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ code --install-extension TabNine.tabnine-vscode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension continuedev.continue
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ For JetBrains, the AI Assistant is built into the 2024+ versions, with GitHub Co
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Code Quality and Formatting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ For JetBrains, the AI Assistant is built into the 2024+ versions, with GitHub Co
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension biomejs.biome
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ code --install-extension biomejs.biome
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension SonarSource.sonarlint-vscode
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ code --install-extension SonarSource.sonarlint-vscode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension usernamehw.errorlens
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ code --install-extension usernamehw.errorlens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **GitLens** is the gold standard for Git visualization in VS Code. It shows blame annotations inline, file history, branch comparisons, and much more. The 2026 version includes AI-powered commit message generation:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ code --install-extension eamodio.gitlens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Git Graph** provides a clean visual representation of your branch structure and commit history:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ code --install-extension mhutchie.git-graph
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Testing and Debugging
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ code --install-extension mhutchie.git-graph
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # For Python
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ code --install-extension ms-python.python
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # For Jest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ code --install-extension Orta.vscode-jest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # For Playwright
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ code --install-extension ms-playwright.playwright
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Thunder Client** is a lightweight API testing client built into VS Code, offering an alternative to Postman for quick endpoint testing:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ code --install-extension rangav.vscode-thunder-client
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Docker and Kubernetes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ code --install-extension rangav.vscode-thunder-client
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension ms-azuretools.vscode-docker
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ code --install-extension ms-azuretools.vscode-docker
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Zed** editor has gained significant traction for its GPU-accelerated rendering and excellent terminal integration. It is worth trying if you spend a lot of time in the terminal.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ For VS Code terminal enhancement:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension vscode-shell-format
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ code --install-extension timonwong.shellcheck
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Code Navigation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ code --install-extension timonwong.shellcheck
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension sourcegraph.sourcegraph
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ code --install-extension sourcegraph.sourcegraph
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --install-extension ms-vscode-remote.vscode-remote-extensionpack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ code --install-extension ms-vscode-remote.vscode-remote-extensionpack
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **IntelliCode** (VS Code) uses AI to provide smart completions based on patterns across your codebase:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ code --install-extension VisualStudioExptTeam.vscodeintellicode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For language-specific development:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |----------|----------------------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | TypeScript | Built-in, ESLint, Biome |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Rust | rust-analyzer, crates, Better TOML |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | C# | C# Dev Kit, .NET Extension Pack |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **VS Code** has the largest extension ecosystem with over 40,000 extensions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Zed** has a growing but limited extension ecosystem. Its focus is on performance and built-in features like pair programming and collaboration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ For language-specific development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Keep your extensions lean. Each extension adds startup time and potential conflicts. Review your extension list quarterly:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ Keep your extensions lean. Each extension adds startup time and potential confli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --list-extensions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,6 +1941,15 @@ code --list-extensions
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 code --disable-extension 
@@ -1268,10 +1967,28 @@ code --disable-extension
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

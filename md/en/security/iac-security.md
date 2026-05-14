@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/iac-security.html
   
   
   
+  
+  
+  
+
+
+# Infrastructure as Code Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Infrastructure as Code Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Infrastructure as Code Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Infrastructure as Code (IaC) enables automated, repeatable infrastructure provis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Terraform Security Scanning 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,6 +251,15 @@ Scan Terraform configurations for security misconfigurations before applying the
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 checkov 
@@ -163,10 +277,28 @@ checkov
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Basic scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ checkov -d terraform/environments/production/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Scan with specific framework
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ checkov -d . --framework terraform --skip-framework dockerfile
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Output in multiple formats
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ checkov -d . -o json | jq '.results.failed_checks[] | {resource: .resource, chec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Run in CI/CD with threshold
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ checkov -d . --soft-fail-on MEDIUM # Fail only on HIGH/CRITICAL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Custom Checkov policy for Terraform
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ from checkov.terraform.checks.resource.base_resource_check import BaseResourceCh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from checkov.common.models.enums import CheckResult
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ class RDSEncryptionCheck(BaseResourceCheck):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ name = "Ensure RDS instances have encryption enabled"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id = "CKV_CUSTOM_002"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ supported_resources = ['aws_db_instance']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 super().__init__(name=name, id=id, supported_resources=supported_resources)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ def scan_resource_conf(self, conf):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check if storage_encrypted is set to true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ if conf.get('storage_encrypted') == [True]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return CheckResult.PASSED
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ return CheckResult.FAILED
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 check = RDSEncryptionCheck()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ tfsec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Basic scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ tfsec terraform/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Scan with custom configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ tfsec . --config-file tfsec.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Generate SARIF output for GitHub Code Scanning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ tfsec . --format sarif --out tfsec-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Ignore specific checks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ tfsec . --exclude aws-s3-enable-bucket-logging,aws-s3-specify-public-access-bloc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # tfsec.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ exclude:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws-s3-enable-bucket-logging
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws-s3-enable-bucket-logging
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws-*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws-*
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,6 +1265,15 @@ severity_threshold: HIGH
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 custom_checks:
@@ -826,10 +1291,28 @@ custom_checks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: custom-restrict-ssh
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: custom-restrict-ssh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ description: Security groups should not allow SSH from 0.0.0.0/0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 impact: Open SSH access to the internet
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,6 +1395,15 @@ severity: CRITICAL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 match:
@@ -911,10 +1421,28 @@ match:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- resource_type: aws_security_group
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- resource_type: aws_security_group
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ attribute_path: ingress
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 condition: >
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ any(ingress,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 i.from_port == 22 &&
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ any(i.cidr_blocks, c == "0.0.0.0/0")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ Policy as Code with Open Policy Agent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OPA allows you to write policies that enforce infrastructure standards across your IaC. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ OPA allows you to write policies that enforce infrastructure standards across yo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 package terraform.analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ package terraform.analysis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ resource := input.resource[name][_]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 not resource.tags
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ msg = sprintf("%v %v must have tags", [name, resource.type])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ msg = sprintf("%v %v must have tags", [name, resource.type])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ resource := input.resource.aws_s3_bucket[name]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource.acl == "public-read"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ msg = sprintf("S3 bucket %v must not be public", [name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ msg = sprintf("S3 bucket %v must not be public", [name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ sg := input.resource.aws_security_group[name]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rule := sg.ingress[_]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ rule.cidr_blocks[_] == "0.0.0.0/0"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rule.from_port == 22
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ msg = sprintf("Security group %v allows SSH from anywhere", [name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ msg = sprintf("Security group %v allows SSH from anywhere", [name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 terraform plan -out=plan.tfplan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ terraform show -json plan.tfplan > plan.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ Sentinel (HashiCorp)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sentinel is HashiCorp's policy-as-code framework for Terraform Enterprise/Cloud. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ Sentinel is HashiCorp's policy-as-code framework for Terraform Enterprise/Cloud.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 policy "restrict-instance-type" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,6 +2461,15 @@ source = "./restrict-instance-type.sentinel"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 enforcement_level = "hard-mandatory"
@@ -1608,10 +2487,28 @@ enforcement_level = "hard-mandatory"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ policy "require-encryption" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source = "./require-encryption.sentinel"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ enforcement_level = "soft-mandatory"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ enforcement_level = "soft-mandatory"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import "tfplan/v2" as tfplan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ allowed_instance_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "t3.medium",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ allowed_instance_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "m5.large",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ allowed_instance_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get all EC2 instances
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ instances = filter tfplan.resource_changes as _, rc {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rc.mode is "managed" and 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,6 +2903,15 @@ rc.type is "aws_instance" and
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rc.change.actions contains "create"
@@ -1897,10 +2929,28 @@ rc.change.actions contains "create"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ rc.change.actions contains "create"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for _, instance in instances {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ instance_type = instance.change.after.instance_type
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if instance_type not in allowed_instance_types {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,6 +3085,15 @@ print("Instance type", instance_type, "not allowed")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return false
@@ -2016,6 +3111,15 @@ return false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -2033,10 +3137,28 @@ return false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ return true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CI/CD Integration 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,6 +3241,15 @@ CI/CD Integration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stages:
@@ -2118,31 +3267,6 @@ stages:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security
-
-  
-  
-  
-  
   
   
   
@@ -2154,8 +3278,17 @@ stages:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- plan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2171,8 +3304,69 @@ stages:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apply
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- plan
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apply
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ terraform-validate:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: validate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,14 +3449,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform init
-
-  
-  
-  
-  
   
   
   
@@ -2256,7 +3460,7 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform init
 
   
   
@@ -2271,10 +3475,54 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,10 +3553,28 @@ iac-security-scan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: security
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,14 +3605,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . --framework terraform --skip-check CKV_AWS_126
-
-  
-  
-  
-  
   
   
   
@@ -2358,7 +3616,7 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --no-color
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . --framework terraform --skip-check CKV_AWS_126
 
   
   
@@ -2373,10 +3631,54 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --no-color
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- opa eval --data policies/ --input plan.json "data.terraform.analysis.deny"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2394,6 +3696,15 @@ script:
 
 artifacts:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ reports:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 checkov: checkov-report.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,10 +3787,28 @@ terraform-plan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: plan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2492,10 +3839,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform plan -out=plan.tfplan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform plan -out=plan.tfplan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,6 +3891,15 @@ artifacts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 paths:
@@ -2543,10 +3917,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- plan.tfplan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- plan.tfplan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2577,10 +3969,28 @@ only:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- merge_requests
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- merge_requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2611,10 +4021,28 @@ terraform-apply:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: apply
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2645,10 +4073,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply plan.tfplan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply plan.tfplan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2679,6 +4125,15 @@ when: manual
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 only:
@@ -2696,10 +4151,28 @@ only:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,10 +4203,28 @@ Drift Detection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Terraform drift detection with AWS Config
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2764,10 +4255,28 @@ resource "aws_config_config_rule" "required_tags" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name = "required-tags"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ source {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 owner = "AWS"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ source_identifier = "REQUIRED_TAGS"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,10 +4411,28 @@ input_parameters = jsonencode({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tag1Key = "Environment"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ tag2Key = "Owner"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2934,10 +4515,28 @@ tag2Key = "Owner"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Automated drift detection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2968,6 +4567,15 @@ tag2Key = "Owner"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws configservice get-compliance-details-by-config-rule \
@@ -2985,31 +4593,6 @@ aws configservice get-compliance-details-by-config-rule \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--config-rule-name required-tags \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--compliance-types NON_COMPLIANT \
-
-  
-  
-  
-  
   
   
   
@@ -3021,8 +4604,17 @@ aws configservice get-compliance-details-by-config-rule \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query 'EvaluationResults[].EvaluationResultIdentifier.EvaluationResultQualifier[].ResourceId' \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--config-rule-name required-tags \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3038,8 +4630,69 @@ aws configservice get-compliance-details-by-config-rule \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--compliance-types NON_COMPLIANT \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query 'EvaluationResults[].EvaluationResultIdentifier.EvaluationResultQualifier[].ResourceId' \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3057,6 +4710,15 @@ aws configservice get-compliance-details-by-config-rule \
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

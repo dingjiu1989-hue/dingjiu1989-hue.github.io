@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/full-text-search.html
   
 
 
+# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Need for Full-Text Search 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Standard database `LIKE` queries do not scale. They require full table scans, do
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 How Search Engines Work 
@@ -77,10 +155,28 @@ How Search Engines Work
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 An inverted index maps terms to the documents containing them: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ Document 1: "The quick brown fox"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document 2: "The lazy dog"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ Inverted Index:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "the" -> [Doc1, Doc2]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ Inverted Index:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "brown" -> [Doc1]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ Inverted Index:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "lazy" -> [Doc2]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ Inverted Index:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When searching for "brown fox," the engine finds documents containing both terms and ranks them by relevance. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -239,10 +425,28 @@ Search Engine Comparison
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | Elasticsearch | Meilisearch | Typesense | |---------|--------------|-------------|-----------| | Setup complexity | High | Low | Low | | Query language | Query DSL (JSON) | Simple search parameters | Simple API | | Relevance tuning | BM25, custom scripts | Built-in (good defaults) | Built-in (good defaults) | | Typo tolerance | Via fuzzy queries | Built-in (excellent) | Built-in (excellent) | | Faceted search | Excellent | Good | Good | | Geospatial search | Excellent | Limited | Built-in | | Scalability | Very high | Moderate | High | | Resource usage | High (Java JVM) | Low (Rust) | Low (C++) | | Managed service | Elastic Cloud | Meilisearch Cloud | Typesense Cloud | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -261,10 +465,28 @@ Elasticsearch
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Indexing Data 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -289,6 +511,15 @@ Indexing Data
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PUT /articles
@@ -303,10 +534,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -331,10 +580,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "analysis": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -359,10 +626,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "custom_analyzer": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -387,6 +672,15 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "stopwords": "_english_"
@@ -401,6 +695,38 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -415,6 +741,15 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -428,11 +763,6 @@ PUT /articles
   
   
   
-  
-
-
-}
-
   
   
   
@@ -447,6 +777,15 @@ PUT /articles
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,10 +810,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -499,10 +856,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "text",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -527,10 +902,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "fields": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -555,6 +948,15 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -569,10 +971,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -597,10 +1017,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "author": { "type": "keyword" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -625,10 +1063,28 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "published_at": { "type": "date" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -653,6 +1109,38 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -667,6 +1155,15 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -680,11 +1177,6 @@ PUT /articles
   
   
   
-  
-
-
-}
-
   
   
   
@@ -709,6 +1201,15 @@ PUT /articles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 POST /articles/_doc/1
@@ -723,10 +1224,28 @@ POST /articles/_doc/1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -751,10 +1270,28 @@ POST /articles/_doc/1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "content": "A comprehensive guide to indexing...",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -779,10 +1316,28 @@ POST /articles/_doc/1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "tags": ["database", "performance"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -807,6 +1362,15 @@ POST /articles/_doc/1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "views": 1200
@@ -821,10 +1385,28 @@ POST /articles/_doc/1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -849,10 +1431,28 @@ Searching
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Full-text search with relevance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1477,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -905,10 +1523,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "bool": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -933,10 +1569,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -961,10 +1615,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "query": "database indexing performance",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -989,6 +1661,15 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "best_fields"
@@ -1003,6 +1684,15 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1017,10 +1707,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1035,6 +1743,15 @@ GET /articles/_search
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1059,10 +1776,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 { "term": { "author": "alice" } },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1087,10 +1822,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1868,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1143,10 +1914,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 { "_score": "desc" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1171,10 +1960,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1199,10 +2006,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "size": 20,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1227,10 +2052,28 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "by_tag": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1255,6 +2098,38 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1269,6 +2144,15 @@ GET /articles/_search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1282,11 +2166,6 @@ GET /articles/_search
   
   
   
-  
-
-
-}
-
   
   
   
@@ -1311,10 +2190,28 @@ from elasticsearch import Elasticsearch
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 es = Elasticsearch(['https://localhost:9200'])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1339,10 +2236,28 @@ results = es.search(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 index='articles',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1367,10 +2282,28 @@ query={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'multi_match': {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1395,6 +2328,15 @@ query={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'fields': ['title^3', 'content']
@@ -1409,10 +2351,28 @@ query={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1437,10 +2397,28 @@ query={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aggs={'by_tag': {'terms': {'field': 'tags'}}},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1465,10 +2443,28 @@ size=20
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1493,10 +2489,28 @@ for hit in results['hits']['hits']:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"{hit['_score']:.2f}: {hit['_source']['title']}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1521,10 +2535,28 @@ print(f"{hit['_score']:.2f}: {hit['_source']['title']}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for bucket in results['aggregations']['by_tag']['buckets']:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1549,10 +2581,28 @@ print(f"{bucket['key']}: {bucket['doc_count']} articles")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Meilisearch 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1571,10 +2621,28 @@ Meilisearch focuses on developer experience with sensible defaults and instant t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Setup 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1599,10 +2667,28 @@ docker run -it --rm \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -p 7700:7700 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1627,6 +2713,15 @@ docker run -it --rm \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 getmeili/meilisearch:v1.6 \
@@ -1641,10 +2736,28 @@ getmeili/meilisearch:v1.6 \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\--master-key=MASTER_KEY
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--master-key=MASTER_KEY
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,6 +2772,15 @@ getmeili/meilisearch:v1.6 \
 
 Indexing and Search 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1683,10 +2805,28 @@ const { MeiliSearch } = require('meilisearch');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const client = new MeiliSearch({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1711,6 +2851,15 @@ host: 'http://localhost:7700',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiKey: 'MASTER_KEY',
@@ -1725,10 +2874,28 @@ apiKey: 'MASTER_KEY',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1753,10 +2920,28 @@ apiKey: 'MASTER_KEY',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const index = client.index('articles');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1781,10 +2966,28 @@ await index.addDocuments([
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1809,10 +3012,28 @@ id: 1,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 title: "Database Indexing Strategies",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1837,10 +3058,28 @@ content: "A comprehensive guide...",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tags: ["database", "performance"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1865,10 +3104,28 @@ views: 1200
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1893,10 +3150,28 @@ views: 1200
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Configure searchable attributes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1921,10 +3196,28 @@ await index.updateSearchableAttributes(['title', 'content']);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 await index.updateSortableAttributes(['views', 'published_at']);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1949,10 +3242,28 @@ await index.updateFilterableAttributes(['tags', 'author']);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Search (typo tolerance built-in)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1977,10 +3288,28 @@ const results = await index.search('database indexing', {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 limit: 20,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2005,10 +3334,28 @@ filter: 'views > 100',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sort: ['views:desc']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3380,28 @@ sort: ['views:desc']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Typesense 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2055,10 +3420,28 @@ Typesense is a fast, typo-tolerant search engine written in C++.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Setup 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2083,10 +3466,28 @@ Setup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: '3'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2111,10 +3512,28 @@ services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 typesense:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2139,6 +3558,15 @@ image: typesense/typesense:27.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ports:
@@ -2153,10 +3581,28 @@ ports:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- "8108:8108"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8108:8108"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2181,10 +3627,28 @@ environment:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TYPESENSE_API_KEY: "xyz"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2209,6 +3673,15 @@ TYPESENSE_DATA_DIR: /data
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 volumes:
@@ -2223,10 +3696,28 @@ volumes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- ./typesense-data:/data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ./typesense-data:/data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2251,10 +3742,28 @@ Indexing and Search
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import typesense
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2279,10 +3788,28 @@ client = typesense.Client({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2307,10 +3834,28 @@ client = typesense.Client({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2335,10 +3880,28 @@ client = typesense.Client({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client.collections.create({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2363,10 +3926,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'fields': [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2391,10 +3972,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {'name': 'content', 'type': 'string'},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2419,10 +4018,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {'name': 'views', 'type': 'int32'},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2447,10 +4064,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2475,10 +4110,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2503,10 +4156,28 @@ client.collections.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client.collections['articles'].documents.create({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2531,10 +4202,28 @@ client.collections['articles'].documents.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'title': 'Database Indexing Strategies',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2559,10 +4248,28 @@ client.collections['articles'].documents.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'tags': ['database', 'performance'],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2587,6 +4294,15 @@ client.collections['articles'].documents.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'published_at': 1715385600
@@ -2601,10 +4317,28 @@ client.collections['articles'].documents.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2629,10 +4363,28 @@ client.collections['articles'].documents.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results = client.collections['articles'].documents.search({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2657,10 +4409,28 @@ results = client.collections['articles'].documents.search({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'query_by': 'title,content',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2685,10 +4455,28 @@ results = client.collections['articles'].documents.search({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'sort_by': 'views:desc',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2713,10 +4501,28 @@ results = client.collections['articles'].documents.search({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'per_page': 20
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2741,10 +4547,28 @@ results = client.collections['articles'].documents.search({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Use Which 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2763,10 +4587,28 @@ When to Use Which
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

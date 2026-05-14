@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/performance-optimization-sa
   
 
 
+# SaaS Performance Optimization: Caching, CDN, Database on a Budget
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Performance Optimization: Caching, CDN, Database on a Budget
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Performance Optimization: Caching, CDN, Database on a Budget
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SaaS Performance Optimization on a Budget
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Performance directly impacts SaaS revenue. A one-second delay in page load time 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Caching Strategy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Caching is the highest-leverage performance optimization. Implement caching at m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Application-level caching** stores computed results for reuse. Server-side caching with Redis or Memcached stores database query results, rendered templates, and API responses. Use Upstash for serverless Redis at $0.15/GB/month. Set appropriate TTLs based on data staleness tolerance — frequently accessed, rarely changed data benefits most.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Caching is the highest-leverage performance optimization. Implement caching at m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Database query caching** eliminates repeated expensive queries. Use materialized views for complex aggregations, prepared statements for repeated query patterns, and result caching for frequently accessed lookups. PostgreSQL's query cache (shared buffers) requires proper configuration to be effective.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Caching is the highest-leverage performance optimization. Implement caching at m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A CDN reduces latency by serving static assets from edge locations near users. Cloudflare provides a generous free tier with CDN, DDoS protection, and SSL termination. Cloudflare's CDN caches static assets (images, CSS, JavaScript, fonts) at 330+ global locations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ For dynamic content, Cloudflare Workers (free tier: 100,000 requests/day) can ca
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vercel Edge Network provides built-in CDN for Next.js applications. Static pages are served from the edge automatically. ISR (Incremental Static Regeneration) enables cache-then-revalidate patterns for dynamic content. The Edge Config provides low-latency feature flags and configuration data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Vercel Edge Network provides built-in CDN for Next.js applications. Static pages
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database optimization reduces response times without infrastructure costs. Start with query optimization: identify slow queries using `EXPLAIN ANALYZE`, add appropriate indexes, and optimize JOIN patterns. One missing index can cause 100x slowdown.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Connection pooling reduces database connection overhead. Supabase uses PgBouncer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Read replicas distribute database load. For read-heavy workloads, offload reporting and analytics queries to read replicas. Neon's branching feature creates instant database branches for testing and analytics without impacting production. This costs $0.15/hour per branch.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Read replicas distribute database load. For read-heavy workloads, offload report
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bundle size directly impacts time-to-interactive. Use code splitting to load only necessary JavaScript per page. Next.js automatically code-splits by page. Analyze bundles with `webpack-bundle-analyzer` or `@next/bundle-analyzer`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Image optimization reduces payload size significantly. Next.js Image component p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Core Web Vitals optimization improves both user experience and SEO. Largest Contentful Paint (LCP) under 2.5s, First Input Delay (FID) under 100ms, and Cumulative Layout Shift (CLS) under 0.1. Use Lighthouse and PageSpeed Insights for measurement.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Core Web Vitals optimization improves both user experience and SEO. Largest Cont
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Measure before optimizing. Implement Real User Monitoring (RUM) with tools like Plausible, Umami, or Vercel Analytics (free). Track page load times, API response times, and error rates. Set up alerts when performance degrades beyond thresholds.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Synthetic monitoring with Checkly or Better Uptime tests critical user journeys 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

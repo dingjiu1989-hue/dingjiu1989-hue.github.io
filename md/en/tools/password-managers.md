@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/password-managers.html
   
 
 
+# Best Password Managers for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best Password Managers for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best Password Managers for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Password managers are essential security tools, but developers have additional requirements beyond basic credential storage: CLI access for terminal workflows, SSH key management, TOTP generation, and team sharing. This guide evaluates password managers from a developer perspective.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Password managers are essential security tools, but developers have additional r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A developer-friendly password manager should offer:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Browser extension for development tool logins.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +268,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * TOTP (two-factor) code generation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -182,6 +314,15 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Audit logging for security compliance.
@@ -196,10 +337,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Cross-platform support (macOS, Linux, Windows).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -230,10 +389,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 1Password is the most popular password manager among developers. It offers a robust CLI and excellent developer experience.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -264,10 +441,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Comprehensive CLI: `op` command for all operations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -292,10 +487,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * TOTP code generation built-in.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -320,10 +533,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Biometric unlock (Touch ID, Windows Hello).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -348,10 +579,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Watchtower for compromised password alerts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -382,10 +631,28 @@ A developer-friendly password manager should offer:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Sign in
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -416,10 +683,28 @@ op account add --address my.1password.com --email user@example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get a password
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -450,10 +735,28 @@ op read "op://Personal/GitHub/password"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get an API token for automation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -484,10 +787,28 @@ op item get "GitHub" --fields "token" --reveal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Use in scripts securely
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -518,10 +839,28 @@ API_TOKEN=$(op read "op://Development/API/token")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -H "Authorization: Bearer $API_TOKEN" https://api.example.com/data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -552,10 +891,28 @@ curl -H "Authorization: Bearer $API_TOKEN" https://api.example.com/data
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Use 1Password as your SSH agent
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -586,10 +943,28 @@ export SSH_AUTH_SOCK=~/.1password/agent.sock
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Load SSH keys from 1Password
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -620,10 +995,28 @@ ssh-add -l
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Best developer tooling, polished UX, SSH agent, strong security track record.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -654,10 +1047,28 @@ ssh-add -l
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Bitwarden
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -688,10 +1099,28 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Developer Features:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -719,10 +1148,28 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Self-hosted option (Vaultwarden server).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -747,6 +1194,15 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Unlimited devices on free plan.
@@ -761,10 +1217,28 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * API for programmatic access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -795,10 +1269,28 @@ Bitwarden is the leading open-source password manager. It offers a self-hosted o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Login
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -829,10 +1321,28 @@ bw login user@example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get a password
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -863,10 +1373,28 @@ bw get password github.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # List items
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -897,10 +1425,28 @@ bw list items --search "github"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Export vault
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -931,10 +1477,28 @@ bw export --format json --output vault-backup.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Self-Hosted Deployment:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -965,10 +1529,28 @@ bw export --format json --output vault-backup.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 services:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -999,10 +1581,28 @@ vaultwarden:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: vaultwarden/server:latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1033,10 +1633,28 @@ ports:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- "8443:80"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8443:80"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1067,10 +1685,28 @@ volumes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- vw-data:/data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vw-data:/data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1101,10 +1737,28 @@ environment:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SIGNUPS_ALLOWED: "false"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1135,10 +1789,28 @@ volumes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vw-data:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1169,10 +1841,28 @@ vw-data:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: UI less polished, no built-in SSH agent, CLI can be slow.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1203,10 +1893,28 @@ vw-data:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 `pass` is the standard Unix password manager, using GPG encryption and a Git repository for storage. It is minimal, scriptable, and follows the Unix philosophy.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1237,10 +1945,28 @@ vw-data:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pass init "your-gpg-key-id"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1271,10 +1997,28 @@ pass init "your-gpg-key-id"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pass insert github.com/personal
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1305,10 +2049,28 @@ pass insert github.com/personal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pass generate github.com/personal 32
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1339,10 +2101,28 @@ pass generate github.com/personal 32
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pass -c github.com/personal
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1373,10 +2153,28 @@ pass -c github.com/personal
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pass git push origin master
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1407,10 +2205,28 @@ pass git push origin master
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ~/.password-store/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1441,10 +2257,28 @@ github.com/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 personal.gpg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1475,10 +2309,28 @@ work.gpg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1509,10 +2361,28 @@ console.gpg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 api-key.gpg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1543,10 +2413,28 @@ servers/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 web01.gpg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1577,10 +2465,28 @@ web01.gpg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Simple, Unix-native, fully scriptable, Git-backed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1611,10 +2517,28 @@ web01.gpg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  gopass
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1645,10 +2569,28 @@ gopass is a modern rewrite of pass with additional features. It supports teams, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Initialize
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1679,10 +2621,28 @@ gopass setup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create a secret with multiple fields
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1713,10 +2673,28 @@ gopass insert --echo webserver/login
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # username: admin
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1747,10 +2725,28 @@ gopass insert --echo webserver/login
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # url: https://internal.example.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1781,10 +2777,28 @@ gopass insert --echo webserver/login
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gopass mounts mount work git@github.com:company/secrets.git
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1815,10 +2829,28 @@ gopass mounts mount work git@github.com:company/secrets.git
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gopass sync
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1849,10 +2881,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: More complex than pass, GPG still required.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1883,10 +2933,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Dashlane** and **Keeper** focus on consumer and enterprise respectively, with limited developer-specific features. They lack CLI support and SSH integration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1917,10 +2985,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | 1Password | Bitwarden | pass | gopass |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1951,10 +3037,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Encryption | AES-256-GCM + SRP | AES-256-CBC | GPG | GPG + XCrypto |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1985,10 +3089,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Audit log | Yes | Yes | Git log | Git log |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2019,10 +3141,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Open source | No (proprietary) | Yes | Yes | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2053,10 +3193,28 @@ gopass sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For DevOps workflows, password managers can supply secrets to CI/CD pipelines:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2087,10 +3245,28 @@ For DevOps workflows, password managers can supply secrets to CI/CD pipelines:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2121,6 +3297,15 @@ deploy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -2138,10 +3323,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: 1password/load-secrets-action@v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: 1password/load-secrets-action@v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2172,10 +3375,28 @@ with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 export-env: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2206,10 +3427,28 @@ env:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DEPLOY_KEY: op://Development/AWS/deploy_key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2240,10 +3479,28 @@ DB_PASSWORD: op://Production/Database/password
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- run: ./deploy.sh
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: ./deploy.sh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2274,10 +3531,28 @@ Bitwarden equivalent via API:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get session token
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2308,10 +3583,28 @@ BW_SESSION=$(bw login --apikey < api_key.txt)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bw get password "Production/Database" --session $BW_SESSION
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2342,10 +3635,28 @@ bw get password "Production/Database" --session $BW_SESSION
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Solo developers**: pass or gopass for Unix-native simplicity with Git backup.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2370,6 +3681,15 @@ bw get password "Production/Database" --session $BW_SESSION
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Budget-conscious or self-hosted**: Bitwarden for open-source, free tier, and self-hosting.
@@ -2384,10 +3704,28 @@ bw get password "Production/Database" --session $BW_SESSION
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Maximum Unix compatibility**: pass for minimal, scriptable password management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2415,10 +3753,28 @@ bw get password "Production/Database" --session $BW_SESSION
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/serverless-framework.html
   
   
   
+  
+  
+  
+
+
+# Serverless Framework: From Zero to Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Serverless Framework: From Zero to Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Serverless Framework: From Zero to Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ The Serverless Framework provides a unified experience for deploying functions, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Project Setup and Structure
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ A well-structured serverless project separates concerns across functions, layers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # serverless.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,6 +303,15 @@ service: order-processor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 frameworkVersion: "4"
@@ -197,10 +329,28 @@ frameworkVersion: "4"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 provider:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ name: aws
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runtime: nodejs20.x
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,6 +433,15 @@ region: us-east-1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: ${opt:stage, 'dev'}
@@ -282,10 +459,28 @@ stage: ${opt:stage, 'dev'}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 environment:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ ORDER_TABLE: ${self:custom.tableName}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 QUEUE_URL: !Ref OrderQueue
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,14 +563,6 @@ plugins:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-webpack
-
-  
-  
-  
-  
   
   
   
@@ -369,7 +574,7 @@ plugins:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-offline
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-webpack
 
   
   
@@ -384,10 +589,54 @@ plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-prune-plugin
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-offline
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serverless-prune-plugin
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -405,6 +654,15 @@ plugins:
 
 custom:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ tableName: orders-${self:provider.stage}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 webpack:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ packager: pnpm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 excludeFiles: src/**/*.test.ts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ prune:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 automatic: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ number: 3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 functions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ createOrder:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 handler: src/handlers/createOrder.handler
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ events:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- httpApi:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- httpApi:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ method: POST
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 path: /orders
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ timeout: 10
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 memorySize: 256
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ iamRoleStatements:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Effect: Allow
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Effect: Allow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ Action: dynamodb:PutItem
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resource: !GetAtt OrdersTable.Arn
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ Resource: !GetAtt OrdersTable.Arn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Define resources alongside functions for self-documenting infrastructure:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,6 +1317,15 @@ OrdersTable:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Type: AWS::DynamoDB::Table
@@ -860,10 +1343,28 @@ Type: AWS::DynamoDB::Table
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Properties:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ TableName: orders-${self:provider.stage}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 BillingMode: PAY_PER_REQUEST
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,80 @@ AttributeDefinitions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: orderId
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: orderId
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+AttributeType: S
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: status
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -958,31 +1547,6 @@ AttributeType: S
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: status
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-AttributeType: S
-
   
   
   
@@ -1013,10 +1577,28 @@ KeySchema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: orderId
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: orderId
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1034,6 +1616,15 @@ KeySchema:
 
 KeyType: HASH
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ GlobalSecondaryIndexes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IndexName: StatusIndex
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IndexName: StatusIndex
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ KeySchema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: status
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- AttributeName: status
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ KeyType: HASH
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Projection:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ ProjectionType: ALL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OrderQueue:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ Type: AWS::SQS::Queue
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Properties:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ QueueName: orders-${self:provider.stage}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VisibilityTimeout: 60
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ RedrivePolicy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ maxReceiveCount: 3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DeadLetterQueue:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ Type: AWS::SQS::Queue
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Properties:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ QueueName: orders-dlq-${self:provider.stage}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Lambda Handler Implementation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ Write handlers with proper error handling and observability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // src/handlers/createOrder.ts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import { randomUUID } from "crypto";
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ import { Logger } from "@aws-lambda-powertools/logger";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import { Metrics } from "@aws-lambda-powertools/metrics";
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ import { Tracer } from "@aws-lambda-powertools/tracer";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const logger = new Logger({ serviceName: "order-processor" });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ const metrics = new Metrics({ namespace: "OrderProcessor" });
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const tracer = new Tracer({ serviceName: "order-processor" });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 export const handler = async (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ event: APIGatewayProxyEvent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ): Promise => {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ try {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const body = JSON.parse(event.body || "{}");
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ const orderId = randomUUID();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const order = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ orderId,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ...body,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,6 +2747,15 @@ status: "PENDING",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 createdAt: new Date().toISOString(),
@@ -1795,10 +2773,28 @@ createdAt: new Date().toISOString(),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ await ddb.send(new PutCommand({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TableName: process.env.ORDER_TABLE,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ Item: order,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }));
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,6 +2929,15 @@ metrics.addMetric("OrderCreated", 1, "Count");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 logger.info("Order created", { orderId });
@@ -1914,10 +2955,28 @@ logger.info("Order created", { orderId });
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ statusCode: 201,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 headers: { "Content-Type": "application/json" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ body: JSON.stringify({ orderId, status: "PENDING" }),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,10 +3111,28 @@ body: JSON.stringify({ orderId, status: "PENDING" }),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 logger.error("Failed to create order", { error });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2050,10 +3163,28 @@ metrics.addMetric("OrderCreationError", 1, "Count");
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,6 +3215,15 @@ statusCode: 500,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 body: JSON.stringify({ message: "Internal server error" }),
@@ -2101,10 +3241,28 @@ body: JSON.stringify({ message: "Internal server error" }),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ body: JSON.stringify({ message: "Internal server error" }),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ body: JSON.stringify({ message: "Internal server error" }),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The `serverless-offline` plugin provides a local Lambda emulator:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ The `serverless-offline` plugin provides a local Lambda emulator:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 serverless offline --stage dev --httpPort 4000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,6 +3449,15 @@ serverless offline --stage dev --httpPort 4000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 serverless invoke local --function createOrder \
@@ -2254,10 +3475,28 @@ serverless invoke local --function createOrder \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--path test/fixtures/create-order.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--path test/fixtures/create-order.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,6 +3527,15 @@ serverless invoke local --function createOrder \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 serverless offline --stage dev \
@@ -2305,14 +3553,6 @@ serverless offline --stage dev \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--noPrependStageInUrl \
-
-  
-  
-  
-  
   
   
   
@@ -2324,8 +3564,43 @@ serverless offline --stage dev \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reloadHandler
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--noPrependStageInUrl \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reloadHandler
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2356,10 +3631,28 @@ serverless offline --stage dev \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cold starts add latency when Lambda scales up a new execution environment:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2390,10 +3683,28 @@ Cold starts add latency when Lambda scales up a new execution environment:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 provider:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ provider:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 architecture: arm64
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,10 +3787,28 @@ architecture: arm64
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # (and proportionally reduces cold start time)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2492,10 +3839,28 @@ memorySize: 1024
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 functions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,10 +3891,28 @@ latencyCritical:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 handler: src/handlers/critical.handler
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ handler: src/handlers/critical.handler
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 provisionedConcurrency: 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,10 +3995,28 @@ provisionedConcurrency: 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reservedConcurrency: 20
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2628,10 +4047,28 @@ Code-level optimizations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Cold start optimization techniques
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ Code-level optimizations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 let client: DynamoDBDocumentClient;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4151,28 @@ function getClient(): DynamoDBDocumentClient {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if (!client) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,10 +4203,28 @@ client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2764,10 +4255,28 @@ return client;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ return client;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Use esbuild or webpack to exclude unused SDK clients
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ return client;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Exclude in webpack:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,10 +4411,28 @@ return client;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // 4. Use AWS SDK v3 for modular imports
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Instead of: import { DynamoDB } from "aws-sdk";
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2934,10 +4515,28 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CloudWatch is the default, but Powertools enhances observability significantly:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2968,10 +4567,28 @@ functions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 processOrder:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3002,10 +4619,28 @@ handler: src/handlers/processOrder.handler
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 environment:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3036,10 +4671,28 @@ POWERTOOLS_SERVICE_NAME: order-processor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 POWERTOOLS_METRICS_NAMESPACE: OrderProcessor
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3070,6 +4723,15 @@ LOG_LEVEL: INFO
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 events:
@@ -3087,10 +4749,28 @@ events:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sqs:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sqs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3121,10 +4801,28 @@ arn: !GetAtt OrderQueue.Arn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 batchSize: 10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3155,10 +4853,28 @@ maximumBatchingWindowInSeconds: 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Create CloudWatch dashboards and alarms:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3189,10 +4905,28 @@ resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3223,10 +4957,28 @@ OrderErrorAlarm:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Type: AWS::CloudWatch::Alarm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3257,10 +5009,28 @@ Properties:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AlarmName: order-processor-errors-${self:provider.stage}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3291,10 +5061,28 @@ MetricName: Errors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Namespace: AWS/Lambda
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3325,10 +5113,28 @@ Dimensions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Name: FunctionName
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Name: FunctionName
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3359,10 +5165,28 @@ Value: !Ref ProcessOrderLambdaFunction
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Statistic: Sum
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3393,10 +5217,28 @@ Period: 300
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EvaluationPeriods: 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3427,10 +5269,28 @@ Threshold: 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ComparisonOperator: GreaterThanThreshold
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3461,10 +5321,28 @@ ComparisonOperator: GreaterThanThreshold
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Serverless costs are driven by invocation count, duration, and memory allocation:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3495,10 +5373,28 @@ Serverless costs are driven by invocation count, duration, and memory allocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Invocations: 10M/month
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3529,10 +5425,28 @@ Serverless costs are driven by invocation count, duration, and memory allocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Memory: 1024MB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3563,10 +5477,28 @@ Serverless costs are driven by invocation count, duration, and memory allocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # = 10M * 0.2 * 0.00001667
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3597,10 +5529,28 @@ Serverless costs are driven by invocation count, duration, and memory allocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Optimize cost with `serverless-prune-plugin` to remove old versions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3631,10 +5581,28 @@ custom:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prune:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3665,10 +5633,28 @@ automatic: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 number: 3 # Keep only 3 latest versions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

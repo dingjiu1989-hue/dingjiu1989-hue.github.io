@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/task-queues.html
   
   
   
+  
+  
+  
+
+
+# Task Queues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Task Queues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Task Queues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Task queues enable asynchronous processing of work outside the main application request-response cycle. They handle email sending, image processing, report generation, data synchronization, and any other work that does not need to complete before the user receives a response. This article compares the leading task queue systems and covers design patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Task queues enable asynchronous processing of work outside the main application 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Synchronous request processing keeps users waiting. If every request waits for email sending, image resizing, and report generation, response times become unacceptable. Task queues move this work to background workers, allowing the request to return immediately while the work completes asynchronously.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Task queues also provide reliability. If a worker crashes while processing a tas
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Celery
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Celery is the most popular task queue for Python applications. It uses a message
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Celery supports task routing, where specific tasks are sent to specific queues. High-priority tasks can go to a fast queue with dedicated workers. Long-running tasks can go to a separate queue with higher timeout settings.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Celery's task result backend stores task results for retrieval. The application 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Bull
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Bull is a Redis-based task queue for Node.js. It provides job scheduling, concur
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bull supports job prioritization, delayed jobs, and job repeatability. Jobs can be added with a priority value—higher priority jobs are processed first. Delayed jobs execute after a specified delay. Repeatable jobs execute on a cron schedule.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Bull's lifecycle includes `waiting`, `active`, `completed`, `failed`, and `delay
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Sidekiq
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Sidekiq is the dominant task queue for Ruby applications, particularly in the Ra
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sidekiq's web UI provides real-time visibility into queue status, job history, and worker performance. It shows which jobs are running, waiting, and failed. The UI supports manual retry of failed jobs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Sidekiq supports job scheduling with Sidekiq-Cron, job prioritization through mu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Job Design Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Each task should be idempotent—processing the same job twice should have the s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tasks should handle failures gracefully. Transient failures (network timeouts, database deadlocks) should trigger retries with exponential backoff. Permanent failures (invalid input, missing data) should fail fast and not be retried.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Tasks should be self-contained. Include all data needed for processing in the jo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Prioritization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Not all tasks are equally important. Password reset emails should be processed b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Implementation approaches include multiple queues (one per priority level), weighted queue processing (process more high-priority tasks per cycle), and priority-sorted queues. Multiple queues with dedicated workers provide the strongest priority guarantees.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Implementation approaches include multiple queues (one per priority level), weig
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Task queue monitoring tracks queue depth, processing rate, failure rate, and worker utilization. Dashboard visibility into these metrics supports capacity planning and problem detection.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Alerting should trigger when queues grow beyond thresholds (indicating insuffici
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dead letter queues collect tasks that have exhausted their retry attempts. Operations teams review dead letter queues, fix underlying issues, and manually retry tasks. Automated dead letter handling prevents infinite retry loops.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/key-management.html
   
 
 
+# Key Management Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Key Management Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Key Management Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -89,10 +167,28 @@ Key management is the foundation of cryptographic security. Poor key management 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cloud KMS: AWS KMS vs GCP Cloud KMS 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -117,10 +213,28 @@ AWS Key Management Service
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AWS KMS is a managed service for creating and controlling encryption keys. It integrates with most AWS services and provides FIPS 140-2 validated HSM-backed key storage. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -151,6 +265,15 @@ AWS KMS is a managed service for creating and controlling encryption keys. It in
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws kms create-key \
@@ -168,31 +291,6 @@ aws kms create-key \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--description "Production data encryption key" \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\--key-usage ENCRYPT_DECRYPT \
-
-  
-  
-  
-  
   
   
   
@@ -204,8 +302,17 @@ aws kms create-key \
   
 
 
-\\\\\\\\\\\\\\\\--origin AWS_KMS \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--description "Production data encryption key" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -221,8 +328,69 @@ aws kms create-key \
   
 
 
-\\\\\\\\\\\\\\\\--tags TagKey=Environment,TagValue=Production
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--key-usage ENCRYPT_DECRYPT \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--origin AWS_KMS \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--tags TagKey=Environment,TagValue=Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -253,6 +421,15 @@ aws kms create-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws kms create-alias \
@@ -270,14 +447,6 @@ aws kms create-alias \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--alias-name alias/production-key \
-
-  
-  
-  
-  
   
   
   
@@ -289,8 +458,43 @@ aws kms create-alias \
   
 
 
-\\\\\\\\\\\\\\\\--target-key-id 
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alias-name alias/production-key \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-key-id 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -321,6 +525,15 @@ aws kms create-alias \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws kms encrypt \
@@ -338,31 +551,6 @@ aws kms encrypt \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--key-id alias/production-key \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\--plaintext fileb://secret.txt \
-
-  
-  
-  
-  
   
   
   
@@ -374,8 +562,17 @@ aws kms encrypt \
   
 
 
-\\\\\\\\\\\\\\\\--output text \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--key-id alias/production-key \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -391,8 +588,69 @@ aws kms encrypt \
   
 
 
-\\\\\\\\\\\\\\\\--query CiphertextBlob | base64 --decode > secret.encrypted
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--plaintext fileb://secret.txt \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output text \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query CiphertextBlob | base64 --decode > secret.encrypted
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -423,6 +681,15 @@ aws kms encrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws kms decrypt \
@@ -440,14 +707,6 @@ aws kms decrypt \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--ciphertext-blob fileb://secret.encrypted \
-
-  
-  
-  
-  
   
   
   
@@ -459,7 +718,7 @@ aws kms decrypt \
   
 
 
-\\\\\\\\\\\\\\\\--output text \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--ciphertext-blob fileb://secret.encrypted \
 
   
   
@@ -474,10 +733,54 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--query Plaintext | base64 --decode
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output text \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query Plaintext | base64 --decode
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -495,6 +798,15 @@ aws kms decrypt \
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -525,10 +837,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Statement": [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -559,10 +889,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Effect": "Allow",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -593,10 +941,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "kms:Encrypt",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -627,10 +993,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -661,10 +1045,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Condition": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -695,6 +1097,15 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "kms:ViaService": "s3.us-east-1.amazonaws.com"
@@ -712,6 +1123,41 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -729,6 +1175,15 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -742,14 +1197,6 @@ aws kms decrypt \
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -780,10 +1227,28 @@ aws kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -811,10 +1276,28 @@ GCP Cloud KMS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GCP Cloud KMS offers similar functionality with an emphasis on hierarchical key management and integration with Cloud HSM. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -845,6 +1328,15 @@ GCP Cloud KMS offers similar functionality with an emphasis on hierarchical key 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud kms keyrings create production-keyring \
@@ -862,10 +1354,28 @@ gcloud kms keyrings create production-keyring \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--location global
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--location global
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -896,6 +1406,15 @@ gcloud kms keyrings create production-keyring \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud kms keys create production-key \
@@ -913,31 +1432,6 @@ gcloud kms keys create production-key \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--keyring production-keyring \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\--location global \
-
-  
-  
-  
-  
   
   
   
@@ -949,8 +1443,17 @@ gcloud kms keys create production-key \
   
 
 
-\\\\\\\\\\\\\\\\--purpose encryption \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--keyring production-keyring \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -966,7 +1469,7 @@ gcloud kms keys create production-key \
   
 
 
-\\\\\\\\\\\\\\\\--rotation-period 90d \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--location global \
 
   
   
@@ -981,10 +1484,80 @@ gcloud kms keys create production-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--next-rotation-time "2026-08-10T00:00:00Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--purpose encryption \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--rotation-period 90d \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--next-rotation-time "2026-08-10T00:00:00Z"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1015,6 +1588,15 @@ gcloud kms keys create production-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo -n "sensitive-data" | gcloud kms encrypt \
@@ -1032,31 +1614,6 @@ echo -n "sensitive-data" | gcloud kms encrypt \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--plaintext-file=- \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\--ciphertext-file=- \
-
-  
-  
-  
-  
   
   
   
@@ -1068,8 +1625,17 @@ echo -n "sensitive-data" | gcloud kms encrypt \
   
 
 
-\\\\\\\\\\\\\\\\--location global \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--plaintext-file=- \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1085,7 +1651,7 @@ echo -n "sensitive-data" | gcloud kms encrypt \
   
 
 
-\\\\\\\\\\\\\\\\--keyring production-keyring \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--ciphertext-file=- \
 
   
   
@@ -1100,10 +1666,80 @@ echo -n "sensitive-data" | gcloud kms encrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--key production-key \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--location global \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--keyring production-keyring \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--key production-key \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1134,10 +1770,28 @@ echo -n "sensitive-data" | gcloud kms encrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Decrypt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1168,31 +1822,6 @@ echo -n "encrypted-data" | base64 --decode | gcloud kms decrypt \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--ciphertext-file=- \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\--plaintext-file=- \
-
-  
-  
-  
-  
   
   
   
@@ -1204,8 +1833,17 @@ echo -n "encrypted-data" | base64 --decode | gcloud kms decrypt \
   
 
 
-\\\\\\\\\\\\\\\\--location global \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--ciphertext-file=- \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1221,7 +1859,7 @@ echo -n "encrypted-data" | base64 --decode | gcloud kms decrypt \
   
 
 
-\\\\\\\\\\\\\\\\--keyring production-keyring \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--plaintext-file=- \
 
   
   
@@ -1236,10 +1874,80 @@ echo -n "encrypted-data" | base64 --decode | gcloud kms decrypt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--key production-key
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--location global \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--keyring production-keyring \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--key production-key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1267,10 +1975,28 @@ Envelope Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Envelope encryption encrypts data with a data key (DEK), then encrypts the DEK with a key encryption key (KEK) stored in KMS. This enables local encryption while delegating key management to KMS. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1301,10 +2027,28 @@ import boto3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from cryptography.fernet import Fernet
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1335,10 +2079,28 @@ import base64
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kms = boto3.client('kms')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1369,10 +2131,28 @@ def envelope_encrypt(plaintext, kms_key_id):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Generate a data key from KMS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1403,10 +2183,28 @@ response = kms.generate_data_key(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 KeyId=kms_key_id,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1437,6 +2235,15 @@ KeySpec='AES_256'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
@@ -1454,10 +2261,28 @@ KeySpec='AES_256'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 plaintext_data_key = response['Plaintext']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1488,6 +2313,15 @@ encrypted_data_key = response['CiphertextBlob']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Encrypt data locally with Fernet
@@ -1505,10 +2339,28 @@ encrypted_data_key = response['CiphertextBlob']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fernet = Fernet(base64.urlsafe_b64encode(plaintext_data_key))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1539,10 +2391,28 @@ encrypted_data = fernet.encrypt(plaintext.encode())
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1573,10 +2443,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'encrypted_data_key': encrypted_data_key,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1607,10 +2495,28 @@ return {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def envelope_decrypt(encrypted_payload):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1641,10 +2547,28 @@ def envelope_decrypt(encrypted_payload):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response = kms.decrypt(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1675,10 +2599,28 @@ CiphertextBlob=encrypted_payload['encrypted_data_key']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1709,10 +2651,28 @@ plaintext_data_key = response['Plaintext']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Decrypt data locally
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1743,10 +2703,28 @@ fernet = Fernet(base64.urlsafe_b64encode(plaintext_data_key))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return fernet.decrypt(encrypted_payload['encrypted_data']).decode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1774,10 +2752,28 @@ Hardware Security Modules (HSM)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 HSMs provide tamper-resistant hardware for key generation, storage, and cryptographic operations. Cloud HSMs (AWS CloudHSM, GCP Cloud HSM) offer dedicated HSM instances. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1808,6 +2804,15 @@ HSMs provide tamper-resistant hardware for key generation, storage, and cryptogr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
@@ -1825,10 +2830,28 @@ pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--slot 0 --login --list-objects --pin :
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--slot 0 --login --list-objects --pin :
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1859,6 +2882,15 @@ pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
@@ -1876,14 +2908,6 @@ pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--slot 0 --login --pin : \
-
-  
-  
-  
-  
   
   
   
@@ -1895,7 +2919,7 @@ pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
   
 
 
-\\\\\\\\\\\\\\\\--keygen --key-type AES:256 --label "production-encryption-key" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--slot 0 --login --pin : \
 
   
   
@@ -1910,10 +2934,54 @@ pkcs11-tool --module /opt/cloudhsm/lib/libcloudhsm_pkcs11.so \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--id 1234
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--keygen --key-type AES:256 --label "production-encryption-key" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--id 1234
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1941,10 +3009,28 @@ Key Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Automatic key rotation reduces the impact of key compromise. Both AWS KMS and GCP KMS support automatic rotation. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1975,10 +3061,28 @@ Automatic key rotation reduces the impact of key compromise. Both AWS KMS and GC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def rotate_kms_key(key_id):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2009,10 +3113,28 @@ def rotate_kms_key(key_id):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client = boto3.client('kms')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2043,10 +3165,28 @@ new_key = client.create_key(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Description=f'Rotated key for {key_id} - {datetime.now()}',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2077,6 +3217,15 @@ KeyUsage='ENCRYPT_DECRYPT',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Origin='AWS_KMS'
@@ -2094,10 +3243,28 @@ Origin='AWS_KMS'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2128,10 +3295,28 @@ new_key_id = new_key['KeyMetadata']['KeyId']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Alias update to point to new key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2162,10 +3347,28 @@ client.update_alias(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AliasName=f'alias/production-key',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2196,10 +3399,28 @@ TargetKeyId=new_key_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2230,10 +3451,28 @@ TargetKeyId=new_key_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client.schedule_key_deletion(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2264,10 +3503,28 @@ KeyId=key_id,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PendingWindowInDays=7
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2298,10 +3555,28 @@ PendingWindowInDays=7
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Re-encrypt data with new key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2332,6 +3607,15 @@ PendingWindowInDays=7
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 logger.info(f'Key rotated: {key_id} -> {new_key_id}')
@@ -2349,10 +3633,28 @@ logger.info(f'Key rotated: {key_id} -> {new_key_id}')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

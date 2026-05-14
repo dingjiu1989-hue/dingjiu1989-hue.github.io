@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html
   
   
   
+  
+  
+  
+
+
+# API Gateway Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# API Gateway Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# API Gateway Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ An API gateway sits at the boundary between clients and backend services, handli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Gateway Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ An API gateway sits at the boundary between clients and backend services, handli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 _format_version: "3.0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-service
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-service
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,6 +407,15 @@ url: http://user-svc:8080
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 routes:
@@ -265,10 +433,28 @@ routes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-routes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-routes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /api/v1/users
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /api/v1/users
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ methods: [GET, POST, PUT, DELETE]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 strip_path: false
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: rate-limiting
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: rate-limiting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -388,6 +628,15 @@ plugins:
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ minute: 100
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hour: 1000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ policy: local
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: key-auth
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: key-auth
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -473,6 +758,15 @@ policy: local
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ key_names: ["X-API-Key"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: cors
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: cors
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -524,6 +836,15 @@ key_names: ["X-API-Key"]
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ origins: ["*"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,6 +979,15 @@ APISIX provides sub-millisecond route matching via a radix tree and supports hot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
@@ -639,10 +1005,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "methods": ["GET", "POST"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "roundrobin",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "order-svc:8080": 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "limit-req": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "burst": 20,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,6 +1421,15 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "header": "Authorization"
@@ -928,10 +1447,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Tyk
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "api_id": "payment-api-v1",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "proxy": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "listen_path": "/api/v1/payments/",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,6 +1863,15 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "not_versioned": true
@@ -1217,10 +1889,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,6 +1941,15 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "auth_header_name": "Authorization"
@@ -1268,10 +1967,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "rate": 100,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,6 +2175,15 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Gateways support multiple routing strategies critical for microservice decomposition:
@@ -1421,10 +2201,28 @@ Gateways support multiple routing strategies critical for microservice decomposi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: complex route matching with regex
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: complex route matching with regex
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1442,6 +2240,15 @@ Gateways support multiple routing strategies critical for microservice decomposi
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ name = "complex-route",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 paths = { "/api/v2/(users|orders|products)/?.*" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ hosts = { "api.example.com" },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 methods = { "GET", "POST" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,6 +2383,15 @@ protocols = { "https" },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 priority = 100 -- Higher priority routes checked first
@@ -1557,10 +2409,28 @@ priority = 100 -- Higher priority routes checked first
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ APISIX supports weight-based routing for canary deployments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 upstream:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ type: weighted_upstream
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nodes:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ user-svc-v1:8080: 90
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 user-svc-v2:8080: 10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,6 +2617,15 @@ user-svc-v2:8080: 10
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Implement multi-layered rate limiting to protect backend services:
@@ -1710,10 +2643,28 @@ Implement multi-layered rate limiting to protect backend services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: combined rate limiting strategy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: combined rate limiting strategy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1731,6 +2682,15 @@ Implement multi-layered rate limiting to protect backend services:
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,10 +2721,28 @@ name = "rate-limiting-advanced",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 config = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ limit_by = "consumer", -- consumer, credential, ip, service
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 policy = "redis", -- local, redis, cluster
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ minute = 60,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hour = 1000,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ fault_tolerant = true,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hide_client_headers = false,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2929,28 @@ redis_host = "redis-cluster",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 redis_port = 6379,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,6 +2981,15 @@ redis_timeout = 2000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1948,10 +3007,28 @@ redis_timeout = 2000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ redis_timeout = 2000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Layer multiple auth methods with priority-based execution:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,10 +3111,28 @@ plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: key-auth
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: key-auth
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2037,6 +3150,15 @@ plugins:
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ key_names: ["X-API-Key"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 key_in_header: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ key_in_query: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hide_credentials: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ run_on_preflight: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: oauth2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: oauth2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2156,6 +3332,15 @@ run_on_preflight: true
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,10 +3371,28 @@ scopes: ["read", "write", "admin"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mandatory_scope: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2220,10 +3423,28 @@ provision_key: "${OAUTH_PROVISION_KEY}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 token_expiration: 3600
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2254,10 +3475,28 @@ enable_authorization_code: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 enable_client_credentials: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,6 +3527,15 @@ enable_client_credentials: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transform payloads between client and service boundaries:
@@ -2305,10 +3553,28 @@ Transform payloads between client and service boundaries:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: response transformer plugin
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Kong: response transformer plugin
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2326,6 +3592,15 @@ Transform payloads between client and service boundaries:
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2356,10 +3631,28 @@ name = "response-transformer",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 config = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2390,10 +3683,28 @@ remove = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 json = { "password", "credit_card", "ssn" }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ json = { "password", "credit_card", "ssn" }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 add = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,6 +3787,15 @@ headers = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "X-Response-Time:$(context.now)"
@@ -2475,31 +3813,6 @@ headers = {
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
-  
-  
-  
   
   
   
@@ -2526,10 +3839,80 @@ headers = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ APISIX supports serverless functions for custom transformations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- APISIX: serverless plugin for custom logic
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- APISIX: serverless plugin for custom logic
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,10 +3995,28 @@ APISIX supports serverless functions for custom transformations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "serverless-pre-function": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2628,10 +4047,28 @@ APISIX supports serverless functions for custom transformations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "functions": ["return function(conf, ctx)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ local core = require(\"apisix.core\")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 local token = core.request.header(ctx, \"Authorization\")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4151,28 @@ if token then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 core.request.set_header(ctx, \"X-Internal-Token\", token:sub(8))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,6 +4203,15 @@ end
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 end"]
@@ -2747,6 +4229,15 @@ end"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -2764,10 +4255,28 @@ end"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ end"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 All three gateways export metrics for monitoring and billing:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,6 +4359,15 @@ All three gateways export metrics for monitoring and billing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 plugins:
@@ -2849,10 +4385,28 @@ plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2870,6 +4424,15 @@ plugins:
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ prefer_name: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: http-logger
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: http-logger
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2921,6 +4502,15 @@ prefer_name: true
 
 config:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2951,10 +4541,28 @@ uri: http://log-collector:5000/logs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 batch_max_size: 100
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2985,10 +4593,28 @@ inactive_timeout: 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: skywalking
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: skywalking
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3019,10 +4645,28 @@ config:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sample_ratio: 0.1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3053,10 +4697,28 @@ sample_ratio: 0.1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Sidecar Pattern
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3087,10 +4749,28 @@ Deploy the gateway as a sidecar alongside each service, suitable for service mes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: apps/v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3121,10 +4801,28 @@ kind: Deployment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3155,10 +4853,28 @@ name: user-service
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3189,10 +4905,28 @@ template:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3223,10 +4957,28 @@ containers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: user-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3257,10 +5009,28 @@ image: user-service:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: kong-sidecar
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: kong-sidecar
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3291,6 +5061,15 @@ image: kong:3.6
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 env:
@@ -3308,10 +5087,28 @@ env:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: KONG_ROLE
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: KONG_ROLE
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3342,10 +5139,28 @@ value: data_plane
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: KONG_CLUSTER_CONTROL_PLANE
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: KONG_CLUSTER_CONTROL_PLANE
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3376,10 +5191,28 @@ value: cp:8005
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Centralized Pattern
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3410,10 +5243,28 @@ A shared gateway cluster handles all ingress traffic:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: networking.k8s.io/v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3444,10 +5295,28 @@ kind: IngressClass
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3478,10 +5347,28 @@ name: apisix
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3512,10 +5399,28 @@ controller: apache.org/apisix-ingress-controller
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3546,10 +5451,28 @@ apiVersion: apisix.apache.org/v2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kind: ApisixRoute
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3580,10 +5503,28 @@ metadata:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: main-route
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3614,6 +5555,15 @@ spec:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 http:
@@ -3631,10 +5581,28 @@ http:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: root
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: root
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3665,10 +5633,28 @@ match:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hosts: ["api.example.com"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3699,6 +5685,15 @@ paths: ["/*"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 backends:
@@ -3716,10 +5711,28 @@ backends:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serviceName: aggregator-svc
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- serviceName: aggregator-svc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3737,6 +5750,15 @@ backends:
 
 servicePort: 80
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/compare/graphql-vs-rest.html
   
 
 
+# GraphQL vs REST API
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# GraphQL vs REST API
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# GraphQL vs REST API
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ GraphQL and REST are the two dominant API design paradigms. REST has been the st
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Core Philosophy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ GraphQL and REST are the two dominant API design paradigms. REST has been the st
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 REST treats data as resources accessed via endpoints:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ GET /api/users → List users
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GET /api/users/123 → Get user 123
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ POST /api/users → Create user
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PUT /api/users/123 → Update user 123
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ DELETE /api/users/123 → Delete user 123
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GET /api/users/123/posts → Get user 123's posts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Each endpoint returns a fixed response structure. The client gets whatever the s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### GraphQL: Query-Based
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,6 +485,15 @@ GraphQL exposes a single endpoint and lets the client specify exactly what data 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 POST /graphql
@@ -316,10 +511,28 @@ POST /graphql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ user(id: 123) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,6 +615,15 @@ email
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 posts(limit: 5) {
@@ -401,10 +641,28 @@ posts(limit: 5) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 title
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,6 +693,41 @@ createdAt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -452,6 +745,15 @@ createdAt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -465,14 +767,6 @@ createdAt
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -503,10 +797,28 @@ The server returns only the requested fields. No over-fetching, no under-fetchin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Data Fetching
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ The server returns only the requested fields. No over-fetching, no under-fetchin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // REST: three requests to get users + their posts + post comments
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ const users = await fetch("/api/users").then(r => r.json());
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const usersWithPosts = await Promise.all(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ users.map(user => fetch(`/api/users/${user.id}/posts`).then(r => r.json()))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ users.map(user => fetch(`/api/users/${user.id}/posts`).then(r => r.json()))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **GraphQL** fetches all required data in a single request:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ query {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 users {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ posts {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 title
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ comments(limit: 3) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 body
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,31 +1265,6 @@ author { name }
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
-  
-  
-  
   
   
   
@@ -860,10 +1291,80 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **REST** has straightforward HTTP caching. GET requests are cacheable by browsers, CDNs, and reverse proxies using standard HTTP cache headers (ETag, Cache-Control, Last-Modified). This is REST's strongest advantage for read-heavy public APIs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Automatic Persisted Queries**: Cache query strings, send only hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -956,6 +1493,15 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CDN caching**: Use GET requests for queries with `@cacheControl` directives
@@ -970,10 +1516,28 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Relay's cache**: More opinionated, built for Facebook-scale apps
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1004,10 +1568,28 @@ author { name }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const cache = new InMemoryCache({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1038,10 +1620,28 @@ typePolicies: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 User: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1072,10 +1672,28 @@ keyFields: ["id"],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fields: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1106,10 +1724,28 @@ posts: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 merge(existing, incoming) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1140,31 +1776,6 @@ return incoming;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
-  
-  
-  
   
   
   
@@ -1178,6 +1789,15 @@ return incoming;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1208,10 +1828,80 @@ return incoming;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1229,6 +1919,15 @@ return incoming;
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1259,10 +1958,28 @@ return incoming;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **GraphQL** has built-in type safety with a schema definition language:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1293,10 +2010,28 @@ type User {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id: ID!
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1327,10 +2062,28 @@ name: String!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 email: String!
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1361,6 +2114,15 @@ posts: [Post!]!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 createdAt: DateTime!
@@ -1378,10 +2140,28 @@ createdAt: DateTime!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1412,10 +2192,28 @@ type Post {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id: ID!
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1446,10 +2244,28 @@ title: String!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 content: String
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1480,6 +2296,15 @@ published: Boolean!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 author: User!
@@ -1497,10 +2322,28 @@ author: User!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1531,10 +2374,28 @@ type Query {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 user(id: ID!): User
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1565,10 +2426,28 @@ users(limit: Int, offset: Int): [User!]!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1599,10 +2478,28 @@ The schema serves as a contract between client and server, with auto-generated d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **REST** has no built-in type system. Type safety requires tools like OpenAPI/Swagger:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1633,10 +2530,28 @@ openapi: 3.0.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 paths:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1667,10 +2582,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 get:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1701,10 +2634,28 @@ parameters:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: id
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: id
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1735,6 +2686,15 @@ in: path
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 required: true
@@ -1752,10 +2712,28 @@ required: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 schema:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1786,10 +2764,28 @@ type: integer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 responses:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1820,10 +2816,28 @@ responses:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 content:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1854,10 +2868,28 @@ application/json:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 schema:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1888,10 +2920,28 @@ $ref: '#/components/schemas/User'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OpenAPI provides similar contract guarantees but requires more boilerplate to maintain.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1922,10 +2972,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **REST** benefits from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1953,10 +3021,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * CDN distribution for read endpoints
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1981,10 +3067,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Connection pooling per endpoint
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2015,10 +3119,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * N+1 queries: Resolving nested relations requires solutions like DataLoader
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2043,10 +3165,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No CDN caching for POST requests (unless using GET-based queries)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2077,10 +3217,28 @@ OpenAPI provides similar contract guarantees but requires more boilerplate to ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const DataLoader = require("dataloader");
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2111,10 +3269,28 @@ const userLoader = new DataLoader(async (ids) => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const users = await db.user.findMany({ where: { id: { in: ids } } });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2145,10 +3321,28 @@ return ids.map(id => users.find(u => u.id === id));
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2179,10 +3373,28 @@ return ids.map(id => users.find(u => u.id === id));
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 posts: (parent) => userLoader.load(parent.authorId)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2213,10 +3425,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **GraphQL** offers superior developer tooling:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2244,10 +3474,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Apollo Studio: Schema registry, operation tracking, performance monitoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2272,10 +3520,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Inline documentation: Field descriptions visible in the query explorer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2306,10 +3572,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Postman/Hoppscotch: Request collections and testing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2334,10 +3618,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * curl: Universal, no special tools needed
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2368,10 +3670,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Choose GraphQL when:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2399,10 +3719,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You have multiple clients (web, mobile, third-party) with different data needs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2427,6 +3765,15 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your data has complex relationships
@@ -2441,10 +3788,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You value strong typing and auto-generated documentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2475,10 +3840,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your API is primarily consumed by third-party developers
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2503,6 +3886,15 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your API is simple (CRUD on a few resources)
@@ -2517,10 +3909,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You need maximum compatibility with existing tools and proxies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2548,10 +3958,28 @@ posts: (parent) => userLoader.load(parent.authorId)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

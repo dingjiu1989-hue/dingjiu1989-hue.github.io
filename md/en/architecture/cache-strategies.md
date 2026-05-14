@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html
   
 
 
+# Caching Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Caching Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Caching Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies—write-through, write-around, and write-back—along with cache invalidation approaches essential for maintaining data consistency. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Write-Through Cache
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 In a write-through cache, every write operation writes data to both the cache and the underlying data store simultaneously. The write is not considered complete until both destinations have acknowledged it. This ensures strong consistency between the cache and the data store—the cache always contains up-to-date data. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ The primary advantage is read reliability. Subsequent reads of the same data wil
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The downside is increased write latency. Every write must complete two operations, which adds overhead. Write-through caches also suffer from cache churn—if written data is never read, the write to cache was wasted. This strategy works best when most written data is subsequently read. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Write-Around Cache
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write-around caching bypasses the cache on write operations. Data is written directly to the underlying data store. The cache is populated only on a subsequent read miss—when a read request cannot find the data in cache, it is fetched from the data store and stored in the cache for future reads. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ This strategy avoids polluting the cache with data that may never be read. It is
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write-around caching is commonly used in conjunction with CDNs and file caches, where the overhead of populating the cache on write is not justified by subsequent read patterns. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Write-Back Cache
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write-back caching writes data to the cache immediately and asynchronously writes it to the underlying data store at a later time. This provides the lowest write latency because the write operation completes as soon as the cache acknowledges it. The data store is updated in batches or after a configurable delay. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ This strategy excels in high-write-volume scenarios where write latency must be 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cache Invalidation Strategies 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ Regardless of the write strategy, cache invalidation is one of the hardest probl
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TTL-based invalidation is the simplest: cached entries expire after a fixed duration. It is appropriate for data where slight staleness is acceptable. Event-driven invalidation uses a message queue or event bus to notify caches when data changes, enabling near-instantaneous invalidation. Explicit purging allows the application to remove specific cache entries when it knows the underlying data has changed. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ Choosing a Strategy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The optimal strategy depends on your access patterns. Read-heavy workloads with strong consistency needs favor write-through. Write-heavy workloads benefit from write-around or write-back. Applications tolerant of eventual consistency can use write-back for maximum write performance. Many production systems combine strategies: write-through for critical data, write-around for reference data, and write-back for high-volume transient data. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/database-gui.html
   
 
 
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ A good database GUI makes the difference between a pleasant querying experience 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  TablePlus
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,6 +225,15 @@ A native macOS database client with a clean, modern interface:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Supported databases**: PostgreSQL, MySQL, Redis, SQLite, SQL Server, MariaDB, Amazon Redshift, CockroachDB
@@ -146,31 +251,6 @@ A native macOS database client with a clean, modern interface:
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- TablePlus built-in features:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Query history with search and favorites
-
-  
-  
-  
-  
   
   
   
@@ -182,8 +262,17 @@ A native macOS database client with a clean, modern interface:
   
 
 
-\\\\\\\\\\\\\\\\-- Filter and sort by columns directly
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TablePlus built-in features:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -199,7 +288,7 @@ A native macOS database client with a clean, modern interface:
   
 
 
-\\\\\\\\\\\\\\\\-- Multiple tabs with connection grouping
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query history with search and favorites
 
   
   
@@ -210,14 +299,6 @@ A native macOS database client with a clean, modern interface:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- SQL editor with autocomplete and syntax highlighting
-
   
   
   
@@ -233,7 +314,7 @@ A native macOS database client with a clean, modern interface:
   
 
 
-\\\\\\\\\\\\\\\\-- Import/export CSV, JSON, Excel
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Filter and sort by columns directly
 
   
   
@@ -244,14 +325,6 @@ A native macOS database client with a clean, modern interface:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- SSH tunneling
-
   
   
   
@@ -267,7 +340,7 @@ A native macOS database client with a clean, modern interface:
   
 
 
-\\\\\\\\\\\\\\\\-- Quick filter: select table row and type column:value
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Multiple tabs with connection grouping
 
   
   
@@ -278,14 +351,6 @@ A native macOS database client with a clean, modern interface:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Example: status:active name:john
-
   
   
   
@@ -301,8 +366,147 @@ A native macOS database client with a clean, modern interface:
   
 
 
-\\\\\\\\\\\\\\\\-- This converts to: WHERE status = 'active' AND name LIKE '%john%'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL editor with autocomplete and syntax highlighting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Import/export CSV, JSON, Excel
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SSH tunneling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Quick filter: select table row and type column:value
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Example: status:active name:john
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- This converts to: WHERE status = 'active' AND name LIKE '%john%'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ A native macOS database client with a clean, modern interface:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Weaknesses**: macOS only (no Linux/Windows), fewer advanced features than DBeaver, paid for full features (one-time purchase).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ A native macOS database client with a clean, modern interface:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The most comprehensive cross-platform database tool:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,31 +641,6 @@ The most comprehensive cross-platform database tool:
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- DBeaver advanced features:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- ER diagram generation from database schema
-
-  
-  
-  
-  
   
   
   
@@ -437,8 +652,17 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Compare and sync database structures
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DBeaver advanced features:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -454,7 +678,7 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Data export in 20+ formats
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ER diagram generation from database schema
 
   
   
@@ -465,14 +689,6 @@ The most comprehensive cross-platform database tool:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Schema export as SQL scripts
-
   
   
   
@@ -488,7 +704,7 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Script execution with variable substitution
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compare and sync database structures
 
   
   
@@ -499,14 +715,6 @@ The most comprehensive cross-platform database tool:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- SQL query plan visualization
-
   
   
   
@@ -522,7 +730,7 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Mock data generation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Data export in 20+ formats
 
   
   
@@ -533,14 +741,6 @@ The most comprehensive cross-platform database tool:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- ER diagram generation
-
   
   
   
@@ -556,7 +756,7 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Right-click database -> View Diagram
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Schema export as SQL scripts
 
   
   
@@ -567,14 +767,6 @@ The most comprehensive cross-platform database tool:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Automatically generates relationships from foreign keys
-
   
   
   
@@ -590,8 +782,173 @@ The most comprehensive cross-platform database tool:
   
 
 
-\\\\\\\\\\\\\\\\-- Export as PNG, SVG, or print
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Script execution with variable substitution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL query plan visualization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Mock data generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ER diagram generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Right-click database -> View Diagram
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Automatically generates relationships from foreign keys
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Export as PNG, SVG, or print
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ The most comprehensive cross-platform database tool:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Weaknesses**: Java-based (heavier resource usage), UI can feel cluttered, slower startup than native tools, occasional instability with large datasets.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ The most comprehensive cross-platform database tool:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JetBrains' database IDE, integrated with the IntelliJ ecosystem:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,31 +1083,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- DataGrip unique features:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Context-aware code completion
-
-  
-  
-  
-  
   
   
   
@@ -726,8 +1094,17 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Detect potential SQL errors before execution
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DataGrip unique features:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -743,7 +1120,7 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Version-controlled database objects
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Context-aware code completion
 
   
   
@@ -754,14 +1131,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Integrated with VCS (Git)
-
   
   
   
@@ -777,7 +1146,7 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Database diff and migration tools
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Detect potential SQL errors before execution
 
   
   
@@ -788,14 +1157,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- SQL formatting (configurable)
-
   
   
   
@@ -811,7 +1172,7 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Intelligent code completion:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Version-controlled database objects
 
   
   
@@ -822,14 +1183,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Ctrl+Space: table names, column names, functions
-
   
   
   
@@ -845,7 +1198,7 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Alt+Enter: quick fixes for SQL issues
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Integrated with VCS (Git)
 
   
   
@@ -856,14 +1209,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Ctrl+Shift+Enter: complete statement
-
   
   
   
@@ -879,7 +1224,7 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Version control for schemas
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Database diff and migration tools
 
   
   
@@ -890,14 +1235,6 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Tools -> Migrations -> Compare with database
-
   
   
   
@@ -913,8 +1250,199 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
 
 
-\\\\\\\\\\\\\\\\-- Generates migration scripts automatically
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL formatting (configurable)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Intelligent code completion:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Ctrl+Space: table names, column names, functions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Alt+Enter: quick fixes for SQL issues
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Ctrl+Shift+Enter: complete statement
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Version control for schemas
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Tools -> Migrations -> Compare with database
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Generates migration scripts automatically
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Weaknesses**: Requires JetBrains subscription, heavier resource usage, overkill for simple queries, not as many databases supported as DBeaver.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,6 +1525,15 @@ JetBrains' database IDE, integrated with the IntelliJ ecosystem:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A lightweight, open-source SQL editor and database manager:
@@ -996,31 +1551,6 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- Beekeeper Studio features:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Tab-based query editing
-
-  
-  
-  
-  
   
   
   
@@ -1032,8 +1562,17 @@ A lightweight, open-source SQL editor and database manager:
   
 
 
-\\\\\\\\\\\\\\\\-- Query history with search
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Beekeeper Studio features:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1049,7 +1588,7 @@ A lightweight, open-source SQL editor and database manager:
   
 
 
-\\\\\\\\\\\\\\\\-- Save and organize queries in folders
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Tab-based query editing
 
   
   
@@ -1060,14 +1599,6 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Dark and light themes
-
   
   
   
@@ -1083,7 +1614,7 @@ A lightweight, open-source SQL editor and database manager:
   
 
 
-\\\\\\\\\\\\\\\\-- Keyboard shortcuts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query history with search
 
   
   
@@ -1094,14 +1625,6 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Native desktop app (Electron-based)
-
   
   
   
@@ -1117,7 +1640,7 @@ A lightweight, open-source SQL editor and database manager:
   
 
 
-\\\\\\\\\\\\\\\\-- Supported databases:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Save and organize queries in folders
 
   
   
@@ -1132,10 +1655,132 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- PostgreSQL, MySQL, SQLite, SQL Server
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Dark and light themes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Keyboard shortcuts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Native desktop app (Electron-based)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Supported databases:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL, MySQL, SQLite, SQL Server
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "fontSize": 14,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "tabSize": 2,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "showTableStats": true,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "limitDefault": 500,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,6 +2175,15 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1421,10 +2201,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Weaknesses**: Fewer features than competitors, limited database support, no ER diagrams, Electron-based (more RAM than TablePlus), smaller community.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | TablePlus | DBeaver | DataGrip | Beekeeper |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Platform | macOS | Cross-platform | Cross-platform | Cross-platform |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Startup speed | Fast | Slow (Java) | Slow (JVM) | Moderate |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | SSH tunneling | Built-in | Built-in | Built-in | Built-in |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Code completion | Basic | Good | Excellent | Basic |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **macOS user**: TablePlus for the best native experience and speed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1687,10 +2611,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **IntelliJ user**: DataGrip for seamless JetBrains integration (especially with IDEA Ultimate).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1715,6 +2657,15 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Database administration**: DBeaver for schema comparison, migration scripts, and ER diagrams.
@@ -1729,10 +2680,28 @@ A lightweight, open-source SQL editor and database manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Daily querying**: TablePlus for fast, developer-friendly query execution.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

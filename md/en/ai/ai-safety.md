@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-safety.html
   
   
   
+  
+  
+  
+
+
+# AI Safety: Responsible Development and Deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Safety: Responsible Development and Deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Safety: Responsible Development and Deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AI safety encompasses the technical and organizational practices for developing and deploying AI systems that behave as intended. As LLMs and AI agents handle increasingly critical tasks, safety considerations become paramount.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ AI safety encompasses the technical and organizational practices for developing 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Alignment ensures AI systems pursue the goals their developers intend. Three levels: base alignment (model follows instructions), helpfulness alignment (model assists users constructively), and safety alignment (model refuses harmful requests).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ RLHF (Reinforcement Learning from Human Feedback) remains the primary alignment 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Robustness
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Robust models maintain performance under distribution shift, adversarial inputs,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prompt injection attacks trick models into ignoring safety instructions. Defenses include input sanitization, output filtering, instruction hierarchy (system prompts override user prompts), and perplexity-based anomaly detection. Monitor for jailbreak attempts and iterate on defenses.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Prompt injection attacks trick models into ignoring safety instructions. Defense
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Production monitoring tracks model behavior for safety issues. Log all inputs and outputs for auditing. Implement real-time content filtering for toxic, biased, or policy-violating outputs. Set up automated alerts for safety metric violations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Human review samples of model outputs, especially for high-stakes applications. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Responsible Deployment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Phased deployment starts with limited release and expands as safety is confirmed
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document model capabilities, limitations, and known failure modes. Provide transparency about model behavior. Engage with external researchers and auditors. Publish safety evaluations and red-teaming results. Participate in industry safety standards development.
@@ -279,10 +456,28 @@ Document model capabilities, limitations, and known failure modes. Provide trans
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Privacy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

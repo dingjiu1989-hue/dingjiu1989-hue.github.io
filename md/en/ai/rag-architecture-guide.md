@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-architecture-guide.html
   
 
 
+# RAG Architecture Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Architecture Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Architecture Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Retrieval-Augmented Generation (RAG) has become the dominant architecture for pr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Core Components
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ A RAG system consists of three primary stages: indexing, retrieval, and generati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Indexing Pipeline
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,6 +277,15 @@ The indexing pipeline transforms raw documents into a searchable format:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Document ingestion**: Load documents from PDFs, web pages, databases, or APIs
@@ -180,14 +303,6 @@ The indexing pipeline transforms raw documents into a searchable format:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Text splitting**: Chunk documents into manageable pieces using semantic or fixed-size splitting
-
-  
-  
-  
-  
   
   
   
@@ -199,7 +314,7 @@ The indexing pipeline transforms raw documents into a searchable format:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Embedding generation**: Convert each chunk into a dense vector using an embedding model
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Text splitting**: Chunk documents into manageable pieces using semantic or fixed-size splitting
 
   
   
@@ -214,10 +329,54 @@ The indexing pipeline transforms raw documents into a searchable format:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Vector storage**: Store embeddings in a vector database with metadata
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Embedding generation**: Convert each chunk into a dense vector using an embedding model
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Vector storage**: Store embeddings in a vector database with metadata
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Chunking strategy significantly impacts retrieval quality. Fixed-size chunks of 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Retrieval Stage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ The retrieval stage finds relevant documents for a given query:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Query transformation** is often the first step. Raw user queries are rarely optimal for retrieval. Common transformations include:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -313,6 +508,15 @@ The retrieval stage finds relevant documents for a given query:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Query expansion: Generate multiple related queries and retrieve for each
@@ -327,10 +531,28 @@ The retrieval stage finds relevant documents for a given query:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * HyDE (Hypothetical Document Embedding): Generate a hypothetical answer, then use its embedding for retrieval
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -361,10 +583,28 @@ The retrieval stage finds relevant documents for a given query:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Dense retrieval**: Cosine similarity search against embedding vectors using ANN indexes (HNSW, IVF)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -389,10 +629,28 @@ The retrieval stage finds relevant documents for a given query:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Hybrid retrieval**: Combine dense and sparse results with reciprocal rank fusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -423,10 +681,28 @@ Hybrid retrieval consistently outperforms either method alone. A typical fusion 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RRF(d) = Σ 1/(k + rank_i(d))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -457,10 +733,28 @@ Where k is a constant (typically 60) and rank_i(d) is the rank of document d in 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Generation Stage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -491,10 +785,28 @@ The generation stage constructs prompts combining retrieved context with the use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Context windowing** strategies include:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -522,6 +834,15 @@ The generation stage constructs prompts combining retrieved context with the use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Map-reduce**: Process each document separately, then combine results
@@ -536,10 +857,28 @@ The generation stage constructs prompts combining retrieved context with the use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Refine**: Iteratively update an answer as each document is processed
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -570,10 +909,28 @@ The generation stage constructs prompts combining retrieved context with the use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Advanced RAG Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -604,10 +961,28 @@ The generation stage constructs prompts combining retrieved context with the use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Agentic RAG systems give the LLM control over retrieval decisions. Instead of retrieving once and generating, the model can:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -635,6 +1010,15 @@ Agentic RAG systems give the LLM control over retrieval decisions. Instead of re
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Choose between different data sources (vector DB, web search, SQL database)
@@ -649,10 +1033,28 @@ Agentic RAG systems give the LLM control over retrieval decisions. Instead of re
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Iteratively refine search queries based on partial results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -683,10 +1085,28 @@ This pattern dramatically improves answer quality for complex, multi-step questi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Multi-Hop RAG
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -717,10 +1137,28 @@ Some questions require information from multiple documents. Multi-hop RAG breaks
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Self-RAG
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -751,6 +1189,15 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Retrieve relevant passages
@@ -768,14 +1215,6 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate an answer based on retrieved passages
-
-  
-  
-  
-  
   
   
   
@@ -787,7 +1226,7 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Evaluate whether the answer is supported by the passages
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate an answer based on retrieved passages
 
   
   
@@ -802,10 +1241,54 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If not, either retrieve more information or revise the answer
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Evaluate whether the answer is supported by the passages
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If not, either retrieve more information or revise the answer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -836,10 +1319,28 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Latency optimization**: Embedding generation and vector search both add latency. Strategies include caching frequent queries, using smaller embedding models for initial retrieval, and parallelizing retrieval across multiple data sources.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -870,6 +1371,15 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Monitoring**: Track embedding drift (when the distribution of queries changes), retrieval success rate, and end-user feedback to continuously improve the system.
@@ -887,10 +1397,28 @@ Self-RAG introduces reflection steps where the model evaluates its own retrieval
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

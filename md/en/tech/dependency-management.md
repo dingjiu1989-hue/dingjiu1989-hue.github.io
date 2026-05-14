@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/dependency-management.html
   
   
   
+  
+  
+  
+
+
+# Dependency Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dependency Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dependency Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency management is a critical but often neglected aspect of software engineering. Every dependency introduces risk: security vulnerabilities, breaking changes, licensing issues, and maintenance burden. This article covers the key practices for managing dependencies effectively, from lock files to vulnerability scanning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Dependency management is a critical but often neglected aspect of software engin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Lock files pin exact versions of every dependency and its transitive dependencies. They ensure that every build uses the same dependency versions, regardless of when the build runs. This is essential for reproducible builds and consistent behavior across environments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Package managers generate lock files automatically. npm's `package-lock.json`, Y
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Lock files also enable security auditing. When a vulnerability is discovered in a specific dependency version, the lock file shows whether your project is affected. Security scanning tools analyze lock files to identify vulnerable dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Lock files also enable security auditing. When a vulnerability is discovered in 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Semantic versioning (semver) provides a contract for dependency compatibility. MAJOR.MINOR.PATCH versions communicate the scope of changes: MAJOR for breaking changes, MINOR for backward-compatible new features, PATCH for backward-compatible bug fixes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Understanding semver allows appropriate version ranges in dependency specificati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 In practice, not all packages follow semver strictly. Minor version releases may include breaking changes. Testing dependency upgrades before deploying to production is essential, regardless of the advertised version number.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ In practice, not all packages follow semver strictly. Minor version releases may
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency vulnerabilities are a common attack vector. Automated scanning tools detect known vulnerabilities in dependencies by comparing installed versions against vulnerability databases. Dependabot, Snyk, Renovate, and OWASP Dependency-Check are popular scanning tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Scanning should be integrated into CI/CD pipelines. A build should fail if criti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Beyond known vulnerabilities, scanning should also detect deprecated packages, packages with incompatible licenses, and packages with poor maintenance indicators (no recent releases, unaddressed issues).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Beyond known vulnerabilities, scanning should also detect deprecated packages, p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependencies should be updated regularly to receive bug fixes, performance improvements, and security patches. The update strategy balances stability against staying current. A well-defined strategy prevents both stagnation (outdated dependencies with known vulnerabilities) and churn (constantly upgrading for minor improvements).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ A common approach uses automated dependency update tools like Renovate or Depend
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency updates should be small and frequent. A weekly update cycle with automated PRs keeps the dependency tree current without overwhelming the team. Larger, less frequent updates create risk as multiple changes compound.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Dependency updates should be small and frequent. A weekly update cycle with auto
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency governance establishes rules for which dependencies can be used and how they are managed. An approved dependency list specifies trusted packages. New dependencies require review, assessing necessity, maintenance quality, license compatibility, and security track record.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Governance prevents dependency sprawl. Each new dependency is an addition to the
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Unused dependencies should be removed. Dead code elimination is well understood, but unused dependencies are harder to detect. Tools like `depcheck` (JavaScript) and `pip-check-reqs` (Python) identify dependencies that are no longer imported.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Unused dependencies should be removed. Dead code elimination is well understood,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Commit lock files to version control. Run dependency audits regularly. Use automated update tools for routine updates. Review major version upgrades manually. Remove unused dependencies. Maintain a dependency inventory. Establish governance for new dependency approval.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

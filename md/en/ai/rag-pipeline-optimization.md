@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-pipeline-optimization.html
   
   
   
+  
+  
+  
+
+
+# RAG Pipeline Optimization: Production Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Pipeline Optimization: Production Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# RAG Pipeline Optimization: Production Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Retrieval-Augmented Generation (RAG) combines information retrieval with LLM gen
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document chunking determines what information is retrieved. Fixed-size chunking with overlap is simple but can split semantic units. Semantic chunking uses NLP to find natural boundaries (sentence, paragraph, section boundaries).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Optimal chunk size depends on your retrieval task. 256-512 tokens works well for
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Embedding Selection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Choose embeddings based on your content type and language. OpenAI ada-002 works 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Embedding dimension affects storage and retrieval speed. 1536 dimensions (ada-002) is a good default. 768 dimensions reduces storage with minimal accuracy loss. Consider Matryoshka embeddings (intfloat/e5-mistral-7b-instruct) for flexible dimensionality.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Embedding dimension affects storage and retrieval speed. 1536 dimensions (ada-00
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Hybrid search combines keyword (BM25) and semantic (embedding) retrieval. This captures exact matches that embeddings miss and semantic matches that keywords miss. Weight the two scores based on your content characteristics.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,6 +378,15 @@ Metadata filtering narrows retrieval scope. Filter by date, category, source, or
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Evaluation
@@ -245,10 +404,28 @@ Metadata filtering narrows retrieval scope. Filter by date, category, source, or
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Evaluate RAG pipelines on retrieval metrics (hit rate, MRR, NDCG) and generation metrics (answer relevance, faithfulness, correctness). Use RAGAS framework for automated evaluation. Build golden QA datasets from real user queries. Monitor production performance with user feedback signals.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

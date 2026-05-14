@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/endpoint-security.html
   
   
   
+  
+  
+  
+
+
+# Endpoint Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Endpoint Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Endpoint Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Endpoint security protects devices — laptops, servers, mobile devices, and IoT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EDR vs XDR vs Traditional Antivirus 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Traditional Antivirus (AV)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Signature-based AV compares files against a database of known malware hashes. It is effective against commodity malware but fails against zero-day threats, fileless attacks, and polymorphic malware. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Signature-based AV compares files against a database of known malware hashes. It
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 clamscan --recursive --infected /home/user
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ clamscan --database=/var/lib/clamav --log=/var/log/clamav.log /
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Limitations of signature-based AV:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Limitations of signature-based AV:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No behavioral monitoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Limitations of signature-based AV:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No cross-host correlation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Endpoint Detection and Response (EDR)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EDR platforms continuously monitor endpoint activity, recording system calls, process creation, network connections, file system changes, and registry modifications. They provide visibility into attacker behavior across the kill chain. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ EDR platforms continuously monitor endpoint activity, recording system calls, pr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def query_process_tree(process_id, timespan_hours=24):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ return edr_api.query(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT pid, parent_pid, name, command_line, 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ event_time, user, hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM process_events
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ WHERE (pid = {process_id} OR parent_pid = {process_id})
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND event_time > NOW() - INTERVAL '{timespan_hours} hours'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ ORDER BY event_time
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Extended Detection and Response (XDR)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 XDR extends EDR by correlating telemetry across endpoints, network traffic, email, cloud workloads, and identity systems. This cross-domain correlation reveals multi-stage attacks spanning different infrastructure layers. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ XDR extends EDR by correlating telemetry across endpoints, network traffic, emai
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def correlate_alerts():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ def correlate_alerts():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 endpoint_alerts = xdr.get_alerts(sources=['endpoint'], severity='high')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ network_flows = xdr.get_flows(source_ip_subnet='10.0.0.0/8',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 time_range='last_1h')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ for alert in endpoint_alerts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 matching_flows = [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ flow for flow in network_flows
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if flow.dest_ip == alert.external_ip
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ and abs(flow.timestamp - alert.timestamp).seconds < 300
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ if matching_flows:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alert.add_evidence(matching_flows)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ alert.escalate_severity('critical')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Detection Techniques 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ Behavioral Detection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monitors sequences of actions rather than static indicators. Detects ransomware by observing mass file encryption patterns. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,6 +1343,15 @@ Monitors sequences of actions rather than static indicators. Detects ransomware 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 detection_rules:
@@ -877,10 +1369,28 @@ detection_rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Ransomware Behavior"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Ransomware Behavior"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,31 +1421,6 @@ conditions:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.count > 100
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.extension_changes > 50
-
-  
-  
-  
-  
   
   
   
@@ -947,8 +1432,17 @@ conditions:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.avg_write_size_bytes > 500000
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.count > 100
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -964,8 +1458,69 @@ conditions:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration_seconds < 60
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.extension_changes > 50
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process.file_operations.avg_write_size_bytes > 500000
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration_seconds < 60
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response: isolate_host
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ ML-Based Detection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Machine learning models analyze features extracted from endpoint telemetry to classify benign and malicious behavior. Models must be trained on diverse datasets and continuously updated to avoid concept drift. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ Response Automation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SOAR (Security Orchestration, Automation, and Response) platforms automate response actions based on detection triggers. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ SOAR (Security Orchestration, Automation, and Response) platforms automate respo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 playbook:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ name: "Host Isolation and Investigation"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 trigger: severity == critical AND threat_type == ransomware
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: isolate_host
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: isolate_host
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1187,6 +1850,15 @@ steps:
 
 target: alert.host_id
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ network_scope: full
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: capture_memory
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: capture_memory
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ target: alert.host_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: collect_process_tree
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: collect_process_tree
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ target: alert.process.id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: enrich_iocs
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: enrich_iocs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,6 +2045,15 @@ targets: [alert.file_hash, alert.dest_ip]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 feeds: [virustotal, abuseipdb]
@@ -1336,10 +2071,28 @@ feeds: [virustotal, abuseipdb]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: create_ticket
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: create_ticket
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ system: jira
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 priority: P1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ assignee_group: "SOC Tier 3"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

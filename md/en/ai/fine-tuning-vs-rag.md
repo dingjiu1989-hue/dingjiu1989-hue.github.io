@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/fine-tuning-vs-rag.html
   
 
 
+# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Two dominant approaches exist for customizing LLMs to your domain: fine-tuning, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Fine-Tune
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Fine-tuning excels at teaching the model new capabilities or styles:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from openai import OpenAI
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ client = OpenAI()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Fine-tuning for a custom tone and format
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ fine_tune_job = client.fine_tuning.jobs.create(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 training_file="file-tone-training.jsonl",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ model="gpt-4o-mini-2024-07-18",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hyperparameters={
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ hyperparameters={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "batch_size": 4,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ hyperparameters={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ suffix="support-tone"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Use fine-tuning when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * The task requires a specific output format or style that the base model does not produce
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -395,6 +635,15 @@ Use fine-tuning when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * The model needs to learn domain-specific terminology or reasoning patterns
@@ -409,10 +658,28 @@ Use fine-tuning when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You want lower latency (no retrieval step) and consistent response times
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -443,10 +710,28 @@ Fine-tuning costs include training ($25-$100 per run for GPT-4o-mini) and hostin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Use RAG
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -477,10 +762,28 @@ RAG excels at incorporating changing or factual information:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def rag_response(question: str) -> str:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -511,10 +814,28 @@ def rag_response(question: str) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docs = vector_search(question, k=5)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -545,10 +866,28 @@ context = format_context(docs)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Generate with up-to-date context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -579,10 +918,28 @@ response = call_llm(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Answer using ONLY the provided context.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -613,10 +970,28 @@ Context: {context}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Question: {question}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -647,10 +1022,28 @@ Question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return response
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,10 +1074,28 @@ Use RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your knowledge base changes frequently (daily or weekly updates)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -709,10 +1120,28 @@ Use RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your data includes documents too numerous to train on (millions of records)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -737,10 +1166,28 @@ Use RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You need to add or remove information without retraining
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -771,10 +1218,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Cost Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -805,10 +1270,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |--------|-------------|-----|--------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -839,10 +1322,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Per-query cost | $0.0001-$0.003 | $0.003-$0.015 (context) | $0.003-$0.02 |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -873,10 +1374,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Update cost | $25-$500 per retrain | $0 (add docs to index) | $25-$500 + indexing |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -907,10 +1426,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Source citation | No | Yes | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -941,10 +1478,28 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The most powerful pattern combines both: fine-tune for behavior, RAG for knowledge:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -975,10 +1530,28 @@ def hybrid_rag(question: str) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Fine-tuned model handles formatting, tone, and reasoning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1009,10 +1582,28 @@ def hybrid_rag(question: str) -> str:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 1: Retrieve relevant context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1043,10 +1634,28 @@ docs = vector_search(question, k=5)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 2: Use fine-tuned model with RAG context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1077,10 +1686,28 @@ response = client.chat.completions.create(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 model="ft:gpt-4o-mini:org:custom-support:2026-05-01",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1111,10 +1738,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1145,10 +1790,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "content": "You are a support agent with access to internal documentation."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1179,10 +1842,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1213,10 +1894,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "content": f"Context:\n{format_docs(docs)}\n\nQuestion: {question}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1247,10 +1946,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1281,10 +1998,28 @@ messages=[
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return response.choices[0].message.content
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1315,10 +2050,28 @@ return response.choices[0].message.content
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 You can also fine-tune the embedding model for better retrieval:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1349,10 +2102,28 @@ from sentence_transformers import SentenceTransformer, losses, InputExample
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from torch.utils.data import DataLoader
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1383,10 +2154,28 @@ model = SentenceTransformer("BAAI/bge-base-en-v1.5")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create training pairs: (question, relevant_document)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1417,10 +2206,28 @@ train_examples = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 InputExample(texts=[q, pos_doc], label=1.0)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1451,10 +2258,28 @@ for q, pos_doc in training_pairs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1485,10 +2310,28 @@ train_examples += [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 InputExample(texts=[q, neg_doc], label=0.0)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1519,10 +2362,28 @@ for q, neg_doc in negative_pairs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1553,10 +2414,28 @@ for q, neg_doc in negative_pairs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 train_dataloader = DataLoader(train_examples, shuffle=True, batch_size=16)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1587,10 +2466,28 @@ train_loss = losses.CosineSimilarityLoss(model)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=3)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1621,10 +2518,28 @@ model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=3)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Follow this decision tree:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1655,31 +2570,6 @@ Follow this decision tree:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you need to cite sources? Yes -> RAG. No -> consider fine-tuning.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you have 100+ high-quality examples? No -> RAG. Yes -> consider fine-tuning.
-
-  
-  
-  
-  
   
   
   
@@ -1691,8 +2581,17 @@ Follow this decision tree:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you need very low latency? Yes -> fine-tuning. No -> RAG is usually fine.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you need to cite sources? Yes -> RAG. No -> consider fine-tuning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1708,8 +2607,69 @@ Follow this decision tree:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Can you afford both? Yes -> hybrid approach is best.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you have 100+ high-quality examples? No -> RAG. Yes -> consider fine-tuning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Do you need very low latency? Yes -> fine-tuning. No -> RAG is usually fine.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Can you afford both? Yes -> hybrid approach is best.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,6 +2687,15 @@ Follow this decision tree:
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

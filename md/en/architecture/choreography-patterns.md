@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/choreography-patterns.htm
   
 
 
+# Choreography Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Choreography Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Choreography Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Choreography is an architectural pattern for coordinating distributed workflows without a central coordinator. Unlike orchestration, where a central service directs all participants, choreography uses events to achieve coordination—each service performs its task and emits events that trigger the next steps. This decentralized approach offers scalability and loose coupling but introduces challenges in observability and error handling. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ How Choreography Works
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 In a choreographed workflow, there is no central controller. Each service knows its role and reacts to relevant events. When a service completes its work, it emits an event that other services consume to trigger their own work. The workflow emerges from the interaction of independent services. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Consider an order fulfillment flow. The order service places an order and emits 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Event Contracts 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Successful choreography depends on clear event contracts. Each event has a defin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A schema registry is essential for managing event contracts. It stores event schemas, enforces compatibility, and provides a discovery mechanism for consumers. Without explicit contracts, choreography degrades into unpredictable coupling where services make implicit assumptions about event structure. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Monitoring Choreography
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monitoring choreographed workflows is challenging because no single component has a complete view of the workflow. Distributed tracing is essential for understanding how a single request flows through multiple services. Each event should carry a correlation ID that ties it to the originating request. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Workflow dashboards can reconstruct the state of each workflow instance by consu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Saga Coordination 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Choreography is one of two approaches to implementing the Saga pattern for distr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For example, in the order flow, if payment fails, the payment service emits "Payment Failed". The order service consumes this event and cancels the order. The inventory service (if it already reserved inventory) consumes the event and releases the reservation. Each service handles its own compensation logic. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ The advantage of choreographed sagas is minimal coupling. Services do not need t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Error Handling 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ Without a central coordinator, error handling in choreography requires careful d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Compensation events reverse the effects of successful operations. If the payment service emits "Payment Failed", the order service's compensation handler cancels the order. Compensation should consider that the original operation may have been completed long ago and the system state may have changed. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -242,6 +455,15 @@ Timeout handling is another challenge. If a service does not emit its expected e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Use Choreography 
@@ -253,10 +475,28 @@ When to Use Choreography
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Choreography is appropriate when workflows are relatively stable, events are naturally aligned with service boundaries, and the team has good observability infrastructure. It is less suitable for complex workflows with many conditional paths, strict timing requirements, or where end-to-end visibility is critical. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

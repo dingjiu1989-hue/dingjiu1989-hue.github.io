@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-types-overview.html
   
 
 
+# Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Choosing the right database type is one of the most consequential architectural 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Relational Databases (PostgreSQL, MySQL, SQL Server) 
@@ -77,10 +155,28 @@ Relational Databases (PostgreSQL, MySQL, SQL Server)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Relational databases organize data into tables with predefined schemas, linked by foreign keys. They provide ACID transactions and powerful querying via SQL. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -102,10 +198,28 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * ACID transactions with strong consistency guarantees.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -124,6 +238,15 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Rich constraint system (foreign keys, unique, check).
@@ -135,10 +258,28 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Mature ecosystem and tooling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,6 +304,15 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Schema changes require migrations.
@@ -174,10 +324,28 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Horizontal scaling is complex (sharding).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -199,10 +367,28 @@ Relational databases organize data into tables with predefined schemas, linked b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Typical relational model
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Typical relational model
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -227,10 +413,28 @@ CREATE TABLE users (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -255,6 +459,15 @@ email TEXT UNIQUE NOT NULL,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 created_at TIMESTAMPTZ DEFAULT NOW()
@@ -269,10 +482,28 @@ created_at TIMESTAMPTZ DEFAULT NOW()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -297,10 +528,28 @@ CREATE TABLE orders (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -325,10 +574,28 @@ user_id BIGINT REFERENCES users(id),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 total NUMERIC(10,2),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -353,10 +620,28 @@ created_at TIMESTAMPTZ DEFAULT NOW()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -381,10 +666,28 @@ SELECT u.email, COUNT(o.id) AS order_count
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM users u
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -409,10 +712,28 @@ LEFT JOIN orders o ON o.user_id = u.id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY u.email;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -434,6 +755,15 @@ GROUP BY u.email;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document Databases (MongoDB, Couchbase) 
@@ -445,10 +775,28 @@ Document Databases (MongoDB, Couchbase)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document databases store semi-structured data in JSON-like documents. Schemas are flexible, and documents can have varying structures. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -470,10 +818,28 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Schema flexibility: documents in the same collection can have different fields.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -492,6 +858,15 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Horizontal scaling with native sharding.
@@ -503,10 +878,28 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Developer productivity for rapidly evolving models.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -531,10 +924,28 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Limited join capabilities (`$lookup` is less performant than SQL JOINs).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -553,10 +964,28 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No enforced schema means application-level validation is essential.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -581,10 +1010,28 @@ Document databases store semi-structured data in JSON-like documents. Schemas ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 db.users.insertOne({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -609,10 +1056,28 @@ _id: ObjectId(),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 email: "alice@example.com",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -637,10 +1102,28 @@ profile: { name: "Alice", avatar: "avatar.jpg" },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 orders: [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -665,10 +1148,28 @@ orders: [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -693,10 +1194,28 @@ orders: [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Best for**: Content management, catalogs, rapid prototyping, applications with evolving schemas. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1234,28 @@ Key-Value Stores (Redis, DynamoDB, Riak)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key-value stores are the simplest database type. They store values accessed by a unique key, optimized for high-throughput, low-latency lookups. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -740,10 +1277,28 @@ Key-value stores are the simplest database type. They store values accessed by a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Extremely fast reads and writes (sub-millisecond).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -762,6 +1317,15 @@ Key-value stores are the simplest database type. They store values accessed by a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Easy to scale horizontally.
@@ -773,10 +1337,28 @@ Key-value stores are the simplest database type. They store values accessed by a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Ideal for caching and session storage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -801,10 +1383,28 @@ Key-value stores are the simplest database type. They store values accessed by a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No query capabilities beyond key lookups (in pure KV stores).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -823,10 +1423,28 @@ Key-value stores are the simplest database type. They store values accessed by a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Application must manage data relationships.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -851,10 +1469,28 @@ SET user:42 '{"email": "alice@example.com", "name": "Alice"}'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GET user:42
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -879,10 +1515,28 @@ LPUSH recent_views:42 "product:100"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ZADD leaderboard 1000 "player_alice"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -904,6 +1558,15 @@ ZADD leaderboard 1000 "player_alice"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Graph Databases (Neo4j, Amazon Neptune) 
@@ -915,10 +1578,28 @@ Graph Databases (Neo4j, Amazon Neptune)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Graph databases model data as nodes and edges, optimized for traversing relationships. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -940,10 +1621,28 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Relationship traversal is extremely fast, independent of graph size.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1661,28 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Pattern matching queries for complex relationships.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -990,10 +1707,28 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Less efficient for non-graph workloads (simple aggregations).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1012,10 +1747,28 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Requires learning specialized query languages (Cypher, SPARQL).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1040,10 +1793,28 @@ Graph databases model data as nodes and edges, optimized for traversing relation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MATCH (u:User {email: "alice@example.com"})-[:FRIENDS_WITH]->(f:User)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1068,10 +1839,28 @@ WHERE (f)-[:PURCHASED]->(:Product {category: "Electronics"})
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RETURN f.name
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1093,6 +1882,15 @@ RETURN f.name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Time-Series Databases (TimescaleDB, InfluxDB, ClickHouse) 
@@ -1104,10 +1902,28 @@ Time-Series Databases (TimescaleDB, InfluxDB, ClickHouse)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Time-series databases optimize for append-heavy, time-ordered data with automatic retention and downsampling. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1129,10 +1945,28 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * High ingestion throughput (millions of data points per second).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1151,6 +1985,15 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Time-bucket aggregations and downsampling.
@@ -1162,10 +2005,28 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Compression ratios of 90%+.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1190,6 +2051,15 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Less suitable for transactional workloads.
@@ -1201,10 +2071,28 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Joins and complex relationships are not a focus.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1226,10 +2114,28 @@ Time-series databases optimize for append-heavy, time-ordered data with automati
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- TimescaleDB (SQL-based time-series)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TimescaleDB (SQL-based time-series)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1254,10 +2160,28 @@ SELECT time_bucket('1 hour', time) AS bucket,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AVG(temperature) AS avg_temp,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1282,10 +2206,28 @@ MAX(temperature) AS max_temp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM sensor_readings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1310,10 +2252,28 @@ WHERE sensor_id = 42
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND time > now() - INTERVAL '7 days'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1338,10 +2298,28 @@ GROUP BY bucket
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY bucket;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1363,6 +2341,15 @@ ORDER BY bucket;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vector Databases (pgvector, Pinecone, Milvus, Qdrant) 
@@ -1374,10 +2361,28 @@ Vector Databases (pgvector, Pinecone, Milvus, Qdrant)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vector databases store and search high-dimensional vectors (embeddings) using similarity metrics. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1399,10 +2404,28 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Efficient approximate nearest neighbor (ANN) search.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2444,28 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * CRUD operations on vector embeddings.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1449,6 +2490,15 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Orthogonal use case to traditional databases (complement, not replace).
@@ -1460,10 +2510,28 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Index build times can be significant for large datasets.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1485,10 +2553,28 @@ Vector databases store and search high-dimensional vectors (embeddings) using si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- pgvector (PostgreSQL extension)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgvector (PostgreSQL extension)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1513,10 +2599,28 @@ CREATE TABLE documents (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1541,10 +2645,28 @@ content TEXT,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 embedding VECTOR(1536) -- OpenAI embedding dimension
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1569,10 +2691,28 @@ embedding VECTOR(1536) -- OpenAI embedding dimension
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX ON documents USING IVFFLAT (embedding vector_cosine_ops);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1597,10 +2737,28 @@ SELECT content, 1 - (embedding <=> $1) AS similarity
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM documents
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2783,28 @@ ORDER BY embedding <=> $1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 10;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1650,10 +2826,28 @@ LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-Model Databases 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1672,6 +2866,15 @@ Many modern databases support multiple models. PostgreSQL is the best example: w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Choosing the Right Database 
@@ -1683,10 +2886,28 @@ Choosing the Right Database
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | If you need... | Consider... | |----------------|-------------| | Strong consistency, complex joins | PostgreSQL, MySQL | | Flexible schemas, rapid development | MongoDB | | Sub-millisecond lookups, caching | Redis | | Relationship-heavy traversal | Neo4j | | High-volume time-series | TimescaleDB, InfluxDB | | Semantic similarity search | pgvector, Pinecone, Milvus | | All of the above | PostgreSQL with extensions | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

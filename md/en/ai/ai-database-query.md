@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html
   
 
 
+# Natural Language to SQL with LLMs
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Natural Language to SQL with LLMs
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Natural Language to SQL with LLMs
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Natural language to SQL (NL2SQL) is one of the most impactful applications of LL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  How NL2SQL Works
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The core architecture is straightforward:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ The critical step is **context assembly** — providing the LLM with enough data
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Schema Context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ The LLM needs to understand your database schema. A well-structured schema promp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE TABLE customers (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ customer_id INTEGER PRIMARY KEY,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 first_name VARCHAR(100),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ last_name VARCHAR(100),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 email VARCHAR(255),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ signup_date DATE,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 country VARCHAR(50),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ lifetime_value DECIMAL(10,2)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ CREATE TABLE orders (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 order_id INTEGER PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ customer_id INTEGER REFERENCES customers(customer_id),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 order_date TIMESTAMP,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,6 +693,15 @@ total_amount DECIMAL(10,2),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 status VARCHAR(20) -- pending, shipped, delivered, cancelled
@@ -452,10 +719,28 @@ status VARCHAR(20) -- pending, shipped, delivered, cancelled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ CREATE TABLE order_items (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 item_id INTEGER PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ order_id INTEGER REFERENCES orders(order_id),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 product_name VARCHAR(200),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ quantity INTEGER,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 unit_price DECIMAL(10,2)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ unit_price DECIMAL(10,2)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key additions for better accuracy:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -619,10 +976,28 @@ unit_price DECIMAL(10,2)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Value examples: `-- status options: pending, shipped, delivered, cancelled`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -647,10 +1022,28 @@ unit_price DECIMAL(10,2)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Index hints: `-- indexed on order_date for range queries`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,10 +1074,28 @@ def build_schema_context(tables):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 context_parts = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1126,28 @@ for table in tables:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ddl = f"CREATE TABLE {table.name} (\n"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -749,10 +1178,28 @@ for col in table.columns:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ddl += f" {col.name} {col.type} -- {col.description}\n"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -783,10 +1230,28 @@ ddl += ");"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 context_parts.append(ddl)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -817,10 +1282,28 @@ context_parts.append(ddl)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if table.sample_rows:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -851,10 +1334,28 @@ context_parts.append(f"-- Sample row: {table.sample_rows[0]}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "\n\n".join(context_parts)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -885,10 +1386,28 @@ return "\n\n".join(context_parts)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For complex schemas, provide question-SQL pairs relevant to the query:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -919,10 +1438,28 @@ few_shot_examples = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -953,6 +1490,15 @@ few_shot_examples = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "query": """
@@ -970,10 +1516,28 @@ few_shot_examples = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1004,10 +1568,28 @@ c.first_name || ' ' || c.last_name AS customer_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SUM(o.total_amount) AS total_spent
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1038,10 +1620,28 @@ FROM customers c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JOIN orders o ON c.customer_id = o.customer_id
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1072,10 +1672,28 @@ WHERE o.status != 'cancelled'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY c.customer_id, c.first_name, c.last_name
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1106,6 +1724,15 @@ ORDER BY total_spent DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 5
@@ -1123,10 +1750,28 @@ LIMIT 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1157,10 +1802,28 @@ LIMIT 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1191,10 +1854,28 @@ LIMIT 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "query": """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1225,10 +1906,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DATE_TRUNC('month', o.order_date) AS month,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1259,10 +1958,28 @@ SUM(o.total_amount) AS revenue
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM orders o
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1293,10 +2010,28 @@ WHERE o.status = 'delivered'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND o.order_date >= '2025-01-01'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1327,10 +2062,28 @@ AND o.order_date < '2026-01-01'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY month
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1361,10 +2114,28 @@ ORDER BY month
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1395,10 +2166,28 @@ ORDER BY month
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1429,10 +2218,28 @@ ORDER BY month
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  SQL Generation Prompt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1463,10 +2270,28 @@ The complete prompt combines schema, examples, and safety instructions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def build_nl2sql_prompt(question, schema, examples, dialect="postgresql"):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1497,10 +2322,28 @@ prompt = f"""You are a {dialect} SQL expert. Convert natural language questions 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database Schema:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1531,6 +2374,15 @@ Database Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rules:
@@ -1548,31 +2400,6 @@ Rules:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-2\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships
-
-  
-  
-  
-  
   
   
   
@@ -1584,8 +2411,17 @@ Rules:
   
 
 
-3\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1601,7 +2437,7 @@ Rules:
   
 
 
-4\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships
 
   
   
@@ -1612,14 +2448,6 @@ Rules:
   
   
   
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data
-
   
   
   
@@ -1635,7 +2463,7 @@ Rules:
   
 
 
-6\\\\\\\\\\\\\\\\. Use LIMIT for result size control
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks
 
   
   
@@ -1646,14 +2474,6 @@ Rules:
   
   
   
-  
-  
-  
-  
-
-
-7\\\\\\\\\\\\\\\\. Order results when ordering is implied
-
   
   
   
@@ -1669,8 +2489,121 @@ Rules:
   
 
 
-8\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use LIMIT for result size control
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Order results when ordering is implied
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1701,10 +2634,28 @@ Examples:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1735,10 +2686,28 @@ for ex in examples:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1769,10 +2738,28 @@ prompt += f"\nQ: {question}\nSQL:"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return prompt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1803,10 +2790,28 @@ return prompt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Before executing generated SQL, validate it:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1837,10 +2842,28 @@ def validate_sql(query, allowed_tables):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 errors = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1871,10 +2894,28 @@ errors = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1905,10 +2946,28 @@ for keyword in forbidden_keywords:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if keyword in query.upper():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1939,10 +2998,28 @@ errors.append(f"Forbidden operation: {keyword}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check table references
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1973,10 +3050,28 @@ parsed = sqlparse.parse(query)[0]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 used_tables = extract_tables(parsed)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2007,10 +3102,28 @@ for table in used_tables:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if table not in allowed_tables:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2041,6 +3154,15 @@ errors.append(f"Unauthorized table: {table}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Syntax validation
@@ -2058,10 +3180,28 @@ errors.append(f"Unauthorized table: {table}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 try:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2092,6 +3232,15 @@ conn = get_dummy_connection(dialect)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 conn.execute(f"EXPLAIN {query}")
@@ -2109,10 +3258,28 @@ conn.execute(f"EXPLAIN {query}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 except Exception as e:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2143,10 +3310,28 @@ errors.append(f"SQL syntax error: {str(e)}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return errors
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2177,10 +3362,28 @@ return errors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Self-Correction Loop
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2211,10 +3414,28 @@ When the generated SQL fails or returns empty results, the system can self-corre
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def nl2sql_with_correction(question, schema, max_attempts=3):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2245,10 +3466,28 @@ for attempt in range(max_attempts):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query = generate_sql(question, schema)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2279,10 +3518,28 @@ errors = validate_sql(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if not errors:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2313,10 +3570,28 @@ try:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results = execute_sql(query)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2347,6 +3622,15 @@ if results:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return format_results(question, query, results)
@@ -2364,10 +3648,28 @@ return format_results(question, query, results)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2398,10 +3700,28 @@ feedback = "The query returned no results. Try a broader search."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 except Exception as e:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2432,10 +3752,28 @@ feedback = f"Execution error: {str(e)}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2466,10 +3804,28 @@ feedback = f"Validation errors: {', '.join(errors)}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2500,10 +3856,28 @@ question = f"Original question: {question}\nPrevious attempt failed: {feedback}\
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For large schemas with many tables, first identify relevant tables before generating SQL:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2534,10 +3908,28 @@ def identify_relevant_tables(question, all_tables, table_descriptions):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prompt = f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2568,10 +3960,28 @@ Question: {question}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Available tables with descriptions:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2602,10 +4012,28 @@ Available tables with descriptions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 List only the tables needed to answer this question, comma-separated:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2636,10 +4064,28 @@ List only the tables needed to answer this question, comma-separated:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response = call_llm(prompt)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2670,10 +4116,28 @@ return [t.strip() for t in response.split(",")]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This dramatically reduces context size and improves accuracy on large databases.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2704,10 +4168,28 @@ This dramatically reduces context size and improves accuracy on large databases.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2738,10 +4220,28 @@ This dramatically reduces context size and improves accuracy on large databases.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2772,10 +4272,28 @@ This dramatically reduces context size and improves accuracy on large databases.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

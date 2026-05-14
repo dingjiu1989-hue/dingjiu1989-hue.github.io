@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-configuration.html
   
 
 
+# Secure Configuration Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secure Configuration Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secure Configuration Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Configuration drift — when actual system configuration diverges from the inten
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Infrastructure as Code Scanning 
@@ -77,10 +155,28 @@ Infrastructure as Code Scanning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 IaC scanning catches misconfigurations before they reach production. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ IaC scanning catches misconfigurations before they reach production.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 checkov -d terraform/environments/production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ checkov -d terraform/environments/production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tfsec terraform/environments/production --config-file tfsec.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ tfsec terraform/environments/production --config-file tfsec.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kics scan -p kubernetes/deployments --output-path kics-report.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ kics scan -p kubernetes/deployments --output-path kics-report.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_s3_bucket" "data" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ bucket = "my-data-bucket"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # This will fail checkov check CKV_AWS_21
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,10 +431,28 @@ bucket = "my-data-bucket"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +477,28 @@ bucket = "my-data-bucket"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from checkov.common.models.enums import CheckResult
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +523,28 @@ from checkov.terraform.checks.resource.base_resource_check import BaseResourceCh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class S3EncryptionCheck(BaseResourceCheck):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -329,10 +569,28 @@ def __init__(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name = "Ensure S3 bucket has encryption enabled"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -357,10 +615,28 @@ id = "CKV_CUSTOM_001"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 supported_resources = ['aws_s3_bucket']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -385,10 +661,28 @@ super().__init__(name=name, id=id, supported_resources=supported_resources)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def scan_resource_conf(self, conf):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -413,10 +707,28 @@ if 'server_side_encryption_configuration' in conf:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return CheckResult.PASSED
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -441,6 +753,15 @@ return CheckResult.FAILED
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Drift Detection 
@@ -452,10 +773,28 @@ Drift Detection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Drift detection identifies when live infrastructure differs from the declared configuration. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -480,10 +819,28 @@ Drift detection identifies when live infrastructure differs from the declared co
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 terraform plan -refresh-only # Check for manual changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -508,10 +865,28 @@ terraform plan -refresh-only # Check for manual changes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_config_config_rule" "s3_bucket_ssl" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -536,10 +911,28 @@ name = "s3-bucket-ssl-requests-only"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -564,6 +957,15 @@ owner = "AWS"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
@@ -578,6 +980,15 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -592,10 +1003,28 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -620,25 +1049,6 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   
   
   
-
-
-# 1\\\\. Schedule terraform plan to run daily
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# 2\\\\. Compare output with baseline
-
-  
   
   
   
@@ -650,8 +1060,63 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   
 
 
-# 3\\\\. Alert on unexpected changes
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -676,10 +1141,28 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # drift_detection.sh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -704,10 +1187,28 @@ BASELINE_DIR="/config/baselines"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 REPORT_DIR="/config/reports"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -732,10 +1233,28 @@ for env in production staging; do
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cd terraform/environments/$env
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -760,10 +1279,28 @@ terraform plan -refresh-only -out=plan.tfplan 2>&1 | \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 grep -E "changed|destroyed|added" > /tmp/drift.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -788,10 +1325,28 @@ if [ -s /tmp/drift.txt ]; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Send alert
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -816,10 +1371,28 @@ if [ -s /tmp/drift.txt ]; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cp /tmp/drift.txt "$REPORT_DIR/${env}_drift_$(date +%Y%m%d).txt"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -844,10 +1417,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 done
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -872,10 +1463,28 @@ Configuration Validation Pipeline
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # CI/CD configuration validation stage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -900,25 +1509,6 @@ stages:
   
   
   
-
-
-\\\\\\\\- validate
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- scan
-
-  
   
   
   
@@ -930,8 +1520,63 @@ stages:
   
 
 
-\\\\\\\\- deploy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -956,10 +1601,28 @@ validate:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: validate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -984,11 +1647,6 @@ script:
   
   
   
-
-
-\\\\\\\\- terraform fmt -check
-
-  
   
   
   
@@ -1000,8 +1658,40 @@ script:
   
 
 
-\\\\\\\\- terraform validate
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1026,10 +1716,28 @@ scan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1054,25 +1762,6 @@ script:
   
   
   
-
-
-\\\\\\\\- checkov -d . -o json > checkov-report.json
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif
-
-  
   
   
   
@@ -1084,8 +1773,63 @@ script:
   
 
 
-\\\\\\\\- conftest test . --policy policies/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . -o json > checkov-report.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- conftest test . --policy policies/
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1110,10 +1854,28 @@ artifacts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reports:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1138,10 +1900,28 @@ checkov: checkov-report.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tfsec: tfsec-report.sarif
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1946,28 @@ deploy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage: deploy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1194,10 +1992,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- terraform apply -auto-approve
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply -auto-approve
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1222,10 +2038,28 @@ only:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- main
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1250,6 +2084,15 @@ when: manual
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Configuration Validation with Conftest 
@@ -1261,10 +2104,28 @@ Configuration Validation with Conftest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1289,10 +2150,28 @@ Conftest applies policy-as-code to configuration files using Open Policy Agent (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 package main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1317,10 +2196,28 @@ deny[msg] {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 input.kind == "Deployment"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1345,10 +2242,28 @@ not input.spec.template.spec.containers[_].securityContext.runAsNonRoot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 msg = "Containers must run as non-root"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1373,10 +2288,28 @@ msg = "Containers must run as non-root"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1401,10 +2334,28 @@ input.kind == "Deployment"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 input.spec.template.spec.containers[_].securityContext.privileged == true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1429,6 +2380,15 @@ msg = "Privileged containers are not allowed"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1443,10 +2403,28 @@ msg = "Privileged containers are not allowed"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1471,10 +2449,28 @@ input.kind == "Service"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 input.spec.type == "LoadBalancer"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1499,6 +2495,15 @@ msg = "LoadBalancer services are not allowed"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1513,10 +2518,28 @@ msg = "LoadBalancer services are not allowed"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1541,10 +2564,28 @@ input.kind == "Pod"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 not input.spec.containers[_].resources.limits.memory
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1569,10 +2610,28 @@ msg = "Memory limits are required"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1597,10 +2656,28 @@ msg = "Memory limits are required"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 conftest test deployment.yaml --policy conftest/policies/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2702,28 @@ Policy as Code with OPA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # OPA policy for Terraform
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1653,10 +2748,28 @@ package terraform
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deny[msg] {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1681,10 +2794,28 @@ resource := input.resource.aws_security_group[_]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rule := resource.ingress[_]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1709,10 +2840,28 @@ rule.from_port == 22
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rule.cidr_blocks[_] == "0.0.0.0/0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1737,10 +2886,28 @@ msg = sprintf("Security group %v allows SSH from anywhere", [resource.name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1765,10 +2932,28 @@ deny[msg] {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource := input.resource.aws_s3_bucket[_]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1793,10 +2978,28 @@ resource.acl == "public-read" || resource.acl == "public-read-write"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 msg = sprintf("S3 bucket %v has public ACL", [resource.name])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1821,6 +3024,15 @@ msg = sprintf("S3 bucket %v has public ACL", [resource.name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Secrets in Configuration 
@@ -1832,10 +3044,28 @@ Secrets in Configuration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Never hardcode secrets in configuration. Use a secrets manager. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1860,10 +3090,28 @@ Never hardcode secrets in configuration. Use a secrets manager.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_db_instance" "database" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1888,6 +3136,15 @@ username = "admin"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 password = "P@ssw0rd123!" # NEVER hardcode
@@ -1902,10 +3159,28 @@ password = "P@ssw0rd123!" # NEVER hardcode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1930,10 +3205,28 @@ password = "P@ssw0rd123!" # NEVER hardcode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 data "aws_secretsmanager_secret_version" "db_creds" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1958,10 +3251,28 @@ secret_id = "production/database/credentials"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1986,6 +3297,15 @@ resource "aws_db_instance" "database" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 username = jsondecode(
@@ -2000,10 +3320,28 @@ username = jsondecode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 data.aws_secretsmanager_secret_version.db_creds.secret_string
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2028,10 +3366,28 @@ data.aws_secretsmanager_secret_version.db_creds.secret_string
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 password = jsondecode(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2056,10 +3412,28 @@ data.aws_secretsmanager_secret_version.db_creds.secret_string
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )["password"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3458,28 @@ data.aws_secretsmanager_secret_version.db_creds.secret_string
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

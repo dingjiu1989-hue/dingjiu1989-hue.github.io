@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/package-managers-compared.html
   
 
 
+# Package Managers Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Package Managers Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Package Managers Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Package managers are the backbone of modern software development. They handle dependency resolution, version management, and package distribution. This guide compares the most important package managers across JavaScript, Python, Rust, and other ecosystems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Package managers are the backbone of modern software development. They handle de
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JavaScript has the richest package manager landscape, with three main contenders:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ JavaScript has the richest package manager landscape, with three main contenders
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The default package manager for Node.js. It is bundled with Node, making it the baseline choice.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ The default package manager for Node.js. It is bundled with Node, making it the 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm init -y
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ npm init -y
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm install express
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ npm install express
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm install -g typescript
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ npm install -g typescript
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm outdated
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ npm outdated
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm audit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ npm audit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Slower than alternatives, heavy `node_modules` duplication, nested dependency tree issues.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,6 +589,15 @@ npm audit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Created by Meta to address npm's early performance issues. Yarn 2+ (Berry) introduced Plug'n'Play for zero-install workflows.
@@ -384,10 +615,28 @@ Created by Meta to address npm's early performance issues. Yarn 2+ (Berry) intro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ npm install -g yarn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Initialize
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ yarn init
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Add dependency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ yarn add express
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Zero-install configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ yarn set version berry # Yarn 2+
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .yarnrc.yml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ nodeLinker: pnp # Plug'n'Play mode
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 enableGlobalCache: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ enableGlobalCache: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Different command syntax, PnP mode can cause compatibility issues, smaller community than npm.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ enableGlobalCache: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The fastest and most disk-efficient package manager. It uses hard links and symlinks to share dependencies across projects.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ The fastest and most disk-efficient package manager. It uses hard links and syml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm install -g pnpm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,6 +1083,15 @@ npm install -g pnpm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm init
@@ -707,10 +1109,28 @@ pnpm init
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Add dependency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ pnpm add express
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install all dependencies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ pnpm install
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm stores dependencies in a global content-addressable store. Multiple projects sharing the same dependency version only store it once on disk.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Some tools expect flat `node_modules`, smaller ecosystem, newer tool.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Operation | npm | Yarn Classic | Yarn Berry | pnpm |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Clean install (100 packages) | 8.5s | 5.2s | 3.8s | 3.2s |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Disk usage (100 projects) | 5.2GB | 5.2GB | 3.1GB | 1.3GB |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ pnpm stores dependencies in a global content-addressable store. Multiple project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Python's ecosystem has traditionally used pip, but uv is a game-changing Rust-based alternative.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,6 +1525,15 @@ Python's ecosystem has traditionally used pip, but uv is a game-changing Rust-ba
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The standard Python package manager:
@@ -996,10 +1551,28 @@ The standard Python package manager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install from requirements file
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ pip install -r requirements.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create virtual environment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ python -m venv .venv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source .venv/bin/activate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ source .venv/bin/activate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pip install requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ pip install requests
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pip freeze > requirements.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ pip freeze > requirements.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 uv is a drop-in replacement for pip that is 10-100x faster:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ uv is a drop-in replacement for pip that is 10-100x faster:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 uv venv
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ source .venv/bin/activate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install from requirements file
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ uv pip install -r requirements.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install packages
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ uv pip install requests fastapi uvicorn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 uv also includes a project manager (`uv init`, `uv add`, `uv run`) that competes with Poetry.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ uv also includes a project manager (`uv init`, `uv add`, `uv run`) that competes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Poetry introduced pyproject.toml-based dependency management:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ Poetry introduced pyproject.toml-based dependency management:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [tool.poetry.dependencies]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ python = "^3.12"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fastapi = "^0.110.0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ uvicorn = {extras = ["standard"], version = "^0.27.0"}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [build-system]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ requires = ["poetry-core"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 build-backend = "poetry.core.masonry.api"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ uv has rapidly gained adoption due to its speed and compatibility with existing 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Rust: Cargo
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ Cargo is widely considered the gold standard for package managers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Cargo.toml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ Cargo is widely considered the gold standard for package managers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name = "myapp"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ version = "0.1.0"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 edition = "2021"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ edition = "2021"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 serde = { version = "1.0", features = ["derive"] }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ tokio = { version = "1", features = ["full"] }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reqwest = "0.12"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ reqwest = "0.12"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 criterion = "0.5"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ criterion = "0.5"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cargo build
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ cargo build
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cargo test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ cargo test
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cargo outdated
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ cargo outdated
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cargo audit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ Cargo's strengths: deterministic builds, integrated testing and benchmarking, co
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Go: go mod
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ Go modules are built into the Go toolchain:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Initialize module
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ go mod init github.com/user/myapp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Add dependency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,10 +3111,28 @@ go get github.com/gorilla/mux
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Tidy dependencies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2050,10 +3163,28 @@ go mod tidy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Verify
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ go mod verify
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Go's approach is minimal but effective. The module graph is stored in `go.sum` for integrity verification.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3267,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Manager | Language | Speed | Disk Efficiency | Lock File | Workspaces | Dev Tools |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3319,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | npm | JS | Medium | Low | package-lock.json | Yes | Scripts |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,10 +3371,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | pnpm | JS | Fast | High | pnpm-lock.yaml | Yes | Scripts |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2220,10 +3423,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | uv | Python | Very Fast | High | uv.lock | Yes | Built-in |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2254,10 +3475,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | go mod | Go | Fast | High | go.sum | No | Test, build |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,10 +3527,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2319,10 +3576,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Python**: Use uv for development (dramatically faster). Keep pip for CI/CD compatibility.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2347,10 +3622,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Go**: go mod is built in and sufficient.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2378,10 +3671,28 @@ Go's approach is minimal but effective. The module graph is stored in `go.sum` f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

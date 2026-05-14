@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/structured-logging.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1058",
+      "wordCount": "1204",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html"},
-      "articleBody": "Structured Logging Structured Logging Structured Logging Structured Logging Structured logging is the practice of emitting logs as structured data \u2014 typically JSON \u2014 rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database \u2014 providing a unified view of what happened during that specific request. Log levels should be used consistently across services. DEBUG: detailed information for development and troubleshooting, typically not enabled in production. INFO: high-level events that track normal operation (request started, payment processed). WARN: unexpected events that do not affect normal operation (slow query, retry attempt, degraded dependency). ERROR: failures that affect the current operation but not the overall service (validation error, downstream timeout). FATAL: events that require immediate human intervention (data corruption, configuration error). Context propagation through the logging system is essential for debugging. When an error occurs, the log entry should include the full context of what the service was doing, what input it received, and what state it was in. This context should be added incrementally as the request progresses through the code. A good logging library supports implicit context propagation \u2014 once you set a context key on a logger instance, all subsequent log calls include it automatically. Logging libraries should support structured output natively. In Go, zerolog and zap are optimized for high-performance structured logging. In Java, Logback with Logstash encoder or Log4j 2 with JSON layout. In Python, structlog. In Node.js, pino or winston. These libraries minimize allocation overhead while producing well-formed JSON. Microbenchmarks matter \u2014 in high-throughput services, logging can consume significant CPU if the library is not optimized. Log aggregation infrastructure ingests and indexes logs for querying. The ELK stack (Elasticsearch, Logstash, Kibana) is the most common self-hosted option. Loki (Grafana's log aggregation system) indexes only metadata and relies on the log timestamp for ordering, reducing storage requirements. Cloud options include AWS OpenSearch, Google Cloud Logging, and Azure Monitor. The aggregation system should preserve the structured fields for querying \u2014 timestamps for time-range queries, levels for filtering, trace IDs for correlation. Log sampling reduces volume for high-traffic services. Sampling strategies include: logging every Nth request for INFO level, logging all ERROR level entries (sampling errors is almost always wrong), and using adaptive sampling that reduces rate as traffic increases. Important patterns that should never be sampled: errors, warnings, security events, audit events, and startup/shutdown sequences. Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements."
+      "articleBody": "Structured Logging Structured Logging Structured Logging Structured Logging Structured Logging Structured Logging Structured Logging Structured logging is the practice of emitting logs as structured data \u2014 typically JSON \u2014 rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. The JSON log format is the standard. Each log line is a JSON object with required fields: timestamp (ISO 8601 with timezone and microseconds), level, logger (source file or component), message (human-readable summary), and trace_id (correlation ID for request tracing). Optional fields include: service, version, environment, request details, error stack traces, and any business-specific context. Every field should be consistently named and typed across all services in the organization. Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database \u2014 providing a unified view of what happened during that specific request. Log levels should be used consistently across services. DEBUG: detailed information for development and troubleshooting, typically not enabled in production. INFO: high-level events that track normal operation (request started, payment processed). WARN: unexpected events that do not affect normal operation (slow query, retry attempt, degraded dependency). ERROR: failures that affect the current operation but not the overall service (validation error, downstream timeout). FATAL: events that require immediate human intervention (data corruption, configuration error). Context propagation through the logging system is essential for debugging. When an error occurs, the log entry should include the full context of what the service was doing, what input it received, and what state it was in. This context should be added incrementally as the request progresses through the code. A good logging library supports implicit context propagation \u2014 once you set a context key on a logger instance, all subsequent log calls include it automatically. Logging libraries should support structured output natively. In Go, zerolog and zap are optimized for high-performance structured logging. In Java, Logback with Logstash encoder or Log4j 2 with JSON layout. In Python, structlog. In Node.js, pino or winston. These libraries minimize allocation overhead while producing well-formed JSON. Microbenchmarks matter \u2014 in high-throughput services, logging can consume significant CPU if the library is not optimized. Log aggregation infrastructure ingests and indexes logs for querying. The ELK stack (Elasticsearch, Logstash, Kibana) is the most common self-hosted option. Loki (Grafana's log aggregation system) indexes only metadata and relies on the log timestamp for ordering, reducing storage requirements. Cloud options include AWS OpenSearch, Google Cloud Logging, and Azure Monitor. The aggregation system should preserve the structured fields for querying \u2014 timestamps for time-range queries, levels for filtering, trace IDs for correlation. Log sampling reduces volume for high-traffic services. Sampling strategies include: logging every Nth request for INFO level, logging all ERROR level entries (sampling errors is almost always wrong), and using adaptive sampling that reduces rate as traffic increases. Important patterns that should never be sampled: errors, warnings, security events, audit events, and startup/shutdown sequences. Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements."
     }
     </script>
     <script type="application/ld+json">
@@ -102,7 +102,67 @@
 <br>
 <br>
 <br>
+<h1>Structured Logging</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Structured Logging</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Structured Logging</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -118,7 +178,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database — providing a unified view of what happened during that specific request. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -134,7 +212,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Context propagation through the logging system is essential for debugging. When an error occurs, the log entry should include the full context of what the service was doing, what input it received, and what state it was in. This context should be added incrementally as the request progresses through the code. A good logging library supports implicit context propagation — once you set a context key on a logger instance, all subsequent log calls include it automatically. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -150,7 +246,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Log aggregation infrastructure ingests and indexes logs for querying. The ELK stack (Elasticsearch, Logstash, Kibana) is the most common self-hosted option. Loki (Grafana's log aggregation system) indexes only metadata and relies on the log timestamp for ordering, reducing storage requirements. Cloud options include AWS OpenSearch, Google Cloud Logging, and Azure Monitor. The aggregation system should preserve the structured fields for querying — timestamps for time-range queries, levels for filtering, trace IDs for correlation. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -166,7 +280,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

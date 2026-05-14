@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/cloud-cost-optimization.html
   
   
   
+  
+  
+  
+
+
+# Cloud Cost Optimization Tips
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud Cost Optimization Tips
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud Cost Optimization Tips
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Cloud costs are often the second-largest expense after payroll for SaaS companie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ The most common waste is over-provisioned resources. Use cloud provider tools to
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **GCP Rightsizing Recommendations**: Built into the Compute Engine console.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ The most common waste is over-provisioned resources. Use cloud provider tools to
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Target utilization rules of thumb:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Target utilization rules of thumb:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |----------|-------------------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Target utilization rules of thumb:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Memory | 60-80% average |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Target utilization rules of thumb:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Downsize instances that consistently run below 20% utilization. For variable wor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Commit to usage in exchange for discounts:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Commit to usage in exchange for discounts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |--------|----------|------------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Commit to usage in exchange for discounts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | AWS Savings Plans | 40-60% | 1 or 3 years ($/hour) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Commit to usage in exchange for discounts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Azure Reserved | 40-60% | 1 or 3 years |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Start with 1-year commitments for baseline workloads (30-50% of your total compu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Spot and Preemptible Instances
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # AWS: Request spot instances in Auto Scaling
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ aws autoscaling create-auto-scaling-group \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--mixed-instances-policy file://spot-policy.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--mixed-instances-policy file://spot-policy.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,6 +875,15 @@ aws autoscaling create-auto-scaling-group \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud compute instances create worker \
@@ -571,10 +901,28 @@ gcloud compute instances create worker \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preemptible
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--preemptible
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ Ideal workloads: batch processing, CI/CD runners, stateless web workers, data an
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Storage costs accumulate silently. Audit your storage regularly:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ Storage costs accumulate silently. Audit your storage regularly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Use lifecycle policies**: Move infrequently accessed data to colder tiers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ Storage costs accumulate silently. Audit your storage regularly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Tier | Cost/GB/Month | Use Case |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ Storage costs accumulate silently. Audit your storage regularly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | S3 Standard | $0.023 | Active data |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ Storage costs accumulate silently. Audit your storage regularly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | S3 Glacier | $0.0036 | Archived data |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,6 +1265,15 @@ Storage costs accumulate silently. Audit your storage regularly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set S3 Lifecycle rules to transition objects automatically:
@@ -826,10 +1291,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Filter": {"Prefix": "logs/"},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Transitions": [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {"Days": 90, "StorageClass": "GLACIER"}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,6 +1551,15 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Expiration": {"Days": 365}
@@ -1013,10 +1577,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ Set S3 Lifecycle rules to transition objects automatically:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Data transfer out of cloud providers is expensive. Minimize egress:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ Data transfer out of cloud providers is expensive. Minimize egress:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CloudFront/CDN**: Serve static assets through a CDN. CloudFront data transfer to the internet is cheaper than S3 direct access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ Data transfer out of cloud providers is expensive. Minimize egress:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **NAT Gateway costs**: Use NAT instances instead of NAT Gateway for high-volume traffic (cost savings of 70-80%).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ Data transfer out of cloud providers is expensive. Minimize egress:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Scale resources to match demand:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ Scale resources to match demand:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 autoscaling:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ target_tracking:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- predefined_metric_specification:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- predefined_metric_specification:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ predefined_metric_type: ASGAverageCPUUtilization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 target_value: 60
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ For containerized workloads, use Kubernetes Cluster Autoscaler:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Karpenter for AWS EKS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ kubectl scale deployment api-server --replicas=0 # Automated idle scaling
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ Karpenter and similar tools scale nodes based on actual pod resource requests, e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Databases are often the most expensive service:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ Databases are often the most expensive service:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Read replicas**: Add replicas for read-heavy workloads instead of upscaling a single instance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ Databases are often the most expensive service:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Delete old data**: Archive historical data to object storage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ Databases are often the most expensive service:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Combine reserved capacity for baseline with spot for spikes:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ Combine reserved capacity for baseline with spot for spikes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_autoscaling_group" "app" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ mixed_instances_policy {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 launch_template {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ launch_template_specification { ... }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 override {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,6 +2513,15 @@ instance_type = "t3.medium"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1642,10 +2539,28 @@ instance_type = "t3.medium"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ instances_distribution {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 on_demand_base_capacity = 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,6 +2643,15 @@ on_demand_percentage_above_base_capacity = 50 # Rest from Spot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spot_allocation_strategy = "capacity-optimized"
@@ -1727,6 +2669,41 @@ spot_allocation_strategy = "capacity-optimized"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1744,6 +2721,15 @@ spot_allocation_strategy = "capacity-optimized"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1757,14 +2743,6 @@ spot_allocation_strategy = "capacity-optimized"
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -1795,10 +2773,28 @@ spot_allocation_strategy = "capacity-optimized"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set up cost monitoring to catch anomalies early:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,6 +2825,15 @@ Set up cost monitoring to catch anomalies early:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws budgets create-budget \
@@ -1846,14 +2851,6 @@ aws budgets create-budget \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-name "Monthly-Infra" \
-
-  
-  
-  
-  
   
   
   
@@ -1865,7 +2862,7 @@ aws budgets create-budget \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-file monthly-budget.json \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-name "Monthly-Infra" \
 
   
   
@@ -1880,10 +2877,54 @@ aws budgets create-budget \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-with-subscribers file://alert-config.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-file monthly-budget.json \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-with-subscribers file://alert-config.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,6 +2955,15 @@ aws budgets create-budget \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud billing budgets create \
@@ -1931,31 +2981,6 @@ gcloud billing budgets create \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--billing-account=XXXXXX \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--display-name="Monthly Budget" \
-
-  
-  
-  
-  
   
   
   
@@ -1967,8 +2992,17 @@ gcloud billing budgets create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-amount=5000USD \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--billing-account=XXXXXX \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1984,7 +3018,7 @@ gcloud billing budgets create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--threshold-rules=percent=50,percent=90 \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--display-name="Monthly Budget" \
 
   
   
@@ -1999,10 +3033,80 @@ gcloud billing budgets create \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-pubsub-topic=budget-alerts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget-amount=5000USD \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--threshold-rules=percent=50,percent=90 \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-pubsub-topic=budget-alerts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

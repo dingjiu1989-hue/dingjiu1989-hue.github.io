@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-metrics.html
   
 
 
+# SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Metrics Deep Dive: MRR, ARR, LTV, CAC, Payback Period, and Net Revenue Retention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 If you run a SaaS business, you are flying blind without metrics. Unlike e-commerce or media sites where revenue is straightforward, SaaS has delayed recognition, churn, and expansion revenue that make simple top-line numbers misleading. Here is the practical guide to the six metrics that matter most.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ If you run a SaaS business, you are flying blind without metrics. Unlike e-comme
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monthly Recurring Revenue (MRR) is your predictable monthly income from subscriptions. Calculate it as the sum of all subscription fees in a month, normalized to a monthly value. If you have annual plans, divide by 12. If you have usage-based components, average the last three months.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Annual Recurring Revenue (ARR) is simply MRR multiplied by 12. Both should exclu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Track MRR growth rate month over month. A healthy early-stage SaaS grows 15-20% month over month. Below 10% monthly growth means you need to investigate your acquisition channels or pricing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Track MRR growth rate month over month. A healthy early-stage SaaS grows 15-20% 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Customer Lifetime Value (LTV) is the total revenue you expect from a customer before they churn. The simple formula is ARPU divided by churn rate. If your average revenue per user is $50 per month and monthly churn is 5%, LTV is $50 / 0.05 = $1,000.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Customer Acquisition Cost (CAC) is your total sales and marketing spend divided 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The LTV to CAC ratio should be at least 3:1. Below 3:1 means you are spending too much to acquire customers. Above 5:1 might mean you are under-investing in growth and leaving money on the table.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ The LTV to CAC ratio should be at least 3:1. Below 3:1 means you are spending to
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Payback period is how long it takes to earn back the CAC from a customer. Calculate it as CAC divided by monthly revenue per customer. If CAC is $1,500 and monthly revenue is $100, the payback period is 15 months.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ SaaS investors want to see a payback period under 12 months. For enterprise SaaS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Net Revenue Retention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Net Revenue Retention (NRR) measures revenue growth from your existing customer 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 NRR above 100% means your existing customers are spending more over time through upsells and cross-sells. This is the hallmark of great SaaS products. Below 100% means you are leaking revenue and need to plug churn before investing heavily in acquisition.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,6 +537,15 @@ Top-quartile public SaaS companies have NRR above 120%. Companies below 100% NRR
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Putting It Together
@@ -350,10 +563,28 @@ Top-quartile public SaaS companies have NRR above 120%. Companies below 100% NRR
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 These six metrics tell a coherent story. High MRR growth driven by low CAC with fast payback and NRR above 120% means you have product-market fit and efficient go-to-market. Track them monthly in a simple dashboard. Use Baremetrics, ChartMogul, or a spreadsheet. The tool matters less than the discipline of reviewing them every month with your team.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

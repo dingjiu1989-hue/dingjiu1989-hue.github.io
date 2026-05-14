@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/webpack-vs-vite-bundlers.html
   
   
   
+  
+  
+  
+
+
+# Webpack vs Vite Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Webpack vs Vite Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Webpack vs Vite Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Webpack has been the dominant JavaScript bundler for nearly a decade. Vite emerged in 2021 as a faster alternative leveraging native ES modules and esbuild. Choosing between them depends on your project requirements, team expertise, and performance needs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Webpack has been the dominant JavaScript bundler for nearly a decade. Vite emerg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The fundamental difference is development-time approach:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ The fundamental difference is development-time approach:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Vite** serves source files as native ES modules during development, using the browser's module system. esbuild pre-bundles dependencies for efficiency, but application code is served on-demand. Cold starts are under 2 seconds regardless of project size.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ In production, both produce optimized bundles. Webpack uses its own (Terser-base
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Development Server Performance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Vite's HMR (Hot Module Replacement) is the clear winner:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | Webpack | Vite |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Vite's HMR (Hot Module Replacement) is the clear winner:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Cold start | 10-60s | <2s |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Vite's HMR (Hot Module Replacement) is the clear winner:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Memory usage | High | Low |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Vite's HMR (Hot Module Replacement) is the clear winner:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vite's HMR works at the module level. When you edit a file, only that module is invalidated and re-served. Webpack must rebuild a module chunk, which scales with project size.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Vite's HMR works at the module level. When you edit a file, only that module is 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Webpack configuration has a reputation for verbosity:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Webpack configuration has a reputation for verbosity:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const path = require('path');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 module.exports = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ entry: './src/index.js',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 output: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,6 +771,15 @@ path: path.resolve(__dirname, 'dist'),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 filename: 'bundle.[contenthash].js'
@@ -503,10 +797,28 @@ filename: 'bundle.[contenthash].js'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ module: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rules: [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ rules: [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.jsx?$/,
+test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.jsx?$/,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ exclude: /node_modules/,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 use: 'babel-loader'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,6 +1005,15 @@ use: 'babel-loader'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
@@ -656,10 +1031,28 @@ use: 'babel-loader'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.css$/,
+test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.css$/,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ use: ['style-loader', 'css-loader', 'postcss-loader']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ use: ['style-loader', 'css-loader', 'postcss-loader']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(png|svg|jpg)$/,
+test: /\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(png|svg|jpg)$/,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ type: 'asset/resource'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ type: 'asset/resource'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ plugins: [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 new HtmlWebpackPlugin({ template: './src/index.html' })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ new HtmlWebpackPlugin({ template: './src/index.html' })
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 devServer: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ port: 3000,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hot: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ hot: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Vite configuration is significantly simpler:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // vite.config.js
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ import { defineConfig } from 'vite'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import react from '@vitejs/plugin-react'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ export default defineConfig({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 plugins: [react()],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ server: { port: 3000 }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Vite uses convention over configuration. TypeScript, JSX, CSS imports, and asset
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Plugin Ecosystem
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ Webpack's plugin and loader ecosystem is vast. Any transformation you can imagin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vite plugins are Rollup-compatible, and the Vite-specific plugin ecosystem has matured significantly. Most tools (React, Vue, Svelte, Solid) have first-party Vite plugins. For less common needs, Webpack still has broader coverage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ Vite plugins are Rollup-compatible, and the Vite-specific plugin ecosystem has m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Webpack's production optimization is battle-tested and highly configurable. You control every aspect of code splitting, chunk naming, and asset processing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ Vite uses Rollup for production builds, which produces smaller bundles on averag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Build speed comparison for a medium React project (50k lines):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ Build speed comparison for a medium React project (50k lines):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |-------|-----------|------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ Build speed comparison for a medium React project (50k lines):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Production build | 18s | 8s |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ Build speed comparison for a medium React project (50k lines):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Choose Webpack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ Webpack remains the better choice when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You maintain a legacy project with extensive Webpack configuration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ Webpack remains the better choice when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your toolchain depends on Webpack-specific loaders not available elsewhere.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ Webpack remains the better choice when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Choose Vite
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ Vite is the better choice for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * New projects starting in 2024+.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ Vite is the better choice for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Projects using modern frameworks (React, Vue, Svelte, Solid).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ Vite is the better choice for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Library development (Vite's library mode produces both ESM and CJS outputs).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ Vite is the better choice for:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Migrating from Webpack to Vite is usually straightforward:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,31 +2435,6 @@ Migrating from Webpack to Vite is usually straightforward:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Replace `webpack.config.js` with `vite.config.js`.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Move webpack loaders to Vite equivalents.
-
-  
-  
-  
-  
   
   
   
@@ -1610,8 +2446,17 @@ Migrating from Webpack to Vite is usually straightforward:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update import paths for assets (Webpack uses `require`, Vite uses URL imports).
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Replace `webpack.config.js` with `vite.config.js`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1627,8 +2472,69 @@ Migrating from Webpack to Vite is usually straightforward:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Test development and build workflows thoroughly.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Move webpack loaders to Vite equivalents.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update import paths for assets (Webpack uses `require`, Vite uses URL imports).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Test development and build workflows thoroughly.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ For large projects, consider a gradual migration using Vite's build and dev serv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

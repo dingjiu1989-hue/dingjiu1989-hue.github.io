@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/serverless-architecture.h
   
 
 
+# Serverless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Serverless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Serverless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Serverless architecture represents a shift from managing servers to writing code. In a serverless model, cloud providers dynamically manage the allocation and provisioning of servers. Developers focus on individual functions or containers, and the provider handles scaling, availability, and infrastructure maintenance. This article examines the key serverless compute options, architectural patterns, and operational considerations. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Functions as a Service (FaaS)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FaaS platforms like AWS Lambda, Azure Functions, and Google Cloud Functions execute code in response to events. Each function is stateless, short-lived, and automatically scaled. The developer uploads code and configures triggers—HTTP requests, queue messages, database changes, or scheduled events. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ The primary advantage of FaaS is granular scaling. Each function instance scales
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cold Starts 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Cold starts are the most significant challenge with FaaS. When a function hasn't
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cold start latency varies by runtime: Java and .NET typically add 1-3 seconds, Node.js and Python add 200-500ms, and the custom runtime on AWS Lambda can be optimized to under 100ms. Strategies for mitigation include provisioned concurrency (keeping a minimum number of warm instances), keeping functions warm with periodic pings, and optimizing deployment package size. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ AWS Fargate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fargate is AWS's serverless compute engine for containers. Unlike Lambda, Fargate runs long-lived containers without requiring you to manage the underlying servers. You define the container image, CPU, and memory requirements, and Fargate places the container on optimized infrastructure. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Fargate bridges the gap between Lambda and traditional container orchestration. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Event-Driven Design 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Serverless architecture naturally aligns with event-driven design. Functions res
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A typical event-driven serverless pattern uses SQS or SNS to decouple producers from consumers. An API Gateway receives a request, publishes a message to SQS, and returns immediately. A Lambda function processes the SQS messages asynchronously. This pattern handles traffic spikes gracefully by buffering messages in the queue. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ Production Considerations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Production serverless systems require careful attention to several areas. Observability is critical—services like AWS X-Ray, CloudWatch, and third-party tools provide distributed tracing across functions and downstream services. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ Error handling should use dead-letter queues for failed messages and implement e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cost management is also important. While serverless can be cost-effective at low to moderate traffic, high-volume workloads may be cheaper on provisioned infrastructure. Tools like AWS Compute Optimizer help analyze cost patterns and recommend optimizations. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

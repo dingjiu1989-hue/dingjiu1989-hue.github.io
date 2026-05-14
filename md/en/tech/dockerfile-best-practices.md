@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html
   
   
   
+  
+  
+  
+
+
+# Dockerfile Best Practices for Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dockerfile Best Practices for Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dockerfile Best Practices for Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Writing efficient Dockerfiles reduces image size, improves build speed, and enha
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Multi-stage builds dramatically reduce image size. A Go application might go fro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Layer Caching
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Each Dockerfile instruction creates a cacheable layer. Order instructions from l
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ This ordering means rebuilding after code changes only invalidates layers from t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root—container escape vulnerabilities grant root access to the host.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Use specific base image tags, not latest. Pin versions like python:3.12-slim ins
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Minimal Images
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,6 +459,15 @@ Use distroless or Alpine base images. Distroless images contain only the applica
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly—some Python packages have musl compatibility issues.
@@ -299,10 +485,28 @@ Alpine-based images are small (5MB base) but use musl libc instead of glibc. Tes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Dockerignore
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

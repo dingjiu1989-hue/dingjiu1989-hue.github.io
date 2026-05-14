@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics-setup.html
   
 
 
+# SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SaaS Analytics Setup: PostHog, Plausible, and Umami
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SaaS Analytics Setup: Privacy-Focused Tools
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Analytics are essential for SaaS decision-making, but traditional tools like Goo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### PostHog: Product Analytics Platform
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ PostHog is the most comprehensive open-source product analytics platform. It pro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Event tracking** captures user actions: page views, button clicks, feature usage, and custom events. Instrument PostHog with their JavaScript snippet or SDK (Python, Node.js, React, iOS, Android). Events include automatic properties (browser, OS, device) and custom properties you define.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ PostHog is the most comprehensive open-source product analytics platform. It pro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Feature flags** enable gradual rollouts and A/B testing without additional tools. Target flags by user properties (beta users, enterprise customers, geographic regions) or random percentage. Full-stack experimentation measures the impact of feature changes on conversion metrics.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Pricing: self-hosted is free (unlimited events, users, and team members). PostHo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Plausible: Lightweight Web Analytics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Plausible is a lightweight, privacy-first web analytics tool. It provides essent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Installation is simple: add a JavaScript snippet or use the proxy integration for WordPress/Cloudflare. The dashboard loads instantly — no waiting for data aggregation. Break down metrics by source, browser, OS, country, and device.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Installation is simple: add a JavaScript snippet or use the proxy integration fo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Plausible Cloud starts at $9/month for 10,000 monthly page views. Self-hosted (Docker) is free but requires infrastructure management. For early-stage SaaS, Plausible's simplicity is an advantage over more complex tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Plausible Cloud starts at $9/month for 10,000 monthly page views. Self-hosted (D
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Umami is a simple, fast, self-hosted analytics alternative. Deploy via Docker on a $5/month VPS. Umami tracks page views, visitors, events, and custom data without cookies or personal data collection.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Key features: real-time analytics, website tracking (unlimited sites), custom ev
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The interface is clean and fast. Umami provides the essential metrics without complexity. It integrates with Vercel (one-click deploy) or any Docker-compatible platform. Umami is completely free and open source.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ The interface is clean and fast. Umami provides the essential metrics without co
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use PostHog when you need deep product analytics: event tracking across user journeys, session recordings for UX research, feature flags, and experimentation. PostHog replaces multiple tools (Google Analytics, Hotjar, LaunchDarkly, Optimizely) in one platform.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Use Plausible for simple, privacy-compliant web analytics. Plausible is sufficie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use Umami when you want full data ownership with a self-hosted solution and minimal maintenance. Umami bridges the gap between Plausible's simplicity and PostHog's complexity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Use Umami when you want full data ownership with a self-hosted solution and mini
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set up tracking infrastructure in three phases. Phase 1: deploy your analytics tool and instrument basic page views. Phase 2: add custom event tracking for key actions (signup, feature usage, upgrade). Phase 3: set up dashboards for the metrics that matter: activation rate, retention, and revenue.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ Use a data layer to separate analytics instrumentation from your application cod
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/compare/mysql-vs-mariadb.html
   
 
 
+# MySQL vs MariaDB: The Complete Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# MySQL vs MariaDB: The Complete Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# MySQL vs MariaDB: The Complete Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ MySQL and MariaDB share a common origin but have diverged significantly since Ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Divergence History
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,6 +225,15 @@ MySQL and MariaDB share a common origin but have diverged significantly since Ma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 timeline:
@@ -146,10 +251,28 @@ timeline:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 1995
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 1995
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ event: "MySQL 1.0 released by TCX DataKonsult AB"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 2008
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 2008
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ event: "Sun Microsystems acquires MySQL AB for $1B"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 2009
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 2009
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ event: "Oracle acquires Sun; MariaDB forked by MySQL founder Monty Widenius"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 2013
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 2013
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ event: "MySQL 5.6 (Oracle) diverges further from MariaDB 10.0"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 2018
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 2018
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ event: "MySQL 8.0 released with data dictionary rewrite, roles, CTE"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- year: 2024
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- year: 2024
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ event: "MariaDB 11.x and MySQL 8.4 LTS diverge on optimizer and engine features"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key fork motivations:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -381,6 +612,15 @@ Key fork motivations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Feature inclusion**: Oracle rejected some community patches that MariaDB adopted
@@ -395,10 +635,28 @@ Key fork motivations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Storage engine philosophy**: MariaDB encourages engine diversity; MySQL centralizes around InnoDB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -429,6 +687,15 @@ Key fork motivations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### InnoDB (Both) vs Aria (MariaDB)
@@ -446,14 +713,6 @@ Key fork motivations:
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- MySQL/MariaDB: InnoDB configuration
-
-  
-  
-  
-  
   
   
   
@@ -465,7 +724,7 @@ Key fork motivations:
   
 
 
-\\\\\\\\\\\\\\\\-- Both support this, but default settings differ
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL/MariaDB: InnoDB configuration
 
   
   
@@ -480,10 +739,54 @@ Key fork motivations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MySQL default:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Both support this, but default settings differ
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL default:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -514,10 +817,28 @@ innodb_buffer_pool_size = 70% of RAM
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 innodb_log_file_size = 2GB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -548,10 +869,28 @@ innodb_flush_log_at_trx_commit = 1 -- ACID compliant
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 innodb_io_capacity = 2000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -582,10 +921,28 @@ innodb_autoinc_lock_mode = 2 -- Interleaved (MySQL 8+)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MariaDB default:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB default:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -616,10 +973,28 @@ innodb_buffer_pool_size = 50% of RAM
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 innodb_log_file_size = 512MB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -650,6 +1025,15 @@ innodb_flush_log_at_trx_commit = 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 innodb_io_capacity = 200
@@ -667,10 +1051,28 @@ innodb_io_capacity = 200
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MariaDB also defaults to InnoDB for transactional tables
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB also defaults to InnoDB for transactional tables
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -701,10 +1103,28 @@ MariaDB's Aria engine (fork of MyISAM):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Create Aria table (MariaDB only)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create Aria table (MariaDB only)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -735,10 +1155,28 @@ CREATE TABLE analytics_events (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 event_id BIGINT AUTO_INCREMENT,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -769,10 +1207,28 @@ user_id INT NOT NULL,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 event_type VARCHAR(50),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -803,10 +1259,28 @@ event_data JSON,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -837,10 +1311,28 @@ PRIMARY KEY (event_id),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 INDEX idx_user (user_id),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -871,6 +1363,15 @@ INDEX idx_type (event_type)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ) ENGINE=Aria TRANSACTIONAL=1 PAGE_CHECKSUM=1;
@@ -888,31 +1389,6 @@ INDEX idx_type (event_type)
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- Aria advantages:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead
-
-  
-  
-  
-  
   
   
   
@@ -924,8 +1400,17 @@ INDEX idx_type (event_type)
   
 
 
-\\\\\\\\\\\\\\\\-- 2. Better performance for read-heavy analytics workloads
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Aria advantages:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -941,7 +1426,7 @@ INDEX idx_type (event_type)
   
 
 
-\\\\\\\\\\\\\\\\-- 3. Lower memory footprint for large tables
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 1. Crash-safe (unlike MyISAM) without full InnoDB overhead
 
   
   
@@ -952,14 +1437,6 @@ INDEX idx_type (event_type)
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- 4. Supports FULLTEXT indexes
-
   
   
   
@@ -975,7 +1452,7 @@ INDEX idx_type (event_type)
   
 
 
-\\\\\\\\\\\\\\\\-- MariaDB: ColumnStore for analytical queries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 2. Better performance for read-heavy analytics workloads
 
   
   
@@ -986,14 +1463,6 @@ INDEX idx_type (event_type)
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Install ColumnStore for columnar storage
-
   
   
   
@@ -1009,7 +1478,7 @@ INDEX idx_type (event_type)
   
 
 
-\\\\\\\\\\\\\\\\-- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3. Lower memory footprint for large tables
 
   
   
@@ -1024,10 +1493,132 @@ INDEX idx_type (event_type)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Optimized for large-scale aggregations
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 4. Supports FULLTEXT indexes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB: ColumnStore for analytical queries
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install ColumnStore for columnar storage
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CREATE TABLE sales_analytics (...) ENGINE=ColumnStore;
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optimized for large-scale aggregations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1058,6 +1649,15 @@ INDEX idx_type (event_type)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Common Features (Both)
@@ -1075,14 +1675,6 @@ INDEX idx_type (event_type)
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- Both MySQL 8.x and MariaDB 11.x support:
-
-  
-  
-  
-  
   
   
   
@@ -1094,8 +1686,43 @@ INDEX idx_type (event_type)
   
 
 
-\\\\\\\\\\\\\\\\-- Common Table Expressions (CTE)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Both MySQL 8.x and MariaDB 11.x support:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Common Table Expressions (CTE)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1126,10 +1753,28 @@ WITH RECURSIVE org_tree AS (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT id, name, manager_id, 1 AS level
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1160,10 +1805,28 @@ FROM employees WHERE manager_id IS NULL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 UNION ALL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1194,10 +1857,28 @@ SELECT e.id, e.name, e.manager_id, ot.level + 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM employees e
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1228,10 +1909,28 @@ JOIN org_tree ot ON e.manager_id = ot.id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1262,10 +1961,28 @@ SELECT * FROM org_tree ORDER BY level, name;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Window functions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Window functions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1296,10 +2013,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 department,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1330,10 +2065,28 @@ employee_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 salary,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1364,10 +2117,28 @@ RANK() OVER (PARTITION BY department ORDER BY salary DESC) as rank,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AVG(salary) OVER (PARTITION BY department) as dept_avg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1398,10 +2169,28 @@ FROM employees;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- JSON functions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- JSON functions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1432,10 +2221,28 @@ SELECT JSON_EXTRACT(data, '$.address.city') as city
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM users WHERE JSON_CONTAINS(data, '{"active": true}');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1466,10 +2273,28 @@ FROM users WHERE JSON_CONTAINS(data, '{"active": true}');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Temporal tables (system-versioned)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Temporal tables (system-versioned)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1500,10 +2325,28 @@ CREATE TABLE customer_audit (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id INT PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1534,10 +2377,28 @@ name VARCHAR(100),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 email VARCHAR(200),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1568,10 +2429,28 @@ credit_limit DECIMAL(10,2),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Automatic versioning
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Automatic versioning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1602,10 +2481,28 @@ ROW_START TIMESTAMP(6) GENERATED ALWAYS AS ROW START,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ROW_END TIMESTAMP(6) GENERATED ALWAYS AS ROW END,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1636,6 +2533,15 @@ PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ) WITH SYSTEM VERSIONING;
@@ -1653,10 +2559,28 @@ PERIOD FOR SYSTEM_TIME (ROW_START, ROW_END)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Query historical state
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query historical state
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1687,10 +2611,28 @@ SELECT * FROM customer_audit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FOR SYSTEM_TIME AS OF '2026-01-15 10:00:00'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1721,10 +2663,28 @@ WHERE id = 42;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Dynamic columns (schema-less within column)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Dynamic columns (schema-less within column)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1755,10 +2715,28 @@ CREATE TABLE product_metadata (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 product_id INT PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1789,10 +2767,28 @@ attributes BLOB -- Dynamic columns
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1823,10 +2819,28 @@ INSERT INTO product_metadata VALUES (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 1,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1857,10 +2871,28 @@ COLUMN_CREATE('color', 'red', 'weight', 150, 'material', 'steel')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1891,10 +2923,28 @@ SELECT COLUMN_GET(attributes, 'weight' AS INT) as weight
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM product_metadata WHERE product_id = 1;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1925,10 +2975,28 @@ FROM product_metadata WHERE product_id = 1;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MySQL 8.4: Histogram-based optimizer stats
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL 8.4: Histogram-based optimizer stats
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1959,10 +3027,28 @@ ANALYZE TABLE orders UPDATE HISTOGRAM ON status, customer_id;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MySQL: Invisible indexes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Invisible indexes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1993,14 +3079,6 @@ ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- Test query performance without removing the index
-
-  
-  
-  
-  
   
   
   
@@ -2012,8 +3090,43 @@ ALTER TABLE orders ALTER INDEX idx_order_date INVISIBLE;
   
 
 
-\\\\\\\\\\\\\\\\-- MySQL: VECTOR type (MySQL 9.0+)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Test query performance without removing the index
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: VECTOR type (MySQL 9.0+)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2044,10 +3157,28 @@ CREATE TABLE embeddings (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id INT PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2078,10 +3209,28 @@ embedding VECTOR(1536)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2112,10 +3261,28 @@ CREATE VECTOR INDEX idx_embed ON embeddings ((VECTOR_DISTANCE(embedding, '[...]'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- MySQL: Resource groups
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Resource groups
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2146,10 +3313,28 @@ CREATE RESOURCE GROUP reporting_group
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TYPE = USER
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2180,10 +3365,28 @@ VCPU = 2-3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 THREAD_PRIORITY = 5;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2214,10 +3417,28 @@ SET RESOURCE GROUP reporting_group;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Limit analytics queries to specific CPU cores
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Limit analytics queries to specific CPU cores
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2248,31 +3469,6 @@ SET RESOURCE GROUP reporting_group;
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- Benchmark: Concurrent OLTP workload
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Similar performance for basic queries
-
-  
-  
-  
-  
   
   
   
@@ -2284,8 +3480,17 @@ SET RESOURCE GROUP reporting_group;
   
 
 
-\\\\\\\\\\\\\\\\-- MariaDB thread pool (default in 11.x)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Benchmark: Concurrent OLTP workload
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2301,8 +3506,69 @@ SET RESOURCE GROUP reporting_group;
   
 
 
-\\\\\\\\\\\\\\\\-- Better scalability for high-connection workloads
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Similar performance for basic queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB thread pool (default in 11.x)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Better scalability for high-connection workloads
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2333,10 +3599,28 @@ thread_pool_size = 16
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 thread_pool_max_threads = 500
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2367,14 +3651,6 @@ thread_pool_idle_timeout = 60
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- MySQL: Connection handling
-
-  
-  
-  
-  
   
   
   
@@ -2386,7 +3662,7 @@ thread_pool_idle_timeout = 60
   
 
 
-\\\\\\\\\\\\\\\\-- Dedicated thread per connection (default)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Connection handling
 
   
   
@@ -2401,10 +3677,54 @@ thread_pool_idle_timeout = 60
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Or Thread Pool plugin (Enterprise only)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Dedicated thread per connection (default)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or Thread Pool plugin (Enterprise only)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2435,31 +3755,6 @@ thread_handling = one-thread-per-connection
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- MariaDB includes thread pool free (MySQL charges for it)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\-- Query optimizer differences:
-
-  
-  
-  
-  
   
   
   
@@ -2471,8 +3766,17 @@ thread_handling = one-thread-per-connection
   
 
 
-\\\\\\\\\\\\\\\\-- MySQL 8.4: Cost-based, uses histograms
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB includes thread pool free (MySQL charges for it)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2488,7 +3792,7 @@ thread_handling = one-thread-per-connection
   
 
 
-\\\\\\\\\\\\\\\\-- MariaDB 11.x: Cost-based with table statistics feedback loop
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query optimizer differences:
 
   
   
@@ -2503,10 +3807,80 @@ thread_handling = one-thread-per-connection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- EXPLAIN output differences
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL 8.4: Cost-based, uses histograms
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB 11.x: Cost-based with table statistics feedback loop
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- EXPLAIN output differences
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2537,14 +3911,6 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
-
-
-\\\\\\\\\\\\\\\\-- MySQL: JSON plan with cost breakdown
-
-  
-  
-  
-  
   
   
   
@@ -2556,8 +3922,43 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
 
 
-\\\\\\\\\\\\\\\\-- MariaDB: JSON plan with optimization trace
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: JSON plan with cost breakdown
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MariaDB: JSON plan with optimization trace
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2588,10 +3989,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Application Compatibility
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2622,10 +4041,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2656,10 +4093,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Data types | 100% compatible (basic) | +Dynamic columns, +INET6 |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2690,10 +4145,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Triggers | Compatible | Compatible |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2724,10 +4197,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | JSON | Native type | LONGTEXT + JSON functions |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2758,10 +4249,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # MariaDB as replica of MySQL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2792,10 +4301,28 @@ EXPLAIN FORMAT=JSON SELECT * FROM orders WHERE status = 'pending';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 server-id = 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2826,10 +4353,28 @@ replicate-do-db = production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 binlog_format = ROW
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2860,6 +4405,15 @@ slave_parallel_threads = 4
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Known limitations:
@@ -2877,14 +4431,6 @@ slave_parallel_threads = 4
   
   
   
-
-
-# \\\\\\\\- GTID formats differ (MariaDB uses own format)
-
-  
-  
-  
-  
   
   
   
@@ -2896,7 +4442,7 @@ slave_parallel_threads = 4
   
 
 
-# \\\\\\\\- Use binlog_checksum = NONE for cross-compatibility
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- GTID formats differ (MariaDB uses own format)
 
   
   
@@ -2911,10 +4457,54 @@ slave_parallel_threads = 4
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\- Some DDL may not replicate correctly
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use binlog_checksum = NONE for cross-compatibility
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Some DDL may not replicate correctly
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2945,10 +4535,28 @@ slave_parallel_threads = 4
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Option 1: Logical dump (most compatible)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2979,10 +4587,28 @@ mysqldump --compatible=ansi --skip-definer \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--routines --triggers --events \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--routines --triggers --events \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3013,10 +4639,28 @@ production_db > backup.sql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Option 2: Percona XtraBackup (physical)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3047,6 +4691,15 @@ xtrabackup --backup --target-dir=/backup/mysql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Option 3: Replication-based (zero-downtime)
@@ -3064,31 +4717,6 @@ xtrabackup --backup --target-dir=/backup/mysql
   
   
   
-
-
-# 1\\\\\\\\. Set up MySQL as master
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# 2\\\\\\\\. Configure MariaDB as replica
-
-  
-  
-  
-  
   
   
   
@@ -3100,8 +4728,17 @@ xtrabackup --backup --target-dir=/backup/mysql
   
 
 
-# 3\\\\\\\\. Verify data consistency
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set up MySQL as master
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3117,8 +4754,69 @@ xtrabackup --backup --target-dir=/backup/mysql
   
 
 
-# 4\\\\\\\\. Promote MariaDB to master
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Configure MariaDB as replica
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data consistency
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promote MariaDB to master
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3149,10 +4847,28 @@ xtrabackup --backup --target-dir=/backup/mysql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Choose MySQL** if you rely on Oracle ecosystem compatibility, need MySQL HeatWave for analytics, require MySQL Enterprise support, or need the VECTOR data type for AI/ML embeddings.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3177,10 +4893,28 @@ xtrabackup --backup --target-dir=/backup/mysql
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Stay on current** if you already run either in production without migration pain; the differences are rarely worth a migration for existing deployments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

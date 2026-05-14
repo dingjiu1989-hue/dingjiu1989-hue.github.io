@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/asynchronous-communicatio
   
 
 
+# Asynchronous Communication in Distributed Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Asynchronous Communication in Distributed Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Asynchronous Communication in Distributed Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Message brokers like RabbitMQ, Amazon SQS, and ActiveMQ provide reliable point-t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Event buses (Kafka, Amazon Kinesis, Pulsar) follow a publish-subscribe model where messages are organized into topics or streams. Multiple consumer groups can independently read the same event stream at their own pace. Events persist for a configurable retention period, allowing new consumers to replay historical data. This makes event buses suitable for event sourcing, stream processing, and data integration patterns where multiple consumers derive different value from the same events. Kafka's partitioned log model provides ordering guarantees within a partition and horizontal scalability. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Brokerless messaging (NATS, ZeroMQ) eliminates the intermediary. Producers and c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Reliability guarantees form a spectrum. At-most-once delivery prioritizes speed over reliability — the message is sent once and not retried regardless of outcome. At-least-once delivery retries until acknowledgment, potentially delivering duplicates. Exactly-once delivery requires end-to-end mechanisms: transactional producers, idempotent consumers, and exactly-once semantics in the broker. True exactly-once is exceptionally difficult across distributed boundaries and is often approximated through idempotent consumers rather than guaranteed by the messaging system. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,6 +215,15 @@ Ordering guarantees are similarly nuanced. A single queue or partition maintains
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Backpressure handling prevents producers from overwhelming consumers. Buffering in the broker provides limited protection, but sustained overload requires active backpressure. Kafka uses consumer lag as a backpressure signal. RabbitMQ uses credit flow. Applications should monitor consumer lag and implement circuit breakers to protect consumers from overload cascades. 
@@ -121,10 +235,28 @@ Backpressure handling prevents producers from overwhelming consumers. Buffering 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Message schema evolution is a practical concern often overlooked. Messages outlive their producers and consumers. Schema registries (Confluent Schema Registry, Apicurio) enforce compatibility rules — backward, forward, or full — ensuring that producers and consumers can evolve independently. Protocol Buffers, Avro, and JSON Schema are common schema formats. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

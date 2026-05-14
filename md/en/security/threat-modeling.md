@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-modeling.html
   
 
 
+# Threat Modeling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Modeling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Threat Modeling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Threat Model? 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Threat modeling identifies potential security issues during design, when they ar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 STRIDE Methodology 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Microsoft's STRIDE categorizes threats:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -116,10 +221,28 @@ Microsoft's STRIDE categorizes threats:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def analyze_with_stride(component, data_flow):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -144,10 +267,28 @@ threats = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Spoofing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -172,10 +313,28 @@ if not component.get("authentication"):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 threats.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -200,10 +359,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "threat": f"Attacker could impersonate {component['name']}",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +405,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -256,6 +451,15 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if not data_flow.get("integrity_check"):
@@ -270,10 +474,28 @@ if not data_flow.get("integrity_check"):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 threats.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -298,10 +520,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "threat": f"Data in {data_flow['name']} could be modified",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -326,10 +566,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -354,10 +612,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if not data_flow.get("encryption"):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -382,10 +658,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "category": "Information Disclosure",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -410,10 +704,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "mitigation": "Encrypt data in transit with TLS"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -438,10 +750,28 @@ threats.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return threats
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -463,10 +793,28 @@ DREAD Risk Rating
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DREAD helps prioritize threats: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -491,10 +839,28 @@ def dread_rating(threat):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scores = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -519,10 +885,28 @@ scores = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "reproducibility": threat["reproducibility"], # 1-10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -547,10 +931,28 @@ scores = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "affected_users": threat["affected_users"], # 1-10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -575,10 +977,28 @@ scores = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -603,10 +1023,28 @@ total = sum(scores.values())
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rating = total / 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -631,10 +1069,28 @@ if rating >= 7:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "Critical"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -659,10 +1115,28 @@ elif rating >= 4:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "High"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -687,10 +1161,28 @@ elif rating >= 2:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "Medium"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1207,28 @@ else:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "Low"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -740,10 +1250,28 @@ PASTA Methodology
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Process for Attack Simulation and Threat Analysis (PASTA) has seven stages: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -768,10 +1296,28 @@ pasta_stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 1: "Define business and security objectives"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -796,10 +1342,28 @@ pasta_stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 3: "Application decomposition"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -824,10 +1388,28 @@ pasta_stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 5: "Vulnerability analysis"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -852,10 +1434,28 @@ pasta_stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 7: "Risk and impact analysis"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -880,11 +1480,6 @@ stage_4_threat_analysis:
   
   
   
-
-
-\\\\\\\\- technique: "Create threat tree for each asset"
-
-  
   
   
   
@@ -896,8 +1491,40 @@ stage_4_threat_analysis:
   
 
 
-\\\\\\\\- example:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technique: "Create threat tree for each asset"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- example:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -922,6 +1549,15 @@ asset: "User database"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 threats:
@@ -936,25 +1572,6 @@ threats:
   
   
   
-
-
-\\\\\\\\- "SQL injection via search endpoint"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- "Insider threat with direct DB access"
-
-  
   
   
   
@@ -966,8 +1583,63 @@ threats:
   
 
 
-\\\\\\\\- "Unencrypted backup compromise"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "SQL injection via search endpoint"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Insider threat with direct DB access"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Unencrypted backup compromise"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -989,10 +1661,28 @@ Attack Trees
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Model attacker goals and paths: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1017,10 +1707,28 @@ class AttackTreeNode:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, name, description, children=None):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1045,10 +1753,28 @@ self.name = name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.description = description
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1073,10 +1799,28 @@ self.children = children or []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.mitigations = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1101,6 +1845,15 @@ def add_child(self, node):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.children.append(node)
@@ -1115,10 +1868,28 @@ self.children.append(node)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return self
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1143,10 +1914,28 @@ def add_mitigation(self, mitigation):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.mitigations.append(mitigation)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1171,10 +1960,28 @@ return self
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Example: Attack tree for credential theft
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1199,10 +2006,28 @@ root = AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Steal User Credentials",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1227,6 +2052,15 @@ root = AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
@@ -1241,10 +2075,28 @@ root = AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 root.add_child(AttackTreeNode(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1269,6 +2121,15 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Send convincing phishing email"
@@ -1283,10 +2144,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ).add_child(AttackTreeNode(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1311,10 +2190,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Create replica of login page"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1339,10 +2236,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 root.add_child(AttackTreeNode(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1367,10 +2282,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Use leaked credentials from other breaches"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1395,10 +2328,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 root.add_child(AttackTreeNode(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1423,10 +2374,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Install malware to capture keystrokes"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1451,10 +2420,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Drive-by download",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1479,10 +2466,28 @@ root.add_child(AttackTreeNode(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1507,10 +2512,28 @@ Threat Modeling Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Microsoft Threat Modeling Tool
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1535,10 +2558,28 @@ Threat Modeling Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # PyTM - Pythonic threat modeling
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1563,10 +2604,28 @@ Threat Modeling Tools
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from pytm import TM, Server, Dataflow, Boundary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2650,28 @@ tm = TM("Web Application")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 internet = Boundary("Internet")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1619,10 +2696,28 @@ web_server = Server("Web Server")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 database = Server("Database")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1647,10 +2742,28 @@ web_server.inBoundary = internet
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 request = Dataflow(web_server, database, "SQL Query")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1675,10 +2788,28 @@ request.protocol = "TCP"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 request.data = "SQL Query"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1703,10 +2834,28 @@ tm.process()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integration with Development 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1731,10 +2880,28 @@ Integration with Development
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 threat_modeling_pipeline:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1759,25 +2926,6 @@ triggers:
   
   
   
-
-
-\\\\\\\\- new_feature_creation
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- architecture_change
-
-  
   
   
   
@@ -1789,8 +2937,63 @@ triggers:
   
 
 
-\\\\\\\\- third_party_integration
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- architecture_change
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- third_party_integration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1815,25 +3018,6 @@ automated_checks:
   
   
   
-
-
-\\\\\\\\- data_flow_diagram_required
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- trust_boundaries_defined
-
-  
   
   
   
@@ -1845,8 +3029,17 @@ automated_checks:
   
 
 
-\\\\\\\\- authentication_documented
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_flow_diagram_required
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1859,8 +3052,63 @@ automated_checks:
   
 
 
-\\\\\\\\- authorization_model_defined
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trust_boundaries_defined
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authentication_documented
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorization_model_defined
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1885,25 +3133,6 @@ review_gates:
   
   
   
-
-
-\\\\\\\\- critical_threats: must_have_mitigation
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- high_threats: must_have_mitigation_or_acceptance
-
-  
   
   
   
@@ -1915,8 +3144,63 @@ review_gates:
   
 
 
-\\\\\\\\- medium_threats: reviewed_and_documented
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical_threats: must_have_mitigation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high_threats: must_have_mitigation_or_acceptance
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium_threats: reviewed_and_documented
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,6 +3215,15 @@ review_gates:
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

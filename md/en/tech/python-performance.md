@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/python-performance.html
   
   
   
+  
+  
+  
+
+
+# Python Performance Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Python Performance Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Python Performance Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Python's performance is often criticized, but the ecosystem offers multiple strategies to dramatically improve execution speed. This article explores the major performance optimization approaches: alternative runtimes, just-in-time compilation, type-annotated extensions, async programming, and profiling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Python's performance is often criticized, but the ecosystem offers multiple stra
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PyPy is a JIT-compiled Python runtime that can significantly outperform CPython for pure Python code. It works best for long-running processes where the JIT compiler can warm up and optimize hot code paths. Numerical computations, text processing, and algorithm-heavy code often runs 2-10x faster.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ PyPy has limitations. C extension compatibility is incomplete—libraries like N
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Cython
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Cython compiles Python code with optional type annotations to C extensions. Addi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cython works within the standard CPython environment. You write Python code, add type declarations (`cdef int x`), compile to a `.so` file, and import it normally. Cython is widely used in scientific computing—NumPy and Pandas use it extensively. The learning curve is moderate, and the performance gains for hot loops can be 10-100x.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Cython works within the standard CPython environment. You write Python code, add
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Numba is a JIT compiler for numerical Python. It reads Python bytecode, applies type inference, and generates optimized machine code using LLVM. A `@jit` decorator compiles a function for high-performance execution. Numba integrates with NumPy arrays for vectorized operations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Numba excels at numerical computations: array operations, mathematical simulatio
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Async Programming
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Python's async/await concurrency model, built on `asyncio`, improves I/O-bound p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Async programming does not make Python's CPU performance faster—it improves throughput by overlapping I/O operations. A web server using async handlers can serve hundreds of concurrent connections on a single thread, where a synchronous server would need hundreds of threads.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Async programming does not make Python's CPU performance faster—it improves th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Optimization without profiling is guesswork. Python's `cProfile` module measures function-level execution time, identifying which functions consume the most time. `line_profiler` provides line-by-line timing for deeper analysis. `memory_profiler` tracks memory usage over time.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Profiling should guide optimization effort. Focus on the functions that consume 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  C Extensions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ For the most demanding computations, C extensions provide maximum performance. W
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 C extensions are the most complex approach and should be reserved for the hottest code paths. A common pattern is to write the application in Python, profile to find bottlenecks, and rewrite only the bottleneck functions as C extensions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,6 +667,15 @@ C extensions are the most complex approach and should be reserved for the hottes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A pragmatic performance strategy starts with profiling to identify actual bottlenecks. Apply the simplest optimizations first: use built-in functions and list comprehensions, avoid attribute lookups in loops, and use local variable bindings. Then consider async for I/O-bound work.
@@ -435,10 +693,28 @@ A pragmatic performance strategy starts with profiling to identify actual bottle
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For CPU-bound Python code, Numba offers the easiest path to significant gains. Cython provides more control and better C integration. PyPy gives an easy global speedup for compatible code. The key is measuring before and after each optimization to ensure changes actually improve performance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

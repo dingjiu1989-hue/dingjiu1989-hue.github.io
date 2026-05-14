@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/encryption-at-rest.html
   
   
   
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Encryption at Rest Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 What Is Encryption at Rest? 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Encryption at rest protects data stored on disk or in databases by making it unr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encryption Layers 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Encryption Layers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Disk-Level Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ LUKS (Linux Unified Key Setup)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Encrypt a disk with LUKS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ sudo cryptsetup luksFormat /dev/sdb1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sudo cryptsetup luksOpen /dev/sdb1 encrypted_volume
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ sudo mkfs.ext4 /dev/mapper/encrypted_volume
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sudo mount /dev/mapper/encrypted_volume /mnt/secure
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ AWS EBS Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Enable default EBS encryption
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ aws ec2 enable-ebs-encryption-by-default --region us-east-1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create an encrypted volume with a custom KMS key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,31 +563,6 @@ aws ec2 create-volume \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100 \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-east-1 \
-
-  
-  
-  
-  
   
   
   
@@ -386,8 +574,17 @@ aws ec2 create-volume \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--availability-zone us-east-1a \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,7 +600,7 @@ aws ec2 create-volume \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--encrypted \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-east-1 \
 
   
   
@@ -418,10 +615,80 @@ aws ec2 create-volume \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--kms-key-id alias/my-app-key
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--availability-zone us-east-1a \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--encrypted \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--kms-key-id alias/my-app-key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ GCE Persistent Disk Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Google Cloud uses AES-256 by default (CSEK for customer-managed)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,6 +771,15 @@ GCE Persistent Disk Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud compute disks create secure-disk \
@@ -503,14 +797,6 @@ gcloud compute disks create secure-disk \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100GB \
-
-  
-  
-  
-  
   
   
   
@@ -522,7 +808,7 @@ gcloud compute disks create secure-disk \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--size 100GB \
 
   
   
@@ -537,10 +823,54 @@ gcloud compute disks create secure-disk \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,14 +901,6 @@ gcloud compute instances attach-disk my-instance \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--disk secure-disk \
-
-  
-  
-  
-  
   
   
   
@@ -590,7 +912,7 @@ gcloud compute instances attach-disk my-instance \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--disk secure-disk \
 
   
   
@@ -605,10 +927,54 @@ gcloud compute instances attach-disk my-instance \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--zone us-central1-a \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--csek-key-file ./key.json
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,6 +1005,15 @@ Database Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transparent Data Encryption (TDE) 
@@ -656,10 +1031,28 @@ Transparent Data Encryption (TDE)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pg_tde extension
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pg_tde extension
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ CREATE EXTENSION pg_tde;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Initialize encryption key
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Initialize encryption key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,6 +1135,15 @@ SELECT pg_tde_add_key_provider_file('file-vault', '/etc/postgresql/key.file');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT pg_tde_set_key('my-db-key', 'file-vault');
@@ -741,10 +1161,28 @@ SELECT pg_tde_set_key('my-db-key', 'file-vault');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt a table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt a table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ CREATE TABLE users (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id SERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ email TEXT,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ssn TEXT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ ssn TEXT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or encrypt existing table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or encrypt existing table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,6 +1369,15 @@ ALTER TABLE users SET ACCESS METHOD TDE;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Column-Level Encryption 
@@ -894,10 +1395,28 @@ Column-Level Encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pgcrypto
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL with pgcrypto
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ CREATE EXTENSION pgcrypto;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt specific columns
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Encrypt specific columns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ CREATE TABLE patients (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id SERIAL PRIMARY KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ name TEXT NOT NULL,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ssn BYTEA, -- Encrypted
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ diagnosis BYTEA, -- Encrypted
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 created_at TIMESTAMP DEFAULT NOW()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ created_at TIMESTAMP DEFAULT NOW()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Insert with encryption
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Insert with encryption
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ INSERT INTO patients (name, ssn, diagnosis)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VALUES (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ VALUES (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pgp_sym_encrypt('123-45-6789', 'encryption-key'),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,6 +1811,15 @@ pgp_sym_encrypt('Diabetes Type 2', 'encryption-key')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 );
@@ -1183,10 +1837,28 @@ pgp_sym_encrypt('Diabetes Type 2', 'encryption-key')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Decrypt when needed (with proper access control)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Decrypt when needed (with proper access control)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ SELECT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ pgp_sym_decrypt(ssn, 'encryption-key') AS ssn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM patients
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ WHERE id = 1;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MongoDB Field-Level Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ const client = new MongoClient(uri, {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 autoEncryption: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ keyVaultNamespace: 'encryption.__keyVault',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kmsProviders: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ aws: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 accessKeyId: process.env.AWS_ACCESS_KEY,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,6 +2201,15 @@ secretAccessKey: process.env.AWS_SECRET_KEY
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1438,10 +2227,28 @@ secretAccessKey: process.env.AWS_SECRET_KEY
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ schemaMap: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'test.users': {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ bsonType: 'object',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 encryptMetadata: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ keyId: [UUID('...')],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 algorithm: 'AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ algorithm: 'AEAD_AES_256_CBC_HMAC_SHA_512-Deterministic'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 properties: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,6 +2487,15 @@ ssn: { encrypt: { bsonType: 'string' } },
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 creditCard: { encrypt: { bsonType: 'string' } }
@@ -1625,31 +2513,6 @@ creditCard: { encrypt: { bsonType: 'string' } }
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
-  
-  
-  
   
   
   
@@ -1676,10 +2539,80 @@ creditCard: { encrypt: { bsonType: 'string' } }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ creditCard: { encrypt: { bsonType: 'string' } }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Application-Level Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ For end-to-end protection where even the database administrator should not see p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from cryptography.fernet import Fernet
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ class FieldEncryptor:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, key):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ self.cipher = Fernet(key)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def encrypt_field(self, plaintext):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ def encrypt_field(self, plaintext):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return self.cipher.encrypt(plaintext.encode())
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ def decrypt_field(self, ciphertext):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Decrypt a single field."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ return self.cipher.decrypt(ciphertext).decode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Usage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ key = Fernet.generate_key() # Store this securely in a vault
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 encryptor = FieldEncryptor(key)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ user_data = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'email': 'user@example.com',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,10 +3111,28 @@ user_data = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'medical_record': encryptor.encrypt_field('Sensitive diagnosis data')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2050,10 +3163,28 @@ user_data = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Store user_data in database
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ db.users.insert_one(user_data)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key Management 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3267,28 @@ Key Hierarchy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Master Key (HSM or KMS)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3319,28 @@ Master Key (HSM or KMS)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ├── Key Encryption Key (KEK)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,10 +3371,28 @@ Master Key (HSM or KMS)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 └── Key Encryption Key (KEK)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2220,10 +3423,28 @@ Master Key (HSM or KMS)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AWS KMS 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2254,10 +3475,28 @@ import boto3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kms = boto3.client('kms')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,10 +3527,28 @@ def create_encryption_key():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response = kms.create_key(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2322,10 +3579,28 @@ Description='Application data encryption key',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 KeyUsage='ENCRYPT_DECRYPT',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2356,10 +3631,28 @@ CustomerMasterKeySpec='SYMMETRIC_DEFAULT'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2390,10 +3683,28 @@ return response['KeyMetadata']['KeyId']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def encrypt_data(plaintext, key_id):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ response = kms.encrypt(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 KeyId=key_id,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,10 +3787,28 @@ Plaintext=plaintext.encode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2492,10 +3839,28 @@ return response['CiphertextBlob']
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def decrypt_data(ciphertext):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,10 +3891,28 @@ response = kms.decrypt(CiphertextBlob=ciphertext)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return response['Plaintext'].decode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ Key Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Key Type | Rotation Frequency | Method | |----------|-------------------|--------| | Master key | Annually (manual) | Create new, re-wrap DEKs | | Data encryption key | Per-encryption | Generate new per operation | | Database password | 90 days | Automated via secrets manager | | TLS certificate | 90 days | cert-manager / ACM | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,6 +3995,15 @@ Compliance Requirements
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Standard | Encryption Requirement | |----------|----------------------| | PCI DSS 4.0 | All cardholder data encrypted at rest | | HIPAA | ePHI encrypted at rest | | SOC 2 | Encryption controls for sensitive data | | GDPR | Appropriate technical measures (encryption) | | FedRAMP | FIPS 140-2 validated encryption | 
@@ -2611,10 +4021,28 @@ Compliance Requirements
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/artifact-management.html
   
   
   
+  
+  
+  
+
+
+# Artifact Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Artifact Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Artifact Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Artifact management is the practice of storing, versioning, and distributing build outputs. Artifacts include compiled binaries, container images, library packages, deployment configurations, and any other output from the build process. Effective artifact management is essential for reproducible deployments, dependency management, and auditability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Artifact management is the practice of storing, versioning, and distributing bui
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 An artifact is any file produced during the build process that is needed for deployment or consumed by other builds. Common artifact types include Docker images, JAR/WAR files, npm packages, Python wheels, compiled binaries, and Terraform plan files.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Artifacts should be immutable—once published, they should never be modified. A
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Docker Registries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Docker registries store and distribute container images. Docker Hub, Amazon ECR,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Image tagging conventions matter. The `latest` tag is ambiguous and should not be used for production deployments. Immutable tags (commit hash, semantic version, or CI build number) provide traceability. A Docker image tagged with the Git commit SHA can be traced back to the exact source code and CI build that produced it.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Registry cleanup policies prevent storage costs from growing unboundedly. Retent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Package Registries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Package registries store language-specific packages. npm registry for JavaScript
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Package versioning follows semantic versioning. Each published version is immutable. If a bug is found, a new version is published rather than modifying the existing version. This ensures that projects depending on a specific version are not broken by unannounced changes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Private registries enable internal library distribution. An organization can pub
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Versioning Strategies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Artifact versioning strategies connect the artifact to its source. Semantic vers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A common approach combines semantic versioning for public packages (communicating compatibility) with commit hash tags for deployment artifacts (providing traceability). Docker images might have both a semantic version tag (`1.2.3`) and a commit hash tag (`abc123-def`).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Version metadata should be embedded in the artifact. A compiled binary can inclu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Lifecycle Policies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Artifacts have a lifecycle: publish, promote, deprecate, delete. Promotion moves
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Deprecation marks an artifact as no longer recommended for new use. Existing consumers continue working. Deletion removes the artifact entirely. Deletion policies should account for downstream consumers who may still need the artifact.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Immutable artifacts contradict the need for deletion. A better approach is to ex
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Artifact Repositories
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ An artifact repository (like JFrog Artifactory, Sonatype Nexus, or AWS CodeArtif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Repository managers improve reliability and speed. By caching external packages, they reduce dependency on external services during builds. If the external registry is unavailable, the cached version is still accessible. This is critical for CI/CD pipeline reliability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,6 +771,15 @@ Repository managers improve reliability and speed. By caching external packages,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use immutable artifacts with unique versions. Tag artifacts with build metadata (commit SHA, build number, build date). Store artifacts in a registry with access controls and audit logging. Implement retention policies to manage storage costs. Use an artifact repository for caching and unified management.
@@ -503,10 +797,28 @@ Use immutable artifacts with unique versions. Tag artifacts with build metadata 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Verify artifact integrity with checksums. Automate artifact promotion through CI/CD pipelines. Monitor registry usage for anomalies. Clean up unused artifacts regularly. Maintain artifact provenance—the ability to trace an artifact back to its source code and build configuration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

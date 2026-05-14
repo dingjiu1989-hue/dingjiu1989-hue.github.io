@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/ci-cd-tools-comparison.html
   
 
 
+# CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Continuous integration and delivery pipelines are the backbone of modern softwar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Pipeline Syntax Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Continuous integration and delivery pipelines are the backbone of modern softwar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Actions uses event-driven YAML with a flat step structure:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ name: CI
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 on:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ push:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 branches: [main]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ pull_request:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 branches: [main]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ jobs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,6 +485,15 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 strategy:
@@ -316,10 +511,28 @@ strategy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 matrix:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,6 +563,15 @@ node-version: [18, 20]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -367,14 +589,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -386,8 +600,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -405,6 +654,15 @@ steps:
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,14 +693,6 @@ node-version: ${{ matrix.node-version }}
   
   
   
-
-
-\\\\\\\\\\\\\\\\- run: npm ci
-
-  
-  
-  
-  
   
   
   
@@ -454,7 +704,7 @@ node-version: ${{ matrix.node-version }}
   
 
 
-\\\\\\\\\\\\\\\\- run: npm test
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm ci
 
   
   
@@ -469,10 +719,54 @@ node-version: ${{ matrix.node-version }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: actions/upload-artifact@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/upload-artifact@v4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ if: always()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ name: test-results
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 path: test-results.xml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ path: test-results.xml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitLab CI uses a stage-based pipeline model:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,14 +953,6 @@ stages:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- build
-
-  
-  
-  
-  
   
   
   
@@ -624,7 +964,7 @@ stages:
   
 
 
-\\\\\\\\\\\\\\\\- test
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build
 
   
   
@@ -639,10 +979,54 @@ stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- deploy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,6 +1057,15 @@ variables:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DOCKER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
@@ -690,10 +1083,28 @@ DOCKER_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 build:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ stage: build
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: node:20
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,14 +1187,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- npm ci
-
-  
-  
-  
-  
   
   
   
@@ -777,8 +1198,43 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\- npm run build
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm ci
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm run build
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -796,6 +1252,15 @@ script:
 
 artifacts:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- dist/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dist/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ expire_in: 1 hour
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ stage: test
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: node:20
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,14 +1447,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- npm ci
-
-  
-  
-  
-  
   
   
   
@@ -947,7 +1458,7 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\- npm run test:ci
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm ci
 
   
   
@@ -962,10 +1473,54 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-coverage: '/Coverage: \d+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.\d+%/'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm run test:ci
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+coverage: '/Coverage: \d+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.\d+%/'
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ artifacts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 reports:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ junit: test-results.xml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deploy:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ stage: deploy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image: alpine:latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,14 +1707,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- apk add --no-cache aws-cli
-
-  
-  
-  
-  
   
   
   
@@ -1117,8 +1718,43 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\- aws s3 sync dist/ s3://$S3_BUCKET
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apk add --no-cache aws-cli
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- aws s3 sync dist/ s3://$S3_BUCKET
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ only:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- main
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ environment:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ name: production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Jenkins uses a Groovy-based DSL in a Jenkinsfile:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ pipeline {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 agent any
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,6 +1993,15 @@ tools {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nodejs 'node-20'
@@ -1302,10 +2019,28 @@ nodejs 'node-20'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,6 +2071,15 @@ stages {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stage('Build') {
@@ -1353,10 +2097,28 @@ stage('Build') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ sh 'npm ci'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sh 'npm run build'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ sh 'npm run build'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 post {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,6 +2253,15 @@ success {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 archiveArtifacts artifacts: 'dist/**'
@@ -1472,6 +2279,41 @@ archiveArtifacts artifacts: 'dist/**'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1489,6 +2331,15 @@ archiveArtifacts artifacts: 'dist/**'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1502,14 +2353,6 @@ archiveArtifacts artifacts: 'dist/**'
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -1540,10 +2383,28 @@ stage('Test') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 parallel {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,6 +2435,15 @@ stage('Unit') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps { sh 'npm run test:unit' }
@@ -1591,10 +2461,28 @@ steps { sh 'npm run test:unit' }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,6 +2513,15 @@ stage('Integration') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps { sh 'npm run test:integration' }
@@ -1642,10 +2539,28 @@ steps { sh 'npm run test:integration' }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,6 +2591,15 @@ stage('Lint') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps { sh 'npm run lint' }
@@ -1693,6 +2617,15 @@ steps { sh 'npm run lint' }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1710,10 +2643,28 @@ steps { sh 'npm run lint' }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ post {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 always {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,6 +2747,41 @@ junit 'test-results/**/*.xml'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1795,6 +2799,15 @@ junit 'test-results/**/*.xml'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1808,14 +2821,6 @@ junit 'test-results/**/*.xml'
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -1846,10 +2851,28 @@ stage('Deploy') {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 when { branch 'main' }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ steps {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 withAWS(region: 'us-east-1') {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,31 +2955,6 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
-  
-  
-  
   
   
   
@@ -1952,6 +2968,15 @@ sh 'aws s3 sync dist/ s3://my-bucket'
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3007,80 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2016,6 +3111,15 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Capability | GitHub Actions | GitLab CI | Jenkins |
@@ -2033,10 +3137,28 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Custom development | Docker containers, composite actions | Custom images, scripts | Full Groovy/Java |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ sh 'aws s3 sync dist/ s3://my-bucket'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Caching | actions/cache | Built-in cache | Pipeline utility steps |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ GitHub Actions benefits from tight GitHub integration but relies on a third-part
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Hosted vs Self-Hosted
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ GitHub Actions benefits from tight GitHub integration but relies on a third-part
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ GitHub Actions benefits from tight GitHub integration but relies on a third-part
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Self-hosted | Scale sets, auto-scaling | GitLab Runner (K8s, Docker) | Full control, any OS |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ GitHub Actions benefits from tight GitHub integration but relies on a third-part
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Actions offers the most generous hosted runner minutes but restricts macOS to paid plans. GitLab CI's free tier is more limited, making it less suitable for large open-source projects. Jenkins has no hosted offering, requiring infrastructure investment.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ GitHub Actions offers the most generous hosted runner minutes but restricts macO
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: actions.summerwind.dev/v1alpha1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,10 +3553,28 @@ kind: RunnerDeployment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,10 +3605,28 @@ name: custom-runner
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,10 +3657,28 @@ replicas: 2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 template:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2407,10 +3709,28 @@ spec:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 repository: my-org/my-repo
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2441,10 +3761,28 @@ image: summerwind/actions-runner:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2475,10 +3813,28 @@ limits:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cpu: "4"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2509,10 +3865,28 @@ memory: 8Gi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Scalability and Performance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2543,10 +3917,28 @@ memory: 8Gi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2577,10 +3969,28 @@ memory: 8Gi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Pipeline execution time | 6 hours max | Unlimited | Unlimited |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2611,10 +4021,28 @@ memory: 8Gi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Cache replication | Regional | Global with runner | Manual |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2645,10 +4073,28 @@ GitHub Actions enforces a 6-hour limit on individual job execution, which affect
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Migration Paths
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2679,10 +4125,28 @@ GitHub Actions enforces a 6-hour limit on individual job execution, which affect
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # GitHub Actions equivalent in GitLab CI
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2713,10 +4177,28 @@ GitHub Actions enforces a 6-hour limit on individual job execution, which affect
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # GitLab: trigger: push
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2747,6 +4229,15 @@ build:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rules:
@@ -2764,10 +4255,28 @@ rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- if: $CI_PIPELINE_SOURCE == "push"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- if: $CI_PIPELINE_SOURCE == "push"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ script: npm run build
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # GHA: matrix strategy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ script: npm run build
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,6 +4411,15 @@ parallel:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 matrix:
@@ -2883,10 +4437,28 @@ matrix:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- NODE_VERSION: ["18", "20"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- NODE_VERSION: ["18", "20"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2917,14 +4489,6 @@ script:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- nvm use $NODE_VERSION
-
-  
-  
-  
-  
   
   
   
@@ -2936,8 +4500,43 @@ script:
   
 
 
-\\\\\\\\\\\\\\\\- npm test
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nvm use $NODE_VERSION
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- npm test
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2968,10 +4567,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use `actions/github-script` to replicate Jenkins Groovy patterns:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3002,10 +4619,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: actions/github-script@v7
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/github-script@v7
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3036,10 +4671,28 @@ with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 script: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3070,10 +4723,28 @@ const { data: checks } = await github.rest.checks.listForRef({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ...context.repo,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3104,10 +4775,28 @@ ref: context.sha,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3138,10 +4827,28 @@ ref: context.sha,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Market Share Trends
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3172,10 +4879,28 @@ Based on the 2025-2026 Stack Overflow and JetBrains surveys, GitHub Actions has 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Decision Guide
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3203,6 +4928,15 @@ Based on the 2025-2026 Stack Overflow and JetBrains surveys, GitHub Actions has 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Choose GitLab CI** if you need an integrated DevOps platform with built-in registry, security scanning, and unlimited stages.
@@ -3217,10 +4951,28 @@ Based on the 2025-2026 Stack Overflow and JetBrains surveys, GitHub Actions has 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Choose Jenkins** if you require air-gapped deployments, custom plugin development, or have existing pipeline investments that make migration costly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

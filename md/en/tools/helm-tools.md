@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/helm-tools.html
   
 
 
+# Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Tools: Helmfile, helm-docs, helm-secrets, Chart Testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Helm is the standard package manager for Kubernetes, but managing Helm charts at
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Helmfile
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Declarative management of Helm releases across environments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # helmfile.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ repositories:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: bitnami
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: bitnami
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ url: https://charts.bitnami.com/bitnami
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: prometheus-community
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus-community
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ url: https://prometheus-community.github.io/helm-charts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 environments:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,6 +433,15 @@ development:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values:
@@ -282,10 +459,28 @@ values:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- env/development.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- env/development.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,6 +511,15 @@ production:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values:
@@ -333,14 +537,6 @@ values:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- env/production.yaml
-
-  
-  
-  
-  
   
   
   
@@ -352,8 +548,43 @@ values:
   
 
 
-\\\\\\\\\\\\\\\\- env/secrets.yaml # Encrypted values
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- env/production.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- env/secrets.yaml # Encrypted values
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,6 +615,15 @@ releases:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Core infrastructure
@@ -401,10 +641,28 @@ releases:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: prometheus-stack
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prometheus-stack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ namespace: monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chart: prometheus-community/kube-prometheus-stack
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,6 +745,15 @@ version: 62.0.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values:
@@ -486,14 +771,6 @@ values:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- values/prometheus.yaml
-
-  
-  
-  
-  
   
   
   
@@ -505,7 +782,7 @@ values:
   
 
 
-\\\\\\\\\\\\\\\\- {{ env "PROMETHEUS_VALUES" | default "values/prometheus-default.yaml" }}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- values/prometheus.yaml
 
   
   
@@ -520,10 +797,54 @@ values:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: ingress-nginx
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- {{ env "PROMETHEUS_VALUES" | default "values/prometheus-default.yaml" }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: ingress-nginx
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ namespace: ingress
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chart: ingress-nginx/ingress-nginx
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,6 +927,15 @@ version: 4.11.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values:
@@ -605,10 +953,28 @@ values:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- values/ingress-{{ .Environment.Name }}.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- values/ingress-{{ .Environment.Name }}.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ set:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: controller.replicaCount
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: controller.replicaCount
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ value: {{ .Values.ingress.replicas }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 installed: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,6 +1109,15 @@ wait: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Application charts
@@ -724,10 +1135,28 @@ wait: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: my-app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ namespace: {{ .Values.app.namespace }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chart: ./charts/my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,6 +1239,15 @@ version: 0.2.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 values:
@@ -809,10 +1265,28 @@ values:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- values/app-{{ .Environment.Name }}.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- values/app-{{ .Environment.Name }}.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,6 +1369,15 @@ env: {{ .Environment.Name }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hooks:
@@ -894,10 +1395,28 @@ hooks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- events: ["presync", "postsync"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- events: ["presync", "postsync"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ command: "helm test {{ .Release.Name }}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Apply environment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ helmfile -e production apply
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Diff changes before applying
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ helmfile -e development diff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Sync specific releases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ helmfile -e staging -l app=my-app sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Destroy releases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ helmfile -e development destroy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  helm-docs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ Automatically generate README documentation from chart metadata:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 brew install helm-docs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ brew install helm-docs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm-docs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ helm-docs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm-docs --chart-search-root ./charts/my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ helm-docs --chart-search-root ./charts/my-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Number of replicas to run
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Number of replicas to run
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,6 +1967,15 @@ replicaCount: 3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 image:
@@ -1285,10 +1993,28 @@ image:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Container image repository
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Container image repository
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ repository: my-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Image tag
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image tag
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ tag: "latest"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Image pull policy
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Image pull policy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ pullPolicy: Always
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Resource limits and requests
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Resource limits and requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,6 +2201,15 @@ resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 limits:
@@ -1438,10 +2227,28 @@ limits:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- CPU limit
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CPU limit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ cpu: "1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\-- Memory limit
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Memory limit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,6 +2331,15 @@ memory: 512Mi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 requests:
@@ -1523,10 +2357,28 @@ requests:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cpu: 250m
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1560,10 +2412,28 @@ memory: 256Mi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # {{ .Name }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1594,10 +2464,28 @@ memory: 256Mi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Installation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1628,10 +2516,28 @@ helm repo add myrepo https://charts.example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm install myrepo/{{ .Name }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1662,10 +2568,28 @@ helm install myrepo/{{ .Name }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Name | Description | Default |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1696,10 +2620,28 @@ helm install myrepo/{{ .Name }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- range .Values }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1730,10 +2672,28 @@ helm install myrepo/{{ .Name }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- end }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1764,10 +2724,28 @@ helm install myrepo/{{ .Name }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encrypt sensitive values using SOPS with various backends:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1798,10 +2776,28 @@ Encrypt sensitive values using SOPS with various backends:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm plugin install https://github.com/jkroepke/helm-secrets
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1832,10 +2828,28 @@ helm plugin install https://github.com/jkroepke/helm-secrets
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm secrets encrypt secrets.yaml > secrets.enc.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1866,10 +2880,28 @@ helm secrets encrypt secrets.yaml > secrets.enc.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm secrets install my-app ./chart -f secrets.enc.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1900,10 +2932,28 @@ helm secrets install my-app ./chart -f secrets.enc.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # helmfile.yaml references secrets.enc.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1934,10 +2984,28 @@ helmfile -e production apply
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .sops.yaml — SOPS configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1968,10 +3036,28 @@ creation_rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- path_regex: secrets\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path_regex: secrets\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2002,10 +3088,28 @@ age: age1abc123...
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- path_regex: production/.*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path_regex: production/.*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2036,10 +3140,28 @@ pgp: "FINGERPRINT"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 encrypted_regex: "^(password|token|key|secret)$"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2070,10 +3192,28 @@ encrypted_regex: "^(password|token|key|secret)$"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Validate charts in CI pipelines:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2104,6 +3244,15 @@ Validate charts in CI pipelines:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chart-dirs:
@@ -2121,10 +3270,28 @@ chart-dirs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- charts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- charts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2155,10 +3322,28 @@ chart-repos:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- bitnami=https://charts.bitnami.com/bitnami
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- bitnami=https://charts.bitnami.com/bitnami
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2189,10 +3374,28 @@ helm-extra-args: --timeout 600s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 validate-maintainers: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2223,6 +3426,15 @@ validate-maintainers: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lint-conf: |
@@ -2240,14 +3452,6 @@ lint-conf: |
   
   
   
-
-
-\\\\\\\\\\\\\\\\--strict
-
-  
-  
-  
-  
   
   
   
@@ -2259,8 +3463,43 @@ lint-conf: |
   
 
 
-\\\\\\\\\\\\\\\\--namespace default
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--strict
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--namespace default
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2291,10 +3530,28 @@ lint-conf: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # ct install --charts charts/my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2325,10 +3582,28 @@ lint-conf: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Helm Chart CI
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2359,10 +3634,28 @@ on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pull_request:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2393,10 +3686,28 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- "charts/**"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "charts/**"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2427,10 +3738,28 @@ jobs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lint-test:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2461,6 +3790,15 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -2478,14 +3816,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -2497,7 +3827,7 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- uses: helm/chart-testing-action@v2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
   
   
@@ -2512,10 +3842,54 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Lint charts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: helm/chart-testing-action@v2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Lint charts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2546,10 +3920,28 @@ run: ct lint --all --check-version-increment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Create kind cluster
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Create kind cluster
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2580,10 +3972,28 @@ uses: helm/kind-action@v1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Install and test charts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install and test charts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2614,10 +4024,28 @@ run: ct install --all
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Essential Helm CLI Tips
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2648,10 +4076,28 @@ run: ct install --all
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm template my-app ./chart --values values.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2682,10 +4128,28 @@ helm template my-app ./chart --values values.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm install my-app ./chart --dry-run --debug
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2716,10 +4180,28 @@ helm install my-app ./chart --dry-run --debug
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm rollback my-app 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2750,10 +4232,28 @@ helm rollback my-app 2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm get notes my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2784,10 +4284,28 @@ helm get notes my-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm history my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2818,10 +4336,28 @@ helm history my-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm plugin list
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2852,10 +4388,28 @@ helm plugin install https://github.com/databus23/helm-diff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm diff release my-app ./chart
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2886,10 +4440,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Tool | Purpose | Essential For |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2920,10 +4492,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Helmfile | Declarative release management | Managing multiple charts across environments |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2954,10 +4544,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | helm-secrets | Secret encryption | Securely managing sensitive values |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2988,10 +4596,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | helm-diff | Change preview | Reviewing changes before apply |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3022,10 +4648,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Multi-environment deployments**: Helmfile is essential for managing differences across dev, staging, and production.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3050,10 +4694,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Production deployments**: Use helm-secrets with SOPS and age/PGP for encrypted values.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3078,10 +4740,28 @@ helm diff release my-app ./chart
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Review before apply**: Use helm-diff to preview changes without actually applying them.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

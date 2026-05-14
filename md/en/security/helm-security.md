@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/helm-security.html
   
 
 
+# Helm Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Helm Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Helm Security Challenges 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Helm simplifies Kubernetes deployments but introduces security concerns: untrust
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Chart Signing 
@@ -77,10 +155,28 @@ Chart Signing
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sign charts with GPG to verify authenticity: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ Sign charts with GPG to verify authenticity:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gpg --full-generate-key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ gpg --list-secret-keys
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Sign a chart
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ helm package mychart/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm sign mychart-1.0.0.tgz --key "developer@example.com"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ helm sign mychart-1.0.0.tgz --key "developer@example.com"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm verify mychart-1.0.0.tgz
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ helm verify mychart-1.0.0.tgz
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gpg --export developer@example.com > pubkey.asc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,6 +431,15 @@ helm verify mychart-1.0.0.tgz --keyring pubkey.asc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Provenance Files 
@@ -256,10 +451,28 @@ Provenance Files
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Provenance files contain the chart hash and signature: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,10 +497,28 @@ Provenance files contain the chart hash and signature:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -312,10 +543,28 @@ files:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- mychart-1.0.0.tgz
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- mychart-1.0.0.tgz
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -340,10 +589,28 @@ chart: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sha256: a1b2c3d4...
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -368,10 +635,28 @@ signature: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-----BEGIN PGP SIGNATURE-----
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----BEGIN PGP SIGNATURE-----
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -396,10 +681,28 @@ iQEzBAABCAAdFiEE...
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-----END PGP SIGNATURE-----
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----END PGP SIGNATURE-----
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -424,10 +727,28 @@ Automated Verification in CI
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # CI pipeline chart verification
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +773,28 @@ pipeline:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: verify-charts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify-charts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -480,6 +819,15 @@ commands:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Import trusted keys
@@ -494,10 +842,28 @@ commands:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- gpg --import trusted-keys.asc
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- gpg --import trusted-keys.asc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -522,10 +888,28 @@ commands:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- for chart in charts/*.tgz; do
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- for chart in charts/*.tgz; do
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -550,10 +934,28 @@ helm verify "$chart" --keyring trusted-keys.asc || exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 done
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -578,10 +980,28 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- trivy fs charts/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trivy fs charts/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -606,10 +1026,28 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- helm lint charts/*
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- helm lint charts/*
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -634,10 +1072,28 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- pluto detect-files -d charts/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pluto detect-files -d charts/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -659,10 +1115,28 @@ Secrets Management
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Never store secrets in values files: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -687,10 +1161,28 @@ Never store secrets in values files:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiKey: "sk-1234567890"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -715,10 +1207,28 @@ dbPassword: "password123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # GOOD: Reference external secret
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -743,10 +1253,28 @@ apiKey: "{{ .Values.externalSecrets.apiKey }}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dbPassword: "{{ .Values.externalSecrets.dbPassword }}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -771,10 +1299,28 @@ Use external secrets operator:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: external-secrets.io/v1beta1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -799,10 +1345,28 @@ kind: ExternalSecret
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -827,10 +1391,28 @@ name: app-secrets
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -855,10 +1437,28 @@ refreshInterval: 1h
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 secretStoreRef:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -883,10 +1483,28 @@ name: vault-backend
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kind: ClusterSecretStore
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1529,28 @@ target:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: app-secret
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -939,10 +1575,28 @@ data:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- secretKey: api-key
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- secretKey: api-key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -967,10 +1621,28 @@ remoteRef:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 key: secret/data/app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -995,10 +1667,28 @@ property: api-key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- secretKey: db-password
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- secretKey: db-password
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1023,10 +1713,28 @@ remoteRef:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 key: secret/data/app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1051,6 +1759,15 @@ property: db-password
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Values Security 
@@ -1062,10 +1779,28 @@ Values Security
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Validate values with JSON Schema: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1090,10 +1825,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "$schema": "https://json-schema.org/draft-07/schema",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1118,10 +1871,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1146,6 +1917,15 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "object",
@@ -1160,10 +1940,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1188,10 +1986,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "tag": { "type": "string", "pattern": "^[a-zA-Z0-9._-]+$" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1216,10 +2032,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "string",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1244,6 +2078,15 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1258,10 +2101,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1286,10 +2147,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1314,10 +2193,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "type": "object",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1342,10 +2239,28 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,6 +2285,15 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "runAsUser": { "type": "integer", "minimum": 1000 }
@@ -1384,25 +2308,6 @@ Validate values with JSON Schema:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-}
-
-  
   
   
   
@@ -1426,10 +2331,74 @@ Validate values with JSON Schema:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1454,10 +2423,28 @@ RBAC for Helm Operations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: rbac.authorization.k8s.io/v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1482,10 +2469,28 @@ kind: Role
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1510,6 +2515,15 @@ name: helm-deployer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rules:
@@ -1524,10 +2538,28 @@ rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- apiGroups: ["apps", "extensions"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: ["apps", "extensions"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1552,6 +2584,15 @@ resources: ["deployments", "statefulsets"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 verbs: ["get", "list", "create", "update", "patch"]
@@ -1566,10 +2607,28 @@ verbs: ["get", "list", "create", "update", "patch"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- apiGroups: [""]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [""]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1594,6 +2653,15 @@ resources: ["secrets", "configmaps"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 verbs: ["get", "list", "create"]
@@ -1608,10 +2676,28 @@ verbs: ["get", "list", "create"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- apiGroups: ["batch"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: ["batch"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1636,6 +2722,15 @@ resources: ["jobs"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 verbs: ["get", "create", "delete"]
@@ -1650,10 +2745,28 @@ verbs: ["get", "create", "delete"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

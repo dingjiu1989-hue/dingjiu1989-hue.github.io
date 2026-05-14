@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/soc2-technical.html
   
 
 
+# SOC 2 Technical Controls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SOC 2 Technical Controls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SOC 2 Technical Controls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 SOC 2 Overview 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ SOC 2 audits trust service criteria: Security, Availability, Processing Integrit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Logging and Monitoring 
@@ -77,10 +155,28 @@ Logging and Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Comprehensive logging is the foundation of SOC 2: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ import structlog
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from datetime import datetime
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ class SOC2Logger:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ self.logger = structlog.get_logger()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.required_fields = [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ self.required_fields = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "source_ip", "outcome", "correlation_id"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ self.required_fields = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def log_access(self, user_id, action, resource, outcome, metadata=None):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,10 +431,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "timestamp": datetime.utcnow().isoformat(),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +477,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "action": action,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +523,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "source_ip": metadata.get("ip", "unknown"),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -329,10 +569,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "correlation_id": metadata.get("correlation_id", str(uuid.uuid4())),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -357,10 +615,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "geo_location": metadata.get("geo"),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -385,10 +661,28 @@ log_entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -413,10 +707,28 @@ self.logger.info("access_log", **log_entry)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.store_immutable(log_entry)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -441,10 +753,28 @@ return log_entry
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def store_immutable(self, log_entry):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +799,28 @@ def store_immutable(self, log_entry):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Write to append-only log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -497,10 +845,28 @@ with open("/var/log/soc2/access.log", "a") as f:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f.write(json.dumps(log_entry) + "\n")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -525,10 +891,28 @@ f.write(json.dumps(log_entry) + "\n")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.send_to_siem(log_entry)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -550,10 +934,28 @@ Access Review Automation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Automate periodic access reviews: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -578,10 +980,28 @@ class AccessReviewAutomation:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, identity_provider):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -606,10 +1026,28 @@ self.idp = identity_provider
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.reviewers = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -634,10 +1072,28 @@ self.reviewers = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "sales": "sales-director@example.com",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -662,10 +1118,28 @@ self.reviewers = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1164,28 @@ def generate_review(self, department):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 users = self.idp.get_users_by_department(department)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -718,10 +1210,28 @@ review = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "department": department,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -746,10 +1256,28 @@ review = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "reviewer": self.reviewers[department],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -774,10 +1302,28 @@ review = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -802,10 +1348,28 @@ for user in users:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 review["users"].append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -830,10 +1394,28 @@ review["users"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "email": user["email"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -858,10 +1440,28 @@ review["users"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "last_login": user["last_login"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -886,10 +1486,28 @@ review["users"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "days_since_last_access": (
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -914,6 +1532,15 @@ datetime.utcnow() - user["last_login"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ).days if user["last_login"] else None
@@ -928,10 +1555,28 @@ datetime.utcnow() - user["last_login"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -956,10 +1601,28 @@ return review
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def auto_disable_inactive(self, days_threshold=90):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -984,10 +1647,28 @@ cutoff = datetime.utcnow() - timedelta(days=days_threshold)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 disabled = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1012,10 +1693,28 @@ for user in self.idp.get_all_users():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if user.get("last_login", datetime.min) < cutoff:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1040,10 +1739,28 @@ self.idp.disable_user(user["email"])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 disabled.append(user["email"])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1068,6 +1785,15 @@ return disabled
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Change Management 
@@ -1079,10 +1805,28 @@ Change Management
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Track and approve all infrastructure changes: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1107,10 +1851,28 @@ Track and approve all infrastructure changes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 change_management:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1135,25 +1897,6 @@ required_for:
   
   
   
-
-
-\\\\\\\\- infrastructure_changes
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- code_deployments
-
-  
   
   
   
@@ -1165,8 +1908,17 @@ required_for:
   
 
 
-\\\\\\\\- configuration_changes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1179,8 +1931,63 @@ required_for:
   
 
 
-\\\\\\\\- access_policy_changes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- code_deployments
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configuration_changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- access_policy_changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1205,10 +2012,28 @@ workflow:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- request:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- request:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1233,25 +2058,6 @@ fields:
   
   
   
-
-
-\\\\\\\\- change_description
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- risk_assessment
-
-  
   
   
   
@@ -1263,8 +2069,17 @@ fields:
   
 
 
-\\\\\\\\- rollback_plan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_description
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1277,7 +2092,7 @@ fields:
   
 
 
-\\\\\\\\- testing_completed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_assessment
 
   
   
@@ -1289,10 +2104,74 @@ fields:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- review:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollback_plan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_completed
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- review:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1317,11 +2196,6 @@ required_approvals:
   
   
   
-
-
-\\\\\\\\- technical_reviewer
-
-  
   
   
   
@@ -1333,8 +2207,40 @@ required_approvals:
   
 
 
-\\\\\\\\- security_reviewer
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technical_reviewer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_reviewer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1359,25 +2265,6 @@ auto_approve:
   
   
   
-
-
-\\\\\\\\- risk: low
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- owner: same_team
-
-  
   
   
   
@@ -1389,8 +2276,63 @@ auto_approve:
   
 
 
-\\\\\\\\- implementation:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk: low
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- owner: same_team
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- implementation:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1415,6 +2357,15 @@ window: business_hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 blackout_periods:
@@ -1429,11 +2380,6 @@ blackout_periods:
   
   
   
-
-
-\\\\\\\\- end_of_month
-
-  
   
   
   
@@ -1445,8 +2391,40 @@ blackout_periods:
   
 
 
-\\\\\\\\- holiday_season
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- end_of_month
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- holiday_season
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1471,25 +2449,6 @@ require_change_window: high_risk
   
   
   
-
-
-\\\\\\\\- verification:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- monitoring_metrics_normal
-
-  
   
   
   
@@ -1501,8 +2460,17 @@ require_change_window: high_risk
   
 
 
-\\\\\\\\- smoke_tests_passed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- verification:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1515,8 +2483,63 @@ require_change_window: high_risk
   
 
 
-\\\\\\\\- no_security_events
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1541,10 +2564,28 @@ require_change_window: high_risk
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class ChangeManager:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1569,10 +2610,28 @@ def __init__(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.changes = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1597,10 +2656,28 @@ def create_change(self, request):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 change = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2702,28 @@ change = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "description": request["description"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1653,10 +2748,28 @@ change = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "requester": request["requester"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1681,10 +2794,28 @@ change = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "created_at": datetime.utcnow().isoformat(),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1709,10 +2840,28 @@ change = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "rollback_plan": request["rollback_plan"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1737,10 +2886,28 @@ change = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.changes.append(change)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1765,10 +2932,28 @@ self.notify_reviewers(change)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return change
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1793,10 +2978,28 @@ def approve_change(self, change_id, reviewer, decision, comments):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 change = self.find_change(change_id)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1821,10 +3024,28 @@ change["approvals"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "reviewer": reviewer,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1849,10 +3070,28 @@ change["approvals"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "comments": comments,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1877,10 +3116,28 @@ change["approvals"].append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1905,10 +3162,28 @@ if decision == "approved":
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 change["status"] = "approved"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1933,10 +3208,28 @@ self.schedule_implementation(change)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1961,10 +3254,28 @@ change["status"] = "rejected"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def post_implementation_review(self, change_id):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1989,10 +3300,28 @@ change = self.find_change(change_id)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 change["status"] = "completed"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2017,10 +3346,28 @@ change["completed_at"] = datetime.utcnow().isoformat()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/security/phishing-awareness.html
   
   
   
+  
+  
+  
+
+
+# Phishing Awareness and Technical Defenses
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Phishing Awareness and Technical Defenses
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Phishing Awareness and Technical Defenses
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Phishing remains the most common initial attack vector. Technical controls combined with user awareness provide layered defense.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Phishing remains the most common initial attack vector. Technical controls combi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Email authentication protocols verify sender identity. SPF (Sender Policy Framework) specifies which servers can send email for your domain. DKIM (DomainKeys Identified Mail) adds a cryptographic signature to emails. DMARC (Domain-based Message Authentication, Reporting, and Conformance) tells receiving servers what to do with unauthenticated email. Together, these prevent email spoofing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Advanced email filtering (Microsoft Defender for Office 365, Google Workspace Se
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Browser-based phishing protection: Google Safe Browsing, Microsoft Defender SmartScreen. These block access to known phishing sites. Enterprise browsers with security controls add URL categorization and credential protections.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Browser-based phishing protection: Google Safe Browsing, Microsoft Defender Smar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Regular security awareness training teaches users to recognize phishing. Key indicators: urgent language, unexpected attachments, mismatched URLs, requests for credentials, and unusual sender addresses. Simulated phishing campaigns test and reinforce training.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Training frequency: initial training for all new employees, annual refresher tra
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Reporting and Response
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Users should report suspected phishing with one click (phishing report buttons i
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Incident response for credential compromise: force password reset, terminate active sessions, review account activity for suspicious actions, and notify affected users. Time is critical—credentials harvested within minutes of a successful phish are used quickly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ Incident response for credential compromise: force password reset, terminate act
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MFA is the most effective defense against credential phishing. Even if credentials are stolen, MFA blocks account takeover. Phishing-resistant MFA (FIDO2 security keys, passkeys) prevents real-time phishing relay attacks that bypass TOTP.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -237,10 +414,28 @@ Require MFA for all accounts. Enforce MFA with conditional access policies that 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Advanced Threats
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

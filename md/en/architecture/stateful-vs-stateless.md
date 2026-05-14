@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/architecture/stateful-vs-stateless.htm
   
   
   
+  
+  
+  
+
+
+# Stateful vs Stateless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Stateful vs Stateless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Stateful vs Stateless Architecture Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The choice between stateful and stateless architecture shapes every aspect of a distributed system—scalability, resilience, complexity, and operational cost.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ The choice between stateful and stateless architecture shapes every aspect of a 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A stateless service does not store any session state between requests. Each request contains all the information needed to process it. Any instance can handle any request. This simplifies horizontal scaling—add instances behind a load balancer, and no data needs to be shared.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Stateless services are easy to deploy, upgrade, and recover. Failed instances ca
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The limitation is that not all workloads can be stateless. Applications that maintain user sessions, real-time connections, or in-memory caches must manage state externally.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ The limitation is that not all workloads can be stateless. Applications that mai
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A stateful service maintains state across requests. This may be in-memory, on local disk, or in a local database. Client requests must be routed to the correct instance (sticky sessions). Scaling requires careful data partitioning and rebalancing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Stateful services are harder to operate. Failed instances may lose data. Deploym
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Externalizing State
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ The most common approach is to externalize state. The service itself remains sta
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 External state stores add network latency and potential failure points. Cache frequently accessed data in the service with careful invalidation. Consider read-through and write-through cache patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ External state stores add network latency and potential failure points. Cache fr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Stateless session management stores session data in tokens (JWT). The token contains all session claims. No server-side session store is needed. Token size increases with session data. Invalidating tokens before expiration requires additional infrastructure.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -237,10 +414,28 @@ Stateful session management stores session data in a server-side store (Redis). 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Choosing the Right Approach
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/testing-strategies.html
   
   
   
+  
+  
+  
+
+
+# Testing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Testing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Testing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A robust testing strategy is essential for maintaining software quality as codebases grow. This article examines the testing landscape—unit tests, integration tests, end-to-end tests, the test pyramid, and test double patterns—providing practical guidance for building effective test suites.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ A robust testing strategy is essential for maintaining software quality as codeb
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The test pyramid, popularized by Mike Cohn, describes the ideal distribution of tests. At the base are unit tests—fast, numerous, and focused on small units of code. In the middle are integration tests that verify interactions between components. At the top are end-to-end tests that validate complete user workflows.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ The pyramid shape is intentional. Unit tests should form the largest portion of 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Unit Tests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Unit tests verify the behavior of a single unit of code in isolation. A unit is 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Good unit tests are fast (milliseconds), deterministic (same result every time), and focused (test one behavior). They should not depend on databases, network services, or file systems. Unit tests provide rapid feedback during development and serve as living documentation of the code's expected behavior.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Good unit tests are fast (milliseconds), deterministic (same result every time),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integration tests verify that multiple components work together correctly. They test the interactions between your code and actual dependencies—databases, message queues, external APIs, or other services. Integration tests catch issues that unit tests cannot, such as incorrect query syntax, configuration errors, or API contract violations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Running integration tests requires test infrastructure. The common approach is t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  End-to-End Tests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ End-to-end tests validate complete user workflows through the entire system. The
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 E2E tests provide the highest confidence that the system works correctly, but they are slow, brittle, and expensive to maintain. Changes to the UI often require E2E test updates. Smart E2E strategies focus on critical user journeys and happy paths rather than exhaustive coverage. A small number of well-designed E2E tests provide disproportionate value.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ E2E tests provide the highest confidence that the system works correctly, but th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Test doubles replace real dependencies in tests. Mocks record and verify method calls and their arguments. Stubs return predefined values for specific calls. Fakes provide simplified implementations that work correctly for testing but are unsuitable for production. Spies wrap real objects and record their interactions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ The choice of test double affects test quality. Overusing mocks leads to brittle
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Testing Best Practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Write tests before or alongside code. Tests should be independent—each test sh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Test coverage is a useful metric but not a goal in itself. 100% coverage does not guarantee a bug-free application. Focus on testing behavior rather than implementation details. Test the public API of each component, not its internal methods. Tests that verify internal implementation break when code is refactored, even when behavior remains correct.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

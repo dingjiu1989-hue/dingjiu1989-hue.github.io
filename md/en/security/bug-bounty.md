@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/bug-bounty.html
   
   
   
+  
+  
+  
+
+
+# Bug Bounty Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Bug Bounty Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Bug Bounty Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Bug bounty programs invite security researchers to find and report vulnerabiliti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Finding Vulnerabilities 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Reconnaissance-Driven Approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Successful bug bounty hunters invest heavily in reconnaissance. The more you know about a target, the more attack surface you can discover. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Successful bug bounty hunters invest heavily in reconnaissance. The more you kno
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 subfinder -d target.com -silent | tee subs_raw.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ assetfinder --subs-only target.com | tee -a subs_raw.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Deduplicate and validate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ cat subs_raw.txt | sort -u | httprobe -c 50 > live_subs.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Technology fingerprinting on discovered subdomains
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ cat live_subs.txt | httpx -sc -title -tech-detect -o tech_report.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Directory brute-forcing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ ffuf -u https://admin.target.com/FUZZ -w /usr/share/wordlists/dirb/common.txt \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -ac -t 100 -o admin_fuzz.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Attack-Specific Techniques
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Automated XSS discovery
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ import requests
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from urllib.parse import urljoin, urlparse, parse_qs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ def hunt_xss(base_url):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 payloads = [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '">',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '">',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 response = requests.get(base_url)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ response = requests.get(base_url)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for endpoint in discover_endpoints(base_url):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ params = extract_params(endpoint)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for param in params:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ for payload in payloads:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test_url = endpoint.replace(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ f'{param}={params[param]}',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f'{param}={urlencode(payload)}'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ f'{param}={urlencode(payload)}'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resp = requests.get(test_url)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ if payload in resp.text and not resp.text.count('"') > 3:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check if payload rendered unescaped
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,6 +1239,15 @@ print(f"[+] XSS found: {test_url}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # IDOR detection with autorize (Burp extension)
@@ -809,31 +1265,6 @@ print(f"[+] XSS found: {test_url}")
   
   
   
-
-
-# 1\\\\\\\\\\\\\\\\. Record authenticated session cookies
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# 2\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
-
-  
-  
-  
-  
   
   
   
@@ -845,8 +1276,17 @@ print(f"[+] XSS found: {test_url}")
   
 
 
-# 3\\\\\\\\\\\\\\\\. Browse application as victim user
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Record authenticated session cookies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -862,8 +1302,69 @@ print(f"[+] XSS found: {test_url}")
   
 
 
-# 4\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Enable Autorize with victim cookie
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Browse application as victim user
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Monitor BApp output for unauthorized access
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ print(f"[+] XSS found: {test_url}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -X POST https://api.target.com/graphql \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ curl -X POST https://api.target.com/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -d '{"query":"query { __schema { types { name fields { name } } } }"}'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Writing Effective Reports
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A clear, well-structured report increases the likelihood of acceptance and higher bounties. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ report_template:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 title: "Stored XSS in User Profile Bio Field"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ vulnerability_type: "Stored Cross-Site Scripting (XSS)"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: "High"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ cvss: "7.3 (AV:N/AC:L/PR:L/UI:R/S:U/C:H/I:N/A:N)"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 summary: >
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ The user profile bio field does not sanitize HTML input,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 allowing an attacker to inject JavaScript that executes when
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,6 +1759,15 @@ other users view the profile.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps_to_reproduce:
@@ -1149,10 +1785,28 @@ steps_to_reproduce:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,6 +1837,15 @@ action: "Log in as attacker user"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 detail: "Create account at https://app.target.com/register"
@@ -1200,10 +1863,28 @@ detail: "Create account at https://app.target.com/register"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,6 +1915,15 @@ action: "Navigate to profile settings"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 detail: "https://app.target.com/settings/profile"
@@ -1251,10 +1941,28 @@ detail: "https://app.target.com/settings/profile"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 3
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ action: "Set bio to: "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,6 +2045,15 @@ action: "Save profile and navigate to public profile"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 detail: "https://app.target.com/users/attacker"
@@ -1336,10 +2071,28 @@ detail: "https://app.target.com/users/attacker"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 5
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step: 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ action: "Observe JavaScript execution"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 detail: "alert box displays current user's cookies"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ impact: >
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 An attacker can steal session cookies, exfiltrate CSRF tokens,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ perform actions on behalf of other users, or deface profiles.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 remediation_suggestion: >
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ Apply context-sensitive output encoding to the bio field.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use a DOMPurify-style sanitizer on input and properly escape
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,6 +2331,15 @@ on output using the template engine's auto-escaping.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 supporting_evidence:
@@ -1523,10 +2357,28 @@ supporting_evidence:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: "screenshot"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: "screenshot"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,6 +2409,15 @@ file: "xss_bio_alert.png"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 caption: "Alert box showing cookies on profile view"
@@ -1574,10 +2435,28 @@ caption: "Alert box showing cookies on profile view"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: "poc_script"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: "poc_script"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ file: "xss_exploit.html"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Platform Tips 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ HackerOne
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Start with the `hackerone.com/security` page for each target
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ HackerOne
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Leverage the `hackerone.com/trending` for current attack patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ HackerOne
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bugcrowd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ Bugcrowd
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Use the built-in POC video recording for complex vulnerabilities
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ Bugcrowd
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

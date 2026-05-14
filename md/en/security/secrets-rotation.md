@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/secrets-rotation.html
   
 
 
+# Secrets Rotation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secrets Rotation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secrets Rotation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Rotate Secrets? 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Secrets rotation limits the damage window if a credential is compromised. Regula
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Automated Rotation Strategies 
@@ -77,10 +155,28 @@ Automated Rotation Strategies
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database Credential Rotation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ import hvac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import psycopg2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ class DatabaseCredentialRotator:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, vault_url, vault_token):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ self.client = hvac.Client(url=vault_url, token=vault_token)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def rotate_db_credentials(self, db_name, role_name):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ def rotate_db_credentials(self, db_name, role_name):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 creds = self.client.secrets.database.generate_credentials(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,6 +385,15 @@ mount_point="database",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name=role_name
@@ -231,10 +408,28 @@ name=role_name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -259,10 +454,28 @@ name=role_name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 conn = psycopg2.connect(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -287,10 +500,28 @@ host="db.example.com",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 port=5432,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -315,10 +546,28 @@ user=creds["data"]["username"],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 password=creds["data"]["password"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -343,10 +592,28 @@ dbname=db_name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -371,10 +638,28 @@ conn.close()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Update application configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -399,10 +684,28 @@ self.update_app_config(db_name, creds["data"])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return creds["data"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -427,10 +730,28 @@ AWS IAM Key Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import boto3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -455,6 +776,15 @@ from datetime import datetime, timedelta
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class IAMKeyRotator:
@@ -469,10 +799,28 @@ class IAMKeyRotator:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -497,10 +845,28 @@ self.iam = boto3.client("iam")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def rotate_access_keys(self, username):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -525,10 +891,28 @@ def rotate_access_keys(self, username):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 keys = self.iam.list_access_keys(UserName=username)["AccessKeyMetadata"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -553,10 +937,28 @@ keys = self.iam.list_access_keys(UserName=username)["AccessKeyMetadata"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 new_key = self.iam.create_access_key(UserName=username)["AccessKeyMetadata"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -581,10 +983,28 @@ new_key = self.iam.create_access_key(UserName=username)["AccessKeyMetadata"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 time.sleep(10)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -609,10 +1029,28 @@ time.sleep(10)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.update_services(username, new_key["AccessKeyId"], new_key["SecretAccessKey"])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -637,10 +1075,28 @@ self.update_services(username, new_key["AccessKeyId"], new_key["SecretAccessKey"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for key in keys:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -665,10 +1121,28 @@ if key["Status"] == "Active":
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.iam.update_access_key(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -693,10 +1167,28 @@ UserName=username,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AccessKeyId=key["AccessKeyId"],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -721,10 +1213,28 @@ Status="Inactive"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -749,10 +1259,28 @@ Status="Inactive"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.schedule_deletion(key["AccessKeyId"], username, delay_hours=24)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -774,10 +1302,28 @@ Zero-Downtime Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use the blue-green pattern for credential rotation: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -802,6 +1348,15 @@ rotation_strategy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 phase_1:
@@ -816,25 +1371,6 @@ phase_1:
   
   
   
-
-
-\\\\\\\\- Generate new credential (secret B)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- Deploy with both old (secret A) and new (secret B) valid
-
-  
   
   
   
@@ -846,8 +1382,63 @@ phase_1:
   
 
 
-\\\\\\\\- Application tries A first, falls back to B
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Generate new credential (secret B)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Deploy with both old (secret A) and new (secret B) valid
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Application tries A first, falls back to B
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -872,11 +1463,6 @@ phase_2:
   
   
   
-
-
-\\\\\\\\- Wait for all instances to refresh
-
-  
   
   
   
@@ -888,8 +1474,40 @@ phase_2:
   
 
 
-\\\\\\\\- Rotate: make B primary, A secondary
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Wait for all instances to refresh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Rotate: make B primary, A secondary
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -914,11 +1532,6 @@ phase_3:
   
   
   
-
-
-\\\\\\\\- Verify all instances use B
-
-  
   
   
   
@@ -930,8 +1543,40 @@ phase_3:
   
 
 
-\\\\\\\\- Decommission secret A
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify all instances use B
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decommission secret A
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -956,10 +1601,28 @@ phase_3:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class RotatingCredentialProvider:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -984,10 +1647,28 @@ def __init__(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.primary = None
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1012,10 +1693,28 @@ self.secondary = None
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.load_credentials()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1040,10 +1739,28 @@ def get_credentials(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 try:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1068,10 +1785,28 @@ return self.try_credential(self.primary)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 except AuthenticationError:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1096,10 +1831,28 @@ return self.try_credential(self.secondary)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def rotate(self, new_credential):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1124,10 +1877,28 @@ self.secondary = self.primary
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.primary = new_credential
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1152,10 +1923,28 @@ Vault Agent for Automatic Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # vault-agent-config.hcl
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1180,6 +1969,15 @@ vault {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 address = "https://vault.example.com:8200"
@@ -1194,10 +1992,28 @@ address = "https://vault.example.com:8200"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1222,10 +2038,28 @@ auto_auth {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 method "aws" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1250,10 +2084,28 @@ config {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 role = "app-role"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1278,6 +2130,38 @@ type = "iam"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1292,6 +2176,15 @@ type = "iam"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1305,11 +2198,6 @@ type = "iam"
   
   
   
-  
-
-
-}
-
   
   
   
@@ -1334,10 +2222,28 @@ template {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source = "/etc/app/config.ctmpl"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1362,10 +2268,28 @@ destination = "/etc/app/config.env"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 command = "/usr/local/bin/reload-app.sh"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1390,10 +2314,28 @@ command = "/usr/local/bin/reload-app.sh"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Template
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1418,10 +2360,28 @@ command = "/usr/local/bin/reload-app.sh"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{- with secret "database/creds/app-role" }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1446,10 +2406,28 @@ DB_USERNAME={{ .Data.username }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DB_PASSWORD={{ .Data.password }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1474,10 +2452,28 @@ DB_PASSWORD={{ .Data.password }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Certificate Rotation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1502,10 +2498,28 @@ Certificate Rotation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from cryptography import x509
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1530,10 +2544,28 @@ from cryptography.hazmat.primitives import hashes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from cryptography.hazmat.primitives.asymmetric import rsa
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1558,10 +2590,28 @@ from cryptography.x509.oid import NameOID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import datetime
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1586,10 +2636,28 @@ def auto_renew_certificate(domain, vault_path):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client = hvac.Client()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1614,10 +2682,28 @@ client = hvac.Client()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 existing = client.secrets.pki.read_certificate(vault_path)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2728,28 @@ cert = x509.load_pem_x509_certificate(existing["data"]["certificate"].encode())
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 days_remaining = (cert.not_valid_after - datetime.datetime.utcnow()).days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1670,10 +2774,28 @@ if days_remaining < 30: # Renew if less than 30 days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 new_cert = client.secrets.pki.generate_certificate(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1698,10 +2820,28 @@ mount_point="pki",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name="example-dot-com",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1726,10 +2866,28 @@ common_name=domain,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ttl="2160h" # 90 days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1754,10 +2912,28 @@ ttl="2160h" # 90 days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deploy_certificate(domain, new_cert["data"])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1782,6 +2958,15 @@ return True
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return False
@@ -1796,10 +2981,28 @@ return False
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

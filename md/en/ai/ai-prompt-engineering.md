@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-prompt-engineering.html
   
 
 
+# Advanced Prompt Engineering Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Advanced Prompt Engineering Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Advanced Prompt Engineering Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Prompt engineering has evolved from simple instruction writing into a sophistica
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Chain-of-Thought Prompting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Chain-of-thought (CoT) prompting instructs the model to reason step-by-step befo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Zero-shot CoT** simply appends "Let's think step by step" to a query:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ A store has 15 apples. It sells 7, then receives a shipment of 20, then sells 9 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Few-shot CoT** provides worked examples before the actual query. For complex domains like legal reasoning or medical diagnosis, providing 3-5 examples with explicit reasoning chains yields the best results.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ A store has 15 apples. It sells 7, then receives a shipment of 20, then sells 9 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Few-shot prompting provides the model with input-output examples before the target query. The key is selecting representative examples that cover the distribution of expected inputs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Few-shot prompting provides the model with input-output examples before the targ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Include edge cases alongside typical examples
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -259,6 +427,15 @@ Few-shot prompting provides the model with input-output examples before the targ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Keep example formatting consistent
@@ -273,10 +450,28 @@ Few-shot prompting provides the model with input-output examples before the targ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Use 3-6 examples for most tasks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -307,10 +502,28 @@ Dynamic few-shot selection, where examples are retrieved from a vector database 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Structured Output Prompting
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -341,10 +554,28 @@ When you need predictable outputs, structure your prompts to constrain the respo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **XML-tag prompting** works reliably across models:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -378,14 +609,6 @@ Extract the following fields from the text below:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- name: the person's full name
-
-  
-  
-  
-  
   
   
   
@@ -397,7 +620,7 @@ Extract the following fields from the text below:
   
 
 
-\\\\\\\\\\\\\\\\- age: their age as a number
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: the person's full name
 
   
   
@@ -412,10 +635,54 @@ Extract the following fields from the text below:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- occupation: their job title
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- age: their age as a number
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- occupation: their job title
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -455,10 +722,28 @@ John Smith, 34, works as a Senior Software Engineer at Acme Corp.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Output your response in this JSON format:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -489,10 +774,28 @@ Output your response in this JSON format:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **System prompt engineering** is equally important. A well-crafted system prompt establishes persona, constraints, output format, and guardrails in a structured way:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -523,31 +826,6 @@ You are an expert data extraction assistant. Follow these rules:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\. Only extract information explicitly present in the text.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-2\\\\\\\\\\\\\\\\. If a field is missing, use null rather than guessing.
-
-  
-  
-  
-  
   
   
   
@@ -559,8 +837,17 @@ You are an expert data extraction assistant. Follow these rules:
   
 
 
-3\\\\\\\\\\\\\\\\. Output valid JSON only, no additional commentary.
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Only extract information explicitly present in the text.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -576,8 +863,69 @@ You are an expert data extraction assistant. Follow these rules:
   
 
 
-4\\\\\\\\\\\\\\\\. Maintain the exact schema provided by the user.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If a field is missing, use null rather than guessing.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output valid JSON only, no additional commentary.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain the exact schema provided by the user.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -608,10 +956,28 @@ You are an expert data extraction assistant. Follow these rules:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Assigning a persona to the model changes its output style and accuracy. Research shows that domain-specific personas improve performance on specialized tasks. For code generation, "You are a senior software engineer with 15 years of experience" produces more robust code than a generic prompt.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -642,10 +1008,28 @@ Assigning a persona to the model changes its output style and accuracy. Research
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Complex tasks should be broken into multiple prompts, each building on the previous output. This pattern is superior to putting everything in a single prompt because:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -676,14 +1060,6 @@ Complex tasks should be broken into multiple prompts, each building on the previ
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Intermediate outputs can be validated before proceeding
-
-  
-  
-  
-  
   
   
   
@@ -695,7 +1071,7 @@ Complex tasks should be broken into multiple prompts, each building on the previ
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Token limits are less likely to be hit
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Intermediate outputs can be validated before proceeding
 
   
   
@@ -710,10 +1086,54 @@ Complex tasks should be broken into multiple prompts, each building on the previ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Debugging is easier when each step is isolated
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Token limits are less likely to be hit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Debugging is easier when each step is isolated
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -744,10 +1164,28 @@ A typical chain for content generation might be: outline generation → section 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Temperature and Sampling Parameters
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -778,10 +1216,28 @@ Parameter tuning is an essential part of prompt engineering:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Temperature (0-2)**: Lower values (0.1-0.3) for factual tasks, higher (0.7-0.9) for creative tasks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -806,6 +1262,15 @@ Parameter tuning is an essential part of prompt engineering:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Frequency penalty**: Increases word diversity; useful for generation tasks
@@ -820,10 +1285,28 @@ Parameter tuning is an essential part of prompt engineering:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Presence penalty**: Encourages topic diversity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -854,10 +1337,28 @@ For extraction and classification tasks, use temperature 0 for deterministic out
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Iterative Refinement
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -888,10 +1389,28 @@ Professional prompt engineering is an iterative process. Start with a baseline p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A systematic approach:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -922,31 +1441,6 @@ A systematic approach:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Test with 10-20 diverse inputs
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Categorize failure modes
-
-  
-  
-  
-  
   
   
   
@@ -958,8 +1452,17 @@ A systematic approach:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rewrite the prompt to address each failure mode
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Test with 10-20 diverse inputs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -975,8 +1478,69 @@ A systematic approach:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retest and measure improvement
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Categorize failure modes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rewrite the prompt to address each failure mode
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retest and measure improvement
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -994,6 +1558,15 @@ A systematic approach:
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

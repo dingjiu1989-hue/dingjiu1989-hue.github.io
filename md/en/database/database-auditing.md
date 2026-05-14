@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-auditing.html
   
   
   
+  
+  
+  
+
+
+# Database Auditing: Tracking Data Changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Auditing: Tracking Data Changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Auditing: Tracking Data Changes
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database auditing tracks data changes for compliance, security, and debugging. A comprehensive audit system records who changed what, when the change occurred, the old and new values, and the context of the change.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Database auditing tracks data changes for compliance, security, and debugging. A
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Trigger-based auditing uses database triggers to capture changes. An audit trigger fires on INSERT, UPDATE, or DELETE operations and writes change records to an audit table. This approach captures all changes regardless of how they reach the database—application code, admin tools, or direct SQL.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Application-level auditing logs changes in the application layer. Each service e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Change Data Capture (CDC) streams database changes to a log (like Kafka) for external consumers. Debezium is the most popular CDC tool. It reads the database transaction log and publishes change events without modifying application code.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Change Data Capture (CDC) streams database changes to a log (like Kafka) for ext
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A minimal audit table includes: audit_id (primary key), table_name, row_id, operation (INSERT, UPDATE, DELETE), old_values (JSON), new_values (JSON), changed_by, changed_at, transaction_id. Consider partitioning by date for query performance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Include a session context so you know not just who changed data but under what c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Querying Audit Data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,10 +322,28 @@ Audit tables grow quickly. Index by table_name + row_id for point queries, by ch
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Performance Impact
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -209,10 +368,28 @@ Writing audit records adds latency to every data modification. Consider asynchro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Compliance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

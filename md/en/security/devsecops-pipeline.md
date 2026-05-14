@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/devsecops-pipeline.html
   
 
 
+# DevSecOps: Integrating Security into CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# DevSecOps: Integrating Security into CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# DevSecOps: Integrating Security into CI/CD
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 DevSecOps embeds security into every stage of the software development lifecycle. Rather than running security assessments at the end of a release cycle, DevSecOps shifts security left into development and CI/CD pipelines. This article covers how to integrate SAST, DAST, dependency scanning, container scanning, and policy-as-code into your pipelines.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ DevSecOps embeds security into every stage of the software development lifecycle
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The shift-left principle moves security testing earlier in the development process. Finding and fixing a vulnerability during development costs 10 times less than fixing it in production, and 100 times less than fixing it after a breach.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The shift-left principle moves security testing earlier in the development proce
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A mature DevSecOps pipeline has security gates at every stage:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Code Commit -> SAST -> Dependency Scan -> Build -> Container Scan ->
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integration Test -> DAST -> Staging -> Policy Check -> Production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Each gate can pass, fail with a warning, or fail and block the pipeline. The sev
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Static Application Security Testing (SAST)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Popular SAST Tools
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **SonarQube**: Static analysis with quality gates and technical debt tracking.
@@ -276,10 +453,28 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CodeQL**: GitHub's semantic code analysis engine. Query-based vulnerability detection.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -307,10 +502,28 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Pipeline Integration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -341,10 +554,28 @@ SAST analyzes source code without executing it. It identifies vulnerabilities li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: SAST Scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -375,10 +606,28 @@ on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pull_request:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -409,10 +658,28 @@ branches: [main]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -443,10 +710,28 @@ semgrep:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -477,14 +762,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -496,8 +773,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- uses: semgrep/semgrep-action@v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: semgrep/semgrep-action@v1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -515,6 +827,15 @@ steps:
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -545,6 +866,15 @@ config: p/default
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 audit_on: push
@@ -562,10 +892,28 @@ audit_on: push
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Check for blocking findings
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check for blocking findings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -583,6 +931,15 @@ audit_on: push
 
 run: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -613,10 +970,28 @@ if [ "${{ steps.semgrep.outputs.results }}" != "" ]; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "SAST found vulnerabilities. Fix before merging."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -647,10 +1022,28 @@ exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -681,10 +1074,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Run SAST on every pull request, not just on push to main.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -709,6 +1120,15 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Tune rules to reduce false positives. Block only high-confidence findings.
@@ -723,10 +1143,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Create custom rules for your application's specific security patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -757,10 +1195,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern applications use dozens of open-source libraries. Each library introduces transitive dependencies with potential vulnerabilities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -791,10 +1247,28 @@ Modern applications use dozens of open-source libraries. Each library introduces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 An SBOM is a formal inventory of all software components in an application. Generate SBOMs in CycloneDX or SPDX format.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -825,10 +1299,28 @@ An SBOM is a formal inventory of all software components in an application. Gene
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 syft packages . -o cyclonedx-json > sbom.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -859,10 +1351,28 @@ syft packages . -o cyclonedx-json > sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 grype sbom:./sbom.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -893,10 +1403,28 @@ grype sbom:./sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Dependabot**: GitHub's built-in dependency scanning and automated pull requests for patches.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -921,6 +1449,15 @@ grype sbom:./sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Snyk**: Commercial vulnerability scanner with fix advice and license compliance.
@@ -935,10 +1472,28 @@ grype sbom:./sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **OWASP Dependency-Check**: Open-source scanner that identifies CVEs in dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -969,10 +1524,28 @@ grype sbom:./sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1003,10 +1576,28 @@ updates:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- package-ecosystem: "npm"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- package-ecosystem: "npm"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1037,10 +1628,28 @@ directory: "/"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 schedule:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1071,10 +1680,28 @@ interval: "weekly"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 open-pull-requests-limit: 10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1105,14 +1732,6 @@ labels:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- "dependencies"
-
-  
-  
-  
-  
   
   
   
@@ -1124,8 +1743,43 @@ labels:
   
 
 
-\\\\\\\\\\\\\\\\- "security"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "dependencies"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "security"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1156,10 +1810,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Block the pipeline on critical or high severity vulnerabilities in direct dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1184,6 +1856,15 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Require automated dependency updates within 7 days for critical, 30 days for high.
@@ -1198,10 +1879,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Monitor for license compliance alongside vulnerability scanning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1232,10 +1931,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DAST tests the running application from the outside, simulating real-world attack patterns. It discovers vulnerabilities that SAST misses, such as authentication bypass, session management flaws, and business logic errors.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1266,10 +1983,28 @@ DAST tests the running application from the outside, simulating real-world attac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **OWASP ZAP**: Open-source web application scanner with automated and manual modes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1294,10 +2029,28 @@ DAST tests the running application from the outside, simulating real-world attac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Arachni**: Open-source web application security scanner framework.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1328,10 +2081,28 @@ DAST tests the running application from the outside, simulating real-world attac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # DAST with OWASP ZAP in CI/CD
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1362,10 +2133,28 @@ services:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 zap:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1396,10 +2185,28 @@ image: ghcr.io/zaproxy/zaproxy:stable
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 options: --user root
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1430,10 +2237,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Run ZAP Scan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run ZAP Scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1451,6 +2276,15 @@ steps:
 
 run: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1481,10 +2315,28 @@ docker run -v $(pwd):/zap/wrk:rw \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ghcr.io/zaproxy/zaproxy:stable \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1515,10 +2367,28 @@ zap-full-scan.py \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -t https://staging.example.com \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1549,6 +2419,15 @@ zap-full-scan.py \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -z "-config spider.maxDuration=10"
@@ -1566,10 +2445,28 @@ zap-full-scan.py \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Check ZAP Results
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check ZAP Results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1587,6 +2484,15 @@ zap-full-scan.py \
 
 run: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1617,10 +2523,28 @@ if grep -q "High" zap_report.html; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "DAST found High severity issues"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1651,10 +2575,28 @@ exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1685,10 +2627,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Run DAST against staging or review environments, not production.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1713,6 +2673,15 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Use baseline scans for smoke testing and full scans for release candidates.
@@ -1727,10 +2696,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Integrate with Jira or ticketing for automatic issue creation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,10 +2748,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Container images bundle applications with their runtime dependencies. Vulnerabilities in base images or installed packages become part of the container.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2800,28 @@ Container images bundle applications with their runtime dependencies. Vulnerabil
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Dockerfile with security best practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2852,28 @@ FROM alpine:3.19 AS builder
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RUN apk add --no-cache build-base
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2904,28 @@ FROM alpine:3.19
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RUN apk add --no-cache ca-certificates && \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2956,28 @@ addgroup -S app && adduser -S app -G app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COPY --from=builder /app/bin/server /app/server
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +3008,28 @@ USER app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EXPOSE 8080
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3060,28 @@ EXPOSE 8080
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3112,28 @@ scan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,14 +3164,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -2052,8 +3175,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- name: Build image
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Build image
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3242,28 @@ run: docker build -t myapp:${{ github.sha }} .
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Scan with Trivy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Scan with Trivy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3294,28 @@ uses: aquasecurity/trivy-action@master
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3346,28 @@ image-ref: myapp:${{ github.sha }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 format: sarif
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,6 +3398,15 @@ output: trivy-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: CRITICAL,HIGH
@@ -2203,10 +3424,28 @@ severity: CRITICAL,HIGH
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Upload results
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3476,28 @@ uses: github/codeql-action/upload-sarif@v3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3528,28 @@ sarif_file: trivy-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Container Security Practices
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2302,10 +3577,28 @@ sarif_file: trivy-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Scan images before pushing to the registry.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2330,10 +3623,28 @@ sarif_file: trivy-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Enable granular runtime security with seccomp, AppArmor, or SELinux policies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2364,10 +3675,28 @@ sarif_file: trivy-results.sarif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Policy-as-code defines security and compliance rules as executable code. Policies are versioned, reviewed, and enforced automatically in the pipeline.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2398,10 +3727,28 @@ Policy-as-code defines security and compliance rules as executable code. Policie
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OPA enforces policies across the software lifecycle. Rego is OPA's policy language.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2432,10 +3779,28 @@ OPA enforces policies across the software lifecycle. Rego is OPA's policy langua
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 package kubernetes.storage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2466,10 +3831,28 @@ deny[msg] {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 volume := input.volumes[_]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2500,10 +3883,28 @@ volume.persistentVolumeClaim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 not volume.encrypted
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2534,10 +3935,28 @@ msg := sprintf("Volume %v must have encryption enabled", [volume.name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2568,10 +3987,28 @@ msg := sprintf("Volume %v must have encryption enabled", [volume.name])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Conftest: Policy enforcement for Kubernetes manifests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2602,10 +4039,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Check Kubernetes policies
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check Kubernetes policies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2623,6 +4078,15 @@ steps:
 
 run: |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2653,14 +4117,6 @@ conftest test deployment.yaml \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--policy policies/ \
-
-  
-  
-  
-  
   
   
   
@@ -2672,7 +4128,7 @@ conftest test deployment.yaml \
   
 
 
-\\\\\\\\\\\\\\\\--namespace kubernetes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy policies/ \
 
   
   
@@ -2687,10 +4143,54 @@ conftest test deployment.yaml \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Check Terraform policies
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--namespace kubernetes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check Terraform policies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2721,6 +4221,15 @@ run: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 conftest test main.tf \
@@ -2738,10 +4247,28 @@ conftest test main.tf \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--policy policies/terraform/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy policies/terraform/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2772,10 +4299,28 @@ conftest test main.tf \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Containers must not run as root.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2800,10 +4345,28 @@ conftest test main.tf \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * S3 buckets must block public access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2828,10 +4391,28 @@ conftest test main.tf \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * IAM roles must have resource-level constraints.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2862,10 +4443,28 @@ conftest test main.tf \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tools alone do not make DevSecOps successful. The human elements matter more.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2893,6 +4492,15 @@ Tools alone do not make DevSecOps successful. The human elements matter more.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Security champions**: Train security champions in each development team. They bridge the gap between security and engineering.
@@ -2907,10 +4515,28 @@ Tools alone do not make DevSecOps successful. The human elements matter more.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Friction reduction**: Optimize scan times. A 30-minute SAST scan encourages skipping. A 2-minute scan integrates naturally into the workflow.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2938,10 +4564,28 @@ Tools alone do not make DevSecOps successful. The human elements matter more.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

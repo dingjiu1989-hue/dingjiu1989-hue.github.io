@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/vector-search-optimization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "664",
+      "wordCount": "1012",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/vector-search-optimization.html"},
-      "articleBody": "Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Fundamentals Vector search finds similar items using embedding vectors. It powers semantic search, recommendation systems, and RAG applications. HNSW Index Parameters Hierarchical Navigable Small World (HNSW) is the most popular vector index: \\\\\\\\-- pgvector HNSW index CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction = 200); SET hnsw.ef_search = 100; SELECT id, embedding '[0.1, 0.2, ...]' as distance FROM documents ORDER BY embedding '[0.1, 0.2, ...]' LIMIT 10; Key HNSW parameters: M (connections per node, default 16), ef_construction (build quality, default 200), ef_search (query recall, set per-query). Quantization Reduce memory footprint: def quantize_int8(vectors): mins = vectors.min(axis=0) maxs = vectors.max(axis=0) scale = 255.0 / (maxs - mins + 1e-8) quantized = ((vectors - mins) * scale - 128).astype(np.int8) return quantized, mins, scale FP16 halves memory. INT8 reduces by 4x. Product quantization achieves 10-30x compression. Pre-filtering Strategies \\\\\\\\-- Post-filtering: search then filter SELECT id, embedding '[0.1, 0.2]' as distance FROM documents WHERE category = 'technology' ORDER BY embedding '[0.1, 0.2]' LIMIT 10; Prefer pre-filtering with separate indexes per filter category for optimal performance. Conclusion Tune HNSW parameters for your data distribution. Use quantization to reduce memory. Benchmark with your actual data. Monitor recall in production."
+      "articleBody": "Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Optimization Techniques Vector Search Fundamentals Vector search finds similar items using embedding vectors. It powers semantic search, recommendation systems, and RAG applications. HNSW Index Parameters Hierarchical Navigable Small World (HNSW) is the most popular vector index: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgvector HNSW index CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops) WITH (m = 16, ef_construction = 200); SET hnsw.ef_search = 100; SELECT id, embedding '[0.1, 0.2, ...]' as distance FROM documents ORDER BY embedding '[0.1, 0.2, ...]' LIMIT 10; Key HNSW parameters: M (connections per node, default 16), ef_construction (build quality, default 200), ef_search (query recall, set per-query). Quantization Reduce memory footprint: def quantize_int8(vectors): mins = vectors.min(axis=0) maxs = vectors.max(axis=0) scale = 255.0 / (maxs - mins + 1e-8) quantized = ((vectors - mins) * scale - 128).astype(np.int8) return quantized, mins, scale FP16 halves memory. INT8 reduces by 4x. Product quantization achieves 10-30x compression. Pre-filtering Strategies \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Post-filtering: search then filter SELECT id, embedding '[0.1, 0.2]' as distance FROM documents WHERE category = 'technology' ORDER BY embedding '[0.1, 0.2]' LIMIT 10; Prefer pre-filtering with separate indexes per filter category for optimal performance. Conclusion Tune HNSW parameters for your data distribution. Use quantization to reduce memory. Benchmark with your actual data. Monitor recall in production."
     }
     </script>
     <script type="application/ld+json">
@@ -101,7 +101,67 @@
 <br>
 <br>
 <br>
+<h1>Vector Search Optimization Techniques</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Vector Search Optimization Techniques</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>Vector Search Optimization Techniques</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Vector Search Fundamentals </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -117,7 +177,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>HNSW Index Parameters </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -136,7 +214,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- pgvector HNSW index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgvector HNSW index</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -158,7 +254,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>WITH (m = 16, ef_construction = 200);</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -180,6 +294,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>SELECT id, embedding <=> '[0.1, 0.2, ...]' as distance</p>
 <br>
 <br>
@@ -191,7 +314,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>FROM documents</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -213,7 +354,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Key HNSW parameters: M (connections per node, default 16), ef_construction (build quality, default 200), ef_search (query recall, set per-query). </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -229,7 +388,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Reduce memory footprint: </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -251,7 +428,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>mins = vectors.min(axis=0)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -273,7 +468,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>scale = 255.0 / (maxs - mins + 1e-8)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -295,7 +508,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>return quantized, mins, scale</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -314,6 +545,15 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Pre-filtering Strategies </p>
 <br>
 <br>
@@ -325,7 +565,25 @@
 <br>
 <br>
 <br>
-<p>\\\\-- Post-filtering: search then filter</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Post-filtering: search then filter</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -347,7 +605,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>FROM documents</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -369,7 +645,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>ORDER BY embedding <=> '[0.1, 0.2]' LIMIT 10;</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -388,7 +682,25 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/package-managers.html
   
 
 
+# Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ JavaScript package managers have evolved significantly. npm is the default, yarn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  npm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Node's built-in package manager, now at version 11:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # npm workspaces for monorepos
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ npm init -w packages/core -w packages/utils
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm install lodash -w packages/core
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ npm test -w packages/core
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Audit and fix vulnerabilities
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ npm audit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm audit fix
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ npm audit fix
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm ls --depth=0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ npm ls --depth=0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Weaknesses**: Slower install times than alternatives, flat `node_modules` can cause dependency confusion, no built-in content deduplication across projects.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ npm ls --depth=0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Yarn v4 (Berry) introduced Plug'n'Play (PnP) and strict dependency resolution:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Yarn v4 (Berry) introduced Plug'n'Play (PnP) and strict dependency resolution:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 yarn set version berry
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ yarn config set nodeLinker pnp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Zero-install: commit .yarn/cache to git
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ yarn config set enableGlobalCache false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Workspaces for monorepos
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ yarn workspace packages/core add lodash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 yarn workspaces foreach run test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ yarn workspaces foreach run test
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nodeLinker: pnp
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ enableGlobalCache: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 compressionLevel: 9
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ compressionLevel: 9
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Dependencies are stored as zip files in .yarn/cache
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ compressionLevel: 9
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Strengths**: PnP eliminates `node_modules`, zero-install dramatically speeds CI, workspace commands are powerful, strict mode prevents undeclared dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ compressionLevel: 9
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  pnpm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ pnpm uses content-addressable storage to deduplicate across projects:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install pnpm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ npm install -g pnpm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Uses hard links to a global store
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ npm install -g pnpm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm install
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ pnpm install
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Prevents importing undeclared packages
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ pnpm install
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm -r run test
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ pnpm --filter packages/core add lodash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .npmrc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ shamefully-hoist=false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 strict-peer-dependencies=true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ auto-install-peers=true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Global store location
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ store-dir=~/.pnpm-store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Disk usage comparison** (100 identical projects with React + lodash):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ store-dir=~/.pnpm-store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |------|-----------|-------------|----------------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ store-dir=~/.pnpm-store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Yarn (PnP) | 1.1 GB | 12s | 80KB |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ store-dir=~/.pnpm-store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | bun | 4.8 GB | 8s | 220KB |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ store-dir=~/.pnpm-store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bun is a JavaScript runtime, bundler, and package manager in one binary:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ Bun is a JavaScript runtime, bundler, and package manager in one binary:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bun install
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ bun install
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bun add zod
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ bun add zod
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bun run dev
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ bun run dev
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bun remove lodash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ bun remove lodash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bun install --workspaces
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # But bun also supports package.json workspaces
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # npm: 45s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # pnpm: 22s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Strengths**: Fastest install speeds, built-in test runner (`bun test`), built-in bundler, drop-in npm replacement for most projects, native TypeScript execution.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---------|-----|-----------|------|-----|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Disk usage | High | Low (PnP) | Lowest | High |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Lockfile | JSON | YAML | YAML | Binary |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Strict deps | No | Yes (PnP) | Yes | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1622,10 +2510,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CI speed critical**: Yarn Berry with zero-install (committed cache) or bun for native speed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1650,6 +2556,15 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Monorepo**: pnpm with filters or Yarn Berry with workspaces. Both excel here.
@@ -1664,10 +2579,28 @@ bun install --workspaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **New project**: Consider bun if you want a single tool for runtime, package management, and bundling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

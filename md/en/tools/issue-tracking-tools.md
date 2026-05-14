@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/tools/issue-tracking-tools.html
   
   
   
+  
+  
+  
+
+
+# Issue Tracking Tools: Jira, Linear, GitHub Issues, and More
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Issue Tracking Tools: Jira, Linear, GitHub Issues, and More
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Issue Tracking Tools: Jira, Linear, GitHub Issues, and More
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Issue tracking tools manage bugs, feature requests, tasks, and project progress. The right tool depends on team size, workflow complexity, and integration needs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Issue tracking tools manage bugs, feature requests, tasks, and project progress.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Jira is the most powerful and customizable issue tracker. Supports Scrum, Kanban, and custom workflows. Rich plugin ecosystem. Best for enterprise teams with complex workflows. Can be overwhelming for small teams due to complexity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Jira is the most powerful and customizable issue tracker. Supports Scrum, Kanban
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Linear is a modern issue tracker focused on speed and developer experience. Fast keyboard navigation, clean interface, and GitHub integration. Best for startups and product teams. Simpler than Jira but less customizable.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,6 +274,15 @@ Linear is a modern issue tracker focused on speed and developer experience. Fast
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Issues is integrated with GitHub repositories. Supports labels, milestones, projects, and issue templates. Best for open-source projects and small teams already using GitHub. Limited compared to dedicated tools.
@@ -177,10 +300,28 @@ GitHub Issues is integrated with GitHub repositories. Supports labels, milestone
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

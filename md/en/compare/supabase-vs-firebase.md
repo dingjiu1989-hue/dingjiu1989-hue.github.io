@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/compare/supabase-vs-firebase.html
   
 
 
+# Supabase vs Firebase
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Supabase vs Firebase
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Supabase vs Firebase
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Supabase and Firebase are the leading Backend-as-a-Service (BaaS) platforms, pro
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Database: SQL vs NoSQL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The database choice is the most important factor in deciding between these platf
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Firebase Firestore (NoSQL)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Firestore is a document-oriented NoSQL database:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Collection: users
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Document: user123
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: "Alice"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ email: "alice@example.com"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 posts: [ref:post456, ref:post789]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Collection: posts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Document: post456
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ title: "Hello World"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 content: "..."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Automatic real-time synchronization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -361,6 +583,15 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Works offline with on-device persistence
@@ -375,10 +606,28 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Flexible schema — no migrations needed
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -409,10 +658,28 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Complex queries (no JOIN, limited filtering, no aggregation)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -437,6 +704,15 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Data denormalization required for relational data
@@ -451,10 +727,28 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * No migration tools — schema changes are manual
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -485,10 +779,28 @@ content: "..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const snapshot = await db
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -519,10 +831,28 @@ const snapshot = await db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .where("published", "==", true)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -553,10 +883,28 @@ const snapshot = await db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .limit(10)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -587,10 +935,28 @@ const snapshot = await db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Supabase (PostgreSQL)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -621,10 +987,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -652,10 +1036,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Relational data modeling with foreign keys and constraints
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -680,6 +1082,15 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Row Level Security for granular access control
@@ -694,10 +1105,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * ACID compliance and transactional integrity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -728,10 +1157,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Manual schema migrations required
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -756,10 +1203,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Scaling requires planning (connection pooling, read replicas)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -787,10 +1252,28 @@ Supabase uses full PostgreSQL with all its capabilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Supabase SQL query
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Supabase SQL query
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -821,10 +1304,28 @@ SELECT posts.*, profiles.username, COUNT(comments.id) as comment_count
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM posts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -855,10 +1356,28 @@ JOIN profiles ON posts.author_id = profiles.id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LEFT JOIN comments ON comments.post_id = posts.id
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -889,10 +1408,28 @@ WHERE posts.published = true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY posts.id, profiles.username
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -923,10 +1460,28 @@ ORDER BY posts.created_at DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 10;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -957,10 +1512,28 @@ LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Both platforms offer comprehensive auth:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -991,10 +1564,28 @@ Both platforms offer comprehensive auth:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---------|--------------|---------------|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1025,10 +1616,28 @@ Both platforms offer comprehensive auth:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | OAuth providers | Google, Apple, Facebook, etc. | Google, GitHub, Discord, etc. |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1059,10 +1668,28 @@ Both platforms offer comprehensive auth:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Anonymous auth | Yes | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1093,10 +1720,28 @@ Both platforms offer comprehensive auth:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Custom claims | Yes | Via PostgreSQL |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1127,6 +1772,15 @@ Both platforms offer comprehensive auth:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Supabase's auth integrates directly with PostgreSQL Row Level Security, allowing database-level permissions without additional logic:
@@ -1144,10 +1798,28 @@ Supabase's auth integrates directly with PostgreSQL Row Level Security, allowing
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Supabase RLS: users can only see their own data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Supabase RLS: users can only see their own data
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1178,10 +1850,28 @@ CREATE POLICY "Users can view own profile"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ON profiles FOR SELECT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1212,10 +1902,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Real-time Features
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1243,10 +1951,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Supabase**: Real-time uses a separate Realtime Server that listens to PostgreSQL replication. You subscribe to specific channels and tables. It's more configurable but requires explicit setup.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1277,10 +2003,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Aspect | Firebase | Supabase |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1311,10 +2055,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Free tier | Spark plan: 1GB storage, 10GB/month transfer | 500MB database, 2GB storage |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1345,10 +2107,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Predictable pricing | Less predictable (usage-based) | More predictable (compute-based) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1379,10 +2159,28 @@ USING (auth.uid() = user_id);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Firebase's Spark plan is generous for prototyping, but costs can scale unpredictably with usage. Supabase's compute-based model is more predictable.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1413,10 +2211,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Firebase** offers a richer ecosystem of integrations: Crashlytics, Performance Monitoring, Analytics, Cloud Messaging, Remote Config, and A/B Testing. This makes Firebase the better choice for mobile app development where you need these services.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1447,10 +2263,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Choose What
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1481,10 +2315,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You're building a mobile app (iOS/Android) with Google Play Services integration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1509,10 +2361,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your data model is document-oriented and doesn't require complex JOINs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1537,10 +2407,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You want the fastest path to a working prototype
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1571,10 +2459,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your data has complex relationships requiring SQL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1599,10 +2505,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You need full-text search or geospatial queries
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1627,10 +2551,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You need vector embeddings for AI features (pgvector)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1658,10 +2600,28 @@ Firebase's Spark plan is generous for prototyping, but costs can scale unpredict
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

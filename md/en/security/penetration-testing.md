@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/penetration-testing.html
   
 
 
+# Penetration Testing Methodology
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Penetration Testing Methodology
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Penetration Testing Methodology
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Penetration testing simulates real-world attacks to identify security vulnerabil
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The PTES Standard 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,6 +175,15 @@ PTES defines seven phases for penetration testing, each with specific activities
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Phase 1: Pre-Engagement Interactions 
@@ -99,10 +195,28 @@ Phase 1: Pre-Engagement Interactions
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Define scope, rules of engagement, and legal boundaries before any testing begins. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -127,10 +241,28 @@ rules_of_engagement:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 client: "ACME Corp"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -155,6 +287,15 @@ scope:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 in_scope:
@@ -169,11 +310,6 @@ in_scope:
   
   
   
-
-
-\\\\\\\\- "*.acme.com"
-
-  
   
   
   
@@ -185,8 +321,40 @@ in_scope:
   
 
 
-\\\\\\\\- "203.0.113.0/24"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "*.acme.com"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "203.0.113.0/24"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -211,11 +379,6 @@ out_of_scope:
   
   
   
-
-
-\\\\\\\\- "payment.acme.com" # Production payment system
-
-  
   
   
   
@@ -227,8 +390,40 @@ out_of_scope:
   
 
 
-\\\\\\\\- "10.0.0.0/8" # Internal only
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "payment.acme.com" # Production payment system
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "10.0.0.0/8" # Internal only
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -253,25 +448,6 @@ restrictions:
   
   
   
-
-
-\\\\\\\\- no_social_engineering: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- no_dos_attacks: true
-
-  
   
   
   
@@ -283,8 +459,17 @@ restrictions:
   
 
 
-\\\\\\\\- testing_window: "2026-05-15T00:00Z - 2026-05-19T23:59Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_social_engineering: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -297,8 +482,63 @@ restrictions:
   
 
 
-\\\\\\\\- notification_list: ["security@acme.com", "incident-response@acme.com"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_dos_attacks: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_window: "2026-05-15T00:00Z - 2026-05-19T23:59Z"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- notification_list: ["security@acme.com", "incident-response@acme.com"]
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -323,25 +563,6 @@ legal:
   
   
   
-
-
-\\\\\\\\- authorized_signatory: "Jane Doe, CISO"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- insurance_coverage: true
-
-  
   
   
   
@@ -353,8 +574,63 @@ legal:
   
 
 
-\\\\\\\\- data_handling_nda_signed: true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorized_signatory: "Jane Doe, CISO"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- insurance_coverage: true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_handling_nda_signed: true
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -376,10 +652,28 @@ Phase 2: Intelligence Gathering (Reconnaissance)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Reconnaissance builds a target profile through passive and active information gathering. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -404,10 +698,28 @@ Reconnaissance builds a target profile through passive and active information ga
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dig axfr @ns1.acme.com acme.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -432,10 +744,28 @@ dnsrecon -d acme.com -t axfr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dnsrecon -d acme.com -t std --db acme_recon.db
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -460,10 +790,28 @@ dnsrecon -d acme.com -t std --db acme_recon.db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sublist3r -d acme.com -o subdomains.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -488,10 +836,28 @@ sublist3r -d acme.com -o subdomains.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -516,10 +882,28 @@ whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -s "https://crt.sh/?q=%.acme.com&output;=json" | jq -r '.[].name_value' | sort -u
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -541,10 +925,28 @@ Phase 3: Vulnerability Analysis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Analyze gathered information to identify potential vulnerabilities. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -569,10 +971,28 @@ Analyze gathered information to identify potential vulnerabilities.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -597,10 +1017,28 @@ nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -625,10 +1063,28 @@ nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Vulnerability scanning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -653,6 +1109,15 @@ nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Phase 4: Exploitation 
@@ -664,10 +1129,28 @@ Phase 4: Exploitation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Exploitation attempts to breach the target using identified vulnerabilities. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -692,10 +1175,28 @@ Exploitation attempts to breach the target using identified vulnerabilities.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import requests
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -720,10 +1221,28 @@ def test_sqli(url, params):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 payloads = [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -748,10 +1267,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "' UNION SELECT NULL,NULL--",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -776,10 +1313,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "' WAITFOR DELAY '00:00:05'--",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -804,10 +1359,28 @@ payloads = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for param, value in params.items():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -832,10 +1405,28 @@ for payload in payloads:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 test_params = params.copy()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1451,28 @@ test_params[param] = payload
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 start = time.time()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -888,10 +1497,28 @@ resp = requests.get(url, params=test_params, timeout=10)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 elapsed = time.time() - start
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -916,10 +1543,28 @@ elapsed = time.time() - start
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if elapsed > 5:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -944,10 +1589,28 @@ print(f"[!] Time-based SQLi in {param}: {payload}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Error-based detection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -972,10 +1635,28 @@ if any(err in resp.text for err in ["SQL syntax", "mysql_fetch", "ORA-"]):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"[!] Error-based SQLi in {param}: {payload}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -997,10 +1678,28 @@ Phase 5: Post-Exploitation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 After gaining access, assess the value of compromised systems and establish persistence. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1025,10 +1724,28 @@ After gaining access, assess the value of compromised systems and establish pers
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 whoami /all
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1053,10 +1770,28 @@ systeminfo | findstr /B "OS Name OS Version System Type"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net localgroup administrators
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1816,28 @@ netstat -ano
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 wmic product get name,version
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1109,10 +1862,28 @@ wmic product get name,version
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 powershell -Command "Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1134,10 +1905,28 @@ Phase 6: Reporting
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The report is the primary deliverable. It must be clear, actionable, and properly scoped for different audiences. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1162,6 +1951,15 @@ report_structure:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 executive_summary:
@@ -1176,25 +1974,6 @@ executive_summary:
   
   
   
-
-
-\\\\\\\\- risk_rating: "High"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- total_findings: 12
-
-  
   
   
   
@@ -1206,8 +1985,17 @@ executive_summary:
   
 
 
-\\\\\\\\- critical: 2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_rating: "High"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1220,7 +2008,7 @@ executive_summary:
   
 
 
-\\\\\\\\- high: 4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_findings: 12
 
   
   
@@ -1231,11 +2019,6 @@ executive_summary:
   
   
   
-  
-
-
-\\\\\\\\- medium: 4
-
   
   
   
@@ -1248,7 +2031,7 @@ executive_summary:
   
 
 
-\\\\\\\\- low: 2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical: 2
 
   
   
@@ -1260,10 +2043,97 @@ executive_summary:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- business_impact: "SQL injection in main application could lead to complete data breach"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high: 4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium: 4
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- low: 2
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- business_impact: "SQL injection in main application could lead to complete data breach"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1288,10 +2158,28 @@ technical_findings:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- finding_id: "F-001"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- finding_id: "F-001"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1316,10 +2204,28 @@ title: "SQL Injection in /api/search endpoint"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: "Critical"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1344,10 +2250,28 @@ cvss: 9.1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 description: "User input is directly concatenated into SQL queries"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1372,10 +2296,28 @@ affected_endpoint: "POST /api/search"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 poc: "curl -X POST https://app.acme.com/api/search -d 'query=1%27+OR+%271%27%3D%271'"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1400,6 +2342,15 @@ remediation: "Use parameterized queries; implement input validation"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 remediation_timeline:
@@ -1414,25 +2365,6 @@ remediation_timeline:
   
   
   
-
-
-\\\\\\\\- immediate: "Patch critical SQL injection and RCE vulnerabilities"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- short_term: "Implement WAF and input validation"
-
-  
   
   
   
@@ -1444,8 +2376,63 @@ remediation_timeline:
   
 
 
-\\\\\\\\- long_term: "Security training for developers, SAST integration in CI/CD"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- immediate: "Patch critical SQL injection and RCE vulnerabilities"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- short_term: "Implement WAF and input validation"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- long_term: "Security training for developers, SAST integration in CI/CD"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1467,6 +2454,15 @@ Phase 7: Post-Engagement
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cleanup, evidence destruction, and lessons learned. 
@@ -1478,10 +2474,28 @@ Cleanup, evidence destruction, and lessons learned.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

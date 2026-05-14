@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/technical-writing.html
   
 
 
+# Technical Writing Income Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Technical Writing Income Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Technical Writing Income Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Technical writing is one of the most accessible and lucrative side hustles for developers. Companies pay well for clear documentation, tutorials, and technical content. With rates ranging from $200 to $500 per article, a few pieces per month can generate significant side income.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Technical writing is one of the most accessible and lucrative side hustles for d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Good technical writers are scarce. Most developers can write code but struggle to explain concepts clearly. Most professional writers understand language but lack technical depth. Developers who can write well sit at the intersection of these two skill sets, and companies pay a premium for that combination.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Developer tool companies need tutorials and documentation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -157,6 +271,15 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Online publications need contributors who understand technology.
@@ -171,10 +294,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * AI training data requires high-quality technical explanations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -205,10 +346,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Tutorials and how-to guides.** Step-by-step guides showing how to accomplish specific tasks. Paid per article or per word. Typical rates: $200-500 per article (1,500-2,500 words).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -239,10 +398,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Blog posts.** Content marketing for tech companies. SEO-optimized articles targeting developer audiences. Rates: $300-800 per post.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +450,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Course materials.** Writing curriculum for online technical courses. Rates vary widely.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -307,10 +502,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Content marketplaces and platforms:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -338,6 +551,15 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Upwork and ProBlogger**: Mixed quality but good for starting.
@@ -352,10 +574,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Contently and Skyword**: Content marketing platforms with established rates.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -386,10 +626,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Identify developer tool companies with active blogs (e.g., DigitalOcean, Twilio, Auth0, Netlify).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -414,6 +672,15 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Send a pitch with 3-5 article ideas, a writing sample, and your rate.
@@ -428,10 +695,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Many companies have standing budgets for contributed content.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -462,10 +747,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * FreeCodeCamp (pays for tutorials).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -490,6 +793,15 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * CSS-Tricks (pays for contributed content).
@@ -504,10 +816,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Dev.to (lower rates but excellent portfolio building).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -538,10 +868,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Companies are often desperate for technical writers to document internal systems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -566,10 +914,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Offer to document their codebase, API, or internal tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -600,10 +966,28 @@ The demand for technical content is massive and growing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Your first few pieces establish credibility. If you have no published work:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -634,14 +1018,6 @@ Your first few pieces establish credibility. If you have no published work:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Publish on your own blog.** A well-written blog post demonstrates capability. Use it as a writing sample when pitching.
-
-  
-  
-  
-  
   
   
   
@@ -653,7 +1029,7 @@ Your first few pieces establish credibility. If you have no published work:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Contributing to documentation.** Improve open source project documentation. It is public, visible, and demonstrates real technical documentation skills.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Publish on your own blog.** A well-written blog post demonstrates capability. Use it as a writing sample when pitching.
 
   
   
@@ -668,10 +1044,54 @@ Your first few pieces establish credibility. If you have no published work:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ghostwriting.** Write articles that will be published under someone else's name. The pay is good, and you gain portfolio examples (with permission to use as samples).
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Contributing to documentation.** Improve open source project documentation. It is public, visible, and demonstrates real technical documentation skills.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ghostwriting.** Write articles that will be published under someone else's name. The pay is good, and you gain portfolio examples (with permission to use as samples).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -702,10 +1122,28 @@ Your first few pieces establish credibility. If you have no published work:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rates depend on experience, specialization, and the client:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -736,10 +1174,28 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Blog posts: $200-300 per article.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -764,10 +1220,28 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Editing and review: $30-50 per hour.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -798,10 +1272,28 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Blog posts: $400-800 per article.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1318,28 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Whitepapers: $2,000-5,000 per project.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,6 +1370,15 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Blog posts: $800-2,000 per article.
@@ -874,10 +1393,28 @@ Rates depend on experience, specialization, and the client:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Documentation: $125-200 per hour.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -908,10 +1445,28 @@ Negotiate based on value, not time. If your article generates $10,000 in traffic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Writing Effective Technical Content
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -942,10 +1497,28 @@ Negotiate based on value, not time. If your article generates $10,000 in traffic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Use code examples.** Every abstraction needs a concrete example. Show the code, explain what it does, and show the output.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -976,10 +1549,28 @@ Negotiate based on value, not time. If your article generates $10,000 in traffic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Include troubleshooting sections.** Your readers will hit problems. Anticipate common errors and explain how to fix them.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1010,10 +1601,28 @@ Negotiate based on value, not time. If your article generates $10,000 in traffic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Scaling Income
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1044,10 +1653,28 @@ To grow beyond side-hustle income:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Develop a specialization.** Become the go-to writer for a specific technology (Kubernetes, React, Rust, etc.).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1072,10 +1699,28 @@ To grow beyond side-hustle income:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Offer packages.** "I will write 4 blog posts per month for $2,000" is more valuable to a client than one-off pieces.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1103,10 +1748,28 @@ To grow beyond side-hustle income:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

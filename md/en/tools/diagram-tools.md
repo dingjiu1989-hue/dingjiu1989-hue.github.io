@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/diagram-tools.html
   
 
 
+# Best Diagram as Code Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best Diagram as Code Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Best Diagram as Code Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Integrate with Markdown documentation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,6 +268,15 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Can be run in CI/CD pipelines.
@@ -168,10 +291,28 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Work in any editor with syntax highlighting.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -202,6 +343,15 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax.
@@ -219,10 +369,28 @@ Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 graph TD
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -253,10 +421,28 @@ A[Client] -->|HTTP| B[Load Balancer]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B --> C[Web Server 1]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -287,10 +473,28 @@ B --> D[Web Server 2]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 C --> E[(Database)]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -321,10 +525,28 @@ D --> E
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 E --> F[Cache]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -355,10 +577,28 @@ graph TD
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A[Client] -->|HTTP| B[Load Balancer]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -389,10 +629,28 @@ B --> C[Web Server 1]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B --> D[Web Server 2]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -423,6 +681,15 @@ C --> E[(Database)]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 D --> E
@@ -440,10 +707,28 @@ D --> E
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 E --> F[Cache]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -474,10 +759,28 @@ E --> F[Cache]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Flowchart, Sequence diagram, Class diagram
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -502,6 +805,15 @@ E --> F[Cache]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Gantt chart, Pie chart, Git graph
@@ -516,10 +828,28 @@ E --> F[Cache]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * User Journey, C4 diagram (decomposition)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -550,10 +880,28 @@ sequenceDiagram
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 participant User
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -584,10 +932,28 @@ participant API
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 participant DB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -618,10 +984,28 @@ User->>API: POST /login
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 API->>DB: SELECT user
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -652,10 +1036,28 @@ DB-->>API: user data
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 API->>API: validate password
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -686,10 +1088,28 @@ API-->>User: JWT token
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Native GitHub/GitLab support, wide diagram type support, simple syntax, active development.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -720,10 +1140,28 @@ API-->>User: JWT token
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Installation:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -754,10 +1192,28 @@ npm install -g @mermaid-js/mermaid-cli
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mmdc -i input.mmd -o output.png
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -788,10 +1244,28 @@ mmdc -i input.mmd -o output.png
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -822,10 +1296,28 @@ PlantUML is a mature diagram-as-code tool with Java-based rendering and extensiv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 actor User
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -856,10 +1348,28 @@ participant "API Gateway" as GW
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 participant "Auth Service" as Auth
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -890,10 +1400,28 @@ database "User DB" as DB
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 User -> GW: POST /auth/login
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -924,10 +1452,28 @@ GW -> Auth: validate credentials
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Auth -> DB: query user
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -958,10 +1504,28 @@ DB --> Auth: user record
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Auth --> GW: JWT token
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -992,10 +1556,28 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 @enduml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1026,10 +1608,28 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Sequence, Use Case, Class, Activity, Component
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1054,6 +1654,15 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Archimate, Gantt, Mind Map, Work Breakdown
@@ -1068,10 +1677,28 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Network diagram, JSON/YAML visualization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1102,6 +1729,15 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Java dependency, syntax can be verbose, slower rendering than Mermaid.
@@ -1119,10 +1755,28 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Installation:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1153,10 +1807,28 @@ GW --> User: 200 OK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1187,10 +1859,28 @@ docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 java -jar plantuml.jar diagram.puml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1221,10 +1911,28 @@ java -jar plantuml.jar diagram.puml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly "diagram as code," but the .excalidraw format is JSON and can be version controlled.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1255,10 +1963,28 @@ Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is n
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Not text-based, no code generation, manual placement.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1289,10 +2015,28 @@ Excalidraw has a CLI tool for embedding in workflows:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npx @excalidraw/cli export diagram.excalidraw --output diagram.png
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1323,10 +2067,28 @@ npx @excalidraw/cli export diagram.excalidraw --output diagram.png
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1357,10 +2119,28 @@ from diagrams import Diagram, Cluster
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from diagrams.aws.compute import EC2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1391,10 +2171,28 @@ from diagrams.aws.database import RDS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from diagrams.aws.network import ELB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1425,10 +2223,28 @@ with Diagram("Web Service", show=False):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lb = ELB("Load Balancer")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1459,10 +2275,28 @@ web = EC2("Web Server")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 db = RDS("Database")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1493,10 +2327,28 @@ lb >> web >> db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Output Style:** Structured cloud architecture diagrams with official service icons.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1527,10 +2379,28 @@ lb >> web >> db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Limited to cloud architecture, not general-purpose diagramming.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1561,10 +2431,28 @@ lb >> web >> db
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pip install diagrams
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1595,10 +2483,28 @@ python diagram.py # Generates diagram.png
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  D2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1629,10 +2535,28 @@ D2 is a newer diagram-as-code language by Terrastruct, designed to address Merma
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Client -> Load Balancer: HTTP
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1663,10 +2587,28 @@ Load Balancer -> Web Server 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Load Balancer -> Web Server 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1697,10 +2639,28 @@ Web Server 1 -> Database: SQL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Web Server 2 -> Database: SQL
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1731,10 +2691,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Better auto-layout than Mermaid, cleaner output, fast rendering, animated diagrams.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1765,10 +2743,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Comparison Table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1799,10 +2795,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---------|---------|----------|------------|----------|-----|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1833,10 +2847,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Diagram types | 10+ | 20+ | Free-form | Cloud arch | 5+ |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1867,10 +2899,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | CI/CD support | CLI | CLI | CLI | Python | CLI |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1901,10 +2951,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Speed | Fast | Medium | N/A | Fast | Fast |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1935,10 +3003,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Integration with Documentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1969,10 +3055,28 @@ Database -> Redis Cache: Cache read/write
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 graph LR
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2003,10 +3107,28 @@ A --> B
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B --> C
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2037,10 +3159,28 @@ Rendered automatically on GitHub, GitLab, and with Markdown renderers that suppo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **In MkDocs with Material Theme:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2071,6 +3211,15 @@ Rendered automatically on GitHub, GitLab, and with Markdown renderers that suppo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 markdown_extensions:
@@ -2088,10 +3237,28 @@ markdown_extensions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- pymdownx.superfences:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2122,10 +3289,28 @@ custom_fences:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: mermaid
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: mermaid
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2156,10 +3341,28 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **In VS Code:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2190,10 +3393,28 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "extensions": ["bierner.markdown-mermaid"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2224,10 +3445,28 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **For GitHub documentation**: Mermaid (native support, simplest syntax).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2252,6 +3491,15 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **For cloud architecture**: Diagrams (official icons, Python integration).
@@ -2266,10 +3514,28 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **For whiteboarding**: Excalidraw (best visual output for brainstorming).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2297,10 +3563,28 @@ class: mermaid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

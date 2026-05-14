@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html
   
 
 
+# Structured Logging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Structured Logging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Structured Logging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ The JSON log format is the standard. Each log line is a JSON object with require
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Correlation IDs bridge logs across service boundaries. When a request enters the system, it is assigned a trace ID (UUID). This ID is propagated to all downstream services through HTTP headers or message metadata. Every log entry within that request's scope includes the trace ID. When investigating an issue, the trace ID ties together logs from the API gateway, the order service, the payment service, and the database — providing a unified view of what happened during that specific request. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Log levels should be used consistently across services. DEBUG: detailed informat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Context propagation through the logging system is essential for debugging. When an error occurs, the log entry should include the full context of what the service was doing, what input it received, and what state it was in. This context should be added incrementally as the request progresses through the code. A good logging library supports implicit context propagation — once you set a context key on a logger instance, all subsequent log calls include it automatically. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Logging libraries should support structured output natively. In Go, zerolog and 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Log aggregation infrastructure ingests and indexes logs for querying. The ELK stack (Elasticsearch, Logstash, Kibana) is the most common self-hosted option. Loki (Grafana's log aggregation system) indexes only metadata and relies on the log timestamp for ordering, reducing storage requirements. Cloud options include AWS OpenSearch, Google Cloud Logging, and Azure Monitor. The aggregation system should preserve the structured fields for querying — timestamps for time-range queries, levels for filtering, trace IDs for correlation. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Log sampling reduces volume for high-traffic services. Sampling strategies inclu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dynamic debugging with structured logging enables log-based metrics. If a log entry includes a response_time_ms field, the aggregation system can compute percentile latency metrics directly from logs without separate instrumentation. This is useful for ad-hoc analysis but should not replace purpose-built metrics for production alerting, as log-based metric computation is more expensive. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

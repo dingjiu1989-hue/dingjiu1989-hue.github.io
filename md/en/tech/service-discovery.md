@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/service-discovery.html
   
   
   
+  
+  
+  
+
+
+# Service Discovery in Microservices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Service Discovery in Microservices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Service Discovery in Microservices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Service discovery enables services to find and communicate with each other in a 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Effective service discovery handles dynamic environments. It reacts to instance 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  DNS-Based Discovery
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ DNS-based service discovery uses DNS records to resolve service names to IP addr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The simplest approach uses round-robin DNS. Multiple A records return IP addresses in rotating order, distributing requests across instances. More sophisticated approaches use DNS with health checking—only healthy instances are included in DNS responses.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ DNS-based discovery is simple and ubiquitous. Every system has a DNS resolver. H
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Consul
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ HashiCorp Consul provides service discovery with health checking, key-value stor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Consul uses DNS for backward compatibility: `orders.service.consul` resolves to available instance IPs. It also provides an HTTP API for richer discovery: querying by service name, tags, and health status. Consul's gossip protocol provides distributed health checking without a central server.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Consul supports service mesh integration through Consul Connect, providing mTLS 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Kubernetes Service Discovery
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Kubernetes provides built-in service discovery through Services and DNS. Each Se
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Kubernetes Services support several types: ClusterIP (internal only), NodePort (accessible on each node's IP), LoadBalancer (cloud load balancer), and ExternalName (DNS alias). ClusterIP Services are the default for internal service-to-service communication.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Kubernetes endpoints track Pod health and readiness. Only ready Pods are include
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Client-Side vs Server-Side Discovery
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ In client-side discovery, the client directly queries the service registry and s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 In server-side discovery, the client sends requests to a load balancer or API gateway, which queries the service registry and forwards the request to an available instance. The client does not know about individual instances—it only knows the load balancer address.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ In server-side discovery, the client sends requests to a load balancer or API ga
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Health checking is integral to service discovery. Services must differentiate between "running" and "ready." A service may be running but not ready to receive traffic. Readiness checks determine traffic eligibility.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,6 +719,15 @@ Health checks should test meaningful service functionality. A health endpoint th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Use Each Approach
@@ -469,10 +745,28 @@ Health checks should test meaningful service functionality. A health endpoint th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

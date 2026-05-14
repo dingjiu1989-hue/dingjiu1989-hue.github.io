@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/linux-performance-tuning.html
   
   
   
+  
+  
+  
+
+
+# Linux Performance Tuning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Linux Performance Tuning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Linux Performance Tuning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Linux performance tuning is essential for running efficient production workloads. Understanding how the kernel manages CPU, memory, disk, and network resources allows you to identify bottlenecks and optimize accordingly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Linux performance tuning is essential for running efficient production workloads
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Brendan Gregg's USE (Utilization, Saturation, Errors) method provides a systematic approach to performance analysis:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Brendan Gregg's USE (Utilization, Saturation, Errors) method provides a systemat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Saturation**: How much extra work is queued?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Brendan Gregg's USE (Utilization, Saturation, Errors) method provides a systemat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Apply this to CPU, memory, storage, and network resources to quickly identify the bottleneck.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Apply this to CPU, memory, storage, and network resources to quickly identify th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Monitoring Tools
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Apply this to CPU, memory, storage, and network resources to quickly identify th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 htop
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ htop
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 top -o %CPU
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ top -o %CPU
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vmstat 1 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ vmstat 1 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mpstat -P ALL 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ High context switch rates (above 50,000 per second per core) may indicate ineffi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Kernel Parameters
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ High context switch rates (above 50,000 per second per core) may indicate ineffi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kernel.sched_min_granularity_ns = 3000000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ kernel.sched_wakeup_granularity_ns = 4000000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kernel.sched_migration_cost_ns = 500000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ kernel.sched_nr_migrate = 32
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 These scheduler parameters reduce latency for interactive workloads. Adjust carefully -- aggressive settings can hurt throughput.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ These scheduler parameters reduce latency for interactive workloads. Adjust care
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Monitoring Memory
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ These scheduler parameters reduce latency for interactive workloads. Adjust care
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 free -h
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ free -h
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cat /proc/meminfo
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ cat /proc/meminfo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sar -B 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ sar -B 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ps aux --sort=-%mem | head
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ Check `sar -B` for page fault rates. High `pgmajfault` values indicate the syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Swappiness
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ Check `sar -B` for page fault rates. High `pgmajfault` values indicate the syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vm.swappiness = 10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ vm.swappiness = 10
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sysctl vm.swappiness=10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ For database servers, set swappiness to 1 to avoid swapping. For desktops and ge
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Transparent Huge Pages
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ Disable THP for database workloads:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ echo never > /sys/kernel/mm/transparent_hugepage/defrag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 THP can cause latency spikes in database systems due to memory defragmentation pauses.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ THP can cause latency spikes in database systems due to memory defragmentation p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### I/O Scheduler
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ Choose the right I/O scheduler for your workload:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Check current scheduler
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ cat /sys/block/nvme0n1/queue/scheduler
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Set to none for NVMe, mq-deadline for spinning disks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ echo none > /sys/block/nvme0n1/queue/scheduler
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern NVMe drives perform best with the `none` (or `nvme`) scheduler. Spinning disks benefit from `mq-deadline` which minimizes seek times.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ Modern NVMe drives perform best with the `none` (or `nvme`) scheduler. Spinning 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # I/O statistics per device
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ iostat -x 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Process-level I/O
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ iotop
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # File system latency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ bcc-tools/biolatency
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 High `await` times (above 20ms) indicate disk saturation. Check `iowait` in `top` and `svctm` in `iostat` for confirmation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ High `await` times (above 20ms) indicate disk saturation. Check `iowait` in `top
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Kernel Network Parameters
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ High `await` times (above 20ms) indicate disk saturation. Check `iowait` in `top
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.core.somaxconn = 65535
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ net.core.netdev_max_backlog = 50000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.ipv4.tcp_tw_reuse = 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ net.ipv4.tcp_fin_timeout = 15
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.ipv4.tcp_keepalive_time = 300
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ net.ipv4.tcp_keepalive_intvl = 60
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.ipv4.tcp_keepalive_probes = 5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ net.core.rmem_max = 134217728
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.core.wmem_max = 134217728
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ net.ipv4.tcp_rmem = 4096 87380 134217728
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 net.ipv4.tcp_wmem = 4096 65536 134217728
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ Increase socket buffer sizes for high-throughput applications. `tcp_tw_reuse` al
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Network Monitoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ Increase socket buffer sizes for high-throughput applications. `tcp_tw_reuse` al
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sar -n DEV 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ sar -n DEV 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ss -s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ ss -s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 netstat -s | grep -i "connections established"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ Monitor for dropped packets in `/proc/net/softnet_stat` and TCP retransmits with
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  File System Tuning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ Monitor for dropped packets in `/proc/net/softnet_stat` and TCP retransmits with
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Optimize filesystem mount options for performance:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ Optimize filesystem mount options for performance:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 /dev/sda1 / ext4 noatime,nodiratime,data=ordered 0 0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ The `noatime` option eliminates update timestamps on every file read, significan
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### I/O Limits with cgroups
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ Control per-process I/O with cgroups v2:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Limit read/write to 50 MB/s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ echo "8:0 rbps=52428800 wbps=52428800" > /sys/fs/cgroup//io.max
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Application-Level Tuning
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2695,28 @@ Profile before tuning. Use `perf` for CPU profiling, `flamegraphs` for visualiza
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Sample CPU stacks at 99Hz
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,10 +2747,28 @@ perf record -F 99 -a -g -- sleep 30
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 perf script | ./stackcollapse-perf.pl | ./flamegraph.pl > profile.svg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ Always measure before and after changes. A single benchmark run is unreliable --
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/css-grid-flexbox.html
   
   
   
+  
+  
+  
+
+
+# CSS Grid and Flexbox: Modern Layout Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CSS Grid and Flexbox: Modern Layout Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CSS Grid and Flexbox: Modern Layout Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CSS Grid and Flexbox are the two modern layout systems that replaced float-based layouts. They work best when used together—Grid for page-level layout, Flexbox for component-level alignment.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ CSS Grid and Flexbox are the two modern layout systems that replaced float-based
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Flexbox distributes space along a single axis (row or column). Use display: flex on the container and flex properties on children. Main axis properties (justify-content) control distribution. Cross axis properties (align-items) control alignment.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Flexbox excels at one-dimensional layouts: navigation bars, card rows, centered 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  CSS Grid
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Grid creates two-dimensional layouts with rows and columns. Define the grid with
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Grid excels at page layouts and component layouts requiring two-dimensional alignment. The fr unit distributes available space proportionally. minmax() creates responsive tracks. auto-fill and auto-fit create responsive layouts without media queries. Grid areas (grid-template-areas) provide visual mapping of layout regions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Grid excels at page layouts and component layouts requiring two-dimensional alig
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Both Grid and Flexbox are inherently responsive. Flexbox wraps items with flex-wrap. Grid adjusts tracks with auto-fill/auto-fit and minmax(). Combine with media queries for breakpoint-specific layouts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Use clamp() for fluid typography and spacing: clamp(1rem, 2.5vw, 2rem). Containe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Common Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

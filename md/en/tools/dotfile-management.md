@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/dotfile-management.html
   
 
 
+# Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Dotfile Management: chezmoi, GNU Stow, Bare Git Repos
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Dotfiles — configuration files for your shell, editor, git, and other tools �
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Bare Git Repo
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The simplest approach: use git directly without any additional tool:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Initialize a bare repository in your home directory
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,6 +277,15 @@ git init --bare $HOME/.dotfiles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create an alias to manage it
@@ -180,10 +303,28 @@ git init --bare $HOME/.dotfiles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'" >> ~/.zshrc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dotfiles status
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ dotfiles add ~/.zshrc ~/.gitconfig ~/.tmux.conf
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dotfiles commit -m "Initial dotfiles"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ dotfiles remote add origin git@github.com:user/dotfiles.git
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dotfiles push -u origin main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ dotfiles push -u origin main
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git clone --bare https://github.com/user/dotfiles.git $HOME/.dotfiles
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dotfiles checkout
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ dotfiles checkout
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: No templating (machine-specific configs require symlink hacks). Lacks encryption for secrets. Easy to accidentally commit sensitive data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ dotfiles checkout
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Stow creates symlinks from a structured directory to your home directory:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Stow creates symlinks from a structured directory to your home directory:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ~/dotfiles/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ zsh/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .zshrc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ zsh/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 git/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ git/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .gitignore_global
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ tmux/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .tmux.conf
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ nvim/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 .config/nvim/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ init.lua
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install all packages
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ stow -t $HOME zsh git tmux nvim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Stow creates symlinks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ stow -t $HOME zsh git tmux nvim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # ~/dotfiles/git/.gitconfig -> ~/.gitconfig
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ stow -t $HOME zsh git tmux nvim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stow -D -t $HOME zsh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ stow -D -t $HOME zsh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stow -R -t $HOME nvim
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ stow -R -t $HOME nvim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: No templating. No encryption. Conflicts if files overlap. Root privileges needed for system configs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ stow -R -t $HOME nvim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi is purpose-built for dotfile management with advanced features:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ chezmoi is purpose-built for dotfile management with advanced features:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ sh -c "$(curl -fsLS get.chezmoi.io)"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi init
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ chezmoi init
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi add ~/.zshrc
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ chezmoi add ~/.config/nvim/init.lua
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Edit a tracked file
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ chezmoi edit ~/.zshrc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # See what would change
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,6 +1707,15 @@ chezmoi diff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Apply changes
@@ -1115,10 +1733,28 @@ chezmoi diff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi apply
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ chezmoi apply
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi init https://github.com/user/dotfiles.git
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ chezmoi apply
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Templating with chezmoi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ chezmoi supports Go templates for machine-specific configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # .zshrc.tmpl — template file
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ export EDITOR='{{ if eq .chezmoi.os "darwin" }}code{{ else }}nvim{{ end }}'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{ if eq .chezmoi.hostname "work-laptop" }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ export WORK_MODE=true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 export AWS_PROFILE=work
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ export AWS_PROFILE=work
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Template data includes: OS, hostname, architecture, username, and custom variables
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ export AWS_PROFILE=work
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Store secrets in your password manager
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ chezmoi secret set github_token
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi secret set ssh_private_key
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ chezmoi secret set ssh_private_key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {{ (secret "github_token") | quote }}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ chezmoi secret set ssh_private_key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh/id_ed25519.age
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | Bare Git | GNU Stow | chezmoi |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Dependencies | Git only | Stow + Git | chezmoi binary |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Secret management | Manual encryption | Manual encryption | Built-in (age/gpg/password managers) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Cross-platform | Yes | Unix only | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Scriptability | Git commands | Shell scripts | `chezmoi apply` |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1690,10 +2614,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Multiple Unix machines**: GNU Stow provides clean structure with minimal dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1718,6 +2660,15 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Need secret management**: chezmoi's built-in encryption and password manager integration is essential.
@@ -1732,10 +2683,28 @@ chezmoi age encrypt ~/.ssh/id_ed25519 > ~/.local/share/chezmoi/encrypted_dot_ssh
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Team dotfiles**: chezmoi's robust apply/diff workflow supports collaboration safely.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

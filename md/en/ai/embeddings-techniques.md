@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/embeddings-techniques.html
   
   
   
+  
+  
+  
+
+
+# Embeddings: Techniques and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Embeddings: Techniques and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Embeddings: Techniques and Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Embeddings convert text into dense vector representations that capture semantic meaning. They are the foundation of semantic search, clustering, recommendation systems, and retrieval-augmented generation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Embeddings convert text into dense vector representations that capture semantic 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Different embedding models excel at different tasks. OpenAI text-embedding-ada-002 (1536 dimensions) is a strong general-purpose model. text-embedding-3-small (512-1536) offers better performance at lower cost. Sentence-transformers (all-MiniLM-L6-v2, 384 dimensions) run locally.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Multilingual embeddings support cross-lingual retrieval. intfloat/multilingual-e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Embedding Quality Factors
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Embedding quality depends on training data, model architecture, and dimension. H
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Text normalization matters. Remove irrelevant formatting, standardize whitespace, and handle special characters consistently. Longer texts average out—1024 tokens is a good default chunk size. Experiment with different prefix instructions ("search_query:" vs "search_document:") for asymmetric search.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Text normalization matters. Remove irrelevant formatting, standardize whitespace
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cosine similarity is the most common metric. It measures the angle between vectors, ignoring magnitude. Dot product considers both angle and magnitude—use with normalized vectors for cosine equivalence. Euclidean distance captures magnitude differences—useful for clustering.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Choose similarity based on your embedding model. OpenAI embeddings use cosine si
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Vector Databases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Pinecone, Weaviate, Qdrant, and Milvus are purpose-built vector databases. Postg
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Navigable Small World) offers fast approximate nearest neighbor search. IVF (Inverted File Index) is more memory-efficient. Brute force search is exact but slow for large collections.
@@ -279,10 +456,28 @@ Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Naviga
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Preprocessing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

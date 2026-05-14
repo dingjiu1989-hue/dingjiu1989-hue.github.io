@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/compare/prisma-vs-drizzle.html
   
 
 
+# Prisma vs Drizzle ORM
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Prisma vs Drizzle ORM
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Prisma vs Drizzle ORM
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Prisma vs Drizzle: Modern ORMs for TypeScript
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ TypeScript ORMs have evolved significantly, with Prisma ORM and Drizzle ORM lead
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Architecture and Philosophy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Prisma takes an opinionated, schema-first approach. You define your database sch
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Drizzle takes a SQL-like, code-first approach. You write schema in TypeScript using Drizzle's schema builder, and queries are written as TypeScript functions that mirror SQL syntax. Drizzle maps directly to the database driver — there is no query engine layer. This minimal abstraction results in cleaner stack traces, easier debugging, and lower overhead.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Drizzle takes a SQL-like, code-first approach. You write schema in TypeScript us
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prisma's query API is object-oriented and declarative. A query like `prisma.user.findMany({ where: { email: { contains: "example" } }, include: { posts: true } })` is intuitive but abstracts SQL syntax entirely. Prisma provides excellent type safety, with full autocompletion of relations and field-level type checking. However, complex queries require raw SQL or less intuitive API patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Drizzle's query API mirrors SQL syntax: `db.select().from(users).where(eq(users.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Performance Characteristics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Prisma's query engine overhead is measurable. Simple queries add 1-5ms of latenc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Drizzle's abstraction is virtually zero-cost. Queries compile to prepared statements sent directly to the database driver. Drizzle consistently performs within 5% of raw SQL while providing full type safety. For high-throughput applications, Drizzle's minimal overhead is a significant advantage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Drizzle's abstraction is virtually zero-cost. Queries compile to prepared statem
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prisma excels in tooling. Prisma Studio provides a web-based GUI for database exploration, `prisma migrate` handles schema migrations elegantly, and the VS Code extension offers real-time schema validation. The Prisma Data Platform provides connection pooling and database insights.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Drizzle offers `drizzle-kit` for migrations, which is file-based and determinist
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Ecosystem and Compatibility
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Prisma supports PostgreSQL, MySQL, SQLite, SQL Server, MongoDB, and CockroachDB 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Drizzle supports PostgreSQL, MySQL, SQLite, and Turso (D1) with full type safety. Drizzle's edge-compatible design works natively with Cloudflare Workers, Vercel Edge Functions, and Neon serverless. The ability to use the same query syntax across edge environments is compelling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Drizzle supports PostgreSQL, MySQL, SQLite, and Turso (D1) with full type safety
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Choose Prisma for rapid prototyping, teams that prefer schema-first design, when Prisma Studio's GUI is valuable, or when full migration workflow automation is needed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Choose Drizzle for performance-critical applications, SQL-savvy teams, edge/serv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

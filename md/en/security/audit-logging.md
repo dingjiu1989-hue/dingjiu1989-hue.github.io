@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/audit-logging.html
   
   
   
+  
+  
+  
+
+
+# Audit Logging Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Audit Logging Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Audit Logging Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Audit logs are the authoritative record of who did what, when, and where in a sy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Immutable Logs 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Log immutability prevents attackers or insiders from covering their tracks by mo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write-Once, Read-Many (WORM) Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ import hashlib
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import hmac
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ import json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from datetime import datetime
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ class ImmutableAuditLogger:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, storage_backend, hmac_key):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ self.storage = storage_backend
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.hmac_key = hmac_key.encode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ def write_log(self, event):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Write a tamper-evident log entry."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ def write_log(self, event):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'event': event,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ entry = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prev_entry = self.storage.get_last()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ if prev_entry:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry['prev_hash'] = prev_entry['hash']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ else:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry['prev_hash'] = '0' * 64
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ entry['prev_hash'] = '0' * 64
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry_json = json.dumps(entry, sort_keys=True)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ entry_hash = hashlib.sha256(entry_json.encode()).hexdigest()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry['hash'] = entry_hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,6 +979,15 @@ entry['hash'] = entry_hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 entry['signature'] = hmac.new(
@@ -639,10 +1005,28 @@ entry['signature'] = hmac.new(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.hmac_key,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,6 +1057,15 @@ entry_hash.encode(),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hashlib.sha256
@@ -690,10 +1083,28 @@ hashlib.sha256
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ).hexdigest()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ hashlib.sha256
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log_id = f"{entry['timestamp']}_{entry['sequence']}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ self.storage.write(log_id, entry)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return entry
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ def verify_chain(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Verify integrity of the entire log chain."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ entries = self.storage.get_all()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prev_hash = '0' * 64
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ for entry in entries:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Verify hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ entry_copy = {k: v for k, v in entry.items()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if k not in ('hash', 'signature')}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,6 +1447,15 @@ computed_hash = hashlib.sha256(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 json.dumps(entry_copy, sort_keys=True).encode()
@@ -945,10 +1473,28 @@ json.dumps(entry_copy, sort_keys=True).encode()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ).hexdigest()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ if computed_hash != entry['hash']:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return False, f"Hash mismatch at sequence {entry['sequence']}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ return False, f"Hash mismatch at sequence {entry['sequence']}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if entry['prev_hash'] != prev_hash:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ return False, f"Chain break at sequence {entry['sequence']}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Verify HMAC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ expected_sig = hmac.new(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.hmac_key,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ entry['hash'].encode(),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hashlib.sha256
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ hashlib.sha256
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if not hmac.compare_digest(expected_sig, entry['signature']):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ return False, f"Signature mismatch at sequence {entry['sequence']}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 prev_hash = entry['hash']
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ return True, "Log chain verified"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Append-Only Logging 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # /etc/audit/rules.d/audit.rules
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -e 2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -w /usr/bin/su -p x -k privilege_escalation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Log critical file access
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -w /etc/shadow -p wa -k shadow_changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Log system calls for process creation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Log network configuration changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -w /sbin/ip6tables -p x -k firewall_changes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ Append-Only Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -a exclude,never -F auid>=1000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ Log Integrity Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Forward logs to remote syslog server (prevents local tampering)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ Log Integrity Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 *.* @@logs.example.com:514 # TCP with TLS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ $ActionSendStreamDriver gtls
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 $ActionSendStreamDriverMode 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ $ActionSendStreamDriverAuthMode x509/name
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 $ActionSendStreamDriverPermittedPeer *.example.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,6 +2617,15 @@ $ActionSendStreamDriverPermittedPeer *.example.com
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 filebeat.inputs:
@@ -1710,10 +2643,28 @@ filebeat.inputs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,14 +2695,6 @@ paths:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/audit/*.log
-
-  
-  
-  
-  
   
   
   
@@ -1763,7 +2706,7 @@ paths:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/syslog
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/audit/*.log
 
   
   
@@ -1778,10 +2721,54 @@ paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/auth.log
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/syslog
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/auth.log
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1812,10 +2799,28 @@ fields:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 environment: production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ log_type: security_audit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 output.elasticsearch:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ hosts: ["https://elasticsearch.example.com:9200"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 protocol: "https"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ ssl.verification_mode: certificate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Centralized Logging Architecture 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,6 +3007,15 @@ Centralized Logging Architecture
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scrape_configs:
@@ -1965,10 +3033,28 @@ scrape_configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: audit-logs
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- job_name: audit-logs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,14 +3085,6 @@ static_configs:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets:
-
-  
-  
-  
-  
   
   
   
@@ -2018,8 +3096,43 @@ static_configs:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- localhost
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- localhost
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2050,10 +3163,28 @@ labels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 job: audit-logs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ environment: production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 __path__: /var/log/audit/*.log
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,10 +3267,28 @@ pipeline_stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- json:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- json:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2152,10 +3319,28 @@ expressions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 timestamp: timestamp
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2186,10 +3371,28 @@ event_type: event.type
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 user: event.user
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2220,10 +3423,28 @@ action: event.action
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource: event.resource
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2254,10 +3475,28 @@ result: event.result
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- labels:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- labels:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2288,6 +3527,15 @@ event_type: ""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 result: ""
@@ -2305,10 +3553,28 @@ result: ""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- timestamp:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- timestamp:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2339,10 +3605,28 @@ source: timestamp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 format: RFC3339
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,10 +3657,28 @@ Log Retention Policies
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 retention_policies:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2407,10 +3709,28 @@ security_audit_logs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 retention: 365_days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2441,10 +3761,28 @@ storage: warm_glacier
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 compliance: soc2_pci_hipaa
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2475,6 +3813,15 @@ application_logs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 retention: 30_days
@@ -2492,10 +3839,28 @@ retention: 30_days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 storage: hot
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,10 +3891,28 @@ compliance: operational
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 debug_logs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ retention: 7_days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 storage: hot
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,10 +3995,28 @@ compliance: none
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 access_logs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2628,10 +4047,28 @@ retention: 90_days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 storage: warm
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ compliance: soc2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 backup_logs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,10 +4151,28 @@ retention: 3_years
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 storage: glacier
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2730,10 +4203,28 @@ compliance: legal_hold
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Automated log rotation and archival
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2764,10 +4255,28 @@ class LogRotationManager:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, log_directory, archive_bucket):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2798,10 +4307,28 @@ self.log_dir = Path(log_directory)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.archive_bucket = archive_bucket
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2832,10 +4359,28 @@ def rotate_and_archive(self, retention_days=365):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 now = datetime.utcnow()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2866,10 +4411,28 @@ for log_file in self.log_dir.glob("audit-*.log"):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 file_age = now - datetime.fromtimestamp(log_file.stat().st_mtime)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2900,10 +4463,28 @@ if file_age.days > retention_days:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Compress
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2934,10 +4515,28 @@ gzip_path = log_file.with_suffix('.log.gz')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with open(log_file, 'rb') as f_in:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2968,10 +4567,28 @@ with gzip.open(gzip_path, 'wb') as f_out:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 shutil.copyfileobj(f_in, f_out)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3002,10 +4619,28 @@ shutil.copyfileobj(f_in, f_out)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.archive_bucket.upload(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3036,10 +4671,28 @@ str(gzip_path),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f"audit_logs/{gzip_path.name}"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3070,10 +4723,28 @@ f"audit_logs/{gzip_path.name}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Delete local copy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3104,10 +4775,28 @@ log_file.unlink()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gzip_path.unlink()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3138,10 +4827,28 @@ Compliance Requirements
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 audit_log_compliance_mapping:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3172,31 +4879,6 @@ pci_dss_10:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.2" # Audit trails for all access
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.3" # Record audit trail entries
-
-  
-  
-  
-  
   
   
   
@@ -3208,8 +4890,17 @@ pci_dss_10:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.4" # Protect audit trail files
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.2" # Audit trails for all access
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3225,7 +4916,7 @@ pci_dss_10:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.5" # Secure audit trails
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.3" # Record audit trail entries
 
   
   
@@ -3240,10 +4931,80 @@ pci_dss_10:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.7" # Retain audit history for 12 months
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.4" # Protect audit trail files
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.5" # Secure audit trails
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "10.7" # Retain audit history for 12 months
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3274,14 +5035,6 @@ soc2_cc6:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- criteria: "CC6.1" # Logical and physical access controls
-
-  
-  
-  
-  
   
   
   
@@ -3293,8 +5046,43 @@ soc2_cc6:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- criteria: "CC6.4" # Restricted access to audit trails
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- criteria: "CC6.1" # Logical and physical access controls
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- criteria: "CC6.4" # Restricted access to audit trails
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3325,14 +5113,6 @@ gdpr_article_30:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "Records of processing activities"
-
-  
-  
-  
-  
   
   
   
@@ -3344,8 +5124,43 @@ gdpr_article_30:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "Document data retention periods"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "Records of processing activities"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- requirement: "Document data retention periods"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3363,6 +5178,15 @@ gdpr_article_30:
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

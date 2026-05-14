@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/architecture/fanout-pattern.html
   
   
   
+  
+  
+  
+
+
+# Fanout Pattern for Event Distribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Fanout Pattern for Event Distribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Fanout Pattern for Event Distribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The fanout pattern distributes a single event or message to multiple consumers simultaneously. This enables parallel processing, where different subsystems react to the same event independently. Fanout is fundamental to event-driven architectures and publish-subscribe systems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ The fanout pattern distributes a single event or message to multiple consumers s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A producer publishes an event to a message broker. The broker delivers the event to all subscribed consumers. Each consumer processes the event independently and can fail without affecting other consumers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ AWS SNS with SQS subscriptions is a common fanout implementation. A single SNS t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  When to Use Fanout
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Use fanout when multiple services need to react to the same event. For example, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fanout also supports event-driven integration between bounded contexts. A domain event in one context triggers reactions in other contexts without tight coupling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -153,10 +276,28 @@ Fanout also supports event-driven integration between bounded contexts. A domain
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Topic-based fanout uses a message broker with topics. Each consumer subscribes to relevant topics. The broker handles message distribution and filtering. This is the most common and flexible approach.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -181,6 +322,15 @@ Exchange-based fanout uses a message exchange (like RabbitMQ direct or fanout ex
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Considerations
@@ -195,10 +345,28 @@ Exchange-based fanout uses a message exchange (like RabbitMQ direct or fanout ex
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fanout guarantees eventual consistency. Consumers may process events at different times. Idempotent processing is essential since consumers might receive duplicate events. Monitor consumer lag to detect slow consumers that could cause backpressure.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

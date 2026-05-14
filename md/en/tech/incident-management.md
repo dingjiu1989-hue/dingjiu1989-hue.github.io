@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/incident-management.html
   
   
   
+  
+  
+  
+
+
+# Incident Management: Severity Levels, Response Process, and Postmortems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Incident Management: Severity Levels, Response Process, and Postmortems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Incident Management: Severity Levels, Response Process, and Postmortems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Incident management is the practice of identifying, responding to, and learning 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article covers incident severity levels, response processes, communication templates, and blameless postmortems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ This article covers incident severity levels, response processes, communication 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Classifying incidents by severity standardizes response expectations. The common four-tier model maps to the level of customer impact:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ SEV1 (Critical): Complete service outage affecting all users. Response time unde
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SEV2 (High): Partial outage or significant degradation affecting a subset of users. Response time under 15 minutes. Requires the on-call team plus engineering lead. Examples: one feature unavailable, elevated error rates above 5%, slow response times.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ SEV3 (Medium): Minor impact with workaround available. Response time within one 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SEV4 (Low): No customer impact but needs attention. Response time within one week. Normal ticket queue handling. Examples: outdated documentation, minor logging improvements, technical debt tracking.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Clear severity definitions prevent ambiguity during stressful incidents. Teams s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Incident Response Process
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ The incident response process follows a predictable lifecycle: detection, declar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Detection comes from monitoring alerts, customer reports, or manual observation. Automated detection is strongly preferred. Alerts should include relevant context: affected service, metric threshold breached, time duration, and related recent changes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Declaration starts the incident timer. Anyone should be empowered to declare an 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Response involves triaging the incident to understand scope, impact, and potential causes. Roles rotate as needed: the incident commander remains fixed, while subject matter experts cycle in as needed to investigate specific areas.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Mitigation takes priority over root cause diagnosis. Rolling back a recent deplo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resolution confirms the fix is working and monitoring shows recovery. The incident commander declares the incident resolved and initiates the follow-up phase.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Resolution confirms the fix is working and monitoring shows recovery. The incide
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pre-defined communication templates ensure consistent, timely updates during incidents.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Initial notification: "We are investigating a potential issue affecting [service
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Update format: "Status: [Investigating/Identified/Mitigating/Resolved]. Affected: [scope]. Current action: [what teams are doing]. Next update: [time]."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Resolution notice: "The issue affecting [service] has been resolved as of [time]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Status pages (hundreds of people may watch these), internal Slack channels, and executive summaries all need tailored versions of these templates.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Status pages (hundreds of people may watch these), internal Slack channels, and 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The postmortem is the most important incident management practice. A blameless postmortem focuses on what systemic failures allowed the incident to occur, not who made a mistake. The goal is improving systems, not assigning fault.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ A good postmortem includes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Incident summary and timeline.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ A good postmortem includes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Root cause analysis using techniques like Five Whys.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ A good postmortem includes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Action items with owners and deadlines.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,6 +979,15 @@ Blameless culture requires organizational commitment. Executives must model it b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Action items should be prioritized based on risk reduction. Not every finding requires immediate fixes. Track action items and verify completion in subsequent postmortems to close the loop.
@@ -639,10 +1005,28 @@ Action items should be prioritized based on risk reduction. Not every finding re
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

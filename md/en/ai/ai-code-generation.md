@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-code-generation.html
   
 
 
+# AI Code Generation Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Code Generation Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# AI Code Generation Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ AI code generation has transformed from a novelty into a core development tool. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Understanding Model Capabilities
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Current code generation models excel at:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Boilerplate and repetitive code**: API clients, CRUD operations, data models, and config files
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -157,10 +271,28 @@ Current code generation models excel at:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Test generation**: Unit tests, integration tests, and test fixtures
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -185,6 +317,15 @@ Current code generation models excel at:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Code translation**: Converting code between languages or frameworks
@@ -199,10 +340,28 @@ Current code generation models excel at:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Regex and string manipulation**: Complex pattern matching and text processing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -233,10 +392,28 @@ They struggle with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Novel algorithms**: Problems requiring genuine innovation or specialized domain knowledge
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -261,10 +438,28 @@ They struggle with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **System-wide architectural decisions**: Tools lack context about the full codebase
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -289,10 +484,28 @@ They struggle with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Consistent style across large codebases**: Generated code may not match existing patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -323,10 +536,28 @@ They struggle with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Context is Everything
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -357,10 +588,28 @@ The quality of generated code depends directly on the context provided. A good p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **The programming language and framework** (explicitly, not implied)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -385,10 +634,28 @@ The quality of generated code depends directly on the context provided. A good p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Constraints and requirements** (performance, memory, security)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -413,10 +680,28 @@ The quality of generated code depends directly on the context provided. A good p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **The surrounding code** (other functions, imports, and conventions)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -447,10 +732,28 @@ The quality of generated code depends directly on the context provided. A good p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write a function to sort users by name.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -481,10 +784,28 @@ Write a function to sort users by name.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Write a TypeScript function that sorts an array of User objects by their lastName field, then firstName. Users have {id: number, firstName: string, lastName: string, email: string}. Handle null/undefined lastName values by falling back to firstName. Use the native Array.sort() method. Return a new sorted array (don't mutate the input).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -515,10 +836,28 @@ Write a TypeScript function that sorts an array of User objects by their lastNam
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Work with AI code generation in iterations:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -549,14 +888,6 @@ Work with AI code generation in iterations:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add complexity layer by layer**: Error handling, edge cases, performance optimization
-
-  
-  
-  
-  
   
   
   
@@ -568,8 +899,43 @@ Work with AI code generation in iterations:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Review each addition**: Generated code might introduce subtle bugs in new layers
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add complexity layer by layer**: Error handling, edge cases, performance optimization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Review each addition**: Generated code might introduce subtle bugs in new layers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -600,10 +966,28 @@ Work with AI code generation in iterations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Inline completion** (Copilot-style): Best for predictable continuations — completing a function body, adding a parameter, or writing a simple loop
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -628,10 +1012,28 @@ Work with AI code generation in iterations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Agent-based tools** (Devin, Cursor Agent): Best for multi-step tasks like "add a user authentication system" that span multiple files
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -662,10 +1064,28 @@ Work with AI code generation in iterations:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Generated code requires more thorough review than human-written code, for different reasons:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -696,31 +1116,6 @@ Generated code requires more thorough review than human-written code, for differ
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Verify logic, not syntax**: The code compiles but the algorithm might be wrong for edge cases
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Watch for security issues**: SQL injection, XSS, and path traversal are common in generated code
-
-  
-  
-  
-  
   
   
   
@@ -732,8 +1127,17 @@ Generated code requires more thorough review than human-written code, for differ
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test thoroughly**: AI-generated code often misses error handling and boundary conditions
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Verify logic, not syntax**: The code compiles but the algorithm might be wrong for edge cases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -749,8 +1153,69 @@ Generated code requires more thorough review than human-written code, for differ
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Check dependencies**: The model might suggest libraries that don't exist or are outdated
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Watch for security issues**: SQL injection, XSS, and path traversal are common in generated code
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test thoroughly**: AI-generated code often misses error handling and boundary conditions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Check dependencies**: The model might suggest libraries that don't exist or are outdated
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -781,10 +1246,28 @@ Generated code requires more thorough review than human-written code, for differ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Establish guidelines for AI-generated code in your workflow:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -812,10 +1295,28 @@ Establish guidelines for AI-generated code in your workflow:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Generated code should pass existing linting, formatting, and type-checking
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -840,10 +1341,28 @@ Establish guidelines for AI-generated code in your workflow:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Attribution tags (`// AI-generated: reviewed by @username`) help track origins
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -874,6 +1393,15 @@ Establish guidelines for AI-generated code in your workflow:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Over-reliance without review**: Treating generated code as correct without verification
@@ -891,31 +1419,6 @@ Establish guidelines for AI-generated code in your workflow:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Vague prompts leading to wrong implementations**: Being too general and getting generic results
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Not iterating on the prompt**: Accepting the first output rather than refining
-
-  
-  
-  
-  
   
   
   
@@ -927,8 +1430,17 @@ Establish guidelines for AI-generated code in your workflow:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring security implications**: Assuming the model handles security correctly
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Vague prompts leading to wrong implementations**: Being too general and getting generic results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -944,8 +1456,69 @@ Establish guidelines for AI-generated code in your workflow:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Inconsistent architecture**: Letting the AI make architectural decisions without oversight
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Not iterating on the prompt**: Accepting the first output rather than refining
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring security implications**: Assuming the model handles security correctly
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Inconsistent architecture**: Letting the AI make architectural decisions without oversight
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -963,6 +1536,15 @@ Establish guidelines for AI-generated code in your workflow:
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

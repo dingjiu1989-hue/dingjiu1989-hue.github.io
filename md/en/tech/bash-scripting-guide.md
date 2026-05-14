@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html
   
   
   
+  
+  
+  
+
+
+# Bash Scripting Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Bash Scripting Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Bash Scripting Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Bash scripting remains one of the most critical skills for developers, DevOps en
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Every production Bash script should begin with strict mode settings that catch errors early:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Every production Bash script should begin with strict mode settings that catch e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 set -euo pipefail
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ IFS=$'\n\t'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `set -e` causes the script to exit immediately when a command fails.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ IFS=$'\n\t'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * `set -o pipefail` makes pipeline failures propagate.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ IFS=$'\n\t'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A more advanced option is `set -o errexit` combined with custom error handling:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ error_handler() {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 local line=$1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,6 +511,15 @@ echo "Error on line $line" >&2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 exit 1
@@ -333,10 +537,28 @@ exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ trap 'error_handler $LINENO' ERR
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Use Functions for Modularity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Avoid writing long linear scripts. Break logic into functions with clear names:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 validate_input() { ... }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ process_file() { ... }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 send_notification() { ... }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ Declare all functions at the top of the script, followed by argument parsing, fo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Prefer `[[ ]]` Over `[ ]`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ The double-bracket `[[ ]]` construct is a Bash keyword with fewer surprises:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if [[ -f "$file" && "$name" == "prod" ]]; then
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ echo "Matched"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ Unlike single brackets, double brackets handle empty variables safely, support p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Quote Everything
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ Unquoted variables are one of the most common sources of bugs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Wrong
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ if [ -f $file ]; then # breaks if file has spaces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Right
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ if [[ -f "$file" ]]; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Quote all variable expansions: `"$var"`, `"${array[@]}"`, and command substitutions `"$(command)"`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ Quote all variable expansions: `"$var"`, `"${array[@]}"`, and command substituti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Always clean up temporary files and resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ cleanup() {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rm -rf "$TEMP_DIR"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ kill "$PID" 2>/dev/null || true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ trap cleanup EXIT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ The `EXIT` trap fires regardless of why the script exits -- success, failure, or
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use `getopts` for reliable argument parsing instead of manual position checks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ usage() { echo "Usage: $0 -f file -o output [-v]" >&2; exit 1; }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 while getopts ":f:o:v" opt; do
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ case $opt in
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f) INPUT_FILE="$OPTARG" ;;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ o) OUTPUT_DIR="$OPTARG" ;;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 v) VERBOSE=true ;;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,6 +1525,15 @@ v) VERBOSE=true ;;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 esac
@@ -996,10 +1551,28 @@ esac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 done
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ This handles short flags robustly, including missing argument errors.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Use `readonly` and `declare -r`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ Mark constants and configuration values as readonly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 readonly MAX_RETRIES=3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ readonly CONFIG_PATH="/etc/myapp/config.yml"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This prevents accidental overwrites and documents intent.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ This prevents accidental overwrites and documents intent.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ printf "Processing file: %s\n" "$filename"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Logging with Timestamps
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ Implement a simple logging function for better observability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log() {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ local level="$1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 shift
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ printf "[%s] [%s] %s\n" "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$*" >&2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ info() { log "INFO" "$@"; }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 error() { log "ERROR" "$@"; }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ Send logs to stderr so they don't interfere with stdout data output.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Validating Dependencies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ Check required commands before proceeding:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 require() {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ for cmd in "$@"; do
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if ! command -v "$cmd" &>/dev/null; then
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ error "Required command not found: $cmd"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 exit 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,6 +2279,15 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 done
@@ -1489,10 +2305,28 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ require jq curl openssl
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Avoid `eval` and Backtick Substitution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ Never use `eval` unless absolutely necessary -- it is a security risk. Use `$()`
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Use Arrays for Lists
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ Modern Bash supports arrays, which handle spaces correctly:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 files=()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ while IFS= read -r -d '' file; do
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 files+=("$file")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ done < <(find /var/log -name "*.log" -print0)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for file in "${files[@]}"; do
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ process_file "$file"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 done
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,10 +2669,28 @@ The `-print0` / `read -d ''` pattern handles filenames with any special characte
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  ShellCheck Integration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,10 +2721,28 @@ Run [ShellCheck](https://www.shellcheck.net/) as part of your CI pipeline. It ca
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Testing Bash Scripts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ Use `bats` (Bash Automated Testing System) for unit testing:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 @test "validate_input rejects empty string" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ run validate_input ""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [[ "$status" -ne 0 ]]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,6 +2877,15 @@ run validate_input ""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Test your error handlers, edge cases with spaces, and exit codes.
@@ -1880,10 +2903,28 @@ Test your error handlers, edge cases with spaces, and exit codes.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

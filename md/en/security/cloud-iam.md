@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-iam.html
   
   
   
+  
+  
+  
+
+
+# Cloud IAM Deep Dive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud IAM Deep Dive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Cloud IAM Deep Dive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Cloud Identity and Access Management (IAM) is the foundation of cloud security. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AWS IAM Policies 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Statement": [
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "Effect": "Allow",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "s3:GetObject",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "arn:aws:s3:::critical-data",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "IpAddress": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,6 +667,41 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -435,6 +719,15 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -448,14 +741,6 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -486,10 +771,28 @@ AWS IAM uses JSON policy documents to define permissions. Policies can be attach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Key AWS IAM concepts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Principal**: Entity requesting access (user, role, federated identity)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Key AWS IAM concepts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Resource**: ARN identifying the target resource
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ Key AWS IAM concepts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Effect**: Allow or Deny
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ Least Privilege with AWS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AWS Access Advisor shows service last-accessed information, helping identify unused permissions. IAM Access Analyzer generates policies based on CloudTrail access patterns. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ AWS Access Advisor shows service last-accessed information, helping identify unu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws accessanalyzer create-analyzer --analyzer-name my-analyzer --type ACCOUNT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ aws accessanalyzer start-policy-generation \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-generation-details \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-generation-details \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ aws accessanalyzer start-policy-generation \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cloud-trail-details \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cloud-trail-details \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ aws accessanalyzer start-policy-generation \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "startTime":"2026-01-01T00:00:00Z","endTime":"2026-05-01T00:00:00Z"}'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ GCP IAM Roles
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GCP IAM uses a different model: roles are collections of permissions assigned to principals at specific resource hierarchies. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ GCP IAM uses a different model: roles are collections of permissions assigned to
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 organizations/123456789012/roles/customStorageAdmin
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ organizations/123456789012/roles/customStorageAdmin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 folders/987654321/roles/customInstanceAdmin
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ folders/987654321/roles/customInstanceAdmin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 projects/my-project/roles/customComputeAdmin
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,6 +1447,15 @@ projects/my-project/roles/customComputeAdmin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud iam roles create customComputeAdmin \
@@ -945,31 +1473,6 @@ gcloud iam roles create customComputeAdmin \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--title="Custom Compute Admin" \
-
-  
-  
-  
-  
   
   
   
@@ -981,8 +1484,17 @@ gcloud iam roles create customComputeAdmin \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--description="Limited compute admin without delete" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -998,8 +1510,69 @@ gcloud iam roles create customComputeAdmin \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--permissions=compute.instances.create,compute.instances.start,\
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--title="Custom Compute Admin" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--description="Limited compute admin without delete" \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--permissions=compute.instances.create,compute.instances.start,\
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ compute.instances.stop,compute.instances.list \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--stage=GA
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--stage=GA
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,6 +1655,15 @@ compute.instances.stop,compute.instances.list \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud projects add-iam-policy-binding my-project \
@@ -1081,14 +1681,6 @@ gcloud projects add-iam-policy-binding my-project \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:deploy-sa@my-project.iam.gserviceaccount.com" \
-
-  
-  
-  
-  
   
   
   
@@ -1100,8 +1692,43 @@ gcloud projects add-iam-policy-binding my-project \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="projects/my-project/roles/customComputeAdmin"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:deploy-sa@my-project.iam.gserviceaccount.com" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="projects/my-project/roles/customComputeAdmin"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ Policy Simulation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Both AWS and GCP provide policy simulation tools to verify permissions before deployment. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,6 +1811,15 @@ Both AWS and GCP provide policy simulation tools to verify permissions before de
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws iam simulate-principal-policy \
@@ -1183,14 +1837,6 @@ aws iam simulate-principal-policy \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-source-arn arn:aws:iam::123456789012:user/testuser \
-
-  
-  
-  
-  
   
   
   
@@ -1202,7 +1848,7 @@ aws iam simulate-principal-policy \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--action-names s3:GetObject s3:DeleteObject ec2:TerminateInstances \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--policy-source-arn arn:aws:iam::123456789012:user/testuser \
 
   
   
@@ -1217,10 +1863,54 @@ aws iam simulate-principal-policy \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-arns arn:aws:s3:::my-bucket
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--action-names s3:GetObject s3:DeleteObject ec2:TerminateInstances \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--resource-arns arn:aws:s3:::my-bucket
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,6 +1941,15 @@ aws iam simulate-principal-policy \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gcloud policy-intelligence query-activity \
@@ -1268,14 +1967,6 @@ gcloud policy-intelligence query-activity \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \
-
-  
-  
-  
-  
   
   
   
@@ -1287,7 +1978,7 @@ gcloud policy-intelligence query-activity \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity="user:admin@example.com" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--project=my-project \
 
   
   
@@ -1302,10 +1993,54 @@ gcloud policy-intelligence query-activity \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--activity-type=policy.troubleshoot
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity="user:admin@example.com" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--activity-type=policy.troubleshoot
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,6 +2071,15 @@ Common IAM Misconfigurations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Wildcard permissions**: `"Action": ["*"]` grants access to all services
@@ -1353,10 +2097,28 @@ Common IAM Misconfigurations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Overly permissive resource ARNs**: `"Resource": "*"` instead of scoping to specific resources 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Missing condition keys**: No IP restriction, MFA requirement, or TLS version check 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Unused roles and permissions**: Orphaned roles accumulate attack surface 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cross-account trust**: Overly broad `AssumeRole` trust policies 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Overly permissive resource ARNs**: `"Resource": "*"` instead of scoping to specific resources 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Missing condition keys**: No IP restriction, MFA requirement, or TLS version check 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Unused roles and permissions**: Orphaned roles accumulate attack surface 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cross-account trust**: Overly broad `AssumeRole` trust policies 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1374,6 +2136,15 @@ Common IAM Misconfigurations
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

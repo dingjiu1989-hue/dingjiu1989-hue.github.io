@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/kubernetes-tools.html
   
 
 
+# Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Kubernetes Tools: kubectl Plugins, k9s, Lens, Kustomize
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Managing Kubernetes clusters requires more than just raw kubectl commands. The e
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  kubectl Plugins
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Extend kubectl's functionality with plugin managers and essential plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install krew (plugin manager)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Extend kubectl's functionality with plugin managers and essential plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 set -x; cd "$(mktemp -d)" &&
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm64/aarch64/')" &&
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/kr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tar zxvf krew.tar.gz &&
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ KREW=./krew-"${OS}_${ARCH}" &&
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "$KREW" install krew
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ KREW=./krew-"${OS}_${ARCH}" &&
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Essential plugins
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ kubectl krew install ctx # Switch between contexts
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl krew install ns # Switch between namespaces
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ kubectl krew install tree # Show resource hierarchy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl krew install whoami # Show current user/context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ kubectl krew install pod-dive # Dive into pod details
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl krew install sniff # Capture network traffic
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ kubectl krew install neat # Remove clutter from YAML
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl krew install images # Show container images
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ kubectl krew install view-utilization # Resource utilization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl krew install inspect # Deep resource inspection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ kubectl krew install inspect # Deep resource inspection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl ctx production # Switch to production context
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ kubectl ns backend # Switch to backend namespace
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl tree deployment my-app # Show deployment hierarchy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ kubectl sniff pod-web-1 # Start packet capture
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Custom aliases** for daily efficiency:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ kubectl sniff pod-web-1 # Start packet capture
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias k="kubectl"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ alias kg="kubectl get"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias kd="kubectl describe"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ alias kdel="kubectl delete"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias kl="kubectl logs -f"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ alias kx="kubectl ctx"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias kn="kubectl ns"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ alias kgp="kubectl get pods"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias kgs="kubectl get services"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ alias kgd="kubectl get deployments"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alias kgn="kubectl get nodes"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ alias kpf="kubectl port-forward"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get pod with most CPU usage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ alias ktop="kubectl top pods --sort-by=cpu"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Watch resources
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ alias kwp="kubectl get pods --watch"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Exec into pod
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ alias kex="kubectl exec -it"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Resource usage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ alias kutil="kubectl view-utilization"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  k9s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ A terminal-based UI for Kubernetes cluster management:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Install k9s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ brew install k9s # macOS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Or download from GitHub releases
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ brew install k9s # macOS
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 k9s
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ k9s -c prod # Start with specific context
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 k9s -n backend # Start in specific namespace
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ k9s -n backend # Start in specific namespace
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 k9s:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ cluster: prod
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 namespace: default
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ refreshRate: 2 # seconds
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 headless: false
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ readOnly: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ui:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ skin: dracula
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 enableMouse: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ enableImage: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 headless: false
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ logRequestSize: 200
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 logSince: 1h # Default log time range
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Key bindings:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # /: Search/filter resources
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # l: View logs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # e: Edit resource
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # ctrl-d: Delete resource
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **k9s plugins** for custom commands:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ wide: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 plugins:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ plugins:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 restart:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ shortCut: Ctrl-R
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 description: "Rollout restart"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ scopes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- deployments
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deployments
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ command: kubectl
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 background: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,31 +2669,6 @@ args:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- rollout
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- restart
-
-  
-  
-  
-  
   
   
   
@@ -1763,8 +2680,17 @@ args:
   
 
 
-\\\\\\\\\\\\\\\\- deployment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollout
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1780,7 +2706,7 @@ args:
   
 
 
-\\\\\\\\\\\\\\\\- --namespace
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- restart
 
   
   
@@ -1791,14 +2717,6 @@ args:
   
   
   
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- $NAMESPACE
-
   
   
   
@@ -1814,8 +2732,95 @@ args:
   
 
 
-\\\\\\\\\\\\\\\\- $NAME
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deployment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- --namespace
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $NAMESPACE
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $NAME
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1846,10 +2851,28 @@ args:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 logs-less:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1880,10 +2903,28 @@ shortCut: Ctrl-L
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 description: "View logs in less"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1914,10 +2955,28 @@ scopes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- pods
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pods
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1948,10 +3007,28 @@ command: bash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 background: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,14 +3059,6 @@ args:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- -c
-
-  
-  
-  
-  
   
   
   
@@ -2001,8 +3070,43 @@ args:
   
 
 
-\\\\\\\\\\\\\\\\- "kubectl logs $NAME -n $NAMESPACE | less"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- -c
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "kubectl logs $NAME -n $NAMESPACE | less"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ args:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A desktop IDE for Kubernetes with visual cluster management:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ A desktop IDE for Kubernetes with visual cluster management:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Or via package manager
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key features**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2132,10 +3290,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Real-time pod metrics (CPU, memory, network)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2160,10 +3336,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Built-in Helm chart browser and installer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2188,10 +3382,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Port forwarding wizard
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2216,10 +3428,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Multi-cluster management
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2250,10 +3480,28 @@ brew install --cask lens
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Native Kubernetes configuration customization (built into kubectl v1.14+):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2284,6 +3532,15 @@ Native Kubernetes configuration customization (built into kubectl v1.14+):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -2301,10 +3558,28 @@ apiVersion: kustomize.config.k8s.io/v1beta1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kind: Kustomization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2335,14 +3610,6 @@ resources:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- deployment.yaml
-
-  
-  
-  
-  
   
   
   
@@ -2354,7 +3621,7 @@ resources:
   
 
 
-\\\\\\\\\\\\\\\\- service.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deployment.yaml
 
   
   
@@ -2369,10 +3636,54 @@ resources:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- configmap.yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configmap.yaml
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2403,10 +3714,28 @@ commonLabels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2437,6 +3766,15 @@ managed-by: kustomize
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 images:
@@ -2454,10 +3792,28 @@ images:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: my-app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2488,10 +3844,28 @@ newTag: v1.2.3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # overlays/production/kustomization.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2522,10 +3896,28 @@ apiVersion: kustomize.config.k8s.io/v1beta1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kind: Kustomization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2556,10 +3948,28 @@ bases:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- ../../base
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ../../base
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2590,6 +4000,15 @@ namespace: production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 patches:
@@ -2607,14 +4026,6 @@ patches:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- path: replica-patch.yaml
-
-  
-  
-  
-  
   
   
   
@@ -2626,8 +4037,43 @@ patches:
   
 
 
-\\\\\\\\\\\\\\\\- target:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: replica-patch.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- target:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2658,10 +4104,28 @@ kind: Deployment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2692,10 +4156,28 @@ patch: |-
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- op: add
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- op: add
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2726,10 +4208,28 @@ path: /spec/template/spec/containers/0/env/-
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 value:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2760,10 +4260,28 @@ name: LOG_LEVEL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 value: info
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2794,10 +4312,28 @@ configMapGenerator:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: app-config
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app-config
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2828,6 +4364,15 @@ behavior: merge
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 literals:
@@ -2845,14 +4390,6 @@ literals:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- ENV=production
-
-  
-  
-  
-  
   
   
   
@@ -2864,8 +4401,43 @@ literals:
   
 
 
-\\\\\\\\\\\\\\\\- API_URL=https://api.example.com
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ENV=production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- API_URL=https://api.example.com
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2896,10 +4468,28 @@ replicas:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: my-app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2930,10 +4520,28 @@ count: 5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Build and apply
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2964,10 +4572,28 @@ kubectl kustomize overlays/production/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kubectl apply -k overlays/production/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2998,10 +4624,28 @@ kubectl apply -k overlays/production/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/production)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3032,10 +4676,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Tool | Type | Best For | Learning Curve |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3066,10 +4728,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | kubectl + plugins | CLI | Daily operations, scripting | Medium |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3100,10 +4780,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Lens | Desktop UI | Visual management, monitoring | Low |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3134,10 +4832,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3165,10 +4881,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Debugging/exploration**: k9s for fast terminal-based pod inspection, log viewing, and resource management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3193,10 +4927,28 @@ diff <(kubectl kustomize overlays/staging) <(kubectl kustomize overlays/producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Configuration management**: Kustomize for Kubernetes-native, env-specific configuration without templates.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/attention-mechanisms.html
   
   
   
+  
+  
+  
+
+
+# Attention Mechanisms in Neural Networks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Attention Mechanisms in Neural Networks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Attention Mechanisms in Neural Networks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Attention mechanisms allow neural networks to focus on relevant parts of input when producing output. Since the original transformer, numerous attention variants have improved efficiency, quality, and scalability.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Attention mechanisms allow neural networks to focus on relevant parts of input w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Bahdanau attention (additive attention) uses a small feed-forward network to compute attention scores. It introduced attention to neural machine translation but is computationally expensive. Luong attention (multiplicative/dot-product) computes scores as a dot product, enabling efficient matrix multiplication.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Scaled dot-product attention (transformer) divides scores by sqrt(d_k) to preven
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Causal Attention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Causal (masked) attention prevents tokens from attending to future tokens. The a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Causal attention introduces a triangular mask. During training, teacher forcing uses the mask to predict each token given only previous tokens. During inference, the mask prevents looking ahead. PrefixLM uses a bidirectional prefix followed by causal attention for the generation part.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Causal attention introduces a triangular mask. During training, teacher forcing 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-Query Attention (MQA) shares key-value heads across all query heads, dramatically reducing KV cache memory. MQA reduces memory by 4-8x with minimal quality loss. It is used in PaLM and Falcon.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Grouped-Query Attention (GQA) is a middle ground between MHA and MQA. Query head
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  FlashAttention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ FlashAttention computes attention without materializing the full N×N attention 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAttention 3 adds FP8 support and asynchronous processing. These optimizations make long-context transformers practical—enabling 128K+ token contexts by reducing attention memory overhead.
@@ -279,10 +456,28 @@ FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Sparse Attention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

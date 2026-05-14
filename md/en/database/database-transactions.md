@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-transactions.html
   
 
 
+# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ A transaction is a unit of work that the database executes atomically. Transacti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ACID in Practice 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ ACID stands for Atomicity, Consistency, Isolation, Durability. Each property map
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Atomicity**: All operations within a transaction succeed or none do. In PostgreSQL, atomicity is guaranteed by the write-ahead log (WAL). If the server crashes mid-transaction, the WAL replay applies only committed transactions and discards partial ones. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -116,10 +221,28 @@ BEGIN;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 UPDATE accounts SET balance = balance - 100 WHERE id = 1;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -144,10 +267,28 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 2;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COMMIT; -- Both succeed, or neither does
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -172,10 +313,28 @@ COMMIT; -- Both succeed, or neither does
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ALTER TABLE accounts ADD CONSTRAINT positive_balance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -200,10 +359,28 @@ CHECK (balance >= 0);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Any transaction that would violate this constraint is rolled back
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Any transaction that would violate this constraint is rolled back
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -225,10 +402,28 @@ CHECK (balance >= 0);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Durability**: Once `COMMIT` returns, the data is safe. PostgreSQL writes transaction commit records to the WAL and forces a `fsync()` before returning success. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -247,6 +442,15 @@ Isolation Levels
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SQL standard defines four isolation levels. PostgreSQL implements three (it does not expose the dirty-read behavior of `READ UNCOMMITTED`; it maps it to `READ COMMITTED`). 
@@ -258,10 +462,28 @@ SQL standard defines four isolation levels. PostgreSQL implements three (it does
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Read Committed (Default) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -283,10 +505,28 @@ Each statement in the transaction sees a snapshot of rows committed before the s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Session 1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Session 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -311,6 +551,15 @@ BEGIN;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT balance FROM accounts WHERE id = 1; -- returns 1000
@@ -325,10 +574,28 @@ SELECT balance FROM accounts WHERE id = 1; -- returns 1000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Session 2 concurrently:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Session 2 concurrently:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -353,10 +620,28 @@ UPDATE accounts SET balance = 500 WHERE id = 1; COMMIT;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Session 1 continues:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Session 1 continues:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -381,10 +666,28 @@ SELECT balance FROM accounts WHERE id = 1; -- now returns 500!
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COMMIT;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -406,10 +709,28 @@ Repeatable Read
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The transaction sees a snapshot taken when the first query or data-modification statement executes. Subsequent reads return the same data, even if concurrent transactions commit changes. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -434,6 +755,15 @@ BEGIN ISOLATION LEVEL REPEATABLE READ;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT balance FROM accounts WHERE id = 1; -- returns 1000
@@ -448,11 +778,6 @@ SELECT balance FROM accounts WHERE id = 1; -- returns 1000
   
   
   
-
-
-\\\\\\\\-- Session 2 updates and commits
-
-  
   
   
   
@@ -464,8 +789,40 @@ SELECT balance FROM accounts WHERE id = 1; -- returns 1000
   
 
 
-\\\\\\\\-- Session 1:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Session 2 updates and commits
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Session 1:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -490,6 +847,15 @@ SELECT balance FROM accounts WHERE id = 1; -- still returns 1000
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 UPDATE accounts SET balance = balance - 100 WHERE id = 1;
@@ -504,11 +870,6 @@ UPDATE accounts SET balance = balance - 100 WHERE id = 1;
   
   
   
-
-
-\\\\\\\\-- If Session 2 modified the same row, PostgreSQL raises:
-
-  
   
   
   
@@ -520,8 +881,40 @@ UPDATE accounts SET balance = balance - 100 WHERE id = 1;
   
 
 
-\\\\\\\\-- ERROR: could not serialize access due to concurrent update
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If Session 2 modified the same row, PostgreSQL raises:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ERROR: could not serialize access due to concurrent update
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -546,6 +939,15 @@ COMMIT;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Serializable 
@@ -557,10 +959,28 @@ Serializable
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The strictest level. PostgreSQL detects serialization anomalies and enforces true serial execution behavior. Queries may fail with serialization errors that require retries. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -585,10 +1005,28 @@ BEGIN ISOLATION LEVEL SERIALIZABLE;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Complex business logic with multiple rows
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Complex business logic with multiple rows
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -613,6 +1051,15 @@ COMMIT;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Serializable transactions incur overhead from predicate locking. Use it only when correctness requirements truly require it (e.g., financial systems with complex cross-row invariants). 
@@ -624,10 +1071,28 @@ Serializable transactions incur overhead from predicate locking. Use it only whe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Nested Transactions and Savepoints 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -649,10 +1114,28 @@ PostgreSQL does not support true nested transactions (subtransactions that can c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 BEGIN;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -677,6 +1160,15 @@ INSERT INTO orders (user_id, total) VALUES (1, 100);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SAVEPOINT order_inserted;
@@ -691,10 +1183,28 @@ SAVEPOINT order_inserted;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 INSERT INTO order_items (order_id, product_id, quantity)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -719,10 +1229,28 @@ VALUES (currval('orders_id_seq'), 42, 1);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Something went wrong with the item
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Something went wrong with the item
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -747,10 +1275,28 @@ ROLLBACK TO SAVEPOINT order_inserted;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Try a different item
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Try a different item
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1321,28 @@ INSERT INTO order_items (order_id, product_id, quantity)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VALUES (currval('orders_id_seq'), 99, 2);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -803,6 +1367,15 @@ COMMIT; -- Only the second order_item is kept
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Savepoints let you abort part of a transaction without aborting the whole thing. They are useful in batch processing, ETL pipelines, and complex workflows where partial failures must be isolated. 
@@ -814,10 +1387,28 @@ Savepoints let you abort part of a transaction without aborting the whole thing.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The general structure for safe savepoint use: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -842,10 +1433,28 @@ BEGIN;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FOR batch IN batch_data LOOP
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -870,6 +1479,15 @@ SAVEPOINT batch_savepoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 BEGIN TRY
@@ -884,10 +1502,28 @@ BEGIN TRY
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Process batch
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Process batch
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -912,6 +1548,15 @@ EXCEPTION WHEN OTHERS THEN
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ROLLBACK TO batch_savepoint;
@@ -926,10 +1571,28 @@ ROLLBACK TO batch_savepoint;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Log error, skip batch
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Log error, skip batch
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -954,10 +1617,28 @@ END TRY;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 END LOOP;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -982,10 +1663,28 @@ COMMIT;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transaction IDs and Wraparound 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1007,10 +1706,28 @@ PostgreSQL assigns a 32-bit transaction ID (XID) to each transaction. With rough
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Check for wraparound risk
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check for wraparound risk
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1035,10 +1752,28 @@ SELECT datname, age(datfrozenxid) AS xid_age,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ROUND(100 * age(datfrozenxid) / 2000000000.0, 2) AS pct_to_wraparound
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1063,10 +1798,28 @@ FROM pg_database
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY xid_age DESC;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1088,10 +1841,28 @@ When a table's `age` approaches 2 billion, PostgreSQL runs aggressive autovacuum
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Best Practices 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1113,10 +1884,28 @@ Best Practices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Never wait for user input inside a transaction**: This kills concurrency.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1135,10 +1924,28 @@ Best Practices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Retry on serialization failures**: Serializable transactions are expected to fail occasionally.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1157,10 +1964,28 @@ Best Practices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Monitor long-running transactions** via `pg_stat_activity`:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1185,10 +2010,28 @@ SELECT pid, NOW() - xact_start AS duration, state, query
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_activity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1213,6 +2056,15 @@ WHERE state IN ('active', 'idle in transaction')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 AND xact_start IS NOT NULL
@@ -1227,10 +2079,28 @@ AND xact_start IS NOT NULL
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY duration DESC;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

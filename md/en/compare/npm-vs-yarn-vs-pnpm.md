@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/compare/npm-vs-yarn-vs-pnpm.html
   
   
   
+  
+  
+  
+
+
+# npm vs Yarn vs pnpm: Package Manager Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# npm vs Yarn vs pnpm: Package Manager Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# npm vs Yarn vs pnpm: Package Manager Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JavaScript package managers have evolved significantly from the early npm days. Today, developers choose between npm (bundled with Node.js), Yarn (by Meta), and pnpm (performance-focused). Each offers distinct approaches to dependency resolution, disk usage, and workspace management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ JavaScript package managers have evolved significantly from the early npm days. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 npm is the default package manager for Node.js. npm 7+ introduced workspaces and improved dependency resolution. npm uses a flat node_modules structure with nested dependencies for conflicting versions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ npm's lockfile (package-lock.json) ensures reproducible installs across environm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Yarn
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Yarn Classic (v1) addressed npm's early performance issues with parallel downloa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Yarn workspaces provide built-in monorepo support. The Yarn constraints feature allows consistent dependency specifications across workspaces. Yarn Berry's PnP mode significantly improves installation speed and reduces disk usage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Yarn workspaces provide built-in monorepo support. The Yarn constraints feature 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm uses a unique approach to disk usage. Instead of copying packages into each project's node_modules, pnpm stores packages in a global content-addressable store and uses hard links and symlinks in the project. This means disk usage is dramatically lower—especially in monorepos with many projects sharing dependencies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ pnpm's strict dependency resolution prevents packages from requiring undeclared 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Performance Comparison
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ pnpm is generally the fastest for initial installs and updates. Yarn Berry with 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pnpm uses the least disk space. For monorepos with 10+ packages sharing common dependencies, savings are dramatic. npm uses the most disk space due to its flat structure and duplicate nested versions.
@@ -279,10 +456,28 @@ pnpm uses the least disk space. For monorepos with 10+ packages sharing common d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

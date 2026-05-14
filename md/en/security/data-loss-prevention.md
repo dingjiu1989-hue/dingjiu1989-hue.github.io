@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/data-loss-prevention.html
   
 
 
+# Data Loss Prevention (DLP) Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Data Loss Prevention (DLP) Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Data Loss Prevention (DLP) Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensitive data from being leaked, stolen, or improperly exposed. DLP monitors, detects, and blocks unauthorized data transfers. This article covers the key DLP strategies including data classification, content inspection, and deployment across endpoint, network, and cloud environments.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Data Loss Prevention (DLP) encompasses strategies and tools that prevent sensiti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DLP starts with knowing what data you have and how sensitive it is. Data classification categorizes information based on its sensitivity and business impact.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ DLP starts with knowing what data you have and how sensitive it is. Data classif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A typical classification scheme includes four tiers:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ A typical classification scheme includes four tiers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Internal**: Information meant for internal use only. Internal policies, project plans, employee directories.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -188,10 +320,28 @@ A typical classification scheme includes four tiers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Restricted**: Highly sensitive data with legal or regulatory requirements. PII, PHI, payment card data, credentials.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -222,10 +372,28 @@ A typical classification scheme includes four tiers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Manual classification does not scale. Modern DLP solutions use automated methods:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -253,6 +421,15 @@ Manual classification does not scale. Modern DLP solutions use automated methods
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Context analysis**: Examine metadata including file location, creator, and access patterns.
@@ -267,10 +444,28 @@ Manual classification does not scale. Modern DLP solutions use automated methods
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **User behavior**: Flag unusual access patterns, like a developer downloading the entire customer database.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +496,28 @@ Manual classification does not scale. Modern DLP solutions use automated methods
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import re
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -335,10 +548,28 @@ CLASSIFICATION_PATTERNS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "ssn": r"\d{3}-\d{2}-\d{4}",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -369,10 +600,28 @@ CLASSIFICATION_PATTERNS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-"email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.[a-zA-Z]{2,}",
+"email": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.[a-zA-Z]{2,}",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,10 +652,28 @@ CLASSIFICATION_PATTERNS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -437,10 +704,28 @@ def classify_document(text, filename=""):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 findings = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,10 +756,28 @@ for data_type, pattern in CLASSIFICATION_PATTERNS.items():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 matches = re.findall(pattern, text)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -505,10 +808,28 @@ if matches:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 findings.append({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -539,10 +860,28 @@ findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "count": len(matches),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -573,10 +912,28 @@ findings.append({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 })
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -607,10 +964,28 @@ if any(f["type"] in ["ssn", "credit_card"] for f in findings):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "RESTRICTED", findings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -641,10 +1016,28 @@ elif any(f["type"] in ["api_key"] for f in findings):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "CONFIDENTIAL", findings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -675,10 +1068,28 @@ elif findings:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "INTERNAL", findings
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -709,10 +1120,28 @@ return "PUBLIC", []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Content Inspection Methods
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -743,10 +1172,28 @@ DLP systems inspect content at rest, in motion, and in use.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Exact Data Matching (EDM)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -777,10 +1224,28 @@ EDM creates a fingerprint of exact sensitive data values from a structured datab
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Partial Document Matching (PDM)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -811,10 +1276,28 @@ PDM detects documents that are substantially similar to sensitive templates. It 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Statistical Analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -845,10 +1328,28 @@ Statistical methods detect unusual data content based on machine learning models
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Machine Learning Classification
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -879,10 +1380,28 @@ ML-based classifiers learn to identify sensitive content from labeled training d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Endpoint DLP
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -913,10 +1432,28 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### What Endpoint DLP Monitors
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -944,10 +1481,28 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Clipboard**: Prevent copying sensitive data to external applications.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -972,10 +1527,28 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Email**: Scan outgoing email for sensitive content.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1000,10 +1573,28 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Cloud sync**: Monitor files uploaded to personal cloud storage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1034,6 +1625,15 @@ Endpoint DLP protects data on laptops, desktops, and mobile devices. It monitors
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DLP_POLICIES = [
@@ -1051,10 +1651,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1085,10 +1703,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "condition": {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1119,6 +1755,15 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "classification": "RESTRICTED"
@@ -1136,10 +1781,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1170,6 +1833,15 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "notification": "Cannot transfer RESTRICTED data via USB"
@@ -1187,10 +1859,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1221,10 +1911,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "name": "Warn on Email with Credit Card",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1255,10 +1963,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "action": "EMAIL_SEND",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1289,10 +2015,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1323,10 +2067,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "notification": "Email contains potential credit card data"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1357,10 +2119,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1391,10 +2171,28 @@ DLP_POLICIES = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Network DLP inspects traffic at network chokepoints to detect data exfiltration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1425,10 +2223,28 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Web gateways**: Monitor HTTPS traffic using TLS inspection.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1453,6 +2269,15 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **DNS**: Detect DNS tunneling used for data exfiltration.
@@ -1467,10 +2292,28 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **File transfer**: Monitor FTP, SFTP, and SCP transfers.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1501,10 +2344,28 @@ Network DLP inspects traffic at network chokepoints to detect data exfiltration.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Network DLP requires decrypting TLS traffic to inspect the content. The DLP appliance acts as a man-in-the-middle, terminating TLS connections, inspecting traffic, and re-encrypting to forward.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1535,10 +2396,28 @@ Client -> DLP Proxy (decrypts, inspects, re-encrypts) -> Server
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TLS inspection requires deploying a trusted root CA certificate to all managed devices. Organizations must comply with data privacy regulations regarding decryption.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1569,10 +2448,28 @@ TLS inspection requires deploying a trusted root CA certificate to all managed d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, Salesforce) and IaaS environments (AWS, GCP, Azure).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1603,10 +2500,28 @@ Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, S
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **GCP DLP**: Built-in DLP service with 150+ built-in infoType detectors for PII, PHI, and credentials. Supports automated classification of Cloud Storage, BigQuery, and Datastore data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1631,10 +2546,28 @@ Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, S
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **AWS Macie**: Machine learning-powered DLP for S3. Automatically discovers and classifies sensitive data in S3 buckets.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1665,10 +2598,28 @@ Cloud DLP protects data in SaaS applications (Google Workspace, Microsoft 365, S
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from google.cloud import dlp_v2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1699,10 +2650,28 @@ def inspect_content(project_id, text):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dlp = dlp_v2.DlpServiceClient()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1733,10 +2702,28 @@ parent = f"projects/{project_id}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 item = {"value": text}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1767,10 +2754,28 @@ info_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {"name": "CREDIT_CARD_NUMBER"},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1801,10 +2806,28 @@ info_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 {"name": "US_SOCIAL_SECURITY_NUMBER"},
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1835,10 +2858,28 @@ info_types = [
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1869,10 +2910,28 @@ response = dlp.inspect_content(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 request={
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1903,10 +2962,28 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "item": item,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1937,10 +3014,28 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "info_types": info_types,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1971,6 +3066,15 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "include_quote": True
@@ -1988,6 +3092,15 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -2005,10 +3118,28 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2039,10 +3170,28 @@ request={
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for finding in response.result.findings:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2073,10 +3222,28 @@ print(f"Type: {finding.info_type.name}, "
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 f"Location: {finding.location.byte_range}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2107,10 +3274,28 @@ f"Location: {finding.location.byte_range}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Shadow data**: Data in unknown locations or unmanaged cloud services.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,6 +3320,15 @@ f"Location: {finding.location.byte_range}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Global data residency**: DLP policies must respect data residency regulations.
@@ -2149,10 +3343,28 @@ f"Location: {finding.location.byte_range}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Scanning costs**: DLP scanning of large cloud data stores can be expensive.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2183,10 +3395,28 @@ f"Location: {finding.location.byte_range}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective DLP policies balance security with productivity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2217,10 +3447,28 @@ Effective DLP policies balance security with productivity.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Block**: Prevent the action entirely. Use for high-confidence violations involving restricted data.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2245,6 +3493,15 @@ Effective DLP policies balance security with productivity.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Warn**: Alert the user but allow the action. Use for medium-confidence violations.
@@ -2259,10 +3516,28 @@ Effective DLP policies balance security with productivity.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Notify**: Log and notify security without interrupting the user. Use for low-confidence or policy compliance monitoring.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2293,6 +3568,15 @@ Effective DLP policies balance security with productivity.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Start with monitoring-only policies. Review alerts, tune thresholds, and validate detection accuracy before enabling blocking actions. This prevents business disruption from false positives.
@@ -2310,10 +3594,28 @@ Start with monitoring-only policies. Review alerts, tune thresholds, and validat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

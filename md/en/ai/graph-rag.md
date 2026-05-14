@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/ai/graph-rag.html
   
 
 
+# Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Graph RAG: Knowledge Graphs, Entity Extraction, Relationship Traversal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Traditional RAG retrieves documents based on semantic similarity. Graph RAG goes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Entity Extraction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The first step is extracting entities and their relationships from documents:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from pydantic import BaseModel
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ class Entity(BaseModel):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: str
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ type: str
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 description: str
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ class Relationship(BaseModel):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source: str
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ target: str
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 relationship: str
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ description: str
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class ExtractionResult(BaseModel):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ entities: list[Entity]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 relationships: list[Relationship]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ def extract_graph(documents: list[str]) -> ExtractionResult:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 combined_text = "\n\n".join(documents)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ response = call_llm_with_structured_output(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Extract all entities and their relationships from the text below.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Entity types to consider: Person, Organization, Technology, Product, Location, C
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For each entity, provide: name, type, description
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ For each relationship, provide: source, target, relationship type, description
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Text: {combined_text[:8000]}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ Text: {combined_text[:8000]}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return response
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ return response
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use a graph database like Neo4j to store and query the extracted structure:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ from neo4j import GraphDatabase
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class KnowledgeGraph:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ def __init__(self, uri: str, user: str, password: str):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.driver = GraphDatabase.driver(uri, auth=(user, password))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ def insert_entities_and_relations(self, extraction: ExtractionResult):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with self.driver.session() as session:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,6 +1057,15 @@ with self.driver.session() as session:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for entity in extraction.entities:
@@ -690,10 +1083,28 @@ for entity in extraction.entities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 session.run(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ session.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "SET e.type = $type, e.description = $description",
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ name=entity.name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 type=entity.type,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ description=entity.description,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ description=entity.description,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for rel in extraction.relationships:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ session.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "MATCH (s:Entity {name: $source}) "
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ session.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "MERGE (s)-[r:RELATES {type: $relationship}]->(t) "
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ session.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 source=rel.source,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ target=rel.target,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 relationship=rel.relationship,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ description=rel.description,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ def traverse(self, start_entity: str, max_depth: int = 2) -> list[dict]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with self.driver.session() as session:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ result = session.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ MATCH path = (start:Entity {name: $start_entity})-[:RELATES*1..$max_depth]->(rel
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RETURN [node in nodes(path) | node.name] AS path_nodes,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ RETURN [node in nodes(path) | node.name] AS path_nodes,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 50
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ LIMIT 50
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 start_entity=start_entity,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ max_depth=max_depth,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ return [record.data() for record in result]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Graph + Vector Hybrid Retrieval
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ The most powerful pattern combines graph traversal with vector similarity:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class GraphVectorRetriever:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ def __init__(self, graph: KnowledgeGraph, vector_store):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.graph = graph
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ self.vector_store = vector_store
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def retrieve(self, query: str, k: int = 5) -> list[str]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ def retrieve(self, query: str, k: int = 5) -> list[str]:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query_entities = self.extract_query_entities(query)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ query_entities = self.extract_query_entities(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vector_results = self.vector_store.similarity_search(query, k=k)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ vector_results = self.vector_store.similarity_search(query, k=k)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 graph_context = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1472,10 +2279,28 @@ for entity in query_entities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 paths = self.graph.traverse(entity, max_depth=2)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2331,28 @@ for path in paths:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 context = " -> ".join(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ f"{path['path_nodes'][i]} ({path['path_rels'][i]})"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if i < len(path['path_rels'])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ else path['path_nodes'][i]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for i in range(len(path['path_nodes']))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ for i in range(len(path['path_nodes']))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 graph_context.append(context)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,10 +2539,28 @@ graph_context.append(context)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 combined = graph_context + [doc.page_content for doc in vector_results]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1676,10 +2591,28 @@ return combined[:k]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def extract_query_entities(self, query: str) -> list[str]:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1710,10 +2643,28 @@ response = call_llm(f"""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Extract entity names from this query that exist in our knowledge graph.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,6 +2695,15 @@ Return ONLY the entity names, one per line.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Query: {query}
@@ -1761,10 +2721,28 @@ Query: {query}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ return [line.strip() for line in response.strip().split("\n") if line.strip()]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Microsoft's GraphRAG Pattern
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ Microsoft's GraphRAG uses a global-to-local search approach:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -> str:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ def graphrag_search(query: str, graph: KnowledgeGraph, vector_store, llm) -> str
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 local_entities = extract_query_entities(query)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2929,28 @@ local_entities = extract_query_entities(query)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 community_context = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ for entity in local_entities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 community = graph.traverse(entity, max_depth=3)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ community_context.extend(community)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 3: Vector search for text chunks
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ text_chunks = vector_store.similarity_search(query, k=10)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Step 4: Synthesize answer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ context_parts = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for ctx in community_context:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ context_parts.append(format_graph_path(ctx))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for doc in text_chunks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ context_parts.append(doc.page_content)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 answer = call_llm(f"""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ Answer the query using the provided context.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The context includes both graph relationships and document excerpts.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ Context: {' '.join(context_parts[:20])}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Query: {query}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ Query: {query}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return answer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ return answer
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Graph RAG excels over vector-only RAG when:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2268,6 +3498,15 @@ Graph RAG excels over vector-only RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Your data has a rich relational structure (org charts, product hierarchies, dependency maps)
@@ -2282,10 +3521,28 @@ Graph RAG excels over vector-only RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * You need to answer "how are these related?" questions frequently
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2313,10 +3570,28 @@ Graph RAG excels over vector-only RAG when:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/incident-response.html
   
 
 
+# Incident Response Playbook for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Incident Response Playbook for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Incident Response Playbook for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Incident response is the structured process of handling security breaches and cy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ The NIST framework defines four phases: Preparation, Detection and Analysis, Con
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Preparation is the most important phase. Without preparation, every incident becomes a chaotic scramble.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Preparation is the most important phase. Without preparation, every incident bec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Create runbooks**: Document step-by-step procedures for common incident types: phishing, malware outbreak, data breach, ransomware, denial of service, and insider threat.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Preparation is the most important phase. Without preparation, every incident bec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Centralized logging (SIEM like Splunk, ELK, or Sentinel)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -225,10 +375,28 @@ Preparation is the most important phase. Without preparation, every incident bec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Network monitoring and packet capture
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -253,10 +421,28 @@ Preparation is the most important phase. Without preparation, every incident bec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Evidence collection tools (FTK Imager, Volatility, tcpdump)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -287,10 +473,28 @@ Preparation is the most important phase. Without preparation, every incident bec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Phase 2: Detection and Analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -321,10 +525,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Alert sources**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -352,10 +574,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * EDR alerts for malware execution or suspicious process behavior
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -380,6 +620,15 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Application logs showing unusual error rates or access patterns
@@ -394,10 +643,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * User reports of suspicious activity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -428,10 +695,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * What happened? What systems are affected?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -456,10 +741,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * What is the impact? Data loss? Service disruption?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -484,10 +787,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * What severity level applies?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -518,10 +839,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * SEV-1: Critical. Active data exfiltration, ransomware, or service-wide compromise. Immediate response required.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -546,6 +885,15 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * SEV-3: Medium. Potential compromise under investigation. Phishing campaign targeting employees.
@@ -560,10 +908,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * SEV-4: Low. Minor policy violations. Automated scans with no evidence of exploitation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -594,10 +960,28 @@ Detection relies on monitoring and alerting. Every alert is a potential incident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Containment stops the attack from spreading. Eradication removes the attacker's presence. Recovery returns systems to normal operation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -628,10 +1012,28 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Disconnect affected systems from the network.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,6 +1058,15 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Block attacker IP addresses at the firewall.
@@ -670,10 +1081,28 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Rotate credentials for affected services.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -704,10 +1133,28 @@ Containment stops the attack from spreading. Eradication removes the attacker's 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 iptables -A INPUT -s 203.0.113.50 -j DROP
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -738,6 +1185,15 @@ iptables -A INPUT -s 203.0.113.50 -j DROP
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws iam update-access-key \
@@ -755,14 +1211,6 @@ aws iam update-access-key \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \
-
-  
-  
-  
-  
   
   
   
@@ -774,7 +1222,7 @@ aws iam update-access-key \
   
 
 
-\\\\\\\\\\\\\\\\--status Inactive \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \
 
   
   
@@ -789,10 +1237,54 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--user-name compromised-user
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--status Inactive \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--user-name compromised-user
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -823,10 +1315,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Apply security patches.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -851,10 +1361,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Deploy WAF rules to block attack patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -885,10 +1413,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Remove malware using EDR tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -913,6 +1459,15 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Revoke all session tokens and API keys.
@@ -927,10 +1482,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Reset root passwords and privileged credentials.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -961,10 +1534,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Restore systems from clean backups.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -989,6 +1580,15 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Gradually reintroduce traffic while monitoring for recurrence.
@@ -1003,10 +1603,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Communicate recovery status to stakeholders.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1037,10 +1655,28 @@ aws iam update-access-key \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The post-mortem is where the team learns from the incident and improves processes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1071,10 +1707,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Post-mortem document**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1102,10 +1756,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Root cause analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1130,10 +1802,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Detection gaps and containment delays
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1158,10 +1848,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Changes to runbooks, tooling, or architecture
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1192,10 +1900,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Date**: 2026-04-15
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1226,6 +1952,15 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Timeline
@@ -1243,31 +1978,6 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
-
-
-\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC — GuardDuty alert for anomalous API calls
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\- 09:25 — Triage begins
-
-  
-  
-  
-  
   
   
   
@@ -1279,8 +1989,17 @@ The post-mortem is where the team learns from the incident and improves processe
   
 
 
-\\\\\\\\\\\\\\\\- 09:45 — Compromised key identified and revoked
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC — GuardDuty alert for anomalous API calls
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1296,7 +2015,7 @@ The post-mortem is where the team learns from the incident and improves processe
   
 
 
-\\\\\\\\\\\\\\\\- 10:30 — Containment confirmed
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:25 — Triage begins
 
   
   
@@ -1311,10 +2030,80 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- 14:00 — All affected resources rotated
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:45 — Compromised key identified and revoked
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 10:30 — Containment confirmed
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 — All affected resources rotated
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1345,10 +2134,28 @@ The post-mortem is where the team learns from the incident and improves processe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug output. Logs were publicly accessible.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1379,14 +2186,6 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
   
   
   
-
-
-\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22)
-
-  
-  
-  
-  
   
   
   
@@ -1398,7 +2197,7 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
   
 
 
-\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22)
 
   
   
@@ -1413,10 +2212,54 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1447,10 +2290,28 @@ GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug outpu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Proper evidence collection preserves data for legal action and root cause analysis.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1478,10 +2339,28 @@ Proper evidence collection preserves data for legal action and root cause analys
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Collect disk images using `dd` or FTK Imager rather than copying files live.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1506,10 +2385,28 @@ Proper evidence collection preserves data for legal action and root cause analys
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Maintain chain of custody documentation for all evidence.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2437,28 @@ Proper evidence collection preserves data for legal action and root cause analys
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 insmod lime.ko "path=/evidence/memory.dump format=lime"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,6 +2489,15 @@ insmod lime.ko "path=/evidence/memory.dump format=lime"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync
@@ -1591,10 +2515,28 @@ dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

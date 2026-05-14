@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/tools/shell-frameworks.html
   
   
   
+  
+  
+  
+
+
+# Shell Frameworks: zsh, fish, bash Customization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Shell Frameworks: zsh, fish, bash Customization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Shell Frameworks: zsh, fish, bash Customization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern shell environments dramatically improve terminal productivity through plugins, themes, and prompt customization.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Modern shell environments dramatically improve terminal productivity through plu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Oh My Zsh is the most popular Zsh framework. It manages plugins, themes, and configuration. Thousands of community plugins cover Git, Docker, kubectl, Node.js, Python, and more. Themes customize the prompt appearance.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ Essential plugins: git (aliases for common Git commands), autojump or z (smart d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Starship
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Starship is a cross-shell prompt that works with Zsh, Bash, fish, and PowerShell
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Starship is minimal and fast—it only shows relevant information. The prompt updates instantly as context changes. Modules are configurable independently. Starship reduces prompt complexity by showing information only when it is relevant in the current directory.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Starship is minimal and fast—it only shows relevant information. The prompt up
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fish is a user-friendly shell with features built-in: syntax highlighting, autosuggestions, tab completions, and web-based configuration. Fish does not need separate framework configuration—useful features work out of the box.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ Fish's scripting language differs from POSIX shells, creating compatibility issu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Powerlevel10k
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ Powerlevel10k is a Zsh theme focused on speed and customization. It supports ins
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Powerlevel10k prompt segments show command execution time, Python virtualenv, Node.js version, battery status, and time. The prompt adapts to terminal width. Transient prompt shows previous command output without the prompt itself. Powerlevel10k works with Oh My Zsh and antigen.
@@ -279,10 +456,28 @@ Powerlevel10k prompt segments show command execution time, Python virtualenv, No
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

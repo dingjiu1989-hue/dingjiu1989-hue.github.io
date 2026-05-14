@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/ai/transformer-mechanisms.html
   
   
   
+  
+  
+  
+
+
+# Transformer Mechanisms in Deep Learning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Transformer Mechanisms in Deep Learning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Transformer Mechanisms in Deep Learning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ The transformer architecture, introduced in "Attention Is All You Need" (Vaswani
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ The softmax function normalizes attention scores into a probability distribution
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Multi-Head Attention
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Multi-head attention runs multiple self-attention operations (heads) in parallel
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Head outputs are concatenated and linearly projected to the model dimension. Dif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,6 +378,15 @@ Rotary Position Embedding (RoPE) rotates query and key vectors based on position
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Feed-Forward Networks
@@ -245,10 +404,28 @@ Rotary Position Embedding (RoPE) rotates query and key vectors based on position
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

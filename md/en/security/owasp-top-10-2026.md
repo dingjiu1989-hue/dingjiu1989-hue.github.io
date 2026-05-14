@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html
   
 
 
+# OWASP Top 10 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# OWASP Top 10 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# OWASP Top 10 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 OWASP Top 10 2026 Overview 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ The OWASP Top 10 represents the most critical web application security risks. Th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Updated Categories 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ A01: Broken Access Control
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Access control failures remain the top risk. Modern applications must enforce server-side checks: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -116,10 +221,28 @@ Access control failures remain the top risk. Modern applications must enforce se
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 function requireRole(...roles) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -144,10 +267,28 @@ return (req, res, next) => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if (!req.user || !roles.includes(req.user.role)) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -172,10 +313,28 @@ if (!req.user || !roles.includes(req.user.role)) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 securityLog.warn("Unauthorized access attempt", {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -200,10 +359,28 @@ user: req.user?.id,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 path: req.path,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +405,28 @@ ip: req.ip
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -256,10 +451,28 @@ return res.status(403).json({ error: "Insufficient permissions" });
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,6 +497,15 @@ next();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 };
@@ -298,10 +520,28 @@ next();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -326,10 +566,28 @@ next();
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app.get("/api/admin/users", requireRole("admin"), adminController.getUsers);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -351,10 +609,28 @@ A02: Cryptographic Failures
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Weak cryptography is increasingly exploited. Use modern algorithms: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -379,10 +655,28 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import os
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -407,10 +701,28 @@ def encrypt_data(data, key):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aesgcm = AESGCM(key)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +747,28 @@ nonce = os.urandom(12)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ciphertext = aesgcm.encrypt(nonce, data.encode(), None)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -463,10 +793,28 @@ return nonce + ciphertext
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def decrypt_data(encrypted, key):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -491,10 +839,28 @@ aesgcm = AESGCM(key)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nonce = encrypted[:12]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -519,10 +885,28 @@ ciphertext = encrypted[12:]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return aesgcm.decrypt(nonce, ciphertext, None).decode()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -544,10 +928,28 @@ A03: Injection
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Injection remains prevalent. Parameterized queries are mandatory: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -572,10 +974,28 @@ Injection remains prevalent. Parameterized queries are mandatory:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def find_user(email):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -600,10 +1020,28 @@ query = "SELECT * FROM users WHERE email = $1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return db.execute(query, [email])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -628,10 +1066,28 @@ return db.execute(query, [email])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def find_user_safe(email):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,6 +1112,15 @@ return User.query.filter_by(email=email).first()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A04: Insecure Design 
@@ -667,10 +1132,28 @@ A04: Insecure Design
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A new emphasis on design-level flaws: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -695,25 +1178,6 @@ threat_modeling_checklist:
   
   
   
-
-
-\\\\\\\\- Are trust boundaries defined?
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- Is there a data flow diagram?
-
-  
   
   
   
@@ -725,8 +1189,17 @@ threat_modeling_checklist:
   
 
 
-\\\\\\\\- Are failure modes handled?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are trust boundaries defined?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -739,7 +1212,7 @@ threat_modeling_checklist:
   
 
 
-\\\\\\\\- Is there rate limiting on auth endpoints?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there a data flow diagram?
 
   
   
@@ -751,10 +1224,74 @@ threat_modeling_checklist:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- Are security controls centralized?
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are failure modes handled?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there rate limiting on auth endpoints?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are security controls centralized?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -776,10 +1313,28 @@ A07: Identification and Authentication Failures
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Passwordless and MFA are now expected baselines: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -804,10 +1359,28 @@ Passwordless and MFA are now expected baselines:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 async function registerPasskey(userId) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -832,10 +1405,28 @@ const credential = await navigator.credentials.create({
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 publicKey: {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1451,28 @@ challenge: new Uint8Array(32),
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rp: { name: "Example Corp" },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -888,10 +1497,28 @@ user: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 id: new TextEncoder().encode(userId),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -916,10 +1543,28 @@ name: userId,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 displayName: userId
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -944,6 +1589,15 @@ displayName: userId
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pubKeyCredParams: [{ alg: -7, type: "public-key" }]
@@ -958,10 +1612,28 @@ pubKeyCredParams: [{ alg: -7, type: "public-key" }]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -986,10 +1658,28 @@ pubKeyCredParams: [{ alg: -7, type: "public-key" }]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return credential;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1014,6 +1704,15 @@ return credential;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A08: Software and Data Integrity Failures 
@@ -1025,10 +1724,28 @@ A08: Software and Data Integrity Failures
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CI/CD pipeline security and supply chain attacks: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1053,6 +1770,15 @@ CI/CD pipeline security and supply chain attacks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 supply_chain_checks:
@@ -1067,25 +1793,6 @@ supply_chain_checks:
   
   
   
-
-
-\\\\\\\\- Verify package signatures
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- Scan dependencies for known vulnerabilities
-
-  
   
   
   
@@ -1097,8 +1804,17 @@ supply_chain_checks:
   
 
 
-\\\\\\\\- Pin dependency versions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1111,7 +1827,7 @@ supply_chain_checks:
   
 
 
-\\\\\\\\- Use private registries for verified packages
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities
 
   
   
@@ -1123,10 +1839,74 @@ supply_chain_checks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- Sign all releases with cosign
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Pin dependency versions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use private registries for verified packages
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sign all releases with cosign
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1148,10 +1928,28 @@ Testing Approaches
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern testing combines automation and manual review: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1176,6 +1974,15 @@ def security_test_suite():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 results = []
@@ -1190,10 +1997,28 @@ results = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# 1\\\\. Automated DAST
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1218,10 +2043,28 @@ results.extend(run_dast_scan("https://staging.example.com"))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# 2\\\\. SAST scan
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1246,10 +2089,28 @@ results.extend(run_sast_scan("./src"))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# 3\\\\. Dependency check
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1274,10 +2135,28 @@ results.extend(run_dependency_check("./package.json"))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# 4\\\\. API fuzzing
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,6 +2181,15 @@ results.extend(api_fuzz("https://staging.example.com/api"))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return analyze_results(results)
@@ -1316,10 +2204,28 @@ return analyze_results(results)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

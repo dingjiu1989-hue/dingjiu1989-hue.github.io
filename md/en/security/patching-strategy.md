@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/patching-strategy.html
   
 
 
+# Patching Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Patching Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Patching Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Patching is the most fundamental security practice, yet organizations consistent
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vulnerability Prioritization 
@@ -77,10 +155,28 @@ Vulnerability Prioritization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Not all vulnerabilities are equal. Prioritize based on exploitability, asset criticality, and threat intelligence. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ from dataclasses import dataclass
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from enum import Enum
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -133,10 +247,28 @@ class Severity(Enum):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CRITICAL = 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -161,10 +293,28 @@ HIGH = 2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MEDIUM = 3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -189,10 +339,28 @@ LOW = 4
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 @dataclass
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -217,10 +385,28 @@ class Vulnerability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cve_id: str
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -245,10 +431,28 @@ cvss_score: float
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 asset_criticality: int # 1-5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -273,10 +477,28 @@ exploit_available: bool
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 in_wild: bool
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +523,28 @@ affected_systems: int
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def prioritize(vuln: Vulnerability) -> int:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -329,10 +569,28 @@ score = vuln.cvss_score
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Asset criticality multiplier
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -357,10 +615,28 @@ score *= (vuln.asset_criticality / 3)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Exploit availability
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -385,10 +661,28 @@ if vuln.exploit_available:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 score *= 1.5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -413,10 +707,28 @@ if vuln.in_wild:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 score *= 2.0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -441,10 +753,28 @@ score *= 2.0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if vuln.affected_systems > 100:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +799,28 @@ score *= 1.3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return round(score, 1)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -497,10 +845,28 @@ Prioritization Matrix
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 patch_priority:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -525,25 +891,6 @@ critical:
   
   
   
-
-
-\\\\\\\\- cvss_score: ">= 9.0"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- exploit_in_wild: true
-
-  
   
   
   
@@ -555,8 +902,17 @@ critical:
   
 
 
-\\\\\\\\- sla_hours: 24
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cvss_score: ">= 9.0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -569,8 +925,63 @@ critical:
   
 
 
-\\\\\\\\- process: emergency_change
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- exploit_in_wild: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sla_hours: 24
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process: emergency_change
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -595,25 +1006,6 @@ high:
   
   
   
-
-
-\\\\\\\\- cvss_score: "7.0 - 8.9"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- exploit_available: true
-
-  
   
   
   
@@ -625,8 +1017,17 @@ high:
   
 
 
-\\\\\\\\- sla_days: 7
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cvss_score: "7.0 - 8.9"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,8 +1040,63 @@ high:
   
 
 
-\\\\\\\\- process: standard_change_fast_track
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- exploit_available: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sla_days: 7
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process: standard_change_fast_track
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -665,25 +1121,6 @@ medium:
   
   
   
-
-
-\\\\\\\\- cvss_score: "4.0 - 6.9"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- sla_days: 30
-
-  
   
   
   
@@ -695,8 +1132,63 @@ medium:
   
 
 
-\\\\\\\\- process: standard_change
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cvss_score: "4.0 - 6.9"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sla_days: 30
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process: standard_change
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -721,25 +1213,6 @@ low:
   
   
   
-
-
-\\\\\\\\- cvss_score: "< 4.0"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- sla_days: 90
-
-  
   
   
   
@@ -751,8 +1224,63 @@ low:
   
 
 
-\\\\\\\\- process: next_maintenance_window
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cvss_score: "< 4.0"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sla_days: 90
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- process: next_maintenance_window
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -774,10 +1302,28 @@ Patch Testing Pipeline
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Test patches in a progressive environment chain before production deployment. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -802,6 +1348,15 @@ patch_pipeline:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 stages:
@@ -816,10 +1371,28 @@ stages:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- environment: development
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- environment: development
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -844,11 +1417,6 @@ validation:
   
   
   
-
-
-\\\\\\\\- automated_tests_pass
-
-  
   
   
   
@@ -860,8 +1428,40 @@ validation:
   
 
 
-\\\\\\\\- integration_tests_pass
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- automated_tests_pass
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- integration_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -886,10 +1486,28 @@ rollback: immediate_redeploy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- environment: staging
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- environment: staging
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -914,25 +1532,6 @@ validation:
   
   
   
-
-
-\\\\\\\\- regression_tests_pass
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- performance_tests_pass
-
-  
   
   
   
@@ -944,8 +1543,63 @@ validation:
   
 
 
-\\\\\\\\- security_scan_pass
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- regression_tests_pass
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- performance_tests_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_scan_pass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -970,10 +1624,28 @@ duration: 24_hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- environment: canary
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- environment: canary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -998,25 +1670,6 @@ validation:
   
   
   
-
-
-\\\\\\\\- error_rate_below_baseline
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- latency_below_baseline
-
-  
   
   
   
@@ -1028,8 +1681,63 @@ validation:
   
 
 
-\\\\\\\\- no_critical_alerts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- error_rate_below_baseline
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- latency_below_baseline
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_critical_alerts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1054,6 +1762,15 @@ duration: 4_hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 percentage: 10%
@@ -1068,10 +1785,28 @@ percentage: 10%
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- environment: production
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- environment: production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1096,10 +1831,28 @@ strategy: rolling_update
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 max_surge: 25%
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1124,10 +1877,28 @@ max_unavailable: 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 #!/bin/bash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1152,10 +1923,28 @@ max_unavailable: 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 set -euo pipefail
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1180,10 +1969,28 @@ PATCH_ID="$1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ENVIRONMENTS=("dev" "staging" "canary" "prod")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1208,10 +2015,28 @@ for env in "${ENVIRONMENTS[@]}"; do
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "=== Deploying patch $PATCH_ID to $env ==="
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1236,10 +2061,28 @@ echo "=== Deploying patch $PATCH_ID to $env ==="
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if ! ansible-playbook -i inventories/$env patch-playbook.yml \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1264,10 +2107,28 @@ if ! ansible-playbook -i inventories/$env patch-playbook.yml \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "FAILED: Patch deployment to $env"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1292,6 +2153,15 @@ rollback_patch $env $PATCH_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 exit 1
@@ -1306,10 +2176,28 @@ exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1334,10 +2222,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if ! run_validation_tests $env; then
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1362,10 +2268,28 @@ echo "FAILED: Validation in $env"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rollback_patch $env $PATCH_ID
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1390,10 +2314,28 @@ exit 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fi
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1418,10 +2360,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sleep $([ "$env" == "production" ] && echo 3600 || echo 300)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1446,10 +2406,28 @@ if check_alerts $env; then
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "ALERTS detected in $env after patch"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1474,10 +2452,28 @@ rollback_patch $env $PATCH_ID
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 exit 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1502,10 +2498,28 @@ fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "=== Patch $PATCH_ID passed in $env ==="
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1530,6 +2544,15 @@ done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Emergency Patches 
@@ -1541,10 +2564,28 @@ Emergency Patches
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Zero-day exploits require immediate action, bypassing normal testing cycles. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1569,10 +2610,28 @@ emergency_patch_workflow:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 trigger: active_exploitation_of_critical_vulnerability
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1597,10 +2656,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- phase: assessment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: assessment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,6 +2702,15 @@ duration: 1_hour
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 actions:
@@ -1639,25 +2725,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- confirm_exploit_activity
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- identify_affected_systems
-
-  
   
   
   
@@ -1669,8 +2736,17 @@ actions:
   
 
 
-\\\\\\\\- assess_business_impact
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- confirm_exploit_activity
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1683,8 +2759,63 @@ actions:
   
 
 
-\\\\\\\\- phase: decision
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- identify_affected_systems
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- assess_business_impact
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: decision
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1709,6 +2840,15 @@ duration: 30_minutes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 actions:
@@ -1723,25 +2863,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- ciso_approval
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- change_advisory_board_notification
-
-  
   
   
   
@@ -1753,8 +2874,17 @@ actions:
   
 
 
-\\\\\\\\- communication_plan_activation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ciso_approval
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1767,8 +2897,63 @@ actions:
   
 
 
-\\\\\\\\- phase: deployment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_advisory_board_notification
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- communication_plan_activation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1793,6 +2978,15 @@ duration: 2_hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 actions:
@@ -1807,25 +3001,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- deploy_workaround_virtual_patch
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- deploy_vendor_patch_to_staging
-
-  
   
   
   
@@ -1837,8 +3012,17 @@ actions:
   
 
 
-\\\\\\\\- fast_track_testing
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy_workaround_virtual_patch
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1851,7 +3035,7 @@ actions:
   
 
 
-\\\\\\\\- deploy_to_production
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy_vendor_patch_to_staging
 
   
   
@@ -1862,11 +3046,6 @@ actions:
   
   
   
-  
-
-
-\\\\\\\\- monitor_for_side_effects
-
   
   
   
@@ -1879,8 +3058,86 @@ actions:
   
 
 
-\\\\\\\\- phase: recovery
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fast_track_testing
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy_to_production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitor_for_side_effects
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: recovery
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1905,6 +3162,15 @@ duration: 24_hours
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 actions:
@@ -1919,25 +3185,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- continuous_monitoring
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- post_incident_review
-
-  
   
   
   
@@ -1949,8 +3196,63 @@ actions:
   
 
 
-\\\\\\\\- remove_virtual_patches_if_applicable
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- continuous_monitoring
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post_incident_review
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- remove_virtual_patches_if_applicable
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1975,10 +3277,28 @@ actions:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Deploy WAF rule to block exploit attempts
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2003,10 +3323,28 @@ cat > /etc/modsecurity/crs/custom/emergency-sqli.conf << 'EOF'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SecRule REQUEST_FILENAME "@contains /api/endpoint" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2031,10 +3369,28 @@ SecRule REQUEST_FILENAME "@contains /api/endpoint" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 msg:'Emergency patch: CVE-2026-1234 exploitation attempt blocked'"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2059,10 +3415,28 @@ EOF
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nginx -t && systemctl reload nginx
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3458,28 @@ Rollback Planning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Every patch must have a tested rollback procedure. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2112,10 +3504,28 @@ class PatchRollbackPlan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self, patch_id, system, version_before, version_after):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2140,10 +3550,28 @@ self.patch_id = patch_id
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.system = system
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2168,10 +3596,28 @@ self.version_before = version_before
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.version_after = version_after
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2196,10 +3642,28 @@ self.rollback_commands = []
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.validation_commands = []
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2224,10 +3688,28 @@ def add_rollback_step(self, command):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.rollback_commands.append(command)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2252,10 +3734,28 @@ def execute_rollback(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Execute rollback if patch causes issues."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2280,10 +3780,28 @@ for cmd in self.rollback_commands:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 result = subprocess.run(cmd, shell=True, capture_output=True)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2308,10 +3826,28 @@ if result.returncode != 0:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 raise Exception(f"Rollback failed: {cmd}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2336,10 +3872,28 @@ return False
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2364,10 +3918,28 @@ def validate_rollback(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 """Verify system is back to pre-patch state."""
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2392,10 +3964,28 @@ for cmd in self.validation_commands:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 result = subprocess.run(cmd, shell=True, capture_output=True)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2420,10 +4010,28 @@ if not self._check_expected(result):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return False
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2448,10 +4056,28 @@ return True
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

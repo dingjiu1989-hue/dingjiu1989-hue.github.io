@@ -58,10 +58,88 @@ url: https://dingjiu1989-hue.github.io/en/tools/git-gui-tools.html
   
   
   
+  
+  
+  
+
+
+# Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Git GUI tools provide visual interfaces for version control operations. They make Git more accessible and help visualize complex branching.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -92,10 +170,28 @@ Git GUI tools provide visual interfaces for version control operations. They mak
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitKraken offers the most polished Git visualization. The commit graph is clear and interactive. Drag-and-drop operations make rebasing and cherry-picking intuitive. Built-in merge conflict editor simplifies resolution.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ GitKraken integrates with GitHub, GitLab, Bitbucket, and Azure DevOps. Issues, p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Sourcetree
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -160,10 +274,28 @@ Sourcetree is Atlassian's free Git GUI. It provides visual commit history, stagi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sourcetree supports interactive rebase with a visual interface. The log view shows all branches and tags. Remote repository management works with Bitbucket and GitHub. Sourcetree runs on macOS and Windows. It is free but less polished than GitKraken.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +326,28 @@ Sourcetree supports interactive rebase with a visual interface. The log view sho
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Desktop focuses on GitHub workflows. Clone repositories, create branches, commit changes, and open pull requests. The interface is minimal and beginner-friendly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +378,28 @@ GitHub Desktop integrates with GitHub Issues, Actions, and Codespaces. The diff 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  GitLens
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -262,6 +430,15 @@ GitLens is a VS Code extension that supercharges the built-in Git capabilities. 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitLens provides a visual commit graph, search by commit message or author, and worktree management. GitLens+ features include GitKraken integration. GitLens is free with paid plans for teams. It enhances the editor rather than replacing it.
@@ -279,10 +456,28 @@ GitLens provides a visual commit graph, search by commit message or author, and 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

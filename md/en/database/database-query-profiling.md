@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/database/database-query-profiling.html
   
   
   
+  
+  
+  
+
+
+# Database Query Profiling: Finding and Fixing Performance Bottlenecks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Query Profiling: Finding and Fixing Performance Bottlenecks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Query Profiling: Finding and Fixing Performance Bottlenecks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Query profiling identifies why a query is slow. Rather than guessing, profiling measures where time is spent: CPU, I/O, locks, or network. This data guides targeted optimization.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Query profiling identifies why a query is slow. Rather than guessing, profiling 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 PostgreSQL: EXPLAIN ANALYZE BUFFERS shows execution plan with actual timing and buffer access. pg_stat_statements tracks query statistics. auto_explain logs slow queries automatically. pgBadger analyzes PostgreSQL logs for query performance patterns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ MySQL: EXPLAIN ANALYZE (MySQL 8.0.18+) shows execution plan. performance_schema 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Key Metrics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,10 +230,28 @@ Execution time: total time and time per execution. Buffer usage: shared hit reve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Optimization Workflow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

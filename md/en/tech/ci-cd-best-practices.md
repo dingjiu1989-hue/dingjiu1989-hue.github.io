@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/ci-cd-best-practices.html
   
   
   
+  
+  
+  
+
+
+# CI/CD Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Continuous Integration and Continuous Deployment (CI/CD) pipelines automate the process of building, testing, and deploying software. A well-designed CI/CD pipeline provides fast feedback, reliable deployments, and consistent quality gates. This article covers pipeline design principles, artifact management, environment promotion, and deployment strategies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Continuous Integration and Continuous Deployment (CI/CD) pipelines automate the 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A CI/CD pipeline should follow the fail-fast principle. Early stages should catch the most common and cheapest-to-fix issues. A linting or formatting check fails in seconds, saving the developer from waiting for a full test suite. Unit tests run before integration tests. The pipeline fails as soon as any stage fails, providing immediate feedback.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Each pipeline stage should have a clear purpose. Lint and format checks verify c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pipelines should be fast. Developers should receive feedback within 10 minutes for most changes. Slow pipelines encourage developers to bypass them. Speed optimizations include parallel stage execution, build caching, incremental testing, and only running relevant stages for specific changes.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Pipelines should be fast. Developers should receive feedback within 10 minutes f
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A typical CI pipeline includes checkout, dependency installation, lint/format check, unit tests, build, security scan, integration tests, and artifact publishing. Each stage is independent and can be cached or skipped based on the change scope.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ CD extends CI by adding deployment stages: deploy to staging, run smoke tests, d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Artifact Management
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Build artifacts should be stored in a versioned artifact repository. Docker imag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Immutable artifacts are a key principle. Once an artifact is built and stored, it is never modified. The same artifact that passed testing in staging is deployed to production. This eliminates "it works in staging but not production" issues caused by different builds.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Artifact metadata should include the source commit hash, build timestamp, CI bui
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Environment Promotion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Environment promotion moves artifacts through environments in a controlled seque
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Promotion should be automated with manual approval for production. Manual gates at production deployment ensure human review of the change scope and potential impact. Automated gates run smoke tests, verify health checks, and roll back on failure.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Feature flags decouple deployment from release. Code can be deployed to producti
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Deployment Strategies
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Blue-green deployment runs two identical environments. The blue environment serv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Canary deployment gradually shifts traffic to the new version. Initially, 1% of traffic goes to the new version. While monitoring error rates and performance, traffic percentage increases. If issues arise, traffic is redirected to the previous version. Canary deployment requires sophisticated traffic management and monitoring.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Rolling deployment updates instances gradually. A load balancer removes instance
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Monitoring and Rollback
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,6 +719,15 @@ CI/CD pipelines should include deployment verification stages. After deployment,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rollback procedures should be well-defined and tested. A rollback deploys the previous artifact version, restores the previous database migration state, or redirects traffic to the previous environment. Rollback speed is critical—every minute of degraded service affects users.
@@ -469,10 +745,28 @@ Rollback procedures should be well-defined and tested. A rollback deploys the pr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Post-deployment monitoring continues for an extended period after the deployment completes. Some issues only appear after traffic patterns change or caches warm up. A monitoring period of 15-30 minutes after deployment catches most delayed issues.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

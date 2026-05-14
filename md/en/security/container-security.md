@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/container-security.html
   
   
   
+  
+  
+  
+
+
+# Container Security Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Container Security Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Container Security Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The Container Attack Surface 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Containers share the host kernel, which introduces unique security consideration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Build Phase Security 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Use Minimal Base Images
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Smaller base images reduce the attack surface by eliminating unnecessary tools and libraries. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Smaller base images reduce the attack surface by eliminating unnecessary tools a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM ubuntu:22.04
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ RUN apt-get update && apt-get install -y python3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # BETTER: Minimal distribution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ FROM python:3.12-slim
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # BEST: Distroless (no shell, no package manager)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ FROM gcr.io/distroless/python3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Image | Size | Packages | Attack Surface | |-------|------|----------|----------------| | ubuntu:22.04 | 77 MB | 600+ | Large | | python:3.12-slim | 120 MB | 100+ | Moderate | | gcr.io/distroless/python3 | 60 MB | ~10 | Minimal | | alpine:3.19 | 7 MB | ~5 | Small (uses musl libc) | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Scan for Vulnerabilities
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integrate image scanning into your CI/CD pipeline: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Integrate image scanning into your CI/CD pipeline:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Container Security Scan
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ on: [push]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ scan:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,14 +719,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -471,8 +730,43 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Build image
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Build image
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ run: docker build -t app:latest .
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Scan with Trivy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Scan with Trivy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ uses: aquasecurity/trivy-action@master
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ image-ref: 'app:latest'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 format: 'sarif'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,6 +953,15 @@ output: 'trivy-results.sarif'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 severity: 'HIGH,CRITICAL'
@@ -622,10 +979,28 @@ severity: 'HIGH,CRITICAL'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ uses: github/codeql-action/upload-sarif@v3
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 with:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ sarif_file: 'trivy-results.sarif'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multi-Stage Builds 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ Use multi-stage builds to keep the final image clean:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Build stage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ FROM golang:1.22 AS builder
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WORKDIR /app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ COPY go.mod go.sum ./
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RUN go mod download
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ COPY . .
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RUN CGO_ENABLED=0 go build -o /app/server
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ RUN CGO_ENABLED=0 go build -o /app/server
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM gcr.io/distroless/static:nonroot
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ COPY --from=builder /app/server /server
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 USER nonroot:nonroot
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ EXPOSE 8080
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ENTRYPOINT ["/server"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ Ship Phase Security
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sign and Verify Images 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ Use Docker Content Trust or cosign to sign images and verify integrity:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Generate a signing key pair
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ cosign generate-key-pair
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Sign the image
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ cosign sign --key cosign.key ghcr.io/myorg/myapp:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Verify before deployment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ cosign verify --key cosign.pub ghcr.io/myorg/myapp:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use a Private Registry 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ Push images to a private registry with access controls and vulnerability scannin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Push to private ECR
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ aws ecr get-login-password --region us-east-1 | \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docker login --username AWS --password-stdin $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ docker tag app:latest $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 docker push $ACCOUNT.dkr.ecr.us-east-1.amazonaws.com/app:latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ Run Phase Security
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Run as Non-Root 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ Never run containers as root. Create and use a non-root user:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM node:22-alpine
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COPY --chown=appuser:appgroup . /app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ USER appuser
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 EXPOSE 3000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ CMD ["node", "server.js"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Read-Only Root Filesystem 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,6 +2175,15 @@ Mount the root filesystem as read-only to prevent file-system-based attacks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Kubernetes pod security context
@@ -1421,10 +2201,28 @@ Mount the root filesystem as read-only to prevent file-system-based attacks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ kind: Pod
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,6 +2305,15 @@ name: secure-pod
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 spec:
@@ -1506,10 +2331,28 @@ spec:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 securityContext:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1540,10 +2383,28 @@ runAsNonRoot: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runAsUser: 1001
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,6 +2435,15 @@ fsGroup: 1001
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 containers:
@@ -1591,10 +2461,28 @@ containers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ image: myapp:latest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 securityContext:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ readOnlyRootFilesystem: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 capabilities:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ drop: ["ALL"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 add: ["NET_BIND_SERVICE"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,6 +2669,15 @@ allowPrivilegeEscalation: false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 volumeMounts:
@@ -1744,10 +2695,28 @@ volumeMounts:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: tmp
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: tmp
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1778,6 +2747,15 @@ mountPath: /tmp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 volumes:
@@ -1795,10 +2773,28 @@ volumes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: tmp
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: tmp
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ emptyDir: {}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resource Limits 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ Prevent DoS attacks through resource exhaustion:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2929,28 @@ requests:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 memory: "128Mi"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ cpu: "250m"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 limits:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ memory: "256Mi"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cpu: "500m"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ Seccomp and AppArmor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Restrict system calls available to containers: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ securityContext:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 seccompProfile:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ type: RuntimeDefault # Uses the container runtime's default seccomp profile
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Kubernetes Pod Security Standards 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ Kubernetes defines three Pod Security Standards:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Standard | Description | When to Use | |----------|-------------|-------------| | Privileged | Unrestricted policy | System-level pods | | Baseline | Minimally restrictive, prevents known escalations | Most workloads | | Restricted | Heavily restricted, follows pod hardening best practices | Security-critical workloads | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ Kubernetes defines three Pod Security Standards:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ kind: Namespace
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ name: production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 labels:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ pod-security.kubernetes.io/enforce: restricted
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pod-security.kubernetes.io/enforce-version: latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ Runtime Monitoring
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Use tools like Falco for runtime threat detection: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,6 +3553,15 @@ Use tools like Falco for runtime threat detection:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 helm install falco falcosecurity/falco \
@@ -2322,10 +3579,28 @@ helm install falco falcosecurity/falco \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--set falco.driver.kind=modern-bpf
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--set falco.driver.kind=modern-bpf
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2356,31 +3631,6 @@ helm install falco falcosecurity/falco \
   
   
   
-
-
-# \\\\\\\\\\\\\\\\- Shell spawned in container
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# \\\\\\\\\\\\\\\\- Sensitive file reads
-
-  
-  
-  
-  
   
   
   
@@ -2392,8 +3642,17 @@ helm install falco falcosecurity/falco \
   
 
 
-# \\\\\\\\\\\\\\\\- Unexpected network connections
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Shell spawned in container
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2409,8 +3668,69 @@ helm install falco falcosecurity/falco \
   
 
 
-# \\\\\\\\\\\\\\\\- Privilege escalation attempts
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sensitive file reads
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Unexpected network connections
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Privilege escalation attempts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2428,6 +3748,15 @@ helm install falco falcosecurity/falco \
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

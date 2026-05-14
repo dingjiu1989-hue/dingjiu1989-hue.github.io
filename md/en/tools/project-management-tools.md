@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/project-management-tools.html
   
 
 
+# Project Management Tools for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Project Management Tools for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Project Management Tools for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Project management tools help teams track work, prioritize tasks, and ship software. Developers have specific needs: issue tracking, sprint planning, Git integration, and API access for automation. This guide compares the leading options.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Project management tools help teams track work, prioritize tasks, and ship softw
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A developer-friendly project management tool should:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -126,10 +222,28 @@ A developer-friendly project management tool should:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Support agile workflows (sprints, backlogs, Kanban).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +268,28 @@ A developer-friendly project management tool should:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Offer API access for automation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -182,10 +314,28 @@ A developer-friendly project management tool should:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Allow developer workflow customization.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -216,10 +366,28 @@ A developer-friendly project management tool should:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Linear has become the preferred project management tool for modern software teams. It focuses on speed and developer experience.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -250,10 +418,28 @@ Linear has become the preferred project management tool for modern software team
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Extremely fast keyboard-first interface.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -278,10 +464,28 @@ Linear has become the preferred project management tool for modern software team
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * GitHub/GitLab integration (auto-link PRs, branches).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -306,10 +510,28 @@ Linear has become the preferred project management tool for modern software team
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Cycle-based workflow (Linear's alternative to sprints).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -334,10 +556,28 @@ Linear has become the preferred project management tool for modern software team
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * API and GraphQL-based webhooks.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -368,10 +608,28 @@ Linear has become the preferred project management tool for modern software team
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 query {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -402,10 +660,28 @@ issues(filter: { assignee: { email: { eq: "dev@example.com" } } }) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 nodes {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -436,10 +712,28 @@ title
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 state { name }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -470,6 +764,41 @@ labels { nodes { name } }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -487,6 +816,15 @@ labels { nodes { name } }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -500,14 +838,6 @@ labels { nodes { name } }
   
   
   
-  
-  
-  
-  
-
-
-}
-
   
   
   
@@ -538,10 +868,28 @@ labels { nodes { name } }
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Branch names auto-create links
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -572,10 +920,28 @@ git checkout -b feature/LIN-123-add-auth
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // PR with "LIN-123" in body auto-links
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -606,10 +972,28 @@ git checkout -b feature/LIN-123-add-auth
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Paid ($8/user/month), fewer templates, no time tracking.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -640,10 +1024,28 @@ git checkout -b feature/LIN-123-add-auth
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Jira is the most widely used project management tool in enterprise software development. It offers maximum customization at the cost of complexity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -674,10 +1076,28 @@ Jira is the most widely used project management tool in enterprise software deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Highly customizable workflows and issue types.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -702,10 +1122,28 @@ Jira is the most widely used project management tool in enterprise software deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Roadmaps with dependency tracking.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -730,10 +1168,28 @@ Jira is the most widely used project management tool in enterprise software deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Deep GitHub/Bitbucket integration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1214,28 @@ Jira is the most widely used project management tool in enterprise software deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Marketplace with thousands of add-ons.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1266,28 @@ Jira is the most widely used project management tool in enterprise software deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 project = "BACKEND" AND status != Done ORDER BY priority DESC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1318,28 @@ assignee = currentUser() AND due < now() AND status != Done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Most customizable, enterprise features, extensive integrations, reporting.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1370,28 @@ assignee = currentUser() AND due < now() AND status != Done
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  GitHub Projects
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1422,28 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key Features:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -925,10 +1471,28 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Kanban board with customizable columns.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -953,10 +1517,28 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Issue templates and forms.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -981,6 +1563,15 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Roadmap view (beta).
@@ -995,10 +1586,28 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Free for public repositories.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1029,10 +1638,28 @@ GitHub Projects integrates project management directly into the GitHub workflow.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Move issues
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1063,10 +1690,28 @@ on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pull_request:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1097,10 +1742,28 @@ types: [opened]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1131,10 +1794,28 @@ automate:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1165,10 +1846,28 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- uses: actions/add-to-project@v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/add-to-project@v1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1199,10 +1898,28 @@ with:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 project-url: https://github.com/orgs/myorg/projects/1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1233,10 +1950,28 @@ github-token: ${{ secrets.PROJECT_TOKEN }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Native GitHub integration, free, simple, Actions automation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1267,10 +2002,28 @@ github-token: ${{ secrets.PROJECT_TOKEN }}
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Notion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1301,10 +2054,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key Features:**
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1332,10 +2103,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Wiki and documentation alongside project management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1360,10 +2149,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Templates for various workflows.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1388,10 +2195,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Collaboration with comments and mentions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1422,10 +2247,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Can be slow with large databases, not developer-specific, limited Git integration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1456,10 +2299,28 @@ Notion is a flexible workspace that combines notes, databases, and project manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Taiga is an open-source project management platform with a focus on agile methodologies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1490,10 +2351,28 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Scrum and Kanban support.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1518,10 +2397,28 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Sprint backlog.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1546,6 +2443,15 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Wiki integration.
@@ -1560,10 +2466,28 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Self-hosted option available.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1594,10 +2518,28 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Smaller community, less polished than paid options.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1628,10 +2570,28 @@ Taiga is an open-source project management platform with a focus on agile method
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ClickUp is a feature-rich project management tool that aims to replace multiple tools with one platform.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1662,10 +2622,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Multiple views (list, board, Gantt, calendar, mind map).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1690,10 +2668,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Goals and OKRs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1718,6 +2714,15 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Automations without coding.
@@ -1732,10 +2737,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Integrations with GitHub, GitLab, Slack.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1766,10 +2789,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Cons**: Can feel overwhelming, performance issues at scale, less focused than competitors.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1800,10 +2841,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Tool | Price | Speed | Git Integration | Sprint Mgmt | API | Self-Host |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1834,10 +2893,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Linear | $8/user/mo | Excellent | Good | Yes (cycles) | GraphQL | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1868,10 +2945,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | GitHub Projects | Free | Good | Native | Basic | REST/GH | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1902,10 +2997,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Taiga | Free/Paid | Good | Limited | Yes | REST | Yes |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1936,10 +3049,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Developer Workflow Integration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1970,10 +3101,28 @@ ClickUp is a feature-rich project management tool that aims to replace multiple 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The best project management tools automatically update issue status based on Git activity:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2004,10 +3153,28 @@ Developer creates branch "fix/LIN-123-timeout" → Issue moves to "In Progress"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Developer opens PR with "Closes LIN-123" → Issue moves to "In Review"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2038,10 +3205,28 @@ PR merges to main → Issue moves to "Done"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set this up in Linear via Git integration, in Jira via Smart Commits, or in GitHub Projects via the built-in automation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2072,10 +3257,28 @@ Set this up in Linear via Git integration, in Jira via Smart Commits, or in GitH
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 #!/bin/bash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2106,10 +3309,28 @@ Set this up in Linear via Git integration, in Jira via Smart Commits, or in GitH
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 curl -X POST https://api.linear.app/graphql \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2140,10 +3361,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -H "Content-Type: application/json" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2174,10 +3413,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "query": "mutation { issueCreate(input: { title: \"Fix login timeout\", teamId: \"TEAM_ID\", priority: 2 }) { success } }"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2208,10 +3465,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2239,10 +3514,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Enterprise teams**: Jira (most customization, compliance features).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2267,10 +3560,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Budget-conscious**: GitHub Projects (free with GitHub) or Taiga (free, self-hosted).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2298,10 +3609,28 @@ curl -X POST https://api.linear.app/graphql \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

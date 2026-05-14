@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-architectur
   
 
 
+# Rate Limiting Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Rate Limiting Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Rate Limiting Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ The token bucket algorithm is the most widely used rate limiting approach. A buc
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The sliding window algorithm provides precise rate enforcement over time windows. A sliding window log stores timestamps for each request. When a new request arrives, timestamps outside the window are removed, and the count is checked against the limit. The sliding window counter variant improves memory efficiency by tracking two counters: the current window count and the previous window count, with a weighted estimate for the current position. This provides good accuracy with bounded memory. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Fixed window counting is simpler but suffers from boundary effects. The window r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distributed rate limiting adds the challenge of coordinating across multiple application instances. Each instance must apply consistent rate limits — if the limit is 100 requests per second and there are 3 instances, together they must not allow more than 100 requests. Centralized rate tracking in Redis is the standard approach: each instance increments a counter in Redis with the appropriate TTL. The atomic INCR command with EXPIRE provides correct distributed counting. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Redis-based implementations must handle consistency and performance. Each reques
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rate limit headers communicate limits to clients. Standard headers include: X-RateLimit-Limit (maximum requests per window), X-RateLimit-Remaining (requests remaining in current window), X-RateLimit-Reset (time until the window resets). When a request is rejected, the 429 Too Many Requests response includes Retry-After header indicating when the client should retry. These headers enable intelligent client-side backoff. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,6 +255,15 @@ Rate limiting at different layers serves different purposes. API gateway rate li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Sliding window log vs counter tradeoff: the log approach is memory-intensive (stores a timestamp per request) but perfectly accurate. The counter approach is memory-efficient (stores only two counters) but has approximation error. A practical compromise uses the sliding window counter with a small number of sub-windows (4-10 per window), providing good accuracy with bounded memory — each client rate limit requires 8-20 counters. 
@@ -143,10 +275,28 @@ Sliding window log vs counter tradeoff: the log approach is memory-intensive (st
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Concurrency limiting complements rate limiting. Rate limiting controls request arrival rate. Concurrency limiting controls the number of in-flight requests. A service with 10 worker threads needs to limit concurrent requests to protect those workers, regardless of arrival rate. Semaphores or circuit breakers provide concurrency limiting. Both should be used together: rate limiting for traffic shaping, concurrency limiting for resource protection. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

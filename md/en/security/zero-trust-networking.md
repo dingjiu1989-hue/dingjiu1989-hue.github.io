@@ -41,10 +41,79 @@ url: https://dingjiu1989-hue.github.io/en/security/zero-trust-networking.html
   
   
   
+  
+  
+  
+
+
+# Zero Trust Networking: Architecture and Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero Trust Networking: Architecture and Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero Trust Networking: Architecture and Implementation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Zero Trust Networking (ZTN) assumes no network is trusted. Every request must be authenticated, authorized, and encrypted regardless of origin. ZTN replaces the traditional castle-and-moat security model with identity-based perimeter defense.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -69,10 +138,28 @@ Zero Trust Networking (ZTN) assumes no network is trusted. Every request must be
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Never trust, always verify: every request is authenticated and authorized. Assume breach: design for containment if an attacker gains access. Least privilege: grant the minimum access needed. Micro-segmentation: isolate workloads to limit lateral movement.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -97,10 +184,28 @@ Never trust, always verify: every request is authenticated and authorized. Assum
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Identity-aware proxy: authenticates users and devices before granting network access. Micro-segmentation: divides the network into isolated zones with granular firewall rules. Encrypted tunnels: all communication is encrypted using mTLS or WireGuard.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -125,6 +230,15 @@ Identity-aware proxy: authenticates users and devices before granting network ac
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Start with identity-based access for critical services. Implement mTLS for service-to-service communication. Deploy network micro-segmentation. Implement continuous monitoring and logging. Roll out gradually—start with non-critical workloads.
@@ -139,10 +253,28 @@ Start with identity-based access for critical services. Implement mTLS for servi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Tools
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

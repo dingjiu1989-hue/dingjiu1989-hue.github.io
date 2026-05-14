@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-capacity-planning.ht
   
 
 
+# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Capacity Planning: Sizing, Growth Forecasting, and Scaling 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ Capacity planning ensures your database has enough resources to handle current a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key Capacity Metrics 
@@ -77,10 +155,28 @@ Key Capacity Metrics
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -102,10 +198,28 @@ Storage is the most predictable resource to plan. Track:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Database sizes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Database sizes
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -130,10 +244,28 @@ SELECT datname,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_size_pretty(pg_database_size(datname)) AS size
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -158,6 +290,15 @@ FROM pg_database
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY pg_database_size(datname) DESC;
@@ -172,10 +313,28 @@ ORDER BY pg_database_size(datname) DESC;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Table sizes (top 10)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Table sizes (top 10)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -200,10 +359,28 @@ SELECT relname AS table_name,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_size_pretty(pg_total_relation_size(relid)) AS total_size,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +405,28 @@ pg_size_pretty(pg_relation_size(relid)) AS table_size,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pg_size_pretty(pg_indexes_size(relid)) AS index_size
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -256,10 +451,28 @@ FROM pg_catalog.pg_statio_user_tables
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY pg_total_relation_size(relid) DESC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,10 +497,28 @@ LIMIT 10;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Growth by day
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Growth by day
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -312,10 +543,28 @@ SELECT date(created_at) AS day,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 count(*) AS rows_added,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -340,10 +589,28 @@ count(*) * 200 AS estimated_bytes -- rough estimate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM orders
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -368,10 +635,28 @@ WHERE created_at > now() - interval '30 days'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY day
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -396,10 +681,28 @@ ORDER BY day;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Compute (CPU) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -421,10 +724,28 @@ CPU usage correlates with query complexity and concurrency:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Queries with highest total CPU time
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries with highest total CPU time
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -449,10 +770,28 @@ SELECT queryid, query,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 total_exec_time,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -477,10 +816,28 @@ calls,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mean_exec_time,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -505,10 +862,28 @@ rows
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM pg_stat_statements
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -533,10 +908,28 @@ ORDER BY total_exec_time DESC
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 LIMIT 20;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -558,6 +951,15 @@ Monitor: CPU utilization %, replication CPU usage, autovacuum CPU usage.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Memory 
@@ -572,10 +974,28 @@ Memory
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Shared buffers usage
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Shared buffers usage
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -600,10 +1020,28 @@ SELECT name, setting, unit,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 current_setting(name)::numeric / pg_size_pretty('') AS ratio
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -628,10 +1066,28 @@ FROM pg_settings
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE name IN ('shared_buffers', 'effective_cache_size',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1112,28 @@ WHERE name IN ('shared_buffers', 'effective_cache_size',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Hit ratio (should be >99%)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hit ratio (should be >99%)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -684,10 +1158,28 @@ SELECT 'shared_buffers' AS area,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sum(blks_hit)::float / (sum(blks_hit) + sum(blks_read)) AS hit_ratio
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -712,10 +1204,28 @@ FROM pg_stat_database;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connections 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -740,10 +1250,28 @@ SELECT max_conn.setting AS max_connections,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 used_conn.count AS used_connections,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -768,10 +1296,28 @@ used_conn.count::float / max_conn.setting::int AS utilization_pct
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM (SELECT setting FROM pg_settings WHERE name = 'max_connections') max_conn,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -796,6 +1342,15 @@ FROM (SELECT setting FROM pg_settings WHERE name = 'max_connections') max_conn,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Growth Forecasting 
@@ -807,10 +1362,28 @@ Growth Forecasting
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Simple Linear Model 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -835,10 +1408,28 @@ import psycopg2
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from datetime import datetime, timedelta
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -863,10 +1454,28 @@ import numpy as np
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 conn = psycopg2.connect("dbname=mydb")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -891,10 +1500,28 @@ cur = conn.cursor()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Get daily row counts for last 90 days
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -919,10 +1546,28 @@ cur.execute("""
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT date(created_at) AS day, count(*) AS rows
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -947,10 +1592,28 @@ FROM orders
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE created_at > now() - interval '90 days'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -975,10 +1638,28 @@ GROUP BY day
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY day
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1003,10 +1684,28 @@ ORDER BY day
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 data = cur.fetchall()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1031,10 +1730,28 @@ days = np.array([(row[0] - data[0][0]).days for row in data])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rows = np.array([row[1] for row in data])
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1059,10 +1776,28 @@ rows = np.array([row[1] for row in data])
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 coefficients = np.polyfit(days, rows, 1)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1087,10 +1822,28 @@ daily_growth = coefficients[0]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Forecast: 90 days out
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1868,28 @@ forecast_days = 90
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 current_total = sum(rows)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1143,10 +1914,28 @@ forecast_total = current_total + daily_growth * forecast_days
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"Daily growth: {daily_growth:.0f} rows")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1171,10 +1960,28 @@ print(f"Current monthly row count: {current_total}")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"Forecast in 90 days: {forecast_total:.0f} rows")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1199,10 +2006,28 @@ Projecting Storage
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 avg_row_size_bytes = 250 # From pgstattuple
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1227,10 +2052,28 @@ bytes_per_day = daily_growth * avg_row_size_bytes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gb_per_month = bytes_per_day * 30 / (1024**3)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1255,10 +2098,28 @@ current_gb = 10 # Current database size
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 months_to_full = (50 - current_gb) / gb_per_month # Assuming 50 GB limit
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1283,10 +2144,28 @@ print(f"Growth: {gb_per_month:.1f} GB/month")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 print(f"Time to 50 GB: {months_to_full:.0f} months")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1308,6 +2187,15 @@ Scaling Strategies
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vertical Scaling (Scale Up) 
@@ -1319,10 +2207,28 @@ Vertical Scaling (Scale Up)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Increase the size of the existing database instance: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1347,6 +2253,15 @@ Increase the size of the existing database instance:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws rds modify-db-instance \
@@ -1361,25 +2276,6 @@ aws rds modify-db-instance \
   
   
   
-
-
-\\\\\\\\--db-instance-identifier mydb \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\--db-instance-class db.r6g.xlarge \
-
-  
   
   
   
@@ -1391,8 +2287,63 @@ aws rds modify-db-instance \
   
 
 
-\\\\\\\\--apply-immediately
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.xlarge \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--apply-immediately
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1417,10 +2368,28 @@ aws rds modify-db-instance \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_db_instance" "mydb" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1445,10 +2414,28 @@ instance_class = "db.r6g.xlarge" # Was db.r6g.large
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 allocated_storage = 200 # Was 100
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1473,10 +2460,28 @@ allocated_storage = 200 # Was 100
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Pros**: Simple, no application changes. **Cons**: Instance size limits, downtime for some changes, no infinite scaling. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1495,10 +2500,28 @@ Horizontal Scaling (Scale Out)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Add read replicas for read workloads: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,6 +2546,15 @@ Add read replicas for read workloads:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws rds create-db-instance-read-replica \
@@ -1537,25 +2569,6 @@ aws rds create-db-instance-read-replica \
   
   
   
-
-
-\\\\\\\\--db-instance-identifier mydb-replica-1 \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\--source-db-instance-identifier mydb \
-
-  
   
   
   
@@ -1567,8 +2580,63 @@ aws rds create-db-instance-read-replica \
   
 
 
-\\\\\\\\--db-instance-class db.r6g.large
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-replica-1 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1593,10 +2661,28 @@ For write scaling, consider sharding (Citus):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Citus distributed table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Citus distributed table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1621,10 +2707,28 @@ SELECT create_distributed_table('orders', 'user_id');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Queries automatically route to correct shard
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries automatically route to correct shard
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1649,6 +2753,15 @@ SELECT * FROM orders WHERE user_id = 42;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Autoscaling Configuration 
@@ -1660,10 +2773,28 @@ Autoscaling Configuration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Aurora Serverless 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1688,10 +2819,28 @@ Aurora Serverless
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1716,10 +2865,28 @@ MyDBCluster:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Type: AWS::RDS::DBCluster
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1744,10 +2911,28 @@ Properties:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Engine: aurora-postgresql
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1772,10 +2957,28 @@ ServerlessV2ScalingConfiguration:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MinCapacity: 0.5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1800,10 +3003,28 @@ MaxCapacity: 64
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Storage Autoscaling 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1828,6 +3049,15 @@ Storage Autoscaling
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 aws rds modify-db-instance \
@@ -1842,25 +3072,6 @@ aws rds modify-db-instance \
   
   
   
-
-
-\\\\\\\\--db-instance-identifier mydb \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\--max-allocated-storage 1000 \
-
-  
   
   
   
@@ -1872,8 +3083,63 @@ aws rds modify-db-instance \
   
 
 
-\\\\\\\\--apply-immediately
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-allocated-storage 1000 \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--apply-immediately
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1895,10 +3161,28 @@ Monitoring Dashboard
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Build a capacity monitoring dashboard with these key metrics: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1917,6 +3201,15 @@ Build a capacity monitoring dashboard with these key metrics:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Seasonal Capacity 
@@ -1928,10 +3221,28 @@ Seasonal Capacity
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Many workloads are not uniform. Plan for seasonal peaks: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1956,10 +3267,28 @@ Many workloads are not uniform. Plan for seasonal peaks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Normal: 4 vCPU, 16 GB RAM, 1000 connections
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1984,6 +3313,15 @@ Many workloads are not uniform. Plan for seasonal peaks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Pre-scale 2 weeks before
@@ -1998,10 +3336,28 @@ Many workloads are not uniform. Plan for seasonal peaks:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- date: 2026-11-10
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-11-10
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2026,10 +3382,28 @@ action: scale_up
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 target: db.r6g.4xlarge
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2054,10 +3428,28 @@ target: db.r6g.4xlarge
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- date: 2026-12-07
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-12-07
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2082,10 +3474,28 @@ action: scale_down
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 target: db.r6g.xlarge
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2110,6 +3520,15 @@ The Planning Cycle
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Monitor**: Continuously collect metrics.
@@ -2121,10 +3540,28 @@ The Planning Cycle
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\. **Analyze**: Identify trends and anomalies. 3\\\\\\\\\\\\\\\\. **Forecast**: Project future resource needs. 4\\\\\\\\\\\\\\\\. **Plan**: Schedule scaling or optimization. 5\\\\\\\\\\\\\\\\. **Execute**: Apply changes during maintenance windows. 6\\\\\\\\\\\\\\\\. **Review**: Validate that changes had the expected effect. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analyze**: Identify trends and anomalies. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Forecast**: Project future resource needs. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan**: Schedule scaling or optimization. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Execute**: Apply changes during maintenance windows. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Review**: Validate that changes had the expected effect. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

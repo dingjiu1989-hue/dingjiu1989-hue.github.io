@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/zero-downtime-deployment.
   
 
 
+# Zero-Downtime Deployment Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero-Downtime Deployment Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero-Downtime Deployment Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Zero-downtime deployment ensures that application updates occur without interrupting user-facing service. As systems grow from hobby projects to business-critical platforms, deployment windows become unacceptable. Modern deployment strategies provide multiple approaches to achieving seamless updates, each with different tradeoffs in complexity, cost, and risk. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Rolling deployment replaces instances one at a time. The orchestrator spins up a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Blue-green deployment maintains two complete environments: blue (current) and green (next). The new version is deployed to the green environment. Once fully deployed and tested, the router or load balancer switches traffic from blue to green. If issues arise, traffic can be instantly reverted to blue. Blue-green deployment eliminates the mixed-version problem — all traffic goes to one version at a time. The cost is double infrastructure during deployment and the need for environments that can handle full production load. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ Canary deployment releases the new version to a small subset of traffic initiall
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Feature flags provide deployment independence from release. The code for a new feature is deployed to production behind a feature flag that disables it. Later, the flag is enabled gradually or instantly. This decouples deployment (moving code to production) from release (making features available to users). Feature flags enable canary-like testing at the feature level, instant rollbacks (flip the flag off), and environment-specific behavior. LaunchDarkly and Flagsmith provide managed feature flag platforms. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Database migrations are the hardest part of zero-downtime deployment and are cov
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Readiness and liveness probes must be version-aware. A new instance should not be considered ready until its dependencies are compatible and its data migrations are complete. The probe for the old version should remain healthy even as the migration progresses. Kubernetes lifecycle hooks can coordinate this. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Health check integration during deployment is critical. Monitor error rates, lat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Session management requires attention during deployments. In-memory sessions are lost when instances restart. Sessions should be stored in a shared session store (Redis, database) that survives instance termination. Alternatively, use stateless sessions with client-side tokens. WebSocket connections must be re-established if their instance is terminated — the client should implement reconnection logic. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

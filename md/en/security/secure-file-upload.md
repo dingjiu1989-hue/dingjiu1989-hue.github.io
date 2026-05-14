@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html
   
   
   
+  
+  
+  
+
+
+# Secure File Upload Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secure File Upload Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secure File Upload Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The Risk of File Uploads 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ File upload functionality is one of the most dangerous features an application c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Threat Model 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,6 +251,15 @@ Threat Model
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Validation Strategy 
@@ -163,10 +277,28 @@ Validation Strategy
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension 
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` fi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ALLOWED_EXTENSIONS = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ ALLOWED_EXTENSIONS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ ALLOWED_EXTENSIONS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '.pdf', '.doc', '.docx', '.xls', '.xlsx',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,6 +485,15 @@ ALLOWED_EXTENSIONS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 '.txt', '.csv'
@@ -316,10 +511,28 @@ ALLOWED_EXTENSIONS = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ def validate_extension(filename):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ext = os.path.splitext(filename)[1].lower()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,6 +615,15 @@ if ext not in ALLOWED_EXTENSIONS:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 raise ValueError(f"Extension {ext} not allowed")
@@ -401,10 +641,28 @@ raise ValueError(f"Extension {ext} not allowed")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Never trust the `Content-Type` header from the client. Inspect the actual file c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import magic
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ def validate_mime(file_stream):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mime = magic.from_buffer(file_stream.read(2048), mime=True)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ file_stream.seek(0)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ALLOWED_MIMES = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ ALLOWED_MIMES = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'image/webp', 'application/pdf',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ ALLOWED_MIMES = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,6 +953,15 @@ if mime not in ALLOWED_MIMES:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 raise ValueError(f"MIME type {mime} not allowed")
@@ -622,10 +979,28 @@ raise ValueError(f"MIME type {mime} not allowed")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size 
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ Enforce strict limits at multiple layers:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Express middleware
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ const multer = require('multer');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const upload = multer({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ limits: {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fileSize: 10 * 1024 * 1024, // 10 MB
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ files: 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ fileFilter: (req, file, cb) => {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const allowed = ['image/jpeg', 'image/png', 'application/pdf'];
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,6 +1291,15 @@ if (!allowed.includes(file.mimetype)) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return cb(new Error('Invalid file type'), false);
@@ -843,10 +1317,28 @@ return cb(new Error('Invalid file type'), false);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ cb(null, true);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ cb(null, true);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content 
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ For images, attempt to re-process them. This strips embedded metadata and breaks
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from PIL import Image
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ import io
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def sanitize_image(file_bytes):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,10 +1577,28 @@ def sanitize_image(file_bytes):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 img = Image.open(io.BytesIO(file_bytes))
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1047,10 +1629,28 @@ img = Image.open(io.BytesIO(file_bytes))
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 img = img.convert('RGB')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1081,10 +1681,28 @@ output = io.BytesIO()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 img.save(output, format='PNG')
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ return output.getvalue()
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Secure Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ Never Store in Webroot
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ Storing uploaded files inside the web server's document root is dangerous. If th
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 upload_dir = '/var/www/html/uploads/'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ upload_dir = '/var/www/html/uploads/'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 upload_dir = '/data/uploads/' # Served through app logic
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ Generate Safe Filenames
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Never use user-provided filenames. Generate random filenames: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ import uuid
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import os
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ def safe_filename(original_name):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ext = os.path.splitext(original_name)[1].lower()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ return f"{uuid.uuid4().hex}{ext}"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Object Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ For production systems, use object storage with pre-signed URLs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import boto3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ s3 = boto3.client('s3')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def upload_file(file_bytes, content_type):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ key = f"uploads/{uuid.uuid4().hex}.pdf"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 s3.put_object(
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ Bucket='my-app-uploads',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key=key,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,6 +2357,15 @@ Body=file_bytes,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ContentType=content_type
@@ -1540,10 +2383,28 @@ ContentType=content_type
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1574,10 +2435,28 @@ return key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def get_download_url(key, expires=3600):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1608,10 +2487,28 @@ return s3.generate_presigned_url(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 'get_object',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1642,6 +2539,15 @@ Params={'Bucket': 'my-app-uploads', 'Key': key},
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ExpiresIn=expires
@@ -1659,10 +2565,28 @@ ExpiresIn=expires
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 )
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ Antivirus Scanning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Integrate virus scanning into the upload pipeline: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,10 +2669,28 @@ import subprocess
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def scan_file(file_path):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,10 +2721,28 @@ result = subprocess.run(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ['clamscan', '--stdout', file_path],
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ capture_output=True,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 text=True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ text=True
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if 'FOUND' in result.stdout:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ os.remove(file_path)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 raise SecurityError("Malware detected in uploaded file")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,10 +2929,28 @@ Storage Limits and Quotas
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1931,10 +2981,28 @@ Server Configuration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prevent uploaded files from being executed by the web server: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1965,10 +3033,28 @@ Prevent uploaded files from being executed by the web server:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 location /uploads/ {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1999,10 +3085,28 @@ location /uploads/ {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ {
+location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,6 +3137,15 @@ add_header Content-Disposition 'attachment';
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 expires 30d;
@@ -2050,10 +3163,28 @@ expires 30d;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2084,10 +3215,28 @@ expires 30d;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. {
+location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2118,6 +3267,15 @@ deny all;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return 404;
@@ -2135,6 +3293,15 @@ return 404;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -2152,10 +3319,28 @@ return 404;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2173,6 +3358,15 @@ return 404;
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

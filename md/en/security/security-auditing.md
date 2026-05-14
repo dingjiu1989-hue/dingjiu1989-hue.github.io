@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/security-auditing.html
   
 
 
+# Security Auditing and Compliance Frameworks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Security Auditing and Compliance Frameworks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Security Auditing and Compliance Frameworks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Security auditing is the systematic evaluation of an organization's security controls against established standards. Compliance with frameworks like SOC 2, ISO 27001, PCI DSS, and HIPAA demonstrates to customers and regulators that security is taken seriously. This article covers the major frameworks, audit evidence collection, and continuous compliance strategies.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Security auditing is the systematic evaluation of an organization's security con
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### SOC 2 (Service Organization Control 2)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,6 +225,15 @@ SOC 2 is designed for service organizations that store customer data. It is base
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Security**: The system is protected against unauthorized access. This is the only mandatory criterion.
@@ -146,31 +251,6 @@ SOC 2 is designed for service organizations that store customer data. It is base
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Availability**: The system is available for operation and use as committed.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Processing Integrity**: System processing is complete, valid, accurate, and authorized.
-
-  
-  
-  
-  
   
   
   
@@ -182,8 +262,17 @@ SOC 2 is designed for service organizations that store customer data. It is base
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Confidentiality**: Confidential information is protected.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Availability**: The system is available for operation and use as committed.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -199,8 +288,69 @@ SOC 2 is designed for service organizations that store customer data. It is base
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy**: Personal information is collected, used, retained, and disclosed in accordance with commitments.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Processing Integrity**: System processing is complete, valid, accurate, and authorized.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Confidentiality**: Confidential information is protected.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy**: Personal information is collected, used, retained, and disclosed in accordance with commitments.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,6 +381,15 @@ SOC 2 has two report types:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Type I**: Reports on the design of controls at a specific point in time.
@@ -245,10 +404,28 @@ SOC 2 has two report types:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Type II**: Reports on the operating effectiveness of controls over a period (typically 6-12 months).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -279,10 +456,28 @@ SOC 2 is common among SaaS companies, cloud service providers, and data processo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### ISO 27001
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -313,10 +508,28 @@ ISO 27001 is an international standard for information security management syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Key requirements**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -344,10 +557,28 @@ ISO 27001 is an international standard for information security management syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Clause 5: Leadership and commitment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -372,10 +603,28 @@ ISO 27001 is an international standard for information security management syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Clause 7: Support (resources, competence, awareness, communication)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -400,6 +649,15 @@ ISO 27001 is an international standard for information security management syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Clause 9: Performance evaluation (monitoring, measurement, internal audit)
@@ -414,10 +672,28 @@ ISO 27001 is an international standard for information security management syste
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Clause 10: Improvement (nonconformity, corrective action)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -448,10 +724,28 @@ Annex A controls cover 93 controls across four domains: Organizational, People, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### PCI DSS (Payment Card Industry Data Security Standard)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -482,6 +776,15 @@ PCI DSS applies to any organization that stores, processes, or transmits credit 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Build and maintain a secure network (firewalls, secure configurations).
@@ -499,31 +802,6 @@ PCI DSS applies to any organization that stores, processes, or transmits credit 
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protect cardholder data (encryption at rest and in transit).
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain a vulnerability management program (antivirus, secure coding, patching).
-
-  
-  
-  
-  
   
   
   
@@ -535,8 +813,17 @@ PCI DSS applies to any organization that stores, processes, or transmits credit 
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Implement strong access control measures (least privilege, unique IDs, physical security).
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protect cardholder data (encryption at rest and in transit).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -552,7 +839,7 @@ PCI DSS applies to any organization that stores, processes, or transmits credit 
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Regularly monitor and test networks (logging, scanning, penetration testing).
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain a vulnerability management program (antivirus, secure coding, patching).
 
   
   
@@ -567,10 +854,80 @@ PCI DSS applies to any organization that stores, processes, or transmits credit 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain an information security policy.
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Implement strong access control measures (least privilege, unique IDs, physical security).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Regularly monitor and test networks (logging, scanning, penetration testing).
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain an information security policy.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -601,10 +958,28 @@ PCI DSS compliance levels depend on transaction volume. Merchants processing ove
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### HIPAA (Health Insurance Portability and Accountability Act)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -635,6 +1010,15 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Privacy Rule**: Protects individually identifiable health information (PHI). Defines permitted uses and disclosures.
@@ -649,10 +1033,28 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Security Rule**: Requires administrative, physical, and technical safeguards for electronic PHI (ePHI).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -683,10 +1085,28 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Administrative: Risk analysis, workforce training, contingency planning.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -711,10 +1131,28 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Technical: Access control, audit controls, integrity controls, transmission security.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -745,10 +1183,28 @@ HIPAA applies to healthcare providers, health plans, and healthcare clearinghous
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Auditors require evidence that controls are operating effectively. Evidence must be objective, verifiable, and sufficient.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -779,10 +1235,28 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Configuration screenshots**: Evidence of properly configured security settings.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -807,10 +1281,28 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Policy documents**: Written policies and procedures.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -835,10 +1327,28 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Change management records**: Approvals, testing, and deployment documentation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -863,6 +1373,15 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Vulnerability scan reports**: Scheduled and on-demand scan results.
@@ -877,10 +1396,28 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Incident response records**: Documented incidents and post-mortems.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1448,28 @@ Auditors require evidence that controls are operating effectively. Evidence must
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Manual evidence collection is time-consuming and error-prone. Automation tools collect evidence continuously and respond to auditor requests instantly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1500,28 @@ Manual evidence collection is time-consuming and error-prone. Automation tools c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def collect_iam_evidence():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1552,28 @@ def collect_iam_evidence():
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 evidence = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,6 +1604,15 @@ evidence = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "controls": {}
@@ -1030,10 +1630,28 @@ evidence = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1682,28 @@ evidence = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 evidence["controls"]["mfa_enabled"] = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1734,28 @@ evidence["controls"]["mfa_enabled"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "sample_size": count_active_users(),
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1786,28 @@ evidence["controls"]["mfa_enabled"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1838,28 @@ evidence["controls"]["mfa_enabled"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 evidence["controls"]["key_rotation"] = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,6 +1890,15 @@ evidence["controls"]["key_rotation"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "expired_keys": find_expired_access_keys(90)
@@ -1217,10 +1916,28 @@ evidence["controls"]["key_rotation"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1968,28 @@ evidence["controls"]["key_rotation"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 evidence["controls"]["inactive_accounts"] = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +2020,28 @@ evidence["controls"]["inactive_accounts"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "disabled_count": disable_inactive_accounts(90)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2072,28 @@ evidence["controls"]["inactive_accounts"] = {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return evidence
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2124,28 @@ return evidence
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **AWS Audit Manager**: Continuously collects evidence against AWS-managed frameworks.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1381,10 +2170,28 @@ return evidence
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Azure Policy**: Enforces and audits compliance with built-in initiative definitions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1409,10 +2216,28 @@ return evidence
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Vanta / Drata / Secureframe**: Continuous compliance platforms that automate evidence collection and auditor collaboration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1443,10 +2268,28 @@ return evidence
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Step 1: Scope Definition
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1477,10 +2320,28 @@ Define what systems, data, and processes are in scope. A SOC 2 audit might scope
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Step 2: Gap Analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1511,10 +2372,28 @@ Assess current controls against framework requirements. Identify gaps and create
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 gap_analysis:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1545,10 +2424,28 @@ framework: "SOC 2 Security Criterion"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cc_6_1:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1579,10 +2476,28 @@ description: "Logical access security controls"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 current_state: "MFA enabled for console, not for API"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1613,10 +2528,28 @@ gap: "API access keys lack MFA requirement"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 remediation: "Implement IAM access key MFA or key rotation policy"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1647,10 +2580,28 @@ owner: "DevOps Team"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deadline: "2026-06-30"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1681,10 +2632,28 @@ deadline: "2026-06-30"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Implement the controls identified in the gap analysis. Prioritize based on risk and compliance requirements.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1715,10 +2684,28 @@ Implement the controls identified in the gap analysis. Prioritize based on risk 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Begin collecting evidence for each control. Automate where possible. Organize evidence by control ID for easy auditor access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1749,10 +2736,28 @@ Begin collecting evidence for each control. Automate where possible. Organize ev
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conduct a pre-audit assessment. Review evidence completeness, test control effectiveness, and fix any findings before the external audit.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1783,10 +2788,28 @@ Conduct a pre-audit assessment. Review evidence completeness, test control effec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Auditors will request evidence, conduct interviews, and perform testing. Cooperate fully and respond promptly to requests. Preparation is the key to a smooth audit.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1817,10 +2840,28 @@ Auditors will request evidence, conduct interviews, and perform testing. Coopera
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Organizations often need to comply with multiple frameworks. A unified compliance approach maps common controls across frameworks:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1851,10 +2892,28 @@ common_controls:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 access_reviews:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1885,10 +2944,28 @@ soc_2: "CC6.1, CC6.2"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 iso_27001: "A.9.2.5, A.9.2.6"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1919,10 +2996,28 @@ pci_dss: "7.2.1, 8.1.4"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hipaa: "164.312(a)(1)"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1953,10 +3048,28 @@ encryption_at_rest:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 soc_2: "CC6.7"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1987,10 +3100,28 @@ iso_27001: "A.10.1.1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 pci_dss: "3.4, 3.6"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2021,6 +3152,15 @@ hipaa: "164.312(a)(2)(iv), 164.312(e)(2)(ii)"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This common control mapping allows teams to implement one control that satisfies multiple frameworks, reducing duplication and audit fatigue.
@@ -2038,10 +3178,28 @@ This common control mapping allows teams to implement one control that satisfies
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

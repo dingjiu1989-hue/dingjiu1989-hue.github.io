@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-composition-pattern.h
   
 
 
+# API Composition Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# API Composition Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# API Composition Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The API composition pattern is a technique for retrieving data that spans multiple services in a microservice architecture. A composer (which could be an API gateway, a dedicated service, or the client itself) calls multiple services and combines their responses into a single, aggregated result. This pattern is the simplest approach to cross-service queries, but it requires careful handling of performance, error, and consistency concerns. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ How API Composition Works
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The composer receives a request that requires data from multiple services. It identifies which services have the needed data, determines whether calls can be parallelized, and makes the necessary requests. As responses arrive, the composer combines them into the requested format and returns the result. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ For example, to display an order detail page, the composer might call the Order 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Parallel vs Sequential Calls 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ The composer should make parallel calls whenever possible to minimize latency. C
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Parallel execution reduces response time to the slowest service call rather than the sum of all calls. However, the composer needs thread or coroutine management for concurrent calls. Async/await patterns, futures, and reactive streams are common implementation techniques. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Sequential calls are needed when the composer must use the response from one ser
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Error Handling 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Error handling in API composition requires a strategy for partial failures. When
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Failing fast is often the safest approach for read operations, especially when the client expects complete data. The composer should cancel in-flight requests for services that are no longer needed. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Returning partial data is appropriate when the missing data is non-critical. The
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Default values or cached data can substitute for service failures when the composer has reasonable defaults. This provides the best user experience but risks showing stale or incorrect data. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,10 +375,28 @@ Performance Optimization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Performance optimization for API composition focuses on reducing the number of calls and minimizing their latency. Batch endpoints that accept multiple IDs reduce N+1 query problems. Instead of calling the Product service once per product ID, the composer calls a batch endpoint with all product IDs. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -220,10 +415,28 @@ Caching is also effective. Frequently accessed data that changes slowly (product
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The composer can also prefetch data it expects to need based on the request. If a request for user data typically also needs group membership data, the composer can fetch both in parallel rather than discovering the need for group data later. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -242,10 +455,28 @@ When to Use Composition
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 API composition is appropriate for simple aggregations where the relationships between data sources are straightforward and performance requirements are moderate. It is the simplest cross-service query pattern and the easiest to implement and understand. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -264,10 +495,28 @@ Composition becomes problematic when aggregations are complex, involve large dat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Implementation considerations include the location of the composer. API gateways often handle simple composition. Dedicated composition services handle more complex logic. Client-side composition works for simple cases but couples the client to multiple services. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

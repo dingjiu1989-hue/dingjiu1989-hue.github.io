@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/password-hashing.html
   
   
   
+  
+  
+  
+
+
+# Password Hashing Algorithms Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Password Hashing Algorithms Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Password Hashing Algorithms Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The Difference Between Hashing and Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Password hashing is fundamentally different from encryption. Hashing is a one-wa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Why Not Plain Hashes (SHA-256, MD5) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Simple cryptographic hash functions like SHA-256 are designed for speed and corr
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Modern password hashing algorithms are intentionally slow and memory-hard, making brute-force attacks economically infeasible. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Algorithm Comparison
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Algorithm | Year | Memory Hard | Configurable | Recommended | |-----------|------|-------------|--------------|-------------| | bcrypt | 1999 | No | Cost factor | Yes (minimum) | | PBKDF2 | 2000 | No | Iterations | Yes (with high iterations) | | scrypt | 2009 | Yes | N, r, p params | Yes | | Argon2id | 2015 | Yes | Memory, time, parallelism | **Best** | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ bcrypt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bcrypt remains the most widely deployed password hashing algorithm. It includes a built-in salt and a configurable cost factor. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ const bcrypt = require('bcrypt');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 async function hashPassword(password) {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ const saltRounds = 12; // Cost factor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const hash = await bcrypt.hash(password, saltRounds);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ return hash;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ async function verifyPassword(password, hash) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return await bcrypt.compare(password, hash);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ return await bcrypt.compare(password, hash);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 import bcrypt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ def hash_password(password):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 salt = bcrypt.gensalt(rounds=12)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ return bcrypt.hashpw(password.encode(), salt)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def verify_password(password, hashed):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ return bcrypt.checkpw(password.encode(), hashed)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The bcrypt output includes the version, cost factor, salt, and hash: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ $2b$12$LJ3m4ys3Lk0TSwHnbfgZxeCk7NaML3C1yVvvSxYf1UcJm9xHvKXq
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\__/ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_/ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\____________________/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_____________________________/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\__/ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_/ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\____________________/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_____________________________/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ $2b$12$LJ3m4ys3Lk0TSwHnbfgZxeCk7NaML3C1yVvvSxYf1UcJm9xHvKXq
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Cost
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ Version
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Choosing the Cost Factor 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ Run a benchmark on your production hardware to determine the appropriate cost fa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Cost Factor | Time (approx on modern CPU) | |-------------|----------------------------| | 10 | ~80ms | | 12 | ~320ms | | 14 | ~1.3s | | 16 | ~5s | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,10 +1031,28 @@ Choose the highest cost factor that keeps authentication response time under 500
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Argon2id 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -690,10 +1083,28 @@ Argon2id is the winner of the Password Hashing Competition (2015) and is the rec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from argon2 import PasswordHasher
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -724,10 +1135,28 @@ ph = PasswordHasher(
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 time_cost=3, # Number of iterations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ memory_cost=65536, # 64 MB
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 parallelism=4, # Number of threads
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ hash_len=32, # Output length
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 salt_len=16 # Salt length
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ salt_len=16 # Salt length
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hash = ph.hash("correct horse battery staple")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ verify = ph.verify(hash, "correct horse battery staple")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const argon2 = require('argon2');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ const hash = await argon2.hash(password, {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 type: argon2.argon2id,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ memoryCost: 65536, // 64 MB
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 timeCost: 3, // 3 iterations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ parallelism: 4
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ const valid = await argon2.verify(hash, password);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tuning Argon2 Parameters 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ Tuning Argon2 Parameters
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scrypt 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ scrypt is a memory-hard function designed to be expensive on custom hardware.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const crypto = require('crypto');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ crypto.scrypt(password, salt, 64, {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 N: 16384, // CPU/memory cost
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ r: 8, // Block size
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 p: 1 // Parallelization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ p: 1 // Parallelization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // key is the derived hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,10 +1863,28 @@ p: 1 // Parallelization
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Common Mistakes 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1234,10 +1915,28 @@ Common Mistakes
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Migration Strategy 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1268,10 +1967,28 @@ When upgrading from a weaker algorithm, use a rehash-on-verify pattern:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def verify_and_upgrade(password, stored_hash):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1302,10 +2019,28 @@ if is_bcrypt_hash(stored_hash):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if bcrypt.checkpw(password.encode(), stored_hash):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1336,10 +2071,28 @@ if needs_upgrade(stored_hash): # cost factor too low?
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 new_hash = argon2.hash(password)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ update_user_hash(user_id, new_hash)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return True
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,10 +2175,28 @@ elif is_argon2_hash(stored_hash):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return argon2.verify(stored_hash, password)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1438,10 +2227,28 @@ return False
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

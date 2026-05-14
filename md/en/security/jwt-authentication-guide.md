@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html
   
   
   
+  
+  
+  
+
+
+# JWT Authentication Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# JWT Authentication Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# JWT Authentication Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 What Are JSON Web Tokens? 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ JSON Web Tokens (JWT) are a compact, URL-safe means of representing claims betwe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFsZXgiLCJpYXQiOjE1MTYyMzkwMjJ9.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ Structure Breakdown
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Segment | Contents | Example | |---------|----------|---------| | Header | Algorithm and token type | `{"alg":"RS256","typ":"JWT"}` | | Payload | Claims (data) | `{"sub":"user_123","iat":1516239022}` | | Signature | Cryptographic verification | HMACSHA256 or RSASHA256 output | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ Choosing the Right Algorithm
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Symmetric: HS256 (HMAC with SHA-256) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Uses a single shared secret for both signing and verification. Fast and simple, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const jwt = require('jsonwebtoken');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ const token = jwt.sign({ userId: '123' }, SECRET, {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 algorithm: 'HS256',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ expiresIn: '15m'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Use HS256 only when issuer and verifier are the same service.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Asymmetric: RS256 (RSA with SHA-256) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ Uses a private key for signing and a public key for verification. This enables t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const token = jwt.sign({ userId: '123' }, PRIVATE_KEY, {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,6 +667,15 @@ algorithm: 'RS256',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 expiresIn: '15m'
@@ -435,10 +693,28 @@ expiresIn: '15m'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ expiresIn: '15m'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const decoded = jwt.verify(token, PUBLIC_KEY, { algorithms: ['RS256'] });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,6 +797,15 @@ Use RS256 (or ES256 for better performance) when multiple services need to verif
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Critical Security Practices 
@@ -520,10 +823,28 @@ Critical Security Practices
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate Every Claim 
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate Every Claim 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Never trust the token blindly. Always validate:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const options = {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -588,10 +927,28 @@ algorithms: ['RS256'],
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 issuer: 'https://auth.example.com',
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ audience: 'https://api.example.com',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 clockTolerance: 30 // seconds
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,6 +1031,15 @@ clockTolerance: 30 // seconds
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const payload = jwt.verify(token, PUBLIC_KEY, options);
@@ -673,10 +1057,28 @@ const payload = jwt.verify(token, PUBLIC_KEY, options);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Prevent Algorithm Confusion 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Prevent Algorithm Confusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ An attacker could change the header from `RS256` to `HS256` and sign with the pu
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use Short Expiration 
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use Short Expiration 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ Access tokens should expire in 15-60 minutes. This limits the damage window if a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const accessToken = jwt.sign(payload, PRIVATE_KEY, {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ algorithm: 'RS256',
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 expiresIn: '15m'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ expiresIn: '15m'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Implement Token Rotation 
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Implement Token Rotation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ Refresh tokens should be rotated with each use. When a client exchanges a refres
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Old refresh token --> New access token + New refresh token (old invalidated)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,10 +1369,28 @@ If a refresh token is used after being rotated, it signals potential theft — r
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Token Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -911,10 +1421,28 @@ Token Storage
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Never store JWTs in localStorage or sessionStorage in a browser — they are accessible to any JavaScript running on the same origin and are vulnerable to XSS attacks. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -945,10 +1473,28 @@ Blacklisting and Revocation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 JWTs are stateless, which means they cannot be revoked without additional infrastructure. Options include: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -979,10 +1525,28 @@ JWTs are stateless, which means they cannot be revoked without additional infras
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Short-lived tokens with refresh rotation**: Keep access tokens very short (5-15 min) so revocation happens at refresh time. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Token introspection endpoint**: An API endpoint that checks token validity in real-time. Used by OAuth 2.0 resource servers. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Short-lived tokens with refresh rotation**: Keep access tokens very short (5-15 min) so revocation happens at refresh time. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Token introspection endpoint**: An API endpoint that checks token validity in real-time. Used by OAuth 2.0 resource servers. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1013,6 +1577,15 @@ Common Vulnerabilities
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Vulnerability | Mitigation | |--------------|------------| | alg: none | Reject tokens with alg: none | | Weak secret (HS256) | Use at least 256-bit random secret | | Missing expiry validation | Always verify exp claim | | JWT in URL | Use Authorization header, never URLs | | Large payload | Keep payload under 2KB; use references for large claims | 
@@ -1030,10 +1603,28 @@ Common Vulnerabilities
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

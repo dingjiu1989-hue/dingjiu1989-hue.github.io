@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-migration-zero-d
   
 
 
+# Zero-Downtime Database Migrations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero-Downtime Database Migrations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Zero-Downtime Database Migrations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database migrations are the highest-risk operation in zero-downtime deployments. Schema changes can lock tables, break queries, or silently corrupt data. In a distributed system where multiple service instances run different versions simultaneously, every migration must be backward compatible with both old and new code. The expand-contract pattern is the canonical approach to achieving this. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ The expand phase adds new schema elements without modifying or removing existing
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The migration phase transitions from old to new schema elements. This is typically done through a data migration script that backfills new columns or tables from old data. The migration should run in batches with progress tracking, allowing pausing and resuming. Locks should be minimized — use techniques like batch processing with sleep intervals, or use database-specific online DDL features (PostgreSQL pg_repack, MySQL pt-online-schema-change, or gh-ost). 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ The contract phase removes old schema elements that are no longer needed. This o
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Column additions are the simplest case. Adding a nullable column with a default value is generally safe in modern databases. However, adding a NOT NULL column requires caution — either provide a default value (which locks the table in some databases) or add the column as nullable, backfill data, and then add the NOT NULL constraint. PostgreSQL can add a NOT NULL column with a default without table rewrite in recent versions. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Index changes require careful timing. Adding an index can be done concurrently i
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Table changes are more complex. Renaming a table requires a two-phase approach: add a view or synonym with the old name, rename the table, and update code to use the new name. Splitting a table requires creating the new tables, writing dual-write code to keep both old and new tables in sync while backfilling historical data, then switching reads to the new tables. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Foreign key additions risk deadlocks and performance degradation. In high-traffi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The expand-contract pattern naturally handles rollbacks. If the deployment fails during the expand phase, simply roll back the application code — the empty new columns and tables are harmless. If the deployment fails during the migration phase (data backfill), the migration can be paused or reversed. Only the contract phase (removing old elements) is non-reversible — which is why it must be executed as a separate, confirmed step. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Orchestration and automation are essential for production migrations. Tools like
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Monitoring during migration is critical. Track migration progress, database CPU, replication lag, lock contention, and query latency. Set up automated alerts for any metrics that deviate from baseline. If a migration causes performance degradation, have a plan to pause or rollback. In high-traffic environments, run migrations during low-traffic periods even with zero-downtime techniques, to provide maximum safety margin. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

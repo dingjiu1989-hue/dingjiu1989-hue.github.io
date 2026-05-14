@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/secret-management-tools.html
   
 
 
+# Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Secret Management Tools: Vault vs AWS Secrets Manager vs Doppler
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Managing database credentials, API keys, and TLS certificates is one of the most
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  HashiCorp Vault
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Vault offers the most comprehensive feature set with dynamic secrets, encryption
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Vault configuration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ storage "raft" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 path = "/vault/data"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ node_id = "node1"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ listener "tcp" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 address = "0.0.0.0:8200"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ tls_disable = false
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 tls_cert_file = "/vault/certs/cert.pem"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ tls_key_file = "/vault/certs/key.pem"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ seal "awskms" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 region = "us-east-1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ kms_key_id = "arn:aws:kms:us-east-1:123456789012:key/abc123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ api_addr = "https://vault.example.com:8200"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cluster_addr = "https://vault.example.com:8201"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ cluster_addr = "https://vault.example.com:8201"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vault can generate temporary database credentials on demand, eliminating long-lived credentials:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ Vault can generate temporary database credentials on demand, eliminating long-li
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 path "database/creds/my-role" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ capabilities = ["read"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ capabilities = ["read"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vault read database/creds/payment-app
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ vault read database/creds/payment-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-# \\\\\\\\--- -----
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- -----
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ vault read database/creds/payment-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # lease_duration 1h
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ vault read database/creds/payment-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # password aB3x...kL9p
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ vault read database/creds/payment-app
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Application integration:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,10 +1109,28 @@ Application integration:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 package main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -741,10 +1161,28 @@ import (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 "github.com/hashicorp/vault/api"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1213,28 @@ import (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 type DynamicCredentials struct {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -809,10 +1265,28 @@ client *api.Client
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -843,10 +1317,28 @@ func (d *DynamicCredentials) GetCredentials() (string, string, error) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 secret, err := d.client.Logical().Read("database/creds/payment-app")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -877,6 +1369,15 @@ if err != nil {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return "", "", err
@@ -894,10 +1395,28 @@ return "", "", err
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ username := secret.Data["username"].(string)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 password := secret.Data["password"].(string)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ password := secret.Data["password"].(string)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 go d.renewLease(secret.LeaseDuration)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ return username, password, nil
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ func (d *DynamicCredentials) renewLease(duration int) {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 // Renew at 50% of lease duration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,6 +1655,15 @@ time.Sleep(time.Duration(duration/2) * time.Second)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 d.client.Sys().Renew("database/creds/payment-app", duration)
@@ -1081,10 +1681,28 @@ d.client.Sys().Renew("database/creds/payment-app", duration)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1115,10 +1733,28 @@ d.client.Sys().Renew("database/creds/payment-app", duration)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Secrets Manager integrates natively with the AWS ecosystem:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1149,10 +1785,28 @@ Secrets Manager integrates natively with the AWS ecosystem:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Resources:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1183,10 +1837,28 @@ DatabaseSecret:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Type: AWS::SecretsManager::Secret
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1217,10 +1889,28 @@ Properties:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Name: payment/db-credentials
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ Description: "Payment database credentials"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GenerateSecretString:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ SecretStringTemplate: '{"username": "payment_app"}'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GenerateStringKey: "password"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,6 +2045,15 @@ PasswordLength: 32
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ExcludeCharacters: "@%*"
@@ -1336,10 +2071,28 @@ ExcludeCharacters: "@%*"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RotationSchedule:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1370,10 +2123,28 @@ RotationLambdaARN: !GetAtt RotationLambda.Arn
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 RotationSchedule:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1404,6 +2175,15 @@ Duration: "7d"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tags:
@@ -1421,10 +2201,28 @@ Tags:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- Key: Environment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key: Environment
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ Value: Production
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Application retrieval using the SDK:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-sec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const client = new SecretsManagerClient({ region: "us-east-1" });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ async function getDbConfig(): Promise {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 const response = await client.send(new GetSecretValueCommand({
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1557,10 +2409,28 @@ SecretId: "payment/db-credentials",
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }));
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1591,10 +2461,28 @@ const secret = JSON.parse(response.SecretString!);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1625,10 +2513,28 @@ host: process.env.DB_HOST,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 username: secret.username,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1659,10 +2565,28 @@ password: secret.password,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 database: process.env.DB_NAME,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1693,10 +2617,28 @@ database: process.env.DB_NAME,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1727,10 +2669,28 @@ database: process.env.DB_NAME,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Doppler provides a developer-friendly approach with workspace-based secret management:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1761,10 +2721,28 @@ Doppler provides a developer-friendly approach with workspace-based secret manag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 doppler setup --project payment-service --config prd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1795,10 +2773,28 @@ doppler setup --project payment-service --config prd
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 doppler secrets substitute < config.yaml > config.resolved.yaml
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1829,10 +2825,28 @@ doppler secrets substitute < config.yaml > config.resolved.yaml
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 doppler run -- npm start
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1863,10 +2877,28 @@ doppler run -- npm start
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 setup:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1897,6 +2929,15 @@ project: payment-service
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 configs:
@@ -1914,14 +2955,6 @@ configs:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- dev
-
-  
-  
-  
-  
   
   
   
@@ -1933,7 +2966,7 @@ configs:
   
 
 
-\\\\\\\\\\\\\\\\- stg
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dev
 
   
   
@@ -1948,10 +2981,54 @@ configs:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- prd
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stg
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- prd
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1982,10 +3059,28 @@ environments:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: dev
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: dev
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2003,6 +3098,15 @@ environments:
 
 secrets:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2033,10 +3137,28 @@ DB_CONNECTION_STRING: postgres://dev_user:dev_pass@localhost:5432/payment
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 STRIPE_API_KEY: sk_test_***
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2067,10 +3189,28 @@ JWT_SECRET: dev-secret-key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: prd
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: prd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2101,10 +3241,28 @@ secrets:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DB_CONNECTION_STRING: doppler://payment-service/prd/db_connection_string
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2135,10 +3293,28 @@ STRIPE_API_KEY: doppler://payment-service/prd/stripe_api_key
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CI/CD integration:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2169,10 +3345,28 @@ CI/CD integration:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: Deploy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2203,10 +3397,28 @@ on:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 push:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2237,10 +3449,28 @@ branches: [main]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2271,10 +3501,28 @@ deploy:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2305,14 +3553,6 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
   
   
   
@@ -2324,7 +3564,7 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\- uses: dopplerhq/cli-action@v3
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
   
   
@@ -2339,10 +3579,54 @@ steps:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Build with secrets
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: dopplerhq/cli-action@v3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Build with secrets
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2373,6 +3657,15 @@ run: |
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 doppler secrets substitute --project payment-service --config prd \
@@ -2390,10 +3683,28 @@ doppler secrets substitute --project payment-service --config prd \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--token ${{ secrets.DOPPLER_TOKEN }} \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--token ${{ secrets.DOPPLER_TOKEN }} \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2424,10 +3735,28 @@ doppler secrets substitute --project payment-service --config prd \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: Deploy
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2458,10 +3787,28 @@ run: docker compose -f docker-compose.resolved.yml up -d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Secret Rotation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2492,10 +3839,28 @@ run: docker compose -f docker-compose.resolved.yml up -d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2526,10 +3891,28 @@ run: docker compose -f docker-compose.resolved.yml up -d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | AWS Secrets Manager | Lambda-based rotation | Scheduled rotation | CloudTrail |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2560,10 +3943,28 @@ run: docker compose -f docker-compose.resolved.yml up -d
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vault's dynamic secrets are the gold standard because credentials automatically expire, eliminating the need for rotation entirely. AWS Secrets Manager supports automated rotation but requires custom Lambda functions. Doppler relies on manual intervention or API-driven rotation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2594,10 +3995,28 @@ Vault's dynamic secrets are the gold standard because credentials automatically 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Vault: Enterprise auto-unseal with AWS KMS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2628,10 +4047,28 @@ seal "awskms" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 region = "us-east-1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2662,10 +4099,28 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2696,31 +4151,6 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
   
   
-
-
-# 1\\\\\\\\. Vault starts in sealed state
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# 2\\\\\\\\. Unseal key split across 5 keys (3 quorum required)
-
-  
-  
-  
-  
   
   
   
@@ -2732,8 +4162,17 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
 
 
-# 3\\\\\\\\. OR: auto-unseal via cloud KMS
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Vault starts in sealed state
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2749,7 +4188,7 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
 
 
-# 4\\\\\\\\. Vault encrypts data with AES-256-GCM
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Unseal key split across 5 keys (3 quorum required)
 
   
   
@@ -2760,14 +4199,6 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
   
   
-  
-  
-  
-  
-
-
-# 5\\\\\\\\. Encryption key wrapped by master key
-
   
   
   
@@ -2783,8 +4214,95 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
 
 
-# 6\\\\\\\\. Master key wrapped by unseal key
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. OR: auto-unseal via cloud KMS
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Vault encrypts data with AES-256-GCM
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Encryption key wrapped by master key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Master key wrapped by unseal key
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2815,10 +4333,28 @@ kms_key_id = "arn:aws:kms:...:key/abc123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Vault: DR replication across regions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2849,10 +4385,28 @@ path "sys/replication/dr/primary/enable" {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 capabilities = ["update", "sudo"]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2883,10 +4437,28 @@ capabilities = ["update", "sudo"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Perform DR failover
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2917,10 +4489,28 @@ capabilities = ["update", "sudo"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # vault operator unseal
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2951,10 +4541,28 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Integration Patterns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2985,10 +4593,28 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3019,10 +4645,28 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | SDK access | Go, Python, Java, Node | All AWS SDKs | Any (CLI) |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3053,10 +4697,28 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Decision Guide
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -3084,6 +4746,15 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **AWS Secrets Manager**: Best for AWS-native workloads where simplicity and managed rotation are priorities. Limited outside AWS.
@@ -3098,10 +4769,28 @@ AWS Secrets Manager and Doppler benefit from the cloud provider's redundancy nat
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Doppler**: Best for developer-focused teams wanting a simple, cross-platform secret management solution with minimal operational overhead.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

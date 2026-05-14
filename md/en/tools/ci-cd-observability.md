@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/ci-cd-observability.html
   
 
 
+# CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ CI/CD pipelines are critical infrastructure, yet they often lack the observabili
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article covers build metrics collection, test analytics, deployment tracking, DORA metrics, and tooling recommendations.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ This article covers build metrics collection, test analytics, deployment trackin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Build pipelines generate rich telemetry data: duration, resource utilization (CPU, memory, disk), cache hit rates, dependency download times, and stage-level timing. Collecting and analyzing these metrics identifies optimization opportunities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Key build metrics include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Pipeline duration (total and per-stage).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -191,10 +323,28 @@ Key build metrics include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Cache restore and save times.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -219,6 +369,15 @@ Key build metrics include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Artifact upload and download times.
@@ -233,10 +392,28 @@ Key build metrics include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Success rate and failure distribution by stage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -267,10 +444,28 @@ Key build metrics include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 build:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -301,10 +496,28 @@ script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- ./build.sh
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ./build.sh
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -335,10 +548,28 @@ after_script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- curl -X POST https://metrics.internal/api/v1/build \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- curl -X POST https://metrics.internal/api/v1/build \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -369,10 +600,28 @@ after_script:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 -d '{"duration": "'$CI_JOB_DURATION'", "status": "'$CI_JOB_STATUS'"}'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -403,10 +652,28 @@ Build metrics should be stored in a time-series database (Prometheus, InfluxDB) 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Test Analytics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -437,10 +704,28 @@ Test analytics provides visibility into test suite health: pass/fail rates, exec
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Flaky tests — tests that pass and fail without code changes — erode trust in the test suite. Analytics identify flaky tests by tracking test results across multiple runs on the same commit. A test that passes and fails on the same SHA is flaky.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -471,10 +756,28 @@ Flaky tests — tests that pass and fail without code changes — erode trust in
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def is_flaky(test_results):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -505,10 +808,28 @@ results_per_commit = group_by(test_results, "commit_sha")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for commit, results in results_per_commit.items():
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -539,10 +860,28 @@ statuses = set(r.status for r in results)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 if "passed" in statuses and "failed" in statuses:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -573,10 +912,28 @@ return True
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 return False
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -607,10 +964,28 @@ Test duration tracking identifies slow tests that dominate pipeline time. The Pa
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Test coverage trends reveal degradation over time. Coverage thresholds in CI pipelines prevent merging code that reduces coverage below the team's standard.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -641,10 +1016,28 @@ Test coverage trends reveal degradation over time. Coverage thresholds in CI pip
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Deployment tracking correlates releases with production behavior. Every deployment should be recorded with metadata: commit SHA, image tag, configuration changes, deployer identity, deployment time, and promotion path (dev to staging to production).
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -675,10 +1068,28 @@ Deployment tracking correlates releases with production behavior. Every deployme
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deployment:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -709,10 +1120,28 @@ service: api-gateway
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 version: v2.14.3
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -743,10 +1172,28 @@ commit: a1b2c3d4e5
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 environment: production
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -777,10 +1224,28 @@ timestamp: 2026-05-12T10:30:00Z
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 deployer: github-actions
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -811,10 +1276,28 @@ duration: 145s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rollout_strategy: canary
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -845,10 +1328,28 @@ Deployment markers enable powerful analysis. Superimposing deployment events on 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  DORA Metrics
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -879,10 +1380,28 @@ The DORA (DevOps Research and Assessment) metrics are the industry standard for 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Deployment Frequency: How often an organization deploys to production. Elite performers deploy on demand (multiple times per day), while low performers deploy once per month or less.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -913,10 +1432,28 @@ Lead Time for Changes: The time from commit to production. Elite performers achi
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Change Failure Rate: The percentage of deployments causing a failure in production. Elite performers have under 5% failure rate. Low performers exceed 45%.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -947,10 +1484,28 @@ Time to Restore Service: The time from incident detection to recovery (MTTR). El
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\-- Query for deployment frequency
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query for deployment frequency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -981,10 +1536,28 @@ SELECT date_trunc('day', deployed_at) AS day,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 COUNT(*) AS deployments
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1015,10 +1588,28 @@ FROM deployments
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WHERE deployed_at > NOW() - INTERVAL '30 days'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1049,10 +1640,28 @@ GROUP BY day
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY day;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1083,10 +1692,28 @@ Implementing DORA metrics requires instrumenting CI/CD pipelines to emit deploym
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Tooling Recommendations
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1117,10 +1744,28 @@ GitHub Actions provides built-in analytics for workflow runs, including duration
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dedicated tools include:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1148,10 +1793,28 @@ Dedicated tools include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * SonarQube/SonarCloud: Code quality and test coverage analytics.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1176,10 +1839,28 @@ Dedicated tools include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Datadog CI Visibility: Comprehensive pipeline observability with APM integration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1207,10 +1888,28 @@ Dedicated tools include:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

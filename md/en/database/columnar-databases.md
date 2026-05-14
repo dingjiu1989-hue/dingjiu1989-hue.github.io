@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/columnar-databases.html
   
 
 
+# Columnar Databases: When and How to Use Them
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Columnar Databases: When and How to Use Them
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Columnar Databases: When and How to Use Them
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Columnar Storage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Columnar databases store data by column rather than by row. This enables aggress
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Row vs Columnar 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -91,10 +178,28 @@ Row-oriented storage writes each row contiguously. Columnar stores all values of
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- ClickHouse: columnar query
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse: columnar query
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -119,10 +224,28 @@ SELECT region, SUM(revenue)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FROM sales
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -147,6 +270,15 @@ WHERE year = 2026
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GROUP BY region;
@@ -161,10 +293,28 @@ GROUP BY region;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Only reads 3 columns instead of all columns
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only reads 3 columns instead of all columns
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -186,6 +336,15 @@ Compression Techniques
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common. 
@@ -197,10 +356,28 @@ Columnar databases use specialized compression: run-length encoding for low-card
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Use Columnar 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -222,10 +399,28 @@ When to Use Columnar
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- ClickHouse table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse table
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -250,10 +445,28 @@ CREATE TABLE events (
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 timestamp DateTime,
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -278,10 +491,28 @@ event_type String,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 user_id UInt32
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -306,6 +537,15 @@ user_id UInt32
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ORDER BY (event_type, timestamp);
@@ -320,10 +560,28 @@ ORDER BY (event_type, timestamp);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

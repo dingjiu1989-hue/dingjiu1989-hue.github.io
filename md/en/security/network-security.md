@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/security/network-security.html
   
 
 
+# Network Security Fundamentals
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Network Security Fundamentals
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Network Security Fundamentals
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Network security protects the communication channels between systems. As organizations move to the cloud and adopt zero-trust architectures, traditional perimeter-based network security is giving way to more granular, identity-aware approaches. This article covers the foundational concepts every developer and security practitioner needs.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Network security protects the communication channels between systems. As organiz
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Firewalls filter network traffic based on pre-defined rules. They are the first line of defense in network security.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Firewalls filter network traffic based on pre-defined rules. They are the first 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Packet filtering firewalls inspect individual packets against rule sets. They examine source and destination IP addresses, ports, and protocols. They operate at layers 3 and 4 of the OSI model.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Rule table example:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Source IP Dest IP Port Protocol Action
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Source IP Dest IP Port Protocol Action
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 0.0.0.0/0 10.0.1.5 22 TCP Deny
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Source IP Dest IP Port Protocol Action
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Stateful firewalls maintain a connection table. They track the state of active connections and make decisions based on the connection state, not just individual packets. This allows them to permit return traffic for legitimate outbound connections while blocking unsolicited inbound traffic.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Stateful firewalls maintain a connection table. They track the state of active c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 NGFWs combine traditional firewall capabilities with application-layer inspection, intrusion prevention, and threat intelligence. They can identify applications regardless of port or protocol and enforce policies based on user identity.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ NGFWs combine traditional firewall capabilities with application-layer inspectio
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ iptables -A INPUT -j DROP
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Virtual Private Networks (VPNs)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ VPNs create encrypted tunnels between endpoints over untrusted networks. They ex
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Site-to-Site VPN
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Connects entire networks to each other, such as an office to a cloud VPC. AWS VP
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # AWS CLI: create a VPN connection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,14 +745,6 @@ aws ec2 create-vpn-connection \
   
   
   
-
-
-\\\\\\\\\\\\\\\\--customer-gateway-id cgw-123 \
-
-  
-  
-  
-  
   
   
   
@@ -488,7 +756,7 @@ aws ec2 create-vpn-connection \
   
 
 
-\\\\\\\\\\\\\\\\--vpn-gateway-id vgw-456 \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--customer-gateway-id cgw-123 \
 
   
   
@@ -503,10 +771,54 @@ aws ec2 create-vpn-connection \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\--type ipsec.1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--vpn-gateway-id vgw-456 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type ipsec.1
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ aws ec2 create-vpn-connection \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Connects individual users to the corporate network. VPN clients include OpenVPN, WireGuard, and proprietary solutions like Palo Alto GlobalProtect.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ Connects individual users to the corporate network. VPN clients include OpenVPN,
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 VPNs are not a panacea. They grant broad network access, often violating least-privilege principles. If a VPN credential is compromised, the attacker gains full network access. Modern architectures increasingly replace VPNs with zero-trust network access (ZTNA) solutions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ VPNs are not a panacea. They grant broad network access, often violating least-p
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 IDS monitors network traffic for suspicious activity and generates alerts. IPS sits inline and actively blocks detected threats.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Signature-based**: Matches traffic against known attack patterns. Effective for known threats but misses zero-day attacks.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -667,10 +1051,28 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Behavioral**: Analyzes traffic patterns over time. Detects slow, low-and-slow attacks that evade other methods.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -701,10 +1103,28 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Snort**: Open-source NIDS with a large rule set. Widely deployed for packet logging and real-time traffic analysis.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -729,10 +1149,28 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Zeek (formerly Bro)**: Network analysis framework that produces detailed logs about connections, protocols, and files.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -763,10 +1201,28 @@ IDS monitors network traffic for suspicious activity and generates alerts. IPS s
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 vars:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -797,10 +1253,28 @@ address-groups:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 HOME_NET: "[10.0.0.0/8,172.16.0.0/12]"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -831,6 +1305,15 @@ EXTERNAL_NET: "!$HOME_NET"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 rule-files:
@@ -848,14 +1331,6 @@ rule-files:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- emerging-threats.rules
-
-  
-  
-  
-  
   
   
   
@@ -867,8 +1342,43 @@ rule-files:
   
 
 
-\\\\\\\\\\\\\\\\- malware-cnc.rules
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- emerging-threats.rules
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- malware-cnc.rules
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -899,10 +1409,28 @@ af-packet:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- interface: eth0
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- interface: eth0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -933,10 +1461,28 @@ cluster-id: 99
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 cluster-type: cluster_flow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -967,10 +1513,28 @@ cluster-type: cluster_flow
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Zero trust assumes no implicit trust based on network location. Every access request must be authenticated, authorized, and encrypted.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1001,6 +1565,15 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Never trust, always verify**: Every request, whether from inside or outside the network, must be validated.
@@ -1018,14 +1591,6 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Assume breach**: Design the network as if attackers already have a foothold. Limit lateral movement.
-
-  
-  
-  
-  
   
   
   
@@ -1037,8 +1602,43 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Least privilege**: Grant the minimum access necessary for each user or service.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Assume breach**: Design the network as if attackers already have a foothold. Limit lateral movement.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Least privilege**: Grant the minimum access necessary for each user or service.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1069,10 +1669,28 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **Micro-segmentation**: Divide the network into small, isolated zones. Each zone requires separate authentication.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1097,10 +1715,28 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **BeyondCorp / Cloudflare Access**: Google's BeyondCorp model removes the VPN entirely. Access decisions are based on device identity, user identity, and context, not network location.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1131,6 +1767,15 @@ Zero trust assumes no implicit trust based on network location. Every access req
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 policies:
@@ -1148,10 +1793,28 @@ policies:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- name: "api-access"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "api-access"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1182,10 +1845,28 @@ subject: "service:api-gateway"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource: "app:payment-service"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1216,10 +1897,28 @@ condition:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- attribute: "tls.client_cert.present"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- attribute: "tls.client_cert.present"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1250,6 +1949,15 @@ operator: "equals"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 value: true
@@ -1267,10 +1975,28 @@ value: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- attribute: "request.ip"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- attribute: "request.ip"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1301,10 +2027,28 @@ operator: "in_cidr"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 value: "10.0.0.0/8"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1335,10 +2079,28 @@ action: "allow"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Network Segmentation and Micro-Segmentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1369,10 +2131,28 @@ Segmentation divides a network into smaller segments to limit attack propagation
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ### Traditional Segmentation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1403,10 +2183,28 @@ Uses VLANs and subnets to separate traffic. A web server resides in one subnet, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 [Internet] -> [DMZ: Web Servers] -> [App Tier] -> [DB Tier]
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1437,10 +2235,28 @@ Uses VLANs and subnets to separate traffic. A web server resides in one subnet, 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Micro-segmentation takes segmentation to the individual workload level. In a cloud environment, every workload has its own security group that allows traffic only from specific sources on specific ports.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1471,10 +2287,28 @@ Micro-segmentation takes segmentation to the individual workload level. In a clo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 resource "aws_security_group" "db" {
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1505,10 +2339,28 @@ ingress {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from_port = 5432
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1539,10 +2391,28 @@ to_port = 5432
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 protocol = "tcp"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1573,10 +2443,28 @@ security_groups = [aws_security_group.app.id]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1607,10 +2495,28 @@ egress {
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from_port = 0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1641,10 +2547,28 @@ to_port = 0
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 protocol = "-1"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1675,6 +2599,15 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1692,10 +2625,28 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1726,10 +2677,28 @@ Micro-segmentation is essential in Kubernetes environments. Network policies con
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Kubernetes network policy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1760,10 +2729,28 @@ apiVersion: networking.k8s.io/v1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 kind: NetworkPolicy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1794,10 +2781,28 @@ metadata:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: api-allow
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1828,6 +2833,15 @@ spec:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 podSelector:
@@ -1845,10 +2859,28 @@ podSelector:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 matchLabels:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1879,6 +2911,15 @@ app: api
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ingress:
@@ -1896,14 +2937,6 @@ ingress:
   
   
   
-
-
-\\\\\\\\\\\\\\\\- from:
-
-  
-  
-  
-  
   
   
   
@@ -1915,8 +2948,43 @@ ingress:
   
 
 
-\\\\\\\\\\\\\\\\- podSelector:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1947,10 +3015,28 @@ matchLabels:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 app: frontend
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1981,10 +3067,28 @@ ports:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\- port: 8080
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- port: 8080
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -2002,6 +3106,15 @@ ports:
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

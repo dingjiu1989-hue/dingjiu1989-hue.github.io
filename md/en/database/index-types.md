@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/index-types.html
   
 
 
+# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,6 +135,15 @@ PostgreSQL offers six index types, each designed for different data distribution
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B-tree (Default) 
@@ -77,10 +155,28 @@ B-tree (Default)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B-tree is PostgreSQL's default and most versatile index type. It supports equality, range, sorting, and pattern matching. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -105,10 +201,28 @@ CREATE INDEX idx_users_email ON users USING BTREE (email);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_orders_date ON orders USING BTREE (order_date);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -130,10 +244,28 @@ CREATE INDEX idx_orders_date ON orders USING BTREE (order_date);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 B-tree indexes are balanced trees with fan-out on the order of hundreds. Height grows logarithmically with table size. A B-tree on a table with 10 million rows has a height of approximately 4. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -152,10 +284,28 @@ B-tree indexes are balanced trees with fan-out on the order of hundreds. Height 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Performance characteristics**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -174,10 +324,28 @@ B-tree indexes are balanced trees with fan-out on the order of hundreds. Height 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Range scans: O(log n + k) where k is the number of matching rows
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -199,6 +367,15 @@ B-tree indexes are balanced trees with fan-out on the order of hundreds. Height 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Hash 
@@ -210,10 +387,28 @@ Hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Hash indexes support only equality comparisons (`=`). They are typically smaller than B-tree for the same data: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -238,10 +433,28 @@ CREATE INDEX idx_sessions_token ON sessions USING HASH (token);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **When to use**: Columns with many distinct values that are only queried with equality conditions. Before PostgreSQL 10, hash indexes were not WAL-logged and could not be replicated. Since PostgreSQL 10, they are fully transaction-safe. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -260,6 +473,15 @@ CREATE INDEX idx_sessions_token ON sessions USING HASH (token);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GiST (Generalized Search Tree) 
@@ -271,10 +493,28 @@ GiST (Generalized Search Tree)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GiST is a balanced tree structure that supports custom data types and operators. It is an "indexing framework" rather than a specific algorithm: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +539,28 @@ CREATE INDEX idx_locations ON places USING GIST (location);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -324,10 +582,28 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Geometries: `<<`, `&<`, `&>`, `>>`, `<<|`, `&<|`, `|&>`, `|>>`, `@>`, `<@`, `~=`, `&&`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -346,10 +622,28 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Full-text search: `@@`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -371,10 +665,28 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **When to use**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -393,6 +705,15 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Range types and exclusive constraints
@@ -404,10 +725,28 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Full-text search with `tsvector` (though GIN is often better)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -429,10 +768,28 @@ CREATE INDEX idx_daterange ON bookings USING GIST (booking_period);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Performance**: Variable insertion/query performance depending on the operator class. Typically O(log n) for search. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -451,10 +808,28 @@ GIN (Generalized Inverted Index)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GIN indexes map each distinct value (element) to a list of rows containing that value. They excel at indexing composite values like arrays, JSONB, and full-text documents: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -479,10 +854,28 @@ CREATE INDEX idx_articles_fts ON articles USING GIN (search_vector);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_products_tags ON products USING GIN (tags);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -507,10 +900,28 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Supported operators**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -529,10 +940,28 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * JSONB: `@>`, `?`, `?|`, `?&`
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +983,28 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **When to use**:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -576,6 +1023,15 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * JSONB containment queries
@@ -587,10 +1043,28 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Array columns (tags, categories)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -612,10 +1086,28 @@ CREATE INDEX idx_products_attrs ON products USING GIN (attributes jsonb_path_ops
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Performance**: GIN indexes are larger than B-tree (typically 2-3x the data size) and slower to build. Reads are fast; writes are slower due to pending list management. Use `gin_pending_list_limit` to tune write performance. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -634,10 +1126,28 @@ SP-GiST (Space-Partitioned GiST)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SP-GiST supports partitioned search trees like quad-trees, k-d trees, and radix trees. It divides the search space into non-overlapping partitions: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -662,10 +1172,28 @@ CREATE INDEX idx_points ON locations USING SPGIST (point);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -687,10 +1215,28 @@ CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Point data with natural clustering
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -709,10 +1255,28 @@ CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Geographic data with non-uniform distribution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -734,10 +1298,28 @@ CREATE INDEX idx_text_prefix ON texts USING SPGIST (text);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SP-GiST is most effective when the data distribution allows efficient space partitioning. It is faster than GiST for certain point queries but less general. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -756,10 +1338,28 @@ BRIN (Block Range INdex)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 BRIN indexes aggregate summary information about physical page ranges (typically 32-128 pages per range). They are orders of magnitude smaller than B-tree: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -784,10 +1384,28 @@ CREATE INDEX idx_orders_date_brin ON orders USING BRIN (order_date)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WITH (pages_per_range = 32);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -812,10 +1430,28 @@ CREATE INDEX idx_logs_brin ON access_logs USING BRIN (logged_at, severity)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 WITH (pages_per_range = 64);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -837,10 +1473,28 @@ WITH (pages_per_range = 64);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Very large tables (100GB+) where B-tree index size is prohibitive
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -859,10 +1513,28 @@ WITH (pages_per_range = 64);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Data warehousing and analytics workloads
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -884,10 +1556,28 @@ WITH (pages_per_range = 64);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 **Storage comparison**: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -906,6 +1596,15 @@ WITH (pages_per_range = 64);
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Choosing the Right Index 
@@ -917,10 +1616,28 @@ Choosing the Right Index
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Query Pattern | Recommended Index | |---------------|-------------------| | Equality + range | B-tree | | Equality only (high cardinality) | B-tree (or Hash) | | Full-text search | GIN | | JSONB queries | GIN (jsonb_path_ops) | | Geospatial (points) | GiST or SP-GiST | | Geospatial (polygons) | GiST | | Range types | GiST | | Arrays | GIN | | Time-ordered data, huge tables | BRIN | | Text prefix search (autocomplete) | SP-GiST | 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

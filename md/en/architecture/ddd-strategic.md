@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-strategic.html
   
 
 
+# DDD Strategic Design
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# DDD Strategic Design
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# DDD Strategic Design
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Strategic Domain-Driven Design addresses the high-level organization of a software system around domain boundaries. While tactical patterns guide implementation within a single domain, strategic patterns define how domains relate to each other and how teams collaborate. This article covers bounded contexts, context maps, ubiquitous language, and integration patterns. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Bounded Context
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A bounded context is a explicit boundary within which a particular domain model applies. Within the boundary, all terms have specific meanings, and the model is internally consistent. Outside the boundary, different terms or different meanings may apply. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ For example, in an e-commerce system, the concept of "Customer" may be different
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Identifying bounded contexts is the most critical strategic design activity. Contexts should be aligned with business capabilities and team structures. The general principle is that one team should own one bounded context, and the context boundary should align with the team's scope of responsibility. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Context Map
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A context map documents the relationships between bounded contexts. It shows how different contexts integrate and where translations occur. Common relationship patterns include partnership (two teams collaborate on integration), shared kernel (shared subset of the model), customer-supplier (one context serves another), and conformist (one context conforms to another's model). 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ The context map is both a design artifact and a communication tool. It helps tea
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Ubiquitous Language 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,10 +295,28 @@ Ubiquitous language is a shared language structured around the domain model. It 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Developing ubiquitous language requires continuous refinement. When a team discovers that a term has different meanings for different members, they investigate and resolve the ambiguity. The domain model evolves with the language, and the language evolves with the model. Code names should match spoken language terms. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -176,10 +335,28 @@ Integration Patterns
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Strategic DDD defines several patterns for integrating bounded contexts. Anti-corruption layers protect a context from being polluted by another context's model. Separate ways allow contexts to operate completely independently. Open-host service publishes a formal API for other contexts to consume. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -198,6 +375,15 @@ Published language defines a shared vocabulary used for integration, often takin
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 When to Use Strategic DDD 
@@ -209,10 +395,28 @@ When to Use Strategic DDD
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Strategic DDD is most valuable in complex domains with multiple teams and evolving requirements. It provides the tools to decompose a large system into manageable pieces, define clear ownership, and manage integrations. For simple systems with a single team, strategic DDD may add unnecessary overhead. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

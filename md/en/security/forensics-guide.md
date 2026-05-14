@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/security/forensics-guide.html
   
   
   
+  
+  
+  
+
+
+# Digital Forensics Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Digital Forensics Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Digital Forensics Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Digital forensics is the practice of identifying, preserving, analyzing, and pre
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Evidence Acquisition 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ Acquisition is the most critical phase. Improper handling can render evidence in
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Order of Volatility 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,6 +303,15 @@ Digital evidence must be collected from the most volatile to the least volatile:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * **CPU registers, cache** — lost at power-off
@@ -197,10 +329,28 @@ Digital evidence must be collected from the most volatile to the least volatile:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RAM contents** — lost within seconds of power loss 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections and process tables** — transient state 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **System processes** — disappear with shutdown 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disk storage** — persistent 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Remote logs and archival media** — off-device persistent 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RAM contents** — lost within seconds of power loss 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections and process tables** — transient state 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **System processes** — disappear with shutdown 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disk storage** — persistent 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Remote logs and archival media** — off-device persistent 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Digital evidence must be collected from the most volatile to the least volatile:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 insmod lime.ko "path=/evidence/memory.dump format=lime"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ insmod lime.ko "path=/evidence/memory.dump format=lime"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 winpmem_mini_x64_rc2.exe --output memory.raw
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ winpmem_mini_x64_rc2.exe --output memory.raw
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ps aux > evidence/processes.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ netstat -anp > evidence/network_connections.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 lsof > evidence/open_files.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Disk Acquisition
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Create a forensic image with dd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ sudo dd if=/dev/sda of=/evidence/sda.dd bs=4M conv=noerror,sync status=progress
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Verify image integrity with hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ sha256sum /dev/sda > evidence/sda.hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sha256sum /evidence/sda.dd >> evidence/sda.hash
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ sha256sum /evidence/sda.dd >> evidence/sda.hash
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 guymager -f ewf -e "Case-2026-001" -n "Evidence Item 1" /dev/sda /evidence/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ Chain of Custody
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Chain of custody documents every interaction with evidence from collection to courtroom presentation. Every transfer must be logged with date, time, handler identity, purpose, and hash verification. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ chain_of_custody:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 item_id: "EVID-2026-001"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,6 +901,15 @@ description: "Seized laptop, Dell Latitude 5540, S/N ABC123"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 custody_events:
@@ -588,10 +927,28 @@ custody_events:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-10T09:15:00Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-10T09:15:00Z"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -622,10 +979,28 @@ handler: "Officer Jane Smith, Badge 4512"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: "Seized and logged at scene"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -656,6 +1031,15 @@ hash: "sha256: a1b2c3d4e5..."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 notes: "Device was powered on. Immediately performed memory capture."
@@ -673,10 +1057,28 @@ notes: "Device was powered on. Immediately performed memory capture."
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-10T11:30:00Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-10T11:30:00Z"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,6 +1109,15 @@ handler: "Officer Jane Smith -> Analyst John Doe"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: "Transferred to forensics lab"
@@ -724,10 +1135,28 @@ action: "Transferred to forensics lab"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 hash_verified: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -758,10 +1187,28 @@ notes: "Transport in locked evidence bag, property receipt #8823"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-11T08:00:00Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: "2026-05-11T08:00:00Z"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -792,10 +1239,28 @@ handler: "Analyst John Doe"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 action: "Forensic imaging commenced"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -826,10 +1291,28 @@ hash_verified: true
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 notes: "Write-blocker engaged. Imaging to EWF container."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -860,10 +1343,28 @@ Forensic Analysis with Autopsy and FTK
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Autopsy (Sleuth Kit GUI) 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -894,10 +1395,28 @@ Autopsy is the most widely used open-source forensic platform. It provides timel
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Autopsy Python module for custom analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -928,10 +1447,28 @@ import jarray
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 from org.sleuthkit.datamodel import AbstractFile
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -962,10 +1499,28 @@ from org.sleuthkit.autopsy.ingest import IngestModule
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 class CustomAnalysisModule(IngestModule):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -996,10 +1551,28 @@ def process_files(self, file_list):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for f in file_list:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1030,10 +1603,28 @@ if f.getName().endswith('.encrypted'):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.flag_file(f, "Suspicious encrypted file")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1064,10 +1655,28 @@ self.flag_file(f, "Suspicious encrypted file")
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 file_hash = f.calculateHash("SHA256")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1098,10 +1707,28 @@ if file_hash in threat_intel_hashes:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.flag_file(f, f"Known malware: {file_hash}")
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1132,10 +1759,28 @@ FTK (Forensic Toolkit)
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 FTK provides enterprise-grade forensic analysis with robust indexing, carving, and reporting. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1166,10 +1811,28 @@ FTK provides enterprise-grade forensic analysis with robust indexing, carving, a
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ftkimager /dev/sda1 /evidence/sda1_image.ext --mount --verify
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1200,6 +1863,15 @@ ftkimager /dev/sda1 /evidence/sda1_image.ext --mount --verify
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ftkloader --case="Case-2026" --evidence="/evidence/sda1_image.ext" \
@@ -1217,10 +1889,28 @@ ftkloader --case="Case-2026" --evidence="/evidence/sda1_image.ext" \
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--index --carve
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--index --carve
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1251,10 +1941,28 @@ File Carving and Recovery
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 File carving recovers data from unallocated space without filesystem metadata. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1285,10 +1993,28 @@ File carving recovers data from unallocated space without filesystem metadata.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 foremost -i /evidence/disk.dd -o /evidence/carved/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1319,10 +2045,28 @@ foremost -i /evidence/disk.dd -o /evidence/carved/
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 scalpel -c /etc/scalpel/scalpel.conf -o /evidence/carved/ -i /evidence/disk.dd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1353,10 +2097,28 @@ scalpel -c /etc/scalpel/scalpel.conf -o /evidence/carved/ -i /evidence/disk.dd
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 bulk_extractor -o /evidence/bulk/ /evidence/disk.dd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1387,10 +2149,28 @@ Timeline Analysis
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Timeline construction correlates file system events, logs, and artifacts to reconstruct incident sequences. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1421,10 +2201,28 @@ Timeline construction correlates file system events, logs, and artifacts to reco
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 fls -r -m /evidence /evidence/disk.dd > /evidence/body.txt
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1455,10 +2253,28 @@ fls -r -m /evidence /evidence/disk.dd > /evidence/body.txt
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 mactime -b /evidence/body.txt -d > /evidence/timeline.csv
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1489,10 +2305,28 @@ mactime -b /evidence/body.txt -d > /evidence/timeline.csv
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 log2timeline.py --storage-file /evidence/timeline.plaso /evidence/disk.dd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1523,10 +2357,28 @@ psort.py -o dynamic -w /evidence/timeline.csv /evidence/timeline.plaso
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

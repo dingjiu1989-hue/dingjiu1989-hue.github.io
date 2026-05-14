@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/database-security-hardening.h
   
 
 
+# Database Security Hardening
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Security Hardening
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Database Security Hardening
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Defense in Depth 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Database security requires multiple layers: network isolation, encryption, acces
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encryption 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -91,10 +178,28 @@ Encryption at Rest
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- PostgreSQL TDE
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL TDE
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -119,10 +224,28 @@ CREATE EXTENSION pg_tde;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SELECT pg_tde_add_database_key_provider('file-vault', '{"type":"file"}');
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -147,10 +270,28 @@ SELECT pg_tde_set_principal_key('production-db-key', 'file-vault');
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encryption in Transit 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -175,10 +316,28 @@ Encryption in Transit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ssl = on
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -203,10 +362,28 @@ ssl_cert_file = '/etc/ssl/certs/server.crt'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ssl_key_file = '/etc/ssl/private/server.key'
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -228,10 +405,28 @@ Access Control
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Apply least privilege with separate roles: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -256,10 +451,28 @@ CREATE ROLE read_only;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE ROLE read_write;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -284,10 +497,28 @@ GRANT SELECT ON ALL TABLES TO read_only;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GRANT INSERT, UPDATE, DELETE ON ALL TABLES TO read_write;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -312,10 +543,28 @@ Row-Level Security
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -340,10 +589,28 @@ CREATE POLICY tenant_isolation ON orders
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 USING (tenant_id = current_setting('app.tenant_id')::INT);
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -368,6 +635,15 @@ Audit Logging
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CREATE EXTENSION pgaudit;
@@ -382,10 +658,28 @@ CREATE EXTENSION pgaudit;
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- In postgresql.conf
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -410,10 +704,28 @@ pgaudit.log = 'write,ddl,role'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Network Isolation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -432,10 +744,28 @@ Place databases in private subnets. Use security groups to restrict access to sp
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

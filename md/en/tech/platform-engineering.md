@@ -78,10 +78,97 @@ url: https://dingjiu1989-hue.github.io/en/tech/platform-engineering.html
   
   
   
+  
+  
+  
+
+
+# Platform Engineering
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Platform Engineering
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Platform Engineering
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Platform engineering is the discipline of building and maintaining internal developer platforms (IDPs) that enable development teams to deliver software independently and efficiently. A well-designed IDP reduces cognitive load on developers, enforces organizational standards, and accelerates delivery. This article covers the core concepts, golden paths, and implementation strategies for platform engineering.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -112,10 +199,28 @@ Platform engineering is the discipline of building and maintaining internal deve
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Platform engineering emerged as a response to the operational complexity of microservices, Kubernetes, and cloud-native development. Development teams were spending more time on infrastructure and operations than on business features. Platform engineering creates a layer of abstraction—an internal developer platform—that hides this complexity while providing self-service capabilities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -146,10 +251,28 @@ An IDP is not a single tool. It is a collection of capabilities: service creatio
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  The Platform Team Topology
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -180,10 +303,28 @@ The platform team is a product team whose users are internal developers. This di
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The platform team should be sized proportionally to the engineering organization. A common ratio is one platform team member per 10-15 application developers. The team should have expertise in infrastructure, developer tooling, and product management.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -214,10 +355,28 @@ The platform team does not build every capability from scratch. It curates and i
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Golden Paths
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -248,10 +407,28 @@ Golden paths (also called paved roads) are standardized, well-supported approach
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Golden paths are not mandatory. Teams can diverge from the golden path, but they accept the cognitive load and operational responsibility. The golden path should handle 80% of use cases well. The remaining 20% can use custom solutions at their own cost.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -282,10 +459,28 @@ Golden paths reduce decision fatigue. Developers do not need to evaluate every t
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Developer Experience
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -316,10 +511,28 @@ Developer experience (DevEx) is the platform engineering equivalent of user expe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 DevEx measurement includes time-to-first-deploy for a new service, time-to-fix for a production issue, platform adoption rate, developer satisfaction surveys, and feedback response time. These metrics guide platform investment decisions.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -350,10 +563,28 @@ Good DevEx principles include fast feedback loops (developers should know within
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Platform Capabilities
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -384,10 +615,28 @@ A mature IDP provides several core capabilities. Service creation automates new 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Secret management provides secure storage and automated injection of secrets. Infrastructure provisioning automates environment creation with Terraform modules or similar tools. Access management provides role-based access controls aligned with team structures.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -418,10 +667,28 @@ Secret management provides secure storage and automated injection of secrets. In
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Platform teams face build-vs-buy decisions for each capability. Some capabilities are better bought: secret management (Vault, AWS Secrets Manager), container orchestration (Kubernetes), CI/CD (GitHub Actions, GitLab CI). Some are better built: service catalogs, golden path templates, and integration layers that connect tools into a cohesive platform.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -452,10 +719,28 @@ Backstage has emerged as the leading open-source framework for building develope
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Adoption Strategy
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -486,10 +771,28 @@ Platform engineering requires a thoughtful adoption strategy. Start small: ident
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Early adopters are critical. Work closely with a few development teams to refine the platform before broader rollout. Their feedback shapes the platform's direction, and their success stories drive adoption.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -520,10 +823,28 @@ Avoid the "platform trap": building a perfect platform before any developers use
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Measuring Success
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -554,10 +875,28 @@ Platform success is measured by developer outcomes, not platform features. Key m
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Developer satisfaction surveys provide qualitative feedback. Net Promoter Score (NPS) for the platform measures whether developers would recommend it to their peers. Regular feedback sessions identify pain points and improvement opportunities.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

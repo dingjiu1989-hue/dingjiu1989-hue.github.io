@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/security/soc-operations.html
   
 
 
+# SOC Operations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SOC Operations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# SOC Operations
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ A Security Operations Center (SOC) is a centralized team responsible for monitor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SOC Tier Model 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ The SOC team structure typically follows a three-tier model that provides clear 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tier 1 — Triage 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Tier 1 analysts monitor dashboards, triage alerts, and determine initial severit
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Responsibilities:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -132,10 +255,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Perform initial alert triage and categorization
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -154,6 +295,15 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Create tickets for escalated incidents
@@ -165,10 +315,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Maintain shift logs
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -193,10 +361,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def triage_alert(alert):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -221,10 +407,28 @@ def triage_alert(alert):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for fp_pattern in false_positive_patterns:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -249,10 +453,28 @@ if fp_pattern.matches(alert):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alert.auto_close()
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -277,10 +499,28 @@ return
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Enrich with threat intelligence
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -305,10 +545,28 @@ alert.iocs = enrich_iocs(alert.extract_iocs())
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 # Escalate if critical
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +591,28 @@ if alert.severity == 'critical':
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 alert.assign_tier(2)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -361,10 +637,28 @@ alert.notify('pagerduty')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 else:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -389,10 +683,28 @@ alert.assign_tier(2, queue='standard')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tier 2 — Investigation 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -411,10 +723,28 @@ Tier 2 analysts perform deep investigation, containment, and remediation. They c
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Responsibilities:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -433,10 +763,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Host and network forensic analysis
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -455,10 +803,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Incident containment and remediation
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -480,10 +846,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Tier 3 — Advanced Analysis 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -502,10 +886,28 @@ Tier 3 analysts handle the most complex incidents, develop detection rules, perf
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Responsibilities:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -524,10 +926,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Threat hunt development and execution
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -546,10 +966,28 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 * Red/purple team collaboration
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,6 +1009,15 @@ Responsibilities:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SIEM Tuning 
@@ -582,10 +1029,28 @@ SIEM Tuning
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIEM generates alerts that analysts can actually investigate. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -610,10 +1075,28 @@ SIEM tuning reduces noise while maintaining detection coverage. A well-tuned SIE
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SIEM_ALERTS=10000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -638,10 +1121,28 @@ FALSE_POSITIVES=8500
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TRUE_POSITIVES=1000
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -666,10 +1167,28 @@ ESCALATIONS=500
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "Alert volume: $SIEM_ALERTS"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -694,10 +1213,28 @@ echo "False positive rate: $((FALSE_POSITIVES * 100 / SIEM_ALERTS))%"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 echo "Escalation rate: $((ESCALATIONS * 100 / SIEM_ALERTS))%"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -719,10 +1256,28 @@ Playbooks
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Playbooks provide step-by-step instructions for handling specific scenarios. They reduce mean time to respond (MTTR) and ensure consistency. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -747,10 +1302,28 @@ Playbooks provide step-by-step instructions for handling specific scenarios. The
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 playbook:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -775,10 +1348,28 @@ id: IR-001
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 name: "Ransomware Detection and Response"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -803,6 +1394,15 @@ severity: critical
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 steps:
@@ -817,25 +1417,6 @@ steps:
   
   
   
-
-
-\\\\\\\\- phase: identification
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-actions:
-
-  
   
   
   
@@ -847,7 +1428,7 @@ actions:
   
 
 
-\\\\\\\\- task: "Verify alert from EDR or user report"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: identification
 
   
   
@@ -858,39 +1439,6 @@ actions:
   
   
   
-  
-
-
-\\\\\\\\- task: "Identify affected systems"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- task: "Determine ransomware variant via IOC hash"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- phase: containment
-
   
   
   
@@ -915,25 +1463,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- task: "Isolate affected hosts from network"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- task: "Disable compromised accounts"
-
-  
   
   
   
@@ -945,8 +1474,17 @@ actions:
   
 
 
-\\\\\\\\- task: "Block C2 infrastructure at firewall"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Verify alert from EDR or user report"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -959,7 +1497,7 @@ actions:
   
 
 
-\\\\\\\\- phase: eradication
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Identify affected systems"
 
   
   
@@ -970,11 +1508,6 @@ actions:
   
   
   
-  
-
-
-actions:
-
   
   
   
@@ -987,7 +1520,7 @@ actions:
   
 
 
-\\\\\\\\- task: "Remove malware from affected systems"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Determine ransomware variant via IOC hash"
 
   
   
@@ -998,11 +1531,6 @@ actions:
   
   
   
-  
-
-
-\\\\\\\\- task: "Patch vulnerability used for initial access"
-
   
   
   
@@ -1015,7 +1543,7 @@ actions:
   
 
 
-\\\\\\\\- task: "Reset credentials for affected accounts"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: containment
 
   
   
@@ -1026,11 +1554,6 @@ actions:
   
   
   
-  
-
-
-\\\\\\\\- phase: recovery
-
   
   
   
@@ -1055,25 +1578,6 @@ actions:
   
   
   
-
-
-\\\\\\\\- task: "Restore from clean backups"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\- task: "Verify system integrity"
-
-  
   
   
   
@@ -1085,8 +1589,293 @@ actions:
   
 
 
-\\\\\\\\- task: "Gradually restore connectivity"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Isolate affected hosts from network"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Disable compromised accounts"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Block C2 infrastructure at firewall"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: eradication
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Remove malware from affected systems"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Patch vulnerability used for initial access"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Reset credentials for affected accounts"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- phase: recovery
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+actions:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Restore from clean backups"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Verify system integrity"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- task: "Gradually restore connectivity"
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1108,10 +1897,28 @@ SOC KPIs
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Key performance indicators measure SOC effectiveness and efficiency. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1130,6 +1937,15 @@ Key performance indicators measure SOC effectiveness and efficiency.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Shift Handoff 
@@ -1141,10 +1957,28 @@ Shift Handoff
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Effective shift handoffs prevent incidents from falling through the cracks. 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1169,6 +2003,15 @@ shift_handoff:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 sections:
@@ -1183,10 +2026,28 @@ sections:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: "Active Incidents"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Active Incidents"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1211,10 +2072,28 @@ fields: [id, severity, status, owner, summary, next_steps]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: "Pending Investigations"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Pending Investigations"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1239,10 +2118,28 @@ fields: [alert_id, initial_findings, pending_actions]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: "Maintenance and Outages"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Maintenance and Outages"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1267,10 +2164,28 @@ fields: [system, type, eta, impact]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: "Notable Events"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Notable Events"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1295,10 +2210,28 @@ fields: [timestamp, description, action_taken]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\- name: "Tool Status"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Tool Status"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -1323,10 +2256,28 @@ fields: [tool, status, known_issues]
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

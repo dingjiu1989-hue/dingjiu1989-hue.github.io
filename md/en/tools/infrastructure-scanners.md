@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/tools/infrastructure-scanners.html
   
 
 
+# Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Vulnerability scanning has become a mandatory component of secure software devel
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 This article compares four leading open-source and commercial scanners: Trivy, Grype, Snyk, and OWASP Dependency-Check.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ This article compares four leading open-source and commercial scanners: Trivy, G
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Aqua Security's Trivy has rapidly become the most popular open-source vulnerability scanner. It scans container images, filesystems, Git repositories, Kubernetes manifests, IaC templates, and SBOMs. Trivy covers vulnerabilities (CVEs), misconfigurations, secrets, and licenses.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Trivy uses multiple vulnerability databases — NVD, Red Hat, Debian, Alpine, Am
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 trivy image nginx:latest
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ trivy fs --severity CRITICAL,HIGH /path/to/project
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 trivy config --severity CRITICAL ./infra/
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ trivy repo https://github.com/org/repo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Trivy supports multiple output formats: table, JSON, SARIF (for IDE integration), and CycloneDX or SPDX SBOM formats. Its SARIF output integrates with GitHub Code Scanning and GitLab SAST.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ A key advantage is Trivy's IaC scanning capability, detecting misconfigurations 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Grype: Anchore's Vulnerability Scanner
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Grype is Anchore's open-source vulnerability scanner, focusing on container imag
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Grype integrates tightly with Syft, Anchore's SBOM generation tool. The typical workflow generates an SBOM with Syft, then scans it with Grype:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ syft nginx:latest -o json > sbom.json
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 grype sbom:sbom.json
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ Grype supports YAML and JSON output formats and integrates with CI/CD pipelines 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Grype's strength is its focused scope — it does one thing (vulnerability scanning) and does it well. The downside is that IaC scanning and secret detection require additional tools.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,10 +641,28 @@ Grype's strength is its focused scope — it does one thing (vulnerability scann
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Snyk is a commercial security platform (with a free tier) that scans containers, open-source dependencies, IaC, and Kubernetes configurations. Its developer-first experience includes IDE plugins, PR checks, and CLI integration.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -435,10 +693,28 @@ Snyk's container scanning detects vulnerabilities in base images and application
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Snyk's IaC scanning covers Terraform, CloudFormation, and Kubernetes manifests, providing fix guidance for each finding. The Snyk Advisor dashboard gives organizations visibility into security posture across projects.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -469,10 +745,28 @@ The primary trade-off is cost. While open-source project scanning is free, organ
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  OWASP Dependency-Check
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -503,10 +797,28 @@ Dependency-Check is the OWASP Foundation's software composition analysis tool. I
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency-Check supports Java (.jar, .war), .NET, Python (pip), Ruby (gem), Node.js (npm), and several other ecosystems. It generates HTML, JSON, and XML reports with vulnerability severity, CVSS scores, and CVE references.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -537,10 +849,28 @@ dependency-check --scan /path/to/project --format JSON --out /reports
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dependency-Check is particularly common in government and regulated industries where OWASP guidance is mandated. Its primary limitation is NVD-only coverage, which means slower vulnerability updates compared to Trivy or Grype that aggregate multiple databases.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -571,10 +901,28 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Feature | Trivy | Grype | Snyk | Dependency-Check |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -605,10 +953,28 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Container scanning | Yes | Yes | Yes | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -639,10 +1005,28 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | IaC scanning | Yes | No | Yes | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -673,10 +1057,28 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | Reachability | No | No | Yes | No |
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -707,6 +1109,15 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 | CI/CD integration | Excellent | Good | Excellent | Good |
@@ -724,10 +1135,28 @@ Dependency-Check is particularly common in government and regulated industries w
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

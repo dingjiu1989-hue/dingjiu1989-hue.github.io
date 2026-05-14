@@ -46,8 +46,77 @@ url: https://dingjiu1989-hue.github.io/en/database/distributed-databases.html
   
 
 
+# Distributed Databases: Concepts and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Distributed Databases: Concepts and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Distributed Databases: Concepts and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Distributed Database Architecture 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -66,10 +135,28 @@ Distributed databases store data across multiple nodes, presenting a unified int
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 CAP Theorem 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -88,10 +175,28 @@ A distributed system can provide at most two of: Consistency, Availability, Part
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Consensus Algorithms 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -110,10 +215,28 @@ Raft
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Raft is a consensus algorithm designed for understandability: 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -138,10 +261,28 @@ class RaftNode:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -166,10 +307,28 @@ self.state = "FOLLOWER"
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.current_term = 0
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -194,10 +353,28 @@ def start_election(self):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.state = "CANDIDATE"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -222,10 +399,28 @@ votes = 1
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 for peer in self.peers:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -250,10 +445,28 @@ if peer.request_vote(self.current_term):
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 votes += 1
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -278,10 +491,28 @@ if votes > len(self.peers) // 2:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 self.state = "LEADER"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -303,10 +534,28 @@ Raft powers etcd, Consul, and MongoDB replication.
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Paxos 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -325,10 +574,28 @@ Paxos is the original consensus algorithm. It is correct but difficult to unders
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Gossip Protocol 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -347,10 +614,28 @@ Nodes periodically exchange state with random peers. Information spreads in O(lo
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Dynamo-Style Architecture 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -372,10 +657,28 @@ Amazon DynamoDB and Cassandra prioritize availability:
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-\\\\\\\\-- Cassandra: tunable consistency
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra: tunable consistency
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -400,10 +703,28 @@ INSERT INTO users (user_id, name) VALUES ('u1', 'Alice')
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 USING CONSISTENCY QUORUM;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -428,10 +749,28 @@ SELECT * FROM users WHERE user_id = 'u1'
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 USING CONSISTENCY ONE;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -453,6 +792,15 @@ Spanner-Style Architecture
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency. 
@@ -464,10 +812,28 @@ Google Spanner provides strong consistency globally using TrueTime (GPS + atomic
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

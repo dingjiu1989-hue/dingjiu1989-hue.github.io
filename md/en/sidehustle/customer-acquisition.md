@@ -63,8 +63,86 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/customer-acquisition.html
   
 
 
+# Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# Customer Acquisition Strategies: Content Marketing, SEO, Paid Ads, Partnerships, and PLG
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Customer acquisition is the engine of any SaaS business. But with dozens of channels available, spreading yourself too thin is the fastest way to waste time and money. Here is a framework for choosing and executing the right acquisition strategies for your stage.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -95,10 +173,28 @@ Customer acquisition is the engine of any SaaS business. But with dozens of chan
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Content marketing is the highest-leverage channel for early-stage B2B SaaS. Write about problems your target customers search for. Each piece of content is an asset that compounds over time. A well-written article published today might generate leads for years.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -129,10 +225,28 @@ Practical approach: publish two high-quality posts per week. Each should target 
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distribute your content on Hacker News, relevant subreddits, and LinkedIn. Repurpose long-form content into Twitter threads and LinkedIn posts. Most of your traffic will come from a handful of articles, so double down on what works.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -163,10 +277,28 @@ Distribute your content on Hacker News, relevant subreddits, and LinkedIn. Repur
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 SEO complements content marketing but requires patience. Technical SEO foundations matter: fast page load speeds, proper heading structure, descriptive meta titles, and clean URL slugs. Use a tool like Ahrefs or Semrush to find keyword gaps.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -197,10 +329,28 @@ Build backlinks through guest posting on industry blogs, contributing to open-so
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Remember that SEO is a six-to-twelve-month play. Do not rely on it for immediate traction. Build it alongside shorter-term channels.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -231,10 +381,28 @@ Remember that SEO is a six-to-twelve-month play. Do not rely on it for immediate
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Paid acquisition works best when you know your unit economics. If your LTV to CAC ratio is above 3:1 and you have payback period under 12 months, you can scale with ads. If you do not know these numbers, advertising is gambling.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -265,10 +433,28 @@ Start with Google Ads for intent-based searches. Someone searching "project mana
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Set strict daily budgets. A common mistake is spending $50 per day on five different campaigns. Concentrate that budget on one well-targeted campaign and optimize before expanding.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -299,10 +485,28 @@ Set strict daily budgets. A common mistake is spending $50 per day on five diffe
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Partnerships are an underrated channel for B2B SaaS. Integrate with complementary products and cross-promote to each other's user bases. A project management tool could partner with a time tracking app, a CRM, and a documentation platform.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -333,10 +537,28 @@ Build an integration marketplace early. Even if you only have three integrations
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Product-Led Growth
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -367,10 +589,28 @@ PLG means letting the product sell itself through free tiers, trials, or usage-b
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 For PLG to work, your product must deliver value within minutes of signup. If setup takes more than 15 minutes or requires training, PLG will not work. Measure time-to-value and optimize ruthlessly.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -401,6 +641,15 @@ PLG works best for products with low switching costs and viral loops. A collabor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Channel Selection by Stage
@@ -418,10 +667,28 @@ PLG works best for products with low switching costs and viral loops. A collabor
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pre-revenue: content marketing, community building, founder-led sales. Under $10k MRR: content, SEO, one paid channel, partnerships. $10k to $100k MRR: scale what works, add one experimental channel per quarter. Above $100k MRR: build a dedicated growth team and run multiple channels in parallel.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
