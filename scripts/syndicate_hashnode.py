@@ -27,11 +27,14 @@ if not API_KEY:
         API_KEY = key_file.read_text(encoding="utf-8").strip()
 
 if not API_KEY:
-    print("ERROR: Set HASHNODE_API_KEY env var or create .hashnode-key file")
-    print("Get your key at: https://hashnode.com/settings/developer")
-    sys.exit(1)
+    print("WARNING: HASHNODE_API_KEY not set — Hashnode API is now paid-only")
+    print("See: https://hashnode.com/announcements/graphql-api")
+    sys.exit(0)
 
 PUBLICATION_ID = os.environ.get("HASHNODE_PUBLICATION_ID", "")
+# Hashnode deprecated free GraphQL API access (2026).
+# gql.hashnode.com now redirects to a paid-only announcement.
+# This script is preserved for reference but won't function without paid access.
 HASHNODE_API = "https://gql.hashnode.com/"
 
 import _ssl_compat  # noqa
