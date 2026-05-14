@@ -252,8 +252,9 @@ def main():
         publication_id = get_publication_id()
     except Exception as e:
         print(f"ERROR getting publication ID: {e}")
-        print("Set HASHNODE_PUBLICATION_ID env var to skip discovery.")
-        sys.exit(1)
+        print("Hashnode's free GraphQL API has been deprecated (paid-only since 2026).")
+        print("Skipping Hashnode syndication. See: https://hashnode.com/announcements/graphql-api")
+        return
 
     # Publish (cap by daily remaining)
     max_to_publish = min(ARTICLES_PER_RUN, remaining)
