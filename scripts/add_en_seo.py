@@ -249,20 +249,20 @@ def regenerate_sitemap():
     """
     en_data = json.loads(EN_ARTICLES_JSON.read_text(encoding='utf-8'))
 
-    # Build full URL list: (url, changefreq, priority, hreflangs)
+    # Build full URL list: (url, changefreq, priority, lastmod, hreflangs)
     urls = []
 
-    # Homepages — priority 1.0
-    urls.append((f'{BASE}/', 'daily', '1.0', [
+    # Homepages — priority 1.0, lastmod = today
+    urls.append((f'{BASE}/', 'daily', '1.0', TODAY, [
         f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>',
         f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}/en/"/>',
     ]))
-    urls.append((f'{BASE}/en/', 'daily', '1.0', [
+    urls.append((f'{BASE}/en/', 'daily', '1.0', TODAY, [
         f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}/en/"/>',
         f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>',
     ]))
 
-    # Category pages — priority 0.9
+    # Category pages — priority 0.9, lastmod = today
     for board in en_data['boards']:
         en_cat = f'{BASE}/en/{board["id"]}/'
         cn_cat = f'{BASE}/{board["id"]}/'
@@ -270,9 +270,9 @@ def regenerate_sitemap():
         hreflangs = [f'<xhtml:link rel="alternate" hreflang="en" href="{en_cat}"/>']
         if cn_exists:
             hreflangs.append(f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_cat}"/>')
-        urls.append((en_cat, 'daily', '0.9', hreflangs))
+        urls.append((en_cat, 'daily', '0.9', TODAY, hreflangs))
         if cn_exists:
-            urls.append((cn_cat, 'daily', '0.9', [
+            urls.append((cn_cat, 'daily', '0.9', TODAY, [
                 f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_cat}"/>',
                 f'<xhtml:link rel="alternate" hreflang="en" href="{en_cat}"/>',
             ]))
@@ -311,7 +311,9 @@ def regenerate_sitemap():
                 art_cn = f'{BASE}/{board["id"]}/{art["slug"]}.html'
                 hreflangs.append(f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{art_cn}"/>')
 
-            urls.append((art_en, freq, priority, hreflangs))
+            # Use article's lastActive date for lastmod, fall back to date
+            lastmod = art.get('lastActive', art.get('date', TODAY))
+            urls.append((art_en, freq, priority, lastmod, hreflangs))
 
     # AI discovery files
     ai_files = [
@@ -328,17 +330,17 @@ def regenerate_sitemap():
         (f'{BASE}/robots.txt', 'weekly', '0.5'),
     ]
     for ai_url, freq, priority in ai_files:
-        urls.append((ai_url, freq, priority, []))
+        urls.append((ai_url, freq, priority, TODAY, []))
 
     # Build XML
     lines = ['<?xml version="1.0" encoding="UTF-8"?>']
     lines.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
-    for url, freq, priority, hreflangs in urls:
+    for url, freq, priority, lastmod, hreflangs in urls:
         lines.append('  <url>')
         lines.append(f'    <loc>{url}</loc>')
         lines.append(f'    <changefreq>{freq}</changefreq>')
         lines.append(f'    <priority>{priority}</priority>')
-        lines.append(f'    <lastmod>{TODAY}</lastmod>')
+        lines.append(f'    <lastmod>{lastmod}</lastmod>')
         for h in hreflangs:
             lines.append(f'    {h}')
         lines.append('  </url>')
@@ -347,9 +349,9 @@ def regenerate_sitemap():
     SITEMAP.write_text('\n'.join(lines) + '\n', encoding='utf-8')
 
     # Summary stats
-    p09 = sum(1 for _, _, p, _ in urls if p == '0.9')
-    p08 = sum(1 for _, _, p, _ in urls if p == '0.8')
-    p07 = sum(1 for _, _, p, _ in urls if p == '0.7')
+    p09 = sum(1 for _, _, p, _, _ in urls if p == '0.9')
+    p08 = sum(1 for _, _, p, _, _ in urls if p == '0.8')
+    p07 = sum(1 for _, _, p, _, _ in urls if p == '0.7')
     print(f'  Sitemap regenerated: {len(urls)} URLs ({p09}x0.9, {p08}x0.8, {p07}x0.7)')
     print(f'  Thin articles excluded (noindex)')
 

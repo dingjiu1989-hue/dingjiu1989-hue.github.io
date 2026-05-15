@@ -1633,7 +1633,7 @@ BODIES['best-free-dev-tools-2026'] = '''
 <li>Version control: <strong>Git + lazygit</strong></li>
 <li>API testing: <strong>Bruno</strong> or <strong>Hoppscotch</strong></li>
 <li>Database: <strong>DBeaver</strong> or <strong>TablePlus</strong></li>
-<li>Editor: already covered — see <a href="/en/tech/editor-comparison-2026/">Code Editor Showdown</a></li>
+<li>Editor: already covered — see <a href="/en/compare/code-editors-comparison-2026.html">Code Editor Showdown</a></li>
 </ol>
 
 <p>All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.</p>
@@ -1686,7 +1686,7 @@ BODIES['design-tools-for-developers'] = '''
 </ul>
 
 <h2>Stock Photos That Don't Look Like Stock Photos</h2>
-<p>See our <a href="/en/sidehustle/free-images/">Best Free Stock Photo Sites</a> guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.</p>
+<p>See our <a href="/en/sidehustle/free-images.html">Best Free Stock Photo Sites</a> guide for the full list. Quick picks: Unsplash for natural photos, Pexels for videos too, and Kaboompics for styled flat lays.</p>
 
 <h2>The Developer Design Stack (Save This)</h2>
 <ol>
