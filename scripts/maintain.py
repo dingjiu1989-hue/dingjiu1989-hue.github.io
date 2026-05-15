@@ -40,6 +40,7 @@ def resubmit_sitemaps():
 
         feeds = [
             f"{SITE}/sitemap.xml",
+            f"{SITE}/images/sitemap.xml",
             f"{SITE}/en/feed.xml",
             f"{SITE}/feed.xml",
         ]
