@@ -13840,6 +13840,72 @@ def make_category(data, board_id):
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# All articles index page (SSR for crawlers)
+# ═══════════════════════════════════════════════════════════════════════
+
+def make_all_html(data):
+    """Generate en/all.html with pre-rendered article links by board.
+    Crawlers can read this without JavaScript. JavaScript enhances with search/filter.
+    """
+    boards_html = ''
+    total = 0
+    for board in data['boards']:
+        posts = board['posts']
+        total += len(posts)
+        board_name = BOARD_NAMES.get(board['id'], board['id'].title())
+        items = ''
+        for p in sorted(posts, key=lambda x: x.get('date', ''), reverse=True):
+            pin = ' 📌' if p.get('pinned') else ''
+            items += (
+                f'<li style="padding:0.35rem 0;font-size:0.88rem;">'
+                f'<a href="/en/{board["id"]}/{p["slug"]}.html">{p["title"]}</a>'
+                f' <span style="color:#656d76;font-size:0.75rem;">{p.get("date", "")}</span>{pin}'
+                f'</li>'
+            )
+        boards_html += (
+            f'<div class="board" style="margin-bottom:1.5rem;">'
+            f'<div class="board-header">'
+            f'<span class="board-icon">{board.get("icon", "")}</span> '
+            f'<span class="board-name">{board_name}</span> '
+            f'<span class="board-count">{len(posts)} articles</span>'
+            f'</div>'
+            f'<ul style="padding:0.75rem 1rem;list-style:none;">{items}</ul>'
+            f'</div>'
+        )
+
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Articles — SourceHub</title>
+    <meta name="description" content="Complete index of all {total} articles across {len(data['boards'])} boards. Browse by category or search.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="alternate" type="application/rss+xml" title="SourceHub RSS" href="/en/feed.xml">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/all.html">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container">
+    <div class="breadcrumb"><a href="/en/">Home</a> &rsaquo; All Articles</div>
+    <div class="page-header">
+      <h2>All Articles</h2>
+      <span class="post-count">{total} articles across {len(data['boards'])} boards</span>
+    </div>
+    {boards_html}
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+</body>
+</html>'''
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # Main
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -13852,6 +13918,12 @@ def main():
     hp.write_text(make_homepage(data), encoding='utf-8')
     created += 1
     print(f'  HTML: {hp}')
+
+    # All articles index (SSR for crawlers)
+    all_page = EN_DIR / 'all.html'
+    all_page.write_text(make_all_html(data), encoding='utf-8')
+    created += 1
+    print(f'  HTML: {all_page}')
 
     # Category pages
     for board in data['boards']:
