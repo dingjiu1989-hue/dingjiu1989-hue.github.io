@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-09">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>Webhook Security Best Practices — SourceHub</title>
     <meta name="description" content="Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.">
@@ -45,8 +45,8 @@
       "description": "Secure your webhook endpoints with signature verification, replay protection, IP allowlisting, idempotency, and payload validation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1782",
+      "dateModified": "2026-05-09",
+      "wordCount": "1501",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -91,21 +91,22 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Webhook Security Best Practices</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
-<h1>Webhook Security Best Practices</h1>
+      <div class="article-body"><h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
+<h2>Webhook Security Best Practices</h2>
 <p>Why Webhook Security Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/webhook-security.png" alt="Webhook Security Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Webhooks are HTTP callbacks that allow services to push real-time events to your application. Unlike APIs where you initiate the request, webhooks are delivered to a public endpoint that anyone with the URL can call. Without proper security, an attacker can replay webhook events, send fake event data, or probe your internal infrastructure. </p>
 <p>Threat Model </p>
@@ -117,23 +118,23 @@
 <p>import hashlib</p>
 <p>def verify_stripe_signature(payload, sig_header, secret):</p>
 <p>"""Verify Stripe webhook signature."""</p>
-<h1>Signature format: t=timestamp,v1=signature</h1>
+<h2>Signature format: t=timestamp,v1=signature</h2>
 <p>parts = dict(item.split('=', 1) for item in sig_header.split(','))</p>
 <p>if 'v1' not in parts or 't' not in parts:</p>
 <p>return False</p>
 <p>timestamp = parts['t']</p>
 <p>expected_sig = parts['v1']</p>
-<h1>Prevent replay: signature must be within 5 minutes</h1>
+<h2>Prevent replay: signature must be within 5 minutes</h2>
 <p>if abs(int(timestamp) - time.time()) &gt; 300:</p>
 <p>return False</p>
-<h1>Compute expected signature</h1>
+<h2>Compute expected signature</h2>
 <p>signed_payload = f"{timestamp}.{payload}".encode()</p>
 <p>computed_sig = hmac.new(</p>
 <p>secret.encode(),</p>
 <p>signed_payload,</p>
 <p>hashlib.sha256</p>
 <p>).hexdigest()</p>
-<h1>Constant-time comparison</h1>
+<h2>Constant-time comparison</h2>
 <p>return hmac.compare_digest(computed_sig, expected_sig)</p>
 <p>GitHub-Style Signatures </p>
 <p>const crypto = require('crypto');</p>
@@ -187,7 +188,7 @@
 <p>@verify_webhook(WEBHOOK_SECRET)</p>
 <p>def handle_webhook():</p>
 <p>event = request.json</p>
-<h1>Process the verified event</h1>
+<h2>Process the verified event</h2>
 <p>return 'OK', 200</p>
 <p>Defense 2: Replay Protection </p>
 <p>Timestamp-Based Prevention </p>
@@ -276,7 +277,8 @@
 <p>| Security Control | Implementation | Priority | |-----------------|----------------|----------| | HMAC signature verification | Verify every webhook | Critical | | Replay protection | Timestamp + tolerance | Critical | | Idempotency | Track event IDs | High | | IP allowlisting | Restrict by provider CIDR | High | | Payload validation | Schema validation | High | | Rate limiting | Per-IP and per-provider | Medium | | HTTPS only | Reject HTTP | Critical | | Error handling | Generic error messages | Medium | </p>
 <p>Summary </p>
 <p>Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events.</p>
-<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/jwt-authentication-guide.html">JWT Authentication Best Practices</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/mobile-security.html">Mobile Application Security Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

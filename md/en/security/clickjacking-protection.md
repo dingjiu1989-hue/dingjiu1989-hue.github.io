@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/clickjacking-protection.html
 
 # Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
 
-# Clickjacking Protection
+## Clickjacking Protection
+
+## Clickjacking Protection
 
 Introduction 
 
@@ -50,15 +52,15 @@ X-Frame-Options
 
 X-Frame-Options is a response header that controls whether a page can be displayed in an iframe. 
 
-# Deny all framing
+## Deny all framing
 
 add_header X-Frame-Options "DENY" always;
 
-# Allow only same-origin framing
+## Allow only same-origin framing
 
 add_header X-Frame-Options "SAMEORIGIN" always;
 
-# Flask example: set X-Frame-Options
+## Flask example: set X-Frame-Options
 
 from flask import Flask, make_response
 
@@ -72,7 +74,7 @@ response.headers['X-Frame-Options'] = 'SAMEORIGIN'
 
 return response
 
-# For sensitive pages (banking, admin panels), use DENY
+## For sensitive pages (banking, admin panels), use DENY
 
 @app.route('/admin/transfer')
 
@@ -90,25 +92,25 @@ CSP frame-ancestors
 
 Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page. 
 
-# Allow only same-origin
+## Allow only same-origin
 
 add_header Content-Security-Policy "frame-ancestors 'self'" always;
 
-# Allow specific origins
+## Allow specific origins
 
 add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.example.com" always;
 
-# Allow none (equivalent to DENY)
+## Allow none (equivalent to DENY)
 
 add_header Content-Security-Policy "frame-ancestors 'none'" always;
 
-# Allow multiple specific origins
+## Allow multiple specific origins
 
 add_header Content-Security-Policy "frame-ancestors https://app1.example.com https://app2.example.com" always;
 
 When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor the more restrictive policy. CSP `frame-ancestors` is preferred because it supports multiple origins. 
 
-# Python/Flask CSP middleware
+## Python/Flask CSP middleware
 
 from flask import Flask
 
@@ -173,11 +175,11 @@ Framebusting limitations:
 
 Testing for Clickjacking Vulnerabilities 
 
-# Test with curl
+## Test with curl
 
 curl -I https://target-website.com/admin | grep -i "x-frame-options|content-security-policy"
 
-# Check for frame-ancestors specifically
+## Check for frame-ancestors specifically
 
 curl -sI https://target-website.com | \
 
@@ -185,7 +187,7 @@ grep -E 'X-Frame-Options|frame-ancestors' || \
 
 echo "NO PROTECTION DETECTED"
 
-# Python automated check
+## Python automated check
 
 python3 -c "
 
@@ -227,21 +229,21 @@ print(f'[VULNERABLE] {url}: No framing protection')
 
 Comprehensive Protection Strategy 
 
-# Nginx: full clickjacking protection
+## Nginx: full clickjacking protection
 
 server {
 
-# X-Frame-Options as fallback
+## X-Frame-Options as fallback
 
 add_header X-Frame-Options "SAMEORIGIN" always;
 
-# CSP frame-ancestors as modern replacement
+## CSP frame-ancestors as modern replacement
 
 add_header Content-Security-Policy "frame-ancestors 'self'" always;
 
 location /admin/ {
 
-# Stricter for sensitive areas
+## Stricter for sensitive areas
 
 add_header X-Frame-Options "DENY" always;
 
@@ -251,7 +253,7 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
 
 location /api/ {
 
-# APIs should never be framed
+## APIs should never be framed
 
 add_header X-Frame-Options "DENY" always;
 
@@ -266,5 +268,7 @@ Conclusion
 Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set `X-Frame-Options: DENY` or `SAMEORIGIN` on every response, and use CSP `frame-ancestors` for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment.
 
 **See also:** [Email Security](</en/security/email-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Penetration Testing Methodology](</en/security/penetration-testing.html>).
+
+**See also:** [Email Security](</en/security/email-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)
 
 **See also:** [Email Security](</en/security/email-security.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>)

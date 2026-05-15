@@ -8,39 +8,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/docker-networking.html
 
 # Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-# Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
 
-## Introduction
+## Docker Networking: Bridge, Overlay, Host, Macvlan, and Troubleshooting
+
+### Introduction
 
 Docker networking is a critical component of containerized applications. Understanding the available network drivers and their behavior is essential for designing secure, performant multi-container deployments. Docker provides five built-in network drivers: bridge, host, overlay, macvlan, and none. Each serves different use cases with distinct trade-offs.
 
 This article explores each driver in detail, along with network policies and troubleshooting techniques.
 
-## Bridge Networks
+### Bridge Networks
 
 The bridge network driver creates an internal virtual network within the Docker host. Containers connected to the same bridge network can communicate using IP addresses or container names (when embedded DNS is enabled). The default bridge network (`docker0`) has limitations: containers cannot resolve each other by name unless linked — a deprecated feature.
 
@@ -52,13 +54,13 @@ docker run --network my-network --name web nginx
 
 Port publishing maps container ports to host ports using the `-p` flag. Each published port consumes a host port, making bridge networks unsuitable for running multiple containers that all need port 80 without an external load balancer or reverse proxy.
 
-## Host Networks
+### Host Networks
 
 The host network driver removes network isolation between container and host. The container shares the host's network stack directly, meaning ports are exposed without mapping. This provides the best network performance since there is no bridge or NAT layer.
 
 Host networking is ideal for network-intensive applications where performance is critical, such as metrics collectors, network monitoring tools, or applications needing direct access to host network interfaces. The trade-off is reduced portability and the inability to run multiple containers on the same host port.
 
-## Overlay Networks
+### Overlay Networks
 
 Overlay networks enable communication between containers across multiple Docker hosts. They are essential for Docker Swarm services and for multi-host container communication in general. The overlay network driver creates a distributed network using VXLAN encapsulation.
 
@@ -68,13 +70,13 @@ Traffic between containers on an overlay network is encrypted by default using I
 
 Overlay networking requires a key-value store (Docker Swarm's built-in raft consensus provides this). Latency is slightly higher than bridge networking due to VXLAN encapsulation overhead.
 
-## Macvlan Networks
+### Macvlan Networks
 
 The macvlan driver assigns a MAC address to each container, making it appear as a physical device on the network. Containers can be assigned IP addresses from the same subnet as the host, enabling direct communication with external systems without port mapping.
 
 Macvlan is useful for legacy applications that expect direct network attachment, monitoring tools that need to inspect network traffic, and environments where IP address assignment must come from a specific pool. The main limitation is that many cloud providers (AWS, GCP, Azure) restrict MAC addresses on their virtual networks, making macvlan impractical in those environments.
 
-## Network Policies and Security
+### Network Policies and Security
 
 Docker's built-in security features include:
 
@@ -91,7 +93,7 @@ Docker's built-in security features include:
 
 For production deployments, combining Docker user-defined networks with external firewalls and service meshes provides defense in depth. Each container should be connected only to networks it requires, following the principle of least privilege.
 
-## Troubleshooting Common Issues
+### Troubleshooting Common Issues
 
 DNS resolution failures are among the most common networking issues. Verify containers are attached to the correct user-defined network and that the embedded DNS server is accessible at 127.0.0.11 within each container.
 
@@ -105,10 +107,12 @@ docker exec -it container-name ping another-container
 
 nsenter -t $(docker inspect -f '{{.State.Pid}}' container-name) -n ip addr
 
-## Conclusion
+### Conclusion
 
 Docker networking offers flexibility through its driver architecture. Bridge networks provide isolation and portability for single-host deployments. Overlay networks enable multi-host communication essential for Swarm services. Macvlan provides direct network attachment for specialized use cases. Understanding these drivers and their trade-offs is key to designing robust container networking architectures.
 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>).
+
+**See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)
 
 **See also:** [Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing](</en/tech/azure-networking.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts](</en/tech/sli-slo-error-budget.html>)

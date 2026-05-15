@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/global-traffic-routing.ht
 
 # Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
 
-# Global Traffic Routing
+## Global Traffic Routing
+
+## Global Traffic Routing
 
 Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. 
 
@@ -53,5 +55,7 @@ Regional failover testing should be regular and automated. Chaos engineering exe
 Multi-cloud routing adds another dimension of complexity. Traffic must be routed not just to the nearest data center but to the nearest data center in the optimal cloud provider. This introduces cloud provider selection based on pricing, available services, and contractual commitments. Multi-cloud routing typically uses DNS-based steering with cloud-specific health checks and capacity tracking. The routing policy should account for data transfer costs between clouds and regions, which can be significant.
 
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>).
+
+**See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)
 
 **See also:** [Multi-Tenancy Architecture](</en/architecture/multi-tenancy.html>), [A/B Testing Infrastructure](</en/architecture/a-b-testing-infrastructure.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>)

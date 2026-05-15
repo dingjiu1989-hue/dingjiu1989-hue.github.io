@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/data-classification.html
 
 # Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
 
-# Data Classification
+## Data Classification
+
+## Data Classification
 
 Why Classify Data? 
 
@@ -96,7 +98,7 @@ Handling Procedures
 
 Define procedures for each classification level: 
 
-# handling-policies.yaml
+## handling-policies.yaml
 
 restricted:
 
@@ -177,5 +179,7 @@ Conclusion
 Data classification is foundational to information security. Automate where possible, define clear handling procedures, and integrate classification labels across your data protection stack. Start with the most sensitive data and expand coverage iteratively.
 
 **See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>), [GDPR Technical Controls](</en/security/gdpr-technical.html>).
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Secrets Rotation](</en/security/secrets-rotation.html>)

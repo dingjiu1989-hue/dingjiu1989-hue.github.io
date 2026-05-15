@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/jwt-authentication-guide.html
 
 # JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
 
-# JWT Authentication Best Practices
+## JWT Authentication Best Practices
+
+## JWT Authentication Best Practices
 
 What Are JSON Web Tokens? 
 
@@ -153,5 +155,7 @@ Summary
 JWTs are a powerful authentication mechanism when implemented correctly. Use asymmetric algorithms (RS256/ES256) for multi-service architectures, validate all claims rigorously, keep access tokens short-lived, and implement refresh token rotation. Never store tokens in browser localStorage, and always explicitly specify allowed algorithms to prevent confusion attacks.
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>).
+
+**See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Container Security Best Practices](</en/security/container-security.html>)
 
 **See also:** [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>), [Container Security Best Practices](</en/security/container-security.html>)

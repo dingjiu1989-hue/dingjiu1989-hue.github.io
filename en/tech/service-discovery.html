@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-01">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Service Discovery in Microservices — SourceHub</title>
     <meta name="description" content="Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.">
@@ -46,8 +46,8 @@
       "description": "Explore client-side and server-side discovery patterns with Consul, etcd, and Kubernetes DNS, including health checking and blue-green deployment strategies.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1207",
+      "dateModified": "2026-05-01",
+      "wordCount": "1131",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,47 +93,49 @@
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Service Discovery in Microservices</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
-<h1>Service Discovery in Microservices</h1>
+      <div class="article-body"><h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
+<h2>Service Discovery in Microservices</h2>
 <p>Service discovery enables services to find and communicate with each other in a distributed system. In static environments, service locations could be hardcoded. In dynamic environments like Kubernetes, service instances are ephemeral—they come and go, scale up and down, and move between hosts. Service discovery provides a mechanism for locating available service instances.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/service-discovery.png" alt="Service Discovery in Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>The Service Discovery Problem</h2>
+<h3>The Service Discovery Problem</h3>
 <p>Service discovery solves two problems. Registration: when a service instance starts, it must register its location and capabilities so other services can find it. Lookup: when a service needs to call another service, it must discover the location of available instances.</p>
 <p>Effective service discovery handles dynamic environments. It reacts to instance registration immediately—new instances become available as soon as they register. It handles instance failures—when an instance crashes or becomes unhealthy, it is removed from the available pool. It distributes load across available instances.</p>
-<h2>DNS-Based Discovery</h2>
+<h3>DNS-Based Discovery</h3>
 <p>DNS-based service discovery uses DNS records to resolve service names to IP addresses. A service named <code>orders-service</code> resolves to one or more IP addresses of healthy instances. The DNS server is updated as instances come and go.</p>
 <p>The simplest approach uses round-robin DNS. Multiple A records return IP addresses in rotating order, distributing requests across instances. More sophisticated approaches use DNS with health checking—only healthy instances are included in DNS responses.</p>
 <p>DNS-based discovery is simple and ubiquitous. Every system has a DNS resolver. However, DNS caching can cause delays in propagating changes. TTL settings must balance responsiveness against DNS query load. DNS also has limited support for advanced load balancing and port-based routing.</p>
-<h2>Consul</h2>
+<h3>Consul</h3>
 <p>HashiCorp Consul provides service discovery with health checking, key-value storage, and multi-datacenter support. Services register with Consul agents running on each node. Consul performs health checks and removes unhealthy instances.</p>
 <p>Consul uses DNS for backward compatibility: <code>orders.service.consul</code> resolves to available instance IPs. It also provides an HTTP API for richer discovery: querying by service name, tags, and health status. Consul's gossip protocol provides distributed health checking without a central server.</p>
 <p>Consul supports service mesh integration through Consul Connect, providing mTLS and intentions alongside service discovery. This makes Consul a comprehensive service networking platform for organizations not using Kubernetes.</p>
-<h2>Kubernetes Service Discovery</h2>
+<h3>Kubernetes Service Discovery</h3>
 <p>Kubernetes provides built-in service discovery through Services and DNS. Each Service gets a DNS name (e.g., <code>my-service.namespace.svc.cluster.local</code>) that resolves to the Pod IPs backing that Service. The kube-proxy component implements load balancing across Pods.</p>
 <p>Kubernetes Services support several types: ClusterIP (internal only), NodePort (accessible on each node's IP), LoadBalancer (cloud load balancer), and ExternalName (DNS alias). ClusterIP Services are the default for internal service-to-service communication.</p>
 <p>Kubernetes endpoints track Pod health and readiness. Only ready Pods are included in the Service's endpoint list. Liveness probes determine if a Pod is healthy. Readiness probes determine if a Pod should receive traffic.</p>
-<h2>Client-Side vs Server-Side Discovery</h2>
+<h3>Client-Side vs Server-Side Discovery</h3>
 <p>In client-side discovery, the client directly queries the service registry and selects an instance. The client implements load balancing logic—typically using a library like Netflix Eureka with Ribbon, or Kubernetes client-go's round-robin.</p>
 <p>In server-side discovery, the client sends requests to a load balancer or API gateway, which queries the service registry and forwards the request to an available instance. The client does not know about individual instances—it only knows the load balancer address.</p>
-<h2>Health Checking</h2>
+<h3>Health Checking</h3>
 <p>Health checking is integral to service discovery. Services must differentiate between "running" and "ready." A service may be running but not ready to receive traffic. Readiness checks determine traffic eligibility.</p>
 <p>Health checks should test meaningful service functionality. A health endpoint that returns 200 immediately upon startup is less useful than one that verifies database connectivity and internal state. Externally accessible health check endpoints enable monitoring systems and load balancers to validate service health.</p>
-<h2>When to Use Each Approach</h2>
+<h3>When to Use Each Approach</h3>
 <p>Kubernetes environments should use Kubernetes-native discovery through Services. Non-Kubernetes environments can use Consul for comprehensive discovery with health checking. Simple environments with few services can use DNS-based discovery with health-checked records.</p>
 <p>Service discovery is foundational to distributed system reliability. Combined with health checking and load balancing, it enables resilient, self-healing systems that adapt to changing conditions automatically.</p>
-<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

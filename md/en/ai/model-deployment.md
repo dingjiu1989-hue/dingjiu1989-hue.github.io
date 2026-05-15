@@ -8,41 +8,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/model-deployment.html
 
 # Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
 
-## Introduction
+## Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+
+### Introduction
 
 Deploying large language models for production inference requires specialized infrastructure. Unlike traditional ML models, LLMs demand gigabytes of GPU memory, specialized attention kernels, and careful batching strategies to achieve acceptable throughput. This article covers the major deployment frameworks and optimization techniques.
 
-## vLLM
+### vLLM
 
 vLLM is the most popular open-source LLM serving framework, featuring PagedAttention for efficient memory management:
 
-# Using vLLM's OpenAI-compatible API server
+## Using vLLM's OpenAI-compatible API server
 
-# Start server:
+## Start server:
 
 # python -m vllm.entrypoints.openai.api_server \
 
@@ -54,7 +56,7 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-model-len 8192 \
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--dtype bfloat16
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--dtype bfloat16
 
 from openai import OpenAI
 
@@ -88,9 +90,9 @@ print(chunk.choices[0].delta.content, end="")
 
 vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fragmentation and enabling near-100% GPU memory utilization. It supports continuous batching, meaning new requests can start processing as soon as previous ones complete generation.
 
-### Performance Tuning
+#### Performance Tuning
 
-# Key vLLM performance flags
+## Key vLLM performance flags
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-num-seqs 256 # Max concurrent sequences
 
@@ -100,11 +102,11 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--enforce-eager # Disable CUDA graphs (saves memory)
 
-## Hugging Face TGI
+### Hugging Face TGI
 
 Text Generation Inference (TGI) is Hugging Face's optimized serving solution:
 
-# docker-compose.yml for TGI
+## docker-compose.yml for TGI
 
 version: "3.8"
 
@@ -176,7 +178,7 @@ print(response.json()["generated_text"])
 
 TGI provides native support for tensor parallelism across GPUs, watermarking, and speculative decoding for faster generation.
 
-## ONNX Runtime
+### ONNX Runtime
 
 ONNX Runtime enables deployment across GPU and CPU with hardware-specific optimizations:
 
@@ -186,7 +188,7 @@ from transformers import AutoTokenizer, AutoConfig
 
 import numpy as np
 
-# Load ONNX-optimized model
+## Load ONNX-optimized model
 
 session = ort.InferenceSession(
 
@@ -198,7 +200,7 @@ providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
 
 tokenizer = AutoTokenizer.from_pretrained("model-name")
 
-# Prepare inputs
+## Prepare inputs
 
 inputs = tokenizer("Explain model quantization.", return_tensors="np")
 
@@ -210,13 +212,13 @@ onnx_inputs = {
 
 }
 
-# Run inference
+## Run inference
 
 outputs = session.run(None, onnx_inputs)
 
 ONNX models require an initial conversion step but benefit from aggressive graph optimizations and operator fusion.
 
-## Quantization
+### Quantization
 
 Quantization reduces model size and accelerates inference by using lower-precision numbers:
 
@@ -224,7 +226,7 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 import torch
 
-# 4-bit quantization with bitsandbytes
+## 4-bit quantization with bitsandbytes
 
 quant_config = BitsAndBytesConfig(
 
@@ -262,11 +264,11 @@ device_map="auto",
 
 | NF4 | 4-bit | 8x vs FP32 | 3-4x | Minor |
 
-## GPU Optimization
+### GPU Optimization
 
 Beyond framework choice, several techniques maximize GPU utilization:
 
-# Flash Attention 2: memory-efficient attention
+## Flash Attention 2: memory-efficient attention
 
 model = AutoModelForCausalLM.from_pretrained(
 
@@ -278,18 +280,20 @@ torch_dtype=torch.bfloat16,
 
 )
 
-# Continuous batching: process multiple requests concurrently
+## Continuous batching: process multiple requests concurrently
 
-# (built into vLLM and TGI)
+## (built into vLLM and TGI)
 
-# Prefix caching: reuse KV cache for shared prompt prefixes
+## Prefix caching: reuse KV cache for shared prompt prefixes
 
-# (vLLM: --enable-prefix-caching)
+## (vLLM: --enable-prefix-caching)
 
-## Conclusion
+### Conclusion
 
 Deploying LLMs requires selecting the right serving framework and optimization level. vLLM offers the best memory efficiency with PagedAttention and continuous batching. TGI excels with Hugging Face ecosystem integration. ONNX provides cross-platform deployment. Quantization with 4-bit or 8-bit formats reduces memory requirements by 4-8x with minimal quality loss. Match your deployment stack to your latency, throughput, and budget requirements.
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Model Quantization: Making LLMs Smaller and Faster](</en/ai/model-quantization.html>), [MLOps Pipeline: From Training to Production](</en/ai/mlops-pipeline.html>).
+
+**See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Quantization: Making LLMs Smaller and Faster](</en/ai/model-quantization.html>)
 
 **See also:** [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [LLM Version Management: Model Registry, A/B Testing, Rollback](</en/ai/llm-version-management.html>), [Model Quantization: Making LLMs Smaller and Faster](</en/ai/model-quantization.html>)

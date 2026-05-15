@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
 
 # API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
 
-# API Gateway Patterns
+## API Gateway Patterns
+
+## API Gateway Patterns
 
 An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations. 
 
@@ -79,5 +81,7 @@ A common architecture uses both: an API gateway for external traffic management 
 API gateway patterns are essential for microservice architectures, providing centralized control over external-facing API traffic while keeping backend services focused on business logic.
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>).
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>)

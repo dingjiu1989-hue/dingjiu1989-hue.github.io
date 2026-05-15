@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cqrs-pattern.html
 
 # CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
 
-# CQRS Pattern: Command Query Responsibility Segregation
+## CQRS Pattern: Command Query Responsibility Segregation
+
+## CQRS Pattern: Command Query Responsibility Segregation
 
 Command Query Responsibility Segregation (CQRS) is a pattern that separates read and write operations into distinct models. Rather than using a single model for both commands (writes) and queries (reads), CQRS introduces separate interfaces, data structures, and often separate data stores for each side. This separation unlocks significant scalability and flexibility advantages in complex domains. 
 
@@ -59,5 +61,7 @@ Read models can be stored in any technology optimized for the access pattern: re
 Testing CQRS systems requires verifying both the command behavior (do commands produce the expected events?) and the query behavior (do read models reflect the event stream correctly?). Automated tests should validate event production, projection logic, and consistency guarantees. With careful design, CQRS can dramatically improve system scalability and maintainability.
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Event Sourcing Pattern](</en/architecture/event-sourcing.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>).
+
+**See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
 
 **See also:** [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>), [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)

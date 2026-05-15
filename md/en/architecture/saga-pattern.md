@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html
 
 # Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
 
-# Saga Pattern for Distributed Transactions
+## Saga Pattern for Distributed Transactions
+
+## Saga Pattern for Distributed Transactions
 
 The Saga pattern manages distributed transactions across multiple services without requiring two-phase commit. Instead of a single, atomic distributed transaction, a saga breaks the operation into a series of local transactions, each with a compensating action that can undo its effects if a subsequent step fails. This article examines the two saga implementation approaches, compensation design, and monitoring strategies. 
 
@@ -79,5 +81,7 @@ Saga timeouts should prevent steps from waiting indefinitely. Each step should h
 The Saga pattern is essential for maintaining data consistency in distributed systems without sacrificing the autonomy and scalability of individual services. When designed with careful compensation logic and robust monitoring, sagas provide reliable distributed transaction semantics with manageable complexity.
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>).
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

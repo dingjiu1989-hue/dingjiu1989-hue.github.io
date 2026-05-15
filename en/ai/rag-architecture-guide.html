@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-architecture-guide.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-06">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <title>RAG Architecture Guide — SourceHub</title>
     <meta name="description" content="A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.">
@@ -46,8 +46,8 @@
       "description": "A comprehensive guide to Retrieval-Augmented Generation architecture, covering indexing, retrieval, generation, and production deployment.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-architecture-guide.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1916",
+      "dateModified": "2026-05-06",
+      "wordCount": "1715",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,25 +92,26 @@
       <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">RAG Architecture Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 120 views · 1 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-06 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-architecture-guide.png" alt="RAG Architecture Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h1>RAG Architecture Guide</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h2>RAG Architecture Guide</h2>
+<h3>Introduction</h3>
 <p>Retrieval-Augmented Generation (RAG) has become the dominant architecture for production LLM applications. By combining a retrieval system with a generative model, RAG overcomes the limitations of static model knowledge — providing access to up-to-date information, reducing hallucinations, and grounding responses in verifiable sources. This guide explores RAG architecture from the ground up.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-architecture-guide.png" alt="RAG Architecture Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Core Components</h2>
+<h3>Core Components</h3>
 <p>A RAG system consists of three primary stages: indexing, retrieval, and generation.</p>
-<h3>Indexing Pipeline</h3>
+<h4>Indexing Pipeline</h4>
 <p>The indexing pipeline transforms raw documents into a searchable format:</p>
 <ul>
 <li><strong>Document ingestion</strong> : Load documents from PDFs, web pages, databases, or APIs</li>
@@ -119,7 +120,7 @@
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Embedding generation</strong> : Convert each chunk into a dense vector using an embedding model</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Vector storage</strong> : Store embeddings in a vector database with metadata</p>
 <p>Chunking strategy significantly impacts retrieval quality. Fixed-size chunks of 512 tokens with 128-token overlap work well for general-purpose RAG. For code documentation, smaller chunks of 256 tokens are preferable. Semantic chunking, which splits at natural boundaries like paragraphs or sections, often produces the best results.</p>
-<h3>Retrieval Stage</h3>
+<h4>Retrieval Stage</h4>
 <p>The retrieval stage finds relevant documents for a given query:</p>
 <p><strong>Query transformation</strong> is often the first step. Raw user queries are rarely optimal for retrieval. Common transformations include:</p>
 <ul>
@@ -148,7 +149,7 @@
 <p>Hybrid retrieval consistently outperforms either method alone. A typical fusion formula is:</p>
 <p>RRF(d) = Σ 1/(k + rank_i(d))</p>
 <p>Where k is a constant (typically 60) and rank_i(d) is the rank of document d in method i.</p>
-<h3>Generation Stage</h3>
+<h4>Generation Stage</h4>
 <p>The generation stage constructs prompts combining retrieved context with the user's query:</p>
 <p><strong>Context windowing</strong> strategies include:</p>
 <ul>
@@ -163,8 +164,8 @@
 </li>
 </ul>
 <p><strong>Re-ranking</strong> is a critical step between retrieval and generation. A cross-encoder model scores each retrieved document for relevance to the query, filtering out low-quality matches before they reach the LLM.</p>
-<h2>Advanced RAG Patterns</h2>
-<h3>Agentic RAG</h3>
+<h3>Advanced RAG Patterns</h3>
+<h4>Agentic RAG</h4>
 <p>Agentic RAG systems give the LLM control over retrieval decisions. Instead of retrieving once and generating, the model can:</p>
 <ul>
 <li>
@@ -178,9 +179,9 @@
 </li>
 </ul>
 <p>This pattern dramatically improves answer quality for complex, multi-step questions.</p>
-<h3>Multi-Hop RAG</h3>
+<h4>Multi-Hop RAG</h4>
 <p>Some questions require information from multiple documents. Multi-hop RAG breaks the question into sub-questions, retrieves for each, and synthesizes the results. For example, "Which company founded by Person A acquired Company B?" requires finding Person A's company, then checking acquisition records.</p>
-<h3>Self-RAG</h3>
+<h4>Self-RAG</h4>
 <p>Self-RAG introduces reflection steps where the model evaluates its own retrieval and generation:</p>
 <ul>
 <li>Retrieve relevant passages</li>
@@ -188,13 +189,14 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate an answer based on retrieved passages</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Evaluate whether the answer is supported by the passages</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If not, either retrieve more information or revise the answer</p>
-<h2>Production Considerations</h2>
+<h3>Production Considerations</h3>
 <p><strong>Latency optimization</strong> : Embedding generation and vector search both add latency. Strategies include caching frequent queries, using smaller embedding models for initial retrieval, and parallelizing retrieval across multiple data sources.</p>
 <p><strong>Evaluation</strong> : RAG systems need evaluation at both the retrieval and generation stages. Retrieval metrics include recall@k and MRR. Generation metrics include answer relevance, faithfulness (whether the answer is supported by retrieved documents), and answer completeness.</p>
 <p><strong>Monitoring</strong> : Track embedding drift (when the distribution of queries changes), retrieval success rate, and end-user feedback to continuously improve the system.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>RAG architecture provides a powerful framework for building LLM applications grounded in real data. The key to success is understanding the interaction between indexing quality, retrieval strategy, and generation prompts. Start with a simple pipeline, measure performance, and add sophistication — hybrid retrieval, re-ranking, agentic patterns — only where data shows they improve outcomes.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>, <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

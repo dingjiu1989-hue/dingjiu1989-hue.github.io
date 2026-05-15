@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/web-security-basics.png">
     <meta property="article:published_time" content="2026-05-08">
-    <meta property="article:modified_time" content="2026-05-08">
+    <meta property="article:modified_time" content="2026-05-12">
     <meta property="article:tag" content="Security, OWASP, Best Practices, Web Dev">
     <title>Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know — SourceHub</title>
     <meta name="description" content="Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.">
@@ -47,8 +47,8 @@
       "description": "Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/web-security-basics.png",
       "datePublished": "2026-05-08",
-      "dateModified": "2026-05-08",
-      "wordCount": "1048",
+      "dateModified": "2026-05-12",
+      "wordCount": "870",
       "keywords": "Security, OWASP, Best Practices, Web Dev",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -67,46 +67,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know",
-      "description": "Practical web security guide covering Cross-Site Scripting, CORS headers, Content Security Policy, SQL injection, and CSRF attacks. Includes code examples and prevention strategies.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Cross-Site Scripting (XSS)",
-        "text": "XSS happens when user input is rendered as HTML without sanitization. An attacker who can inject &lt;script&gt; tags can steal cookies, session tokens, and sensitive data. // ❌ Vulnerable: div.innerHTML = userComment; // Attacker: &lt;img src=x onerror=\"stealCookies()\"&gt; // ✅ Safe: div.textContent"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "SQL Injection",
-        "text": "Concatenating user input into SQL queries gives attackers full database access. Parameterized queries are the fix — use them 100% of the time. // ❌ Vulnerable — attacker input: \"1; DROP TABLE users;\" const query = `SELECT * FROM users WHERE id = ${userId}`; // ✅ Safe — parameterized query const quer"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Cross-Site Request Forgery (CSRF)",
-        "text": "An attacker's site makes a request to your API using the victim's cookies. CSRF tokens ensure the request originated from your own frontend. // Mitigation strategies: // 1. SameSite cookies (simplest, best): Set-Cookie: session=abc123; SameSite=Strict; HttpOnly; Secure // 2. CSRF token (additional l"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "4",
-        "name": "CORS Misconfiguration",
-        "text": "CORS (Cross-Origin Resource Sharing) controls which origins can access your API. The most common mistake: using a wildcard or reflecting the Origin header blindly. // ❌ Vulnerable — allows any origin: Access-Control-Allow-Origin: * Access-Control-Allow-Credentials: true // Can't use with * // ❌ Vuln"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "5",
-        "name": "Content Security Policy (CSP)",
-        "text": "CSP is your last line of defense. It tells the browser what sources of scripts, styles, and other resources are allowed. A well-configured CSP makes XSS exploitation nearly impossible. // Recommended CSP header: Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-e"
-      }
       ]
     }
     </script>
@@ -136,7 +96,7 @@
         <span class="tag-cat">Web Dev</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</h1>
-      <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
+      <div class="article-meta">Published 2026-05-08 · Last active 2026-05-12 · 5040 views · 42 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/web-security-basics.png" alt="Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know" width="1200" height="630" loading="lazy">
       <div class="article-body"><p>Security isn't optional — it's part of your job as a developer. Most breaches exploit well-known vulnerabilities that have been understood for years. Here are the five web security threats every developer must understand, with prevention strategies and code examples.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/web-security-basics.png" alt="Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 

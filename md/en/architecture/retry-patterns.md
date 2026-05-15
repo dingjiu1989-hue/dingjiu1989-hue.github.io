@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
 
 # Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
 
-# Retry Patterns
+## Retry Patterns
+
+## Retry Patterns
 
 Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. 
 
@@ -69,5 +71,7 @@ Modern resilience libraries like Resilience4j, Polly (.NET), and Tenacity (Pytho
 Retries are a powerful tool, but they are not a substitute for addressing underlying reliability issues. Used judiciously with backoff, jitter, budgets, and circuit breakers, they make distributed systems gracefully resilient to transient failures.
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Circuit Breaker vs Bulkhead Pattern](</en/architecture/circuit-breaker-vs-bulkhead.html>).
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)

@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-database-query.html
 
 # Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-# Natural Language to SQL with LLMs
+## Natural Language to SQL with LLMs
 
-## Introduction
+## Natural Language to SQL with LLMs
+
+### Introduction
 
 Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries — when properly configured with schema context, safety guards, and validation.
 
-## How NL2SQL Works
+### How NL2SQL Works
 
 The core architecture is straightforward:
 
@@ -44,7 +46,7 @@ User Question → Context Assembly → LLM SQL Generation → Query Validation �
 
 The critical step is **context assembly** — providing the LLM with enough database metadata to generate correct SQL.
 
-## Schema Context
+### Schema Context
 
 The LLM needs to understand your database schema. A well-structured schema prompt includes:
 
@@ -123,7 +125,7 @@ ddl += ");"
 
 context_parts.append(ddl)
 
-# Add sample rows for context on data patterns
+## Add sample rows for context on data patterns
 
 if table.sample_rows:
 
@@ -131,7 +133,7 @@ context_parts.append(f"-- Sample row: {table.sample_rows[0]}")
 
 return "\n\n".join(context_parts)
 
-## Few-Shot Examples
+### Few-Shot Examples
 
 For complex schemas, provide question-SQL pairs relevant to the query:
 
@@ -197,7 +199,7 @@ ORDER BY month
 
 **Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question.
 
-## SQL Generation Prompt
+### SQL Generation Prompt
 
 The complete prompt combines schema, examples, and safety instructions:
 
@@ -239,7 +241,7 @@ prompt += f"\nQ: {question}\nSQL:"
 
 return prompt
 
-## Query Validation
+### Query Validation
 
 Before executing generated SQL, validate it:
 
@@ -247,7 +249,7 @@ def validate_sql(query, allowed_tables):
 
 errors = []
 
-# Safety check: no mutations
+## Safety check: no mutations
 
 forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]
 
@@ -257,7 +259,7 @@ if keyword in query.upper():
 
 errors.append(f"Forbidden operation: {keyword}")
 
-# Check table references
+## Check table references
 
 parsed = sqlparse.parse(query)[0]
 
@@ -269,7 +271,7 @@ if table not in allowed_tables:
 
 errors.append(f"Unauthorized table: {table}")
 
-# Syntax validation
+## Syntax validation
 
 try:
 
@@ -283,9 +285,9 @@ errors.append(f"SQL syntax error: {str(e)}")
 
 return errors
 
-## Advanced Techniques
+### Advanced Techniques
 
-### Self-Correction Loop
+#### Self-Correction Loop
 
 When the generated SQL fails or returns empty results, the system can self-correct:
 
@@ -321,7 +323,7 @@ feedback = f"Validation errors: {', '.join(errors)}"
 
 question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."
 
-### Schema Linking
+#### Schema Linking
 
 For large schemas with many tables, first identify relevant tables before generating SQL:
 
@@ -345,7 +347,7 @@ return [t.strip() for t in response.split(",")]
 
 This dramatically reduces context size and improves accuracy on large databases.
 
-## Production Deployment
+### Production Deployment
 
 **Security** : Always use a read-only database user, set statement timeouts, and implement rate limiting per user.
 
@@ -355,10 +357,12 @@ This dramatically reduces context size and improves accuracy on large databases.
 
 **User experience** : Show the generated SQL to users (with a "view query" option), and allow them to provide feedback on results.
 
-## Conclusion
+### Conclusion
 
 Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members.
 
 **See also:** [Running LLMs Locally](</en/ai/local-llm-setup.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>).
+
+**See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)
 
 **See also:** [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [Running LLMs Locally](</en/ai/local-llm-setup.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>)

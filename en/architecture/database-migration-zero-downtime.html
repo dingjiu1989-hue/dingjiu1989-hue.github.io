@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-migration-zero-downtime.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-02">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Zero-Downtime Database Migrations — SourceHub</title>
     <meta name="description" content="Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices">
@@ -46,8 +46,8 @@
       "description": "Expand-contract pattern, backward-compatible schema changes, safe migration strategies, and production practices",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-migration-zero-downtime.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1167",
+      "dateModified": "2026-05-02",
+      "wordCount": "1119",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Zero-Downtime Database Migrations</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-migration-zero-downtime.png" alt="Zero-Downtime Database Migrations" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
-<h1>Zero-Downtime Database Migrations</h1>
+      <div class="article-body"><h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
+<h2>Zero-Downtime Database Migrations</h2>
 <p>Database migrations are the highest-risk operation in zero-downtime deployments. Schema changes can lock tables, break queries, or silently corrupt data. In a distributed system where multiple service instances run different versions simultaneously, every migration must be backward compatible with both old and new code. The expand-contract pattern is the canonical approach to achieving this. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-migration-zero-downtime.png" alt="Zero-Downtime Database Migrations" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The expand phase adds new schema elements without modifying or removing existing ones. New columns are added as nullable (or with default values), new tables are created alongside existing ones, and new indexes are built in the background. During this phase, old code continues to work unchanged — it reads and writes the old schema elements. New code can begin writing to both old and new elements to populate them for the eventual switchover. </p>
 <p>The migration phase transitions from old to new schema elements. This is typically done through a data migration script that backfills new columns or tables from old data. The migration should run in batches with progress tracking, allowing pausing and resuming. Locks should be minimized — use techniques like batch processing with sleep intervals, or use database-specific online DDL features (PostgreSQL pg_repack, MySQL pt-online-schema-change, or gh-ost). </p>
@@ -115,7 +116,8 @@
 <p>Orchestration and automation are essential for production migrations. Tools like Flyway, Liquibase, and Alembic manage migration versions and ordering. They should be integrated with CI/CD so that migrations are tested against a staging database before production. Migration scripts should be idempotent — running them multiple times should be safe. </p>
 <p>Monitoring during migration is critical. Track migration progress, database CPU, replication lag, lock contention, and query latency. Set up automated alerts for any metrics that deviate from baseline. If a migration causes performance degradation, have a plan to pause or rollback. In high-traffic environments, run migrations during low-traffic periods even with zero-downtime techniques, to provide maximum safety margin. </p>
 <p>Testing migrations against production data volume is essential. Synthetic migrations against staging databases with small data volumes miss performance problems that emerge at scale. Use anonymized production data snapshots or automated data generation that matches production distribution to validate migration performance before deployment.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

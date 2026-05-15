@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html
 
 # Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-# Testing Strategies for AI Applications
+## Testing Strategies for AI Applications
 
-## Introduction
+## Testing Strategies for AI Applications
+
+### Introduction
 
 Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.
 
-## Evaluation Datasets
+### Evaluation Datasets
 
 Curate high-quality evaluation datasets that reflect real-world usage:
 
@@ -62,7 +64,7 @@ difficulty: str # "easy", "medium", "hard"
 
 tags: List[str]
 
-# For non-deterministic evaluation
+## For non-deterministic evaluation
 
 criteria: List[Callable[[str], bool]]
 
@@ -142,7 +144,7 @@ lambda output:
 
 ))
 
-## Regression Testing
+### Regression Testing
 
 Automated regression testing catches model behavior changes:
 
@@ -188,7 +190,7 @@ try:
 
 output = await self._invoke_model(model_name, test_case.input)
 
-# Evaluate against all criteria
+## Evaluate against all criteria
 
 passed = all(
 
@@ -232,7 +234,7 @@ results["failures"].append({
 
 results["score"] = results["passed"] / results["total"]
 
-# Compare with previous run
+## Compare with previous run
 
 if previous_results:
 
@@ -262,7 +264,7 @@ f"{results['score']:.2%}"
 
 )
 
-## A/B Evaluation
+### A/B Evaluation
 
 Compare model versions side by side with structured evaluation:
 
@@ -346,7 +348,7 @@ prompt, output_a, output_b, criteria
 
 )
 
-# Aggregate across criteria
+## Aggregate across criteria
 
 winner = evaluation["winner"]
 
@@ -360,7 +362,7 @@ results["b_win_rate"] = results["model_b_wins"] / results["total"]
 
 return results
 
-## Hallucination Detection
+### Hallucination Detection
 
 Automated hallucination checks verify factual accuracy:
 
@@ -374,7 +376,7 @@ async def check_factual_claims(self, output: str) -> List[dict]:
 
 """Extract factual claims and verify them against a knowledge base."""
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims
 
 claims = await self._extract_claims(output)
 
@@ -382,11 +384,11 @@ verified_claims = []
 
 for claim in claims:
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base
 
 evidence = await self.kb.search(claim["text"])
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence
 
 verification = await self._verify_claim(
 
@@ -462,7 +464,7 @@ total = len(verified_claims)
 
 return unsupported / total if total > 0 else 0.0
 
-## Prompt Testing
+### Prompt Testing
 
 Version-control prompts with structured testing:
 
@@ -510,13 +512,13 @@ results = []
 
 for case in test_cases:
 
-# Render template with test inputs
+## Render template with test inputs
 
 rendered = prompt["template"].format(**case["inputs"])
 
 output = await self._invoke(rendered)
 
-# Run tests
+## Run tests
 
 test_results = [
 
@@ -548,7 +550,7 @@ return {
 
 }
 
-## Performance Testing
+### Performance Testing
 
 Benchmark latency, throughput, and cost across model versions:
 
@@ -611,5 +613,7 @@ return {
 A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Responsible AI Development Practices](</en/ai/responsible-ai.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>).
+
+**See also:** [Responsible AI Development Practices](</en/ai/responsible-ai.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [Responsible AI Development Practices](</en/ai/responsible-ai.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)

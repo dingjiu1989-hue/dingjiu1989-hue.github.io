@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html
 
 # OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
 
-# OAuth 2.0 and PKCE Explained
+## OAuth 2.0 and PKCE Explained
+
+## OAuth 2.0 and PKCE Explained
 
 OAuth 2.0 Overview 
 
@@ -213,5 +215,7 @@ Summary
 PKCE transforms the authorization code flow into a secure protocol for public clients by adding a cryptographic binding between the authorization request and the token exchange. Its proof-of-possession model ensures that even if the authorization code is intercepted, it cannot be exchanged without the original verifier. For any new application, the PKCE-authorized code flow is the recommended OAuth 2.0 grant type.
 
 **See also:** [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>).
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>), [Cloud Security Basics: Shared Responsibility Model Explained](</en/security/cloud-security-basics.html>)

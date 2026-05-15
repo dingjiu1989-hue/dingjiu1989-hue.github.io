@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/data-warehousing.html
 
 # Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
 
-# Data Warehousing Concepts and Modern Tools
+## Data Warehousing Concepts and Modern Tools
+
+## Data Warehousing Concepts and Modern Tools
 
 Data Warehousing Concepts 
 
@@ -103,5 +105,7 @@ Conclusion
 Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve.
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>).
+
+**See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Columnar Databases: When and How to Use Them](</en/database/columnar-databases.html>)

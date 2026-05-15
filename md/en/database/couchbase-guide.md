@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/couchbase-guide.html
 
 # Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
-# Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
+
+## Couchbase Guide: N1QL, Document Model, Clustering, and Caching
 
 Couchbase Guide: N1QL, Document Model, Clustering, and Caching 
 
@@ -86,7 +88,7 @@ bucket = cluster.bucket('myapp')
 
 collection = bucket.default_collection()
 
-# Create/Update
+## Create/Update
 
 collection.upsert('user_alice_42', {
 
@@ -98,13 +100,13 @@ collection.upsert('user_alice_42', {
 
 })
 
-# Read
+## Read
 
 result = collection.get('user_alice_42')
 
 user = result.content_as[dict]
 
-# CAS (Compare-And-Swap) for optimistic locking
+## CAS (Compare-And-Swap) for optimistic locking
 
 result = collection.get('user_alice_42')
 
@@ -214,7 +216,7 @@ Provides full-text search capabilities using FTS (based on Bleve).
 
 Cluster Management 
 
-# Initialize cluster
+## Initialize cluster
 
 couchbase-cli cluster-init -c 127.0.0.1 \
 
@@ -228,7 +230,7 @@ couchbase-cli cluster-init -c 127.0.0.1 \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query
 
-# Add node
+## Add node
 
 couchbase-cli server-add -c 192.168.1.1 \
 
@@ -240,7 +242,7 @@ couchbase-cli server-add -c 192.168.1.1 \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--services data,index,query
 
-# Rebalance
+## Rebalance
 
 couchbase-cli rebalance -c 192.168.1.1
 
@@ -263,7 +265,7 @@ Cache Behavior
 
 Memory Quotas 
 
-# Set bucket memory quota (important tuning parameter)
+## Set bucket memory quota (important tuning parameter)
 
 couchbase-cli bucket-create -c 127.0.0.1 \
 
@@ -288,13 +290,13 @@ Eviction policies:
 
 Durability Settings 
 
-# Wait for replication to N nodes before acknowledging
+## Wait for replication to N nodes before acknowledging
 
 collection.upsert('doc_id', doc,
 
 durability= Durability.MAJORITY_AND_PERSIST_TO_ACTIVE)
 
-# Or use observe-based durability
+## Or use observe-based durability
 
 collection.upsert('doc_id', doc,
 
@@ -306,7 +308,7 @@ Session Store
 
 Couchbase's sub-millisecond get/set operations and built-in TTL make it an excellent session store: 
 
-# Set session with TTL (24 hours)
+## Set session with TTL (24 hours)
 
 collection.upsert('session_token_xyz', {
 
@@ -351,5 +353,7 @@ Couchbase vs Alternatives
 Couchbase fills a unique niche: a document database with SQL querying and built-in caching. It is a strong choice when you need low-latency document access combined with ad-hoc query capabilities, and when you want to simplify your architecture by avoiding a separate cache layer.
 
 **See also:** [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>).
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>), [DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost](</en/database/dynamodb-vs-cassandra.html>)

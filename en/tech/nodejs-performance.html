@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>Node.js Performance Optimization Guide — SourceHub</title>
     <meta name="description" content="Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.">
@@ -46,8 +46,8 @@
       "description": "Optimize Node.js applications: profiling, memory management, event loop optimization, and production tuning.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "675",
+      "dateModified": "2026-05-15",
+      "wordCount": "635",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,37 +93,39 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Node.js Performance Optimization Guide</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png" alt="Node.js Performance Optimization Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
-<h1>Node.js Performance Optimization Guide</h1>
+      <div class="article-body"><h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
+<h2>Node.js Performance Optimization Guide</h2>
 <p>Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nodejs-performance.png" alt="Node.js Performance Optimization Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Event Loop Fundamentals</h2>
+<h3>Event Loop Fundamentals</h3>
 <p>The event loop processes callbacks in phases: timers, I/O callbacks, idle/prepare, poll, check (setImmediate), and close callbacks. Each phase has a FIFO queue of callbacks. Blocking any phase delays all subsequent callbacks.</p>
 <p>Avoid blocking the event loop. CPU-intensive operations (JSON parsing, cryptography, template rendering) block all other requests. Offload CPU work to Worker Threads, child processes, or dedicated microservices.</p>
-<h2>Profiling</h2>
+<h3>Profiling</h3>
 <p>Use the built-in --prof flag for V8 CPU profiling. Generate flame graphs with --prof-process. Node.js --inspect enables Chrome DevTools profiling with heap snapshots and CPU profiles.</p>
 <p>Clinic.js provides visualization for event loop lag, garbage collection, and heap growth. Use autocannon or wrk for load testing. Profile in production-like environments—performance characteristics differ between development and production.</p>
-<h2>Memory Management</h2>
+<h3>Memory Management</h3>
 <p>Monitor memory with process.memoryUsage(). Watch for heap growth between garbage collection cycles. Use heap snapshots (node --inspect, then Memory tab) to identify memory leaks.</p>
 <p>Common leak sources: global variables, event listeners not removed, closures retaining references, and cache without size limits. Use the --max-old-space-size flag to limit heap size and detect leaks earlier via OOM crashes.</p>
-<h2>Async Performance</h2>
+<h3>Async Performance</h3>
 <p>Use native Promises instead of callback patterns. Native Promises are optimized in V8 and outperform bluebird in modern Node.js versions. Use async/await for readability without performance cost.</p>
 <p>Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit concurrent async operations with p-limit or similar. Unhandled promise rejections crash Node.js in recent versions—handle all promise rejections.</p>
-<h2>Production Tuning</h2>
+<h3>Production Tuning</h3>
 <p>Set NODE_ENV=production for framework optimizations. Configure max-old-space-size to 75% of available memory. Use clustering (cluster module) or PM2 for multi-core utilization. Implement graceful shutdown with SIGTERM handling.</p>
 <p>Monitor event loop lag (&gt;40ms indicates overload). Use the proses monitoring module for Node.js-specific metrics. Set up GC metrics monitoring—frequent GC cycles indicate memory pressure.</p>
-<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Architecture, System Design">
     <title>Caching Strategies and Patterns in Distributed Systems — SourceHub</title>
     <meta name="description" content="Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation.">
@@ -46,8 +46,8 @@
       "description": "Caching patterns: cache-aside, write-through, write-behind, eviction policies, distributed caching with Redis, CDN caching, and invalidation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2924",
+      "dateModified": "2026-05-05",
+      "wordCount": "2421",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -89,19 +89,20 @@
       <div class="article-tags">        <span class="tag-cat">Architecture</span>
         <span class="tag-cat">System Design</span></div>
       <h1 class="article-title">Caching Strategies and Patterns in Distributed Systems</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
-<h1>Caching Strategies and Patterns in Distributed Systems</h1>
+      <div class="article-body"><h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
+<h2>Caching Strategies and Patterns in Distributed Systems</h2>
 <p>Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png" alt="Caching Strategies and Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Caching Patterns </p>
 <p>Cache-Aside (Lazy Loading) </p>
@@ -111,21 +112,21 @@
 <p>self.cache = cache</p>
 <p>self.database = database</p>
 <p>def get_user(self, user_id):</p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</h2>
 <p>cached = self.cache.get(f"user:{user_id}")</p>
 <p>if cached is not None:</p>
 <p>return cached</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</h2>
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>if user:</p>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</h1>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</h2>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p>return user</p>
 <p>def update_user(self, user_id, data):</p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h2>
 <p>self.database.execute("UPDATE users SET name = ? WHERE id = ?",</p>
 <p>data['name'], user_id)</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h2>
 <p>self.cache.delete(f"user:{user_id}")</p>
 <p><strong>Advantages</strong> :</p>
 <ul>
@@ -158,10 +159,10 @@
 <p>self.cache = cache</p>
 <p>self.database = database</p>
 <p>def update_user(self, user_id, data):</p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h2>
 <p>self.database.execute("UPDATE users SET name = ? WHERE id = ?",</p>
 <p>data['name'], user_id)</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</h2>
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p><strong>Advantages</strong> :</p>
@@ -201,7 +202,7 @@
 <p>"""Background task that flushes writes to database."""</p>
 <p>async def flusher():</p>
 <p>while True:</p>
-<h1>Batch writes and flush periodically</h1>
+<h2>Batch writes and flush periodically</h2>
 <p>batch = []</p>
 <p>for _ in range(100): # Batch size</p>
 <p>try:</p>
@@ -215,10 +216,10 @@
 <p>self._flush_to_database(batch)</p>
 <p>asyncio.create_task(flusher())</p>
 <p>def update_user(self, user_id, data):</p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</h2>
 <p>user = {<strong>self.cache.get(f"user:{user_id}", {}),</strong> data}</p>
 <p>self.cache.set(f"user:{user_id}", user)</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</h2>
 <p>self.write_queue.put_nowait({</p>
 <p>"type": "update_user",</p>
 <p>"user_id": user_id,</p>
@@ -261,10 +262,10 @@
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
 <p>return user</p>
-<h1>Check if we should refresh</h1>
+<h2>Check if we should refresh</h2>
 <p>ttl = self.cache.ttl(f"user:{user_id}")</p>
 <p>if ttl &lt; 3600 * (1 - self.refresh_threshold):</p>
-<h1>Asynchronously refresh in background</h1>
+<h2>Asynchronously refresh in background</h2>
 <p>self._async_refresh(f"user:{user_id}", user_id)</p>
 <p>return cached</p>
 <p>def _async_refresh(self, cache_key, user_id):</p>
@@ -295,7 +296,7 @@
 <p>Distributed Caching with Redis </p>
 <p>Redis is the dominant distributed cache. It provides in-memory data structures, replication, persistence, and high availability. </p>
 <p>Redis Cluster Setup </p>
-<h1>docker-compose.yml for Redis Cluster</h1>
+<h2>docker-compose.yml for Redis Cluster</h2>
 <p>version: '3'</p>
 <p>services:</p>
 <p>redis-cluster:</p>
@@ -349,26 +350,26 @@
 <p>CDN Caching </p>
 <p>Content Delivery Networks (CDNs) cache static and dynamic content at edge locations close to users. </p>
 <p>Cache Control Headers </p>
-<h1>Nginx: Static asset caching headers</h1>
+<h2>Nginx: Static asset caching headers</h2>
 <p>location /static/ {</p>
 <p>expires 365d;</p>
 <p>add_header Cache-Control "public, immutable";</p>
 <p>}</p>
 <p>location /api/content/ {</p>
-<h1>Dynamic content: shorter cache</h1>
+<h2>Dynamic content: shorter cache</h2>
 <p>expires 5m;</p>
 <p>add_header Cache-Control "public, must-revalidate";</p>
 <p>}</p>
 <p>location /api/user/ {</p>
-<h1>Private content: no CDN caching</h1>
+<h2>Private content: no CDN caching</h2>
 <p>add_header Cache-Control "private, no-cache";</p>
 <p>}</p>
 <p>CDN Cache Invalidation </p>
-<h1>CloudFront: Invalidate specific paths</h1>
+<h2>CloudFront: Invalidate specific paths</h2>
 <p>aws cloudfront create-invalidation \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths "/api/content/*" "/index.html"</p>
-<h1>Fastly: Purge by key</h1>
+<h2>Fastly: Purge by key</h2>
 <p>curl -X POST https://api.fastly.com/service/SERVICE/purge \</p>
 <p>-H "Fastly-Key: $API_KEY" \</p>
 <p>-H "Surrogate-Key: product:1234" \</p>
@@ -382,12 +383,12 @@
 <p>Limitation: data can be arbitrarily stale within the TTL window.</p>
 <p>Event-Driven Invalidation </p>
 <p>When data changes, publish an invalidation event. </p>
-<h1>Event-driven invalidation</h1>
+<h2>Event-driven invalidation</h2>
 <p>class EventDrivenCache:</p>
 <p>def <strong>init</strong>(self, cache, message_bus):</p>
 <p>self.cache = cache</p>
 <p>self.message_bus = message_bus</p>
-<h1>Subscribe to invalidation events</h1>
+<h2>Subscribe to invalidation events</h2>
 <p>self.message_bus.subscribe("cache.invalidate", self.handle_invalidation)</p>
 <p>def handle_invalidation(self, event):</p>
 <p>key = event.data['key']</p>
@@ -397,16 +398,17 @@
 <p>Invalidate (or update) the cache as part of the write transaction. </p>
 <p>def update_product(product_id, data):</p>
 <p>with transaction():</p>
-<h1>Update database</h1>
+<h2>Update database</h2>
 <p>db.execute("UPDATE products SET price = ? WHERE id = ?",</p>
 <p>data['price'], product_id)</p>
-<h1>Invalidate cache in same transaction if possible</h1>
+<h2>Invalidate cache in same transaction if possible</h2>
 <p>cache.delete(f"product:{product_id}")</p>
-<h1>Publish invalidation for other cache nodes</h1>
+<h2>Publish invalidation for other cache nodes</h2>
 <p>message_bus.publish("cache.invalidate", {"key": f"product:{product_id}"})</p>
 <p>Conclusion </p>
 <p>Choose cache-aside for most general-purpose caching. Use write-through when read consistency is critical. Use write-behind when write performance is paramount. Use refresh-ahead for predictable access patterns. Set appropriate TTLs as a safety net. Use Redis for distributed caching with proper cluster configuration. Use CDNs for content delivery to global users. Remember that cache invalidation is hard: prefer TTLs over complex invalidation logic, use event-driven invalidation when TTLs are insufficient, and always have a fallback to the original data source.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/circuit-breaker-pattern.html">Circuit Breaker Pattern: Building Resilient Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

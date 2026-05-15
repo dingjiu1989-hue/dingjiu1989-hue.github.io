@@ -8,39 +8,41 @@ url: https://dingjiu1989-hue.github.io/en/tech/helm-kubernetes-package-managemen
 
 # Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-# Helm Charts: Kubernetes Package Management
+## Helm Charts: Kubernetes Package Management
 
-## Introduction
+## Helm Charts: Kubernetes Package Management
+
+### Introduction
 
 Helm is the de facto package manager for Kubernetes, enabling developers to define, install, and upgrade complex applications through reusable chart packages. A single Helm chart can encapsulate dozens of Kubernetes resources into a versioned, configurable unit that can be deployed across multiple environments with minimal repetition.
 
 This guide covers advanced Helm concepts including chart structure, templating, dependency management, CI/CD integration, and enterprise best practices.
 
-## Chart Structure
+### Chart Structure
 
 A well-organized Helm chart follows a standard directory layout:
 
@@ -108,7 +110,7 @@ repository: https://charts.bitnami.com/bitnami
 
 condition: redis.enabled
 
-## Advanced Templating
+### Advanced Templating
 
 Helm uses Go templates with the Sprig function library for dynamic resource generation. Beyond simple variable substitution, you can implement complex logic:
 
@@ -194,7 +196,7 @@ failureThreshold: {{ .failureThreshold | default 3 }}
 
 {{- end -}}
 
-## Values Management and Validation
+### Values Management and Validation
 
 JSON Schema validation catches configuration errors early:
 
@@ -262,7 +264,7 @@ JSON Schema validation catches configuration errors early:
 
 Environment-specific overrides keep values DRY:
 
-# values.yaml (defaults)
+## values.yaml (defaults)
 
 replicaCount: 1
 
@@ -270,7 +272,7 @@ image:
 
 tag: latest
 
-# values-staging.yaml
+## values-staging.yaml
 
 replicaCount: 2
 
@@ -286,7 +288,7 @@ hosts:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: staging.my-app.com
 
-# values-production.yaml
+## values-production.yaml
 
 replicaCount: 6
 
@@ -318,7 +320,7 @@ hosts:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- host: www.my-app.com
 
-## Dependency Management
+### Dependency Management
 
 Lock dependency versions with `Chart.lock`:
 
@@ -348,11 +350,11 @@ repository: https://charts.bitnami.com/bitnami
 
 condition: replica-db.enabled
 
-## CI/CD Integration
+### CI/CD Integration
 
 Integrate Helm linting and testing into pipelines:
 
-# .github/workflows/helm-release.yml
+## .github/workflows/helm-release.yml
 
 name: Helm Release
 
@@ -402,23 +404,23 @@ helm package ./charts/my-app
 
 helm push my-app-*.tgz oci://ghcr.io/${{ github.repository }}/charts
 
-## Chart Versioning and Publishing
+### Chart Versioning and Publishing
 
 Use OCI registries for chart distribution:
 
-# Login and push
+## Login and push
 
 helm registry login ghcr.io -u $USER
 
 helm push my-app-1.2.3.tgz oci://ghcr.io/my-org/charts
 
-# Install from OCI
+## Install from OCI
 
 helm install my-app oci://ghcr.io/my-org/charts/my-app --version 1.2.3
 
 Follow semantic versioning strictly. Breaking template changes require a major version bump, as `helm upgrade` must never silently break deployed resources.
 
-## Best Practices
+### Best Practices
 
   * **Use`helm create` scaffolds** as a starting point but customize helpers aggressively.
 
@@ -438,5 +440,7 @@ Follow semantic versioning strictly. Breaking template changes require a major v
 Helm remains the most widely adopted packaging tool in the Kubernetes ecosystem, and mastering its advanced features is essential for operating production-grade workloads at scale.
 
 **See also:** [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Git Workflows for Teams](</en/tech/git-workflows-2026.html>).
+
+**See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Kubernetes Security Best Practices](</en/tech/kubernetes-services-security.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-testing.html
 
 # Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
 
-# Database Testing Strategies for Developers
+## Database Testing Strategies for Developers
+
+## Database Testing Strategies for Developers
 
 Database Testing Strategies 
 
@@ -107,5 +109,7 @@ Conclusion
 Use in-memory databases for fast unit tests. Use Testcontainers for integration tests against real databases. Test migrations for backward compatibility. Use factory patterns for data fixtures. The most valuable test is one that uses a real database.
 
 **See also:** [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>).
+
+**See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)
 
 **See also:** [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>)

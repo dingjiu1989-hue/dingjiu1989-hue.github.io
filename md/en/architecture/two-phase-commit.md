@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/two-phase-commit.html
 
 # Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
 
-# Two-Phase Commit (2PC) for Distributed Transactions
+## Two-Phase Commit (2PC) for Distributed Transactions
+
+## Two-Phase Commit (2PC) for Distributed Transactions
 
 Two-phase commit (2PC) is a distributed transaction protocol that ensures atomic commitment across multiple databases or services. While it provides strong consistency guarantees, 2PC introduces significant complexity, blocking behavior, and failure modes that require careful consideration. This article examines the protocol mechanics, XA standard, coordinator failure scenarios, and modern alternatives. 
 
@@ -65,5 +67,7 @@ Given 2PC's limitations, modern architectures often prefer alternatives. The Sag
 Two-phase commit remains useful for specific scenarios, particularly within a single data center where strong consistency across heterogeneous data stores is non-negotiable. For most modern cloud-native applications, however, the trade-offs favor alternatives that embrace eventual consistency and compensate rather than block.
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>).
+
+**See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)
 
 **See also:** [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency](</en/tech/distributed-transactions-guide.html>), [CQRS Pattern: Command Query Responsibility Segregation](</en/architecture/cqrs-pattern.html>)

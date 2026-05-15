@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html
 
 # API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
 
-# API Rate Limiting Implementation
+## API Rate Limiting Implementation
+
+## API Rate Limiting Implementation
 
 Why Rate Limiting Matters 
 
@@ -88,7 +90,7 @@ self.tokens + elapsed * self.rate)
 
 self.last_refill = now
 
-# Usage
+## Usage
 
 bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20
 
@@ -122,7 +124,7 @@ def allow_request(self):
 
 now = time.time()
 
-# Remove expired entries
+## Remove expired entries
 
 while self.log and self.log[0] <= now - self.window_size:
 
@@ -229,5 +231,7 @@ Conclusion
 Choose the right rate limiting algorithm for your use case. Token bucket works well for most APIs. Use Redis for distributed rate limiting across multiple servers. Always return clear rate limit headers so clients can self-regulate. Monitor rate limit hit rates to tune thresholds over time.
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>).
+
+**See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)
 
 **See also:** [RBAC Authorization Implementation](</en/security/rbac-authorization.html>), [Two-Factor Authentication Guide](</en/security/two-factor-authentication.html>), [API Gateway Security Patterns](</en/security/api-gateway-security.html>)

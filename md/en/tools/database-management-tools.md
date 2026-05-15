@@ -8,37 +8,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/database-management-tools.html
 
 # Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
 
-## Introduction
+## Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+
+### Introduction
 
 Database management tools are essential for developers, DBAs, and data analysts. They provide graphical interfaces for querying, designing, and administering databases across multiple engine types. The right tool significantly reduces time spent on routine database tasks while providing advanced capabilities for schema migration, performance analysis, and data exploration.
 
 This article compares five database management tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass.
 
-## DBeaver: Universal Database Tool
+### DBeaver: Universal Database Tool
 
 DBeaver is a free, open-source universal database client supporting virtually any database with a JDBC driver. It supports MySQL, PostgreSQL, Oracle, SQL Server, SQLite, MongoDB, Cassandra, Redis, and over 80 other databases.
 
@@ -75,7 +77,7 @@ DBeaver Enterprise adds support for MongoDB, Cassandra, Redis, and BigQuery — 
 
 The main drawback is a somewhat dated Java Swing interface and occasional performance issues with large result sets. However, the sheer breadth of database support makes DBeaver the Swiss Army knife of database tools.
 
-## TablePlus: Modern Native Database Client
+### TablePlus: Modern Native Database Client
 
 TablePlus is a modern, native database management tool for macOS and Windows. It provides a clean, fast interface for MySQL, PostgreSQL, SQLite, Redis, and several other databases.
 
@@ -100,7 +102,7 @@ TablePlus' text-editing mode for large text fields and JSON viewer for JSON colu
 
 TablePlus operates on a paid license model per platform. The free version limits the number of open tabs and connections.
 
-## DataGrip: JetBrains IDE for Databases
+### DataGrip: JetBrains IDE for Databases
 
 DataGrip, from JetBrains, is a professional database IDE built on the IntelliJ platform. It shares code completion, refactoring, and navigation features familiar to IntelliJ IDEA users.
 
@@ -120,7 +122,7 @@ Additional features include schema diff and migration generation, version contro
 
 DataGrip supports PostgreSQL, MySQL, SQL Server, Oracle, SQLite, and MongoDB (via plugin). The main disadvantage is cost — DataGrip requires a paid subscription, though JetBrains All Products Pack includes it.
 
-## pgAdmin: PostgreSQL Administration
+### pgAdmin: PostgreSQL Administration
 
 pgAdmin is the official administration and management tool for PostgreSQL. It provides a web-based interface with comprehensive PostgreSQL-specific features.
 
@@ -143,7 +145,7 @@ PostgreSQL-specific features include:
 
 pgAdmin 4's web-based architecture allows running as a shared service accessible from any browser. This is ideal for team database administration. The trade-off is a heavier resource footprint compared to desktop-only tools.
 
-## MongoDB Compass
+### MongoDB Compass
 
 MongoDB Compass is the official GUI for MongoDB. It provides schema visualization, query building, and performance monitoring.
 
@@ -163,7 +165,7 @@ The Schema tab analyzes collection documents and displays field type distributio
 
 Compass supports CRUD operations, index management, document validation rule editor, and real-time server metrics. Compass Serverless and Compass Readonly editions provide free, lightweight alternatives to the full Compass application.
 
-## Conclusion
+### Conclusion
 
 | Tool | Database Support | Platform | Cost | Best For |
 
@@ -182,5 +184,7 @@ Compass supports CRUD operations, index management, document validation rule edi
 The best tool depends on database types, team workflow, and budget. DBeaver provides the broadest database support. DataGrip offers the best SQL development experience. TablePlus delivers a fast native interface. pgAdmin is essential for PostgreSQL administration. MongoDB Compass is the standard for MongoDB management.
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>).
+
+**See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>), [Database GUI: TablePlus, DBeaver, DataGrip, Beekeeper Studio](</en/tools/database-gui.html>)

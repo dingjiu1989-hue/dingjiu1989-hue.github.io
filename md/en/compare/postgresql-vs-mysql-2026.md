@@ -8,47 +8,49 @@ url: https://dingjiu1989-hue.github.io/en/compare/postgresql-vs-mysql-2026.html
 
 # PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-# PostgreSQL vs MySQL 2026: Relational Database Comparison
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
 
-## PostgreSQL vs MySQL 2026: The State of Relational Databases
+## PostgreSQL vs MySQL 2026: Relational Database Comparison
+
+### PostgreSQL vs MySQL 2026: The State of Relational Databases
 
 The PostgreSQL vs MySQL debate has evolved significantly by 2026. Both databases have matured dramatically, converging on features while maintaining distinct philosophical approaches.
 
-### Feature Evolution
+#### Feature Evolution
 
 PostgreSQL 18 introduces native columnar storage via pg_analytics, closing the gap with dedicated OLAP databases. Incremental materialized views (finally!), improved partitioning with automatic list/default partitions, and enhanced parallel query execution make PostgreSQL increasingly competitive for data warehouse workloads.
 
 MySQL 9.0 brings JavaScript stored procedures via GraalVM, improved JSON functionality with JSON_TABLE and JSON_SCHEMA_VALID support, and encrypted system tablespaces. InnoDB continues to receive performance optimizations for high-concurrency OLTP workloads. HeatWave, MySQL's integrated in-memory query accelerator, provides columnar analytics directly on MySQL data.
 
-### Performance Characteristics
+#### Performance Characteristics
 
 MySQL maintains an edge in pure read-heavy OLTP workloads. Single-table point lookups using the primary key consistently outperform PostgreSQL by 10-20% in benchmarks. Write-heavy workloads show similar MySQL advantages, particularly under high concurrency with InnoDB's buffer pool optimizations.
 
 PostgreSQL excels at complex queries involving multiple joins, window functions, CTEs, and aggregations. PostgreSQL's query optimizer is more sophisticated, generating better execution plans for complex queries. For analytical queries over millions of rows, PostgreSQL often outperforms MySQL by 2-5x.
 
-### Developer-Friendly Features
+#### Developer-Friendly Features
 
 **PostgreSQL Strengths:**
 
@@ -82,28 +84,30 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
 
 
 
-### Ecosystem and Hosting
+#### Ecosystem and Hosting
 
 PostgreSQL dominates in modern application stacks. Supabase, Neon, and Crunchy Bridge provide serverless and managed options with generous free tiers. The pgvector extension makes PostgreSQL a leading vector database solution for AI applications.
 
 MySQL, via the MariaDB fork and MySQL HeatWave, maintains dominance in traditional LAMP/LEMP stacks. MySQL remains the default choice for WordPress and many legacy applications. Managed options include Amazon RDS, Aurora, and PlanetScale.
 
-### Operational Considerations
+#### Operational Considerations
 
 PostgreSQL's streaming replication and WAL archiving provide robust point-in-time recovery. Logical replication has improved dramatically, supporting selective table replication and bi-directional synchronization.
 
 MySQL's InnoDB Cluster with Group Replication offers automated failover with multi-primary capabilities. MySQL Shell's AdminAPI simplifies cluster management significantly compared to PostgreSQL's more manual approaches.
 
-### When to Choose Each
+#### When to Choose Each
 
 Choose PostgreSQL for complex queries, advanced data types, JSON operations, geospatial applications via PostGIS, AI/vector workloads, and when you need extensibility without sacrificing ACID compliance.
 
 Choose MySQL for high-throughput OLTP, read-heavy web applications, WordPress-based sites, and when operational simplicity in replication management is critical.
 
-### Conclusion
+#### Conclusion
 
 In 2026, both PostgreSQL and MySQL are excellent choices. PostgreSQL has pulled ahead for modern application development with its extensibility and advanced features, while MySQL remains the pragmatic choice for high-volume web applications and MySQL-centric ecosystems. The gap between them continues to narrow with each release.
 
 **See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>).
+
+**See also:** [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>)
 
 **See also:** [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [Next.js vs Remix 2026: React Frameworks Compared](</en/compare/nextjs-vs-remix-2026.html>)

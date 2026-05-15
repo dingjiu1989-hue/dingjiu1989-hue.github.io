@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/data-modeling.html
 
 # Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
 
-# Data Modeling Best Practices
+## Data Modeling Best Practices
+
+## Data Modeling Best Practices
 
 Data Modeling Fundamentals 
 
@@ -96,5 +98,7 @@ Conclusion
 Start with 3NF for data integrity. Denormalize for performance when needed. For NoSQL, design your schema around your query patterns. Document all denormalization decisions with rationale.
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools and Strategies](</en/database/database-migration.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>).
+
+**See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>)
 
 **See also:** [Database Normalization Explained](</en/database/database-normalization.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>)

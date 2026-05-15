@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html
 
 # Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
 
-# Saga Choreography Pattern
+## Saga Choreography Pattern
+
+## Saga Choreography Pattern
 
 Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. 
 
@@ -51,5 +53,7 @@ Domain characteristics matter. Sagas where each step is independently useful and
 Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate.
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>).
+
+**See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

@@ -8,37 +8,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/ai-cli-tools-guide.html
 
 # Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
-# Building AI-Powered CLI Tools: A Complete Guide for Developers
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
+
+## Building AI-Powered CLI Tools: A Complete Guide for Developers
 
 The terminal is having a renaissance. Developers spend hours in it every day — and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can _interpret intent, reason about context, and take action_.
 
 This guide covers how to build these tools end-to-end: architecture patterns, Python and Node.js implementations, streaming, interactive flows, file-aware agents, packaging, and two real-world examples you can adapt right now.
 
-## Why AI CLI Tools Are Different
+### Why AI CLI Tools Are Different
 
 A traditional CLI tool maps flags to function calls. An AI CLI tool does something fundamentally different:
 
@@ -65,7 +67,7 @@ User Input (args, stdin, interactive) → CLI Framework (Click/Commander)
 
 The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper — the real work is in prompt engineering and tool orchestration.
 
-## Architecture of AI CLI Tools
+### Architecture of AI CLI Tools
 
 Every AI CLI tool shares these layers:
 
@@ -79,7 +81,7 @@ Every AI CLI tool shares these layers:
 
 The key design decision is **stateless vs. stateful**. Stateless tools (one question, one answer) are simpler. Stateful tools (multi-turn conversations, file edits, undo) require persistence — typically a session file or a temp directory.
 
-## Python: Click + LLM SDK
+### Python: Click + LLM SDK
 
 Python is the most popular language for CLI tools, and [Click](<https://click.palletsprojects.com/>) is the standard framework. Pair it with the `openai` or `anthropic` SDK.
 
@@ -203,11 +205,11 @@ app()
 
 Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive.
 
-## Node.js: Commander + LangChain
+### Node.js: Commander + LangChain
 
 In the Node.js ecosystem, [Commander](<https://github.com/tj/commander.js>) is the standard CLI framework. [LangChain](<https://js.langchain.com/>) adds LLM orchestration, or you can use the SDK directly.
 
-# !/usr/bin/env node
+## !/usr/bin/env node
 
 import { Command } from 'commander';
 
@@ -309,7 +311,7 @@ program.parse();
 
 LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable.
 
-## Pattern: Streaming Responses to stdout
+### Pattern: Streaming Responses to stdout
 
 Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages:
 
@@ -349,7 +351,7 @@ process.exit(130);
 
 Rich formatting (Markdown, syntax highlighting) makes streaming output readable. But be careful with Rich's `Live` — it re-renders the entire output on each frame, which can be slow for long streams. For long outputs, raw `click.echo` or `process.stdout.write` is more performant.
 
-## Pattern: Interactive Multi-Step Tools
+### Pattern: Interactive Multi-Step Tools
 
 Not every tool is a single query. Interactive tools maintain state across turns. The pattern is a **REPL loop** with AI-generated responses.
 
@@ -457,7 +459,7 @@ break
 
 This is the same pattern powering Claude Code and similar AI coding agents. The complexity is in which tools you expose (file read/write, git, shell, search) and how much context you pack into the system prompt.
 
-## Pattern: File-Aware Tools
+### Pattern: File-Aware Tools
 
 File-aware tools read the user's working directory before generating responses. This is the most useful pattern for developer tools.
 
@@ -540,7 +542,7 @@ The key challenge is **context window management**. You can't dump every file in
 
 
 
-## CLI Framework Comparison
+### CLI Framework Comparison
 
 | Feature | Click | Typer | Commander | Clack |
 
@@ -572,11 +574,11 @@ The key challenge is **context window management**. You can't dump every file in
 
 For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations.
 
-## Real Example: AI Code Review CLI
+### Real Example: AI Code Review CLI
 
 This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback.
 
-# !/usr/bin/env python3
+## !/usr/bin/env python3
 
 import subprocess
 
@@ -598,7 +600,7 @@ def review(diff, model, output):
 
 """Review staged git changes with AI."""
 
-# Get git diff
+## Get git diff
 
 cmd = ["git", "diff", "--cached"]
 
@@ -614,7 +616,7 @@ click.echo("No changes to review.", err=True)
 
 raise click.Abort()
 
-# Count lines and warn
+## Count lines and warn
 
 lines = result.stdout.count("\n")
 
@@ -681,11 +683,11 @@ The code review tool is a good example of the **file-aware + git-aware** pattern
 
 
 
-## Real Example: AI Git Commit Message Generator
+### Real Example: AI Git Commit Message Generator
 
 This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message.
 
-# !/usr/bin/env python3
+## !/usr/bin/env python3
 
 import subprocess
 
@@ -772,7 +774,7 @@ Extended versions of this tool:
 
 
 
-## Error Handling for LLM Calls in CLI
+### Error Handling for LLM Calls in CLI
 
 LLM calls fail in ways normal API calls don't. Your CLI must handle:
 
@@ -850,7 +852,7 @@ def tool(json_output):
 
 try:
 
-# ...
+## ...
 
 except Exception as e:
 
@@ -864,11 +866,11 @@ click.echo(f"Error: {e}", err=True)
 
 raise click.Abort()
 
-## Packaging and Distribution
+### Packaging and Distribution
 
-### PyPI (Python)
+#### PyPI (Python)
 
-# pyproject.toml
+## pyproject.toml
 
 [build-system]
 
@@ -898,7 +900,7 @@ my-ai-tool = "my_ai_tool.cli:main"
 
 Install with `pip install my-ai-tool` or publish with `flit publish`.
 
-### npm (Node.js)
+#### npm (Node.js)
 
 {
 
@@ -924,7 +926,7 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
 
 Publish with `npm publish`.
 
-### Homebrew (macOS/Linux)
+#### Homebrew (macOS/Linux)
 
 For a Go or compiled binary, a Homebrew tap is the standard distribution channel:
 
@@ -950,7 +952,7 @@ end
 
 For interpreted languages (Python, Node.js), PyPI and npm are better distribution channels. Homebrew makes sense for compiled binaries (Rust, Go, Zig) that embed the LLM client.
 
-### Environment and Configuration
+#### Environment and Configuration
 
 AI CLI tools need API keys. Best practices:
 
@@ -979,7 +981,7 @@ click.echo("Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY", err=True)
 
 raise click.Abort()
 
-## Putting It All Together: Architecture Checklist
+### Putting It All Together: Architecture Checklist
 
 When designing a new AI CLI tool, run through these questions:
 
@@ -1003,7 +1005,7 @@ When designing a new AI CLI tool, run through these questions:
 
 The answers define your architecture. A simple "explain this error" tool needs only streaming Q&A.; A "refactor this codebase" tool needs file I/O, git integration, multi-step planning, and undo support.
 
-## Beyond Simple Wrappers
+### Beyond Simple Wrappers
 
 The tools described here are the foundation. The next generation of AI CLI tools will:
 
@@ -1025,5 +1027,7 @@ The pattern is always the same: CLI framework handles input, LLM SDK handles gen
 See also: [Click vs Typer vs argparse](<>), [Best Terminal Emulators 2026](<>), [Best Local Dev Tools](<>).
 
 **See also:** [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>).
+
+**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)
 
 **See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/caching-strategies-web-apps.png">
     <meta property="article:published_time" content="2026-05-08">
-    <meta property="article:modified_time" content="2026-05-08">
+    <meta property="article:modified_time" content="2026-04-15">
     <meta property="article:tag" content="Caching, Performance, Web Dev, Backend">
     <title>Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching — SourceHub</title>
     <meta name="description" content="Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.">
@@ -46,8 +46,8 @@
       "description": "Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/caching-strategies-web-apps.png",
       "datePublished": "2026-05-08",
-      "dateModified": "2026-05-08",
-      "wordCount": "1032",
+      "dateModified": "2026-04-15",
+      "wordCount": "815",
       "keywords": "Caching, Performance, Web Dev, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -66,34 +66,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching",
-      "description": "Where, when, and how to cache in a modern web app. CDN caching, Redis, HTTP cache headers, stale-while-revalidate, and cache invalidation strategies.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Browser & CDN: Cache-Control Headers",
-        "text": "# Static assets with content hash (1 year) # /_next/static/chunks/main-abc123.js Cache-Control: public, max-age=31536000, immutable # HTML pages (revalidate at CDN, serve stale if origin is down) # /blog/my-post Cache-Control: public, s-maxage=60, stale-while-revalidate=300 # API responses that don'"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "Application Cache: Redis",
-        "text": "// Cache-aside pattern — the most common approach async function getUserPosts(userId: string): Promise&lt;Post[]&gt; { const cacheKey = `user:${userId}:posts`; // 1. Try cache const cached = await redis.get(cacheKey); if (cached) return JSON.parse(cached); // 2. Cache miss — fetch from DB const post"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Next.js Caching (App Router)",
-        "text": "// Static data — cached permanently async function getNavigation() { const res = await fetch(\"https://cms.example.com/navigation\"); return res.json(); // Cached forever (build-time) } // Revalidated data — cached, then refreshed async function getBlogPosts() { const res = await fetch(\"https://cms.ex"
-      }
       ]
     }
     </script>
@@ -123,7 +95,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching</h1>
-      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-meta">Published 2026-05-08 · Last active 2026-04-15 · 3720 views · 31 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/caching-strategies-web-apps.png" alt="Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching" width="1200" height="630" loading="lazy">
       <div class="article-body"><p>Caching is the difference between a 50ms response and a 5-second timeout. But cache invalidation is famously one of the hardest problems in computer science. Here's a practical guide to caching at every layer — and when NOT to cache.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/caching-strategies-web-apps.png" alt="Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 

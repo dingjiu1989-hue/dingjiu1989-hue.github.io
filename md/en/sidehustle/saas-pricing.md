@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-pricing.html
 
 # SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
 
-# SaaS Pricing Strategies
+## SaaS Pricing Strategies
+
+## SaaS Pricing Strategies
 
 Pricing is the single most impactful lever for SaaS revenue. A 1% price increase can yield an 8-12% increase in operating profit. Yet many developers treat pricing as an afterthought, setting numbers arbitrarily based on gut feel or competitor rates. This article covers proven SaaS pricing strategies backed by data and psychology.
 
-## The Psychology of Pricing
+### The Psychology of Pricing
 
 Before diving into models, understand the psychological principles that influence purchasing decisions:
 
@@ -44,7 +46,7 @@ Before diving into models, understand the psychological principles that influenc
 
 **Charm pricing.** $9.99 feels significantly cheaper than $10.00, even though the difference is one cent. This works, but use it judiciously. Premium brands often avoid charm pricing to signal quality.
 
-## Flat-Rate Pricing
+### Flat-Rate Pricing
 
 One price, one product. Simple and transparent.
 
@@ -56,7 +58,7 @@ Example: Basecamp costs a flat monthly fee.
 
 Flat-rate works best when your product has a clear, narrow use case and a homogeneous customer base. As your customer base diversifies, you will likely outgrow this model.
 
-## Tiered Pricing
+### Tiered Pricing
 
 Multiple plans at different price points with graduated feature sets:
 
@@ -83,7 +85,7 @@ Enterprise: Custom - Everything + SSO, SLA
 
 
 
-## Usage-Based Pricing
+### Usage-Based Pricing
 
 Customers pay for what they consume:
 
@@ -97,7 +99,7 @@ Stripe: 2.9% + $0.30 per transaction
 
 Usage-based pricing works well when value is directly proportional to usage (compute, storage, transactions). It is less suitable when value comes from features or access.
 
-## Per-Seat Pricing
+### Per-Seat Pricing
 
 Charge per user:
 
@@ -111,7 +113,7 @@ GitHub: $4/user/month (Team)
 
 Per-seat pricing is the standard for collaboration and productivity tools. Combine with tiered plans (free tier for small teams, paid plans for larger teams).
 
-## Hybrid Models
+### Hybrid Models
 
 Most successful SaaS companies use hybrid pricing:
 
@@ -126,7 +128,7 @@ Most successful SaaS companies use hybrid pricing:
 
 Example: SendGrid charges a base monthly fee for email credits, then overages for additional emails, and add-ons for dedicated IP addresses and analytics.
 
-## Choosing Your Model
+### Choosing Your Model
 
 Consider these factors:
 
@@ -138,7 +140,7 @@ Consider these factors:
 
 **Value delivered.** Price based on the value your product provides, not the cost to build it. A tool that saves a company $10,000/month is worth $2,000/month, regardless of how much it costs to run.
 
-## Pricing Experiments
+### Pricing Experiments
 
 Do not set your pricing once and forget it. Run continuous experiments:
 
@@ -155,7 +157,7 @@ Do not set your pricing once and forget it. Run continuous experiments:
 
 Tools like ProfitWell and Baremetrics help track pricing metrics.
 
-## Common Mistakes
+### Common Mistakes
 
 **Underpricing.** This is the most common mistake. Founders fear charging too much, so they charge too little. Raise your prices. You will lose some customers but make more money from the ones who stay.
 
@@ -165,10 +167,12 @@ Tools like ProfitWell and Baremetrics help track pricing metrics.
 
 **Free tier that is too generous.** Your free tier should solve enough of a problem to demonstrate value, but leave customers wanting more. Otherwise, they have no incentive to upgrade.
 
-## Summary
+### Summary
 
 Great SaaS pricing aligns what customers pay with the value they receive. Start simple with 3-4 tiers. Experiment continuously. Use psychological principles like anchoring and the decoy effect. Raise prices regularly as you add value. Avoid underpricing -- it is far easier to lower prices than to raise them later.
 
 **See also:** [Monetizing APIs](</en/sidehustle/api-monetization.html>), [Landing Page Conversion Optimization](</en/sidehustle/landing-page-conversion.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>).
+
+**See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Building a Subscription Business as a Developer](</en/sidehustle/subscription-business.html>), [Monetizing APIs](</en/sidehustle/api-monetization.html>)

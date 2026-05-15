@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/partitioning-vs-sharding.html
 
 # Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
 
-# Partitioning vs Sharding
+## Partitioning vs Sharding
+
+## Partitioning vs Sharding
 
 Partitioning vs Sharding 
 
@@ -112,5 +114,7 @@ Conclusion
 Start with partitioning before considering sharding. Partitioning solves many problems with less complexity. Only shard when a single database is insufficient, and use tools like Vitess or Citus to manage the complexity.
 
 **See also:** [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>).
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Database Triggers: Use Cases, Performance Costs, and Alternatives](</en/database/triggers-patterns.html>), [NoSQL Databases Guide](</en/database/nosql-guide.html>)

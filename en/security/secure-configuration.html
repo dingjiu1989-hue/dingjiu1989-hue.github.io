@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-06">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Secure Configuration Management — SourceHub</title>
     <meta name="description" content="Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.">
@@ -46,8 +46,8 @@
       "description": "Comprehensive guide to secure configuration covering infrastructure as code scanning, drift detection, configuration validation, and policy enforcement.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1729",
+      "dateModified": "2026-05-06",
+      "wordCount": "1473",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,36 +93,37 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Secure Configuration Management</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png" alt="Secure Configuration Management" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
-<h1>Secure Configuration Management</h1>
+      <div class="article-body"><h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
+<h2>Secure Configuration Management</h2>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png" alt="Secure Configuration Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Configuration drift — when actual system configuration diverges from the intended secure baseline — is a leading cause of security incidents. Secure configuration management ensures that systems remain in a known, compliant state throughout their lifecycle. This requires automation at every stage: validation at build time, enforcement at deploy time, and detection at runtime. </p>
 <p>Infrastructure as Code Scanning </p>
 <p>IaC scanning catches misconfigurations before they reach production. </p>
-<h1>Checkov: scan Terraform for security issues</h1>
+<h2>Checkov: scan Terraform for security issues</h2>
 <p>checkov -d terraform/environments/production</p>
-<h1>tfsec: Terraform security scanner</h1>
+<h2>tfsec: Terraform security scanner</h2>
 <p>tfsec terraform/environments/production --config-file tfsec.yaml</p>
-<h1>kics: Keep Infrastructure as Code Secure</h1>
+<h2>kics: Keep Infrastructure as Code Secure</h2>
 <p>kics scan -p kubernetes/deployments --output-path kics-report.json</p>
-<h1>checkov policy: S3 bucket must have encryption enabled</h1>
+<h2>checkov policy: S3 bucket must have encryption enabled</h2>
 <p>resource "aws_s3_bucket" "data" {</p>
 <p>bucket = "my-data-bucket"</p>
-<h1>This will fail checkov check CKV_AWS_21</h1>
-<h1>Missing: server_side_encryption_configuration</h1>
+<h2>This will fail checkov check CKV_AWS_21</h2>
+<h2>Missing: server_side_encryption_configuration</h2>
 <p>}</p>
-<h1>Custom Checkov policy</h1>
+<h2>Custom Checkov policy</h2>
 <p>from checkov.common.models.enums import CheckResult</p>
 <p>from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck</p>
 <p>class S3EncryptionCheck(BaseResourceCheck):</p>
@@ -137,9 +138,9 @@
 <p>return CheckResult.FAILED</p>
 <p>Drift Detection </p>
 <p>Drift detection identifies when live infrastructure differs from the declared configuration. </p>
-<h1>Terraform plan detects drift</h1>
+<h2>Terraform plan detects drift</h2>
 <p>terraform plan -refresh-only # Check for manual changes</p>
-<h1>Terraform drift detection with AWS Config</h1>
+<h2>Terraform drift detection with AWS Config</h2>
 <p>resource "aws_config_config_rule" "s3_bucket_ssl" {</p>
 <p>name = "s3-bucket-ssl-requests-only"</p>
 <p>source {</p>
@@ -147,12 +148,12 @@
 <p>source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"</p>
 <p>}</p>
 <p>}</p>
-<h1>Continuous drift monitoring</h1>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily</h1>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline</h1>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes</h1>
-<h1>!/bin/bash</h1>
-<h1>drift_detection.sh</h1>
+<h2>Continuous drift monitoring</h2>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily</h2>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline</h2>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes</h2>
+<h2>!/bin/bash</h2>
+<h2>drift_detection.sh</h2>
 <p>BASELINE_DIR="/config/baselines"</p>
 <p>REPORT_DIR="/config/reports"</p>
 <p>for env in production staging; do</p>
@@ -160,13 +161,13 @@
 <p>terraform plan -refresh-only -out=plan.tfplan 2&gt;&amp;1 | \</p>
 <p>grep -E "changed|destroyed|added" &gt; /tmp/drift.txt</p>
 <p>if [ -s /tmp/drift.txt ]; then</p>
-<h1>Send alert</h1>
+<h2>Send alert</h2>
 <p>./send_alert.sh "Drift detected in $env environment"</p>
 <p>cp /tmp/drift.txt "$REPORT_DIR/${env}<em>drift</em> $(date +%Y%m%d).txt"</p>
 <p>fi</p>
 <p>done</p>
 <p>Configuration Validation Pipeline </p>
-<h1>CI/CD configuration validation stage</h1>
+<h2>CI/CD configuration validation stage</h2>
 <p>stages:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan</p>
@@ -195,7 +196,7 @@
 <p>when: manual</p>
 <p>Configuration Validation with Conftest </p>
 <p>Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). </p>
-<h1>conftest policy for Kubernetes</h1>
+<h2>conftest policy for Kubernetes</h2>
 <p>package main</p>
 <p>deny[msg] {</p>
 <p>input.kind == "Deployment"</p>
@@ -217,10 +218,10 @@
 <p>not input.spec.containers[_].resources.limits.memory</p>
 <p>msg = "Memory limits are required"</p>
 <p>}</p>
-<h1>Run conftest policies</h1>
+<h2>Run conftest policies</h2>
 <p>conftest test deployment.yaml --policy conftest/policies/</p>
 <p>Policy as Code with OPA </p>
-<h1>OPA policy for Terraform</h1>
+<h2>OPA policy for Terraform</h2>
 <p>package terraform</p>
 <p>deny[msg] {</p>
 <p>resource := input.resource.aws_security_group[_]</p>
@@ -236,12 +237,12 @@
 <p>}</p>
 <p>Secrets in Configuration </p>
 <p>Never hardcode secrets in configuration. Use a secrets manager. </p>
-<h1>BAD: Hardcoded secret</h1>
+<h2>BAD: Hardcoded secret</h2>
 <p>resource "aws_db_instance" "database" {</p>
 <p>username = "admin"</p>
 <p>password = "P@ssw0rd123!" # NEVER hardcode</p>
 <p>}</p>
-<h1>GOOD: Secrets Manager reference</h1>
+<h2>GOOD: Secrets Manager reference</h2>
 <p>data "aws_secretsmanager_secret_version" "db_creds" {</p>
 <p>secret_id = "production/database/credentials"</p>
 <p>}</p>
@@ -255,7 +256,8 @@
 <p>}</p>
 <p>Conclusion </p>
 <p>Secure configuration management requires automation at every stage: scan IaC before deployment, validate against policy as code, detect drift continuously, and never embed secrets in configuration. Shift security left by validating configuration at build time rather than discovering issues in production. Use tools like Checkov, tfsec, conftest, and OPA to enforce your security baseline automatically.</p>
-<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/session-management.html">Session Management Security</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/session-management.html">Session Management Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

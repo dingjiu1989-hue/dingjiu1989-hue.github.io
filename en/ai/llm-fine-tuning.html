@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <title>LLM Fine-Tuning Guide — SourceHub</title>
     <meta name="description" content="Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.">
@@ -46,8 +46,8 @@
       "description": "Learn how to fine-tune LLMs effectively using LoRA, QLoRA, and full fine-tuning techniques with practical code examples.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1781",
+      "dateModified": "2026-05-15",
+      "wordCount": "1519",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,23 +92,24 @@
       <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">LLM Fine-Tuning Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png" alt="LLM Fine-Tuning Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h1>LLM Fine-Tuning Guide</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h2>LLM Fine-Tuning Guide</h2>
+<h3>Introduction</h3>
 <p>Fine-tuning adapts a pre-trained language model to a specific task or domain. While prompt engineering and RAG handle many use cases out of the box, fine-tuning is essential when you need consistent formatting, domain-specific knowledge, or behavior that base models cannot achieve through prompting alone. This guide covers the full spectrum of fine-tuning approaches.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-fine-tuning.png" alt="LLM Fine-Tuning Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>When to Fine-Tune</h2>
+<h3>When to Fine-Tune</h3>
 <p>Before investing in fine-tuning, consider whether simpler approaches suffice:</p>
 <ul>
 <li>
@@ -122,8 +123,8 @@
 </li>
 </ul>
 <p>Fine-tuning becomes cost-effective when you need to run many similar queries and can amortize the training cost over thousands or millions of inference calls.</p>
-<h2>Fine-Tuning Approaches</h2>
-<h3>Full Fine-Tuning</h3>
+<h3>Fine-Tuning Approaches</h3>
+<h4>Full Fine-Tuning</h4>
 <p>Full fine-tuning updates all model parameters on a target dataset. This approach achieves the highest quality but requires substantial compute — full fine-tuning of a 7B parameter model requires approximately 56 GB of GPU memory per batch.</p>
 <p><strong>When to use full fine-tuning:</strong></p>
 <ul>
@@ -140,7 +141,7 @@
 <p>Maximum quality is critical</p>
 </li>
 </ul>
-<h3>LoRA (Low-Rank Adaptation)</h3>
+<h4>LoRA (Low-Rank Adaptation)</h4>
 <p>LoRA injects trainable rank-decomposition matrices into the model's attention layers, reducing the number of trainable parameters by 10,000x. A 7B model can be fine-tuned with LoRA on a single consumer GPU with 24 GB memory.</p>
 <p>from peft import LoraConfig, get_peft_model</p>
 <p>lora_config = LoraConfig(</p>
@@ -153,7 +154,7 @@
 <p>)</p>
 <p>model = get_peft_model(base_model, lora_config)</p>
 <p>print(f"Trainable params: {model.num_parameters(only_trainable=True):,}")</p>
-<h1>Output for Llama 2 7B: ~4,194,304 params (0.06% of total)</h1>
+<h2>Output for Llama 2 7B: ~4,194,304 params (0.06% of total)</h2>
 <p><strong>Key hyperparameters:</strong></p>
 <ul>
 <li>
@@ -166,7 +167,7 @@
 <p><strong>Target modules</strong> : Include all attention projection matrices for best results</p>
 </li>
 </ul>
-<h3>QLoRA (Quantized LoRA)</h3>
+<h4>QLoRA (Quantized LoRA)</h4>
 <p>QLoRA combines 4-bit quantization with LoRA, enabling fine-tuning of 65B models on a single 48GB GPU. The model weights are quantized to 4-bit while LoRA adapters remain in full precision.</p>
 <p>from transformers import BitsAndBytesConfig</p>
 <p>bnb_config = BitsAndBytesConfig(</p>
@@ -181,7 +182,7 @@
 <p>device_map="auto"</p>
 <p>)</p>
 <p>QLoRA achieves approximately 99% of full fine-tuning performance while reducing memory requirements by 4x.</p>
-<h2>Dataset Preparation</h2>
+<h3>Dataset Preparation</h3>
 <p>Dataset quality matters more than quantity. A well-curated 1,000-example dataset outperforms a noisy 10,000-example one.</p>
 <p><strong>Guidelines for instruction tuning datasets:</strong></p>
 <ul>
@@ -197,7 +198,7 @@
 <p>"input": "Team discussed Q1 results. Revenue grew 15%. Engineering shipped 3 features. Marketing launched new campaign.",</p>
 <p>"output": "- Q1 revenue grew 15%\n- Engineering shipped 3 new features\n- Marketing launched a new campaign"</p>
 <p>}</p>
-<h2>Training Process</h2>
+<h3>Training Process</h3>
 <p>Modern fine-tuning uses the SFT (Supervised Fine-Tuning) trainer:</p>
 <p>from trl import SFTTrainer</p>
 <p>trainer = SFTTrainer(</p>
@@ -216,7 +217,7 @@
 <p>)</p>
 <p>)</p>
 <p>trainer.train()</p>
-<h2>Evaluation</h2>
+<h3>Evaluation</h3>
 <p>Evaluate fine-tuned models on:</p>
 <ul>
 <li>
@@ -233,9 +234,10 @@
 </li>
 </ul>
 <p>Use an automated evaluation harness comparing the fine-tuned model against the base model on a held-out test set.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Fine-tuning remains the most powerful tool for adapting LLMs to specific domains and tasks. Start with QLoRA for cost-effective experimentation, scale to full fine-tuning only when quality demands it. Focus on dataset quality over quantity, and always measure performance against a clear baseline.</p>
-<p><strong>See also:</strong> <a href="/en/ai/fine-tune-open-source-llm.html">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tune-open-source-llm.html">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tune-open-source-llm.html">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tune-open-source-llm.html">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tune-open-source-llm.html">Fine-Tuning Open Source LLMs: A Developer's Practical Guide (2026)</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/fine-tuning-strategies.html">LLM Fine-Tuning Strategies and Techniques</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

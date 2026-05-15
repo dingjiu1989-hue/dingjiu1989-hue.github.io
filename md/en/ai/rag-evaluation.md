@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-evaluation.html
 
 # RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
-# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+
+## RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
 
 Retrieval-Augmented Generation is the most popular architecture for production LLM applications. But evaluating RAG systems is notoriously difficult. You need to assess both the retrieval component and the generation component, then measure how they work together. Here is the practical evaluation framework.
 
-## Retrieval Evaluation
+### Retrieval Evaluation
 
 Retrieval quality determines the ceiling on your RAG system's performance. If the retriever fails to find relevant documents, the generator cannot produce good answers regardless of model quality.
 
@@ -44,7 +46,7 @@ Precision and recall at K are also useful. Precision at K measures how many of t
 
 Build a test set of at least 100 queries with known relevant documents. Use this to benchmark changes to your embedding model, chunking strategy, and retrieval parameters. Automate this benchmark to run on every change.
 
-## Generation Quality
+### Generation Quality
 
 Generation quality is subjective but measurable. The key dimensions are faithfulness, relevance, completeness, and conciseness.
 
@@ -54,7 +56,7 @@ Relevance means the answer addresses the user's question. An answer can be faith
 
 Use LLM-as-judge for generation evaluation. Ask a strong model like Claude or GPT-4 to evaluate answers on these dimensions with a structured rubric. Provide the question, retrieved context, and generated answer. LLM-as-judge correlates reasonably well with human evaluation for RAG tasks.
 
-## End-to-End Testing
+### End-to-End Testing
 
 End-to-end tests validate the complete system. They catch integration issues that component-level tests miss, like a chunking change that breaks retrieval for certain query types.
 
@@ -64,7 +66,7 @@ Define pass conditions for each test case. A test passes when the answer is fait
 
 Track the pass rate over time. Every change to chunking, embedding, retrieval parameters, prompt templates, or the generator model should be evaluated against this suite. A regression of more than 5% should block deployment.
 
-## Benchmark Datasets
+### Benchmark Datasets
 
 Several public datasets help benchmark RAG performance. The KILT benchmark covers knowledge-intensive tasks. Natural Questions and TriviaQA are useful for factoid question answering. HotpotQA tests multi-hop reasoning across documents.
 
@@ -72,7 +74,7 @@ For domain-specific RAG, public benchmarks may not reflect your use case. Build 
 
 Synthetic data generation using LLMs can bootstrap your evaluation set. Generate questions from your documents, then have humans verify quality. This is faster than creating everything from scratch but requires human validation to avoid biased or superficial questions.
 
-## Continuous Monitoring
+### Continuous Monitoring
 
 RAG evaluation is not a one-time activity. Deploy monitoring that tracks retrieval quality and generation quality in production.
 
@@ -83,5 +85,7 @@ Track retrieval latency and generation latency separately. If retrieval becomes 
 The most important lesson about RAG evaluation is that it requires ongoing investment. A RAG system launched without evaluation instrumentation will degrade silently. Build the evaluation pipeline before you launch, not after users complain.
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>).
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>), [Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production](</en/ai/model-evaluation-harness.html>)

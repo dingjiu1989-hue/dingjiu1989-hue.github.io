@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Manage prompts like code: version control, automated testing, team collaboration workflows, staging environments, and CI/CD deployment for prompts.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-10">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Prompt Management: Versioning, Testing, Collaboration, Deployment — SourceHub</title>
     <meta name="description" content="Manage prompts like code: version control, automated testing, team collaboration workflows, staging environments, and CI/CD deployment for prompts.">
@@ -46,8 +46,8 @@
       "description": "Manage prompts like code: version control, automated testing, team collaboration workflows, staging environments, and CI/CD deployment for prompts.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2474",
+      "dateModified": "2026-04-10",
+      "wordCount": "2219",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,25 +93,26 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png" alt="Prompt Management: Versioning, Testing, Collaboration, Deployment" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h1>Prompt Management: Versioning, Testing, Collaboration, Deployment</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h2>Prompt Management: Versioning, Testing, Collaboration, Deployment</h2>
+<h3>Introduction</h3>
 <p>Prompts are the primary interface for controlling LLM behavior, yet most teams manage them as copy-pasted text files or hardcoded strings in source code. As AI applications grow, prompts need the same rigor as application code: versioning, testing, review, staging, and deployment pipelines. This article covers the tools and workflows for professional prompt management.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-management.png" alt="Prompt Management: Versioning, Testing, Collaboration, Deployment" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Prompt as Code</h2>
+<h3>Prompt as Code</h3>
 <p>Store prompts in a structured, version-controlled format:</p>
-<h1>prompts/summarization.yaml</h1>
+<h2>prompts/summarization.yaml</h2>
 <p>name: document_summarizer</p>
 <p>version: 2.3.0</p>
 <p>model: claude-sonnet-4-20260512</p>
@@ -138,7 +139,7 @@
 <p>expected_output_contains: ["container orchestration", "pods"]</p>
 <p>min_length: 50</p>
 <p>max_length: 150</p>
-<h2>Prompt Registry</h2>
+<h3>Prompt Registry</h3>
 <p>A central registry stores all prompt versions with metadata:</p>
 <p>import hashlib</p>
 <p>import yaml</p>
@@ -173,7 +174,7 @@
 <p>prompt_a = self.get_prompt(name, version_a)["prompt"]</p>
 <p>prompt_b = self.get_prompt(name, version_b)["prompt"]</p>
 <p>return self._compute_diff(prompt_a, prompt_b)</p>
-<h2>Automated Prompt Testing</h2>
+<h3>Automated Prompt Testing</h3>
 <p>Test prompts against a suite of evaluation cases:</p>
 <p>class PromptTester:</p>
 <p>def <strong>init</strong>(self, llm_fn):</p>
@@ -200,14 +201,14 @@
 <p>results["pass_rate"] = results["passed"] / len(tests) if tests else 1.0</p>
 <p>return results</p>
 <p>def _run_single_test(self, prompt_data: dict, test: dict) -&gt; dict:</p>
-<h1>Build the prompt</h1>
+<h2>Build the prompt</h2>
 <p>system = prompt_data.get("system_prompt", "")</p>
 <p>template = prompt_data.get("user_template", "")</p>
 <p>inputs = test.get("input", {})</p>
 <p>full_prompt = template.format(**inputs) if inputs else template</p>
-<h1>Run the model</h1>
+<h2>Run the model</h2>
 <p>response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))</p>
-<h1>Check assertions</h1>
+<h2>Check assertions</h2>
 <p>failures = []</p>
 <p>if "expected_output_contains" in test:</p>
 <p>for expected in test["expected_output_contains"]:</p>
@@ -218,9 +219,9 @@
 <p>if "max_length" in test and len(response) &gt; test["max_length"]:</p>
 <p>failures.append(f"Response too long: {len(response)} &gt; {test['max_length']}")</p>
 <p>return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}</p>
-<h2>CI/CD for Prompts</h2>
+<h3>CI/CD for Prompts</h3>
 <p>Integrate prompt changes into your deployment pipeline:</p>
-<h1>.github/workflows/prompt-deploy.yml</h1>
+<h2>.github/workflows/prompt-deploy.yml</h2>
 <p>name: Prompt Deployment</p>
 <p>on:</p>
 <p>push:</p>
@@ -247,7 +248,7 @@
 <p>runs-on: ubuntu-latest</p>
 <p>steps:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production</p>
-<h2>Collaboration Workflow</h2>
+<h3>Collaboration Workflow</h3>
 <p>class PromptReviewWorkflow:</p>
 <p>def <strong>init</strong>(self, registry: PromptRegistry):</p>
 <p>self.registry = registry</p>
@@ -274,9 +275,10 @@
 <p>pr["status"] = "approved"</p>
 <p>pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": comment})</p>
 <p>self.storage.save(f"reviews/{pr_id}", pr)</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Manage prompts with the same rigor as code. Store them in YAML with version numbers, test cases, and metadata. Use a registry to track all versions and promote them through staging environments. Write automated tests that validate prompt outputs against assertions. Integrate prompt changes into CI/CD pipelines with review gates. This systematic approach prevents the common problems of prompt drift, broken deployments, and untracked changes that plague ad-hoc prompt management.</p>
-<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-chaining.html">Prompt Chaining: Decomposition, Parallel Execution, State Management</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-chaining.html">Prompt Chaining: Decomposition, Parallel Execution, State Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

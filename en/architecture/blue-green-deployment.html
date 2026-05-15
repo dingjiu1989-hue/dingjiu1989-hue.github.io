@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-06">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Blue-Green Deployment Strategy — SourceHub</title>
     <meta name="description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
@@ -46,8 +46,8 @@
       "description": "Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "591",
+      "dateModified": "2026-04-06",
+      "wordCount": "543",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,31 +90,33 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Blue-Green Deployment Strategy</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
-<h1>Blue-Green Deployment Strategy</h1>
+      <div class="article-body"><h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
+<h2>Blue-Green Deployment Strategy</h2>
 <p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png" alt="Blue-Green Deployment Strategy" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>How Blue-Green Works</h2>
+<h3>How Blue-Green Works</h3>
 <p>The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.</p>
 <p>This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors.</p>
-<h2>Advantages</h2>
+<h3>Advantages</h3>
 <p>Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial—switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment.</p>
-<h2>Challenges</h2>
+<h3>Challenges</h3>
 <p>Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue.</p>
 <p>The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.</p>
-<h2>Best Practices</h2>
+<h3>Best Practices</h3>
 <p>Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch—gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

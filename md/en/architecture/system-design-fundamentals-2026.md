@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/system-design-fundamental
 
 # System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
-# System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
+
+## System Design Fundamentals 2026: A Developer Guide to Scalable Applications
 
 System Design Fundamentals 2026: A Developer's Guide to Scalable Applications 
 
@@ -107,7 +109,7 @@ When CQRS Makes Sense
 
 A Simple CQRS Implementation 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Command Side (Writes) ---
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Command Side (Writes) ---
 
 class CreateOrderCommand:
 
@@ -121,7 +123,7 @@ class OrderCommandHandler:
 
 def handle(self, cmd: CreateOrderCommand) -> str:
 
-# Validate business rules
+## Validate business rules
 
 order = Order.create(cmd.user_id, cmd.items)
 
@@ -131,13 +133,13 @@ event_bus.publish("order.created", {"order_id": order.id})
 
 return order.id
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Query Side (Reads) ---
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- Query Side (Reads) ---
 
 class OrderQueryHandler:
 
 def get_order_summary(self, user_id: str) -> dict:
 
-# Read from denormalized read model (could be a different DB)
+## Read from denormalized read model (could be a different DB)
 
 return read_db.query(
 
@@ -248,7 +250,7 @@ Message Queue Comparison
 
 Kafka in Practice: The Url Shortener Click Stream 
 
-# Producer — emit click events
+## Producer — emit click events
 
 def record_click(short_code: str, ip: str, user_agent: str):
 
@@ -272,7 +274,7 @@ value={
 
 )
 
-# Consumer 1 — real-time analytics (e.g., update Redis counters)
+## Consumer 1 — real-time analytics (e.g., update Redis counters)
 
 def consume_clicks_for_analytics():
 
@@ -284,7 +286,7 @@ redis.zincrby("popular_urls:today", 1, click["short_code"])
 
 redis.incr(f"url:{click['short_code']}:clicks")
 
-# Consumer 2 — store raw clicks in data warehouse
+## Consumer 2 — store raw clicks in data warehouse
 
 def consume_clicks_for_storage():
 
@@ -296,7 +298,7 @@ Event Sourcing: Storing State as Events
 
 Instead of storing the current state, event sourcing stores a sequence of state-changing events. The current state is derived by replaying them. 
 
-# Events (immutable facts)
+## Events (immutable facts)
 
 events = [
 
@@ -308,7 +310,7 @@ events = [
 
 ]
 
-# Derive current state by replaying events
+## Derive current state by replaying events
 
 def get_account_state(events):
 
@@ -356,7 +358,7 @@ The simplest scaling strategy: one primary handles writes, replicas handle reads
 
 └──────────┘ └──────────┘ └──────────┘
 
-# Using read/write separation in code
+## Using read/write separation in code
 
 class DatabaseRouter:
 
@@ -376,7 +378,7 @@ return conn.execute(query, params or {})
 
 def read(self, query, params=None):
 
-# Round-robin across replicas
+## Round-robin across replicas
 
 replica = self.replicas[self.replica_index % len(self.replicas)]
 
@@ -390,7 +392,7 @@ async def create_order_and_redirect(user_id: str, items: list):
 
 order_id = db.write("INSERT INTO orders ... RETURNING id")
 
-# Read-after-write: force this read to the primary
+## Read-after-write: force this read to the primary
 
 order = db.read_from_primary(
 
@@ -406,7 +408,7 @@ Split data across databases by a shard key.
 
 | Strategy | Shard Key | Pros | Cons | |---|---|---|---| | **Hash-based** | hash(user_id) % N | Even distribution | Resharding is painful (need consistent hashing) | | **Range-based** | user_id 1–10000 → shard 1 | Range queries work | Hot spots possible | | **Directory-based** | Lookup table maps key → shard | Flexible, re-shardable | Extra lookup, single point of failure | 
 
-# Consistent hashing — minimizes re-sharding
+## Consistent hashing — minimizes re-sharding
 
 class ConsistentHashRing:
 
@@ -498,7 +500,7 @@ async def get_user_profile(user_id: str) -> dict:
 
 cache_key = f"user:profile:{user_id}"
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache
 
 cached = await redis.get(cache_key)
 
@@ -506,7 +508,7 @@ if cached:
 
 return json.loads(cached)
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — load from database
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — load from database
 
 profile = await db.query(
 
@@ -518,7 +520,7 @@ profile = await db.query(
 
 if profile:
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL
 
 await redis.setex(cache_key, 300, json.dumps(profile))
 
@@ -526,7 +528,7 @@ return profile
 
 async def update_user_profile(user_id: str, data: dict):
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database
 
 await db.execute(
 
@@ -536,13 +538,13 @@ await db.execute(
 
 )
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (don't update it — let next read re-populate)
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (don't update it — let next read re-populate)
 
 await redis.delete(f"user:profile:{user_id}")
 
 Write Behind — For High-Volume Writes 
 
-# Batch writer process — runs every 5 seconds
+## Batch writer process — runs every 5 seconds
 
 write_buffer = []
 
@@ -570,7 +572,7 @@ await db.execute(
 
 write_buffer.clear()
 
-# Start background flusher
+## Start background flusher
 
 async def periodic_flush():
 
@@ -609,11 +611,11 @@ You **must** choose CP or AP. Partition tolerance is non-negotiable in distribut
 
 Practical CAP Decisions 
 
-# AP choice — accept stale reads for availability
+## AP choice — accept stale reads for availability
 
 async def get_product_stock(product_id: str) -> int:
 
-# Read from nearest replica, may be stale
+## Read from nearest replica, may be stale
 
 return await replica.query(
 
@@ -623,11 +625,11 @@ return await replica.query(
 
 )
 
-# CP choice — accept slower reads for consistency
+## CP choice — accept slower reads for consistency
 
 async def get_product_stock_cp(product_id: str) -> int:
 
-# Read from primary, always latest
+## Read from primary, always latest
 
 return await primary.query(
 
@@ -649,7 +651,7 @@ Layer 4 vs Layer 7
 
 Algorithms 
 
-# Round Robin — predictable, but doesn't handle different load sizes
+## Round Robin — predictable, but doesn't handle different load sizes
 
 servers = ["app-01", "app-02", "app-03"]
 
@@ -657,13 +659,13 @@ next_server = current_index % len(servers)
 
 current_index += 1
 
-# Least Connections — better for variable request durations
+## Least Connections — better for variable request durations
 
 def least_connections(servers: list) -> str:
 
 return min(servers, key=lambda s: s.active_connections)
 
-# IP Hash — session persistence without cookies
+## IP Hash — session persistence without cookies
 
 def ip_hash(client_ip: str, servers: list) -> str:
 
@@ -687,13 +689,13 @@ Health Checks: The Bare Minimum
 
 └──────────┘ └──────────┘
 
-# /healthz endpoint
+## /healthz endpoint
 
 @app.get("/healthz")
 
 async def health_check():
 
-# Check critical dependencies
+## Check critical dependencies
 
 db_ok = await check_database()
 
@@ -743,7 +745,7 @@ Client ──────────┼─▶ Auth │ │
 
 What the Gateway Handles 
 
-# Before gateway — each service handles auth
+## Before gateway — each service handles auth
 
 @app.route("/api/orders")
 
@@ -755,9 +757,9 @@ token = request.headers["Authorization"]
 
 user = verify_token(token) # Duplicated in EVERY service
 
-# After gateway — auth is centralized
+## After gateway — auth is centralized
 
-# Service code is simpler:
+## Service code is simpler:
 
 @app.route("/api/orders")
 
@@ -833,7 +835,7 @@ self.state = "OPEN"
 
 return await fallback() if fallback else None
 
-# Usage
+## Usage
 
 cb = CircuitBreaker(failure_threshold=3, recovery_timeout=60)
 
@@ -851,7 +853,7 @@ Other Resilience Patterns
 
 | Pattern | What It Does | |---|---| | **Retry with backoff** | Exponential backoff + jitter to avoid thundering herd | | **Timeout** | Hard timeout per request (e.g., 5s) to prevent cascading | | **Bulkhead** | Isolate resources — limit connections per service | | **Rate limiting** | Token bucket or leaky bucket per client | | **Dead letter queue** | Failed messages go to a DLQ for manual inspection | 
 
-# Retry with exponential backoff and jitter
+## Retry with exponential backoff and jitter
 
 async def retry_with_backoff(func, max_retries=3):
 
@@ -920,7 +922,7 @@ result = result * 62 + BASE62.index(char)
 
 return result
 
-# Example: 7 chars of base62 = 62^7 ≈ 3.5 trillion unique URLs
+## Example: 7 chars of base62 = 62^7 ≈ 3.5 trillion unique URLs
 
 encode_base62(123456789) # "8m0Kx"
 
@@ -1002,7 +1004,7 @@ Step 4: Write Path
 
 async def shorten_url(url: str, user_id: str = None):
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Check if URL already shortened (optimization)
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Check if URL already shortened (optimization)
 
 existing = await db.query(
 
@@ -1016,11 +1018,11 @@ if existing:
 
 return {"short_url": f"https://short.domain/{existing['short_code']}"}
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate unique code
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate unique code
 
 short_code = await generate_unique_code()
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store in DB
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store in DB
 
 await db.execute(
 
@@ -1030,7 +1032,7 @@ await db.execute(
 
 )
 
-# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Warm the cache
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Warm the cache
 
 await redis.setex(f"url:{short_code}", 86400, url)
 
@@ -1060,13 +1062,13 @@ Step 5: Read Path (The Hot Path — Handles 100M req/day)
 
 async def redirect(short_code: str, request: Request):
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache (99% hit rate with 24h TTL)
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache (99% hit rate with 24h TTL)
 
 original_url = await redis.get(f"url:{short_code}")
 
 if not original_url:
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — hit DB
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss — hit DB
 
 row = await db.query(
 
@@ -1082,11 +1084,11 @@ raise HTTPException(status_code=404)
 
 original_url = row["original_url"]
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache with TTL
 
 await redis.setex(f"url:{short_code}", 86400, original_url)
 
-# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Log click asynchronously (don't block the redirect)
+## 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Log click asynchronously (don't block the redirect)
 
 click_event = {
 
@@ -1102,11 +1104,11 @@ click_event = {
 
 }
 
-# Fire and forget — queue to Kafka
+## Fire and forget — queue to Kafka
 
 await click_producer.send("url_clicks", click_event)
 
-# 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Redirect (301 for permanent, 302 for analytics)
+## 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Redirect (301 for permanent, 302 for analytics)
 
 return RedirectResponse(url=original_url, status_code=301)
 
@@ -1163,13 +1165,13 @@ Pattern 1: Fire and Forget
 
 async def send_email(request: EmailRequest):
 
-# Validate request
+## Validate request
 
 if not request.valid:
 
 raise HTTPException(400)
 
-# Queue the work — don't wait
+## Queue the work — don't wait
 
 await email_queue.send({
 
@@ -1181,7 +1183,7 @@ await email_queue.send({
 
 })
 
-# Return immediately
+## Return immediately
 
 return {"status": "queued", "message_id": str(uuid.uuid4())}
 
@@ -1215,11 +1217,11 @@ Instead of polling, have the worker call a URL when done:
 
 async def process_report(report_id: str, params: dict, callback_url: str):
 
-# ... generate report ...
+## ... generate report ...
 
 await save_report(report_id, result)
 
-# Notify caller
+## Notify caller
 
 if callback_url:
 
@@ -1273,7 +1275,7 @@ Every request hits the database. Database CPU is 90%. Response times are 200ms f
 
 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The N+1 Query Problem 
 
-# Anti-pattern: N+1 queries
+## Anti-pattern: N+1 queries
 
 def get_orders_with_items(user_id: str):
 
@@ -1281,7 +1283,7 @@ orders = db.query("SELECT * FROM orders WHERE user_id = :uid", {"uid": user_id})
 
 for order in orders:
 
-# One query PER order — terrible!
+## One query PER order — terrible!
 
 order["items"] = db.query(
 
@@ -1293,7 +1295,7 @@ order["items"] = db.query(
 
 return orders
 
-# Fix: single query with JOIN
+## Fix: single query with JOIN
 
 def get_orders_with_items_fixed(user_id: str):
 
@@ -1324,5 +1326,7 @@ Summary: Key Decisions for 2026
 The best system design is the one that solves today's problem without creating tomorrow's nightmare. Start simple, measure everything, extract with surgical precision, and never optimize for a scale you haven't reached.
 
 **See also:** [Domain-Driven Design Fundamentals](</en/architecture/ddd-guide.html>), [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>).
+
+**See also:** [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Domain-Driven Design Fundamentals](</en/architecture/ddd-guide.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>)
 
 **See also:** [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Domain-Driven Design Fundamentals](</en/architecture/ddd-guide.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>)

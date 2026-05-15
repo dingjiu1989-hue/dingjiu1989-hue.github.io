@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html
 
 # Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
 
-# Data Loss Prevention Strategies
+## Data Loss Prevention Strategies
+
+## Data Loss Prevention Strategies
 
 DLP Overview 
 
@@ -48,17 +50,17 @@ if packet.haslayer(Raw):
 
 payload = str(packet[Raw].load)
 
-# Check for credit card patterns
+## Check for credit card patterns
 
 if re.search(r"\b(?:\d[ -]*?){13,16}\b", payload):
 
 print(f"[ALERT] Potential CC leak from {packet[IP].src}")
 
-# Trigger block or alert
+## Trigger block or alert
 
 return False
 
-# Check for API keys (length > 20, high entropy)
+## Check for API keys (length > 20, high entropy)
 
 if len(payload) > 20 and has_high_entropy(payload):
 
@@ -82,7 +84,7 @@ Endpoint DLP
 
 Control data movement on endpoints: 
 
-# endpoint-dlp-rules.yaml
+## endpoint-dlp-rules.yaml
 
 rules:
 
@@ -120,7 +122,7 @@ Cloud DLP
 
 Protect data in SaaS and IaaS environments: 
 
-# Google Cloud DLP inspection job
+## Google Cloud DLP inspection job
 
 resource "google_data_loss_prevention_job_trigger" "bigquery_scan" {
 
@@ -241,5 +243,7 @@ Conclusion
 Effective DLP requires coverage across network, endpoint, and cloud domains. Design policies iteratively, start with monitoring, layer in blocking controls, and feed findings into your incident response workflow. The goal is to prevent data loss without blocking productivity.
 
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>).
+
+**See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)
 
 **See also:** [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>), [Incident Response Plan](</en/security/incident-response-plan.html>), [Endpoint Security](</en/security/endpoint-security.html>)

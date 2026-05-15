@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-03">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>Nginx Configuration: Performance and Security — SourceHub</title>
     <meta name="description" content="Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.">
@@ -46,8 +46,8 @@
       "description": "Configure Nginx for production: reverse proxy, load balancing, caching, SSL termination, and security hardening.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "697",
+      "dateModified": "2026-04-03",
+      "wordCount": "644",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,37 +93,39 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Nginx Configuration: Performance and Security</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration.png" alt="Nginx Configuration: Performance and Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
-<h1>Nginx Configuration: Performance and Security</h1>
+      <div class="article-body"><h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
+<h2>Nginx Configuration: Performance and Security</h2>
 <p>Nginx is the most popular web server and reverse proxy. Proper configuration balances performance, security, and resource usage.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration.png" alt="Nginx Configuration: Performance and Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Reverse Proxy Configuration</h2>
+<h3>Reverse Proxy Configuration</h3>
 <p>Configure Nginx as a reverse proxy to backend applications. Use proxy_pass to forward requests. Set proxy_set_header to forward client connection details. Configure proxy_buffering for streaming applications.</p>
 <p>WebSocket proxying requires specific headers: Upgrade and Connection. FastCGI proxying (for PHP) uses fastcgi_pass. gRPC proxying requires http2 and grpc_pass. Each protocol has specific requirements for reliable proxying.</p>
-<h2>Load Balancing</h2>
+<h3>Load Balancing</h3>
 <p>Nginx distributes traffic across backend servers. Load balancing methods include round-robin (default), least_conn (least connections), ip_hash (session persistence), and random. upstream blocks define server groups with optional weights.</p>
 <p>Health checks monitor backend availability. Active checks (nginx plus) test endpoints periodically. Passive checks mark servers as failed after connection or timeout errors. max_fails and fail_timeout control failure detection.</p>
-<h2>Caching</h2>
+<h3>Caching</h3>
 <p>Nginx caching reduces backend load. proxy_cache_path defines the cache location and parameters. proxy_cache enables caching for specific locations. Cache keys based on request URI, query string, and headers.</p>
 <p>Cache bypass headers (Cache-Control: no-cache) from the backend prevent caching of dynamic content. Cache purging removes stale entries. Microcaching (1-5 second cache for all responses) protects backends from traffic spikes.</p>
-<h2>SSL/TLS</h2>
+<h3>SSL/TLS</h3>
 <p>Configure HTTPS with strong ciphers and protocols. Use TLS 1.2 and 1.3 only. Modern cipher suites prioritize ChaCha20 and AES-GCM. Enable HSTS (Strict-Transport-Security) to enforce HTTPS.</p>
 <p>OCSP stapling improves TLS performance. SSL session cache reduces handshake overhead. Use Let's Encrypt with Certbot for automated certificate management. Redirect HTTP to HTTPS in the server block.</p>
-<h2>Security Headers</h2>
+<h3>Security Headers</h3>
 <p>Add security headers: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, X-XSS-Protection: 0 (modern browsers handle XSS), Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy for feature control. Content-Security-Policy headers mitigate XSS and data injection attacks.</p>
 <p>Rate limiting protects against abuse. limit_req_zone defines rate zones. limit_req applies rate limiting per location. Burst and nodelay parameters allow short traffic spikes while maintaining average limits.</p>
-<p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/dockerfile-best-practices.html">Dockerfile Best Practices for Production</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

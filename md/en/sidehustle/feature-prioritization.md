@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/feature-prioritization.html
 
 # Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
 
-## Feature Prioritization Frameworks for SaaS
+## Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+
+### Feature Prioritization Frameworks for SaaS
 
 Feature prioritization is the most consequential product decision a founder makes. Building the wrong features wastes months of development time while competitors iterate on what customers actually need. Systematic prioritization frameworks remove subjectivity from these decisions.
 
-### RICE Scoring
+#### RICE Scoring
 
 RICE (Reach, Impact, Confidence, Effort) provides a quantitative framework for comparing feature requests. Calculate each dimension on a scale and divide by effort to get a priority score.
 
@@ -50,7 +52,7 @@ RICE (Reach, Impact, Confidence, Effort) provides a quantitative framework for c
 
 The RICE score is (Reach x Impact x Confidence) / Effort. Sort features by RICE score and build from the top.
 
-### MoSCoW Method
+#### MoSCoW Method
 
 MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed releases and complements RICE's continuous prioritization.
 
@@ -62,7 +64,7 @@ MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed r
 
 **Won't-have:** Explicitly out of scope for this release. Documenting these prevents scope creep.
 
-### Opportunity Scoring
+#### Opportunity Scoring
 
 Opportunity scoring identifies gaps between how important a feature is and how satisfied users are with current solutions. Survey users: "How important is X?" (1-10) and "How satisfied are you with current X?" (1-10).
 
@@ -70,20 +72,22 @@ The opportunity score formula prioritizes features where importance is high but 
 
 This framework is particularly useful for established products where you need to identify the biggest gaps in user experience rather than evaluate net-new features.
 
-### Combining Frameworks
+#### Combining Frameworks
 
 Use RICE for initial prioritization of your backlog. Apply MoSCoW to scope each release. Use opportunity scoring quarterly to validate your roadmap against user sentiment.
 
 A practical workflow: maintain a feature request database (Canny, Productboard, or a simple Airtable). Score all requests using RICE. For each quarterly planning cycle, review the top 20% of RICE-scored features and apply MoSCoW for the upcoming release. Run opportunity scoring surveys with your power users.
 
-### Common Pitfalls
+#### Common Pitfalls
 
 Avoid prioritizing by vocal minority — a few loud customers don't represent your broader user base. Avoid prioritizing by founder intuition without data validation. Avoid building features for individual customers instead of addressing patterns across customers. Most critically, avoid prioritizing revenue potential over activation impact — a feature that helps 10 users upgrade is less valuable than one that helps 100 users activate.
 
-### Conclusion
+#### Conclusion
 
 Systematic feature prioritization replaces guesswork with data-driven decision making. RICE provides quantitative comparison across your full backlog. MoSCoW scopes individual releases. Opportunity scoring validates your roadmap against actual user needs. Together, these frameworks ensure you build what matters most to your product's success.
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product Launch Strategy: Product Hunt, Hacker News, Social Media](</en/sidehustle/product-announcement.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>).
+
+**See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)
 
 **See also:** [Developer Community Building: Discord, GitHub, Documentation, and Open Source](</en/sidehustle/dev-community-building.html>), [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis](</en/sidehustle/saas-analytics.html>)

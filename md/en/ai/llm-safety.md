@@ -8,45 +8,47 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-safety.html
 
 # LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-# LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
 
-## Introduction
+## LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming
+
+### Introduction
 
 As LLMs are deployed in sensitive applications, safety mechanisms are essential. Models can produce harmful content, leak private information, or be manipulated through prompt injection. This article covers the four layers of LLM safety: training-time alignment through RLHF, runtime constraints with Constitutional AI, automated content filtering, and adversarial testing via red teaming.
 
-## RLHF (Reinforcement Learning from Human Feedback)
+### RLHF (Reinforcement Learning from Human Feedback)
 
 RLHF trains the model to prefer helpful and harmless responses:
 
-# RLHF training pipeline (simplified)
+## RLHF training pipeline (simplified)
 
-# Step 1: Supervised fine-tuning on demonstration data
+## Step 1: Supervised fine-tuning on demonstration data
 
-# Step 2: Train a reward model on human preference comparisons
+## Step 2: Train a reward model on human preference comparisons
 
-# Training a reward model
+## Training a reward model
 
 reward_training_data = [
 
@@ -60,15 +62,15 @@ reward_training_data = [
 
 ]
 
-# Step 3: Optimize the policy using PPO
+## Step 3: Optimize the policy using PPO
 
-# The model generates responses, the reward model scores them,
+## The model generates responses, the reward model scores them,
 
-# and PPO updates the model weights toward higher-scoring responses
+## and PPO updates the model weights toward higher-scoring responses
 
 RLHF produces models that refuse harmful requests, avoid biased language, and maintain helpfulness. The quality of the reward model and the diversity of the preference data are the primary determinants of alignment quality.
 
-## Constitutional AI
+### Constitutional AI
 
 Constitutional AI (CAI) provides a set of behavioral principles that guide model responses without requiring human feedback for every example:
 
@@ -114,7 +116,7 @@ return response, []
 
 The model critiques its own output against the constitution and revises it when violations are detected. This RLAIF (RL from AI Feedback) approach scales alignment beyond what human annotation budgets allow.
 
-## Content Filtering
+### Content Filtering
 
 Automated filters provide a safety layer independent of the model:
 
@@ -170,7 +172,7 @@ def check_output(self, text: str) -> tuple[bool, list[str]]:
 
 violations = []
 
-# Use a classifier model for semantic content filtering
+## Use a classifier model for semantic content filtering
 
 classification = self.classify_content(text)
 
@@ -182,7 +184,7 @@ if classification["self_harm"] > 0.7:
 
 violations.append("self_harm_reference")
 
-# Pattern-based PII detection
+## Pattern-based PII detection
 
 for name, pattern in self.patterns.items():
 
@@ -192,7 +194,7 @@ violations.append(f"pii_leak: {name}")
 
 return len(violations) == 0, violations
 
-## Red Teaming
+### Red Teaming
 
 Red teaming systematically probes the model for vulnerabilities:
 
@@ -280,10 +282,12 @@ refusal_patterns = ["I cannot", "I'm unable", "I apologize", "not appropriate"]
 
 return not any(pattern in response.lower() for pattern in refusal_patterns)
 
-## Conclusion
+### Conclusion
 
 LLM safety requires defense in depth. RLHF and Constitutional AI align the model during training. Content filters provide runtime safety independent of the model's reliability. Red teaming identifies vulnerabilities before they are exploited in production. Establish a continuous safety pipeline: train with alignment techniques, filter inputs and outputs, run automated red-teaming on every model update, and maintain a vulnerability disclosure process for external reporters.
 
 **See also:** [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>).
+
+**See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)
 
 **See also:** [AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration](</en/ai/ai-testing-frameworks.html>), [AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing](</en/ai/ai-red-teaming.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>)

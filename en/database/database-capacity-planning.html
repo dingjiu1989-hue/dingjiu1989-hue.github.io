@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-04">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling — SourceHub</title>
     <meta name="description" content="Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.">
@@ -46,8 +46,8 @@
       "description": "Learn database capacity planning: right-sizing compute and storage, growth forecasting models, monitoring key metrics, and scaling strategies for PostgreSQL.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2475",
+      "dateModified": "2026-05-04",
+      "wordCount": "2213",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png" alt="Database Capacity Planning: Sizing, Growth Forecasting, and Scaling" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
-<h1>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h1>
+      <div class="article-body"><h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
+<h2>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</h2>
 <p>Database Capacity Planning: Sizing, Growth Forecasting, and Scaling </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-capacity-planning.png" alt="Database Capacity Planning: Sizing, Growth Forecasting, and Scaling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Capacity planning ensures your database has enough resources to handle current and future workloads without over-provisioning. It is a continuous process that combines monitoring, forecasting, and proactive scaling. </p>
 <p>Key Capacity Metrics </p>
@@ -165,7 +166,7 @@
 <p>import numpy as np</p>
 <p>conn = psycopg2.connect("dbname=mydb")</p>
 <p>cur = conn.cursor()</p>
-<h1>Get daily row counts for last 90 days</h1>
+<h2>Get daily row counts for last 90 days</h2>
 <p>cur.execute("""</p>
 <p>SELECT date(created_at) AS day, count(*) AS rows</p>
 <p>FROM orders</p>
@@ -176,10 +177,10 @@
 <p>data = cur.fetchall()</p>
 <p>days = np.array([(row[0] - data[0][0]).days for row in data])</p>
 <p>rows = np.array([row[1] for row in data])</p>
-<h1>Linear regression</h1>
+<h2>Linear regression</h2>
 <p>coefficients = np.polyfit(days, rows, 1)</p>
 <p>daily_growth = coefficients[0]</p>
-<h1>Forecast: 90 days out</h1>
+<h2>Forecast: 90 days out</h2>
 <p>forecast_days = 90</p>
 <p>current_total = sum(rows)</p>
 <p>forecast_total = current_total + daily_growth * forecast_days</p>
@@ -197,12 +198,12 @@
 <p>Scaling Strategies </p>
 <p>Vertical Scaling (Scale Up) </p>
 <p>Increase the size of the existing database instance: </p>
-<h1>AWS RDS</h1>
+<h2>AWS RDS</h2>
 <p>aws rds modify-db-instance \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.xlarge \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--apply-immediately</p>
-<h1>Or via Terraform</h1>
+<h2>Or via Terraform</h2>
 <p>resource "aws_db_instance" "mydb" {</p>
 <p>instance_class = "db.r6g.xlarge" # Was db.r6g.large</p>
 <p>allocated_storage = 200 # Was 100</p>
@@ -210,7 +211,7 @@
 <p><strong>Pros</strong> : Simple, no application changes. <strong>Cons</strong> : Instance size limits, downtime for some changes, no infinite scaling. </p>
 <p>Horizontal Scaling (Scale Out) </p>
 <p>Add read replicas for read workloads: </p>
-<h1>Add read replica</h1>
+<h2>Add read replica</h2>
 <p>aws rds create-db-instance-read-replica \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-replica-1 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
@@ -222,7 +223,7 @@
 <p>SELECT * FROM orders WHERE user_id = 42;</p>
 <p>Autoscaling Configuration </p>
 <p>Aurora Serverless </p>
-<h1>Automatic scaling based on load</h1>
+<h2>Automatic scaling based on load</h2>
 <p>Resources:</p>
 <p>MyDBCluster:</p>
 <p>Type: AWS::RDS::DBCluster</p>
@@ -232,7 +233,7 @@
 <p>MinCapacity: 0.5</p>
 <p>MaxCapacity: 64</p>
 <p>Storage Autoscaling </p>
-<h1>Enable storage autoscaling on RDS</h1>
+<h2>Enable storage autoscaling on RDS</h2>
 <p>aws rds modify-db-instance \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-allocated-storage 1000 \</p>
@@ -242,14 +243,14 @@
 <p>| Metric | Alert Threshold | Action | |--------|-----------------|--------| | Storage utilization | &gt;80% | Increase storage or archive data | | CPU utilization | &gt;80% for 5 minutes | Scale up or optimize queries | | Connection utilization | &gt;80% | Increase max_connections or add pooler | | Replication lag | &gt;60 seconds | Investigate replica or network | | IOPS utilization | &gt;80% of provisioned | Increase IOPS provision | | Cache hit ratio | &lt;99% | Increase shared_buffers | </p>
 <p>Seasonal Capacity </p>
 <p>Many workloads are not uniform. Plan for seasonal peaks: </p>
-<h1>Example: Black Friday capacity plan</h1>
-<h1>Normal: 4 vCPU, 16 GB RAM, 1000 connections</h1>
-<h1>Black Friday: 16 vCPU, 64 GB RAM, 5000 connections</h1>
-<h1>Pre-scale 2 weeks before</h1>
+<h2>Example: Black Friday capacity plan</h2>
+<h2>Normal: 4 vCPU, 16 GB RAM, 1000 connections</h2>
+<h2>Black Friday: 16 vCPU, 64 GB RAM, 5000 connections</h2>
+<h2>Pre-scale 2 weeks before</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-11-10</p>
 <p>action: scale_up</p>
 <p>target: db.r6g.4xlarge</p>
-<h1>Post-scale 1 week after</h1>
+<h2>Post-scale 1 week after</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-12-07</p>
 <p>action: scale_down</p>
 <p>target: db.r6g.xlarge</p>
@@ -259,7 +260,8 @@
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Analyze</strong> : Identify trends and anomalies. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Forecast</strong> : Project future resource needs. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Plan</strong> : Schedule scaling or optimization. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Execute</strong> : Apply changes during maintenance windows. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Review</strong> : Validate that changes had the expected effect. </p>
 <p>Capacity planning is not a one-time exercise. Review your database capacity monthly, adjust forecasts quarterly, and always maintain headroom for unexpected traffic spikes. Over-provision by 20-30% for production databases to absorb traffic surges without degradation.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-cost-optimization.html">Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-implementation.html
 
 # OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
 
-# OAuth2 Implementation
+## OAuth2 Implementation
+
+## OAuth2 Implementation
 
 OAuth2 Fundamentals 
 
@@ -198,15 +200,15 @@ Refresh Token Rotation
 
 def rotate_refresh_token(old_token):
 
-# Verify the old refresh token
+## Verify the old refresh token
 
 token_data = verify_refresh_token(old_token)
 
-# Revoke the old token
+## Revoke the old token
 
 revoke_token(old_token)
 
-# Issue new tokens
+## Issue new tokens
 
 new_access = create_access_token(token_data["user_id"])
 
@@ -247,5 +249,7 @@ Conclusion
 OAuth2 is complex but essential for modern authentication. PKCE makes authorization code flow safe for single-page apps. Use short-lived access tokens with refresh token rotation. Always validate tokens thoroughly on the server side. Keep your JWKS endpoint secure and rotate signing keys regularly.
 
 **See also:** [Data Classification](</en/security/data-classification.html>), [Helm Security](</en/security/helm-security.html>), [Software Signing](</en/security/software-signing.html>).
+
+**See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [Helm Security](</en/security/helm-security.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)

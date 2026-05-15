@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/iam-audit.html
 
 # IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
 
-# IAM Audit
+## IAM Audit
+
+## IAM Audit
 
 IAM Audit Fundamentals 
 
@@ -72,25 +74,25 @@ user_info = {
 
 }
 
-# Inline policies
+## Inline policies
 
 policies = self.iam.list_user_policies(UserName=user["UserName"])
 
 user_info["policies"] = policies["PolicyNames"]
 
-# Attached managed policies
+## Attached managed policies
 
 attached = self.iam.list_attached_user_policies(UserName=user["UserName"])
 
 user_info["managed_policies"] = [p["PolicyName"] for p in attached["AttachedPolicies"]]
 
-# Groups
+## Groups
 
 groups = self.iam.list_groups_for_user(UserName=user["UserName"])
 
 user_info["groups"] = [g["GroupName"] for g in groups["Groups"]]
 
-# Last activity
+## Last activity
 
 last_used = self.iam.get_user(UserName=user["UserName"])
 
@@ -168,7 +170,7 @@ actions = [actions]
 
 resource = stmt.get("Resource", "*")
 
-# Check for IAM modify permissions
+## Check for IAM modify permissions
 
 escalation_actions = [
 
@@ -226,7 +228,7 @@ report = {
 
 }
 
-# Flag users with admin access who don't need it
+## Flag users with admin access who don't need it
 
 for user in findings["users"]:
 
@@ -273,5 +275,7 @@ Conclusion
 Regular IAM audits are essential for maintaining least privilege. Automate permission reviews, detect unused roles, and analyze privilege escalation paths. Generate actionable reports and enforce remediation SLAs. Audit at least quarterly, with automated scanning running continuously.
 
 **See also:** [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>), [EDR: Endpoint Detection and Response Solutions](</en/security/endpoint-detection-response.html>), [Cloud IAM Deep Dive](</en/security/cloud-iam.html>).
+
+**See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)
 
 **See also:** [Cloud IAM Deep Dive](</en/security/cloud-iam.html>), [Threat Hunting](</en/security/threat-hunting.html>), [Container Runtime Security](</en/security/container-runtime-security.html>)

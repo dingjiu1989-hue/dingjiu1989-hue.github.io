@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/distributed-databases.html
 
 # Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
 
-# Distributed Databases: Concepts and Implementation
+## Distributed Databases: Concepts and Implementation
+
+## Distributed Databases: Concepts and Implementation
 
 Distributed Database Architecture 
 
@@ -101,5 +103,7 @@ Conclusion
 Choose Dynamo-style (Cassandra, DynamoDB) for availability and tunable consistency. Choose Spanner-style (Spanner, CockroachDB) for strong consistency. Choose Raft-based systems (etcd) for coordination. Consider your consistency requirements carefully.
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>).
+
+**See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Redis Caching Patterns](</en/database/redis-caching.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
 
 **See also:** [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Redis Caching Patterns](</en/database/redis-caching.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)

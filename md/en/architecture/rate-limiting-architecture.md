@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-architectur
 
 # Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
 
-# Rate Limiting Architecture
+## Rate Limiting Architecture
+
+## Rate Limiting Architecture
 
 Rate limiting protects system resources by controlling the rate at which clients can make requests. It prevents abuse, ensures fair resource allocation, and maintains system stability under load. The choice of rate limiting algorithm — how limits are tracked and enforced — determines the system's accuracy, memory usage, and ability to handle burst traffic. 
 
@@ -53,5 +55,7 @@ Concurrency limiting complements rate limiting. Rate limiting controls request a
 Client identification is the prerequisite for rate limiting. Simple identification uses IP address, which is unreliable behind proxies or NAT. API keys or JWT claims provide reliable client identity. Anonymous clients may be identified by a combination of factors (IP + user agent + geolocation). The identification method determines the limit's fairness — IP-based limiting unfairly restricts users behind shared IPs, while API key limiting requires all clients to authenticate.
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [Distributed Tracing: Deep Dive](</en/architecture/distributed-tracing-deep.html>).
+
+**See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Distributed Locking Mechanisms](</en/architecture/distributed-locking.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)

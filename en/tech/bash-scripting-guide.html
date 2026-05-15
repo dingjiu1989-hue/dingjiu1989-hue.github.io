@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Essential patterns for writing reliable, maintainable shell scripts in production environments.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-04-00">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Bash Scripting Best Practices — SourceHub</title>
     <meta name="description" content="Essential patterns for writing reliable, maintainable shell scripts in production environments.">
@@ -46,8 +46,8 @@
       "description": "Essential patterns for writing reliable, maintainable shell scripts in production environments.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1384",
+      "dateModified": "2026-04-00",
+      "wordCount": "1094",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,25 +93,26 @@
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Bash Scripting Best Practices</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-04-00 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
-<h1>Bash Scripting Best Practices</h1>
+      <div class="article-body"><h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
+<h2>Bash Scripting Best Practices</h2>
 <p>Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png" alt="Bash Scripting Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Start with Strict Mode</h2>
+<h3>Start with Strict Mode</h3>
 <p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
-<h1>!/usr/bin/env bash</h1>
+<h2>!/usr/bin/env bash</h2>
 <p>set -euo pipefail</p>
 <p>IFS=$'\n\t'</p>
 <ul>
@@ -135,26 +136,26 @@
 <p>exit 1</p>
 <p>}</p>
 <p>trap 'error_handler $LINENO' ERR</p>
-<h2>Use Functions for Modularity</h2>
+<h3>Use Functions for Modularity</h3>
 <p>Avoid writing long linear scripts. Break logic into functions with clear names:</p>
 <p>validate_input() { ... }</p>
 <p>process_file() { ... }</p>
 <p>send_notification() { ... }</p>
 <p>Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable.</p>
-<h2>Prefer <code>[[ ]]</code> Over <code>[ ]</code></h2>
+<h3>Prefer <code>[[ ]]</code> Over <code>[ ]</code></h3>
 <p>The double-bracket <code>[[ ]]</code> construct is a Bash keyword with fewer surprises:</p>
 <p>if [[ -f "$file" &amp;&amp; "$name" == "prod" ]]; then</p>
 <p>echo "Matched"</p>
 <p>fi</p>
 <p>Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting.</p>
-<h2>Quote Everything</h2>
+<h3>Quote Everything</h3>
 <p>Unquoted variables are one of the most common sources of bugs:</p>
-<h1>Wrong</h1>
+<h2>Wrong</h2>
 <p>if [ -f $file ]; then # breaks if file has spaces</p>
-<h1>Right</h1>
+<h2>Right</h2>
 <p>if [[ -f "$file" ]]; then</p>
 <p>Quote all variable expansions: <code>"$var"</code>, <code>"${array[@]}"</code>, and command substitutions <code>"$(command)"</code>.</p>
-<h2>Use <code>trap</code> for Cleanup</h2>
+<h3>Use <code>trap</code> for Cleanup</h3>
 <p>Always clean up temporary files and resources:</p>
 <p>cleanup() {</p>
 <p>rm -rf "$TEMP_DIR"</p>
@@ -162,7 +163,7 @@
 <p>}</p>
 <p>trap cleanup EXIT</p>
 <p>The <code>EXIT</code> trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for <code>INT</code> and <code>TERM</code>.</p>
-<h2>Argument Parsing with <code>getopts</code></h2>
+<h3>Argument Parsing with <code>getopts</code></h3>
 <p>Use <code>getopts</code> for reliable argument parsing instead of manual position checks:</p>
 <p>usage() { echo "Usage: $0 -f file -o output [-v]" &gt;&2; exit 1; }</p>
 <p>while getopts ":f:o:v" opt; do</p>
@@ -174,15 +175,15 @@
 <p>esac</p>
 <p>done</p>
 <p>This handles short flags robustly, including missing argument errors.</p>
-<h2>Use <code>readonly</code> and <code>declare -r</code></h2>
+<h3>Use <code>readonly</code> and <code>declare -r</code></h3>
 <p>Mark constants and configuration values as readonly:</p>
 <p>readonly MAX_RETRIES=3</p>
 <p>readonly CONFIG_PATH="/etc/myapp/config.yml"</p>
 <p>This prevents accidental overwrites and documents intent.</p>
-<h2>Prefer <code>printf</code> Over <code>echo</code></h2>
+<h3>Prefer <code>printf</code> Over <code>echo</code></h3>
 <p>The <code>echo</code> command behaves differently across shells and platforms. Use <code>printf</code> for portable, predictable output:</p>
 <p>printf "Processing file: %s\n" "$filename"</p>
-<h2>Logging with Timestamps</h2>
+<h3>Logging with Timestamps</h3>
 <p>Implement a simple logging function for better observability:</p>
 <p>log() {</p>
 <p>local level="$1"</p>
@@ -192,7 +193,7 @@
 <p>info() { log "INFO" "$@"; }</p>
 <p>error() { log "ERROR" "$@"; }</p>
 <p>Send logs to stderr so they don't interfere with stdout data output.</p>
-<h2>Validating Dependencies</h2>
+<h3>Validating Dependencies</h3>
 <p>Check required commands before proceeding:</p>
 <p>require() {</p>
 <p>for cmd in "$@"; do</p>
@@ -203,9 +204,9 @@
 <p>done</p>
 <p>}</p>
 <p>require jq curl openssl</p>
-<h2>Avoid <code>eval</code> and Backtick Substitution</h2>
+<h3>Avoid <code>eval</code> and Backtick Substitution</h3>
 <p>Never use <code>eval</code> unless absolutely necessary -- it is a security risk. Use <code>$()</code> instead of backticks for command substitution; <code>$()</code> nests cleanly and is visually distinct.</p>
-<h2>Use Arrays for Lists</h2>
+<h3>Use Arrays for Lists</h3>
 <p>Modern Bash supports arrays, which handle spaces correctly:</p>
 <p>files=()</p>
 <p>while IFS= read -r -d '' file; do</p>
@@ -215,18 +216,19 @@
 <p>process_file "$file"</p>
 <p>done</p>
 <p>The <code>-print0</code> / <code>read -d ''</code> pattern handles filenames with any special characters.</p>
-<h2>ShellCheck Integration</h2>
+<h3>ShellCheck Integration</h3>
 <p>Run <a href="https://www.shellcheck.net/">ShellCheck</a> as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing.</p>
-<h2>Testing Bash Scripts</h2>
+<h3>Testing Bash Scripts</h3>
 <p>Use <code>bats</code> (Bash Automated Testing System) for unit testing:</p>
 <p>@test "validate_input rejects empty string" {</p>
 <p>run validate_input ""</p>
 <p>[[ "$status" -ne 0 ]]</p>
 <p>}</p>
 <p>Test your error handlers, edge cases with spaces, and exit codes.</p>
-<h2>Summary</h2>
+<h3>Summary</h3>
 <p>Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production.</p>
-<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/microservices-communication.html">Microservices Communication Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/kubernetes-services-security.html">Kubernetes Security Best Practices</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>, <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

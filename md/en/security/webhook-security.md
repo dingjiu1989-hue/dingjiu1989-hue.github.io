@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/webhook-security.html
 
 # Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
 
-# Webhook Security Best Practices
+## Webhook Security Best Practices
+
+## Webhook Security Best Practices
 
 Why Webhook Security Matters 
 
@@ -56,7 +58,7 @@ def verify_stripe_signature(payload, sig_header, secret):
 
 """Verify Stripe webhook signature."""
 
-# Signature format: t=timestamp,v1=signature
+## Signature format: t=timestamp,v1=signature
 
 parts = dict(item.split('=', 1) for item in sig_header.split(','))
 
@@ -68,13 +70,13 @@ timestamp = parts['t']
 
 expected_sig = parts['v1']
 
-# Prevent replay: signature must be within 5 minutes
+## Prevent replay: signature must be within 5 minutes
 
 if abs(int(timestamp) - time.time()) > 300:
 
 return False
 
-# Compute expected signature
+## Compute expected signature
 
 signed_payload = f"{timestamp}.{payload}".encode()
 
@@ -88,7 +90,7 @@ hashlib.sha256
 
 ).hexdigest()
 
-# Constant-time comparison
+## Constant-time comparison
 
 return hmac.compare_digest(computed_sig, expected_sig)
 
@@ -196,7 +198,7 @@ def handle_webhook():
 
 event = request.json
 
-# Process the verified event
+## Process the verified event
 
 return 'OK', 200
 
@@ -375,5 +377,7 @@ Summary
 Webhook endpoints are publicly accessible by design, making them an attractive target. Always verify payload signatures using HMAC-SHA256, implement replay protection with timestamps, track idempotency keys to prevent duplicate processing, validate payload structure, and restrict by IP when possible. These controls turn a publicly accessible endpoint into a secure integration point that only processes legitimate webhook events.
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>).
+
+**See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)
 
 **See also:** [JWT Authentication Best Practices](</en/security/jwt-authentication-guide.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>)

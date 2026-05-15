@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/consensus-algorithms.html
 
 # Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
 
-# Consensus Algorithms: Paxos, Raft, Zab
+## Consensus Algorithms: Paxos, Raft, Zab
+
+## Consensus Algorithms: Paxos, Raft, Zab
 
 Consensus algorithms enable a group of distributed nodes to agree on a value despite failures. They are the foundation of replicated state machines, which underpin distributed databases, configuration stores, and coordination services. Three algorithms dominate production systems: Paxos, Raft, and Zab. Understanding their mechanics and tradeoffs is essential for architects designing fault-tolerant infrastructure. 
 
@@ -51,5 +53,7 @@ Witnesses and observers extend consensus clusters without affecting quorum size.
 Choosing between algorithms is less important than choosing a mature implementation. The differences between Raft, Zab, and Paxos are dwarfed by differences between well-tested and poorly-tested implementations. Production systems should use established implementations (etcd's Raft, ZooKeeper's Zab, CockroachDB's extended Raft) rather than custom implementations, no matter how clean the algorithm appears.
 
 **See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Caching Strategies](</en/architecture/cache-strategies.html>).
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>)

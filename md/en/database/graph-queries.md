@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/graph-queries.html
 
 # Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
-# Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
+
+## Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE
 
 Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE 
 
@@ -305,5 +307,7 @@ Consider a dedicated graph database when:
 Recursive CTEs prove that SQL can handle graph queries. For bounded-depth hierarchies, they perform well and keep your architecture simple. When your graph queries become the dominant workload, it is time to evaluate a dedicated graph database.
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>).
+
+**See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)
 
 **See also:** [NewSQL Databases: Combining SQL with Horizontal Scaling](</en/database/new-sql-databases.html>), [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [Materialized Views](</en/database/materialized-views.html>)

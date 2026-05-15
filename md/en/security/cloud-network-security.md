@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-network-security.html
 
 # Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
 
-# Cloud Network Security
+## Cloud Network Security
+
+## Cloud Network Security
 
 Cloud Network Security Layers 
 
@@ -38,7 +40,7 @@ Security Groups vs NACLs
 
 Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters: 
 
-# Security Group (stateful)
+## Security Group (stateful)
 
 resource "aws_security_group" "web_sg" {
 
@@ -90,7 +92,7 @@ cidr_blocks = ["0.0.0.0/0"]
 
 }
 
-# NACL (stateless - must allow both directions)
+## NACL (stateless - must allow both directions)
 
 resource "aws_network_acl" "public_subnet_acl" {
 
@@ -132,7 +134,7 @@ action = "allow"
 
 VPC Design 
 
-# Multi-tier VPC design
+## Multi-tier VPC design
 
 class VPCDesign:
 
@@ -158,7 +160,7 @@ def generate_routing_rules(self):
 
 rules = []
 
-# Web tier: inbound from public, outbound to app
+## Web tier: inbound from public, outbound to app
 
 rules.append({
 
@@ -172,7 +174,7 @@ rules.append({
 
 })
 
-# App tier: outbound to db
+## App tier: outbound to db
 
 rules.append({
 
@@ -186,7 +188,7 @@ rules.append({
 
 })
 
-# No direct public access to app or db
+## No direct public access to app or db
 
 return rules
 
@@ -194,7 +196,7 @@ Traffic Inspection
 
 Deploy inline inspection for east-west traffic: 
 
-# Traffic inspection rules
+## Traffic inspection rules
 
 inspection_rules:
 
@@ -220,7 +222,7 @@ anomaly_detection: enabled
 
 Firewall Rule Management 
 
-# Firewall rule analyzer
+## Firewall rule analyzer
 
 def analyze_firewall_rules(rules):
 
@@ -228,21 +230,21 @@ issues = []
 
 for rule in rules:
 
-# Check for overly permissive rules
+## Check for overly permissive rules
 
 if rule.get("cidr") == "0.0.0.0/0" and rule.get("port") in [22, 3389]:
 
 issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")
 
-# Check for rules with no hits
+## Check for rules with no hits
 
 if rule.get("hit_count", 0) == 0 and rule["age_days"] > 30:
 
 issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")
 
-# Check for duplicate rules
+## Check for duplicate rules
 
-# ...
+## ...
 
 return issues
 
@@ -251,5 +253,7 @@ Conclusion
 Cloud network security requires layered controls. Use security groups for instance-level filtering and NACLs for subnet-level guardrails. Design VPCs with multiple tiers and restrict traffic between them. Deploy traffic inspection for critical paths. Review firewall rules quarterly and remove unused rules. Automate everything with infrastructure as code.
 
 **See also:** [Kubernetes Security](</en/security/kubernetes-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>).
+
+**See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Kubernetes Security](</en/security/kubernetes-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Data Loss Prevention Strategies](</en/security/dlp-strategies.html>), [Kubernetes Security](</en/security/kubernetes-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)

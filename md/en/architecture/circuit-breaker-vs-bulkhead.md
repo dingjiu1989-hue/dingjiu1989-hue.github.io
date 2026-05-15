@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhe
 
 # Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
 
-# Circuit Breaker vs Bulkhead Pattern
+## Circuit Breaker vs Bulkhead Pattern
+
+## Circuit Breaker vs Bulkhead Pattern
 
 Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. 
 
@@ -51,5 +53,7 @@ Implementation considerations include metric collection for both patterns. Track
 Configuration should be dynamic where possible. Circuit breaker thresholds and timeouts may need adjustment during incidents. Bulkhead sizes may need adjustment based on traffic patterns. Feature flags or runtime configuration changes allow tuning without redeployment. The initial configuration should be conservative — circuit breakers trip quickly, bulkheads are sized generously — and tightened based on operational experience.
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>).
+
+**See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)
 
 **See also:** [Timeout and Retry Patterns](</en/architecture/timeout-retry-patterns.html>), [Retry Patterns](</en/architecture/retry-patterns.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>)

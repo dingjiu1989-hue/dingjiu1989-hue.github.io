@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/patching-strategy.html
 
 # Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
 
-# Patching Strategy
+## Patching Strategy
+
+## Patching Strategy
 
 Introduction 
 
@@ -72,11 +74,11 @@ def prioritize(vuln: Vulnerability) -> int:
 
 score = vuln.cvss_score
 
-# Asset criticality multiplier
+## Asset criticality multiplier
 
 score *= (vuln.asset_criticality / 3)
 
-# Exploit availability
+## Exploit availability
 
 if vuln.exploit_available:
 
@@ -86,7 +88,7 @@ if vuln.in_wild:
 
 score *= 2.0
 
-# Reachability
+## Reachability
 
 if vuln.affected_systems > 100:
 
@@ -186,9 +188,9 @@ max_surge: 25%
 
 max_unavailable: 0
 
-# !/bin/bash
+## !/bin/bash
 
-# Automated patch testing script
+## Automated patch testing script
 
 set -euo pipefail
 
@@ -200,7 +202,7 @@ for env in "${ENVIRONMENTS[@]}"; do
 
 echo "=== Deploying patch $PATCH_ID to $env ==="
 
-# Apply patch
+## Apply patch
 
 if ! ansible-playbook -i inventories/$env patch-playbook.yml \
 
@@ -214,7 +216,7 @@ exit 1
 
 fi
 
-# Run validation
+## Run validation
 
 if ! run_validation_tests $env; then
 
@@ -226,7 +228,7 @@ exit 1
 
 fi
 
-# Monitor for issues
+## Monitor for issues
 
 sleep $([ "$env" == "production" ] && echo 3600 || echo 300)
 
@@ -306,9 +308,9 @@ actions:
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- remove_virtual_patches_if_applicable
 
-# Virtual patching via WAF as immediate stopgap
+## Virtual patching via WAF as immediate stopgap
 
-# Deploy WAF rule to block exploit attempts
+## Deploy WAF rule to block exploit attempts
 
 cat > /etc/modsecurity/crs/custom/emergency-sqli.conf << 'EOF'
 
@@ -381,5 +383,7 @@ Conclusion
 A mature patching strategy prioritizes based on exploitability and asset criticality, tests patches in progressive environments, maintains emergency procedures for zero-day vulnerabilities, and always plans for rollback. Automate as much of the pipeline as possible — manual patching does not scale and is prone to error in high-pressure situations.
 
 **See also:** [Vulnerability Management](</en/security/vulnerability-management.html>), [Certificate Management](</en/security/certificate-management.html>), [Privacy Engineering](</en/security/privacy-engineering.html>).
+
+**See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [Certificate Management](</en/security/certificate-management.html>), [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)

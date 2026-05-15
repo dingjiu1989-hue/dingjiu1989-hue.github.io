@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/soc2-technical.html
 
 # SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
 
-# SOC 2 Technical Controls
+## SOC 2 Technical Controls
+
+## SOC 2 Technical Controls
 
 SOC 2 Overview 
 
@@ -92,13 +94,13 @@ def store_immutable(self, log_entry):
 
 """Store logs in immutable storage for audit"""
 
-# Write to append-only log
+## Write to append-only log
 
 with open("/var/log/soc2/access.log", "a") as f:
 
 f.write(json.dumps(log_entry) + "\n")
 
-# Also send to SIEM
+## Also send to SIEM
 
 self.send_to_siem(log_entry)
 
@@ -182,7 +184,7 @@ Change Management
 
 Track and approve all infrastructure changes: 
 
-# change-management-pipeline.yaml
+## change-management-pipeline.yaml
 
 change_management:
 
@@ -244,7 +246,7 @@ require_change_window: high_risk
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events
 
-# Change management API
+## Change management API
 
 class ChangeManager:
 
@@ -319,5 +321,7 @@ Conclusion
 SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden.
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [Database Encryption](</en/security/database-encryption.html>), [IAM: Identity and Access Management Fundamentals](</en/security/identity-access-management.html>).
+
+**See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)
 
 **See also:** [GDPR Technical Controls](</en/security/gdpr-technical.html>), [SIEM: Security Information and Event Management](</en/security/security-information-event-management.html>), [Certificate Management](</en/security/certificate-management.html>)

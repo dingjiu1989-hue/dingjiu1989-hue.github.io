@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/security-metrics.html
 
 # Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
 
-# Security Metrics and Reporting
+## Security Metrics and Reporting
+
+## Security Metrics and Reporting
 
 Introduction 
 
@@ -102,11 +104,11 @@ total_risk = 0
 
 for vuln in vulnerabilities:
 
-# CVSS score * asset criticality multiplier
+## CVSS score * asset criticality multiplier
 
 risk = vuln['cvss'] * (vuln['asset_criticality'] / 5)
 
-# Exploit availability multiplier
+## Exploit availability multiplier
 
 if vuln.get('exploit_available'):
 
@@ -445,5 +447,7 @@ Conclusion
 Security metrics must be meaningful, measurable, and actionable. Distinguish between KPIs that measure operational effectiveness and KRIs that measure risk exposure. Tailor dashboards for each audience — executives need strategic trends and risk summaries, while SOC teams need real-time operational data. Benchmark against industry peers, track trends over time (not just snapshots), and always tie metrics back to business impact and risk reduction.
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Security Awareness Training](</en/security/security-awareness.html>), [Infrastructure as Code Security](</en/security/iac-security.html>).
+
+**See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Content Security Policy](</en/security/content-security-policy.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)

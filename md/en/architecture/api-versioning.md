@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
 
 # API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
 
-# API Versioning Strategies
+## API Versioning Strategies
+
+## API Versioning Strategies
 
 APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. 
 
@@ -240,5 +242,7 @@ Summary
 API versioning is a practical necessity for evolving APIs. URL path versioning is the most common and practical approach. Support a limited number of versions and communicate deprecation timelines clearly. Design your API to minimize breaking changes through extensibility. When possible, prefer backward-compatible additions over new versions.
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>).
+
+**See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)
 
 **See also:** [API Composition and Aggregation](</en/architecture/api-composition.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [API Versioning Strategies](</en/architecture/api-versioning-strategies.html>)

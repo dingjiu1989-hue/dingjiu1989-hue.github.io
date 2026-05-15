@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/multi-tenancy.html
 
 # Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
 
-# Multi-Tenancy Architecture
+## Multi-Tenancy Architecture
+
+## Multi-Tenancy Architecture
 
 Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. 
 
@@ -51,5 +53,7 @@ Tenant feature flags enable per-tenant configuration. Different tenants may requ
 Migrating between isolation levels is a common lifecycle pattern. Startups often begin with a shared database for speed, migrate to schema-per-tenant as the customer base grows, and eventually offer database-per-tenant for premium enterprise customers. The migration path must be designed from the beginning — using tenant_id consistently even in shared databases, abstracting database access behind a routing layer, and ensuring that connection management is configurable without code changes.
 
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>).
+
+**See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)
 
 **See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)

@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/tools/ide-comparison-2026.html
 
 # IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-# IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
 
-## Introduction
+## IDE Comparison 2026: VS Code, JetBrains, Zed, Cursor — Performance and Features
+
+### Introduction
 
 The IDE landscape has changed dramatically. VS Code dominates market share, JetBrains remains the choice for professional enterprise teams, Zed brings native-performance editing, and Cursor pioneers AI-native development. This article provides a detailed comparison of these four platforms across performance, features, and developer experience in 2026.
 
-## VS Code
+### VS Code
 
 Microsoft's free, open-source editor remains the most popular choice with a massive extension ecosystem.
 
@@ -70,7 +72,7 @@ Microsoft's free, open-source editor remains the most popular choice with a mass
 
 **Key strengths** : 50,000+ extensions, Language Server Protocol support, integrated terminal, GitHub Copilot integration, Remote SSH/Containers.
 
-## JetBrains IDEs
+### JetBrains IDEs
 
 IntelliJ IDEA, WebStorm, PyCharm, and GoLand are language-specific IDEs built on the JVM.
 
@@ -90,7 +92,7 @@ IntelliJ IDEA, WebStorm, PyCharm, and GoLand are language-specific IDEs built on
 
 **Key strengths** : Deep static analysis, refactoring tools, debugger quality, framework-specific support (Spring, Django, React), database tools. Best for large codebases where deep analysis saves time.
 
-## Zed
+### Zed
 
 Zed is a new editor written in Rust, using GPU acceleration for rendering.
 
@@ -136,13 +138,13 @@ Zed is a new editor written in Rust, using GPU acceleration for rendering.
 
 **Key strengths** : Near-instant startup, GPU-accelerated rendering for smooth scrolling, multi-cursor editing, collaborative editing built in. Limited extension ecosystem but core features are polished.
 
-## Cursor
+### Cursor
 
 Cursor is a fork of VS Code with AI as a first-class feature.
 
 **Performance** : Similar to VS Code (Electron-based), but with additional AI processing. Expect 300-800MB baseline plus AI model overhead.
 
-# Cursor AI rules — configure model behavior
+## Cursor AI rules — configure model behavior
 
 RULES = """
 
@@ -160,7 +162,7 @@ RULES = """
 
 **Key strengths** : AI-native features: inline code generation, natural language editing, multi-file refactoring with AI, context-aware completions. Best for AI-assisted development workflows.
 
-## Comparison Table
+### Comparison Table
 
 | Feature | VS Code | JetBrains | Zed | Cursor |
 
@@ -180,7 +182,7 @@ RULES = """
 
 | Platforms | Win/Mac/Linux | Win/Mac/Linux | Mac/Linux (Win soon) | Win/Mac/Linux |
 
-## Recommendations
+### Recommendations
 
   * **General development** : VS Code remains the best all-rounder with the largest ecosystem.
 
@@ -196,5 +198,7 @@ RULES = """
 Consider using multiple editors for different tasks. Many developers use VS Code for quick edits and JetBrains for deep work on large codebases. Zed and Cursor are increasingly replacing VS Code as daily drivers for performance and AI features respectively.
 
 **See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [Package Managers: npm, yarn, pnpm, bun — Speed, Disk, Features](</en/tools/package-managers.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>).
+
+**See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [Code Editors Compared: VS Code, Neovim, JetBrains, Zed 2026](</en/tools/text-editor-comparison.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)

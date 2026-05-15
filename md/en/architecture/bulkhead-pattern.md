@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
 
 # Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
 
-# Bulkhead Pattern for Resilience
+## Bulkhead Pattern for Resilience
+
+## Bulkhead Pattern for Resilience
 
 The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. 
 
@@ -65,5 +67,7 @@ Bulkheads should also have sensible fallback behaviors. When a bulkhead is full,
 In production, bulkheads are one of the most effective patterns for preventing cascading failures. Combined with monitoring, circuit breakers, and thoughtful timeout configuration, they form the backbone of a resilient distributed system.
 
 **See also:** [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>).
+
+**See also:** [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)
 
 **See also:** [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Strangler Fig Pattern for Legacy Migration](</en/architecture/strangler-fig.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>)

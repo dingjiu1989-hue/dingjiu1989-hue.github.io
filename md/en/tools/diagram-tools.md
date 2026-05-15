@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/tools/diagram-tools.html
 
 # Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
 
-# Best Diagram as Code Tools
+## Best Diagram as Code Tools
+
+## Best Diagram as Code Tools
 
 Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows.
 
-## Why Diagram as Code
+### Why Diagram as Code
 
 Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools:
 
@@ -51,7 +53,7 @@ Traditional diagram tools (draw.io, LucidChart) produce binary files that are di
 
 
 
-## Mermaid
+### Mermaid
 
 Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax.
 
@@ -124,7 +126,7 @@ npm install -g @mermaid-js/mermaid-cli
 
 mmdc -i input.mmd -o output.png
 
-## PlantUML
+### PlantUML
 
 PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support.
 
@@ -171,15 +173,15 @@ GW --> User: 200 OK
 
 **Installation:**
 
-# Using Docker
+## Using Docker
 
 docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml
 
-# Or using the plantuml CLI with Java
+## Or using the plantuml CLI with Java
 
 java -jar plantuml.jar diagram.puml
 
-## Excalidraw
+### Excalidraw
 
 Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly "diagram as code," but the .excalidraw format is JSON and can be version controlled.
 
@@ -191,7 +193,7 @@ Excalidraw has a CLI tool for embedding in workflows:
 
 npx @excalidraw/cli export diagram.excalidraw --output diagram.png
 
-## Diagrams (Python)
+### Diagrams (Python)
 
 Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more.
 
@@ -225,7 +227,7 @@ pip install diagrams
 
 python diagram.py # Generates diagram.png
 
-## D2
+### D2
 
 D2 is a newer diagram-as-code language by Terrastruct, designed to address Mermaid's layout limitations.
 
@@ -245,7 +247,7 @@ Database -> Redis Cache: Cache read/write
 
 **Cons** : Newer = smaller community, fewer integrations, limited diagram types.
 
-## Comparison Table
+### Comparison Table
 
 | Feature | Mermaid | PlantUML | Excalidraw | Diagrams | D2 |
 
@@ -265,7 +267,7 @@ Database -> Redis Cache: Cache read/write
 
 | License | MIT | GPL | MIT | MIT | MPL |
 
-## Integration with Documentation
+### Integration with Documentation
 
 **Mermaid in Markdown:**
 
@@ -279,7 +281,7 @@ Rendered automatically on GitHub, GitLab, and with Markdown renderers that suppo
 
 **In MkDocs with Material Theme:**
 
-# mkdocs.yml
+## mkdocs.yml
 
 markdown_extensions:
 
@@ -297,7 +299,7 @@ class: mermaid
 
 "extensions": ["bierner.markdown-mermaid"]
 
-## Recommendations
+### Recommendations
 
   * **For GitHub documentation** : Mermaid (native support, simplest syntax).
 
@@ -312,10 +314,12 @@ class: mermaid
 
 
 
-## Summary
+### Summary
 
 Diagram-as-code tools have made technical diagrams maintainable and version-controllable. Mermaid is the most accessible choice with native GitHub support. PlantUML offers the widest diagram type coverage. D2 provides the best layout quality for modern tools. The key principle is to choose a tool that integrates with your existing documentation workflow -- if you already use Markdown in GitHub, Mermaid is the natural choice.
 
 **See also:** [Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser](</en/tools/best-diagram-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Developer Note Taking Tools](</en/tools/note-taking-tools.html>).
+
+**See also:** [Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser](</en/tools/best-diagram-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)
 
 **See also:** [Best Diagram and Architecture Tools 2026: Excalidraw vs Draw.io vs Mermaid vs Eraser](</en/tools/best-diagram-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Code Review Tools and Best Practices](</en/tools/code-review-tools.html>)

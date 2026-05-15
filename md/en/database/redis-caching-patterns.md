@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html
 
 # Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
 
-# Redis Caching Patterns
+## Redis Caching Patterns
+
+## Redis Caching Patterns
 
 Redis as Cache 
 
@@ -105,5 +107,7 @@ Conclusion
 Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance.
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Scalability](</en/database/database-scalability.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>).
+
+**See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)
 
 **See also:** [Database Caching](</en/database/database-caching.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Scalability](</en/database/database-scalability.html>)

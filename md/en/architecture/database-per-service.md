@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html
 
 # Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
 
-# Database per Service Pattern
+## Database per Service Pattern
+
+## Database per Service Pattern
 
 The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. 
 
@@ -77,5 +79,7 @@ The pattern is most effective when combined with event-driven communication. Ser
 Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.
 
 **See also:** [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>).
+
+**See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)
 
 **See also:** [Sidecar Pattern in Microservices Architecture](</en/architecture/sidecar-pattern.html>), [Saga Pattern for Distributed Transactions](</en/architecture/saga-pattern.html>), [Event-Carried State Transfer Pattern](</en/architecture/event-carried-state-transfer.html>)

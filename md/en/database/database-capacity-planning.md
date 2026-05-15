@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-capacity-planning.ht
 
 # Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
-# Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
+
+## Database Capacity Planning: Sizing, Growth Forecasting, and Scaling
 
 Database Capacity Planning: Sizing, Growth Forecasting, and Scaling 
 
@@ -154,7 +156,7 @@ conn = psycopg2.connect("dbname=mydb")
 
 cur = conn.cursor()
 
-# Get daily row counts for last 90 days
+## Get daily row counts for last 90 days
 
 cur.execute("""
 
@@ -176,13 +178,13 @@ days = np.array([(row[0] - data[0][0]).days for row in data])
 
 rows = np.array([row[1] for row in data])
 
-# Linear regression
+## Linear regression
 
 coefficients = np.polyfit(days, rows, 1)
 
 daily_growth = coefficients[0]
 
-# Forecast: 90 days out
+## Forecast: 90 days out
 
 forecast_days = 90
 
@@ -218,7 +220,7 @@ Vertical Scaling (Scale Up)
 
 Increase the size of the existing database instance: 
 
-# AWS RDS
+## AWS RDS
 
 aws rds modify-db-instance \
 
@@ -228,7 +230,7 @@ aws rds modify-db-instance \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--apply-immediately
 
-# Or via Terraform
+## Or via Terraform
 
 resource "aws_db_instance" "mydb" {
 
@@ -244,7 +246,7 @@ Horizontal Scaling (Scale Out)
 
 Add read replicas for read workloads: 
 
-# Add read replica
+## Add read replica
 
 aws rds create-db-instance-read-replica \
 
@@ -268,7 +270,7 @@ Autoscaling Configuration
 
 Aurora Serverless 
 
-# Automatic scaling based on load
+## Automatic scaling based on load
 
 Resources:
 
@@ -288,7 +290,7 @@ MaxCapacity: 64
 
 Storage Autoscaling 
 
-# Enable storage autoscaling on RDS
+## Enable storage autoscaling on RDS
 
 aws rds modify-db-instance \
 
@@ -308,13 +310,13 @@ Seasonal Capacity
 
 Many workloads are not uniform. Plan for seasonal peaks: 
 
-# Example: Black Friday capacity plan
+## Example: Black Friday capacity plan
 
-# Normal: 4 vCPU, 16 GB RAM, 1000 connections
+## Normal: 4 vCPU, 16 GB RAM, 1000 connections
 
-# Black Friday: 16 vCPU, 64 GB RAM, 5000 connections
+## Black Friday: 16 vCPU, 64 GB RAM, 5000 connections
 
-# Pre-scale 2 weeks before
+## Pre-scale 2 weeks before
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-11-10
 
@@ -322,7 +324,7 @@ action: scale_up
 
 target: db.r6g.4xlarge
 
-# Post-scale 1 week after
+## Post-scale 1 week after
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- date: 2026-12-07
 
@@ -341,5 +343,7 @@ The Planning Cycle
 Capacity planning is not a one-time exercise. Review your database capacity monthly, adjust forecasts quarterly, and always maintain headroom for unexpected traffic spikes. Over-provision by 20-30% for production databases to absorb traffic surges without degradation.
 
 **See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>).
+
+**See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering](</en/database/database-cost-optimization.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)

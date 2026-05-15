@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-01">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups — SourceHub</title>
     <meta name="description" content="Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.">
@@ -46,8 +46,8 @@
       "description": "Technical guide to AWS VPC design including subnet strategies, NAT gateways, VPC peering, Transit Gateway architecture, security groups, and network ACLs.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1248",
+      "dateModified": "2026-04-01",
+      "wordCount": "1198",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,25 +93,26 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h1>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h2>AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</h2>
+<h3>Introduction</h3>
 <p>Amazon Virtual Private Cloud (VPC) is the foundational networking layer for AWS infrastructure. Every AWS resource — EC2 instances, RDS databases, Lambda functions, ECS tasks — exists within a VPC. Proper VPC design directly impacts security, performance, scalability, and cost. A poorly designed VPC can cause connectivity issues, security vulnerabilities, and expensive data transfer bills.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/aws-vpc-design.png" alt="AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers subnet design, NAT strategies, VPC peering, Transit Gateway, security groups, and network ACLs.</p>
-<h2>VPC and Subnet Design</h2>
+<h3>VPC and Subnet Design</h3>
 <p>A VPC spans all Availability Zones (AZs) in a region. The CIDR block must be large enough to accommodate current and future workloads. The standard RFC 1918 ranges are used: 10.0.0.0/8, 172.16.0.0/12, or 192.168.0.0/16. A /16 CIDR (65,536 addresses) provides sufficient capacity for most organizations.</p>
 <p>Subnets are associated with a single AZ and can be public or private. Public subnets have a route table entry pointing to an Internet Gateway. Private subnets route through a NAT Gateway or NAT Instance for outbound internet access. Best practice dictates at least two AZs for high availability, each with public and private subnets.</p>
 <p>VPC: 10.0.0.0/16</p>
@@ -123,13 +124,13 @@
 <p>Public: 10.0.2.0/24</p>
 <p>Private: 10.0.12.0/24</p>
 <p>Data: 10.0.22.0/24</p>
-<h2>NAT Gateways and Internet Connectivity</h2>
+<h3>NAT Gateways and Internet Connectivity</h3>
 <p>NAT Gateways enable private subnet resources to access the internet for updates, downloads, and external API calls while preventing unsolicited inbound connections. They are highly available within an AZ and managed by AWS, eliminating the maintenance burden of NAT Instances.</p>
 <p>Each NAT Gateway costs approximately $0.045/hour plus data processing charges. For high availability, deploy a NAT Gateway in each AZ used for production workloads. This increases cost but provides resiliency against AZ failures. Alternatively, a single shared NAT Gateway can serve all private subnets via transit gateway attachments.</p>
-<h2>VPC Peering</h2>
+<h3>VPC Peering</h3>
 <p>VPC Peering connects two VPCs using AWS's internal network, providing low-latency, high-bandwidth connectivity with no bandwidth limits or single point of failure. Peered VPCs can be in the same or different accounts and regions.</p>
 <p>Key limitations: transitive peering is not supported (A to B and B to C does not imply A to C), overlapping CIDR blocks cannot be peered, and route tables must be manually configured on both sides. For more than a few VPCs, Transit Gateway is a better solution.</p>
-<h2>AWS Transit Gateway</h2>
+<h3>AWS Transit Gateway</h3>
 <p>Transit Gateway (TGW) is a network transit hub connecting VPCs, VPN connections, and AWS Direct Connect. It supports transitive routing, eliminating the mesh complexity of VPC peering at scale.</p>
 <p>Transit Gateway</p>
 <p>├── VPC: Production (us-east-1)</p>
@@ -139,13 +140,14 @@
 <p>├── VPN: Branch Office</p>
 <p>└── Direct Connect: Data Center</p>
 <p>TGW supports route tables per attachment, enabling network segmentation. The default behavior is full mesh, but route table associations limit traffic flow between specific VPCs. TGW Peering connects transit gateways across regions, providing inter-region connectivity at premium data transfer rates.</p>
-<h2>Security Groups vs. Network ACLs</h2>
+<h3>Security Groups vs. Network ACLs</h3>
 <p>Security groups act as virtual stateful firewalls at the instance level. They support allow rules only (no explicit deny), evaluate all rules before returning a decision, and track connection state automatically. Security groups are the primary security mechanism for AWS resources.</p>
 <p>Network ACLs (NACLs) are stateless firewalls at the subnet level. They support both allow and deny rules, evaluate rules in order (lowest number first), and require explicit rules for return traffic. NACLs provide a secondary defense layer and are useful for blocking specific IP ranges that security groups cannot deny.</p>
 <p>Defense in depth combines both: security groups for traffic control between logical application tiers, and NACLs for broad traffic filtering such as blocking known malicious IP ranges at the subnet boundary.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>AWS VPC design requires careful planning of CIDR allocation, subnet layout, and connectivity strategies. Transit Gateway simplifies multi-VPC networking at scale, while security groups and NACLs provide layered defense. The most successful VPC designs are those that plan for growth, maintain isolation between environments, and implement connectivity in alignment with organizational security requirements.</p>
-<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

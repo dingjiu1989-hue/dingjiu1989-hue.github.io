@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/passwordless-auth.html
 
 # Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
 
-# Passwordless Authentication
+## Passwordless Authentication
+
+## Passwordless Authentication
 
 The Passwordless Vision 
 
@@ -138,7 +140,7 @@ user_display_name=user.name
 
 )
 
-# Store challenge temporarily
+## Store challenge temporarily
 
 cache.set(f"webauthn:challenge:{user.id}", options.challenge, time=300)
 
@@ -176,7 +178,7 @@ expected_origin="https://example.com"
 
 )
 
-# Store credential for future logins
+## Store credential for future logins
 
 store_credential(user.id, verification.credential_id, verification.public_key)
 
@@ -250,11 +252,11 @@ token = secrets.token_urlsafe(32)
 
 expiry = datetime.utcnow() + timedelta(minutes=15)
 
-# Store token
+## Store token
 
 cache.set(f"magic_link:{token}", email, time=900)
 
-# Send email
+## Send email
 
 link = f"https://example.com/auth/magic?token={token}"
 
@@ -277,5 +279,7 @@ Conclusion
 Passwordless authentication improves both security and UX. Use WebAuthn with platform authenticators as the primary method, fall back to magic links for cross-device scenarios. Store public keys for verification and never handle private keys server-side. Passkeys sync across devices via platform providers, making them the most practical passwordless solution for 2026.
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Data Classification](</en/security/data-classification.html>), [Database Encryption](</en/security/database-encryption.html>).
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Data Classification](</en/security/data-classification.html>)

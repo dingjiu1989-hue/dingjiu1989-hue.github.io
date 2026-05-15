@@ -8,29 +8,31 @@ url: https://dingjiu1989-hue.github.io/en/security/microservice-security.html
 
 # Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
 
-# Microservice Security
+## Microservice Security
+
+## Microservice Security
 
 Introduction 
 
@@ -42,7 +44,7 @@ A service mesh provides a dedicated infrastructure layer for handling service-to
 
 Istio mTLS Configuration 
 
-# Enable mTLS across the mesh
+## Enable mTLS across the mesh
 
 apiVersion: security.istio.io/v1beta1
 
@@ -60,7 +62,7 @@ mtls:
 
 mode: STRICT # Reject plain-text traffic
 
-# Per-namespace mTLS policy
+## Per-namespace mTLS policy
 
 apiVersion: security.istio.io/v1beta1
 
@@ -90,7 +92,7 @@ portLevelMtls:
 
 mode: DISABLE # Allow plaintext for health checks only
 
-# Authorization policy for service-to-service access
+## Authorization policy for service-to-service access
 
 apiVersion: security.istio.io/v1beta1
 
@@ -130,7 +132,7 @@ paths: ["/api/v1/charges"]
 
 Envoy Sidecar Configuration 
 
-# Envoy TLS configuration (used under the hood by Istio)
+## Envoy TLS configuration (used under the hood by Istio)
 
 static_resources:
 
@@ -198,7 +200,7 @@ API Gateway Security
 
 The API gateway is the ingress point for external traffic and performs authentication, rate limiting, and request validation. 
 
-# Kong API Gateway security configuration
+## Kong API Gateway security configuration
 
 _format_version: "3.0"
 
@@ -266,7 +268,7 @@ Secret Distribution
 
 Never store secrets in code or configuration files. Use a dedicated secret management system. 
 
-# Kubernetes External Secrets Operator
+## Kubernetes External Secrets Operator
 
 apiVersion: external-secrets.io/v1beta1
 
@@ -310,7 +312,7 @@ key: production/database/credentials
 
 property: password
 
-# HashiCorp Vault integration
+## HashiCorp Vault integration
 
 import hvac
 
@@ -370,7 +372,7 @@ from opentelemetry.sdk.trace import TracerProvider
 
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
-# Initialize distributed tracing
+## Initialize distributed tracing
 
 provider = TracerProvider()
 
@@ -390,13 +392,13 @@ span.set_attribute("order_id", request.order_id)
 
 span.set_attribute("user_id", request.user_id)
 
-# Add security-relevant attributes
+## Add security-relevant attributes
 
 span.set_attribute("auth.method", "oauth2")
 
 span.set_attribute("ip_address", request.client_ip)
 
-# Call downstream service
+## Call downstream service
 
 with tracer.start_as_current_span("validate_payment") as child_span:
 
@@ -453,5 +455,7 @@ Conclusion
 Microservice security requires shifting from perimeter-based defense to identity-based security. Use a service mesh for automatic mTLS between services, enforce authorization at the API gateway, distribute secrets through dedicated systems like Vault or External Secrets Operator, and implement distributed tracing for cross-service visibility. Each service should be treated as an untrusted external system — authenticate and authorize every request, regardless of source.
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>).
+
+**See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)
 
 **See also:** [API Authentication Methods](</en/security/api-authentication.html>), [Supply Chain Security](</en/security/supply-chain-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>)

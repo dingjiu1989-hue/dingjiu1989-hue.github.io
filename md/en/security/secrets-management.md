@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/secrets-management.html
 
 # Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
 
-# Secrets Management for Developers
+## Secrets Management for Developers
+
+## Secrets Management for Developers
 
 The Secrets Problem 
 
@@ -48,11 +50,11 @@ A secrets vault is a centralized service that stores, manages, and audits access
 
 HashiCorp Vault 
 
-# Start Vault in development mode
+## Start Vault in development mode
 
 vault server -dev
 
-# Store a secret
+## Store a secret
 
 vault kv put secret/database \
 
@@ -64,7 +66,7 @@ username=app_user \
 
 password=$(openssl rand -base64 32)
 
-# Read a secret
+## Read a secret
 
 vault kv get secret/database
 
@@ -84,7 +86,7 @@ path='database'
 
 db_password = secret['data']['data']['password']
 
-# Use the secret to connect
+## Use the secret to connect
 
 conn = psycopg2.connect(
 
@@ -110,7 +112,7 @@ response = client.get_secret_value(SecretId=secret_name)
 
 return json.loads(response['SecretString'])
 
-# Automatic rotation
+## Automatic rotation
 
 db_creds = get_secret('prod/database/credentials')
 
@@ -134,7 +136,7 @@ Never store secrets in repository CI/CD configuration files that are committed t
 
 | Platform | How to Store Secrets | |----------|---------------------| | GitHub Actions | Settings > Secrets and variables > Actions | | GitLab CI | Settings > CI/CD > Variables | | CircleCI | Project Settings > Environment Variables | | Jenkins | Manage Jenkins > Credentials | 
 
-# GitHub Actions workflow with secrets
+## GitHub Actions workflow with secrets
 
 name: Deploy
 
@@ -166,7 +168,7 @@ Pre-Commit Hooks
 
 Use tools like `git-secrets` or `truffleHog` as pre-commit hooks: 
 
-# Install git-secrets
+## Install git-secrets
 
 brew install git-secrets
 
@@ -174,21 +176,21 @@ git secrets --install
 
 git secrets --register-aws
 
-# Scan for secrets before commit
+## Scan for secrets before commit
 
-# !/bin/sh
+## !/bin/sh
 
-# .git/hooks/pre-commit
+## .git/hooks/pre-commit
 
 git secrets --scan
 
 Scanning Repositories 
 
-# Scan the entire history
+## Scan the entire history
 
 trufflehog git https://github.com/example/repo.git
 
-# Scan with Gitleaks
+## Scan with Gitleaks
 
 gitleaks detect --source . --verbose
 
@@ -207,15 +209,15 @@ Secrets should have a limited lifetime. Implement automatic rotation:
 
 
 
-# Example: Zero-downtime DB password rotation
+## Example: Zero-downtime DB password rotation
 
-# Phase 1: Update app to accept both old and new passwords
+## Phase 1: Update app to accept both old and new passwords
 
-# Phase 2: Rotate master password in database
+## Phase 2: Rotate master password in database
 
-# Phase 3: Update app to use only new password
+## Phase 3: Update app to use only new password
 
-# Phase 4: Revoke old password
+## Phase 4: Revoke old password
 
 The Principle of Least Privilege 
 
@@ -237,5 +239,7 @@ Summary
 Treat secrets as the critical infrastructure they are. Use a dedicated secrets vault in production, store them in platform-native secret stores for CI/CD, never hardcode them or commit them to version control, and implement automatic rotation. Combine these practices with regular scanning for leaked secrets and strict access control to minimize the blast radius of any exposure.
 
 **See also:** [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Security Log Management](</en/security/log-management-security.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>).
+
+**See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)
 
 **See also:** [Security Log Management](</en/security/log-management-security.html>), [Secure File Upload Implementation](</en/security/secure-file-upload.html>), [Data Loss Prevention (DLP) Strategies](</en/security/data-loss-prevention.html>)

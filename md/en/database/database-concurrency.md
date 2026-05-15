@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-concurrency.html
 
 # Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
-# Database Concurrency Control: MVCC, Locking, and Deadlocks
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
+
+## Database Concurrency Control: MVCC, Locking, and Deadlocks
 
 Database Concurrency Control: MVCC, Locking, and Deadlocks 
 
@@ -206,5 +208,7 @@ Summary
 PostgreSQL's MVCC provides the foundation: readers and writers coexist without blocking. On top of MVCC, row-level locks enable pessimistic patterns when needed. The key is choosing the right strategy for each operation and monitoring for deadlocks, long-held locks, and MVCC bloat. Proper concurrency control is what separates a smoothly scaling application from one that stalls under load.
 
 **See also:** [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>).
+
+**See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)
 
 **See also:** [Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints](</en/database/database-transactions.html>), [Database Locking: Row Locks, Table Locks, and Deadlock Prevention](</en/database/database-locking-mechanisms.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>)

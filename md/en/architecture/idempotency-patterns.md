@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html
 
 # Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
 
-# Idempotency Patterns in Distributed Systems
+## Idempotency Patterns in Distributed Systems
+
+## Idempotency Patterns in Distributed Systems
 
 Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. 
 
@@ -51,5 +53,7 @@ Uniqueness constraints are the most reliable idempotency mechanism. A database u
 Idempotency should be designed into every external-facing API and every event handler from the start. Retrofitting idempotency after data corruption incidents is painful. The upfront cost of adding idempotency keys and deduplication logic is minimal compared to the cost of debugging duplicate processing in production.
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>).
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)

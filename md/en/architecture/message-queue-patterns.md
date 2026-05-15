@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/message-queue-patterns.ht
 
 # Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
 
-# Message Queue Patterns
+## Message Queue Patterns
+
+## Message Queue Patterns
 
 Message queues enable asynchronous communication between distributed system components. They decouple producers from consumers, buffer traffic spikes, and provide reliability guarantees that direct communication cannot. This article examines the fundamental message queue patterns: competing consumers, publish-subscribe, dead letter queues, and the delivery semantics that govern reliable message processing. 
 
@@ -75,5 +77,7 @@ Message schemas should be versioned and evolved carefully. A schema registry ens
 Message queue patterns form the backbone of reliable asynchronous communication in distributed systems. When applied correctly with appropriate delivery semantics, dead letter handling, and monitoring, they provide robust decoupling between services.
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>).
+
+**See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)

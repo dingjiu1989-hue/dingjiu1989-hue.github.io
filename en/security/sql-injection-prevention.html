@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Comprehensive guide to preventing SQL injection attacks with parameterized queries, ORM protections, input validation, and WAF rules.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-06">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>SQL Injection Prevention Guide — SourceHub</title>
     <meta name="description" content="Comprehensive guide to preventing SQL injection attacks with parameterized queries, ORM protections, input validation, and WAF rules.">
@@ -45,8 +45,8 @@
       "description": "Comprehensive guide to preventing SQL injection attacks with parameterized queries, ORM protections, input validation, and WAF rules.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1261",
+      "dateModified": "2026-05-06",
+      "wordCount": "1088",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -91,21 +91,22 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">SQL Injection Prevention Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 120 views · 1 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-06 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png" alt="SQL Injection Prevention Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
-<h1>SQL Injection Prevention Guide</h1>
+      <div class="article-body"><h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
+<h2>SQL Injection Prevention Guide</h2>
 <p>Understanding SQL Injection </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/sql-injection-prevention.png" alt="SQL Injection Prevention Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>SQL injection is a code injection technique where an attacker inserts malicious SQL statements into application queries. It has been the top vulnerability in the OWASP Top 10 for years and remains one of the most damaging attack vectors despite being well-understood. </p>
 <p>How It Works </p>
@@ -143,21 +144,21 @@
 <p>Defense Layer 2: ORM Protections </p>
 <p>Modern ORMs provide built-in protection against SQL injection when used correctly. </p>
 <p>Django ORM </p>
-<h1>Safe: ORM parameterizes automatically</h1>
+<h2>Safe: ORM parameterizes automatically</h2>
 <p>users = User.objects.filter(email=user_input, is_active=True)</p>
-<h1>Safe: Raw queries with parameters</h1>
+<h2>Safe: Raw queries with parameters</h2>
 <p>users = User.objects.raw(</p>
 <p>'SELECT * FROM auth_user WHERE email = %s', [user_input]</p>
 <p>)</p>
-<h1>UNSAFE: String interpolation bypasses protections</h1>
+<h2>UNSAFE: String interpolation bypasses protections</h2>
 <p>users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = "{user_input}"')</p>
 <p>SQLAlchemy </p>
-<h1>Safe</h1>
+<h2>Safe</h2>
 <p>result = session.execute(</p>
 <p>text("SELECT * FROM users WHERE email = :email"),</p>
 <p>{"email": user_input}</p>
 <p>)</p>
-<h1>UNSAFE</h1>
+<h2>UNSAFE</h2>
 <p>result = session.execute(</p>
 <p>text(f"SELECT * FROM users WHERE email = '{user_input}'")</p>
 <p>)</p>
@@ -190,11 +191,12 @@
 <p>Attackers infer information through boolean or time-based responses. Use uniform error messages and prevent timing-based inference by adding random delays. </p>
 <p>Detection Tools </p>
 <p>| Tool | Type | Coverage | |------|------|----------| | SQLMap | Automated exploitation testing | Dynamic analysis | | OWASP ZAP | DAST scanner | Runtime detection | | SonarQube | SAST | Static code analysis | | Semgrep | SAST | Custom rule patterns | </p>
-<h1>Scan Go code for string concatenation in SQL queries</h1>
+<h2>Scan Go code for string concatenation in SQL queries</h2>
 <p>semgrep --config "p/sql-injection" .</p>
 <p>Summary </p>
 <p>SQL injection is entirely preventable. Parameterized queries are the single most effective defense and should be the default pattern for every database interaction. Layer in ORM protections, input validation, least-privilege database accounts, and static analysis tools to create defense-in-depth. Never concatenate user input directly into SQL strings, and train every developer on these principles from day one.</p>
-<p><strong>See also:</strong> <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/xsrf-csrf-protection.html">XSRF/CSRF Protection Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

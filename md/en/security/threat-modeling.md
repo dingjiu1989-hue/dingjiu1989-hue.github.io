@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-modeling.html
 
 # Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
 
-# Threat Modeling
+## Threat Modeling
+
+## Threat Modeling
 
 Why Threat Model? 
 
@@ -40,13 +42,13 @@ Microsoft's STRIDE categorizes threats:
 
 | Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | 
 
-# STRIDE threat analysis
+## STRIDE threat analysis
 
 def analyze_with_stride(component, data_flow):
 
 threats = []
 
-# Spoofing
+## Spoofing
 
 if not component.get("authentication"):
 
@@ -60,7 +62,7 @@ threats.append({
 
 })
 
-# Tampering
+## Tampering
 
 if not data_flow.get("integrity_check"):
 
@@ -74,7 +76,7 @@ threats.append({
 
 })
 
-# Information Disclosure
+## Information Disclosure
 
 if not data_flow.get("encryption"):
 
@@ -194,7 +196,7 @@ self.mitigations.append(mitigation)
 
 return self
 
-# Example: Attack tree for credential theft
+## Example: Attack tree for credential theft
 
 root = AttackTreeNode(
 
@@ -242,13 +244,13 @@ root.add_child(AttackTreeNode(
 
 Threat Modeling Tools 
 
-# Microsoft Threat Modeling Tool
+## Microsoft Threat Modeling Tool
 
-# OWASP Threat Dragon
+## OWASP Threat Dragon
 
-# PyTM - Pythonic threat modeling
+## PyTM - Pythonic threat modeling
 
-# Example: PyTM model
+## Example: PyTM model
 
 from pytm import TM, Server, Dataflow, Boundary
 
@@ -272,7 +274,7 @@ tm.process()
 
 Integration with Development 
 
-# Threat modeling in CI
+## Threat modeling in CI
 
 threat_modeling_pipeline:
 
@@ -307,5 +309,7 @@ Conclusion
 Threat modeling is an essential security practice. Use STRIDE for threat identification, DREAD for prioritization, and PASTA for comprehensive analysis. Build attack trees to explore attacker paths. Integrate threat modeling into your development lifecycle. Automate where possible but maintain human oversight for design-level analysis. The goal is to find and fix security issues before they reach production.
 
 **See also:** [Threat Hunting](</en/security/threat-hunting.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>).
+
+**See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [SOC Operations](</en/security/soc-operations.html>)
 
 **See also:** [Bug Bounty Guide](</en/security/bug-bounty.html>), [DNS Security](</en/security/dns-security.html>), [SOC Operations](</en/security/soc-operations.html>)

@@ -8,37 +8,39 @@ url: https://dingjiu1989-hue.github.io/en/compare/graphql-vs-rest.html
 
 # GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-# GraphQL vs REST API
+## GraphQL vs REST API
 
-## Introduction
+## GraphQL vs REST API
+
+### Introduction
 
 GraphQL and REST are the two dominant API design paradigms. REST has been the standard since the early 2000s, while GraphQL emerged from Facebook in 2015 as a solution to REST's limitations in data-intensive applications. Both are widely used in 2026, and the choice depends on your application's data fetching patterns, team expertise, and performance requirements.
 
-## Core Philosophy
+### Core Philosophy
 
-### REST: Resource-Based
+#### REST: Resource-Based
 
 REST treats data as resources accessed via endpoints:
 
@@ -56,7 +58,7 @@ GET /api/users/123/posts → Get user 123's posts
 
 Each endpoint returns a fixed response structure. The client gets whatever the server decides to send.
 
-### GraphQL: Query-Based
+#### GraphQL: Query-Based
 
 GraphQL exposes a single endpoint and lets the client specify exactly what data it needs:
 
@@ -84,7 +86,7 @@ createdAt
 
 The server returns only the requested fields. No over-fetching, no under-fetching.
 
-## Data Fetching
+### Data Fetching
 
 **REST** often over-fetches (returns unneeded fields) or under-fetches (requires multiple requests):
 
@@ -128,7 +130,7 @@ author { name }
 
 }
 
-## Caching
+### Caching
 
 **REST** has straightforward HTTP caching. GET requests are cacheable by browsers, CDNs, and reverse proxies using standard HTTP cache headers (ETag, Cache-Control, Last-Modified). This is REST's strongest advantage for read-heavy public APIs.
 
@@ -175,7 +177,7 @@ return incoming;
 
 });
 
-## Type Safety
+### Type Safety
 
 **GraphQL** has built-in type safety with a schema definition language:
 
@@ -253,7 +255,7 @@ $ref: '#/components/schemas/User'
 
 OpenAPI provides similar contract guarantees but requires more boilerplate to maintain.
 
-## Performance Considerations
+### Performance Considerations
 
 **REST** benefits from:
 
@@ -295,7 +297,7 @@ return ids.map(id => users.find(u => u.id === id));
 
 posts: (parent) => userLoader.load(parent.authorId)
 
-## Tooling and Developer Experience
+### Tooling and Developer Experience
 
 **GraphQL** offers superior developer tooling:
 
@@ -321,7 +323,7 @@ posts: (parent) => userLoader.load(parent.authorId)
 
 
 
-## When to Choose What
+### When to Choose What
 
 **Choose GraphQL when:**
 
@@ -353,10 +355,12 @@ posts: (parent) => userLoader.load(parent.authorId)
 
 
 
-## Conclusion
+### Conclusion
 
 REST and GraphQL coexist successfully in 2026. REST excels at simple, cacheable, widely-consumed APIs where HTTP semantics provide real benefits. GraphQL excels at complex, data-intensive applications where flexible querying and strong typing improve developer productivity. Many organizations use both — REST for public-facing third-party APIs and GraphQL for internal applications and mobile clients.
 
 **See also:** [Zustand vs Redux vs Jotai](</en/compare/zustand-vs-redux.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [CircleCI vs GitHub Actions: Pipeline Configuration, Caching, Performance, Pricing, and Migration](</en/compare/circleci-vs-github-actions.html>).
+
+**See also:** [Zustand vs Redux vs Jotai](</en/compare/zustand-vs-redux.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>)
 
 **See also:** [Zustand vs Redux vs Jotai](</en/compare/zustand-vs-redux.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>)

@@ -11,10 +11,17 @@ TODAY = date.today().isoformat()
 BASE = 'https://dingjiu1989-hue.github.io'
 
 def md_to_html(md_text):
-    """Convert markdown to HTML. Uses markdown lib if available, else simple fallback."""
+    """Convert markdown to HTML with heading levels offset by 1.
+    Page H1 is the article title; body headings start at H2.
+    """
     try:
         import markdown as md_lib
-        return md_lib.markdown(md_text, extensions=['fenced_code', 'codehilite', 'tables'])
+        html = md_lib.markdown(md_text, extensions=['fenced_code', 'codehilite', 'tables'])
+        # Offset heading levels: h1→h2, h2→h3, h3→h4 etc.
+        for level in ('3', '2', '1'):
+            html = html.replace(f'<h{level}>', f'<h{int(level)+1}>')
+            html = html.replace(f'</h{level}>', f'</h{int(level)+1}>')
+        return html
     except ImportError:
         lines = md_text.split('\n')
         html_parts = []
@@ -30,11 +37,11 @@ def md_to_html(md_text):
             elif in_code:
                 html_parts.append(html_mod.escape(line) + '\n')
             elif line.startswith('### '):
-                html_parts.append(f'<h3>{line[4:]}</h3>')
+                html_parts.append(f'<h4>{line[4:]}</h4>')
             elif line.startswith('## '):
-                html_parts.append(f'<h2>{line[2:]}</h2>')
+                html_parts.append(f'<h3>{line[3:]}</h3>')
             elif line.startswith('# '):
-                html_parts.append(f'<h1>{line[2:]}</h1>')
+                html_parts.append(f'<h2>{line[2:]}</h2>')
             elif line.startswith('- '):
                 html_parts.append(f'<li>{line[2:]}</li>')
             elif line.startswith('1. '):
@@ -13393,11 +13400,11 @@ def make_article_html(art, board_id, board_name, all_posts):
     # HowTo schema for articles with step-by-step instructions
     body_html = get_body(slug, board_id)
     howto_schema = ''
-    # Find numbered h2/h3 headings: "1. Title", "Step 1: Title", etc.
-    step_headings = re.findall(r'<h[23][^>]*>\s*(\d+)[\.\:\)]\s*([^<]+)</h[23]>', body_html)
+    # Find numbered h3/h4 headings (offset from original h2/h3): "1. Title", "Step 1: Title", etc.
+    step_headings = re.findall(r'<h[34][^>]*>\s*(\d+)[\.\:\)]\s*([^<]+)</h[34]>', body_html)
     if len(step_headings) >= 3:
         # Extract step text between headings
-        parts = re.split(r'<h[23][^>]*>\s*\d+[\.\:\)]\s*[^<]+</h[23]>', body_html)
+        parts = re.split(r'<h[34][^>]*>\s*\d+[\.\:\)]\s*[^<]+</h[34]>', body_html)
         steps = []
         for i, (num, name) in enumerate(step_headings[:10]):  # max 10 steps
             name_clean = name.strip().replace('"', '\\"')
@@ -13426,11 +13433,12 @@ def make_article_html(art, board_id, board_name, all_posts):
     }}
     </script>'''
     body_len = len(body_html)
-    word_est = max(300, body_len // 5)  # rough estimate from body chars
-
-    # Thin content guard: noindex articles under 2K chars plain text to protect site quality
+    # wordCount from plain text (not HTML) — ~5 chars/word average
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
     body_text_len = len(body_text)
+    word_est = max(300, body_text_len // 5)
+
+    # Thin content guard: noindex articles under 2K chars plain text to protect site quality
     robots_meta = 'noindex, follow' if body_text_len < 2000 else 'index, follow'
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
 

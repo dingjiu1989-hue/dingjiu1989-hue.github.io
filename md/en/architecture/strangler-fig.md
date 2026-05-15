@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/strangler-fig.html
 
 # Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
 
-# Strangler Fig Pattern for Legacy Migration
+## Strangler Fig Pattern for Legacy Migration
+
+## Strangler Fig Pattern for Legacy Migration
 
 The Strangler Fig pattern, named after the tropical plant that gradually envelops its host tree, is a strategy for incrementally replacing a legacy system with a new one. Rather than undertaking a high-risk big-bang rewrite, the Strangler Fig pattern allows teams to replace functionality piece by piece, routing traffic to the new system while the legacy system remains operational. This approach dramatically reduces risk and allows continuous delivery of value. 
 
@@ -63,5 +65,7 @@ The Strangler Fig pattern is ideal for replacing monolithic applications that ca
 Ultimately, the Strangler Fig pattern is the safest path to modernizing critical legacy systems, prioritizing risk reduction over speed. It has been successfully used by organizations including Amazon, Microsoft, and countless enterprises to migrate from monoliths to microservices.
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>).
+
+**See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)
 
 **See also:** [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Database per Service Pattern](</en/architecture/database-per-service.html>)

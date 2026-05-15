@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/nosql-guide.html
 
 # NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
 
-# NoSQL Databases Guide
+## NoSQL Databases Guide
+
+## NoSQL Databases Guide
 
 NoSQL Database Types 
 
@@ -87,5 +89,7 @@ Conclusion
 Match the NoSQL type to your data model. Document for nested data, key-value for caching, wide-column for scale, graph for relationships. Consider using multiple databases for different workloads.
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Couchbase Guide: N1QL, Document Model, Clustering, and Caching](</en/database/couchbase-guide.html>).
+
+**See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector](</en/database/database-types-overview.html>), [SQL vs NoSQL in 2026](</en/database/sql-vs-nosql-2026.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)

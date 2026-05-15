@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-transactions.html
 
 # Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
-# Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
+
+## Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints
 
 Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints 
 
@@ -216,5 +218,7 @@ ORDER BY duration DESC;
 Transactions are not just a SQL feature; they are a correctness contract between your application and the database. Understanding isolation levels and their performance implications is essential for building reliable, concurrent systems.
 
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Isolation Levels and Anomalies](</en/database/database-isolation-levels.html>).
+
+**See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Concurrency Control: MVCC, Locking, and Deadlocks](</en/database/database-concurrency.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)

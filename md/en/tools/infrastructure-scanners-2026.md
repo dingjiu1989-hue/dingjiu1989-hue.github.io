@@ -8,67 +8,69 @@ url: https://dingjiu1989-hue.github.io/en/tools/infrastructure-scanners-2026.htm
 
 # Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-# Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
 
-## Introduction
+## Infrastructure Scanners 2026: Trivy, Checkov, Terrascan, kube-bench
+
+### Introduction
 
 Infrastructure security scanning is essential for catching misconfigurations before they reach production. The landscape of scanners in 2026 offers specialized tools for different layers: container images and filesystems, IaC templates, Kubernetes configurations, and runtime posture. This article covers Trivy, Checkov, Terrascan, and kube-bench.
 
-## Trivy
+### Trivy
 
 Aqua Security's comprehensive vulnerability scanner covering containers, filesystems, repositories, and IaC:
 
-# Installation
+## Installation
 
 brew install trivy
 
-# Scan container images
+## Scan container images
 
 trivy image nginx:latest
 
 trivy image --severity HIGH,CRITICAL my-app:latest
 
-# Scan filesystem
+## Scan filesystem
 
 trivy fs .
 
-# Scan git repository
+## Scan git repository
 
 trivy repo https://github.com/org/my-repo
 
-# Scan IaC configurations
+## Scan IaC configurations
 
 trivy config ./terraform/
 
 trivy config --severity CRITICAL ./kubernetes/
 
-# Scan Kubernetes cluster
+## Scan Kubernetes cluster
 
 trivy k8s cluster --report summary
 
-# Output formats
+## Output formats
 
 trivy image my-app --format json --output results.json
 
@@ -76,11 +78,11 @@ trivy image my-app --format sarif --output results.sarif
 
 trivy image my-app --format html --output report.html
 
-# In CI, fail on critical issues
+## In CI, fail on critical issues
 
 trivy image --exit-code 1 --severity CRITICAL my-app
 
-# trivy.yaml — configuration file
+## trivy.yaml — configuration file
 
 severity: HIGH,CRITICAL
 
@@ -112,49 +114,49 @@ scanners:
 
 **Key features** : Single binary, comprehensive vulnerability database, IaC scanning (Terraform, K8s, Dockerfile), secret detection, SBOM generation. The most versatile scanner in the ecosystem.
 
-## Checkov
+### Checkov
 
 Bridgecrew's policy-as-code scanner for IaC:
 
-# Installation
+## Installation
 
 pip install checkov
 
-# Scan Terraform
+## Scan Terraform
 
 checkov --directory terraform/
 
-# Scan CloudFormation
+## Scan CloudFormation
 
 checkov -f cloudformation/template.yaml
 
-# Scan Kubernetes manifests
+## Scan Kubernetes manifests
 
 checkov --directory k8s/
 
-# Scan multiple frameworks
+## Scan multiple frameworks
 
 checkov --directory . --framework terraform,kubernetes,helm
 
-# Output formats
+## Output formats
 
 checkov -d . --output json > results.json
 
 checkov -d . --output junitxml > checkov-junit.xml
 
-# Soft fail (don't exit with error)
+## Soft fail (don't exit with error)
 
 checkov -d . --soft-fail
 
-# Skip specific checks
+## Skip specific checks
 
 checkov -d . --skip-check CKV_AWS_52,CKV_AWS_79
 
-# External checks directory
+## External checks directory
 
 checkov -d . --external-checks-dir custom-checks/
 
-# .checkov.yaml
+## .checkov.yaml
 
 quiet: true
 
@@ -178,7 +180,7 @@ output: cli
 
 **Custom policies** in YAML:
 
-# custom-checks/custom_policy.yaml
+## custom-checks/custom_policy.yaml
 
 metadata:
 
@@ -208,31 +210,31 @@ key: "monitoring[0].enabled"
 
 value: false
 
-## Terrascan
+### Terrascan
 
 Accurant's static code analyzer for IaC:
 
-# Installation
+## Installation
 
 brew install terrascan
 
-# Scan directory
+## Scan directory
 
 terrascan scan -d terraform/
 
-# Scan specific IaC type
+## Scan specific IaC type
 
 terrascan scan -d . -i terraform
 
-# Scan Kubernetes
+## Scan Kubernetes
 
 terrascan scan -d k8s/ -i k8s
 
-# Policy categories
+## Policy categories
 
 terrascan scan -d . --policy-type aws,gcp
 
-# Output formats
+## Output formats
 
 terrascan scan -d . -o json
 
@@ -240,45 +242,45 @@ terrascan scan -d . -o yaml
 
 terrascan scan -d . -o sarif
 
-# Use specific policy set
+## Use specific policy set
 
 terrascan scan -d . --categories "network,logging"
 
-# Non-recursive scan
+## Non-recursive scan
 
 terrascan scan -d . --non-recursive
 
-## kube-bench
+### kube-bench
 
 CIS Kubernetes Benchmark validator:
 
-# Installation
+## Installation
 
-# Run as a job in the cluster
+## Run as a job in the cluster
 
 kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
 
-# Or install locally
+## Or install locally
 
 curl -L https://github.com/aquasecurity/kube-bench/releases/download/v0.9.0/kube-bench_0.9.0_linux_amd64.tar.gz | tar xz
 
-# Run benchmark
+## Run benchmark
 
 ./kube-bench
 
 ./kube-bench --version 1.28 # Specify K8s version
 
-# Run specific checks
+## Run specific checks
 
 ./kube-bench --check 1.1.1,1.1.2,1.2.1
 
-# As a Kubernetes job
+## As a Kubernetes job
 
 kubectl get jobs
 
 kubectl logs job/kube-bench
 
-# kube-bench job
+## kube-bench job
 
 apiVersion: batch/v1
 
@@ -334,9 +336,9 @@ hostPath:
 
 path: /etc/kubernetes
 
-## CI Integration
+### CI Integration
 
-# .github/workflows/infra-scan.yml
+## .github/workflows/infra-scan.yml
 
 name: Infrastructure Security Scan
 
@@ -398,7 +400,7 @@ iac_type: 'terraform'
 
 iac_dir: 'terraform'
 
-## Comparison
+### Comparison
 
 | Feature | Trivy | Checkov | Terrascan | kube-bench |
 
@@ -414,7 +416,7 @@ iac_dir: 'terraform'
 
 | False positives | Low | Medium | Medium | Low |
 
-## Recommendations
+### Recommendations
 
   * **Comprehensive scanning** : Use Trivy as your primary scanner covering containers, IaC, and secrets.
 
@@ -432,5 +434,7 @@ iac_dir: 'terraform'
 The most robust approach runs all four scanners at different points: Trivy on every container build and IaC change, Checkov on Terraform PRs, Terrascan as a compliance check, and kube-bench as a scheduled cluster audit.
 
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>).
+
+**See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)
 
 **See also:** [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Terraform Tools: Terragrunt, terratest, tfsec, Infracost](</en/tools/terraform-tools.html>), [Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer](</en/tools/kafka-tools.html>)

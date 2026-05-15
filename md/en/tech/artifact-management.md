@@ -8,41 +8,43 @@ url: https://dingjiu1989-hue.github.io/en/tech/artifact-management.html
 
 # Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
 
-# Artifact Management
+## Artifact Management
+
+## Artifact Management
 
 Artifact management is the practice of storing, versioning, and distributing build outputs. Artifacts include compiled binaries, container images, library packages, deployment configurations, and any other output from the build process. Effective artifact management is essential for reproducible deployments, dependency management, and auditability.
 
-## What Is an Artifact?
+### What Is an Artifact?
 
 An artifact is any file produced during the build process that is needed for deployment or consumed by other builds. Common artifact types include Docker images, JAR/WAR files, npm packages, Python wheels, compiled binaries, and Terraform plan files.
 
 Artifacts should be immutable—once published, they should never be modified. An immutable artifact deployed to staging is identical to the one deployed to production. This eliminates "works on staging but not production" issues caused by different builds. Versioning provides a unique identifier for each artifact, tying it back to the source code and build configuration.
 
-## Docker Registries
+### Docker Registries
 
 Docker registries store and distribute container images. Docker Hub, Amazon ECR, Google Artifact Registry, Azure Container Registry, and Quay.io are popular options. Each registry provides image storage, versioning, and access control.
 
@@ -50,7 +52,7 @@ Image tagging conventions matter. The `latest` tag is ambiguous and should not b
 
 Registry cleanup policies prevent storage costs from growing unboundedly. Retention policies delete images older than a threshold. Environment-based retention keeps production images longer than development images. Only retain images that could be needed for rollback.
 
-## Package Registries
+### Package Registries
 
 Package registries store language-specific packages. npm registry for JavaScript, PyPI for Python, Maven Central for Java, RubyGems for Ruby, and Go module proxy for Go. Private registries (Verdaccio, JFrog Artifactory, Sonatype Nexus) provide internal package distribution.
 
@@ -58,7 +60,7 @@ Package versioning follows semantic versioning. Each published version is immuta
 
 Private registries enable internal library distribution. An organization can publish shared libraries to a private registry, consumed by multiple projects. Access controls restrict who can publish and consume packages.
 
-## Versioning Strategies
+### Versioning Strategies
 
 Artifact versioning strategies connect the artifact to its source. Semantic versioning communicates the nature of changes. Build number versioning provides monotonically increasing identifiers. Commit hash versioning provides direct source traceability.
 
@@ -66,7 +68,7 @@ A common approach combines semantic versioning for public packages (communicatin
 
 Version metadata should be embedded in the artifact. A compiled binary can include the version via build flags. A Docker image includes labels with version, build date, and commit hash. This enables runtime version identification.
 
-## Lifecycle Policies
+### Lifecycle Policies
 
 Artifacts have a lifecycle: publish, promote, deprecate, delete. Promotion moves an artifact from one environment to the next. The artifact built for development is promoted to staging, then to production. Each promotion should verify the artifact's integrity (checksum verification).
 
@@ -74,13 +76,13 @@ Deprecation marks an artifact as no longer recommended for new use. Existing con
 
 Immutable artifacts contradict the need for deletion. A better approach is to expire artifacts based on age or usage, with exceptions for production artifacts and recent builds. Automated cleanup prevents registry bloat without risking needed artifacts.
 
-## Artifact Repositories
+### Artifact Repositories
 
 An artifact repository (like JFrog Artifactory, Sonatype Nexus, or AWS CodeArtifact) provides a unified store for multiple artifact types. It proxies external registries (caching frequently used packages), hosts internal packages, and provides consistent access control across artifact types.
 
 Repository managers improve reliability and speed. By caching external packages, they reduce dependency on external services during builds. If the external registry is unavailable, the cached version is still accessible. This is critical for CI/CD pipeline reliability.
 
-## Best Practices
+### Best Practices
 
 Use immutable artifacts with unique versions. Tag artifacts with build metadata (commit SHA, build number, build date). Store artifacts in a registry with access controls and audit logging. Implement retention policies to manage storage costs. Use an artifact repository for caching and unified management.
 
@@ -89,5 +91,7 @@ Verify artifact integrity with checksums. Automate artifact promotion through CI
 Artifact management is a critical but often overlooked component of the software development lifecycle. Well-managed artifacts enable reliable deployments, reproducible builds, and audit-ready compliance.
 
 **See also:** [Dependency Management](</en/tech/dependency-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Log Management](</en/tech/log-management.html>).
+
+**See also:** [Dependency Management](</en/tech/dependency-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Log Management](</en/tech/log-management.html>)
 
 **See also:** [Dependency Management](</en/tech/dependency-management.html>), [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Log Management](</en/tech/log-management.html>)

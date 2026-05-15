@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-13">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>DNS Security — SourceHub</title>
     <meta name="description" content="Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.">
@@ -46,8 +46,8 @@
       "description": "Comprehensive guide to DNS security including DNSSEC, DNS over HTTPS/TLS, split-horizon DNS, filtering strategies, and common attack vectors.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1748",
+      "dateModified": "2026-04-13",
+      "wordCount": "1528",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,31 +93,32 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">DNS Security</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png" alt="DNS Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
-<h1>DNS Security</h1>
+      <div class="article-body"><h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
+<h2>DNS Security</h2>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/dns-security.png" alt="DNS Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Domain Name System (DNS) is a foundational internet protocol that translates human-readable domain names to IP addresses. Despite its critical role, DNS was designed without security considerations, making it a prime target for attacks including cache poisoning, tunneling, and DDoS amplification. </p>
 <p>DNSSEC </p>
 <p>DNS Security Extensions (DNSSEC) adds cryptographic signatures to DNS records, ensuring authenticity and integrity. It protects against cache poisoning attacks where an attacker injects forged DNS responses. </p>
 <p>DNSSEC uses a chain of trust starting from the DNS root zone. Each zone signs its records with a private key, and resolvers verify signatures using corresponding public keys stored as DNSKEY records. </p>
-<h1>Checking DNSSEC validation with dig</h1>
+<h2>Checking DNSSEC validation with dig</h2>
 <p>dig +dnssec example.com</p>
-<h1>Verify DNSSEC chain</h1>
+<h2>Verify DNSSEC chain</h2>
 <p>delv example.com</p>
-<h1>Check if a domain is DNSSEC-signed</h1>
+<h2>Check if a domain is DNSSEC-signed</h2>
 <p>dig example.com DNSKEY</p>
 <p>Key DNSSEC record types:</p>
 <ul>
@@ -134,7 +135,7 @@
 <p><strong>NSEC/NSEC3</strong> : Next Secure — provides authenticated denial of existence</p>
 </li>
 </ul>
-<h1>BIND DNSSEC configuration example</h1>
+<h2>BIND DNSSEC configuration example</h2>
 <p>zone "example.com" {</p>
 <p>type master;</p>
 <p>file "/etc/bind/db.example.com";</p>
@@ -152,13 +153,13 @@
 <p><strong>DoH</strong> (RFC 8484): DNS over HTTP/2 or HTTP/3 on port 443, blending with HTTPS traffic</p>
 </li>
 </ul>
-<h1>Nginx DoH proxy configuration</h1>
+<h2>Nginx DoH proxy configuration</h2>
 <p>location /dns-query {</p>
 <p>proxy_pass http://127.0.0.1:8053;</p>
 <p>proxy_set_header Host $host;</p>
 <p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
 <p>}</p>
-<h1>unbound configuration with DoT forwarder</h1>
+<h2>unbound configuration with DoT forwarder</h2>
 <p>forward-zone:</p>
 <p>name: "."</p>
 <p>forward-tls-upstream: yes</p>
@@ -166,7 +167,7 @@
 <p>forward-addr: 8.8.8.8@853#dns.google</p>
 <p>Split-Horizon DNS </p>
 <p>Split-horizon DNS returns different responses based on the requester's network origin. Internal users receive private IP addresses while external users receive public addresses. </p>
-<h1>BIND split-horizon configuration</h1>
+<h2>BIND split-horizon configuration</h2>
 <p>view "internal" {</p>
 <p>match-clients { 10.0.0.0/8; 172.16.0.0/12; 192.168.0.0/16; };</p>
 <p>zone "example.com" {</p>
@@ -183,11 +184,11 @@
 <p>};</p>
 <p>DNS Filtering and Threat Blocking </p>
 <p>DNS filtering blocks resolution of known malicious domains. Modern solutions integrate threat intelligence feeds to dynamically block malware, phishing, and command-and-control (C2) domains. </p>
-<h1>Simple DNS filter using dnspython</h1>
+<h2>Simple DNS filter using dnspython</h2>
 <p>import dns.resolver</p>
 <p>THREAT_FEED = set()</p>
 <p>def load_threat_feed(feed_url):</p>
-<h1>Download and parse threat intelligence feed</h1>
+<h2>Download and parse threat intelligence feed</h2>
 <p>response = requests.get(feed_url)</p>
 <p>for domain in response.text.splitlines():</p>
 <p>THREAT_FEED.add(domain.strip().lower())</p>
@@ -200,7 +201,7 @@
 <li><strong>Cache Poisoning</strong> : Attacker injects forged records into a resolver's cache. Mitigated by DNSSEC and source port randomization.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>DNS Tunneling</strong> : Encodes data in DNS queries to exfiltrate data or bypass network controls. Detected via traffic analysis of unusual query patterns. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>DNS Amplification DDoS</strong> : Attacker sends small queries with spoofed source IPs; responses can be 50x larger. Mitigated by response rate limiting (RRL) and BCP38 filtering. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>NXDOMAIN Attacks</strong> : High volume of queries for non-existent domains exhausts resolver resources. </p>
-<h1>Response Rate Limiting in BIND</h1>
+<h2>Response Rate Limiting in BIND</h2>
 <p>options {</p>
 <p>rate-limit {</p>
 <p>responses-per-second 5;</p>
@@ -210,7 +211,8 @@
 <p>};</p>
 <p>Conclusion </p>
 <p>Securing DNS requires a layered approach: DNSSEC for integrity, encrypted transports for confidentiality, split-horizon for network segmentation, and threat intelligence for proactive blocking. Regular monitoring and logging of DNS traffic is essential for detecting anomalous behavior indicative of compromise.</p>
-<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/session-management.html">Session Management Security</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cors-security.html">CORS Security</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

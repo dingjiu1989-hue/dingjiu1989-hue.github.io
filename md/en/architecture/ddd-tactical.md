@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-tactical.html
 
 # DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
 
-# DDD Tactical Patterns
+## DDD Tactical Patterns
+
+## DDD Tactical Patterns
 
 Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. 
 
@@ -71,5 +73,7 @@ Repositories should be defined as interfaces in the domain layer and implemented
 Tactical patterns provide a shared vocabulary for implementation. When a team uses terms like "aggregate root" or "value object", they have precise, agreed-upon meanings. This shared understanding reduces communication overhead and leads to more consistent implementations.
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>).
+
+**See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)
 
 **See also:** [Domain Event Implementation: Publishing, Handling, and Testing](</en/architecture/domain-event-implementation.html>), [DDD Strategic Design](</en/architecture/ddd-strategic.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>)

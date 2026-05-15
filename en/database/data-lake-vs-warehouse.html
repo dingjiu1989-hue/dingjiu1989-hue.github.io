@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Compare data lake, data warehouse, and lakehouse architectures with Delta Lake, Iceberg, Hudi, and the medallion architecture.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/data-lake-vs-warehouse.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-08">
     <meta property="article:tag" content="Database, SQL">
     <title>Data Lake vs Data Warehouse vs Lakehouse — SourceHub</title>
     <meta name="description" content="Compare data lake, data warehouse, and lakehouse architectures with Delta Lake, Iceberg, Hudi, and the medallion architecture.">
@@ -46,8 +46,8 @@
       "description": "Compare data lake, data warehouse, and lakehouse architectures with Delta Lake, Iceberg, Hudi, and the medallion architecture.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/data-lake-vs-warehouse.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2800",
+      "dateModified": "2026-04-08",
+      "wordCount": "2430",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -89,19 +89,20 @@
       <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Data Lake vs Data Warehouse vs Lakehouse</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/data-lake-vs-warehouse.png" alt="Data Lake vs Data Warehouse vs Lakehouse" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
-<h1>Data Lake vs Data Warehouse vs Lakehouse</h1>
+      <div class="article-body"><h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
+<h2>Data Lake vs Data Warehouse vs Lakehouse</h2>
 <p>The data landscape has evolved from simple databases to complex architectures spanning data lakes, data warehouses, and the emerging lakehouse paradigm. Understanding the differences between these architectures is essential for building a modern data platform. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/data-lake-vs-warehouse.png" alt="Data Lake vs Data Warehouse vs Lakehouse" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data Warehouse </p>
 <p>A data warehouse is a centralized repository optimized for structured, processed data used in reporting and analytics. </p>
@@ -268,7 +269,7 @@
 <p>file3.parquet</p>
 <p>Silver Layer (Cleaned) </p>
 <p>Data is deduplicated, validated, and lightly transformed. Null handling, type casting, and simple joins. This layer serves as the source of truth for analysts. </p>
-<h1>Bronze to Silver transformation</h1>
+<h2>Bronze to Silver transformation</h2>
 <p>def bronze_to_silver(spark):</p>
 <p>bronze_df = spark.read.format("delta").load("/data/bronze/orders")</p>
 <p>silver_df = bronze_df \</p>
@@ -304,7 +305,8 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Continue using the warehouse</strong> for BI and reporting. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Introduce an open table format</strong> (Delta, Iceberg, Hudi) on the lake for ACID properties. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Move bronze/silver layers to the lake</strong> while keeping gold aggregations in the warehouse. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Adopt a lakehouse query engine</strong> (Trino, Athena, Databricks SQL) for direct lake queries. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Migrate gold layer to the lakehouse</strong> once performance is acceptable. </p>
 <p>Conclusion </p>
 <p>Data warehouses remain essential for BI and reporting. Data lakes are ideal for raw storage and ML workloads. The lakehouse architecture bridges both worlds by bringing ACID transactions, schema enforcement, and performance optimization to object storage. Choose the medallion architecture (bronze, silver, gold) to organize lakehouse data. Start with a data warehouse, add a lake for raw data, and converge on a lakehouse as your platform matures.</p>
-<p><strong>See also:</strong> <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>, <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>, <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>, <a href="/en/database/time-series-databases.html">Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>, <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/distributed-databases.html">Distributed Databases: Concepts and Implementation</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>, <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html
 
 # Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
 
-# Distributed Locking Mechanisms
+## Distributed Locking Mechanisms
+
+## Distributed Locking Mechanisms
 
 Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. 
 
@@ -51,5 +53,7 @@ The choice between locking mechanisms depends on consistency requirements. ZooKe
 Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale.
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Saga vs Process Manager: Orchestration Patterns Compared](</en/architecture/saga-process-manager.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>).
+
+**See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)
 
 **See also:** [Rate Limiting Architecture](</en/architecture/rate-limiting-architecture.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>)

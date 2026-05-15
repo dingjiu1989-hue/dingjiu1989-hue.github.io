@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-vacuuming-maintenance.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation — SourceHub</title>
     <meta name="description" content="Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.">
@@ -46,8 +46,8 @@
       "description": "Master PostgreSQL VACUUM: autovacuum tuning, bloat prevention, and maintenance best practices.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-vacuuming-maintenance.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "701",
+      "dateModified": "2026-05-05",
+      "wordCount": "674",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,34 +90,36 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-vacuuming-maintenance.png" alt="PostgreSQL Vacuuming: Maintenance, Tuning, and Automation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
-<h1>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h1>
+      <div class="article-body"><h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
+<h2>PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</h2>
 <p>PostgreSQL uses Multi-Version Concurrency Control (MVCC) to handle concurrent transactions. Every UPDATE and DELETE creates a new row version while keeping the old one. Dead rows accumulate over time, consuming storage and degrading query performance. VACUUM reclaims this space and updates statistics.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-vacuuming-maintenance.png" alt="PostgreSQL Vacuuming: Maintenance, Tuning, and Automation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Understanding Bloat</h2>
+<h3>Understanding Bloat</h3>
 <p>Table bloat occurs when dead row versions accumulate faster than VACUUM reclaims them. Causes include long-running transactions that prevent dead row removal, high update frequency tables, and insufficient VACUUM frequency.</p>
 <p>Measure bloat using the pg_stat_user_tables view. High n_dead_tup relative to n_live_tup indicates bloat. A ratio over 20% needs investigation. The pgstattuple extension provides accurate bloat measurement per table.</p>
-<h2>Autovacuum Tuning</h2>
+<h3>Autovacuum Tuning</h3>
 <p>Autovacuum runs automatically based on thresholds. The default settings work for small databases but need tuning for large ones. Key parameters: autovacuum_vacuum_threshold (50) plus autovacuum_vacuum_scale_factor (0.2) means VACUUM triggers when 20% of rows plus 50 are dead. For large tables, reduce scale_factor or use per-table settings.</p>
 <p>autovacuum_vacuum_cost_limit and autovacuum_vacuum_cost_delay control autovacuum's I/O impact. Default settings are conservative (cost_limit=200, cost_delay=20ms). Increase cost_limit for faster VACUUM on systems with I/O headroom. Decrease cost_delay for aggressive cleanup.</p>
 <p>Set per-table autovacuum settings for busy tables:</p>
 <p>ALTER TABLE orders SET (autovacuum_vacuum_scale_factor = 0.05, autovacuum_vacuum_threshold = 1000);</p>
-<h2>Manual Vacuum Operations</h2>
+<h3>Manual Vacuum Operations</h3>
 <p>Standard VACUUM reclaims space but does not return it to the operating system. It makes space available for reuse within the table. Run standard VACUUM during low-traffic periods for tables with heavy updates.</p>
 <p>VACUUM FULL reclaims space to the OS but requires an ACCESS EXCLUSIVE lock. It rewrites the entire table, blocking all operations. Use during maintenance windows only. Consider pg_repack instead—it rebuilds tables without blocking reads or writes.</p>
-<h2>Monitoring</h2>
+<h3>Monitoring</h3>
 <p>Track vacuum activity through pg_stat_progress_vacuum. Monitor last_autovacuum and last_analyze timestamps. Tables not vacuumed in 24 hours need attention. Set up alerts for tables approaching the autovacuum threshold without being vacuumed.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-posture.html
 
 # Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
 
-# Cloud Security Posture Management
+## Cloud Security Posture Management
+
+## Cloud Security Posture Management
 
 Introduction 
 
@@ -64,7 +66,7 @@ def scan_aws(self, account_id):
 
 """Evaluate AWS account against security benchmarks."""
 
-# Check S3 public access
+## Check S3 public access
 
 s3 = boto3.client('s3')
 
@@ -196,7 +198,7 @@ def map_finding(self, finding):
 
 mapped_to = []
 
-# Example mapping
+## Example mapping
 
 if finding['issue'] == 'S3 bucket publicly accessible':
 
@@ -290,7 +292,7 @@ def remediate_open_security_group(self, group_id, region):
 
 ec2 = boto3.client('ec2', region_name=region)
 
-# Get current rules
+## Get current rules
 
 sg = ec2.describe_security_groups(GroupIds=[group_id])['SecurityGroups'][0]
 
@@ -302,7 +304,7 @@ if ip_range['CidrIp'] == '0.0.0.0/0':
 
 if permission.get('FromPort') in (22, 3389, 3306, 5432):
 
-# Remove overly permissive rule
+## Remove overly permissive rule
 
 ec2.revoke_security_group_ingress(
 
@@ -387,5 +389,7 @@ Conclusion
 CSPM is essential for maintaining secure cloud configurations at scale. Deploy CSPM tools that continuously scan across all cloud providers, map findings to compliance frameworks, detect configuration drift, and automate remediation where safe. Integrate CSPM findings into your existing SIEM and incident response workflows for complete visibility.
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>).
+
+**See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Certificate Management](</en/security/certificate-management.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)

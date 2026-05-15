@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-09">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits — SourceHub</title>
     <meta name="description" content="Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys">
@@ -46,8 +46,8 @@
       "description": "Practical guide to designing LLM APIs with streaming responses, structured JSON output, error handling patterns, and rate limiting strategies for production sys",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1554",
+      "dateModified": "2026-05-09",
+      "wordCount": "1374",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h1>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h2>LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</h2>
+<h3>Introduction</h3>
 <p>Designing APIs that wrap large language models requires handling concerns that traditional REST APIs do not face: streaming token-by-token responses, enforcing structured output schemas, managing unpredictable latency, and protecting against runaway costs. This guide covers the four critical pillars of LLM API design with production-ready patterns.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-api-design.png" alt="LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Streaming Responses</h2>
+<h3>Streaming Responses</h3>
 <p>Streaming is the standard way to return LLM outputs. Instead of waiting for the full response, the client receives tokens as they are generated:</p>
 <p>from fastapi import FastAPI, Request</p>
 <p>from fastapi.responses import StreamingResponse</p>
@@ -139,7 +140,7 @@
 <p>},</p>
 <p>)</p>
 <p>The Server-Sent Events protocol is the most compatible streaming format. Each <code>data:</code> line is a new token chunk. Clients use <code>EventSource</code> or fetch with <code>ReadableStream</code> to consume the stream progressively.</p>
-<h2>Structured Output</h2>
+<h3>Structured Output</h3>
 <p>Raw LLM text is unreliable for programmatic consumption. Use structured output modes to enforce JSON schemas:</p>
 <p>from pydantic import BaseModel</p>
 <p>from openai import OpenAI</p>
@@ -176,7 +177,7 @@
 <p>raise</p>
 <p>prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."</p>
 <p>return None</p>
-<h2>Error Handling</h2>
+<h3>Error Handling</h3>
 <p>LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:</p>
 <p>import time</p>
 <p>from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type</p>
@@ -203,7 +204,7 @@
 <p>raise ContentFilterError from e</p>
 <p>raise</p>
 <p>Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.</p>
-<h2>Rate Limiting</h2>
+<h3>Rate Limiting</h3>
 <p>Protect your API from abuse and cost spikes with layered rate limiting:</p>
 <p>from fastapi import HTTPException</p>
 <p>import time</p>
@@ -230,9 +231,10 @@
 <p>estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))</p>
 <p>await rate_limiter.check(user_id, estimated)</p>
 <p>return await generate_response(body["prompt"])</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Designing LLM APIs requires balancing responsiveness with cost control. Stream responses for user experience, enforce structured output for programmatic reliability, implement retry logic calibrated to each error type, and gate access with rate and budget limits. These four patterns form the foundation of any production LLM service.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>, <a href="/en/ai/tool-use-patterns.html">Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/feature-flags-architectur
 
 # Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
 
-# Feature Flags Architecture
+## Feature Flags Architecture
+
+## Feature Flags Architecture
 
 Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. 
 
@@ -51,5 +53,7 @@ Security implications of feature flags are significant. Flags that control secur
 Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.
 
 **See also:** [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>), [Structured Logging](</en/architecture/structured-logging.html>)

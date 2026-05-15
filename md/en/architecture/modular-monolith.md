@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/modular-monolith.html
 
 # Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
 
-# Modular Monolith Architecture
+## Modular Monolith Architecture
+
+## Modular Monolith Architecture
 
 A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices — separation of concerns, bounded contexts, independent evolvability — without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. 
 
@@ -47,5 +49,7 @@ Testing benefits are substantial. Integration tests can cover cross-module flows
 The modular monolith is not a permanent state — it is a starting position. As the organization grows and domain boundaries stabilize, individual modules can be extracted to independent services with confidence, knowing the extraction path was designed from the beginning. The key is treating the monolith not as a technical compromise but as a deliberate architectural choice with its own design patterns and tradeoffs.
 
 **See also:** [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>).
+
+**See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [Microservices vs Monolith: Decision Guide](</en/architecture/microservices-vs-monolith.html>), [Microservices vs Monolith 2026](</en/architecture/microservices-vs-monolith-2026.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)

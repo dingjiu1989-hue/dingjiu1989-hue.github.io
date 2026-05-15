@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/capacity-planning-cloud.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1635",
+      "wordCount": "1544",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -95,23 +95,24 @@
       <h1 class="article-title">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/capacity-planning-cloud.png" alt="Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h1>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h2>Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</h2>
+<h3>Introduction</h3>
 <p>Capacity planning in the cloud is fundamentally different from traditional on-premises capacity management. Cloud elasticity theoretically eliminates capacity constraints, but without proper planning, organizations face unexpectedly high bills, performance degradation during traffic spikes, or both. Effective cloud capacity planning balances cost efficiency with the ability to handle demand variability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/capacity-planning-cloud.png" alt="Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers auto-scaling strategies, reserved and spot instances, demand forecasting, and cost optimization.</p>
-<h2>Auto-Scaling Strategies</h2>
+<h3>Auto-Scaling Strategies</h3>
 <p>Auto-scaling is the primary mechanism for matching capacity to demand in the cloud. Effective auto-scaling requires careful configuration of scaling policies, cooldown periods, and instance warm-up times.</p>
 <p>Target tracking policies maintain a metric at a specified target value. For example, maintaining average CPU utilization at 60% across an Auto Scaling Group. AWS Application Auto Scaling supports target tracking for CPU, memory, request count, and custom metrics.</p>
 <p>Step scaling policies allow different scaling adjustments based on the magnitude of metric deviation. A 10% CPU increase might add one instance, while a 30% increase adds five. This provides proportional responses without over-provisioning.</p>
@@ -128,12 +129,12 @@
 <p>Cooldown periods: Prevent rapid scaling oscillations.</p>
 </li>
 </ul>
-<h2>Reserved Instances</h2>
+<h3>Reserved Instances</h3>
 <p>Reserved Instances (RIs) provide significant discounts (30-60%) in exchange for commitment to a specific instance configuration. They are the primary tool for reducing compute costs for baseline capacity.</p>
 <p>Standard RIs commit to a specific instance family, region, and payment option. Convertible RIs allow changing instance attributes during the term, providing flexibility at a slightly lower discount. Scheduled RIs launch within a specified time window, useful for predictable batch workloads.</p>
 <p>Payment options range from no upfront (highest effective discount rate) to all upfront (maximum discount). Analysis of workload predictability determines the optimal option: steady-state workloads benefit from three-year all-upfront RIs, while variable workloads may prefer one-year partial upfront.</p>
 <p>Reserved instance planning requires careful capacity forecasting. Over-provisioning RIs wastes money on unused capacity. Under-provisioning leaves cost savings on the table. A hybrid approach — RIs for baseline capacity plus spot or on-demand for variable demand — balances cost and flexibility.</p>
-<h2>Spot Instances</h2>
+<h3>Spot Instances</h3>
 <p>Spot instances offer 60-90% discounts over on-demand pricing but can be reclaimed by the provider with two minutes notice. They are ideal for fault-tolerant, stateless, and interruptible workloads.</p>
 <p>Best use cases for spot instances include:</p>
 <ul>
@@ -172,18 +173,19 @@
 </li>
 </ul>
 <p>Spot Instance Advisor provides pricing history and interruption rate data for informed instance selection.</p>
-<h2>Demand Forecasting</h2>
+<h3>Demand Forecasting</h3>
 <p>Capacity planning requires understanding future demand. Several forecasting approaches apply to cloud planning:</p>
 <p>Time series analysis decomposes traffic into trend, seasonality, and residual components. Weekly and daily patterns are common in SaaS applications. Tools like Facebook Prophet, Amazon Forecast, or custom ARIMA models generate capacity projections.</p>
 <p>Leading indicators correlate with future demand. New user sign-ups predict future API calls. Marketing campaign schedules predict traffic increases. Feature launch timelines predict resource requirements.</p>
 <p>Buffer planning adds headroom above forecasted demand. A common practice is planning for peak load plus 20-30% buffer. Automated scaling handles within-buffer variability, while the buffer handles forecast errors.</p>
-<h2>Cost Management and Optimization</h2>
+<h3>Cost Management and Optimization</h3>
 <p>Right-sizing is the ongoing process of matching instance sizes to workload requirements. Cloud providers offer right-sizing recommendations based on historical utilization data. A typical pattern is identifying instances consistently below 20% utilization and downgrading them.</p>
 <p>Savings plans provide AWS's flexible discount model: committed compute spend ($/hour) in exchange for discounts across any EC2 instance family in a region. Compute Savings Plans are the most flexible, applying to EC2, Lambda, and Fargate.</p>
 <p>Elasticsearch and database capacity planning requires special attention — these stateful services cannot scale as rapidly as stateless compute. Pre-provisioning for peak load with automated storage scaling is the standard approach.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Cloud capacity planning requires a multi-faceted approach. Auto-scaling handles dynamic demand, reserved instances reduce baseline costs, spot instances optimize variable workloads, and demand forecasting guides purchasing decisions. The most cost-effective organizations combine these strategies: RIs for baseline, spot for spikes, and on-demand as a safety net. Regular right-sizing reviews and savings plan optimization ensure capacity planning evolves with workload requirements.</p>
-<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

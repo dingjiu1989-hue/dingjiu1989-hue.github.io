@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/iac-security.html
 
 # Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
 
-# Infrastructure as Code Security
+## Infrastructure as Code Security
+
+## Infrastructure as Code Security
 
 Introduction 
 
@@ -44,23 +46,23 @@ Scan Terraform configurations for security misconfigurations before applying the
 
 checkov 
 
-# Basic scan
+## Basic scan
 
 checkov -d terraform/environments/production/
 
-# Scan with specific framework
+## Scan with specific framework
 
 checkov -d . --framework terraform --skip-framework dockerfile
 
-# Output in multiple formats
+## Output in multiple formats
 
 checkov -d . -o json | jq '.results.failed_checks[] | {resource: .resource, check: .check_id, severity: .severity}'
 
-# Run in CI/CD with threshold
+## Run in CI/CD with threshold
 
 checkov -d . --soft-fail-on MEDIUM # Fail only on HIGH/CRITICAL
 
-# Custom Checkov policy for Terraform
+## Custom Checkov policy for Terraform
 
 from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck
 
@@ -80,7 +82,7 @@ super().**init**(name=name, id=id, supported_resources=supported_resources)
 
 def scan_resource_conf(self, conf):
 
-# Check if storage_encrypted is set to true
+## Check if storage_encrypted is set to true
 
 if conf.get('storage_encrypted') == [True]:
 
@@ -92,23 +94,23 @@ check = RDSEncryptionCheck()
 
 tfsec 
 
-# Basic scan
+## Basic scan
 
 tfsec terraform/
 
-# Scan with custom configuration
+## Scan with custom configuration
 
 tfsec . --config-file tfsec.yaml
 
-# Generate SARIF output for GitHub Code Scanning
+## Generate SARIF output for GitHub Code Scanning
 
 tfsec . --format sarif --out tfsec-results.sarif
 
-# Ignore specific checks
+## Ignore specific checks
 
 tfsec . --exclude aws-s3-enable-bucket-logging,aws-s3-specify-public-access-block
 
-# tfsec.yaml
+## tfsec.yaml
 
 exclude:
 
@@ -150,11 +152,11 @@ Policy as Code with Open Policy Agent
 
 OPA allows you to write policies that enforce infrastructure standards across your IaC. 
 
-# OPA policy for Terraform
+## OPA policy for Terraform
 
 package terraform.analysis
 
-# All resources must have tags
+## All resources must have tags
 
 deny[msg] {
 
@@ -166,7 +168,7 @@ msg = sprintf("%v %v must have tags", [name, resource.type])
 
 }
 
-# S3 buckets must be private
+## S3 buckets must be private
 
 deny[msg] {
 
@@ -178,7 +180,7 @@ msg = sprintf("S3 bucket %v must not be public", [name])
 
 }
 
-# Security groups must not have wide open ingress
+## Security groups must not have wide open ingress
 
 deny[msg] {
 
@@ -194,7 +196,7 @@ msg = sprintf("Security group %v allows SSH from anywhere", [name])
 
 }
 
-# Evaluate OPA policy against Terraform plan
+## Evaluate OPA policy against Terraform plan
 
 terraform plan -out=plan.tfplan
 
@@ -206,7 +208,7 @@ Sentinel (HashiCorp)
 
 Sentinel is HashiCorp's policy-as-code framework for Terraform Enterprise/Cloud. 
 
-# sentinel.hcl
+## sentinel.hcl
 
 policy "restrict-instance-type" {
 
@@ -224,7 +226,7 @@ enforcement_level = "soft-mandatory"
 
 }
 
-# restrict-instance-type.sentinel
+## restrict-instance-type.sentinel
 
 import "tfplan/v2" as tfplan
 
@@ -238,7 +240,7 @@ allowed_instance_types = [
 
 ]
 
-# Get all EC2 instances
+## Get all EC2 instances
 
 instances = filter tfplan.resource_changes as _, rc {
 
@@ -250,7 +252,7 @@ rc.change.actions contains "create"
 
 }
 
-# Check each instance
+## Check each instance
 
 for _, instance in instances {
 
@@ -270,7 +272,7 @@ return true
 
 CI/CD Integration 
 
-# GitLab CI pipeline for IaC security
+## GitLab CI pipeline for IaC security
 
 stages:
 
@@ -346,7 +348,7 @@ only:
 
 Drift Detection 
 
-# Terraform drift detection with AWS Config
+## Terraform drift detection with AWS Config
 
 resource "aws_config_config_rule" "required_tags" {
 
@@ -370,9 +372,9 @@ tag2Key = "Owner"
 
 }
 
-# Automated drift detection
+## Automated drift detection
 
-# !/bin/bash
+## !/bin/bash
 
 aws configservice get-compliance-details-by-config-rule \
 
@@ -389,5 +391,7 @@ Conclusion
 IaC security shifts security left by catching misconfigurations before infrastructure is provisioned. Use tools like Checkov and tfsec for automated scanning, OPA or Sentinel for policy enforcement, integrate scans into CI/CD pipelines, and continuously monitor for drift in deployed infrastructure. Remember that IaC security is an ongoing practice — new resources, providers, and attack patterns require continuous policy updates.
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>).
+
+**See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [Secure Configuration Management](</en/security/secure-configuration.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Container Image Security](</en/security/container-image-security.html>)

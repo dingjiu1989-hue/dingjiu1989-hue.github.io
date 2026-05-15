@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-04-21">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>RBAC Authorization Implementation — SourceHub</title>
     <meta name="description" content="A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.">
@@ -45,8 +45,8 @@
       "description": "A practical guide to implementing Role-Based Access Control with roles, permissions, policies, and middleware in Node.js and Python.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "2041",
+      "dateModified": "2026-04-21",
+      "wordCount": "1690",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -91,21 +91,22 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">RBAC Authorization Implementation</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-04-21 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png" alt="RBAC Authorization Implementation" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
-<h1>RBAC Authorization Implementation</h1>
+      <div class="article-body"><h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
+<h2>RBAC Authorization Implementation</h2>
 <p>What Is RBAC? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/rbac-authorization.png" alt="RBAC Authorization Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Role-Based Access Control (RBAC) is an authorization model where permissions are assigned to roles, and users are assigned to those roles. Instead of managing permissions for each user individually, you manage roles and their associated permissions, then assign users to appropriate roles. </p>
 <p>Core RBAC Concepts </p>
@@ -250,26 +251,26 @@
 <p>return await func(<em>args,</em> *kwargs)</p>
 <p>return wrapper</p>
 <p>return decorator</p>
-<h1>Usage</h1>
+<h2>Usage</h2>
 <p>@app.delete("/articles/{article_id}")</p>
 <p>@require_permission(Permission.ARTICLE_DELETE)</p>
 <p>async def delete_article(article_id: int, current_user = Depends(get_current_user)):</p>
-<h1>Delete logic</h1>
+<h2>Delete logic</h2>
 <p>pass</p>
 <p>Attribute-Based Access Control (ABAC) </p>
 <p>For more granular control, extend RBAC with ABAC policies that consider resource attributes and context: </p>
 <p>def can_access_resource(user, resource, action):</p>
 <p>"""Check RBAC first, then ABAC policies."""</p>
-<h1>RBAC check</h1>
+<h2>RBAC check</h2>
 <p>if not has_role_permission(user.role, action):</p>
 <p>return False</p>
-<h1>ABAC policies</h1>
+<h2>ABAC policies</h2>
 <p>policies = {</p>
-<h1>Users can edit their own articles</h1>
+<h2>Users can edit their own articles</h2>
 <p>('article:update', 'article'): lambda u, r: r.author_id == u.id,</p>
-<h1>Admins can edit any article</h1>
+<h2>Admins can edit any article</h2>
 <p>('article:update', 'article'): lambda u, r: 'admin' in u.roles,</p>
-<h1>Only article authors can delete</h1>
+<h2>Only article authors can delete</h2>
 <p>('article:delete', 'article'): lambda u, r: r.author_id == u.id,</p>
 <p>}</p>
 <p>policy = policies.get((action, resource.type))</p>
@@ -319,7 +320,8 @@
 </ul>
 <p>Summary </p>
 <p>RBAC simplifies authorization by grouping permissions into roles and assigning roles to users. Start with flat RBAC and add hierarchy as needed. Always check permissions rather than role names, cache resolved permissions for performance, and layer on ABAC policies for fine-grained access control. Log all authorization decisions for auditability.</p>
-<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/secure-file-upload.html">Secure File Upload Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

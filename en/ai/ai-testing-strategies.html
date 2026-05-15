@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-09">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <title>Testing Strategies for AI Applications — SourceHub</title>
     <meta name="description" content="Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.">
@@ -46,8 +46,8 @@
       "description": "Implement robust AI testing with evaluation datasets, regression testing, A/B evaluation, hallucination detection, prompt testing, and performance benchmarking.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2344",
+      "dateModified": "2026-05-09",
+      "wordCount": "1893",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,23 +92,24 @@
       <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Testing Strategies for AI Applications</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h1>Testing Strategies for AI Applications</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h2>Testing Strategies for AI Applications</h2>
+<h3>Introduction</h3>
 <p>Testing AI applications differs fundamentally from testing deterministic software. Model outputs are probabilistic, edge cases are infinite, and a passing unit test does not guarantee correct behavior in production. A comprehensive AI testing strategy combines traditional software testing with AI-specific evaluation methodologies to catch regressions, hallucinations, and performance degradations before they reach users.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-strategies.png" alt="Testing Strategies for AI Applications" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Evaluation Datasets</h2>
+<h3>Evaluation Datasets</h3>
 <p>Curate high-quality evaluation datasets that reflect real-world usage:</p>
 <p>from dataclasses import dataclass</p>
 <p>from typing import List, Callable</p>
@@ -121,7 +122,7 @@
 <p>domain: str</p>
 <p>difficulty: str # "easy", "medium", "hard"</p>
 <p>tags: List[str]</p>
-<h1>For non-deterministic evaluation</h1>
+<h2>For non-deterministic evaluation</h2>
 <p>criteria: List[Callable[[str], bool]]</p>
 <p>class EvalDataset:</p>
 <p>def <strong>init</strong>(self, name: str):</p>
@@ -161,7 +162,7 @@
 <p>"I cannot" in output or "I'm unable" in output,</p>
 <p>],</p>
 <p>))</p>
-<h2>Regression Testing</h2>
+<h3>Regression Testing</h3>
 <p>Automated regression testing catches model behavior changes:</p>
 <p>class ModelRegressionTest:</p>
 <p>def <strong>init</strong>(self, eval_dataset: EvalDataset):</p>
@@ -184,7 +185,7 @@
 <p>for test_case in self.dataset.test_cases:</p>
 <p>try:</p>
 <p>output = await self._invoke_model(model_name, test_case.input)</p>
-<h1>Evaluate against all criteria</h1>
+<h2>Evaluate against all criteria</h2>
 <p>passed = all(</p>
 <p>criterion(output) for criterion in test_case.criteria</p>
 <p>)</p>
@@ -206,7 +207,7 @@
 <p>"error": str(e),</p>
 <p>})</p>
 <p>results["score"] = results["passed"] / results["total"]</p>
-<h1>Compare with previous run</h1>
+<h2>Compare with previous run</h2>
 <p>if previous_results:</p>
 <p>score_delta = results["score"] - previous_results["score"]</p>
 <p>results["regression"] = score_delta &lt; -0.02</p>
@@ -221,7 +222,7 @@
 <p>f"{results.get('previous_score', 1.0):.2%} to "</p>
 <p>f"{results['score']:.2%}"</p>
 <p>)</p>
-<h2>A/B Evaluation</h2>
+<h3>A/B Evaluation</h3>
 <p>Compare model versions side by side with structured evaluation:</p>
 <p>class ABEvaluation:</p>
 <p>def <strong>init</strong>(self, judge_model: str = "claude-opus-4-20260512"):</p>
@@ -263,27 +264,27 @@
 <p>evaluation = await self.evaluate_pair(</p>
 <p>prompt, output_a, output_b, criteria</p>
 <p>)</p>
-<h1>Aggregate across criteria</h1>
+<h2>Aggregate across criteria</h2>
 <p>winner = evaluation["winner"]</p>
 <p>results[f"{winner}_wins"] += 1</p>
 <p>results["total"] = len(prompts)</p>
 <p>results["a_win_rate"] = results["model_a_wins"] / results["total"]</p>
 <p>results["b_win_rate"] = results["model_b_wins"] / results["total"]</p>
 <p>return results</p>
-<h2>Hallucination Detection</h2>
+<h3>Hallucination Detection</h3>
 <p>Automated hallucination checks verify factual accuracy:</p>
 <p>class HallucinationDetector:</p>
 <p>def <strong>init</strong>(self, knowledge_base: Callable):</p>
 <p>self.kb = knowledge_base</p>
 <p>async def check_factual_claims(self, output: str) -&gt; List[dict]:</p>
 <p>"""Extract factual claims and verify them against a knowledge base."""</p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims</h2>
 <p>claims = await self._extract_claims(output)</p>
 <p>verified_claims = []</p>
 <p>for claim in claims:</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base</h2>
 <p>evidence = await self.kb.search(claim["text"])</p>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h1>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence</h2>
 <p>verification = await self._verify_claim(</p>
 <p>claim["text"],</p>
 <p>evidence,</p>
@@ -321,7 +322,7 @@
 <p>)</p>
 <p>total = len(verified_claims)</p>
 <p>return unsupported / total if total &gt; 0 else 0.0</p>
-<h2>Prompt Testing</h2>
+<h3>Prompt Testing</h3>
 <p>Version-control prompts with structured testing:</p>
 <p>class PromptRegistry:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -345,10 +346,10 @@
 <p>prompt = self.prompts[name]</p>
 <p>results = []</p>
 <p>for case in test_cases:</p>
-<h1>Render template with test inputs</h1>
+<h2>Render template with test inputs</h2>
 <p>rendered = prompt["template"].format(**case["inputs"])</p>
 <p>output = await self._invoke(rendered)</p>
-<h1>Run tests</h1>
+<h2>Run tests</h2>
 <p>test_results = [</p>
 <p>test(output) for test in prompt["tests"]</p>
 <p>]</p>
@@ -364,7 +365,7 @@
 <p>"pass_rate": sum(r["tests_passed"] for r in results) / len(results),</p>
 <p>"results": results,</p>
 <p>}</p>
-<h2>Performance Testing</h2>
+<h3>Performance Testing</h3>
 <p>Benchmark latency, throughput, and cost across model versions:</p>
 <p>class AIPerformanceTest:</p>
 <p>async def benchmark(</p>
@@ -395,7 +396,8 @@
 <p>"total_cost": self._calculate_cost(model, requests),</p>
 <p>}</p>
 <p>A mature AI testing pipeline runs golden set regression on every PR, A/B evaluations before model upgrades, hallucination detection on every production response, and performance benchmarks weekly. No single metric captures model quality; combine automated tests with human evaluation for production releases.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/security/mobile-security.html
 
 # Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
 
-# Mobile Application Security Guide
+## Mobile Application Security Guide
+
+## Mobile Application Security Guide
 
 Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.
 
-## OWASP Mobile Top 10
+### OWASP Mobile Top 10
 
 The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.
 
@@ -60,11 +62,11 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
 
 10\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Extraneous Functionality** : Hidden backdoors, debug endpoints, or test code left in production builds.
 
-## Code Obfuscation
+### Code Obfuscation
 
 Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.
 
-### Android Obfuscation with ProGuard / R8
+#### Android Obfuscation with ProGuard / R8
 
 ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename classes, methods, and fields to meaningless names and remove unused code.
 
@@ -90,13 +92,13 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
 
 }
 
-# proguard-rules.pro
+## proguard-rules.pro
 
-# Keep model classes used by Gson serialization
+## Keep model classes used by Gson serialization
 
 -keep class com.example.app.model.*_{_ ; }
 
-# Keep logging in debug but strip in release
+## Keep logging in debug but strip in release
 
 -assumenosideeffects class android.util.Log {
 
@@ -108,7 +110,7 @@ public static int d(...);
 
 }
 
-### iOS Obfuscation
+#### iOS Obfuscation
 
 iOS apps are harder to reverse engineer than Android APKs due to the compiled ARM binary, but they are not immune. Use these techniques:
 
@@ -149,15 +151,15 @@ key: 0xAB
 
 ).decrypt()
 
-## Certificate Pinning
+### Certificate Pinning
 
 Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the device trusts a rogue CA due to malware or user action.
 
-### What Certificate Pinning Does
+#### What Certificate Pinning Does
 
 Certificate pinning hardcodes the expected server certificate or public key in the app. The app rejects any connection where the server presents a different certificate, even if it chains to a trusted root CA.
 
-### Implementation
+#### Implementation
 
 **Android (OkHttp)** :
 
@@ -219,7 +221,7 @@ completionHandler(.cancelAuthenticationChallenge, nil)
 
 }
 
-### Pinning Update Strategy
+#### Pinning Update Strategy
 
 Certificate pinning breaks when you rotate certificates. Plan for updates:
 
@@ -234,11 +236,11 @@ Certificate pinning breaks when you rotate certificates. Plan for updates:
 
 
 
-## Secure Storage
+### Secure Storage
 
 Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.
 
-### Android Encrypted SharedPreferences
+#### Android Encrypted SharedPreferences
 
 // Using EncryptedSharedPreferences
 
@@ -268,7 +270,7 @@ sharedPreferences.edit()
 
 .apply()
 
-### Android Keystore
+#### Android Keystore
 
 The Android Keystore stores cryptographic keys in a hardware-backed environment (TEE or StrongBox). Extracting the key requires physical device access and specialized tools.
 
@@ -302,7 +304,7 @@ keyGenerator.init(spec)
 
 val secretKey = keyGenerator.generateKey()
 
-### iOS Keychain
+#### iOS Keychain
 
 iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data using device-specific keys that never leave the Secure Enclave.
 
@@ -334,11 +336,11 @@ nil
 
 SecItemAdd(query as CFDictionary, nil)
 
-## Runtime Protection
+### Runtime Protection
 
 Runtime protection defends against tampering while the app is running.
 
-### Root/Jailbreak Detection
+#### Root/Jailbreak Detection
 
 // Android root detection
 
@@ -396,7 +398,7 @@ return jbPaths.contains { FileManager.default.fileExists(atPath: $0) }
 
 Never terminate the app immediately on detecting a compromised device. This gives attackers a signal to bypass your detection. Instead, degrade functionality silently or report the event to your backend.
 
-### Debugger Detection
+#### Debugger Detection
 
 // iOS debugger detection
 
@@ -414,10 +416,12 @@ return (info.kp_proc.p_flag & P_TRACED) != 0
 
 }
 
-## Conclusion
+### Conclusion
 
 Mobile security requires defense in depth. Obfuscate your code to slow down reverse engineering. Pin certificates to prevent MITM attacks. Use platform-provided secure storage for sensitive data. Add runtime protection against root/jailbreak and debugging. Most importantly, follow the OWASP Mobile Top 10 as your baseline and validate controls with regular penetration testing.
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [Encryption at Rest Guide](</en/security/encryption-at-rest.html>), [Container Security Best Practices](</en/security/container-security.html>).
+
+**See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)
 
 **See also:** [Webhook Security Best Practices](</en/security/webhook-security.html>), [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Identity and Access Management (IAM) Guide](</en/security/identity-management.html>)

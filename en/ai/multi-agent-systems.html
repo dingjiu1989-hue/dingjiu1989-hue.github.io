@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-04">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Multi-Agent Systems: Coordination, Communication, Consensus — SourceHub</title>
     <meta name="description" content="Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st">
@@ -46,8 +46,8 @@
       "description": "Design multi-agent systems with LLM-powered agents: coordination patterns, inter-agent communication protocols, consensus mechanisms, and conflict resolution st",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1878",
+      "dateModified": "2026-05-04",
+      "wordCount": "1600",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h1>Multi-Agent Systems: Coordination, Communication, Consensus</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h2>Multi-Agent Systems: Coordination, Communication, Consensus</h2>
+<h3>Introduction</h3>
 <p>A single LLM agent has limitations: finite context windows, single perspective bias, and vulnerability to cascading errors. Multi-agent systems address these by distributing work across specialized agents that communicate, coordinate, and reach consensus. This article covers the architectural patterns for building effective multi-agent systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-agent-systems.png" alt="Multi-Agent Systems: Coordination, Communication, Consensus" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Agent Roles and Specialization</h2>
+<h3>Agent Roles and Specialization</h3>
 <p>Each agent should have a narrow, defined role:</p>
 <p>@dataclass</p>
 <p>class AgentSpec:</p>
@@ -128,7 +129,7 @@
 <p>response = self.llm(messages, tools=self.spec.tools)</p>
 <p>self.message_history.append({"role": "assistant", "content": response})</p>
 <p>return response</p>
-<h1>Define specialized agents</h1>
+<h2>Define specialized agents</h2>
 <p>researcher = Agent(AgentSpec(</p>
 <p>name="Researcher",</p>
 <p>role="Information retrieval and fact-checking",</p>
@@ -150,7 +151,7 @@
 <p>tools=[],</p>
 <p>model="claude-opus-4-20260512", # Stronger model for evaluation</p>
 <p>))</p>
-<h2>Communication Protocols</h2>
+<h3>Communication Protocols</h3>
 <p>Agents communicate through structured messages:</p>
 <p>from enum import Enum</p>
 <p>from datetime import datetime</p>
@@ -190,8 +191,8 @@
 <p>for agent in self.queues:</p>
 <p>self.queues[agent].append(message)</p>
 <p>self.broadcast_log.append(message)</p>
-<h2>Orchestration Patterns</h2>
-<h3>Sequential Handoff</h3>
+<h3>Orchestration Patterns</h3>
+<h4>Sequential Handoff</h4>
 <p>One agent passes results to the next in a pipeline:</p>
 <p>class SequentialOrchestrator:</p>
 <p>def <strong>init</strong>(self, agents: list[Agent], bus: MessageBus):</p>
@@ -211,7 +212,7 @@
 <p>content=result,</p>
 <p>))</p>
 <p>return current_output</p>
-<h3>Debate and Consensus</h3>
+<h4>Debate and Consensus</h4>
 <p>Multiple agents work on the same problem and then converge:</p>
 <p>class DebateOrchestrator:</p>
 <p>def <strong>init</strong>(self, agents: list[Agent], rounds: int = 3):</p>
@@ -220,9 +221,9 @@
 <p>async def debate(self, problem: str) -&gt; str:</p>
 <p>positions = {a.spec.name: await a.process(problem) for a in self.agents}</p>
 <p>for round_num in range(self.rounds):</p>
-<h1>Share positions</h1>
+<h2>Share positions</h2>
 <p>summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())</p>
-<h1>Each agent critiques and refines</h1>
+<h2>Each agent critiques and refines</h2>
 <p>new_positions = {}</p>
 <p>for agent in self.agents:</p>
 <p>critique = await agent.process(</p>
@@ -231,14 +232,14 @@
 <p>)</p>
 <p>new_positions[agent.spec.name] = critique</p>
 <p>positions = new_positions</p>
-<h1>Final consensus</h1>
+<h2>Final consensus</h2>
 <p>consensus_agent = self.agents[0]</p>
 <p>summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())</p>
 <p>consensus = await consensus_agent.process(</p>
 <p>f"Based on all perspectives, produce a final consensus answer:\n{summary}"</p>
 <p>)</p>
 <p>return consensus</p>
-<h3>Manager-Worker Pattern</h3>
+<h4>Manager-Worker Pattern</h4>
 <p>A manager agent decomposes tasks and delegates to workers:</p>
 <p>class ManagerWorkerOrchestrator:</p>
 <p>def <strong>init</strong>(self, manager: Agent, workers: list[Agent], bus: MessageBus):</p>
@@ -246,18 +247,18 @@
 <p>self.workers = workers</p>
 <p>self.bus = bus</p>
 <p>async def run(self, task: str) -&gt; str:</p>
-<h1>Manager creates a plan</h1>
+<h2>Manager creates a plan</h2>
 <p>plan = await self.manager.process(f"Decompose this task into sub-tasks and assign to workers: {task}")</p>
 <p>sub_tasks = self._parse_plan(plan)</p>
-<h1>Distribute to workers</h1>
+<h2>Distribute to workers</h2>
 <p>worker_futures = []</p>
 <p>for sub_task in sub_tasks:</p>
 <p>worker = self._select_worker(sub_task)</p>
 <p>future = worker.process(sub_task["description"])</p>
 <p>worker_futures.append(future)</p>
-<h1>Collect results</h1>
+<h2>Collect results</h2>
 <p>results = await asyncio.gather(*worker_futures)</p>
-<h1>Manager synthesizes final output</h1>
+<h2>Manager synthesizes final output</h2>
 <p>results_text = "\n".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))</p>
 <p>final = await self.manager.process(</p>
 <p>f"Synthesize these results into a coherent output:\n{results_text}",</p>
@@ -270,7 +271,7 @@
 <p>if skill in worker.spec.role.lower():</p>
 <p>return worker</p>
 <p>return self.workers[0]</p>
-<h2>Consensus with Voting</h2>
+<h3>Consensus with Voting</h3>
 <p>When agents disagree, a voting mechanism resolves conflicts:</p>
 <p>def weighted_vote(proposals: list[dict], agent_weights: dict[str, float]) -&gt; dict:</p>
 <p>"""Weighted voting: each agent's vote is weighted by its reliability."""</p>
@@ -281,9 +282,10 @@
 <p>vote_counts[key] = vote_counts.get(key, 0) + weight</p>
 <p>winner = max(vote_counts, key=vote_counts.get)</p>
 <p>return {"winner": winner, "confidence": vote_counts[winner] / sum(vote_counts.values())}</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.</p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

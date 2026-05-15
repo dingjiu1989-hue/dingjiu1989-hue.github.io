@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational considerations">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh-deep.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Service Mesh Deep Dive — SourceHub</title>
     <meta name="description" content="Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational considerations">
@@ -46,8 +46,8 @@
       "description": "Deep dive into service mesh: Istio vs Linkerd vs Consul, mTLS, traffic splitting, and operational considerations",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh-deep.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1054",
+      "dateModified": "2026-05-14",
+      "wordCount": "997",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Service Mesh Deep Dive</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
-<h1>Service Mesh Deep Dive</h1>
+      <div class="article-body"><h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
+<h2>Service Mesh Deep Dive</h2>
 <p>A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/service-mesh-deep.png" alt="Service Mesh Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>How a Service Mesh Works </p>
 <p>A service mesh consists of two components: a data plane and a control plane. The data plane is composed of lightweight proxy sidecars deployed alongside each service instance. These proxies intercept all network traffic in and out of their service, enforcing routing rules, collecting metrics, and managing encryption. </p>
@@ -123,7 +124,8 @@
 <p>Traffic splitting allows operators to route a percentage of traffic to different service versions. This enables canary deployments, A/B testing, and gradual rollouts. The service mesh handles the split at the proxy level, and the split can be based on fixed percentages or request attributes (headers, cookies). Istio supports the most sophisticated traffic splitting, while Linkerd and Consul cover the common use cases. </p>
 <p>Choosing a Service Mesh </p>
 <p>The choice depends on your requirements. Istio for maximum features and traffic management capabilities. Linkerd for simplicity, performance, and ease of operation. Consul Connect for multi-platform environments. For teams new to service meshes, Linkerd offers the gentlest learning curve with the most immediate value. Regardless of choice, a service mesh is a significant operational investment that should be justified by concrete requirements for security, observability, or traffic management.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/service-mesh.html">Service Mesh Patterns: Istio and Linkerd</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/service-mesh.html">Service Mesh Patterns: Istio and Linkerd</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/service-mesh.html">Service Mesh Patterns: Istio and Linkerd</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/service-mesh.html">Service Mesh Patterns: Istio and Linkerd</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/service-mesh.html">Service Mesh Patterns: Istio and Linkerd</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cache-strategies.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Caching Strategies — SourceHub</title>
     <meta name="description" content="Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems">
@@ -46,8 +46,8 @@
       "description": "Compare write-through, write-around, write-back caching and invalidation strategies for distributed systems",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cache-strategies.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1031",
+      "dateModified": "2026-05-10",
+      "wordCount": "977",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Caching Strategies</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cache-strategies.png" alt="Caching Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
-<h1>Caching Strategies</h1>
+      <div class="article-body"><h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
+<h2>Caching Strategies</h2>
 <p>Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies—write-through, write-around, and write-back—along with cache invalidation approaches essential for maintaining data consistency. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cache-strategies.png" alt="Caching Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Write-Through Cache </p>
 <p>In a write-through cache, every write operation writes data to both the cache and the underlying data store simultaneously. The write is not considered complete until both destinations have acknowledged it. This ensures strong consistency between the cache and the data store—the cache always contains up-to-date data. </p>
@@ -121,7 +122,8 @@
 <p>Choosing a Strategy </p>
 <p>The optimal strategy depends on your access patterns. Read-heavy workloads with strong consistency needs favor write-through. Write-heavy workloads benefit from write-around or write-back. Applications tolerant of eventual consistency can use write-back for maximum write performance. Many production systems combine strategies: write-through for critical data, write-around for reference data, and write-back for high-volume transient data. </p>
 <p>Modern caching systems like Redis, Memcached, and CDN platforms provide configurable support for these strategies. The key is measuring your actual access patterns and choosing the strategy that aligns with your consistency, latency, and throughput requirements.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/caching-strategies.html">Caching Strategies and Patterns in Distributed Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/caching-http.html">HTTP Caching Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

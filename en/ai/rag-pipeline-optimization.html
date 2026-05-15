@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-pipeline-optimization.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-02">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>RAG Pipeline Optimization: Production Best Practices — SourceHub</title>
     <meta name="description" content="Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.">
@@ -46,8 +46,8 @@
       "description": "Optimize Retrieval-Augmented Generation pipelines: chunking strategies, embedding selection, retrieval tuning, and evaluation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-pipeline-optimization.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "693",
+      "dateModified": "2026-04-02",
+      "wordCount": "678",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,34 +93,36 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Pipeline Optimization: Production Best Practices</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
-<h1>RAG Pipeline Optimization: Production Best Practices</h1>
+      <div class="article-body"><h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
+<h2>RAG Pipeline Optimization: Production Best Practices</h2>
 <p>Retrieval-Augmented Generation (RAG) combines information retrieval with LLM generation. Production RAG requires careful optimization of every pipeline stage.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-pipeline-optimization.png" alt="RAG Pipeline Optimization: Production Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Chunking Strategies</h2>
+<h3>Chunking Strategies</h3>
 <p>Document chunking determines what information is retrieved. Fixed-size chunking with overlap is simple but can split semantic units. Semantic chunking uses NLP to find natural boundaries (sentence, paragraph, section boundaries).</p>
 <p>Optimal chunk size depends on your retrieval task. 256-512 tokens works well for factual Q&amp;A.; Larger chunks (1000-2000 tokens) preserve context for summarization. Smaller chunks improve precision. Agentic chunking summarizes each chunk for improved retrieval relevance.</p>
-<h2>Embedding Selection</h2>
+<h3>Embedding Selection</h3>
 <p>Choose embeddings based on your content type and language. OpenAI ada-002 works well for general English content. Multilingual embeddings (multilingual-e5, intfloat/multilingual-e5-large) support cross-lingual retrieval. Domain-specific embeddings (code-search, legal, biomedical) outperform general embeddings in specialized domains.</p>
 <p>Embedding dimension affects storage and retrieval speed. 1536 dimensions (ada-002) is a good default. 768 dimensions reduces storage with minimal accuracy loss. Consider Matryoshka embeddings (intfloat/e5-mistral-7b-instruct) for flexible dimensionality.</p>
-<h2>Retrieval Tuning</h2>
+<h3>Retrieval Tuning</h3>
 <p>Hybrid search combines keyword (BM25) and semantic (embedding) retrieval. This captures exact matches that embeddings miss and semantic matches that keywords miss. Weight the two scores based on your content characteristics.</p>
 <p>Metadata filtering narrows retrieval scope. Filter by date, category, source, or document type. This improves relevance and reduces latency by limiting the search space. Pre-filtering (filter before search) is faster. Post-filtering (search then filter) is more accurate.</p>
-<h2>Evaluation</h2>
+<h3>Evaluation</h3>
 <p>Evaluate RAG pipelines on retrieval metrics (hit rate, MRR, NDCG) and generation metrics (answer relevance, faithfulness, correctness). Use RAGAS framework for automated evaluation. Build golden QA datasets from real user queries. Monitor production performance with user feedback signals.</p>
 <p>Optimization is iterative. Test chunk size, embedding model, top-k, and prompt template combinations. Use A/B testing in production for significant changes.</p>
-<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-best-practices.html">RAG Best Practices 2026: Building Production-Ready Retrieval Systems</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

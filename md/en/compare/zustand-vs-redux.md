@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html
 
 # Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-# Zustand vs Redux vs Jotai
+## Zustand vs Redux vs Jotai
 
-## Introduction
+## Zustand vs Redux vs Jotai
+
+### Introduction
 
 React state management has evolved significantly. Redux, once the default choice for complex applications, now competes with simpler alternatives like Zustand and Jotai. Each takes a different approach: Redux centralizes state with strict patterns, Zustand provides a minimal store with hooks, and Jotai offers atomic, Recoil-inspired state management. This comparison helps you choose the right state management approach.
 
-## Redux Toolkit
+### Redux Toolkit
 
 Redux Toolkit (RTK) is Redux's modern incarnation, eliminating much of the boilerplate that plagued classic Redux.
 
@@ -116,7 +118,7 @@ dispatch(increment())}>+1
 
 
 
-## Zustand
+### Zustand
 
 Zustand provides a minimal store with React hooks, no providers needed.
 
@@ -192,7 +194,7 @@ return (
 
 
 
-## Jotai
+### Jotai
 
 Jotai takes an atomic approach — each piece of state is an independent atom.
 
@@ -266,7 +268,7 @@ setCount((c) => c + 1)}>+1
 
 
 
-## Comparison Table
+### Comparison Table
 
 | Aspect | Redux Toolkit | Zustand | Jotai |
 
@@ -292,7 +294,7 @@ setCount((c) => c + 1)}>+1
 
 | External use | Yes (store) | Yes (store) | Limited |
 
-## When to Choose What
+### When to Choose What
 
 **Choose Redux Toolkit when:**
 
@@ -339,10 +341,12 @@ setCount((c) => c + 1)}>+1
 
 
 
-## Conclusion
+### Conclusion
 
 The state management landscape in 2026 has moved beyond "one size fits all." Redux Toolkit remains the right choice for large applications that need structure and a rich ecosystem. Zustand has become the default recommendation for most new React projects due to its simplicity and performance. Jotai offers the most React-idiomatic experience for applications with highly granular state needs. Consider your team size, application complexity, and whether you need data fetching (RTK Query) or async workflows (Jotai's async atoms) when making your choice.
 
 **See also:** [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>), [Linear vs Jira vs GitHub Issues: Project Management, Workflows, Integrations, and Team Size Fit](</en/compare/linear-vs-jira.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>).
+
+**See also:** [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [Turbopack vs Vite](</en/compare/turbopack-vs-vite.html>)
 
 **See also:** [GraphQL vs REST API](</en/compare/graphql-vs-rest.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>), [Turbopack vs Vite](</en/compare/turbopack-vs-vite.html>)

@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html
 
 # LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-# LLM Context Window Management
+## LLM Context Window Management
 
-## Introduction
+## LLM Context Window Management
+
+### Introduction
 
 Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.
 
-## The "Lost in the Middle" Problem
+### The "Lost in the Middle" Problem
 
 Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed.
 
@@ -53,7 +55,7 @@ Research consistently shows that LLMs perform best when relevant information app
 
 This has direct implications for RAG systems: placing the most relevant documents at the beginning and end of the context improves answer quality even if less relevant documents are included in the middle.
 
-## Context Budgeting
+### Context Budgeting
 
 Treat context like a budget. Allocate tokens deliberately:
 
@@ -80,9 +82,9 @@ For each allocation, ask:
 
 
 
-## Strategies for Long Conversations
+### Strategies for Long Conversations
 
-### Sliding Window
+#### Sliding Window
 
 Keep only the most recent N turns of conversation:
 
@@ -92,7 +94,7 @@ def get_conversation_context(conversation, max_turns=10):
 
 trimmed = conversation[-max_turns:]
 
-# Include a summary of earlier turns if needed
+## Include a summary of earlier turns if needed
 
 if len(conversation) > max_turns:
 
@@ -102,7 +104,7 @@ trimmed = [{"role": "system", "content": f"Earlier summary: {summary}"}] + trimm
 
 return trimmed
 
-### Conversation Summarization
+#### Conversation Summarization
 
 Periodically summarize the conversation and replace older messages:
 
@@ -122,7 +124,7 @@ remaining = messages[-summary_threshold:]
 
 return [{"role": "system", "content": f"Conversation summary: {summary}"}] + remaining
 
-### Hierarchical Summarization
+#### Hierarchical Summarization
 
 For very long conversations, maintain a hierarchy of summaries:
 
@@ -136,9 +138,9 @@ Level 3: Conversation summary (per session)
 
 When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc.
 
-## RAG Context Management
+### RAG Context Management
 
-### Document Ranking for Context
+#### Document Ranking for Context
 
 When multiple documents are retrieved but context is limited:
 
@@ -156,7 +158,7 @@ When multiple documents are retrieved but context is limited:
 
 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Fill the middle with remaining documents
 
-### Chunk-Level Re-Ranking
+#### Chunk-Level Re-Ranking
 
 Instead of ranking entire documents, rank individual chunks. A single relevant paragraph from a marginal document may be more useful than the entire top document:
 
@@ -170,7 +172,7 @@ selected = []
 
 token_count = 0
 
-# Always include the top chunk
+## Always include the top chunk
 
 top = ranked[0]
 
@@ -180,7 +182,7 @@ selected.append(top)
 
 token_count += len(top)
 
-# Fill from both ends inward
+## Fill from both ends inward
 
 for chunk in ranked[1:]:
 
@@ -194,13 +196,13 @@ else:
 
 break
 
-# Reorder: best chunk last, second best first, rest in middle
+## Reorder: best chunk last, second best first, rest in middle
 
 return reorder_for_positioning(selected)
 
-## Long Document Processing
+### Long Document Processing
 
-### Map-Reduce for Very Long Documents
+#### Map-Reduce for Very Long Documents
 
 Split the document, process each section independently, then combine:
 
@@ -226,7 +228,7 @@ final_summary = call_llm(
 
 return final_summary
 
-### Iterative Refinement
+#### Iterative Refinement
 
 For analysis of long documents, iterate with targeted queries:
 
@@ -240,7 +242,7 @@ For analysis of long documents, iterate with targeted queries:
 
 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate refined analysis
 
-## Monitoring Context Usage
+### Monitoring Context Usage
 
 Track these metrics per request:
 
@@ -255,10 +257,12 @@ Track these metrics per request:
 
 
 
-## Conclusion
+### Conclusion
 
 Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage.
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [LLM Evaluation Metrics](</en/ai/llm-evaluation-metrics.html>).
+
+**See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)
 
 **See also:** [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI Code Generation Best Practices](</en/ai/ai-code-generation.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)

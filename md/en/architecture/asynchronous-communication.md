@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/asynchronous-communicatio
 
 # Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
 
-# Asynchronous Communication in Distributed Systems
+## Asynchronous Communication in Distributed Systems
+
+## Asynchronous Communication in Distributed Systems
 
 Asynchronous communication is the backbone of resilient distributed systems. By decoupling services in time and space, it enables independent scaling, fault isolation, and event-driven workflows. The core infrastructure choices are message brokers, event buses, and brokerless messaging, each with distinct tradeoffs in reliability, latency, and operational complexity. 
 
@@ -49,5 +51,7 @@ Message schema evolution is a practical concern often overlooked. Messages outli
 Choosing the right messaging infrastructure depends on consumption patterns, durability requirements, and operational capability. A pragmatic architecture often uses multiple systems: a broker for command-style point-to-point communication, an event bus for event streaming and data integration, and brokerless messaging for real-time internal communication where some loss is acceptable.
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>).
+
+**See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Message Queue Patterns](</en/architecture/message-queue-patterns.html>), [Dead Letter Queues: Handling Message Failures](</en/architecture/dead-letter-queue.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)

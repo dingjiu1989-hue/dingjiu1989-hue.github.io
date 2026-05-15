@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-04">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Helm Security — SourceHub</title>
     <meta name="description" content="Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.">
@@ -46,8 +46,8 @@
       "description": "Securing Helm deployments with chart signing, provenance verification, secrets management, and best practices.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1279",
+      "dateModified": "2026-04-04",
+      "wordCount": "1068",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,37 +93,38 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Helm Security</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
-<h1>Helm Security</h1>
+      <div class="article-body"><h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
+<h2>Helm Security</h2>
 <p>Helm Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Helm simplifies Kubernetes deployments but introduces security concerns: untrusted charts, unprotected secrets, and supply chain risks. </p>
 <p>Chart Signing </p>
 <p>Sign charts with GPG to verify authenticity: </p>
-<h1>Generate signing key</h1>
+<h2>Generate signing key</h2>
 <p>gpg --full-generate-key</p>
 <p>gpg --list-secret-keys</p>
-<h1>Sign a chart</h1>
+<h2>Sign a chart</h2>
 <p>helm package mychart/</p>
 <p>helm sign mychart-1.0.0.tgz --key "developer@example.com"</p>
-<h1>Verify a chart</h1>
+<h2>Verify a chart</h2>
 <p>helm verify mychart-1.0.0.tgz</p>
-<h1>With custom public key</h1>
+<h2>With custom public key</h2>
 <p>gpg --export developer@example.com &gt; pubkey.asc</p>
 <p>helm verify mychart-1.0.0.tgz --keyring pubkey.asc</p>
 <p>Provenance Files </p>
 <p>Provenance files contain the chart hash and signature: </p>
-<h1>mychart-1.0.0.tgz.prov</h1>
+<h2>mychart-1.0.0.tgz.prov</h2>
 <p>apiVersion: v1</p>
 <p>files:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- mychart-1.0.0.tgz</p>
@@ -134,28 +135,28 @@
 <p>iQEzBAABCAAdFiEE...</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----END PGP SIGNATURE-----</p>
 <p>Automated Verification in CI </p>
-<h1>CI pipeline chart verification</h1>
+<h2>CI pipeline chart verification</h2>
 <p>pipeline:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify-charts</p>
 <p>commands:</p>
-<h1>Import trusted keys</h1>
+<h2>Import trusted keys</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- gpg --import trusted-keys.asc</p>
-<h1>Verify all charts</h1>
+<h2>Verify all charts</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- for chart in charts/*.tgz; do</p>
 <p>helm verify "$chart" --keyring trusted-keys.asc || exit 1</p>
 <p>done</p>
-<h1>Scan for vulnerabilities</h1>
+<h2>Scan for vulnerabilities</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trivy fs charts/</p>
-<h1>Lint charts</h1>
+<h2>Lint charts</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- helm lint charts/*</p>
-<h1>Check for deprecated APIs</h1>
+<h2>Check for deprecated APIs</h2>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pluto detect-files -d charts/</p>
 <p>Secrets Management </p>
 <p>Never store secrets in values files: </p>
-<h1>BAD: Secrets in values</h1>
+<h2>BAD: Secrets in values</h2>
 <p>apiKey: "sk-1234567890"</p>
 <p>dbPassword: "password123"</p>
-<h1>GOOD: Reference external secret</h1>
+<h2>GOOD: Reference external secret</h2>
 <p>apiKey: "{{ .Values.externalSecrets.apiKey }}"</p>
 <p>dbPassword: "{{ .Values.externalSecrets.dbPassword }}"</p>
 <p>Use external secrets operator: </p>
@@ -224,7 +225,8 @@
 <p>verbs: ["get", "create", "delete"]</p>
 <p>Conclusion </p>
 <p>Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories.</p>
-<p><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

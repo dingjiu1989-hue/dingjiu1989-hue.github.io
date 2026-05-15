@@ -8,43 +8,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/api-gateway-implementation.html
 
 # API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-# API Gateway Implementation Guide
+## API Gateway Implementation Guide
 
-## Introduction
+## API Gateway Implementation Guide
+
+### Introduction
 
 An API gateway sits at the boundary between clients and backend services, handling cross-cutting concerns like authentication, rate limiting, routing, and observability. Choosing the right gateway and deployment pattern is critical for microservice architectures. This guide compares Kong, Tyk, and Apache APISIX across the dimensions that matter in production.
 
-## Gateway Comparison
+### Gateway Comparison
 
-### Kong Gateway
+#### Kong Gateway
 
 Kong is built on OpenResty (NGINX + Lua) and offers enterprise features through a plugin ecosystem:
 
-# Kong declarative config (kong.yml)
+## Kong declarative config (kong.yml)
 
 _format_version: "3.0"
 
@@ -92,11 +94,11 @@ origins: ["*"]
 
 methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 
-### Apache APISIX
+#### Apache APISIX
 
 APISIX provides sub-millisecond route matching via a radix tree and supports hot-reload of plugins:
 
-# APISIX Admin API
+## APISIX Admin API
 
 curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
 
@@ -142,7 +144,7 @@ curl http://apisix:9180/apisix/admin/routes/1 -X PUT -d '
 
 }'
 
-### Tyk
+#### Tyk
 
 Tyk offers a dashboard-centric approach with API definitions stored in Redis:
 
@@ -188,7 +190,7 @@ Tyk offers a dashboard-centric approach with API definitions stored in Redis:
 
 }
 
-## Routing Strategies
+### Routing Strategies
 
 Gateways support multiple routing strategies critical for microservice decomposition:
 
@@ -222,7 +224,7 @@ user-svc-v1:8080: 90
 
 user-svc-v2:8080: 10
 
-## Rate Limiting and Throttling
+### Rate Limiting and Throttling
 
 Implement multi-layered rate limiting to protect backend services:
 
@@ -256,7 +258,7 @@ redis_timeout = 2000
 
 }
 
-## Authentication Plugin Integration
+### Authentication Plugin Integration
 
 Layer multiple auth methods with priority-based execution:
 
@@ -292,7 +294,7 @@ enable_authorization_code: true
 
 enable_client_credentials: true
 
-## Request/Response Transformation
+### Request/Response Transformation
 
 Transform payloads between client and service boundaries:
 
@@ -352,11 +354,11 @@ end"]
 
 }
 
-## Analytics and Observability
+### Analytics and Observability
 
 All three gateways export metrics for monitoring and billing:
 
-# APISIX: Prometheus and logging
+## APISIX: Prometheus and logging
 
 plugins:
 
@@ -382,9 +384,9 @@ config:
 
 sample_ratio: 0.1
 
-## Deployment Patterns
+### Deployment Patterns
 
-### Sidecar Pattern
+#### Sidecar Pattern
 
 Deploy the gateway as a sidecar alongside each service, suitable for service mesh architectures:
 
@@ -422,7 +424,7 @@ value: data_plane
 
 value: cp:8005
 
-### Centralized Pattern
+#### Centralized Pattern
 
 A shared gateway cluster handles all ingress traffic:
 
@@ -469,5 +471,7 @@ servicePort: 80
 Select the centralized pattern for simpler operations and the sidecar pattern for strict traffic isolation in multi-tenant environments. Whichever gateway you choose, invest in declarative configuration management and CI/CD integration from day one to avoid configuration drift at scale.
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>).
+
+**See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)
 
 **See also:** [Microservices Communication Patterns](</en/tech/microservices-communication.html>), [Nginx Configuration Guide](</en/tech/nginx-configuration-guide.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>)

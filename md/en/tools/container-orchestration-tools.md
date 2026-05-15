@@ -8,37 +8,39 @@ url: https://dingjiu1989-hue.github.io/en/tools/container-orchestration-tools.ht
 
 # Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-# Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
 
-## Introduction
+## Container Orchestration Tools: Kubernetes, Nomad, Docker Swarm, and Amazon ECS Compared
+
+### Introduction
 
 Container orchestration manages the deployment, scaling, networking, and lifecycle of containerized applications across clusters of machines. While Kubernetes dominates the conversation, it is not always the right choice. Simpler alternatives like Docker Swarm, HashiCorp Nomad, and Amazon ECS provide compelling capabilities with significantly less operational complexity.
 
 This article compares four container orchestration platforms, helping teams choose based on their specific requirements.
 
-## Kubernetes: The Universal Platform
+### Kubernetes: The Universal Platform
 
 Kubernetes (K8s) is the de facto standard for container orchestration. Originally developed by Google and now governed by the CNCF, Kubernetes provides a comprehensive container orchestration platform with pod scheduling, service discovery, load balancing, rolling updates, auto-scaling, secret management, and persistent storage orchestration.
 
@@ -48,7 +50,7 @@ The ecosystem around Kubernetes is vast: service meshes (Istio, Linkerd), ingres
 
 The main disadvantage is complexity. Running a production Kubernetes cluster requires expertise in networking (CNI), storage (CSI), security (RBAC, PSP), and cluster operations. Managed services (EKS, AKS, GKE) reduce but do not eliminate this complexity.
 
-## Docker Swarm: Simplicity for Docker-Native Teams
+### Docker Swarm: Simplicity for Docker-Native Teams
 
 Docker Swarm provides container orchestration integrated directly into the Docker engine. It uses the same Compose file format for service definitions, making it the most accessible orchestration platform for teams already using Docker.
 
@@ -76,7 +78,7 @@ Swarm excels in simplicity — a three-node cluster can be operational in minute
 
 Docker Swarm is best suited for small-to-medium deployments, edge computing, and teams wanting orchestration without learning Kubernetes. Docker has acknowledged that Swarm is in maintenance mode, focusing development on Kubernetes integration instead.
 
-## HashiCorp Nomad: Simplicity and Versatility
+### HashiCorp Nomad: Simplicity and Versatility
 
 Nomad is HashiCorp's workload orchestrator, managing containers as well as non-containerized applications (raw executables, Java JARs, QEMU virtual machines). This versatility sets Nomad apart from Kubernetes.
 
@@ -116,7 +118,7 @@ Nomad uses a job specification format (HCL) that is simpler than Kubernetes YAML
 
 The trade-off is a smaller ecosystem and community compared to Kubernetes. Fewer third-party integrations, monitoring tools, and managed services support Nomad natively.
 
-## Amazon ECS: Managed AWS-Native Orchestration
+### Amazon ECS: Managed AWS-Native Orchestration
 
 Amazon Elastic Container Service (ECS) is AWS's fully managed container orchestration service. It eliminates control plane management entirely — AWS handles cluster management, scheduling, and networking.
 
@@ -150,7 +152,7 @@ ECS uses task definitions (JSON) to describe containers and AWS Fargate as the s
 
 ECS is ideal for AWS-native organizations. It provides the simplest operational experience of all four platforms. The main limitation is vendor lock-in — ECS has no equivalent outside AWS.
 
-## Choosing the Right Tool
+### Choosing the Right Tool
 
 | Feature | Kubernetes | Docker Swarm | Nomad | ECS |
 
@@ -168,10 +170,12 @@ ECS is ideal for AWS-native organizations. It provides the simplest operational 
 
 | Auto-scaling | HPA + cluster | Manual | r, target | Service auto-scaling |
 
-## Conclusion
+### Conclusion
 
 Kubernetes is the right choice for organizations needing comprehensive orchestration with a large ecosystem. Docker Swarm suits simple deployments where operational simplicity is paramount. Nomad excels for heterogeneous workloads including non-containerized applications. ECS provides the lowest operational overhead for AWS-native teams. The best tool aligns with team expertise, workload requirements, and organizational constraints.
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared](</en/tools/infrastructure-scanners.html>), [Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared](</en/tools/kubernetes-dashboards.html>).
+
+**See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass](</en/tools/database-management-tools.html>), [IaC Tools Compared: Terraform, Pulumi, CDK, OpenTofu, and CloudFormation](</en/tools/iac-tools-compared.html>)

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>LLM Fine-Tuning Strategies and Techniques — SourceHub</title>
     <meta name="description" content="Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.">
@@ -46,8 +46,8 @@
       "description": "Compare LLM fine-tuning approaches: full fine-tuning, LoRA, QLoRA, and RLHF for domain adaptation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "727",
+      "dateModified": "2026-05-15",
+      "wordCount": "706",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,36 +93,38 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">LLM Fine-Tuning Strategies and Techniques</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
-<h1>LLM Fine-Tuning Strategies and Techniques</h1>
+      <div class="article-body"><h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
+<h2>LLM Fine-Tuning Strategies and Techniques</h2>
 <p>Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/fine-tuning-strategies.png" alt="LLM Fine-Tuning Strategies and Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Full Fine-Tuning</h2>
+<h3>Full Fine-Tuning</h3>
 <p>Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each.</p>
 <p>Full fine-tuning is appropriate for domain adaptation (legal, medical, code) where broad knowledge transfer is needed. Training data should be 10,000-100,000 high-quality examples. The resulting model weights are 2x the original size (for AdamW optimizer states during training).</p>
-<h2>LoRA</h2>
+<h3>LoRA</h3>
 <p>Low-Rank Adaptation (LoRA) freezes the original model weights and inserts trainable rank decomposition matrices. This reduces trainable parameters by 10,000x and memory requirements by 4x. LoRA adapters are small (10-100MB) and swappable at runtime.</p>
 <p>Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation), alpha (scaling factor, typically 2x the rank), target modules (attention projections for most tasks, MLP layers for deeper adaptation). Train multiple LoRA adapters for different tasks from the same base model.</p>
-<h2>QLoRA</h2>
+<h3>QLoRA</h3>
 <p>QLoRA combines 4-bit quantization with LoRA. It quantizes the base model to 4 bits (NF4 format) and trains LoRA adapters at full precision. This enables fine-tuning 65B models on a single 48GB GPU. QLoRA achieves performance within 1% of full fine-tuning on most benchmarks.</p>
 <p>Double quantization reduces memory further by quantizing the quantization constants. Paged optimizers use CPU memory for optimizer states during memory spikes. QLoRA makes fine-tuning accessible without expensive GPU clusters.</p>
-<h2>RLHF</h2>
+<h3>RLHF</h3>
 <p>Reinforcement Learning from Human Feedback aligns models with human preferences. The three-stage process: supervised fine-tuning on demonstrations, reward model training on human comparisons, and PPO training using the reward model.</p>
 <p>RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem.</p>
-<h2>Data Preparation</h2>
+<h3>Data Preparation</h3>
 <p>High-quality training data is the most important factor. Use 1000+ examples for noticeable improvement. Deduplicate, filter low-quality examples, and balance label distribution. Include adversarial examples for robustness. Test on held-out validation sets.</p>
-<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>, <a href="/en/ai/ai-data-privacy.html">AI Data Privacy: PII Detection, Data Anonymization, Local Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

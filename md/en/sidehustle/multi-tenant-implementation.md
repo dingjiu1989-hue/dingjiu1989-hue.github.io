@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/multi-tenant-implementation
 
 # Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
 
-## Multi-Tenant SaaS: Architecture and Implementation
+## Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+
+### Multi-Tenant SaaS: Architecture and Implementation
 
 Multi-tenancy is the foundation of SaaS architecture, allowing a single application instance to serve multiple customers (tenants) while maintaining data isolation. The choice of isolation strategy has profound implications for security, performance, operational complexity, and pricing flexibility.
 
-### Tenant Isolation Strategies
+#### Tenant Isolation Strategies
 
 **Database per tenant** provides the strongest isolation. Each customer has their own database instance. This strategy simplifies backup and restore (per-customer), enables per-tenant performance tuning, and provides natural data separation. The downside: operational complexity grows with tenant count, and connection management becomes challenging beyond hundreds of tenants.
 
@@ -44,7 +46,7 @@ Multi-tenancy is the foundation of SaaS architecture, allowing a single applicat
 
 **Shared schema (discriminator column)** uses a single database and schema with a tenant_id column on every table. This offers the simplest operations and best resource utilization. However, isolation relies entirely on application logic — a missing WHERE clause leaks data between tenants. Row-Level Security (RLS) in PostgreSQL mitigates this risk by enforcing tenant filtering at the database level.
 
-### Choosing an Isolation Strategy
+#### Choosing an Isolation Strategy
 
 Start with shared schema and RLS for early-stage SaaS. It provides the simplest operations and lowest infrastructure cost. Implement RLS policies on every table: `CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::int)`.
 
@@ -52,7 +54,7 @@ Add schema-per-tenant as you grow to hundreds of customers. This provides better
 
 Database-per-tenant is for enterprise customers with compliance requirements (HIPAA, SOC 2) or data sovereignty needs. Each tenant gets dedicated resources with configurable performance characteristics.
 
-### Tenant Routing
+#### Tenant Routing
 
 Tenant routing directs users to the correct data partition. Subdomain-based routing (customer1.yourapp.com) is most common for B2B SaaS. Extract tenant from the request hostname and set the tenant context early in the request lifecycle.
 
@@ -60,7 +62,7 @@ Implement a middleware that resolves the tenant from the request and configures 
 
 Caching tenant metadata (database connections, schema names, feature flags) reduces per-request overhead. Use Redis with tenant metadata loaded from a central configuration table. Invalidated only when tenant configuration changes.
 
-### Multi-Tenant Pricing Models
+#### Multi-Tenant Pricing Models
 
 Per-seat pricing charges per user per month. Simple to understand but penalizes large organizations and discourages adoption. Slack charges $7.25/user/month, scaling naturally with organization size.
 
@@ -68,7 +70,7 @@ Usage-based pricing charges per resource consumed (API calls, storage, compute).
 
 Tiered pricing offers feature-based plans. Free tier for evaluation (limited features, usage caps), Pro tier for growing teams (full features, standard limits), Enterprise tier for large organizations (unlimited everything, SSO, dedicated support). Feature differentiation between tiers drives upgrades.
 
-### Implementation Considerations
+#### Implementation Considerations
 
 Connection pooling is critical for multi-tenant architectures. PgBouncer in transaction mode provides efficient connection reuse across tenants. For database-per-tenant, a routing proxy selects the correct pool based on tenant ID.
 
@@ -76,10 +78,12 @@ Backup strategies differ by isolation level: shared schema requires point-in-tim
 
 Tenant monitoring tracks per-tenant resource usage, error rates, and performance. Use database-level monitoring with tenant context to identify noisy neighbors. Alert on tenants exceeding resource quotas.
 
-### Conclusion
+#### Conclusion
 
 Multi-tenant architecture choices have long-term implications for your SaaS. Start simple with shared schema and PostgreSQL RLS, graduating to increased isolation as your customer base grows. Implement robust tenant routing middleware early. Choose pricing models that align with your value proposition. The right isolation strategy balances operational complexity against customer requirements.
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [SaaS Performance Optimization: Caching, CDN, Database on a Budget](</en/sidehustle/performance-optimization-saas.html>).
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)
 
 **See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>), [Billing Integration for SaaS: Stripe, Paddle, Chargebee, Subscription Management, and Dunning](</en/sidehustle/billing-integration.html>)

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/build-tools.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison — SourceHub</title>
     <meta name="description" content="Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual">
@@ -46,8 +46,8 @@
       "description": "Compare modern JavaScript build tools: esbuild, swc, turbopack, and vite. Benchmark bundling speed, plugin ecosystems, configuration, and production output qual",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/build-tools.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1487",
+      "dateModified": "2026-05-15",
+      "wordCount": "1223",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/build-tools.png" alt="Build Tools: esbuild, swc, turbopack, vite — Speed Comparison" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h1>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h2>Build Tools: esbuild, swc, turbopack, vite — Speed Comparison</h2>
+<h3>Introduction</h3>
 <p>JavaScript build tooling has undergone a revolution. Webpack-era builds that took minutes are now replaced by tools that bundle in milliseconds. The new generation — esbuild, swc, turbopack, and vite — leverage native code (Go, Rust) and modern architectures to deliver dramatically faster builds.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/build-tools.png" alt="Build Tools: esbuild, swc, turbopack, vite — Speed Comparison" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>esbuild</h2>
+<h3>esbuild</h3>
 <p>esbuild is an extremely fast bundler written in Go:</p>
 <p>// build.js</p>
 <p>const esbuild = require("esbuild");</p>
@@ -137,11 +138,11 @@
 <p>outfile: "dist/bundle.js",</p>
 <p>}).then(ctx =&gt; ctx.watch());</p>
 <p>// v0.24+ supports CSS bundling and bundling</p>
-<h1>Command line</h1>
+<h2>Command line</h2>
 <p>esbuild src/index.tsx --bundle --outfile=dist/bundle.js --minify</p>
 <p><strong>Speed</strong> : 10-100x faster than Webpack on equivalent bundles. A 1000-module TypeScript project bundles in ~100ms. Builds are CPU-bound on Go's efficient parallelism.</p>
 <p><strong>Limitations</strong> : No native TypeScript type checking (delegates to tsc separately). Plugin ecosystem is smaller. Code splitting is less sophisticated than Webpack's.</p>
-<h2>swc</h2>
+<h3>swc</h3>
 <p>swc is a Rust-based compiler and bundler:</p>
 <p>// .swcrc</p>
 <p>{</p>
@@ -167,13 +168,13 @@
 <p>},</p>
 <p>"minify": true</p>
 <p>}</p>
-<h1>Transpile a file</h1>
+<h2>Transpile a file</h2>
 <p>swc src/index.ts -o dist/index.js</p>
-<h1>Bundle entry points</h1>
+<h2>Bundle entry points</h2>
 <p>swc src/index.ts --out-dir dist --config-file .swcrc</p>
 <p>swc is commonly used as a compiler replacement within Webpack (via swc-loader) or as a standalone for TypeScript transpilation. Its bundler is newer than esbuild's but benefits from Rust's memory safety and parallelism.</p>
 <p><strong>Speed</strong> : Comparable to esbuild for transpilation. Slightly slower for bundling due to more conservative AST handling. The <code>minify</code> pass is very fast.</p>
-<h2>Turbopack</h2>
+<h3>Turbopack</h3>
 <p>Vercel's Rust-based incremental bundler, designed as a Webpack successor:</p>
 <p>// next.config.js — Turbopack in Next.js</p>
 <p>const nextConfig = {</p>
@@ -191,13 +192,13 @@
 <p>},</p>
 <p>};</p>
 <p>module.exports = nextConfig;</p>
-<h1>Start Next.js with Turbopack</h1>
+<h2>Start Next.js with Turbopack</h2>
 <p>next dev --turbo</p>
-<h1>Build with Turbopack (Next.js 15+)</h1>
+<h2>Build with Turbopack (Next.js 15+)</h2>
 <p>next build --turbo</p>
 <p>Turbopack is deeply integrated with Next.js. As a standalone bundler, it is less mature. Its key innovation is function-level caching: it tracks changes at the function granularity and only rebuilds affected functions.</p>
 <p><strong>Speed</strong> : Up to 10x faster than Webpack in development. Cold builds are comparable to esbuild. Hot module replacement is near-instant with function-level granularity.</p>
-<h2>Vite</h2>
+<h3>Vite</h3>
 <p>Vite uses esbuild for dependencies and Rollup for production builds:</p>
 <p>// vite.config.ts</p>
 <p>import { defineConfig } from "vite";</p>
@@ -230,12 +231,12 @@
 <p>},</p>
 <p>},</p>
 <p>});</p>
-<h1>Development</h1>
+<h2>Development</h2>
 <p>vite dev # Near-instant start, uses esbuild for pre-bundling</p>
-<h1>Production build</h1>
+<h2>Production build</h2>
 <p>vite build # Uses Rollup for optimal production output</p>
 <p><strong>Speed</strong> : Development server starts in &lt;50ms regardless of project size. Native ESM in dev means no bundling needed. Pre-bundling dependencies with esbuild only happens once. Production builds are slower (Rollup) but produce optimized output.</p>
-<h2>Benchmarks</h2>
+<h3>Benchmarks</h3>
 <p>| Task | esbuild | swc | Turbopack | Vite |</p>
 <p>|------|---------|-----|-----------|------|</p>
 <p>| Bundle 500KB TS project | 45ms | 60ms | 50ms | 80ms (pre-bundle) |</p>
@@ -243,7 +244,7 @@
 <p>| Production build (large) | 2.1s | 2.8s | 1.5s (Next.js) | 4.5s |</p>
 <p>| Hot module reload | 5-10ms | 5-10ms | &lt;5ms | &lt;10ms |</p>
 <p>| Cold start (dev) | N/A | N/A | 300ms | &lt;50ms |</p>
-<h2>Recommendations</h2>
+<h3>Recommendations</h3>
 <ul>
 <li>
 <p><strong>Fastest bundling</strong> : esbuild for raw speed in CI or custom build pipelines.</p>
@@ -262,7 +263,8 @@
 </li>
 </ul>
 <p>Many teams use a combination: esbuild for dependencies, Vite for development, and esbuild or swc for CI compilation without type checking, with a separate <code>tsc --noEmit</code> step for type safety.</p>
-<p><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/monorepo-tools.html">Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

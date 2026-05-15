@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>Two-Factor Authentication Guide — SourceHub</title>
     <meta name="description" content="A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.">
@@ -45,8 +45,8 @@
       "description": "A comprehensive guide to implementing two-factor authentication with TOTP, SMS, backup codes, and WebAuthn passkeys.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1417",
+      "dateModified": "2026-05-14",
+      "wordCount": "1198",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -91,21 +91,22 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Two-Factor Authentication Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png" alt="Two-Factor Authentication Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
-<h1>Two-Factor Authentication Guide</h1>
+      <div class="article-body"><h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
+<h2>Two-Factor Authentication Guide</h2>
 <p>Why 2FA Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/two-factor-authentication.png" alt="Two-Factor Authentication Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Passwords alone are insufficient. Data breaches expose billions of credentials annually, phishing campaigns trick users into revealing their passwords, and credential stuffing attacks automate login attempts across services. Two-factor authentication (2FA) adds a second layer of verification that renders stolen passwords useless. </p>
 <p>2FA Factor Types </p>
@@ -156,7 +157,7 @@
 <p>from twilio.rest import Client</p>
 <p>def send_sms_code(phone_number):</p>
 <p>code = ''.join(random.choices('0123456789', k=6))</p>
-<h1>Store code with expiry in Redis</h1>
+<h2>Store code with expiry in Redis</h2>
 <p>redis.setex(f"2fa:{phone_number}", 300, code)</p>
 <p>client = Client(TWILIO_SID, TWILIO_TOKEN)</p>
 <p>client.messages.create(</p>
@@ -234,7 +235,8 @@
 </ul>
 <p>Summary </p>
 <p>Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.</p>
-<p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/mfa-implementation.html">MFA Implementation</a>, <a href="/en/security/api-rate-limiting.html">API Rate Limiting Implementation</a>, <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/data-lake-vs-warehouse.html
 
 # Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
 
-# Data Lake vs Data Warehouse vs Lakehouse
+## Data Lake vs Data Warehouse vs Lakehouse
+
+## Data Lake vs Data Warehouse vs Lakehouse
 
 The data landscape has evolved from simple databases to complex architectures spanning data lakes, data warehouses, and the emerging lakehouse paradigm. Understanding the differences between these architectures is essential for building a modern data platform. 
 
@@ -258,7 +260,7 @@ Silver Layer (Cleaned)
 
 Data is deduplicated, validated, and lightly transformed. Null handling, type casting, and simple joins. This layer serves as the source of truth for analysts. 
 
-# Bronze to Silver transformation
+## Bronze to Silver transformation
 
 def bronze_to_silver(spark):
 
@@ -329,5 +331,7 @@ Conclusion
 Data warehouses remain essential for BI and reporting. Data lakes are ideal for raw storage and ML workloads. The lakehouse architecture bridges both worlds by bringing ACID transactions, schema enforcement, and performance optimization to object storage. Choose the medallion architecture (bronze, silver, gold) to organize lakehouse data. Start with a data warehouse, add a lake for raw data, and converge on a lakehouse as your platform matures.
 
 **See also:** [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>).
+
+**See also:** [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)
 
 **See also:** [Distributed Databases: Concepts and Implementation](</en/database/distributed-databases.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>), [SQL vs NoSQL Decision Guide](</en/database/sql-vs-nosql.html>)

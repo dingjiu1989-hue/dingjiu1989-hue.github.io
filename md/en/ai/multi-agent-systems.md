@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/multi-agent-systems.html
 
 # Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-# Multi-Agent Systems: Coordination, Communication, Consensus
+## Multi-Agent Systems: Coordination, Communication, Consensus
 
-## Introduction
+## Multi-Agent Systems: Coordination, Communication, Consensus
+
+### Introduction
 
 A single LLM agent has limitations: finite context windows, single perspective bias, and vulnerability to cascading errors. Multi-agent systems address these by distributing work across specialized agents that communicate, coordinate, and reach consensus. This article covers the architectural patterns for building effective multi-agent systems.
 
-## Agent Roles and Specialization
+### Agent Roles and Specialization
 
 Each agent should have a narrow, defined role:
 
@@ -74,7 +76,7 @@ self.message_history.append({"role": "assistant", "content": response})
 
 return response
 
-# Define specialized agents
+## Define specialized agents
 
 researcher = Agent(AgentSpec(
 
@@ -118,7 +120,7 @@ model="claude-opus-4-20260512", # Stronger model for evaluation
 
 ))
 
-## Communication Protocols
+### Communication Protocols
 
 Agents communicate through structured messages:
 
@@ -198,9 +200,9 @@ self.queues[agent].append(message)
 
 self.broadcast_log.append(message)
 
-## Orchestration Patterns
+### Orchestration Patterns
 
-### Sequential Handoff
+#### Sequential Handoff
 
 One agent passes results to the next in a pipeline:
 
@@ -240,7 +242,7 @@ content=result,
 
 return current_output
 
-### Debate and Consensus
+#### Debate and Consensus
 
 Multiple agents work on the same problem and then converge:
 
@@ -258,11 +260,11 @@ positions = {a.spec.name: await a.process(problem) for a in self.agents}
 
 for round_num in range(self.rounds):
 
-# Share positions
+## Share positions
 
 summary = "\n".join(f"{name}: {pos}" for name, pos in positions.items())
 
-# Each agent critiques and refines
+## Each agent critiques and refines
 
 new_positions = {}
 
@@ -280,7 +282,7 @@ new_positions[agent.spec.name] = critique
 
 positions = new_positions
 
-# Final consensus
+## Final consensus
 
 consensus_agent = self.agents[0]
 
@@ -294,7 +296,7 @@ f"Based on all perspectives, produce a final consensus answer:\n{summary}"
 
 return consensus
 
-### Manager-Worker Pattern
+#### Manager-Worker Pattern
 
 A manager agent decomposes tasks and delegates to workers:
 
@@ -310,13 +312,13 @@ self.bus = bus
 
 async def run(self, task: str) -> str:
 
-# Manager creates a plan
+## Manager creates a plan
 
 plan = await self.manager.process(f"Decompose this task into sub-tasks and assign to workers: {task}")
 
 sub_tasks = self._parse_plan(plan)
 
-# Distribute to workers
+## Distribute to workers
 
 worker_futures = []
 
@@ -328,11 +330,11 @@ future = worker.process(sub_task["description"])
 
 worker_futures.append(future)
 
-# Collect results
+## Collect results
 
 results = await asyncio.gather(*worker_futures)
 
-# Manager synthesizes final output
+## Manager synthesizes final output
 
 results_text = "\n".join(f"{st['id']}: {r}" for st, r in zip(sub_tasks, results))
 
@@ -358,7 +360,7 @@ return worker
 
 return self.workers[0]
 
-## Consensus with Voting
+### Consensus with Voting
 
 When agents disagree, a voting mechanism resolves conflicts:
 
@@ -380,10 +382,12 @@ winner = max(vote_counts, key=vote_counts.get)
 
 return {"winner": winner, "confidence": vote_counts[winner] / sum(vote_counts.values())}
 
-## Conclusion
+### Conclusion
 
 Multi-agent systems distribute intelligence across specialized agents. Sequential handoff is suitable for linear pipelines. Debate and consensus produces higher-quality answers by challenging assumptions. Manager-worker scales to complex tasks by decomposing and delegating. Choose your coordination pattern based on the task: sequential for well-defined steps, debate for decisions requiring multiple perspectives, and manager-worker for complex projects with parallelizable sub-tasks.
 
 **See also:** [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>), [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>).
+
+**See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)
 
 **See also:** [AI Workflow Automation: LangChain, Temporal, Event-Driven Agents](</en/ai/ai-workflow-automation.html>), [AI Agents: Architecture and Implementation](</en/ai/ai-agents-overview.html>), [Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory](</en/ai/agent-memory-systems.html>)

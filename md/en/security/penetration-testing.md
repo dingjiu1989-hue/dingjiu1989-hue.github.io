@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/penetration-testing.html
 
 # Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
 
-# Penetration Testing Methodology
+## Penetration Testing Methodology
+
+## Penetration Testing Methodology
 
 Introduction 
 
@@ -82,7 +84,7 @@ Phase 2: Intelligence Gathering (Reconnaissance)
 
 Reconnaissance builds a target profile through passive and active information gathering. 
 
-# Passive recon — DNS enumeration
+## Passive recon — DNS enumeration
 
 dig axfr @ns1.acme.com acme.com
 
@@ -90,15 +92,15 @@ dnsrecon -d acme.com -t axfr
 
 dnsrecon -d acme.com -t std --db acme_recon.db
 
-# Subdomain discovery
+## Subdomain discovery
 
 sublist3r -d acme.com -o subdomains.txt
 
-# Technology fingerprinting
+## Technology fingerprinting
 
 whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt
 
-# Certificate transparency logs
+## Certificate transparency logs
 
 curl -s "https://crt.sh/?q=%.acme.com&output;=json" | jq -r '.[].name_value' | sort -u
 
@@ -106,17 +108,17 @@ Phase 3: Vulnerability Analysis
 
 Analyze gathered information to identify potential vulnerabilities. 
 
-# Port scanning with Nmap
+## Port scanning with Nmap
 
 nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24
 
-# Service enumeration
+## Service enumeration
 
 nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \
 
 -p 80,443 203.0.113.0/24 -oA acme_web_scan
 
-# Vulnerability scanning
+## Vulnerability scanning
 
 nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln
 
@@ -124,7 +126,7 @@ Phase 4: Exploitation
 
 Exploitation attempts to breach the target using identified vulnerabilities. 
 
-# Custom exploit example — SQL injection test
+## Custom exploit example — SQL injection test
 
 import requests
 
@@ -156,13 +158,13 @@ resp = requests.get(url, params=test_params, timeout=10)
 
 elapsed = time.time() - start
 
-# Time-based detection
+## Time-based detection
 
 if elapsed > 5:
 
 print(f"[!] Time-based SQLi in {param}: {payload}")
 
-# Error-based detection
+## Error-based detection
 
 if any(err in resp.text for err in ["SQL syntax", "mysql_fetch", "ORA-"]):
 
@@ -172,7 +174,7 @@ Phase 5: Post-Exploitation
 
 After gaining access, assess the value of compromised systems and establish persistence. 
 
-# Post-exploitation enumeration
+## Post-exploitation enumeration
 
 whoami /all
 
@@ -184,7 +186,7 @@ netstat -ano
 
 wmic product get name,version
 
-# Lateral movement check
+## Lateral movement check
 
 powershell -Command "Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET"
 
@@ -245,5 +247,7 @@ Conclusion
 Effective penetration testing follows a disciplined methodology. PTES provides comprehensive coverage from legal agreements through reporting. The true value of a pentest lies not in how many vulnerabilities are found, but in the actionable remediation guidance provided in the final report.
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Compliance Automation](</en/security/compliance-automation.html>).
+
+**See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>)
 
 **See also:** [Clickjacking Protection](</en/security/clickjacking-protection.html>), [Content Security Policy](</en/security/content-security-policy.html>), [Supply Chain Security](</en/security/supply-chain-security.html>)

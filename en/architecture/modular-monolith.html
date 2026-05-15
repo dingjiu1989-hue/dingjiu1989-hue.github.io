@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Module boundaries, in-process communication, and future extraction paths in modular monolith design">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-07">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Modular Monolith Architecture — SourceHub</title>
     <meta name="description" content="Module boundaries, in-process communication, and future extraction paths in modular monolith design">
@@ -46,8 +46,8 @@
       "description": "Module boundaries, in-process communication, and future extraction paths in modular monolith design",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "862",
+      "dateModified": "2026-05-07",
+      "wordCount": "814",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Modular Monolith Architecture</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png" alt="Modular Monolith Architecture" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
-<h1>Modular Monolith Architecture</h1>
+      <div class="article-body"><h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
+<h2>Modular Monolith Architecture</h2>
 <p>A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices — separation of concerns, bounded contexts, independent evolvability — without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png" alt="Modular Monolith Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Module boundaries are the central design challenge. Each module should represent a coherent domain capability with its own data ownership, business logic, and public API. Modules communicate through in-process interfaces, typically defined as Java interfaces or Go interfaces, with implementation classes hidden behind the boundary. The module's internals, including its database tables, internal classes, and private functions, are inaccessible to other modules. </p>
 <p>Dependency rules must be explicit and enforced. A common pattern is to establish a strict layered dependency graph: presentation modules depend on application modules, which depend on domain modules, which depend on infrastructure modules. Circular dependencies between modules are forbidden. Tools like ArchUnit (Java), modules in Go, or dependency-cruiser (Node.js) can enforce these rules in CI pipelines, preventing boundary erosion over time. </p>
@@ -111,7 +112,8 @@
 <p>The future extraction path is an explicit design consideration. Each module should be extractable into an independent service without rewriting. This means modules should have their own database schemas (or at least logically isolated tables), communicate through interfaces that could be replaced with HTTP or gRPC calls, and operate without synchronous assumptions about other modules' availability. The "backyard" pattern — where modules maintain separate database connections even within the monolith — makes extraction significantly easier. </p>
 <p>Testing benefits are substantial. Integration tests can cover cross-module flows without network mocking, deployment complexity, or environment orchestration. A single process can run the entire system for end-to-end tests, making test suites orders of magnitude faster than their distributed counterparts. </p>
 <p>The modular monolith is not a permanent state — it is a starting position. As the organization grows and domain boundaries stabilize, individual modules can be extracted to independent services with confidence, knowing the extraction path was designed from the beginning. The key is treating the monolith not as a technical compromise but as a deliberate architectural choice with its own design patterns and tradeoffs.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/microservices-vs-monolith-2026.html">Microservices vs Monolith 2026</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

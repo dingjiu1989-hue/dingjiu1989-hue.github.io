@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-caching.html
 
 # Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
 
-# Database Caching
+## Database Caching
+
+## Database Caching
 
 Why Cache? 
 
@@ -110,7 +112,7 @@ if value:
 
 return json.loads(value)
 
-# Try to acquire lock
+## Try to acquire lock
 
 lock_key = f"lock:{key}"
 
@@ -126,7 +128,7 @@ redis.delete(lock_key)
 
 return value
 
-# Wait for the other thread
+## Wait for the other thread
 
 import time
 
@@ -139,5 +141,7 @@ Conclusion
 Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable.
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>), [Database Migration Strategies](</en/database/database-migration-strategies.html>).
+
+**See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)
 
 **See also:** [Redis Caching Patterns](</en/database/redis-caching-patterns.html>), [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Database Design Patterns: Repository, Unit of Work, Query Objects, Table Inheritance](</en/database/database-design-patterns.html>)

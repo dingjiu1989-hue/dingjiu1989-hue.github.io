@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/technical-writing.html
 
 # Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
 
-# Technical Writing Income Guide
+## Technical Writing Income Guide
+
+## Technical Writing Income Guide
 
 Technical writing is one of the most accessible and lucrative side hustles for developers. Companies pay well for clear documentation, tutorials, and technical content. With rates ranging from $200 to $500 per article, a few pieces per month can generate significant side income.
 
-## Why Technical Writing Pays Well
+### Why Technical Writing Pays Well
 
 Good technical writers are scarce. Most developers can write code but struggle to explain concepts clearly. Most professional writers understand language but lack technical depth. Developers who can write well sit at the intersection of these two skill sets, and companies pay a premium for that combination.
 
@@ -51,7 +53,7 @@ The demand for technical content is massive and growing:
 
 
 
-## Types of Technical Writing Work
+### Types of Technical Writing Work
 
 **Tutorials and how-to guides.** Step-by-step guides showing how to accomplish specific tasks. Paid per article or per word. Typical rates: $200-500 per article (1,500-2,500 words).
 
@@ -63,7 +65,7 @@ The demand for technical content is massive and growing:
 
 **Course materials.** Writing curriculum for online technical courses. Rates vary widely.
 
-## Finding Writing Opportunities
+### Finding Writing Opportunities
 
 **Content marketplaces and platforms:**
 
@@ -113,7 +115,7 @@ The demand for technical content is massive and growing:
 
 
 
-## Building a Portfolio
+### Building a Portfolio
 
 Your first few pieces establish credibility. If you have no published work:
 
@@ -127,7 +129,7 @@ Your first few pieces establish credibility. If you have no published work:
 
 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ghostwriting.** Write articles that will be published under someone else's name. The pay is good, and you gain portfolio examples (with permission to use as samples).
 
-## Setting Your Rates
+### Setting Your Rates
 
 Rates depend on experience, specialization, and the client:
 
@@ -164,7 +166,7 @@ Rates depend on experience, specialization, and the client:
 
 Negotiate based on value, not time. If your article generates $10,000 in traffic-driven conversions for the client, $1,000 is a bargain.
 
-## Writing Effective Technical Content
+### Writing Effective Technical Content
 
 **Know your audience.** Are you writing for junior developers learning a new framework, or senior engineers evaluating a technology? Tone and depth change dramatically.
 
@@ -176,7 +178,7 @@ Negotiate based on value, not time. If your article generates $10,000 in traffic
 
 **Edit ruthlessly.** Cut every word that does not serve the reader. Technical writing should be concise and precise.
 
-## Scaling Income
+### Scaling Income
 
 To grow beyond side-hustle income:
 
@@ -191,10 +193,12 @@ To grow beyond side-hustle income:
 
 
 
-## Summary
+### Summary
 
 Technical writing is a viable side hustle that leverages your development skills in a different way. Build a portfolio with a few free or low-paying pieces, then raise rates as you gain credibility. Pitch developer tool companies directly. Specialize in a technical niche to command premium rates. Good technical writing is rare and valuable -- charge accordingly.
 
 **See also:** [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>), [Developer Consulting Guide](</en/sidehustle/developer-consulting.html>), [Product Hunt Launch Guide](</en/sidehustle/product-hunt-launch.html>).
+
+**See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)
 
 **See also:** [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Affiliate Income](</en/sidehustle/affiliate-income.html>)

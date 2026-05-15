@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/ci-cd-best-practices.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>CI/CD Best Practices — SourceHub</title>
     <meta name="description" content="Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies">
@@ -46,8 +46,8 @@
       "description": "Master CI/CD best practices: pipeline design, artifact management, environment promotion, and deployment strategies",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/ci-cd-best-practices.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1247",
+      "dateModified": "2026-05-13",
+      "wordCount": "1187",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,47 +93,49 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">CI/CD Best Practices</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ci-cd-best-practices.png" alt="CI/CD Best Practices" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
-<h1>CI/CD Best Practices</h1>
+      <div class="article-body"><h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
+<h2>CI/CD Best Practices</h2>
 <p>Continuous Integration and Continuous Deployment (CI/CD) pipelines automate the process of building, testing, and deploying software. A well-designed CI/CD pipeline provides fast feedback, reliable deployments, and consistent quality gates. This article covers pipeline design principles, artifact management, environment promotion, and deployment strategies.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/ci-cd-best-practices.png" alt="CI/CD Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Pipeline Design Principles</h2>
+<h3>Pipeline Design Principles</h3>
 <p>A CI/CD pipeline should follow the fail-fast principle. Early stages should catch the most common and cheapest-to-fix issues. A linting or formatting check fails in seconds, saving the developer from waiting for a full test suite. Unit tests run before integration tests. The pipeline fails as soon as any stage fails, providing immediate feedback.</p>
 <p>Each pipeline stage should have a clear purpose. Lint and format checks verify code style. Unit tests verify logic. Integration tests verify service interactions. Security scans verify dependency and code vulnerabilities. Build stages produce deployable artifacts. Each stage's pass/fail status is immediately visible.</p>
 <p>Pipelines should be fast. Developers should receive feedback within 10 minutes for most changes. Slow pipelines encourage developers to bypass them. Speed optimizations include parallel stage execution, build caching, incremental testing, and only running relevant stages for specific changes.</p>
-<h2>Stage Structure</h2>
+<h3>Stage Structure</h3>
 <p>A typical CI pipeline includes checkout, dependency installation, lint/format check, unit tests, build, security scan, integration tests, and artifact publishing. Each stage is independent and can be cached or skipped based on the change scope.</p>
 <p>CD extends CI by adding deployment stages: deploy to staging, run smoke tests, deploy to production (with approval gates), and run post-deployment verification. Environment promotion moves artifacts through environments without rebuilding—the same artifact that passed tests in staging is deployed to production.</p>
-<h2>Artifact Management</h2>
+<h3>Artifact Management</h3>
 <p>Build artifacts should be stored in a versioned artifact repository. Docker images are pushed to a container registry. JAR/WAR files go to a Maven repository. npm packages go to a package registry. Each artifact has a unique version that ties it to the source code commit and CI build.</p>
 <p>Immutable artifacts are a key principle. Once an artifact is built and stored, it is never modified. The same artifact that passed testing in staging is deployed to production. This eliminates "it works in staging but not production" issues caused by different builds.</p>
 <p>Artifact metadata should include the source commit hash, build timestamp, CI build ID, and test results. This metadata enables traceability from production back to source code and build configuration.</p>
-<h2>Environment Promotion</h2>
+<h3>Environment Promotion</h3>
 <p>Environment promotion moves artifacts through environments in a controlled sequence: development to staging, staging to production. Each promotion step includes verification gates. The staging deployment runs smoke tests and integration tests. The production deployment may include approval gates and canary analysis.</p>
 <p>Promotion should be automated with manual approval for production. Manual gates at production deployment ensure human review of the change scope and potential impact. Automated gates run smoke tests, verify health checks, and roll back on failure.</p>
 <p>Feature flags decouple deployment from release. Code can be deployed to production while features remain disabled behind flags. This allows testing in production and gradual feature rollouts without multiple deployments.</p>
-<h2>Deployment Strategies</h2>
+<h3>Deployment Strategies</h3>
 <p>Blue-green deployment runs two identical environments. The blue environment serves current traffic. After deploying and testing the green environment, traffic switches to green. If issues arise, traffic switches back to blue. Rollback is instantaneous.</p>
 <p>Canary deployment gradually shifts traffic to the new version. Initially, 1% of traffic goes to the new version. While monitoring error rates and performance, traffic percentage increases. If issues arise, traffic is redirected to the previous version. Canary deployment requires sophisticated traffic management and monitoring.</p>
 <p>Rolling deployment updates instances gradually. A load balancer removes instances from rotation, updates them, and returns them to rotation. This avoids capacity reduction but provides less isolation between versions during deployment.</p>
-<h2>Monitoring and Rollback</h2>
+<h3>Monitoring and Rollback</h3>
 <p>CI/CD pipelines should include deployment verification stages. After deployment, automated checks verify the service is healthy: HTTP health checks return 200, error rates are normal, and latency is acceptable. Failed verification should trigger automatic rollback.</p>
 <p>Rollback procedures should be well-defined and tested. A rollback deploys the previous artifact version, restores the previous database migration state, or redirects traffic to the previous environment. Rollback speed is critical—every minute of degraded service affects users.</p>
 <p>Post-deployment monitoring continues for an extended period after the deployment completes. Some issues only appear after traffic patterns change or caches warm up. A monitoring period of 15-30 minutes after deployment catches most delayed issues.</p>
 <p>CI/CD best practices transform deployment from a high-risk manual operation into an automated, repeatable, verifiable process. The investment in pipeline quality pays dividends in deployment confidence and developer productivity.</p>
-<p><strong>See also:</strong> <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/kubernetes-pod-design.html">Kubernetes Pod Design: Patterns and Best Practices</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

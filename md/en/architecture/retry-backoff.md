@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-backoff.html
 
 # Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
 
-# Retry and Backoff Strategies
+## Retry and Backoff Strategies
+
+## Retry and Backoff Strategies
 
 In distributed systems, failures are inevitable. Networks drop packets, services restart, databases time out. Retry and backoff strategies are essential for building systems that gracefully handle transient failures without overwhelming downstream services. 
 
@@ -185,5 +187,7 @@ Summary
 Effective retry strategies are essential for distributed system resilience. Always combine retries with idempotency keys to prevent duplicate operations. Use exponential backoff with jitter to spread retries and prevent thundering herds. Integrate with circuit breakers for long-term failure handling. Set strict retry limits and time budgets to fail fast when recovery is not imminent.
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Bulkhead Pattern for Resilience](</en/architecture/bulkhead-pattern.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>).
+
+**See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)
 
 **See also:** [Retry Patterns](</en/architecture/retry-patterns.html>), [Circuit Breaker Pattern: Building Resilient Systems](</en/architecture/circuit-breaker-pattern.html>), [Caching Strategies](</en/architecture/cache-strategies.html>)

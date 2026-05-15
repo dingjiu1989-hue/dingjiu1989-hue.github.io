@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-17">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Graceful Shutdown Patterns — SourceHub</title>
     <meta name="description" content="Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown">
@@ -46,8 +46,8 @@
       "description": "Signal handling, connection draining, processing in-flight requests, and best practices for graceful service shutdown",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1039",
+      "dateModified": "2026-04-17",
+      "wordCount": "992",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Graceful Shutdown Patterns</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-17 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
-<h1>Graceful Shutdown Patterns</h1>
+      <div class="article-body"><h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
+<h2>Graceful Shutdown Patterns</h2>
 <p>Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/graceful-shutdown.png" alt="Graceful Shutdown Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Signal handling is the foundation. The service should register handlers for SIGTERM (the standard termination signal from orchestration platforms) and SIGINT (interactive termination). When received, the signal handler initiates the shutdown sequence. The handler should not block indefinitely — it should set a deadline for graceful shutdown and force-terminate if exceeded. Kubernetes sends SIGTERM to pods and waits for the terminationGracePeriodSeconds before sending SIGKILL. </p>
 <p>The shutdown sequence follows a well-defined order. First, the service should stop accepting new requests. This means unregistering from the service discovery registry, failing readiness probes, closing listener sockets, and rejecting incoming connections. The service should not return to "accepting" state once shutdown begins, even if the signal was spurious. </p>
@@ -114,7 +115,8 @@
 <p>Orchestrated shutdown in service mesh environments adds complexity. When Istio or Linkerd is present, the sidecar proxy must also shutdown gracefully — and the order matters. The application container should stop before the sidecar proxy. If the proxy stops first, in-flight request processing through the proxy will fail. Container lifecycle dependencies and preStop hooks can enforce the correct ordering. </p>
 <p>Testing graceful shutdown is critical but often overlooked. Deploy a canary instance and kill it while monitoring request success rates. Verify that no requests are lost during the shutdown window. Test with various in-flight request durations. Test with dependencies intentionally slow to close. Automated chaos testing (Litmus, Chaos Mesh) can incorporate graceful shutdown testing into regular CI/CD pipelines. </p>
 <p>Stateful services require additional consideration. Services that own data or maintain state must complete or roll back stateful operations during shutdown, not just drain them. A saga orchestrator must persist workflow state before shutdown. A stream processor must commit offsets. These state management operations should be the highest-priority step in the shutdown sequence.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/health-check-patterns.html">Health Check Patterns</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/feature-flags-architecture.html">Feature Flags Architecture</a>, <a href="/en/architecture/gateway-vs-mesh.html">API Gateway vs Service Mesh</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

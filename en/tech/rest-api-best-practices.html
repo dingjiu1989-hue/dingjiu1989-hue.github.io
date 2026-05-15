@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/rest-api-best-practices.png",
       "datePublished": "2026-05-07",
       "dateModified": "2026-05-12",
-      "wordCount": "752",
+      "wordCount": "588",
       "keywords": "REST API, Backend, Best Practices",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -66,64 +66,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "REST API Best Practices: The Complete Guide for 2026"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "REST API Best Practices: The Complete Guide for 2026",
-      "description": "Design production-ready REST APIs with proper naming, versioning, pagination, error handling, and security. Includes OpenAPI documentation standards.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Use Nouns, Not Verbs, for Resources",
-        "text": "# Good GET /users GET /users/42 POST /users PUT /users/42 DELETE /users/42 # Bad GET /getUsers POST /createUser GET /users/42/getProfile"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "Version Your API from Day One",
-        "text": "Use URL prefix versioning ( /v1/users ) or header-based versioning ( Accept: application/vnd.api.v2+json ). URL versioning is simpler for public APIs. Choose one and stick with it everywhere — mixing strategies is worse than either alone."
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Consistent Naming Conventions",
-        "text": "// JSON: camelCase for properties {{\"userId\": 42, \"createdAt\": \"2026-05-07\"}} // URL paths: kebab-case GET /user-orders/42 // Query parameters: snake_case GET /users?sort_by=name&page_size=20"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "4",
-        "name": "Use Proper HTTP Status Codes",
-        "text": "Code When to Use 200 OK Successful GET, PUT, PATCH 201 Created Successful POST — always include Location header 204 No Content Successful DELETE (no body returned) 400 Bad Request Malformed input, validation failure 401 Unauthorized Missing or expired auth token 403 Forbidden Authenticated but not p"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "5",
-        "name": "Error Response Format",
-        "text": "Always return errors in a consistent structure: {{ \"error\": {{ \"code\": \"VALIDATION_ERROR\", \"message\": \"Email is required\", \"details\": [ {{\"field\": \"email\", \"reason\": \"must not be empty\"}}, {{\"field\": \"age\", \"reason\": \"must be positive\"}} ], \"requestId\": \"req_abc123\" }} }}"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "6",
-        "name": "Pagination, Filtering, and Sorting",
-        "text": "# Pagination with cursor (preferred for large datasets) GET /users?cursor=eyJpZCI6NDJ9&limit=20 Response: {{\"data\": [...], \"nextCursor\": \"eyJpZCI6NjJ9\", \"hasMore\": true}} # Or offset-based for simpler use cases GET /users?offset=0&limit=20 # Filtering GET /users?status=active&role=admin # Sorting GE"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "7",
-        "name": "Security Checklist",
-        "text": "Always use HTTPS. No exceptions. Set rate limits. At minimum: 60 req/min per IP for unauthenticated, 1000 req/min per user for authenticated. Validate Content-Type. Reject requests with wrong Content-Type headers. Set CORS explicitly. Never use Access-Control-Allow-Origin: * with credentials. Use AP"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "8",
-        "name": "API Documentation",
-        "text": "Use OpenAPI 3.1 (Swagger). It's the industry standard and generates interactive docs automatically. Tools like Stoplight, Redoc, and Swagger UI render beautiful docs from a single spec file. If your API doesn't have an OpenAPI spec, it's not ready for production."
-      }
       ]
     }
     </script>

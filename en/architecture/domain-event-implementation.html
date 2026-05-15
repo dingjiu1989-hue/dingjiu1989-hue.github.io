@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-08">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Domain Event Implementation: Publishing, Handling, and Testing — SourceHub</title>
     <meta name="description" content="Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.">
@@ -46,8 +46,8 @@
       "description": "Implement domain events in DDD: event definitions, publishing patterns, handlers, and testing strategies.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "425",
+      "dateModified": "2026-05-08",
+      "wordCount": "391",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,26 +90,28 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Domain Event Implementation: Publishing, Handling, and Testing</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
+      <div class="article-body"><h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
+<h2>Domain Event Implementation: Publishing, Handling, and Testing</h2>
 <p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Event Definition</h2>
+<h3>Event Definition</h3>
 <p>Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.</p>
-<h2>Publishing</h2>
+<h3>Publishing</h3>
 <p>Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.</p>
 <p>Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

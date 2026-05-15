@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-index-types.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "827",
+      "wordCount": "795",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,37 +92,39 @@
       <h1 class="article-title">B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-index-types.png" alt="B-Tree, Hash, GiST, GIN: Index Type Selection Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
-<h1>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h1>
+      <div class="article-body"><h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
+<h2>B-Tree, Hash, GiST, GIN: Index Type Selection Guide</h2>
 <p>Database indexes accelerate queries by providing fast lookup paths. Different index types optimize for different query patterns. Choosing the wrong index type wastes storage and may not improve query performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-index-types.png" alt="B-Tree, Hash, GiST, GIN: Index Type Selection Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>B-Tree Indexes</h2>
+<h3>B-Tree Indexes</h3>
 <p>B-Tree is the default and most versatile index type. It supports equality, range, sorting, and pattern matching queries. B-Tree indexes organize data in a balanced tree structure where leaf nodes contain sorted data values.</p>
 <p>Use B-Tree for: primary key lookups, range queries (&gt;, &lt;, BETWEEN), ORDER BY sorting, prefix matching (LIKE 'abc%'). B-Tree is optimal when queries filter by comparison operators or require sorted output.</p>
 <p>Performance characteristics: O(log n) lookup time. Insert and delete cost O(log n) with page splits. B-Tree is the best general-purpose index and should be your default choice.</p>
-<h2>Hash Indexes</h2>
+<h3>Hash Indexes</h3>
 <p>Hash indexes support only equality lookups (=, IN). They compute a hash of the index key and store the hash value. Hash indexes are smaller than B-Tree for the same data because they store fixed-length hash values.</p>
 <p>Use Hash indexes for: exact-match lookups where range queries are never needed. Hash indexes perform best when indexed values are large (long strings) where hash comparisons are faster than value comparisons.</p>
 <p>PostgreSQL's hash indexes are now WAL-logged and crash-safe (since PostgreSQL 10). They were historically discouraged but are production-ready in modern versions. Benchmark B-Tree vs Hash for your specific workload before choosing.</p>
-<h2>GiST Indexes</h2>
+<h3>GiST Indexes</h3>
 <p>GiST (Generalized Search Tree) supports complex data types: geometric data, full-text search, range types, and nearest-neighbor searches. GiST is an extensible index framework—different operators provide different capabilities.</p>
 <p>Use GiST for: geospatial queries with PostGIS, range type overlap (&amp;&amp; operator), full-text ranking and ordering, nearest-neighbor (ORDER BY val &lt;-&gt; target). GiST indexes handle queries that B-Tree cannot express.</p>
 <p>Trade-offs: GiST indexes are larger than B-Tree and slower to build. Query performance varies by operator class. GiST has higher write overhead.</p>
-<h2>GIN Indexes</h2>
+<h3>GIN Indexes</h3>
 <p>GIN (Generalized Inverted Index) is designed for composite values: arrays, JSONB, full-text vectors. GIN stores mappings from component values to rows containing them.</p>
 <p>Use GIN for: JSONB queries (? and @&gt; operators), array containment (array @&gt; value), full-text search (tsvector @@ tsquery), trigram similarity (pg_trgm extension). GIN excels at searching within composite data.</p>
 <p>GIN indexes have fast query speed but slow writes. Use fastupdate setting for write-heavy workloads—it buffers index entries and bulk-inserts them. GIN indexes are significantly larger than B-Tree.</p>
-<h2>Choosing</h2>
+<h3>Choosing</h3>
 <p>Start with B-Tree. If B-Tree does not support your query type, evaluate GiST or GIN based on your data type. Hash indexes are rarely needed—B-Tree handles equality queries well and supports more operations. Test index types with your actual data and query patterns.</p>
-<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

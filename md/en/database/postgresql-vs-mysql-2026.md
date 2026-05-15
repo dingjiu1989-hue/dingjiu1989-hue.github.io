@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/postgresql-vs-mysql-2026.html
 
 # PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
-# PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
+
+## PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers
 
 Introduction 
 
@@ -427,11 +429,11 @@ PostgreSQL to MySQL
 
 **Tool:** `pg2mysql` CLI converter handles 80% of schema conversion automatically. For data, dump CSV from PostgreSQL and load into MySQL. 
 
-# Export from PostgreSQL
+## Export from PostgreSQL
 
 psql -c "\COPY (SELECT * FROM users) TO 'users.csv' CSV HEADER"
 
-# Import to MySQL
+## Import to MySQL
 
 mysql -e "LOAD DATA INFILE 'users.csv' INTO TABLE users FIELDS TERMINATED BY ',' IGNORE 1 ROWS"
 
@@ -545,5 +547,7 @@ The best database is the one you do not have to think about. Pick based on your 
 _Benchmarks conducted May 2026 on AWS c6i.2xlarge instances with gp3 volumes. Results vary by workload pattern, schema design, and configuration tuning. Always benchmark against your own workload._
 
 **See also:** [Go vs Rust: Systems Programming Comparison](</en/compare/go-vs-rust.html>), [Nginx vs Apache: Web Server Comparison 2026](</en/compare/nginx-vs-apache.html>), [Sentry vs Datadog APM: Error Tracking & Performance](</en/compare/sentry-vs-datadog-apm.html>).
+
+**See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [DuckDB vs SQLite: Embedded Databases for Analytics and Applications Compared](</en/compare/duckdb-vs-sqlite.html>)

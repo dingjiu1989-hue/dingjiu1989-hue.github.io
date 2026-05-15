@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/fine-tuning-vs-rag.html
 
 # Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-# Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
 
-## Introduction
+## Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison
+
+### Introduction
 
 Two dominant approaches exist for customizing LLMs to your domain: fine-tuning, which modifies the model weights, and RAG, which injects context at inference time. Teams often ask which to use. The answer depends on your data type, update frequency, latency requirements, and budget. This article provides a decision framework with cost analysis for each approach.
 
-## When to Fine-Tune
+### When to Fine-Tune
 
 Fine-tuning excels at teaching the model new capabilities or styles:
 
@@ -44,7 +46,7 @@ from openai import OpenAI
 
 client = OpenAI()
 
-# Fine-tuning for a custom tone and format
+## Fine-tuning for a custom tone and format
 
 fine_tune_job = client.fine_tuning.jobs.create(
 
@@ -81,19 +83,19 @@ Use fine-tuning when:
 
 Fine-tuning costs include training ($25-$100 per run for GPT-4o-mini) and hosting. The benefit is zero retrieval overhead at inference time.
 
-## When to Use RAG
+### When to Use RAG
 
 RAG excels at incorporating changing or factual information:
 
 def rag_response(question: str) -> str:
 
-# Retrieve current information
+## Retrieve current information
 
 docs = vector_search(question, k=5)
 
 context = format_context(docs)
 
-# Generate with up-to-date context
+## Generate with up-to-date context
 
 response = call_llm(f"""
 
@@ -124,7 +126,7 @@ Use RAG when:
 
 RAG costs are dominated by vector storage and retrieval latency (100-500ms per search).
 
-## Cost Comparison
+### Cost Comparison
 
 | Factor | Fine-Tuning | RAG | Hybrid |
 
@@ -142,21 +144,21 @@ RAG costs are dominated by vector storage and retrieval latency (100-500ms per s
 
 | Source citation | No | Yes | Yes |
 
-## Hybrid Approaches
+### Hybrid Approaches
 
 The most powerful pattern combines both: fine-tune for behavior, RAG for knowledge:
 
 def hybrid_rag(question: str) -> str:
 
-# Fine-tuned model handles formatting, tone, and reasoning
+## Fine-tuned model handles formatting, tone, and reasoning
 
-# RAG provides factual context
+## RAG provides factual context
 
-# Step 1: Retrieve relevant context
+## Step 1: Retrieve relevant context
 
 docs = vector_search(question, k=5)
 
-# Step 2: Use fine-tuned model with RAG context
+## Step 2: Use fine-tuned model with RAG context
 
 response = client.chat.completions.create(
 
@@ -186,7 +188,7 @@ messages=[
 
 return response.choices[0].message.content
 
-### Fine-Tuning the Retriever
+#### Fine-Tuning the Retriever
 
 You can also fine-tune the embedding model for better retrieval:
 
@@ -196,7 +198,7 @@ from torch.utils.data import DataLoader
 
 model = SentenceTransformer("BAAI/bge-base-en-v1.5")
 
-# Create training pairs: (question, relevant_document)
+## Create training pairs: (question, relevant_document)
 
 train_examples = [
 
@@ -214,7 +216,7 @@ for q, neg_doc in negative_pairs
 
 ]
 
-# Fine-tune the embedding model
+## Fine-tune the embedding model
 
 train_dataloader = DataLoader(train_examples, shuffle=True, batch_size=16)
 
@@ -222,7 +224,7 @@ train_loss = losses.CosineSimilarityLoss(model)
 
 model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=3)
 
-## Decision Flowchart
+### Decision Flowchart
 
 Follow this decision tree:
 
@@ -238,10 +240,12 @@ Follow this decision tree:
 
 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Can you afford both? Yes -> hybrid approach is best.
 
-## Conclusion
+### Conclusion
 
 Fine-tuning and RAG are complementary, not competing, approaches. RAG handles factual accuracy and dynamic knowledge. Fine-tuning handles behavior, tone, and capability. The most effective production systems use a hybrid: a fine-tuned model with RAG context injection. Start with RAG (it is faster to implement), add fine-tuning when you need consistent output formatting or domain-specific behavior that RAG alone cannot provide.
 
 **See also:** [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>), [LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies](</en/ai/llm-caching-deep.html>).
+
+**See also:** [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)
 
 **See also:** [LLM Fine-Tuning Strategies and Techniques](</en/ai/fine-tuning-strategies.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution](</en/ai/llm-observability.html>)

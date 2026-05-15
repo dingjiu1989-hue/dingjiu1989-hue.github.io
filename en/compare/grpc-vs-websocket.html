@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/grpc-vs-websocket.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-13",
-      "wordCount": "3045",
+      "wordCount": "2584",
       "keywords": "Comparison, Technology",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -94,22 +94,23 @@
       <h1 class="article-title">gRPC vs WebSocket: Real-Time Communication</h1>
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/compare/grpc-vs-websocket.png" alt="gRPC vs WebSocket: Real-Time Communication" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h1>gRPC vs WebSocket: Real-Time Communication</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h2>gRPC vs WebSocket: Real-Time Communication</h2>
+<h3>Introduction</h3>
 <p>Real-time communication is essential for modern applications--from chat and live dashboards to multiplayer gaming and financial trading platforms. gRPC and WebSocket represent two fundamentally different approaches to bidirectional streaming. gRPC builds on HTTP/2 with Protocol Buffers for typed, efficient RPCs. WebSocket provides a message-oriented protocol over a single TCP connection. This article compares them across the dimensions that matter for real-time application design.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/compare/grpc-vs-websocket.png" alt="gRPC vs WebSocket: Real-Time Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Protocol Fundamentals</h2>
-<h3>gRPC: HTTP/2 + Protocol Buffers</h3>
+<h3>Protocol Fundamentals</h3>
+<h4>gRPC: HTTP/2 + Protocol Buffers</h4>
 <p>gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication:</p>
 <p>// order.proto</p>
 <p>syntax = "proto3";</p>
@@ -211,7 +212,7 @@
 <p>)</p>
 <p>async for result in stub.ProcessOrders(generate_actions()):</p>
 <p>print(f"Order {result.order_id}: {result.status}")</p>
-<h3>WebSocket: Message-Based Protocol</h3>
+<h4>WebSocket: Message-Based Protocol</h4>
 <p>WebSocket provides a simpler, message-oriented protocol over TCP:</p>
 <p>// WebSocket client (browser)</p>
 <p>const ws = new WebSocket('wss://api.example.com/orders');</p>
@@ -293,7 +294,7 @@
 <p>channelManager.unsubscribe(clientId);</p>
 <p>});</p>
 <p>});</p>
-<h2>Streaming Patterns</h2>
+<h3>Streaming Patterns</h3>
 <p>| Pattern | gRPC | WebSocket |</p>
 <p>|---|---|---|</p>
 <p>| Unary (request-response) | Native RPC | Wrapper over messages |</p>
@@ -302,8 +303,8 @@
 <p>| Bidirectional | Native (full duplex) | Native (full duplex) |</p>
 <p>| Pub/Sub | Requires external broker | Manual topics |</p>
 <p>| Request-reply patterns | Natural | Natural |</p>
-<h2>Protocol Buffers vs Raw Messages</h2>
-<h1>Size comparison: gRPC (Protobuf) vs WebSocket (JSON)</h1>
+<h3>Protocol Buffers vs Raw Messages</h3>
+<h2>Size comparison: gRPC (Protobuf) vs WebSocket (JSON)</h2>
 <p>example_message: |</p>
 <p>Order with 3 items, totals 200 bytes</p>
 <p>gRPC (binary Protobuf):</p>
@@ -315,13 +316,13 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+ WebSocket framing: ~6 bytes</p>
 <p>Total: ~326 bytes</p>
 <p>Savings: gRPC is ~3.5x more efficient per message</p>
-<h1>at 1000 messages/second:</h1>
-<h1>gRPC: ~94 KB/s + ~30 KB/s header overhead</h1>
-<h1>WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead</h1>
-<h1>Daily savings: ~20 GB</h1>
+<h2>at 1000 messages/second:</h2>
+<h2>gRPC: ~94 KB/s + ~30 KB/s header overhead</h2>
+<h2>WebSocket (JSON): ~326 KB/s + ~30 KB/s header overhead</h2>
+<h2>Daily savings: ~20 GB</h2>
 <p>Type safety comparison:</p>
-<h1>gRPC: Compile-time type checking</h1>
-<h1>Client gets typed stubs from proto definition</h1>
+<h2>gRPC: Compile-time type checking</h2>
+<h2>Client gets typed stubs from proto definition</h2>
 <p>request = order_pb2.CreateOrderRequest(</p>
 <p>user_id="user-123",</p>
 <p>items=[</p>
@@ -329,13 +330,13 @@
 <p>],</p>
 <p>)</p>
 <p>response = stub.CreateOrder(request)</p>
-<h1>WebSocket: Runtime parsing</h1>
-<h1>No compile-time type checking</h1>
+<h2>WebSocket: Runtime parsing</h2>
+<h2>No compile-time type checking</h2>
 <p>message = json.loads(data)</p>
-<h1>Must validate fields manually</h1>
+<h2>Must validate fields manually</h2>
 <p>if not isinstance(message.get('user_id'), str):</p>
 <p>raise ValueError("Invalid user_id")</p>
-<h2>Browser Support</h2>
+<h3>Browser Support</h3>
 <p>| Factor | gRPC | WebSocket |</p>
 <p>|---|---|---|</p>
 <p>| Native browser support | gRPC-Web (with Envoy proxy) | Native |</p>
@@ -343,7 +344,7 @@
 <p>| Streaming in browser | gRPC-Web (limited) | Full support |</p>
 <p>| Headers and cookies | Via Envoy proxy | Standard HTTP upgrade |</p>
 <p>| Fallback transport | WebSocket transport available | HTTP long-polling |</p>
-<h1>Envoy configuration for gRPC-Web</h1>
+<h2>Envoy configuration for gRPC-Web</h2>
 <p>static_resources:</p>
 <p>listeners:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- address:</p>
@@ -377,7 +378,7 @@
 <p>"@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions</p>
 <p>explicit_http_config:</p>
 <p>http2_protocol_options: {}</p>
-<h2>Use Cases</h2>
+<h3>Use Cases</h3>
 <p>| Use Case | Preferred | Reason |</p>
 <p>|---|---|---|</p>
 <p>| Microservice-to-microservice | gRPC | Typed contracts, efficient binary, built-in streaming |</p>
@@ -388,7 +389,7 @@
 <p>| Financial ticker | gRPC streaming | Lower latency, smaller payloads |</p>
 <p>| Live dashboards | WebSocket | Browser-side simplicity |</p>
 <p>| IoT device communication | gRPC | Small binary, resource efficient, bi-directional |</p>
-<h2>Performance Comparison</h2>
+<h3>Performance Comparison</h3>
 <p>| Metric | gRPC | WebSocket |</p>
 <p>|---|---|---|</p>
 <p>| Latency (p50) | ~0.5ms | ~1ms |</p>
@@ -398,7 +399,7 @@
 <p>| Compression | Automatic (HTTP/2 HPACK) | Optional (permessage-deflate) |</p>
 <p>| Connection setup | 1 RTT (HTTP/2) | 1 RTT (HTTP upgrade) |</p>
 <p>Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing.</p>
-<h2>Decision Framework</h2>
+<h3>Decision Framework</h3>
 <ul>
 <li>
 <p><strong>Choose gRPC</strong> for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility.</p>
@@ -411,7 +412,8 @@
 </li>
 </ul>
 <p>For modern applications, gRPC is the better choice for service-to-service communication, while WebSocket remains the practical standard for browser-based real-time features.</p>
-<p><strong>See also:</strong> <a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a>, <a href="/en/compare/sqlite-vs-duckdb.html">SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics</a>, <a href="/en/compare/nginx-vs-caddy.html">Nginx vs Caddy: Web Server Comparison</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a>, <a href="/en/compare/redis-vs-memcached.html">Redis vs Memcached: Caching Solution Comparison</a>, <a href="/en/compare/fastapi-vs-flask.html">FastAPI vs Flask vs Django</a></p></div>
+<p><strong>See also:</strong> <a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a>, <a href="/en/compare/sqlite-vs-duckdb.html">SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics</a>, <a href="/en/compare/nginx-vs-caddy.html">Nginx vs Caddy: Web Server Comparison</a>.</p>
+<p><strong>See also:</strong> <a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a>, <a href="/en/compare/redis-vs-memcached.html">Redis vs Memcached: Caching Solution Comparison</a>, <a href="/en/compare/fastapi-vs-flask.html">FastAPI vs Flask vs Django</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/compare/flask-vs-fastapi.html">Flask vs FastAPI: Python Web Framework Comparison 2026</a>, <a href="/en/compare/redis-vs-memcached.html">Redis vs Memcached: Caching Solution Comparison</a>, <a href="/en/compare/fastapi-vs-flask.html">FastAPI vs Flask vs Django</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

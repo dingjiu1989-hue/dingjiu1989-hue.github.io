@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html
 
 # XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
 
-# XSRF/CSRF Protection Guide
+## XSRF/CSRF Protection Guide
+
+## XSRF/CSRF Protection Guide
 
 What Is CSRF? 
 
@@ -96,11 +98,11 @@ Framework Built-In Support
 
 Most modern frameworks include CSRF protection: 
 
-# Django
+## Django
 
 {% csrf_token %} 
 
-# Rails
+## Rails
 
 <%= csrf_meta_tags %>
 
@@ -130,7 +132,7 @@ The `SameSite` cookie attribute tells the browser when to send cookies with cros
 
 | Attribute | Behavior | Security | |-----------|----------|----------| | `Strict` | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | `Lax` | Cookie sent for top-level GET navigations | Good balance for most apps | | `None` | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | 
 
-# Django settings
+## Django settings
 
 SESSION_COOKIE_SAMESITE = 'Lax'
 
@@ -237,5 +239,7 @@ Summary
 CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions.
 
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [HTTP Security Headers Checklist](</en/security/http-security-headers.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>).
+
+**See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)
 
 **See also:** [SQL Injection Prevention Guide](</en/security/sql-injection-prevention.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Incident Response Playbook for Developers](</en/security/incident-response.html>)

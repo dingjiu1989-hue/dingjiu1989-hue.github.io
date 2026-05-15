@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/multi-master-replication.html
 
 # Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
-# Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
+
+## Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR
 
 Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR 
 
@@ -260,5 +262,7 @@ A rising conflict rate indicates application-level contention that might be bett
 Multi-master replication is a powerful but complex tool. Start with single-master and add multi-master only when your availability or latency requirements genuinely demand it.
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>).
+
+**See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)
 
 **See also:** [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>)

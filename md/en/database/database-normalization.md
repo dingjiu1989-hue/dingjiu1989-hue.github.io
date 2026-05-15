@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-normalization.html
 
 # Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
 
-# Database Normalization Explained
+## Database Normalization Explained
+
+## Database Normalization Explained
 
 What is Normalization? 
 
@@ -103,5 +105,7 @@ Conclusion
 Normalize to 3NF for transactional integrity. Denormalize selectively for performance. Document your decisions. The key is "the key, the whole key, and nothing but the key."
 
 **See also:** [Data Modeling Best Practices](</en/database/data-modeling.html>), [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Schema Design Patterns: Normalization, Denormalization, Naming Conventions](</en/database/schema-design.html>).
+
+**See also:** [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)
 
 **See also:** [Data Consistency Models Explained](</en/database/data-consistency-models.html>), [Database Sharding: Strategies and Trade-offs](</en/database/database-sharding.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>)

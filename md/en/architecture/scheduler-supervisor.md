@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/scheduler-supervisor.html
 
 # Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
 
-# Scheduler Supervisor Pattern
+## Scheduler Supervisor Pattern
+
+## Scheduler Supervisor Pattern
 
 The scheduler supervisor pattern manages the execution of scheduled and background jobs in a distributed system. It separates the scheduling responsibility from the execution responsibility, using a supervisor to monitor job execution, handle failures, and manage retries. This pattern is essential for reliable background processing in production systems. 
 
@@ -81,5 +83,7 @@ Dashboard visibility into job execution history is essential for operations team
 The scheduler supervisor pattern transforms unreliable background job execution into a manageable, observable system. By separating concerns and providing consistent failure handling, it ensures that scheduled jobs execute reliably even in distributed, failure-prone environments.
 
 **See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [Saga vs Process Manager: Orchestration Patterns Compared](</en/architecture/saga-process-manager.html>).
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [API Composition Pattern](</en/architecture/api-composition-pattern.html>)

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/composite-indexes.html
 
 # Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
-# Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
+
+## Composite Indexes: Column Order, Covering Indexes, and Partial Indexes
 
 Composite Indexes: Column Order, Covering Indexes, and Partial Indexes 
 
@@ -252,5 +254,7 @@ WHERE idx_scan = 0 AND indexname NOT LIKE '%_pkey';
 A well-designed composite index can eliminate the need for multiple single-column indexes. Audit your indexes regularly: remove duplicates, add covering columns, and trim unused partial indexes. Each index adds write overhead, so the total set should serve your query patterns without redundancy.
 
 **See also:** [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>), [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates](</en/database/time-series-postgresql.html>).
+
+**See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)
 
 **See also:** [EXPLAIN ANALYZE Deep Dive: Reading Plans, Cost Estimation, and Scan Types](</en/database/query-optimization-explain.html>), [Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning](</en/database/index-maintenance.html>), [Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN](</en/database/index-types.html>)

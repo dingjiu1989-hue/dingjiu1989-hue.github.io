@@ -8,41 +8,43 @@ url: https://dingjiu1989-hue.github.io/en/tech/configuration-management.html
 
 # Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
 
-# Configuration Management
+## Configuration Management
+
+## Configuration Management
 
 Configuration management addresses how applications receive configuration at build time, deploy time, and runtime. Effective configuration management ensures applications run correctly across different environments without code changes. This article covers environment variables, configuration files, feature flags, and secret management.
 
-## The Twelve-Factor App Approach
+### The Twelve-Factor App Approach
 
 The Twelve-Factor App methodology provides canonical guidance for configuration management. It states that configuration should be stored in environment variables. Code remains constant across environments; configuration changes with each deployment.
 
 This strict separation between code and config enables several best practices. The same codebase can be deployed to development, staging, and production without changes. Configuration is environment-specific but deployment-system-agnostic. Secrets are kept out of the codebase entirely.
 
-## Environment Variables
+### Environment Variables
 
 Environment variables are the simplest and most common configuration mechanism. They are available to the process at startup, easy to set in containers and orchestration systems, and naturally separate from code. Most programming languages have built-in support for reading environment variables.
 
@@ -50,7 +52,7 @@ Best practices for environment variables include using a consistent naming conve
 
 Environment variables work well for simple configuration: database URLs, service endpoints, log levels, and feature flags. They become unwieldy for complex or nested configuration, where configuration files are more appropriate.
 
-## Configuration Files
+### Configuration Files
 
 Configuration files handle structured, nested, or complex configuration that does not fit well in environment variables. YAML, JSON, TOML, and HCL are common configuration file formats. Configuration files can be versioned (for defaults) or environment-specific (for overrides).
 
@@ -58,7 +60,7 @@ A common pattern uses a default configuration file (committed to version control
 
 Configuration files should be validated at application startup. Invalid configuration should cause the application to fail fast, not at runtime when a misconfigured feature is first accessed. Schema validation tools (JSON Schema, CUE) catch configuration errors early.
 
-## Feature Flags
+### Feature Flags
 
 Feature flags (also called feature toggles) allow enabling or disabling features without deploying code. They decouple deployment from release—code can be deployed to production while the feature remains disabled behind a flag. This enables trunk-based development, canary releases, and kill switches.
 
@@ -66,19 +68,19 @@ Feature flag management tools like LaunchDarkly, Split, and Flagsmith provide so
 
 Feature flags should be treated as temporary by default. Long-lived flags add complexity and should be removed after the feature is fully released. A flag lifecycle policy helps manage the accumulation of stale flags.
 
-## Configuration at Different Stages
+### Configuration at Different Stages
 
 Configuration enters the application at different stages. Build-time configuration is baked into the artifact (e.g., compile-time constants). Deploy-time configuration is set when the application starts (e.g., environment variables). Runtime configuration can change while the application runs (e.g., feature flags retrieved from an external service).
 
 Build-time configuration should be minimized. It couples the artifact to a specific environment, defeating the purpose of immutable artifacts. Deploy-time configuration is the standard approach. Runtime configuration provides the most flexibility but adds complexity and latency.
 
-## Configuration Validation
+### Configuration Validation
 
 Invalid configuration is a common source of runtime errors. Validation should be automated and run at startup. The application should check that all required configuration is present, values are of the correct type and within acceptable ranges, and dependent configuration items are consistent.
 
 A dedicated configuration module or class provides initialization, validation, and accessor methods. It fails loudly at startup if configuration is invalid. This prevents the "it worked on my machine" problem and catches environment-specific configuration issues before deployment.
 
-## Configuration Storage
+### Configuration Storage
 
 Configuration storage depends on the configuration's sensitivity and change frequency. Environment variables are the simplest storage. Configuration files provide structure. HashiCorp Vault, AWS Parameter Store, and Azure Key Vault store secrets securely. Feature flag services manage runtime flags.
 
@@ -87,5 +89,7 @@ A layered configuration approach combines multiple sources. Default values in co
 Effective configuration management ensures applications run correctly in any environment without code changes. The key principles are separation of code and configuration, environment-specific overrides, startup validation, and secure handling of secrets.
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [Infrastructure Composability](</en/tech/infrastructure-composability.html>), [Metric Collection](</en/tech/metric-collection.html>).
+
+**See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)
 
 **See also:** [CI/CD Best Practices](</en/tech/ci-cd-best-practices.html>), [On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention](</en/tech/on-call-best-practices.html>), [Terraform State Management: Remote State, Locking, Migration, and Workspaces](</en/tech/terraform-state-management.html>)

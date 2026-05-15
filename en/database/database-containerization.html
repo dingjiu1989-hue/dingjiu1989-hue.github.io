@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, performance considerations, and production best practices.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-24">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Databases in Containers: StatefulSets, Persistent Volumes, and Backup — SourceHub</title>
     <meta name="description" content="Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, performance considerations, and production best practices.">
@@ -46,8 +46,8 @@
       "description": "Running databases in containers: Kubernetes StatefulSets, PersistentVolumes, backup strategies, performance considerations, and production best practices.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1820",
+      "dateModified": "2026-04-24",
+      "wordCount": "1500",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-24 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png" alt="Databases in Containers: StatefulSets, Persistent Volumes, and Backup" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
-<h1>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h1>
+      <div class="article-body"><h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
+<h2>Databases in Containers: StatefulSets, Persistent Volumes, and Backup</h2>
 <p>Databases in Containers: StatefulSets, Persistent Volumes, and Backup </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-containerization.png" alt="Databases in Containers: StatefulSets, Persistent Volumes, and Backup" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Running databases in containers was once considered an anti-pattern, but modern orchestration and storage primitives have made it viable for many production workloads. This article covers Kubernetes patterns for stateful databases, storage management, and operational considerations. </p>
 <p>StatefulSets vs Deployments </p>
@@ -206,13 +207,13 @@
 <p>memory: "8Gi"</p>
 <p>cpu: "4"</p>
 <p>Automated Failover </p>
-<h1>Simulate pod failure to test failover</h1>
+<h2>Simulate pod failure to test failover</h2>
 <p>kubectl delete pod myapp-db-0</p>
-<h1>Operator automatically:</h1>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone</h1>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica</h1>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary</h1>
-<h1>Typical failover time: 15-30 seconds</h1>
+<h2>Operator automatically:</h2>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone</h2>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica</h2>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary</h2>
+<h2>Typical failover time: 15-30 seconds</h2>
 <p>Backup in Containers </p>
 <p>Volume Snapshots </p>
 <p>apiVersion: snapshot.storage.k8s.io/v1</p>
@@ -236,7 +237,7 @@
 <p>Performance Considerations </p>
 <p>Network Overhead </p>
 <p>Container networking adds latency vs bare metal: </p>
-<h1>Use hostNetwork for lowest latency</h1>
+<h2>Use hostNetwork for lowest latency</h2>
 <p>spec:</p>
 <p>template:</p>
 <p>spec:</p>
@@ -252,7 +253,7 @@
 <p>cpu: "8" # PostgreSQL bursts here normally</p>
 <p>memory: "24Gi" # Allocate extra for OS cache (effective_cache_size)</p>
 <p>Tuning for Kubernetes </p>
-<h1>postgresql.conf tuned for container environments</h1>
+<h2>postgresql.conf tuned for container environments</h2>
 <p>shared_buffers = '4GB' # 25% of container memory limit</p>
 <p>effective_cache_size = '12GB' # 75% of container memory limit</p>
 <p>work_mem = '64MB'</p>
@@ -261,7 +262,7 @@
 <p>random_page_cost = 1.1 # SSD in containers</p>
 <p>Anti-Patterns to Avoid </p>
 <p>EmptyDir for Data </p>
-<h1>WRONG: data lost on pod restart</h1>
+<h2>WRONG: data lost on pod restart</h2>
 <p>volumes:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data</p>
 <p>emptyDir: {}</p>
@@ -269,18 +270,18 @@
 <p>Multiple Writable Replicas </p>
 <p>Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. </p>
 <p>Using Deployments </p>
-<h1>WRONG: Deployments do not guarantee stable identity or storage</h1>
+<h2>WRONG: Deployments do not guarantee stable identity or storage</h2>
 <p>apiVersion: apps/v1</p>
 <p>kind: Deployment</p>
 <p>Always use StatefulSets for databases. </p>
 <p>Monitoring </p>
-<h1>Check pod status</h1>
+<h2>Check pod status</h2>
 <p>kubectl get pods -l app=postgres</p>
-<h1>Check PVC status</h1>
+<h2>Check PVC status</h2>
 <p>kubectl get pvc -l app=postgres</p>
-<h1>Check WAL archiving status</h1>
+<h2>Check WAL archiving status</h2>
 <p>kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"</p>
-<h1>View operator logs</h1>
+<h2>View operator logs</h2>
 <p>kubectl logs -n postgres-operator deployment/postgres-operator</p>
 <p>When to Containerize </p>
 <p><strong>Containerize your database when</strong> : </p>
@@ -314,7 +315,8 @@
 </li>
 </ul>
 <p>Databases in containers are production-viable with the right operator, storage class, and backup strategy. For most teams, a managed database service is simpler and more cost-effective. Containerization makes sense when you need portability, GitOps-driven management, and full control over the database configuration.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/materialized-views.html">Materialized Views</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/materialized-views.html">Materialized Views</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

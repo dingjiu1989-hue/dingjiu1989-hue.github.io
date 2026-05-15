@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-14">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Monitoring and Alerting Setup — SourceHub</title>
     <meta name="description" content="Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.">
@@ -46,8 +46,8 @@
       "description": "Build a production monitoring stack with metrics collection, log aggregation, and intelligent alerting.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "3640",
+      "dateModified": "2026-05-14",
+      "wordCount": "3349",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Monitoring and Alerting Setup</h1>
-      <div class="article-meta">Published 2026-05-11 · 240 views · 2 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-14 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png" alt="Monitoring and Alerting Setup" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
-<h1>Monitoring and Alerting Setup</h1>
+      <div class="article-body"><h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
+<h2>Monitoring and Alerting Setup</h2>
 <p>A robust monitoring and alerting system is the backbone of reliable production infrastructure. Without it, you are flying blind -- discovering outages only when users complain. This guide covers setting up a complete monitoring stack and designing effective alert rules.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/monitoring-alerting-setup.png" alt="Monitoring and Alerting Setup" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>The Four Golden Signals</h2>
+<h3>The Four Golden Signals</h3>
 <p>Google's SRE book defines four key metrics for user-facing systems:</p>
 <ul>
 <li><strong>Latency</strong> -- Time to service a request. Measure both average and high percentiles (p95, p99).</li>
@@ -118,7 +119,7 @@
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Errors</strong> -- Rate of failed requests (5xx, timeouts, explicit error responses).</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Saturation</strong> -- How full the service is (CPU, memory, queue depth).</p>
 <p>Every monitoring system should capture these four signals for each service.</p>
-<h2>Metrics Collection Stack</h2>
+<h3>Metrics Collection Stack</h3>
 <p>The Prometheus ecosystem has become the standard for metrics collection:</p>
 <p>Application → Metrics Export → Prometheus → Grafana</p>
 <p>↑ ↓</p>
@@ -127,7 +128,7 @@
 <p>System Notification</p>
 <p>Metrics Channels</p>
 <p>Install Prometheus and configure it to scrape targets:</p>
-<h1>prometheus.yml</h1>
+<h2>prometheus.yml</h2>
 <p>global:</p>
 <p>scrape_interval: 15s</p>
 <p>evaluation_interval: 15s</p>
@@ -139,7 +140,7 @@
 <p>static_configs:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- targets: ['localhost:3000']</p>
 <p>Use <code>scrape_interval</code> of 15 seconds for most metrics. For high-cardinality metrics (e.g., per-request tracing), use a longer interval or sample.</p>
-<h2>Application Instrumentation</h2>
+<h3>Application Instrumentation</h3>
 <p>Export application metrics in Prometheus format:</p>
 <p>// Node.js with prom-client</p>
 <p>const client = require('prom-client');</p>
@@ -158,9 +159,9 @@
 <p>next();</p>
 <p>});</p>
 <p>Use Histogram metrics for latency, Counter for request counts, and Gauge for current resource usage. Avoid unbounded label cardinality.</p>
-<h2>Centralized Logging</h2>
+<h3>Centralized Logging</h3>
 <p>The ELK stack (Elasticsearch, Logstash, Kibana) remains popular, but the Grafana Loki stack is simpler and cheaper for log aggregation:</p>
-<h1>docker-compose for Loki + Promtail</h1>
+<h2>docker-compose for Loki + Promtail</h2>
 <p>services:</p>
 <p>loki:</p>
 <p>image: grafana/loki:3.0</p>
@@ -174,9 +175,9 @@
 <p>image: grafana/grafana:latest</p>
 <p>ports: ["3000:3000"]</p>
 <p>Promtail tails log files, adds labels, and ships them to Loki. Grafana queries both Prometheus (metrics) and Loki (logs) in a unified dashboard.</p>
-<h2>Effective Alerting Rules</h2>
+<h3>Effective Alerting Rules</h3>
 <p>Design alerts that are actionable and meaningful:</p>
-<h1>prometheus-alerts.yml</h1>
+<h2>prometheus-alerts.yml</h2>
 <p>groups:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: application</p>
 <p>rules:</p>
@@ -205,7 +206,7 @@
 <p>for: 1m</p>
 <p>labels:</p>
 <p>severity: critical</p>
-<h3>Alert Design Principles</h3>
+<h4>Alert Design Principles</h4>
 <ul>
 <li>
 <p><strong>Alert on symptoms, not causes.</strong> Alert on error rate, not on "CPU is high." CPU spikes may be normal; error rate spikes always require investigation.</p>
@@ -220,9 +221,9 @@
 <p><strong>Include runbooks.</strong> Every alert annotation should reference a runbook URL.</p>
 </li>
 </ul>
-<h2>Notification Channels</h2>
+<h3>Notification Channels</h3>
 <p>Route alerts through Alertmanager:</p>
-<h1>alertmanager.yml</h1>
+<h2>alertmanager.yml</h2>
 <p>route:</p>
 <p>receiver: 'team-page'</p>
 <p>routes:</p>
@@ -238,7 +239,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- api_url: 'https://hooks.slack.com/services/...'</p>
 <p>channel: '#alerts'</p>
 <p>Critical alerts go to PagerDuty or Opsgenie for immediate attention. Warnings go to Slack for team awareness.</p>
-<h2>Dashboard Best Practices</h2>
+<h3>Dashboard Best Practices</h3>
 <p>Effective Grafana dashboards follow these principles:</p>
 <ul>
 <li>
@@ -254,9 +255,9 @@
 <p><strong>Link to logs</strong> -- a metric spike should have a one-click path to relevant logs.</p>
 </li>
 </ul>
-<h2>Synthetic Monitoring</h2>
+<h3>Synthetic Monitoring</h3>
 <p>Complement real-user monitoring with synthetic checks:</p>
-<h1>blackbox-exporter targets</h1>
+<h2>blackbox-exporter targets</h2>
 <p>modules:</p>
 <p>http_2xx:</p>
 <p>prober: http</p>
@@ -264,9 +265,10 @@
 <p>preferred_ip_protocol: "ip4"</p>
 <p>valid_status_codes: [200, 201, 204]</p>
 <p>Run synthetic checks from multiple geographic locations to detect regional outages.</p>
-<h2>Summary</h2>
+<h3>Summary</h3>
 <p>A complete monitoring stack requires metrics (Prometheus), logs (Loki), dashboards (Grafana), and alerting (Alertmanager). Instrument your applications with the four golden signals, design alerts that fire on symptoms not causes, and ensure every alert has a clear path to resolution. Start simple with Prometheus and Grafana, then add log aggregation and synthetic monitoring as your infrastructure grows.</p>
-<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/prometheus-deep-dive.html">Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/distributed-tracing.html">Distributed Tracing with OpenTelemetry</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

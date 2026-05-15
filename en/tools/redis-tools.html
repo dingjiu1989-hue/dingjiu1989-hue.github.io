@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Redis Tools: RedisInsight, Redis CLI, Redis Commander — SourceHub</title>
     <meta name="description" content="Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-">
@@ -46,8 +46,8 @@
       "description": "Essential tools for Redis management: RedisInsight for GUI-based visualization and analysis, Redis CLI for command-line operations, and Redis Commander for web-",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1789",
+      "dateModified": "2026-05-15",
+      "wordCount": "1484",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,55 +93,56 @@
         <span class="tag-cat">DevTools</span>
         <span class="tag-cat">Productivity</span></div>
       <h1 class="article-title">Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png" alt="Redis Tools: RedisInsight, Redis CLI, Redis Commander" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h1>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h2>Redis Tools: RedisInsight, Redis CLI, Redis Commander</h2>
+<h3>Introduction</h3>
 <p>Redis is one of the most widely used data stores for caching, session management, message queues, and real-time applications. Managing Redis effectively requires the right tools for visualizing data, profiling performance, and debugging issues. This article covers the essential Redis tools: RedisInsight, the Redis CLI, and web-based administration tools.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/redis-tools.png" alt="Redis Tools: RedisInsight, Redis CLI, Redis Commander" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Redis CLI</h2>
+<h3>Redis CLI</h3>
 <p>The command-line interface is the most fundamental Redis tool, shipped with every Redis installation:</p>
-<h1>Basic commands</h1>
+<h2>Basic commands</h2>
 <p>redis-cli ping # Test connection</p>
 <p>redis-cli info # Server info and statistics</p>
 <p>redis-cli monitor # Real-time command monitoring</p>
 <p>redis-cli --stat # Real-time statistics</p>
-<h1>Key operations</h1>
+<h2>Key operations</h2>
 <p>redis-cli keys "*" # List all keys (avoid in production!)</p>
 <p>redis-cli --scan --pattern "session:*" # Safe key scanning</p>
 <p>redis-cli dbsize # Number of keys in database</p>
-<h1>Value inspection</h1>
+<h2>Value inspection</h2>
 <p>redis-cli type user:123</p>
 <p>redis-cli get user:123</p>
 <p>redis-cli hgetall user:123</p>
 <p>redis-cli smembers "tags:article:456"</p>
-<h1>Performance debugging</h1>
+<h2>Performance debugging</h2>
 <p>redis-cli --bigkeys # Find largest keys</p>
 <p>redis-cli --hotkeys # Find hottest keys (Redis 7+)</p>
 <p>redis-cli slowlog get 10 # Last 10 slow commands</p>
 <p>redis-cli --latency # Connection latency test</p>
 <p>redis-cli --rdb /tmp/dump.rdb # Generate RDB dump</p>
-<h1>Cluster mode</h1>
+<h2>Cluster mode</h2>
 <p>redis-cli -c cluster nodes</p>
 <p>redis-cli -c cluster info</p>
-<h1>With SSL/tls</h1>
+<h2>With SSL/tls</h2>
 <p>redis-cli --tls --cacert ca.crt --cert client.crt --key client.key</p>
 <p><strong>Pipeline mode</strong> for bulk operations:</p>
-<h1>Load data from file</h1>
+<h2>Load data from file</h2>
 <p>cat commands.txt | redis-cli --pipe</p>
-<h1>Generate test data with inline scripting</h1>
+<h2>Generate test data with inline scripting</h2>
 <p>redis-cli --eval script.lua key1 key2 , arg1 arg2</p>
-<h2>RedisInsight</h2>
+<h3>RedisInsight</h3>
 <p>Redis's official GUI tool for visualization and analysis:</p>
 <p><strong>Key features</strong> :</p>
 <ul>
@@ -170,38 +171,38 @@
 <p>Redis Stream management and TRIM operations</p>
 </li>
 </ul>
-<h1>Start RedisInsight</h1>
-<h1>Download from https://redis.com/redis-enterprise/redis-insight/</h1>
-<h1>Or run as Docker container</h1>
+<h2>Start RedisInsight</h2>
+<h2>Download from https://redis.com/redis-enterprise/redis-insight/</h2>
+<h2>Or run as Docker container</h2>
 <p>docker run -d -p 5540:5540 redis/redisinsight:latest</p>
-<h1>Access at http://localhost:5540</h1>
+<h2>Access at http://localhost:5540</h2>
 <p><strong>Workbench</strong> for advanced querying:</p>
-<h1>RedisInsight Workbench supports:</h1>
-<h1>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter</h1>
-<h1>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search</h1>
-<h1>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)</h1>
-<h1>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete</h1>
-<h1>Memory analysis commands</h1>
+<h2>RedisInsight Workbench supports:</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)</h2>
+<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete</h2>
+<h2>Memory analysis commands</h2>
 <p>MEMORY DOCTOR # Get memory optimization suggestions</p>
 <p>MEMORY USAGE user:123 # Memory used by a specific key</p>
 <p>MEMORY STATS # Overall memory statistics</p>
-<h1>Performance analysis</h1>
+<h2>Performance analysis</h2>
 <p>SLOWLOG GET 20 # Most recent slow commands</p>
 <p>CLIENT LIST # Connected clients and their queries</p>
 <p>INFO COMMANDSTATS # Command execution statistics</p>
 <p><strong>Strengths</strong> : Official Redis tool, excellent memory analysis and optimization recommendations, professional data visualization, free.</p>
-<h2>Redis Commander</h2>
+<h3>Redis Commander</h3>
 <p>A web-based Redis management tool built with Node.js:</p>
-<h1>Install globally</h1>
+<h2>Install globally</h2>
 <p>npm install -g redis-commander</p>
-<h1>Start with default settings</h1>
+<h2>Start with default settings</h2>
 <p>redis-commander</p>
-<h1>With custom configuration</h1>
+<h2>With custom configuration</h2>
 <p>redis-commander --redis-host redis.example.com --redis-port 6379</p>
 <p>redis-commander --redis-password yourpassword</p>
-<h1>Docker</h1>
+<h2>Docker</h2>
 <p>docker run -d -p 8081:8081 rediscommander/redis-commander:latest</p>
-<h1>Access at http://localhost:8081</h1>
+<h2>Access at http://localhost:8081</h2>
 <p>// Custom configuration</p>
 <p>{</p>
 <p>"redis": {</p>
@@ -236,48 +237,48 @@
 <p>Connection to multiple Redis instances</p>
 </li>
 </ul>
-<h2>Redis Monitoring with redis-stat</h2>
-<h1>Install via gem</h1>
+<h3>Redis Monitoring with redis-stat</h3>
+<h2>Install via gem</h2>
 <p>gem install redis-stat</p>
-<h1>Run monitoring dashboard</h1>
+<h2>Run monitoring dashboard</h2>
 <p>redis-stat --server=6379 1 # 1 second refresh interval</p>
-<h1>Run on headless server</h1>
+<h2>Run on headless server</h2>
 <p>redis-stat --daemon --server=redis:6379 5</p>
-<h2>Production Usage</h2>
-<h1>!/bin/bash</h1>
-<h1>Redis production health check script</h1>
+<h3>Production Usage</h3>
+<h2>!/bin/bash</h2>
+<h2>Redis production health check script</h2>
 <p>echo "=== Redis Health Check ==="</p>
 <p>echo ""</p>
-<h1>Connection test</h1>
+<h2>Connection test</h2>
 <p>echo "Ping: $(redis-cli ping)"</p>
-<h1>Memory usage</h1>
+<h2>Memory usage</h2>
 <p>MEM=$(redis-cli info memory | grep "used_memory_human" | cut -d: -f2)</p>
 <p>MAXMEM=$(redis-cli info memory | grep "maxmemory_human" | cut -d: -f2)</p>
 <p>echo "Memory: $MEM / $MAXMEM"</p>
-<h1>Key count</h1>
+<h2>Key count</h2>
 <p>KEYS=$(redis-cli dbsize)</p>
 <p>echo "Total keys: $KEYS"</p>
-<h1>Connected clients</h1>
+<h2>Connected clients</h2>
 <p>CLIENTS=$(redis-cli info clients | grep "connected_clients" | cut -d: -f2)</p>
 <p>echo "Clients: $CLIENTS"</p>
-<h1>Commands per second</h1>
+<h2>Commands per second</h2>
 <p>OPS=$(redis-cli info stats | grep "instantaneous_ops_per_sec" | cut -d: -f2)</p>
 <p>echo "Operations/sec: $OPS"</p>
-<h1>Hit rate</h1>
+<h2>Hit rate</h2>
 <p>HITS=$(redis-cli info stats | grep "keyspace_hits" | cut -d: -f2)</p>
 <p>MISSES=$(redis-cli info stats | grep "keyspace_misses" | cut -d: -f2)</p>
 <p>if [ "$HITS" -gt 0 ] || [ "$MISSES" -gt 0 ]; then</p>
 <p>RATE=$(echo "scale=2; $HITS / ($HITS + $MISSES) * 100" | bc)</p>
 <p>echo "Hit rate: ${RATE}%"</p>
 <p>fi</p>
-<h2>Comparison</h2>
+<h3>Comparison</h3>
 <p>| Tool | Type | Best For | Complexity |</p>
 <p>|------|------|----------|------------|</p>
 <p>| Redis CLI | CLI | Quick operations, scripting | Low |</p>
 <p>| RedisInsight | GUI | Visual exploration, memory analysis | Medium |</p>
 <p>| Redis Commander | Web GUI | Lightweight management | Low |</p>
 <p>| redis-stat | CLI dashboard | Real-time monitoring | Low |</p>
-<h2>Recommendations</h2>
+<h3>Recommendations</h3>
 <ul>
 <li>
 <p><strong>Daily operations</strong> : Redis CLI for quick commands and scripting.</p>
@@ -296,7 +297,8 @@
 </li>
 </ul>
 <p>The most effective setup combines the Redis CLI for scripting and automation with RedisInsight for data visualization and memory optimization. Use Redis Commander for lightweight web-based access when a desktop GUI is not available.</p>
-<p><strong>See also:</strong> <a href="/en/tools/reverse-engineering.html">Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tools/reverse-engineering.html">Reverse Engineering Tools: Ghidra, IDA Free, radare2, Binary Ninja</a>, <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/productivity-tools.html">Developer Productivity Tools: Essential Toolkit for 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/command-line-productivity.html">Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit</a>, <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

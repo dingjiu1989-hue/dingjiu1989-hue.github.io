@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration-guide.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Nginx Configuration Guide — SourceHub</title>
     <meta name="description" content="Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing.">
@@ -46,8 +46,8 @@
       "description": "Master Nginx configuration with practical examples for reverse proxying, SSL, caching, rate limiting, and load balancing.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration-guide.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1704",
+      "dateModified": "2026-05-10",
+      "wordCount": "1425",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">Programming</span>
         <span class="tag-cat">DevOps</span></div>
       <h1 class="article-title">Nginx Configuration Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration-guide.png" alt="Nginx Configuration Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
-<h1>Nginx Configuration Guide</h1>
+      <div class="article-body"><h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
+<h2>Nginx Configuration Guide</h2>
 <p>Nginx is the most widely used web server and reverse proxy in production. Its event-driven architecture handles thousands of concurrent connections with minimal resource usage. This guide covers essential Nginx configuration patterns for production deployments.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/nginx-configuration-guide.png" alt="Nginx Configuration Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Core Configuration Structure</h2>
+<h3>Core Configuration Structure</h3>
 <p>Every Nginx configuration follows a hierarchical structure:</p>
 <p>/etc/nginx/</p>
 <p>nginx.conf # Main configuration</p>
@@ -137,7 +138,7 @@
 <p>include /etc/nginx/sites-enabled/*;</p>
 <p>}</p>
 <p>Set <code>worker_processes</code> to <code>auto</code> to match the number of CPU cores. <code>worker_connections</code> controls how many simultaneous connections each worker handles.</p>
-<h2>HTTP Server Block</h2>
+<h3>HTTP Server Block</h3>
 <p>A basic server block for a static site:</p>
 <p>server {</p>
 <p>listen 80;</p>
@@ -153,7 +154,7 @@
 <p>add_header Cache-Control "public, immutable";</p>
 <p>}</p>
 <p>}</p>
-<h2>Reverse Proxy Configuration</h2>
+<h3>Reverse Proxy Configuration</h3>
 <p>Nginx excels as a reverse proxy for application servers:</p>
 <p>server {</p>
 <p>listen 80;</p>
@@ -171,7 +172,7 @@
 <p>}</p>
 <p>}</p>
 <p>Always set the <code>X-Forwarded-*</code> headers so upstream applications know the client's real IP and protocol. The <code>proxy_http_version 1.1</code> and <code>Upgrade</code> headers are required for WebSocket support.</p>
-<h2>SSL/TLS with Let's Encrypt</h2>
+<h3>SSL/TLS with Let's Encrypt</h3>
 <p>Secure your sites with modern TLS configuration:</p>
 <p>server {</p>
 <p>listen 443 ssl http2;</p>
@@ -192,7 +193,7 @@
 <p>return 301 https://$server_name$request_uri;</p>
 <p>}</p>
 <p>TLSv1.3 should be preferred when available. The HTTP redirect ensures all traffic uses HTTPS. HSTS headers tell browsers to always use HTTPS for your domain.</p>
-<h2>Rate Limiting</h2>
+<h3>Rate Limiting</h3>
 <p>Protect your application from abuse:</p>
 <p>http {</p>
 <p>limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;</p>
@@ -206,7 +207,7 @@
 <p>}</p>
 <p>}</p>
 <p>The <code>limit_req_zone</code> defines a shared memory zone for tracking request rates. A burst of 20 allows short spikes above the 10 requests-per-second limit.</p>
-<h2>Load Balancing</h2>
+<h3>Load Balancing</h3>
 <p>Distribute traffic across multiple upstream servers:</p>
 <p>upstream backend {</p>
 <p>least_conn;</p>
@@ -220,7 +221,7 @@
 <p>}</p>
 <p>}</p>
 <p>Use <code>least_conn</code> for variable-length requests, <code>ip_hash</code> for session persistence, or the default round-robin for identical workloads. The <code>backup</code> server only receives traffic when all primary servers are down.</p>
-<h2>Caching Static Content</h2>
+<h3>Caching Static Content</h3>
 <p>Cache proxied responses to reduce backend load:</p>
 <p>http {</p>
 <p>proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=static:10m max_size=1g inactive=60m;</p>
@@ -235,14 +236,14 @@
 <p>}</p>
 <p>}</p>
 <p>The <code>proxy_cache_use_stale</code> directive serves stale content when the backend is unreachable, preventing error pages during brief outages.</p>
-<h2>Security Headers</h2>
+<h3>Security Headers</h3>
 <p>Add security headers to all responses:</p>
 <p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
 <p>add_header X-Content-Type-Options "nosniff" always;</p>
 <p>add_header X-XSS-Protection "0" always;</p>
 <p>add_header Referrer-Policy "strict-origin-when-cross-origin" always;</p>
 <p>add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;</p>
-<h2>Logging Configuration</h2>
+<h3>Logging Configuration</h3>
 <p>Customize log formats for better debugging:</p>
 <p>log_format json escape=json '{'</p>
 <p>'"time": "$time_local",'</p>
@@ -256,9 +257,10 @@
 <p>'}';</p>
 <p>access_log /var/log/nginx/access.log json buffer=32k flush=5s;</p>
 <p>JSON-formatted logs are parseable by log aggregation tools like Loki, Elasticsearch, or Datadog.</p>
-<h2>Summary</h2>
+<h3>Summary</h3>
 <p>Nginx is a versatile tool that serves as web server, reverse proxy, load balancer, and TLS termination point. Master these configuration patterns -- server blocks, reverse proxying, SSL termination, rate limiting, and caching -- and you can handle the majority of production deployment scenarios. Always test configuration changes with <code>nginx -t</code> before reloading.</p>
-<p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/api-gateway-implementation.html">API Gateway Implementation Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

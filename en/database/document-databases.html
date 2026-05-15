@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document storage.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/document-databases.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-06">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Document Databases: MongoDB, CouchDB, Firestore — SourceHub</title>
     <meta name="description" content="Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document storage.">
@@ -46,8 +46,8 @@
       "description": "Compare document databases: MongoDB, CouchDB, and Firestore for flexible schema and JSON document storage.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/document-databases.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "736",
+      "dateModified": "2026-05-06",
+      "wordCount": "711",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,35 +90,37 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Document Databases: MongoDB, CouchDB, Firestore</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/document-databases.png" alt="Document Databases: MongoDB, CouchDB, Firestore" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
-<h1>Document Databases: MongoDB, CouchDB, Firestore</h1>
+      <div class="article-body"><h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
+<h2>Document Databases: MongoDB, CouchDB, Firestore</h2>
 <p>Document databases store data as flexible, self-describing documents (typically JSON or BSON). Unlike relational databases with rigid schemas, document databases allow different documents in the same collection to have different fields. This flexibility makes them popular for rapid development and evolving data models.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/document-databases.png" alt="Document Databases: MongoDB, CouchDB, Firestore" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>MongoDB</h2>
+<h3>MongoDB</h3>
 <p>MongoDB is the most popular document database. It stores documents in BSON format, supports rich queries, secondary indexes, aggregation pipelines, and change streams. MongoDB Atlas provides a managed cloud service with automated scaling and backups.</p>
 <p>MongoDB's document model allows embedding related data within a single document, reducing the need for joins. This works well for one-to-many relationships but leads to data duplication for many-to-many relationships.</p>
-<h2>CouchDB</h2>
+<h3>CouchDB</h3>
 <p>CouchDB uses a different philosophy. It stores JSON documents and uses MapReduce views for querying. Its multi-master replication makes it excellent for offline-first applications and environments with unreliable connectivity.</p>
 <p>CouchDB's conflict resolution model allows multiple replicas to accept writes independently. Conflicts are detected during replication and stored as conflicting revisions. The application resolves conflicts at read time.</p>
-<h2>Firestore</h2>
+<h3>Firestore</h3>
 <p>Firestore is Google's serverless document database. It provides real-time synchronization, automatic scaling, and strong consistency guarantees. The real-time listener feature makes it ideal for collaborative applications where multiple clients watch the same data.</p>
 <p>Firestore pricing is based on read, write, and delete operations rather than compute resources. This makes it cost-effective for variable workloads but expensive for read-heavy analytical queries.</p>
-<h2>When to Choose Document Databases</h2>
+<h3>When to Choose Document Databases</h3>
 <p>Choose document databases when your data has a natural document structure, when the schema evolves frequently, or when you need to store heterogeneous data in a single collection. They excel at content management, user profiles, product catalogs, and real-time collaborative applications.</p>
 <p>Avoid document databases when you need complex joins across multiple data types, when data integrity constraints are critical (no foreign keys), or when you need strict ACID transactions across multiple collections.</p>
-<h2>Performance Considerations</h2>
+<h3>Performance Considerations</h3>
 <p>Document databases typically outperform relational databases for read-heavy workloads with embedded data. Write performance is similar. Complex aggregation queries may perform worse than SQL equivalents. Plan for appropriate indexing strategy—unindexed queries trigger collection scans.</p>
-<p><strong>See also:</strong> <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/json-in-postgresql.html">JSON in PostgreSQL: JSONB vs JSON, Indexing, and Operations</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

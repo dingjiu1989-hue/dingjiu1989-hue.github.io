@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/etl-pipelines.html
 
 # Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
 
-# Building ETL Pipelines: A Practical Guide
+## Building ETL Pipelines: A Practical Guide
+
+## Building ETL Pipelines: A Practical Guide
 
 ETL Pipeline Fundamentals 
 
@@ -99,5 +101,7 @@ Conclusion
 Choose batch for simplicity and streaming for real-time needs. Use Airflow for orchestration and dbt for transformations. Implement data quality checks at every stage. Design for idempotency and incremental loads.
 
 **See also:** [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>).
+
+**See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)
 
 **See also:** [Data Warehousing Concepts and Modern Tools](</en/database/data-warehousing.html>), [Database Indexing Strategies](</en/database/database-indexing.html>), [NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)](</en/database/nosql-databases-guide.html>)

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/graph-databases.html
 
 # Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
-# Graph Databases (Neo4j, Dgraph, ArangoDB)
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
+
+## Graph Databases (Neo4j, Dgraph, ArangoDB)
 
 Graph Database Fundamentals 
 
@@ -73,5 +75,7 @@ Conclusion
 Choose Neo4j for mature graph capabilities and Cypher. Choose ArangoDB for multi-model flexibility. Use property graphs for applications and RDF for semantic web workloads.
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Data Lake vs Data Warehouse vs Lakehouse](</en/database/data-lake-vs-warehouse.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>).
+
+**See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>)
 
 **See also:** [Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)](</en/database/time-series-databases.html>), [Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)](</en/database/full-text-search.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>)

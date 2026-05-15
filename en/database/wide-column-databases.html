@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/wide-column-databases.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-04">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Wide-Column Databases: Cassandra, HBase, ScyllaDB — SourceHub</title>
     <meta name="description" content="Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.">
@@ -46,8 +46,8 @@
       "description": "Explore wide-column databases: Cassandra for high-throughput writes, HBase for Hadoop ecosystems, and ScyllaDB.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/wide-column-databases.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "722",
+      "dateModified": "2026-05-04",
+      "wordCount": "687",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,35 +90,37 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/wide-column-databases.png" alt="Wide-Column Databases: Cassandra, HBase, ScyllaDB" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
-<h1>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h1>
+      <div class="article-body"><h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
+<h2>Wide-Column Databases: Cassandra, HBase, ScyllaDB</h2>
 <p>Wide-column databases store data in rows with a variable number of columns. Unlike relational databases where every row has the same columns, wide-column stores treat columns as part of the data model. This design optimizes for high-throughput writes and large-scale analytical workloads.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/wide-column-databases.png" alt="Wide-Column Databases: Cassandra, HBase, ScyllaDB" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Cassandra</h2>
+<h3>Cassandra</h3>
 <p>Apache Cassandra is the most widely deployed wide-column database. It offers linear scalability, no single point of failure, and tunable consistency. Cassandra's data model uses partition keys for distribution and clustering columns for ordering within a partition.</p>
 <p>Cassandra excels at write-heavy workloads. Write throughput scales linearly as nodes are added. It is commonly used for time-series data, IoT sensor data, messaging systems, and recommendation engines.</p>
-<h2>ScyllaDB</h2>
+<h3>ScyllaDB</h3>
 <p>ScyllaDB is a Cassandra-compatible database written in C++ instead of Java. It claims 10x better performance per node through CPU affinity, asynchronous I/O, and a shared-nothing architecture. ScyllaDB maintains Cassandra wire protocol compatibility.</p>
 <p>ScyllaDB's performance advantage is most apparent on modern hardware with many cores and NVMe drives. Each core manages its own portion of data, eliminating contention. The trade-off is operational complexity—ScyllaDB requires careful hardware selection.</p>
-<h2>HBase</h2>
+<h3>HBase</h3>
 <p>HBase is built on top of HDFS (Hadoop Distributed File System). It provides strong consistency and integrates deeply with the Hadoop ecosystem. HBase is commonly used for real-time access to large datasets that also support MapReduce or Spark jobs.</p>
 <p>HBase's architecture uses a master node (HMaster) managing region servers. Automatic failover and region splitting reduce operational overhead. However, HBase is complex to operate and requires significant Hadoop infrastructure.</p>
-<h2>Data Modeling for Wide-Column Stores</h2>
+<h3>Data Modeling for Wide-Column Stores</h3>
 <p>Wide-column data modeling differs fundamentally from relational modeling. Design tables around query patterns, not entities. Denormalize aggressively. Duplicate data across tables for different access patterns.</p>
 <p>The primary key design determines query efficiency. Cassandra queries can only filter by partition key (equality) or clustering columns (range). Queries that do not filter by partition key require full table scans.</p>
-<h2>When to Choose Wide-Column Databases</h2>
+<h3>When to Choose Wide-Column Databases</h3>
 <p>Use Cassandra or ScyllaDB for high-throughput write workloads, multi-region deployments, and time-series data. Use HBase when already invested in the Hadoop ecosystem and strong consistency is required. Avoid wide-column databases for complex analytical queries, ad-hoc reporting, or highly relational data.</p>
-<p><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/key-value-stores.html">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/key-value-stores.html">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/key-value-stores.html">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/key-value-stores.html">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/nosql-guide.html">NoSQL Databases Guide</a>, <a href="/en/database/key-value-stores.html">Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

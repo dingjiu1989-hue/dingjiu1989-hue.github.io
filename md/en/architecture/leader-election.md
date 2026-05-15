@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/leader-election.html
 
 # Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
 
-# Leader Election in Distributed Systems
+## Leader Election in Distributed Systems
+
+## Leader Election in Distributed Systems
 
 Leader election is the mechanism by which distributed systems select a single node to coordinate work or make decisions on behalf of the group. It is essential for systems where exactly one node must perform certain operations — assigning monotonically increasing sequence numbers, performing periodic maintenance, or managing group membership changes. The leader must be unique at any time, and the system must remain available despite leader failures. 
 
@@ -51,5 +53,7 @@ The scope of leader responsibilities must be clearly defined. A single leader pe
 Observability of leadership state is essential. Expose leadership status as a metric. Log leadership transitions with reasons (startup, lease expiry, voluntary stepdown, failure). Alert on frequent transitions or extended periods without a leader. Monitor the time between leader failure and new leader election — this recovery time is the window of unavailability for leader-dependent operations.
 
 **See also:** [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Scheduler Supervisor Pattern](</en/architecture/scheduler-supervisor.html>), [Caching Strategies](</en/architecture/cache-strategies.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Consensus Algorithms: Paxos, Raft, Zab](</en/architecture/consensus-algorithms.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)

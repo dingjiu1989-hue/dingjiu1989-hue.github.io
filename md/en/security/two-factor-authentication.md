@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/two-factor-authentication.htm
 
 # Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
 
-# Two-Factor Authentication Guide
+## Two-Factor Authentication Guide
+
+## Two-Factor Authentication Guide
 
 Why 2FA Matters 
 
@@ -134,7 +136,7 @@ def send_sms_code(phone_number):
 
 code = ''.join(random.choices('0123456789', k=6))
 
-# Store code with expiry in Redis
+## Store code with expiry in Redis
 
 redis.setex(f"2fa:{phone_number}", 300, code)
 
@@ -270,5 +272,7 @@ Summary
 Implement TOTP as the primary 2FA method, supplement with backup codes for recovery, and offer WebAuthn/passkeys as an upgrade path for security-conscious users. Always rate limit 2FA endpoints, hash backup codes before storage, and provide clear recovery workflows. SMS-based 2FA is better than no 2FA but should be deprecated in favor of app-based or hardware-based authenticators.
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [Encryption at Rest Guide](</en/security/encryption-at-rest.html>).
+
+**See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)
 
 **See also:** [MFA Implementation](</en/security/mfa-implementation.html>), [API Rate Limiting Implementation](</en/security/api-rate-limiting.html>), [RBAC Authorization Implementation](</en/security/rbac-authorization.html>)

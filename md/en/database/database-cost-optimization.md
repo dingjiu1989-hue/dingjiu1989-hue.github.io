@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-cost-optimization.ht
 
 # Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
-# Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
+
+## Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering
 
 Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering 
 
@@ -83,17 +85,17 @@ In cloud environments, monitor CloudWatch (AWS), Azure Monitor, or GCP Cloud Mon
 
 The Sizing Process 
 
-# Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)
+## Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)
 
-# After monitoring for 2 weeks:
+## After monitoring for 2 weeks:
 
-# Peak CPU: 25%, average CPU: 12%
+## Peak CPU: 25%, average CPU: 12%
 
-# Peak connections: 40 of 200
+## Peak connections: 40 of 200
 
-# Storage used: 120 GB
+## Storage used: 120 GB
 
-# Optimized: 4 vCPU, 16 GB RAM, 150 GB gp3 ($200/month - 71% savings)
+## Optimized: 4 vCPU, 16 GB RAM, 150 GB gp3 ($200/month - 71% savings)
 
 Reserved Instances 
 
@@ -180,9 +182,9 @@ Serverless databases (Aurora Serverless, Cloud SQL, Azure Serverless) scale comp
 
 Aurora Serverless v2 
 
-# Automatic scaling from 0.5 to 64 ACUs
+## Automatic scaling from 0.5 to 64 ACUs
 
-# 1 ACU = ~2 GB RAM, proportional CPU
+## 1 ACU = ~2 GB RAM, proportional CPU
 
 aurora:
 
@@ -255,7 +257,7 @@ ORDER BY wasted_bytes DESC;
 
 Set up cloud cost budgets and alerts: 
 
-# AWS Budget example
+## AWS Budget example
 
 aws budgets create-budget \
 
@@ -263,10 +265,12 @@ aws budgets create-budget \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget file://budget.json
 
-# Alert at 80% and 100% of monthly budget
+## Alert at 80% and 100% of monthly budget
 
 Database cost optimization is an ongoing practice, not a one-time project. Review your database costs quarterly, right-size based on actual usage patterns, and leverage cloud provider discounts for predictable workloads.
 
 **See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>).
+
+**See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)
 
 **See also:** [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>), [Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST](</en/database/database-compression.html>), [Database Horizontal Scaling Strategies](</en/database/database-horizontal-scaling.html>)

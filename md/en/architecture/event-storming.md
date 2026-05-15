@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-storming.html
 
 # Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
 
-# Event Storming
+## Event Storming
+
+## Event Storming
 
 Event Storming is a collaborative workshop technique for exploring complex business domains. Created by Alberto Brandolini, it brings together domain experts, developers, and stakeholders to model business processes using colored sticky notes on a large wall. The technique is remarkably effective at surfacing domain knowledge, discovering inconsistencies, and designing software that aligns with business needs. 
 
@@ -71,5 +73,7 @@ Benefits and Outcomes
 Event Storming produces several valuable outcomes: a shared understanding of the domain, identified bounded contexts, surfaced assumptions and inconsistencies, prioritized questions for further investigation, and a concrete model that translates directly into software design. The process is as valuable as the output—the conversations and discoveries during the workshop build team alignment that persists throughout the project.
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Modular Monolith Architecture](</en/architecture/modular-monolith.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>).
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)
 
 **See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>)

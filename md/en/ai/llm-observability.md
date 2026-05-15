@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-observability.html
 
 # LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
-# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+
+## LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
 
 Production LLM applications fail in ways traditional monitoring does not capture. You need observability that tracks prompts, responses, tokens, latency, and costs across every model call. Here is the LLM observability framework.
 
-## Why LLM Observability Is Different
+### Why LLM Observability Is Different
 
 Traditional application monitoring tracks request volume, error rates, and response times. LLM applications need all of that plus token counts, model versions, prompt templates, and generation parameters.
 
@@ -42,7 +44,7 @@ LLM failures are subtle. The API returns 200 OK, but the response is hallucinate
 
 LLM costs are non-trivial. A single GPT-4 call can cost cents, but thousands of calls per day add up to real money. Without token tracking, you cannot attribute costs to users, features, or prompt templates.
 
-## Tracing LLM Calls
+### Tracing LLM Calls
 
 Distributed tracing for LLM applications should capture the full lifecycle of each request: the user input, the system prompt, any retrieved context, the model parameters, the response, and post-processing.
 
@@ -52,7 +54,7 @@ Instrument your LLM calls with OpenTelemetry. Add spans for each stage: retrieva
 
 Use an observability platform that supports LLM-specific data. LangSmith, Weights and Biases, and Arize AI offer LLM observability features. Open-source alternatives include Langfuse and Helicone.
 
-## Token Tracking
+### Token Tracking
 
 Token usage is the currency of LLM applications. Track input tokens, output tokens, and total tokens for every call. This is the basis for cost calculation and capacity planning.
 
@@ -62,7 +64,7 @@ Track token usage trends over time. If token consumption per request is increasi
 
 Monitor token limits. If your output frequently gets truncated because it exceeds max_tokens, your use case needs either longer context or shorter responses. Both are actionable signals.
 
-## Latency Monitoring
+### Latency Monitoring
 
 LLM latency varies wildly. Same model, same prompt, same token count can take 500 milliseconds or 5 seconds depending on server load and request queuing.
 
@@ -72,7 +74,7 @@ Set latency budgets per feature. A chatbot needs responses in under 2 seconds. A
 
 Monitor percentile latency, not averages. P50 might be 1 second while P95 is 8 seconds, which means one in twenty users has a terrible experience. Optimize for P95 and P99.
 
-## Cost Attribution
+### Cost Attribution
 
 Cost attribution answers the question: where is the money going? Tag every LLM call with metadata: feature name, user ID, model name, and prompt template version. This lets you slice costs by any dimension.
 
@@ -82,7 +84,7 @@ Set cost alerts per feature. If a feature suddenly doubles in cost, something ch
 
 Track cost per user session. A user that generates $2 in LLM costs per session needs to generate at least that much in revenue or value. Unprofitable user segments might need different pricing or feature limits.
 
-## Alerting and Incident Response
+### Alerting and Incident Response
 
 Define alert thresholds for the metrics that matter. Response time exceeds 5 seconds for P95. Error rate exceeds 2%. Cost per day exceeds a threshold. Tokens per request exceed expected range.
 
@@ -93,5 +95,7 @@ Build runbooks for common LLM failures. Model down: failover to a fallback model
 LLM observability is not optional for production applications. Start with basic token and latency tracking, add tracing for critical paths, and expand gradually. The cost of observability is a fraction of the cost of undetected LLM failures.
 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>).
+
+**See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)
 
 **See also:** [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>), [AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging](</en/ai/ai-gateway.html>), [AI API Gateway: Load Balancing, Fallback, Cost Tracking, Observability](</en/ai/ai-api-gateway.html>)

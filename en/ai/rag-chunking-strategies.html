@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-06">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting — SourceHub</title>
     <meta name="description" content="Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete">
@@ -46,8 +46,8 @@
       "description": "Master document chunking for RAG pipelines: semantic chunking with embeddings, overlapping strategies for context preservation, and recursive splitting for hete",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1397",
+      "dateModified": "2026-04-06",
+      "wordCount": "1265",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,23 +93,24 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png" alt="RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h1>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h2>RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</h2>
+<h3>Introduction</h3>
 <p>Document chunking is the foundation of any RAG system. How you split documents into chunks directly determines retrieval quality: chunks that are too small lose context, chunks that are too large dilute relevance, and naive splits break semantic units mid-thought. This article covers the major chunking strategies and when to use each.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/rag-chunking-strategies.png" alt="RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Naive Fixed-Size Chunking</h2>
+<h3>Naive Fixed-Size Chunking</h3>
 <p>The simplest approach splits text every N characters or tokens:</p>
 <p>def fixed_size_chunks(text: str, chunk_size: int = 512, overlap: int = 64) -&gt; list[str]:</p>
 <p>chunks = []</p>
@@ -121,7 +122,7 @@
 <p>start = end - overlap</p>
 <p>return chunks</p>
 <p>Fixed-size chunking is fast and predictable. However, it frequently splits in the middle of sentences, paragraphs, or code blocks, producing chunks that are semantically incomplete. Use it only for homogeneous text where content quality is not critical.</p>
-<h2>Recursive Character Text Splitter</h2>
+<h3>Recursive Character Text Splitter</h3>
 <p>LangChain's RecursiveCharacterTextSplitter tries to split on natural boundaries first, falling back to smaller separators:</p>
 <p>from langchain.text_splitter import RecursiveCharacterTextSplitter</p>
 <p>splitter = RecursiveCharacterTextSplitter(</p>
@@ -132,7 +133,7 @@
 <p>)</p>
 <p>chunks = splitter.split_text(long_document)</p>
 <p>The algorithm tries each separator in order. It first attempts to split on paragraph boundaries (<code>\n\n</code>). If a paragraph exceeds the chunk size, it splits on line breaks, then sentences, then spaces. This preserves as much natural structure as possible.</p>
-<h2>Semantic Chunking</h2>
+<h3>Semantic Chunking</h3>
 <p>Semantic chunking uses embedding similarity to detect natural boundaries:</p>
 <p>import numpy as np</p>
 <p>from sentence_transformers import SentenceTransformer</p>
@@ -142,7 +143,7 @@
 <p>chunks = []</p>
 <p>current_chunk = [sentences[0]]</p>
 <p>for i in range(1, len(sentences)):</p>
-<h1>Encode as we go</h1>
+<h2>Encode as we go</h2>
 <p>emb_current = model.encode(" ".join(current_chunk[-3:]))</p>
 <p>emb_next = model.encode(sentences[i])</p>
 <p>similarity = cosine_similarity(emb_current, emb_next)</p>
@@ -155,7 +156,7 @@
 <p>chunks.append(" ".join(current_chunk))</p>
 <p>return chunks</p>
 <p>Semantic chunking produces chunks that are internally coherent: each chunk discusses a single topic. The threshold controls chunk granularity. Lower values create larger chunks with more context; higher values create smaller, tighter chunks.</p>
-<h2>Chunking by Document Structure</h2>
+<h3>Chunking by Document Structure</h3>
 <p>When documents have known structures (headings, sections), use the structure to define chunks:</p>
 <p>import re</p>
 <p>def structure_aware_chunk(markdown_text: str) -&gt; list[dict]:</p>
@@ -177,7 +178,7 @@
 <p>chunks.append(current_section)</p>
 <p>return chunks</p>
 <p>Structure-aware chunking preserves document hierarchy. Each chunk retains a heading reference, enabling richer retrieval context and more accurate citation.</p>
-<h2>Sliding Window with Overlap</h2>
+<h3>Sliding Window with Overlap</h3>
 <p>Overlap between adjacent chunks prevents information loss at boundaries:</p>
 <p>def sliding_window_chunks(text: str, window: int = 512, stride: int = 384) -&gt; list[str]:</p>
 <p>chunks = []</p>
@@ -185,7 +186,7 @@
 <p>chunks.append(text[i:i + window])</p>
 <p>return chunks</p>
 <p>A 512-token window with 384-token stride means each adjacent pair overlaps by 128 tokens. This ensures that no query misses context that spans a chunk boundary. The trade-off is increased storage and more chunks to search.</p>
-<h2>Choosing the Right Strategy</h2>
+<h3>Choosing the Right Strategy</h3>
 <p>| Strategy | Best For | Pros | Cons |</p>
 <p>|----------|----------|------|------|</p>
 <p>| Fixed-size | Simple docs, testing | Fast, predictable | Breaks sentences |</p>
@@ -193,9 +194,10 @@
 <p>| Semantic | Narrative text | Topic coherence | Slower, model-dependent |</p>
 <p>| Structure-aware | Markdown, HTML, code | Preserves hierarchy | Requires structured input |</p>
 <p>| Sliding window | Dense technical docs | No information loss | More chunks, overlap |</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Chunking strategy is one of the highest-leverage decisions in RAG system design. Start with recursive character splitting for general use, add structure-aware splitting for documents with clear hierarchy, and adopt semantic chunking when topic coherence is critical. Always include overlap to prevent boundary information loss, and measure retrieval recall on your specific document types to validate your choice.</p>
-<p><strong>See also:</strong> <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multi-modal-rag.html">Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/embeddings-techniques.html">Embeddings: Techniques and Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

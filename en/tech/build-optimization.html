@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/build-optimization.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-03">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>Build Optimization — SourceHub</title>
     <meta name="description" content="Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation">
@@ -46,8 +46,8 @@
       "description": "Explore build optimization: caching, parallelism, incremental builds, distcc, and strategies for faster compilation",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/build-optimization.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1184",
+      "dateModified": "2026-05-03",
+      "wordCount": "1099",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,47 +93,49 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Build Optimization</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/build-optimization.png" alt="Build Optimization" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
-<h1>Build Optimization</h1>
+      <div class="article-body"><h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
+<h2>Build Optimization</h2>
 <p>Build speed directly affects developer productivity. Slow builds break flow, reduce iteration speed, and discourage best practices like running tests before committing. This article examines build optimization strategies across different languages and tools.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/build-optimization.png" alt="Build Optimization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Build Caching</h2>
+<h3>Build Caching</h3>
 <p>Build caching stores the output of build steps that have not changed. When a source file changes, the build system only recompiles the affected parts, reusing cached results for everything else. Effective caching is the highest-impact optimization.</p>
 <p>Incremental compilation is the most basic form of caching. Compilers track which source files have changed and only recompile those files and their dependents. TypeScript, Rust, Go, and modern Java compilers all support incremental compilation.</p>
 <p>Build systems like Bazel, Buck, and Nx take caching further. They hash inputs to each build action and reuse cached results when inputs are identical. This allows caching across different developers and CI runs. A developer's build can reuse results from a CI build if the inputs are identical. This dramatically reduces build times for large projects.</p>
-<h2>Parallelism</h2>
+<h3>Parallelism</h3>
 <p>Modern machines have multiple CPU cores. Build systems that fully utilize available cores complete builds faster than sequential systems. Parallelism operates at multiple levels: independent build targets can be built concurrently, and individual compilation units can be compiled in parallel.</p>
 <p>Make and Ninja handle parallelism at the target level with the <code>-j</code> flag specifying the number of parallel jobs. Typically, this is set to the number of CPU cores plus one. Rust's Cargo and Go's compiler automatically parallelize compilation of independent packages.</p>
 <p>Parallelism has diminishing returns. Beyond a certain point (typically 2-4x the core count), adding more parallel jobs increases context switching overhead without improving throughput. Each project has an optimal parallelism level.</p>
-<h2>Incremental Builds</h2>
+<h3>Incremental Builds</h3>
 <p>Incremental builds rebuild only the parts of the project that changed, reusing previous build outputs for unchanged parts. This is distinct from caching—incremental builds track file-level changes rather than action-level hashes.</p>
 <p>Incremental compilation in TypeScript uses <code>--incremental</code> and <code>--tsBuildInfoFile</code> flags. Rust's Cargo compiles only changed crates. Go compiles only changed packages. Modern Java compilers (javac since JDK 9) support incremental compilation in most IDEs.</p>
 <p>The incremental build speedup depends on the change scope. A single-file change in a large project should rebuild in seconds rather than minutes. If incremental builds are slow, investigate whether changes to common dependencies are triggering widespread rebuilds.</p>
-<h2>Distributed Compilation</h2>
+<h3>Distributed Compilation</h3>
 <p>For very large projects, distributed compilation spreads compilation across multiple machines. distcc (for C/C++), Bazel's remote execution, and IncrediBuild distribute compilation tasks to a pool of worker machines.</p>
 <p>Distributed compilation is effective when compilation is CPU-bound and the network is fast enough that distribution overhead is less than the compilation time saved. It is less effective for projects where compilation is I/O-bound or link-time dominates.</p>
 <p>Remote caching (using shared storage for build artifacts) is often more practical than remote execution. Turborepo and Nx provide remote caching for JavaScript/TypeScript builds. Bazel and BuildBuddy provide remote caching for polyglot builds. Remote caching requires significant shared storage but avoids the complexity of remote execution.</p>
-<h2>Build Tool Selection</h2>
+<h3>Build Tool Selection</h3>
 <p>The choice of build tool affects optimization options. Modern build tools like Turborepo, Nx, Bazel, and Pants offer built-in caching, parallelism, and distributed build support. Traditional tools like Make, Gradle, and Webpack have plugin ecosystems for optimization.</p>
 <p>JavaScript/TypeScript projects benefit from Turborepo (monorepo caching) or Nx (comprehensive build orchestration). Rust projects use Cargo's built-in incremental compilation. Go projects benefit from the compiler's fast incremental compilation. Java projects use Gradle's build cache.</p>
-<h2>Practical Steps</h2>
+<h3>Practical Steps</h3>
 <p>The first optimization step is measuring current build times. Identify which parts of the build are slowest. Apply the highest-impact optimizations first: enable incremental compilation, configure build caching, and increase parallelism.</p>
 <p>Optimize before scaling up build infrastructure. A project that compiles in 30 seconds does not need distributed compilation. A project that compiles in 30 minutes should be optimized at the project level before investing in distributed build infrastructure.</p>
 <p>Monitor build times in CI. Track trends over time. A gradual increase in build times indicates accumulating complexity that needs attention before it becomes a crisis. Set build time budgets and alert when they are exceeded.</p>
 <p>Build optimization is an ongoing investment. As projects grow, build systems that were once fast become slow. Regular measurement and incremental improvements keep builds fast and developers productive.</p>
-<p><strong>See also:</strong> <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/web-performance-optimization.html">Web Performance Optimization Techniques 2026</a>, <a href="/en/tech/distributed-caching.html">Distributed Caching</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/log-management.html">Log Management</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

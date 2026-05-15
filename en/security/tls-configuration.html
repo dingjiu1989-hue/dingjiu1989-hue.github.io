@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-06">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>TLS Configuration Guide — SourceHub</title>
     <meta name="description" content="Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.">
@@ -46,8 +46,8 @@
       "description": "Practical TLS configuration guide covering cipher suites, HSTS, certificate pinning, TLS 1.3, and testing with SSL Labs.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1242",
+      "dateModified": "2026-04-06",
+      "wordCount": "1047",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,36 +93,37 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">TLS Configuration Guide</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png" alt="TLS Configuration Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
-<h1>TLS Configuration Guide</h1>
+      <div class="article-body"><h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
+<h2>TLS Configuration Guide</h2>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/tls-configuration.png" alt="TLS Configuration Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Transport Layer Security (TLS) is the foundation of secure internet communication. However, TLS is only as strong as its configuration. Weak cipher suites, outdated protocol versions, and missing security headers leave connections vulnerable to downgrade attacks, protocol flaws, and traffic interception. </p>
 <p>Cipher Suites </p>
 <p>A cipher suite defines the cryptographic algorithms used for key exchange, authentication, encryption, and message authentication. </p>
-<h1>Modern Nginx TLS configuration</h1>
+<h2>Modern Nginx TLS configuration</h2>
 <p>server {</p>
 <p>listen 443 ssl http2;</p>
 <p>server_name example.com;</p>
 <p>ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;</p>
 <p>ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;</p>
-<h1>Modern cipher suite selection</h1>
+<h2>Modern cipher suite selection</h2>
 <p>ssl_protocols TLSv1.2 TLSv1.3;</p>
 <p>ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;</p>
 <p>ssl_prefer_server_ciphers off; # Let client negotiate for TLS 1.3</p>
-<h1>Modern key exchange</h1>
+<h2>Modern key exchange</h2>
 <p>ssl_ecdh_curve X25519:prime256v1:secp384r1;</p>
-<h1>OCSP stapling</h1>
+<h2>OCSP stapling</h2>
 <p>ssl_stapling on;</p>
 <p>ssl_stapling_verify on;</p>
 <p>resolver 1.1.1.1 8.8.8.8 valid=300s;</p>
@@ -135,18 +136,18 @@
 <p>GCM - Galois/Counter Mode (authenticated encryption)</p>
 <p>SHA256 - SHA-256 HMAC (integrity)</p>
 <p>Deprecated Ciphers </p>
-<h1>NEVER use these</h1>
+<h2>NEVER use these</h2>
 <p>ssl_protocols SSLv3 TLSv1 TLSv1.1; # All broken</p>
 <p>ssl_ciphers RC4:3DES:EXPORT:NULL; # Weak or broken</p>
 <p>HSTS (HTTP Strict Transport Security) </p>
 <p>HSTS instructs browsers to always connect via HTTPS, preventing SSL stripping attacks. </p>
-<h1>Strict HSTS for production</h1>
+<h2>Strict HSTS for production</h2>
 <p>add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;</p>
-<h1>Explanation:</h1>
-<h1>max-age=63072000 - 2 years in seconds</h1>
-<h1>includeSubDomains - Applies to all subdomains</h1>
-<h1>preload - Allow inclusion in browser preload lists</h1>
-<h1>Flask HSTS implementation</h1>
+<h2>Explanation:</h2>
+<h2>max-age=63072000 - 2 years in seconds</h2>
+<h2>includeSubDomains - Applies to all subdomains</h2>
+<h2>preload - Allow inclusion in browser preload lists</h2>
+<h2>Flask HSTS implementation</h2>
 <p>from flask import Flask, make_response</p>
 <p>app = Flask(<strong>name</strong>)</p>
 <p>@app.after_request</p>
@@ -157,7 +158,7 @@
 <p>return response</p>
 <p>Certificate Pinning </p>
 <p>While HTTP Public Key Pinning (HPKP) is deprecated, certificate pinning techniques remain useful in controlled environments. </p>
-<h1>TLS fingerprint validation (alternative to deprecated HPKP)</h1>
+<h2>TLS fingerprint validation (alternative to deprecated HPKP)</h2>
 <p>import ssl</p>
 <p>import hashlib</p>
 <p>import requests</p>
@@ -166,7 +167,7 @@
 <p>def validate_certificate_fingerprint(hostname, port=443, expected_hash=None):</p>
 <p>cert_pem = ssl.get_server_certificate((hostname, port))</p>
 <p>cert = x509.load_pem_x509_certificate(cert_pem.encode())</p>
-<h1>Calculate SHA-256 fingerprint</h1>
+<h2>Calculate SHA-256 fingerprint</h2>
 <p>fingerprint = cert.fingerprint(hashes.SHA256())</p>
 <p>fingerprint_hex = fingerprint.hex()</p>
 <p>if expected_hash and fingerprint_hex != expected_hash:</p>
@@ -175,23 +176,23 @@
 <p>f"expected {expected_hash}, got {fingerprint_hex}"</p>
 <p>)</p>
 <p>return fingerprint_hex</p>
-<h1>Usage: pin to expected fingerprint</h1>
+<h2>Usage: pin to expected fingerprint</h2>
 <p>PINNED_FINGERPRINTS = {</p>
 <p>'api.example.com': 'a1b2c3d4e5f6...',</p>
 <p>}</p>
 <p>TLS 1.3 Benefits </p>
 <p>TLS 1.3 simplifies the handshake to one round trip (or zero with pre-shared keys), removes insecure features, and mandates forward secrecy. </p>
-<h1>Test TLS 1.3 support</h1>
+<h2>Test TLS 1.3 support</h2>
 <p>openssl s_client -connect example.com:443 -tls1_3</p>
 <p>Testing with SSL Labs </p>
-<h1>Using ssllabs-scan</h1>
+<h2>Using ssllabs-scan</h2>
 <p>docker run --rm -t jumanjiman/ssllabs-scan example.com</p>
-<h1>Using testssl.sh</h1>
+<h2>Using testssl.sh</h2>
 <p>testssl.sh --quiet --htmlfile report.html example.com</p>
-<h1>Quick curl-based check</h1>
+<h2>Quick curl-based check</h2>
 <p>curl -sI https://example.com | grep -i "strict-transport-security|x-frame-options|content-security-policy"</p>
 <p>Full Hardened Configuration </p>
-<h1>/etc/nginx/conf.d/ssl.conf - hardened TLS</h1>
+<h2>/etc/nginx/conf.d/ssl.conf - hardened TLS</h2>
 <p>ssl_protocols TLSv1.2 TLSv1.3;</p>
 <p>ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305;</p>
 <p>ssl_prefer_server_ciphers off;</p>
@@ -199,17 +200,18 @@
 <p>ssl_session_cache shared:SSL:10m;</p>
 <p>ssl_session_timeout 1d;</p>
 <p>ssl_session_tickets off;</p>
-<h1>OCSP Stapling</h1>
+<h2>OCSP Stapling</h2>
 <p>ssl_stapling on;</p>
 <p>ssl_stapling_verify on;</p>
 <p>resolver 1.1.1.1 8.8.8.8 valid=300s;</p>
-<h1>Security Headers</h1>
+<h2>Security Headers</h2>
 <p>add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;</p>
 <p>add_header X-Content-Type-Options nosniff always;</p>
 <p>add_header X-Frame-Options DENY always;</p>
 <p>Conclusion </p>
 <p>A proper TLS configuration requires modern protocol versions (TLS 1.2 and 1.3), forward-secrecy cipher suites, HSTS enforcement, and regular testing with tools like SSL Labs and testssl.sh. Disable all legacy protocols and ciphers, enable OCSP stapling for performance, and consider certificate pinning for high-security APIs.</p>
-<p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/patching-strategy.html">Patching Strategy</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/patching-strategy.html">Patching Strategy</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/certificate-management.html">Certificate Management</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

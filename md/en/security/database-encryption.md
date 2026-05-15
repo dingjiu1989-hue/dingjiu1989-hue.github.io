@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/database-encryption.html
 
 # Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
 
-# Database Encryption
+## Database Encryption
+
+## Database Encryption
 
 Database Encryption Layers 
 
@@ -118,11 +120,11 @@ digest.update(b"deterministic_salt")
 
 return digest.finalize().hex()[:32]
 
-# Usage
+## Usage
 
 encryptor = ColumnEncryptor(os.environ["COLUMN_ENCRYPTION_KEY"])
 
-# Encrypt PII before storage
+## Encrypt PII before storage
 
 cursor.execute("""
 
@@ -271,5 +273,7 @@ Conclusion
 Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS.
 
 **See also:** [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>), [Key Management Systems](</en/security/key-management.html>), [SOC 2 Technical Controls](</en/security/soc2-technical.html>).
+
+**See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)
 
 **See also:** [Key Management Systems](</en/security/key-management.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Encryption Key Management Best Practices](</en/security/encryption-key-management.html>)

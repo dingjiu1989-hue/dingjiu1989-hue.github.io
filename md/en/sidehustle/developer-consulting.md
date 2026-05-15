@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/developer-consulting.html
 
 # Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
 
-# Developer Consulting Guide
+## Developer Consulting Guide
+
+## Developer Consulting Guide
 
 Developer consulting offers one of the highest income potential side hustles for experienced engineers. With rates ranging from $100-$300/hour for independent consultants, the financial potential is significant. But technical skill alone is not enough. This guide covers how to start, price, and grow a developer consulting practice.
 
-## Is Consulting Right for You?
+### Is Consulting Right for You?
 
 Consulting is not for everyone. Before starting, assess your fit:
 
@@ -62,7 +64,7 @@ Consulting is not for everyone. Before starting, assess your fit:
 
 
 
-## Finding Your Niche
+### Finding Your Niche
 
 The most successful consultants specialize. A specialist commanding $250/hour earns more than a generalist at $100/hour, and has a stronger pipeline.
 
@@ -85,7 +87,7 @@ The most successful consultants specialize. A specialist commanding $250/hour ea
 
 Choose a niche where you have existing depth and where companies are actively spending money.
 
-## Getting Your First Clients
+### Getting Your First Clients
 
 Your first clients come from your existing network. Do not skip this step trying to build a website or brand first.
 
@@ -97,7 +99,7 @@ Your first clients come from your existing network. Do not skip this step trying
 
 **Strategy 4: Consulting marketplaces.** Platforms like Toptal, Gun.io, and Upwork can provide initial clients. Rates are lower, but the client acquisition cost is zero. Use them to build testimonials and case studies, then transition to direct clients.
 
-## Pricing Your Services
+### Pricing Your Services
 
 There are several pricing models for developer consulting:
 
@@ -120,7 +122,7 @@ There are several pricing models for developer consulting:
 
 
 
-## Creating Proposals and Contracts
+### Creating Proposals and Contracts
 
 A good consulting proposal includes:
 
@@ -140,7 +142,7 @@ A good consulting proposal includes:
 
 Always use a written contract. Include payment terms (net-15 or net-30), scope boundaries, cancellation terms, and intellectual property assignment. Use a lawyer to draft your template, or use services like And Co or Hello Bonsai for standard agreements.
 
-## Managing Projects and Clients
+### Managing Projects and Clients
 
 **Overcommunicate.** Send weekly status updates. Share progress even when there is nothing to report. Clients fear the unknown more than bad news.
 
@@ -150,7 +152,7 @@ Always use a written contract. Include payment terms (net-15 or net-30), scope b
 
 **Deliver incrementally.** Show working software frequently. Do not disappear for two months and emerge with a finished product.
 
-## Going Full-Time
+### Going Full-Time
 
 Transition from side hustle to full-time consulting when:
 
@@ -165,10 +167,12 @@ Transition from side hustle to full-time consulting when:
 
 
 
-## Summary
+### Summary
 
 Developer consulting offers excellent income potential for experienced engineers. Specialize in a high-demand niche. Get your first clients through warm outreach. Use project-based or retainer pricing instead of hourly. Overcommunicate with clients and document everything. Build toward full-time consulting only after establishing a stable client base. The most important skill in consulting is not coding -- it is communication.
 
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>).
+
+**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>)
 
 **See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Building a Micro-SaaS in 2026](</en/sidehustle/micro-saas-guide.html>), [Starting a Developer YouTube Channel](</en/sidehustle/youtube-dev-channel.html>)

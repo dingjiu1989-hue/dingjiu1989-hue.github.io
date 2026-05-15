@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>Network Security Fundamentals — SourceHub</title>
     <meta name="description" content="Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.">
@@ -46,8 +46,8 @@
       "description": "Core network security concepts: firewalls, VPNs, IDS/IPS, zero-trust networking, segmentation, and micro-segmentation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2545",
+      "dateModified": "2026-05-15",
+      "wordCount": "2283",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,54 +92,55 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Network Security Fundamentals</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png" alt="Network Security Fundamentals" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
-<h1>Network Security Fundamentals</h1>
+      <div class="article-body"><h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
+<h2>Network Security Fundamentals</h2>
 <p>Network security protects the communication channels between systems. As organizations move to the cloud and adopt zero-trust architectures, traditional perimeter-based network security is giving way to more granular, identity-aware approaches. This article covers the foundational concepts every developer and security practitioner needs.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/network-security.png" alt="Network Security Fundamentals" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Firewalls</h2>
+<h3>Firewalls</h3>
 <p>Firewalls filter network traffic based on pre-defined rules. They are the first line of defense in network security.</p>
-<h3>Packet Filtering Firewalls</h3>
+<h4>Packet Filtering Firewalls</h4>
 <p>Packet filtering firewalls inspect individual packets against rule sets. They examine source and destination IP addresses, ports, and protocols. They operate at layers 3 and 4 of the OSI model.</p>
 <p>Rule table example:</p>
 <p>Source IP Dest IP Port Protocol Action</p>
 <p>10.0.1.0/24 10.0.2.0/24 443 TCP Allow</p>
 <p>0.0.0.0/0 10.0.1.5 22 TCP Deny</p>
-<h3>Stateful Firewalls</h3>
+<h4>Stateful Firewalls</h4>
 <p>Stateful firewalls maintain a connection table. They track the state of active connections and make decisions based on the connection state, not just individual packets. This allows them to permit return traffic for legitimate outbound connections while blocking unsolicited inbound traffic.</p>
-<h3>Next-Generation Firewalls (NGFW)</h3>
+<h4>Next-Generation Firewalls (NGFW)</h4>
 <p>NGFWs combine traditional firewall capabilities with application-layer inspection, intrusion prevention, and threat intelligence. They can identify applications regardless of port or protocol and enforce policies based on user identity.</p>
-<h1>iptables stateful rule example</h1>
+<h2>iptables stateful rule example</h2>
 <p>iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT</p>
 <p>iptables -A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT</p>
 <p>iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT</p>
 <p>iptables -A INPUT -j DROP</p>
-<h2>Virtual Private Networks (VPNs)</h2>
+<h3>Virtual Private Networks (VPNs)</h3>
 <p>VPNs create encrypted tunnels between endpoints over untrusted networks. They extend a private network across a public network, allowing remote users and branch offices to access internal resources.</p>
-<h3>Site-to-Site VPN</h3>
+<h4>Site-to-Site VPN</h4>
 <p>Connects entire networks to each other, such as an office to a cloud VPC. AWS VPN, Azure VPN Gateway, and GCP Cloud VPN all implement IPsec tunnels.</p>
-<h1>AWS CLI: create a VPN connection</h1>
+<h2>AWS CLI: create a VPN connection</h2>
 <p>aws ec2 create-vpn-connection \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--customer-gateway-id cgw-123 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--vpn-gateway-id vgw-456 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type ipsec.1</p>
-<h3>Remote Access VPN</h3>
+<h4>Remote Access VPN</h4>
 <p>Connects individual users to the corporate network. VPN clients include OpenVPN, WireGuard, and proprietary solutions like Palo Alto GlobalProtect.</p>
-<h3>VPN Limitations</h3>
+<h4>VPN Limitations</h4>
 <p>VPNs are not a panacea. They grant broad network access, often violating least-privilege principles. If a VPN credential is compromised, the attacker gains full network access. Modern architectures increasingly replace VPNs with zero-trust network access (ZTNA) solutions.</p>
-<h2>Intrusion Detection and Prevention Systems (IDS/IPS)</h2>
+<h3>Intrusion Detection and Prevention Systems (IDS/IPS)</h3>
 <p>IDS monitors network traffic for suspicious activity and generates alerts. IPS sits inline and actively blocks detected threats.</p>
-<h3>Detection Methods</h3>
+<h4>Detection Methods</h4>
 <ul>
 <li>
 <p><strong>Signature-based</strong> : Matches traffic against known attack patterns. Effective for known threats but misses zero-day attacks.</p>
@@ -151,7 +152,7 @@
 <p><strong>Behavioral</strong> : Analyzes traffic patterns over time. Detects slow, low-and-slow attacks that evade other methods.</p>
 </li>
 </ul>
-<h3>Popular Tools</h3>
+<h4>Popular Tools</h4>
 <ul>
 <li>
 <p><strong>Snort</strong> : Open-source NIDS with a large rule set. Widely deployed for packet logging and real-time traffic analysis.</p>
@@ -163,7 +164,7 @@
 <p><strong>Zeek (formerly Bro)</strong> : Network analysis framework that produces detailed logs about connections, protocols, and files.</p>
 </li>
 </ul>
-<h1>Suricata configuration snippet</h1>
+<h2>Suricata configuration snippet</h2>
 <p>vars:</p>
 <p>address-groups:</p>
 <p>HOME_NET: "[10.0.0.0/8,172.16.0.0/12]"</p>
@@ -175,15 +176,15 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- interface: eth0</p>
 <p>cluster-id: 99</p>
 <p>cluster-type: cluster_flow</p>
-<h2>Zero-Trust Networking</h2>
+<h3>Zero-Trust Networking</h3>
 <p>Zero trust assumes no implicit trust based on network location. Every access request must be authenticated, authorized, and encrypted.</p>
-<h3>Core Principles</h3>
+<h4>Core Principles</h4>
 <ul>
 <li><strong>Never trust, always verify</strong> : Every request, whether from inside or outside the network, must be validated.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Assume breach</strong> : Design the network as if attackers already have a foothold. Limit lateral movement.</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Least privilege</strong> : Grant the minimum access necessary for each user or service.</p>
-<h3>Zero-Trust Implementation</h3>
+<h4>Zero-Trust Implementation</h4>
 <ul>
 <li>
 <p><strong>Micro-segmentation</strong> : Divide the network into small, isolated zones. Each zone requires separate authentication.</p>
@@ -195,7 +196,7 @@
 <p><strong>BeyondCorp / Cloudflare Access</strong> : Google's BeyondCorp model removes the VPN entirely. Access decisions are based on device identity, user identity, and context, not network location.</p>
 </li>
 </ul>
-<h1>Example: zero-trust access policy via proxy</h1>
+<h2>Example: zero-trust access policy via proxy</h2>
 <p>policies:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "api-access"</p>
 <p>subject: "service:api-gateway"</p>
@@ -208,14 +209,14 @@
 <p>operator: "in_cidr"</p>
 <p>value: "10.0.0.0/8"</p>
 <p>action: "allow"</p>
-<h2>Network Segmentation and Micro-Segmentation</h2>
+<h3>Network Segmentation and Micro-Segmentation</h3>
 <p>Segmentation divides a network into smaller segments to limit attack propagation.</p>
-<h3>Traditional Segmentation</h3>
+<h4>Traditional Segmentation</h4>
 <p>Uses VLANs and subnets to separate traffic. A web server resides in one subnet, a database server in another. Firewalls control traffic between subnets.</p>
 <p>[Internet] -&gt; [DMZ: Web Servers] -&gt; [App Tier] -&gt; [DB Tier]</p>
-<h3>Micro-Segmentation</h3>
+<h4>Micro-Segmentation</h4>
 <p>Micro-segmentation takes segmentation to the individual workload level. In a cloud environment, every workload has its own security group that allows traffic only from specific sources on specific ports.</p>
-<h1>AWS Security Group for a database instance</h1>
+<h2>AWS Security Group for a database instance</h2>
 <p>resource "aws_security_group" "db" {</p>
 <p>ingress {</p>
 <p>from_port = 5432</p>
@@ -231,7 +232,7 @@
 <p>}</p>
 <p>}</p>
 <p>Micro-segmentation is essential in Kubernetes environments. Network policies control which pods can communicate.</p>
-<h1>Kubernetes network policy</h1>
+<h2>Kubernetes network policy</h2>
 <p>apiVersion: networking.k8s.io/v1</p>
 <p>kind: NetworkPolicy</p>
 <p>metadata:</p>
@@ -247,9 +248,10 @@
 <p>app: frontend</p>
 <p>ports:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- port: 8080</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Network security has evolved from simple perimeter firewalls to sophisticated zero-trust architectures. The fundamentals still matter: proper firewall rules, careful VPN use, intrusion detection, and network segmentation. But the trend is clear — the network boundary is disappearing, and security must follow the workload, not the perimeter.</p>
-<p><strong>See also:</strong> <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a>, <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-basics.html">Cloud Security Basics: Shared Responsibility Model Explained</a>, <a href="/en/security/zero-trust-architecture.html">Zero Trust Architecture for Startups</a>, <a href="/en/security/zero-trust-networking.html">Zero Trust Networking: Architecture and Implementation Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

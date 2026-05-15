@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/compliance-automation.html
 
 # Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
 
-# Compliance Automation
+## Compliance Automation
+
+## Compliance Automation
 
 Why Automate Compliance? 
 
@@ -38,7 +40,7 @@ CIS Benchmark Scanning
 
 Automate CIS benchmark checks across infrastructure: 
 
-# cis-benchmark-config.yaml
+## cis-benchmark-config.yaml
 
 benchmarks:
 
@@ -78,7 +80,7 @@ expected: "[true]"
 
 severity: "high"
 
-# CIS compliance checker
+## CIS compliance checker
 
 import subprocess
 
@@ -238,13 +240,13 @@ summary = {
 
 report_md = f"""
 
-# Compliance Report: {framework}
+## Compliance Report: {framework}
 
 **Date:** {summary['timestamp']}
 
 **Score:** {summary['compliance_score']:.1f}%
 
-## Summary
+### Summary
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Total Checks: {summary['total_checks']}
 
@@ -252,7 +254,7 @@ report_md = f"""
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Failed: {summary['failed']}
 
-## Failed Controls
+### Failed Controls
 
 """
 
@@ -262,7 +264,7 @@ if not result["passed"]:
 
 report_md += f"""
 
-### {result['id']}: {result['title']}
+#### {result['id']}: {result['title']}
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Severity:** {result['severity']}
 
@@ -307,5 +309,7 @@ Conclusion
 Automate compliance with CIS benchmark scanning, remediation, reporting, and monitoring. Start with critical controls and expand coverage gradually. Use infrastructure-as-code to enforce compliance at deploy time. Continuously monitor compliance posture and alert on drift. Automation turns compliance from a periodic burden into a continuous assurance program.
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>).
+
+**See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)
 
 **See also:** [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools](</en/security/security-compliance-tools.html>)

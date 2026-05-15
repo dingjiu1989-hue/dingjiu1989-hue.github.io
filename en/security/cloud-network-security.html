@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Cloud Network Security — SourceHub</title>
     <meta name="description" content="Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.">
@@ -46,8 +46,8 @@
       "description": "Designing cloud network security with security groups, NACLs, firewall rules, and traffic inspection.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "959",
+      "dateModified": "2026-05-15",
+      "wordCount": "761",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,24 +93,25 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Cloud Network Security</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
-<h1>Cloud Network Security</h1>
+      <div class="article-body"><h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
+<h2>Cloud Network Security</h2>
 <p>Cloud Network Security Layers </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cloud-network-security.png" alt="Cloud Network Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cloud networks require defense in depth: VPC isolation, subnet segmentation, security groups, network ACLs, and traffic inspection. </p>
 <p>Security Groups vs NACLs </p>
 <p>Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters: </p>
-<h1>Security Group (stateful)</h1>
+<h2>Security Group (stateful)</h2>
 <p>resource "aws_security_group" "web_sg" {</p>
 <p>name = "web-tier"</p>
 <p>description = "Security group for web instances"</p>
@@ -136,7 +137,7 @@
 <p>cidr_blocks = ["0.0.0.0/0"]</p>
 <p>}</p>
 <p>}</p>
-<h1>NACL (stateless - must allow both directions)</h1>
+<h2>NACL (stateless - must allow both directions)</h2>
 <p>resource "aws_network_acl" "public_subnet_acl" {</p>
 <p>vpc_id = var.vpc_id</p>
 <p>ingress {</p>
@@ -157,7 +158,7 @@
 <p>}</p>
 <p>}</p>
 <p>VPC Design </p>
-<h1>Multi-tier VPC design</h1>
+<h2>Multi-tier VPC design</h2>
 <p>class VPCDesign:</p>
 <p>def <strong>init</strong>(self, cidr="10.0.0.0/16"):</p>
 <p>self.cidr = cidr</p>
@@ -170,25 +171,25 @@
 <p>}</p>
 <p>def generate_routing_rules(self):</p>
 <p>rules = []</p>
-<h1>Web tier: inbound from public, outbound to app</h1>
+<h2>Web tier: inbound from public, outbound to app</h2>
 <p>rules.append({</p>
 <p>"from": "web",</p>
 <p>"to": "app",</p>
 <p>"ports": [8080, 8443],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h1>App tier: outbound to db</h1>
+<h2>App tier: outbound to db</h2>
 <p>rules.append({</p>
 <p>"from": "app", </p>
 <p>"to": "db",</p>
 <p>"ports": [5432],</p>
 <p>"protocol": "tcp"</p>
 <p>})</p>
-<h1>No direct public access to app or db</h1>
+<h2>No direct public access to app or db</h2>
 <p>return rules</p>
 <p>Traffic Inspection </p>
 <p>Deploy inline inspection for east-west traffic: </p>
-<h1>Traffic inspection rules</h1>
+<h2>Traffic inspection rules</h2>
 <p>inspection_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_web_app_traffic</p>
 <p>source: web-subnet</p>
@@ -201,22 +202,23 @@
 <p>inspection: metadata_only</p>
 <p>anomaly_detection: enabled</p>
 <p>Firewall Rule Management </p>
-<h1>Firewall rule analyzer</h1>
+<h2>Firewall rule analyzer</h2>
 <p>def analyze_firewall_rules(rules):</p>
 <p>issues = []</p>
 <p>for rule in rules:</p>
-<h1>Check for overly permissive rules</h1>
+<h2>Check for overly permissive rules</h2>
 <p>if rule.get("cidr") == "0.0.0.0/0" and rule.get("port") in [22, 3389]:</p>
 <p>issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")</p>
-<h1>Check for rules with no hits</h1>
+<h2>Check for rules with no hits</h2>
 <p>if rule.get("hit_count", 0) == 0 and rule["age_days"] &gt; 30:</p>
 <p>issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")</p>
-<h1>Check for duplicate rules</h1>
-<h1>...</h1>
+<h2>Check for duplicate rules</h2>
+<h2>...</h2>
 <p>return issues</p>
 <p>Conclusion </p>
 <p>Cloud network security requires layered controls. Use security groups for instance-level filtering and NACLs for subnet-level guardrails. Design VPCs with multiple tiers and restrict traffic between them. Deploy traffic inspection for critical paths. Review firewall rules quarterly and remove unused rules. Automate everything with infrastructure as code.</p>
-<p><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/kubernetes-network-policies.html">Kubernetes Network Policies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/structured-logging.html
 
 # Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
 
-# Structured Logging
+## Structured Logging
+
+## Structured Logging
 
 Structured logging is the practice of emitting logs as structured data — typically JSON — rather than free-form text strings. This transformation is foundational to observability. Structured logs can be parsed, filtered, and queried by machines without requiring fragile regular expressions. The initial investment in structured logging pays dividends in every incident investigation, deployment verification, and system analysis. 
 
@@ -51,5 +53,7 @@ Dynamic debugging with structured logging enables log-based metrics. If a log en
 Log retention policies balance debugging needs with storage costs. Typical retention: 7-14 days for production logs in hot storage, 30-90 days in warm storage, 12 months in cold archival storage. Compliance-required logs (audit trails, financial transactions) have longer retention with immutable storage. The retention policy should be per-service, as different services have different debugging windows and compliance requirements.
 
 **See also:** [Leader Election in Distributed Systems](</en/architecture/leader-election.html>), [Observability: Logs, Metrics, and Traces](</en/architecture/observability-three-pillars.html>), [Schema Registry](</en/architecture/schema-registry.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)
 
 **See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [Graceful Shutdown Patterns](</en/architecture/graceful-shutdown.html>)

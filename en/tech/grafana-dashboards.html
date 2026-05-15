@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Technical exploration of Grafana dashboard design covering panel types, template variables, annotations, alerting configuration, and provisioning with infrastructure as code.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/grafana-dashboards.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Technology, DevOps, Cloud">
     <title>Grafana Dashboards: Panels, Variables, Annotations, and Alerting — SourceHub</title>
     <meta name="description" content="Technical exploration of Grafana dashboard design covering panel types, template variables, annotations, alerting configuration, and provisioning with infrastructure as code.">
@@ -46,8 +46,8 @@
       "description": "Technical exploration of Grafana dashboard design covering panel types, template variables, annotations, alerting configuration, and provisioning with infrastructure as code.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/grafana-dashboards.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1735",
+      "dateModified": "2026-05-13",
+      "wordCount": "1659",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,30 +93,31 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h1>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h2>Grafana Dashboards: Panels, Variables, Annotations, and Alerting</h2>
+<h3>Introduction</h3>
 <p>Grafana has become the industry standard for observability dashboards, providing unified visualization across metrics, logs, traces, and other data sources. Its modular architecture supports Prometheus, Elasticsearch, InfluxDB, Loki, Tempo, and dozens of other backends. Beyond visualization, Grafana has evolved into a full observability platform with alerting, anomaly detection, and incident management capabilities.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/grafana-dashboards.png" alt="Grafana Dashboards: Panels, Variables, Annotations, and Alerting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers Grafana dashboard design in detail: panel types, template variables, annotations, alerting, and provisioning.</p>
-<h2>Panel Types and Visualization Options</h2>
+<h3>Panel Types and Visualization Options</h3>
 <p>Grafana offers a rich set of visualization panels. The time series panel is the workhorse for metric data, supporting line charts, bar charts, and area graphs with multiple display options. The state timeline panel visualizes state changes over time, ideal for showing service health or deployment status.</p>
 <p>The stat panel displays a single numeric value with optional sparkline, perfect for showing current CPU usage or error rate. The gauge panel presents values in a radial format. The table panel provides detailed data inspection with sorting, filtering, and field overrides.</p>
 <p>The geomap panel renders geographic data on interactive maps, useful for visualizing request origins or data center health. The logs panel streams log lines in real time with highlighting and filtering. The traces panel visualizes distributed trace spans in waterfall format.</p>
 <p>Field overrides allow per-field customization without duplicating queries. Transformations transform query results without modifying the data source: merging series, calculating percentages, grouping by field values, and applying mathematical operations.</p>
-<h2>Template Variables: Dynamic Dashboards</h2>
+<h3>Template Variables: Dynamic Dashboards</h3>
 <p>Template variables make dashboards interactive and reusable. Instead of hardcoding values, queries use variables that users can change via dropdowns at the top of the dashboard.</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Prometheus query using variables</p>
 <p>rate(http_requests_total{job="$job", namespace="$namespace"}[5m])</p>
@@ -136,11 +137,11 @@
 </li>
 </ul>
 <p>Chained (dependent) variables filter subsequent variable options based on previous selections, enabling drill-down navigation from datacenter to cluster to pod.</p>
-<h2>Annotations: Events on Timelines</h2>
+<h3>Annotations: Events on Timelines</h3>
 <p>Annotations overlay events on graph panels, correlating infrastructure changes with metric behavior. Common annotation sources include deployment events from CI/CD pipelines, configuration changes, and incident timestamps.</p>
 <p>Grafana supports annotation queries from data sources. For example, annotations can pull deployment timestamps from Loki logs or from a dedicated annotation database. Native annotations are stored in a Grafana internal database and support rich text descriptions.</p>
 <p>Using annotations effectively transforms dashboards from metric viewers into forensic tools for understanding what caused metric anomalies.</p>
-<h2>Alerting in Grafana</h2>
+<h3>Alerting in Grafana</h3>
 <p>Grafana Alerting (introduced in Grafana 8 and unified in Grafana 9) provides a centralized alert system. Alerts evaluate queries on a schedule and route notifications through contact points.</p>
 <p>An alert rule consists of a query, a condition evaluation interval, a pending period, and labels. Multiple rules can be grouped into alert groups. The Alertmanager handles notification routing, grouping, silencing, and inhibition.</p>
 <p>groups:</p>
@@ -152,7 +153,7 @@
 <p>labels:</p>
 <p>severity: critical</p>
 <p>Contact points support PagerDuty, Slack, email, webhooks, OpsGenie, VictorOps, Teams, and custom integrations. Notification policies route alerts based on labels and grouping rules.</p>
-<h2>Provisioning Dashboards as Code</h2>
+<h3>Provisioning Dashboards as Code</h3>
 <p>Grafana supports provisioning dashboards, data sources, alert rules, and contact points through YAML configuration files. This enables infrastructure-as-code workflows for observability.</p>
 <p>apiVersion: 1</p>
 <p>providers:</p>
@@ -163,9 +164,10 @@
 <p>options:</p>
 <p>path: /etc/grafana/provisioning/dashboards</p>
 <p>Dashboards are exported as JSON and version-controlled alongside application code. CI/CD pipelines deploy dashboard changes through Git workflows, enabling peer review and rollback.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Grafana's composable architecture — panels, variables, annotations, and alerting — makes it the central hub for observability. Provisioning dashboards as code ensures consistency across environments and enables GitOps workflows. As Grafana continues to add capabilities like explore mode, correlate metrics with logs and traces, and incident management, it solidifies its position as the primary interface for understanding system behavior.</p>
-<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/typescript-advanced-types.html">Advanced TypeScript Types for Better Code</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p></div>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/typescript-advanced-types.html">Advanced TypeScript Types for Better Code</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/gcp-networking.html">GCP Networking: VPCs, Cloud NAT, Private Google Access, and Shared VPC</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/sli-slo-error-budget.html">SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

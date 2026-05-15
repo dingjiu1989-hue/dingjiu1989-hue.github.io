@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Everything developers need to know about web security in 2026 — OWASP Top 10, authentication, encryption, CSP, and production security patterns.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/web-security-fundamentals-2026.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-15">
     <meta property="article:tag" content="Web Security, OWASP, CSP, Authentication, XSS, SQL Injection, HTTPS, API Security">
     <title>Web Security Fundamentals 2026: A Developer Complete Guide — SourceHub</title>
     <meta name="description" content="Everything developers need to know about web security in 2026 — OWASP Top 10, authentication, encryption, CSP, and production security patterns.">
@@ -45,8 +45,8 @@
       "description": "Everything developers need to know about web security in 2026 — OWASP Top 10, authentication, encryption, CSP, and production security patterns.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/web-security-fundamentals-2026.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "5624",
+      "dateModified": "2026-05-15",
+      "wordCount": "5067",
       "keywords": "Web Security, OWASP, CSP, Authentication, XSS, SQL Injection, HTTPS, API Security",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -98,31 +98,32 @@
         <span class="tag-cat">HTTPS</span>
         <span class="tag-cat">API Security</span></div>
       <h1 class="article-title">Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/web-security-fundamentals-2026.png" alt="Web Security Fundamentals 2026: A Developer Complete Guide" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h1>Web Security Fundamentals 2026: A Developer Complete Guide</h1>
-<h3>Stored XSS</h3>
+      <div class="article-body"><h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h2>Web Security Fundamentals 2026: A Developer Complete Guide</h2>
+<h4>Stored XSS</h4>
 <p>The payload is persisted on the server (e.g., in a comment, user bio) and served to every visitor.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/web-security-fundamentals-2026.png" alt="Web Security Fundamentals 2026: A Developer Complete Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Example: A comment containing </p>
-<h3>DOM-Based XSS</h3>
+<h4>DOM-Based XSS</h4>
 <p>The vulnerability lives entirely in client-side JavaScript. The server response is clean, but the browser executes attacker-controlled input via <code>innerHTML</code>, <code>document.write</code>, or <code>eval</code>.</p>
 <p>// VULNERABLE — DOM XSS</p>
 <p>const name = new URLSearchParams(window.location.search).get('name');</p>
 <p>document.getElementById('greeting').innerHTML = <code>Hello, ${name}</code>;</p>
 <p>// SAFE — use textContent, not innerHTML</p>
 <p>document.getElementById('greeting').textContent = <code>Hello, ${name}</code>;</p>
-<h3>XSS Prevention Table</h3>
+<h4>XSS Prevention Table</h4>
 <p>| Context | Safe Approach | Dangerous Approach |</p>
 <p>|---------|--------------|-------------------|</p>
 <p>| HTML body | <code>textContent</code>, template escaping | <code>innerHTML</code>, <code>outerHTML</code> |</p>
@@ -158,7 +159,7 @@
 <p>next();</p>
 <p>});</p>
 <p>TLS Configuration Check (2026 Minimum) </p>
-<h1>nginx TLS config — modern profile</h1>
+<h2>nginx TLS config — modern profile</h2>
 <p>ssl_protocols TLSv1.2 TLSv1.3;</p>
 <p>ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256;</p>
 <p>ssl_prefer_server_ciphers off;</p>
@@ -174,7 +175,7 @@
 <p>Dependency Scanning Tools </p>
 <p>| Tool | Scope | Integration | |------|-------|-------------| | <code>npm audit</code> / <code>yarn audit</code> | Node.js packages | CI/CD pipeline gate | | <code>pip-audit</code> | Python packages | pre-commit hooks | | <code>trivy</code> | Containers, OS packages, IaC | GitHub Actions, GitLab CI | | <code>snyk</code> | Multi-language, container | PR checks | | <code>dependabot</code> | GitHub-hosted repos | Auto-PRs for vulnerable deps | | <code>grype</code> | Containers, filesystem | Fast, free, OSS | </p>
 <p>Running a Scan in CI </p>
-<h1>.github/workflows/security-scan.yml</h1>
+<h2>.github/workflows/security-scan.yml</h2>
 <p>name: Security Scan</p>
 <p>on: [push, pull_request]</p>
 <p>jobs:</p>
@@ -231,7 +232,7 @@
 <p>res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');</p>
 <p>next();</p>
 <p>});</p>
-<h1>FastAPI with SecureHeaders middleware</h1>
+<h2>FastAPI with SecureHeaders middleware</h2>
 <p>from secure import SecureHeaders</p>
 <p>secure_headers = SecureHeaders()</p>
 <p>@app.middleware("http")</p>
@@ -274,14 +275,14 @@
 <p>});</p>
 <p>Proper Error Handling </p>
 <p>Never leak stack traces, database schemas, or internal paths to API consumers. </p>
-<h1>BAD — leaks internals</h1>
+<h2>BAD — leaks internals</h2>
 <p>@app.exception_handler(Exception)</p>
 <p>async def debug_error(request, exc):</p>
 <p>return JSONResponse(</p>
 <p>status_code=500,</p>
 <p>content={"error": str(exc), "traceback": traceback.format_exc()}</p>
 <p>)</p>
-<h1>GOOD — sanitized errors with logging</h1>
+<h2>GOOD — sanitized errors with logging</h2>
 <p>import logging</p>
 <p>logger = logging.getLogger(<strong>name</strong>)</p>
 <p>@app.exception_handler(HTTPException)</p>
@@ -412,7 +413,8 @@
 <p><strong>Remember:</strong> security is not a one-time audit. It is a continuous practice embedded into your development workflow. Ship safely. </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- </p>
 <p><em>Last updated: May 2026</em></p>
-<p><strong>See also:</strong> <a href="/en/ai/ai-security-complete-guide.html">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-security-complete-guide.html">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/ai-security-complete-guide.html">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-security-complete-guide.html">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-security-complete-guide.html">AI Security Complete Guide: Prompt Injection, Guardrails, and Red Teaming in 2026</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/tech/authentication-best-practices-2026.html">Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

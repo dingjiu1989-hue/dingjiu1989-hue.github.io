@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html
 
 # LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
 
-## Introduction
+## LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+
+### Introduction
 
 LLM API calls are expensive, both in cost and latency. Caching previously generated responses can reduce costs by 20-80% depending on the application. Unlike traditional HTTP caching where exact URL matching suffices, LLM caching must handle semantically equivalent but textually different queries. This article covers caching strategies from simple exact match to sophisticated semantic caching.
 
-## Exact Match Cache
+### Exact Match Cache
 
 The simplest cache: identical inputs produce identical outputs:
 
@@ -96,7 +98,7 @@ self.cache[key] = {"response": response, "timestamp": time.time()}
 
 Exact match works well when identical questions recur: FAQs, repeated classification tasks, or template-based prompts where only parameters change.
 
-## Semantic Cache
+### Semantic Cache
 
 Semantic caching returns cached responses for semantically equivalent questions:
 
@@ -162,7 +164,7 @@ self.cache_entries = self.cache_entries[-max_entries:]
 
 The similarity threshold controls the precision-recall tradeoff. A threshold of 0.95 is safe but rarely matches. A threshold of 0.85 catches more queries but risks returning irrelevant cached responses. Test on your specific query distribution.
 
-## Two-Level Cache
+### Two-Level Cache
 
 Combine both strategies for maximum coverage:
 
@@ -176,7 +178,7 @@ self.semantic = SemanticCache(embedding_fn, similarity_threshold=0.92)
 
 def get(self, messages: list[dict], model: str, params: dict) -> str | None:
 
-# Try exact match first (fast, no embedding computation)
+## Try exact match first (fast, no embedding computation)
 
 exact_result = self.exact.get(messages, model, params)
 
@@ -184,7 +186,7 @@ if exact_result:
 
 return exact_result
 
-# Try semantic match for the last user message
+## Try semantic match for the last user message
 
 last_user_msg = self._get_last_user_message(messages)
 
@@ -208,7 +210,7 @@ if last_user_msg:
 
 self.semantic.set(last_user_msg, response)
 
-## TTL and Invalidation
+### TTL and Invalidation
 
 Different cache entries need different expiration policies:
 
@@ -216,7 +218,7 @@ class TTLManager:
 
 def **init**(self):
 
-# Different TTLs for different content types
+## Different TTLs for different content types
 
 self.ttl_config = {
 
@@ -240,7 +242,7 @@ def invalidate_by_prefix(self, prefix: str):
 
 """Invalidate cache entries matching a prefix pattern."""
 
-# Used when source documents are updated
+## Used when source documents are updated
 
 pass
 
@@ -250,7 +252,7 @@ def invalidate_all(self):
 
 pass
 
-## Cache-Aware Application Design
+### Cache-Aware Application Design
 
 Structure your application to maximize cache hits:
 
@@ -264,7 +266,7 @@ self.llm = llm_fn
 
 async def generate(self, task_type: str, messages: list[dict], model: str, params: dict) -> str:
 
-# Check cache
+## Check cache
 
 cached = self.cache.get(messages, model, params)
 
@@ -272,17 +274,17 @@ if cached:
 
 return cached
 
-# Generate fresh response
+## Generate fresh response
 
 response = await self.llm(messages, model, params)
 
-# Cache with appropriate TTL
+## Cache with appropriate TTL
 
 self.cache.set(messages, model, params, response)
 
 return response
 
-## Cache Hit Rate Optimization
+### Cache Hit Rate Optimization
 
 class CacheAnalytics:
 
@@ -300,16 +302,18 @@ metrics = {
 
 }
 
-# Adjust semantic threshold based on hit quality
+## Adjust semantic threshold based on hit quality
 
 if metrics["semantic_hits"] > 0 and user_feedback_score < 0.8:
 
 self.semantic.threshold += 0.02 # Be more conservative
 
-## Conclusion
+### Conclusion
 
 LLM caching significantly reduces costs and latency. Use exact-match caching for deterministic tasks with identical inputs. Add semantic caching with embedding similarity for paraphrased questions. Implement two-level caching with exact match first (fast) then semantic match (broader). Configure TTLs based on content stability: long TTLs for classification tasks, short TTLs for generation. Monitor cache hit rates and user satisfaction to tune similarity thresholds. A well-tuned cache typically achieves 30-60% hit rates in production.
 
 **See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning](</en/ai/tool-use-patterns.html>).
+
+**See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)
 
 **See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI Model Deployment: Strategies for Production LLM Serving](</en/ai/ai-model-deployment-strategies.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>)

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-07">
     <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Transformer Mechanisms in Deep Learning — SourceHub</title>
     <meta name="description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
@@ -46,8 +46,8 @@
       "description": "Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "728",
+      "dateModified": "2026-05-07",
+      "wordCount": "694",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,34 +93,36 @@
         <span class="tag-cat">Machine Learning</span>
         <span class="tag-cat">LLM</span></div>
       <h1 class="article-title">Transformer Mechanisms in Deep Learning</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
-<h1>Transformer Mechanisms in Deep Learning</h1>
+      <div class="article-body"><h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
+<h2>Transformer Mechanisms in Deep Learning</h2>
 <p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png" alt="Transformer Mechanisms in Deep Learning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Self-Attention</h2>
+<h3>Self-Attention</h3>
 <p>Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.</p>
 <p>The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance—unlike RNNs which process sequentially.</p>
-<h2>Multi-Head Attention</h2>
+<h3>Multi-Head Attention</h3>
 <p>Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head.</p>
 <p>Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language.</p>
-<h2>Positional Encoding</h2>
+<h3>Positional Encoding</h3>
 <p>Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training.</p>
 <p>Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information—attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores.</p>
-<h2>Feed-Forward Networks</h2>
+<h3>Feed-Forward Networks</h3>
 <p>Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.</p>
 <p>The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling.</p>
-<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/attention-mechanisms.html">Attention Mechanisms in Neural Networks</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/mlops-pipeline.html">MLOps Pipeline: From Training to Production</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releases">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/zero-downtime-deployment.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-04-25">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Zero-Downtime Deployment Strategies — SourceHub</title>
     <meta name="description" content="Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releases">
@@ -46,8 +46,8 @@
       "description": "Rolling, blue-green, canary deployments, feature flags, database migrations for zero-downtime releases",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/zero-downtime-deployment.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1058",
+      "dateModified": "2026-04-25",
+      "wordCount": "1011",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Zero-Downtime Deployment Strategies</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-04-25 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/zero-downtime-deployment.png" alt="Zero-Downtime Deployment Strategies" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
-<h1>Zero-Downtime Deployment Strategies</h1>
+      <div class="article-body"><h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
+<h2>Zero-Downtime Deployment Strategies</h2>
 <p>Zero-downtime deployment ensures that application updates occur without interrupting user-facing service. As systems grow from hobby projects to business-critical platforms, deployment windows become unacceptable. Modern deployment strategies provide multiple approaches to achieving seamless updates, each with different tradeoffs in complexity, cost, and risk. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/zero-downtime-deployment.png" alt="Zero-Downtime Deployment Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Rolling deployment replaces instances one at a time. The orchestrator spins up a new instance with the new version, health-checks it, and once healthy, terminates an old instance. This continues until all instances are updated. Rolling deployments require no additional infrastructure and work well with horizontal scaling. The disadvantage is backward compatibility issues during the update window — both old and new versions serve traffic simultaneously, so API changes must be backward compatible. </p>
 <p>Blue-green deployment maintains two complete environments: blue (current) and green (next). The new version is deployed to the green environment. Once fully deployed and tested, the router or load balancer switches traffic from blue to green. If issues arise, traffic can be instantly reverted to blue. Blue-green deployment eliminates the mixed-version problem — all traffic goes to one version at a time. The cost is double infrastructure during deployment and the need for environments that can handle full production load. </p>
@@ -113,7 +114,8 @@
 <p>Health check integration during deployment is critical. Monitor error rates, latency percentiles, and instance health throughout the deployment. Automatically rollback if error rates exceed a threshold. Blue-green and canary deployments benefit from automated smoke tests after each stage before proceeding to the next. </p>
 <p>Session management requires attention during deployments. In-memory sessions are lost when instances restart. Sessions should be stored in a shared session store (Redis, database) that survives instance termination. Alternatively, use stateless sessions with client-side tokens. WebSocket connections must be re-established if their instance is terminated — the client should implement reconnection logic. </p>
 <p>The choice of deployment strategy depends on application architecture, team maturity, and risk tolerance. Rolling deployments suit simple stateless services. Blue-green deployments fit services requiring predictable cutover times. Canary deployments are appropriate for high-risk, high-traffic services where gradual rollout provides the best safety profile. Many organizations combine approaches — using rolling deployments for routine updates and canary for major releases.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/canary-deployment.html">Canary Deployments for Safe Releases</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

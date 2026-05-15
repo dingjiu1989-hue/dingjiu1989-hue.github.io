@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html
 
 # REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
 
-# REST API Design Best Practices
+## REST API Design Best Practices
+
+## REST API Design Best Practices
 
 REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. 
 
@@ -197,5 +199,7 @@ Summary
 Great REST API design comes down to consistency and following conventions. Use proper HTTP methods and status codes, name resources with plural nouns, version your API, and document it thoroughly. When in doubt, follow the principle of least surprise -- your API should work the way developers expect it to.
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Retry and Backoff Strategies](</en/architecture/retry-backoff.html>).
+
+**See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)
 
 **See also:** [Backend for Frontend (BFF) Pattern](</en/architecture/backend-for-frontend.html>), [Hexagonal Architecture (Ports and Adapters)](</en/architecture/hexagonal-architecture.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>)

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Security, Cybersecurity">
     <title>Blockchain and Smart Contract Security — SourceHub</title>
     <meta name="description" content="Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.">
@@ -46,8 +46,8 @@
       "description": "Smart contract vulnerabilities including reentrancy and oracle manipulation, plus auditing tools, formal verification, and wallet security.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2270",
+      "dateModified": "2026-05-10",
+      "wordCount": "1861",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,23 +92,24 @@
       <div class="article-tags">        <span class="tag-cat">Security</span>
         <span class="tag-cat">Cybersecurity</span></div>
       <h1 class="article-title">Blockchain and Smart Contract Security</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png" alt="Blockchain and Smart Contract Security" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
-<h1>Blockchain and Smart Contract Security</h1>
+      <div class="article-body"><h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
+<h2>Blockchain and Smart Contract Security</h2>
 <p>Blockchain and smart contract security presents unique challenges. Once deployed, smart contracts are immutable. A vulnerability in a contract can result in millions of dollars in losses with no recourse. This article covers common smart contract vulnerabilities, auditing tools and techniques, formal verification, and wallet security.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png" alt="Blockchain and Smart Contract Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Common Smart Contract Vulnerabilities</h2>
-<h3>Reentrancy</h3>
+<h3>Common Smart Contract Vulnerabilities</h3>
+<h4>Reentrancy</h4>
 <p>Reentrancy is the most infamous smart contract vulnerability. It occurs when a contract calls an external contract before updating its own state, allowing the external contract to recursively call back into the original contract before the first invocation completes.</p>
 <p>// VULNERABLE: Reentrancy</p>
 <p>contract VulnerableWithdraw {</p>
@@ -142,7 +143,7 @@
 <p>require(success, "Transfer failed");</p>
 <p>}</p>
 <p>}</p>
-<h3>Oracle Manipulation</h3>
+<h4>Oracle Manipulation</h4>
 <p>Smart contracts rely on oracles to bring off-chain data (price feeds, randomness) on-chain. If an oracle is manipulated, contracts depending on that data behave incorrectly.</p>
 <p><strong>Flash loan attacks</strong> : An attacker borrows a large amount of tokens, trades them to manipulate the pool price, then exploits a contract that reads the manipulated price. The attacker repays the flash loan in the same transaction.</p>
 <p><strong>Prevention</strong> :</p>
@@ -173,7 +174,7 @@
 <p>return (price1 + price2 + price3) / 3;</p>
 <p>}</p>
 <p>}</p>
-<h3>Front-Running</h3>
+<h4>Front-Running</h4>
 <p>Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) bots monitor the mempool and submit transactions ahead of profitable trades.</p>
 <p><strong>Prevention</strong> :</p>
 <ul>
@@ -187,7 +188,7 @@
 <p>Use private transaction relayers (Flashbots, MEV Blocker).</p>
 </li>
 </ul>
-<h3>Integer Overflow and Underflow</h3>
+<h4>Integer Overflow and Underflow</h4>
 <p>While Solidity 0.8+ includes built-in overflow checking via <code>unchecked</code> blocks, older versions required SafeMath. Always use SafeMath or Solidity 0.8+ for arithmetic.</p>
 <p>// Solidity 0.8+ automatically reverts on overflow</p>
 <p>uint256 max = type(uint256).max;</p>
@@ -196,7 +197,7 @@
 <p>unchecked {</p>
 <p>uint256 result = max + 1; // Wraps around (use with caution)</p>
 <p>}</p>
-<h3>Access Control Vulnerabilities</h3>
+<h4>Access Control Vulnerabilities</h4>
 <p>Improper access control allows unauthorized users to call privileged functions. The Parity multi-sig wallet hack (2017) lost 30 million dollars due to an unprotected <code>initWallet</code> function.</p>
 <p><strong>Prevention</strong> :</p>
 <ul>
@@ -226,9 +227,9 @@
 <p>_pause();</p>
 <p>}</p>
 <p>}</p>
-<h2>Smart Contract Auditing</h2>
+<h3>Smart Contract Auditing</h3>
 <p>Auditing is the primary defense against smart contract vulnerabilities. A thorough audit combines automated scanning with manual review.</p>
-<h3>Automated Auditing Tools</h3>
+<h4>Automated Auditing Tools</h4>
 <ul>
 <li>
 <p><strong>Slither</strong> : Static analysis framework for Solidity. Detects common vulnerabilities, generates contract inheritance graphs, and identifies dangerous patterns.</p>
@@ -240,13 +241,13 @@
 <p><strong>Echidna</strong> : Fuzzing tool that tests contract properties using random inputs.</p>
 </li>
 </ul>
-<h1>Slither analysis</h1>
+<h2>Slither analysis</h2>
 <p>slither my_contract.sol --print human-summary</p>
-<h1>Run specific detectors</h1>
+<h2>Run specific detectors</h2>
 <p>slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth</p>
-<h1>Mythril analysis</h1>
+<h2>Mythril analysis</h2>
 <p>myth analyze my_contract.sol --solc-json solc.json</p>
-<h3>Property-Based Fuzzing with Foundry</h3>
+<h4>Property-Based Fuzzing with Foundry</h4>
 <p>Foundry is a modern Solidity testing framework that supports fuzz testing and invariant testing.</p>
 <p>// Foundry fuzz test</p>
 <p>contract TestToken is Test {</p>
@@ -263,7 +264,7 @@
 <p>assertGe(token.totalSupply(), before);</p>
 <p>}</p>
 <p>}</p>
-<h3>Manual Review Checklist</h3>
+<h4>Manual Review Checklist</h4>
 <p>Automated tools catch common patterns but miss business logic flaws. Manual review is essential.</p>
 <ul>
 <li>
@@ -285,9 +286,9 @@
 <p><strong>Token handling</strong> : Does the contract handle non-standard ERC-20 tokens (USDT, fee-on-transfer)?</p>
 </li>
 </ul>
-<h2>Formal Verification</h2>
+<h3>Formal Verification</h3>
 <p>Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.</p>
-<h3>Tools</h3>
+<h4>Tools</h4>
 <ul>
 <li>
 <p><strong>Certora Prover</strong> : Automated formal verification platform with property specification language.</p>
@@ -311,9 +312,9 @@
 <p>assert supply_after &gt;= supply_before;</p>
 <p>}</p>
 <p>Formal verification is most valuable for high-value contracts (DeFi protocols, bridges, stablecoins) where failure is catastrophic.</p>
-<h2>Wallet Security</h2>
+<h3>Wallet Security</h3>
 <p>User wallets are a major attack vector. Protecting wallet infrastructure is critical for any blockchain application.</p>
-<h3>Key Management</h3>
+<h4>Key Management</h4>
 <ul>
 <li>
 <p>Never store private keys in plaintext.</p>
@@ -325,7 +326,7 @@
 <p>Implement multi-party computation (MPC) for distributed key management.</p>
 </li>
 </ul>
-<h3>EIP-712 Structured Data Signing</h3>
+<h4>EIP-712 Structured Data Signing</h4>
 <p>Use typed data signing (EIP-712) to make signed data readable in wallets, reducing phishing risk.</p>
 <p>// EIP-712 typed data</p>
 <p>struct Permit {</p>
@@ -338,9 +339,10 @@
 <p>bytes32 constant PERMIT_TYPEHASH = keccak256(</p>
 <p>"Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"</p>
 <p>);</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Smart contract security requires a multi-layered approach. Understand common vulnerabilities like reentrancy, oracle manipulation, and front-running. Use automated analysis tools like Slither and Mythril. Invest in formal verification for high-value contracts. Implement rigorous access control and follow patterns like checks-effects-interactions. Finally, secure the wallet infrastructure that interacts with your contracts. In the immutable world of blockchain, security is not optional.</p>
-<p><strong>See also:</strong> <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p></div>
+<p><strong>See also:</strong> <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/time-series-postgresql.html
 
 # Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
-# Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
+
+## Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates
 
 Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates 
 
@@ -271,5 +273,7 @@ TimescaleDB is the right choice when you need:
 The combination of hypertables, continuous aggregates, and compression makes PostgreSQL with TimescaleDB a compelling default choice for time-series data that coexists with relational data.
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Query Parameterization: Bind Parameters, Prepared Statements, and SQL Injection](</en/database/query-parameters.html>).
+
+**See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)
 
 **See also:** [Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing](</en/database/change-data-capture.html>), [Composite Indexes: Column Order, Covering Indexes, and Partial Indexes](</en/database/composite-indexes.html>), [Slow Query Troubleshooting: Identification, Profiling, and Optimization](</en/database/database-slow-query-fix.html>)

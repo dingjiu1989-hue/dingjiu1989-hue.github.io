@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/zero-downtime-deployment.
 
 # Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
 
-# Zero-Downtime Deployment Strategies
+## Zero-Downtime Deployment Strategies
+
+## Zero-Downtime Deployment Strategies
 
 Zero-downtime deployment ensures that application updates occur without interrupting user-facing service. As systems grow from hobby projects to business-critical platforms, deployment windows become unacceptable. Modern deployment strategies provide multiple approaches to achieving seamless updates, each with different tradeoffs in complexity, cost, and risk. 
 
@@ -51,5 +53,7 @@ Session management requires attention during deployments. In-memory sessions are
 The choice of deployment strategy depends on application architecture, team maturity, and risk tolerance. Rolling deployments suit simple stateless services. Blue-green deployments fit services requiring predictable cutover times. Canary deployments are appropriate for high-risk, high-traffic services where gradual rollout provides the best safety profile. Many organizations combine approaches — using rolling deployments for routine updates and canary for major releases.
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>).
+
+**See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)
 
 **See also:** [Blue-Green Deployment Strategy](</en/architecture/blue-green-deployment.html>), [Canary Deployments for Safe Releases](</en/architecture/canary-deployment.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)

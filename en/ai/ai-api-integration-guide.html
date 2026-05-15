@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-integration-guide.png">
     <meta property="article:published_time" content="2026-05-08">
-    <meta property="article:modified_time" content="2026-05-08">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="AI API, OpenAI, Anthropic, Backend">
     <title>AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers — SourceHub</title>
     <meta name="description" content="Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.">
@@ -46,8 +46,8 @@
       "description": "Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-integration-guide.png",
       "datePublished": "2026-05-08",
-      "dateModified": "2026-05-08",
-      "wordCount": "965",
+      "dateModified": "2026-05-10",
+      "wordCount": "612",
       "keywords": "AI API, OpenAI, Anthropic, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -66,46 +66,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers",
-      "description": "Practical guide to integrating AI APIs into your apps. Streaming responses, function calling, embeddings, rate limits, and cost optimization across the big 3 providers.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Streaming Responses",
-        "text": "Streaming shows tokens as they're generated — critical for good UX. All three APIs support it: // Anthropic streaming example import Anthropic from \"@anthropic-ai/sdk\"; const client = new Anthropic(); const stream = client.messages.stream({ model: \"claude-sonnet-4-20250514\", max_tokens: 4096, messag"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "Function Calling (Tool Use)",
-        "text": "Function calling lets the AI call your APIs. Define the tools, and the AI decides when to use them: // Define a tool const tools = [{ name: \"search_database\", description: \"Search the product database\", input_schema: { type: \"object\", properties: { query: { type: \"string\", description: \"Search query"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Embeddings for Semantic Search",
-        "text": "Embeddings convert text into vectors for semantic search. OpenAI and Google both offer embedding APIs: // OpenAI embeddings const embedding = await openai.embeddings.create({ model: \"text-embedding-3-small\", // $0.02/1M tokens — cheapest input: \"How to deploy Next.js to Vercel\", }); // Store in vect"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "4",
-        "name": "Cost Optimization Strategies",
-        "text": "Strategy Savings How Model routing 50-80% Route simple tasks to Haiku/Flash, complex to Sonnet/Pro Caching 50-90% Cache common responses. Anthropic has built-in prompt caching. Shorter prompts 20-40% System prompts are charged per request. Keep them tight. Batch processing 50% OpenAI batch API is 50"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "5",
-        "name": "Error Handling Pattern",
-        "text": "async function callAI(prompt: string): Promise&lt;string&gt; { const maxRetries = 3; for (let i = 0; i Bottom line: Use streaming for any user-facing feature. Use function calling to extend the AI with your own data. Cache aggressively. Route simple queries to cheaper models. See also: Prompt Engine"
-      }
       ]
     }
     </script>
@@ -136,7 +96,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers</h1>
-      <div class="article-meta">Published 2026-05-08 · 3720 views · 31 replies</div>
+      <div class="article-meta">Published 2026-05-08 · Last active 2026-05-10 · 3720 views · 31 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-integration-guide.png" alt="AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers" width="1200" height="630" loading="lazy">
       <div class="article-body"><p>Adding AI to your app means calling an API. OpenAI, Anthropic, and Google AI each have different SDKs, pricing models, and capabilities. Here's the practical integration guide covering the patterns you'll actually use: streaming, function calling, embeddings, and cost optimization.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-integration-guide.png" alt="AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 

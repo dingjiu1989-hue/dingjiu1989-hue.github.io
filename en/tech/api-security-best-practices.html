@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-security-best-practices.png">
     <meta property="article:published_time" content="2026-05-09">
-    <meta property="article:modified_time" content="2026-05-09">
+    <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="">
     <title>API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs — SourceHub</title>
     <meta name="description" content="Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.">
@@ -46,8 +46,8 @@
       "description": "Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/api-security-best-practices.png",
       "datePublished": "2026-05-09",
-      "dateModified": "2026-05-09",
-      "wordCount": "1617",
+      "dateModified": "2026-05-13",
+      "wordCount": "1413",
       "keywords": "",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -66,76 +66,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs",
-      "description": "Complete API security guide covering JWT authentication, RBAC authorization, rate limiting, input validation, CORS, SQL injection prevention, and secrets management with code examples.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Authentication: JWT Done Right",
-        "text": "JWTs are ubiquitous, but most implementations are vulnerable. Here are the rules: always set an expiration ( exp ) claim — never issue eternal tokens; always validate the iss (issuer) and aud (audience) claims — don't accept tokens issued for other services; never accept alg: none — explicitly white"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "Authorization: RBAC and ABAC",
-        "text": "Never trust the client to enforce authorization. Every API endpoint must verify: is this user authenticated? Does this user have permission for this action on this resource? Implement role-based access control (RBAC) for simple cases: admin, editor, viewer. For complex cases, use attribute-based acc"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Rate Limiting: Stop Abuse Before It Starts",
-        "text": "Every public API endpoint needs rate limiting. Without it, a single misconfigured client can take down your service. Use the token bucket or sliding window algorithm — fixed window is too bursty. Rate limit by: IP address (basic), API key (better), user ID + endpoint (best). Return standard headers:"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "4",
-        "name": "Input Validation: Never Trust the Client",
-        "text": "The #1 cause of API vulnerabilities is trusting user input. Validate everything: type (is this a string? number?), format (is this a valid email? UUID?), length (is this under the max?), range (is this number between 1 and 100?), and business rules (is this status transition allowed?). Use a schema "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "5",
-        "name": "CORS: Be Strict, Not Permissive",
-        "text": "Never use Access-Control-Allow-Origin: * on an API that uses cookies or tokens. Specify exact origins. Never echo back the Origin header without whitelisting. Don't allow Access-Control-Allow-Credentials: true with a wildcard origin. For public APIs that legitimately need broad access, use API keys "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "6",
-        "name": "SQL Injection: Still Relevant in 2026",
-        "text": "Parameterized queries eliminate SQL injection. Never concatenate user input into SQL strings. ORMs help but aren't foolproof — raw queries with string interpolation are still common in ORM codebases. Always use parameterized queries or the ORM's safe query builder. // BAD - SQL injection vulnerable "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "7",
-        "name": "HTTPS and TLS: Non-Negotiable",
-        "text": "Serve everything over HTTPS. Redirect HTTP to HTTPS with HSTS ( Strict-Transport-Security: max-age=31536000; includeSubDomains ). Use TLS 1.3 minimum. GitHub Pages handles this automatically, but if you self-host, use Let's Encrypt with auto-renewal. Never disable certificate validation in your API "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "8",
-        "name": "Secrets Management",
-        "text": "Never hardcode secrets. Use environment variables for local development, a secrets manager (AWS Secrets Manager, Doppler, Infisical) for production. Rotate secrets regularly. Never log secrets — configure your logger to redact known secret patterns. Never commit secrets to version control — use .git"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "9",
-        "name": "Logging and Monitoring",
-        "text": "Log every authentication attempt (success and failure). Log every authorization failure. Log every rate limit hit. Log every input validation failure. These four signals catch 80% of attacks in progress. Ship logs to a centralized system (Datadog, Grafana Loki, Better Stack) and set up alerts for an"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "10",
-        "name": "API Security Checklist",
-        "text": "Category Must Have Nice to Have Auth JWT with expiry + RS256 OAuth 2.1, Passkeys AuthZ RBAC per endpoint ABAC, OPA/Rego policies Rate Limit Per-user/IP, 429 response Distributed rate limiting Validation Schema validation on every input OpenAPI spec as validation source CORS Explicit origins, no wild"
-      }
       ]
     }
     </script>
@@ -161,7 +91,7 @@
     <article>
       <div class="article-tags"></div>
       <h1 class="article-title">API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs</h1>
-      <div class="article-meta">Published 2026-05-09 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-09 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-security-best-practices.png" alt="API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs" width="1200" height="630" loading="lazy">
       <div class="article-body"><p>APIs are the front door to your application — and the #1 attack surface in 2026. This guide covers the security practices every API developer must implement, from authentication to rate limiting to input validation, with concrete code examples.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/api-security-best-practices.png" alt="API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 

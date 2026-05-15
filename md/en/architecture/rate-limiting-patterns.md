@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rate-limiting-patterns.ht
 
 # Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
 
-# Rate Limiting Patterns
+## Rate Limiting Patterns
+
+## Rate Limiting Patterns
 
 Rate limiting is a critical component of any production API or service. It protects your system from abuse, ensures fair usage among consumers, and maintains service quality under load. This article explores the most common rate limiting algorithms and how to choose the right one for your use case. 
 
@@ -169,5 +171,7 @@ Summary
 Rate limiting is essential for production APIs. Start with the token bucket algorithm for general-purpose rate limiting. Use Redis for distributed scenarios. Always return descriptive headers so clients can adjust their behavior. Monitor your rate limiting effectiveness and adjust thresholds based on real traffic patterns.
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>).
+
+**See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)
 
 **See also:** [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Messaging Patterns: Pub/Sub and Request/Reply](</en/architecture/messaging-patterns.html>), [Serverless Architecture Patterns](</en/architecture/serverless-architecture.html>)

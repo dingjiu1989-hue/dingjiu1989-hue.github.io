@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/compare/vercel-vs-netlify.html
 
 # Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
-# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+
+## Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
 
 Vercel and Netlify are the two dominant platforms for frontend deployment. Both offer Git-based deployment, serverless functions, edge computing, and generous free tiers. But they have different strengths that matter depending on your stack and scale.
 
-## Deployment Experience
+### Deployment Experience
 
 Both platforms offer automatic deployment from GitHub, GitLab, or Bitbucket. Push to a branch, and the platform builds and deploys automatically. Preview deployments for pull requests are standard on both.
 
@@ -44,7 +46,7 @@ Netlify's deployment is framework-agnostic. It works well with any static site g
 
 Both support deploy previews, rollbacks, and branch-based deployments. The experience is comparable for most use cases. Vercel has a slight edge for Next.js projects. Netlify has a slight edge for custom build configurations.
 
-## Serverless Functions
+### Serverless Functions
 
 Vercel and Netlify both offer serverless functions, but they work differently.
 
@@ -54,7 +56,7 @@ Netlify functions also run on AWS Lambda. They support Node.js and Go natively, 
 
 The key difference is in the developer experience. Vercel functions use the `api/` directory, the same convention as Next.js API routes. Netlify functions use `netlify/functions/` and require a slightly different setup. Vercel's integration feels more natural if you are already in the Next.js ecosystem.
 
-## Edge Computing
+### Edge Computing
 
 Vercel Edge Functions run on Vercel's Edge Network using the Web Standards API. They have a 1-50ms cold start and run in over 100 locations worldwide. Edge Functions are ideal for authentication checks, A/B testing, geolocation-based redirects, and personalization.
 
@@ -62,7 +64,7 @@ Netlify Edge Functions also run at the edge, based on Deno. They provide similar
 
 The edge computing capabilities are comparable. Vercel Edge Functions use JavaScript only. Netlify Edge Functions also use JavaScript but leverage the Deno runtime, which has broader API compatibility.
 
-## Pricing
+### Pricing
 
 Both platforms offer generous free tiers. Vercel's free tier includes 100 GB bandwidth, 100 GB-hours of serverless execution, and 1 million edge function invocations per month. Netlify's free tier includes 100 GB bandwidth, 125,000 serverless function invocations, and 2 million edge function invocations.
 
@@ -72,7 +74,7 @@ At scale, costs diverge. Vercel charges for bandwidth overage at $0.10 per GB fo
 
 For high-traffic applications, Vercel tends to be more cost-effective. For low-traffic hobby projects, both free tiers are sufficient.
 
-## Developer Experience
+### Developer Experience
 
 Vercel's DX is tightly integrated with Next.js. The Vercel CLI, dashboard, and analytics are polished and well-designed. Environment variable management, team collaboration, and integration marketplace are all above average.
 
@@ -80,7 +82,7 @@ Netlify's DX is more framework-agnostic. The Netlify CLI is powerful, the dashbo
 
 Both platforms offer excellent developer experience. The choice often comes down to your framework preference. Next.js developers prefer Vercel. Static site and general frontend developers often prefer Netlify.
 
-## Migration Considerations
+### Migration Considerations
 
 Migrating between platforms is straightforward for static sites. For applications using serverless functions, you need to rewrite function handlers and update configuration files. Edge functions require more significant changes since the runtimes differ.
 
@@ -89,5 +91,7 @@ Consider your long-term stack before choosing. If you are committed to Next.js, 
 Both platforms are excellent. Choose based on your framework, traffic volume, and which platform's pricing aligns with your scale. You can always move later, but choosing the right one upfront saves migration effort.
 
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Jest vs Vitest: Testing Framework Comparison](</en/compare/jest-vs-vitest.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>).
+
+**See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>)
 
 **See also:** [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Auth0 vs Clerk: Authentication Platforms Compared](</en/compare/auth0-vs-clerk.html>), [GitHub Actions vs GitLab CI: CI/CD Platforms Compared](</en/compare/github-actions-vs-gitlab-ci.html>)

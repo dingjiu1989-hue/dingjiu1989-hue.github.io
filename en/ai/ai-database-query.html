@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-04-02">
     <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <title>Natural Language to SQL with LLMs — SourceHub</title>
     <meta name="description" content="Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.">
@@ -46,8 +46,8 @@
       "description": "Build systems that convert natural language questions into SQL queries using LLMs, with schema context, query validation, and safety guards.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "2192",
+      "dateModified": "2026-04-02",
+      "wordCount": "1887",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -92,27 +92,28 @@
       <div class="article-tags">        <span class="tag-cat">Artificial Intelligence</span>
         <span class="tag-cat">Machine Learning</span></div>
       <h1 class="article-title">Natural Language to SQL with LLMs</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-04-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h1>Natural Language to SQL with LLMs</h1>
-<h2>Introduction</h2>
+      <div class="article-body"><h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h2>Natural Language to SQL with LLMs</h2>
+<h3>Introduction</h3>
 <p>Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries — when properly configured with schema context, safety guards, and validation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png" alt="Natural Language to SQL with LLMs" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>How NL2SQL Works</h2>
+<h3>How NL2SQL Works</h3>
 <p>The core architecture is straightforward:</p>
 <p>User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting</p>
 <p>The critical step is <strong>context assembly</strong> — providing the LLM with enough database metadata to generate correct SQL.</p>
-<h2>Schema Context</h2>
+<h3>Schema Context</h3>
 <p>The LLM needs to understand your database schema. A well-structured schema prompt includes:</p>
 <p>CREATE TABLE customers (</p>
 <p>customer_id INTEGER PRIMARY KEY,</p>
@@ -160,11 +161,11 @@
 <p>ddl += f" {col.name} {col.type} -- {col.description}\n"</p>
 <p>ddl += ");"</p>
 <p>context_parts.append(ddl)</p>
-<h1>Add sample rows for context on data patterns</h1>
+<h2>Add sample rows for context on data patterns</h2>
 <p>if table.sample_rows:</p>
 <p>context_parts.append(f"-- Sample row: {table.sample_rows[0]}")</p>
 <p>return "\n\n".join(context_parts)</p>
-<h2>Few-Shot Examples</h2>
+<h3>Few-Shot Examples</h3>
 <p>For complex schemas, provide question-SQL pairs relevant to the query:</p>
 <p>few_shot_examples = [</p>
 <p>{</p>
@@ -197,7 +198,7 @@
 <p>}</p>
 <p>]</p>
 <p><strong>Dynamic example retrieval</strong> using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question.</p>
-<h2>SQL Generation Prompt</h2>
+<h3>SQL Generation Prompt</h3>
 <p>The complete prompt combines schema, examples, and safety instructions:</p>
 <p>def build_nl2sql_prompt(question, schema, examples, dialect="postgresql"):</p>
 <p>prompt = f"""You are a {dialect} SQL expert. Convert natural language questions into SQL queries.</p>
@@ -218,30 +219,30 @@
 <p>prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"</p>
 <p>prompt += f"\nQ: {question}\nSQL:"</p>
 <p>return prompt</p>
-<h2>Query Validation</h2>
+<h3>Query Validation</h3>
 <p>Before executing generated SQL, validate it:</p>
 <p>def validate_sql(query, allowed_tables):</p>
 <p>errors = []</p>
-<h1>Safety check: no mutations</h1>
+<h2>Safety check: no mutations</h2>
 <p>forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]</p>
 <p>for keyword in forbidden_keywords:</p>
 <p>if keyword in query.upper():</p>
 <p>errors.append(f"Forbidden operation: {keyword}")</p>
-<h1>Check table references</h1>
+<h2>Check table references</h2>
 <p>parsed = sqlparse.parse(query)[0]</p>
 <p>used_tables = extract_tables(parsed)</p>
 <p>for table in used_tables:</p>
 <p>if table not in allowed_tables:</p>
 <p>errors.append(f"Unauthorized table: {table}")</p>
-<h1>Syntax validation</h1>
+<h2>Syntax validation</h2>
 <p>try:</p>
 <p>conn = get_dummy_connection(dialect)</p>
 <p>conn.execute(f"EXPLAIN {query}")</p>
 <p>except Exception as e:</p>
 <p>errors.append(f"SQL syntax error: {str(e)}")</p>
 <p>return errors</p>
-<h2>Advanced Techniques</h2>
-<h3>Self-Correction Loop</h3>
+<h3>Advanced Techniques</h3>
+<h4>Self-Correction Loop</h4>
 <p>When the generated SQL fails or returns empty results, the system can self-correct:</p>
 <p>def nl2sql_with_correction(question, schema, max_attempts=3):</p>
 <p>for attempt in range(max_attempts):</p>
@@ -259,7 +260,7 @@
 <p>else:</p>
 <p>feedback = f"Validation errors: {', '.join(errors)}"</p>
 <p>question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."</p>
-<h3>Schema Linking</h3>
+<h4>Schema Linking</h4>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
 <p>def identify_relevant_tables(question, all_tables, table_descriptions):</p>
 <p>prompt = f"""</p>
@@ -271,14 +272,15 @@
 <p>response = call_llm(prompt)</p>
 <p>return [t.strip() for t in response.split(",")]</p>
 <p>This dramatically reduces context size and improves accuracy on large databases.</p>
-<h2>Production Deployment</h2>
+<h3>Production Deployment</h3>
 <p><strong>Security</strong> : Always use a read-only database user, set statement timeouts, and implement rate limiting per user.</p>
 <p><strong>Caching</strong> : Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes.</p>
 <p><strong>Monitoring</strong> : Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency.</p>
 <p><strong>User experience</strong> : Show the generated SQL to users (with a "view query" option), and allow them to provide feedback on results.</p>
-<h2>Conclusion</h2>
+<h3>Conclusion</h3>
 <p>Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members.</p>
-<p><strong>See also:</strong> <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/local-llm-setup.html">Running LLMs Locally</a>, <a href="/en/ai/responsible-ai.html">Responsible AI Development Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

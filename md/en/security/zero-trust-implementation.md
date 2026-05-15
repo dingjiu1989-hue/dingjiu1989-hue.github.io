@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/zero-trust-implementation.htm
 
 # Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
 
-# Zero Trust Implementation
+## Zero Trust Implementation
+
+## Zero Trust Implementation
 
 Zero Trust Principles 
 
@@ -38,7 +40,7 @@ Micro-Segmentation
 
 Divide your network into small, isolated zones. Each zone requires separate authentication. 
 
-# Terraform: AWS security group micro-segmentation
+## Terraform: AWS security group micro-segmentation
 
 resource "aws_security_group" "app_to_db" {
 
@@ -78,7 +80,7 @@ Least Privilege Access
 
 Implement just-in-time (JIT) access with ephemeral credentials. 
 
-# JIT access broker
+## JIT access broker
 
 from datetime import datetime, timedelta
 
@@ -195,5 +197,7 @@ Conclusion
 Zero Trust is an architectural shift, not a product. Start with a single application, implement micro-segmentation, enforce least privilege, and expand gradually. Measure progress by reduction in lateral movement capability and mean time to detect anomalies.
 
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Kubernetes Network Policies](</en/security/kubernetes-network-policies.html>).
+
+**See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)
 
 **See also:** [Zero Trust Networking: Architecture and Implementation Guide](</en/security/zero-trust-networking.html>), [Web Application Firewall Implementation](</en/security/waf-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>)

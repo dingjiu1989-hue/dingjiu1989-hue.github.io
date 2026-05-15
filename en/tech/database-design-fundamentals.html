@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/database-design-fundamentals.png">
     <meta property="article:published_time" content="2026-05-08">
-    <meta property="article:modified_time" content="2026-05-08">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Database, SQL, Schema Design, Backend">
     <title>Database Design Fundamentals: Normalization, Indexing, and Schema Design — SourceHub</title>
     <meta name="description" content="Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.">
@@ -46,8 +46,8 @@
       "description": "Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/database-design-fundamentals.png",
       "datePublished": "2026-05-08",
-      "dateModified": "2026-05-08",
-      "wordCount": "1108",
+      "dateModified": "2026-05-10",
+      "wordCount": "830",
       "keywords": "Database, SQL, Schema Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -66,46 +66,6 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Database Design Fundamentals: Normalization, Indexing, and Schema Design"}
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Database Design Fundamentals: Normalization, Indexing, and Schema Design",
-      "description": "Design databases that don't haunt you later. Covers normalization (1NF to 3NF), indexing strategies, relationship types, and common schema design mistakes.",
-      "step": [
-          {
-        "@type": "HowToStep",
-        "position": "1",
-        "name": "Normalization — Reduce Redundancy",
-        "text": "Normalization eliminates duplicate data and prevents update anomalies. You need at least 3NF (Third Normal Form) for most applications. 1NF: Atomic Values, No Repeating Groups -- ❌ Denormalized: multiple phone numbers in one field | id | name | phones | | 1 | Alice | \"555-0001, 555-0002\"| -- ✅ 1NF: "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "2",
-        "name": "Indexing — Speed Up Queries",
-        "text": "Index Type Best For Example B-Tree (default) Equality, range, sorting WHERE email = ?, ORDER BY created_at Composite Multi-column queries WHERE user_id = ? AND status = ? Partial Filtering by condition WHERE deleted_at IS NULL Full-text (GIN/GiST) Text search WHERE body @@ to_tsquery('typescript') U"
-      },
-      {
-        "@type": "HowToStep",
-        "position": "3",
-        "name": "Relationship Types",
-        "text": "-- One-to-Many (most common): CREATE TABLE posts ( id SERIAL PRIMARY KEY, user_id INT REFERENCES users(id), -- FK to users title TEXT NOT NULL ); -- One user → many posts -- Many-to-Many (use junction table): CREATE TABLE post_tags ( post_id INT REFERENCES posts(id), tag_id INT REFERENCES tags(id), "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "4",
-        "name": "Common Schema Design Mistakes",
-        "text": "Mistake Why It's Bad Fix Using VARCHAR for everything No constraints, wasted space Use appropriate types (UUID, INT, TIMESTAMPTZ, TEXT) Storing JSON blobs instead of columns Can't index, can't query efficiently Relational columns first, JSONB only for truly dynamic data No TIMESTAMPTZ Timezone bugs "
-      },
-      {
-        "@type": "HowToStep",
-        "position": "5",
-        "name": "Choosing Your Primary Key",
-        "text": "Strategy Pros Cons UUID v4 No collisions, client-generated, no sequence contention Larger (16 bytes), fragmented index, slower joins UUID v7 Time-ordered, all UUID benefits Slightly more complex generation Auto-increment INT Small index, fast joins, ordered Predictable, can't merge across servers, e"
-      }
       ]
     }
     </script>
@@ -136,7 +96,7 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat" style="background:#fff3cd;color:#856404;">🔥 Hot</span></div>
       <h1 class="article-title">Database Design Fundamentals: Normalization, Indexing, and Schema Design</h1>
-      <div class="article-meta">Published 2026-05-08 · 4200 views · 35 replies</div>
+      <div class="article-meta">Published 2026-05-08 · Last active 2026-05-10 · 4200 views · 35 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" width="1200" height="630" loading="lazy">
       <div class="article-body"><p>A well-designed database makes every query simpler and faster. A poorly-designed one creates bugs, slow queries, and painful migrations forever. Here are the fundamentals every developer should know before creating tables.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/database-design-fundamentals.png" alt="Database Design Fundamentals: Normalization, Indexing, and Schema Design" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 

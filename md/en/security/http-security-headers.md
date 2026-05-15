@@ -8,31 +8,33 @@ url: https://dingjiu1989-hue.github.io/en/security/http-security-headers.html
 
 # HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
 
-# HTTP Security Headers Checklist
+## HTTP Security Headers Checklist
+
+## HTTP Security Headers Checklist
 
 Why Security Headers Matter 
 
@@ -165,5 +167,7 @@ Summary
 Implementing HTTP security headers is one of the highest-ROI security improvements you can make. Start with HSTS, CSP, X-Content-Type-Options, and X-Frame-Options, then progressively add the remaining headers. Test regularly with automated scanners, and monitor CSP reports to catch new vulnerabilities as your application evolves.
 
 **See also:** [Mobile Application Security Guide](</en/security/mobile-security.html>), [XSRF/CSRF Protection Guide](</en/security/xsrf-csrf-protection.html>), [Container Security Best Practices](</en/security/container-security.html>).
+
+**See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)
 
 **See also:** [DevSecOps: Integrating Security into CI/CD](</en/security/devsecops-pipeline.html>), [Mobile Application Security Guide](</en/security/mobile-security.html>), [Webhook Security Best Practices](</en/security/webhook-security.html>)

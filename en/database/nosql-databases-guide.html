@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png">
     <meta property="article:published_time" content="2026-05-11">
-    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-10">
     <meta property="article:tag" content="Database, SQL">
     <title>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore) — SourceHub</title>
     <meta name="description" content="A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.">
@@ -45,8 +45,8 @@
       "description": "A practical guide to NoSQL databases comparing MongoDB, DynamoDB, and Firestore for document storage, scalability, and query patterns.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png",
       "datePublished": "2026-05-11",
-      "dateModified": "2026-05-11",
-      "wordCount": "1430",
+      "dateModified": "2026-05-10",
+      "wordCount": "1205",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -91,19 +91,20 @@
       <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-      <div class="article-meta">Published 2026-05-11 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-11 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
-<h1>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h1>
+      <div class="article-body"><h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
+<h2>NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)</h2>
 <p>What Are NoSQL Databases? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/nosql-databases-guide.png" alt="NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>NoSQL databases are non-relational data stores designed for specific data models and access patterns that do not fit well in the relational paradigm. They trade strict ACID guarantees for scalability, flexibility, and performance at scale. </p>
 <p>NoSQL Database Types </p>
@@ -216,7 +217,7 @@
 <p>import firebase_admin</p>
 <p>from firebase_admin import firestore</p>
 <p>db = firestore.client()</p>
-<h1>Document reference</h1>
+<h2>Document reference</h2>
 <p>user_ref = db.collection('users').document('alice')</p>
 <p>user_ref.set({</p>
 <p>'email': 'alice@example.com',</p>
@@ -224,14 +225,14 @@
 <p>'roles': ['admin', 'editor'],</p>
 <p>'created_at': firestore.SERVER_TIMESTAMP</p>
 <p>})</p>
-<h1>Subcollection for hierarchical data</h1>
+<h2>Subcollection for hierarchical data</h2>
 <p>orders_ref = user_ref.collection('orders')</p>
 <p>orders_ref.add({</p>
 <p>'product': 'Laptop',</p>
 <p>'amount': 1200,</p>
 <p>'status': 'completed'</p>
 <p>})</p>
-<h1>Real-time listener</h1>
+<h2>Real-time listener</h2>
 <p>def on_snapshot(doc_snapshot, changes, read_time):</p>
 <p>for change in changes:</p>
 <p>print(f"Order changed: {change.document.id}")</p>
@@ -252,7 +253,8 @@
 <p>| Factor | MongoDB | DynamoDB | Firestore | |--------|---------|----------|-----------| | Query flexibility | Excellent | Limited to key/GSI | Moderate | | Scalability | Manual sharding | Automatic | Automatic | | Consistency | Configurable | Eventual (default) | Strong | | Hosting | Self-managed or Atlas | AWS-managed | GCP-managed | | Real-time | Change streams | DynamoDB Streams | Native real-time | | Offline support | Limited | Limited | Excellent | | Pricing | Instance-based | Pay per request | Pay per read/write | </p>
 <p>Summary </p>
 <p>NoSQL databases excel at scale and flexibility but require different design thinking than relational databases. MongoDB offers the most flexible querying with embedded documents, DynamoDB provides unparalleled scalability with single-table design, and Firestore offers the best real-time and offline support. Choose based on your access patterns, scalability needs, and cloud ecosystem rather than treating NoSQL as a one-size-fits-all solution.</p>
-<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/document-databases.html">Document Databases: MongoDB, CouchDB, Firestore</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/sql-vs-nosql.html">SQL vs NoSQL Decision Guide</a>, <a href="/en/database/oltp-vs-olap.html">OLTP vs OLAP: Workload Optimization</a>, <a href="/en/database/data-modeling.html">Data Modeling Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

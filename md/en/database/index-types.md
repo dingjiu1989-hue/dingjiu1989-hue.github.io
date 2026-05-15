@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/index-types.html
 
 # Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
-# Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
+
+## Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN
 
 Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN 
 
@@ -200,5 +202,7 @@ Choosing the Right Index
 The best index is the one that matches your query patterns exactly. A B-tree index on a column never used in WHERE or ORDER BY is wasted storage. Conversely, a BRIN index on a randomly-ordered column may be useless because it does not exclude any blocks. Measure before and after creating indexes using `EXPLAIN (ANALYZE, BUFFERS)` to confirm the performance benefit.
 
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>).
+
+**See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)
 
 **See also:** [B-Tree, Hash, GiST, GIN: Index Type Selection Guide](</en/database/database-index-types.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes](</en/database/full-text-search-postgresql.html>)

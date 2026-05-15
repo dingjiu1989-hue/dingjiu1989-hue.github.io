@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-composition.html
 
 # API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
 
-# API Composition and Aggregation
+## API Composition and Aggregation
+
+## API Composition and Aggregation
 
 API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. 
 
@@ -47,5 +49,7 @@ Caching at the composition layer can dramatically improve performance and reduce
 The choice between these patterns depends on client diversity, team structure, and performance requirements. API composition suits homogeneous clients and simpler architectures. GraphQL federation excels when clients need flexible data shapes. BFF shines with diverse client platforms and independent team ownership of client experiences.
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Gateway Patterns](</en/architecture/api-gateway-patterns.html>), [Materialized View Pattern](</en/architecture/materialized-view-pattern.html>).
+
+**See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)
 
 **See also:** [API Composition Pattern](</en/architecture/api-composition-pattern.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>)

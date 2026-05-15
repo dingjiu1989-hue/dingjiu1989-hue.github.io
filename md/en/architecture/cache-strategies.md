@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cache-strategies.html
 
 # Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
 
-# Caching Strategies
+## Caching Strategies
+
+## Caching Strategies
 
 Caching is one of the most effective techniques for improving application performance, but choosing the right caching strategy is critical. Incorrect cache usage can lead to stale data, increased latency under certain conditions, or even system instability. This article examines the three fundamental caching strategies—write-through, write-around, and write-back—along with cache invalidation approaches essential for maintaining data consistency. 
 
@@ -67,5 +69,7 @@ The optimal strategy depends on your access patterns. Read-heavy workloads with 
 Modern caching systems like Redis, Memcached, and CDN platforms provide configurable support for these strategies. The key is measuring your actual access patterns and choosing the strategy that aligns with your consistency, latency, and throughput requirements.
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>), [Saga vs Process Manager: Orchestration Patterns Compared](</en/architecture/saga-process-manager.html>).
+
+**See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)
 
 **See also:** [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [HTTP Caching Architecture](</en/architecture/caching-http.html>)

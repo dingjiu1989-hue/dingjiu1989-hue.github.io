@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh-deep.html
 
 # Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
 
-# Service Mesh Deep Dive
+## Service Mesh Deep Dive
+
+## Service Mesh Deep Dive
 
 A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. 
 
@@ -71,5 +73,7 @@ Choosing a Service Mesh
 The choice depends on your requirements. Istio for maximum features and traffic management capabilities. Linkerd for simplicity, performance, and ease of operation. Consul Connect for multi-platform environments. For teams new to service meshes, Linkerd offers the gentlest learning curve with the most immediate value. Regardless of choice, a service mesh is a significant operational investment that should be justified by concrete requirements for security, observability, or traffic management.
 
 **See also:** [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>).
+
+**See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)
 
 **See also:** [Service Mesh Patterns: Istio and Linkerd](</en/architecture/service-mesh.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>)

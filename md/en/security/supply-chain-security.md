@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/supply-chain-security.html
 
 # Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
 
-# Supply Chain Security
+## Supply Chain Security
+
+## Supply Chain Security
 
 Introduction 
 
@@ -104,15 +106,15 @@ An SBOM is a machine-readable inventory of all components in a software artifact
 
 }
 
-# Generate SPDX SBOM with syft
+## Generate SPDX SBOM with syft
 
 syft packages ./myapp:latest -o spdx-json > sbom.spdx.json
 
-# Generate CycloneDX SBOM
+## Generate CycloneDX SBOM
 
 cyclonedx-bom -o bom.xml -t file
 
-# Compare SBOMs for change detection
+## Compare SBOMs for change detection
 
 diff <(jq '.components[].purl' bom-v1.json | sort) \
 
@@ -122,25 +124,25 @@ Sigstore and Artifact Signing
 
 Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. 
 
-# Sign a container image with cosign
+## Sign a container image with cosign
 
 cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \
 
 myregistry.io/myapp:latest
 
-# Keyless signing (OIDC-based)
+## Keyless signing (OIDC-based)
 
 cosign sign myregistry.io/myapp:latest
 
-# Verify a signed image
+## Verify a signed image
 
 cosign verify --key pubkey.pem myregistry.io/myapp:latest
 
-# Verify keyless signature
+## Verify keyless signature
 
 cosign verify myregistry.io/myapp:latest
 
-# Cosign keyless verification policy
+## Cosign keyless verification policy
 
 cosign_policy:
 
@@ -158,11 +160,11 @@ bundle: "sigstore-bundle.json"
 
 Generating provenance with SLSA 
 
-# Generate SLSA provenance for a build
+## Generate SLSA provenance for a build
 
 gitsign --sign-commits HEAD
 
-# Attest provenance
+## Attest provenance
 
 cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \
 
@@ -172,7 +174,7 @@ in-toto: Framework for Supply Chain Integrity
 
 in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. 
 
-# in-toto layout definition
+## in-toto layout definition
 
 layout = Layout(
 
@@ -224,7 +226,7 @@ Dependency Confusion
 
 Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. 
 
-# Detect potential dependency confusion
+## Detect potential dependency confusion
 
 import requests
 
@@ -242,7 +244,7 @@ continue
 
 pkg_name = line.split('=')[0].strip().lower()
 
-# Check if package exists on PyPI
+## Check if package exists on PyPI
 
 resp = requests.get(f"https://pypi.org/pypi/{pkg_name}/json")
 
@@ -311,5 +313,7 @@ Conclusion
 Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected.
 
 **See also:** [Software Signing](</en/security/software-signing.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Microservice Security](</en/security/microservice-security.html>).
+
+**See also:** [Software Signing](</en/security/software-signing.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Microservice Security](</en/security/microservice-security.html>)
 
 **See also:** [Software Signing](</en/security/software-signing.html>), [Digital Forensics Guide](</en/security/forensics-guide.html>), [Microservice Security](</en/security/microservice-security.html>)

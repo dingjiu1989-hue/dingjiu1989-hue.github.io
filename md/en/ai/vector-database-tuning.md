@@ -8,33 +8,35 @@ url: https://dingjiu1989-hue.github.io/en/ai/vector-database-tuning.html
 
 # Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
-# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+
+## Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
 
 Vector databases are the backbone of modern RAG applications. But default configurations rarely give optimal results. Tuning your vector database for your specific data distribution and query patterns can improve recall by 20% or more while reducing latency. Here is the tuning guide.
 
-## Understanding Index Types
+### Understanding Index Types
 
 Vector databases support multiple index types, each with different trade-offs between search speed, memory usage, and recall accuracy.
 
@@ -44,7 +46,7 @@ IVF Inverted File Index is more memory-efficient than HNSW. It partitions vector
 
 There is no universal best index. HNSW is a safe starting point for most applications. Switch to IVF if memory is constrained. Test both on your data with your query patterns before committing.
 
-## HNSW Parameter Tuning
+### HNSW Parameter Tuning
 
 HNSW has two critical parameters: M and ef_construction. M controls the number of connections per node. Higher M values improve recall at the cost of memory. A value of 16 is a good default. For high-recall requirements on smaller datasets, use 32. For large datasets where memory is constrained, use 8.
 
@@ -52,7 +54,7 @@ Ef_construction controls the dynamic candidate list size during index constructi
 
 The search-time parameter ef controls the candidate list size during query. Higher ef values improve recall but increase latency. Start with 50 and tune based on latency budgets. For every 2x increase in ef, recall improves by roughly 1-3% while latency increases linearly.
 
-## Distance Metrics
+### Distance Metrics
 
 The choice of distance metric affects both retrieval quality and performance. Cosine similarity is the default for text embeddings. It measures the angle between vectors and is appropriate for normalized embeddings.
 
@@ -62,7 +64,7 @@ Inner product works well for embeddings trained with inner product loss function
 
 Use the distance metric that matches your embedding model's training objective. Check the documentation for your embedding model. Using the wrong metric silently degrades retrieval quality by 5-15%.
 
-## Search Configuration
+### Search Configuration
 
 Beyond index type and parameters, search configuration affects quality. The number of results returned top_k is the most important setting.
 
@@ -72,7 +74,7 @@ Consider rescoring after initial retrieval. Run a fast initial search with a sma
 
 Filters and pre-filters affect search behavior. Pre-filtering before vector search reduces the search space but can degrade recall if the filter eliminates relevant results. Post-filtering provides better recall but may return too few results after filtering.
 
-## Hybrid Search
+### Hybrid Search
 
 Hybrid search combines vector similarity with keyword matching. It catches exact matches that vector search might miss and handles queries where vector similarity alone performs poorly.
 
@@ -82,7 +84,7 @@ BM25 is the standard keyword scoring algorithm. It works well for exact term mat
 
 Analyze your query patterns to tune the hybrid weight. Queries with specific terminology benefit more from keyword weight. Conversational queries benefit more from vector weight. If possible, tune the weight per query type.
 
-## Monitoring and Maintenance
+### Monitoring and Maintenance
 
 Vector database performance degrades over time as data is added and updated. Monitor recall, latency, and memory usage monthly.
 
@@ -95,5 +97,7 @@ Test index changes on a production copy before deploying. A parameter change tha
 Vector database tuning is iterative. Start with defaults, benchmark your recall and latency, adjust one parameter at a time, and measure the impact. The optimal configuration depends on your data, your queries, and your performance requirements.
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>), [RAG Pipeline Optimization: Production Best Practices](</en/ai/rag-pipeline-optimization.html>).
+
+**See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)
 
 **See also:** [RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation](</en/ai/rag-retrieval-optimization.html>), [Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison](</en/ai/fine-tuning-vs-rag.html>), [Embeddings: Techniques and Best Practices](</en/ai/embeddings-techniques.html>)

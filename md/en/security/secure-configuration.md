@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/secure-configuration.html
 
 # Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
 
-# Secure Configuration Management
+## Secure Configuration Management
+
+## Secure Configuration Management
 
 Introduction 
 
@@ -38,31 +40,31 @@ Infrastructure as Code Scanning
 
 IaC scanning catches misconfigurations before they reach production. 
 
-# Checkov: scan Terraform for security issues
+## Checkov: scan Terraform for security issues
 
 checkov -d terraform/environments/production
 
-# tfsec: Terraform security scanner
+## tfsec: Terraform security scanner
 
 tfsec terraform/environments/production --config-file tfsec.yaml
 
-# kics: Keep Infrastructure as Code Secure
+## kics: Keep Infrastructure as Code Secure
 
 kics scan -p kubernetes/deployments --output-path kics-report.json
 
-# checkov policy: S3 bucket must have encryption enabled
+## checkov policy: S3 bucket must have encryption enabled
 
 resource "aws_s3_bucket" "data" {
 
 bucket = "my-data-bucket"
 
-# This will fail checkov check CKV_AWS_21
+## This will fail checkov check CKV_AWS_21
 
-# Missing: server_side_encryption_configuration
+## Missing: server_side_encryption_configuration
 
 }
 
-# Custom Checkov policy
+## Custom Checkov policy
 
 from checkov.common.models.enums import CheckResult
 
@@ -92,11 +94,11 @@ Drift Detection
 
 Drift detection identifies when live infrastructure differs from the declared configuration. 
 
-# Terraform plan detects drift
+## Terraform plan detects drift
 
 terraform plan -refresh-only # Check for manual changes
 
-# Terraform drift detection with AWS Config
+## Terraform drift detection with AWS Config
 
 resource "aws_config_config_rule" "s3_bucket_ssl" {
 
@@ -112,17 +114,17 @@ source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
 
 }
 
-# Continuous drift monitoring
+## Continuous drift monitoring
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily
+## 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline
+## 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes
+## 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes
 
-# !/bin/bash
+## !/bin/bash
 
-# drift_detection.sh
+## drift_detection.sh
 
 BASELINE_DIR="/config/baselines"
 
@@ -138,7 +140,7 @@ grep -E "changed|destroyed|added" > /tmp/drift.txt
 
 if [ -s /tmp/drift.txt ]; then
 
-# Send alert
+## Send alert
 
 ./send_alert.sh "Drift detected in $env environment"
 
@@ -150,7 +152,7 @@ done
 
 Configuration Validation Pipeline 
 
-# CI/CD configuration validation stage
+## CI/CD configuration validation stage
 
 stages:
 
@@ -208,7 +210,7 @@ Configuration Validation with Conftest
 
 Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). 
 
-# conftest policy for Kubernetes
+## conftest policy for Kubernetes
 
 package main
 
@@ -252,13 +254,13 @@ msg = "Memory limits are required"
 
 }
 
-# Run conftest policies
+## Run conftest policies
 
 conftest test deployment.yaml --policy conftest/policies/
 
 Policy as Code with OPA 
 
-# OPA policy for Terraform
+## OPA policy for Terraform
 
 package terraform
 
@@ -290,7 +292,7 @@ Secrets in Configuration
 
 Never hardcode secrets in configuration. Use a secrets manager. 
 
-# BAD: Hardcoded secret
+## BAD: Hardcoded secret
 
 resource "aws_db_instance" "database" {
 
@@ -300,7 +302,7 @@ password = "P@ssw0rd123!" # NEVER hardcode
 
 }
 
-# GOOD: Secrets Manager reference
+## GOOD: Secrets Manager reference
 
 data "aws_secretsmanager_secret_version" "db_creds" {
 
@@ -329,5 +331,7 @@ Conclusion
 Secure configuration management requires automation at every stage: scan IaC before deployment, validate against policy as code, detect drift continuously, and never embed secrets in configuration. Shift security left by validating configuration at build time rather than discovering issues in production. Use tools like Checkov, tfsec, conftest, and OPA to enforce your security baseline automatically.
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Session Management Security](</en/security/session-management.html>).
+
+**See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)
 
 **See also:** [Infrastructure as Code Security](</en/security/iac-security.html>), [Cloud Security Posture Management](</en/security/cloud-security-posture.html>), [Secure API Design Principles](</en/security/secure-api-design.html>)

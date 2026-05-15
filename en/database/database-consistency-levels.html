@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Understanding database consistency: strong consistency, eventual consistency, and tunable consistency in distributed systems.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-11">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Database Consistency Levels Explained — SourceHub</title>
     <meta name="description" content="Understanding database consistency: strong consistency, eventual consistency, and tunable consistency in distributed systems.">
@@ -46,8 +46,8 @@
       "description": "Understanding database consistency: strong consistency, eventual consistency, and tunable consistency in distributed systems.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "719",
+      "dateModified": "2026-05-11",
+      "wordCount": "679",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,35 +90,37 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Consistency Levels Explained</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
-<h1>Database Consistency Levels Explained</h1>
+      <div class="article-body"><h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
+<h2>Database Consistency Levels Explained</h2>
 <p>Consistency in distributed databases describes how up-to-date the data is across all nodes when a read occurs after a write. Different consistency levels offer trade-offs between correctness, availability, and performance.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-consistency-levels.png" alt="Database Consistency Levels Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Strong Consistency</h2>
+<h3>Strong Consistency</h3>
 <p>Strong consistency guarantees that after a write completes, all subsequent reads return the most recent write. Every node sees the same data at the same time. This is the standard in single-node databases and distributed databases using consensus protocols.</p>
 <p>Strong consistency requires coordination between nodes before confirming a write. Writes must replicate to a quorum of nodes (typically a majority). This adds latency proportional to network round-trips between nodes.</p>
-<h2>Eventual Consistency</h2>
+<h3>Eventual Consistency</h3>
 <p>Eventual consistency guarantees that if no new writes occur, all nodes will eventually return the same data. There is no time bound on when convergence happens. This is the weakest consistency model but offers the best performance and availability.</p>
 <p>Eventual consistency is common in DNS systems, CDN caches, and some NoSQL databases (Cassandra with consistency level ONE). Most applications use eventual consistency for non-critical data where temporary staleness is acceptable.</p>
-<h2>Tunable Consistency</h2>
+<h3>Tunable Consistency</h3>
 <p>Cassandra popularized tunable consistency. Each read and write operation specifies the consistency level. Write ONE acknowledges after one node. Write QUORUM acknowledges after a majority. Write ALL acknowledges after all nodes. Applications choose the appropriate level per operation.</p>
 <p>Tunable consistency enables performance optimization. Use higher consistency for critical operations and weaker consistency for high-throughput operations. Monitor consistency trade-offs through read-repair statistics and hinted handoff metrics.</p>
-<h2>PACELC Trade-offs</h2>
+<h3>PACELC Trade-offs</h3>
 <p>The PACELC theorem extends CAP: in a distributed system, if a partition occurs (P), you trade between availability (A) and consistency (C). Else (E), you trade between latency (L) and consistency (C).</p>
 <p>Understanding PACELC helps choose the right consistency model. Systems that favor consistency (Spanner) have higher latency within a partition. Systems that favor availability (Cassandra with weak consistency) provide lower latency but may serve stale data.</p>
-<h2>Choosing Consistency</h2>
+<h3>Choosing Consistency</h3>
 <p>Use strong consistency for financial transactions, inventory management, and user profile updates where stale data causes errors. Use eventual consistency for social media feeds, analytics, and content delivery where temporary staleness is invisible to users. Use causal consistency for collaborative editing and messaging applications.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-isolation-levels.html">Database Isolation Levels and Anomalies</a>, <a href="/en/database/database-pagination-techniques.html">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-isolation-levels.html">Database Isolation Levels and Anomalies</a>, <a href="/en/database/database-pagination-techniques.html">Database Pagination: Offset, Cursor, Keyset, and Seek Methods</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a>, <a href="/en/database/dynamodb-vs-cassandra.html">DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

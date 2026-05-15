@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png">
     <meta property="article:published_time" content="2026-05-13">
-    <meta property="article:modified_time" content="2026-05-13">
+    <meta property="article:modified_time" content="2026-04-08">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Transactional Inbox Pattern for Reliable Messaging — SourceHub</title>
     <meta name="description" content="The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.">
@@ -46,8 +46,8 @@
       "description": "The transactional inbox pattern ensures reliable message processing by storing incoming messages before handling them.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png",
       "datePublished": "2026-05-13",
-      "dateModified": "2026-05-13",
-      "wordCount": "678",
+      "dateModified": "2026-04-08",
+      "wordCount": "639",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,34 +90,36 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Transactional Inbox Pattern for Reliable Messaging</h1>
-      <div class="article-meta">Published 2026-05-13 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-13 · Last active 2026-04-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
-<h1>Transactional Inbox Pattern for Reliable Messaging</h1>
+      <div class="article-body"><h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
+<h2>Transactional Inbox Pattern for Reliable Messaging</h2>
 <p>The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transactional-inbox.png" alt="Transactional Inbox Pattern for Reliable Messaging" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>The Problem</h2>
+<h3>The Problem</h3>
 <p>In distributed systems, messages can be delivered multiple times. Network failures, consumer crashes, and broker retries all cause duplicate deliveries without the producer knowing. Without the inbox pattern, duplicate messages cause duplicate side effects—charging a customer twice, creating duplicate records.</p>
-<h2>How It Works</h2>
+<h3>How It Works</h3>
 <p>When a message arrives, the consumer first checks if it exists in the inbox by its unique message ID. If it is new, the consumer stores the message in the inbox table and then processes it. If the message ID already exists, the consumer skips processing (idempotent consumption).</p>
 <p>The inbox is typically a database table with a unique constraint on message ID. The consumer uses a database transaction to atomically check for the message and process it. If the consumer crashes after processing but before acknowledging the message, the next delivery finds the message already in the inbox and skips processing.</p>
-<h2>Inbox Table Schema</h2>
+<h3>Inbox Table Schema</h3>
 <p>A minimal inbox table contains: message_id (UUID, primary key), message_type, payload, status (received, processing, completed), created_at, processed_at. Additional columns can store retry count, error messages, and correlation IDs.</p>
-<h2>Relationship to Transactional Outbox</h2>
+<h3>Relationship to Transactional Outbox</h3>
 <p>The transactional inbox and outbox are complementary. The outbox pattern ensures outgoing messages are reliably delivered. The inbox pattern ensures incoming messages are reliably processed. Together, they provide end-to-end reliability in asynchronous communication.</p>
-<h2>Implementation Considerations</h2>
+<h3>Implementation Considerations</h3>
 <p>Periodically clean up processed inbox records to prevent table growth. Archive after 7-30 days depending on reprocessing requirements. Monitor inbox table size and processing latency. Set up alerts for stuck messages (status=processing for too long).</p>
-<h2>Idempotency Keys</h2>
+<h3>Idempotency Keys</h3>
 <p>For REST API consumers, idempotency keys serve a similar purpose. The client generates a unique key for each request. The server stores processed keys to detect and reject duplicates. Stripe's idempotency key implementation is a well-known example of this pattern.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/routing-slip.html">Routing Slip Pattern for Dynamic Message Processing</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-06">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Idempotency Patterns in Distributed Systems — SourceHub</title>
     <meta name="description" content="Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns">
@@ -46,8 +46,8 @@
       "description": "Idempotency keys, deduplication, at-least-once delivery, exactly-once semantics, and implementation patterns",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1067",
+      "dateModified": "2026-05-06",
+      "wordCount": "1030",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,19 +90,20 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Idempotency Patterns in Distributed Systems</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
-<h1>Idempotency Patterns in Distributed Systems</h1>
+      <div class="article-body"><h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
+<h2>Idempotency Patterns in Distributed Systems</h2>
 <p>Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/idempotency-patterns.png" alt="Idempotency Patterns in Distributed Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The idempotency key pattern is the foundation. The client generates a unique key for each operation and includes it with the request. The server stores the key and its result. If the server receives a duplicate request with the same key, it returns the stored result without re-executing the operation. The idempotency key should be scoped to the client and operation type. UUIDs or ULIDs are typical key formats. </p>
 <p>Implementation requires an idempotency store. This is typically a database table or Redis cache with the key as the primary key. When a request arrives, the server checks the idempotency store. If the key exists and the operation completed, return the cached response. If the key exists and the operation is in progress, wait or return a conflict. If the key does not exist, execute the operation and store the result. The key must be created atomically — a unique constraint prevents two requests with the same key from executing simultaneously. </p>
@@ -113,7 +114,8 @@
 <p>State-based idempotency offers an alternative to key-based deduplication. Instead of tracking operation IDs, the system checks the current state before performing state-changing operations. For example, before processing a payment, check that the invoice is in "unpaid" state. If the invoice is already "paid," skip the payment. This works well when operations map to clear state transitions but requires careful handling of race conditions. </p>
 <p>Uniqueness constraints are the most reliable idempotency mechanism. A database unique constraint on business keys (order ID, payment reference) guarantees that duplicate operations fail atomically at the database level. This is the foundation of idempotent inserts. The constraint handles concurrent requests correctly — only the first insert succeeds, and subsequent attempts fail with a unique constraint violation that the application can handle gracefully. </p>
 <p>Idempotency should be designed into every external-facing API and every event handler from the start. Retrofitting idempotency after data corruption incidents is painful. The upfront cost of adding idempotency keys and deduplication logic is minimal compared to the cost of debugging duplicate processing in production.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

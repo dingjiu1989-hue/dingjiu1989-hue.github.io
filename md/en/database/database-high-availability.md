@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-high-availability.ht
 
 # Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
 
-# Database High Availability: Failover, Standby Types, Health Checks
+## Database High Availability: Failover, Standby Types, Health Checks
+
+## Database High Availability: Failover, Standby Types, Health Checks
 
 Database High Availability: Failover, Standby Types, Health Checks 
 
@@ -48,7 +50,7 @@ Hot Standby
 
 A hot standby accepts read queries while replicating from the primary. PostgreSQL's `hot_standby = on` enables this: 
 
-# standby postgresql.conf
+## standby postgresql.conf
 
 hot_standby = on
 
@@ -67,7 +69,7 @@ Warm Standby
 
 A warm standby is running but does not accept connections until promoted: 
 
-# warm standby: accept no connections
+## warm standby: accept no connections
 
 hot_standby = off
 
@@ -99,13 +101,13 @@ Manual Failover
 
 The operator promotes a standby and redirects applications: 
 
-# Promote standby
+## Promote standby
 
 pg_ctl promote -D /var/lib/postgresql/data
 
-# Update application DNS or connection string
+## Update application DNS or connection string
 
-# This may take minutes and requires human intervention
+## This may take minutes and requires human intervention
 
 **Pros** : Simple, operator has full control. **Cons** : Slow (minutes), error-prone under pressure. 
 
@@ -113,7 +115,7 @@ Automated Failover with Patroni
 
 Patroni is the most popular HA solution for PostgreSQL. It uses distributed consensus (etcd, Consul, or Zookeeper) to elect a new leader: 
 
-# patroni.yml
+## patroni.yml
 
 scope: myapp-db
 
@@ -175,13 +177,13 @@ Patroni performs regular health checks:
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Replication lag** : If lag exceeds a threshold, the standby is not eligible for promotion. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consensus health** : The node must be reachable to the DCS (etcd/Consul). 
 
-# Manual health check
+## Manual health check
 
 pg_isready -h localhost -p 5432
 
-# localhost:5432 - accepting connections
+## localhost:5432 - accepting connections
 
-# Check replication status
+## Check replication status
 
 psql -c "SELECT * FROM pg_stat_replication;"
 
@@ -213,7 +215,7 @@ conn.commit()
 
 except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:
 
-# Reconnect and retry
+## Reconnect and retry
 
 conn = psycopg2.connect(dsn)
 
@@ -267,7 +269,7 @@ A production HA setup combines:
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Patroni** : Automated failover and cluster management. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **etcd/Consul** : Distributed consensus for leader election. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **HAProxy or PgBouncer** : Connection routing to the current primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Watchdog** : Fencing to prevent split-brain. 
 
-# HAProxy configuration
+## HAProxy configuration
 
 frontend pg_frontend
 
@@ -289,23 +291,23 @@ Testing HA
 
 Regular failover testing is essential: 
 
-# Test: Kill the primary
+## Test: Kill the primary
 
 ssh pg-node-1 "systemctl stop postgresql"
 
-# Expected:
+## Expected:
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue
+## \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue
 
-# Verify:
+## Verify:
 
 psql -h haproxy -p 5000 -c "SELECT inet_server_addr();"
 
-# Should show pg-node-2's IP
+## Should show pg-node-2's IP
 
 Common Pitfalls 
 
@@ -323,5 +325,7 @@ Common Pitfalls
 High availability is not a product you buy; it is a property of your system's architecture and operations. Invest in automation, test regularly, and accept that no system is 100% available.
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Disaster Recovery: RPO, RTO, Cross-Region Replication](</en/database/database-disaster-recovery.html>).
+
+**See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)
 
 **See also:** [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>), [Read Replicas: Scaling Reads, Replication Lag, and Failover](</en/database/read-replicas.html>), [Database Capacity Planning: Sizing, Growth Forecasting, and Scaling](</en/database/database-capacity-planning.html>)

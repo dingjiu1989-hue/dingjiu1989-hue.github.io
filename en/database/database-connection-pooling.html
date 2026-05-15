@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-05">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Connection Pooling: Tuning, Best Practices, and Pitfalls — SourceHub</title>
     <meta name="description" content="Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.">
@@ -46,8 +46,8 @@
       "description": "Master database connection pooling: pool sizing, timeout tuning, and common pitfalls in production.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "799",
+      "dateModified": "2026-05-05",
+      "wordCount": "764",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,35 +90,37 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
-<h1>Connection Pooling: Tuning, Best Practices, and Pitfalls</h1>
+      <div class="article-body"><h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
+<h2>Connection Pooling: Tuning, Best Practices, and Pitfalls</h2>
 <p>Connection pooling reuses database connections to avoid the overhead of establishing new connections for every request. Opening a database connection involves TCP handshake, SSL negotiation, and authentication—typically 10-50ms of overhead. Pooling eliminates this latency by maintaining a cache of established connections.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-connection-pooling.png" alt="Connection Pooling: Tuning, Best Practices, and Pitfalls" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>Pool Size Tuning</h2>
+<h3>Pool Size Tuning</h3>
 <p>The optimal pool size depends on your database's capability. PostgreSQL handles connections with one process per connection. Each idle connection consumes roughly 5-10 MB of memory. A pool of 100 connections uses 500 MB to 1 GB of memory even when idle.</p>
 <p>The HikariCP formula provides guidance: pool_size = (core_count * 2) + effective_spindle_count. For a typical 8-core server with SSDs, this gives about 20 connections. More connections do not mean more throughput—they increase context switching and contention.</p>
 <p>Measure your database's connection handling capacity. Monitor active connections, wait events, and query throughput. Increase the pool size only when the database has capacity and the application needs more concurrent queries.</p>
-<h2>Connection Validation</h2>
+<h3>Connection Validation</h3>
 <p>Always validate connections before use. Idle connections may be closed by firewalls, the database server, or network intermediaries. Set a validation query or use connection test functionality.</p>
 <p>PostgreSQL offers several validation methods: setConnectionTestQuery("SELECT 1") verifies connection health. TCP keepalive with validationQueryTimeout detects dead connections quickly. Validation interval should be shorter than the firewall's idle timeout—typically 30-60 seconds.</p>
-<h2>Timeout Configuration</h2>
+<h3>Timeout Configuration</h3>
 <p>Connection timeout controls how long to wait when all connections are busy. Set it based on application tolerance—2-5 seconds for interactive applications, longer for batch jobs. Connection timeout that is too short causes unnecessary failures during traffic spikes.</p>
 <p>Idle timeout closes connections after they remain unused. Set it based on database resource constraints—5-30 minutes typically. Maximum lifetime prevents connections from living forever; set to 30-60 minutes to avoid memory leaks and stale state.</p>
-<h2>Common Pitfalls</h2>
+<h3>Common Pitfalls</h3>
 <p>Connection leaks are the most common pooling issue. Every connection obtained from the pool must be returned. Use try-with-resources (Java) or context managers (Python) to guarantee release.</p>
 <p>Stale connections cause mysterious failures. A connection opened before a database restart becomes invalid. Always validate connections before use, not just when creating them.</p>
 <p>Pool starvation occurs when connections are held longer than necessary. Long-running queries, slow transactions, and connection-holding during external API calls all consume pool capacity. Keep transactions short and avoid holding connections during I/O waits.</p>
-<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/connection-management.html">Database Connection Management: Pooling, PgBouncer, HikariCP, and Tuning</a>, <a href="/en/database/database-migration-version-control.html">Database Migration Version Control Strategies</a>, <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

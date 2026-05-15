@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-compression.html
 
 # Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
-# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+
+## Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
 
 Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST 
 
@@ -227,5 +229,7 @@ Best Practices
 Compression is a rare optimization that reduces cost and improves performance simultaneously. Measure your data's compressibility and choose the right algorithm for each column type.
 
 **See also:** [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Columnar Storage: Compression, Encoding, and Analytical Performance](</en/database/database-columnar-storage.html>).
+
+**See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)
 
 **See also:** [Database Table Partitioning: Range, List, Hash](</en/database/database-partitioning.html>), [Database Views: Simple, Materialized, and Updateable Views](</en/database/database-views.html>), [Database Backup Types: Full, Incremental, Differential, WAL Archiving](</en/database/backup-types.html>)

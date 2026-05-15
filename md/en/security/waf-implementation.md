@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/waf-implementation.html
 
 # Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
 
-# Web Application Firewall Implementation
+## Web Application Firewall Implementation
+
+## Web Application Firewall Implementation
 
 Introduction 
 
@@ -38,7 +40,7 @@ ModSecurity and OWASP CRS
 
 ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules. 
 
-# Basic ModSecurity configuration
+## Basic ModSecurity configuration
 
 SecRuleEngine On
 
@@ -48,13 +50,13 @@ SecResponseBodyAccess On
 
 SecDataDir /tmp/modsecurity/data
 
-# Include OWASP CRS
+## Include OWASP CRS
 
 Include /etc/modsecurity/crs/crs-setup.conf
 
 Include /etc/modsecurity/crs/rules/*.conf
 
-# Custom rule: block requests with suspicious User-Agent
+## Custom rule: block requests with suspicious User-Agent
 
 SecRule REQUEST_HEADERS:User-Agent "@pmFromFile /etc/modsecurity/blocked-agents.txt" \
 
@@ -66,7 +68,7 @@ Custom Rule Writing
 
 Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions. 
 
-# Custom rule: protect /api/checkout from parameter tampering
+## Custom rule: protect /api/checkout from parameter tampering
 
 SecRule REQUEST_URI "@beginsWith /api/checkout" \
 
@@ -78,7 +80,7 @@ chain"
 
 SecRule ARGS:quantity "!@rx ^[0-9]+$"
 
-# Rate limiting per IP
+## Rate limiting per IP
 
 SecRule IP:COUNT "@gt 100" \
 
@@ -106,7 +108,7 @@ Overly aggressive WAF rules generate false positives that block legitimate traff
 
 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analyze audit logs** for blocked requests that appear legitimate. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable specific rules** or adjust paranoia levels. 
 
-# Set CRS paranoia level (1-4, higher = stricter)
+## Set CRS paranoia level (1-4, higher = stricter)
 
 SecAction \
 
@@ -122,11 +124,11 @@ t:none,\
 
 setvar:tx.paranoia_level=2"
 
-# Remove a specific rule for a specific URI
+## Remove a specific rule for a specific URI
 
 SecRuleRemoveById 942100
 
-# This removes the rule globally; better to scope it:
+## This removes the rule globally; better to scope it:
 
 SecRule REQUEST_URI "@beginsWith /api/public" \
 
@@ -145,7 +147,7 @@ WAF inspection introduces latency. Key optimization strategies:
 
 
 
-# Skip WAF for static files
+## Skip WAF for static files
 
 SecRule REQUEST_URI "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|png|css|js|ico)$" \
 
@@ -158,5 +160,7 @@ Conclusion
 A properly tuned WAF is a critical defense layer. Start with CRS in detection mode, monitor logs aggressively, tune false positives before enforcing, and always be aware of the performance trade-offs at each paranoia level.
 
 **See also:** [WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai](</en/security/waf-comparison.html>), [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>).
+
+**See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [SOC Operations](</en/security/soc-operations.html>)
 
 **See also:** [Zero Trust Implementation](</en/security/zero-trust-implementation.html>), [Bug Bounty Guide](</en/security/bug-bounty.html>), [SOC Operations](</en/security/soc-operations.html>)

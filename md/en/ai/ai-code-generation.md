@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-code-generation.html
 
 # AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-# AI Code Generation Best Practices
+## AI Code Generation Best Practices
 
-## Introduction
+## AI Code Generation Best Practices
+
+### Introduction
 
 AI code generation has transformed from a novelty into a core development tool. GitHub Copilot, Cursor, Claude, and similar tools now handle everything from boilerplate generation to complex algorithm implementation. However, using these tools effectively requires understanding their strengths, limitations, and the workflows that maximize their value.
 
-## Understanding Model Capabilities
+### Understanding Model Capabilities
 
 Current code generation models excel at:
 
@@ -70,9 +72,9 @@ They struggle with:
 
 
 
-## Effective Prompting for Code Generation
+### Effective Prompting for Code Generation
 
-### Context is Everything
+#### Context is Everything
 
 The quality of generated code depends directly on the context provided. A good prompt includes:
 
@@ -97,7 +99,7 @@ Write a function to sort users by name.
 
 Write a TypeScript function that sorts an array of User objects by their lastName field, then firstName. Users have {id: number, firstName: string, lastName: string, email: string}. Handle null/undefined lastName values by falling back to firstName. Use the native Array.sort() method. Return a new sorted array (don't mutate the input).
 
-### Iterative Development
+#### Iterative Development
 
 Work with AI code generation in iterations:
 
@@ -109,7 +111,7 @@ Work with AI code generation in iterations:
 
 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Review each addition** : Generated code might introduce subtle bugs in new layers
 
-### Use the Right Tool for the Task
+#### Use the Right Tool for the Task
 
   * **Inline completion** (Copilot-style): Best for predictable continuations — completing a function body, adding a parameter, or writing a simple loop
 
@@ -120,7 +122,7 @@ Work with AI code generation in iterations:
 
 
 
-## Code Review Practices for AI-Generated Code
+### Code Review Practices for AI-Generated Code
 
 Generated code requires more thorough review than human-written code, for different reasons:
 
@@ -136,7 +138,7 @@ Generated code requires more thorough review than human-written code, for differ
 
 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Check dependencies** : The model might suggest libraries that don't exist or are outdated
 
-## Integrating Into CI/CD
+### Integrating Into CI/CD
 
 Establish guidelines for AI-generated code in your workflow:
 
@@ -151,7 +153,7 @@ Establish guidelines for AI-generated code in your workflow:
 
 
 
-## Common Mistakes
+### Common Mistakes
 
   * **Over-reliance without review** : Treating generated code as correct without verification
 
@@ -165,10 +167,12 @@ Establish guidelines for AI-generated code in your workflow:
 
 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Inconsistent architecture** : Letting the AI make architectural decisions without oversight
 
-## Conclusion
+### Conclusion
 
 AI code generation is a powerful productivity multiplier when used correctly. Provide rich context, iterate on prompts, review generated code carefully, and maintain your existing quality standards. The developers who benefit most are those who use AI as an accelerator while applying their own judgment to architecture, security, and correctness. The tool amplifies your ability — it does not replace it.
 
 **See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>), [AI Content Generation Workflows](</en/ai/ai-content-generation.html>).
+
+**See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)
 
 **See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [LLM Context Window Management](</en/ai/llm-context-window.html>), [LLM Fine-Tuning Guide](</en/ai/llm-fine-tuning.html>)

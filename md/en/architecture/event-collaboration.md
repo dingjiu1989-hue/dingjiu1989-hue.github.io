@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-collaboration.html
 
 # Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
 
-# Event Collaboration: Choreography vs Orchestration
+## Event Collaboration: Choreography vs Orchestration
+
+## Event Collaboration: Choreography vs Orchestration
 
 Event collaboration is the architectural pattern where services communicate through events rather than direct requests. This shifts the coordination model from asking (request-response) to telling (event notification). Two fundamental patterns govern how these collaborations are structured: choreography, where each service independently responds to events, and orchestration, where a central coordinator directs the workflow. 
 
@@ -49,5 +51,7 @@ In orchestration, the coordinator tracks state and invokes compensations in reve
 Many production systems combine both patterns. Orchestration manages core business flows that require strict consistency guarantees. Choreography handles peripheral flows where eventual consistency and loose coupling are more valuable than workflow visibility. The choice depends on the criticality of the flow, the number of participating services, and the organization's tolerance for implicit versus explicit workflow definitions.
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga vs Process Manager: Orchestration Patterns Compared](</en/architecture/saga-process-manager.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>).
+
+**See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)
 
 **See also:** [Saga Choreography Pattern](</en/architecture/saga-choreography.html>), [Saga Orchestration Pattern](</en/architecture/saga-orchestration.html>), [Choreography Patterns](</en/architecture/choreography-patterns.html>)

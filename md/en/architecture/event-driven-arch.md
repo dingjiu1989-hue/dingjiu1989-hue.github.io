@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-driven-arch.html
 
 # Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
 
-# Event-Driven Architecture
+## Event-Driven Architecture
+
+## Event-Driven Architecture
 
 Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. 
 
@@ -73,5 +75,7 @@ Event-driven architecture excels in systems with many loosely coupled services, 
 The decision to adopt EDA should be driven by concrete requirements for decoupling, scalability, or real-time processing. For many systems, a hybrid approach—using events for specific workflows while keeping request-response for others—provides the right balance of decoupling and simplicity.
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Event Collaboration: Choreography vs Orchestration](</en/architecture/event-collaboration.html>).
+
+**See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)
 
 **See also:** [Choreography Patterns](</en/architecture/choreography-patterns.html>), [Polling Consumer vs Event-Driven Consumer](</en/architecture/polling-consumer.html>), [Asynchronous Communication in Distributed Systems](</en/architecture/asynchronous-communication.html>)

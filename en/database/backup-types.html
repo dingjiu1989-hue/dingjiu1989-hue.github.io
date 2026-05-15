@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-13">
     <meta property="article:tag" content="Database, Backend, Data">
     <title>Database Backup Types: Full, Incremental, Differential, WAL Archiving — SourceHub</title>
     <meta name="description" content="Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.">
@@ -46,8 +46,8 @@
       "description": "Explore database backup strategies including full, incremental, differential backups, WAL archiving, and point-in-time recovery with PostgreSQL.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "1488",
+      "dateModified": "2026-05-13",
+      "wordCount": "1274",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,37 +90,38 @@
         <span class="tag-cat">Backend</span>
         <span class="tag-cat">Data</span></div>
       <h1 class="article-title">Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-      <div class="article-meta">Published 2026-05-12 · 120 views · 1 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png" alt="Database Backup Types: Full, Incremental, Differential, WAL Archiving" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
-<h1>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h1>
+      <div class="article-body"><h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
+<h2>Database Backup Types: Full, Incremental, Differential, WAL Archiving</h2>
 <p>Database Backup Types: Full, Incremental, Differential, WAL Archiving </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/backup-types.png" alt="Database Backup Types: Full, Incremental, Differential, WAL Archiving" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>No database backup strategy is complete until it has been tested with a real restoration. This article covers backup types, PostgreSQL-specific tools, and how to implement point-in-time recovery (PITR). </p>
 <p>Backup Types </p>
 <p>Full Backup </p>
 <p>A full backup copies the entire database cluster. It is the foundation of any backup strategy. </p>
-<h1>PostgreSQL full backup with pg_dump (logical)</h1>
+<h2>PostgreSQL full backup with pg_dump (logical)</h2>
 <p>pg_dump -h localhost -U admin -Fc -f prod_backup.dump proddb</p>
-<h1>Or directory format for parallel dumps</h1>
+<h2>Or directory format for parallel dumps</h2>
 <p>pg_dump -h localhost -U admin -Fd -j 4 -f /backups/proddb proddb</p>
-<h1>Physical full backup with pg_basebackup</h1>
+<h2>Physical full backup with pg_basebackup</h2>
 <p>pg_basebackup -h localhost -U replicator \</p>
 <p>-D /backups/full/$(date +%Y%m%d) \</p>
 <p>-X stream -P -v</p>
 <p><strong>Pros</strong> : Complete snapshot, simple restoration. <strong>Cons</strong> : Large, time-consuming, resource-intensive. </p>
 <p>Incremental Backup </p>
 <p>An incremental backup captures only changes since the last backup (of any type). PostgreSQL achieves this via WAL archiving: </p>
-<h1>Archive WAL segments continuously</h1>
-<h1>In postgresql.conf:</h1>
+<h2>Archive WAL segments continuously</h2>
+<h2>In postgresql.conf:</h2>
 <p>archive_mode = on</p>
 <p>archive_command = 'cp %p /backups/wal/%f'</p>
 <p>Each 16 MB WAL segment is an incremental backup. </p>
@@ -131,23 +132,23 @@
 <p>WAL Archiving and Point-in-Time Recovery </p>
 <p>WAL archiving is PostgreSQL's mechanism for continuous archiving. Combined with a base backup, it enables restoring to any point in time. </p>
 <p>Configuration </p>
-<h1>postgresql.conf</h1>
+<h2>postgresql.conf</h2>
 <p>wal_level = replica</p>
 <p>archive_mode = on</p>
 <p>archive_command = 'aws s3 cp %p s3://my-backups/wal/%f'</p>
 <p>archive_timeout = 60</p>
 <p>Recovery </p>
 <p>To restore to a specific point in time: </p>
-<h1>recovery.signal (or standby.signal for replica)</h1>
+<h2>recovery.signal (or standby.signal for replica)</h2>
 <p>restore_command = 'aws s3 cp s3://my-backups/wal/%f %p'</p>
 <p>recovery_target_time = '2026-05-10 14:30:00 UTC'</p>
 <p>recovery_target_action = promote</p>
 <p>Start PostgreSQL. It replays WAL segments until it reaches the target time and then promotes itself to a primary. </p>
 <p>Complete PITR Workflow </p>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Take a base backup</h1>
+<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Take a base backup</h2>
 <p>pg_basebackup -h prod-db -U replicator -D /backups/base_20260512 -X stream</p>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Archive WAL continuously (configured in postgresql.conf)</h1>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore to a point in time</h1>
+<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Archive WAL continuously (configured in postgresql.conf)</h2>
+<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore to a point in time</h2>
 <p>mkdir /var/lib/postgresql/restored</p>
 <p>cp -r /backups/base_20260512/* /var/lib/postgresql/restored/</p>
 <p>touch /var/lib/postgresql/restored/recovery.signal</p>
@@ -189,21 +190,21 @@
 </ul>
 <p>pgBackRest </p>
 <p>pgBackRest is the most popular dedicated backup tool for PostgreSQL: </p>
-<h1>Configure stanza</h1>
+<h2>Configure stanza</h2>
 <p>pgbackrest --stanza=prod stanza-create</p>
-<h1>Full backup</h1>
+<h2>Full backup</h2>
 <p>pgbackrest --stanza=prod --type=full backup</p>
-<h1>Incremental backup (default)</h1>
+<h2>Incremental backup (default)</h2>
 <p>pgbackrest --stanza=prod --type=incr backup</p>
-<h1>List backups</h1>
+<h2>List backups</h2>
 <p>pgbackrest --stanza=prod info</p>
-<h1>Restore to specific point</h1>
+<h2>Restore to specific point</h2>
 <p>pgbackrest --stanza=prod --type=time \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target="2026-05-12 03:15:00" restore</p>
 <p>Testing Backups </p>
 <p>A backup that cannot be restored is worthless. Regular restore testing is mandatory: </p>
-<h1>Automated restore test script</h1>
-<h1>!/bin/bash</h1>
+<h2>Automated restore test script</h2>
+<h2>!/bin/bash</h2>
 <p>set -e</p>
 <p>RESTORE_DIR=/tmp/restore_test</p>
 <p>BACKUP_DIR=/backups/weekly</p>
@@ -229,7 +230,8 @@
 </li>
 </ul>
 <p>The 3-2-1 rule applies to databases: three copies of data, on two different media, with one off-site. Your backup strategy should verify all three conditions regularly.</p>
-<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p></div>
+<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a>, <a href="/en/database/database-partitioning.html">Database Table Partitioning: Range, List, Hash</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>, <a href="/en/database/database-backup-strategies.html">Database Backup and Recovery Strategies</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"

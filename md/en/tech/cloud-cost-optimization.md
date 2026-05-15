@@ -8,35 +8,37 @@ url: https://dingjiu1989-hue.github.io/en/tech/cloud-cost-optimization.html
 
 # Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
 
-# Cloud Cost Optimization Tips
+## Cloud Cost Optimization Tips
+
+## Cloud Cost Optimization Tips
 
 Cloud costs are often the second-largest expense after payroll for SaaS companies. Without active management, spending grows faster than revenue. This guide covers practical cost optimization strategies that reduce bills by 30-50% without sacrificing performance.
 
-## Right-Sizing Instances
+### Right-Sizing Instances
 
 The most common waste is over-provisioned resources. Use cloud provider tools to analyze utilization:
 
@@ -63,7 +65,7 @@ Target utilization rules of thumb:
 
 Downsize instances that consistently run below 20% utilization. For variable workloads, consider scaling horizontally rather than vertically.
 
-## Reserved Instances and Savings Plans
+### Reserved Instances and Savings Plans
 
 Commit to usage in exchange for discounts:
 
@@ -81,17 +83,17 @@ Commit to usage in exchange for discounts:
 
 Start with 1-year commitments for baseline workloads (30-50% of your total compute). Use 3-year commitments for stable, predictable workloads. Combine Savings Plans with Spot Instances for maximum flexibility.
 
-## Spot and Preemptible Instances
+### Spot and Preemptible Instances
 
 Use spot instances (AWS), preemptible VMs (GCP), or low-priority VMs (Azure) for fault-tolerant workloads:
 
-# AWS: Request spot instances in Auto Scaling
+## AWS: Request spot instances in Auto Scaling
 
 aws autoscaling create-auto-scaling-group \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--mixed-instances-policy file://spot-policy.json
 
-# GCP: Create preemptible VM
+## GCP: Create preemptible VM
 
 gcloud compute instances create worker \
 
@@ -101,7 +103,7 @@ Ideal workloads: batch processing, CI/CD runners, stateless web workers, data an
 
 Savings: 60-90% compared to on-demand pricing. Combine with Spot Instance interruption handling (checkpointing, graceful shutdown).
 
-## Storage Optimization
+### Storage Optimization
 
 Storage costs accumulate silently. Audit your storage regularly:
 
@@ -156,7 +158,7 @@ Set S3 Lifecycle rules to transition objects automatically:
 
 }
 
-## Network Egress Costs
+### Network Egress Costs
 
 Data transfer out of cloud providers is expensive. Minimize egress:
 
@@ -171,11 +173,11 @@ Data transfer out of cloud providers is expensive. Minimize egress:
 
 
 
-## Autoscaling
+### Autoscaling
 
 Scale resources to match demand:
 
-# AWS Auto Scaling with target tracking
+## AWS Auto Scaling with target tracking
 
 autoscaling:
 
@@ -189,13 +191,13 @@ target_value: 60
 
 For containerized workloads, use Kubernetes Cluster Autoscaler:
 
-# Karpenter for AWS EKS
+## Karpenter for AWS EKS
 
 kubectl scale deployment api-server --replicas=0 # Automated idle scaling
 
 Karpenter and similar tools scale nodes based on actual pod resource requests, eliminating node-level waste.
 
-## Database Cost Optimization
+### Database Cost Optimization
 
 Databases are often the most expensive service:
 
@@ -210,11 +212,11 @@ Databases are often the most expensive service:
 
 
 
-## Reserved Capacity with Spot
+### Reserved Capacity with Spot
 
 Combine reserved capacity for baseline with spot for spikes:
 
-# Terraform: Mix OD and Spot in ASG
+## Terraform: Mix OD and Spot in ASG
 
 resource "aws_autoscaling_group" "app" {
 
@@ -246,11 +248,11 @@ spot_allocation_strategy = "capacity-optimized"
 
 }
 
-## Monitoring and Budgets
+### Monitoring and Budgets
 
 Set up cost monitoring to catch anomalies early:
 
-# AWS Budget with action
+## AWS Budget with action
 
 aws budgets create-budget \
 
@@ -260,7 +262,7 @@ aws budgets create-budget \
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--notifications-with-subscribers file://alert-config.json
 
-# GCP budget alert
+## GCP budget alert
 
 gcloud billing budgets create \
 
@@ -276,10 +278,12 @@ gcloud billing budgets create \
 
 Set up alerts at 50%, 80%, and 90% of budget. Tag resources by cost center and review spending weekly.
 
-## Summary
+### Summary
 
 Cloud cost optimization is an ongoing process, not a one-time cleanup. Start with right-sizing (the quickest wins), add reserved capacity for baseline workloads, use spot instances for fault-tolerant work, and configure autoscaling to match demand. Monitor storage lifecycle, minimize data egress, and optimize database tiering. The most effective approach is a 20% time investment per quarter: review spending, tag resources, and implement the top three savings opportunities. Most organizations can reduce their cloud bill by 30-50% within three months by following these practices.
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>).
+
+**See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>)
 
 **See also:** [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Infrastructure Testing with Terratest and Other Tools](</en/tech/infrastructure-testing.html>), [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>)

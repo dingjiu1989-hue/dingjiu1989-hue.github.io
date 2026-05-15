@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/database-migration.html
 
 # Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
 
-# Database Migration Tools and Strategies
+## Database Migration Tools and Strategies
+
+## Database Migration Tools and Strategies
 
 Why Database Migrations Matter 
 
@@ -46,7 +48,7 @@ pip install alembic
 
 alembic init alembic
 
-# alembic/env.py
+## alembic/env.py
 
 from myapp.models import Base
 
@@ -54,15 +56,15 @@ target_metadata = Base.metadata
 
 Creating Migrations 
 
-# Auto-generate migration
+## Auto-generate migration
 
 alembic revision --autogenerate -m "add user roles table"
 
-# Apply migrations
+## Apply migrations
 
 alembic upgrade head
 
-# Rollback
+## Rollback
 
 alembic downgrade -1
 
@@ -110,23 +112,23 @@ op.drop_table('user_roles')
 
 Flyway (Java) 
 
-# Migration naming convention:
+## Migration naming convention:
 
-# V1__create_users.sql
+## V1__create_users.sql
 
-# V2__add_email_column.sql
+## V2__add_email_column.sql
 
-# V3__create_orders_table.sql
+## V3__create_orders_table.sql
 
-# Apply migrations
+## Apply migrations
 
 flyway migrate
 
-# Check status
+## Check status
 
 flyway info
 
-# Repair checksums
+## Repair checksums
 
 flyway repair
 
@@ -172,9 +174,9 @@ UPDATE users SET email_new = email WHERE email_new IS NULL;
 
 **Phase 2: Migrate**
 
-# Application reads from new column, still writes to both
+## Application reads from new column, still writes to both
 
-# Deploy application update
+## Deploy application update
 
 **Phase 3: Contract**
 
@@ -238,7 +240,7 @@ print(f"Updated {offset} rows...")
 
 Online Schema Change (pt-online-schema-change) 
 
-# For MySQL without downtime
+## For MySQL without downtime
 
 pt-online-schema-change \
 
@@ -264,7 +266,7 @@ op.drop_column('users', 'email')
 
 Test Migrations 
 
-# Test upgrade and downgrade
+## Test upgrade and downgrade
 
 alembic upgrade head
 
@@ -274,7 +276,7 @@ alembic upgrade head
 
 CI/CD Integration 
 
-# .github/workflows/migrate.yml
+## .github/workflows/migrate.yml
 
 jobs:
 
@@ -311,5 +313,7 @@ Summary
 Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production.
 
 **See also:** [Database Migration Strategies](</en/database/database-migration-strategies.html>), [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>).
+
+**See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)
 
 **See also:** [Database Migration Tools: Alembic, Flyway, Liquibase, Versioning](</en/database/database-migration-tools.html>), [Database Testing Strategies for Developers](</en/database/database-testing.html>), [Database Backup and Recovery Strategies](</en/database/database-backup-strategies.html>)

@@ -8,37 +8,39 @@ url: https://dingjiu1989-hue.github.io/en/tech/infrastructure-testing.html
 
 # Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-# Infrastructure Testing with Terratest and Other Tools
+## Infrastructure Testing with Terratest and Other Tools
 
-## Introduction
+## Infrastructure Testing with Terratest and Other Tools
+
+### Introduction
 
 Infrastructure as Code (IaC) brings software engineering practices to infrastructure management, but testing remains an afterthought in many teams. Without proper testing, misconfigured infrastructure causes outages, security vulnerabilities, and costly re-provisioning. This guide covers practical approaches to testing Terraform configurations, cloud resources, and compliance policies using tools like Terratest, OPA, and tflint.
 
-## Unit Testing Terraform with Terratest
+### Unit Testing Terraform with Terratest
 
 Terratest is a Go library for writing automated tests against infrastructure. For unit-level tests, validate Terraform outputs and resource configurations:
 
@@ -94,7 +96,7 @@ assert.Len(t, subnetIDs, 3, "Should have 3 public subnets")
 
 }
 
-## Integration Testing Cloud Resources
+### Integration Testing Cloud Resources
 
 Integration tests validate real cloud resources are configured correctly:
 
@@ -174,11 +176,11 @@ t.Error("Found SSH open to the world - security violation!")
 
 }
 
-## Compliance Testing with OPA and Sentinel
+### Compliance Testing with OPA and Sentinel
 
 Open Policy Agent (OPA) enforces policies at plan time:
 
-# policies/terraform/restrict_public_s3.rego
+## policies/terraform/restrict_public_s3.rego
 
 package terraform
 
@@ -220,21 +222,21 @@ startswith(block.address, address)
 
 Run OPA in CI pipeline:
 
-# Generate a plan JSON
+## Generate a plan JSON
 
 terraform plan -out=plan.tfplan
 
 terraform show -json plan.tfplan > plan.json
 
-# Evaluate policies
+## Evaluate policies
 
 opa eval --data policies/ --input plan.json "data.terraform.deny"
 
-## Static Analysis with tflint and tfsec
+### Static Analysis with tflint and tfsec
 
 Integrate static analysis into your pre-commit hooks and CI:
 
-# .github/workflows/terraform-lint.yml
+## .github/workflows/terraform-lint.yml
 
 name: Terraform Lint
 
@@ -286,7 +288,7 @@ format: sarif
 
 Example `tflint` configuration:
 
-# .tflint.hcl
+## .tflint.hcl
 
 plugin "aws" {
 
@@ -318,7 +320,7 @@ force = false
 
 }
 
-## Testing Terragrunt Configurations
+### Testing Terragrunt Configurations
 
 For teams using Terragrunt, test the generated Terraform configurations:
 
@@ -352,7 +354,7 @@ assert.NotContains(t, stdout, "Error:", "No errors in plan")
 
 }
 
-## Test Validation Pipeline
+### Test Validation Pipeline
 
 Combine all testing stages in a CI pipeline:
 
@@ -386,7 +388,7 @@ t.Skip("Skipping integration test in short mode")
 
 }
 
-## Best Practices
+### Best Practices
 
   * **Test from the outside in** : validate outputs and behavior, not internal Terraform state.
 
@@ -406,5 +408,7 @@ t.Skip("Skipping integration test in short mode")
 A comprehensive infrastructure testing strategy combines static analysis for fast feedback, unit tests for module validation, integration tests for real resource behavior, and policy-as-code for compliance. The upfront investment pays dividends when a test catches a misconfiguration before it reaches production.
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>), [Cloud Cost Optimization Tips](</en/tech/cloud-cost-optimization.html>).
+
+**See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)
 
 **See also:** [Terraform Infrastructure as Code](</en/tech/terraform-infrastructure-code.html>), [Serverless Framework: From Zero to Production](</en/tech/serverless-framework.html>), [Developer Environment Setup Guide](</en/tech/dev-environment-setup.html>)

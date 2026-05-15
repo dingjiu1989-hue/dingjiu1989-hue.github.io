@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/security/helm-security.html
 
 # Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
 
-# Helm Security
+## Helm Security
+
+## Helm Security
 
 Helm Security Challenges 
 
@@ -38,23 +40,23 @@ Chart Signing
 
 Sign charts with GPG to verify authenticity: 
 
-# Generate signing key
+## Generate signing key
 
 gpg --full-generate-key
 
 gpg --list-secret-keys
 
-# Sign a chart
+## Sign a chart
 
 helm package mychart/
 
 helm sign mychart-1.0.0.tgz --key "developer@example.com"
 
-# Verify a chart
+## Verify a chart
 
 helm verify mychart-1.0.0.tgz
 
-# With custom public key
+## With custom public key
 
 gpg --export developer@example.com > pubkey.asc
 
@@ -64,7 +66,7 @@ Provenance Files
 
 Provenance files contain the chart hash and signature: 
 
-# mychart-1.0.0.tgz.prov
+## mychart-1.0.0.tgz.prov
 
 apiVersion: v1
 
@@ -86,7 +88,7 @@ iQEzBAABCAAdFiEE...
 
 Automated Verification in CI 
 
-# CI pipeline chart verification
+## CI pipeline chart verification
 
 pipeline:
 
@@ -94,11 +96,11 @@ pipeline:
 
 commands:
 
-# Import trusted keys
+## Import trusted keys
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- gpg --import trusted-keys.asc
 
-# Verify all charts
+## Verify all charts
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- for chart in charts/*.tgz; do
 
@@ -106,15 +108,15 @@ helm verify "$chart" --keyring trusted-keys.asc || exit 1
 
 done
 
-# Scan for vulnerabilities
+## Scan for vulnerabilities
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trivy fs charts/
 
-# Lint charts
+## Lint charts
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- helm lint charts/*
 
-# Check for deprecated APIs
+## Check for deprecated APIs
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pluto detect-files -d charts/
 
@@ -122,13 +124,13 @@ Secrets Management
 
 Never store secrets in values files: 
 
-# BAD: Secrets in values
+## BAD: Secrets in values
 
 apiKey: "sk-1234567890"
 
 dbPassword: "password123"
 
-# GOOD: Reference external secret
+## GOOD: Reference external secret
 
 apiKey: "{{ .Values.externalSecrets.apiKey }}"
 
@@ -267,5 +269,7 @@ Conclusion
 Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories.
 
 **See also:** [Container Runtime Security](</en/security/container-runtime-security.html>), [Kubernetes Security](</en/security/kubernetes-security.html>), [OAuth2 Implementation](</en/security/oauth2-implementation.html>).
+
+**See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Container Image Security](</en/security/container-image-security.html>)
 
 **See also:** [OAuth2 Implementation](</en/security/oauth2-implementation.html>), [Audit Logging Best Practices](</en/security/audit-logging.html>), [Container Image Security](</en/security/container-image-security.html>)

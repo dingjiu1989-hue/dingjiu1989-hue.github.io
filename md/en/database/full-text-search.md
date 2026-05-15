@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/database/full-text-search.html
 
 # Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
-# Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
+
+## Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)
 
 The Need for Full-Text Search 
 
@@ -242,7 +244,7 @@ for hit in results['hits']['hits']:
 
 print(f"{hit['_score']:.2f}: {hit['_source']['title']}")
 
-# Facet results
+## Facet results
 
 for bucket in results['aggregations']['by_tag']['buckets']:
 
@@ -324,7 +326,7 @@ Typesense is a fast, typo-tolerant search engine written in C++.
 
 Setup 
 
-# docker-compose.yml
+## docker-compose.yml
 
 version: '3'
 
@@ -360,7 +362,7 @@ client = typesense.Client({
 
 })
 
-# Create collection (schema)
+## Create collection (schema)
 
 client.collections.create({
 
@@ -384,7 +386,7 @@ client.collections.create({
 
 })
 
-# Index documents
+## Index documents
 
 client.collections['articles'].documents.create({
 
@@ -402,7 +404,7 @@ client.collections['articles'].documents.create({
 
 })
 
-# Search
+## Search
 
 results = client.collections['articles'].documents.search({
 
@@ -429,5 +431,7 @@ Summary
 Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.
 
 **See also:** [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [MongoDB vs PostgreSQL](</en/database/mongodb-vs-postgresql.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>).
+
+**See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)
 
 **See also:** [PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers](</en/database/postgresql-vs-mysql-2026.html>), [ACID vs BASE Transactions](</en/database/acid-vs-base.html>), [Graph Databases (Neo4j, Dgraph, ArangoDB)](</en/database/graph-databases.html>)

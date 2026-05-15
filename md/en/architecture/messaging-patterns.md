@@ -8,27 +8,29 @@ url: https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html
 
 # Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
 
-# Messaging Patterns: Pub/Sub and Request/Reply
+## Messaging Patterns: Pub/Sub and Request/Reply
+
+## Messaging Patterns: Pub/Sub and Request/Reply
 
 Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. 
 
@@ -77,7 +79,7 @@ Use Cases
 
 Example with Kafka 
 
-# Publisher
+## Publisher
 
 producer.send('order-events', {
 
@@ -91,7 +93,7 @@ producer.send('order-events', {
 
 })
 
-# Subscriber
+## Subscriber
 
 @kafka_listener('order-events')
 
@@ -119,7 +121,7 @@ Correlation ID
 
 The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. 
 
-# Requestor
+## Requestor
 
 correlation_id = str(uuid.uuid4())
 
@@ -135,11 +137,11 @@ message = {
 
 request_queue.send(message)
 
-# Wait for reply on the reply queue
+## Wait for reply on the reply queue
 
 reply = reply_queue.receive(timeout=30)
 
-# Replier
+## Replier
 
 def handle_request(message):
 
@@ -196,5 +198,7 @@ Summary
 Pub/Sub and Request-Reply serve different purposes. Use Pub/Sub when you need to notify multiple consumers of an event. Use Request-Reply when a service needs a response. Many systems use both patterns together. Choose your message broker based on throughput requirements, routing complexity, and operational preferences. Always design for idempotency and handle duplicate messages gracefully.
 
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Request-Reply Pattern for Asynchronous Communication](</en/architecture/request-reply-pattern.html>), [Idempotency Patterns in Distributed Systems](</en/architecture/idempotency-patterns.html>).
+
+**See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)
 
 **See also:** [Pub-Sub Patterns: Event-Driven Communication](</en/architecture/pub-sub-patterns.html>), [Caching Strategies and Patterns in Distributed Systems](</en/architecture/caching-strategies.html>), [Event-Driven Architecture: Patterns and Practice](</en/architecture/event-driven-architecture.html>)

@@ -8,39 +8,41 @@ url: https://dingjiu1989-hue.github.io/en/tools/api-testing-2026.html
 
 # API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
 
-## Introduction
+## API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+
+### Introduction
 
 API testing tools have evolved from simple request builders to full-featured collaboration platforms. The landscape in 2026 offers options for every workflow: Bruno puts collections in Git, Hoppscotch provides a lightweight web experience, Postman remains the enterprise standard, and Insomnia excels with GraphQL. This comparison helps you choose the right tool for your team.
 
-## Bruno
+### Bruno
 
 Bruno is a Git-friendly API client that stores collections as plain text files:
 
-# Collection directory structure
+## Collection directory structure
 
 bruno/
 
@@ -50,7 +52,7 @@ request.bru # Individual request
 
 collection.bru # Collection metadata
 
-# request.bru
+## request.bru
 
 meta {
 
@@ -106,7 +108,7 @@ bru.setVar("userId", res.body.data[0].id);
 
 **Weaknesses** : No cloud sync, smaller community, fewer collaboration features than Postman.
 
-## Hoppscotch
+### Hoppscotch
 
 A web-based, open-source API development platform:
 
@@ -170,7 +172,7 @@ A web-based, open-source API development platform:
 
 **Weaknesses** : Web-based (limited offline without PWA), fewer integrations than Postman.
 
-## Postman
+### Postman
 
 The enterprise standard with comprehensive features:
 
@@ -226,11 +228,11 @@ pm-collection run user-api.postman_collection.json
 
 **Weaknesses** : Heavy resource usage, account required, can be overwhelming, recent UI changes have been controversial.
 
-## Insomnia
+### Insomnia
 
 Kong's API client with excellent GraphQL support:
 
-# Insomnia GraphQL query
+## Insomnia GraphQL query
 
 query GetUser($id: ID!) {
 
@@ -258,7 +260,7 @@ content
 
 }
 
-# With variables
+## With variables
 
 {
 
@@ -302,7 +304,7 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
 
 **Strengths** : Clean UI, excellent GraphQL support, plugin system, local data (no cloud required by default), unit testing feature.
 
-## Comparison
+### Comparison
 
 | Feature | Bruno | Hoppscotch | Postman | Insomnia |
 
@@ -324,7 +326,7 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
 
 | Desktop app | Yes | PWA | Yes | Yes |
 
-## Recommendations
+### Recommendations
 
   * **Git-native teams** : Bruno for API collections in your repository with PR-based review.
 
@@ -344,5 +346,7 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
 The trend is toward local-first, git-integrated tools. Bruno represents this new direction most completely. Postman remains the safest choice for enterprise teams needing the full feature set.
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Git GUI Tools: GitKraken, Sourcetree, GitHub Desktop](</en/tools/git-gui-tools.html>).
+
+**See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)
 
 **See also:** [API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI](</en/tools/api-development-tools.html>), [Load Testing Tools: k6, Locust, Gatling, Artillery](</en/tools/load-testing-tools.html>), [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>)

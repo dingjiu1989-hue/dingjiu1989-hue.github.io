@@ -28,7 +28,7 @@
     <meta name="twitter:description" content="Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png">
     <meta property="article:published_time" content="2026-05-12">
-    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-11">
     <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Event-Carried State Transfer Pattern — SourceHub</title>
     <meta name="description" content="Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.">
@@ -46,8 +46,8 @@
       "description": "Learn the event-carried state transfer pattern for reducing service dependencies in event-driven architectures.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png",
       "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "625",
+      "dateModified": "2026-05-11",
+      "wordCount": "580",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -90,34 +90,36 @@
         <span class="tag-cat">System Design</span>
         <span class="tag-cat">Backend</span></div>
       <h1 class="article-title">Event-Carried State Transfer Pattern</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-12 · Last active 2026-05-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" width="1200" height="630" loading="lazy">
-      <div class="article-body"><h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
-<h1>Event-Carried State Transfer Pattern</h1>
+      <div class="article-body"><h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
+<h2>Event-Carried State Transfer Pattern</h2>
 <p>Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-carried-state-transfer.png" alt="Event-Carried State Transfer Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h2>How It Works</h2>
+<h3>How It Works</h3>
 <p>When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call.</p>
 <p>This is a departure from traditional event design, where events contain only identifiers and consumers query the producer for details. That approach creates synchronous coupling and single points of failure.</p>
-<h2>Benefits</h2>
+<h3>Benefits</h3>
 <p>Event-carried state transfer eliminates synchronous dependencies. If the producer is down, consumers can still process events using the embedded state. It also reduces latency—consumers save the round-trip time of querying the producer.</p>
 <p>System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API.</p>
-<h2>Drawbacks</h2>
+<h3>Drawbacks</h3>
 <p>Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination.</p>
 <p>Stale data is a concern. If the producer updates its internal state after publishing the event, consumers have the old state. This is acceptable in eventually consistent systems but requires careful design.</p>
-<h2>When to Use</h2>
+<h3>When to Use</h3>
 <p>Use event-carried state transfer when consumer independence is a priority, when the producer is likely to experience high load from consumer queries, and when eventual consistency is acceptable. Avoid it when event payload size is constrained or when consumers need absolutely current data.</p>
-<h2>Best Practices</h2>
+<h3>Best Practices</h3>
 <p>Include only the state that consumers need, not the producer's entire internal model. Version event schemas to manage payload evolution. Document which fields each consumer uses so producers understand the impact of changes.</p>
-<p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a></p></div>
+<p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
