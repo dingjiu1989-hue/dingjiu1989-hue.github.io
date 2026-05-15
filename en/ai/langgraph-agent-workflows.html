@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-render="related" data-board="ai" data-exclude="langgraph-agent-workflows">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base-path" content="/en">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XGFYGQE9NS"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XGFYGQE9NS');
+    </script>
+    <meta property="og:title" content="Building Custom AI Agents with LangGraph: A Practical Guide">
+    <meta property="og:description" content="Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-in-the-loop, and conditional routing.">
+    <meta property="og:url" content="https://dingjiu1989-hue.github.io/en/ai/langgraph-agent-workflows.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="SourceHub">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building Custom AI Agents with LangGraph: A Practical Guide">
+    <meta name="twitter:description" content="Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-in-the-loop, and conditional routing.">
+    <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png">
+    <title>Building Custom AI Agents with LangGraph: A Practical Guide — SourceHub</title>
+    <meta name="description" content="Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-in-the-loop, and conditional routing.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/ai/langgraph-agent-workflows.html">
+    <meta name="robots" content="index, follow">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Building Custom AI Agents with LangGraph: A Practical Guide",
+      "description": "Learn to build stateful, multi-step agent workflows with LangGraph: graph-based orchestration, persistent memory, human-in-the-loop, and conditional routing.",
+      "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png",
+      "datePublished": "2026-05-15",
+      "dateModified": "2026-05-15",
+      "wordCount": "1350",
+      "keywords": "AI, LangGraph, Agent, Workflow",
+      "author": {"@type": "Person", "name": "SourceHub"},
+      "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
+      "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/langgraph-agent-workflows.html"},
+      "articleBody": "LangGraph extends LangChain with graph-based state machine orchestration for building reliable, multi-step AI agent workflows. Unlike traditional linear chains, LangGraph lets you define cyclic graphs with conditional routing, persistent state, and human-in-the-loop checkpoints. Why LangGraph? Most agent frameworks chain LLM calls linearly: call LLM, parse output, call tool, repeat. This breaks for complex tasks requiring loops, branching, or manual approval. LangGraph models agents as state graphs where each node is a computation step and edges define control flow. The key innovations are state persistence across steps, conditional edges that route based on output content, and built-in checkpointing for pause-and-resume. Installing and Setup pip install langgraph langchain langchain-openai Python 3.10+ is required. LangGraph runs entirely locally — no external server needed. Defining Your State Graph Every LangGraph application starts with a state definition. The state is a typed dictionary that flows through all nodes: from typing import TypedDict, Literal from langgraph.graph import StateGraph, END class AgentState(TypedDict): input: str messages: list output: str steps: int This state carries the user's input, the conversation history, the final output, and a step counter for loop control. Building Nodes Nodes are Python functions that receive the state and return updates. Each node focuses on one task: call_llm evaluates the current state and decides the next action; execute_tool runs external API calls; should_continue is a conditional edge function that routes to continue or end based on the message content. Conditional Routing Conditional edges are what make LangGraph powerful. A routing function inspects the state and returns the next node name: def route(state): if 'SEARCH' in state['messages'][-1]: return 'search_tool' elif 'CODE' in state['messages'][-1]: return 'code_executor' else: return END The graph.add_conditional_edges('call_llm', route) call lets the agent dynamically choose paths based on LLM output. Adding Memory and Checkpointing LangGraph supports persistent memory via checkpointing. This enables pause-and-resume, human-in-the-loop approvals, and debugging: from langgraph.checkpoint import MemorySaver memory = MemorySaver() graph = builder.compile(checkpointer=memory) config = {'configurable': {'thread_id': 'session_1'}} for event in graph.stream({'input': 'Analyze this data and generate a report'}, config): print(event) Each checkpoint saves the full state so you can replay or inspect any step. Human-in-the-Loop Patterns A common pattern is pausing execution for human approval before executing destructive tools: def human_approval(state): print(f'About to execute: {state[\"next_action\"]}') approval = input('Approve? (y/n): ') if approval.lower() != 'y': return 'revise_prompt' return 'execute_tool' Wrap the node with interrupt_before in the compilation config to pause before sensitive steps. This pattern is essential for production agents that might issue API calls or modify databases. Parallel Execution LangGraph supports fan-out patterns where multiple nodes run in parallel and their results merge back. This is useful for research agents that query multiple sources simultaneously: graph.add_node('search_web') graph.add_node('search_docs') graph.add_node('search_vector_db') graph.add_edge('call_llm', 'parallel_search') graph.add_conditional_edges('parallel_search', merge_results) Each search node runs concurrently. The merge_results function combines their outputs into a unified state update. Performance Tips Keep node functions pure — avoid side effects beyond the state update. Use checkpointer=None for simple stateless chains to reduce overhead. For production, use a persistent checkpointer like SQLiteSaver instead of MemorySaver to survive restarts. Limit graph depth to under 20 nodes for predictable latency. Real-World Example A customer support agent built with LangGraph processes incoming tickets through classification, knowledge base search, escalation decision, and response generation — all with manual override at each stage. A startup using this pattern reduced ticket resolution time by 60% while maintaining human oversight on sensitive issues. Summary LangGraph transforms agent building from fragile linear chains into robust state machines. The graph model handles complex control flow naturally, and checkpointing makes production deployment safer."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
+        {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
+        {"@type": "ListItem", "position": 3, "name": "Building Custom AI Agents with LangGraph: A Practical Guide"}
+      ]
+    }
+    </script>
+    <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<main>
+  <div class="container article-container">
+    <div class="breadcrumb">
+      <a href="/en/">Home</a> › <a href="/en/ai/">AI Tutorials</a> › Building Custom AI Agents with LangGraph: A Practical Guide
+    </div>
+    <article>
+      <div class="article-tags">        <span class="tag-cat">AI</span>
+        <span class="tag-cat">LangGraph</span>
+        <span class="tag-cat">Agent</span></div>
+      <h1 class="article-title">Building Custom AI Agents with LangGraph: A Practical Guide</h1>
+      <div class="article-meta">Published 2026-05-15 · 0 views · 0 replies</div>
+      <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/langgraph-agent-workflows.png" alt="Building Custom AI Agents with LangGraph: A Practical Guide" width="1200" height="630" loading="lazy">
+      <div class="article-body">
+LangGraph extends LangChain with graph-based state machine orchestration for building reliable, multi-step AI agent workflows. Unlike traditional linear chains, LangGraph lets you define cyclic graphs with conditional routing, persistent state, and human-in-the-loop checkpoints.
+
+<h2>Why LangGraph?</h2>
+
+<p>Most agent frameworks chain LLM calls linearly: call LLM, parse output, call tool, repeat. This breaks for complex tasks requiring loops, branching, or manual approval. LangGraph models agents as <strong>state graphs</strong> where each node is a computation step and edges define control flow.</p>
+
+<p>The key innovations are <em>state persistence across steps</em>, <em>conditional edges</em> that route based on output content, and <em>built-in checkpointing</em> for pause-and-resume.</p>
+
+<h2>Installing and Setup</h2>
+
+<pre><code>pip install langgraph langchain langchain-openai</code></pre>
+
+<p>Python 3.10+ is required. LangGraph runs entirely locally — no external server needed.</p>
+
+<h2>Defining Your State Graph</h2>
+
+<p>Every LangGraph application starts with a state definition. The state is a typed dictionary that flows through all nodes:</p>
+
+<pre><code>from typing import TypedDict, Literal
+from langgraph.graph import StateGraph, END
+
+class AgentState(TypedDict):
+    input: str
+    messages: list
+    output: str
+    steps: int</code></pre>
+
+<p>This state carries the user's input, the conversation history, the final output, and a step counter for loop control.</p>
+
+<h2>Building Nodes</h2>
+
+<p>Nodes are Python functions that receive the state and return updates. Each node focuses on one task:</p>
+
+<ul>
+<li><code>call_llm</code> — evaluates the current state and decides the next action</li>
+<li><code>execute_tool</code> — runs external API calls (search, calculator, database)</li>
+<li><code>should_continue</code> — a conditional edge function that routes to <code>continue</code> or <code>end</code></li>
+</ul>
+
+<h2>Conditional Routing</h2>
+
+<p>Conditional edges are what make LangGraph powerful. A routing function inspects the state and returns the next node name:</p>
+
+<pre><code>def route(state):
+    if 'SEARCH' in state['messages'][-1]:
+        return 'search_tool'
+    elif 'CODE' in state['messages'][-1]:
+        return 'code_executor'
+    else:
+        return END
+
+graph.add_conditional_edges('call_llm', route)</code></pre>
+
+<p>The agent dynamically chooses paths based on LLM output.</p>
+
+<h2>Adding Memory and Checkpointing</h2>
+
+<p>LangGraph supports persistent memory via checkpointing. This enables pause-and-resume, human-in-the-loop approvals, and debugging:</p>
+
+<pre><code>from langgraph.checkpoint import MemorySaver
+
+memory = MemorySaver()
+graph = builder.compile(checkpointer=memory)
+config = {'configurable': {'thread_id': 'session_1'}}
+
+for event in graph.stream({'input': 'Analyze this data'}, config):
+    print(event)</code></pre>
+
+<p>Each checkpoint saves the full state so you can replay or inspect any step.</p>
+
+<h2>Human-in-the-Loop Patterns</h2>
+
+<p>A common pattern is pausing execution for human approval before executing destructive tools:</p>
+
+<pre><code>def human_approval(state):
+    print(f'About to execute: {state["next_action"]}')
+    approval = input('Approve? (y/n): ')
+    if approval.lower() != 'y':
+        return 'revise_prompt'
+    return 'execute_tool'</code></pre>
+
+<p>Wrap the node with <code>interrupt_before</code> to pause before sensitive steps. Essential for production agents that might issue API calls or modify databases.</p>
+
+<h2>Parallel Execution</h2>
+
+<p>LangGraph supports fan-out patterns where multiple nodes run in parallel:</p>
+
+<pre><code>graph.add_node('search_web')
+graph.add_node('search_docs')
+graph.add_node('search_vector_db')
+graph.add_edge('call_llm', 'parallel_search')</code></pre>
+
+<p>Each search node runs concurrently. A merge function combines results into a unified state update.</p>
+
+<h2>Performance Tips</h2>
+
+<ul>
+<li>Keep node functions pure — avoid side effects beyond the state update</li>
+<li>Use <code>checkpointer=None</code> for simple stateless chains to reduce overhead</li>
+<li>For production, use <code>SQLiteSaver</code> instead of <code>MemorySaver</code> to survive restarts</li>
+<li>Limit graph depth to under 20 nodes for predictable latency</li>
+</ul>
+
+<h2>Real-World Example</h2>
+
+<p>A customer support agent built with LangGraph processes incoming tickets through classification, knowledge base search, escalation decision, and response generation — all with manual override at each stage. A startup using this pattern reduced ticket resolution time by 60% while maintaining human oversight on sensitive issues.</p>
+
+<h2>Summary</h2>
+
+<p>LangGraph transforms agent building from fragile linear chains into robust state machines. The graph model handles complex control flow naturally, and checkpointing makes production deployment safer.</p>
+      </div>
+    </article>
+  </div>
+</main>
+<div id="footer-placeholder"></div>
+<script src="/js/include.js"></script>
+</body>
+</html>
