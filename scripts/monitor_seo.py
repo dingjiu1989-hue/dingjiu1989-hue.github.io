@@ -42,6 +42,16 @@ REQUIRED_TAGS = {
     "json-ld": r'application/ld\+json',
 }
 
+# Tags only required on article pages (not index/category/utility pages)
+ARTICLE_ONLY_TAGS = {
+    "article:published_time": r'<meta property="article:published_time"',
+    "article:modified_time": r'<meta property="article:modified_time"',
+    "article:tag": r'<meta property="article:tag"',
+    "speakable": r'SpeakableSpecification',
+}
+
+ARTICLE_ONLY_PAGES = {"nav.html", "footer.html", "privacy.html", "index.html", "about.html"}
+
 # Tags that are only required when a Chinese counterpart exists on disk
 CONDITIONAL_TAGS = {
     "hreflang:zh": r'hreflang="zh-CN"',
@@ -114,18 +124,26 @@ def check_seo_tags():
     html_files = list(en_dir.rglob("*.html"))
     results = {"total_files": len(html_files), "missing_tags": defaultdict(list), "files_with_issues": 0}
 
-    # Exclude utility pages (nav, footer, privacy)
-    UTIL_PAGES = {"nav.html", "footer.html", "privacy.html"}
-    html_files = [f for f in html_files if f.name not in UTIL_PAGES]
+    # Exclude utility pages and generated dashboards
+    EXCLUDE_PAGES = {"nav.html", "footer.html", "privacy.html", "about.html"}
+    EXCLUDE_DIRS = {"monitor"}
+    html_files = [f for f in html_files if f.name not in EXCLUDE_PAGES and f.parent.name not in EXCLUDE_DIRS]
 
     for fpath in html_files:
         html = fpath.read_text(encoding="utf-8")
         rel = str(fpath.relative_to(ROOT))
+        is_article = fpath.name not in ARTICLE_ONLY_PAGES
         issues = []
         for tag_name, pattern in REQUIRED_TAGS.items():
             if not re.search(pattern, html):
                 results["missing_tags"][tag_name].append(rel)
                 issues.append(tag_name)
+        # Article-only tags (published_time, modified_time, article:tag, speakable)
+        if is_article:
+            for tag_name, pattern in ARTICLE_ONLY_TAGS.items():
+                if not re.search(pattern, html):
+                    results["missing_tags"][tag_name].append(rel)
+                    issues.append(tag_name)
         # Conditional tags: only required when Chinese counterpart exists
         cn_rel = re.sub(r'^en/', '', rel)
         cn_path = ROOT / cn_rel
@@ -185,6 +203,16 @@ def check_structured_data():
                     if "itemListElement" not in data:
                         results["errors"].append(
                             {"file": str(fpath.relative_to(ROOT)), "schema": "BreadcrumbList", "error": "missing itemListElement"}
+                        )
+                elif schema_type == "WebSite":
+                    if "potentialAction" not in data:
+                        results.setdefault("warnings", []).append(
+                            {"file": str(fpath.relative_to(ROOT)), "warning": "WebSite schema missing SearchAction"}
+                        )
+                elif schema_type == "WebPage":
+                    if "speakable" not in data:
+                        results["errors"].append(
+                            {"file": str(fpath.relative_to(ROOT)), "schema": "WebPage", "error": "missing speakable"}
                         )
             except json.JSONDecodeError as e:
                 results["errors"].append({"file": str(fpath.relative_to(ROOT)), "error": f"Invalid JSON: {e}"})
@@ -254,7 +282,116 @@ def check_internal_links():
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# 6. GSC API Integration
+# 6. AI-Friendly Files Health (llms.txt, robots.txt, image sitemap)
+# ═══════════════════════════════════════════════════════════════════════════
+
+def check_ai_friendly_files():
+    """Verify llms.txt coverage, llms-full.txt format, robots.txt completeness,
+    image sitemap validity, and /md/ directory health."""
+    results = {
+        "llms_txt": {"boards_listed": [], "boards_missing": []},
+        "llms_full_txt": {"size_kb": 0, "articles": 0, "dup_titles": 0},
+        "robots_txt": {"sitemaps": [], "missing_sitemaps": []},
+        "image_sitemap": {"exists": False, "image_count": 0},
+        "md_dir": {"article_count": 0, "expected": 0},
+        "warnings": [],
+        "ok": True,
+    }
+
+    # ── 6a. llms.txt board coverage ──
+    llms_path = ROOT / "llms.txt"
+    en_articles = ROOT / "en" / "articles.json"
+    if llms_path.exists() and en_articles.exists():
+        en_data = json.loads(en_articles.read_text(encoding="utf-8"))
+        expected_boards = {b["id"] for b in en_data["boards"]}
+        llms_content = llms_path.read_text(encoding="utf-8")
+        # Extract board IDs from links in llms.txt: /en/{board_id}/{slug}.html
+        listed_boards = set(re.findall(r'/en/([a-z-]+)/[a-z0-9-]+\.html', llms_content))
+        results["llms_txt"]["boards_listed"] = sorted(listed_boards)
+        results["llms_txt"]["boards_missing"] = sorted(expected_boards - listed_boards)
+        if results["llms_txt"]["boards_missing"]:
+            results["warnings"].append(
+                f'llms.txt missing boards: {results["llms_txt"]["boards_missing"]}'
+            )
+            results["ok"] = False
+    else:
+        results["warnings"].append("llms.txt or en/articles.json not found")
+        results["ok"] = False
+
+    # ── 6b. llms-full.txt format quality ──
+    full_path = ROOT / "llms-full.txt"
+    if full_path.exists():
+        content = full_path.read_text(encoding="utf-8")
+        results["llms_full_txt"]["size_kb"] = round(len(content.encode("utf-8")) / 1024)
+        # Count articles by "## " headers (metadata format, not content H2s)
+        articles = re.findall(r'^## .+\nURL: https?://', content, re.MULTILINE)
+        results["llms_full_txt"]["articles"] = len(articles)
+        # Check for duplicate H1 within same article section (old format issue)
+        # Pattern: ## Title \n... \n# Title — title appears as H2 header then H1 in body
+        dup_matches = re.findall(r'^## (.+)\n(?:.+\n)*?# \1$', content, re.MULTILINE)
+        results["llms_full_txt"]["dup_titles"] = len(dup_matches)
+        if dup_matches:
+            results["warnings"].append(
+                f'llms-full.txt has {len(dup_matches)} duplicate titles (H2+H1 in same article)'
+            )
+            results["ok"] = False
+
+    # ── 6c. robots.txt sitemap references ──
+    robots_path = ROOT / "robots.txt"
+    if robots_path.exists():
+        robots = robots_path.read_text(encoding="utf-8")
+        sitemaps = re.findall(r'^Sitemap: (.+)$', robots, re.MULTILINE)
+        results["robots_txt"]["sitemaps"] = sitemaps
+        expected_sitemaps = [
+            "https://dingjiu1989-hue.github.io/sitemap.xml",
+            "https://dingjiu1989-hue.github.io/images/sitemap.xml",
+        ]
+        for expected in expected_sitemaps:
+            if expected not in sitemaps:
+                results["robots_txt"]["missing_sitemaps"].append(expected)
+        if results["robots_txt"]["missing_sitemaps"]:
+            results["warnings"].append(
+                f'robots.txt missing sitemaps: {results["robots_txt"]["missing_sitemaps"]}'
+            )
+            results["ok"] = False
+    else:
+        results["warnings"].append("robots.txt not found")
+        results["ok"] = False
+
+    # ── 6d. Image sitemap ──
+    img_sitemap = ROOT / "images" / "sitemap.xml"
+    if img_sitemap.exists():
+        results["image_sitemap"]["exists"] = True
+        sc = img_sitemap.read_text(encoding="utf-8")
+        results["image_sitemap"]["image_count"] = len(re.findall(r"<image:image>", sc))
+        if results["image_sitemap"]["image_count"] == 0:
+            results["warnings"].append("Image sitemap exists but has 0 images")
+            results["ok"] = False
+    else:
+        results["warnings"].append("Image sitemap (images/sitemap.xml) not found")
+        results["ok"] = False
+
+    # ── 6e. /md/ directory coverage ──
+    md_en = ROOT / "md" / "en"
+    if md_en.exists():
+        md_count = len(list(md_en.rglob("*.md")))
+        # Expected: one md per article with a rendered HTML page
+        en_html = list((ROOT / "en").rglob("*.html"))
+        # Exclude index.html, nav, footer, privacy
+        article_pages = [f for f in en_html if f.stem not in ("index", "nav", "footer", "privacy")]
+        results["md_dir"]["expected"] = len(article_pages)
+        results["md_dir"]["article_count"] = md_count
+        if md_count < len(article_pages) * 0.95:
+            results["warnings"].append(
+                f'/md/ coverage: {md_count}/{len(article_pages)} — below 95%'
+            )
+            results["ok"] = False
+
+    return results
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# 7. GSC API Integration
 # ═══════════════════════════════════════════════════════════════════════════
 
 def _gsc_csv_fallback():
@@ -480,7 +617,7 @@ def load_previous_report():
     return None
 
 
-def generate_report(sitemap, seo_tags, structured, pages, links, gsc):
+def generate_report(sitemap, seo_tags, structured, pages, links, ai_health, gsc):
     """Merge all checks into a single health report."""
     prev = load_previous_report()
 
@@ -499,6 +636,13 @@ def generate_report(sitemap, seo_tags, structured, pages, links, gsc):
         },
         "page_sizes": pages,
         "internal_links": links,
+        "ai_friendly": {
+            "llms_txt": ai_health["llms_txt"],
+            "llms_full_txt": ai_health["llms_full_txt"],
+            "robots_txt": ai_health["robots_txt"],
+            "image_sitemap": ai_health["image_sitemap"],
+            "md_dir": ai_health["md_dir"],
+        },
         "gsc": gsc,
         "warnings": [],
         "trend": {},
@@ -521,6 +665,8 @@ def generate_report(sitemap, seo_tags, structured, pages, links, gsc):
         report["warnings"].append(
             f"{seo_tags['files_with_issues']} files missing some SEO tags"
         )
+    if ai_health.get("warnings"):
+        report["warnings"].extend(ai_health["warnings"])
     if not gsc.get("available"):
         if gsc.get("error"):
             report["warnings"].append(
@@ -582,15 +728,31 @@ def main():
     print()
 
     # 4. Page Sizes + Internal Links
-    print("[4/5] Page size & link analysis...")
+    print("[4/6] Page size & link analysis...")
     pages = check_page_sizes()
     print(f"  Avg page: {pages['avg_kb']} KB | Over 100KB: {len(pages['over_100kb'])}")
     links = check_internal_links()
     print(f"  Internal links checked: {links['total_links']} | Broken: {len(links['broken'])}")
     print()
 
-    # 5. GSC Data
-    print("[5/5] GSC data pull...")
+    # 5. AI-friendly files health
+    print("[5/6] AI-friendly files health...")
+    ai_health = check_ai_friendly_files()
+    print(f"  llms.txt boards covered: {len(ai_health['llms_txt']['boards_listed'])}")
+    if ai_health['llms_txt']['boards_missing']:
+        print(f"    MISSING: {ai_health['llms_txt']['boards_missing']}")
+    print(f"  llms-full.txt: {ai_health['llms_full_txt']['articles']} articles, {ai_health['llms_full_txt']['size_kb']} KB")
+    if ai_health['llms_full_txt']['dup_titles']:
+        print(f"    WARN: {ai_health['llms_full_txt']['dup_titles']} duplicate titles")
+    print(f"  robots.txt sitemaps: {len(ai_health['robots_txt']['sitemaps'])}")
+    if ai_health['robots_txt']['missing_sitemaps']:
+        print(f"    MISSING: {ai_health['robots_txt']['missing_sitemaps']}")
+    print(f"  Image sitemap: {'✓' if ai_health['image_sitemap']['exists'] else '✗'} ({ai_health['image_sitemap']['image_count']} images)")
+    print(f"  /md/ coverage: {ai_health['md_dir']['article_count']}/{ai_health['md_dir']['expected']}")
+    print()
+
+    # 6. GSC Data
+    print("[6/6] GSC data pull...")
     gsc = pull_gsc_data()
     if gsc.get("available"):
         sp = gsc.get("search_performance", {})
@@ -606,7 +768,7 @@ def main():
     print()
 
     # Generate Report
-    report = generate_report(sitemap, seo_tags, structured, pages, links, gsc)
+    report = generate_report(sitemap, seo_tags, structured, pages, links, ai_health, gsc)
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     HEALTH_FILE.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
