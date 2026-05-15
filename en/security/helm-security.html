@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-04",
-      "wordCount": "1068",
+      "wordCount": "1089",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/helm-security.html"},
@@ -96,35 +98,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
-<h2>Helm Security</h2>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
+<h3>Helm Security</h3>
 <p>Helm Security Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/helm-security.png" alt="Helm Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Helm simplifies Kubernetes deployments but introduces security concerns: untrusted charts, unprotected secrets, and supply chain risks. </p>
 <p>Chart Signing </p>
 <p>Sign charts with GPG to verify authenticity: </p>
-<h2>Generate signing key</h2>
+<h3>Generate signing key</h3>
 <p>gpg --full-generate-key</p>
 <p>gpg --list-secret-keys</p>
-<h2>Sign a chart</h2>
+<h3>Sign a chart</h3>
 <p>helm package mychart/</p>
 <p>helm sign mychart-1.0.0.tgz --key "developer@example.com"</p>
-<h2>Verify a chart</h2>
+<h3>Verify a chart</h3>
 <p>helm verify mychart-1.0.0.tgz</p>
-<h2>With custom public key</h2>
+<h3>With custom public key</h3>
 <p>gpg --export developer@example.com &gt; pubkey.asc</p>
 <p>helm verify mychart-1.0.0.tgz --keyring pubkey.asc</p>
 <p>Provenance Files </p>
 <p>Provenance files contain the chart hash and signature: </p>
-<h2>mychart-1.0.0.tgz.prov</h2>
+<h3>mychart-1.0.0.tgz.prov</h3>
 <p>apiVersion: v1</p>
 <p>files:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- mychart-1.0.0.tgz</p>
@@ -135,28 +138,28 @@
 <p>iQEzBAABCAAdFiEE...</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----END PGP SIGNATURE-----</p>
 <p>Automated Verification in CI </p>
-<h2>CI pipeline chart verification</h2>
+<h3>CI pipeline chart verification</h3>
 <p>pipeline:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify-charts</p>
 <p>commands:</p>
-<h2>Import trusted keys</h2>
+<h3>Import trusted keys</h3>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- gpg --import trusted-keys.asc</p>
-<h2>Verify all charts</h2>
+<h3>Verify all charts</h3>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- for chart in charts/*.tgz; do</p>
 <p>helm verify "$chart" --keyring trusted-keys.asc || exit 1</p>
 <p>done</p>
-<h2>Scan for vulnerabilities</h2>
+<h3>Scan for vulnerabilities</h3>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trivy fs charts/</p>
-<h2>Lint charts</h2>
+<h3>Lint charts</h3>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- helm lint charts/*</p>
-<h2>Check for deprecated APIs</h2>
+<h3>Check for deprecated APIs</h3>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pluto detect-files -d charts/</p>
 <p>Secrets Management </p>
 <p>Never store secrets in values files: </p>
-<h2>BAD: Secrets in values</h2>
+<h3>BAD: Secrets in values</h3>
 <p>apiKey: "sk-1234567890"</p>
 <p>dbPassword: "password123"</p>
-<h2>GOOD: Reference external secret</h2>
+<h3>GOOD: Reference external secret</h3>
 <p>apiKey: "{{ .Values.externalSecrets.apiKey }}"</p>
 <p>dbPassword: "{{ .Values.externalSecrets.dbPassword }}"</p>
 <p>Use external secrets operator: </p>
@@ -226,6 +229,7 @@
 <p>Conclusion </p>
 <p>Secure Helm deployments with chart signing and provenance verification. Use external secrets management instead of storing secrets in values files. Validate values with JSON Schema. Restrict Helm RBAC to specific operations. Scan charts for vulnerabilities before deployment. Always verify chart signatures from third-party repositories.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/kubernetes-security.html">Kubernetes Security</a>, <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/oauth2-implementation.html">OAuth2 Implementation</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a>, <a href="/en/security/container-image-security.html">Container Image Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

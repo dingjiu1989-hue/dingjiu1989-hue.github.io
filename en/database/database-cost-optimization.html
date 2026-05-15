@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-13",
-      "wordCount": "1807",
+      "wordCount": "1861",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-cost-optimization.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png" alt="Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
-<h2>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h2>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
+<h3>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering</h3>
 <p>Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-cost-optimization.png" alt="Database Cost Optimization: Instance Sizing, Reserved Instances, Storage Tiering" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database costs are often the largest infrastructure expense for data-intensive applications. This article covers strategies to optimize database spending without sacrificing performance or reliability. </p>
 <p>Right-Sizing Instances </p>
@@ -139,12 +142,12 @@
 </li>
 </ul>
 <p>The Sizing Process </p>
-<h2>Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)</h2>
-<h2>After monitoring for 2 weeks:</h2>
-<h2>Peak CPU: 25%, average CPU: 12%</h2>
-<h2>Peak connections: 40 of 200</h2>
-<h2>Storage used: 120 GB</h2>
-<h2>Optimized: 4 vCPU, 16 GB RAM, 150 GB gp3 ($200/month - 71% savings)</h2>
+<h3>Before: 8 vCPU, 32 GB RAM, 1000 GB gp2 ($700/month)</h3>
+<h3>After monitoring for 2 weeks:</h3>
+<h3>Peak CPU: 25%, average CPU: 12%</h3>
+<h3>Peak connections: 40 of 200</h3>
+<h3>Storage used: 120 GB</h3>
+<h3>Optimized: 4 vCPU, 16 GB RAM, 150 GB gp3 ($200/month - 71% savings)</h3>
 <p>Reserved Instances </p>
 <p>Cloud providers offer significant discounts for committing to 1-year or 3-year terms: </p>
 <p>| Commitment | AWS RDS Discount | Azure SQL Discount | GCP Cloud SQL | |------------|-----------------|-------------------|---------------| | 1-year no upfront | ~30% | ~30% | ~25% | | 1-year partial upfront | ~35% | ~35% | ~30% | | 3-year all upfront | ~60% | ~55% | ~50% | </p>
@@ -192,8 +195,8 @@
 <p>Serverless Databases </p>
 <p>Serverless databases (Aurora Serverless, Cloud SQL, Azure Serverless) scale compute automatically and charge only for usage: </p>
 <p>Aurora Serverless v2 </p>
-<h2>Automatic scaling from 0.5 to 64 ACUs</h2>
-<h2>1 ACU = ~2 GB RAM, proportional CPU</h2>
+<h3>Automatic scaling from 0.5 to 64 ACUs</h3>
+<h3>1 ACU = ~2 GB RAM, proportional CPU</h3>
 <p>aurora:</p>
 <p>engine: aurora-postgresql</p>
 <p>serverlessv2:</p>
@@ -250,13 +253,14 @@
 <p>FROM pg_stat_user_tables</p>
 <p>ORDER BY wasted_bytes DESC;</p>
 <p>Set up cloud cost budgets and alerts: </p>
-<h2>AWS Budget example</h2>
+<h3>AWS Budget example</h3>
 <p>aws budgets create-budget \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--account-id 123456789012 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--budget file://budget.json</p>
-<h2>Alert at 80% and 100% of monthly budget</h2>
+<h3>Alert at 80% and 100% of monthly budget</h3>
 <p>Database cost optimization is an ongoing practice, not a one-time project. Review your database costs quarterly, right-size based on actual usage patterns, and leverage cloud provider discounts for predictable workloads.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-compression.html">Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

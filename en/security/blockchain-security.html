@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "1861",
+      "wordCount": "1895",
       "keywords": "Security, Cybersecurity",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/blockchain-security.html"},
@@ -95,20 +97,21 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png" alt="Blockchain and Smart Contract Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
-<h2>Blockchain and Smart Contract Security</h2>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
+<h3>Blockchain and Smart Contract Security</h3>
 <p>Blockchain and smart contract security presents unique challenges. Once deployed, smart contracts are immutable. A vulnerability in a contract can result in millions of dollars in losses with no recourse. This article covers common smart contract vulnerabilities, auditing tools and techniques, formal verification, and wallet security.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/blockchain-security.png" alt="Blockchain and Smart Contract Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Common Smart Contract Vulnerabilities</h3>
+<h4>Common Smart Contract Vulnerabilities</h4>
 <h4>Reentrancy</h4>
 <p>Reentrancy is the most infamous smart contract vulnerability. It occurs when a contract calls an external contract before updating its own state, allowing the external contract to recursively call back into the original contract before the first invocation completes.</p>
 <p>// VULNERABLE: Reentrancy</p>
@@ -227,7 +230,7 @@
 <p>_pause();</p>
 <p>}</p>
 <p>}</p>
-<h3>Smart Contract Auditing</h3>
+<h4>Smart Contract Auditing</h4>
 <p>Auditing is the primary defense against smart contract vulnerabilities. A thorough audit combines automated scanning with manual review.</p>
 <h4>Automated Auditing Tools</h4>
 <ul>
@@ -241,11 +244,11 @@
 <p><strong>Echidna</strong> : Fuzzing tool that tests contract properties using random inputs.</p>
 </li>
 </ul>
-<h2>Slither analysis</h2>
+<h3>Slither analysis</h3>
 <p>slither my_contract.sol --print human-summary</p>
-<h2>Run specific detectors</h2>
+<h3>Run specific detectors</h3>
 <p>slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth</p>
-<h2>Mythril analysis</h2>
+<h3>Mythril analysis</h3>
 <p>myth analyze my_contract.sol --solc-json solc.json</p>
 <h4>Property-Based Fuzzing with Foundry</h4>
 <p>Foundry is a modern Solidity testing framework that supports fuzz testing and invariant testing.</p>
@@ -286,7 +289,7 @@
 <p><strong>Token handling</strong> : Does the contract handle non-standard ERC-20 tokens (USDT, fee-on-transfer)?</p>
 </li>
 </ul>
-<h3>Formal Verification</h3>
+<h4>Formal Verification</h4>
 <p>Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.</p>
 <h4>Tools</h4>
 <ul>
@@ -312,7 +315,7 @@
 <p>assert supply_after &gt;= supply_before;</p>
 <p>}</p>
 <p>Formal verification is most valuable for high-value contracts (DeFi protocols, bridges, stablecoins) where failure is catastrophic.</p>
-<h3>Wallet Security</h3>
+<h4>Wallet Security</h4>
 <p>User wallets are a major attack vector. Protecting wallet infrastructure is critical for any blockchain application.</p>
 <h4>Key Management</h4>
 <ul>
@@ -339,9 +342,10 @@
 <p>bytes32 constant PERMIT_TYPEHASH = keccak256(</p>
 <p>"Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"</p>
 <p>);</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Smart contract security requires a multi-layered approach. Understand common vulnerabilities like reentrancy, oracle manipulation, and front-running. Use automated analysis tools like Slither and Mythril. Invest in formal verification for high-value contracts. Implement rigorous access control and follow patterns like checks-effects-interactions. Finally, secure the wallet infrastructure that interacts with your contracts. In the immutable world of blockchain, security is not optional.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-security.html">Container Security Best Practices</a>, <a href="/en/security/log-management-security.html">Security Log Management</a>, <a href="/en/security/webhook-security.html">Webhook Security Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-auditing.html">Security Auditing and Compliance Frameworks</a>, <a href="/en/security/vulnerability-scanning.html">Vulnerability Scanning: Tools and Workflows</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

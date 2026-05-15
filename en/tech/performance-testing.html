@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/performance-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "1147",
+      "wordCount": "1185",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/performance-testing.html"},
@@ -96,45 +98,47 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/performance-testing.png" alt="Performance Testing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
-<h2>Performance Testing</h2>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
+<h3>Performance Testing</h3>
 <p>Performance testing ensures that applications meet speed, scalability, and stability requirements under expected and peak loads. This article explores the leading performance testing tools—k6, Locust, and Gatling—along with test design principles and results interpretation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/performance-testing.png" alt="Performance Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>k6</h3>
+<h4>k6</h4>
 <p>k6, developed by Grafana Labs, is a modern load testing tool built on JavaScript. Tests are written as JavaScript scripts that define HTTP requests, checks, and thresholds. k6 compiles the JavaScript to Go for efficient execution.</p>
 <p>k6's key features include a built-in metrics system, thresholds that automatically fail tests when performance degrades, and integration with Grafana dashboards. Tests can be written in a familiar language (JavaScript), and the tool can generate significant load from a single instance.</p>
 <p>A typical k6 test defines virtual users (VUs), test duration, and HTTP scenarios. k6 reports metrics including request rate, response time percentiles, error rate, and the number of virtual users over time. Thresholds like <code>http_req_duration{p(95)} &lt; 500ms</code> automatically fail the test if the 95th percentile response time exceeds 500ms.</p>
-<h3>Locust</h3>
+<h4>Locust</h4>
 <p>Locust is a Python-based load testing tool. Unlike k6 and Gatling, Locust tests are defined by writing Python code that describes user behavior. This makes Locust particularly accessible for teams already using Python.</p>
 <p>Locust's architecture uses a master-worker model. The master coordinates test execution, and workers generate load. Locust supports distributed load generation across multiple machines, scaling to very high concurrency.</p>
 <p>Locust's web UI provides real-time test monitoring, including request rates, response times, and the number of running users. Tests can be started, stopped, and modified through the UI. This makes Locust suitable for exploratory load testing where test parameters may be adjusted during execution.</p>
-<h3>Gatling</h3>
+<h4>Gatling</h4>
 <p>Gatling is a JVM-based load testing tool with a Scala DSL. It uses an asynchronous, non-blocking architecture that generates high load efficiently. Gatling provides a comprehensive HTML report with detailed metrics, charts, and response time distributions.</p>
 <p>Gatling's scenario definition is based on a "simulation" describing virtual user journeys. Each simulation defines user populations, injection profiles (how users ramp up), and assertions that define pass/fail criteria. Gatling's reports include response time percentiles, request rate over time, active users, and error distributions.</p>
 <p>Gatling's Recorder allows recording browser interactions as test scenarios, though recorded scripts typically require cleanup and parameterization. Gatling also supports detailed assertions for automated CI/CD integration.</p>
-<h3>Test Design</h3>
+<h4>Test Design</h4>
 <p>Good performance tests follow a structured approach. Start by defining performance requirements—expected throughput, acceptable response times, and peak load conditions. Design test scenarios that reflect realistic user behavior, not just synthetic endpoints.</p>
 <p>Consider different types of tests. Load tests verify performance under expected load. Stress tests find the system's breaking point. Soak tests verify stability under sustained load. Spike tests verify behavior under sudden load increases. Each test type reveals different aspects of system performance.</p>
 <p>Parameterization is essential. Tests should use realistic data distributions: different users accessing different resources, realistic mix of read and write operations, and realistic think times between actions. Using the same data for all requests creates cache optimization that does not reflect production behavior.</p>
-<h3>Results Interpretation</h3>
+<h4>Results Interpretation</h4>
 <p>Response time percentiles (p50, p95, p99) are more informative than averages. Averages hide the experience of slow requests. If 5% of requests take 5 seconds, the average may still look acceptable, but users experiencing those requests are unhappy.</p>
 <p>The relationship between load and response time is revealing. Response times that increase linearly with load indicate adequate capacity. Response times that suddenly increase at a certain load level indicate a bottleneck being reached—this is the knee point in the performance curve.</p>
 <p>Error rate trends matter. Errors during load tests indicate capacity issues, configuration problems, or application bugs. The error rate should remain near zero during load tests. Increasing errors as load increases often indicates resource exhaustion.</p>
-<h3>CI/CD Integration</h3>
+<h4>CI/CD Integration</h4>
 <p>Performance tests should be integrated into CI/CD pipelines. Not every commit needs a full performance test, but critical changes and pre-release builds should be tested. Tools like k6 and Gatling have built-in support for automated thresholds and CI integration.</p>
 <p>A common approach is to run baseline performance tests on every commit to a performance branch and full tests on release candidates. Thresholds provide automated pass/fail criteria. Historical test results help detect performance regressions before they reach production.</p>
 <p>Performance testing is an ongoing activity, not a one-time effort. As the system evolves, performance characteristics change. Regular testing with consistent methodology provides the data needed to maintain performance and identify degradation early.</p>
 <p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/aws-vpc-design.html">AWS VPC Design: Subnets, NAT, Peering, Transit Gateway, and Security Groups</a>, <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-08",
-      "wordCount": "1001",
+      "wordCount": "1026",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/code-generation.html"},
@@ -96,42 +98,44 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png" alt="Code Generation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
-<h2>Code Generation</h2>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
+<h3>Code Generation</h3>
 <p>Code generation automates the creation of repetitive, boilerplate code. It enforces consistency, reduces human error, and accelerates development. This article explores the major code generation approaches: scaffolding tools, API client generation, GraphQL code generation, and custom template engines.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/code-generation.png" alt="Code Generation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Scaffolding Tools</h3>
+<h4>Scaffolding Tools</h4>
 <p>Scaffolding tools generate initial project structures with pre-configured build systems, directory layouts, and common dependencies. They eliminate the repetitive setup that every project requires and ensure consistent project structures across the organization.</p>
 <p>Popular scaffolding tools include Yeoman (JavaScript), Cookiecutter (Python), and <code>create-react-app</code>/<code>create-next-app</code> (React/Next.js). These tools ask a few questions and generate a complete project foundation. The generated code follows best practices and is production-ready from day one.</p>
 <p>Organizations should invest in custom scaffolding templates that encode their specific conventions, preferred libraries, security policies, and CI/CD configurations. A standardized scaffold reduces onboarding time and ensures every project follows the same patterns.</p>
-<h3>OpenAPI Code Generation</h3>
+<h4>OpenAPI Code Generation</h4>
 <p>OpenAPI specifications enable automatic generation of both server and client code. Tools like OpenAPI Generator and Swagger Codegen read an OpenAPI spec and generate type definitions, API client libraries, server stubs, and documentation.</p>
 <p>Server-side code generation produces controllers and service interfaces. The developer implements the business logic within the generated structure. This ensures the implementation matches the specification exactly—any deviation is immediately visible.</p>
 <p>Client-side code generation produces type-safe API clients. Generated clients include request/response types, endpoint methods, and serialization logic. This eliminates manual HTTP client code that is error-prone and tedious to maintain. When the API changes, regenerating the client highlights all affected code.</p>
-<h3>GraphQL Code Generation</h3>
+<h4>GraphQL Code Generation</h4>
 <p>GraphQL's typed schema makes it an ideal candidate for code generation. Tools like GraphQL Code Generator read a GraphQL schema and generate TypeScript types, React hooks, and resolver types.</p>
 <p>Generated TypeScript types provide compile-time safety for GraphQL operations. When a field is removed from the schema, the generated types update, and the TypeScript compiler reports every usage that needs attention. This catches breaking changes at compile time rather than runtime.</p>
 <p>For React applications, GraphQL Code Generator generates typed hooks for each query and mutation. The generated hooks include response types, variable types, and loading state types. This eliminates manual type annotation and ensures the frontend types always match the schema.</p>
-<h3>Template Engines</h3>
+<h4>Template Engines</h4>
 <p>Custom code generation uses template engines to generate files from templates and data. A template is a text file with placeholders that the engine fills with generated content. Mustache, Handlebars, and EJS are popular template engines.</p>
 <p>Templates can generate any text-based file: source code, configuration files, documentation, SQL migrations, or test fixtures. The template approach is flexible and can be adapted to any codebase's specific patterns.</p>
 <p>Custom templates are most valuable for generating repetitive code within a project. Common examples include creating new components following a consistent pattern, generating CRUD endpoints for each database table, and creating test files that mirror source file structure.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Generated code should be clearly marked as generated. Include a comment at the top of generated files indicating they are auto-generated and the source command used. This prevents developers from manually editing generated files—changes would be lost on regeneration.</p>
 <p>Version control for generated code depends on the context. API client libraries that are consumed across services should be versioned as packages. Scaffolding-generated projects should start with the generated structure and evolve independently. Template-generated code within a project should be regenerated when the source changes.</p>
 <p>Regeneration should be automated and part of the build process. When an API specification changes, a CI pipeline regenerates the client code and runs tests. Any compilation errors from the regeneration are caught immediately.</p>
 <p>Code generation is a powerful productivity tool, but it should be used thoughtfully. Generate code where it eliminates significant manual work or enforces consistency. Avoid generating code that adds complexity without proportional benefit—simple tasks may not need generation.</p>
 <p><strong>See also:</strong> <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a>, <a href="/en/tech/testing-strategies.html">Testing Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/grafana-dashboards.html">Grafana Dashboards: Panels, Variables, Annotations, and Alerting</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/task-queues.html">Task Queues</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-foreign-key-constraints.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-05",
-      "wordCount": "519",
+      "wordCount": "575",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html"},
@@ -93,28 +95,30 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
-<h2>Foreign Key Constraints: Referential Integrity in Practice</h2>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
+<h3>Foreign Key Constraints: Referential Integrity in Practice</h3>
 <p>Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-foreign-key-constraints.png" alt="Foreign Key Constraints: Referential Integrity in Practice" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Referential Actions</h3>
+<h4>Referential Actions</h4>
 <p>ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains.</p>
 <p>ON DELETE SET NULL sets the foreign key column to NULL when the parent is deleted. Use when the relationship is optional and child rows should survive parent deletion.</p>
 <p>ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default—it prevents accidental data loss.</p>
-<h3>Performance</h3>
+<h4>Performance</h4>
 <p>Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations.</p>
 <p>Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does.</p>
-<h3>Practical Guidelines</h3>
+<h4>Practical Guidelines</h4>
 <p>Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations.</p>
 <p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/couchbase-guide.html">Couchbase Guide: N1QL, Document Model, Clustering, and Caching</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/change-data-capture.html">Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</a>, <a href="/en/database/batch-operations.html">Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-09",
-      "wordCount": "1457",
+      "wordCount": "1520",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-caching-strategies.html"},
@@ -96,52 +98,54 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
-<h2>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h2>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
+<h3>AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement</h3>
 <p>LLM API calls are expensive and slow. The average GPT-4 response costs about a cent and takes seconds. For production applications serving thousands of users, caching is not optional. It is an economic necessity. Here is how to cache AI responses effectively.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-caching-strategies.png" alt="AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>The Case for Caching</h3>
+<h4>The Case for Caching</h4>
 <p>Without caching, every user query hits the LLM API. This means every query costs money, every query takes seconds, and your API costs scale linearly with usage.</p>
 <p>With caching, repeated or similar queries return instant, free responses. For applications where users ask similar questions like a documentation chatbot or a customer support bot, cache hit rates of 40% to 70% are achievable.</p>
 <p>Caching also improves consistency. LLMs are non-deterministic. The same prompt can produce different responses each time. Caching ensures users see consistent answers to the same question, which builds trust.</p>
-<h3>Exact Match Caching</h3>
+<h4>Exact Match Caching</h4>
 <p>Exact match caching is the simplest approach. Hash the input and use it as a cache key. If the exact same prompt is seen again, return the cached response.</p>
 <p>This works well for applications with a fixed set of queries or templates. A code documentation chatbot might see the same question "How do I use the authentication middleware?" dozens of times per day.</p>
 <p>Implement exact match caching with Redis or Memcached. Set a TTL based on how often the underlying knowledge changes. For static documentation, a TTL of 24 hours is reasonable. For rapidly changing data, reduce the TTL to minutes.</p>
 <p>The limitation is obvious: exact match catches only identical queries. "How do I reset my password?" and "How can I reset my password?" are different cache keys even though they mean the same thing.</p>
-<h3>Semantic Caching</h3>
+<h4>Semantic Caching</h4>
 <p>Semantic caching uses embeddings to find similar queries. When a query arrives, compute its embedding and search for nearby cached queries. If a sufficiently similar query exists, return its cached response.</p>
 <p>The threshold for semantic similarity depends on your use case. A cosine similarity of 0.95 or higher indicates effectively identical queries. Between 0.85 and 0.95, consider the context: minor wording differences may still warrant the same response.</p>
 <p>Semantic caching requires a vector database. Pinecone, Weaviate, or pgvector with PostgreSQL all work well. The cache stores the query embedding, the response, and metadata like timestamp and response model.</p>
 <p>The trade-off is latency and cost. Computing embeddings adds milliseconds to each query. Searching the vector index adds more. The semantic cache must be fast enough that the overhead does not exceed the savings from avoided API calls.</p>
-<h3>Cache Invalidation</h3>
+<h4>Cache Invalidation</h4>
 <p>Stale responses are worse than no cache. An AI assistant giving outdated information erodes trust and can cause real problems if the information involves pricing, policies, or technical specifications.</p>
 <p>Invalidate cache entries when the underlying knowledge changes. If you update your documentation, clear all cached responses that reference the changed pages. This requires tracking which documents each cached response depends on.</p>
 <p>Time-based invalidation is simpler but less precise. Set TTLs based on data freshness requirements. Pricing information might have a one-hour TTL. General knowledge might have a 24-hour TTL. Company-specific policies might be somewhere in between.</p>
 <p>For semantic caches, invalidation is trickier. A single document update can affect semantically similar but non-identical queries. When in doubt, clear the entire cache for the affected context. The temporary increase in API costs is better than serving stale information.</p>
-<h3>Multi-Tier Caching</h3>
+<h4>Multi-Tier Caching</h4>
 <p>A multi-tier caching strategy balances cost, latency, and freshness. Implement three tiers: exact match, semantic, and model response.</p>
 <p>Exact match cache: Redis with short TTL. Catches repeated identical queries. Sub-millisecond lookup. This tier handles the most common case.</p>
 <p>Semantic cache: Vector database with medium TTL. Catches similar but non-identical queries. Millisecond lookup. This tier increases hit rate significantly.</p>
 <p>Model response cache: Cache the raw API response for identical prompts. This tier is useful when prompt caching APIs like Anthropic's prompt caching apply. It reduces costs but does not reduce latency since the API call still happens.</p>
-<h3>Caching with Streaming</h3>
+<h4>Caching with Streaming</h4>
 <p>Streaming responses complicate caching. If you stream tokens to the user, you cannot serve a cached response because streaming implies new content generation.</p>
 <p>The solution is to cache complete responses and serve them as non-streaming when a cache hit occurs. For cache misses, stream the response as normal and cache the complete response for future requests.</p>
 <p>Alternatively, use a hybrid approach. Serve cached responses instantly for common queries and stream fresh responses for unique queries. Most users do not need streaming for simple factual questions.</p>
-<h3>Measuring Cache Effectiveness</h3>
+<h4>Measuring Cache Effectiveness</h4>
 <p>Track cache hit rate, average response time, and API cost savings. A well-tuned cache should achieve 40% to 60% hit rate for typical chatbot applications. Each percentage point improvement in hit rate translates directly to cost savings.</p>
 <p>Monitor cache freshness. If users complain about outdated information, your TTLs are too long or invalidation is incomplete. If your hit rate is low but freshness is high, your TTLs are too short and you are leaving savings on the table.</p>
 <p>Start with exact match caching and add semantic caching once you understand your query patterns. The simplest cache that meets your cost and latency goals is the right one.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-caching-deep.html">LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

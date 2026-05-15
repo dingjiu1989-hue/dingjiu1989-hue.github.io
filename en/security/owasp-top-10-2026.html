@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-06",
-      "wordCount": "1074",
+      "wordCount": "1099",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html"},
@@ -96,17 +98,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png" alt="OWASP Top 10 2026" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
-<h2>OWASP Top 10 2026</h2>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
+<h3>OWASP Top 10 2026</h3>
 <p>OWASP Top 10 2026 Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png" alt="OWASP Top 10 2026" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape. </p>
 <p>Updated Categories </p>
@@ -145,11 +148,11 @@
 <p>return aesgcm.decrypt(nonce, ciphertext, None).decode()</p>
 <p>A03: Injection </p>
 <p>Injection remains prevalent. Parameterized queries are mandatory: </p>
-<h2>Secure: Parameterized query</h2>
+<h3>Secure: Parameterized query</h3>
 <p>def find_user(email):</p>
 <p>query = "SELECT * FROM users WHERE email = $1"</p>
 <p>return db.execute(query, [email])</p>
-<h2>Also secure: ORM abstraction</h2>
+<h3>Also secure: ORM abstraction</h3>
 <p>def find_user_safe(email):</p>
 <p>return User.query.filter_by(email=email).first()</p>
 <p>A04: Insecure Design </p>
@@ -180,7 +183,7 @@
 <p>}</p>
 <p>A08: Software and Data Integrity Failures </p>
 <p>CI/CD pipeline security and supply chain attacks: </p>
-<h2>Supply chain security checks</h2>
+<h3>Supply chain security checks</h3>
 <p>supply_chain_checks:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities</p>
@@ -191,18 +194,19 @@
 <p>Modern testing combines automation and manual review: </p>
 <p>def security_test_suite():</p>
 <p>results = []</p>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST</h2>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST</h3>
 <p>results.extend(run_dast_scan("https://staging.example.com"))</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan</h3>
 <p>results.extend(run_sast_scan("./src"))</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check</h3>
 <p>results.extend(run_dependency_check("./package.json"))</p>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing</h2>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing</h3>
 <p>results.extend(api_fuzz("https://staging.example.com/api"))</p>
 <p>return analyze_results(results)</p>
 <p>Conclusion </p>
 <p>The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle.</p>
 <p><strong>See also:</strong> <a href="/en/security/security-testing-tools.html">Security Testing Tools: SAST, DAST, IAST, and RASP Compared</a>, <a href="/en/security/api-security-guide.html">API Security: Protecting Your REST and GraphQL APIs</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a></p>
 <p><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>, <a href="/en/security/tls-configuration.html">TLS Configuration Guide</a>, <a href="/en/security/waf-implementation.html">Web Application Firewall Implementation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

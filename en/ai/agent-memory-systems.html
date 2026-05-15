@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1771",
+      "wordCount": "1821",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/agent-memory-systems.html"},
@@ -96,21 +98,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png" alt="Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h2>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h2>
-<h3>Introduction</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h3>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h3>
+<h4>Introduction</h4>
 <p>Memory is what separates stateless LLM calls from true autonomous agents. Without memory, an agent cannot learn from past interactions, maintain context across sessions, or build a model of the world. Drawing from cognitive science, agent memory can be structured into four types: short-term (working memory), long-term (persistent storage), episodic (specific experiences), and semantic (general knowledge).</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png" alt="Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Short-Term Memory (Working Memory)</h3>
+<h4>Short-Term Memory (Working Memory)</h4>
 <p>Short-term memory holds the current conversation context and immediate state:</p>
 <p>from collections import deque</p>
 <p>from typing import Any</p>
@@ -122,7 +125,7 @@
 <p>def add(self, role: str, content: str):</p>
 <p>message = {"role": role, "content": content}</p>
 <p>estimated_tokens = len(content.split()) * 1.3</p>
-<h2>Evict oldest messages when over token limit</h2>
+<h3>Evict oldest messages when over token limit</h3>
 <p>while self.current_tokens + estimated_tokens &gt; self.max_tokens:</p>
 <p>removed = self.messages.popleft()</p>
 <p>self.current_tokens -= len(removed["content"].split()) * 1.3</p>
@@ -138,7 +141,7 @@
 <p>self.messages = deque(list(self.messages)[-20:], maxlen=50)</p>
 <p>return summary</p>
 <p>return ""</p>
-<h3>Long-Term Memory</h3>
+<h4>Long-Term Memory</h4>
 <p>Long-term memory persists across sessions and is typically backed by a vector store:</p>
 <p>import uuid</p>
 <p>from datetime import datetime</p>
@@ -188,9 +191,9 @@
 <p>def consolidate(self, llm_fn):</p>
 <p>"""Periodically merge similar memories."""</p>
 <p>all_memories = self.vector_store.get()</p>
-<h2>Group similar memories and create consolidated summaries</h2>
-<h2>This runs as a background task</h2>
-<h3>Episodic Memory</h3>
+<h3>Group similar memories and create consolidated summaries</h3>
+<h3>This runs as a background task</h3>
+<h4>Episodic Memory</h4>
 <p>Episodic memory stores specific experiences: what happened, when, and what the outcome was:</p>
 <p>@dataclass</p>
 <p>class Episode:</p>
@@ -230,7 +233,7 @@
 <p>emb_a = embedding_fn(task_a)</p>
 <p>emb_b = embedding_fn(task_b)</p>
 <p>return cosine_similarity(emb_a, emb_b)</p>
-<h3>Semantic Memory</h3>
+<h4>Semantic Memory</h4>
 <p>Semantic memory stores factual knowledge extracted from experiences:</p>
 <p>class SemanticMemory:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -265,7 +268,7 @@
 <p>facts = json.loads(extraction)</p>
 <p>for fact in facts:</p>
 <p>self.add_fact(fact["subject"], fact["predicate"], fact["object"], confidence=0.5)</p>
-<h3>Integrated Agent Memory</h3>
+<h4>Integrated Agent Memory</h4>
 <p>Bring all four types together in a unified memory system:</p>
 <p>class AgentMemory:</p>
 <p>def <strong>init</strong>(self, short_term_capacity=4096, long_term_store=None):</p>
@@ -275,21 +278,21 @@
 <p>self.semantic = SemanticMemory()</p>
 <p>def build_prompt_context(self, query: str) -&gt; str:</p>
 <p>context_parts = []</p>
-<h2>Recent conversation</h2>
+<h3>Recent conversation</h3>
 <p>context_parts.append("=== Recent Context ===\n")</p>
 <p>context_parts.extend(self.short_term.get_context())</p>
-<h2>Relevant long-term memories</h2>
+<h3>Relevant long-term memories</h3>
 <p>memories = self.long_term.recall(query, k=3)</p>
 <p>if memories:</p>
 <p>context_parts.append("\n=== Related Memories ===\n")</p>
 <p>context_parts.extend([m["content"] for m in memories])</p>
-<h2>Similar past episodes</h2>
+<h3>Similar past episodes</h3>
 <p>episodes = self.episodic.retrieve_similar_episodes(query, k=2)</p>
 <p>if episodes:</p>
 <p>context_parts.append("\n=== Similar Past Experiences ===\n")</p>
 <p>for ep in episodes:</p>
 <p>context_parts.append(f"Task: {ep.task}, Outcome: {ep.outcome}")</p>
-<h2>Relevant semantic facts</h2>
+<h3>Relevant semantic facts</h3>
 <p>entities = extract_entities(query)</p>
 <p>for entity in entities:</p>
 <p>facts = self.semantic.query_fact(entity)</p>
@@ -297,9 +300,10 @@
 <p>context_parts.append(f"\n=== Facts about {entity} ===\n")</p>
 <p>context_parts.extend(facts)</p>
 <p>return "\n".join(context_parts)</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/ai-workflow-automation.html">AI Workflow Automation: LangChain, Temporal, Event-Driven Agents</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

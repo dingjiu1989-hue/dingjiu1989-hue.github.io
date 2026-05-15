@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/python-package-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-13",
-      "wordCount": "683",
+      "wordCount": "735",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/python-package-management.html"},
@@ -96,34 +98,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/python-package-management.png" alt="Python Package Management: pip, Poetry, uv, Conda" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
-<h2>Python Package Management: pip, Poetry, uv, Conda</h2>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
+<h3>Python Package Management: pip, Poetry, uv, Conda</h3>
 <p>Python package management has evolved significantly. The ecosystem now offers multiple tools competing for the role of standard package and project manager.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/python-package-management.png" alt="Python Package Management: pip, Poetry, uv, Conda" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>pip and requirements.txt</h3>
+<h4>pip and requirements.txt</h4>
 <p>pip is Python's default package installer. requirements.txt lists dependencies with optional version constraints. pip installs packages from PyPI into the current environment. It is simple and universal—every Python environment has pip.</p>
 <p>pip's limitations include no dependency resolution (it installs the latest compatible version rather than deterministic resolution) and no environment management. pip freeze outputs the current environment's packages but includes dependencies, not just direct requirements. pip-tools (pip-compile) addresses this by generating pinned requirements from loose requirements.</p>
-<h3>Poetry</h3>
+<h4>Poetry</h4>
 <p>Poetry is a modern dependency manager with deterministic resolution. pyproject.toml replaces setup.py, setup.cfg, and requirements.txt. Poetry.lock pins exact versions for reproducibility.</p>
 <p>Poetry manages virtual environments automatically—poetry install creates and activates environments. poetry add installs and adds dependencies in one step. Poetry builds and publishes packages to PyPI with poetry build and poetry publish.</p>
-<h3>uv</h3>
+<h4>uv</h4>
 <p>uv is a Rust-based pip and Poetry replacement that is 10-100x faster than pip. It supports pip-compatible commands (uv pip install) and Poetry-compatible project management (uv sync, uv add). uv resolves dependencies in milliseconds.</p>
 <p>uv's speed advantage comes from Rust implementation, aggressive caching, and parallel downloads. It supports Python version management (uv python install) and works in CI where installation speed matters. uv is production-ready for most workflows.</p>
-<h3>Conda</h3>
+<h4>Conda</h4>
 <p>Conda is a cross-platform package manager for Python and non-Python dependencies. It excels at scientific computing where native library dependencies (NumPy, SciPy, PyTorch) are complex. Conda channels (conda-forge, defaults) provide pre-compiled binaries.</p>
 <p>Miniconda is the minimal installer. Mamba is a faster Conda alternative with the same commands. Conda-lock provides reproducible environments. Conda environments are heavy—each environment is a full directory of packages.</p>
-<h3>Recommendation</h3>
+<h4>Recommendation</h4>
 <p>Use pip for simple projects and containers. Use Poetry for library development and projects needing deterministic resolution. Use uv for speed-sensitive workflows and CI. Use Conda for data science and machine learning projects with complex native dependencies.</p>
 <p><strong>See also:</strong> <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/dependency-management.html">Dependency Management</a>, <a href="/en/tech/python-performance.html">Python Performance Optimization</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/rust-vs-go-practical.html">Rust vs Go: A Practical Comparison</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "1303",
+      "wordCount": "1327",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/session-management.html"},
@@ -96,17 +98,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png" alt="Session Management Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
-<h2>Session Management Security</h2>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
+<h3>Session Management Security</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/session-management.png" alt="Session Management Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Session management is the mechanism by which a web application maintains state across multiple requests from the same user. Flawed session management leads to session hijacking, fixation, and replay attacks. A robust session management strategy must address token generation, storage, transmission, rotation, and invalidation. </p>
 <p>JWT vs Opaque Tokens </p>
@@ -114,7 +117,7 @@
 <p>JWTs are self-contained tokens carrying claims in a signed JSON payload. They enable stateless authentication — the server validates the signature without database lookups. </p>
 <p>import jwt</p>
 <p>from datetime import datetime, timedelta</p>
-<h2>Generate a JWT access token</h2>
+<h3>Generate a JWT access token</h3>
 <p>def create_access_token(user_id, roles, secret_key):</p>
 <p>payload = {</p>
 <p>'sub': user_id,</p>
@@ -125,7 +128,7 @@
 <p>'type': 'access'</p>
 <p>}</p>
 <p>return jwt.encode(payload, secret_key, algorithm='HS256')</p>
-<h2>Generate a refresh token</h2>
+<h3>Generate a refresh token</h3>
 <p>def create_refresh_token(user_id, secret_key):</p>
 <p>payload = {</p>
 <p>'sub': user_id,</p>
@@ -134,11 +137,11 @@
 <p>'type': 'refresh'</p>
 <p>}</p>
 <p>return jwt.encode(payload, secret_key, algorithm='HS256')</p>
-<h2>Verify and decode</h2>
+<h3>Verify and decode</h3>
 <p>def verify_token(token, secret_key):</p>
 <p>try:</p>
 <p>payload = jwt.decode(token, secret_key, algorithms=['HS256'])</p>
-<h2>Check if token is revoked (check jti against blocklist)</h2>
+<h3>Check if token is revoked (check jti against blocklist)</h3>
 <p>if is_revoked(payload['jti']):</p>
 <p>raise jwt.InvalidTokenError('Token revoked')</p>
 <p>return payload</p>
@@ -172,28 +175,28 @@
 <p>if not data:</p>
 <p>return None</p>
 <p>session = json.loads(data)</p>
-<h2>Update last activity</h2>
+<h3>Update last activity</h3>
 <p>session['last_activity'] = datetime.utcnow().isoformat()</p>
 <p>self.redis.setex(session_key, 3600, json.dumps(session))</p>
 <p>return session</p>
 <p>def revoke_session(self, token):</p>
 <p>self.redis.delete(f"session:{token}")</p>
 <p>def revoke_all_user_sessions(self, user_id):</p>
-<h2>Pattern-based revocation</h2>
+<h3>Pattern-based revocation</h3>
 <p>for key in self.redis.scan_iter(f"session:*"):</p>
 <p>data = json.loads(self.redis.get(key))</p>
 <p>if data['user_id'] == user_id:</p>
 <p>self.redis.delete(key)</p>
 <p>Token Rotation </p>
 <p>Rotating tokens limits the window of opportunity for stolen tokens. </p>
-<h2>Refresh token rotation</h2>
+<h3>Refresh token rotation</h3>
 <p>def refresh_access_token(refresh_token, secret_key):</p>
 <p>payload = verify_token(refresh_token, secret_key)</p>
 <p>if payload['type'] != 'refresh':</p>
 <p>raise InvalidTokenError('Not a refresh token')</p>
-<h2>Revoke old refresh token</h2>
+<h3>Revoke old refresh token</h3>
 <p>revoke_token(payload['jti'])</p>
-<h2>Issue new tokens</h2>
+<h3>Issue new tokens</h3>
 <p>new_access = create_access_token(payload['sub'], payload['roles'], secret_key)</p>
 <p>new_refresh = create_refresh_token(payload['sub'], secret_key)</p>
 <p>return {'access_token': new_access, 'refresh_token': new_refresh}</p>
@@ -210,7 +213,7 @@
 <p>max_age=3600,</p>
 <p>path='/'</p>
 <p>)</p>
-<h2>Modern recommended cookie configuration</h2>
+<h3>Modern recommended cookie configuration</h3>
 <p>session_cookie_config = {</p>
 <p>'http_only': True,</p>
 <p>'secure': True,</p>
@@ -218,21 +221,21 @@
 <p>'max_age': 3600, # 1 hour</p>
 <p>'domain': 'app.example.com',</p>
 <p>'path': '/',</p>
-<h2>__Host- prefix for cookie name ensures path=/ and no domain attribute</h2>
+<h3>__Host- prefix for cookie name ensures path=/ and no domain attribute</h3>
 <p>'name': '__Host-session'</p>
 <p>}</p>
 <p>Session Fixation Prevention </p>
 <p>Session fixation occurs when an attacker forces a victim to use a known session identifier. Mitigation: regenerate the session ID after authentication. </p>
 <p>def login(request, username, password):</p>
 <p>if authenticate(username, password):</p>
-<h2>Regenerate session ID after successful login</h2>
+<h3>Regenerate session ID after successful login</h3>
 <p>old_session = request.session</p>
 <p>request.session.regenerate() # New session ID, same data</p>
-<h2>Copy relevant data and invalidate old session</h2>
+<h3>Copy relevant data and invalidate old session</h3>
 <p>request.session['user_id'] = get_user_id(username)</p>
 <p>request.session['authenticated'] = True</p>
 <p>request.session['auth_time'] = datetime.utcnow().isoformat()</p>
-<h2>Invalidate old session in store</h2>
+<h3>Invalidate old session in store</h3>
 <p>session_store.delete(old_session.session_key)</p>
 <p>return redirect('/dashboard')</p>
 <p>Session Timeout Strategies </p>
@@ -242,11 +245,11 @@
 <p>}</p>
 <p>def check_session_timeout(session):</p>
 <p>now = datetime.utcnow()</p>
-<h2>Idle timeout</h2>
+<h3>Idle timeout</h3>
 <p>last_activity = datetime.fromisoformat(session['last_activity'])</p>
 <p>if now - last_activity &gt; session_timeouts['idle_timeout']:</p>
 <p>return {'expired': True, 'reason': 'idle_timeout'}</p>
-<h2>Absolute timeout</h2>
+<h3>Absolute timeout</h3>
 <p>auth_time = datetime.fromisoformat(session['auth_time'])</p>
 <p>if now - auth_time &gt; session_timeouts['absolute_timeout']:</p>
 <p>return {'expired': True, 'reason': 'absolute_timeout'}</p>
@@ -254,6 +257,7 @@
 <p>Conclusion </p>
 <p>Secure session management requires defense in depth. Use JWTs for stateless distributed systems with short expiration times, or opaque tokens for server-side control with instant revocation. Always use <code>HttpOnly</code>, <code>Secure</code>, and <code>SameSite</code> attributes on session cookies, regenerate session IDs after login, enforce idle and absolute timeouts, and implement proper token rotation for refresh flows.</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-security-posture.html">Cloud Security Posture Management</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/key-management.html">Key Management Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

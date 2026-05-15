@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/testing-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1029",
+      "wordCount": "1055",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/testing-strategies.html"},
@@ -96,40 +98,42 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
-<h2>Testing Strategies</h2>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
+<h3>Testing Strategies</h3>
 <p>A robust testing strategy is essential for maintaining software quality as codebases grow. This article examines the testing landscape—unit tests, integration tests, end-to-end tests, the test pyramid, and test double patterns—providing practical guidance for building effective test suites.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/testing-strategies.png" alt="Testing Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>The Test Pyramid</h3>
+<h4>The Test Pyramid</h4>
 <p>The test pyramid, popularized by Mike Cohn, describes the ideal distribution of tests. At the base are unit tests—fast, numerous, and focused on small units of code. In the middle are integration tests that verify interactions between components. At the top are end-to-end tests that validate complete user workflows.</p>
 <p>The pyramid shape is intentional. Unit tests should form the largest portion of your test suite because they execute quickly, pinpoint failures precisely, and are cheap to maintain. Integration tests verify that components work together but are slower and more expensive. End-to-end tests provide the highest confidence but are the slowest, most fragile, and most expensive to maintain.</p>
-<h3>Unit Tests</h3>
+<h4>Unit Tests</h4>
 <p>Unit tests verify the behavior of a single unit of code in isolation. A unit is typically a function, method, or class. The test calls the unit with specific inputs and asserts the expected outputs or side effects. Dependencies are replaced with test doubles to isolate the unit under test.</p>
 <p>Good unit tests are fast (milliseconds), deterministic (same result every time), and focused (test one behavior). They should not depend on databases, network services, or file systems. Unit tests provide rapid feedback during development and serve as living documentation of the code's expected behavior.</p>
-<h3>Integration Tests</h3>
+<h4>Integration Tests</h4>
 <p>Integration tests verify that multiple components work together correctly. They test the interactions between your code and actual dependencies—databases, message queues, external APIs, or other services. Integration tests catch issues that unit tests cannot, such as incorrect query syntax, configuration errors, or API contract violations.</p>
 <p>Running integration tests requires test infrastructure. The common approach is to use testcontainers (Docker-based test dependencies) or dedicated test environments. Tests should clean up their data after execution to avoid polluting shared environments. Integration tests are slower than unit tests, so they are typically separated into a different test suite that runs less frequently.</p>
-<h3>End-to-End Tests</h3>
+<h4>End-to-End Tests</h4>
 <p>End-to-end tests validate complete user workflows through the entire system. They interact with the application as a user would—clicking buttons, filling forms, navigating pages—and verify the expected outcomes. Tools like Playwright, Cypress, and Selenium automate browser-based E2E testing.</p>
 <p>E2E tests provide the highest confidence that the system works correctly, but they are slow, brittle, and expensive to maintain. Changes to the UI often require E2E test updates. Smart E2E strategies focus on critical user journeys and happy paths rather than exhaustive coverage. A small number of well-designed E2E tests provide disproportionate value.</p>
-<h3>Test Doubles</h3>
+<h4>Test Doubles</h4>
 <p>Test doubles replace real dependencies in tests. Mocks record and verify method calls and their arguments. Stubs return predefined values for specific calls. Fakes provide simplified implementations that work correctly for testing but are unsuitable for production. Spies wrap real objects and record their interactions.</p>
 <p>The choice of test double affects test quality. Overusing mocks leads to brittle tests that break when implementation details change, even when behavior is correct. Fakes and real implementations (in integration tests) provide more robust testing at the cost of more setup. A good rule is to use the simplest double that provides the necessary isolation.</p>
-<h3>Testing Best Practices</h3>
+<h4>Testing Best Practices</h4>
 <p>Write tests before or alongside code. Tests should be independent—each test should set up its own data and not depend on other tests' state. Tests should have clear, descriptive names that explain the scenario and expected outcome. Each test should verify one behavior, making failures easier to diagnose.</p>
 <p>Test coverage is a useful metric but not a goal in itself. 100% coverage does not guarantee a bug-free application. Focus on testing behavior rather than implementation details. Test the public API of each component, not its internal methods. Tests that verify internal implementation break when code is refactored, even when behavior remains correct.</p>
 <p>A well-structured test suite provides fast feedback, catches regressions, and documents expected behavior. It is an investment that pays continuous dividends throughout the software lifecycle. The key is finding the right balance of test types and test thoroughness for your specific context.</p>
 <p><strong>See also:</strong> <a href="/en/tech/performance-testing.html">Performance Testing</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/performance-testing.html">Performance Testing</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/performance-testing.html">Performance Testing</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/performance-testing.html">Performance Testing</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a>, <a href="/en/tech/infrastructure-testing.html">Infrastructure Testing with Terratest and Other Tools</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1924",
+      "wordCount": "1980",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-disaster-recovery.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
-<h2>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h2>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
+<h3>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h3>
 <p>Database Disaster Recovery: RPO, RTO, Cross-Region Replication </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png" alt="Database Disaster Recovery: RPO, RTO, Cross-Region Replication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Disaster recovery (DR) ensures your database can survive catastrophic events: region outages, data corruption, accidental deletions, or ransomware attacks. Unlike high availability, which handles component failures, DR addresses large-scale disasters. </p>
 <p>RPO and RTO </p>
@@ -130,66 +133,66 @@
 <p>FROM pg_stat_replication</p>
 <p>WHERE application_name = 'dr_sub';</p>
 <p>AWS RDS Cross-Region Read Replicas </p>
-<h2>Create cross-region read replica</h2>
+<h3>Create cross-region read replica</h3>
 <p>aws rds create-db-instance-read-replica \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large</p>
-<h2>Promote to standalone for DR</h2>
+<h3>Promote to standalone for DR</h3>
 <p>aws rds promote-read-replica \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2</p>
 <p>Multi-Region with Patroni </p>
 <p>Patroni can manage clusters across regions with careful configuration: </p>
-<h2>DR site configuration</h2>
+<h3>DR site configuration</h3>
 <p>scope: myapp</p>
 <p>namespace: /service/</p>
 <p>name: pg-dr-node-1</p>
 <p>consul:</p>
 <p>host: dr-consul.service.consul:8500</p>
-<h2>Separate DCS for DR isolation</h2>
+<h3>Separate DCS for DR isolation</h3>
 <p>tags:</p>
 <p>nofailover: true # DR site should not automatically become primary</p>
 <p>Backup-Based DR </p>
 <p>For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: </p>
-<h2>Continuous WAL archiving to cross-region S3 bucket</h2>
+<h3>Continuous WAL archiving to cross-region S3 bucket</h3>
 <p>archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'</p>
-<h2>DR restore procedure</h2>
+<h3>DR restore procedure</h3>
 <p>pg_restore --dbname=proddb /backups/dr/latest_full.dump</p>
 <p>pg_receivewal --directory /backups/dr/wal</p>
 <p>Recovery Workflow </p>
-<h2>!/bin/bash</h2>
-<h2>Dr: restore to us-west-2</h2>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</h2>
+<h3>!/bin/bash</h3>
+<h3>Dr: restore to us-west-2</h3>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</h3>
 <p>pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</h3>
 <p>cat &gt;&gt; /var/lib/postgresql/dr/postgresql.conf &lt;&lt; EOF</p>
 <p>restore_command = 'aws s3 cp s3://myapp-wal-dr/region/us-east-1/%f %p'</p>
 <p>recovery_target_time = '2026-05-12 10:00:00 UTC'</p>
 <p>recovery_target_action = promote</p>
 <p>EOF</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</h3>
 <p>pg_ctl start -D /var/lib/postgresql/dr</p>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</h2>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</h3>
 <p>psql -c "SELECT count(*) FROM critical_table;"</p>
 <p>psql -c "SELECT max(created_at) FROM orders;"</p>
 <p>Backup Testing </p>
 <p>Backups are worthless until proven restorable. Regular testing is mandatory. </p>
 <p>Automated Restore Test </p>
-<h2>!/bin/bash</h2>
-<h2>Weekly restore test</h2>
+<h3>!/bin/bash</h3>
+<h3>Weekly restore test</h3>
 <p>set -euo pipefail</p>
 <p>TEST_DIR=/tmp/dr_test_$(date +%Y%m%d)</p>
 <p>LOG_FILE=$TEST_DIR/restore.log</p>
 <p>mkdir -p $TEST_DIR</p>
 <p>echo "=== DR Restore Test $(date) ===" &gt;&gt; $LOG_FILE</p>
-<h2>Full restore</h2>
+<h3>Full restore</h3>
 <p>pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore &gt;&gt; $LOG_FILE 2&gt;&amp;1</p>
-<h2>Start database</h2>
+<h3>Start database</h3>
 <p>pg_ctl -D $TEST_DIR/data -l $TEST_DIR/pg.log start &gt;&gt; $LOG_FILE 2&gt;&amp;1</p>
 <p>sleep 5</p>
-<h2>Verify</h2>
+<h3>Verify</h3>
 <p>echo "Database size:"</p>
 <p>psql -p 5433 -c "SELECT pg_size_pretty(pg_database_size('proddb'));"</p>
 <p>echo "Row counts:"</p>
@@ -206,7 +209,7 @@
 <p>UNION ALL</p>
 <p>SELECT 'orders', max(created_at) FROM orders;</p>
 <p>"</p>
-<h2>Cleanup</h2>
+<h3>Cleanup</h3>
 <p>pg_ctl -D $TEST_DIR/data stop &gt;&gt; $LOG_FILE 2&gt;&amp;1</p>
 <p>rm -rf $TEST_DIR</p>
 <p>echo "=== Test Complete ===" &gt;&gt; $LOG_FILE</p>
@@ -221,18 +224,19 @@
 <p>Disaster Scenarios and Mitigations </p>
 <p>| Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time | </p>
 <p>Testing DR with Chaos Engineering </p>
-<h2>Simulate region failure: block traffic to primary</h2>
+<h3>Simulate region failure: block traffic to primary</h3>
 <p>iptables -A INPUT -s dr-test-region -j DROP</p>
-<h2>Trigger DR failover script</h2>
+<h3>Trigger DR failover script</h3>
 <p>./dr_failover.sh --target us-west-2</p>
-<h2>Verify applications work from DR region</h2>
+<h3>Verify applications work from DR region</h3>
 <p>curl -f https://dr-api.myapp.com/health</p>
-<h2>Fail back</h2>
+<h3>Fail back</h3>
 <p>./dr_failback.sh --target us-east-1</p>
-<h2>Clean up</h2>
+<h3>Clean up</h3>
 <p>iptables -D INPUT -s dr-test-region -j DROP</p>
 <p>Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>, <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/database-backup-to-s3.html">Database Backup Strategies to Object Storage</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>, <a href="/en/database/database-high-availability.html">Database High Availability: Failover, Standby Types, Health Checks</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

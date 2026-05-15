@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-11",
-      "wordCount": "592",
+      "wordCount": "638",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/orm-performance.html"},
@@ -93,71 +95,73 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png" alt="ORM Performance" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
-<h2>ORM Performance</h2>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
+<h3>ORM Performance</h3>
 <p>ORM Performance Challenges </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png" alt="ORM Performance" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Object-Relational Mappers (ORMs) simplify database access but introduce performance pitfalls. Understanding these issues is essential for production applications. </p>
 <p>The N+1 Query Problem </p>
 <p>The most common ORM performance issue: </p>
-<h2>N+1: One query for users, then N queries for orders</h2>
+<h3>N+1: One query for users, then N queries for orders</h3>
 <p>users = User.query.all()</p>
 <p>for user in users:</p>
 <p>orders = user.orders # Triggers a query per user!</p>
 <p>print(len(orders))</p>
 <p><strong>Fix</strong> : Use eager loading: </p>
-<h2>Solution: 2 queries total</h2>
+<h3>Solution: 2 queries total</h3>
 <p>users = User.query.options(joinedload(User.orders)).all()</p>
 <p>for user in users:</p>
 <p>orders = user.orders # Already loaded</p>
 <p>print(len(orders))</p>
 <p>Lazy Loading </p>
 <p>Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1: </p>
-<h2>SQLAlchemy: configure relationship loading</h2>
+<h3>SQLAlchemy: configure relationship loading</h3>
 <p>class User(Base):</p>
 <p><strong>tablename</strong> = 'users'</p>
 <p>id = Column(Integer, primary_key=True)</p>
 <p>orders = relationship("Order", lazy="selectin") # Eager load</p>
 <p>| Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters | </p>
 <p>Query Optimization </p>
-<h2>BAD: Fetch all columns when only one is needed</h2>
+<h3>BAD: Fetch all columns when only one is needed</h3>
 <p>users = session.query(User).all()</p>
 <p>emails = [u.email for u in users]</p>
-<h2>GOOD: Fetch only needed columns</h2>
+<h3>GOOD: Fetch only needed columns</h3>
 <p>emails = session.query(User.email).all()</p>
-<h2>BAD: Loading entire objects</h2>
+<h3>BAD: Loading entire objects</h3>
 <p>users = User.query.filter(User.status == 'active').all()</p>
 <p>for u in users:</p>
 <p>u.last_login = datetime.utcnow()</p>
-<h2>GOOD: Bulk update</h2>
+<h3>GOOD: Bulk update</h3>
 <p>User.query.filter(User.status == 'active').update(</p>
 <p>{"last_login": datetime.utcnow()}</p>
 <p>)</p>
 <p>Understanding Generated SQL </p>
 <p>Always check the SQL your ORM generates: </p>
-<h2>SQLAlchemy: see the query</h2>
+<h3>SQLAlchemy: see the query</h3>
 <p>query = session.query(User).filter(User.email == 'alice@example.com')</p>
 <p>print(str(query))</p>
-<h2>SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</h2>
+<h3>SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</h3>
 <p>Batch Operations </p>
-<h2>BAD: Individual inserts</h2>
+<h3>BAD: Individual inserts</h3>
 <p>for user in users:</p>
 <p>session.add(user)</p>
 <p>session.commit() # N individual INSERTs</p>
-<h2>GOOD: Bulk insert</h2>
+<h3>GOOD: Bulk insert</h3>
 <p>session.bulk_insert_mappings(User, [u.<strong>dict</strong> for u in users])</p>
 <p>session.commit() # Single batch INSERT</p>
 <p>Conclusion </p>
 <p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-query-profiling.html">Database Query Profiling: Finding and Fixing Performance Bottlenecks</a>, <a href="/en/database/database-slow-query-fix.html">Slow Query Troubleshooting: Identification, Profiling, and Optimization</a>, <a href="/en/database/database-slow-query-optimization.html">Slow Query Optimization: Analysis, Indexing, and Rewriting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

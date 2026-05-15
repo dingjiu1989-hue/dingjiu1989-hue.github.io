@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-04",
-      "wordCount": "700",
+      "wordCount": "752",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-backup-to-s3.html"},
@@ -93,36 +95,38 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
-<h2>Database Backup Strategies to Object Storage</h2>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
+<h3>Database Backup Strategies to Object Storage</h3>
 <p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png" alt="Database Backup Strategies to Object Storage" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Backup Types</h3>
+<h4>Backup Types</h4>
 <p>Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate—typically daily for most databases.</p>
 <p>Incremental backups capture only data changed since the last full or incremental backup. They are faster and smaller but require the full backup chain for restoration. Recommended interval is minutes to hours.</p>
 <p>Transaction log backups capture every write operation. They enable point-in-time recovery to any moment. Log backup frequency determines recovery point objective (RPO)—every minute provides a 1-minute RPO.</p>
-<h3>Object Storage Backup Tools</h3>
+<h4>Object Storage Backup Tools</h4>
 <p>WAL-G is the most popular tool for PostgreSQL backups to object storage. It supports full backups, incremental backups, and WAL archiving. WAL-G compresses, encrypts, and uploads backups efficiently.</p>
 <p>Percona XtraBackup handles MySQL backups with object storage support. It performs hot backups without locking and can stream to S3-compatible storage.</p>
 <p>MongoDB Atlas and AWS RDS provide built-in backup to S3 with configurable retention. Managed databases typically include automated backup management.</p>
-<h3>Point-in-Time Recovery</h3>
+<h4>Point-in-Time Recovery</h4>
 <p>Point-in-Time Recovery (PITR) restores a database to any moment within the retention period. For PostgreSQL, this requires a base backup plus all WAL segments from the backup time to the target time.</p>
 <p>PITR restore time depends on the amount of WAL to replay. Pre-warming the buffer pool improves restore performance. Test PITR regularly to verify it works and to measure restore time.</p>
-<h3>Retention Policies</h3>
+<h4>Retention Policies</h4>
 <p>Use lifecycle policies to automate backup retention. Keep daily backups for 30 days, weekly for 3 months, monthly for a year, and yearly for compliance requirements. Store older backups in cheaper storage tiers (S3 Glacier, GCS Archive).</p>
-<h3>Encryption</h3>
+<h4>Encryption</h4>
 <p>Encrypt backups before uploading. Use server-side encryption (SSE-S3) or client-side encryption with your own keys. The backup encryption key must be stored separately from the backup—losing the key means losing the backup.</p>
-<h3>Testing Backups</h3>
+<h4>Testing Backups</h4>
 <p>A backup is only as good as its restoration. Test full restoration regularly—at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates.</p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

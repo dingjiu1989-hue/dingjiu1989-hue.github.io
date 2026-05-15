@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-03",
-      "wordCount": "1109",
+      "wordCount": "1139",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/materialized-view-pattern.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
-<h2>Materialized View Pattern</h2>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
+<h3>Materialized View Pattern</h3>
 <p>The materialized view pattern creates pre-computed, denormalized read models that are optimized for specific query patterns. Instead of querying multiple services or performing expensive joins at query time, the system maintains a dedicated data store containing exactly the data needed for each query. This pattern is essential for read-heavy workloads and complex cross-service queries in microservice architectures. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/materialized-view-pattern.png" alt="Materialized View Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Problem </p>
 <p>In a microservice architecture, each service owns its database. A query that needs data from multiple services cannot use a simple database join. The alternatives—API composition (calling multiple services and combining results) or client-side joins—are slow, resource-intensive, and do not scale for complex queries. </p>
@@ -128,6 +131,7 @@
 <p>Materialized views are appropriate when queries require data from multiple services, queries are read-heavy and performance-critical, source data changes are manageable (not too frequent), and eventual consistency is acceptable. They are not suitable for queries where the source data changes extremely frequently (thousands of changes per second for the same entity) or where strong consistency is required between reads and writes. </p>
 <p>A pragmatic approach is to use materialized views for the most important queries and API composition for less critical ones. Start with the patterns that cause the most performance problems and add materialized views incrementally. Over time, the system develops a set of optimized read models that cover the most common and performance-critical queries.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/cqrs-pattern.html">CQRS Pattern: Command Query Responsibility Segregation</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

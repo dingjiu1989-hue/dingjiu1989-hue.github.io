@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-09",
-      "wordCount": "1659",
+      "wordCount": "1677",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-hunting.html"},
@@ -96,17 +98,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
-<h2>Threat Hunting</h2>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
+<h3>Threat Hunting</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png" alt="Threat Hunting" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Threat hunting is the proactive search for malicious activity that evades existing security controls. Unlike automated detection, hunting is hypothesis-driven and iterative. It assumes that adversaries are already inside the network and seeks to find them before they achieve their objectives. </p>
 <p>The Hunting Maturity Model </p>
@@ -130,8 +133,8 @@
 </ul>
 <p>Hypothesis-Driven Hunting </p>
 <p>The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. </p>
-<h2>Hypothesis: An adversary is using PowerShell for C2 communication</h2>
-<h2>Test: Find PowerShell processes making outbound connections</h2>
+<h3>Hypothesis: An adversary is using PowerShell for C2 communication</h3>
+<h3>Test: Find PowerShell processes making outbound connections</h3>
 <p>def hunt_powershell_c2(time_window_hours=72):</p>
 <p>query = f"""</p>
 <p>SELECT p.pid, p.command_line, p.start_time, </p>
@@ -180,18 +183,18 @@
 <li><strong>Process creation logs</strong> (Event ID 4688 / Sysmon Event ID 1)</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Network connections</strong> (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>DNS queries</strong> (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>File system changes</strong> (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Registry modifications</strong> (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>PowerShell operational logs</strong> (Event ID 4103, 4104) </p>
-<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\<em>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\</em></p>
+<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_</p>
 <p>Hunting Tools </p>
-<h2>Velociraptor: collect process listing across fleet</h2>
+<h3>Velociraptor: collect process listing across fleet</h3>
 <p>velociraptor --config client.config.yaml </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler </p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json &gt; scheduled_tasks.json</p>
-<h2>Zeek: analyze DNS logs for DGA patterns</h2>
+<h3>Zeek: analyze DNS logs for DGA patterns</h3>
 <p>zeek-cut dns.query &lt; dns.log | \</p>
 <p>grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \</p>
 <p>awk '{len=length($1)} len&gt;20 {print $1, len}' | \</p>
 <p>sort | uniq -c | sort -rn | head -20</p>
-<h2>KQL: hunting in Microsoft 365 Defender</h2>
+<h3>KQL: hunting in Microsoft 365 Defender</h3>
 <p>DeviceProcessEvents</p>
 <p>| where Timestamp &gt; ago(7d)</p>
 <p>| where ProcessVersionInfoProductName == "PsExec"</p>
@@ -199,7 +202,7 @@
 <p>| summarize LatestProcess=arg_max(Timestamp, *) by DeviceName</p>
 <p>| project DeviceName, AccountName, ProcessCommandLine, Timestamp</p>
 <p>Data Analysis Techniques </p>
-<h2>Stack counting for anomaly detection</h2>
+<h3>Stack counting for anomaly detection</h3>
 <p>def stack_count(events, field, top_n=10):</p>
 <p>"""Identify unusually frequent values."""</p>
 <p>counts = Counter(getattr(e, field) for e in events)</p>
@@ -212,6 +215,7 @@
 <p>Conclusion </p>
 <p>Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules.</p>
 <p><strong>See also:</strong> <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/dns-security.html">DNS Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/data-masking.html">Data Masking and Redaction</a>, <a href="/en/security/dns-security.html">DNS Security</a>, <a href="/en/security/forensics-guide.html">Digital Forensics Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

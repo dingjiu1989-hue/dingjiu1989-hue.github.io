@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1536",
+      "wordCount": "1602",
       "keywords": "Technology, DevTools, Productivity",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/devcontainer-setup.html"},
@@ -67,6 +69,17 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Technical guide to development containers covering devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -96,22 +109,23 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png" alt="Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h2>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h2>
-<h3>Introduction</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h3>Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces</h3>
+<h4>Introduction</h4>
 <p>Development containers (dev containers) provide consistent, reproducible development environments defined as code. Instead of developers manually installing language runtimes, databases, and tools on their local machines, dev containers package the entire development environment into a Docker container. This eliminates "works on my machine" problems, reduces onboarding time from days to minutes, and ensures consistency across team environments.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/devcontainer-setup.png" alt="Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.</p>
-<h3>Dev Container Specification</h3>
+<h4>Dev Container Specification</h4>
 <p>The dev container specification, maintained by the Community Specification Contributor Agreement, defines a standard format for configuring development containers. The primary configuration file is <code>.devcontainer/devcontainer.json</code> at the repository root.</p>
 <p>{</p>
 <p>"name": "Node.js &amp; PostgreSQL",</p>
@@ -132,7 +146,7 @@
 <p>}</p>
 <p>}</p>
 <p>The <code>image</code> property specifies the base container image. Alternatively, <code>build</code> references a Dockerfile for custom images. The Dockerfile approach provides complete control over the environment but requires more maintenance.</p>
-<h3>Base Images and Features</h3>
+<h4>Base Images and Features</h4>
 <p>Microsoft maintains a library of pre-built dev container base images: <code>javascript-node</code>, <code>python</code>, <code>go</code>, <code>rust</code>, <code>java</code>, <code>dotnet</code>, and more. These images include the runtime, common development tools (git, curl, zsh, Oh My Zsh), and non-root user configuration.</p>
 <p>Features are self-contained, shareable units of configuration that install additional tools into a dev container. The features repository includes CLI tools (Azure CLI, AWS CLI, Docker-in-Docker), language runtimes (Ruby, PHP, Elixir), and databases (PostgreSQL, SQLite, Redis).</p>
 <p>{</p>
@@ -146,7 +160,7 @@
 <p>}</p>
 <p>}</p>
 <p>Features are versioned and published as OCI artifacts. The community contributes features to the shared registry, providing a growing catalog of ready-to-use environment components.</p>
-<h3>Dotfiles Integration</h3>
+<h4>Dotfiles Integration</h4>
 <p>Dotfiles — configuration files for shell, editors, and tools — can be automatically applied when creating a dev container. The devcontainer.json specifies a dotfiles repository:</p>
 <p>{</p>
 <p>"dotfilesRepository": "github.com/username/dotfiles",</p>
@@ -155,17 +169,17 @@
 <p>}</p>
 <p>The dotfiles repository typically contains shell configuration (.zshrc, .bashrc), git configuration (.gitconfig), editor settings, and tool configuration. The install script links or copies files to the appropriate locations inside the container.</p>
 <p>This feature enables personalized development environments within the standardized container, balancing consistency with individual preferences.</p>
-<h3>Remote Development Workflows</h3>
+<h4>Remote Development Workflows</h4>
 <p>Dev containers support four connection modes:</p>
 <p>Docker (local): The container runs on the local Docker daemon. VS Code's Remote - Containers extension attaches to the container. This is the simplest mode for individual development.</p>
 <p>Docker (remote SSH): The container runs on a remote Docker host accessed via SSH. Useful for development on powerful remote machines without transferring local setup.</p>
 <p>Dev Tunnel: VS Code tunnels through firewalls to connect to a dev container on any machine. Enabled by the <code>devcontainer up</code> CLI command.</p>
 <p>Codespaces: GitHub managed remote dev containers in the cloud.</p>
-<h2>Build and open a dev container</h2>
+<h3>Build and open a dev container</h3>
 <p>devcontainer open .</p>
-<h2>Rebuild from scratch</h2>
+<h3>Rebuild from scratch</h3>
 <p>devcontainer build --workspace-folder . --image-name my-devcontainer</p>
-<h3>GitHub Codespaces</h3>
+<h4>GitHub Codespaces</h4>
 <p>GitHub Codespaces provides cloud-hosted dev containers integrated directly with GitHub repositories. When <code>devcontainer.json</code> exists in a repository, Codespaces automatically provisions a container with the specified configuration.</p>
 <p>Codespaces supports:</p>
 <ul>
@@ -198,7 +212,7 @@
 <p>}</p>
 <p>}</p>
 <p>Prebuilds significantly improve the Codespaces experience. A GitHub Actions workflow builds the container on each push, caching layers for instant startup. Without prebuilds, Codespaces builds the container on first launch, which can take several minutes.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Keep devcontainer.json in the repository root for broadest tool compatibility. Pin feature versions for reproducibility. Use postCreateCommand for setup scripts, not for tools that should be permanently installed. Configure lifecycle hooks for different timing phases:</p>
 <ul>
 <li>
@@ -215,9 +229,10 @@
 </li>
 </ul>
 <p>Minimize image size by using specific base images rather than the universal image unless diverse tooling is needed. Test dev container configuration in CI to catch configuration drift.</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Dev containers transform development environment management. devcontainer.json defines environments as code. Features provide composable tool installation. Dotfiles integration preserves personal preferences. Remote development workflows support diverse connectivity modes. GitHub Codespaces extends the model to cloud-hosted environments. Organizations adopting dev containers reduce onboarding friction, eliminate environment inconsistencies, and enable developers to contribute to any repository with zero local configuration.</p>
 <p><strong>See also:</strong> <a href="/en/tools/kubernetes-dashboards.html">Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared</a>, <a href="/en/tools/ci-cd-observability.html">CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/kubernetes-dashboards.html">Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a>, <a href="/en/tools/ci-cd-observability.html">CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/kubernetes-dashboards.html">Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a>, <a href="/en/tools/ci-cd-observability.html">CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/kubernetes-dashboards.html">Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared</a>, <a href="/en/tools/api-development-tools.html">API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI</a>, <a href="/en/tools/ci-cd-observability.html">CI/CD Observability: Build Metrics, Test Analytics, Deployment Tracking, and DORA Metrics</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

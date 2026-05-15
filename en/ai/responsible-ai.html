@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/responsible-ai.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-03",
-      "wordCount": "2557",
+      "wordCount": "2588",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/responsible-ai.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/responsible-ai.png" alt="Responsible AI Development Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h2>Responsible AI Development Practices</h2>
-<h3>Introduction</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h3>Responsible AI Development Practices</h3>
+<h4>Introduction</h4>
 <p>As AI systems make increasingly consequential decisions--from loan approvals to medical diagnoses--responsible AI development is no longer optional. Regulations like the EU AI Act, emerging AI liability frameworks, and growing public scrutiny demand that developers implement systematic fairness, transparency, and safety practices. This article covers practical techniques for building responsible AI applications.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/responsible-ai.png" alt="Responsible AI Development Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Bias Detection and Fairness Metrics</h3>
+<h4>Bias Detection and Fairness Metrics</h4>
 <p>Quantify bias across demographic groups using standard fairness metrics:</p>
 <p>import numpy as np</p>
 <p>from sklearn.metrics import confusion_matrix</p>
@@ -159,22 +162,22 @@
 <p>) -&gt; List[str]:</p>
 <p>"""Check fairness metrics against thresholds."""</p>
 <p>violations = []</p>
-<h2>Demographic parity: max difference &lt; 0.1</h2>
+<h3>Demographic parity: max difference &lt; 0.1</h3>
 <p>max_parity = max(r.demographic_parity for r in reports.values())</p>
 <p>if max_parity &gt; 0.1:</p>
 <p>violations.append(</p>
 <p>f"Demographic parity violation: {max_parity:.3f} &gt; 0.1"</p>
 <p>)</p>
-<h2>Equal opportunity: TPR difference &lt; 0.1</h2>
+<h3>Equal opportunity: TPR difference &lt; 0.1</h3>
 <p>tpr_values = [r.true_positive_rate for r in reports.values()]</p>
 <p>if max(tpr_values) - min(tpr_values) &gt; 0.1:</p>
 <p>violations.append("Equal opportunity violation: TPR gap &gt; 0.1")</p>
-<h2>Equalized odds: FPR difference &lt; 0.1</h2>
+<h3>Equalized odds: FPR difference &lt; 0.1</h3>
 <p>fpr_values = [r.false_positive_rate for r in reports.values()]</p>
 <p>if max(fpr_values) - min(fpr_values) &gt; 0.1:</p>
 <p>violations.append("Equalized odds violation: FPR gap &gt; 0.1")</p>
 <p>return violations</p>
-<h3>Model Explainability</h3>
+<h4>Model Explainability</h4>
 <h4>SHAP (SHapley Additive exPlanations)</h4>
 <p>SHAP explains individual predictions by computing feature contributions:</p>
 <p>import shap</p>
@@ -193,7 +196,7 @@
 <p>"base_value": float(self.explainer.expected_value),</p>
 <p>"feature_contributions": [],</p>
 <p>}</p>
-<h2>Sort features by absolute contribution</h2>
+<h3>Sort features by absolute contribution</h3>
 <p>for i, (name, value) in enumerate(</p>
 <p>sorted(</p>
 <p>zip(self.feature_names, shap_values[0]),</p>
@@ -211,7 +214,7 @@
 <p>def generate_report(self, X: np.ndarray) -&gt; dict:</p>
 <p>"""Generate global feature importance summary."""</p>
 <p>shap_values = self.explainer.shap_values(X)</p>
-<h2>Mean absolute SHAP values</h2>
+<h3>Mean absolute SHAP values</h3>
 <p>mean_shap = np.abs(shap_values).mean(axis=0)</p>
 <p>feature_importance = sorted(</p>
 <p>zip(self.feature_names, mean_shap),</p>
@@ -252,7 +255,7 @@
 <p>num_features=num_features,</p>
 <p>top_labels=1,</p>
 <p>)</p>
-<h2>Format as structured output</h2>
+<h3>Format as structured output</h3>
 <p>label, contributions = explanation.as_list(label=1)</p>
 <p>return {</p>
 <p>"predicted_class": label,</p>
@@ -267,9 +270,9 @@
 <p>for feature, weight in contributions</p>
 <p>],</p>
 <p>}</p>
-<h3>Transparency Documentation</h3>
+<h4>Transparency Documentation</h4>
 <p>Maintain model documentation using standardized frameworks:</p>
-<h2>Model Card: Credit Scoring Model v2.1</h2>
+<h3>Model Card: Credit Scoring Model v2.1</h3>
 <p>model_card:</p>
 <p>model_details:</p>
 <p>name: "CreditRisk-Classifier-v2"</p>
@@ -322,7 +325,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "ECOA (Equal Credit Opportunity Act)"</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "FCRA (Fair Credit Reporting Act)"</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "EU AI Act (proposed, risk category: limited)"</p>
-<h3>Safety Guardrails</h3>
+<h4>Safety Guardrails</h4>
 <p>Implement runtime safety checks for LLM applications:</p>
 <p>class SafetyGuardrails:</p>
 <p>def <strong>init</strong>(self, config: dict):</p>
@@ -341,23 +344,24 @@
 <p>schema=config.get("output_schema")</p>
 <p>)</p>
 <p>async def process_request(self, user_input: str) -&gt; dict:</p>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Input check: detect prompt injection</h2>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Input check: detect prompt injection</h3>
 <p>injection_risk = self.prompt_injection_detector.analyze(user_input)</p>
 <p>if injection_risk.score &gt; 0.85:</p>
 <p>return {"blocked": True, "reason": "prompt_injection"}</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Content filter</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Content filter</h3>
 <p>filtered_input = self.pii_redactor.redact(user_input)</p>
 <p>if self.content_filter.is_blocked(filtered_input):</p>
 <p>return {"blocked": True, "reason": "blocked_content"}</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Process through model</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Process through model</h3>
 <p>output = await self._invoke_model(filtered_input)</p>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output validation</h2>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output validation</h3>
 <p>validated = self.output_validator.validate(output)</p>
 <p>if not valid:</p>
 <p>return {"blocked": True, "reason": "invalid_output"}</p>
 <p>return {"blocked": False, "output": output}</p>
 <p>Building responsible AI requires ongoing commitment, not a one-time checklist. Integrate bias audits into CI/CD, maintain model documentation as living documents, and continuously monitor production behavior for drift or emerging fairness issues.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

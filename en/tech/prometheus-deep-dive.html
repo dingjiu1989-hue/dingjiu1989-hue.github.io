@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-12",
-      "wordCount": "1722",
+      "wordCount": "1781",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/prometheus-deep-dive.html"},
@@ -96,31 +98,32 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-12 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h2>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h2>
-<h3>Introduction</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h3>Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability</h3>
+<h4>Introduction</h4>
 <p>Prometheus has emerged as the de facto standard for monitoring cloud-native infrastructure. Originally developed at SoundCloud and later donated to the Cloud Native Computing Foundation (CNCF), it has become the second graduated project after Kubernetes. Its pull-based metrics collection model, powerful query language, and multi-dimensional data model differentiate it from traditional monitoring solutions like Nagios or Zabbix.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/prometheus-deep-dive.png" alt="Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article explores Prometheus architecture, metrics collection, PromQL, recording rules, alerting, and strategies for high availability.</p>
-<h3>Metrics Collection Architecture</h3>
+<h4>Metrics Collection Architecture</h4>
 <p>Prometheus scrapes metrics from instrumented targets over HTTP. Targets expose metrics at a standard endpoint, typically <code>/metrics</code>, in plaintext format. Exporters bridge the gap for third-party systems: the Node Exporter provides OS-level metrics, the Blackbox Exporter probes external endpoints, and numerous specialized exporters exist for databases, message queues, and cloud services.</p>
 <p>A key design choice is the pull model. Prometheus scrapes targets on a configurable interval (default 15 seconds). This simplifies health detection — if a target stops responding, Prometheus immediately detects the absence of metrics. Service discovery integrations for Kubernetes, Consul, EC2, and DNS allow targets to be dynamically discovered without manual reconfiguration.</p>
-<h3>The Multi-Dimensional Data Model</h3>
+<h4>The Multi-Dimensional Data Model</h4>
 <p>Prometheus stores metrics as time series identified by a metric name and a set of key-value labels. For example:</p>
 <p>http_requests_total{method="POST", endpoint="/api/users", status="200"}</p>
 <p>Labels enable dimensionality. You can aggregate, filter, and compute across any label combination without pre-defining aggregation hierarchies — a significant advantage over tools like Graphite.</p>
 <p>Metric types include counters (monotonically increasing values), gauges (arbitrarily fluctuating values), histograms (observations counted into configurable buckets), and summaries (quantiles computed on the client). Choosing the right metric type is critical for accurate monitoring and cost-effective cardinality management.</p>
-<h3>PromQL: The Query Language</h3>
+<h4>PromQL: The Query Language</h4>
 <p>PromQL is the heart of Prometheus. It supports instant vector queries, range vector queries, aggregation operators, and binary arithmetic.</p>
 <p>Key patterns include:</p>
 <ul>
@@ -138,7 +141,7 @@
 </li>
 </ul>
 <p>Understanding PromQL vector matching — one-to-one, many-to-one, and group modifiers — is essential for writing correct queries involving multiple metrics.</p>
-<h3>Recording Rules</h3>
+<h4>Recording Rules</h4>
 <p>Recording rules compute frequently needed or computationally expensive expressions in advance. They re-encapsulate a PromQL expression as a new time series, scraped alongside other metrics.</p>
 <p>groups:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: recording_rules</p>
@@ -147,7 +150,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- record: instance:node_cpu_utilization:rate5m</p>
 <p>expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)</p>
 <p>Recording rules reduce query latency for dashboards and provide a stable interface between metric collection and consumption.</p>
-<h3>Alerting with Alertmanager</h3>
+<h4>Alerting with Alertmanager</h4>
 <p>Alerting in Prometheus is a two-phase process. The Prometheus server evaluates alerting rules and sends firing alerts to Alertmanager, which handles deduplication, silencing, inhibition, and routing.</p>
 <p>groups:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: alerting_rules</p>
@@ -160,12 +163,13 @@
 <p>annotations:</p>
 <p>summary: "CPU usage above 80%"</p>
 <p>Alertmanager routes alerts to notification channels (PagerDuty, Slack, email) using route trees. Inhibition rules suppress low-severity alerts when high-severity alerts for the same service are firing, reducing noise during major incidents.</p>
-<h3>High Availability and Long-Term Storage</h3>
+<h4>High Availability and Long-Term Storage</h4>
 <p>Prometheus is designed for reliability, not durability. A single Prometheus server stores data locally — if it fails, historical data is lost. High availability is achieved by running identical pairs of Prometheus servers with the same scrape configuration, both receiving the same data.</p>
 <p>For long-term storage, the Thanos and Cortex projects extend Prometheus. Thanos provides global query views across multiple Prometheus instances, unlimited retention via object storage (S3, GCS), and downsampling for fast queries over large time ranges. Cortex offers a horizontally scalable, multi-tenant Prometheus-compatible backend.</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Prometheus fundamentally changed how teams approach monitoring. Its pull model, label-based data model, and powerful PromQL language provide capabilities that traditional tools cannot match. When paired with Thanos for long-term storage and Alertmanager for sophisticated notification routing, Prometheus forms a complete monitoring stack suitable for infrastructure of any scale.</p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ansible-automation.html">Ansible Automation: Playbooks, Roles, Inventory, and Vault</a>, <a href="/en/tech/elk-stack-setup.html">ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

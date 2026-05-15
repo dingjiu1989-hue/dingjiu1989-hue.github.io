@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-11",
-      "wordCount": "942",
+      "wordCount": "969",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-11 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
-<h2>Saga Choreography Pattern</h2>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
+<h3>Saga Choreography Pattern</h3>
 <p>Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-choreography.png" alt="Saga Choreography Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>In a choreographed saga, each service owns its part of the workflow. When the Order Service creates an order, it publishes OrderCreated. The Payment Service subscribes to OrderCreated, processes payment, and publishes PaymentProcessed. The Inventory Service subscribes to PaymentProcessed, reserves stock, and publishes InventoryReserved. The Shipping Service subscribes to InventoryReserved and schedules shipment. The workflow emerges from these chains of reactions. </p>
 <p>The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones — no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible. </p>
@@ -115,6 +118,7 @@
 <p>Domain characteristics matter. Sagas where each step is independently useful and compensatable lend themselves to choreography. Sagas that require conditional branching or complex coordination logic are better served by orchestration. A good rule of thumb: if you can describe the saga as a simple linear chain of events, choreography may suffice. If the saga requires any "or," "if," or "while" logic, orchestration is safer. </p>
 <p>Production experience suggests starting with orchestration for critical workflows and moving to choreography only when the team demonstrates mature event handling patterns and monitoring infrastructure. The implicit nature of choreographed workflows demands operational maturity that many teams underestimate.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

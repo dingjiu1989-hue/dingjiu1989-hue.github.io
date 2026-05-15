@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-08",
-      "wordCount": "2215",
+      "wordCount": "2251",
       "keywords": "Technology, Programming, DevOps",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/distributed-tracing.html"},
@@ -96,22 +98,23 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h2>Distributed Tracing with OpenTelemetry</h2>
-<h3>Introduction</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h3>Distributed Tracing with OpenTelemetry</h3>
+<h4>Introduction</h4>
 <p>Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png" alt="Distributed Tracing with OpenTelemetry" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Core Concepts: Traces, Spans, and Context</h3>
+<h4>Core Concepts: Traces, Spans, and Context</h4>
 <p>A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships:</p>
 <p>import { trace, Span, SpanStatusCode } from "@opentelemetry/api";</p>
 <p>const tracer = trace.getTracer("payment-service");</p>
@@ -140,7 +143,7 @@
 <p>span.end();</p>
 <p>}</p>
 <p>}</p>
-<h3>Context Propagation</h3>
+<h4>Context Propagation</h4>
 <p>Propagation carries trace context across service boundaries. For HTTP services, the <code>W3C TraceContext</code> format is standard:</p>
 <p>// Instrument outgoing HTTP requests</p>
 <p>import { context, propagation } from "@opentelemetry/api";</p>
@@ -182,9 +185,9 @@
 <p>span.end();</p>
 <p>});</p>
 <p>});</p>
-<h3>Sampling Strategies</h3>
+<h4>Sampling Strategies</h4>
 <p>Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:</p>
-<h2>OpenTelemetry Collector: tail-based sampling</h2>
+<h3>OpenTelemetry Collector: tail-based sampling</h3>
 <p>processors:</p>
 <p>tail_sampling:</p>
 <p>decision_wait: 30s</p>
@@ -228,9 +231,9 @@
 <p>return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
 <p>}</p>
 <p>}</p>
-<h3>Visualization with Jaeger and Zipkin</h3>
+<h4>Visualization with Jaeger and Zipkin</h4>
 <p>Jaeger provides rich trace visualization and analysis capabilities:</p>
-<h2>docker-compose.yml for Jaeger</h2>
+<h3>docker-compose.yml for Jaeger</h3>
 <p>services:</p>
 <p>jaeger:</p>
 <p>image: jaegertracing/all-in-one:latest</p>
@@ -255,7 +258,7 @@
 <p>traces:</p>
 <p>receivers: [otlp]</p>
 <p>exporters: [jaeger]</p>
-<h3>Baggage Propagation</h3>
+<h4>Baggage Propagation</h4>
 <p>Baggage carries non-sampling key-value pairs across service boundaries for contextual information:</p>
 <p>import { propagation } from "@opentelemetry/api";</p>
 <p>// Set baggage in the entry service</p>
@@ -272,7 +275,7 @@
 <p>const baggage = getBaggage(context.active());</p>
 <p>return baggage?.getEntry("user.id")?.value;</p>
 <p>}</p>
-<h3>Correlation with Logs and Metrics</h3>
+<h4>Correlation with Logs and Metrics</h4>
 <p>Link traces to logs using <code>trace_id</code> and <code>span_id</code>:</p>
 <p>import { trace } from "@opentelemetry/api";</p>
 <p>function enrichLogger(logger: Logger): Logger {</p>
@@ -296,7 +299,7 @@
 <p>trace_id: spanContext?.traceId,</p>
 <p>});</p>
 <p>}</p>
-<h3>Production Configuration</h3>
+<h4>Production Configuration</h4>
 <p>Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration:</p>
 <p>apiVersion: apps/v1</p>
 <p>kind: DaemonSet</p>
@@ -313,6 +316,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP</p>
 <p>Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes.</p>
 <p><strong>See also:</strong> <a href="/en/tech/monitoring-alerting-setup.html">Monitoring and Alerting Setup</a>, <a href="/en/tech/reverse-proxy-guide.html">Reverse Proxy Guide</a>, <a href="/en/tech/webpack-vs-vite-bundlers.html">Webpack vs Vite Comparison</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/chaos-engineering.html">Chaos Engineering: Principles and Practical Tools</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/service-discovery.html">Service Discovery in Microservices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-00",
-      "wordCount": "1302",
+      "wordCount": "1327",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-00 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png" alt="LLM Evaluation Metrics" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h2>LLM Evaluation Metrics</h2>
-<h3>Introduction</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h3>LLM Evaluation Metrics</h3>
+<h4>Introduction</h4>
 <p>Evaluating large language models is fundamentally different from evaluating traditional machine learning models. LLMs produce open-ended outputs, have no single ground truth measure, and can fail in ways that accuracy cannot capture. This guide covers the evaluation metrics and frameworks used to measure LLM performance across different tasks.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-evaluation-metrics.png" alt="LLM Evaluation Metrics" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Classification Metrics</h3>
+<h4>Classification Metrics</h4>
 <p>For classification tasks — sentiment analysis, intent detection, topic classification — standard ML metrics apply:</p>
 <ul>
 <li>
@@ -134,7 +137,7 @@
 <p>Precision = 850/(850+50) = 0.944</p>
 <p>Recall = 850/(850+100) = 0.895</p>
 <p>F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919</p>
-<h3>Generation Metrics</h3>
+<h4>Generation Metrics</h4>
 <h4>ROUGE (Recall-Oriented Understudy for Gisting Evaluation)</h4>
 <p>ROUGE measures the overlap between generated text and reference text, primarily used for summarization:</p>
 <ul>
@@ -167,7 +170,7 @@
 <p>Perplexity measures how well the model predicts a sequence — lower is better. It is calculated as the exponential of the average negative log-likelihood:</p>
 <p>Perplexity = exp(-1/N * Σ log P(token_i | context))</p>
 <p>Perplexity is useful for comparing models on the same dataset but cannot compare across datasets. A general model will have higher perplexity than a domain-specific one on the same domain text.</p>
-<h3>Task-Specific Benchmarks</h3>
+<h4>Task-Specific Benchmarks</h4>
 <p>Standardized benchmarks enable model-to-model comparison:</p>
 <ul>
 <li>
@@ -190,7 +193,7 @@
 </li>
 </ul>
 <p>When reporting benchmark scores, always include the exact evaluation setup (few-shot count, prompt template, decoding parameters) since these significantly affect results.</p>
-<h3>LLM-as-Judge Evaluation</h3>
+<h4>LLM-as-Judge Evaluation</h4>
 <p>Using an LLM to evaluate another LLM's outputs has become the standard approach for open-ended tasks:</p>
 <p>judge_prompt = """</p>
 <p>You are evaluating a response for quality. Rate the response on:</p>
@@ -203,7 +206,7 @@
 <p>Output a JSON object with scores and brief reasoning.</p>
 <p>"""</p>
 <p><strong>GPT-4 and Claude-3.5 Opus</strong> are the most commonly used judge models. Agreement between LLM judges and human raters ranges from 70-85% for most tasks, making this approach cost-effective and scalable.</p>
-<h3>Human Evaluation</h3>
+<h4>Human Evaluation</h4>
 <p>Despite automation advances, human evaluation remains the gold standard:</p>
 <ul>
 <li>
@@ -220,7 +223,7 @@
 </li>
 </ul>
 <p>A good annotation rubric defines each score level with concrete examples. For a 5-point helpfulness scale, each point should have anchor examples.</p>
-<h3>Evaluation in Production</h3>
+<h4>Evaluation in Production</h4>
 <p>Production evaluation goes beyond benchmarks:</p>
 <ul>
 <li>
@@ -236,9 +239,10 @@
 <p><strong>Monitoring dashboards</strong> : Track response length, latency, refusal rates, and toxicity scores over time</p>
 </li>
 </ul>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>No single metric captures LLM quality. Effective evaluation combines automated metrics for regression testing, LLM-as-judge for scalable quality assessment, task-specific benchmarks for capability tracking, and human evaluation for final quality assurance. Build an evaluation pipeline that includes all these levels and update it as your use case evolves.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

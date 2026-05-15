@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-collaboration.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "975",
+      "wordCount": "1002",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-collaboration.html"},
@@ -64,6 +66,17 @@
         {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Event Collaboration: Choreography vs Orchestration"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Event Collaboration: Choreography vs Orchestration",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Event-driven collaboration patterns, saga execution, choreography vs orchestration, error handling in distributed workflows",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -93,17 +106,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-collaboration.png" alt="Event Collaboration: Choreography vs Orchestration" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
-<h2>Event Collaboration: Choreography vs Orchestration</h2>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
+<h3>Event Collaboration: Choreography vs Orchestration</h3>
 <p>Event collaboration is the architectural pattern where services communicate through events rather than direct requests. This shifts the coordination model from asking (request-response) to telling (event notification). Two fundamental patterns govern how these collaborations are structured: choreography, where each service independently responds to events, and orchestration, where a central coordinator directs the workflow. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-collaboration.png" alt="Event Collaboration: Choreography vs Orchestration" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>In choreography, services are loosely coupled through events. When a service completes an operation, it publishes an event. Other services subscribe to relevant events and react accordingly. There is no central controller — the workflow emerges from the collective behavior of participating services. For example, when the Order Service creates an order, it publishes an OrderCreated event. The Inventory Service subtracts stock, the Payment Service charges the customer, and the Shipping Service schedules delivery — each acting independently. </p>
 <p>Choreography's strength is decoupling. Services have no direct knowledge of each other, only of the events they produce and consume. New services can join the workflow by subscribing to existing events without modifying any existing service. This aligns naturally with domain-driven design and bounded contexts. The trade-off is visibility: the overall workflow is not explicitly defined anywhere, making it difficult to understand, monitor, and debug. </p>
@@ -114,6 +128,7 @@
 <p>In orchestration, the coordinator tracks state and invokes compensations in reverse order. This makes error handling more manageable to implement and verify. However, the coordinator itself must be highly available and its state durable. If the coordinator fails mid-workflow, it must recover precisely where it left off — requiring persistent workflow state and idempotent service operations. </p>
 <p>Many production systems combine both patterns. Orchestration manages core business flows that require strict consistency guarantees. Choreography handles peripheral flows where eventual consistency and loose coupling are more valuable than workflow visibility. The choice depends on the criticality of the flow, the number of participating services, and the organization's tolerance for implicit versus explicit workflow definitions.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/saga-orchestration.html">Saga Orchestration Pattern</a>, <a href="/en/architecture/choreography-patterns.html">Choreography Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

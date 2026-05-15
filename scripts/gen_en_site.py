@@ -13346,6 +13346,9 @@ def make_article_html(art, board_id, board_name, all_posts):
     # Cover image for social sharing + article hero
     cover_url = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.png'
     tags_str = ', '.join(art.get('tags', []))
+    # "about" structured topics for AI crawlers
+    about_entries = ', '.join(f'{{"@type": "Thing", "name": "{t}"}}' for t in art.get('tags', [])[:5])
+    about_json = about_entries if about_entries else '{"@type": "Thing", "name": "Technology"}'
 
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
     <meta property="og:description" content="{art['description']}">
@@ -13432,6 +13435,23 @@ def make_article_html(art, board_id, board_name, all_posts):
       ]
     }}
     </script>'''
+
+    # SoftwareApplication schema for tool articles
+    softapp_schema = ''
+    if board_id == 'tools' or any(w in art['title'].lower() for w in [' vs ', 'compared', 'review', 'best ']):
+        softapp_schema = f'''
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "{art['title']}",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "{art['description']}",
+      "offers": {{"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    }}
+    </script>'''
+
     body_len = len(body_html)
     # wordCount from plain text (not HTML) — ~5 chars/word average
     body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
@@ -13555,6 +13575,8 @@ def make_article_html(art, board_id, board_name, all_posts):
       "dateModified": "{art.get('lastActive', art['date'])}",
       "wordCount": "{word_est}",
       "keywords": "{tags_str}",
+      "about": [{about_json}],
+      "inLanguage": "en",
       "author": {{"@type": "Person", "name": "SourceHub"}},
       "publisher": {{"@type": "Organization", "name": "SourceHub", "logo": {{"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}}}},
       "mainEntityOfPage": {{"@type": "WebPage", "@id": "{art_url}"}}{sameas_json},
@@ -13571,7 +13593,7 @@ def make_article_html(art, board_id, board_name, all_posts):
         {{"@type": "ListItem", "position": 3, "name": "{art['title']}"}}
       ]
     }}
-    </script>{faq_schema}{howto_schema}
+    </script>{faq_schema}{howto_schema}{softapp_schema}
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",

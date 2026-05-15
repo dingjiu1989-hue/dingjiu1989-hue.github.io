@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-07",
-      "wordCount": "2690",
+      "wordCount": "2723",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html"},
@@ -95,25 +97,26 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h2>Multimodal AI Applications in 2026</h2>
-<h3>Introduction</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h3>Multimodal AI Applications in 2026</h3>
+<h4>Introduction</h4>
 <p>Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png" alt="Multimodal AI Applications in 2026" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Vision-Language Models</h3>
+<h4>Vision-Language Models</h4>
 <p>Modern vision-language models (VLMs) accept images and text together in a single context window:</p>
 <p>from anthropic import Anthropic</p>
 <p>client = Anthropic(api_key="sk-...")</p>
-<h2>Analyze an image with text instructions</h2>
+<h3>Analyze an image with text instructions</h3>
 <p>response = client.messages.create(</p>
 <p>model="claude-sonnet-4-20260512",</p>
 <p>max_tokens=1024,</p>
@@ -141,7 +144,7 @@
 <p>],</p>
 <p>}],</p>
 <p>)</p>
-<h2>The model "sees" the image and processes it jointly with text</h2>
+<h3>The model "sees" the image and processes it jointly with text</h3>
 <p>analysis = response.content[0].text</p>
 <h4>Document AI and OCR</h4>
 <p>Extract structured data from complex documents:</p>
@@ -179,7 +182,7 @@
 <p>response_format={"type": "json_object"},</p>
 <p>)</p>
 <p>return json.loads(response.content[0].text)</p>
-<h3>Speech-to-Text and Audio Understanding</h3>
+<h4>Speech-to-Text and Audio Understanding</h4>
 <p>Multimodal models now handle audio directly without separate ASR pipelines:</p>
 <p>import asyncio</p>
 <p>async def analyze_call_recording(audio_path: str) -&gt; dict:</p>
@@ -217,7 +220,7 @@
 <p>}],</p>
 <p>)</p>
 <p>return parse_analysis(response.content[0].text)</p>
-<h3>Multimodal RAG</h3>
+<h4>Multimodal RAG</h4>
 <p>Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables:</p>
 <p>import chromadb</p>
 <p>from sentence_transformers import SentenceTransformer</p>
@@ -239,15 +242,15 @@
 <p>tables: List[dict],</p>
 <p>):</p>
 <p>embeddings = []</p>
-<h2>Index text chunks</h2>
+<h3>Index text chunks</h3>
 <p>text_chunks = self._chunk_text(text)</p>
 <p>text_embeddings = self.text_encoder.encode(text_chunks)</p>
 <p>embeddings.extend(text_embeddings)</p>
-<h2>Index images</h2>
+<h3>Index images</h3>
 <p>for img in images:</p>
 <p>img_embedding = self.image_encoder.encode(img)</p>
 <p>embeddings.append(img_embedding)</p>
-<h2>Index with metadata about modality</h2>
+<h3>Index with metadata about modality</h3>
 <p>self.collection.add(</p>
 <p>embeddings=embeddings,</p>
 <p>ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],</p>
@@ -258,15 +261,15 @@
 <p>],</p>
 <p>)</p>
 <p>def query(self, question: str, top_k: int = 5) -&gt; List[dict]:</p>
-<h2>Encode query</h2>
+<h3>Encode query</h3>
 <p>query_embedding = self.text_encoder.encode(question)</p>
-<h2>Retrieve across all modalities</h2>
+<h3>Retrieve across all modalities</h3>
 <p>results = self.collection.query(</p>
 <p>query_embeddings=[query_embedding],</p>
 <p>n_results=top_k,</p>
 <p>)</p>
 <p>return results</p>
-<h3>Audio Transcription and Analysis Pipeline</h3>
+<h4>Audio Transcription and Analysis Pipeline</h4>
 <p>For production audio processing, combine streaming with multimodal analysis:</p>
 <p>class AudioProcessingPipeline:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -279,15 +282,15 @@
 <p>buffer.append(chunk)</p>
 <p>buffer_duration += self._chunk_duration(chunk)</p>
 <p>if buffer_duration &gt;= self.buffer_duration:</p>
-<h2>Process buffer</h2>
+<h3>Process buffer</h3>
 <p>segment = b"".join(buffer)</p>
-<h2>Real-time transcription + analysis</h2>
+<h3>Real-time transcription + analysis</h3>
 <p>result = await self._analyze_segment(segment)</p>
-<h2>Extract action items, sentiment, entities</h2>
+<h3>Extract action items, sentiment, entities</h3>
 <p>actions = self._extract_actions(result)</p>
 <p>if actions:</p>
 <p>await self._route_actions(actions)</p>
-<h2>Keep overlap for continuity</h2>
+<h3>Keep overlap for continuity</h3>
 <p>overlap_bytes = int(</p>
 <p>len(segment) * (self.overlap / buffer_duration)</p>
 <p>)</p>
@@ -316,7 +319,7 @@
 <p>}],</p>
 <p>)</p>
 <p>return response</p>
-<h3>Use Cases and Limitations</h3>
+<h4>Use Cases and Limitations</h4>
 <p>| Use Case | Capability | Current Limitations |</p>
 <p>|---|---|---|</p>
 <p>| Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy |</p>
@@ -325,8 +328,8 @@
 <p>| Accessibility | Generate alt text, describe scenes | Real-time video processing latency |</p>
 <p>| Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk |</p>
 <p>| Video understanding | Summarize meetings, detect events | Long video context limits |</p>
-<h3>Production Considerations</h3>
-<h2>Multimodal model selection criteria</h2>
+<h4>Production Considerations</h4>
+<h3>Multimodal model selection criteria</h3>
 <p>selection:</p>
 <p>latency:</p>
 <p>text_only: "&lt; 500ms"</p>
@@ -348,6 +351,7 @@
 <p>audio_transcription: "&gt;95% WER on clean speech, &gt;80% on accented"</p>
 <p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/multimodal-models.html">Multimodal AI Models: Vision, Audio, and Text</a>, <a href="/en/ai/ai-testing-strategies.html">Testing Strategies for AI Applications</a>, <a href="/en/ai/ai-database-query.html">Natural Language to SQL with LLMs</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-08",
-      "wordCount": "1098",
+      "wordCount": "1128",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/observability-three-pillars.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png" alt="Observability: Logs, Metrics, and Traces" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
-<h2>Observability: Logs, Metrics, and Traces</h2>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
+<h3>Observability: Logs, Metrics, and Traces</h3>
 <p>Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/observability-three-pillars.png" alt="Observability: Logs, Metrics, and Traces" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Logs are timestamped records of discrete events. They are the most detailed pillar — a log line can contain any amount of structured or unstructured data about what happened, when, and with what context. The challenge is volume. Production systems generate millions of log lines per minute. Without structure and filtering, logs become noise. Structured logging (JSON format) is essential for machine parsing and querying. Log levels (DEBUG, INFO, WARN, ERROR) provide the primary filtering mechanism. </p>
 <p>Metrics are numeric aggregations over time. They are the most efficient storage representation — a single metric stream consumes bytes rather than kilobytes per event. Metrics are ideal for dashboards, alerting, and trend analysis. Common metric types include counters (total requests), gauges (current memory usage), histograms (request latency distribution), and summaries (quantile approximations). Metrics inherently lose individual event detail — you know the 99th percentile latency but not which specific request was slow. </p>
@@ -115,6 +118,7 @@
 <p>The OpenTelemetry project is converging the three pillars. OTel provides a unified API for generating signals, with exporters that send data to any backend. Logs, metrics, and traces share instrumentation context including trace IDs and resource attributes. This unification dramatically improves correlation — with OTel, the three pillars are generated from the same instrumentation and carry the same context, making cross-pillar analysis natural rather than bolted on. </p>
 <p>Choosing an observability backend depends on scale and budget. Self-hosted options (Grafana + Loki for logs, Prometheus for metrics, Tempo for traces) provide cost control but operational overhead. Managed options (Datadog, Honeycomb, New Relic) provide convenience at higher per-event cost. Hybrid approaches (self-hosted for high-volume data, managed for curated dashboards) balance cost and capability.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/metrics-types.html">Metrics Types and Monitoring Methodologies</a>, <a href="/en/architecture/cost-per-request.html">Cost Per Request Modeling</a>, <a href="/en/architecture/distributed-tracing-deep.html">Distributed Tracing: Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

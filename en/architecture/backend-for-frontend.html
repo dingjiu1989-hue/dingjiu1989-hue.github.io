@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/backend-for-frontend.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-08",
-      "wordCount": "793",
+      "wordCount": "819",
       "keywords": "Architecture, System Design",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/backend-for-frontend.html"},
@@ -94,17 +96,18 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/backend-for-frontend.png" alt="Backend for Frontend (BFF) Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
-<h2>Backend for Frontend (BFF) Pattern</h2>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
+<h3>Backend for Frontend (BFF) Pattern</h3>
 <p>The Backend for Frontend (BFF) pattern, popularized by Phil Calçado from SoundCloud, addresses a fundamental tension in API design: a single backend cannot optimally serve multiple, diverse clients. Mobile applications have different data requirements, bandwidth constraints, and interaction patterns than web browsers or IoT devices. The BFF pattern creates a dedicated backend layer for each client type. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/backend-for-frontend.png" alt="Backend for Frontend (BFF) Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Concept </p>
 <p>A BFF sits between the frontend and downstream services, tailored specifically to the needs of one client. Instead of forcing a mobile app and a web app to share the same API, each gets its own BFF that aggregates data, transforms responses, and manages session state in a client-appropriate way. The BFF is not a general-purpose API—it is purpose-built for its consuming application. </p>
@@ -121,6 +124,7 @@
 <p>Each BFF should be owned by the same team that owns the frontend, fostering shared responsibility. BFFs should be thin—they orchestrate and transform, but should not contain business logic. Business logic belongs in downstream domain services. BFFs should also be independently deployable and scalable, since mobile and web traffic patterns differ significantly. </p>
 <p>In practice, the BFF pattern has become a standard recommendation for microservice architectures serving multiple client types, and is a key building block in modern platform engineering initiatives.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/rest-api-design.html">REST API Design Best Practices</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/bulkhead-pattern.html">Bulkhead Pattern for Resilience</a>, <a href="/en/architecture/database-per-service.html">Database per Service Pattern</a>, <a href="/en/architecture/event-sourcing.html">Event Sourcing Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

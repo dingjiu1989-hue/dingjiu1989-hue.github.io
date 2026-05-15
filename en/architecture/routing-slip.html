@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/routing-slip.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-05",
-      "wordCount": "663",
+      "wordCount": "705",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/routing-slip.html"},
@@ -93,33 +95,35 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/routing-slip.png" alt="Routing Slip Pattern for Dynamic Message Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
-<h2>Routing Slip Pattern for Dynamic Message Processing</h2>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
+<h3>Routing Slip Pattern for Dynamic Message Processing</h3>
 <p>The routing slip pattern processes a message through a predefined sequence of processing steps, where the path is determined at runtime. Think of it as a delivery route for messages—each stop adds value or transformation before sending the message to the next destination.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/routing-slip.png" alt="Routing Slip Pattern for Dynamic Message Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>How Routing Slips Work</h3>
+<h4>How Routing Slips Work</h4>
 <p>The routing slip is attached to the message as metadata. It contains an ordered list of processing steps. After each step completes, the processing component reads the next destination from the routing slip and forwards the message. When all steps are complete, the message reaches its final destination.</p>
-<h3>Implementation</h3>
+<h4>Implementation</h4>
 <p>The routing slip is typically implemented as a JSON array or a comma-separated list of endpoint addresses. Each processing step inspects the slip, performs its operation, removes the current step from the list, and forwards the message to the next address.</p>
 <p>In Apache Camel, routing slips are a built-in Enterprise Integration Pattern (EIP). Camel reads the slip from a message header and routes dynamically. Spring Integration and Mule also support routing slips natively.</p>
-<h3>Dynamic Routing vs Static Pipelines</h3>
+<h4>Dynamic Routing vs Static Pipelines</h4>
 <p>Static processing pipelines hardcode the sequence of steps. Every message follows the same path. Routing slips allow each message to have a unique path based on its content or type. This flexibility is valuable when different message types require different processing.</p>
 <p>For example, a payment message might follow the path: validate → enrich → fraud check → process. A simple status check message might skip enrichment and fraud check entirely.</p>
-<h3>Use Cases</h3>
+<h4>Use Cases</h4>
 <p>Data transformation pipelines where different data sources need different enrichment steps. Document approval workflows where the approval chain depends on document type and value. Multi-step provisioning processes where the required steps depend on the requested resources.</p>
-<h3>Error Handling</h3>
+<h4>Error Handling</h4>
 <p>If a step fails, the message should go to a dead letter queue with its routing slip intact. The failure context includes which step failed and what steps remain. After fixing the issue, operators can resume processing from the failed step by modifying the routing slip.</p>
-<h3>Monitoring</h3>
+<h4>Monitoring</h4>
 <p>Track metrics per step: processing time, success rate, and queue depth. A routing slip dashboard should show the distribution of message paths—which combinations of steps are most common and where bottlenecks occur.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/priority-queue.html">Priority Queue Pattern for Message Processing</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a>, <a href="/en/architecture/request-reply-pattern.html">Request-Reply Pattern for Asynchronous Communication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-cost-optimization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-13",
-      "wordCount": "1197",
+      "wordCount": "1230",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-api-cost-optimization.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-13 · 360 views · 3 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-cost-optimization.png" alt="AI API Cost Optimization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h2>AI API Cost Optimization</h2>
-<h3>Introduction</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h3>AI API Cost Optimization</h3>
+<h4>Introduction</h4>
 <p>LLM API costs can quickly become the largest line item in an AI application's budget. A single production application processing millions of requests can incur monthly API costs ranging from hundreds to hundreds of thousands of dollars. This guide covers proven strategies for reducing AI API costs by 50-80% without sacrificing quality.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-api-cost-optimization.png" alt="AI API Cost Optimization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Understanding Pricing Models</h3>
+<h4>Understanding Pricing Models</h4>
 <p>Most LLM APIs charge per token — typically at different rates for input and output:</p>
 <ul>
 <li>
@@ -129,7 +132,7 @@
 </li>
 </ul>
 <p>Output tokens are typically 3-6x more expensive than input tokens. This asymmetry has major implications for optimization strategy.</p>
-<h3>Strategy 1: Model Selection</h3>
+<h4>Strategy 1: Model Selection</h4>
 <p><strong>Use the cheapest model that meets your requirements.</strong> Most applications over-index on capability:</p>
 <ul>
 <li>
@@ -155,7 +158,7 @@
 <p>else:</p>
 <p>return "claude-3-opus" # $15/M input</p>
 <p>This pattern alone can reduce costs by 60-80% while maintaining overall quality.</p>
-<h3>Strategy 2: Prompt Optimization</h3>
+<h4>Strategy 2: Prompt Optimization</h4>
 <p><strong>Shorter prompts cost less.</strong> Every token in your system prompt, few-shot examples, and retrieved context costs money.</p>
 <ul>
 <li>
@@ -171,7 +174,7 @@
 <p><strong>Dynamic prompt assembly</strong> : Only include instructions relevant to the current task. Don't include all possible capabilities in every request.</p>
 </li>
 </ul>
-<h3>Strategy 3: Caching</h3>
+<h4>Strategy 3: Caching</h4>
 <p>Prompt caching can cut input token costs by 50-90% for repeated system prompts and contexts:</p>
 <p><strong>Anthropic Prompt Caching</strong> caches frequently used context between requests:</p>
 <p>response = client.messages.create(</p>
@@ -196,7 +199,7 @@
 <p>cache[prompt_hash] = response</p>
 <p>return response</p>
 <p>For semantic caching (similar but not identical queries), use embedding similarity to find cache hits.</p>
-<h3>Strategy 4: Batching and Rate Limiting</h3>
+<h4>Strategy 4: Batching and Rate Limiting</h4>
 <ul>
 <li>
 <p><strong>Request batching</strong> : Send multiple prompts in a single API call when the provider supports it (Google, Together, OpenAI batch API)</p>
@@ -208,7 +211,7 @@
 <p><strong>Rate limit optimization</strong> : Fill your rate limit efficiently rather than making many small requests</p>
 </li>
 </ul>
-<h3>Strategy 5: Smart Output Management</h3>
+<h4>Strategy 5: Smart Output Management</h4>
 <p><strong>Limit output tokens aggressively.</strong> Each output token is 3-6x the cost of an input token:</p>
 <ul>
 <li>
@@ -224,7 +227,7 @@
 <p>Generate shorter drafts and iterate rather than requesting comprehensive outputs</p>
 </li>
 </ul>
-<h3>Strategy 6: Hybrid Architecture</h3>
+<h4>Strategy 6: Hybrid Architecture</h4>
 <p>Don't use LLMs for everything. A hybrid architecture combines cheap deterministic code with expensive AI calls:</p>
 <ul>
 <li>
@@ -240,7 +243,7 @@
 <p><strong>Fallback chain</strong> : Try cheaper methods first, escalate to more expensive models only when needed</p>
 </li>
 </ul>
-<h3>Monitoring and Budgeting</h3>
+<h4>Monitoring and Budgeting</h4>
 <p>Implement cost tracking from day one:</p>
 <ul>
 <li>
@@ -256,9 +259,10 @@
 <p>A/B test optimization strategies with cost as a key metric alongside quality</p>
 </li>
 </ul>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>LLM API costs are manageable with the right strategies. The most impactful levers are model selection (using cheap models whenever possible), prompt optimization (shorter prompts cost less), caching (avoid recomputing the same thing), and hybrid architectures (use deterministic code where it suffices). Start by measuring your current token usage and identifying the biggest opportunities, then implement optimizations in order of impact.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-model-deployment-strategies.html">AI Model Deployment: Strategies for Production LLM Serving</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

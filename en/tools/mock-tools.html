@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1485",
+      "wordCount": "1537",
       "keywords": "Technology, DevTools, Productivity",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevTools"}, {"@type": "Thing", "name": "Productivity"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/mock-tools.html"},
@@ -67,6 +69,17 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -96,21 +109,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png" alt="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h2>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h2>
-<h3>Introduction</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h3>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h3>
+<h4>Introduction</h4>
 <p>Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png" alt="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>MSW (Mock Service Worker)</h3>
+<h4>MSW (Mock Service Worker)</h4>
 <p>MSW intercepts network requests at the service worker level, working in both browser and Node.js:</p>
 <p>// mocks/handlers.ts</p>
 <p>import { http, HttpResponse } from "msw";</p>
@@ -169,7 +183,7 @@
 <p>// Test error handling logic</p>
 <p>});</p>
 <p><strong>Strengths</strong> : Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support.</p>
-<h3>nock</h3>
+<h4>nock</h4>
 <p>nock intercepts HTTP requests at the Node.js <code>http</code> module level:</p>
 <p>const nock = require("nock");</p>
 <p>// Mock a GET request</p>
@@ -206,7 +220,7 @@
 <p>nock.cleanAll();</p>
 <p><strong>Strengths</strong> : Fine-grained request matching, supports regex URL matching, response templating, scope isolation.</p>
 <p><strong>Weaknesses</strong> : Node.js only, module-level interception (not browser), can be slow with many mocks.</p>
-<h3>Sinon</h3>
+<h4>Sinon</h4>
 <p>Sinon provides standalone test doubles (spies, stubs, mocks):</p>
 <p>const sinon = require("sinon");</p>
 <p>// Spy: observe function calls</p>
@@ -235,7 +249,7 @@
 <p>expect(callback.calledOnce).toBe(true);</p>
 <p>clock.restore();</p>
 <p><strong>Strengths</strong> : Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.</p>
-<h3>WireMock</h3>
+<h4>WireMock</h4>
 <p>WireMock runs as a standalone HTTP server, perfect for integration tests:</p>
 <p>// Java example (WireMock also has HTTP API)</p>
 <p>import static com.github.tomakehurst.wiremock.client.WireMock.*;</p>
@@ -257,11 +271,11 @@
 <p>// Verify request was made</p>
 <p>verify(getRequestedFor(urlPathEqualTo("/api/users/1"))</p>
 <p>.withHeader("Authorization", containing("Bearer")));</p>
-<h2>Start WireMock standalone</h2>
+<h3>Start WireMock standalone</h3>
 <p>java -jar wiremock-standalone.jar --port 8089 --verbose</p>
-<h2>Configure via JSON files in mappings/ directory</h2>
-<h2>__files/response.json contains the response body</h2>
-<h3>Comparison</h3>
+<h3>Configure via JSON files in mappings/ directory</h3>
+<h3>__files/response.json contains the response body</h3>
+<h4>Comparison</h4>
 <p>| Feature | MSW | nock | Sinon | WireMock |</p>
 <p>|---------|-----|------|-------|----------|</p>
 <p>| Level | Network (SW) | Network (http) | Function | HTTP server |</p>
@@ -270,7 +284,7 @@
 <p>| Real HTTP | Yes | No (hijacked) | No | Yes |</p>
 <p>| Setup complexity | Medium | Low | Low | Medium |</p>
 <p>| Best for | Frontend tests | Backend tests | Unit tests | Integration tests |</p>
-<h3>Recommendations</h3>
+<h4>Recommendations</h4>
 <ul>
 <li>
 <p><strong>Frontend API mocking</strong> : MSW is the best choice — it works in both test and development environments.</p>
@@ -287,6 +301,7 @@
 </ul>
 <p>Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing service-to-service HTTP interactions at the integration level.</p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/documentation-tools.html">Documentation Tools for Developers 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p>
 <p><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tools/api-testing-2026.html">API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</a>, <a href="/en/tools/load-testing-tools.html">Load Testing Tools: k6, Locust, Gatling, Artillery</a>, <a href="/en/tools/cloud-cli-tools.html">Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

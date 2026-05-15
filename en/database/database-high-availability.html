@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png",
       "datePublished": "2026-05-15",
       "dateModified": "2026-04-04",
-      "wordCount": "1979",
+      "wordCount": "2035",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-high-availability.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-15 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png" alt="Database High Availability: Failover, Standby Types, Health Checks" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
-<h2>Database High Availability: Failover, Standby Types, Health Checks</h2>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
+<h3>Database High Availability: Failover, Standby Types, Health Checks</h3>
 <p>Database High Availability: Failover, Standby Types, Health Checks </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-high-availability.png" alt="Database High Availability: Failover, Standby Types, Health Checks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>High availability (HA) ensures your database remains accessible despite hardware failures, network partitions, or software crashes. This article covers failover mechanisms, standby types, health monitoring, and automated recovery. </p>
 <p>Availability Metrics </p>
@@ -113,7 +116,7 @@
 <p>Standby Types </p>
 <p>Hot Standby </p>
 <p>A hot standby accepts read queries while replicating from the primary. PostgreSQL's <code>hot_standby = on</code> enables this: </p>
-<h2>standby postgresql.conf</h2>
+<h3>standby postgresql.conf</h3>
 <p>hot_standby = on</p>
 <p>hot_standby_feedback = on</p>
 <ul>
@@ -129,7 +132,7 @@
 </ul>
 <p>Warm Standby </p>
 <p>A warm standby is running but does not accept connections until promoted: </p>
-<h2>warm standby: accept no connections</h2>
+<h3>warm standby: accept no connections</h3>
 <p>hot_standby = off</p>
 <ul>
 <li>
@@ -158,14 +161,14 @@
 <p>Failover Strategies </p>
 <p>Manual Failover </p>
 <p>The operator promotes a standby and redirects applications: </p>
-<h2>Promote standby</h2>
+<h3>Promote standby</h3>
 <p>pg_ctl promote -D /var/lib/postgresql/data</p>
-<h2>Update application DNS or connection string</h2>
-<h2>This may take minutes and requires human intervention</h2>
+<h3>Update application DNS or connection string</h3>
+<h3>This may take minutes and requires human intervention</h3>
 <p><strong>Pros</strong> : Simple, operator has full control. <strong>Cons</strong> : Slow (minutes), error-prone under pressure. </p>
 <p>Automated Failover with Patroni </p>
 <p>Patroni is the most popular HA solution for PostgreSQL. It uses distributed consensus (etcd, Consul, or Zookeeper) to elect a new leader: </p>
-<h2>patroni.yml</h2>
+<h3>patroni.yml</h3>
 <p>scope: myapp-db</p>
 <p>namespace: /service/</p>
 <p>name: pg-node-1</p>
@@ -197,10 +200,10 @@
 <li><strong>pg_isready</strong> : Checks if PostgreSQL is accepting connections.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Replication lag</strong> : If lag exceeds a threshold, the standby is not eligible for promotion. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Consensus health</strong> : The node must be reachable to the DCS (etcd/Consul). </p>
-<h2>Manual health check</h2>
+<h3>Manual health check</h3>
 <p>pg_isready -h localhost -p 5432</p>
-<h2>localhost:5432 - accepting connections</h2>
-<h2>Check replication status</h2>
+<h3>localhost:5432 - accepting connections</h3>
+<h3>Check replication status</h3>
 <p>psql -c "SELECT * FROM pg_stat_replication;"</p>
 <p>Failover Flow </p>
 <ul>
@@ -217,7 +220,7 @@
 <p>cur.execute(query, params or ())</p>
 <p>conn.commit()</p>
 <p>except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:</p>
-<h2>Reconnect and retry</h2>
+<h3>Reconnect and retry</h3>
 <p>conn = psycopg2.connect(dsn)</p>
 <p>raise</p>
 <p>Smart DNS (Route53, CloudDNS) </p>
@@ -245,7 +248,7 @@
 <li><strong>Streaming replication</strong> : 2-3 synchronous standbys.</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Patroni</strong> : Automated failover and cluster management. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>etcd/Consul</strong> : Distributed consensus for leader election. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>HAProxy or PgBouncer</strong> : Connection routing to the current primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Watchdog</strong> : Fencing to prevent split-brain. </p>
-<h2>HAProxy configuration</h2>
+<h3>HAProxy configuration</h3>
 <p>frontend pg_frontend</p>
 <p>bind *:5000</p>
 <p>default_backend pg_backend</p>
@@ -256,15 +259,15 @@
 <p>server pg-node-3 pg-node-3:5432 check port 8008 inter 2s</p>
 <p>Testing HA </p>
 <p>Regular failover testing is essential: </p>
-<h2>Test: Kill the primary</h2>
+<h3>Test: Kill the primary</h3>
 <p>ssh pg-node-1 "systemctl stop postgresql"</p>
-<h2>Expected:</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue</h2>
-<h2>Verify:</h2>
+<h3>Expected:</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue</h3>
+<h3>Verify:</h3>
 <p>psql -h haproxy -p 5000 -c "SELECT inet_server_addr();"</p>
-<h2>Should show pg-node-2's IP</h2>
+<h3>Should show pg-node-2's IP</h3>
 <p>Common Pitfalls </p>
 <ul>
 <li>
@@ -282,6 +285,7 @@
 </ul>
 <p>High availability is not a product you buy; it is a property of your system's architecture and operations. Invest in automation, test regularly, and accept that no system is 100% available.</p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-disaster-recovery.html">Database Disaster Recovery: RPO, RTO, Cross-Region Replication</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/backup-types.html">Database Backup Types: Full, Incremental, Differential, WAL Archiving</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-10",
-      "wordCount": "1585",
+      "wordCount": "1630",
       "keywords": "Database, SQL",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "SQL"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/full-text-search.html"},
@@ -94,17 +96,18 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
-<h2>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h2>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
+<h3>Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)</h3>
 <p>The Need for Full-Text Search </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/full-text-search.png" alt="Full-Text Search Engines (Elasticsearch, Meilisearch, Typesense)" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Standard database <code>LIKE</code> queries do not scale. They require full table scans, do not understand relevance ranking, and cannot handle typo tolerance, stemming, or faceted search. Dedicated search engines solve these problems with inverted indexes, relevance scoring, and specialized query parsing. </p>
 <p>How Search Engines Work </p>
@@ -211,7 +214,7 @@
 <p>)</p>
 <p>for hit in results['hits']['hits']:</p>
 <p>print(f"{hit['_score']:.2f}: {hit['_source']['title']}")</p>
-<h2>Facet results</h2>
+<h3>Facet results</h3>
 <p>for bucket in results['aggregations']['by_tag']['buckets']:</p>
 <p>print(f"{bucket['key']}: {bucket['doc_count']} articles")</p>
 <p>Meilisearch </p>
@@ -252,7 +255,7 @@
 <p>Typesense </p>
 <p>Typesense is a fast, typo-tolerant search engine written in C++. </p>
 <p>Setup </p>
-<h2>docker-compose.yml</h2>
+<h3>docker-compose.yml</h3>
 <p>version: '3'</p>
 <p>services:</p>
 <p>typesense:</p>
@@ -270,7 +273,7 @@
 <p>'nodes': [{'host': 'localhost', 'port': '8108', 'protocol': 'http'}],</p>
 <p>'api_key': 'xyz',</p>
 <p>})</p>
-<h2>Create collection (schema)</h2>
+<h3>Create collection (schema)</h3>
 <p>client.collections.create({</p>
 <p>'name': 'articles',</p>
 <p>'fields': [</p>
@@ -282,7 +285,7 @@
 <p>],</p>
 <p>'default_sorting_field': 'views'</p>
 <p>})</p>
-<h2>Index documents</h2>
+<h3>Index documents</h3>
 <p>client.collections['articles'].documents.create({</p>
 <p>'id': '1',</p>
 <p>'title': 'Database Indexing Strategies',</p>
@@ -291,7 +294,7 @@
 <p>'views': 1200,</p>
 <p>'published_at': 1715385600</p>
 <p>})</p>
-<h2>Search</h2>
+<h3>Search</h3>
 <p>results = client.collections['articles'].documents.search({</p>
 <p>'q': 'database indexing',</p>
 <p>'query_by': 'title,content',</p>
@@ -305,6 +308,7 @@
 <p>Summary </p>
 <p>Full-text search engines are essential for applications that need more than simple SQL LIKE queries. Elasticsearch offers the most features and scalability at the cost of operational complexity. Meilisearch provides the best developer experience with instant typo tolerance and sensible defaults. Typesense offers excellent performance with minimal resource usage. Choose based on your scale, feature requirements, and operational capacity: start with Meilisearch or Typesense for typical web applications and move to Elasticsearch when you need advanced analytics or larger scale.</p>
 <p><strong>See also:</strong> <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/mongodb-vs-postgresql.html">MongoDB vs PostgreSQL</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p>
 <p><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/postgresql-vs-mysql-2026.html">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a>, <a href="/en/database/acid-vs-base.html">ACID vs BASE Transactions</a>, <a href="/en/database/graph-databases.html">Graph Databases (Neo4j, Dgraph, ArangoDB)</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

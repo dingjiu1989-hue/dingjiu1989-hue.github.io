@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/attention-mechanisms.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-08",
-      "wordCount": "718",
+      "wordCount": "763",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/attention-mechanisms.html"},
@@ -96,34 +98,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/attention-mechanisms.png" alt="Attention Mechanisms in Neural Networks" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
-<h2>Attention Mechanisms in Neural Networks</h2>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
+<h3>Attention Mechanisms in Neural Networks</h3>
 <p>Attention mechanisms allow neural networks to focus on relevant parts of input when producing output. Since the original transformer, numerous attention variants have improved efficiency, quality, and scalability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/attention-mechanisms.png" alt="Attention Mechanisms in Neural Networks" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>From Additive to Dot-Product</h3>
+<h4>From Additive to Dot-Product</h4>
 <p>Bahdanau attention (additive attention) uses a small feed-forward network to compute attention scores. It introduced attention to neural machine translation but is computationally expensive. Luong attention (multiplicative/dot-product) computes scores as a dot product, enabling efficient matrix multiplication.</p>
 <p>Scaled dot-product attention (transformer) divides scores by sqrt(d_k) to prevent softmax saturation at high dimensions. This simple scaling stabilizes training and enables parallel computation. Modern LLMs universally use scaled dot-product attention.</p>
-<h3>Causal Attention</h3>
+<h4>Causal Attention</h4>
 <p>Causal (masked) attention prevents tokens from attending to future tokens. The attention mask sets future token scores to -infinity before softmax, ensuring predictions depend only on previous tokens. This is essential for autoregressive language models.</p>
 <p>Causal attention introduces a triangular mask. During training, teacher forcing uses the mask to predict each token given only previous tokens. During inference, the mask prevents looking ahead. PrefixLM uses a bidirectional prefix followed by causal attention for the generation part.</p>
-<h3>Multi-Query and Grouped-Query Attention</h3>
+<h4>Multi-Query and Grouped-Query Attention</h4>
 <p>Multi-Query Attention (MQA) shares key-value heads across all query heads, dramatically reducing KV cache memory. MQA reduces memory by 4-8x with minimal quality loss. It is used in PaLM and Falcon.</p>
 <p>Grouped-Query Attention (GQA) is a middle ground between MHA and MQA. Query heads are divided into groups sharing key-value heads. GQA with 8 key-value groups for 32 query heads offers better quality than MQA with similar memory savings. GQA is used in Llama 2/3 and Mistral.</p>
-<h3>FlashAttention</h3>
+<h4>FlashAttention</h4>
 <p>FlashAttention computes attention without materializing the full N×N attention matrix, reducing memory from O(N²) to O(N). It uses tiling to process attention in blocks that fit in fast on-chip SRAM. IO-aware algorithms minimize slow HBM accesses.</p>
 <p>FlashAttention 2 improves parallelism and reduces non-matmul operations. FlashAttention 3 adds FP8 support and asynchronous processing. These optimizations make long-context transformers practical—enabling 128K+ token contexts by reducing attention memory overhead.</p>
-<h3>Sparse Attention</h3>
+<h4>Sparse Attention</h4>
 <p>Sparse attention patterns reduce computation by only attending to a subset of tokens. Sliding window attention attends to local tokens. Global tokens attend to all tokens. BigBird and Longformer combine local, global, and random attention patterns for linear complexity.</p>
 <p><strong>See also:</strong> <a href="/en/ai/transformer-mechanisms.html">Transformer Mechanisms in Deep Learning</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/transformer-mechanisms.html">Transformer Mechanisms in Deep Learning</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/transformer-mechanisms.html">Transformer Mechanisms in Deep Learning</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/transformer-mechanisms.html">Transformer Mechanisms in Deep Learning</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/llm-safety.html">LLM Safety: RLHF, Constitutional AI, Content Filtering, Red Teaming</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

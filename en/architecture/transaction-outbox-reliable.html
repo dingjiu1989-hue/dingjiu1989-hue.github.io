@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-19",
-      "wordCount": "1058",
+      "wordCount": "1090",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliable.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-19 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
 <p>The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox-reliable.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Dual-Write Problem </p>
 <p>The dual-write problem occurs when a service must atomically update a database and publish a message. In a typical order service, placing an order involves inserting into the orders table and publishing an "OrderPlaced" event. If the database insert succeeds but the message publish fails, the event is lost. If the database insert fails but the message publishes, a phantom event is emitted. </p>
@@ -128,6 +131,7 @@
 <p>Clean up published records regularly. A background job can delete records that have been published for more than a threshold period. Partition the outbox table by creation date to make cleanup efficient. </p>
 <p>The transactional outbox pattern is a reliable, battle-tested solution for atomic message publication. Combined with idempotent consumers and careful monitoring, it ensures no messages are lost and no duplicate messages cause problems.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/transactional-inbox.html">Transactional Inbox Pattern for Reliable Messaging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

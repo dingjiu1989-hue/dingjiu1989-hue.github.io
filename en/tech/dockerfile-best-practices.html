@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-01",
-      "wordCount": "601",
+      "wordCount": "651",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/dockerfile-best-practices.html"},
@@ -67,6 +69,17 @@
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Dockerfile Best Practices for Production"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Dockerfile Best Practices for Production",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Optimize Dockerfiles for production: multi-stage builds, layer caching, security scanning, and minimal images.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -96,35 +109,37 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
-<h2>Dockerfile Best Practices for Production</h2>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
+<h3>Dockerfile Best Practices for Production</h3>
 <p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png" alt="Dockerfile Best Practices for Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Multi-Stage Builds</h3>
+<h4>Multi-Stage Builds</h4>
 <p>Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.</p>
 <p>Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages.</p>
-<h3>Layer Caching</h3>
+<h4>Layer Caching</h4>
 <p>Each Dockerfile instruction creates a cacheable layer. Order instructions from least to most frequently changing. Install system packages first, copy dependency manifests (package.json, requirements.txt), run package install, then copy application code.</p>
 <p>This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache.</p>
-<h3>Security Best Practices</h3>
+<h4>Security Best Practices</h4>
 <p>Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root—container escape vulnerabilities grant root access to the host.</p>
 <p>Use specific base image tags, not latest. Pin versions like python:3.12-slim instead of python:latest. Scan images for vulnerabilities with Docker Scout, Trivy, or Snyk. Remove package manager cache files in the same RUN instruction.</p>
-<h3>Minimal Images</h3>
+<h4>Minimal Images</h4>
 <p>Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries—no shell, package manager, or utilities. This reduces attack surface and image size.</p>
 <p>Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly—some Python packages have musl compatibility issues.</p>
-<h3>Dockerignore</h3>
+<h4>Dockerignore</h4>
 <p>Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments.</p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a>, <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

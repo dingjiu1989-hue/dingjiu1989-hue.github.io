@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-document-processing.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-08",
-      "wordCount": "1815",
+      "wordCount": "1840",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-document-processing.png" alt="AI Document Processing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h2>AI Document Processing</h2>
-<h3>Introduction</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h3>AI Document Processing</h3>
+<h4>Introduction</h4>
 <p>Document processing is one of the highest-ROI applications of AI in business. Organizations spend countless hours manually extracting data from invoices, contracts, forms, and reports. AI-powered document processing can handle these tasks in seconds, with higher accuracy and lower cost than human operators.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-document-processing.png" alt="AI Document Processing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>The Document Processing Pipeline</h3>
+<h4>The Document Processing Pipeline</h4>
 <p>A complete document processing system has five stages:</p>
 <h4>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Ingestion</h4>
 <p>Documents arrive in various formats:</p>
@@ -148,7 +151,7 @@
 <p>from PIL import Image</p>
 <p>def ocr_document(image_path):</p>
 <p>image = Image.open(image_path)</p>
-<h2>Configure OCR for better accuracy</h2>
+<h3>Configure OCR for better accuracy</h3>
 <p>custom_config = r'--oem 3 --psm 6 -l eng'</p>
 <p>data = pytesseract.image_to_data(</p>
 <p>image,</p>
@@ -238,7 +241,7 @@
 <p>if not re.match(rules["pattern"], str(data[field])):</p>
 <p>errors.append(f"Field {field} fails pattern validation")</p>
 <p>return errors</p>
-<h3>Production Architecture</h3>
+<h4>Production Architecture</h4>
 <p>Documents → Queue → Worker Pool → Storage</p>
 <p>↓</p>
 <p>Classification Router</p>
@@ -266,7 +269,7 @@
 <p><strong>Human review interface</strong> : Dashboard for manual review of exceptions</p>
 </li>
 </ul>
-<h3>Handling Edge Cases</h3>
+<h4>Handling Edge Cases</h4>
 <ul>
 <li>
 <p><strong>Poor quality scans</strong> : Apply image enhancement (deskew, denoise, contrast adjustment)</p>
@@ -284,7 +287,7 @@
 <p><strong>Very long documents</strong> : Chunk and process section by section, then merge results</p>
 </li>
 </ul>
-<h3>Measuring Accuracy</h3>
+<h4>Measuring Accuracy</h4>
 <p>Track these metrics per document type:</p>
 <ul>
 <li>
@@ -300,9 +303,10 @@
 <p><strong>Time savings</strong> : Manual processing time vs AI processing time</p>
 </li>
 </ul>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>AI document processing transforms document-heavy workflows from hours of manual work to seconds of automated processing. The key to success is building a pipeline that handles format diversity, uses the right OCR/extraction approach for each document type, and includes robust validation with human review for edge cases. Start with a single document type (like invoices), perfect the pipeline, then expand to additional types.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/llm-context-window.html">LLM Context Window Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-embeddings-explained.html">AI Embeddings Explained</a>, <a href="/en/ai/llm-chaining-patterns.html">LLM Chaining and Pipeline Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

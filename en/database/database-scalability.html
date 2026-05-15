@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-23",
-      "wordCount": "490",
+      "wordCount": "530",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-scalability.html"},
@@ -93,22 +95,23 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-23 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png" alt="Database Scalability" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
-<h2>Database Scalability</h2>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
+<h3>Database Scalability</h3>
 <p>Scalability Options </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-scalability.png" alt="Database Scalability" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Database scalability options range from simple to complex. Start with the simplest approach and evolve. </p>
 <p>Vertical Scaling </p>
 <p>Upgrade to a larger server with more CPU, RAM, and storage. </p>
-<h2>AWS RDS instance upgrade</h2>
+<h3>AWS RDS instance upgrade</h3>
 <p>resource "aws_db_instance" "main" {</p>
 <p>instance_class = "db.r6g.8xlarge" # 32 vCPU, 256GB RAM</p>
 <p>allocated_storage = 5000 # 5TB SSD</p>
@@ -124,7 +127,7 @@
 <p>if write:</p>
 <p>return self.primary</p>
 <p>return random.choice(self.replicas)</p>
-<h2>Route reads to replicas, writes to primary</h2>
+<h3>Route reads to replicas, writes to primary</h3>
 <p>db_router.get_conn(write=True).execute("INSERT INTO ...")</p>
 <p>results = db_router.get_conn(write=False).execute("SELECT ...")</p>
 <p>Effective for read-heavy workloads. Does not help with write scaling. </p>
@@ -154,6 +157,7 @@
 <p>Conclusion </p>
 <p>Scale vertically first (simple). Add read replicas for read loads. Add caching for repeated queries. Shard only when necessary. Monitor your bottleneck before choosing a strategy. Most applications never need sharding.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-horizontal-scaling.html">Database Horizontal Scaling Strategies</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a>, <a href="/en/database/database-capacity-planning.html">Database Capacity Planning: Sizing, Growth Forecasting, and Scaling</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

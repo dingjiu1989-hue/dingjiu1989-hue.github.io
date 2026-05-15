@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-06",
-      "wordCount": "738",
+      "wordCount": "785",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/new-sql-databases.html"},
@@ -93,34 +95,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png" alt="NewSQL Databases: Combining SQL with Horizontal Scaling" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
-<h2>NewSQL Databases: Combining SQL with Horizontal Scaling</h2>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
+<h3>NewSQL Databases: Combining SQL with Horizontal Scaling</h3>
 <p>NewSQL databases combine the ACID guarantees and SQL query capabilities of traditional relational databases with the horizontal scalability of NoSQL systems. They address a fundamental limitation of traditional databases: scaling beyond a single node without sacrificing consistency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/new-sql-databases.png" alt="NewSQL Databases: Combining SQL with Horizontal Scaling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>CockroachDB</h3>
+<h4>CockroachDB</h4>
 <p>CockroachDB is a distributed SQL database designed for cloud-native applications. It automatically replicates and distributes data across nodes, handles node failures transparently, and supports standard PostgreSQL-compatible SQL.</p>
 <p>CockroachDB uses a consensus protocol (Raft) to maintain consistency across replicas. Each range of data is replicated to at least 3 nodes. Reads and writes go through the leaseholder node for that range, providing linearizable consistency.</p>
 <p>Its geo-partitioning feature allows data to be stored in specific geographic locations for latency optimization and data residency compliance. A table can specify that EU customer data is stored only on EU nodes.</p>
-<h3>YugabyteDB</h3>
+<h4>YugabyteDB</h4>
 <p>YugabyteDB is an open-source distributed SQL database that supports both PostgreSQL and Cassandra-compatible APIs. It uses a document store at its core with a distributed transaction layer on top.</p>
 <p>YugabyteDB's architecture separates compute from storage. The query layer handles SQL parsing and optimization. The storage layer handles replication and persistence. This separation allows independent scaling of compute and storage resources.</p>
-<h3>Google Spanner</h3>
+<h4>Google Spanner</h4>
 <p>Google Spanner is the original NewSQL database, running on Google's global infrastructure. It provides external consistency (global serializability) across data centers through TrueTime, a globally synchronized clock service.</p>
 <p>Spanner combines automatic sharding, synchronous replication, and atomic clocks for consistency. It handles automatic failover, data rebalancing, and geo-distribution transparently. The trade-off is vendor lock-in and higher cost.</p>
-<h3>When to Use NewSQL</h3>
+<h4>When to Use NewSQL</h4>
 <p>Use NewSQL when you need ACID transactions across multiple nodes, when your application requires standard SQL, and when you anticipate scaling beyond a single database node. NewSQL is ideal for financial systems, multi-tenant SaaS platforms, and globally distributed applications.</p>
 <p>Avoid NewSQL for simple key-value workloads (Redis is simpler), write-heavy time series (Cassandra is more cost-effective), or when eventual consistency is acceptable. NewSQL's distributed transaction overhead adds latency compared to NoSQL alternatives.</p>
-<h3>Operational Considerations</h3>
+<h4>Operational Considerations</h4>
 <p>NewSQL databases require more operational expertise than traditional databases. Plan for cluster management, node replacement, and version upgrades. Most NewSQL databases offer managed cloud services that reduce operational burden.</p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/database-scalability.html">Database Scalability</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p>
 <p><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/graph-queries.html">Graph Queries in SQL: Recursive CTEs, Adjacency Lists, and WITH RECURSIVE</a>, <a href="/en/database/sql-vs-nosql-2026.html">SQL vs NoSQL in 2026</a>, <a href="/en/database/database-transactions.html">Database Transactions Deep Dive: ACID, Isolation Levels, Savepoints</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

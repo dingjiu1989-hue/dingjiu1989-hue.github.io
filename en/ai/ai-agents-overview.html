@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-overview.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-08",
-      "wordCount": "703",
+      "wordCount": "754",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-agents-overview.html"},
@@ -96,34 +98,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-overview.png" alt="AI Agents: Architecture and Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
-<h2>AI Agents: Architecture and Implementation</h2>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
+<h3>AI Agents: Architecture and Implementation</h3>
 <p>AI agents are autonomous systems that use large language models to perceive environments, reason about goals, and take actions. They represent the next frontier of LLM applications beyond simple chat and generation.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-overview.png" alt="AI Agents: Architecture and Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Agent Architecture</h3>
+<h4>Agent Architecture</h4>
 <p>A basic agent consists of an LLM core, a set of tools, and a reasoning loop. The LLM processes input and decides which tool to call. The tool executes and returns results. The LLM incorporates results into its reasoning and decides the next action. This loop continues until the task is complete.</p>
 <p>Tool definitions include name, description, parameters (JSON schema), and implementation. The LLM selects tools based on their descriptions. Well-written tool descriptions are critical for correct tool selection.</p>
-<h3>Planning</h3>
+<h4>Planning</h4>
 <p>Agents plan by breaking complex tasks into subtasks. ReAct (Reasoning + Acting) alternates reasoning and action steps at each iteration. Plan-and-Solve generates a complete plan before execution. Tree-of-Thought explores multiple plan branches.</p>
 <p>Effective planning requires the agent to self-evaluate progress. Ask the agent "Have I completed the original goal?" at each step. Implement maximum iteration limits to prevent infinite loops. Add human-in-the-loop checkpoints for critical actions.</p>
-<h3>Memory</h3>
+<h4>Memory</h4>
 <p>Agent memory has three levels: short-term (conversation context), long-term (external storage like vector databases), and episodic (past task experiences). Context window limits constrain short-term memory. Implement summarization to compress long conversations.</p>
 <p>External memory stores embeddings of past interactions. Retrieve relevant memories at each step using semantic search. Episodic memory improves over time as the agent learns from past successes and failures. Clear episodic memory when task patterns change.</p>
-<h3>Multi-Agent Systems</h3>
+<h4>Multi-Agent Systems</h4>
 <p>Complex tasks benefit from multiple specialized agents. A research agent gathers information. A writer agent produces output. A reviewer agent validates quality. Agent orchestration frameworks (LangGraph, CrewAI, AutoGen) manage agent communication.</p>
 <p>Define clear handoff protocols between agents. Each agent should have a specific role, tools, and success criteria. Shared memory allows agents to access each other's outputs. Human supervision monitors agent-to-agent interactions.</p>
-<h3>Safety</h3>
+<h4>Safety</h4>
 <p>Implement guardrails for agent actions. Validate tool arguments before execution. Require human approval for destructive operations (file deletion, database writes). Set budget limits for cost control. Monitor agent behavior for anomalous patterns.</p>
 <p><strong>See also:</strong> <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/agent-memory-systems.html">Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

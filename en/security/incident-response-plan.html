@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-02",
-      "wordCount": "993",
+      "wordCount": "1016",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html"},
@@ -96,22 +98,23 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
-<h2>Incident Response Plan</h2>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
+<h3>Incident Response Plan</h3>
 <p>The NIST Framework </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png" alt="Incident Response Plan" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection &amp; Analysis, Containment Eradication &amp; Recovery, and Post-Incident Activity. </p>
 <p>Phase 1: Preparation </p>
 <p>Preparation determines response success. Key elements include: </p>
-<h2>incident-response-tools.yaml</h2>
+<h3>incident-response-tools.yaml</h3>
 <p>tools:</p>
 <p>siem: elastic-security</p>
 <p>edr: crowdstrike-falcon</p>
@@ -148,7 +151,7 @@
 <p>"timestamp": datetime.utcnow().isoformat()</p>
 <p>})</p>
 <p>return alerts</p>
-<h2>Example: Correlate failed logins across accounts</h2>
+<h3>Example: Correlate failed logins across accounts</h3>
 <p>detector = IncidentDetector()</p>
 <p>detector.add_rule({</p>
 <p>"name": "Brute Force Detection",</p>
@@ -158,20 +161,20 @@
 <p>"window": timedelta(minutes=5)</p>
 <p>})</p>
 <p>Phase 3: Containment, Eradication, Recovery </p>
-<h2>!/bin/bash</h2>
-<h2>Incident containment script</h2>
+<h3>!/bin/bash</h3>
+<h3>Incident containment script</h3>
 <p>isolate_host() {</p>
 <p>local host=$1</p>
-<h2>Block at network level</h2>
+<h3>Block at network level</h3>
 <p>ansible-playbook isolate_host.yml -e "target=$host"</p>
-<h2>Capture forensic data</h2>
+<h3>Capture forensic data</h3>
 <p>ssh "user@$host" "tar czf /tmp/forensics.tar.gz /var/log /tmp /home"</p>
 <p>scp "user@$host:/tmp/forensics.tar.gz" ./evidence/</p>
-<h2>Snapshot for analysis</h2>
+<h3>Snapshot for analysis</h3>
 <p>aws ec2 create-snapshot --volume-id $(get_volume_id $host)</p>
 <p>echo "Host $host isolated. Forensic data captured."</p>
 <p>}</p>
-<h2>Eradicate malware</h2>
+<h3>Eradicate malware</h3>
 <p>eradicate() {</p>
 <p>local host=$1</p>
 <p>ansible-playbook malware_removal.yml -e "target=$host"</p>
@@ -217,6 +220,7 @@
 <p>Conclusion </p>
 <p>A well-rehearsed incident response plan reduces breach impact by 50% or more. Invest in preparation, run regular tabletop exercises, automate containment where possible, and learn from every incident.</p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p>
 <p><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/dlp-strategies.html">Data Loss Prevention Strategies</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

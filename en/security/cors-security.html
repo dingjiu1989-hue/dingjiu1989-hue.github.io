@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-13",
-      "wordCount": "1656",
+      "wordCount": "1676",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/cors-security.html"},
@@ -96,19 +98,20 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
-<h2>CORS Security</h2>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
+<h3>CORS Security</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/cors-security.png" alt="CORS Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cross-Origin Resource Sharing (CORS) is a browser mechanism that controls which origins can access resources on a different origin. While CORS enables legitimate cross-origin requests, misconfigurations are among the most common security vulnerabilities discovered in modern web applications. </p>
 <p>How CORS Works </p>
@@ -136,12 +139,12 @@
 <p>Access-Control-Max-Age: 3600</p>
 <p>Proper Origin Validation </p>
 <p>Never reflect the <code>Origin</code> header back unconditionally. This is the most common dangerous CORS misconfiguration. </p>
-<h2>UNSAFE: Reflective origin (vulnerable to attack)</h2>
+<h3>UNSAFE: Reflective origin (vulnerable to attack)</h3>
 <p>def cors_unsafe(request):</p>
 <p>origin = request.headers.get('Origin')</p>
 <p>response.headers['Access-Control-Allow-Origin'] = origin # NEVER do this</p>
 <p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
-<h2>SAFE: Whitelist-based origin validation</h2>
+<h3>SAFE: Whitelist-based origin validation</h3>
 <p>ALLOWED_ORIGINS = {</p>
 <p>'https://app.example.com',</p>
 <p>'https://admin.example.com',</p>
@@ -158,30 +161,30 @@
 <p>def is_origin_allowed(origin):</p>
 <p>from urllib.parse import urlparse</p>
 <p>parsed = urlparse(origin)</p>
-<h2>Must be HTTPS</h2>
+<h3>Must be HTTPS</h3>
 <p>if parsed.scheme != 'https':</p>
 <p>return False</p>
-<h2>Exact match only, no wildcards for credentialed requests</h2>
+<h3>Exact match only, no wildcards for credentialed requests</h3>
 <p>return parsed.geturl() in ALLOWED_ORIGINS</p>
 <p>Common Misconfigurations </p>
 <p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Wildcard with Credentials </p>
-<h2>VULNERABLE: Wildcard origin with credentials</h2>
+<h3>VULNERABLE: Wildcard origin with credentials</h3>
 <p>response.headers['Access-Control-Allow-Origin'] = '*'</p>
 <p>response.headers['Access-Control-Allow-Credentials'] = 'true'</p>
-<h2>Browsers will reject this combination, but attackers can still exploit</h2>
-<h2>applications that don't rely on browser enforcement (e.g., server-side CORS)</h2>
+<h3>Browsers will reject this combination, but attackers can still exploit</h3>
+<h3>applications that don't rely on browser enforcement (e.g., server-side CORS)</h3>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Overly Permissive Origin Match </p>
-<h2>VULNERABLE: Subdomain matching that is too permissive</h2>
+<h3>VULNERABLE: Subdomain matching that is too permissive</h3>
 <p>def unsafe_origin_check(origin):</p>
-<h2>Accepts evil.example.com as matching example.com</h2>
+<h3>Accepts evil.example.com as matching example.com</h3>
 <p>return origin.endswith('.example.com') or origin == 'example.com'</p>
-<h2>Also vulnerable: origin contains 'example.com' would match evil-example.com</h2>
+<h3>Also vulnerable: origin contains 'example.com' would match evil-example.com</h3>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Null Origin </p>
-<h2>VULNERABLE: Allow null origin</h2>
+<h3>VULNERABLE: Allow null origin</h3>
 <p>if origin == 'null':</p>
 <p>response.headers['Access-Control-Allow-Origin'] = 'null'</p>
-<h2>null origin is used by file://, sandboxed iframes, and some</h2>
-<h2>automated scanners. Attackers can exploit this.</h2>
+<h3>null origin is used by file://, sandboxed iframes, and some</h3>
+<h3>automated scanners. Attackers can exploit this.</h3>
 <p>Exploit Scenarios </p>
 <p>Internal Network API Attack </p>
 <p>An attacker hosts a malicious site that performs cross-origin requests to internal APIs. If the internal API reflects origins, the attacker can exfiltrate sensitive data. </p>
@@ -216,6 +219,7 @@
 <p>Conclusion </p>
 <p>CORS misconfigurations remain a top web vulnerability. Never reflect origins dynamically, never use wildcard with credentials, validate origins against an allowlist, and always set the <code>Vary: Origin</code> header when using dynamic CORS. Remember that CORS is a browser-enforced policy — protect sensitive endpoints with proper authentication regardless.</p>
 <p><strong>See also:</strong> <a href="/en/security/serverless-security.html">Serverless Security</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/input-validation.html">Input Validation Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/serverless-security.html">Serverless Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

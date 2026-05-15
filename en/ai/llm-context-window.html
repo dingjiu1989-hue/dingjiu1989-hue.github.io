@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-01",
-      "wordCount": "2259",
+      "wordCount": "2287",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-01 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h2>LLM Context Window Management</h2>
-<h3>Introduction</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h3>LLM Context Window Management</h3>
+<h4>Introduction</h4>
 <p>Context window size has grown from 2K tokens in early GPT models to 200K tokens in GPT-4, 200K in Claude 3, and even 1 million tokens in Gemini 1.5 Pro. Despite this growth, effective context management remains critical — models attend less effectively to information in the middle of long contexts, token costs scale with context length, and response latency increases. This guide covers strategies for managing context windows in production.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-context-window.png" alt="LLM Context Window Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>The "Lost in the Middle" Problem</h3>
+<h4>The "Lost in the Middle" Problem</h4>
 <p>Research consistently shows that LLMs perform best when relevant information appears at the beginning or end of the context window. Information in the middle is more likely to be ignored or incorrectly processed.</p>
 <p><strong>Performance by position (approximate):</strong></p>
 <ul>
@@ -124,7 +127,7 @@
 </li>
 </ul>
 <p>This has direct implications for RAG systems: placing the most relevant documents at the beginning and end of the context improves answer quality even if less relevant documents are included in the middle.</p>
-<h3>Context Budgeting</h3>
+<h4>Context Budgeting</h4>
 <p>Treat context like a budget. Allocate tokens deliberately:</p>
 <p>Total context: 100K tokens (example)</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- System prompt: 2K tokens (2%)</p>
@@ -146,13 +149,13 @@
 <p>Can the query be compressed?</p>
 </li>
 </ul>
-<h3>Strategies for Long Conversations</h3>
+<h4>Strategies for Long Conversations</h4>
 <h4>Sliding Window</h4>
 <p>Keep only the most recent N turns of conversation:</p>
 <p>def get_conversation_context(conversation, max_turns=10):</p>
 <p>"""Keep only the most recent max_turns of conversation."""</p>
 <p>trimmed = conversation[-max_turns:]</p>
-<h2>Include a summary of earlier turns if needed</h2>
+<h3>Include a summary of earlier turns if needed</h3>
 <p>if len(conversation) &gt; max_turns:</p>
 <p>summary = summarize_conversation(conversation[:-max_turns])</p>
 <p>trimmed = [{"role": "system", "content": f"Earlier summary: {summary}"}] + trimmed</p>
@@ -174,7 +177,7 @@
 <p>Level 2: Daily summaries</p>
 <p>Level 3: Conversation summary (per session)</p>
 <p>When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc.</p>
-<h3>RAG Context Management</h3>
+<h4>RAG Context Management</h4>
 <h4>Document Ranking for Context</h4>
 <p>When multiple documents are retrieved but context is limited:</p>
 <ul>
@@ -192,21 +195,21 @@
 <p>ranked = cross_encoder_rank(chunks, query)</p>
 <p>selected = []</p>
 <p>token_count = 0</p>
-<h2>Always include the top chunk</h2>
+<h3>Always include the top chunk</h3>
 <p>top = ranked[0]</p>
 <p>if token_count + len(top) &lt;= max_tokens:</p>
 <p>selected.append(top)</p>
 <p>token_count += len(top)</p>
-<h2>Fill from both ends inward</h2>
+<h3>Fill from both ends inward</h3>
 <p>for chunk in ranked[1:]:</p>
 <p>if token_count + len(chunk) &lt;= max_tokens:</p>
 <p>selected.append(chunk)</p>
 <p>token_count += len(chunk)</p>
 <p>else:</p>
 <p>break</p>
-<h2>Reorder: best chunk last, second best first, rest in middle</h2>
+<h3>Reorder: best chunk last, second best first, rest in middle</h3>
 <p>return reorder_for_positioning(selected)</p>
-<h3>Long Document Processing</h3>
+<h4>Long Document Processing</h4>
 <h4>Map-Reduce for Very Long Documents</h4>
 <p>Split the document, process each section independently, then combine:</p>
 <p>def process_long_document(document, chunk_size=4000):</p>
@@ -228,7 +231,7 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Query model for what's missing or unclear</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve specific sections to fill gaps</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate refined analysis</p>
-<h3>Monitoring Context Usage</h3>
+<h4>Monitoring Context Usage</h4>
 <p>Track these metrics per request:</p>
 <ul>
 <li>
@@ -244,9 +247,10 @@
 <p><strong>Truncation events</strong> : how often context is being cut off</p>
 </li>
 </ul>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Effective context management is essential for building reliable LLM applications, regardless of context window size. Prioritize important information, use hierarchical summarization for long conversations, rank documents carefully in RAG systems, and monitor context usage in production. The models with million-token windows are impressive, but they work best when you treat their attention with respect rather than as unlimited storage.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/llm-evaluation-metrics.html">LLM Evaluation Metrics</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/ai-prompt-engineering.html">Advanced Prompt Engineering Techniques</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

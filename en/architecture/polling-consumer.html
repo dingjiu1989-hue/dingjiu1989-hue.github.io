@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "586",
+      "wordCount": "612",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html"},
@@ -64,6 +66,17 @@
         {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Polling Consumer vs Event-Driven Consumer"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Polling Consumer vs Event-Driven Consumer",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Compare polling and event-driven consumer patterns: when to poll, when to push, and hybrid approaches.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -93,31 +106,33 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
-<h2>Polling Consumer vs Event-Driven Consumer</h2>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
+<h3>Polling Consumer vs Event-Driven Consumer</h3>
 <p>Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/polling-consumer.png" alt="Polling Consumer vs Event-Driven Consumer" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Polling Consumer</h3>
+<h4>Polling Consumer</h4>
 <p>A polling consumer periodically checks a queue or endpoint for new messages. The consumer controls the polling frequency, which determines the trade-off between latency (how quickly messages are received) and resource cost (API calls, CPU usage).</p>
 <p>Polling is simple to implement and provides natural backpressure—if the consumer is overloaded, it can slow its polling rate. It works well when message arrival is unpredictable or when the consumer needs to control its processing cadence.</p>
 <p>The main drawback is latency. A consumer polling every 30 seconds may wait up to 30 seconds to receive time-sensitive messages. Increasing polling frequency reduces latency but increases infrastructure costs.</p>
-<h3>Event-Driven Consumer</h3>
+<h4>Event-Driven Consumer</h4>
 <p>An event-driven consumer receives messages as they arrive. The producer or broker pushes messages to the consumer through webhooks, streaming connections, or long-polling. This approach provides minimal latency—messages are processed as soon as they are published.</p>
 <p>Event-driven consumers require persistent connections (WebSocket, gRPC stream, or HTTP/2) and must handle backpressure carefully. If the consumer falls behind, in-flight messages accumulate in memory or buffers.</p>
-<h3>Hybrid Approach</h3>
+<h4>Hybrid Approach</h4>
 <p>Many systems combine both patterns. Use push for time-sensitive notifications and polling for less urgent batch processing. For example, a notification service might use push for real-time alerts and poll a dead letter queue for retry processing.</p>
-<h3>Choosing the Right Pattern</h3>
+<h4>Choosing the Right Pattern</h4>
 <p>Choose polling when latency requirements are relaxed (minutes, not seconds), the consumer needs strict rate control, or the message source does not support push. Choose push when low latency is critical, the consumer can scale to handle peak load, or real-time updates are a product requirement.</p>
 <p>Implementation complexity is often lower with polling libraries and frameworks, but operational overhead is higher at scale due to constant API calls even when no messages exist.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-notification-vs-event-carrying.html">Event Notification vs Event-Carried State Transfer</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/monolith-first-strategy.html">Monolith-First Strategy</a>, <a href="/en/architecture/saga-choreography.html">Saga Choreography Pattern</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

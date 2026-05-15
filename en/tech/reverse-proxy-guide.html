@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/reverse-proxy-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-04-06",
-      "wordCount": "1244",
+      "wordCount": "1272",
       "keywords": "Technology, Programming, DevOps",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html"},
@@ -96,21 +98,22 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/reverse-proxy-guide.png" alt="Reverse Proxy Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
-<h2>Reverse Proxy Guide</h2>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
+<h3>Reverse Proxy Guide</h3>
 <p>A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/reverse-proxy-guide.png" alt="Reverse Proxy Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Why Use a Reverse Proxy</h3>
+<h4>Why Use a Reverse Proxy</h4>
 <ul>
 <li>
 <p><strong>TLS termination</strong> : Handle HTTPS once at the proxy layer.</p>
@@ -128,7 +131,7 @@
 <p><strong>Multiple services</strong> : Route different paths to different backends from one domain.</p>
 </li>
 </ul>
-<h3>Nginx Reverse Proxy</h3>
+<h4>Nginx Reverse Proxy</h4>
 <p>Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.</p>
 <h4>Basic Reverse Proxy Configuration</h4>
 <p>server {</p>
@@ -180,10 +183,10 @@
 <p>}</p>
 <p>}</p>
 <p>The <code>$upstream_cache_status</code> header helps debug caching (HIT, MISS, STALE, etc.). <code>proxy_cache_use_stale</code> serves stale content when the backend is down.</p>
-<h3>Caddy Reverse Proxy</h3>
+<h4>Caddy Reverse Proxy</h4>
 <p>Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go-based performance. It is ideal for teams that want a zero-fuss reverse proxy.</p>
 <h4>Basic Reverse Proxy</h4>
-<h2>Caddyfile</h2>
+<h3>Caddyfile</h3>
 <p>app.example.com {</p>
 <p>reverse_proxy localhost:3000</p>
 <p>}</p>
@@ -210,14 +213,14 @@
 <p>header_up Host {host}</p>
 <p>header_up X-Real-IP {remote_host}</p>
 <p>}</p>
-<h2>Add security headers</h2>
+<h3>Add security headers</h3>
 <p>header {</p>
 <p>X-Frame-Options "SAMEORIGIN"</p>
 <p>X-Content-Type-Options "nosniff"</p>
 <p>}</p>
 <p>}</p>
 <p>Caddy's <code>header</code> directive works for both request and response headers.</p>
-<h3>Nginx vs Caddy: Comparison</h3>
+<h4>Nginx vs Caddy: Comparison</h4>
 <p>| Feature | Nginx | Caddy |</p>
 <p>|---------|-------|-------|</p>
 <p>| Configuration | Complex, powerful | Simple, opinionated |</p>
@@ -228,7 +231,7 @@
 <p>| Learning curve | Steep | Gentle |</p>
 <p>| Dynamic configuration | Limited | REST API available |</p>
 <p>| HTTP/3 | Supported | Supported |</p>
-<h3>Security Headers</h3>
+<h4>Security Headers</h4>
 <p>Regardless of which reverse proxy you choose, add these security headers:</p>
 <p>For Nginx:</p>
 <p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
@@ -241,7 +244,7 @@
 <p>X-Content-Type-Options "nosniff"</p>
 <p>Strict-Transport-Security "max-age=31536000; includeSubDomains"</p>
 <p>}</p>
-<h3>Rate Limiting</h3>
+<h4>Rate Limiting</h4>
 <p>Nginx:</p>
 <p>limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;</p>
 <p>location /api/ {</p>
@@ -259,11 +262,12 @@
 <p>}</p>
 <p>reverse_proxy localhost:3000</p>
 <p>}</p>
-<h3>Health Checks</h3>
+<h4>Health Checks</h4>
 <p>Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.</p>
-<h3>Summary</h3>
+<h4>Summary</h4>
 <p>Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance.</p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a>, <a href="/en/tech/nginx-configuration.html">Nginx Configuration: Performance and Security</a>, <a href="/en/tech/dev-environment-setup.html">Developer Environment Setup Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

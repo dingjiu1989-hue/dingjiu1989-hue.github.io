@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-08",
-      "wordCount": "4307",
+      "wordCount": "4339",
       "keywords": "Technology, Programming, DevOps",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "Programming"}, {"@type": "Thing", "name": "DevOps"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/github-actions-advanced.html"},
@@ -96,24 +98,25 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-08 · 360 views · 3 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h2>Advanced GitHub Actions Workflows</h2>
-<h3>Introduction</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h3>Advanced GitHub Actions Workflows</h3>
+<h4>Introduction</h4>
 <p>GitHub Actions has evolved beyond simple CI/CD into a full-featured automation platform. Teams managing monorepos, multi-service architectures, or compliance-sensitive deployments need advanced workflows that are maintainable, fast, and secure. This article explores production-ready patterns for GitHub Actions at scale.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-advanced.png" alt="Advanced GitHub Actions Workflows" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Reusable Workflows</h3>
+<h4>Reusable Workflows</h4>
 <p>Reusable workflows eliminate duplication across repositories. Define a workflow in <code>.github/workflows/deploy-shared.yml</code> with <code>workflow_call</code>:</p>
-<h2>.github/workflows/deploy-shared.yml</h2>
+<h3>.github/workflows/deploy-shared.yml</h3>
 <p>name: Shared Deployment Workflow</p>
 <p>on:</p>
 <p>workflow_call:</p>
@@ -136,9 +139,9 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to ${{ inputs.environment }}</p>
 <p>run: |</p>
 <p>echo "Deploying ${{ inputs.image-tag }} to ${{ inputs.environment }}"</p>
-<h2>Actual deployment logic here</h2>
+<h3>Actual deployment logic here</h3>
 <p>Consume it from any repository:</p>
-<h2>.github/workflows/release.yml</h2>
+<h3>.github/workflows/release.yml</h3>
 <p>name: Release</p>
 <p>on:</p>
 <p>push:</p>
@@ -151,7 +154,7 @@
 <p>image-tag: ${{ github.sha }}</p>
 <p>secrets:</p>
 <p>CLOUD_PROVIDER_KEY: ${{ secrets.CLOUD_PROVIDER_KEY }}</p>
-<h3>Matrix Builds</h3>
+<h4>Matrix Builds</h4>
 <p>Matrix strategies test across multiple dimensions without duplicating workflow YAML:</p>
 <p>jobs:</p>
 <p>test:</p>
@@ -177,9 +180,9 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- if: matrix.coverage</p>
 <p>uses: codecov/codecov-action@v3</p>
 <p>The <code>include</code> key adds jobs to the matrix, while <code>exclude</code> removes specific combinations. For large matrices, use <code>max-parallel: 3</code> to avoid saturating runner capacity.</p>
-<h3>Composite Actions</h3>
+<h4>Composite Actions</h4>
 <p>Composite actions bundle multiple steps into a reusable unit, ideal for organization-wide standards:</p>
-<h2>.github/actions/setup-node-env/action.yml</h2>
+<h3>.github/actions/setup-node-env/action.yml</h3>
 <p>name: "Setup Node.js Environment"</p>
 <p>description: "Configures Node with pnpm, cache, and dependency audit"</p>
 <p>inputs:</p>
@@ -228,7 +231,7 @@
 <p>with:</p>
 <p>node-version: "22"</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: pnpm build</p>
-<h3>OIDC and Cloud Authentication</h3>
+<h4>OIDC and Cloud Authentication</h4>
 <p>OpenID Connect eliminates static credentials by exchanging GitHub's JWT tokens for cloud provider credentials:</p>
 <p>jobs:</p>
 <p>deploy:</p>
@@ -257,7 +260,7 @@
 <p>}</p>
 <p>}]</p>
 <p>}</p>
-<h3>Environment Protection Rules</h3>
+<h4>Environment Protection Rules</h4>
 <p>Protect production deployments with required reviewers, wait gates, and custom deployment branch policies:</p>
 <p>name: Deploy</p>
 <p>on:</p>
@@ -283,7 +286,7 @@
 <p>steps:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: echo "Deploying to ${{ github.event.inputs.environment }}"</p>
 <p>Configure required reviewers in the repository's environment settings to enforce manual approval gates.</p>
-<h3>Self-Hosted Runners</h3>
+<h4>Self-Hosted Runners</h4>
 <p>Self-hosted runners provide custom hardware, internal network access, and reduced costs:</p>
 <p>jobs:</p>
 <p>build:</p>
@@ -293,7 +296,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: docker build -t my-model:latest .</p>
 <p>Scale self-hosted runners with the <code>actions-runner-controller</code> on Kubernetes, which auto-provisions and auto-scales runner pods based on workflow demand.</p>
-<h3>Caching Strategies</h3>
+<h4>Caching Strategies</h4>
 <p>Effective caching reduces workflow runtime significantly:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/cache@v3</p>
 <p>with:</p>
@@ -310,6 +313,7 @@
 <p>key: ${{ runner.os }}-${{ github.workflow }}-${{ hashFiles('packages/*/package-lock.json') }}</p>
 <p>These patterns form the foundation of scalable, secure GitHub Actions usage in enterprise environments. Start with reusable workflows and matrix builds, then layer on OIDC and self-hosted runners as your infrastructure grows.</p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/terraform-infrastructure-code.html">Terraform Infrastructure as Code</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-workflows.html">GitHub Actions Workflows: Advanced Patterns</a>, <a href="/en/tech/serverless-framework.html">Serverless Framework: From Zero to Production</a>, <a href="/en/tech/nginx-configuration-guide.html">Nginx Configuration Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

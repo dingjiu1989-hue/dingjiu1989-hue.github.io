@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1530",
+      "wordCount": "1584",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/prompt-chaining.html"},
@@ -96,21 +98,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 120 views · 1 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png" alt="Prompt Chaining: Decomposition, Parallel Execution, State Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h2>Prompt Chaining: Decomposition, Parallel Execution, State Management</h2>
-<h3>Introduction</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h3>Prompt Chaining: Decomposition, Parallel Execution, State Management</h3>
+<h4>Introduction</h4>
 <p>Prompt chaining connects multiple LLM calls into pipelines where each step refines, validates, or transforms the output of the previous one. This pattern is essential for tasks too complex for a single prompt: multi-page document generation, multi-step analysis, and workflows requiring both creativity and precision. This article covers decomposition strategies, parallel execution, and state management across chain steps.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/prompt-chaining.png" alt="Prompt Chaining: Decomposition, Parallel Execution, State Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Task Decomposition</h3>
+<h4>Task Decomposition</h4>
 <p>The first step in prompt chaining is breaking a complex task into discrete, independently verifiable steps:</p>
 <p>def decompose_task(complex_request: str) -&gt; list[dict]:</p>
 <p>"""Use an LLM to plan the decomposition."""</p>
@@ -122,7 +125,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validation_criteria: how to verify correctness</p>
 <p>Request: """ + complex_request)</p>
 <p>return parse_steps(plan)</p>
-<h2>Example decomposition for "write a product page"</h2>
+<h3>Example decomposition for "write a product page"</h3>
 <p>steps = [</p>
 <p>{"name": "extract_keywords", "input": "product_brief", "output": "keyword_list"},</p>
 <p>{"name": "write_headline", "input": "keyword_list", "output": "headline"},</p>
@@ -131,7 +134,7 @@
 <p>{"name": "validate_tone", "input": "all_outputs", "output": "tone_feedback"},</p>
 <p>]</p>
 <p>Each step has a narrow focus. Narrow prompts produce more reliable outputs than monolithic ones because the model can concentrate its attention on one objective at a time.</p>
-<h3>Sequential Chain Execution</h3>
+<h4>Sequential Chain Execution</h4>
 <p>Once decomposed, execute steps in order, passing outputs as inputs:</p>
 <p>class ChainStep:</p>
 <p>def <strong>init</strong>(self, name: str, prompt_template: str, inputs: list[str]):</p>
@@ -154,7 +157,7 @@
 <p>validation = call_llm(f"Validate this {step.name} output: {output}")</p>
 <p>if "FAIL" in validation:</p>
 <p>raise ChainValidationError(f"Step {step.name} failed validation: {validation}")</p>
-<h3>Parallel Execution</h3>
+<h4>Parallel Execution</h4>
 <p>When steps are independent, execute them concurrently to reduce wall-clock time:</p>
 <p>import asyncio</p>
 <p>async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]):</p>
@@ -169,7 +172,7 @@
 <p>raise ChainError(f"Step {step.name} failed: {result}")</p>
 <p>state[step.name] = result</p>
 <p>return state</p>
-<h2>Example: generate three sections of a report simultaneously</h2>
+<h3>Example: generate three sections of a report simultaneously</h3>
 <p>parallel_groups = [</p>
 <p>[</p>
 <p>ChainStep("market_analysis", market_template, ["industry"]),</p>
@@ -180,7 +183,7 @@
 <p>ChainStep("executive_summary", summary_template, ["market_analysis", "financial_analysis", "competitive_analysis"]),</p>
 <p>],</p>
 <p>]</p>
-<h3>State Management</h3>
+<h4>State Management</h4>
 <p>Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery:</p>
 <p>from dataclasses import dataclass, field</p>
 <p>from typing import Any, Optional</p>
@@ -200,7 +203,7 @@
 <p>def restore(self, snapshot: dict):</p>
 <p>self.outputs.update(snapshot.get("outputs", {}))</p>
 <p>self.errors.update(snapshot.get("errors", {}))</p>
-<h3>Error Recovery Chains</h3>
+<h4>Error Recovery Chains</h4>
 <p>When a step fails, the chain should attempt recovery rather than aborting entirely:</p>
 <p>async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=2):</p>
 <p>for attempt in range(max_retries + 1):</p>
@@ -210,15 +213,16 @@
 <p>return result</p>
 <p>except ValidationError as e:</p>
 <p>if attempt == max_retries:</p>
-<h2>Fallback: try a simpler version</h2>
+<h3>Fallback: try a simpler version</h3>
 <p>fallback = await execute_fallback(step, state)</p>
 <p>state.set_output(step.name, fallback)</p>
 <p>state.errors[step.name] = f"Used fallback after {attempt} retries"</p>
 <p>return fallback</p>
 <p>state.metadata[f"{step.name}<em>retry</em>{attempt}"] = str(e)</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Prompt chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Decompose complex tasks into narrow steps, execute independent steps in parallel, maintain state explicitly, and implement recovery logic for each failure mode. The result is LLM-powered workflows that match the reliability of traditional software pipelines.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>, <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/prompt-management.html">Prompt Management: Versioning, Testing, Collaboration, Deployment</a>, <a href="/en/ai/agent-planning.html">Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

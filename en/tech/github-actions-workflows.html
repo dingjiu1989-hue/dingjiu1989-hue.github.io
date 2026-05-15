@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-workflows.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-07",
-      "wordCount": "620",
+      "wordCount": "659",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/github-actions-workflows.html"},
@@ -96,35 +98,37 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-workflows.png" alt="GitHub Actions Workflows: Advanced Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
-<h2>GitHub Actions Workflows: Advanced Patterns</h2>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
+<h3>GitHub Actions Workflows: Advanced Patterns</h3>
 <p>GitHub Actions powers CI/CD for millions of repositories. Beyond basic workflows, advanced patterns improve reliability, speed, and maintainability.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/github-actions-workflows.png" alt="GitHub Actions Workflows: Advanced Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Matrix Builds</h3>
+<h4>Matrix Builds</h4>
 <p>Matrix builds run the same workflow across multiple configurations. Define a matrix strategy with OS versions, language versions, or dependency configurations. GitHub Actions runs each combination as a separate job in parallel.</p>
 <p>Use include and exclude to fine-tune the matrix. Add specific combinations while excluding incompatible ones. Dynamic matrices use JSON output from a previous job to determine the matrix at runtime.</p>
-<h3>Reusable Workflows</h3>
+<h4>Reusable Workflows</h4>
 <p>Reusable workflows (.github/workflows/ with workflow_call trigger) encapsulate common CI patterns. Call them with uses: owner/repo/.github/workflows/ci.yml@v1. Pass inputs and secrets. Reusable workflows standardize CI across an organization.</p>
 <p>Composite actions combine multiple steps into a single action. Unlike reusable workflows, composite actions run in the calling workflow's context. Use composites for step-level reuse within a single workflow.</p>
-<h3>Caching Dependencies</h3>
+<h4>Caching Dependencies</h4>
 <p>Cache dependencies with actions/cache. Hash lockfiles (package-lock.json, requirements.txt) to create unique cache keys. Use restore-keys for partial cache matches. Cache npm, pip, Maven, Gradle, and Go module caches for faster builds.</p>
 <p>For large monorepos, cache individual package manager caches separately. Monitor cache hit rates—low hit rates indicate ineffective caching strategies.</p>
-<h3>Environment Protection</h3>
+<h4>Environment Protection</h4>
 <p>Environments add protection gates. Require reviewers for production deployments. Use environment secrets that are only available to approved deployments. Wait timer delays deployments for a configurable period.</p>
 <p>Deployment branches restrict which branches can deploy to an environment. Combined with branch protection rules, this creates a secure deployment pipeline. Audit logs track every deployment.</p>
-<h3>Custom Actions</h3>
+<h4>Custom Actions</h4>
 <p>Write custom actions in JavaScript, Docker, or composite. JavaScript actions run directly (fastest). Docker actions support any language. Composite actions compose multiple steps. Publish actions to the Marketplace for organization-wide use.</p>
 <p>Inputs, outputs, and pre/post cleanup hooks make actions professional-grade. Test actions with act (local runner) before committing.</p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/build-optimization.html">Build Optimization</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/github-actions-advanced.html">Advanced GitHub Actions Workflows</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

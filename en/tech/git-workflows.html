@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/git-workflows.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-07",
-      "wordCount": "1056",
+      "wordCount": "1089",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/git-workflows.html"},
@@ -96,44 +98,46 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/git-workflows.png" alt="Git Workflows" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
-<h2>Git Workflows</h2>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
+<h3>Git Workflows</h3>
 <p>Git workflows define how teams collaborate using version control. The right workflow depends on team size, release cadence, and deployment requirements. This article compares the major workflows—trunk-based development, GitHub Flow, GitFlow, and monorepo strategies—with guidance for choosing the right approach.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/git-workflows.png" alt="Git Workflows" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Trunk-Based Development</h3>
+<h4>Trunk-Based Development</h4>
 <p>Trunk-based development is the simplest workflow. Developers commit directly to the main branch (trunk) or create short-lived feature branches that merge within hours, not days. The main branch is always in a deployable state.</p>
 <p>Trunk-based development works well with CI/CD and feature flags. Incomplete features are hidden behind feature flags, allowing frequent merges without affecting users. The workflow minimizes merge conflicts, simplifies history, and enables continuous deployment.</p>
 <p>Trunk-based development is best suited for teams practicing continuous delivery. It requires discipline: commits must be small, tests must pass before merge, and feature flags must be managed carefully. For teams deploying multiple times per day, trunk-based development is the natural choice.</p>
-<h3>GitHub Flow</h3>
+<h4>GitHub Flow</h4>
 <p>GitHub Flow is a branch-based workflow centered on pull requests. Developers create feature branches from main, make changes, open a pull request, and merge after review. The main branch is always deployable.</p>
 <p>GitHub Flow adds code review to trunk-based development's simplicity. Every change is reviewed before merge. CI runs on the branch before merge. After review and passing CI, the branch merges to main and deploys.</p>
 <p>GitHub Flow is appropriate for most teams. It adds necessary review overhead without the complexity of long-lived branches. The workflow is well-supported by GitHub's tools and integrates naturally with CI/CD pipelines. Most open-source projects and many companies use GitHub Flow.</p>
-<h3>GitFlow</h3>
+<h4>GitFlow</h4>
 <p>GitFlow uses multiple long-lived branches: <code>develop</code> for integration, <code>main</code> for production releases, <code>feature/*</code> for features, <code>release/*</code> for release preparation, and <code>hotfix/*</code> for urgent fixes. This structure supports scheduled releases and parallel development of multiple features.</p>
 <p>GitFlow is appropriate for projects with scheduled releases, where the main branch represents the current production release, and development continues on the develop branch between releases. Release branches allow last-minute bug fixes without blocking features intended for the next release.</p>
 <p>GitFlow's complexity is its main downside. The multiple branch types and merge patterns create a complex graph. The workflow assumes release-based development, which conflicts with continuous deployment. For teams deploying continuously, GitFlow adds unnecessary overhead.</p>
-<h3>Monorepo Strategies</h3>
+<h4>Monorepo Strategies</h4>
 <p>A monorepo stores multiple projects in a single repository. Monorepo strategies use specialized tools and conventions to manage the complexity of shared code, independent versioning, and targeted builds.</p>
 <p>Monorepos require build tools that understand project dependencies. Nx, Turborepo, Bazel, and Pants analyze the dependency graph to build and test only affected projects. A change to a shared library triggers tests for all dependent projects, but a change to one application does not touch others.</p>
 <p>Monorepo workflows typically use trunk-based development within each project area. Teams may use CODEOWNERS files to define review requirements for different parts of the repository. Monorepos work best with strong tooling investment—without it, the repository becomes unwieldy.</p>
-<h3>Choosing a Workflow</h3>
+<h4>Choosing a Workflow</h4>
 <p>Team size is the primary factor in workflow selection. Small teams (1-5 people) can use trunk-based development with minimal ceremony. Medium teams (5-20) benefit from GitHub Flow's review process. Large teams (20+) may need GitFlow's release management or a monorepo's project isolation.</p>
 <p>Release frequency is another factor. Daily or continuous deployments favor trunk-based development or GitHub Flow. Scheduled releases favor GitFlow. Monorepo workflows work with any cadence but require tooling investment.</p>
 <p>The best workflow is the one your team follows consistently. A simple workflow that everyone follows is better than a sophisticated workflow that creates confusion. Start with GitHub Flow and adjust as the team grows and requirements evolve.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Regardless of workflow, certain practices apply. Write meaningful commit messages. Keep commits focused on single changes. Rebase feature branches on main before merging. Keep the main branch green (always passing tests). Delete branches after merging. Use signed commits for security.</p>
 <p>Git workflows are tools, not rules. Adjust the workflow to fit your team's needs. The goal is efficient collaboration, not workflow purity. The right workflow is the one that enables your team to deliver software reliably and efficiently.</p>
 <p><strong>See also:</strong> <a href="/en/tech/monorepo-vs-multirepo.html">Monorepo vs Multirepo: Repository Strategy Comparison</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a>, <a href="/en/tech/api-versioning-rest-graphql.html">API Versioning Strategies: REST vs GraphQL Approaches</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/git-workflows-team-guide.html">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a>, <a href="/en/tech/monorepo-vs-multirepo.html">Monorepo vs Multirepo: Repository Strategy Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/git-workflows-team-guide.html">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a>, <a href="/en/tech/monorepo-vs-multirepo.html">Monorepo vs Multirepo: Repository Strategy Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/git-workflows-team-guide.html">Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development</a>, <a href="/en/tech/webpack-vs-vite.html">Webpack vs Vite</a>, <a href="/en/tech/monorepo-vs-multirepo.html">Monorepo vs Multirepo: Repository Strategy Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/contract-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-13",
-      "wordCount": "1141",
+      "wordCount": "1158",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/contract-testing.html"},
@@ -96,45 +98,47 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-13 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/contract-testing.png" alt="Contract Testing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
-<h2>Contract Testing</h2>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
+<h3>Contract Testing</h3>
 <p>Contract testing is a testing methodology that validates the interactions between services against a shared agreement. Unlike integration tests that run both services together, contract tests verify each service independently against a contract that defines their interaction. This approach catches integration issues early and enables independent deployment of services.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/contract-testing.png" alt="Contract Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Consumer-Driven Contracts</h3>
+<h4>Consumer-Driven Contracts</h4>
 <p>Consumer-driven contracts (CDC) follow the principle that consumers define their expectations from a provider. The consumer writes a contract specifying how it intends to use the provider's API—which endpoints it calls, what data it sends, and what responses it expects. The provider verifies that it meets all consumer contracts.</p>
 <p>This approach ensures that providers do not break existing consumers when they change their API. Before deploying a change, the provider runs all consumer contracts and confirms compatibility. If a change would break a consumer, the provider knows before deployment.</p>
-<h3>How Pact Works</h3>
+<h4>How Pact Works</h4>
 <p>Pact is the leading contract testing framework. The consumer writes a Pact test that describes its expectations. The test defines the request it will make and the response it expects. Pact records these interactions in a contract file (a pact file).</p>
 <p>The consumer runs its Pact test against a mock provider. This verifies that the consumer code correctly handles the expected responses. The pact file is then shared with the provider team, typically as an artifact in a CI/CD pipeline.</p>
 <p>The provider runs the pact file against its actual implementation. Pact replays each consumer request, verifies that the provider returns the expected response, and reports any mismatches. This "provider verification" step catches breaking changes before they reach production.</p>
-<h3>Pact Flow</h3>
+<h4>Pact Flow</h4>
 <p>The typical Pact workflow follows these steps. The consumer writes a Pact test defining its expectations. The consumer test runs against a mock provider and generates a pact file. The pact file is published to a Pact Broker (a shared repository for contracts).</p>
 <p>The provider retrieves consumer contracts from the Pact Broker. The provider verification tests run each consumer interaction against the actual provider. Results are published back to the Pact Broker. The broker shows which provider versions are compatible with which consumer versions, enabling safe deployment decisions.</p>
-<h3>Provider Verification</h3>
+<h4>Provider Verification</h4>
 <p>Provider verification is the core of Pact's value. The provider test suite loads each pact file and replays each consumer request against the running provider. If the response matches, the contract is verified. If not, the test reports which consumer would be broken.</p>
 <p>Provider verification can be integrated into CI/CD pipelines. Before deploying a provider change, the CI pipeline runs verification against all consumer pacts. If any verification fails, deployment is blocked. This prevents breaking changes from reaching production.</p>
-<h3>Contract Testing vs Integration Testing</h3>
+<h4>Contract Testing vs Integration Testing</h4>
 <p>Contract testing differs from integration testing in important ways. Integration tests run both services together, which requires both to be available and configured correctly. This makes integration tests slow, fragile, and expensive to maintain.</p>
 <p>Contract tests run each service independently. The consumer test uses a mock provider. The provider test uses the real provider but the consumer's requests are replayed from the pact file. Neither test requires both services to be running. Contract tests are faster, more reliable, and more focused than integration tests.</p>
 <p>Contract testing is not a replacement for all integration testing. It validates API contracts but does not verify end-to-end behavior. A complete testing strategy uses both: contract tests for service interactions and a smaller number of end-to-end tests for critical workflows.</p>
-<h3>When to Use Contract Testing</h3>
+<h4>When to Use Contract Testing</h4>
 <p>Contract testing is most valuable in microservice architectures where services are owned by different teams. It provides a formal mechanism for managing API dependencies without requiring constant coordination. Each team can evolve their service independently as long as contracts remain compatible.</p>
 <p>For monoliths or services owned by the same team, contract testing may add unnecessary overhead. The same team can manage API changes through refactoring and shared test suites. However, even within a team, contract testing can provide clear API documentation and prevent accidental breakage.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Contracts should focus on the interactions that consumers actually use, not all possible interactions of the provider API. This keeps contracts small and relevant. Contracts should use realistic data that reflects production usage patterns. Matchers (like Pact's <code>like()</code>) make contracts flexible enough to handle variations in non-essential fields.</p>
 <p>Publish contract verification results to a Pact Broker to enable safe deployment decisions. The broker's "can-i-deploy" tool checks whether a given service version is compatible with its consumers before allowing deployment. This automated safety check is central to the Pact workflow.</p>
 <p>Contract testing provides a practical mechanism for managing service dependencies in distributed systems. By validating API interactions independently, it enables faster, safer deployments in microservice architectures with multiple teams.</p>
 <p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

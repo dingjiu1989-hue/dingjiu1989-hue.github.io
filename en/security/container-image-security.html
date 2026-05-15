@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/container-image-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-06",
-      "wordCount": "2113",
+      "wordCount": "2141",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/container-image-security.html"},
@@ -96,64 +98,65 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-image-security.png" alt="Container Image Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
-<h2>Container Image Security</h2>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
+<h3>Container Image Security</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/container-image-security.png" alt="Container Image Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Container images are the building blocks of modern application deployment. An insecure base image or dependency can compromise every environment where the container runs. Securing the container supply chain requires attention to every layer — from the base image choice to runtime enforcement. </p>
 <p>Minimal Base Images </p>
 <p>Smaller base images reduce attack surface and vulnerability count. </p>
-<h2>BAD: Large base image with unnecessary tools</h2>
+<h3>BAD: Large base image with unnecessary tools</h3>
 <p>FROM ubuntu:22.04</p>
 <p>RUN apt-get update &amp;&amp; apt-get install -y python3 curl wget git build-essential</p>
-<h2>GOOD: Minimal Python image</h2>
+<h3>GOOD: Minimal Python image</h3>
 <p>FROM python:3.12-slim</p>
-<h2>BETTER: Distroless — no package manager, no shell</h2>
+<h3>BETTER: Distroless — no package manager, no shell</h3>
 <p>FROM gcr.io/distroless/python3-debian12</p>
-<h2>BEST: Scratch — completely empty, only your binary</h2>
+<h3>BEST: Scratch — completely empty, only your binary</h3>
 <p>FROM scratch</p>
 <p>COPY my-compiled-binary /app/</p>
-<h2>Compare image sizes</h2>
+<h3>Compare image sizes</h3>
 <p>docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"</p>
-<h2>ubuntu:22.04 → 77MB</h2>
-<h2>python:3.12 → 1.0GB</h2>
-<h2>python:3.12-slim → 130MB</h2>
-<h2>gcr.io/distroless/python3 → 90MB</h2>
+<h3>ubuntu:22.04 → 77MB</h3>
+<h3>python:3.12 → 1.0GB</h3>
+<h3>python:3.12-slim → 130MB</h3>
+<h3>gcr.io/distroless/python3 → 90MB</h3>
 <p>Alpine Considerations </p>
 <p>FROM alpine:3.19</p>
-<h2>Install only what's needed</h2>
+<h3>Install only what's needed</h3>
 <p>RUN apk add --no-cache \</p>
 <p>python3=~3.12 \</p>
 <p>ca-certificates</p>
-<h2>Remove apk cache</h2>
+<h3>Remove apk cache</h3>
 <p>RUN rm -rf /var/cache/apk/*</p>
 <p>Note: Alpine uses musl libc instead of glibc, which can cause compatibility issues with Python wheels and compiled binaries. </p>
 <p>Multi-Stage Builds </p>
 <p>Multi-stage builds separate the build environment from the runtime environment, ensuring build tools and source code are not included in the final image. </p>
-<h2>Build stage</h2>
+<h3>Build stage</h3>
 <p>FROM golang:1.22 AS builder</p>
 <p>WORKDIR /app</p>
 <p>COPY go.mod go.sum ./</p>
 <p>RUN go mod download</p>
 <p>COPY . .</p>
 <p>RUN CGO_ENABLED=0 go build -o /app/server -ldflags="-s -w"</p>
-<h2>Runtime stage</h2>
+<h3>Runtime stage</h3>
 <p>FROM gcr.io/distroless/static-debian12:nonroot</p>
 <p>COPY --from=builder /app/server /server</p>
 <p>EXPOSE 8080</p>
 <p>USER nonroot:nonroot</p>
 <p>ENTRYPOINT ["/server"]</p>
-<h2>Python multi-stage build</h2>
+<h3>Python multi-stage build</h3>
 <p>FROM python:3.12-slim AS builder</p>
 <p>WORKDIR /app</p>
 <p>COPY requirements.txt .</p>
@@ -166,21 +169,21 @@
 <p>CMD ["python", "-m", "app"]</p>
 <p>Image Scanning </p>
 <p>Scan images for known vulnerabilities before deployment. </p>
-<h2>Trivy scan</h2>
+<h3>Trivy scan</h3>
 <p>trivy image myapp:latest --severity CRITICAL,HIGH</p>
-<h2>Trivy with output formats</h2>
+<h3>Trivy with output formats</h3>
 <p>trivy image --format sarif --output trivy-report.sarif myapp:latest</p>
 <p>trivy image --format cyclonedx --output sbom.json myapp:latest</p>
-<h2>Grype scan</h2>
+<h3>Grype scan</h3>
 <p>grype myapp:latest --only-fixed --fail-on high</p>
-<h2>Scan within CI/CD</h2>
+<h3>Scan within CI/CD</h3>
 <p>grype myapp:latest --fail-on high --add-cpes-if-none</p>
-<h2>.trivyignore — exclude accepted risks</h2>
-<h2>CVE-2023-1234 — accepted, no exploit available, will fix in next sprint</h2>
+<h3>.trivyignore — exclude accepted risks</h3>
+<h3>CVE-2023-1234 — accepted, no exploit available, will fix in next sprint</h3>
 <p>CVE-2023-1234</p>
-<h2>CVE-2023-5678 — false positive in this context</h2>
+<h3>CVE-2023-5678 — false positive in this context</h3>
 <p>CVE-2023-5678</p>
-<h2>CI/CD gate: block deployment if critical vulnerabilities found</h2>
+<h3>CI/CD gate: block deployment if critical vulnerabilities found</h3>
 <p>import subprocess</p>
 <p>import json</p>
 <p>def scan_and_validate(image_tag):</p>
@@ -201,17 +204,17 @@
 <p>print(f"PASSED: No critical vulnerabilities")</p>
 <p>Image Signing with Cosign </p>
 <p>Signing container images ensures integrity and provenance. </p>
-<h2>Generate a key pair</h2>
+<h3>Generate a key pair</h3>
 <p>cosign generate-key-pair</p>
-<h2>Sign an image</h2>
+<h3>Sign an image</h3>
 <p>cosign sign --key cosign.key registry.example.com/myapp:latest</p>
-<h2>Verify a signed image</h2>
+<h3>Verify a signed image</h3>
 <p>cosign verify --key cosign.pub registry.example.com/myapp:latest</p>
-<h2>Keyless signing with OIDC</h2>
+<h3>Keyless signing with OIDC</h3>
 <p>cosign sign registry.example.com/myapp:latest</p>
-<h2>Verify keyless signature</h2>
+<h3>Verify keyless signature</h3>
 <p>cosign verify registry.example.com/myapp:latest</p>
-<h2>Kubernetes admission controller to verify signatures</h2>
+<h3>Kubernetes admission controller to verify signatures</h3>
 <p>apiVersion: cosign.sigstore.dev/v1alpha1</p>
 <p>kind: ClusterImagePolicy</p>
 <p>metadata:</p>
@@ -229,31 +232,32 @@
 <p>identities:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- issuer: https://accounts.google.com</p>
 <p>subject: "builder@example.com"</p>
-<h2>Enforce in CI/CD pipeline</h2>
+<h3>Enforce in CI/CD pipeline</h3>
 <p>cosign verify \</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--key k8s://my-namespace/cosign-public-key \</p>
 <p>$IMAGE_TAG || exit 1</p>
 <p>Dockerfile Best Practices </p>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use specific tags, never :latest</h2>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use specific tags, never :latest</h3>
 <p>FROM python:3.12-slim@sha256:abc123...</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Run as non-root</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Run as non-root</h3>
 <p>RUN addgroup -S appgroup &amp;&amp; adduser -S appuser -G appgroup</p>
 <p>USER appuser</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set filesystem read-only</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set filesystem read-only</h3>
 <p>COPY --chown=appuser:appgroup --chmod=0444 app/ ./app/</p>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Drop capabilities in compose/kubernetes</h2>
-<h2>In Kubernetes:</h2>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Drop capabilities in compose/kubernetes</h3>
+<h3>In Kubernetes:</h3>
 <p>securityContext:</p>
 <p>runAsNonRoot: true</p>
 <p>readOnlyRootFilesystem: true</p>
 <p>capabilities:</p>
 <p>drop: ["ALL"]</p>
 <p>allowPrivilegeEscalation: false</p>
-<h2>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. HEALTHCHECK instruction</h2>
+<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. HEALTHCHECK instruction</h3>
 <p>HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8080/health || exit 1</p>
 <p>Conclusion </p>
 <p>Container image security requires a layered approach: use minimal base images and distroless for production, implement multi-stage builds to exclude build tools, scan images for vulnerabilities before every deployment, and sign images with cosign to ensure integrity. Enforce these practices in CI/CD pipelines and at admission control time in Kubernetes.</p>
 <p><strong>See also:</strong> <a href="/en/security/container-scanning-tools.html">Container Scanning Tools: Securing Images in CI/CD</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/software-signing.html">Software Signing</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/container-scanning-tools.html">Container Scanning Tools: Securing Images in CI/CD</a></p>
 <p><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/container-scanning-tools.html">Container Scanning Tools: Securing Images in CI/CD</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>, <a href="/en/security/software-signing.html">Software Signing</a>, <a href="/en/security/container-scanning-tools.html">Container Scanning Tools: Securing Images in CI/CD</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

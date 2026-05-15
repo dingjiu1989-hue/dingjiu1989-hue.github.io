@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-09",
-      "wordCount": "1395",
+      "wordCount": "1415",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-code-review.html"},
@@ -67,6 +69,17 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "Secure Code Review"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Secure Code Review",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "A systematic approach to secure code review with checklists, automation, SAST integration, and common findings.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -96,22 +109,23 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
-<h2>Secure Code Review</h2>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
+<h3>Secure Code Review</h3>
 <p>Why Secure Code Review? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/secure-code-review.png" alt="Secure Code Review" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Secure code review catches vulnerabilities before they reach production. It complements automated scanning by finding logic flaws and business logic vulnerabilities that tools miss. </p>
 <p>The Security Review Checklist </p>
 <p>Every code review should check these categories: </p>
-<h2>secure-code-review-checklist.yaml</h2>
+<h3>secure-code-review-checklist.yaml</h3>
 <p>authentication:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are passwords hashed with bcrypt/argon2?</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is session management secure?</p>
@@ -134,7 +148,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are exceptions handled gracefully?</p>
 <p>SAST Integration </p>
 <p>Static Application Security Testing (SAST) automates vulnerability detection: </p>
-<h2>SAST results triage</h2>
+<h3>SAST results triage</h3>
 <p>import json</p>
 <p>class SASTTriage:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -150,7 +164,7 @@
 <p>if any(re.match(p, finding["file"]) for p in self.false_positive_patterns):</p>
 <p>false_positives.append(finding)</p>
 <p>continue</p>
-<h2>Critical findings in production code</h2>
+<h3>Critical findings in production code</h3>
 <p>if finding["severity"] == "critical" and finding["branch"] == "main":</p>
 <p>actionable.insert(0, finding) # Priority</p>
 <p>else:</p>
@@ -158,11 +172,11 @@
 <p>return actionable, false_positives</p>
 <p>Common Findings </p>
 <p>SQL Injection </p>
-<h2>VULNERABLE</h2>
+<h3>VULNERABLE</h3>
 <p>def get_user(username):</p>
 <p>query = f"SELECT * FROM users WHERE username = '{username}'"</p>
 <p>return db.execute(query)</p>
-<h2>SECURE</h2>
+<h3>SECURE</h3>
 <p>def get_user(username):</p>
 <p>query = "SELECT * FROM users WHERE username = ?"</p>
 <p>return db.execute(query, (username,))</p>
@@ -181,7 +195,7 @@
 <p>res.json(order);</p>
 <p>});</p>
 <p>Automated Enforcement in CI </p>
-<h2>.github/workflows/security-review.yml</h2>
+<h3>.github/workflows/security-review.yml</h3>
 <p>name: Security Review</p>
 <p>on: [pull_request]</p>
 <p>jobs:</p>
@@ -202,6 +216,7 @@
 <p>Conclusion </p>
 <p>Effective secure code review combines automated SAST scanning with manual review of critical code paths. Build a review checklist, integrate security into your CI pipeline, and train developers on common vulnerability patterns. The best vulnerability is the one caught before it reaches production.</p>
 <p><strong>See also:</strong> <a href="/en/security/security-testing-tools.html">Security Testing Tools: SAST, DAST, IAST, and RASP Compared</a>, <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p>
 <p><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/secure-configuration.html">Secure Configuration Management</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>, <a href="/en/security/sso-architecture.html">SSO Architecture</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

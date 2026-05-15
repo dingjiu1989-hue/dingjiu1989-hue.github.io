@@ -37,7 +37,7 @@
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
     <link rel="prev" href="https://dingjiu1989-hue.github.io/en/security/zero-trust-networking.html">
     <link rel="next" href="https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-02",
-      "wordCount": "389",
+      "wordCount": "409",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/input-validation.html"},
@@ -96,26 +98,27 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png" alt="Input Validation Deep Dive" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
-<h2>Input Validation Deep Dive</h2>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
+<h3>Input Validation Deep Dive</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png" alt="Input Validation Deep Dive" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Input validation is the first line of defense against injection attacks. Every piece of data entering an application — form fields, HTTP headers, URL parameters, file uploads, API payloads — must be validated before processing. The principle is simple: never trust user input. </p>
 <p>Whitelist vs Blacklist </p>
 <p>Whitelist (Allowlist) Validation </p>
 <p>Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. </p>
 <p>import re</p>
-<h2>Whitelist: only allow specific characters</h2>
+<h3>Whitelist: only allow specific characters</h3>
 <p>def validate_username_whitelist(username):</p>
 <p>"""Allow only alphanumeric, underscore, and hyphen."""</p>
 <p>pattern = r'^[a-zA-Z0-9_-]{3,32}$'</p>
@@ -125,7 +128,7 @@
 <p>"Only letters, numbers, underscores, and hyphens are allowed."</p>
 <p>)</p>
 <p>return username</p>
-<h2>Whitelist for country codes</h2>
+<h3>Whitelist for country codes</h3>
 <p>ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'}</p>
 <p>def validate_country_code(code):</p>
 <p>if code.upper() not in ALLOWED_COUNTRIES:</p>
@@ -133,11 +136,12 @@
 <p>return code.upper()</p>
 <p>Blacklist (Blocklist) Validation </p>
 <p>Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. </p>
-<h2>WEAK: Blacklist approach (easily bypassed)</h2>
+<h3>WEAK: Blacklist approach (easily bypassed)</h3>
 <p>def validate_input_blacklist(input_string):</p>
-<h2>Easily bypassed — attacker uses alternative syntax</h2>
+<h3>Easily bypassed — attacker uses alternative syntax</h3>
 <p>blocklist = ['</p>
 <p><strong>See also:</strong> <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/cors-security.html">CORS Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a>, <a href="/en/security/secure-api-design.html">Secure API Design Principles</a>, <a href="/en/security/cors-security.html">CORS Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

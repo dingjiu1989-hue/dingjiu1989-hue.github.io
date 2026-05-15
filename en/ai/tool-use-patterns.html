@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-14",
-      "wordCount": "1212",
+      "wordCount": "1269",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html"},
@@ -96,21 +98,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h2>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h2>
-<h3>Introduction</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h3>Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning</h3>
+<h4>Introduction</h4>
 <p>Tool use, or function calling, enables LLMs to interact with external systems: query databases, call APIs, execute code, and retrieve information. This capability transforms LLMs from text generators into autonomous agents. This article covers the essential patterns for defining, invoking, and chaining tool calls in production systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/tool-use-patterns.png" alt="Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Defining Tools</h3>
+<h4>Defining Tools</h4>
 <p>Every tool needs a clear schema that the LLM can understand and the application can execute:</p>
 <p>from openai import OpenAI</p>
 <p>from pydantic import BaseModel</p>
@@ -148,7 +151,7 @@
 <p>}</p>
 <p>]</p>
 <p>Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments.</p>
-<h3>Function Calling Loop</h3>
+<h4>Function Calling Loop</h4>
 <p>The standard pattern is a loop: generate, check for tool calls, execute, and feed results back:</p>
 <p>def tool_use_loop(messages: list, tools: list, max_turns=10):</p>
 <p>for turn in range(max_turns):</p>
@@ -178,20 +181,20 @@
 <p>return calculate(**args)</p>
 <p>raise ValueError(f"Unknown tool: {name}")</p>
 <p>The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer.</p>
-<h3>Multi-Step Reasoning with Tools</h3>
+<h4>Multi-Step Reasoning with Tools</h4>
 <p>Complex tasks require multiple tool calls where later calls depend on earlier results:</p>
 <p>def research_workflow(topic: str):</p>
 <p>messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]</p>
-<h2>Step 1: Search for information</h2>
+<h3>Step 1: Search for information</h3>
 <p>response = client.chat.completions.create(</p>
 <p>model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"</p>
 <p>)</p>
-<h2>Execute search, get results</h2>
-<h2>Step 2: Verify facts using a different source</h2>
-<h2>Step 3: Structure the findings</h2>
-<h2>Step 4: Generate the summary</h2>
+<h3>Execute search, get results</h3>
+<h3>Step 2: Verify facts using a different source</h3>
+<h3>Step 3: Structure the findings</h3>
+<h3>Step 4: Generate the summary</h3>
 <p>return final_summary</p>
-<h3>Structured Tools with Validation</h3>
+<h4>Structured Tools with Validation</h4>
 <p>Anthropic's tool use API supports structured tool definitions with JSON Schema and strict mode:</p>
 <p>import anthropic</p>
 <p>client = anthropic.Anthropic()</p>
@@ -217,7 +220,7 @@
 <p>for block in response.content:</p>
 <p>if block.type == "tool_use":</p>
 <p>print(f"Calling {block.name} with {block.input}")</p>
-<h3>Error Handling in Tool Calls</h3>
+<h4>Error Handling in Tool Calls</h4>
 <p>Tools fail. Plan for timeouts, invalid arguments, and unexpected responses:</p>
 <p>def safe_tool_execution(tool_call, timeout=10):</p>
 <p>try:</p>
@@ -231,9 +234,10 @@
 <p>except Exception as e:</p>
 <p>return {"success": False, "error": f"Unexpected error: {e}"}</p>
 <p>When a tool fails, pass the error message back to the LLM so it can retry with corrected arguments or choose a different approach.</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Tool use transforms LLMs from passive text generators into active problem-solvers. Define tools with clear schemas, implement a robust function-calling loop, chain tool calls for multi-step tasks, and always handle errors gracefully by feeding failures back into the conversation context.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-prompt-chaining.html">Prompt Chaining: Building Multi-Step LLM Workflows</a>, <a href="/en/ai/ai-agents-overview.html">AI Agents: Architecture and Implementation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/multi-agent-systems.html">Multi-Agent Systems: Coordination, Communication, Consensus</a>, <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

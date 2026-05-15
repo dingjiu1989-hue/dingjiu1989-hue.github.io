@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-prompt-engineering.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-14",
-      "wordCount": "2185",
+      "wordCount": "2222",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-prompt-engineering.html"},
@@ -95,26 +97,27 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-prompt-engineering.png" alt="Advanced Prompt Engineering Techniques" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h2>Advanced Prompt Engineering Techniques</h2>
-<h3>Introduction</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h3>Advanced Prompt Engineering Techniques</h3>
+<h4>Introduction</h4>
 <p>Prompt engineering has evolved from simple instruction writing into a sophisticated discipline. As large language models (LLMs) grow more capable, the techniques we use to communicate with them determine the difference between mediocre and exceptional results. This guide covers advanced prompt engineering techniques that production systems rely on.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-prompt-engineering.png" alt="Advanced Prompt Engineering Techniques" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Chain-of-Thought Prompting</h3>
+<h4>Chain-of-Thought Prompting</h4>
 <p>Chain-of-thought (CoT) prompting instructs the model to reason step-by-step before arriving at an answer. This technique dramatically improves performance on arithmetic, logical reasoning, and multi-step problems.</p>
 <p><strong>Zero-shot CoT</strong> simply appends "Let's think step by step" to a query:</p>
 <p>A store has 15 apples. It sells 7, then receives a shipment of 20, then sells 9 more. How many apples remain? Let's think step by step.</p>
 <p><strong>Few-shot CoT</strong> provides worked examples before the actual query. For complex domains like legal reasoning or medical diagnosis, providing 3-5 examples with explicit reasoning chains yields the best results.</p>
-<h3>Few-Shot Prompting</h3>
+<h4>Few-Shot Prompting</h4>
 <p>Few-shot prompting provides the model with input-output examples before the target query. The key is selecting representative examples that cover the distribution of expected inputs.</p>
 <p><strong>Best practices for few-shot selection:</strong></p>
 <ul>
@@ -132,7 +135,7 @@
 </li>
 </ul>
 <p>Dynamic few-shot selection, where examples are retrieved from a vector database based on similarity to the input query, outperforms static example sets in production systems.</p>
-<h3>Structured Output Prompting</h3>
+<h4>Structured Output Prompting</h4>
 <p>When you need predictable outputs, structure your prompts to constrain the response format.</p>
 <p><strong>XML-tag prompting</strong> works reliably across models:</p>
 <p>Extract the following fields from the text below:</p>
@@ -148,9 +151,9 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. If a field is missing, use null rather than guessing.</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output valid JSON only, no additional commentary.</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain the exact schema provided by the user.</p>
-<h3>Persona Prompting</h3>
+<h4>Persona Prompting</h4>
 <p>Assigning a persona to the model changes its output style and accuracy. Research shows that domain-specific personas improve performance on specialized tasks. For code generation, "You are a senior software engineer with 15 years of experience" produces more robust code than a generic prompt.</p>
-<h3>Prompt Chaining</h3>
+<h4>Prompt Chaining</h4>
 <p>Complex tasks should be broken into multiple prompts, each building on the previous output. This pattern is superior to putting everything in a single prompt because:</p>
 <ul>
 <li>Each step has a narrower focus, reducing confusion</li>
@@ -159,7 +162,7 @@
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Token limits are less likely to be hit</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Debugging is easier when each step is isolated</p>
 <p>A typical chain for content generation might be: outline generation → section drafting → fact-checking → formatting.</p>
-<h3>Temperature and Sampling Parameters</h3>
+<h4>Temperature and Sampling Parameters</h4>
 <p>Parameter tuning is an essential part of prompt engineering:</p>
 <ul>
 <li>
@@ -176,7 +179,7 @@
 </li>
 </ul>
 <p>For extraction and classification tasks, use temperature 0 for deterministic outputs. For creative writing, temperature 0.8 with top-p 0.95 produces engaging results.</p>
-<h3>Iterative Refinement</h3>
+<h4>Iterative Refinement</h4>
 <p>Professional prompt engineering is an iterative process. Start with a baseline prompt, evaluate outputs against criteria, then refine. Key metrics to track include accuracy, format compliance, response length, and hallucination rate.</p>
 <p>A systematic approach:</p>
 <ul>
@@ -186,9 +189,10 @@
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Categorize failure modes</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rewrite the prompt to address each failure mode</p>
 <p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retest and measure improvement</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Advanced prompt engineering combines structured techniques, parameter tuning, and systematic iteration. By mastering chain-of-thought reasoning, few-shot selection, structured output formatting, and prompt chaining, you can dramatically improve the reliability and quality of LLM outputs in production systems. The field continues to evolve rapidly, with techniques like automated prompt optimization and self-consistency further pushing the boundaries of what's possible.</p>
 <p><strong>See also:</strong> <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/ai-image-generation.html">AI Image Generation Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/prompt-engineering-advanced.html">Advanced Prompt Engineering: Techniques That Actually Work for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/prompt-engineering-advanced.html">Advanced Prompt Engineering: Techniques That Actually Work for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/prompt-engineering-guide.html">Prompt Engineering Guide for LLMs</a>, <a href="/en/ai/ai-api-cost-optimization.html">AI API Cost Optimization</a>, <a href="/en/ai/prompt-engineering-advanced.html">Advanced Prompt Engineering: Techniques That Actually Work for Developers</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

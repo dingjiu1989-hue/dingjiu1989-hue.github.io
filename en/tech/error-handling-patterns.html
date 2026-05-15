@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/error-handling-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-05",
-      "wordCount": "1133",
+      "wordCount": "1165",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/error-handling-patterns.html"},
@@ -96,44 +98,46 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
-<h2>Error Handling Patterns</h2>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
+<h3>Error Handling Patterns</h3>
 <p>Error handling is a cross-cutting concern that affects system reliability, debuggability, and user experience. Different languages and paradigms offer different error handling approaches: exceptions in Java and Python, Result types in Rust and Swift, and error boundaries in UI frameworks. This article examines these patterns and provides guidance for building resilient error handling.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/error-handling-patterns.png" alt="Error Handling Patterns" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Exceptions</h3>
+<h4>Exceptions</h4>
 <p>Exception-based error handling uses try/catch blocks to handle errors that occur in a different part of the call stack. When an error occurs, the code throws an exception that propagates up the call stack until a matching catch block handles it. Unhandled exceptions typically crash the program.</p>
 <p>Exceptions are appropriate for errors that cannot be handled at the point of occurrence and need to propagate to a higher level. A database connection failure, for example, may need to propagate to the request handler rather than being handled in the data access layer.</p>
 <p>Exception handling best practices include catching specific exception types rather than generic ones, using finally blocks for cleanup, not using exceptions for control flow, and logging exceptions with full stack traces at the appropriate level. Overly broad catch blocks that swallow exceptions are a common source of hard-to-debug issues.</p>
-<h3>Result Types</h3>
+<h4>Result Types</h4>
 <p>Result types (also called Either types) represent the possibility of success or failure as a return value. A function returns a Result that is either an Ok value or an Err value. The caller must handle both cases—there is no way to ignore the error.</p>
 <p>Rust's <code>Result</code> type is the most prominent example. The <code>?</code> operator propagates errors to the caller. Pattern matching on Result values ensures all cases are handled at compile time. This explicit error handling makes error paths visible and forces the programmer to consider them.</p>
 <p>Result types provide type safety for error handling. The compiler ensures that errors are handled at some level—they cannot be silently ignored. This is a significant advantage over exceptions, where unhandled exceptions crash at runtime.</p>
-<h3>Error Boundaries</h3>
+<h4>Error Boundaries</h4>
 <p>Error boundaries are a UI pattern, popularized by React, that catch errors in component subtrees and display fallback UI instead of crashing the entire page. An error boundary wraps a section of the UI and catches errors thrown by its children.</p>
 <p>In React, class components implement <code>componentDidCatch</code> to become error boundaries. React 16 introduced this pattern for recovering from rendering errors. The App Router in Next.js uses <code>error.tsx</code> files to define segment-level error boundaries automatically.</p>
 <p>Error boundaries allow partial page crashes rather than full page crashes. A broken sidebar does not take down the main content area. This significantly improves user experience in complex applications where some components may fail independently.</p>
-<h3>Resilience Patterns</h3>
+<h4>Resilience Patterns</h4>
 <p>Beyond basic error handling, resilience patterns prevent errors from causing system-wide failures. Circuit breakers stop calling a failing service to give it time to recover. Bulkheads isolate resources so a failure in one component does not exhaust shared resources.</p>
 <p>Retry with backoff handles transient failures. Timeouts prevent waiting indefinitely for a response. Fallbacks provide degraded functionality when a dependency fails. Rate limiting prevents a single client from overwhelming the system.</p>
 <p>These patterns are composable. A typical resilience pipeline wraps a service call with a timeout, retries with exponential backoff, a circuit breaker, and finally a fallback. Libraries like Resilience4j (Java), Polly (.NET), and resilience4s (Scala) provide these patterns as reusable components.</p>
-<h3>Error Propagation</h3>
+<h4>Error Propagation</h4>
 <p>How errors propagate through a system affects debuggability. Errors should include context about what went wrong, where it happened, and what the system was doing at the time. In distributed systems, errors should include correlation IDs that tie them to the originating request.</p>
 <p>Errors that cross service boundaries should be translated to appropriate HTTP status codes and structured error responses. Internal error details should not leak to external clients. Consistent error response formats make client-side error handling predictable.</p>
-<h3>Error Recovery</h3>
+<h4>Error Recovery</h4>
 <p>Not all errors need to crash the program. Graceful degradation handles errors by providing reduced functionality rather than failing completely. A recommendation service that fails can be degraded to showing popular items. An image loading failure can show a placeholder.</p>
 <p>Error recovery follows the principle of graceful degradation: degrade functionality rather than denying service. The key is knowing which errors are recoverable (a failed recommendation call) and which are not (a failed authentication check).</p>
 <p>The most robust error handling strategies combine multiple patterns. Use Result types or exceptions for local error handling. Use error boundaries for UI resilience. Use circuit breakers for service resilience. Use structured logging and tracing for diagnosis. The combination of these patterns creates systems that fail gracefully and are debuggable when they do.</p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/nodejs-streams.html">Node.js Streams</a>, <a href="/en/tech/metric-collection.html">Metric Collection</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/load-testing-strategies.html">Load Testing Strategies</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dependency-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1122",
+      "wordCount": "1168",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/dependency-management.html"},
@@ -96,44 +98,46 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dependency-management.png" alt="Dependency Management" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
-<h2>Dependency Management</h2>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
+<h3>Dependency Management</h3>
 <p>Dependency management is a critical but often neglected aspect of software engineering. Every dependency introduces risk: security vulnerabilities, breaking changes, licensing issues, and maintenance burden. This article covers the key practices for managing dependencies effectively, from lock files to vulnerability scanning.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/dependency-management.png" alt="Dependency Management" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Lock Files</h3>
+<h4>Lock Files</h4>
 <p>Lock files pin exact versions of every dependency and its transitive dependencies. They ensure that every build uses the same dependency versions, regardless of when the build runs. This is essential for reproducible builds and consistent behavior across environments.</p>
 <p>Package managers generate lock files automatically. npm's <code>package-lock.json</code>, Yarn's <code>yarn.lock</code>, Python's <code>poetry.lock</code> or <code>Pipfile.lock</code>, and Go's <code>go.sum</code> all serve this purpose. Lock files should be committed to version control. Without committed lock files, a build may install different dependency versions today than it did yesterday, potentially introducing unexpected behavior changes.</p>
 <p>Lock files also enable security auditing. When a vulnerability is discovered in a specific dependency version, the lock file shows whether your project is affected. Security scanning tools analyze lock files to identify vulnerable dependencies.</p>
-<h3>Semantic Versioning</h3>
+<h4>Semantic Versioning</h4>
 <p>Semantic versioning (semver) provides a contract for dependency compatibility. MAJOR.MINOR.PATCH versions communicate the scope of changes: MAJOR for breaking changes, MINOR for backward-compatible new features, PATCH for backward-compatible bug fixes.</p>
 <p>Understanding semver allows appropriate version ranges in dependency specifications. A caret range (<code>^1.2.3</code>) accepts any compatible version (1.x.x). A tilde range (<code>~1.2.3</code>) accepts only patch versions (1.2.x). Exact versions specify a single version.</p>
 <p>In practice, not all packages follow semver strictly. Minor version releases may include breaking changes. Testing dependency upgrades before deploying to production is essential, regardless of the advertised version number.</p>
-<h3>Vulnerability Scanning</h3>
+<h4>Vulnerability Scanning</h4>
 <p>Dependency vulnerabilities are a common attack vector. Automated scanning tools detect known vulnerabilities in dependencies by comparing installed versions against vulnerability databases. Dependabot, Snyk, Renovate, and OWASP Dependency-Check are popular scanning tools.</p>
 <p>Scanning should be integrated into CI/CD pipelines. A build should fail if critical vulnerabilities are present. The team should have a policy for addressing vulnerabilities: critical vulnerabilities are patched within days, moderate within weeks, and low within the next release cycle.</p>
 <p>Beyond known vulnerabilities, scanning should also detect deprecated packages, packages with incompatible licenses, and packages with poor maintenance indicators (no recent releases, unaddressed issues).</p>
-<h3>Update Strategies</h3>
+<h4>Update Strategies</h4>
 <p>Dependencies should be updated regularly to receive bug fixes, performance improvements, and security patches. The update strategy balances stability against staying current. A well-defined strategy prevents both stagnation (outdated dependencies with known vulnerabilities) and churn (constantly upgrading for minor improvements).</p>
 <p>A common approach uses automated dependency update tools like Renovate or Dependabot. These tools create pull requests when new versions are available. The CI pipeline runs tests against each update PR. If tests pass and the change is minor, it is merged automatically. Major version updates require manual review.</p>
 <p>Dependency updates should be small and frequent. A weekly update cycle with automated PRs keeps the dependency tree current without overwhelming the team. Larger, less frequent updates create risk as multiple changes compound.</p>
-<h3>Governance</h3>
+<h4>Governance</h4>
 <p>Dependency governance establishes rules for which dependencies can be used and how they are managed. An approved dependency list specifies trusted packages. New dependencies require review, assessing necessity, maintenance quality, license compatibility, and security track record.</p>
 <p>Governance prevents dependency sprawl. Each new dependency is an addition to the attack surface, a maintenance commitment, and a potential source of breakage. The question "do we really need this dependency?" should be asked for every new addition.</p>
 <p>Unused dependencies should be removed. Dead code elimination is well understood, but unused dependencies are harder to detect. Tools like <code>depcheck</code> (JavaScript) and <code>pip-check-reqs</code> (Python) identify dependencies that are no longer imported.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Commit lock files to version control. Run dependency audits regularly. Use automated update tools for routine updates. Review major version upgrades manually. Remove unused dependencies. Maintain a dependency inventory. Establish governance for new dependency approval.</p>
 <p>Dependency management requires ongoing attention. Neglected dependencies accumulate risk: security vulnerabilities, compatibility issues, and maintenance burden. A systematic approach with automated tools and clear policies keeps the dependency tree healthy without imposing excessive overhead.</p>
 <p><strong>See also:</strong> <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/performance-testing.html">Performance Testing</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/artifact-management.html">Artifact Management</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a>, <a href="/en/tech/terraform-state-management.html">Terraform State Management: Remote State, Locking, Migration, and Workspaces</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

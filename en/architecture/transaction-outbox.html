@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-05",
-      "wordCount": "954",
+      "wordCount": "984",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-14 · Last active 2026-05-05 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
-<h2>Transactional Outbox Pattern</h2>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
+<h3>Transactional Outbox Pattern</h3>
 <p>The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png" alt="Transactional Outbox Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process — the outbox publisher — reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. </p>
 <p>Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. </p>
@@ -115,6 +118,7 @@
 <p>Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. </p>
 <p>The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/transaction-outbox-reliable.html">Transactional Outbox Pattern</a>, <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/fanout-pattern.html">Fanout Pattern for Event Distribution</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

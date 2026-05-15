@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-03",
-      "wordCount": "2428",
+      "wordCount": "2457",
       "keywords": "Architecture, System Design",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.html"},
@@ -92,17 +94,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
-<h2>Circuit Breaker Pattern: Building Resilient Systems</h2>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
+<h3>Circuit Breaker Pattern: Building Resilient Systems</h3>
 <p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png" alt="Circuit Breaker Pattern: Building Resilient Systems" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The Circuit Breaker State Machine </p>
 <p>A circuit breaker has three states: Closed, Open, and Half-Open. </p>
@@ -212,7 +215,7 @@
 <p>return PaymentResponse.failed("Payment temporarily unavailable, please retry");</p>
 <p>}</p>
 <p>}</p>
-<h2>application.yml</h2>
+<h3>application.yml</h3>
 <p>resilience4j.circuitbreaker:</p>
 <p>configs:</p>
 <p>default:</p>
@@ -317,7 +320,7 @@
 <p><strong>Buffered calls</strong> : Number of buffered calls in the current sliding window.</p>
 </li>
 </ul>
-<h2>Prometheus metric format (from Resilience4j exporter)</h2>
+<h3>Prometheus metric format (from Resilience4j exporter)</h3>
 <p>resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1</p>
 <p>resilience4j_circuitbreaker_calls{name="paymentService",kind="successful"} 142</p>
 <p>resilience4j_circuitbreaker_calls{name="paymentService",kind="failed"} 8</p>
@@ -404,6 +407,7 @@
 <p>Conclusion </p>
 <p>The circuit breaker pattern prevents cascading failures by detecting when a remote service is failing and stopping calls to it. Implement the three-state state machine (closed, open, half-open) with libraries like Resilience4j. Monitor circuit breaker state in production dashboards. Combine with fallbacks, bulkheads, and gradual recovery for a comprehensive resilience strategy. Circuit breakers are not a silver bullet, but they are an essential tool in building systems that degrade gracefully instead of failing catastrophically.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/retry-patterns.html">Retry Patterns</a>, <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/circuit-breaker-vs-bulkhead.html">Circuit Breaker vs Bulkhead Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

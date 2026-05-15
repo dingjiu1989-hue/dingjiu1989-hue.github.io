@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1295",
+      "wordCount": "1317",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.html"},
@@ -96,23 +98,24 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
-<h2>Security Engineer Interview</h2>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
+<h3>Security Engineer Interview</h3>
 <p>Interview Structure </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/security-engineer-interview.png" alt="Security Engineer Interview" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Security engineer interviews typically cover: security fundamentals, hands-on exercises, system design, and behavioral scenarios. </p>
 <p>Core Knowledge Topics </p>
 <p>Cryptography </p>
 <p>Understand encryption algorithms and their properties: </p>
-<h2>Interview question: Implement a secure password hasher</h2>
+<h3>Interview question: Implement a secure password hasher</h3>
 <p>import hashlib</p>
 <p>import os</p>
 <p>def hash_password(password):</p>
@@ -120,13 +123,13 @@
 <p>import bcrypt</p>
 <p>salt = bcrypt.gensalt(rounds=12)</p>
 <p>return bcrypt.hashpw(password.encode(), salt)</p>
-<h2>Follow-up: Why not SHA-256?</h2>
-<h2>Answer: SHA-256 is fast, making brute-force feasible.</h2>
-<h2>bcrypt/argon2 are deliberately slow and include salt.</h2>
-<h2>Follow-up: What about MD5?</h2>
-<h2>Answer: MD5 is broken for collision resistance. Never use.</h2>
+<h3>Follow-up: Why not SHA-256?</h3>
+<h3>Answer: SHA-256 is fast, making brute-force feasible.</h3>
+<h3>bcrypt/argon2 are deliberately slow and include salt.</h3>
+<h3>Follow-up: What about MD5?</h3>
+<h3>Answer: MD5 is broken for collision resistance. Never use.</h3>
 <p>Network Security </p>
-<h2>Interview question: Implement a simple port scanner</h2>
+<h3>Interview question: Implement a simple port scanner</h3>
 <p>import socket</p>
 <p>def scan_port(host, port, timeout=1):</p>
 <p>sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</p>
@@ -134,12 +137,12 @@
 <p>result = sock.connect_ex((host, port))</p>
 <p>sock.close()</p>
 <p>return result == 0</p>
-<h2>Follow-up: How would you scan without being detected?</h2>
-<h2>Answer: Use SYN scan (stealth scan), randomize port order,</h2>
-<h2>and introduce delays between probes.</h2>
+<h3>Follow-up: How would you scan without being detected?</h3>
+<h3>Answer: Use SYN scan (stealth scan), randomize port order,</h3>
+<h3>and introduce delays between probes.</h3>
 <p>System Design Questions </p>
 <p>Design a Secure Authentication System </p>
-<h2>High-level design</h2>
+<h3>High-level design</h3>
 <p>class SecureAuthSystem:</p>
 <p>components = [</p>
 <p>"Rate limiter (token bucket per IP)",</p>
@@ -175,7 +178,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Database encryption keys</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Secret encryption keys</p>
 <p>Practical Exercise </p>
-<h2>Exercise: Security incident investigation</h2>
+<h3>Exercise: Security incident investigation</h3>
 <p>incident_logs = [</p>
 <p>{"time": "10:00", "user": "alice", "event": "login", "ip": "192.168.1.1"},</p>
 <p>{"time": "10:01", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},</p>
@@ -186,16 +189,16 @@
 <p>{"time": "10:06", "user": "alice", "event": "export_data", "ip": "10.0.0.5"},</p>
 <p>{"time": "10:07", "user": "alice", "event": "delete_logs", "ip": "10.0.0.5"},</p>
 <p>]</p>
-<h2>Questions:</h2>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?</h2>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?</h2>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?</h2>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?</h2>
-<h2>Analysis:</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -&gt; 10.0.0.5 (internal)</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion</h2>
-<h2>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -&gt; account takeover -&gt; data exfiltration</h2>
+<h3>Questions:</h3>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?</h3>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?</h3>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?</h3>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?</h3>
+<h3>Analysis:</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -&gt; 10.0.0.5 (internal)</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion</h3>
+<h3>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -&gt; account takeover -&gt; data exfiltration</h3>
 <p>Behavioral Questions </p>
 <p>Be prepared to discuss: </p>
 <ul>
@@ -218,6 +221,7 @@
 <p>Resources for Preparation </p>
 <p>Study these areas in depth: OWASP Top 10, cloud security (AWS/GCP/Azure), network protocols, cryptography fundamentals, and compliance frameworks. Practice with hands-on labs and capture-the-flag challenges. Be ready to whiteboard system designs and discuss real-world threat scenarios.</p>
 <p><strong>See also:</strong> <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a>, <a href="/en/security/soc-operations.html">SOC Operations</a>, <a href="/en/security/database-encryption.html">Database Encryption</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p>
 <p><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/bug-bounty.html">Bug Bounty Guide</a>, <a href="/en/security/microservice-security.html">Microservice Security</a>, <a href="/en/security/security-metrics.html">Security Metrics and Reporting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/elk-stack-setup.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-09",
-      "wordCount": "1273",
+      "wordCount": "1332",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html"},
@@ -96,28 +98,29 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/elk-stack-setup.png" alt="ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h2>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h2>
-<h3>Introduction</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h3>ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization</h3>
+<h4>Introduction</h4>
 <p>The ELK Stack — Elasticsearch, Logstash, and Kibana — is the most widely deployed open-source log management platform. Elasticsearch provides distributed full-text search and analytics, Logstash offers server-side data processing, and Kibana delivers visualization and exploration capabilities. The stack was later joined by Beats, lightweight data shippers that extend the Elastic ecosystem.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/elk-stack-setup.png" alt="ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>This article covers ELK stack setup, Logstash pipeline configuration, performance tuning, and index lifecycle management (ILM).</p>
-<h3>Elasticsearch: The Storage and Search Engine</h3>
+<h4>Elasticsearch: The Storage and Search Engine</h4>
 <p>Elasticsearch is a distributed, RESTful search and analytics engine built on Apache Lucene. Data is organized into indices, which are collections of documents. Each index is divided into shards, which are distributed across nodes in a cluster.</p>
 <p>A production Elasticsearch cluster should have a minimum of three master-eligible nodes for high availability. Data nodes store data and perform CRUD operations. Dedicated coordinating-only nodes handle incoming requests and distribute them to data nodes, improving query performance for clusters with complex search patterns.</p>
 <p>Key configuration parameters include <code>indices.memory.index_buffer_size</code>, <code>thread_pool.search.queue_size</code>, and <code>discovery.seed_hosts</code> for cluster formation. The <code>elasticsearch.yml</code> configuration file controls all node-level settings.</p>
 <p>Mapping defines how documents and their fields are stored and indexed. Dynamic mapping auto-detects field types at index time, but explicit mapping is strongly recommended for production use to avoid type conflicts.</p>
-<h3>Logstash: Data Processing Pipeline</h3>
+<h4>Logstash: Data Processing Pipeline</h4>
 <p>Logstash is a server-side data processing pipeline that ingests data from multiple sources, transforms it, and sends it to a destination. The pipeline has three stages: input, filter, and output.</p>
 <p>input {</p>
 <p>beats {</p>
@@ -144,15 +147,15 @@
 <p>}</p>
 <p>}</p>
 <p>The grok filter is the most powerful Logstash plugin, parsing unstructured log data into structured fields using predefined patterns. Performance considerations: reduce the number of filter plugins, use conditional logic to skip unnecessary processing, and configure pipeline workers to match CPU cores.</p>
-<h3>Kibana: Visualization and Exploration</h3>
+<h4>Kibana: Visualization and Exploration</h4>
 <p>Kibana provides the user interface for the ELK stack. The Discover tab allows ad-hoc log exploration with Lucene or KQL (Kibana Query Language). Visualizations are organized into dashboards providing operational views.</p>
 <p>Lens is Kibana's drag-and-drop visualization builder, enabling rapid dashboard creation without learning aggregation syntax. Canvas provides pixel-perfect infographic-style presentations. Maps visualizes geospatial data with multiple layers.</p>
 <p>Kibana Alerting provides rule types for threshold conditions, anomaly detection, and tracking containment. Rules can trigger actions via email, Slack, PagerDuty, or webhooks.</p>
-<h3>Performance Tuning</h3>
+<h4>Performance Tuning</h4>
 <p>Elasticsearch performance tuning begins with shard sizing: 20-40 GB per shard is the recommended range. Too many small shards waste resources; too few large shards slow recovery. Refresh interval should be increased to 30-60 seconds for bulk indexing workloads.</p>
 <p>Heap size should be set to no more than 50% of available RAM, with a hard cap of 31 GB (above which compressed object pointers are disabled in the JVM). The <code>_forcemerge</code> API merges segments after indexing completes, improving query performance.</p>
 <p>Logstash performance depends on pipeline workers, batch size, and batch delay. Setting <code>pipeline.workers</code> to match CPU core count and <code>pipeline.batch.size</code> to 125-500 generally provides good throughput.</p>
-<h3>Index Lifecycle Management</h3>
+<h4>Index Lifecycle Management</h4>
 <p>ILM automates index management through policy-driven phases: hot, warm, cold, frozen, and delete.</p>
 <p>{</p>
 <p>"policy": {</p>
@@ -179,9 +182,10 @@
 <p>}</p>
 <p>}</p>
 <p>ILM reduces manual index management overhead, optimizes storage costs, and ensures data retention policies are consistently enforced.</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>The ELK stack provides a complete log management solution. Elasticsearch delivers scalable search and analytics, Logstash provides flexible data processing, and Kibana enables powerful visualization. With careful performance tuning and ILM policies, the ELK stack can handle terabytes of daily log data while maintaining query performance and controlling storage costs.</p>
 <p><strong>See also:</strong> <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a>, <a href="/en/tech/incident-management.html">Incident Management: Severity Levels, Response Process, and Postmortems</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/nodejs-performance.html">Node.js Performance Optimization Guide</a>, <a href="/en/tech/azure-networking.html">Azure Networking: VNets, Peering, Azure Firewall, and Load Balancing</a>, <a href="/en/tech/capacity-planning-cloud.html">Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

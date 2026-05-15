@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-10",
-      "wordCount": "1131",
+      "wordCount": "1165",
       "keywords": "Architecture, System Design",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html"},
@@ -94,17 +96,18 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
-<h2>Database per Service Pattern</h2>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
+<h3>Database per Service Pattern</h3>
 <p>The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/database-per-service.png" alt="Database per Service Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data Ownership </p>
 <p>In the database per service pattern, each service has complete ownership of its data schema, storage technology, and access patterns. No other service can read or write to the database directly—all data access must go through the owning service's API. </p>
@@ -129,6 +132,7 @@
 <p>The pattern is most effective when combined with event-driven communication. Services publish events when their data changes, and other services consume events to update their cached or duplicated data. This reduces the need for synchronous cross-service queries. </p>
 <p>Database per service is a powerful pattern for achieving service autonomy and independent scalability, but it requires disciplined data management, investment in cross-service query patterns, and acceptance of eventual consistency. For teams that make this investment, the pattern enables truly independent service evolution.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/api-composition-pattern.html">API Composition Pattern</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

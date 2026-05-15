@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-03",
-      "wordCount": "1054",
+      "wordCount": "1082",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
-<h2>Cost Per Request Modeling</h2>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
+<h3>Cost Per Request Modeling</h3>
 <p>Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/cost-per-request.png" alt="Cost Per Request Modeling" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Compute cost is calculated from the resources consumed during request processing. For a containerized service with 500 millicores of CPU and 512 MB of memory allocation, running on instances costing \$50/month with 100 requests per second capacity, the per-request compute cost is approximately \$0.0000058 (50 / 30 / 86400 / 100 * 500/1000). This minimal per-request cost compounds through the chain of services involved — the API gateway, multiple backend services, and background job processors all contribute. </p>
 <p>Storage cost includes database capacity, object storage, and caching layers. A request that reads 10 KB of product data, writes 2 KB of order data, and caches the result for 60 seconds has a direct storage cost plus the amortized cost of the storage infrastructure. Database IOPS and provisioned throughput costs are usually larger than raw storage costs. For relational databases, each request's storage cost must account for the total database cost divided across all served requests, not just the marginal cost. </p>
@@ -115,6 +118,7 @@
 <p>Cost attribution requires distributed tracing metadata. Each trace span should carry cost-related attributes: service name, instance type, data size processed, cache hit status, and database query cost. The tracing system can then sum costs across spans to compute end-to-end per-request cost. This correlation enables architects to identify the most expensive path for any request and target optimization efforts effectively. </p>
 <p>Right-sizing infrastructure is the fundamental cost optimization. Over-provisioned services waste money on idle capacity. Under-provisioned services waste money on performance-related customer churn. Autoscaling policies should target 60-70% utilization during peak — low enough to handle traffic spikes, high enough to avoid waste. For services with predictable traffic patterns, scheduled scaling reduces costs further by matching capacity to expected load.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/zero-downtime-deployment.html">Zero-Downtime Deployment Strategies</a>, <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/database-migration-zero-downtime.html">Zero-Downtime Database Migrations</a>, <a href="/en/architecture/multi-tenancy.html">Multi-Tenancy Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

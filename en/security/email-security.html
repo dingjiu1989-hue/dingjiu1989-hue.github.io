@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/email-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-14",
-      "wordCount": "1905",
+      "wordCount": "1929",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/email-security.html"},
@@ -96,19 +98,20 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/email-security.png" alt="Email Security" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
-<h2>Email Security</h2>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
+<h3>Email Security</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/email-security.png" alt="Email Security" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Email remains the primary attack vector for most organizations. Phishing, business email compromise (BEC), and spam represent significant risks. A robust email security strategy combines authentication protocols, gateway filtering, and user awareness training. </p>
 <p>SPF, DKIM, and DMARC </p>
@@ -119,10 +122,10 @@
 <p>Mechanisms: <code>ip4</code>, <code>ip6</code>, <code>include</code>, <code>a</code>, <code>mx</code>, <code>exists</code>. Qualifiers: <code>+</code> (pass), <code>-</code> (fail), <code>~</code> (softfail), <code>?</code> (neutral). Use <code>-all</code> for strict enforcement after testing with <code>~all</code>. </p>
 <p>DKIM (DomainKeys Identified Mail) </p>
 <p>DKIM adds a digital signature to email headers, allowing receivers to verify the message was not modified in transit. </p>
-<h2>Generate DKIM key pair with OpenSSL</h2>
+<h3>Generate DKIM key pair with OpenSSL</h3>
 <p>openssl genrsa -out dkim-private.pem 2048</p>
 <p>openssl rsa -in dkim-private.pem -pubout -out dkim-public.pem</p>
-<h2>Extract public key for DNS record</h2>
+<h3>Extract public key for DNS record</h3>
 <p>openssl rsa -pubin -in dkim-public.pem -outform DER | base64</p>
 <p>DNS record for DKIM:</p>
 <p>default._domainkey.example.com. TXT "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."</p>
@@ -132,7 +135,7 @@
 <p>Key tags: <code>p</code> (policy: none/quarantine/reject), <code>rua</code> (aggregate reports), <code>ruf</code> (forensic reports), <code>pct</code> (sampling percentage), <code>sp</code> (subdomain policy), <code>adkim</code>/<code>aspf</code> (strict alignment). </p>
 <p>Email Gateway Deployment </p>
 <p>Email gateways filter inbound and outbound traffic, applying policy controls, antivirus scanning, URL rewriting, and attachment sandboxing. </p>
-<h2>Sample gateway filtering policy</h2>
+<h3>Sample gateway filtering policy</h3>
 <p>inbound_policies:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Block executable attachments"</p>
 <p>condition: attachment.extension in ['.exe', '.scr', '.bat', '.cmd', '.js']</p>
@@ -152,7 +155,7 @@
 <li><strong>Attachment scanning</strong> : Sandbox all attachments in isolated environments</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>URL inspection</strong> : Rewrite and scan links at click-time for malicious content 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Impersonation detection</strong> : Identify display-name spoofing and lookalike domains 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>AI-based analysis</strong> : ML models detect anomalous language patterns and social engineering </p>
-<h2>Simple lookalike domain detection</h2>
+<h3>Simple lookalike domain detection</h3>
 <p>import re</p>
 <p>def detect_lookalike(domain, trusted_domains):</p>
 <p>lookalike_patterns = {</p>
@@ -160,12 +163,12 @@
 <p>}</p>
 <p>normalized = domain.lower()</p>
 <p>for trusted in trusted_domains:</p>
-<h2>Check for typosquatting</h2>
+<h3>Check for typosquatting</h3>
 <p>if normalized != trusted:</p>
-<h2>Levenshtein distance check</h2>
+<h3>Levenshtein distance check</h3>
 <p>if levenshtein_distance(normalized, trusted) &lt;= 2:</p>
 <p>return True</p>
-<h2>Homoglyph check</h2>
+<h3>Homoglyph check</h3>
 <p>for pattern, replacement in lookalike_patterns.items():</p>
 <p>if pattern in normalized:</p>
 <p>test = normalized.replace(pattern, replacement)</p>
@@ -189,7 +192,7 @@
 <p><strong>User training</strong> : Simulated BEC campaigns and reporting mechanisms</p>
 </li>
 </ul>
-<h2>BEC detection rule</h2>
+<h3>BEC detection rule</h3>
 <p>def flag_bec_email(email):</p>
 <p>flags = []</p>
 <p>if email.display_name in executive_names and email.from_domain != org_domain:</p>
@@ -202,6 +205,7 @@
 <p>Conclusion </p>
 <p>Email security requires defense in depth: authentication protocols prevent spoofing, gateways filter threats, and user awareness addresses the human element. Regular DMARC reporting analysis helps identify unauthorized sending sources and configuration issues.</p>
 <p><strong>See also:</strong> <a href="/en/security/phishing-awareness.html">Phishing Awareness and Technical Defenses</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/phishing-awareness.html">Phishing Awareness and Technical Defenses</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p>
 <p><strong>See also:</strong> <a href="/en/security/phishing-awareness.html">Phishing Awareness and Technical Defenses</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/phishing-awareness.html">Phishing Awareness and Technical Defenses</a>, <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

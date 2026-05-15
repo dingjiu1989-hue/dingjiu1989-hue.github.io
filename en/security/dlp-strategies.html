@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-20",
-      "wordCount": "1122",
+      "wordCount": "1147",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/dlp-strategies.html"},
@@ -96,17 +98,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-20 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png" alt="Data Loss Prevention Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
-<h2>Data Loss Prevention Strategies</h2>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
+<h3>Data Loss Prevention Strategies</h3>
 <p>DLP Overview </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/dlp-strategies.png" alt="Data Loss Prevention Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data Loss Prevention (DLP) monitors and controls data in use, in motion, and at rest. A comprehensive DLP strategy covers three domains. </p>
 <p>Network DLP </p>
@@ -116,12 +119,12 @@
 <p>def packet_inspector(packet):</p>
 <p>if packet.haslayer(Raw):</p>
 <p>payload = str(packet[Raw].load)</p>
-<h2>Check for credit card patterns</h2>
+<h3>Check for credit card patterns</h3>
 <p>if re.search(r"\b(?:\d[ -]*?){13,16}\b", payload):</p>
 <p>print(f"[ALERT] Potential CC leak from {packet[IP].src}")</p>
-<h2>Trigger block or alert</h2>
+<h3>Trigger block or alert</h3>
 <p>return False</p>
-<h2>Check for API keys (length &gt; 20, high entropy)</h2>
+<h3>Check for API keys (length &gt; 20, high entropy)</h3>
 <p>if len(payload) &gt; 20 and has_high_entropy(payload):</p>
 <p>print(f"[ALERT] High-entropy data from {packet[IP].src}")</p>
 <p>return False</p>
@@ -133,7 +136,7 @@
 <p>return entropy &gt; threshold</p>
 <p>Endpoint DLP </p>
 <p>Control data movement on endpoints: </p>
-<h2>endpoint-dlp-rules.yaml</h2>
+<h3>endpoint-dlp-rules.yaml</h3>
 <p>rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Block USB transfer</p>
 <p>trigger: usb_device_connect</p>
@@ -152,7 +155,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- manager</p>
 <p>Cloud DLP </p>
 <p>Protect data in SaaS and IaaS environments: </p>
-<h2>Google Cloud DLP inspection job</h2>
+<h3>Google Cloud DLP inspection job</h3>
 <p>resource "google_data_loss_prevention_job_trigger" "bigquery_scan" {</p>
 <p>parent = "projects/my-project/locations/us"</p>
 <p>triggers {</p>
@@ -214,6 +217,7 @@
 <p>Conclusion </p>
 <p>Effective DLP requires coverage across network, endpoint, and cloud domains. Design policies iteratively, start with monitoring, layer in blocking controls, and feed findings into your incident response workflow. The goal is to prevent data loss without blocking productivity.</p>
 <p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-detection-response.html">EDR: Endpoint Detection and Response Solutions</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/data-loss-prevention.html">Data Loss Prevention (DLP) Strategies</a>, <a href="/en/security/incident-response-plan.html">Incident Response Plan</a>, <a href="/en/security/endpoint-security.html">Endpoint Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

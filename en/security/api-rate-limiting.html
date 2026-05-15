@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/api-rate-limiting.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-03",
-      "wordCount": "755",
+      "wordCount": "784",
       "keywords": "Security, Cybersecurity",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/api-rate-limiting.html"},
@@ -94,19 +96,20 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-rate-limiting.png" alt="API Rate Limiting Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
-<h2>API Rate Limiting Implementation</h2>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
+<h3>API Rate Limiting Implementation</h3>
 <p>Why Rate Limiting Matters </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/api-rate-limiting.png" alt="API Rate Limiting Implementation" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Rate limiting protects APIs from abuse, DoS attacks, and unintentional overload. It ensures fair usage and maintains service quality for all consumers. </p>
 <p>Rate Limiting Algorithms </p>
@@ -134,7 +137,7 @@
 <p>self.tokens = min(self.capacity, </p>
 <p>self.tokens + elapsed * self.rate)</p>
 <p>self.last_refill = now</p>
-<h2>Usage</h2>
+<h3>Usage</h3>
 <p>bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20</p>
 <p>if bucket.consume():</p>
 <p>process_request()</p>
@@ -151,7 +154,7 @@
 <p>self.log = deque()</p>
 <p>def allow_request(self):</p>
 <p>now = time.time()</p>
-<h2>Remove expired entries</h2>
+<h3>Remove expired entries</h3>
 <p>while self.log and self.log[0] &lt;= now - self.window_size:</p>
 <p>self.log.popleft()</p>
 <p>if len(self.log) &lt; self.max_requests:</p>
@@ -205,6 +208,7 @@
 <p>Conclusion </p>
 <p>Choose the right rate limiting algorithm for your use case. Token bucket works well for most APIs. Use Redis for distributed rate limiting across multiple servers. Always return clear rate limit headers so clients can self-regulate. Monitor rate limit hit rates to tune thresholds over time.</p>
 <p><strong>See also:</strong> <a href="/en/security/encryption-at-rest.html">Encryption at Rest Guide</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/rbac-authorization.html">RBAC Authorization Implementation</a>, <a href="/en/security/two-factor-authentication.html">Two-Factor Authentication Guide</a>, <a href="/en/security/api-gateway-security.html">API Gateway Security Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

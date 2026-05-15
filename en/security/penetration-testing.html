@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-10",
-      "wordCount": "1570",
+      "wordCount": "1593",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/penetration-testing.html"},
@@ -96,17 +98,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png" alt="Penetration Testing Methodology" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
-<h2>Penetration Testing Methodology</h2>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
+<h3>Penetration Testing Methodology</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/penetration-testing.png" alt="Penetration Testing Methodology" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Penetration testing simulates real-world attacks to identify security vulnerabilities before adversaries exploit them. A structured methodology ensures consistent, repeatable, and comprehensive assessments. The Penetration Testing Execution Standard (PTES) provides a widely adopted framework. </p>
 <p>The PTES Standard </p>
@@ -133,28 +136,28 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_handling_nda_signed: true</p>
 <p>Phase 2: Intelligence Gathering (Reconnaissance) </p>
 <p>Reconnaissance builds a target profile through passive and active information gathering. </p>
-<h2>Passive recon — DNS enumeration</h2>
+<h3>Passive recon — DNS enumeration</h3>
 <p>dig axfr @ns1.acme.com acme.com</p>
 <p>dnsrecon -d acme.com -t axfr</p>
 <p>dnsrecon -d acme.com -t std --db acme_recon.db</p>
-<h2>Subdomain discovery</h2>
+<h3>Subdomain discovery</h3>
 <p>sublist3r -d acme.com -o subdomains.txt</p>
-<h2>Technology fingerprinting</h2>
+<h3>Technology fingerprinting</h3>
 <p>whatweb -a 3 https://www.acme.com --log-verbose=tech_report.txt</p>
-<h2>Certificate transparency logs</h2>
+<h3>Certificate transparency logs</h3>
 <p>curl -s "https://crt.sh/?q=%.acme.com&output;=json" | jq -r '.[].name_value' | sort -u</p>
 <p>Phase 3: Vulnerability Analysis </p>
 <p>Analyze gathered information to identify potential vulnerabilities. </p>
-<h2>Port scanning with Nmap</h2>
+<h3>Port scanning with Nmap</h3>
 <p>nmap -sV -sC -O -p- --min-rate=1000 -oA acme_scan 203.0.113.0/24</p>
-<h2>Service enumeration</h2>
+<h3>Service enumeration</h3>
 <p>nmap -sV --script=http-enum,http-headers,http-methods,ssl-enum-ciphers \</p>
 <p>-p 80,443 203.0.113.0/24 -oA acme_web_scan</p>
-<h2>Vulnerability scanning</h2>
+<h3>Vulnerability scanning</h3>
 <p>nmap --script=vuln -p 80,443,22,3389 203.0.113.0/24 -oA acme_vuln</p>
 <p>Phase 4: Exploitation </p>
 <p>Exploitation attempts to breach the target using identified vulnerabilities. </p>
-<h2>Custom exploit example — SQL injection test</h2>
+<h3>Custom exploit example — SQL injection test</h3>
 <p>import requests</p>
 <p>def test_sqli(url, params):</p>
 <p>payloads = [</p>
@@ -170,21 +173,21 @@
 <p>start = time.time()</p>
 <p>resp = requests.get(url, params=test_params, timeout=10)</p>
 <p>elapsed = time.time() - start</p>
-<h2>Time-based detection</h2>
+<h3>Time-based detection</h3>
 <p>if elapsed &gt; 5:</p>
 <p>print(f"[!] Time-based SQLi in {param}: {payload}")</p>
-<h2>Error-based detection</h2>
+<h3>Error-based detection</h3>
 <p>if any(err in resp.text for err in ["SQL syntax", "mysql_fetch", "ORA-"]):</p>
 <p>print(f"[!] Error-based SQLi in {param}: {payload}")</p>
 <p>Phase 5: Post-Exploitation </p>
 <p>After gaining access, assess the value of compromised systems and establish persistence. </p>
-<h2>Post-exploitation enumeration</h2>
+<h3>Post-exploitation enumeration</h3>
 <p>whoami /all</p>
 <p>systeminfo | findstr /B "OS Name OS Version System Type"</p>
 <p>net localgroup administrators</p>
 <p>netstat -ano</p>
 <p>wmic product get name,version</p>
-<h2>Lateral movement check</h2>
+<h3>Lateral movement check</h3>
 <p>powershell -Command "Get-WmiObject -Class Win32_ComputerSystem -ComputerName TARGET"</p>
 <p>Phase 6: Reporting </p>
 <p>The report is the primary deliverable. It must be clear, actionable, and properly scoped for different audiences. </p>
@@ -215,6 +218,7 @@
 <p>Conclusion </p>
 <p>Effective penetration testing follows a disciplined methodology. PTES provides comprehensive coverage from legal agreements through reporting. The true value of a pentest lies not in how many vulnerabilities are found, but in the actionable remediation guidance provided in the final report.</p>
 <p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/compliance-automation.html">Compliance Automation</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/clickjacking-protection.html">Clickjacking Protection</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/supply-chain-security.html">Supply Chain Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

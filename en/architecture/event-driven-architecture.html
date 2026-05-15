@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-16",
-      "wordCount": "2373",
+      "wordCount": "2404",
       "keywords": "Architecture, System Design",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-driven-architecture.html"},
@@ -92,17 +94,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-16 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png" alt="Event-Driven Architecture: Patterns and Practice" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
-<h2>Event-Driven Architecture: Patterns and Practice</h2>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
+<h3>Event-Driven Architecture: Patterns and Practice</h3>
 <p>Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-driven-architecture.png" alt="Event-Driven Architecture: Patterns and Practice" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Concepts </p>
 <p>An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful. </p>
@@ -150,14 +153,14 @@
 <p>def <strong>init</strong>(self, event_store):</p>
 <p>self.event_store = event_store</p>
 <p>def deposit(self, account_id, amount):</p>
-<h2>Rebuild current state</h2>
+<h3>Rebuild current state</h3>
 <p>events = self.event_store.get_events(account_id)</p>
 <p>account = Account(account_id)</p>
 <p>account.rebuild_from_events(events)</p>
-<h2>Validate business rules</h2>
+<h3>Validate business rules</h3>
 <p>if amount &lt;= 0:</p>
 <p>raise ValueError("Amount must be positive")</p>
-<h2>Store the new event</h2>
+<h3>Store the new event</h3>
 <p>event = Event(</p>
 <p>aggregate_id=account_id,</p>
 <p>type="MoneyDeposited",</p>
@@ -197,7 +200,7 @@
 </ul>
 <p>Pub/Sub Pattern </p>
 <p>Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously. </p>
-<h2>Pub/sub using Redis</h2>
+<h3>Pub/sub using Redis</h3>
 <p>import redis</p>
 <p>class EventPublisher:</p>
 <p>def <strong>init</strong>(self, redis_client):</p>
@@ -248,12 +251,12 @@
 </ul>
 <p>from kafka import KafkaProducer, KafkaConsumer</p>
 <p>import json</p>
-<h2>Producer</h2>
+<h3>Producer</h3>
 <p>producer = KafkaProducer(</p>
 <p>bootstrap_servers=['localhost:9092'],</p>
 <p>value_serializer=lambda v: json.dumps(v).encode('utf-8')</p>
 <p>)</p>
-<h2>Publish an event</h2>
+<h3>Publish an event</h3>
 <p>producer.send(</p>
 <p>'orders',</p>
 <p>key=b'ord-12345', # Same key = same partition = ordered</p>
@@ -266,7 +269,7 @@
 <p>}</p>
 <p>)</p>
 <p>producer.flush()</p>
-<h2>Consumer</h2>
+<h3>Consumer</h3>
 <p>consumer = KafkaConsumer(</p>
 <p>'orders',</p>
 <p>bootstrap_servers=['localhost:9092'],</p>
@@ -277,12 +280,12 @@
 <p>for message in consumer:</p>
 <p>event = message.value</p>
 <p>process_event(event)</p>
-<h2>Offset is committed automatically or manually after processing</h2>
+<h3>Offset is committed automatically or manually after processing</h3>
 <p>Partition Assignment Strategy </p>
 <p>Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity. </p>
-<h2>Good partition key: customer_id (entities are naturally scoped)</h2>
+<h3>Good partition key: customer_id (entities are naturally scoped)</h3>
 <p>key = str(customer_id).encode()</p>
-<h2>Bad partition key: timestamp (all events go to one partition if in the same second)</h2>
+<h3>Bad partition key: timestamp (all events go to one partition if in the same second)</h3>
 <p>key = str(order_date).encode()</p>
 <p>Event Schemas </p>
 <p>Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers. </p>
@@ -347,7 +350,7 @@
 <p>def <strong>init</strong>(self, db_connection):</p>
 <p>self.db = db_connection</p>
 <p>def process_event(self, event):</p>
-<h2>Check if already processed</h2>
+<h3>Check if already processed</h3>
 <p>already_processed = self.db.execute(</p>
 <p>"SELECT 1 FROM processed_events WHERE event_id = ?",</p>
 <p>(event.id,)</p>
@@ -355,21 +358,21 @@
 <p>if already_processed:</p>
 <p>log.info(f"Skipping already-processed event: {event.id}")</p>
 <p>return # Idempotent: skip</p>
-<h2>Process event</h2>
+<h3>Process event</h3>
 <p>self.handle_event(event)</p>
-<h2>Record as processed (in same transaction if possible)</h2>
+<h3>Record as processed (in same transaction if possible)</h3>
 <p>self.db.execute(</p>
 <p>"INSERT INTO processed_events (event_id, processed_at) VALUES (?, ?)",</p>
 <p>(event.id, datetime.utcnow())</p>
 <p>)</p>
 <p><strong>Deterministic processing</strong> : Make event processing inherently idempotent. </p>
-<h2>Deterministic: setting status is idempotent</h2>
+<h3>Deterministic: setting status is idempotent</h3>
 <p>def handle_order_shipped(event):</p>
 <p>db.execute(</p>
 <p>"UPDATE orders SET status = ? WHERE order_id = ?",</p>
 <p>("shipped", event.order_id)</p>
 <p>)</p>
-<h2>Running this twice sets "shipped" twice — same result.</h2>
+<h3>Running this twice sets "shipped" twice — same result.</h3>
 <p><strong>Compare-and-swap</strong> : Only apply the event if the current state matches expectations. </p>
 <p>def handle_payment_confirmed(event):</p>
 <p>db.execute(</p>
@@ -377,13 +380,13 @@
 <p>WHERE order_id = ? AND status = 'pending'""",</p>
 <p>(event.timestamp, event.order_id)</p>
 <p>)</p>
-<h2>If already processed, the WHERE clause prevents double application.</h2>
+<h3>If already processed, the WHERE clause prevents double application.</h3>
 <p>Exactly-Once Processing </p>
 <p>Exactly-once processing is the holy grail of event-driven systems. It ensures each event is processed exactly one time, even in the presence of failures. </p>
 <p>Kafka Exactly-Once Semantics </p>
 <p>Kafka supports exactly-once semantics (EOS) through transactional producers and consumers. </p>
 <p>from kafka import KafkaProducer</p>
-<h2>Transactional producer</h2>
+<h3>Transactional producer</h3>
 <p>producer = KafkaProducer(</p>
 <p>bootstrap_servers=['localhost:9092'],</p>
 <p>enable_idempotence=True,</p>
@@ -392,9 +395,9 @@
 <p>producer.init_transactions()</p>
 <p>try:</p>
 <p>producer.begin_transaction()</p>
-<h2>Read from source topic</h2>
+<h3>Read from source topic</h3>
 <p>event = read_event()</p>
-<h2>Process and produce to multiple topics</h2>
+<h3>Process and produce to multiple topics</h3>
 <p>producer.send('processed-orders', value=process(event))</p>
 <p>producer.send('notifications', value=build_notification(event))</p>
 <p>producer.commit_transaction()</p>
@@ -404,19 +407,19 @@
 <p>Common Patterns </p>
 <p>Transactional Outbox </p>
 <p>When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity: </p>
-<h2>Transactional outbox</h2>
+<h3>Transactional outbox</h3>
 <p>def place_order(order_data):</p>
 <p>with transaction():</p>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database</h2>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database</h3>
 <p>order_id = db.insert("orders", order_data)</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write event to outbox table (same database, same transaction)</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write event to outbox table (same database, same transaction)</h3>
 <p>db.insert("outbox", {</p>
 <p>"event_type": "OrderPlaced",</p>
 <p>"payload": json.dumps(order_data),</p>
 <p>"created_at": datetime.utcnow()</p>
 <p>})</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outbox relay picks up and publishes</h2>
-<h2>This runs after the transaction commits</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outbox relay picks up and publishes</h3>
+<h3>This runs after the transaction commits</h3>
 <p>Dead Letter Queue </p>
 <p>Events that cannot be processed after retries go to a dead letter queue (DLQ): </p>
 <p>def process_with_dlq(raw_event_content, max_retries=3):</p>
@@ -430,11 +433,12 @@
 <p>except Exception:</p>
 <p>if attempt &lt; max_retries - 1:</p>
 <p>time.sleep(2 ** attempt) # Exponential backoff</p>
-<h2>Send to DLQ</h2>
+<h3>Send to DLQ</h3>
 <p>dlq.send(raw_event_content, error=str(e), original_topic="orders")</p>
 <p>Conclusion </p>
 <p>Event-driven architecture decouples services through asynchronous event communication. Event sourcing provides a complete audit trail. Pub/sub enables flexible integration. Kafka provides durable, scalable event streaming. Schema management ensures compatible evolution. Idempotent consumers and exactly-once processing guarantee reliability. Use EDA when you need real-time processing, loose coupling, and multiple consumers of the same events. Start simple with pub/sub and event streaming, and add event sourcing only when the complexity is justified by the benefits.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a>, <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/message-queue-patterns.html">Message Queue Patterns</a>, <a href="/en/architecture/pub-sub-patterns.html">Pub-Sub Patterns: Event-Driven Communication</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

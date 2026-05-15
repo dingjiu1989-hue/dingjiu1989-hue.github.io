@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "997",
+      "wordCount": "1032",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/consensus-algorithms.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png" alt="Consensus Algorithms: Paxos, Raft, Zab" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
-<h2>Consensus Algorithms: Paxos, Raft, Zab</h2>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
+<h3>Consensus Algorithms: Paxos, Raft, Zab</h3>
 <p>Consensus algorithms enable a group of distributed nodes to agree on a value despite failures. They are the foundation of replicated state machines, which underpin distributed databases, configuration stores, and coordination services. Three algorithms dominate production systems: Paxos, Raft, and Zab. Understanding their mechanics and tradeoffs is essential for architects designing fault-tolerant infrastructure. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/consensus-algorithms.png" alt="Consensus Algorithms: Paxos, Raft, Zab" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Paxos, published by Leslie Lamport in 1989, was the first practical consensus algorithm. It operates in phases: prepare, promise, accept, and learned. A proposer selects a proposal number and sends prepare requests to acceptors. If a majority of acceptors promise to accept the highest-numbered proposal they have seen, the proposer sends an accept request with its value. Once a majority accepts, the value is chosen. Multi-Paxos extends this to a sequence of values with a distinguished leader for efficiency. </p>
 <p>Paxos is notoriously difficult to understand and implement correctly. The algorithm is correct and proven, but subtle implementation details — handling of persistent state, leader election, log compaction — create many opportunities for bugs. The number of production-grade Paxos implementations is small, and most real systems use Paxos variants (Mencius, Fast Paxos, EPaxos) rather than classic Paxos. </p>
@@ -115,6 +118,7 @@
 <p>Witnesses and observers extend consensus clusters without affecting quorum size. A witness node stores the log but does not vote. An observer node provides read-only access. These patterns allow read scaling without reducing write performance. </p>
 <p>Choosing between algorithms is less important than choosing a mature implementation. The differences between Raft, Zab, and Paxos are dwarfed by differences between well-tested and poorly-tested implementations. Production systems should use established implementations (etcd's Raft, ZooKeeper's Zab, CockroachDB's extended Raft) rather than custom implementations, no matter how clean the algorithm appears.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/cache-strategies.html">Caching Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/idempotency-patterns.html">Idempotency Patterns in Distributed Systems</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

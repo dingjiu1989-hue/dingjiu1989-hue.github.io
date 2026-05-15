@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-pod-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-02",
-      "wordCount": "651",
+      "wordCount": "690",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/kubernetes-pod-design.html"},
@@ -67,6 +69,17 @@
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Kubernetes Pod Design: Patterns and Best Practices"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Kubernetes Pod Design: Patterns and Best Practices",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web, Linux, Mac, Windows",
+      "description": "Design effective Kubernetes pods: init containers, sidecars, probes, resource limits, and pod lifecycle management.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     <script type="application/ld+json">
@@ -96,34 +109,36 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-02 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-pod-design.png" alt="Kubernetes Pod Design: Patterns and Best Practices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
-<h2>Kubernetes Pod Design: Patterns and Best Practices</h2>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
+<h3>Kubernetes Pod Design: Patterns and Best Practices</h3>
 <p>Pods are the smallest deployable units in Kubernetes. Effective pod design determines application reliability, resource efficiency, and operational simplicity.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-pod-design.png" alt="Kubernetes Pod Design: Patterns and Best Practices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Init Containers</h3>
+<h4>Init Containers</h4>
 <p>Init containers run before application containers start. They handle setup tasks: database migrations, permission changes, configuration generation, and waiting for dependencies. Init containers run sequentially and must complete successfully before the app starts.</p>
 <p>Init containers use different images than the application. A migration init container uses a database migration tool image. The application container uses the runtime image. This separation keeps images focused.</p>
-<h3>Container Probes</h3>
+<h4>Container Probes</h4>
 <p>Three probe types manage container lifecycle. Liveness probes check if the container is healthy—restart if unhealthy. Readiness probes check if the container can serve traffic—remove from Service endpoints if unready. Startup probes check if the application has started—delay liveness checks during slow startup.</p>
 <p>Configure probes for your application's startup characteristics. A Java application might need a 60-second startup probe while a Go binary starts in milliseconds. Set failure thresholds appropriately for your recovery time.</p>
-<h3>Resource Limits</h3>
+<h4>Resource Limits</h4>
 <p>Always set resource requests and limits. Requests guarantee resources for scheduling. Limits prevent resource exhaustion. Set requests based on steady-state usage and limits at peak usage plus headroom.</p>
 <p>CPU limits throttle containers rather than terminating them. Memory limits cause OOM kills. Monitor container resource usage with metrics-server or Prometheus and adjust requests accordingly.</p>
-<h3>Pod Lifecycle</h3>
+<h4>Pod Lifecycle</h4>
 <p>Pod lifecycle states: Pending (scheduling), Running (at least one container running), Succeeded (all containers exited with 0), Failed (containers exited with non-0), Unknown (node communication lost).</p>
 <p>Pod lifecycle hooks: PostStart (runs after container creation—not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination—use for graceful shutdown). PreStop hooks are blocking—Kubernetes waits for completion or the terminationGracePeriodSeconds timeout.</p>
-<h3>Pod Disruption Budgets</h3>
+<h4>Pod Disruption Budgets</h4>
 <p>PDBs limit voluntary disruptions. Specify minAvailable or maxUnavailable to protect application availability during node maintenance or cluster upgrades. Without PDBs, cluster operations can take down all replicas simultaneously.</p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/infrastructure-composability.html">Infrastructure Composability</a>, <a href="/en/tech/artifact-management.html">Artifact Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/on-call-best-practices.html">On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

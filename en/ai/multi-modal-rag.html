@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-06",
-      "wordCount": "1611",
+      "wordCount": "1665",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/multi-modal-rag.html"},
@@ -96,25 +98,26 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-06 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h2>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h2>
-<h3>Introduction</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h3>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h3>
+<h4>Introduction</h4>
 <p>Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like "What does the Q3 revenue chart show?" or "What values are in the configuration table?" This article covers the architectures and techniques for building multi-modal RAG.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png" alt="Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Strategies for Multi-Modal RAG</h3>
+<h4>Strategies for Multi-Modal RAG</h4>
 <p>There are three main approaches to handling non-text content:</p>
-<h2>Strategy 1: Convert everything to text (simplest)</h2>
-<h2>Strategy 2: Embed images alongside text (moderate)</h2>
-<h2>Strategy 3: Multi-modal retrieval with specialized models (most powerful)</h2>
+<h3>Strategy 1: Convert everything to text (simplest)</h3>
+<h3>Strategy 2: Embed images alongside text (moderate)</h3>
+<h3>Strategy 3: Multi-modal retrieval with specialized models (most powerful)</h3>
 <h4>Strategy 1: Text Conversion</h4>
 <p>Convert images and tables to text using vision models or OCR:</p>
 <p>from openai import OpenAI</p>
@@ -153,7 +156,7 @@
 <p>from langchain.vectorstores import Chroma</p>
 <p>from langchain.embeddings import OpenAIEmbeddings</p>
 <p>from langchain.schema.document import Document</p>
-<h2>Store text summaries alongside raw elements</h2>
+<h3>Store text summaries alongside raw elements</h3>
 <p>vectorstore = Chroma(</p>
 <p>collection_name="multi_modal_docs",</p>
 <p>embedding_function=OpenAIEmbeddings(),</p>
@@ -164,11 +167,11 @@
 <p>docstore=store,</p>
 <p>id_key="doc_id",</p>
 <p>)</p>
-<h2>For each document element (text, image, table):</h2>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</h2>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</h2>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</h2>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</h2>
+<h3>For each document element (text, image, table):</h3>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</h3>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</h3>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</h3>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</h3>
 <p>doc_id = "doc_001_image_03"</p>
 <p>summary = "Revenue chart showing Q1-Q4 2025: Q1=$1.2M, Q2=$1.5M, Q3=$1.8M, Q4=$2.1M"</p>
 <p>original = Document(</p>
@@ -198,7 +201,7 @@
 <p>)</p>
 <p>top_indices = scores.topk(top_k).indices.tolist()</p>
 <p>return top_indices, scores[top_indices].tolist()</p>
-<h3>Chunking Strategies for Multi-Modal Data</h3>
+<h4>Chunking Strategies for Multi-Modal Data</h4>
 <p>Each content type needs a different chunking approach:</p>
 <p>class MultiModalChunker:</p>
 <p>def chunk_pdf(self, pdf_path: str) -&gt; list[dict]:</p>
@@ -207,7 +210,7 @@
 <p>doc = fitz.open(pdf_path)</p>
 <p>chunks = []</p>
 <p>for page_num, page in enumerate(doc):</p>
-<h2>Extract text blocks</h2>
+<h3>Extract text blocks</h3>
 <p>blocks = page.get_text("dict")["blocks"]</p>
 <p>for block in blocks:</p>
 <p>if block["type"] == 0: # Text</p>
@@ -238,13 +241,13 @@
 <p>"content": text_representation,</p>
 <p>"metadata": {"columns": list(table_df.columns), "rows": len(table_df)},</p>
 <p>}</p>
-<h3>Retrieval and Fusion</h3>
+<h4>Retrieval and Fusion</h4>
 <p>Query across all content types and fuse the results:</p>
 <p>def multi_modal_retrieve(query: str, text_index, image_index, table_index, top_k: int = 3):</p>
 <p>text_results = text_index.similarity_search(query, k=top_k)</p>
 <p>image_results = search_images(query, image_index, top_k)</p>
 <p>table_results = search_tables(query, table_index, top_k)</p>
-<h2>Fuse results with type-aware scoring</h2>
+<h3>Fuse results with type-aware scoring</h3>
 <p>all_results = []</p>
 <p>for doc in text_results:</p>
 <p>all_results.append({"content": doc.page_content, "type": "text", "score": 1.0})</p>
@@ -254,9 +257,10 @@
 <p>all_results.append({"content": tbl["summary"], "type": "table", "data": tbl["content"], "score": 0.9})</p>
 <p>all_results.sort(key=lambda x: x["score"], reverse=True)</p>
 <p>return all_results[:top_k * 2]</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.</p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/rag-chunking-strategies.html">RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting</a>, <a href="/en/ai/rag-evaluation.html">RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/rag-agent-patterns.html">RAG Agent Patterns: Self-Query, Corrective, Adaptive Retrieval</a>, <a href="/en/ai/rag-pipeline-optimization.html">RAG Pipeline Optimization: Production Best Practices</a>, <a href="/en/ai/fine-tuning-vs-rag.html">Fine-Tuning vs RAG: When to Use Each, Hybrid Approaches, Cost Comparison</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-version-control.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "639",
+      "wordCount": "690",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration-version-control.html"},
@@ -93,33 +95,35 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-version-control.png" alt="Database Migration Version Control Strategies" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
-<h2>Database Migration Version Control Strategies</h2>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
+<h3>Database Migration Version Control Strategies</h3>
 <p>Version-controlling database migrations is essential for reproducible deployments and team collaboration. Unlike application code, database schema changes are stateful—applying a migration changes the database permanently, and mistakes can cause data loss.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration-version-control.png" alt="Database Migration Version Control Strategies" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Migration Tools</h3>
+<h4>Migration Tools</h4>
 <p>Flyway is the most popular Java-based migration tool, supporting SQL and Java migrations with version ordering. Liquibase offers XML, YAML, JSON, or SQL changelogs with rollback support. Alembic is the standard for Python/Flask/SQLAlchemy projects. Prisma Migrate handles migrations for the Prisma ORM with declarative schema management.</p>
-<h3>Migration File Naming</h3>
+<h4>Migration File Naming</h4>
 <p>Consistent naming prevents confusion. Use a version prefix (V1__, V2__), a descriptive name (create_users_table), and a timestamp or sequence number. Flyway convention: V1__create_users_table.sql, V2__add_email_to_users.sql. Liquibase uses changelog files with unique IDs.</p>
 <p>Include both forward and backward migrations where possible. Rollback migrations allow reverting changes rapidly when issues are detected.</p>
-<h3>Migration Design Principles</h3>
+<h4>Migration Design Principles</h4>
 <p>One logical change per migration. If you need to add a column and create an index, that is two migrations. This makes rollback easier and debugging clearer.</p>
 <p>For large tables, batch DDL operations. Adding a column or index to a billion-row table may lock the table for hours. Use tools like pt-online-schema-change for zero-downtime migrations.</p>
-<h3>Testing Migrations</h3>
+<h4>Testing Migrations</h4>
 <p>Test every migration against a copy of production data. Automated CI pipelines should apply migrations, run integration tests, and verify rollbacks. Check column defaults, constraints, and foreign key behavior.</p>
 <p>Test rollbacks explicitly. A non-functional rollback is worse than no rollback because it creates false confidence. Verify that rollback restores the exact previous schema.</p>
-<h3>Team Workflow</h3>
+<h4>Team Workflow</h4>
 <p>The golden rule: never modify an existing migration that has been merged to the main branch. Always create a new migration for additional changes. This prevents inconsistent database states when different developers have applied different versions of the same migration.</p>
 <p>Maintain a migration status document for major schema changes. Describe the change, the expected duration, rollback procedure, and affected services.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-schema-migration-strategies.html">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/database-migration-strategies.html">Database Migration Strategies</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-schema-migration-strategies.html">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-schema-migration-strategies.html">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-schema-migration-strategies.html">Database Schema Migration: Version Control, Rollback, and Zero-Downtime</a>, <a href="/en/database/database-migration-tools.html">Database Migration Tools: Alembic, Flyway, Liquibase, Versioning</a>, <a href="/en/database/read-replicas.html">Read Replicas: Scaling Reads, Replication Lag, and Failover</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

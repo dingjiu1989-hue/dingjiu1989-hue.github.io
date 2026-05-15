@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-14",
-      "wordCount": "1057",
+      "wordCount": "1088",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructure.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-14 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
-<h2>A/B Testing Infrastructure</h2>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
+<h3>A/B Testing Infrastructure</h3>
 <p>A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/a-b-testing-infrastructure.png" alt="A/B Testing Infrastructure" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Experiment assignment uses deterministic bucketing. A consistent hash of the user identifier and experiment key determines which variant the user sees. This ensures the user remains in the same variant across sessions. The hash function must distribute users uniformly across variants. Common approaches include MD5 or SHA-256 hashed to a modulus, or using the MurmurHash for better distribution characteristics. The assignment function should produce the same result regardless of the order experiments are evaluated. </p>
 <p>The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2. </p>
@@ -115,6 +118,7 @@
 <p>Client-side experimentation introduces additional challenges. The experiment data must be available on the client for assignment, which exposes targeting rules and variant definitions. The assignment must happen before the user sees any content, making synchronous loading critical. Client-side events may be lost due to ad blockers, network failures, or page abandonment. Server-side supplementation provides a fallback for critical metrics. </p>
 <p>The experiment platform should provide self-service capabilities for product managers and data scientists without requiring engineering involvement for every experiment. The self-service interface should support: experiment definition through a UI, automated statistical analysis with guardrail metrics, and rollback of underperforming experiments with a single click. This democratizes experimentation and increases the velocity of data-driven decision-making.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/global-traffic-routing.html">Global Traffic Routing</a>, <a href="/en/architecture/service-mesh-deep.html">Service Mesh Deep Dive</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/blue-green-deployment.html">Blue-Green Deployment Strategy</a>, <a href="/en/architecture/chaos-engineering.html">Chaos Engineering: Building Resilient Systems</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

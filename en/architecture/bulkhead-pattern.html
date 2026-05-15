@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-04-05",
-      "wordCount": "937",
+      "wordCount": "970",
       "keywords": "Architecture, System Design",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html"},
@@ -94,17 +96,18 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-04-05 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png" alt="Bulkhead Pattern for Resilience" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
-<h2>Bulkhead Pattern for Resilience</h2>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
+<h3>Bulkhead Pattern for Resilience</h3>
 <p>The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/bulkhead-pattern.png" alt="Bulkhead Pattern for Resilience" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Core Concept </p>
 <p>In a system without bulkheads, all requests compete for the same thread pool, database connection pool, or memory space. If one service becomes slow or unresponsive, its threads are held for extended periods. Eventually, the shared thread pool is exhausted, and all other services become unavailable—a catastrophic failure cascade. </p>
@@ -123,6 +126,7 @@
 <p>Bulkheads should also have sensible fallback behaviors. When a bulkhead is full, rejected requests can be queued (with a timeout), failed fast, or routed to a degraded fallback. The choice depends on the criticality of the dependency and the user experience requirements. </p>
 <p>In production, bulkheads are one of the most effective patterns for preventing cascading failures. Combined with monitoring, circuit breakers, and thoughtful timeout configuration, they form the backbone of a resilient distributed system.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/retry-backoff.html">Retry and Backoff Strategies</a>, <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/saga-pattern.html">Saga Pattern for Distributed Transactions</a>, <a href="/en/architecture/strangler-fig.html">Strangler Fig Pattern for Legacy Migration</a>, <a href="/en/architecture/backend-for-frontend.html">Backend for Frontend (BFF) Pattern</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

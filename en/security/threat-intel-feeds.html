@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "876",
+      "wordCount": "901",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html"},
@@ -96,24 +98,25 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
-<h2>Threat Intelligence Feeds</h2>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
+<h3>Threat Intelligence Feeds</h3>
 <p>Threat Intelligence Fundamentals </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png" alt="Threat Intelligence Feeds" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles. </p>
 <p>STIX and TAXII Standards </p>
 <p>STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. </p>
 <p>from stix2 import Indicator, Bundle, TAXIICollectionSource</p>
 <p>from taxii2client import Collection</p>
-<h2>Create a STIX indicator</h2>
+<h3>Create a STIX indicator</h3>
 <p>indicator = Indicator(</p>
 <p>name="Malicious IP",</p>
 <p>indicator_types=["malicious-activity"],</p>
@@ -121,10 +124,10 @@
 <p>pattern_type="stix",</p>
 <p>valid_from="2026-01-01T00:00:00Z"</p>
 <p>)</p>
-<h2>Bundle indicators</h2>
+<h3>Bundle indicators</h3>
 <p>bundle = Bundle(indicator)</p>
 <p>print(bundle.serialize(pretty=True))</p>
-<h2>Consume from TAXII feed</h2>
+<h3>Consume from TAXII feed</h3>
 <p>collection = Collection("https://taxii.example.com/collections/123")</p>
 <p>source = TAXIICollectionSource(collection)</p>
 <p>for indicator in source.query():</p>
@@ -154,13 +157,13 @@
 <p>Not all indicators are equally reliable. Implement scoring: </p>
 <p>def score_indicator(ioc, context):</p>
 <p>score = 50 # Base score</p>
-<h2>Age decay: newer indicators are more valuable</h2>
+<h3>Age decay: newer indicators are more valuable</h3>
 <p>age_days = (datetime.utcnow() - ioc.valid_from).days</p>
 <p>score -= min(age_days * 2, 30)</p>
-<h2>Multiple feeds increase confidence</h2>
+<h3>Multiple feeds increase confidence</h3>
 <p>feed_count = len(ioc.get("sources", []))</p>
 <p>score += feed_count * 10</p>
-<h2>Context matching increases relevance</h2>
+<h3>Context matching increases relevance</h3>
 <p>if context.get("industry") in ioc.get("target_industries", []):</p>
 <p>score += 20</p>
 <p>return min(max(score, 0), 100)</p>
@@ -169,7 +172,7 @@
 <p>| Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | &lt; 5% | | Time to detection | Speed of indicator publication | &lt; 1 hour | | Coverage | Breadth of TTPs covered | &gt; 80% | | Freshness | Update frequency | Continuous | </p>
 <p>Automated Blocking </p>
 <p>High-confidence indicators can trigger automated blocking: </p>
-<h2>threat-intel-automation.yaml</h2>
+<h3>threat-intel-automation.yaml</h3>
 <p>automation_rules:</p>
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips</p>
 <p>trigger: new_indicator</p>
@@ -186,6 +189,7 @@
 <p>Conclusion </p>
 <p>Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones.</p>
 <p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a>, <a href="/en/security/sbom-management.html">SBOM Management</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p>
 <p><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/security-information-event-management.html">SIEM: Security Information and Event Management</a>, <a href="/en/security/threat-hunting.html">Threat Hunting</a>, <a href="/en/security/container-runtime-security.html">Container Runtime Security</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

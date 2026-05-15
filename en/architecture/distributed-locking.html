@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-locking.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-04",
-      "wordCount": "988",
+      "wordCount": "1019",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-locking.png" alt="Distributed Locking Mechanisms" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
-<h2>Distributed Locking Mechanisms</h2>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
+<h3>Distributed Locking Mechanisms</h3>
 <p>Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-locking.png" alt="Distributed Locking Mechanisms" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Lease-based locking is the most common pattern. The lock has a time-to-live (TTL). The holder must periodically renew the lease before it expires. If the holder crashes or is partitioned, the lease expires and another process can acquire the lock. This prevents permanent lock holder failures. The critical implementation detail is choosing an appropriate lease duration — too short causes unnecessary lock releases, too long extends recovery time after holder failure. </p>
 <p>Redis-based locking is popular for its simplicity and performance. SET NX EX implements a basic distributed lock atomically — set the key only if it does not exist, with an expiration. The Redlock algorithm extends this to multiple Redis nodes for fault tolerance. However, Redlock has been subject to debate. Martin Kleppmann's analysis identified scenarios where clock drift or process pauses (garbage collection) can violate mutual exclusion guarantees. </p>
@@ -115,6 +118,7 @@
 <p>The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. </p>
 <p>Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>, <a href="/en/architecture/leader-election.html">Leader Election in Distributed Systems</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/rate-limiting-architecture.html">Rate Limiting Architecture</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/consensus-algorithms.html">Consensus Algorithms: Paxos, Raft, Zab</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png",
       "datePublished": "2026-05-15",
       "dateModified": "2026-05-08",
-      "wordCount": "574",
+      "wordCount": "615",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/pub-sub-patterns.html"},
@@ -92,31 +94,33 @@
       <div class="article-meta">Published 2026-05-15 · Last active 2026-05-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
-<h2>Pub-Sub Patterns: Event-Driven Communication</h2>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
+<h3>Pub-Sub Patterns: Event-Driven Communication</h3>
 <p>The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png" alt="Pub-Sub Patterns: Event-Driven Communication" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Core Concepts</h3>
+<h4>Core Concepts</h4>
 <p>A pub-sub system has three components: publishers that produce events, a message broker that routes events, and subscribers that consume events. Events are categorized into topics or channels. Subscribers register interest in specific topics and receive all events published to those topics.</p>
-<h3>Message Brokers</h3>
+<h4>Message Brokers</h4>
 <p>Apache Kafka is the most popular pub-sub system for high-throughput event streaming. Topics are partitioned for parallelism, and consumers organize into consumer groups for load-balanced consumption. Kafka retains events even after consumption, enabling replay and reprocessing.</p>
 <p>Redis Pub-Sub is lightweight but does not persist messages. If a subscriber is offline, messages are lost. This is suitable for real-time notifications where message loss is acceptable.</p>
 <p>Google Pub-Sub and AWS SNS provide managed pub-sub services with automatic scaling, dead letter queues, and exactly-once delivery guarantees.</p>
-<h3>At-Least-Once vs Exactly-Once</h3>
+<h4>At-Least-Once vs Exactly-Once</h4>
 <p>Most pub-sub systems provide at-least-once delivery. Subscribers must handle duplicate events through idempotent processing. Exactly-once delivery requires coordination between the broker, producer, and consumer—achievable with Kafka exactly-once semantics but with performance overhead.</p>
-<h3>Pattern Variations</h3>
+<h4>Pattern Variations</h4>
 <p>Topic-based pub-sub routes events by topic name. Content-based pub-sub routes events based on message content evaluation. Hybrid systems combine both approaches for flexible routing.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Design event schemas for backward compatibility. Use schema registries to manage schema evolution. Monitor subscription lag to detect consumer issues. Implement circuit breakers to handle slow consumers gracefully. Test subscriber failure scenarios to ensure system resilience.</p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/messaging-patterns.html">Messaging Patterns: Pub/Sub and Request/Reply</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/metric-collection.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-09",
-      "wordCount": "1177",
+      "wordCount": "1197",
       "keywords": "Technology, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Technology"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/metric-collection.html"},
@@ -96,48 +98,50 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-09 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/metric-collection.png" alt="Metric Collection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
-<h2>Metric Collection</h2>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
+<h3>Metric Collection</h3>
 <p>Metric collection is the practice of gathering numerical measurements from applications and infrastructure. Metrics provide insight into system health, performance, and usage patterns. This article covers the three main collection approaches—agent-based, pull-based, and push-based—along with cardinality management and best practices.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/metric-collection.png" alt="Metric Collection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Metric Types</h3>
+<h4>Metric Types</h4>
 <p>Metrics fall into several categories. System metrics measure infrastructure: CPU usage, memory consumption, disk I/O, network traffic. Application metrics measure software behavior: request rate, error rate, response time, queue depth. Business metrics measure business outcomes: orders per minute, active users, revenue.</p>
 <p>Each metric has a name, value, timestamp, and optional dimensions (labels or tags). Dimensions provide context: <code>http_requests_total{method="GET", path="/api/users", status="200"}</code>. Dimensions enable slicing and filtering of metric data.</p>
-<h3>Agent-Based Collection</h3>
+<h4>Agent-Based Collection</h4>
 <p>Agent-based collection runs a monitoring agent on each node. The agent collects system metrics (CPU, memory, disk, network) and forwards them to a central monitoring system. Examples include collectd, Telegraf, and Datadog Agent.</p>
 <p>Agents handle local aggregation and buffering, reducing the load on the central system. They can collect metrics that are only available locally (detailed process information, log file sizes). The agent's configuration controls which metrics are collected and at what frequency.</p>
 <p>Agent-based collection is reliable—the agent continues collecting even if the central system is unavailable. When connectivity is restored, buffered metrics are forwarded. The trade-off is the operational cost of managing agents on every node.</p>
-<h3>Pull-Based Collection</h3>
+<h4>Pull-Based Collection</h4>
 <p>Pull-based collection (also called scrape-based) has the monitoring system periodically fetch metrics from instrumented targets. Prometheus is the most prominent pull-based system. Each service exposes a metrics endpoint (<code>/metrics</code>) that Prometheus scrapes at configured intervals.</p>
 <p>Pull-based collection simplifies discovery. Prometheus queries a service discovery mechanism (Kubernetes, Consul) to find targets. New targets are automatically discovered and scraped. Scaling is straightforward: add scrapers to handle more targets.</p>
 <p>The pull model works well for batch workloads and scheduled jobs that are not always running. The Prometheus pushgateway bridges this gap by accepting pushed metrics from short-lived jobs for later scraping.</p>
-<h3>Push-Based Collection</h3>
+<h4>Push-Based Collection</h4>
 <p>Push-based collection has services actively send metrics to a central collector. Graphite, StatsD, and InfluxDB use push-based models. The service sends metrics at regular intervals or on specific events.</p>
 <p>Push-based collection is simpler to implement in application code—just send metrics to a known address. It works well for ephemeral services and serverless functions that may not be running when a pull-based system tries to scrape them.</p>
 <p>The trade-off is reliability. If the central collector is unavailable, metrics may be lost unless the client buffers them. Authorization needs to be handled differently since the collector receives connections from many sources.</p>
-<h3>Cardinality Management</h3>
+<h4>Cardinality Management</h4>
 <p>Metric cardinality refers to the number of unique dimension combinations. Each dimension value combination creates a unique metric time series. If you have a metric with dimensions <code>user_id</code> (10,000 values) and <code>action</code> (10 values), you have 100,000 time series.</p>
 <p>High cardinality causes performance problems. Monitoring systems struggle with millions of time series. Storage costs increase. Query performance degrades. The monitoring system may reject high-cardinality metrics entirely.</p>
 <p>Cardinality management limits uncontrolled dimension explosion. Avoid putting high-cardinality values (user IDs, session IDs, request IDs) as metric dimensions. Use logging or tracing for high-cardinality data instead. Aggregate metrics before sending to reduce unique series counts.</p>
-<h3>Collection Frequency</h3>
+<h4>Collection Frequency</h4>
 <p>Collection frequency balances granularity against cost. High-frequency collection (every 10 seconds) provides detailed data but increases storage and network costs. Low-frequency collection (every minute) reduces costs but may miss brief spikes.</p>
 <p>The appropriate frequency depends on the metric type. System metrics benefit from high frequency to detect brief CPU or memory spikes. Business metrics are typically fine with lower frequency. Different metrics can have different collection intervals.</p>
-<h3>Best Practices</h3>
+<h4>Best Practices</h4>
 <p>Use consistent metric naming conventions. Follow a hierarchical naming structure: <code>service.layer.operation.unit</code> (e.g., <code>orders.api.create.latency_seconds</code>). Include meaningful dimensions while avoiding cardinality explosion.</p>
 <p>Define metric types clearly. Counters increase monotonically (total requests). Gauges represent current values (active connections). Histograms track distributions (request latency). Summaries provide quantile estimates.</p>
 <p>Instrument all services from the start. Adding metrics after deployment is harder than building them in. Establish SLIs (Service Level Indicators) for each service and monitor them consistently. Correlate metrics with deployment events to identify performance regressions.</p>
 <p>Metric collection is the foundation of observability. Well-designed metrics enable rapid diagnosis, capacity planning, and performance optimization. Combined with structured logging and distributed tracing, metrics provide the visibility needed to operate complex distributed systems reliably.</p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a></p>
 <p><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>, <a href="/en/tech/configuration-management.html">Configuration Management</a>, <a href="/en/tech/error-handling-patterns.html">Error Handling Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

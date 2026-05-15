@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-03",
-      "wordCount": "728",
+      "wordCount": "782",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/key-value-stores.html"},
@@ -93,33 +95,35 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-03 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png" alt="Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
-<h2>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h2>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
+<h3>Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB</h3>
 <p>Key-value stores are the simplest NoSQL databases—data is stored as values identified by unique keys. They offer the highest performance and scalability because of their simple data model. Key-value stores are ideal for caching, session management, and high-throughput lookups.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/key-value-stores.png" alt="Key-Value Stores: Redis, DynamoDB, LevelDB, RocksDB" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Redis</h3>
+<h4>Redis</h4>
 <p>Redis is an in-memory key-value store with optional persistence. It supports rich data structures: strings, hashes, lists, sets, sorted sets, streams, and geospatial indexes. Redis is the dominant choice for caching, real-time analytics, and session management.</p>
 <p>Redis performance is exceptional—sub-millisecond latency for most operations. Redis Cluster provides automatic sharding across multiple nodes. Redis Sentinel provides high availability with automatic failover.</p>
-<h3>DynamoDB</h3>
+<h4>DynamoDB</h4>
 <p>DynamoDB is AWS's managed key-value and document database. It offers single-digit millisecond performance at any scale, automatic multi-region replication, and fully managed infrastructure. DynamoDB uses a partition key for data distribution and an optional sort key for ordering within partitions.</p>
 <p>DynamoDB's pricing model charges for read and write capacity units. Auto-scaling adjusts capacity based on traffic. On-demand mode eliminates capacity planning but costs more per operation. DynamoDB Accelerator (DAX) provides in-memory caching for read-heavy workloads.</p>
-<h3>LevelDB and RocksDB</h3>
+<h4>LevelDB and RocksDB</h4>
 <p>LevelDB is an embedded key-value store by Google, optimized for fast writes. It stores data on local disk with log-structured merge (LSM) tree structure. It offers excellent write throughput with moderate read performance.</p>
 <p>RocksDB is a fork of LevelDB by Facebook, optimized for flash storage. It provides better performance on SSDs through compaction optimizations and bloom filter enhancements. RocksDB is commonly used as a storage engine for other databases (MySQL MyRocks, Kafka Streams).</p>
-<h3>Choosing a Key-Value Store</h3>
+<h4>Choosing a Key-Value Store</h4>
 <p>Use Redis for in-memory caching, session state, real-time analytics, and pub-sub messaging. Use DynamoDB for managed serverless workloads that need single-digit millisecond latency at any scale. Use RocksDB or LevelDB for embedded storage, local caching, and database storage engines.</p>
 <p>Consider total cost of ownership. Redis requires managing memory and cluster topology. DynamoDB eliminates management but costs more at high throughput. Embedded stores have no operational cost but limited capacity.</p>
-<h3>Key-Value Store Best Practices</h3>
+<h4>Key-Value Store Best Practices</h4>
 <p>Design keys carefully to avoid hot partitions. Prefix keys with a namespace for organizational clarity. Set TTL (time-to-live) for temporary data. Use connection pooling for client efficiency. Monitor latency and throughput to detect capacity issues early.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/database-caching.html">Database Caching</a>, <a href="/en/database/redis-caching-patterns.html">Redis Caching Patterns</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p>
 <p><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-types-overview.html">Database Types Overview: Relational, Document, Key-Value, Graph, Time-Series, Vector</a>, <a href="/en/database/time-series-postgresql.html">Time-Series with PostgreSQL: TimescaleDB, Hypertables, and Aggregates</a>, <a href="/en/database/wide-column-databases.html">Wide-Column Databases: Cassandra, HBase, ScyllaDB</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

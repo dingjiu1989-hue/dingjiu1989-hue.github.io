@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-embeddings-explained.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-15",
-      "wordCount": "1407",
+      "wordCount": "1437",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-embeddings-explained.html"},
@@ -95,25 +97,26 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-embeddings-explained.png" alt="AI Embeddings Explained" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h2>AI Embeddings Explained</h2>
-<h3>Introduction</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h3>AI Embeddings Explained</h3>
+<h4>Introduction</h4>
 <p>Embeddings are the foundation of modern AI applications — powering semantic search, recommendation systems, clustering, and classification. At their core, embeddings convert text, images, or other data into dense vector representations that capture semantic meaning. This guide explains what embeddings are, how they work, and how to use them effectively.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-embeddings-explained.png" alt="AI Embeddings Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>What Are Embeddings?</h3>
+<h4>What Are Embeddings?</h4>
 <p>An embedding is a numerical representation of data — typically a list of floating-point numbers — where the position in vector space encodes semantic meaning. Similar concepts cluster together, while dissimilar concepts are far apart.</p>
 <p>For example, the embeddings for "king" and "queen" would be closer to each other than to "bicycle." More importantly, embeddings capture analogical relationships: the vector operation <code>king - man + woman</code> produces a vector close to <code>queen</code>.</p>
 <p>Modern embedding models produce vectors with 384 to 3072 dimensions. The trade-off is speed versus information density: smaller vectors are faster to compare but capture less nuance.</p>
-<h3>How Embeddings Are Generated</h3>
+<h4>How Embeddings Are Generated</h4>
 <p>Embedding models are trained using contrastive learning. The model learns to pull semantically similar texts together in vector space while pushing dissimilar texts apart.</p>
 <p><strong>The training signal is typically:</strong></p>
 <ul>
@@ -125,7 +128,7 @@
 </li>
 </ul>
 <p>The most common loss function is <strong>contrastive loss</strong> or <strong>InfoNCE loss</strong> , which uses in-batch negative sampling to provide training signal at scale.</p>
-<h3>Popular Embedding Models</h3>
+<h4>Popular Embedding Models</h4>
 <p>| Model | Dimensions | Best For | Size |</p>
 <p>|-------|-----------|----------|------|</p>
 <p>| text-embedding-3-small | 512-1536 | General purpose | API |</p>
@@ -134,7 +137,7 @@
 <p>| sentence-transformers/all-MiniLM-L6-v2 | 384 | Speed-critical apps | 80 MB |</p>
 <p>| intfloat/e5-mistral-7b-instruct | 4096 | Highest quality | 14 GB |</p>
 <p>For production RAG systems, <code>bge-large-en-v1.5</code> offers an excellent balance of quality and speed. For mobile or latency-sensitive applications, <code>all-MiniLM-L6-v2</code> is the standard choice.</p>
-<h3>Using Embeddings in Practice</h3>
+<h4>Using Embeddings in Practice</h4>
 <h4>Generating Embeddings</h4>
 <p>from sentence_transformers import SentenceTransformer</p>
 <p>model = SentenceTransformer("BAAI/bge-large-en-v1.5")</p>
@@ -159,7 +162,7 @@
 <p>reducer = umap.UMAP(n_components=2, random_state=42)</p>
 <p>embeddings_2d = reducer.fit_transform(embeddings)</p>
 <p>UMAP preserves more global structure than t-SNE and is significantly faster for large datasets.</p>
-<h3>Advanced Techniques</h3>
+<h4>Advanced Techniques</h4>
 <h4>Multi-Task Embeddings</h4>
 <p>Some models can produce different embeddings for different tasks by prepending task-specific prefixes. For example, <code>bge</code> models use:</p>
 <ul>
@@ -173,16 +176,17 @@
 <p>This simple technique improves retrieval accuracy by 2-5% in production systems.</p>
 <h4>Matryoshka Embeddings</h4>
 <p>Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vectors where the first N dimensions form a valid, lower-quality embedding. You can truncate the vector at inference time to trade accuracy for speed and storage — using 256 dimensions for initial retrieval and 1536 for re-ranking.</p>
-<h3>Common Pitfalls</h3>
+<h4>Common Pitfalls</h4>
 <ul>
 <li><strong>Not normalizing embeddings</strong> : Always normalize unless you have a specific reason not to</li>
 </ul>
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Using raw cosine similarity with unnormalized vectors</strong> : Results are dominated by vector magnitude</p>
 <p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Ignoring domain mismatch</strong> : Embedding models trained on general web text may perform poorly on medical or legal text</p>
 <p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Fixed chunk sizes in RAG</strong> : Large chunks dilute meaning; small chunks lose context</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>Embeddings are a versatile and powerful tool in the AI practitioner's toolkit. They enable semantic search, document clustering, recommendation systems, and are the backbone of RAG architectures. Choosing the right model, normalizing properly, and understanding the trade-offs between dimension count and performance will determine the success of your embedding-based application.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-code-generation.html">AI Code Generation Best Practices</a>, <a href="/en/ai/rag-architecture-guide.html">RAG Architecture Guide</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-agents-guide.html">AI Agents for Developers: A Practical Guide to Building and Using Agents</a>, <a href="/en/ai/ai-document-processing.html">AI Document Processing</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-agents-guide.html">AI Agents for Developers: A Practical Guide to Building and Using Agents</a>, <a href="/en/ai/ai-document-processing.html">AI Document Processing</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-fine-tuning.html">LLM Fine-Tuning Guide</a>, <a href="/en/ai/ai-agents-guide.html">AI Agents for Developers: A Practical Guide to Building and Using Agents</a>, <a href="/en/ai/ai-document-processing.html">AI Document Processing</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

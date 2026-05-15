@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/batch-operations.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-07",
-      "wordCount": "1720",
+      "wordCount": "1774",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/batch-operations.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-07 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/batch-operations.png" alt="Batch Operations: Bulk Insert, COPY, and Batch Size Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
-<h2>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h2>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
+<h3>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h3>
 <p>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/batch-operations.png" alt="Batch Operations: Bulk Insert, COPY, and Batch Size Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Loading or updating large volumes of data row-by-row is prohibitively slow. Batch operations reduce overhead by orders of magnitude. This article covers bulk insert techniques, PostgreSQL's COPY command, batch updates, and the art of choosing the right batch size. </p>
 <p>Row-by-Row is Slow </p>
@@ -125,7 +128,7 @@
 <p>Network round trip</p>
 </li>
 </ul>
-<h2>SLOW: one round trip per row</h2>
+<h3>SLOW: one round trip per row</h3>
 <p>for row in dataset:</p>
 <p>cursor.execute("INSERT INTO users (email, name) VALUES (%s, %s)", row)</p>
 <p>For 100,000 rows, that is 100,000 round trips. Batch operations reduce this to one. </p>
@@ -140,7 +143,7 @@
 <p>data = [</p>
 <p>("alice@example.com", "Alice"),</p>
 <p>("bob@example.com", "Bob"),</p>
-<h2>... 1000 rows</h2>
+<h3>... 1000 rows</h3>
 <p>]</p>
 <p>execute_values(</p>
 <p>cursor,</p>
@@ -151,7 +154,7 @@
 <p>)</p>
 <p>Using asyncpg </p>
 <p>import asyncpg</p>
-<h2>executemany with prepared statement reuse</h2>
+<h3>executemany with prepared statement reuse</h3>
 <p>await conn.executemany(</p>
 <p>"INSERT INTO users (email, name) VALUES ($1, $2)",</p>
 <p>[("alice@example.com", "Alice"), ("bob@example.com", "Bob")]</p>
@@ -192,7 +195,7 @@
 <p>WHERE users.id = data.id</p>
 <p>""", (user_ids, emails))</p>
 <p>Using a Temporary Table </p>
-<h2>Create temp table</h2>
+<h3>Create temp table</h3>
 <p>cursor.execute("""</p>
 <p>CREATE TEMP TABLE tmp_updates (</p>
 <p>id INTEGER PRIMARY KEY,</p>
@@ -200,13 +203,13 @@
 <p>name TEXT</p>
 <p>) ON COMMIT DROP</p>
 <p>""")</p>
-<h2>COPY into temp table</h2>
+<h3>COPY into temp table</h3>
 <p>buffer = io.StringIO()</p>
 <p>writer = csv.writer(buffer)</p>
 <p>writer.writerows(update_data)</p>
 <p>buffer.seek(0)</p>
 <p>cursor.copy_expert("COPY tmp_updates FROM STDIN WITH CSV", buffer)</p>
-<h2>Join update</h2>
+<h3>Join update</h3>
 <p>cursor.execute("""</p>
 <p>UPDATE users u</p>
 <p>SET email = t.email, name = t.name</p>
@@ -279,6 +282,7 @@
 <p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Load into staging, then INSERT INTO users SELECT FROM staging</p>
 <p>Batch operations are essential for ETL pipelines, data migrations, and any workflow that moves large volumes of data. Measure your batch sizes, use COPY when possible, and always handle errors gracefully.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/database-connection-pooling.html">Connection Pooling: Tuning, Best Practices, and Pitfalls</a>, <a href="/en/database/database-foreign-key-constraints.html">Foreign Key Constraints: Referential Integrity in Practice</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p>
 <p><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/index-maintenance.html">Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

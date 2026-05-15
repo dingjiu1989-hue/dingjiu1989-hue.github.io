@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "1122",
+      "wordCount": "1141",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/clickjacking-protection.html"},
@@ -96,19 +98,20 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png" alt="Clickjacking Protection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
-<h2>Clickjacking Protection</h2>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
+<h3>Clickjacking Protection</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/clickjacking-protection.png" alt="Clickjacking Protection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Clickjacking, also known as a UI redress attack, tricks users into clicking on something different from what they perceive. An attacker embeds a target page in a transparent iframe overlaid on a decoy interface. When the user clicks a visible button, they actually interact with the hidden target page — potentially authorizing a transaction, changing settings, or granting permissions. </p>
 <p>How Clickjacking Works </p>
@@ -117,18 +120,18 @@
 <p>The user sees a game or prize button but actually clicks the bank's transfer confirmation. With precise CSS positioning, the attacker makes the real button overlap the decoy. </p>
 <p>X-Frame-Options </p>
 <p>X-Frame-Options is a response header that controls whether a page can be displayed in an iframe. </p>
-<h2>Deny all framing</h2>
+<h3>Deny all framing</h3>
 <p>add_header X-Frame-Options "DENY" always;</p>
-<h2>Allow only same-origin framing</h2>
+<h3>Allow only same-origin framing</h3>
 <p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
-<h2>Flask example: set X-Frame-Options</h2>
+<h3>Flask example: set X-Frame-Options</h3>
 <p>from flask import Flask, make_response</p>
 <p>app = Flask(<strong>name</strong>)</p>
 <p>@app.after_request</p>
 <p>def set_frame_options(response):</p>
 <p>response.headers['X-Frame-Options'] = 'SAMEORIGIN'</p>
 <p>return response</p>
-<h2>For sensitive pages (banking, admin panels), use DENY</h2>
+<h3>For sensitive pages (banking, admin panels), use DENY</h3>
 <p>@app.route('/admin/transfer')</p>
 <p>def admin_transfer():</p>
 <p>response = make_response(render_template('transfer.html'))</p>
@@ -137,16 +140,16 @@
 <p>X-Frame-Options has three values: <code>DENY</code> (no framing ever), <code>SAMEORIGIN</code> (same-origin only), and <code>ALLOW-FROM</code> (deprecated, not supported in modern browsers). </p>
 <p>CSP frame-ancestors </p>
 <p>Content Security Policy's <code>frame-ancestors</code> directive supersedes X-Frame-Options with more granular control. It specifies which origins are allowed to embed the page. </p>
-<h2>Allow only same-origin</h2>
+<h3>Allow only same-origin</h3>
 <p>add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
-<h2>Allow specific origins</h2>
+<h3>Allow specific origins</h3>
 <p>add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.example.com" always;</p>
-<h2>Allow none (equivalent to DENY)</h2>
+<h3>Allow none (equivalent to DENY)</h3>
 <p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
-<h2>Allow multiple specific origins</h2>
+<h3>Allow multiple specific origins</h3>
 <p>add_header Content-Security-Policy "frame-ancestors https://app1.example.com https://app2.example.com" always;</p>
 <p>When both X-Frame-Options and CSP <code>frame-ancestors</code> are present, browsers honor the more restrictive policy. CSP <code>frame-ancestors</code> is preferred because it supports multiple origins. </p>
-<h2>Python/Flask CSP middleware</h2>
+<h3>Python/Flask CSP middleware</h3>
 <p>from flask import Flask</p>
 <p>from flask_talisman import Talisman</p>
 <p>app = Flask(<strong>name</strong>)</p>
@@ -185,13 +188,13 @@
 </li>
 </ul>
 <p>Testing for Clickjacking Vulnerabilities </p>
-<h2>Test with curl</h2>
+<h3>Test with curl</h3>
 <p>curl -I https://target-website.com/admin | grep -i "x-frame-options|content-security-policy"</p>
-<h2>Check for frame-ancestors specifically</h2>
+<h3>Check for frame-ancestors specifically</h3>
 <p>curl -sI https://target-website.com | \</p>
 <p>grep -E 'X-Frame-Options|frame-ancestors' || \</p>
 <p>echo "NO PROTECTION DETECTED"</p>
-<h2>Python automated check</h2>
+<h3>Python automated check</h3>
 <p>python3 -c "</p>
 <p>import requests</p>
 <p>urls = [</p>
@@ -212,19 +215,19 @@
 <p>print(f'[VULNERABLE] {url}: No framing protection')</p>
 <p>"</p>
 <p>Comprehensive Protection Strategy </p>
-<h2>Nginx: full clickjacking protection</h2>
+<h3>Nginx: full clickjacking protection</h3>
 <p>server {</p>
-<h2>X-Frame-Options as fallback</h2>
+<h3>X-Frame-Options as fallback</h3>
 <p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
-<h2>CSP frame-ancestors as modern replacement</h2>
+<h3>CSP frame-ancestors as modern replacement</h3>
 <p>add_header Content-Security-Policy "frame-ancestors 'self'" always;</p>
 <p>location /admin/ {</p>
-<h2>Stricter for sensitive areas</h2>
+<h3>Stricter for sensitive areas</h3>
 <p>add_header X-Frame-Options "DENY" always;</p>
 <p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
 <p>}</p>
 <p>location /api/ {</p>
-<h2>APIs should never be framed</h2>
+<h3>APIs should never be framed</h3>
 <p>add_header X-Frame-Options "DENY" always;</p>
 <p>add_header Content-Security-Policy "frame-ancestors 'none'" always;</p>
 <p>}</p>
@@ -232,6 +235,7 @@
 <p>Conclusion </p>
 <p>Clickjacking is one of the easiest vulnerabilities to prevent but remains surprisingly common. Set <code>X-Frame-Options: DENY</code> or <code>SAMEORIGIN</code> on every response, and use CSP <code>frame-ancestors</code> for fine-grained control. For the strongest protection, deploy both headers, and always test new pages before deployment.</p>
 <p><strong>See also:</strong> <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/penetration-testing.html">Penetration Testing Methodology</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p>
 <p><strong>See also:</strong> <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/email-security.html">Email Security</a>, <a href="/en/security/content-security-policy.html">Content Security Policy</a>, <a href="/en/security/cloud-iam.html">Cloud IAM Deep Dive</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

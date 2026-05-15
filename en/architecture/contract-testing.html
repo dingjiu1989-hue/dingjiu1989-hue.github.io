@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-04-08",
-      "wordCount": "607",
+      "wordCount": "642",
       "keywords": "Architecture, System Design, Backend",
+      "about": [{"@type": "Thing", "name": "Architecture"}, {"@type": "Thing", "name": "System Design"}, {"@type": "Thing", "name": "Backend"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/contract-testing.html"},
@@ -96,33 +98,35 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-04-08 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
-<h2>Contract Testing for Microservices</h2>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
+<h3>Contract Testing for Microservices</h3>
 <p>Contract testing verifies that a service provider meets the expectations of its consumers without running the full system. Each consumer defines the contract—specific API behavior it depends on. The provider validates against all consumer contracts in its CI pipeline.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/contract-testing.png" alt="Contract Testing for Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Why Contract Testing</h3>
+<h4>Why Contract Testing</h4>
 <p>End-to-end testing is slow, brittle, and expensive for microservices. Deploying a full test environment with every service is impractical at scale. Contract testing provides rapid feedback with minimal infrastructure. A provider can verify contract compatibility in seconds, not hours.</p>
 <p>Contract testing catches breaking changes before deployment. If a provider change would break any consumer, the contract test fails in CI. The provider team knows immediately and can adjust before the change reaches production.</p>
-<h3>Consumer Tests</h3>
+<h4>Consumer Tests</h4>
 <p>Consumer tests define how the consumer uses the provider's API. A consumer test for a user service might specify: GET /users/123 should return a response with id, name, and email fields. The test records this expectation as a contract file.</p>
 <p>Consumer tests use Pact's mock provider. The mock returns realistic responses, allowing the consumer to validate its own API usage without the real provider running.</p>
-<h3>Provider Verification</h3>
+<h4>Provider Verification</h4>
 <p>Provider tests verify that the real provider API satisfies all consumer contracts. The provider loads contract files from consumers and runs Pact verification against its actual API. Each endpoint, parameter, and response field specified in the contract is checked against the provider's actual behavior.</p>
 <p>Provider verification runs in CI, typically before deployment. A failed verification blocks the release and notifies the provider team.</p>
-<h3>CI Integration</h3>
+<h4>CI Integration</h4>
 <p>Publish consumer contract files to a Pact Broker after the consumer's CI passes. The Pact Broker maintains contract version history, webhook notifications, and can-i-deploy queries. Provider CI fetches the latest contracts, runs verification, and reports results back to the broker.</p>
 <p>The can-i-deploy tool checks whether a provider version is compatible with the version of each consumer that will consume it. This prevents incompatible deployments.</p>
-<h3>Adoption</h3>
+<h4>Adoption</h4>
 <p>Start with one service pair. Choose a provider with multiple consumers to maximize value. Establish the Pact Broker as shared infrastructure. Train teams on writing consumer tests. Gradually expand contract coverage across the organization.</p>
 <p><strong>See also:</strong> <a href="/en/tech/testing-strategies.html">Testing Strategies</a>, <a href="/en/tech/api-documentation.html">API Documentation</a>, <a href="/en/tech/ci-cd-best-practices.html">CI/CD Best Practices</a>.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p>
 <p><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/consumer-driven-contracts.html">Consumer-Driven Contracts in Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>, <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-10",
-      "wordCount": "1864",
+      "wordCount": "1887",
       "keywords": "Security, DevOps, Cloud",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "DevOps"}, {"@type": "Thing", "name": "Cloud"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/data-masking.html"},
@@ -96,19 +98,20 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-10 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
-<h2>Data Masking and Redaction</h2>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
+<h3>Data Masking and Redaction</h3>
 <p>Introduction </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png" alt="Data Masking and Redaction" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified — it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. </p>
 <p>Static Data Masking </p>
@@ -213,13 +216,13 @@
 <p>elif field in ('ssn', 'social_security'):</p>
 <p>result[field] = f"<strong>*-</strong> -{value[-4:]}"</p>
 <p>elif 'card' in field.lower():</p>
-<p>result[field] = f"<strong>__-_</strong><em> -</em> _**-{value[-4:]}"</p>
+<p>result[field] = f"<strong>__-_</strong><em>-</em> _**-{value[-4:]}"</p>
 <p>return result</p>
 <p>return wrapper</p>
 <p>return decorator</p>
 <p>@mask_sensitive_fields(['email', 'phone', 'credit_card'])</p>
 <p>def get_user_profile(user_id):</p>
-<h2>Returns full data; masking applied by decorator</h2>
+<h3>Returns full data; masking applied by decorator</h3>
 <p>return {</p>
 <p>'user_id': user_id,</p>
 <p>'email': 'john.doe@example.com',</p>
@@ -234,10 +237,10 @@
 <p>self.token_prefix = "tok_"</p>
 <p>def tokenize(self, sensitive_value, context):</p>
 <p>"""Replace sensitive value with a token."""</p>
-<h2>Generate unique token</h2>
+<h3>Generate unique token</h3>
 <p>token_id = secrets.token_hex(16)</p>
 <p>token = f"{self.token_prefix}{token_id}"</p>
-<h2>Store mapping in secure vault</h2>
+<h3>Store mapping in secure vault</h3>
 <p>self.vault.store(</p>
 <p>f"tokens/{token}",</p>
 <p>{</p>
@@ -255,11 +258,11 @@
 <p>if requester_role not in ['admin', 'auditor', 'compliance']:</p>
 <p>raise PermissionError("Not authorized to detokenize")</p>
 <p>record = self.vault.retrieve(f"tokens/{token}")</p>
-<h2>Increment access counter</h2>
+<h3>Increment access counter</h3>
 <p>record['access_count'] += 1</p>
 <p>record['last_accessed'] = datetime.utcnow().isoformat()</p>
 <p>self.vault.store(f"tokens/{token}", record)</p>
-<h2>Log access</h2>
+<h3>Log access</h3>
 <p>self._audit_log('detokenize', token, requester_role)</p>
 <p>return record['value']</p>
 <p>GDPR Compliance </p>
@@ -317,6 +320,7 @@
 <p>Conclusion </p>
 <p>Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications.</p>
 <p><strong>See also:</strong> <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/iac-security.html">Infrastructure as Code Security</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p>
 <p><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/malware-analysis.html">Malware Analysis Fundamentals</a>, <a href="/en/security/privacy-engineering.html">Privacy Engineering</a>, <a href="/en/security/audit-logging.html">Audit Logging Best Practices</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

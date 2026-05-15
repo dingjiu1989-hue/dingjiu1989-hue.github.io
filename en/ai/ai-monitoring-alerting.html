@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-15",
-      "wordCount": "1696",
+      "wordCount": "1759",
       "keywords": "AI, Machine Learning, LLM",
+      "about": [{"@type": "Thing", "name": "AI"}, {"@type": "Thing", "name": "Machine Learning"}, {"@type": "Thing", "name": "LLM"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-monitoring-alerting.html"},
@@ -96,21 +98,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h2>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h2>
-<h3>Introduction</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h3>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h3>
+<h4>Introduction</h4>
 <p>AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png" alt="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Core Metrics</h3>
+<h4>Core Metrics</h4>
 <p>Every AI application should track these foundational metrics:</p>
 <p>from prometheus_client import Counter, Histogram, Gauge</p>
 <p>import time</p>
@@ -144,7 +147,7 @@
 <p>self.token_usage.labels(provider=provider, model=model, token_type="input").inc(input_tokens)</p>
 <p>self.token_usage.labels(provider=provider, model=model, token_type="output").inc(output_tokens)</p>
 <p>self.cost_total.labels(provider=provider, model=model).inc(cost)</p>
-<h3>Token Usage Tracking</h3>
+<h4>Token Usage Tracking</h4>
 <p>Monitor token consumption per user, feature, and time period:</p>
 <p>class TokenUsageTracker:</p>
 <p>def <strong>init</strong>(self, db):</p>
@@ -172,7 +175,7 @@
 <p>WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE</p>
 <p>""", user_id)</p>
 <p>return (row["today_cost"] or 0) &lt; daily_budget</p>
-<h3>Error Rate Monitoring</h3>
+<h4>Error Rate Monitoring</h4>
 <p>LLM applications experience distinctive error types:</p>
 <p>from enum import Enum</p>
 <p>class LLMErrorType(Enum):</p>
@@ -198,7 +201,7 @@
 <p>if rate &gt; self.alert_threshold:</p>
 <p>alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}")</p>
 <p>return alerts</p>
-<h3>Drift Detection</h3>
+<h4>Drift Detection</h4>
 <p>The most critical AI-specific monitoring: detect when model behavior changes:</p>
 <p>import numpy as np</p>
 <p>from scipy import stats</p>
@@ -228,33 +231,34 @@
 <p>) / len(recent_responses)</p>
 <p>change = abs(current_rate - baseline_rate)</p>
 <p>return {"changed": change &gt; 0.05, "baseline": baseline_rate, "current": current_rate, "change": change}</p>
-<h3>Alerting Configuration</h3>
+<h4>Alerting Configuration</h4>
 <p>class AIAlertManager:</p>
 <p>def <strong>init</strong>(self, pagerduty_key: str, slack_webhook: str):</p>
 <p>self.pagerduty = pagerduty_key</p>
 <p>self.slack = slack_webhook</p>
 <p>def check_and_alert(self, metrics: dict):</p>
 <p>alerts = []</p>
-<h2>Latency alerts</h2>
+<h3>Latency alerts</h3>
 <p>if metrics.get("p99_latency_ms", 0) &gt; 10000:</p>
 <p>alerts.append(Alert(severity="critical", title="High P99 latency",</p>
 <p>message=f"P99 latency is {metrics['p99_latency_ms']}ms"))</p>
-<h2>Error rate alerts</h2>
+<h3>Error rate alerts</h3>
 <p>if metrics.get("error_rate", 0) &gt; 0.05:</p>
 <p>alerts.append(Alert(severity="critical", title="Elevated error rate",</p>
 <p>message=f"Error rate is {metrics['error_rate']:.1%}"))</p>
-<h2>Cost anomaly alerts</h2>
+<h3>Cost anomaly alerts</h3>
 <p>if metrics.get("daily_cost", 0) &gt; metrics.get("daily_budget", float("inf")) * 1.2:</p>
 <p>alerts.append(Alert(severity="warning", title="Cost anomaly detected",</p>
 <p>message=f"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget"))</p>
-<h2>Drift alerts</h2>
+<h3>Drift alerts</h3>
 <p>if metrics.get("drift_detected", False):</p>
 <p>alerts.append(Alert(severity="warning", title="Response drift detected",</p>
 <p>message=f"Drift score: {metrics.get('drift_score', 0):.3f}"))</p>
 <p>return alerts</p>
-<h3>Conclusion</h3>
+<h4>Conclusion</h4>
 <p>AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline.</p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/ai-testing-frameworks.html">AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</a>, <a href="/en/ai/ai-gateway.html">AI Gateway: API Routing, Rate Limiting, Fallback Models, Cost Management, and Logging</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/llm-observability.html">LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/llm-version-management.html">LLM Version Management: Model Registry, A/B Testing, Rollback</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

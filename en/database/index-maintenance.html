@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-09",
-      "wordCount": "2159",
+      "wordCount": "2213",
       "keywords": "Database, Backend, Data",
+      "about": [{"@type": "Thing", "name": "Database"}, {"@type": "Thing", "name": "Backend"}, {"@type": "Thing", "name": "Data"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/index-maintenance.html"},
@@ -93,17 +95,18 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
-<h2>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h2>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
+<h3>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning</h3>
 <p>Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/index-maintenance.png" alt="Index Maintenance: Bloat, Rebuild, Reindex, and Fillfactor Tuning" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Indexes degrade over time. PostgreSQL's MVCC architecture creates dead index entries that waste space and slow down scans. Regular maintenance keeps indexes healthy and query performance predictable. </p>
 <p>Index Bloat </p>
@@ -139,7 +142,7 @@
 </ul>
 <p>External Tools </p>
 <p><code>pg_repack</code> rebuilds indexes without locks: </p>
-<h2>Rebuild all indexes on a table without blocking writes</h2>
+<h3>Rebuild all indexes on a table without blocking writes</h3>
 <p>pg_repack -h localhost -d mydb --table orders -o idx_orders_user_id</p>
 <p>REINDEX </p>
 <p><code>REINDEX</code> rebuilds an index from scratch, eliminating bloat and restoring optimal structure: </p>
@@ -189,7 +192,7 @@
 <p>Automated Maintenance </p>
 <p>Autovacuum Configuration </p>
 <p>Autovacuum manages both table and index cleanup: </p>
-<h2>postgresql.conf</h2>
+<h3>postgresql.conf</h3>
 <p>autovacuum = on</p>
 <p>autovacuum_naptime = 1min</p>
 <p>autovacuum_vacuum_scale_factor = 0.01</p>
@@ -241,6 +244,7 @@
 <p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Use CONCURRENTLY</strong> for all production REINDEX operations. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Tune fillfactor</strong> per table based on update frequency. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Schedule index maintenance</strong> during low-traffic periods using pg_cron. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Drop unused indexes</strong> identified by <code>pg_stat_user_indexes</code> with <code>idx_scan = 0</code>. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. <strong>Consider BRIN indexes</strong> for append-only tables to avoid B-tree bloat entirely. </p>
 <p>Index maintenance is not a one-time activity. Build monitoring and automation into your database operations, and check index health as part of your regular performance review cycle.</p>
 <p><strong>See also:</strong> <a href="/en/database/database-vacuuming-maintenance.html">PostgreSQL Vacuuming: Maintenance, Tuning, and Automation</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>.</p>
+<p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p>
 <p><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a>, <a href="/en/database/composite-indexes.html">Composite Indexes: Column Order, Covering Indexes, and Partial Indexes</a>, <a href="/en/database/full-text-search-postgresql.html">Full-Text Search in PostgreSQL: tsvector, tsquery, GIN Indexes</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

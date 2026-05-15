@@ -46,8 +46,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-09",
-      "wordCount": "1692",
+      "wordCount": "1729",
       "keywords": "Security, Cybersecurity",
+      "about": [{"@type": "Thing", "name": "Security"}, {"@type": "Thing", "name": "Cybersecurity"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/xsrf-csrf-protection.html"},
@@ -94,19 +96,20 @@
       <div class="article-meta">Published 2026-05-11 · Last active 2026-05-09 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png" alt="XSRF/CSRF Protection Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
-<h2>XSRF/CSRF Protection Guide</h2>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
+<h3>XSRF/CSRF Protection Guide</h3>
 <p>What Is CSRF? </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/security/xsrf-csrf-protection.png" alt="XSRF/CSRF Protection Guide" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Cross-Site Request Forgery (CSRF or XSRF) is an attack that forces an authenticated user to execute unwanted actions on a web application. The attacker crafts a malicious page that, when visited by the victim, automatically submits a request to the target application using the victim's existing session cookies. </p>
 <p>Attack Scenario </p>
@@ -139,9 +142,9 @@
 <p>Transfer</p>
 <p>Framework Built-In Support </p>
 <p>Most modern frameworks include CSRF protection: </p>
-<h2>Django</h2>
+<h3>Django</h3>
 <p>{% csrf_token %} </p>
-<h2>Rails</h2>
+<h3>Rails</h3>
 <p>&lt;%= csrf_meta_tags %&gt;</p>
 <p>&lt;%= hidden_field_tag :authenticity_token, form_authenticity_token %&gt;</p>
 <p>// Spring Security</p>
@@ -156,7 +159,7 @@
 <p>Defense 2: SameSite Cookies </p>
 <p>The <code>SameSite</code> cookie attribute tells the browser when to send cookies with cross-origin requests. </p>
 <p>| Attribute | Behavior | Security | |-----------|----------|----------| | <code>Strict</code> | Cookie sent only for same-site requests | Most secure, breaks some legitimate cross-site flows | | <code>Lax</code> | Cookie sent for top-level GET navigations | Good balance for most apps | | <code>None</code> | Cookie sent for all requests (requires Secure) | Insecure, use only when necessary | </p>
-<h2>Django settings</h2>
+<h3>Django settings</h3>
 <p>SESSION_COOKIE_SAMESITE = 'Lax'</p>
 <p>CSRF_COOKIE_SAMESITE = 'Lax'</p>
 <p>// Express with cookie-session</p>
@@ -210,6 +213,7 @@
 <p>Summary </p>
 <p>CSRF attacks exploit the browser's automatic inclusion of credentials in cross-origin requests. Defend using synchronizer token patterns for traditional server-rendered apps, SameSite cookies for modern browsers, and custom headers for API-driven SPAs. The most robust approach combines CSRF tokens with SameSite cookies to protect users across all browser versions.</p>
 <p><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/security/http-security-headers.html">HTTP Security Headers Checklist</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a>.</p>
+<p><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p>
 <p><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/security/sql-injection-prevention.html">SQL Injection Prevention Guide</a>, <a href="/en/tech/web-security-basics.html">Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know</a>, <a href="/en/security/incident-response.html">Incident Response Playbook for Developers</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">

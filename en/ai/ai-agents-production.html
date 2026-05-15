@@ -47,8 +47,10 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-04",
-      "wordCount": "1729",
+      "wordCount": "1765",
       "keywords": "Artificial Intelligence, Machine Learning",
+      "about": [{"@type": "Thing", "name": "Artificial Intelligence"}, {"@type": "Thing", "name": "Machine Learning"}],
+      "inLanguage": "en",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-agents-production.html"},
@@ -95,21 +97,22 @@
       <div class="article-meta">Published 2026-05-12 · Last active 2026-05-04 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" width="1200" height="630" loading="lazy">
       <div class="article-body"><h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h2>Deploying AI Agents to Production</h2>
-<h3>Introduction</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h3>Deploying AI Agents to Production</h3>
+<h4>Introduction</h4>
 <p>AI agents that autonomously execute multi-step tasks are transitioning from experimental prototypes to production systems. Unlike traditional API calls, agents make decisions, use tools, and interact with external systems--introducing new challenges around reliability, cost, safety, and observability. This article covers the patterns and practices needed to deploy AI agents safely and efficiently.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-production.png" alt="Deploying AI Agents to Production" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
-<h3>Agent Orchestration</h3>
+<h4>Agent Orchestration</h4>
 <p>Production agents typically follow a structured execution loop:</p>
 <p>import asyncio</p>
 <p>from typing import List, Optional</p>
@@ -132,9 +135,9 @@
 <p>while ctx.current_step &lt; ctx.max_steps:</p>
 <p>ctx.current_step += 1</p>
 <p>try:</p>
-<h2>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</h2>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Think: decide next action</h3>
 <p>action = await self.think(ctx)</p>
-<h2>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</h2>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Act: execute tool or respond</h3>
 <p>if action["type"] == "tool_call":</p>
 <p>result = await self.execute_tool(action["tool"], action["args"])</p>
 <p>ctx.tools_used.append(action["tool"]["name"])</p>
@@ -146,22 +149,22 @@
 <p>"tools_used": ctx.tools_used,</p>
 <p>"total_cost": ctx.total_cost,</p>
 <p>}</p>
-<h2>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</h2>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Observe: store result</h3>
 <p>ctx.history.append({</p>
 <p>"step": ctx.current_step,</p>
 <p>"action": action,</p>
 <p>"observation": result,</p>
 <p>})</p>
-<h2>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</h2>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cost tracking</h3>
 <p>ctx.total_cost += self._calculate_cost(action)</p>
 <p>except ToolError as e:</p>
-<h2>Handle tool failures with retry</h2>
+<h3>Handle tool failures with retry</h3>
 <p>await self.handle_tool_error(ctx, e)</p>
 <p>except Exception as e:</p>
-<h2>Catch-all for unexpected errors</h2>
+<h3>Catch-all for unexpected errors</h3>
 <p>await self.handle_unexpected_error(ctx, e)</p>
 <p>return {"status": "max_steps_exceeded", "steps": ctx.max_steps}</p>
-<h3>Error Handling and Retry Logic</h3>
+<h4>Error Handling and Retry Logic</h4>
 <p>Agents must gracefully handle failures across multiple dimensions:</p>
 <p>class AgentErrorHandler:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -195,7 +198,7 @@
 <p>"message": f"{tool_call['tool']['name']} is temporarily unavailable",</p>
 <p>"suggestion": "Try again later or use an alternative approach",</p>
 <p>}</p>
-<h3>Human-in-the-Loop</h3>
+<h4>Human-in-the-Loop</h4>
 <p>Critical agent actions require human approval before execution:</p>
 <p>class HumanInTheLoop:</p>
 <p>def <strong>init</strong>(self, approval_thresholds: dict):</p>
@@ -204,7 +207,7 @@
 <p>async def request_approval(</p>
 <p>self, action: dict, context: AgentContext</p>
 <p>) -&gt; bool:</p>
-<h2>Determine if approval is needed</h2>
+<h3>Determine if approval is needed</h3>
 <p>if not self._requires_approval(action):</p>
 <p>return True</p>
 <p>approval_id = str(uuid.uuid4())</p>
@@ -214,14 +217,14 @@
 <p>"status": "pending",</p>
 <p>"created_at": datetime.utcnow(),</p>
 <p>}</p>
-<h2>Notify human reviewer</h2>
+<h3>Notify human reviewer</h3>
 <p>await self._notify_reviewer(</p>
 <p>approval_id=approval_id,</p>
 <p>action_description=action["description"],</p>
 <p>risk_level=action.get("risk", "low"),</p>
 <p>current_state=context.history[-3:],</p>
 <p>)</p>
-<h2>Wait for approval (with timeout)</h2>
+<h3>Wait for approval (with timeout)</h3>
 <p>try:</p>
 <p>approved = await self._wait_for_approval(approval_id, timeout=300)</p>
 <p>self.pending_approvals[approval_id]["status"] = (</p>
@@ -238,7 +241,7 @@
 <p>action.get("amount", 0) &gt; self.thresholds.get("max_amount", 1000),</p>
 <p>action.get("destructive", False),</p>
 <p>])</p>
-<h3>Monitoring Agent Behavior</h3>
+<h4>Monitoring Agent Behavior</h4>
 <p>Track agent decisions and outcomes with structured telemetry:</p>
 <p>class AgentTelemetry:</p>
 <p>def <strong>init</strong>(self):</p>
@@ -265,29 +268,29 @@
 <p>span.end()</p>
 <p>def detect_anomalies(self, ctx: AgentContext) -&gt; List[str]:</p>
 <p>warnings = []</p>
-<h2>Looping detection</h2>
+<h3>Looping detection</h3>
 <p>recent_actions = [h["action"]["tool"]["name"]</p>
 <p>for h in ctx.history[-10:]]</p>
 <p>if len(set(recent_actions)) &lt; 3 and len(recent_actions) &gt;= 5:</p>
 <p>warnings.append("POSSIBLE_LOOP")</p>
-<h2>Cost anomaly</h2>
+<h3>Cost anomaly</h3>
 <p>if ctx.total_cost &gt; 0.50:</p>
 <p>warnings.append("HIGH_COST")</p>
-<h2>Token usage</h2>
+<h3>Token usage</h3>
 <p>total_tokens = sum(</p>
 <p>h["action"].get("tokens", 0) for h in ctx.history</p>
 <p>)</p>
 <p>if total_tokens &gt; 50000:</p>
 <p>warnings.append("HIGH_TOKEN_USAGE")</p>
 <p>return warnings</p>
-<h3>Cost Tracking and Rate Limiting</h3>
+<h4>Cost Tracking and Rate Limiting</h4>
 <p>class AgentCostManager:</p>
 <p>def <strong>init</strong>(self, daily_budget: float = 10.0):</p>
 <p>self.daily_budget = daily_budget</p>
 <p>self.daily_spend = 0.0</p>
 <p>self.token_buckets = {}</p>
 <p>async def check_budget(self, estimated_cost: float) -&gt; bool:</p>
-<h2>Reset daily counter</h2>
+<h3>Reset daily counter</h3>
 <p>if self._is_new_day():</p>
 <p>self.daily_spend = 0.0</p>
 <p>if self.daily_spend + estimated_cost &gt; self.daily_budget:</p>
@@ -301,7 +304,7 @@
 <p>refill_interval=60</p>
 <p>))</p>
 <p>return bucket.consume()</p>
-<h3>Observability</h3>
+<h4>Observability</h4>
 <p>Log agent decision traces for debugging and audit:</p>
 <p>{</p>
 <p>"timestamp": "2026-05-12T10:30:00Z",</p>
@@ -328,6 +331,7 @@
 <p>}</p>
 <p>Deploy agents incrementally: start with read-only tools, add human-in-the-loop for destructive actions, and only move to fully autonomous mode after extensive monitoring and failure mode analysis.</p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>.</p>
+<p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a></p>
 <p><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a></p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/ai/ai-content-generation.html">AI Content Generation Workflows</a>, <a href="/en/ai/llm-api-design.html">LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits</a>, <a href="/en/ai/ai-agents-frameworks.html">AI Agent Frameworks Compared</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
