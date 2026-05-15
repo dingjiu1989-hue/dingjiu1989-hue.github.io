@@ -93,3 +93,5 @@ If your Next.js app doesn't use server-side features (SSR, middleware, API route
 **Best for**|  Full Next.js features| Traffic-heavy static| Simple static sites  
   
 **Bottom line:** Vercel is the default for Next.js — simplest deploy, full feature support. Cloudflare Pages for unlimited bandwidth. Static export for maximum portability. After deploying, set up a custom domain (free on both platforms) and you're production-ready. See also: [Free Hosting Guide](</en/tools/best-free-hosting-side-projects.html>) and [Hosting Comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).
+
+**See also:** [Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge](</en/tech/edge-computing-guide.html>), [Environment Variables: The Complete Guide for Developers](</en/tech/environment-variables-guide.html>), [Best Free Hosting for Side Projects 2026: 12 Platforms With Generous Free Tiers](</en/tools/best-free-hosting-side-projects.html>)

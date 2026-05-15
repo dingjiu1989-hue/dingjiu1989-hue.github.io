@@ -63,3 +63,5 @@ role="alert"| Important, time-sensitive notification| `<div role="alert">Your se
     await checkA11y(page); // Runs axe-core against the rendered page
 
 **Bottom line:** Start with semantic HTML — it solves 80% of accessibility issues for free. Add automated a11y testing to CI/CD (axe-core) to catch regressions. Test manually with a keyboard (Tab through your entire app) at least once per feature. Accessibility is not a feature to add later — it is a property of good HTML. See also: [CSS Framework Comparison](</en/compare/tailwind-vs-bootstrap-vs-mui.html>) and [Responsive CSS in 2026](</en/tech/css-responsive-design-guide.html>).
+
+**See also:** [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Load Testing Guide 2026: k6 vs Artillery vs Locust vs wrk2 for Performance Testing](</en/tech/load-testing-guide.html>), [CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries](</en/tech/css-container-queries-guide.html>)

@@ -71,3 +71,5 @@ Pepper| 32-byte random pepper stored in HSM or env var, separate from DB| No pep
 Password requirements| Minimum 8 chars, check against haveibeenpwned API| Requiring special chars that users forget; max length limits  
   
 **Bottom line:** Use session tokens for web apps and JWTs for APIs — do not use JWTs for web app sessions. Implement passkeys as your primary auth method if possible (highest security + best UX). Never roll your own crypto — use well-tested libraries (bcrypt, @simplewebauthn, jose, node-crypto). See also: [Clerk vs Auth0 vs Lucia](</en/compare/clerk-vs-auth0-vs-lucia.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
+
+**See also:** [OAuth 2.0 and OIDC Implementation Guide 2026: Complete Developer Walkthrough](</en/tech/oauth2-oidc-implementation.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>)

@@ -57,3 +57,5 @@ Community support and docs| **Docker**
 Cost-sensitive (avoid Docker Desktop fees)| **Podman**  
   
 **Bottom line:** Docker is still the default for most developers — everything supports it, Compose is excellent, and the ecosystem is unmatched. Podman is the pick for security, Kubernetes-focused workflows, and avoiding Docker Desktop licensing. `alias docker=podman` works for 90% of commands. See also: [Docker Quickstart Guide](</en/tech/docker-quickstart.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).
+
+**See also:** [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>), [Best Local Dev Tools 2026: OrbStack vs Colima vs Rancher Desktop vs Finch vs Docker Desktop](</en/tools/best-local-dev-tools.html>), [Docker in 30 Minutes: From Install to First Container](</en/tech/docker-quickstart.html>)

@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "638",
+      "wordCount": "425",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,303 +93,23 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Event Definition</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
+<p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png" alt="Domain Event Implementation: Publishing, Handling, and Testing" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Event Definition</h2>
 <p>Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Publishing</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h2>Publishing</h2>
 <p>Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker.</p></div>
+<p>Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/domain-events.html">Domain Events: Design and Implementation</a>, <a href="/en/architecture/ddd-tactical.html">DDD Tactical Patterns</a>, <a href="/en/architecture/api-gateway-patterns.html">API Gateway Patterns</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -401,7 +121,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <div class="related-grid"><a href="/en/architecture/domain-events.html" class="related-card">Domain Events: Design and Implementation</a><a href="/en/architecture/ddd-tactical.html" class="related-card">DDD Tactical Patterns</a><a href="/en/architecture/api-gateway-patterns.html" class="related-card">API Gateway Patterns</a><a href="/en/architecture/ddd-strategic.html" class="related-card">DDD Strategic Design</a></div>
     </section>
     
   </div>

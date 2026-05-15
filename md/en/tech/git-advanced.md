@@ -123,4 +123,6 @@ Hook| When It Runs| Use For
 pre-commit| Before commit is created| Linting, formatting, unit tests  
 commit-msg| After message is entered| Enforce message format  
 pre-push| Before push to remote| Integration tests, security scans  
-post-checkout| After checkout/switching branches| Install dependencies if changed
+post-checkout| After checkout/switching branches| Install dependencies if changed  
+  
+**See also:** [Advanced Git Techniques for Developers](</en/tech/git-advanced-techniques.html>), [Git Workflows: Git Flow vs GitHub Flow vs Trunk-Based Development](</en/tech/git-workflows-team-guide.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>)

@@ -119,3 +119,5 @@ Strategy| Pros| Cons
 **Recommendation:** UUID v7 for distributed systems and public-facing IDs. BIGINT for internal tables. Avoid exposing auto-increment IDs in URLs.
 
 **Bottom line:** Normalize to 3NF, index every FK and query column, use appropriate data types, and always have foreign key constraints. A well-designed schema is cheaper to fix now than later. See also: [database comparison](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>).
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [Data Modeling Best Practices](</en/database/data-modeling.html>), [Database Normalization Explained](</en/database/database-normalization.html>)

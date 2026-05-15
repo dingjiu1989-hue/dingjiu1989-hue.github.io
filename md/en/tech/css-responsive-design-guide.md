@@ -124,3 +124,5 @@ Holy Grail Layout| Grid with header, 2 sidebars, content, footer| Full-page layo
 Stack| `flex-direction: column; gap: clamp(1rem, 3vw, 2rem)`| Articles, landing pages  
   
 **Bottom line:** Container queries + clamp() + auto-fit grid eliminate 80% of media queries. Modern CSS has absorbed what Bootstrap and Tailwind solved — you can build fully responsive layouts with zero framework CSS. See also: [CSS Framework Comparison](</en/compare/tailwind-vs-bootstrap-vs-mui.html>) and [Design Tools Guide](</en/tools/design-tools-for-developers.html>).
+
+**See also:** [CSS Container Queries Guide: Component-Based Responsive Design Without Media Queries](</en/tech/css-container-queries-guide.html>), [CSS Grid and Flexbox: Modern Layout Guide](</en/tech/css-grid-flexbox.html>), [Best CSS Frameworks 2026: Tailwind CSS vs UnoCSS vs Panda CSS vs Vanilla Extract vs Open Props](</en/tools/best-css-frameworks-2026.html>)

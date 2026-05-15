@@ -43,3 +43,5 @@ Kotlin Multiplatform| Android-first developers expanding to iOS| Medium-High| Ne
 SwiftUI (iOS only)| iOS-only apps with best UX| Medium| Best  
   
 **Bottom line:** The $100K+/year solo app developer is still achievable in 2026, but it requires finding an underserved niche, nailing ASO (App Store Optimization), and committing to subscription pricing. One app is rarely enough — successful indies typically have 3-5 apps in their portfolio. See also: [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).
+
+**See also:** [How to Make Money with Chrome Extensions in 2026: Complete Guide](</en/sidehustle/chrome-extension-monetization.html>), [Developer Newsletter Monetization: From Side Project to Full-Time Income](</en/sidehustle/newsletter-monetization-guide.html>), [50 Micro-SaaS Ideas for Solo Developers in 2026](</en/sidehustle/micro-saas-ideas-2026.html>)

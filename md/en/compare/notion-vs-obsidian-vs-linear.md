@@ -66,3 +66,5 @@ Daily journal, Zettelkasten| **Obsidian**
 Issue tracker devs won't hate| **Linear**  
   
 **Bottom line:** These three tools complement each other — they're not competitors. Obsidian for personal knowledge (your second brain). Notion for team documentation and collaborative planning. Linear for tracking what needs to be built. The optimal stack: Obsidian for you, Notion for the team, Linear for the code. See also: [free online tools guide](</en/tools/online-tools-2026.html>) for more developer productivity tools.
+
+**See also:** [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Best Authentication Solutions 2026: Clerk vs Auth0 vs Supabase Auth vs NextAuth vs Lucia](</en/tools/best-auth-solutions.html>), [Best Project Management Tools for Dev Teams 2026: Linear vs Jira vs ClickUp vs Notion](</en/tools/best-project-management-dev.html>)

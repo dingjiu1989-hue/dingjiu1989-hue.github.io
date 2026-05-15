@@ -48,3 +48,5 @@ Already use PostgreSQL, <10M vectors| pgvector| Zero new infrastructure, same SQ
 Open source, self-hosted, moderate scale| Qdrant or Weaviate| Both have strong self-hosted offerings  
   
 **Bottom line:** Start with pgvector if you already use PostgreSQL — it handles up to ~10M vectors well and eliminates the operational burden of a separate database. Move to Qdrant or Weaviate when you outgrow pgvector (performance, scale, or need advanced features like hybrid search). Pinecone is the easiest paid option — use it if you want zero ops and predictable pricing. Milvus is the pick for 1B+ vector scale. See also: [RAG Best Practices](</en/ai/rag-best-practices.html>) and [Embedding Models Comparison](</en/ai/embedding-models-comparison.html>).
+
+**See also:** [Semantic Search Implementation Guide: Embeddings, Vector Databases, and Reranking](</en/ai/semantic-search-implementation.html>), [Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide](</en/compare/vector-databases-2026-complete-guide.html>), [Embedding Models Comparison 2026: OpenAI vs Cohere vs BGE vs Jina for Semantic Search](</en/ai/embedding-models-comparison.html>)

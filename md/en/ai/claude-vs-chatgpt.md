@@ -53,3 +53,5 @@ Cost (Pro tier)| Free / Plus $20 / Pro $200| Free / Pro $20 / Team $25
 **If you only pay for one:** Choose based on your primary use case. Writing and research → Claude Pro. Visual content and web-connected tasks → ChatGPT Plus.
 
 The gap between these models is narrowing every quarter. Pick one, learn it deeply, and don't obsess over which is slightly better this week. The time you spend comparing tools is time you could spend building something.
+
+**See also:** [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>), [Is ChatGPT Plus Worth It? Free vs Plus vs Pro Compared (2026)](</en/ai/chatgpt-plus-worth.html>)

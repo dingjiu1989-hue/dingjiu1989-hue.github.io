@@ -58,3 +58,5 @@ Step| What to Do| Timeline
 5\. Shut Down| Return 410 Gone with clear error message + upgrade link| After announced date  
   
 **Bottom line:** For public REST APIs, URI path versioning (/v2/) is the most practical — it is visible, easy to test, and works with all HTTP tooling. For developer-focused APIs, date-based versioning (Stripe model) is more elegant but requires more infrastructure. The key is not the format — it is maintaining backward compatibility and giving clients 6-12 months to migrate when you do break things. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Monolith-First Strategy](</en/architecture/monolith-first-strategy.html>), [Stateful vs Stateless Architecture Patterns](</en/architecture/stateful-vs-stateless.html>)

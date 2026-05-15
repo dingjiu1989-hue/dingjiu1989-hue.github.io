@@ -97,7 +97,7 @@
       <h1 class="article-title">Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond</h1>
       <div class="article-meta">Published 2026-05-08 · 5040 views · 42 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/rate-limiting-strategies.png" alt="Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Rate limiting is one of the few backend patterns that touches every layer of the stack: it protects your API from abuse, controls costs, ensures fair usage, and prevents cascading failures. But picking the wrong algorithm or implementing it incorrectly leads to inaccurate limits, race conditions, or excessive latency. This guide compares every major rate limiting algorithm and provides production-ready implementations.</p>
+      <div class="article-body"><p>Rate limiting is one of the few backend patterns that touches every layer of the stack: it protects your API from abuse, controls costs, ensures fair usage, and prevents cascading failures. But picking the wrong algorithm or implementing it incorrectly leads to inaccurate limits, race conditions, or excessive latency. This guide compares every major rate limiting algorithm and provides production-ready implementations.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/rate-limiting-strategies.png" alt="Rate Limiting Strategies for APIs: Token Bucket, Sliding Window, and Beyond" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 
 <h2>Rate Limiting Algorithms Compared</h2>
 <table>
@@ -188,7 +188,7 @@ class SlidingWindowLimiter:
 <tr><td>Retry-After</td><td>30</td><td>Seconds until next request will succeed (429 response)</td></tr>
 </table>
 
-<p><strong>Bottom line:</strong> Use Token Bucket as your default rate limiting algorithm — it handles bursts gracefully, is simple to explain to API consumers, and has a well-known Redis implementation. Add Sliding Window Counter when you need better accuracy at window boundaries. Always include the standard rate limit headers in your API responses so consumers can self-regulate. See also: <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p></div>
+<p><strong>Bottom line:</strong> Use Token Bucket as your default rate limiting algorithm — it handles bursts gracefully, is simple to explain to API consumers, and has a well-known Redis implementation. Add Sliding Window Counter when you need better accuracy at window boundaries. Always include the standard rate limit headers in your API responses so consumers can self-regulate. See also: <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a> and <a href="/en/tech/web-security-basics.html">Web Security Basics</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/api-design-patterns.html">API Design Patterns: Rate Limiting, Pagination, Idempotency, and More</a>, <a href="/en/tech/graphql-api-design.html">GraphQL API Design: Schema Best Practices, Federation, and Performance</a>, <a href="/en/tech/api-versioning-strategies.html">API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -200,7 +200,7 @@ class SlidingWindowLimiter:
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <div class="related-grid"><a href="/en/tech/api-design-patterns.html" class="related-card">API Design Patterns: Rate Limiting, Pagination, Idempotency, and More</a><a href="/en/tech/graphql-api-design.html" class="related-card">GraphQL API Design: Schema Best Practices, Federation, and Performance</a><a href="/en/tech/api-versioning-strategies.html" class="related-card">API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared</a><a href="/en/architecture/rate-limiting-architecture.html" class="related-card">Rate Limiting Architecture</a></div>
     </section>
     
   </div>

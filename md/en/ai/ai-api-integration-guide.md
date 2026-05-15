@@ -116,3 +116,5 @@ Strategy| Savings| How
     }
 
 **Bottom line:** Use streaming for any user-facing feature. Use function calling to extend the AI with your own data. Cache aggressively. Route simple queries to cheaper models. See also: [Prompt Engineering](</en/ai/prompt-engineering.html>) and [Best LLMs for Coding](</en/ai/best-llms-for-coding-2026.html>).
+
+**See also:** [LLM Cost Optimization: Cut Your AI API Bills by 50-80% (2026 Guide)](</en/ai/llm-cost-optimization.html>), [LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits](</en/ai/llm-api-design.html>), [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>)

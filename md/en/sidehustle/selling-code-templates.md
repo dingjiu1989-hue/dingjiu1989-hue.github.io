@@ -68,3 +68,5 @@ Platform| Fee| Best For
 
 
 **Bottom line:** Templates are the best digital product for developers — you build them with skills you already have. The key is solving real boilerplate pain. Charge more than you think ($99-299 not $19-49). Update regularly to justify the price. See also: [Selling Digital Products](</en/sidehustle/sell-digital-products.html>) and [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>).
+
+**See also:** [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>), [How to Sell Website Templates and UI Kits: Marketplaces, Pricing, and Marketing Strategy](</en/sidehustle/sell-website-templates.html>), [How to Sell Notion Templates as a Developer — $5K/Month Passive Income](</en/sidehustle/sell-notion-templates.html>)

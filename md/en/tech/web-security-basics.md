@@ -114,3 +114,5 @@ CSP is your last line of defense. It tells the browser what sources of scripts, 
 
 
 **Bottom line:** Use parameterized queries, auto-escaping frameworks, SameSite cookies, CSP headers, and explicit CORS allowlists. Security is layers — implement them all, and a single failure won't compromise you. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
+
+**See also:** [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Web Authentication Best Practices 2026: JWT, OAuth 2.1, Passkeys](</en/tech/authentication-best-practices-2026.html>), [API Security Best Practices 2026: JWT, Rate Limiting, Input Validation, and OWASP for APIs](</en/tech/api-security-best-practices.html>)

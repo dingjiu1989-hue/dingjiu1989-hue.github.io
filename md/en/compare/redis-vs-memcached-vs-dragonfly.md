@@ -44,3 +44,5 @@ Message queuing / event streaming| Redis Streams| Lightweight alternative to Kaf
 Distributed locking| Redis (with Redlock library)| Mature, well-understood patterns  
   
 **Bottom line:** Redis is the default choice — the data structures, persistence, and ecosystem are unmatched. Use Memcached if you need pure caching at maximum speed. Dragonfly is the most exciting alternative: Redis-compatible, 25x faster, and 30% less memory — perfect for teams hitting Redis scaling limits. See also: [PostgreSQL vs MySQL vs SQLite](</en/compare/postgresql-vs-mysql-vs-sqlite.html>) and [Caching Strategies for Web Apps](</en/tech/caching-strategies-web-apps.html>).
+
+**See also:** [Redis vs Memcached: Caching Solution Comparison](</en/compare/redis-vs-memcached.html>), [Prisma vs Drizzle vs TypeORM (2026): Best TypeScript ORM?](</en/compare/prisma-vs-drizzle-vs-typeorm.html>), [PostgreSQL vs MySQL 2026: Relational Database Comparison](</en/compare/postgresql-vs-mysql-2026.html>)

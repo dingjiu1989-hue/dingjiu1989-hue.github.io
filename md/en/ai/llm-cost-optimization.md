@@ -56,3 +56,5 @@ Medium app: 1,000 req/day, 3K tokens/req| $1,350/month| $280/month| 79%
 Large app: 10,000 req/day, 5K tokens/req| $15,000/month| $3,500/month| 77%  
   
 **Bottom line:** Start with prompt caching (free, no code changes) and model routing (route 80% of simple queries to cheaper models). These two alone typically save 50-70%. Add semantic caching when you see repeated queries. Implement cost tracking per-user and per-feature — you cannot optimize what you do not measure. See also: [ChatGPT vs Claude vs Gemini API](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
+
+**See also:** [AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement](</en/ai/ai-caching-strategies.html>), [AI API Cost Optimization](</en/ai/ai-api-cost-optimization.html>), [AI API Integration Guide: OpenAI, Anthropic, and Google AI for Developers](</en/ai/ai-api-integration-guide.html>)

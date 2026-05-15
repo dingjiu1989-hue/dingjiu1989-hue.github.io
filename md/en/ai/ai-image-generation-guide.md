@@ -65,3 +65,5 @@ Commercial work, copyright safety| **Adobe Firefly**
 Best value for occasional use| **DALL-E 3** ($0.04/image, no subscription)  
   
 **Bottom line:** DALL-E 3 for API-driven image generation — it's the easiest to integrate and charges per image. Midjourney for the best-looking results (but can't automate). Stable Diffusion for maximum control and self-hosting. Firefly for copyright-safe commercial work. See also: [Midjourney Prompt Guide](</en/ai/midjourney-prompts.html>) and [design tools guide](</en/tools/design-tools-for-developers.html>).
+
+**See also:** [Best AI Video Generation Tools for Developers 2026: Runway vs Pika vs Sora](</en/ai/ai-video-generation-tools.html>), [AI Image Generation Guide](</en/ai/ai-image-generation.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)

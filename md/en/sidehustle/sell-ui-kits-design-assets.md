@@ -53,3 +53,5 @@ Month| Sales| Price| Revenue| Traffic Source
 12| 120| $99| $11,880| SEO + marketplace + newsletter  
   
 **Bottom line:** UI kits and design assets are one of the highest-leverage developer side hustles — build once, sell infinitely. The key insight: developers who can code AND design are rare. If you can produce technically clean code with good design, you have less competition than either pure designers or pure developers. Start with one framework (React + Tailwind), hit 50 components, include a Figma file, and launch on Gumroad. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Browser Extension Development](</en/sidehustle/browser-extension-development.html>).
+
+**See also:** [How to Sell Website Templates and UI Kits: Marketplaces, Pricing, and Marketing Strategy](</en/sidehustle/sell-website-templates.html>), [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>), [How to Sell Notion Templates as a Developer — $5K/Month Passive Income](</en/sidehustle/sell-notion-templates.html>)

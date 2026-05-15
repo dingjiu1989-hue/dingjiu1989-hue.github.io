@@ -46,3 +46,5 @@ TypeScript-first, code-first CMS| Payload CMS| Best TypeScript DX, local API
 Marketing site + blog, simple needs| Strapi (self-hosted)| Free, good enough for most content sites  
   
 **Bottom line:** Strapi is the safe default for self-hosted projects — it is free, mature, and has the largest community. Sanity is the pick for teams that want the best editing experience and real-time collaboration. Payload CMS is the rising star for TypeScript-native teams. Contentful is the enterprise choice when you need a managed platform. See also: [Best Static Site Generators](</en/tools/best-static-site-generators-2026.html>) and [Astro vs Gatsby vs Hugo](</en/compare/astro-vs-gatsby-vs-hugo.html>).
+
+**See also:** [Best Password Managers for Developers](</en/tools/password-managers.html>), [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>)

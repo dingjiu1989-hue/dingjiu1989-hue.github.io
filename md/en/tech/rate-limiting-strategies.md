@@ -104,3 +104,5 @@ X-RateLimit-Reset| 1715818800| Unix timestamp when the window resets
 Retry-After| 30| Seconds until next request will succeed (429 response)  
   
 **Bottom line:** Use Token Bucket as your default rate limiting algorithm — it handles bursts gracefully, is simple to explain to API consumers, and has a well-known Redis implementation. Add Sliding Window Counter when you need better accuracy at window boundaries. Always include the standard rate limit headers in your API responses so consumers can self-regulate. See also: [Webhook Implementation Guide](</en/tech/webhook-implementation-guide.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
+
+**See also:** [API Design Patterns: Rate Limiting, Pagination, Idempotency, and More](</en/tech/api-design-patterns.html>), [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [API Versioning Strategies: URL, Header, and Query Parameter Approaches Compared](</en/tech/api-versioning-strategies.html>)

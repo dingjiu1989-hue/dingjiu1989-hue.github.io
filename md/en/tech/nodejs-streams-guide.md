@@ -98,3 +98,5 @@ Duplex| Independent read and write sides (like a telephone)| net.Socket, TLS soc
     // Note: pipeline() handles this automatically — prefer it over manual piping
 
 **Bottom line:** Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default — it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: [Caching Strategies](</en/tech/caching-strategies-web-apps.html>) and [REST API Best Practices](</en/tech/rest-api-best-practices.html>).
+
+**See also:** [Python asyncio Complete Guide: Coroutines, Tasks, and Event Loops](</en/tech/python-asyncio-guide.html>), [Caching Strategies for Web Apps: CDN, Redis, Browser, and API Caching](</en/tech/caching-strategies-web-apps.html>), [gRPC Complete Guide 2026: Protocol Buffers, Service Definitions, and Production Patterns](</en/tech/grpc-guide.html>)

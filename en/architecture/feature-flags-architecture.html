@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1376",
+      "wordCount": "1073",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,395 +93,27 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Feature Flags Architecture</h1>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Feature Flags Architecture</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>Feature Flags Architecture</h1>
+<p>Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/feature-flags-architecture.png" alt="Feature Flags Architecture" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Flag evaluation must be fast and reliable. Every request potentially evaluates multiple flags, so evaluation latency directly impacts overall request latency. The two primary evaluation models are client-side SDK evaluation and server-side evaluation. In client-side evaluation, the SDK holds a copy of all flag configurations and evaluates locally — this provides sub-millisecond evaluation but requires flag configuration synchronization. In server-side evaluation, the client sends user context to a server that evaluates flags and returns results — this adds a network hop but provides centralized control and audit. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>SDK design follows a consistent pattern. The SDK initializes with a connection to the flag management service, downloads flag configurations, and stores them in memory. When the application requests a flag value, the SDK evaluates the flag locally using the targeting rules. The SDK periodically polls or receives real-time updates (WebSocket, Server-Sent Events) for configuration changes. This ensures that flag changes take effect quickly without redeployment. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Targeting rules determine which users see which flag variations. Rules can be based on user attributes (ID, email, plan tier), request properties (device type, geographic region), or random percentage splits. Rules are typically evaluated in priority order — the first matching rule determines the variant. Rule engines must be deterministic: the same user context must always produce the same result, which is essential for testing and debugging. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Percentage-based rollouts require consistent bucketing to maintain user experience. If a user is assigned to the 5% cohort for a feature, they should remain in that cohort across requests and sessions. This is achieved through hash-based bucketing: the user ID is hashed with the flag key to produce a consistent bucket assignment. The percentage threshold can be gradually increased as confidence in the feature grows. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Flag management platforms provide the service-side infrastructure. LaunchDarkly is the market leader, providing a managed platform with sophisticated targeting, approval workflows, and analytics. Flagsmith, Split, and Unleash are alternatives with different tradeoffs in features, pricing, and deployment models. Self-hosted options like Unleash provide data sovereignty for compliance-sensitive industries. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Flag lifecycle management is a practical challenge that grows with flag count. Dead flags — flags that have been rolled out to 100% or removed — must be cleaned up. The cleanup process involves: confirming the flag is stable at 100%, removing the flag evaluation code from the application, removing the flag from the management platform, and updating any dependent tests. Automated flag lifecycle tools can surface flags that have been at a constant value beyond a configurable threshold. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Testing with feature flags requires special consideration. Tests should verify behavior for each flag variant. Parameterized tests that run the same test with each flag configuration catch regressions that only manifest under specific flag states. More importantly, tests should verify that removing the flag (when it is eventually retired) produces the expected behavior — the code should assume the flag-enabled state is the final state. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Security implications of feature flags are significant. Flags that control security-sensitive behavior — authentication flows, authorization rules, payment processing — must be protected from unauthorized modification. Approval workflows, audit logs, and access controls on flag changes are essential. The flag management platform should enforce separation of duties: the developer who creates a flag should not be the one who approves its production rollout. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p></div>
+<p>Operational concerns include flag evaluation metrics. Track flag evaluation counts, cache hit rates, and evaluation latency. Monitor for unexpected flag evaluation errors — incorrectly cached or missing flag configurations can cause widespread failures. Implement a kill switch flag that disables all non-critical flags simultaneously in emergency scenarios, providing a circuit breaker for flag-induced issues.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-driven-arch.html">Event-Driven Architecture</a>, <a href="/en/architecture/modular-monolith.html">Modular Monolith Architecture</a>, <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/alerting-strategies.html">Alerting Strategies for Production Systems</a>, <a href="/en/architecture/graceful-shutdown.html">Graceful Shutdown Patterns</a>, <a href="/en/architecture/structured-logging.html">Structured Logging</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -493,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <div class="related-grid"><a href="/en/architecture/alerting-strategies.html" class="related-card">Alerting Strategies for Production Systems</a><a href="/en/architecture/graceful-shutdown.html" class="related-card">Graceful Shutdown Patterns</a><a href="/en/architecture/structured-logging.html" class="related-card">Structured Logging</a><a href="/en/architecture/cdn-architecture.html" class="related-card">CDN Architecture</a></div>
     </section>
     
   </div>

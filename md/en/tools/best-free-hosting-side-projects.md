@@ -47,3 +47,5 @@ Full backend + DB| **Render** (web service + Postgres) or **Railway** (app + DB)
 
 
 **Bottom line:** You can ship a production-quality side project for $0/month in 2026. Cloudflare Pages for static, Vercel for Next.js, Render for APIs, Supabase for backend, and Cloudflare Workers for edge functions. No credit card required for any of the above. See also: [Hosting Comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>) and [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>).
+
+**See also:** [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers](</en/compare/vercel-vs-netlify-vs-cloudflare.html>), [Fly.io vs Railway vs Render (2026): Best Modern PaaS for Developers?](</en/compare/fly-io-vs-railway-vs-render.html>)

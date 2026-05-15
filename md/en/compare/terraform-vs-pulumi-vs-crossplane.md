@@ -44,3 +44,5 @@ Multi-cloud, complex orchestration| Terraform or Pulumi| Both handle multi-cloud
 Internal developer platform| Crossplane| Composition Resources let you build self-service APIs for devs  
   
 **Bottom line:** Terraform is the safe default — largest ecosystem, most mature, most examples. Pulumi wins when your infrastructure logic is sufficiently complex that you need real programming constructs. Crossplane is the future for K8s-native teams who want continuous reconciliation and self-service infrastructure. See also: [AWS vs Azure vs GCP](</en/compare/aws-vs-azure-vs-gcp.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).
+
+**See also:** [Terraform vs Pulumi: Infrastructure as Code Compared](</en/compare/terraform-vs-pulumi.html>), [Infrastructure as Code Security](</en/security/iac-security.html>), [Secure Configuration Management](</en/security/secure-configuration.html>)

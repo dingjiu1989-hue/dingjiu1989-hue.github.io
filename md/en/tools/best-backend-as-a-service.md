@@ -45,3 +45,5 @@ Google ecosystem, want most mature platform| Firebase| Most mature, deepest Goog
 Self-hosted, full control, SQL essential| Supabase (self-hosted)| Apache 2.0, Docker deploy, full Postgres  
   
 **Bottom line:** Supabase is the best BaaS for 80% of projects — PostgreSQL alone makes it worth choosing (you can always migrate to your own Postgres later), the free tier is generous, and the open source model means no lock-in. Convex is the pick for real-time-first applications. Firebase is still solid but the NoSQL-only approach and vendor lock-in are real concerns in 2026. See also: [Supabase vs Firebase vs Neon](</en/compare/supabase-vs-firebase-vs-neon.html>) and [Best Open Source SaaS Alternatives](</en/tools/best-open-source-saas-alternatives.html>).
+
+**See also:** [Best Job Scheduling and Cron Tools 2026: Inngest vs Trigger.dev vs QStash vs Airflow](</en/tools/best-scheduling-cron-tools.html>), [Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers](</en/compare/supabase-vs-firebase-vs-neon.html>), [Best Email API Services 2026: Resend vs SendGrid vs Postmark vs Amazon SES](</en/tools/best-email-api-services.html>)

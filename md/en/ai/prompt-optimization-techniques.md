@@ -67,3 +67,5 @@ High-volume (>10K calls/day)| No — cost of errors scales| Small prompt improve
 Multi-step LLM pipeline| No — errors cascade| Each step's output is the next step's input; errors compound  
   
 **Bottom line:** Manual prompt engineering is a 2023 approach. In 2026, DSPy or similar automated optimization should be your default for any LLM pipeline that matters — it systematically finds better prompts than you can, produces measurable results, and is reproducible. The biggest shift is moving from "is this prompt good?" to "what is my evaluation metric?" — define the metric, and let the optimizer find the prompt. See also: [Advanced Prompt Engineering](</en/ai/prompt-engineering-advanced.html>) and [LLM Evaluation Benchmarks](</en/ai/llm-evaluation-benchmarks.html>).
+
+**See also:** [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>), [Prompt Chaining: Building Multi-Step LLM Workflows](</en/ai/ai-prompt-chaining.html>), [AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection](</en/ai/ai-monitoring-alerting.html>)

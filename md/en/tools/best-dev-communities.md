@@ -49,3 +49,5 @@ Platform| Best For| How to Use It
 
 
 **Bottom line:** Stack Overflow for specific problems. Discord (Reactiflux/Vue Land) for real-time help. Twitter/X for networking and opportunities. Dev.to for writing and teaching. Pick 2-3 and be active. See also: [Developer Podcasts](</en/tools/best-dev-podcasts.html>) and [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>).
+
+**See also:** [Best Developer Podcasts 2026: 15 Shows for Your Commute and Code Sessions](</en/tools/best-dev-podcasts.html>), [Best Programming Books 2026: 15 Books Every Developer Should Read](</en/tools/best-programming-books.html>), [Best Developer YouTube Channels 2026: 20 Channels That Actually Teach You Something](</en/tools/best-dev-youtube-channels.html>)

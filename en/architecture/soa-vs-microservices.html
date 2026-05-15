@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1153",
+      "wordCount": "904",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,343 +93,25 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>SOA vs Microservices</h1>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>SOA vs Microservices</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>SOA vs Microservices</h1>
+<p>Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/soa-vs-microservices.png" alt="SOA vs Microservices" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>Granularity is the most visible distinction. SOA services tend to be coarse-grained, often representing entire business capabilities like "Customer Management" or "Order Processing." These services typically expose multiple operations and manage comprehensive data domains. Microservices aim for fine-grained decomposition, where a single service might handle only "Address Validation" or "Payment Authorization." The microservice philosophy favors services small enough to be rewritten in a sprint or two, owned by a single team. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Enterprise Service Bus (ESB) is the architectural centerpiece of traditional SOA. The ESB provides message routing, protocol translation, message enhancement, and orchestration. It acts as a smart intermediary that mediates all service interactions. Microservices reject the centralized ESB in favor of a "smart endpoints, dumb pipes" approach. Communication uses lightweight protocols directly between services or through a message broker that handles only transport. The reasoning is that the ESB becomes a single point of failure, a scalability bottleneck, and a monolithic piece of middleware that itself needs to be maintained and scaled. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Governance models differ fundamentally. SOA typically employs centralized governance with an enterprise service registry, standardized service contracts (often WSDL or SOAP), and architectural review boards that approve service designs. Microservices favor decentralized governance, where each team makes independent technology and protocol decisions. Standardization emerges from shared platform tooling and conventions rather than mandates. Common infrastructure like service meshes, API gateways, and container orchestration provides interoperability without dictating service implementation. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Data management approaches diverge sharply. SOA often promotes enterprise-wide canonical data models and shared databases. Services interact through complex XML schemas representing standardized business documents. Microservices advocate database-per-service and bounded contexts, where each service owns its data exclusively and communicates through simple, service-specific APIs. No canonical data model exists across service boundaries. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Protocol choices reflect different eras. SOA was built on SOAP, WSDL, and WS-* standards, providing extensive interoperability guarantees but substantial complexity. Microservices favor REST, gRPC, and GraphQL — simpler protocols that are easier to implement and evolve. Event-driven communication uses lightweight message formats like JSON or Protocol Buffers rather than verbose XML. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Deployment infrastructure also differs. SOA services often ran on enterprise application servers with complex deployment procedures. Microservices assume containerized deployment with orchestration platforms like Kubernetes, enabling automated CI/CD, horizontal scaling, and self-healing. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Neither approach is universally superior. SOA's mature governance and integration patterns suit large enterprises with heterogeneous systems and strict compliance requirements. Microservices agility benefits product-focused organizations with autonomous teams. Many modern architectures combine elements of both — using lightweight service mesh for inter-service communication (microservices) while maintaining centralized API management and monitoring (SOA governance), recognizing that absolute purity to either philosophy is less important than pragmatic outcomes.</p></div>
+<p>Neither approach is universally superior. SOA's mature governance and integration patterns suit large enterprises with heterogeneous systems and strict compliance requirements. Microservices agility benefits product-focused organizations with autonomous teams. Many modern architectures combine elements of both — using lightweight service mesh for inter-service communication (microservices) while maintaining centralized API management and monitoring (SOA governance), recognizing that absolute purity to either philosophy is less important than pragmatic outcomes.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/event-carried-state-transfer.html">Event-Carried State Transfer Pattern</a>, <a href="/en/architecture/contract-testing.html">Contract Testing for Microservices</a>, <a href="/en/architecture/sidecar-pattern.html">Sidecar Pattern in Microservices Architecture</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/microservices-vs-monolith.html">Microservices vs Monolith: Decision Guide</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/asynchronous-communication.html">Asynchronous Communication in Distributed Systems</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -441,7 +123,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <div class="related-grid"><a href="/en/architecture/microservices-vs-monolith.html" class="related-card">Microservices vs Monolith: Decision Guide</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a><a href="/en/architecture/asynchronous-communication.html" class="related-card">Asynchronous Communication in Distributed Systems</a><a href="/en/architecture/circuit-breaker-vs-bulkhead.html" class="related-card">Circuit Breaker vs Bulkhead Pattern</a></div>
     </section>
     
   </div>

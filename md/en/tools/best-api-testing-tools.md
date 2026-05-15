@@ -75,3 +75,5 @@ CI/CD automation and smoke tests| **Hurl**
 Solo developer, quick testing| **Bruno or Insomnia**  
   
 **Bottom line:** Bruno + Hurl is the modern, Git-friendly stack — design requests in Bruno, automate in Hurl. Postman is still the default for team collaboration but comes with lock-in. Insomnia for GraphQL. See also: [REST API Best Practices](</en/tech/rest-api-best-practices.html>) and [tRPC vs GraphQL vs REST](</en/compare/trpc-vs-graphql-vs-rest.html>).
+
+**See also:** [Best API Clients 2026: Postman vs Bruno vs Insomnia vs HTTPie vs Thunder Client](</en/tools/best-api-clients-2026.html>), [Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared](</en/tools/best-code-review-tools.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>)

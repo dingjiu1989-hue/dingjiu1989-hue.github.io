@@ -132,3 +132,5 @@ Branded Types| Distinguish same-shape types semantically
 Discriminated Unions| Exhaustive state modeling (async, forms)  
   
 **Bottom line:** Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: [TypeScript ORM comparison](</en/compare/prisma-vs-drizzle-vs-typeorm.html>) and [tRPC for end-to-end types](</en/compare/trpc-vs-graphql-vs-rest.html>).
+
+**See also:** [Advanced TypeScript Types for Better Code](</en/tech/typescript-advanced-types.html>), [Monorepo Setup Guide: Turborepo + pnpm + TypeScript in 30 Minutes](</en/tech/monorepo-setup-guide.html>), [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>)

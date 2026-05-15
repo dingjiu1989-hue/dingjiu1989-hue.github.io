@@ -57,3 +57,5 @@ Most generous free tier| **Cloudflare Workers**
 Multi-language (Python, Go, Java)| **AWS Lambda**  
   
 **Bottom line:** Cloudflare Workers for global APIs and generous free tier. AWS Lambda for complex, full-ecosystem serverless. Deno Deploy for web-standard simplicity. Each has a generous free tier — try all three for your next side project. See also: [Backend Frameworks](</en/compare/hono-vs-express-vs-fastify.html>) and [Modern PaaS Comparison](</en/compare/fly-io-vs-railway-vs-render.html>).
+
+**See also:** [Vercel vs Netlify vs Cloudflare Pages (2026): Best Hosting for Developers](</en/compare/vercel-vs-netlify-vs-cloudflare.html>), [AWS Lambda vs GCP Cloud Functions: Serverless Compute 2026](</en/compare/aws-lambda-vs-gcp-functions.html>), [Edge Computing Complete Guide 2026: Cloudflare Workers, Deno Deploy, and Vercel Edge](</en/tech/edge-computing-guide.html>)

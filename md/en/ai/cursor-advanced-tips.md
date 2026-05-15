@@ -97,3 +97,5 @@ Technique| How| Why
 
 
 **Bottom line:** The difference between casual and power Cursor users is context. Power users give rich, specific context with @Files, @Docs, and detailed instructions. Casual users type one-liners and wonder why the output is generic. See also: [Cursor vs Copilot vs Claude Code](</en/compare/cursor-vs-copilot-vs-claude-code.html>) and [AI-Assisted Programming Guide](</en/ai/ai-coding.html>).
+
+**See also:** [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>)

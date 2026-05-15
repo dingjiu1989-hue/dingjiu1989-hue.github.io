@@ -59,3 +59,5 @@ Users| Free → Paid Conversion| Monthly Price| Monthly Revenue
 100,000| 3% (3,000 paid)| $9.99| $29,970/mo  
   
 **Bottom line:** Chrome extensions are a high-leverage side hustle for developers — the technical skill required is moderate (JS/HTML/CSS), distribution is free (Chrome Web Store), and recurring subscription revenue scales well. Focus on a narrow niche where the big players (Grammarly, Honey) don't compete, solve one pain point deeply, and charge a subscription. See also: [Browser Extension Development](</en/sidehustle/browser-extension-development.html>) and [Selling UI Kits and Design Assets](</en/sidehustle/sell-ui-kits-design-assets.html>).
+
+**See also:** [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [How to Start a Profitable YouTube Channel as a Developer (2026 Guide)](</en/sidehustle/youtube-channel-developers.html>), [Mobile App Income in 2026: How Much Can a Solo Developer Really Make?](</en/sidehustle/build-mobile-app-income.html>)

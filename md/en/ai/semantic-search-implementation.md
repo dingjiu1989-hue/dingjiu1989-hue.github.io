@@ -71,3 +71,5 @@ Legal/contract search| No (or hybrid)| Exact terminology matters; "shall" vs "ma
 Code search| Maybe (hybrid)| Function names need exact match; bug descriptions need semantic  
   
 **Bottom line:** For most applications in 2026, the pragmatic choice is **pgvector + OpenAI embeddings + a reranker**. You already have Postgres, pgvector is a single extension, embeddings cost pennies per thousand documents, and the two-stage retrieval gives production-quality results. If you're doing this at scale (1M+ documents), add Qdrant or Pinecone. See also: [Vector Database Comparison](</en/ai/vector-database-comparison.html>) and [RAG Best Practices](</en/ai/rag-best-practices.html>).
+
+**See also:** [Vector Database Comparison 2026: Pinecone vs Weaviate vs Qdrant vs Milvus vs pgvector](</en/ai/vector-database-comparison.html>), [Embedding Models Comparison 2026: OpenAI vs Cohere vs BGE vs Jina for Semantic Search](</en/ai/embedding-models-comparison.html>), [Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide](</en/compare/vector-databases-2026-complete-guide.html>)

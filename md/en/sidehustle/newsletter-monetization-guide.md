@@ -79,3 +79,5 @@ General "web development" newsletters compete with everyone. Narrower wins:
 
 
 **Bottom line:** Pick a focused developer niche. Write consistently for 6 months before worrying about revenue. Cross-promote with other newsletters. Sponsorships kick in at ~1,000 engaged subscribers. Four sponsors per issue at 10K subs = comfortable full-time income. See also: [Technical Writing Income](</en/sidehustle/technical-writing-income.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
+
+**See also:** [How to Build and Monetize a Paid Developer Community in 2026](</en/sidehustle/paid-communities-guide.html>), [How to Start and Monetize a Developer Podcast in 2026](</en/sidehustle/developer-podcast-guide.html>), [Newsletter Monetization: From Zero to Revenue](</en/sidehustle/newsletter-monetization.html>)

@@ -87,3 +87,5 @@ E2E| Playwright| Signup, login, purchase, onboarding
 Visual Regression| Chromatic / Percy| Design system components  
   
 **Bottom line:** Write mostly integration tests. They provide the best confidence-to-effort ratio. Unit test pure logic. E2E test only critical flows (max 20 scenarios). A slow CI pipeline is a broken one — keep E2E count low. See also: [build tools](</en/compare/vite-vs-webpack-vs-turbopack.html>) (Vitest is built on Vite) and [CI/CD tools comparison](</en/tools/best-cicd-tools-2026.html>).
+
+**See also:** [WebSocket vs SSE vs Polling: Real-Time Data Patterns for Web Apps](</en/tech/websocket-vs-sse-vs-polling.html>), [Web Security Basics: CORS, CSP, XSS, CSRF — What Every Developer Must Know](</en/tech/web-security-basics.html>), [Web Accessibility (a11y) Guide for Developers: WCAG 2.2 in Practice](</en/tech/web-accessibility-guide.html>)

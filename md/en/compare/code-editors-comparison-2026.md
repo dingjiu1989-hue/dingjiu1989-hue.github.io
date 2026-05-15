@@ -46,3 +46,5 @@ You prefer open-source and community-owned| VS Code / Neovim / Zed| All three ar
 You want both AI-native + JetBrains intelligence| Cursor + JetBrains| Cursor for daily coding, JetBrains for refactoring/debugging deep dives  
   
 **My setup in 2026:** Cursor for daily coding (best AI integration, VS Code ecosystem), Neovim for quick terminal edits and config files (instant, zero context switching), JetBrains Rider for C#/.NET work (nothing else matches its intelligence). The editor war is over, and the winner is "use the right tool for the task." See also: [Cursor vs Copilot vs Claude Code](</en/compare/cursor-vs-copilot-vs-claude-code.html>) for AI tool comparison.
+
+**See also:** [Best AI Code Documentation Tools 2026: Mintlify vs Swimm vs GitBook AI vs Docusaurus](</en/ai/ai-code-documentation-tools.html>), [Warp vs iTerm2 vs Kitty: Best Terminal Emulator for Developers (2026)](</en/compare/warp-vs-iterm2-vs-kitty.html>), [Text Editors Compared](</en/tools/text-editors-compared.html>)

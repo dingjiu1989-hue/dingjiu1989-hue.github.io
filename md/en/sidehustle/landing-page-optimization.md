@@ -44,3 +44,5 @@ Social proof placement (above vs below fold)| Medium — developers value peer o
 CTA text ("Start free" vs "View docs" vs "npm install")| Low-Medium| CTA click rate  
   
 **Bottom line:** The #1 rule for developer landing pages: show the product immediately. A code snippet above the fold, an interactive demo, or a terminal recording tells developers more in 5 seconds than 500 words of copy ever will. Be specific, be honest (especially in comparisons with competitors), and make the free tier generous enough that developers can build something real before needing to pay. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Selling Digital Products](</en/sidehustle/sell-digital-products.html>).
+
+**See also:** [Affiliate Marketing for Developer Products](</en/sidehustle/affiliate-marketing-tech.html>), [Build vs Buy: Strategic Decisions for Developer Side Projects and SaaS](</en/sidehustle/build-vs-buy-saas-decisions.html>), [Scaling Customer Support as a Solo SaaS Developer](</en/sidehustle/customer-support-scaling.html>)

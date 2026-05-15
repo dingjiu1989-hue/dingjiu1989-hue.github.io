@@ -49,3 +49,5 @@ Basic monitoring| Advanced analytics, audit logs
 Individual use| Team collaboration features  
   
 **Bottom line:** Start with GitHub Sponsors to validate willingness to pay. If you get 50+ sponsors, consider open core or a hosted SaaS. Never make previously free features paid — always add new value to the paid tier. The biggest mistake is monetizing too early before you have critical mass of users. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Build and Sell an API](</en/sidehustle/build-and-sell-api.html>).
+
+**See also:** [How to Start and Monetize a Developer Podcast in 2026](</en/sidehustle/developer-podcast-guide.html>), [Developer Sponsorship Guide 2026: GitHub Sponsors, Content Deals, and Corporate Backing](</en/sidehustle/developer-sponsorship-guide.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>)

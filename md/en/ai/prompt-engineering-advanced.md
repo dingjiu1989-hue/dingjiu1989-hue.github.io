@@ -79,3 +79,5 @@ For complex coding tasks, explicitly ask the model to plan before writing:
     - One edge case it handles
 
 **Bottom line:** Advanced prompt engineering is about structure, not magic words. XML delimiters, curated examples, and explicit reasoning steps produce the biggest quality gains. The best prompt engineers treat prompts like code — version controlled, tested, and iteratively improved with A/B comparisons. See also: [Prompt Engineering Basics](</en/ai/prompt-engineering.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
+
+**See also:** [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [Advanced Prompt Engineering Techniques](</en/ai/ai-prompt-engineering.html>)

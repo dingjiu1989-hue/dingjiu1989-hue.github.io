@@ -60,3 +60,5 @@ Tool| What It Is| Why Use It
 
 
 All tools above are free for individual developers. Bookmark this page and come back next time you set up a new machine.
+
+**See also:** [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>), [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)

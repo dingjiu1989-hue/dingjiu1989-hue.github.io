@@ -57,3 +57,5 @@ Best for| General purpose| Enterprise/Java| AI-first workflow
 **Start with VS Code** — it's the safest default and costs nothing. If you work primarily with Java, C#, or large enterprise codebases, JetBrains is worth every dollar. If you're an indie dev or early-stage startup, try Cursor — the AI-first approach genuinely makes you faster once you adjust your workflow.
 
 Truth is, many experienced developers use two: JetBrains for deep refactoring sessions, VS Code/Cursor for quick edits and frontend work. Don't be dogmatic — use the right tool for the task.
+
+**See also:** [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>), [10 Must-Have VS Code Extensions to Double Your Productivity](</en/tech/vscode-extensions.html>), [Text Editors Compared](</en/tools/text-editors-compared.html>)

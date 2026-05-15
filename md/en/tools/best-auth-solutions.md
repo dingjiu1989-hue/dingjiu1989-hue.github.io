@@ -59,3 +59,5 @@ Full control, open source, no vendor lock-in| **NextAuth.js**
 Best free tier for scale (50K MAU)| **Supabase Auth**  
   
 **Bottom line:** Clerk for Next.js apps — the best DX by far. Auth0 for enterprise. Supabase Auth if you already use Supabase. NextAuth for full control. Don't build auth from scratch — the security risks aren't worth it. See also: [Backend Comparison](</en/compare/supabase-vs-firebase-vs-neon.html>) and [Web Security Basics](</en/tech/web-security-basics.html>).
+
+**See also:** [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>), [Best Database GUI Tools 2026: TablePlus vs DBeaver vs Beekeeper vs DataGrip](</en/tools/best-database-gui-tools.html>), [Best Static Site Generators 2026: Astro vs Hugo vs 11ty vs Jekyll](</en/tools/best-static-site-generators-2026.html>)

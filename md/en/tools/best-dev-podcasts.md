@@ -50,3 +50,5 @@ Podcast| Hosts| Best Episodes
 **The Bootstrapped Founder**|  Arvid Kahl| Building a business without VC funding. Honest, transparent, and specific.  
   
 **How to actually listen:** Pick 3 podcasts max. Subscribe to one technical (Syntax/Changelog), one career (Soft Skills), and one niche relevant to your work. Listen at 1.5x speed. Skip episodes that don't grab you in the first 5 minutes. See also: [Developer YouTube Channels](</en/tools/best-dev-youtube-channels.html>) and [Programming Books](</en/tools/best-programming-books.html>).
+
+**See also:** [Best Developer YouTube Channels 2026: 20 Channels That Actually Teach You Something](</en/tools/best-dev-youtube-channels.html>), [Best Programming Books 2026: 15 Books Every Developer Should Read](</en/tools/best-programming-books.html>), [Best Developer Communities 2026: Where to Learn, Share, and Grow](</en/tools/best-dev-communities.html>)

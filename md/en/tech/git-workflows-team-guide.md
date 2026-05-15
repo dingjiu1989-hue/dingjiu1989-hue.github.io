@@ -56,3 +56,5 @@ High-performance CI/CD team| **Trunk-Based Development**
 Open source project| **GitHub Flow** (fork + PR)  
   
 **Bottom line:** GitHub Flow is the right choice for 80% of teams in 2026. Start there. Evolve to Trunk-Based if your CI/CD maturity allows. Use Git Flow only if you ship versioned releases (mobile, on-premise). See also: [Git Cheatsheet](</en/tech/git-cheatsheet.html>) and [Advanced Git Guide](</en/tech/git-advanced.html>).
+
+**See also:** [Git Workflows](</en/tech/git-workflows.html>), [GitHub vs GitLab vs Bitbucket (2026): Which Git Platform Is Best?](</en/compare/github-vs-gitlab-vs-bitbucket.html>), [Git Advanced: Interactive Rebase, Cherry-Pick, Bisect, and More](</en/tech/git-advanced.html>)

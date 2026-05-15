@@ -98,7 +98,7 @@
       <h1 class="article-title">Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained</h1>
       <div class="article-meta">Published 2026-05-08 · 9840 views · 82 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/database-indexing-guide.png" alt="Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Adding an index is the highest-ROI database optimization — a well-chosen index can turn a 30-second sequential scan into a sub-millisecond index lookup. But indexing is full of trade-offs: each index slows writes, consumes storage, and requires the query planner to choose it. This guide covers index types, when to use each, and how to verify they are actually working.</p>
+      <div class="article-body"><p>Adding an index is the highest-ROI database optimization — a well-chosen index can turn a 30-second sequential scan into a sub-millisecond index lookup. But indexing is full of trade-offs: each index slows writes, consumes storage, and requires the query planner to choose it. This guide covers index types, when to use each, and how to verify they are actually working.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/database-indexing-guide.png" alt="Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 
 <h2>Index Types: Complete Reference</h2>
 <table>
@@ -155,7 +155,7 @@ ORDER BY seq_tup_read DESC;</code></pre>
 <li><strong>Verify with EXPLAIN:</strong> Did the plan change from Seq Scan → Index Scan / Index Only Scan? Run ANALYZE first.</li>
 </ol>
 
-<p><strong>Bottom line:</strong> B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p></div>
+<p><strong>Bottom line:</strong> B-Tree indexes solve 90% of indexing needs — they handle =, range, sorting, and prefix matching. GIN is essential for JSONB and full-text search workloads. The most common indexing mistakes: (1) indexing columns that are never queried, (2) missing composite indexes for multi-column WHERE clauses, and (3) not using covering indexes (INCLUDE) to enable Index-Only Scans. Run the unused index query above quarterly — dropping unused indexes speeds up every INSERT/UPDATE. See also: <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization</a> and <a href="/en/tech/database-design-fundamentals.html">Database Design Fundamentals</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/postgresql-query-optimization.html">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</a>, <a href="/en/database/database-indexing.html">Database Indexing Strategies</a>, <a href="/en/database/index-types.html">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -167,7 +167,7 @@ ORDER BY seq_tup_read DESC;</code></pre>
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <div class="related-grid"><a href="/en/tech/postgresql-query-optimization.html" class="related-card">PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds</a><a href="/en/database/database-indexing.html" class="related-card">Database Indexing Strategies</a><a href="/en/database/index-types.html" class="related-card">Database Index Types: B-tree, Hash, GiST, GIN, SP-GiST, BRIN</a><a href="/en/database/postgresql-vs-mysql-2026.html" class="related-card">PostgreSQL vs MySQL vs SQLite in 2026: A Complete Database Guide for Developers</a></div>
     </section>
     
   </div>

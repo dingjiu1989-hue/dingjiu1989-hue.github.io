@@ -64,3 +64,5 @@ Want open source and no lock-in| **Supabase or Neon**
 Quickest from zero to working MVP| **Supabase** (most built-in features)  
   
 For most web apps in 2026, **Supabase is the best starting point.** It gives you the most features out of the box while keeping the escape hatch open. See our [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) for the full tech stack.
+
+**See also:** [PlanetScale vs Turso vs Neon (2026): Best Serverless Database?](</en/compare/planetscale-vs-turso-vs-neon.html>), [PostgreSQL vs MySQL vs SQLite (2026): Which Database Should You Use?](</en/compare/postgresql-vs-mysql-vs-sqlite.html>), [Best Backend-as-a-Service Platforms 2026: Supabase vs Appwrite vs Convex vs Firebase](</en/tools/best-backend-as-a-service.html>)

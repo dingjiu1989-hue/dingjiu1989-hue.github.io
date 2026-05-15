@@ -37,7 +37,7 @@
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-audit-triggers.html">
     <link rel="prev" href="https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html">
     <link rel="next" href="https://dingjiu1989-hue.github.io/en/database/postgresql-vs-mysql-2026.html">
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "757",
+      "wordCount": "475",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,390 +93,26 @@
       <div class="article-meta">Published 2026-05-12 · 240 views · 2 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Database Audit Triggers: Automatic Change Tracking</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Database triggers can automatically capture changes to sensitive data for audit purposes. An audit trigger logs who changed what, when, and the old and new values. This provides a reliable audit trail that cannot be bypassed.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Audit Table Design</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>Database Audit Triggers: Automatic Change Tracking</h1>
+<p>Database triggers can automatically capture changes to sensitive data for audit purposes. An audit trigger logs who changed what, when, and the old and new values. This provides a reliable audit trail that cannot be bypassed.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-audit-triggers.png" alt="Database Audit Triggers: Automatic Change Tracking" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
+<h2>Audit Table Design</h2>
 <p>The audit table captures the table name, operation type (INSERT, UPDATE, DELETE), the old row values, the new row values, the user who made the change, and a timestamp. For compliance, include the application context—the session ID, IP address, and transaction ID.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Trigger Implementation</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h2>Trigger Implementation</h2>
 <p>Each audited table gets a trigger that fires on INSERT, UPDATE, DELETE. The trigger function captures the OLD and NEW row values and inserts into the audit table. Row-level triggers capture individual row changes with full context.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Performance Considerations</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h2>Performance Considerations</h2>
 <p>Audit triggers add overhead to every DML operation. Batch the audit writes when possible. Consider asynchronous audit logging for high-traffic tables. Archive audit data regularly. Index the audit table on timestamp and table name for efficient queries.</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<h2>  Compliance</h2>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evidence of data access and modification. Keep audit logs immutable—restrict write access and set retention policies. Test audit coverage regularly.</p></div>
+<h2>Compliance</h2>
+<p>Audit logs support SOX, HIPAA, PCI-DSS, and SOC 2 compliance. They provide evidence of data access and modification. Keep audit logs immutable—restrict write access and set retention policies. Test audit coverage regularly.</p>
+<p><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/database-auditing.html">Database Auditing: Tracking Data Changes</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/database/database-change-tracking-cdc.html">Change Data Capture: Tracking Database Changes in Real-Time</a>, <a href="/en/database/triggers-patterns.html">Database Triggers: Use Cases, Performance Costs, and Alternatives</a>, <a href="/en/database/database-security-hardening.html">Database Security Hardening</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -488,7 +124,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
+      <div class="related-grid"><a href="/en/database/database-change-tracking-cdc.html" class="related-card">Change Data Capture: Tracking Database Changes in Real-Time</a><a href="/en/database/triggers-patterns.html" class="related-card">Database Triggers: Use Cases, Performance Costs, and Alternatives</a><a href="/en/database/database-security-hardening.html" class="related-card">Database Security Hardening</a><a href="/en/database/database-auditing.html" class="related-card">Database Auditing: Tracking Data Changes</a></div>
     </section>
     
   </div>

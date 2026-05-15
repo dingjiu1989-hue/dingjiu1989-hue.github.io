@@ -65,3 +65,5 @@ Step| What to Do
     #               A simple metering database (PostgreSQL + Redis)
 
 **Bottom line:** The best API businesses solve a specific, high-value problem that developers have repeatedly. Start with a free tier generous enough for hobbyists, charge based on usage (not seats), and invest in documentation and SDKs — they are your product's UI. The moat is not the technology (someone can always build the same API), it is the integration depth, reliability, and trust you build over time. See also: [Building and Selling APIs](</en/sidehustle/build-and-sell-api.html>) and [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>).
+
+**See also:** [Open Core Business Model: From Open Source Project to Profitable Business](</en/sidehustle/open-core-business-model.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>), [Selling UI Kits, Icons, and Design Assets as a Developer in 2026](</en/sidehustle/sell-ui-kits-design-assets.html>)

@@ -12,7 +12,7 @@ from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parent.parent
 EN_ARTICLES = ROOT / "en" / "articles.json"
-BOARDS = ["ai", "tech", "sidehustle", "tools", "compare"]
+BOARDS = ["ai", "tech", "sidehustle", "tools", "compare", "security", "database", "architecture"]
 
 # Articles that are index/utility pages — skip these
 SKIP_FILES = {"index.html", "nav.html", "footer.html", "privacy.html"}
@@ -29,6 +29,7 @@ def load_all_articles():
                 "slug": art["slug"],
                 "title": art["title"],
                 "description": art.get("description", ""),
+                "tags": art.get("tags", []),
                 "date": art.get("date", ""),
             })
     return articles
@@ -52,31 +53,32 @@ def extract_keywords(title, description):
 
 
 def find_related(article, all_articles, k=3, min_score=0.03):
-    """Find k most semantically similar articles based on keyword overlap.
-    Falls back to same-board articles if no strong matches found."""
+    """Find k most semantically similar articles based on tag + keyword overlap."""
     target_kw = extract_keywords(article["title"], article["description"])
+    target_tags = set(t.lower() for t in article.get("tags", []))
     scores = []
     for other in all_articles:
         if other["slug"] == article["slug"]:
             continue
         other_kw = extract_keywords(other["title"], other["description"])
+        other_tags = set(t.lower() for t in other.get("tags", []))
         overlap = len(target_kw & other_kw)
         union = len(target_kw | other_kw)
         if union == 0:
             continue
         score = overlap / union
+        # Tag overlap bonus (strong signal for topical relevance)
+        tag_overlap = len(target_tags & other_tags)
+        if tag_overlap > 0:
+            score += tag_overlap * 0.15
+        # Same-board bonus
         if other["board"] == article["board"]:
-            score *= 1.2
-        title_overlap = len(target_kw & set(re.findall(r'[a-z]{3,}', other["title"].lower())))
-        score += title_overlap * 0.05
+            score *= 1.3
         scores.append((score, other))
     scores.sort(key=lambda x: x[0], reverse=True)
 
-    # Filter to strong matches (above min_score) first
     strong = [s[1] for s in scores if s[0] >= min_score]
-    # Then same-board articles as fallback
     same_board = [s[1] for s in scores if s[1]["board"] == article["board"] and s[1] not in strong]
-    # Combine: strong matches first, then same-board, limit to k
     result = strong + same_board
     return result[:k]
 
@@ -156,7 +158,7 @@ def main():
     en_updated = process_articles(
         en_articles,
         ROOT / "en",
-        r'href="(/en/(?:ai|tech|sidehustle|tools|compare)/[^"]+\.html)"',
+        r'href="(/en/(?:ai|tech|sidehustle|tools|compare|security|database|architecture)/[^"]+\.html)"',
         "EN",
         url_prefix="/en/"
     )

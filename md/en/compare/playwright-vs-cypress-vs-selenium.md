@@ -59,3 +59,5 @@ Best free CI parallelism| **Playwright** (sharding is free)
 Fastest authoring experience| **Playwright** (codegen + VS Code + Trace Viewer)  
   
 **Bottom line:** Playwright is the default for any new E2E testing project in 2026. Cypress for existing suites. Selenium only if your organization requires a specific language Playwright doesn't support well. See also: [Testing Strategies Guide](</en/tech/testing-strategies-web-apps.html>) and [CI/CD Tools Comparison](</en/tools/best-cicd-tools-2026.html>).
+
+**See also:** [Vitest vs Jest vs Bun Test (2026): JavaScript Test Runner Comparison](</en/compare/vitest-vs-jest-vs-bun-test.html>), [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [Playwright vs Cypress](</en/compare/playwright-vs-cypress.html>)

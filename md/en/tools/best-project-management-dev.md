@@ -46,3 +46,5 @@ All-in-one preference, smaller team| ClickUp| Replace 3-4 tools with one; cost-e
 Docs-first culture, flexible workflows| Notion| Documentation + lightweight project tracking in one place  
   
 **Bottom line:** Linear wins for pure engineering teams — the speed, keyboard shortcuts, and Git integration are best in class. Jira is inevitable at enterprise scale but avoid it if you can. Notion is the best complement to Linear for non-engineering documentation. The true cost of a PM tool is not the subscription — it is the hours your team spends interacting with it. Linear minimizes that overhead. See also: [Best Note-Taking Apps](</en/tools/best-note-taking-apps-developers.html>) and [Best Code Review Tools](</en/tools/best-code-review-tools.html>).
+
+**See also:** [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Project Management Tools for Developers](</en/tools/project-management-tools.html>), [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>)

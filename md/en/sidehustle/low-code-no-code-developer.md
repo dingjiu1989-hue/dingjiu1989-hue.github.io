@@ -58,3 +58,5 @@ Bubble| Plugin Marketplace| One-time or subscription| Stripe subscription manage
 n8n| Community Nodes (npm)| Free + consulting upsell| Custom API integration node, data transformation node  
   
 **Bottom line:** The no-code revolution is not a threat to developers — it is a force multiplier. Companies that adopt no-code tools inevitably hit limits that require a developer to solve. Position yourself as the "developer who speaks no-code" — you can deliver projects 3-5x faster than traditional development while charging premium rates for the parts that require real code. Start with one platform (Retool for enterprise, Bubble for startups), build 2-3 portfolio projects, and market to no-code communities. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Sell Digital Products](</en/sidehustle/sell-digital-products.html>).
+
+**See also:** [No-Code and Low-Code Business Opportunities](</en/sidehustle/no-code-business.html>), [Domain Flipping and Investing Guide for Developers (2026)](</en/sidehustle/domain-flipping-guide.html>), [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>)

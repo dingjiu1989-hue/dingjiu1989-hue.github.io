@@ -65,3 +65,5 @@ Fastest possible dev experience| **Vite**
 Maximum framework/framework-agnostic| **Vite**  
   
 **Bottom line:** Vite is the default for any new project in 2026. Webpack for existing projects where migration isn't worth it. Turbopack if you're on Next.js and want the fastest builds. See also: [framework comparison](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) and [meta-framework comparison](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).
+
+**See also:** [React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>), [pnpm vs npm vs Yarn (2026): Best Node.js Package Manager?](</en/compare/pnpm-vs-npm-vs-yarn.html>), [Webpack vs Vite: Build Tool Comparison](</en/compare/webpack-vs-vite.html>)

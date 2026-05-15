@@ -75,3 +75,5 @@ Replace your entire SaaS stack with open-source alternatives on a single $20/mon
 Estimated savings vs SaaS equivalents: **$500-2,000/month** for a small team. You trade ops time for cash — the tradeoff gets better the more tools you self-host.
 
 **Bottom line:** Not every tool needs to be replaced. But self-hosting even 5-10 of these saves $200-500/month with minimal maintenance. Start with the expensive ones. See also: [best free developer tools](</en/tools/best-free-dev-tools-2026.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).
+
+**See also:** [Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku](</en/compare/self-hosted-paas-comparison.html>), [Open Core Business Model: From Open Source Project to Profitable Business](</en/sidehustle/open-core-business-model.html>), [SaaS Analytics Setup: PostHog, Plausible, and Umami](</en/sidehustle/saas-analytics-setup.html>)

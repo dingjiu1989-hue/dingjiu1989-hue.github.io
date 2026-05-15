@@ -93,3 +93,7 @@ Your first prompt rarely produces a perfect result. Use the conversation like a 
   * **Asking for too much at once** — A 5,000-word article with 10 sections will be shallow. Ask for one section at a time.
   * **Not providing examples** — When you care about format or style, show 1-2 examples. It's the most efficient way to communicate what you want.
   * **Accepting the first answer** — The first response is a draft. Push back: "Make it more concise" or "That analogy doesn't work — try another one."
+
+
+
+**See also:** [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>), [Prompt Engineering Guide for LLMs](</en/ai/prompt-engineering-guide.html>), [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>)

@@ -67,3 +67,5 @@ Enterprise, large team| **Node.js** — stability, ecosystem
 Security-sensitive environment| **Deno** — permissions model  
   
 **Bottom line:** Node.js for production — it's the safe choice with universal support. Bun for CLI tools and side projects where speed matters. Deno for edge deployments and security-conscious environments. See also: [build tools comparison](</en/compare/vite-vs-webpack-vs-turbopack.html>) and [hosting comparison](</en/compare/vercel-vs-netlify-vs-cloudflare.html>).
+
+**See also:** [Hono vs Express vs Fastify (2026): Best Node.js Backend Framework?](</en/compare/hono-vs-express-vs-fastify.html>), [pnpm vs npm vs Yarn (2026): Best Node.js Package Manager?](</en/compare/pnpm-vs-npm-vs-yarn.html>), [Prettier vs Biome (2026): Best Code Formatter for Modern JavaScript?](</en/compare/prettier-vs-biome.html>)

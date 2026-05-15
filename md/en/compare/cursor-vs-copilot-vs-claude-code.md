@@ -65,3 +65,5 @@ Maximum productivity (cost no object)| **Copilot in IDE + Claude Code for hard p
 The optimal setup in 2026: **Cursor or Copilot for daily coding, Claude Code for code review and complex refactoring.** Many senior developers use both — IDE tool for flow, Claude Code for the hard stuff. The combined cost is $20-40/month and pays for itself in a single afternoon of saved debugging.
 
 See also: [AI-Assisted Programming Guide](</en/ai/ai-coding.html>) and [Claude vs ChatGPT comparison](</en/ai/claude-vs-chatgpt.html>).
+
+**See also:** [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [AI-Assisted Programming: From Zero to 10x Productivity](</en/ai/ai-coding.html>), [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>)

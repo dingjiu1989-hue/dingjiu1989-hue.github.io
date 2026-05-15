@@ -70,3 +70,5 @@ Prompt caching: system prompt + few-shot examples cached| 50-90%| Static prefix 
 Truncate conversation history| 20-30%| Summarize old messages instead of keeping all  
   
 **Bottom line:** Start with a simple RAG chatbot (docs → embeddings → LLM) and add complexity incrementally. The biggest mistakes: (1) not implementing "I don't know" handling — chatbots that hallucinate destroy user trust; (2) not tracking what users actually ask — analytics reveal the gaps in your knowledge base; (3) not having a human escalation path — for customer support, 5% of queries should go to a human. See also: [RAG Best Practices](</en/ai/rag-best-practices.html>) and [Function Calling Guide](</en/ai/function-calling-guide.html>).
+
+**See also:** [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [RAG Best Practices 2026: Building Production-Ready Retrieval Systems](</en/ai/rag-best-practices.html>), [Semantic Search Implementation Guide: Embeddings, Vector Databases, and Reranking](</en/ai/semantic-search-implementation.html>)

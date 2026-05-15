@@ -61,3 +61,5 @@ Pinecone / Chroma| Free tier available| Vector databases| Building RAG applicati
 Together AI| Usage-based (competitive)| Open source LLM hosting| Running Llama, Mistral, etc. at scale  
   
 **Bottom line:** Start with Copilot (code completion) + Cursor (AI-native IDE) + Sentry AI (error monitoring) as your core stack. These three alone can save 10+ hours per week. Add specialized tools based on your workflow pain points — not because a tool is trending on Twitter. See also: [AI Coding Tools Guide](</en/ai/ai-coding.html>) and [AI API Integration](</en/ai/ai-api-integration-guide.html>).
+
+**See also:** [Best AI Code Documentation Tools 2026: Mintlify vs Swimm vs GitBook AI vs Docusaurus](</en/ai/ai-code-documentation-tools.html>), [Best Git GUI Clients](</en/tools/best-git-clients.html>), [Best Note-Taking Apps for Developers 2026: Obsidian vs Notion vs Logseq](</en/tools/best-note-taking-apps-developers.html>)

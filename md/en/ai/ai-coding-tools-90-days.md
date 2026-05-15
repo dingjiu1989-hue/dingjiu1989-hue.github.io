@@ -165,3 +165,5 @@ My current setup: **Copilot Free** for inline completions, **Claude Pro** for co
 For a more detailed feature-by-feature comparison of Cursor vs Copilot vs Claude Code, see my [full comparison article](<https://dingjiu1989-hue.github.io/en/compare/cursor-vs-copilot-vs-claude-code.html>). For benchmark data on LLM coding performance across more models, check the [LLM for coding guide](<https://dingjiu1989-hue.github.io/en/ai/best-llms-for-coding-2026.html>).
 
 _This article was originally published on[SourceHub](<https://dingjiu1989-hue.github.io/en/ai/ai-coding-tools-90-days.html>)._
+
+**See also:** [ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>), [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [Claude vs ChatGPT (2026): Which AI Assistant Is Right for You?](</en/ai/claude-vs-chatgpt.html>)

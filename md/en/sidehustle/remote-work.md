@@ -50,3 +50,7 @@ Site| Focus| Frequency
   2. **Build a portfolio piece, not a portfolio.** One impressive project with a live demo and a case study beats ten todo apps.
   3. **Start with smaller projects.** Get 3-4 five-star reviews on Upwork before going after larger contracts. Social proof compounds.
   4. **Don't compete on price.** Clients who pay the least are the most demanding. Set your rate at a level that filters out bad clients.
+
+
+
+**See also:** [Digital Nomad Lifestyle: A Developer's Guide](</en/sidehustle/digital-nomad.html>), [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Selling Digital Products as a Developer](</en/sidehustle/digital-products.html>)

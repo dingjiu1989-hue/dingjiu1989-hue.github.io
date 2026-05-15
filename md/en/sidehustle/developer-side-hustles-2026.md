@@ -60,3 +60,5 @@ Long-term wealth (years)| SaaS (#2) or Job Board (#8)
 Build audience + income| Content Creation (#6)  
   
 Pick one. Ship it in two weeks. The only failed side hustle is the one you never start.
+
+**See also:** [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [Content Monetization Strategies for Developers](</en/sidehustle/content-monetization.html>), [Build vs Buy: Strategic Decisions for Developer Side Projects and SaaS](</en/sidehustle/build-vs-buy-saas-decisions.html>)

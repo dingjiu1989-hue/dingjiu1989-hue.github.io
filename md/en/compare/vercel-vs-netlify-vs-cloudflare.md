@@ -65,3 +65,5 @@ Want integrated forms + identity| **Netlify**
 Best DX for a team| **Vercel**  
   
 All three have generous free tiers. **Start on any of them, ship your project, and only worry about switching when you have real traffic.** The cost of overthinking hosting is higher than the cost of picking the "wrong" one for a month.
+
+**See also:** [Cloudflare Workers vs AWS Lambda vs Deno Deploy (2026): Best Edge Functions?](</en/compare/cloudflare-workers-vs-lambda-vs-deno-deploy.html>), [Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX](</en/compare/vercel-vs-netlify.html>), [AWS vs Azure vs GCP (2026): Best Cloud for Developers?](</en/compare/aws-vs-azure-vs-gcp.html>)

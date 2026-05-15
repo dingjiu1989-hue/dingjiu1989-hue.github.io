@@ -81,3 +81,5 @@ Customer support bot (knowledge base + tickets)| LangChain RAG + tools
 Bug triage (error logs → root cause → fix)| Custom agent + Sentry/GitHub APIs  
   
 **Bottom line:** Start with a custom agent loop using the SDK directly — it's 50 lines of code and you understand everything. Add LangChain only when you need RAG, complex memory, or 5+ tool types. CrewAI for multi-agent orchestration. The agent hype is real, but the simplest approach usually works best. See also: [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>) and [Prompt Engineering Guide](</en/ai/prompt-engineering.html>).
+
+**See also:** [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>), [AI Embeddings Explained](</en/ai/ai-embeddings-explained.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>)

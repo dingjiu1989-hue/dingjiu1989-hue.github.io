@@ -65,3 +65,5 @@ Marketing A/B testing| Luma| Cheapest per-second, good for testing
         f.write(requests.get(video_url).content)
 
 **Bottom line:** Runway Gen-4 is the best overall for developer integrations — best API, highest quality, and most mature. Pika is the value choice for high-volume content. Sora is the most technically impressive but API access is still limited. For most developer projects, Runway's API is the pragmatic pick. See also: [AI Image Generation Guide](</en/ai/ai-image-generation-guide.html>) and [Best AI Tools for Developers](</en/ai/best-ai-tools-developers-2026.html>).
+
+**See also:** [AI Image Generation Guide: DALL-E 3 vs Midjourney vs Stable Diffusion vs Firefly](</en/ai/ai-image-generation-guide.html>), [ChatGPT API vs Claude API vs Gemini API: Developer Comparison (2026)](</en/ai/chatgpt-vs-claude-vs-gemini-api.html>), [AI for DevOps in 2026: Best Tools and Practical Use Cases](</en/ai/ai-devops-tools.html>)

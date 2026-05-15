@@ -67,3 +67,7 @@ Turn any Perplexity thread into a shareable, well-formatted web page with one cl
   * **Ask for comparisons.** "Compare X and Y in terms of A, B, and C. Use a table." Perplexity excels at structured comparisons with inline citations.
   * **Set up a daily briefing Collection.** Pin searches like "Latest developments in [your industry] today" and refresh daily. Saves scanning 10 news sites.
   * **Challenge the answer.** "Are there any studies that contradict this?" or "What's the counterargument?" Perplexity will find opposing views.
+
+
+
+**See also:** [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>), [Best AI Code Documentation Tools 2026: Mintlify vs Swimm vs GitBook AI vs Docusaurus](</en/ai/ai-code-documentation-tools.html>), [Prompt Engineering: From Beginner to Expert](</en/ai/prompt-engineering.html>)

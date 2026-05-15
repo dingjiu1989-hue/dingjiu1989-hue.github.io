@@ -54,3 +54,7 @@ AI can explain trade-offs between approaches, but it shouldn't make the final ca
   3. **Review and refine.** Read every line. Refactor anything unclear. Add error handling.
   4. **Write tests.** Tests prove the code works and serve as documentation.
   5. **Iterate.** Ask AI to add features, fix bugs, or refactor — in small, reviewable steps.
+
+
+
+**See also:** [Cursor vs GitHub Copilot vs Claude Code (2026): Which AI Coding Tool Wins?](</en/compare/cursor-vs-copilot-vs-claude-code.html>), [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>)

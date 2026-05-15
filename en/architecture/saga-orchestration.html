@@ -47,7 +47,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1284",
+      "wordCount": "990",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -93,395 +93,27 @@
       <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Saga Orchestration Pattern</h1>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <h1>Saga Orchestration Pattern</h1>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<h1>Saga Orchestration Pattern</h1>
+<p>Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. </p><img src="https://dingjiu1989-hue.github.io/images/covers/en/architecture/saga-orchestration.png" alt="Saga Orchestration Pattern" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 <p>The orchestrator is a dedicated service responsible for executing the saga. It maintains the workflow state, sends commands to participants, receives results, and decides the next action. The state must be persisted durably — if the orchestrator crashes, it must resume precisely where it left off. This typically involves storing the saga instance state (current step, completed steps, accumulated data) in a database or workflow engine. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Compensation is the mechanism for undoing completed steps. For each step that makes a forward change, the saga designer defines a compensating action that reverses that change. If step 3 fails, the orchestrator invokes the compensations for steps 2 and 1 in reverse order. Compensations must be idempotent — they may be called multiple times if the orchestrator fails during compensation execution. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>State machines provide a natural model for saga orchestration. The saga exists in one of several states: Pending, Active, Compensating, Completed, or Failed. Each step transition moves the saga to a new state. The orchestrator uses a state machine library or workflow engine to define available transitions, guard conditions, and timeout handling. This makes the saga logic explicit and testable. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Temporal is a leading platform for saga orchestration. It provides durable execution of workflow functions — the workflow code is executed on a Temporal worker, and its state is persisted to the Temporal server. If the worker crashes, the workflow resumes from the last completed activity. Temporal handles retries, timeouts, and compensation automatically. The workflow developer writes straightforward sequential code, and Temporal ensures reliable execution. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Concrete implementation requires careful step design. Each step should be a distinct activity with well-defined inputs, outputs, and failure modes. The orchestrator invokes activities through a command message or RPC call. Activities must be idempotent — the orchestrator may retry them on timeout or failure. Activity results are stored in the saga state for use by subsequent steps. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Timeout management is critical. Each step has a timeout — if the activity does not complete within the window, the orchestrator determines the appropriate action. Idempotent activities can be retried. Non-idempotent activities may require human intervention or automatic compensation. The orchestrator should implement exponential backoff with jitter for transient failures and escalation policies for persistent failures. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Data accumulation across saga steps requires careful modeling. The orchestrator accumulates data as it progresses through steps. The order creation saga collects the order ID from step 1, payment authorization from step 2, and shipping details from step 3. The saga state contract defines what data each step produces and what subsequent steps consume. This accumulated data may need to be persisted for auditing and recovery. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <p>Testing orchestrated sagas benefits from the explicit workflow definition. Unit tests verify state transitions and compensation logic. Integration tests verify end-to-end saga execution with actual service instances. Resilience tests verify recovery from orchestrator crashes, participant failures, and network partitions. The explicitness of orchestration makes these tests more comprehensive than testing equivalent choreographed sagas. </p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Saga orchestration is the preferred pattern when workflows involve many participants, require strict compensation guarantees, or need auditable execution records. The trade-off is coupling to the orchestrator — but for complex business flows, this coupling provides the visibility and control that production systems require.</p></div>
+<p>Saga orchestration is the preferred pattern when workflows involve many participants, require strict compensation guarantees, or need auditable execution records. The trade-off is coupling to the orchestrator — but for complex business flows, this coupling provides the visibility and control that production systems require.</p>
+<p><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a>, <a href="/en/architecture/saga-process-manager.html">Saga vs Process Manager: Orchestration Patterns Compared</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/orchestration-patterns.html">Orchestration Patterns</a>, <a href="/en/architecture/api-composition.html">API Composition and Aggregation</a>, <a href="/en/architecture/event-collaboration.html">Event Collaboration: Choreography vs Orchestration</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -493,7 +125,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
+      <div class="related-grid"><a href="/en/architecture/orchestration-patterns.html" class="related-card">Orchestration Patterns</a><a href="/en/architecture/api-composition.html" class="related-card">API Composition and Aggregation</a><a href="/en/architecture/event-collaboration.html" class="related-card">Event Collaboration: Choreography vs Orchestration</a><a href="/en/architecture/saga-choreography.html" class="related-card">Saga Choreography Pattern</a></div>
     </section>
     
   </div>

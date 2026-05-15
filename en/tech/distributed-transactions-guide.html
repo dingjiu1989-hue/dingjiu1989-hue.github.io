@@ -98,7 +98,7 @@
       <h1 class="article-title">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</h1>
       <div class="article-meta">Published 2026-05-08 · 9480 views · 79 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-transactions-guide.png" alt="Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Once you split a monolith into microservices, database transactions that used to be a simple BEGIN/COMMIT suddenly span multiple services and databases. Distributed transactions are the hardest problem in microservices — and getting them wrong corrupts data. This guide covers the production patterns: sagas, two-phase commit, the outbox pattern, and idempotency.</p>
+      <div class="article-body"><p>Once you split a monolith into microservices, database transactions that used to be a simple BEGIN/COMMIT suddenly span multiple services and databases. Distributed transactions are the hardest problem in microservices — and getting them wrong corrupts data. This guide covers the production patterns: sagas, two-phase commit, the outbox pattern, and idempotency.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-transactions-guide.png" alt="Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 
 <h2>Distributed Transaction Patterns Compared</h2>
 <table>
@@ -173,7 +173,7 @@ async def fulfill_order(order_id, user_id, amount):
 # Key principle: each compensating action must be IDEMPOTENT
 # (calling refund twice on the same payment should not double-refund)</code></pre>
 
-<p><strong>Bottom line:</strong> Sagas + the outbox pattern + idempotency keys solve 95% of distributed transaction problems. Start with choreographed sagas for simple workflows (2-3 steps, independent services). Switch to orchestrated sagas when the workflow becomes complex (5+ steps, sequential dependencies). Use the outbox pattern for every event published from a database transaction. And always, always make compensating actions idempotent. See also: <a href="/en/tech/event-driven-architecture-guide.html">Event-Driven Architecture Guide</a> and <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a>.</p></div>
+<p><strong>Bottom line:</strong> Sagas + the outbox pattern + idempotency keys solve 95% of distributed transaction problems. Start with choreographed sagas for simple workflows (2-3 steps, independent services). Switch to orchestrated sagas when the workflow becomes complex (5+ steps, sequential dependencies). Use the outbox pattern for every event published from a database transaction. And always, always make compensating actions idempotent. See also: <a href="/en/tech/event-driven-architecture-guide.html">Event-Driven Architecture Guide</a> and <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/tech/event-driven-architecture-guide.html">Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared</a>, <a href="/en/architecture/two-phase-commit.html">Two-Phase Commit (2PC) for Distributed Transactions</a>, <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith (2026): Making the Right Architectural Choice</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -185,7 +185,7 @@ async def fulfill_order(order_id, user_id, amount):
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <div class="related-grid"><a href="/en/tech/event-driven-architecture-guide.html" class="related-card">Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared</a><a href="/en/architecture/two-phase-commit.html" class="related-card">Two-Phase Commit (2PC) for Distributed Transactions</a><a href="/en/tech/microservices-vs-monolith.html" class="related-card">Microservices vs Monolith (2026): Making the Right Architectural Choice</a><a href="/en/architecture/transaction-outbox-reliable.html" class="related-card">Transactional Outbox Pattern</a></div>
     </section>
     
   </div>

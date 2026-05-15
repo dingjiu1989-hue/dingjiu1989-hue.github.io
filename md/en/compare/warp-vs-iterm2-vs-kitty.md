@@ -56,3 +56,5 @@ Minimal, memory-efficient, pure speed| Kitty| 50MB idle, best raw throughput
 Heavy SSH user, tmux workflows| iTerm2| Best tmux integration, profiles system  
   
 **Bottom line:** Warp is the most exciting terminal innovation in a decade — AI command generation, block-based output, and a modern UI make it the best choice for most developers. iTerm2 remains the safe, feature-complete choice for macOS users. Kitty is the pick for performance purists and cross-platform users. Try all three — the terminal is too personal a tool to choose based on someone else's comparison. See also: [Best Terminal Emulators](</en/tools/best-terminal-emulators.html>) and [Code Editor Comparison](</en/tools/editor-comparison-2026.html>).
+
+**See also:** [Best Terminal Emulators for Developers 2026: Warp vs iTerm2 vs Kitty vs WezTerm](</en/tools/best-terminal-emulators.html>), [Linear vs Jira vs Notion: Best Project Management Tool for Developers (2026)](</en/compare/linear-vs-jira-vs-notion.html>), [Best Terminal Emulators 2026](</en/tools/terminal-emulators.html>)

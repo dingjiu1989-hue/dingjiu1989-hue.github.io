@@ -62,3 +62,5 @@ Level| What It Looks Like| Timeline
 4: Autonomous| AI handles 80%+ of incidents end-to-end; engineers focus on new capabilities| 6-12 months  
   
 **Bottom line:** Start with AI monitoring (Datadog or New Relic) as your foundation — it provides the data other AI DevOps tools need. Add AI incident response second, then CI/CD optimization. Skip the "autonomous" level for now — in 2026, AI is best at assisting, not replacing, production decisions. See also: [Best Monitoring Tools](</en/tools/best-monitoring-tools.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).
+
+**See also:** [AI Code Review: Best Tools, Setup Guide, and ROI Analysis](</en/ai/ai-code-review-tools.html>), [Building AI Automation Workflows with n8n: A Practical Guide](</en/ai/n8n-ai-automation.html>), [DevOps for Developers: CI/CD, Docker, IaC, and Monitoring — A Practical Guide](</en/tech/devops-for-developers.html>)

@@ -10,415 +10,48 @@ url: https://dingjiu1989-hue.github.io/en/architecture/graceful-shutdown.html
 
 # Graceful Shutdown Patterns
 
-  
-
+# Graceful Shutdown Patterns
 
 # Graceful Shutdown Patterns
 
-  
-  
-  
-  
-
+# Graceful Shutdown Patterns
 
 # Graceful Shutdown Patterns
 
-  
-  
-  
-  
-  
-  
-  
-
+# Graceful Shutdown Patterns
 
 # Graceful Shutdown Patterns
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
+# Graceful Shutdown Patterns
 
 # Graceful Shutdown Patterns
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Graceful Shutdown Patterns
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Graceful Shutdown Patterns
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Graceful Shutdown Patterns
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Graceful Shutdown Patterns
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Graceful shutdown ensures that when a service instance stops, it completes its in-flight work, closes connections cleanly, and leaves data in a consistent state. In distributed systems, where multiple instances provide resilience, graceful shutdown is essential for zero-downtime operations. Hard-killing processes leaves requests incomplete, connections half-open, and data potentially corrupted. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Signal handling is the foundation. The service should register handlers for SIGTERM (the standard termination signal from orchestration platforms) and SIGINT (interactive termination). When received, the signal handler initiates the shutdown sequence. The handler should not block indefinitely — it should set a deadline for graceful shutdown and force-terminate if exceeded. Kubernetes sends SIGTERM to pods and waits for the terminationGracePeriodSeconds before sending SIGKILL. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 The shutdown sequence follows a well-defined order. First, the service should stop accepting new requests. This means unregistering from the service discovery registry, failing readiness probes, closing listener sockets, and rejecting incoming connections. The service should not return to "accepting" state once shutdown begins, even if the signal was spurious. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Second, the service drains in-flight requests. It waits for currently processing requests to complete, up to a configurable deadline. Long-running requests may need to be interrupted or saved for later resumption. The service should track in-flight requests and log any that are still active when the drain deadline expires. This information is invaluable for debugging why shutdown actually took the time it did. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Connection draining for different protocol types varies. HTTP/1.1 connections have a one-request-at-a-time model — the server stops accepting new requests and waits for the current one. HTTP/2 and gRPC support multiplexed streams — the server sends GOAWAY frames, stops accepting new streams, and drains existing ones. WebSocket connections may need application-level messages to notify clients of impending disconnection. Database connection pools should be drained by returning connections to the pool and waiting for all to be returned. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Third, the service cleans up resources. Close database connections. Flush caches if needed. Close file handles. Release distributed locks. Commit or rollback pending database transactions. The cleanup order matters — release resources that other processes might be waiting on first, then release resources that are safe to hold until the end. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Fourth, the service notifies its termination to dependent systems. This might include publishing a "shutdown" event, updating a registry, or writing a final health state. Downstream services that rely on this instance should know that it is going away and can adapt their behavior accordingly. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Kubernetes lifecycle hooks integrate with graceful shutdown. The preStop hook runs before the SIGTERM is sent. This can be used to notify service mesh proxies or API gateways that the pod is shutting down. The terminationGracePeriodSeconds defines the total time allowed for shutdown. It should account for the time needed to drain in-flight requests plus the time for PreStop hook execution. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Orchestrated shutdown in service mesh environments adds complexity. When Istio or Linkerd is present, the sidecar proxy must also shutdown gracefully — and the order matters. The application container should stop before the sidecar proxy. If the proxy stops first, in-flight request processing through the proxy will fail. Container lifecycle dependencies and preStop hooks can enforce the correct ordering. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Testing graceful shutdown is critical but often overlooked. Deploy a canary instance and kill it while monitoring request success rates. Verify that no requests are lost during the shutdown window. Test with various in-flight request durations. Test with dependencies intentionally slow to close. Automated chaos testing (Litmus, Chaos Mesh) can incorporate graceful shutdown testing into regular CI/CD pipelines. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Stateful services require additional consideration. Services that own data or maintain state must complete or roll back stateful operations during shutdown, not just drain them. A saga orchestrator must persist workflow state before shutdown. A stream processor must commit offsets. These state management operations should be the highest-priority step in the shutdown sequence.
+
+**See also:** [Health Check Patterns](</en/architecture/health-check-patterns.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>), [Leader Election in Distributed Systems](</en/architecture/leader-election.html>).
+
+**See also:** [Alerting Strategies for Production Systems](</en/architecture/alerting-strategies.html>), [Feature Flags Architecture](</en/architecture/feature-flags-architecture.html>), [API Gateway vs Service Mesh](</en/architecture/gateway-vs-mesh.html>)

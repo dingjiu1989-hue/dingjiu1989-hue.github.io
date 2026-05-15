@@ -49,3 +49,5 @@ High-traffic static file serving (CDN origin)| Nginx| Proven at massive scale, l
 Simple reverse proxy + automatic HTTPS| Caddy| The Caddyfile is the most readable config of all three  
   
 **Bottom line:** Caddy is the best default for 80% of projects — automatic HTTPS alone saves hours of certificate management. Traefik wins in container-heavy environments where services are dynamic. Nginx is still king at extreme scale and when you need maximum performance with minimal resources. See also: [Fly.io vs Railway vs Render](</en/compare/fly-io-vs-railway-vs-render.html>) and [DevOps for Developers](</en/tech/devops-for-developers.html>).
+
+**See also:** [Nginx vs Caddy: Web Server Comparison](</en/compare/nginx-vs-caddy.html>), [Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku](</en/compare/self-hosted-paas-comparison.html>), [Reverse Proxy Guide](</en/tech/reverse-proxy-guide.html>)

@@ -75,3 +75,5 @@ Privacy/air-gapped environment| **CodeLlama 70B**
 Best value ($0)| **Claude Free + Copilot Free**  
   
 **Bottom line:** Claude 4.5 Sonnet is the best all-around coding LLM in 2026. GPT-4o for data-heavy work. Gemini for massive context. The free tier combo (Claude Free + Copilot Free) handles 90% of developer needs. See also: [AI-Assisted Programming Guide](</en/ai/ai-coding.html>) and [AI coding tools comparison](</en/compare/cursor-vs-copilot-vs-claude-code.html>).
+
+**See also:** [AI Code Generation: Tools, Workflows, and Best Practices](</en/ai/ai-code-generation-tools.html>), [6 AI Coding Tools, 90 Days, 30 Tasks: My Honest Comparison](</en/ai/ai-coding-tools-90-days.html>), [Open Source LLMs Compared 2026: Llama 3 vs Mistral vs Qwen vs Gemma](</en/ai/open-source-llm-comparison.html>)

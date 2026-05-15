@@ -43,3 +43,5 @@ Deploy to non-Vercel (Cloudflare, Deno)| Remix or TanStack Start| Run anywhere w
 Already use TanStack ecosystem| TanStack Start| TanStack Query, Router, Table — all first-class  
   
 **Bottom line:** Next.js is the safe default with the largest ecosystem. Remix is better for mostly-dynamic apps where you value web standards. TanStack Start is the rising star for type-safety enthusiasts. Pick the philosophy that matches your team. See also: [Next.js vs Nuxt vs SvelteKit](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>) and [React vs Vue vs Angular vs Svelte](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>).
+
+**See also:** [LangChain vs LlamaIndex vs Haystack (2026): AI Framework Comparison](</en/compare/langchain-vs-llamaindex-vs-haystack.html>), [Zustand vs Redux vs Jotai](</en/compare/zustand-vs-redux.html>), [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>)

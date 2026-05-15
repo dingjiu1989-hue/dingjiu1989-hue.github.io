@@ -57,3 +57,5 @@ Rename column| Expand-contract (4 phases, see above)| Reverse the expand-contrac
 Add index| CREATE INDEX CONCURRENTLY ...;| DROP INDEX CONCURRENTLY ...;  
   
 **Bottom line:** The expand-contract pattern is the gold standard for zero-downtime migrations — deploy changes in small, compatible steps. For any ALTER TABLE on a large production table, use your database's non-blocking equivalent (CONCURRENTLY for PostgreSQL, gh-ost for MySQL). Never run a migration you cannot roll back. See also: [Database Design Fundamentals](</en/tech/database-design-fundamentals.html>) and [PostgreSQL vs MySQL vs SQLite](</en/compare/postgresql-vs-mysql-vs-sqlite.html>).
+
+**See also:** [Database Indexing Strategies: B-Tree, Hash, GIN, GiST, and BRIN Explained](</en/tech/database-indexing-guide.html>), [Database Schema Migration: Version Control, Rollback, and Zero-Downtime](</en/database/database-schema-migration-strategies.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>)

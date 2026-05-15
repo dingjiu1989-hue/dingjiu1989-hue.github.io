@@ -97,3 +97,7 @@ Charge monthly by default, offer a 20-30% discount for annual plans. Annual cust
   * **Pricing too low.** Charge at least $15/month. Anything lower signals "this isn't valuable" and makes customer acquisition costs unsustainable.
   * **Building for yourself, not customers.** Ship based on customer feedback, not what you think is cool. Talk to at least one customer every week.
   * **Giving up too early.** Most successful bootstrapped SaaS products took 12-18 months to reach meaningful revenue. The first 6 months are almost always slow. Keep shipping.
+
+
+
+**See also:** [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [50 Micro-SaaS Ideas for Solo Developers in 2026](</en/sidehustle/micro-saas-ideas-2026.html>), [Side Project Validation: Landing Page, Waitlist, Customer Interviews, and MVP Scoping](</en/sidehustle/side-project-validation.html>)

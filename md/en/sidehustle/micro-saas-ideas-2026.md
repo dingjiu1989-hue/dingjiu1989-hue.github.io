@@ -87,3 +87,5 @@ The best micro-SaaS ideas solve a specific, painful problem for a narrow audienc
 
 
 **Bottom line:** The best micro-SaaS ideas are boring to most people but essential to a specific group. Find a niche where the existing software is old, expensive, or missing. Build something better. Charge money. Repeat. See also: [SaaS Bootstrapping Guide](</en/sidehustle/saas-bootstrapping-guide.html>) and [Build and Sell APIs](</en/sidehustle/build-and-sell-api.html>).
+
+**See also:** [Bootstrapping a SaaS: From Idea to First Paying Customer](</en/sidehustle/saas-bootstrapping-guide.html>), [Micro-SaaS Tech Stack: Building Lean in 2026](</en/sidehustle/micro-saas-stack.html>), [Mobile App Income in 2026: How Much Can a Solo Developer Really Make?](</en/sidehustle/build-mobile-app-income.html>)

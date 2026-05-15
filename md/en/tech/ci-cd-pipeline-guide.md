@@ -113,3 +113,5 @@ Feature Flags| Very Low| Instant| Flag management system| Decoupling deploy from
           - run: npm run deploy:full    # Full production after canary passes
 
 **Bottom line:** A good CI/CD pipeline should give you confidence to deploy on Friday at 5pm. Key principles: the pipeline should complete in under 10 minutes (optimize ruthlessly), every failure should have a clear error message (not "Exit code 1"), and deploys should be one-click reversible. Start with GitHub Actions (free for most teams), implement parallel test sharding first (biggest speed win), and adopt canary deploys as your traffic and risk grow. See also: [Webhook Implementation Guide](</en/tech/webhook-implementation-guide.html>) and [Kubernetes vs Docker Swarm vs Nomad](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>).
+
+**See also:** [Best CI/CD Tools 2026: GitHub Actions vs GitLab CI vs CircleCI vs ArgoCD](</en/tools/best-cicd-tools-2026.html>), [Service Discovery in Microservices](</en/tech/service-discovery.html>), [Self-Hosted PaaS Comparison 2026: Coolify vs Dokploy vs CapRover vs Kamal vs Dokku](</en/compare/self-hosted-paas-comparison.html>)

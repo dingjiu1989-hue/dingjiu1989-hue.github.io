@@ -77,3 +77,5 @@ Auto-increment IDs collide| Each shard's auto-increment starts at 1| Use UUIDs, 
 Transactions across shards| ACID transactions don't span shards| Use distributed transactions (2PC) or design around it (sagas)  
   
 **Bottom line:** Sharding is a last-resort scaling strategy — exhaust all other options first (indexing, caching, read replicas, connection pooling, query optimization). When you do need sharding, use key-based sharding with consistent hashing for the most flexibility. For PostgreSQL, consider Citus (distributed PostgreSQL) or Vitess (MySQL) as battle-tested sharding solutions before building your own. See also: [PostgreSQL Query Optimization](</en/tech/postgresql-query-optimization.html>) and [System Design Interview Guide](</en/tech/system-design-interview-guide.html>).
+
+**See also:** [PostgreSQL Query Optimization: From 2 Seconds to 2 Milliseconds](</en/tech/postgresql-query-optimization.html>), [System Design Fundamentals 2026: A Developer Guide to Scalable Applications](</en/architecture/system-design-fundamentals-2026.html>), [System Design Interview Prep: Complete Developer Guide (2026)](</en/tech/system-design-interview-guide.html>)

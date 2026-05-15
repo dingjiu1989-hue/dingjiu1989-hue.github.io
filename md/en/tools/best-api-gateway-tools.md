@@ -49,3 +49,5 @@ AWS ecosystem, zero ops| AWS API Gateway| Fully managed, tight AWS service integ
 Simple reverse proxy needs| None (use Caddy/Nginx/Traefik)| API Gateway is overkill for simple routing  
   
 **Bottom line:** Apache APISIX is the rising star — best performance, Apache 2.0 license (no open core tricks), and growing plugin ecosystem. Kong is the safe enterprise choice with the largest plugin library. AWS API Gateway is the obvious pick if you are all-in on AWS. For most projects, start without an API gateway (Nginx/Caddy/Traefik handle simple routing), then add one when you need per-route auth, rate limiting, or request transformation. See also: [Nginx vs Caddy vs Traefik](</en/compare/nginx-vs-caddy-vs-traefik.html>) and [API Design Patterns](</en/tech/api-design-patterns.html>).
+
+**See also:** [API Gateway Implementation Guide](</en/tech/api-gateway-implementation.html>), [API Testing Tools Comparison](</en/tools/api-testing-tools.html>), [Best API Documentation Tools 2026: OpenAPI, Postman, Mintlify, ReadMe](</en/tools/best-api-documentation-tools.html>)

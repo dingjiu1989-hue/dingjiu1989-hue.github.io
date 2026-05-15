@@ -64,3 +64,5 @@ Template-heavy work (slides, resumes, flyers)| **Canva**
 Professional UI with developer handoff| **Figma**  
   
 **Bottom line for developers:** Use Figma for UI design, Canva for marketing graphics. Both have excellent free tiers. See our [full design tools guide](</en/tools/design-tools-for-developers.html>) for color palettes, icons, and illustration resources.
+
+**See also:** [Supabase vs Firebase vs Neon (2026): Best Backend for Solo Developers](</en/compare/supabase-vs-firebase-vs-neon.html>), [Notion vs Obsidian vs Linear (2026): Best Dev Knowledge & Project Tool?](</en/compare/notion-vs-obsidian-vs-linear.html>), [Clerk vs Auth0 vs Lucia Auth (2026): Authentication for Modern Apps](</en/compare/clerk-vs-auth0-vs-lucia.html>)

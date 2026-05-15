@@ -10,389 +10,46 @@ url: https://dingjiu1989-hue.github.io/en/architecture/multi-tenancy.html
 
 # Multi-Tenancy Architecture
 
-  
-
+# Multi-Tenancy Architecture
 
 # Multi-Tenancy Architecture
 
-  
-  
-  
-  
-
+# Multi-Tenancy Architecture
 
 # Multi-Tenancy Architecture
 
-  
-  
-  
-  
-  
-  
-  
-
+# Multi-Tenancy Architecture
 
 # Multi-Tenancy Architecture
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
+# Multi-Tenancy Architecture
 
 # Multi-Tenancy Architecture
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Multi-Tenancy Architecture
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Multi-Tenancy Architecture
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Multi-Tenancy Architecture
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Multi-Tenancy Architecture
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Database per tenant provides the strongest isolation. Each tenant gets its own database instance. This simplifies backup and restore (one tenant's data can be manipulated independently), provides natural resource limits (noisy neighbor containment), and makes data migration straightforward. The trade-off is operational cost: provisioning databases, managing connections, and running migration scripts for each tenant. At hundreds or thousands of tenants, the operational overhead becomes significant unless automated through infrastructure-as-code. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Schema per tenant shares the database server but maintains separate schemas for each tenant. This provides moderate isolation — a schema is a namespace with its own tables and data. Connection pooling across schemas shares resources efficiently. Schema management becomes the challenge: each tenant's schema must be created and migrated independently. Tools can automate schema operations across all tenants, but schema divergence becomes a risk if tenants can have different schema versions. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Shared database (all tenants in the same tables) is the most cost-efficient approach. All tenant data resides in the same tables, distinguished by a tenant_id column. This simplifies operations significantly — a single database, single schema, single set of migrations. The trade-offs are severe: any application bug can leak or corrupt data across tenants, resource contention (noisy neighbor) affects all tenants simultaneously, and backup/restore must handle all tenants at once. Strong security measures are essential: every query must include the tenant_id filter. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Tenant routing determines which tenant's data is accessed for each request. The tenant identifier is typically extracted from the authentication context (JWT claims, session data). For database-per-tenant, the tenant ID maps to a database connection. For schema-per-tenant, it maps to a schema name. For shared database, it becomes the WHERE clause filter. The routing infrastructure must be injected early in request processing — ideally at the middleware or API gateway layer — so that downstream code never has to think about multi-tenancy. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Tenant-aware connection pooling is critical for database-per-tenant architectures. Creating a new database connection for each tenant on each request is prohibitively expensive. A pool of connections per tenant, with maximum pool sizes, prevents any single tenant from exhausting database connections. The pool must handle tenant creation and removal dynamically. Tools like PgBouncer with per-database connection limits or application-level pooling frameworks solve this. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Pricing models in multi-tenant systems typically distribute infrastructure costs according to tenant resource consumption. Per-tenant pricing requires metering: tracking CPU, storage, bandwidth, and request counts per tenant. Metering data should be aggregated in a reporting database and used for both billing and capacity planning. The pricing model should incentivize efficient resource usage — tenants that consume more should pay proportionally more. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Data isolation testing is essential for shared-database multi-tenancy. Automated security tests should verify that tenant A cannot access tenant B's data through any API endpoint. Penetration testing should attempt tenant ID manipulation, SQL injection to switch tenant context, and access token replay across tenants. Compliance requirements (SOC 2, HIPAA, GDPR) often mandate specific isolation levels — the architecture must satisfy the strictest requirement across all tenants. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Tenant feature flags enable per-tenant configuration. Different tenants may require different feature sets, integration configurations, or compliance configurations. A tenant-level feature flag system allows rolling out features to specific tenants, maintaining tenant-specific customizations, and gradually migrating tenants between infrastructure tiers as their needs grow. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Migrating between isolation levels is a common lifecycle pattern. Startups often begin with a shared database for speed, migrate to schema-per-tenant as the customer base grows, and eventually offer database-per-tenant for premium enterprise customers. The migration path must be designed from the beginning — using tenant_id consistently even in shared databases, abstracting database access behind a routing layer, and ensuring that connection management is configurable without code changes.
+
+**See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Event-Driven Architecture](</en/architecture/event-driven-arch.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>).
+
+**See also:** [Cost Per Request Modeling](</en/architecture/cost-per-request.html>), [Zero-Downtime Database Migrations](</en/architecture/database-migration-zero-downtime.html>), [Global Traffic Routing](</en/architecture/global-traffic-routing.html>)

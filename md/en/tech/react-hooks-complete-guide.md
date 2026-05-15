@@ -93,3 +93,5 @@ useActionState| Form action with state| Server Action form handling with error s
     }
 
 **Bottom line:** React Hooks are not just for state — they are the primitive for composing behavior in React. The newer hooks (useOptimistic, useFormStatus, useTransition) show React's direction: tighter integration with server actions and optimistic UI. See also: [React vs Vue vs Angular vs Svelte](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) and [Next.js vs Nuxt vs SvelteKit](</en/compare/nextjs-vs-nuxt-vs-sveltekit.html>).
+
+**See also:** [React Server Components Guide: Architecture, Patterns, and When to Use RSC in 2026](</en/tech/react-server-components-guide.html>), [WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI](</en/tech/webassembly-guide.html>), [React vs Vue vs Angular vs Svelte (2026): Best Frontend Framework?](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>)

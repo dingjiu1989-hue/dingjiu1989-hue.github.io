@@ -95,3 +95,5 @@ No delivery monitoring| Failed deliveries go unnoticed for days| Alert when deli
 Hardcoded URLs| Cannot update endpoints without deploy| Store webhook endpoints in database, with UI for management  
   
 **Bottom line:** A production-grade webhook system needs four things: HMAC signatures (security), idempotency keys (reliability), exponential backoff retries (deliverability), and a delivery log (debugging). The most common mistake is processing webhooks synchronously in the request handler — always accept, enqueue, and return 200 immediately. See also: [Rate Limiting Strategies](</en/tech/rate-limiting-strategies.html>) and [CI/CD Pipeline Guide](</en/tech/ci-cd-pipeline-guide.html>).
+
+**See also:** [GraphQL API Design: Schema Best Practices, Federation, and Performance](</en/tech/graphql-api-design.html>), [API Design Patterns: Rate Limiting, Pagination, Idempotency, and More](</en/tech/api-design-patterns.html>), [REST API Best Practices: The Complete Guide for 2026](</en/tech/rest-api-best-practices.html>)

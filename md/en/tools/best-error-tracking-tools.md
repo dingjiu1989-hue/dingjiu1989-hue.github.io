@@ -45,3 +45,5 @@ Mobile-first app (iOS/Android)| Bugsnag| Best mobile stability monitoring
 Cost-sensitive small team| Sentry (self-hosted)| Free and open source  
   
 **Bottom line:** Start with Sentry — it is free for small teams, open source, and covers 90% of use cases. Add LogRocket if you need session replay for frontend debugging. Only consider Datadog if you already use their ecosystem. See also: [Best Log Management Tools](</en/tools/best-log-management-tools.html>) and [Best Monitoring Tools](</en/tools/best-monitoring-tools.html>).
+
+**See also:** [Best Web Performance Tools 2026: Lighthouse vs WebPageTest vs Sentry vs Checkly](</en/tools/best-web-performance-tools.html>), [Best Log Management Tools 2026: Datadog vs Grafana Loki vs Better Stack vs Axiom](</en/tools/best-log-management-tools.html>), [Monitoring Tools: Grafana vs Datadog vs New Relic](</en/tools/monitoring-tools.html>)

@@ -88,3 +88,5 @@ Request Deduplication (at-least-once → exactly-once)| Store processed message 
     # (calling refund twice on the same payment should not double-refund)
 
 **Bottom line:** Sagas + the outbox pattern + idempotency keys solve 95% of distributed transaction problems. Start with choreographed sagas for simple workflows (2-3 steps, independent services). Switch to orchestrated sagas when the workflow becomes complex (5+ steps, sequential dependencies). Use the outbox pattern for every event published from a database transaction. And always, always make compensating actions idempotent. See also: [Event-Driven Architecture Guide](</en/tech/event-driven-architecture-guide.html>) and [Microservices vs Monolith](</en/tech/microservices-vs-monolith.html>).
+
+**See also:** [Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared](</en/tech/event-driven-architecture-guide.html>), [Two-Phase Commit (2PC) for Distributed Transactions](</en/architecture/two-phase-commit.html>), [Microservices vs Monolith (2026): Making the Right Architectural Choice](</en/tech/microservices-vs-monolith.html>)

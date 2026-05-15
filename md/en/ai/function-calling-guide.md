@@ -63,3 +63,5 @@ Anthropic| tools: [{name: "...", description: "...", input_schema: {...}}]| Nati
 Google Gemini| tools: [{functionDeclarations: [{name, description, parameters}]}]| Automatic function calling mode available (Gemini executes)  
   
 **Bottom line:** Function calling is the bridge between LLMs and real-world actions. Invest time in schema design (clear descriptions, typed parameters, enums) — the quality of your function definitions directly determines reliability. Start with 2-3 functions and test extensively before adding more. See also: [AI Agents Guide](</en/ai/ai-agents-guide.html>) and [AI API Integration Guide](</en/ai/ai-api-integration-guide.html>).
+
+**See also:** [MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools](</en/ai/mcp-complete-guide.html>), [How to Build a Custom GPT Plugin: Complete Developer Guide](</en/ai/build-chatgpt-plugin.html>), [Advanced Prompt Engineering: Techniques That Actually Work for Developers](</en/ai/prompt-engineering-advanced.html>)

@@ -86,3 +86,5 @@ Most situations call for neither pure refactor nor pure rewrite, but a combinati
 
 
 **Bottom line:** Refactoring is the default right answer in 80% of cases. Rewrites win when the technology is truly obsolete or the system is small enough to replace quickly. The worst outcome isn't messy code — it's a rewrite that takes 18 months, misses critical features, and kills the product. Ship incrementally, measure everything, and let data drive the decision.
+
+**See also:** [Testing Strategies for Web Apps: Unit, Integration, E2E, and When to Use Each](</en/tech/testing-strategies-web-apps.html>), [WebAssembly Guide 2026: Running Native Code in the Browser with Rust and WASI](</en/tech/webassembly-guide.html>), [Rust vs Go: A Practical Comparison](</en/tech/rust-vs-go-practical.html>)

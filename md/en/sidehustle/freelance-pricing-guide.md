@@ -70,3 +70,5 @@ Scope creep destroys margins. Fix it upfront:
 
 
 **Bottom line:** Charge for value, not hours. A 4-week project that generates $100K in revenue for the client is worth $20-30K — even if it took you 100 hours. Productize your services. Always scope before pricing. See also: [Side Hustles Guide](</en/sidehustle/developer-side-hustles-2026.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).
+
+**See also:** [Product-Led Growth: Freemium, Free Trials, Self-Serve, and Usage-Based Pricing](</en/sidehustle/product-led-growth.html>), [Developer Consulting Side Hustle: From $0 to $150/Hour](</en/sidehustle/developer-consulting-guide.html>), [SaaS Pricing Strategies for Developers](</en/sidehustle/saas-pricing-strategies.html>)

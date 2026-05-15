@@ -68,3 +68,5 @@ Tier| Price| Requests/Month| Who It's For
 **Real examples:** ScreenshotAPI ($30K+/mo, screenshot generation), Bannerbear ($25K+/mo, image generation API), Geocodio ($15K+/mo, geocoding). All built by solo developers or tiny teams.
 
 **Bottom line:** Find a repetitive developer task, wrap it in an API, charge per request. Start with a free tier. Build great docs. The market for developer-focused APIs keeps growing because every company needs more automation. See also: [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>) and [Micro-SaaS Ideas](</en/sidehustle/micro-saas-ideas-2026.html>).
+
+**See also:** [Selling API Access: Build and Monetize a Developer API Business in 2026](</en/sidehustle/selling-api-access.html>), [How to Build and Sell VS Code Extensions: A Developer's Guide to Recurring Revenue](</en/sidehustle/sell-vscode-extensions.html>), [How to Create and Sell Digital Products: A Developer's Complete Guide](</en/sidehustle/sell-digital-products.html>)

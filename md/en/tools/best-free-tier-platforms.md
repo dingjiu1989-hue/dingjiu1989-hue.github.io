@@ -86,3 +86,5 @@ Platform| Free Tier| Best For
 
 
 **This stack handles 10K-100K+ users before you pay anything.** When you do start paying, it's $5-50/month per service, not $500. See also: [Free Hosting Guide](</en/tools/best-free-hosting-side-projects.html>) and [SaaS Bootstrapping](</en/sidehustle/saas-bootstrapping-guide.html>).
+
+**See also:** [Best Free Hosting for Side Projects 2026: 12 Platforms With Generous Free Tiers](</en/tools/best-free-hosting-side-projects.html>), [Best CI/CD Tools 2026: GitHub Actions vs GitLab CI vs CircleCI vs ArgoCD](</en/tools/best-cicd-tools-2026.html>), [Best Password Managers for Developers](</en/tools/password-managers.html>)

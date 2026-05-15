@@ -10,389 +10,46 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
 
 # Transactional Outbox Pattern
 
-  
-
+# Transactional Outbox Pattern
 
 # Transactional Outbox Pattern
 
-  
-  
-  
-  
-
+# Transactional Outbox Pattern
 
 # Transactional Outbox Pattern
 
-  
-  
-  
-  
-  
-  
-  
-
+# Transactional Outbox Pattern
 
 # Transactional Outbox Pattern
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
+# Transactional Outbox Pattern
 
 # Transactional Outbox Pattern
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Transactional Outbox Pattern
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 # Transactional Outbox Pattern
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Transactional Outbox Pattern
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# Transactional Outbox Pattern
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process — the outbox publisher — reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 CDC-based implementation avoids polling overhead. Tools like Debezium read the database's transaction log (WAL in PostgreSQL, binlog in MySQL) and stream changes directly to Kafka. When the application inserts an event into the outbox table, Debezium captures the insert as a CDC event and publishes it to Kafka. This eliminates the need for a separate polling publisher and reduces latency to near-real-time. The trade-off is operational complexity — operating CDC infrastructure requires database expertise. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 The outbox publisher must handle several failure modes. If the publisher crashes after reading an event but before acknowledging publication, the event will be reprocessed. This requires at-least-once delivery semantics and idempotent consumers. If the broker is unavailable, the publisher should retry with exponential backoff. Dead-letter queues capture events that repeatedly fail to publish, preventing the outbox from blocking on problematic events. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 Ordering guarantees require careful consideration. Events published from the same outbox table can be ordered by creation timestamp within a partition. If the publisher processes events sequentially, order is preserved. Parallel processing requires partitioning by aggregate ID or correlation key to maintain causal ordering. CDC-based solutions typically preserve transaction commit order within the database's write-ahead log. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Idempotent consumers are essential since at-least-once delivery means the same event may arrive multiple times. The consumer should maintain a deduplication table of processed event IDs with a unique constraint. Processing the same event twice should produce the same result. This is typically achieved through a combination of deduplication and making the business operation itself idempotent. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 The outbox pattern also solves the inverse dual-write problem: reliably consuming messages. The transactional inbox pattern stores incoming messages in an inbox table within the consumer's database. The consumer processes the message and marks it as processed, all within a single local transaction. This prevents the "at-most-once" processing scenario where the message is consumed successfully but the business operation fails. 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
 Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
 The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency.
+
+**See also:** [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>).
+
+**See also:** [Transactional Outbox Pattern](</en/architecture/transaction-outbox-reliable.html>), [Domain Events: Design and Implementation](</en/architecture/domain-events.html>), [Fanout Pattern for Event Distribution](</en/architecture/fanout-pattern.html>)

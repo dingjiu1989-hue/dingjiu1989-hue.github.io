@@ -44,3 +44,5 @@ Startup that needs iOS + Android + web MVP fast| Expo (with Expo Router for web)
 Performance-critical app (graphics, real-time data)| Flutter or Native (SwiftUI/Kotlin)  
   
 **My recommendation for 2026:** Start with **Expo (React Native)** unless you have a specific reason not to. It covers iOS, Android, and web from a single codebase; the developer experience is excellent; the React knowledge transfers directly; and Expo's managed workflow eliminates most build configuration pain. Use **Flutter** if you need pixel-perfect custom UI, heavy animations, or your team has no React background. Go **native** only when your app's competitive advantage depends on platform-specific features (AR, advanced camera, system integrations). See also: [React vs Vue vs Angular vs Svelte](</en/compare/react-vs-vue-vs-angular-vs-svelte.html>) for the web framework comparison.
+
+**See also:** [Zustand vs Redux vs Jotai: Best React State Management in 2026?](</en/compare/zustand-vs-redux-vs-jotai.html>), [Vue vs React 2026: Which Frontend Framework to Choose?](</en/compare/vue-vs-react-2026.html>), [AWS vs Azure vs GCP 2026](</en/compare/aws-vs-azure-vs-gcp-2026.html>)

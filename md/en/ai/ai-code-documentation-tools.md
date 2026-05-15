@@ -46,3 +46,5 @@ I want to answer questions about my codebase| Unblocked (codebase-aware AI answe
 I want both inline docs + stale detection| Mintlify + Swimm (complementary)  
   
 **My recommendation:** Use **Mintlify Writer** for daily inline documentation (it's free and it just works). For teams, add **Swimm** if documentation rot is a problem you've actually experienced (it's expensive otherwise). For public-facing docs, **Docusaurus** remains the best open-source option — add AI assistance via your preferred AI coding tool rather than a specialized docs AI. See also: [Best AI Tools for Developers](</en/ai/best-ai-tools-developers-2026.html>) and [AI Code Review Tools](</en/ai/ai-code-review-tools.html>).
+
+**See also:** [Best Code Editors 2026: VS Code vs Cursor vs JetBrains vs Zed vs Neovim](</en/compare/code-editors-comparison-2026.html>), [Best API Documentation Tools 2026: OpenAPI, Postman, Mintlify, ReadMe](</en/tools/best-api-documentation-tools.html>), [25 Best AI Tools for Developers in 2026: Code, Debug, Deploy](</en/ai/best-ai-tools-developers-2026.html>)

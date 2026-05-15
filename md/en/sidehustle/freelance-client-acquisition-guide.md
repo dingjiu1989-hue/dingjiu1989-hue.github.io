@@ -65,3 +65,5 @@ Send within 24 hours. Structure: Problem summary (prove you understood), propose
 ## After the First Client
 
 Over-deliver slightly (meet deadlines, communicate proactively, document your work). Ask for a testimonial while the project is still fresh. Ask if they know anyone else who needs similar work. Raise your rate by 20% for the next client. Repeat. After 3-5 clients, you'll have a referral pipeline and won't need to pitch cold anymore. That's when freelancing stops feeling like a hustle and starts feeling like a business.
+
+**See also:** [How to Start a Profitable YouTube Channel as a Developer (2026 Guide)](</en/sidehustle/youtube-channel-developers.html>), [Online Coding Tutoring and Mentoring: Complete Developer Guide (2026)](</en/sidehustle/online-coding-tutoring-guide.html>), [Building a DevTools Startup: Strategy Guide](</en/sidehustle/devtools-startup.html>)

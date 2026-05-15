@@ -98,7 +98,7 @@
       <h1 class="article-title">Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared</h1>
       <div class="article-meta">Published 2026-05-08 · 9240 views · 77 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/tech/event-driven-architecture-guide.png" alt="Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared" width="1200" height="630" loading="lazy">
-      <div class="article-body"><p>Event-driven architecture (EDA) is the pattern behind the most scalable systems — from Netflix's microservices to Stripe's payment processing. Instead of services calling each other directly (request-response), they communicate through events (messages about things that happened). This guide covers the patterns, message brokers, and practical implementation of event-driven systems.</p>
+      <div class="article-body"><p>Event-driven architecture (EDA) is the pattern behind the most scalable systems — from Netflix's microservices to Stripe's payment processing. Instead of services calling each other directly (request-response), they communicate through events (messages about things that happened). This guide covers the patterns, message brokers, and practical implementation of event-driven systems.</p><img src="https://dingjiu1989-hue.github.io/images/covers/en/tech/event-driven-architecture-guide.png" alt="Event-Driven Architecture Patterns: Kafka, RabbitMQ, SQS, and EventBridge Compared" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">
 
 <h2>Core Event-Driven Patterns</h2>
 <table>
@@ -159,7 +159,7 @@ POST /orders {status: PENDING, items: [...]}
 # Key: each compensating action must be idempotent
 # (refunding twice = bad; but idempotent refund = safe to retry)</code></pre>
 
-<p><strong>Bottom line:</strong> Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p></div>
+<p><strong>Bottom line:</strong> Start with simple event notification (one service emits, others react) before adopting event sourcing or CQRS. For most projects, RabbitMQ or Redis Streams provide enough throughput with simpler operations. Only reach for Kafka when you need replay, long-term retention, or 1M+ msg/s throughput. The biggest mistake is going fully event-driven when simple request-response would suffice — EDA is a powerful tool, not a default architecture. See also: <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith</a> and <a href="/en/tech/webhook-implementation-guide.html">Webhook Implementation Guide</a>.</p><p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> <a href="/en/architecture/system-design-fundamentals-2026.html">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</a>, <a href="/en/tech/microservices-vs-monolith.html">Microservices vs Monolith (2026): Making the Right Architectural Choice</a>, <a href="/en/tech/distributed-transactions-guide.html">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a></p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
     <ins class="adsbygoogle"
@@ -171,7 +171,7 @@ POST /orders {status: PENDING, items: [...]}
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
+      <div class="related-grid"><a href="/en/architecture/system-design-fundamentals-2026.html" class="related-card">System Design Fundamentals 2026: A Developer Guide to Scalable Applications</a><a href="/en/tech/microservices-vs-monolith.html" class="related-card">Microservices vs Monolith (2026): Making the Right Architectural Choice</a><a href="/en/tech/distributed-transactions-guide.html" class="related-card">Distributed Transactions: Sagas, Two-Phase Commit, Outbox Pattern, and Idempotency</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
     </section>
     
   </div>

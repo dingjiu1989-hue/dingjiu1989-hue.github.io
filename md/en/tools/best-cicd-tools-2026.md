@@ -74,3 +74,5 @@ Kubernetes, GitOps| **ArgoCD + GitHub Actions**
 Solo developer, side project| **GitHub Actions** (free 2000 min)  
   
 **Bottom line:** GitHub Actions for any GitHub project — it's free, integrated, and the marketplace has everything. GitLab CI if you're on GitLab. CircleCI for complex parallel pipelines. ArgoCD for Kubernetes GitOps (use alongside a CI tool, not instead of). See also: [GitHub vs GitLab comparison](</en/compare/github-vs-gitlab-vs-bitbucket.html>) for where to host your code.
+
+**See also:** [CI/CD Pipeline Complete Guide 2026: From Git Push to Production](</en/tech/ci-cd-pipeline-guide.html>), [Best Code Review Tools 2026: GitHub, GitLab, Graphite, Reviewable Compared](</en/tools/best-code-review-tools.html>), [Best Authentication Solutions 2026: Clerk vs Auth0 vs Supabase Auth vs NextAuth vs Lucia](</en/tools/best-auth-solutions.html>)

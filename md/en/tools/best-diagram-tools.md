@@ -62,3 +62,5 @@ Design docs + diagrams combined| Eraser| Best for writing design docs with embed
 Quick flowchart or sequence for a PR description| Mermaid| Write in PR, renders automatically on GitHub  
   
 **Bottom line:** For most developers, the optimal workflow is Mermaid (for diagrams that go in docs, PRs, and READMEs — version-controlled and auto-rendered) + Excalidraw (for brainstorming and whiteboarding). Mermaid's text-based approach means diagrams live alongside code in Git, can be reviewed in PRs, and never go out of sync with documentation. See also: [Best API Documentation Tools](</en/tools/best-api-documentation-tools.html>) and [Design Tools for Developers](</en/tools/design-tools-for-developers.html>).
+
+**See also:** [Best Diagram as Code Tools](</en/tools/diagram-tools.html>), [Best API Documentation Tools 2026: OpenAPI, Postman, Mintlify, ReadMe](</en/tools/best-api-documentation-tools.html>), [Best AI Code Documentation Tools 2026: Mintlify vs Swimm vs GitBook AI vs Docusaurus](</en/ai/ai-code-documentation-tools.html>)

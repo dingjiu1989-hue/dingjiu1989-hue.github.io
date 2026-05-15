@@ -78,3 +78,7 @@ API| Free Tier| What You Get
   * **Use exponential backoff** — When you get a 429 (rate limited), wait and retry with increasing delays.
   * **Keep keys out of your repo** — Use environment variables. Even for free API keys.
   * **Fallback gracefully** — Free APIs can go down. Your app should still work if the dog picture API is having a bad day.
+
+
+
+**See also:** [Best Free Developer Tools 2026: Terminal, Git, APIs, DBs, and More](</en/tools/best-free-dev-tools-2026.html>), [Best Free Tier Platforms for Developer Projects 2026: The Ultimate List](</en/tools/best-free-tier-platforms.html>), [How to Build and Sell APIs: A Developer's Guide to API-as-a-Service](</en/sidehustle/build-and-sell-api.html>)

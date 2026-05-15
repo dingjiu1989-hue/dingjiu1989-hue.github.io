@@ -53,3 +53,5 @@ Fast switching between projects. Save your favorite repos, assign tags, and jump
 ## Bonus: Color Theme
 
 Pick one good theme and stick with it. **Catppuccin** , **Dracula** , and **One Dark Pro** are community favorites with excellent language coverage. A theme you enjoy looking at for 8 hours a day is worth the 30 seconds to install.
+
+**See also:** [Code Editor Plugins: Must-Have Extensions for Productivity](</en/tools/code-editor-plugins.html>), [VS Code vs JetBrains vs Cursor: Ultimate Code Editor Showdown (2026)](</en/tools/editor-comparison-2026.html>), [Best IDE Extensions 2026](</en/tools/best-ide-extensions-2026.html>)

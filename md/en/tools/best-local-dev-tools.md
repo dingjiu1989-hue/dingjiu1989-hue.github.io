@@ -46,3 +46,5 @@ Just want Docker to work, don't care about RAM| Docker Desktop| Most polished, g
 Linux desktop| Native Docker or Colima| Docker runs natively on Linux — no VM needed; Colima for isolation  
   
 **What I actually use:** OrbStack on macOS for daily development — it's genuinely faster than Docker Desktop, and the 800MB RAM savings means I can run more services without swapping. Colima on any machine I don't control (CI, ephemeral VMs). Docker Desktop when I need to reproduce a bug that only happens in Docker Desktop's VM (rare but real). If I were on Linux, I'd run native Docker Engine with no VM layer — it's still the fastest way to run containers.
+
+**See also:** [Kubernetes vs Docker Swarm vs Nomad (2026): Container Orchestration Compared](</en/compare/kubernetes-vs-docker-swarm-vs-nomad.html>), [Docker vs Podman (2026): Best Container Tool for Developers?](</en/compare/docker-vs-podman.html>), [Docker in 30 Minutes: From Install to First Container](</en/tech/docker-quickstart.html>)

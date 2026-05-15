@@ -45,3 +45,5 @@ ETL pipelines, data engineering| Airflow| Industry standard for DAGs
 Simple cron jobs, low volume| QStash or Trigger.dev| Lowest complexity, cheapest  
   
 **Bottom line:** For most web applications, Trigger.dev or Inngest is the modern replacement for cron. Trigger.dev is simpler for JS-only stacks; Inngest is more powerful for complex workflows. QStash is the simplest option — just HTTP and a schedule. Airflow is the pick for data engineering pipelines. See also: [Event-Driven Architecture Guide](</en/tech/event-driven-architecture-guide.html>) and [CI/CD Pipeline Guide](</en/tech/ci-cd-pipeline-guide.html>).
+
+**See also:** [Best Email API Services 2026: Resend vs SendGrid vs Postmark vs Amazon SES](</en/tools/best-email-api-services.html>), [Best Backend-as-a-Service Platforms 2026: Supabase vs Appwrite vs Convex vs Firebase](</en/tools/best-backend-as-a-service.html>), [Building AI-Powered CLI Tools: A Complete Guide for Developers](</en/tools/ai-cli-tools-guide.html>)

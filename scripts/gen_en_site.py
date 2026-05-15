@@ -13446,12 +13446,44 @@ def make_article_html(art, board_id, board_name, all_posts):
         next_p = all_sorted[idx + 1]
         prev_next += f'\n    <link rel="next" href="{BASE}/en/{board_id}/{next_p["slug"]}.html">'
 
-    other_board = [p for p in all_posts if p['board_id'] != board_id and p['slug'] != slug]
-    related = (same_board + other_board)[:4]
+    # Related articles with tag-based semantic matching
+    art_tags = set(t.lower() for t in art.get('tags', []))
+    art_kw = set(re.findall(r'[a-z]{3,}', f"{art['title']} {art['description']}".lower()))
+    scored = []
+    for p in all_posts:
+        if p['slug'] == slug:
+            continue
+        p_tags = set(t.lower() for t in p.get('tags', []))
+        p_kw = set(re.findall(r'[a-z]{3,}', f"{p.get('title','')} {p.get('description','')}".lower()))
+        tag_overlap = len(art_tags & p_tags)
+        kw_overlap = len(art_kw & p_kw)
+        score = tag_overlap * 3 + kw_overlap
+        if p['board_id'] == board_id:
+            score += 2  # same-board bonus
+        if score > 0:
+            scored.append((score, p))
+    scored.sort(key=lambda x: x[0], reverse=True)
+    related = [s[1] for s in scored[:4]]
     related_html = ''
     for r in related:
         r_url = f"/en/{r['board_id']}/{r['slug']}.html"
         related_html += f'<a href="{r_url}" class="related-card">{r["title"]}</a>'
+
+    # Inline "See also" links for top 3 related (inside article body)
+    see_also = ''
+    if related:
+        links = []
+        for r in related[:3]:
+            r_url = f"/en/{r['board_id']}/{r['slug']}.html"
+            links.append(f'<a href="{r_url}">{r["title"]}</a>')
+        see_also = f'<p class="see-also" style="margin-top:2rem;padding:1rem;background:#f8fafc;border-radius:8px;font-size:0.92rem;"><strong>See also:</strong> {", ".join(links)}</p>'
+
+    # Insert cover image inline after first paragraph for visual engagement
+    inline_img = f'<img src="{cover_url}" alt="{art["title"]}" class="article-inline" width="720" height="405" loading="lazy" style="max-width:100%;height:auto;margin:1.5rem 0;border-radius:8px;">'
+    body_raw = body_html
+    first_p_end = body_raw.find('</p>')
+    if first_p_end > 0:
+        body_raw = body_raw[:first_p_end + 4] + inline_img + body_raw[first_p_end + 4:]
 
     # Mid-content AdSense — placed after article body at ~60% scroll depth
     ad_mid = f'''<div style="margin:2rem 0;text-align:center;">
@@ -13556,7 +13588,7 @@ def make_article_html(art, board_id, board_name, all_posts):
       <h1 class="article-title">{art['title']}</h1>
       <div class="article-meta">Published {art['date']}{' · Last active ' + art['lastActive'] if art.get('lastActive') and art['lastActive'] != art['date'] else ''} · {art['replies'] * 120} views · {art['replies']} replies</div>
       <img class="article-cover" src="{cover_url}" alt="{art['title']}" width="1200" height="630" loading="lazy">
-      <div class="article-body">{get_body(art['slug'], board_id)}</div>
+      <div class="article-body">{body_raw}{see_also}</div>
     </article>
     {ad_mid}
     <section class="related">
