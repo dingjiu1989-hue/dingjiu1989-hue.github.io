@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide">
     <meta name="twitter:description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Vector Database, Pinecone, Qdrant, Weaviate, Milvus, pgvector, AI, RAG, Semantic Search">
     <title>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide — SourceHub</title>
     <meta name="description" content="How vector databases work, when to use them, and a head-to-head comparison of Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector with production benchmarks.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/compare/vector-databases-2026-complete-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "12906",
+      "wordCount": "15023",
       "keywords": "Vector Database, Pinecone, Qdrant, Weaviate, Milvus, pgvector, AI, RAG, Semantic Search",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/vector-databases-in-2026-pinecone-vs-chroma-vs-weaviate-vs-qdrant-complete-guide-5hmf"
       ],
-      "articleBody": "Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector databases have become essential infrastructure for AI applications \u2014 from RAG (Retrieval-Augmented Generation) to semantic search to recommendation systems. If you're building LLM-powered apps in 2026, you'll almost certainly need one. This guide covers what vector databases are, how they work under the hood, and a hands-on comparison of every major option: Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector. What Is a Vector Database? A vector database stores and indexes high-dimensional vectors (arrays of floats) and enables fast similarity search. Instead of exact keyword matching, it finds items that are *semantically similar* \u2014 vectors that are close together in the embedding space. User query: \"How do I deploy a microservice?\" \u2193 Embedding model \u2192 [0.23, 0.87, -0.12, 0.45, ...] \u2193 Vector DB finds nearest neighbors \u2193 Returns: \"Kubernetes deployment guide\" (cosine sim: 0.94) \"Docker compose tutorial\" (cosine sim: 0.89) The key operation is **ANN (Approximate Nearest Neighbor)** search \u2014 finding the closest vectors without scanning everything. This is what separates vector databases from plain PostgreSQL arrays. Why You Need One in 2026 | Use Case | Without Vector DB | With Vector DB | |----------|-----------------|----------------| | RAG (LLM context retrieval) | Full-text search misses synonyms | Semantic retrieval finds related docs | | Semantic product search | \"Waterproof shoes\" \u2192 no \"rain boots\" | Embeddings understand meaning | | Recommendation engine | Keyword tagging, manual rules | \"Users who liked X\" by vector similarity | | Anomaly detection | Fixed thresholds | Finds unusual patterns in embedding space | | Multimodal search | Separate text/image pipelines | Same embedding space for all modalities | How Vector Search Works Algorithms (what you need to know) | Algorithm | Speed | Accuracy | Build Time | Memory | |-----------|-------|----------|------------|--------| | **HNSW** (Hierarchical Navigable Small World) | \u26a1 Fastest | \ud83c\udfaf Excellent | \ud83d\udc0c Slow | \ud83d\udcc8 High | | **IVF** (Inverted File Index) | \u26a1 Fast | \ud83d\udc4d Good | \u26a1 Fast | \ud83d\udcc9 Low | | **IVF + PQ** (Product Quantization) | \u26a1 Fast | \ud83d\udc4c OK | \u26a1 Fast | \ud83d\udcc9 Very low | | **DiskANN** | \u26a1 Fast | \ud83c\udfaf Excellent | \ud83d\udc0c Slow | \ud83d\udcc8 Moderate (SSD) | **Rule of thumb**: Use HNSW for production (best accuracy-speed tradeoff). Use IVF for large datasets (>10M vectors) where memory matters. Use PQ when you need to fit in RAM at all costs. Similarity Metrics | Metric | When to Use | |--------|-------------| | **Cosine similarity** | Text embeddings (most common \u2014 normalized vectors) | | **Euclidean distance (L2)** | When magnitude matters (e.g., image embeddings) | | **Dot product** | Recommendation systems, dense passage retrieval | | **Manhattan (L1)** | High-dimensional sparse vectors | The Contenders | Feature | Pinecone | Chroma | Weaviate | Qdrant | Milvus | pgvector | |---------|----------|--------|----------|--------|-------|----------| | **Type** | Managed SaaS | Embedded | Managed + Self-hosted | Managed + Self-hosted | Managed + Self-hosted | PostgreSQL extension | | **Open source** | \u274c | \u2705 | \u2705 | \u2705 | \u2705 | \u2705 | | **Cloud only** | \u2705 | \u274c | \u274c | \u274c | \u274c | \u274c | | **Self-host** | \u274c | \u2705 | \u2705 | \u2705 | \u2705 | \u2705 (in Postgres) | | **Free tier** | 500K vectors | Unlimited | 1M vectors | 1M vectors | Limited | Unlimited | | **Pricing** | ~$0.10/M vectors/mo | Free | ~$25/mo start | ~$25/mo start | ~$0.07/hr | Free (in Postgres) | 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone **Best for**: Teams that want zero ops \u2014 just create an index and start querying. Pinecone is the market leader and the most mature managed vector database. It handles sharding, replication, and scaling automatically. You don't think about infrastructure. import pinecone pc = pinecone.Pinecone(api_key=\"pc-...\") index = pc.Index(\"my-index\") Upsert vectors index.upsert(vectors=[ (\"id1\", [0.1, 0.2, ...], {\"text\": \"Hello world\"}), (\"id2\", [0.3, 0.4, ...], {\"text\": \"Goodbye world\"}), ]) Query results = index.query( vector=[0.15, 0.25, ...], top_k=5, include_metadata=True ) **Pros:** Fastest setup, automatic scaling, best managed experience, 99.99% SLA. **Cons:** $$$ at scale, vendor lock-in (proprietary), no offline/local use, no control over internals. **Best for:** Startups and teams that want to move fast without DevOps overhead. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma **Best for**: Prototyping, local development, small to medium projects. Chroma is the simplest vector database to get started with. It runs in-process (like SQLite for vectors) and requires zero configuration. import chromadb client = chromadb.Client() collection = client.create_collection(\"my-collection\") collection.add( documents=[\"Hello world\", \"Goodbye world\"], ids=[\"id1\", \"id2\"] ) results = collection.query( query_texts=[\"greeting\"], n_results=5 ) **Pros:** Extremely simple API, runs anywhere (including browser with Pyodide), Pythonic, embeddable. **Cons:** Not designed for production at scale (single-node, limited replication), limited query features (no hybrid search), slower at scale. **Best for:** Prototyping, hackathons, educational projects, small apps under 100K vectors. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate **Best for**: Teams that need a full-featured vector database with hybrid search. Weaviate is the most feature-complete option: it combines vector search with keyword (BM25) search, has built-in modules for embedding generation, and supports GraphQL. import weaviate client = weaviate.connect_to_local() Auto-schema from data client.collections.create( name=\"Document\", vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai() ) Auto-embeds on insert collection = client.collections.get(\"Document\") collection.insert({ \"title\": \"Hello world\", \"content\": \"This is a test document\" }) Hybrid search response = collection.query.hybrid( query=\"test document\", alpha=0.5, # balance between vector and keyword limit=5 ) **Pros:** Hybrid search (BM25 + vector) built-in, GraphQL API, built-in vectorizer modules (auto-embed on write), modular architecture, multi-tenancy. **Cons:** More complex to operate, heavier resource footprint, smaller community than Milvus/Qdrant. **Best for:** Production apps that need hybrid search, multi-modal applications, GraphQL-native teams. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant **Best for**: Performance-critical applications with high QPS requirements. Qdrant is written in Rust and optimized for low-latency, high-throughput scenarios. It has a clean REST API and gRPC support. from qdrant_client import QdrantClient client = QdrantClient(url=\"http://localhost:6333\") client.create_collection( collection_name=\"my-collection\", vectors_config=VectorParams(size=768, distance=Distance.COSINE), ) client.upsert( collection_name=\"my-collection\", points=[ PointStruct(id=1, vector=[0.1, 0.2, ...], payload={\"text\": \"Hello\"}), ] ) client.search( collection_name=\"my-collection\", query_vector=[0.15, 0.25, ...], limit=5, ) **Pros:** Fastest query performance in benchmarks, Rust \u2014 low memory footprint, excellent filtering (payload indexing), quantization for memory reduction. **Cons:** Smaller ecosystem, less mature managed service (recent), fewer integrations. **Best for:** High-throughput production apps, real-time recommendation systems, cost-sensitive deployments. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus **Best for**: Massive-scale deployments with billions of vectors. Milvus is designed for horizontal scaling from the ground up. It uses a cloud-native architecture with separate storage and compute layers. from pymilvus import connections, Collection, FieldSchema, CollectionSchema connections.connect(\"default\", host=\"localhost\", port=\"19530\") schema = CollectionSchema([ FieldSchema(\"id\", dtype=DataType.INT64, is_primary=True), FieldSchema(\"embedding\", dtype=DataType.FLOAT_VECTOR, dim=768), ]) collection = Collection(\"my-collection\", schema) index_params = {\"index_type\": \"IVF_FLAT\", \"params\": {\"nlist\": 1024}, \"metric_type\": \"L2\"} collection.create_index(\"embedding\", index_params) results = collection.search( data=[[0.1, 0.2, ...]], anns_field=\"embedding\", param={\"nprobe\": 10}, limit=5, ) **Pros:** Best horizontal scaling, supports GPU acceleration, mature project (5+ years), rich index types. **Cons:** Complex to deploy and operate (requires Kafka, etcd, MinIO), most complex API, overkill for small-medium needs. **Best for:** Enterprise-scale apps (>100M vectors), GPU-accelerated search, complex production pipelines. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector **Best for**: Teams already on PostgreSQL that want vector search without another infrastructure component. pgvector adds vector similarity search as a PostgreSQL extension. It's not a separate database \u2014 it's a new index type in your existing Postgres instance. CREATE EXTENSION vector; CREATE TABLE documents ( id SERIAL PRIMARY KEY, content TEXT, embedding vector(768) ); CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops); SELECT content, 1 - (embedding '[0.1, 0.2, ...]') AS similarity FROM documents ORDER BY embedding '[0.1, 0.2, ...]' LIMIT 5; import psycopg2 conn = psycopg2.connect(\"dbname=postgres\") cur = conn.cursor() cur.execute( \"SELECT content FROM documents ORDER BY embedding %s LIMIT 5\", ([0.1, 0.2, ...],) ) **Pros:** No new infrastructure, ACID compliance, joins with relational data, free, PostgreSQL ecosystem (backup, replication, tooling). **Cons:** No hybrid search out of the box (use pg_bm25 extension), limited to single-node, slower than dedicated vector DBs at scale, fewer tuning options. **Best for:** Small to medium projects (under 1M vectors) already on PostgreSQL, MVPs, teams that want simplicity. Performance Benchmarks Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large), HNSW index, 100 concurrent queries: | Database | Query Latency (p50) | Query Latency (p99) | QPS | Recall@10 | Memory (1M vecs) | |----------|-------------------|-------------------|-----|-----------|-----------------| | **Qdrant** | 2ms | 8ms | 18,000 | 0.98 | 1.2 GB | | **Milvus** (GPU) | 3ms | 12ms | 22,000 | 0.99 | 1.5 GB | | **Milvus** (CPU) | 5ms | 20ms | 10,000 | 0.99 | 1.5 GB | | **Pinecone** (p2) | 4ms | 15ms | 8,000 | 0.97 | ~1.3 GB* | | **Weaviate** | 6ms | 25ms | 7,000 | 0.96 | 1.8 GB | | **pgvector** (HNSW) | 8ms | 35ms | 5,000 | 0.95 | 1.3 GB | | **Chroma** | 15ms | 50ms | 2,000 | 0.93 | 2.0 GB | | **pgvector** (IVFFlat) | 20ms | 60ms | 1,500 | 0.90 | 1.3 GB | *Pinecone uses their own proprietary index \u2014 memory is managed server-side. **Key takeaway**: For up to 1M vectors, differences are negligible for most apps. The choice should be driven by features and ops overhead, not raw speed. Past 10M vectors, Qdrant and Milvus pull ahead. When to Use What \u2705 Use Pinecone if: * You don't want to manage infrastructure * You're building an MVP and need to ship tomorrow * Your team has no DevOps experience * Budget is not the primary concern \u2705 Use Chroma if: * You're prototyping or building a demo * You need in-process/embeddable vector search * You're building for edge/browser deployment * You're in a Jupyter notebook exploring data \u2705 Use Weaviate if: * You need hybrid search (vector + keyword) * You want built-in embedding generation * You like GraphQL * You need multi-tenancy built in \u2705 Use Qdrant if: * Performance is your top priority * You need advanced payload filtering * You want to minimize infrastructure cost * You're building real-time recommendation systems \u2705 Use Milvus if: * You have more than 10M vectors * You need GPU-accelerated search * You're building enterprise-scale infrastructure * You need to scale to billions of vectors \u2705 Use pgvector if: * You already use PostgreSQL * You need ACID transactions with vectors * You want atomic vector + relational data updates * Your dataset is under 1M vectors Production Checklist When moving to production with any vector database: * **Monitor recall** \u2014 run regular quality checks. A 90% recall means 10% of relevant results are missing. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** \u2014 benchmark with your actual data size, not a sample. Index build time scales O(n log n). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** \u2014 some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** \u2014 HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** \u2014 vector databases are stateful. Know your backup mechanism before you need it. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** \u2014 managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors. Sample Architecture: RAG Pipeline Here's how a production RAG system looks with Qdrant + FastAPI: from fastapi import FastAPI from sentence_transformers import SentenceTransformer from qdrant_client import QdrantClient from openai import OpenAI app = FastAPI() encoder = SentenceTransformer(\"all-MiniLM-L6-v2\") qdrant = QdrantClient(host=\"localhost\", port=6333) llm = OpenAI() COLLECTION = \"knowledge-base\" @app.post(\"/ask\") def ask(question: str): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question vector = encoder.encode(question).tolist() 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context results = qdrant.search( collection_name=COLLECTION, query_vector=vector, limit=5, ) context = \"\\n\".join(r.payload[\"text\"] for r in results) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context response = llm.chat.completions.create( model=\"claude-sonnet-4-6\", messages=[ {\"role\": \"system\", \"content\": f\"Answer using this context:\\n{context}\"}, {\"role\": \"user\", \"content\": question}, ] ) return {\"answer\": response.choices[0].message.content} Quick Decision Flowchart Starting a new project? \u251c\u2500\u2500 Already on PostgreSQL? \u2502 \u2514\u2500\u2500 Yes \u2192 pgvector (keep it simple) \u2502 \u2514\u2500\u2500 No, data \u2502 \u2514\u2500\u2500 Chroma (quickest prototype) \u2502 \u2514\u2500\u2500 pgvector (if you're adding Postgres) \u251c\u2500\u2500 Building for production? \u2502 \u251c\u2500\u2500 Want managed / no ops? \u2502 \u2502 \u2514\u2500\u2500 Pinecone (fastest time-to-production) \u2502 \u251c\u2500\u2500 Need hybrid search? \u2502 \u2502 \u2514\u2500\u2500 Weaviate (best hybrid out of box) \u2502 \u251c\u2500\u2500 Need maximum performance? \u2502 \u2502 \u2514\u2500\u2500 Qdrant (fastest, lowest cost/query) \u2502 \u2514\u2500\u2500 Need to scale to billions? \u2502 \u2514\u2500\u2500 Milvus (true horizontal scaling) \u2514\u2500\u2500 Building at enterprise scale? \u2514\u2500\u2500 Milvus (mature, GPU, 100B+ vectors) Summary | If you want\u2026 | Pick this | |-------------|-----------| | Ship fast, zero ops | **Pinecone** | | Prototype locally | **Chroma** | | Full-featured, hybrid search | **Weaviate** | | Blazing fast, lean | **Qdrant** | | Enterprise scale | **Milvus** | | No new infra (Postgres) | **pgvector** | The best vector database is the one you actually deploy. Start simple (pgvector or Chroma), validate your use case, then migrate to Qdrant or Weaviate when you need the advanced features. Don't over-engineer \u2014 most applications work perfectly well with pgvector through the first million vectors."
+      "articleBody": "Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant \u2014 Complete Guide Vector databases have become essential infrastructure for AI applications \u2014 from RAG (Retrieval-Augmented Generation) to semantic search to recommendation systems. If you're building LLM-powered apps in 2026, you'll almost certainly need one. This guide covers what vector databases are, how they work under the hood, and a hands-on comparison of every major option: Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector. What Is a Vector Database? A vector database stores and indexes high-dimensional vectors (arrays of floats) and enables fast similarity search. Instead of exact keyword matching, it finds items that are *semantically similar* \u2014 vectors that are close together in the embedding space. User query: \"How do I deploy a microservice?\" \u2193 Embedding model \u2192 [0.23, 0.87, -0.12, 0.45, ...] \u2193 Vector DB finds nearest neighbors \u2193 Returns: \"Kubernetes deployment guide\" (cosine sim: 0.94) \"Docker compose tutorial\" (cosine sim: 0.89) The key operation is **ANN (Approximate Nearest Neighbor)** search \u2014 finding the closest vectors without scanning everything. This is what separates vector databases from plain PostgreSQL arrays. Why You Need One in 2026 | Use Case | Without Vector DB | With Vector DB | |----------|-----------------|----------------| | RAG (LLM context retrieval) | Full-text search misses synonyms | Semantic retrieval finds related docs | | Semantic product search | \"Waterproof shoes\" \u2192 no \"rain boots\" | Embeddings understand meaning | | Recommendation engine | Keyword tagging, manual rules | \"Users who liked X\" by vector similarity | | Anomaly detection | Fixed thresholds | Finds unusual patterns in embedding space | | Multimodal search | Separate text/image pipelines | Same embedding space for all modalities | How Vector Search Works Algorithms (what you need to know) | Algorithm | Speed | Accuracy | Build Time | Memory | |-----------|-------|----------|------------|--------| | **HNSW** (Hierarchical Navigable Small World) | \u26a1 Fastest | \ud83c\udfaf Excellent | \ud83d\udc0c Slow | \ud83d\udcc8 High | | **IVF** (Inverted File Index) | \u26a1 Fast | \ud83d\udc4d Good | \u26a1 Fast | \ud83d\udcc9 Low | | **IVF + PQ** (Product Quantization) | \u26a1 Fast | \ud83d\udc4c OK | \u26a1 Fast | \ud83d\udcc9 Very low | | **DiskANN** | \u26a1 Fast | \ud83c\udfaf Excellent | \ud83d\udc0c Slow | \ud83d\udcc8 Moderate (SSD) | **Rule of thumb**: Use HNSW for production (best accuracy-speed tradeoff). Use IVF for large datasets (>10M vectors) where memory matters. Use PQ when you need to fit in RAM at all costs. Similarity Metrics | Metric | When to Use | |--------|-------------| | **Cosine similarity** | Text embeddings (most common \u2014 normalized vectors) | | **Euclidean distance (L2)** | When magnitude matters (e.g., image embeddings) | | **Dot product** | Recommendation systems, dense passage retrieval | | **Manhattan (L1)** | High-dimensional sparse vectors | The Contenders | Feature | Pinecone | Chroma | Weaviate | Qdrant | Milvus | pgvector | |---------|----------|--------|----------|--------|-------|----------| | **Type** | Managed SaaS | Embedded | Managed + Self-hosted | Managed + Self-hosted | Managed + Self-hosted | PostgreSQL extension | | **Open source** | \u274c | \u2705 | \u2705 | \u2705 | \u2705 | \u2705 | | **Cloud only** | \u2705 | \u274c | \u274c | \u274c | \u274c | \u274c | | **Self-host** | \u274c | \u2705 | \u2705 | \u2705 | \u2705 | \u2705 (in Postgres) | | **Free tier** | 500K vectors | Unlimited | 1M vectors | 1M vectors | Limited | Unlimited | | **Pricing** | ~$0.10/M vectors/mo | Free | ~$25/mo start | ~$25/mo start | ~$0.07/hr | Free (in Postgres) | 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone **Best for**: Teams that want zero ops \u2014 just create an index and start querying. Pinecone is the market leader and the most mature managed vector database. It handles sharding, replication, and scaling automatically. You don't think about infrastructure. import pinecone pc = pinecone.Pinecone(api_key=\"pc-...\") index = pc.Index(\"my-index\") Upsert vectors index.upsert(vectors=[ (\"id1\", [0.1, 0.2, ...], {\"text\": \"Hello world\"}), (\"id2\", [0.3, 0.4, ...], {\"text\": \"Goodbye world\"}), ]) Query results = index.query( vector=[0.15, 0.25, ...], top_k=5, include_metadata=True ) **Pros:** Fastest setup, automatic scaling, best managed experience, 99.99% SLA. **Cons:** $$$ at scale, vendor lock-in (proprietary), no offline/local use, no control over internals. **Best for:** Startups and teams that want to move fast without DevOps overhead. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma **Best for**: Prototyping, local development, small to medium projects. Chroma is the simplest vector database to get started with. It runs in-process (like SQLite for vectors) and requires zero configuration. import chromadb client = chromadb.Client() collection = client.create_collection(\"my-collection\") collection.add( documents=[\"Hello world\", \"Goodbye world\"], ids=[\"id1\", \"id2\"] ) results = collection.query( query_texts=[\"greeting\"], n_results=5 ) **Pros:** Extremely simple API, runs anywhere (including browser with Pyodide), Pythonic, embeddable. **Cons:** Not designed for production at scale (single-node, limited replication), limited query features (no hybrid search), slower at scale. **Best for:** Prototyping, hackathons, educational projects, small apps under 100K vectors. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate **Best for**: Teams that need a full-featured vector database with hybrid search. Weaviate is the most feature-complete option: it combines vector search with keyword (BM25) search, has built-in modules for embedding generation, and supports GraphQL. import weaviate client = weaviate.connect_to_local() Auto-schema from data client.collections.create( name=\"Document\", vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai() ) Auto-embeds on insert collection = client.collections.get(\"Document\") collection.insert({ \"title\": \"Hello world\", \"content\": \"This is a test document\" }) Hybrid search response = collection.query.hybrid( query=\"test document\", alpha=0.5, # balance between vector and keyword limit=5 ) **Pros:** Hybrid search (BM25 + vector) built-in, GraphQL API, built-in vectorizer modules (auto-embed on write), modular architecture, multi-tenancy. **Cons:** More complex to operate, heavier resource footprint, smaller community than Milvus/Qdrant. **Best for:** Production apps that need hybrid search, multi-modal applications, GraphQL-native teams. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant **Best for**: Performance-critical applications with high QPS requirements. Qdrant is written in Rust and optimized for low-latency, high-throughput scenarios. It has a clean REST API and gRPC support. from qdrant_client import QdrantClient client = QdrantClient(url=\"http://localhost:6333\") client.create_collection( collection_name=\"my-collection\", vectors_config=VectorParams(size=768, distance=Distance.COSINE), ) client.upsert( collection_name=\"my-collection\", points=[ PointStruct(id=1, vector=[0.1, 0.2, ...], payload={\"text\": \"Hello\"}), ] ) client.search( collection_name=\"my-collection\", query_vector=[0.15, 0.25, ...], limit=5, ) **Pros:** Fastest query performance in benchmarks, Rust \u2014 low memory footprint, excellent filtering (payload indexing), quantization for memory reduction. **Cons:** Smaller ecosystem, less mature managed service (recent), fewer integrations. **Best for:** High-throughput production apps, real-time recommendation systems, cost-sensitive deployments. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus **Best for**: Massive-scale deployments with billions of vectors. Milvus is designed for horizontal scaling from the ground up. It uses a cloud-native architecture with separate storage and compute layers. from pymilvus import connections, Collection, FieldSchema, CollectionSchema connections.connect(\"default\", host=\"localhost\", port=\"19530\") schema = CollectionSchema([ FieldSchema(\"id\", dtype=DataType.INT64, is_primary=True), FieldSchema(\"embedding\", dtype=DataType.FLOAT_VECTOR, dim=768), ]) collection = Collection(\"my-collection\", schema) index_params = {\"index_type\": \"IVF_FLAT\", \"params\": {\"nlist\": 1024}, \"metric_type\": \"L2\"} collection.create_index(\"embedding\", index_params) results = collection.search( data=[[0.1, 0.2, ...]], anns_field=\"embedding\", param={\"nprobe\": 10}, limit=5, ) **Pros:** Best horizontal scaling, supports GPU acceleration, mature project (5+ years), rich index types. **Cons:** Complex to deploy and operate (requires Kafka, etcd, MinIO), most complex API, overkill for small-medium needs. **Best for:** Enterprise-scale apps (>100M vectors), GPU-accelerated search, complex production pipelines. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector **Best for**: Teams already on PostgreSQL that want vector search without another infrastructure component. pgvector adds vector similarity search as a PostgreSQL extension. It's not a separate database \u2014 it's a new index type in your existing Postgres instance. CREATE EXTENSION vector; CREATE TABLE documents ( id SERIAL PRIMARY KEY, content TEXT, embedding vector(768) ); CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops); SELECT content, 1 - (embedding '[0.1, 0.2, ...]') AS similarity FROM documents ORDER BY embedding '[0.1, 0.2, ...]' LIMIT 5; import psycopg2 conn = psycopg2.connect(\"dbname=postgres\") cur = conn.cursor() cur.execute( \"SELECT content FROM documents ORDER BY embedding %s LIMIT 5\", ([0.1, 0.2, ...],) ) **Pros:** No new infrastructure, ACID compliance, joins with relational data, free, PostgreSQL ecosystem (backup, replication, tooling). **Cons:** No hybrid search out of the box (use pg_bm25 extension), limited to single-node, slower than dedicated vector DBs at scale, fewer tuning options. **Best for:** Small to medium projects (under 1M vectors) already on PostgreSQL, MVPs, teams that want simplicity. Performance Benchmarks Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large), HNSW index, 100 concurrent queries: | Database | Query Latency (p50) | Query Latency (p99) | QPS | Recall@10 | Memory (1M vecs) | |----------|-------------------|-------------------|-----|-----------|-----------------| | **Qdrant** | 2ms | 8ms | 18,000 | 0.98 | 1.2 GB | | **Milvus** (GPU) | 3ms | 12ms | 22,000 | 0.99 | 1.5 GB | | **Milvus** (CPU) | 5ms | 20ms | 10,000 | 0.99 | 1.5 GB | | **Pinecone** (p2) | 4ms | 15ms | 8,000 | 0.97 | ~1.3 GB* | | **Weaviate** | 6ms | 25ms | 7,000 | 0.96 | 1.8 GB | | **pgvector** (HNSW) | 8ms | 35ms | 5,000 | 0.95 | 1.3 GB | | **Chroma** | 15ms | 50ms | 2,000 | 0.93 | 2.0 GB | | **pgvector** (IVFFlat) | 20ms | 60ms | 1,500 | 0.90 | 1.3 GB | *Pinecone uses their own proprietary index \u2014 memory is managed server-side. **Key takeaway**: For up to 1M vectors, differences are negligible for most apps. The choice should be driven by features and ops overhead, not raw speed. Past 10M vectors, Qdrant and Milvus pull ahead. When to Use What \u2705 Use Pinecone if: * You don't want to manage infrastructure * You're building an MVP and need to ship tomorrow * Your team has no DevOps experience * Budget is not the primary concern \u2705 Use Chroma if: * You're prototyping or building a demo * You need in-process/embeddable vector search * You're building for edge/browser deployment * You're in a Jupyter notebook exploring data \u2705 Use Weaviate if: * You need hybrid search (vector + keyword) * You want built-in embedding generation * You like GraphQL * You need multi-tenancy built in \u2705 Use Qdrant if: * Performance is your top priority * You need advanced payload filtering * You want to minimize infrastructure cost * You're building real-time recommendation systems \u2705 Use Milvus if: * You have more than 10M vectors * You need GPU-accelerated search * You're building enterprise-scale infrastructure * You need to scale to billions of vectors \u2705 Use pgvector if: * You already use PostgreSQL * You need ACID transactions with vectors * You want atomic vector + relational data updates * Your dataset is under 1M vectors Production Checklist When moving to production with any vector database: * **Monitor recall** \u2014 run regular quality checks. A 90% recall means 10% of relevant results are missing. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** \u2014 benchmark with your actual data size, not a sample. Index build time scales O(n log n). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** \u2014 some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** \u2014 HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** \u2014 vector databases are stateful. Know your backup mechanism before you need it. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** \u2014 managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors. Sample Architecture: RAG Pipeline Here's how a production RAG system looks with Qdrant + FastAPI: from fastapi import FastAPI from sentence_transformers import SentenceTransformer from qdrant_client import QdrantClient from openai import OpenAI app = FastAPI() encoder = SentenceTransformer(\"all-MiniLM-L6-v2\") qdrant = QdrantClient(host=\"localhost\", port=6333) llm = OpenAI() COLLECTION = \"knowledge-base\" @app.post(\"/ask\") def ask(question: str): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question vector = encoder.encode(question).tolist() 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context results = qdrant.search( collection_name=COLLECTION, query_vector=vector, limit=5, ) context = \"\\n\".join(r.payload[\"text\"] for r in results) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context response = llm.chat.completions.create( model=\"claude-sonnet-4-6\", messages=[ {\"role\": \"system\", \"content\": f\"Answer using this context:\\n{context}\"}, {\"role\": \"user\", \"content\": question}, ] ) return {\"answer\": response.choices[0].message.content} Quick Decision Flowchart Starting a new project? \u251c\u2500\u2500 Already on PostgreSQL? \u2502 \u2514\u2500\u2500 Yes \u2192 pgvector (keep it simple) \u2502 \u2514\u2500\u2500 No, data \u2502 \u2514\u2500\u2500 Chroma (quickest prototype) \u2502 \u2514\u2500\u2500 pgvector (if you're adding Postgres) \u251c\u2500\u2500 Building for production? \u2502 \u251c\u2500\u2500 Want managed / no ops? \u2502 \u2502 \u2514\u2500\u2500 Pinecone (fastest time-to-production) \u2502 \u251c\u2500\u2500 Need hybrid search? \u2502 \u2502 \u2514\u2500\u2500 Weaviate (best hybrid out of box) \u2502 \u251c\u2500\u2500 Need maximum performance? \u2502 \u2502 \u2514\u2500\u2500 Qdrant (fastest, lowest cost/query) \u2502 \u2514\u2500\u2500 Need to scale to billions? \u2502 \u2514\u2500\u2500 Milvus (true horizontal scaling) \u2514\u2500\u2500 Building at enterprise scale? \u2514\u2500\u2500 Milvus (mature, GPU, 100B+ vectors) Summary | If you want\u2026 | Pick this | |-------------|-----------| | Ship fast, zero ops | **Pinecone** | | Prototype locally | **Chroma** | | Full-featured, hybrid search | **Weaviate** | | Blazing fast, lean | **Qdrant** | | Enterprise scale | **Milvus** | | No new infra (Postgres) | **pgvector** | The best vector database is the one you actually deploy. Start simple (pgvector or Chroma), validate your use case, then migrate to Qdrant or Weaviate when you need the advanced features. Don't over-engineer \u2014 most applications work perfectly well with pgvector through the first million vectors."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Comparisons", "item": "https://dingjiu1989-hue.github.io/en/compare/"},
         {"@type": "ListItem", "position": 3, "name": "Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -270,7 +283,45 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Vector databases have become essential infrastructure for AI applications — from RAG (Retrieval-Augmented Generation) to semantic search to recommendation systems. If you're building LLM-powered apps in 2026, you'll almost certainly need one.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +379,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  What Is a Vector Database?</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -386,6 +443,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>User query: "How do I deploy a microservice?"</p>
 <br>
 <br>
@@ -415,7 +475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -473,7 +539,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -531,7 +603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -589,7 +667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Docker compose tutorial" (cosine sim: 0.89)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -647,7 +731,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Why You Need One in 2026</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -705,7 +795,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|----------|-----------------|----------------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -763,7 +859,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Semantic product search | "Waterproof shoes" → no "rain boots" | Embeddings understand meaning |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -821,7 +923,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Anomaly detection | Fixed thresholds | Finds unusual patterns in embedding space |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -879,7 +987,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  How Vector Search Works</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -937,7 +1051,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Algorithm | Speed | Accuracy | Build Time | Memory |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -995,7 +1115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **HNSW** (Hierarchical Navigable Small World) | ⚡ Fastest | 🎯 Excellent | 🐌 Slow | 📈 High |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1053,7 +1179,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **IVF + PQ** (Product Quantization) | ⚡ Fast | 👌 OK | ⚡ Fast | 📉 Very low |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1111,7 +1243,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Rule of thumb**: Use HNSW for production (best accuracy-speed tradeoff). Use IVF for large datasets (>10M vectors) where memory matters. Use PQ when you need to fit in RAM at all costs.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1169,7 +1307,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Metric | When to Use |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1227,7 +1371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Cosine similarity** | Text embeddings (most common — normalized vectors) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1285,7 +1435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Dot product** | Recommendation systems, dense passage retrieval |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1343,7 +1499,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  The Contenders</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1401,7 +1563,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|----------|--------|----------|--------|-------|----------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1459,7 +1627,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Open source** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1517,7 +1691,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Self-host** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ (in Postgres) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1575,6 +1755,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Pricing** | ~$0.10/M vectors/mo | Free | ~$25/mo start | ~$25/mo start | ~$0.07/hr | Free (in Postgres) |</p>
 <br>
 <br>
@@ -1604,7 +1787,13 @@
 <br>
 <br>
 <br>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone</h3>
+<br>
+<br>
+<br>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1662,7 +1851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pinecone is the market leader and the most mature managed vector database. It handles sharding, replication, and scaling automatically. You don't think about infrastructure.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1720,7 +1915,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pc = pinecone.Pinecone(api_key="pc-...")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1778,7 +1979,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Upsert vectors</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1836,7 +2043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>("id1", [0.1, 0.2, ...], {"text": "Hello world"}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1894,7 +2107,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1952,7 +2171,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = index.query(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2010,7 +2235,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>top_k=5,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2068,7 +2299,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2126,7 +2363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** $$$ at scale, vendor lock-in (proprietary), no offline/local use, no control over internals.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2184,7 +2427,13 @@
 <br>
 <br>
 <br>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma</h3>
+<br>
+<br>
+<br>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2242,7 +2491,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Chroma is the simplest vector database to get started with. It runs in-process (like SQLite for vectors) and requires zero configuration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2300,7 +2555,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client = chromadb.Client()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2358,7 +2619,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection.add(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2416,6 +2683,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ids=["id1", "id2"]</p>
 <br>
 <br>
@@ -2445,7 +2715,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2503,7 +2779,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query_texts=["greeting"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2561,7 +2843,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2619,7 +2907,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** Not designed for production at scale (single-node, limited replication), limited query features (no hybrid search), slower at scale.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2677,7 +2971,13 @@
 <br>
 <br>
 <br>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate</h3>
+<br>
+<br>
+<br>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2735,7 +3035,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Weaviate is the most feature-complete option: it combines vector search with keyword (BM25) search, has built-in modules for embedding generation, and supports GraphQL.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2793,7 +3099,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client = weaviate.connect_to_local()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2851,7 +3163,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client.collections.create(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2909,6 +3227,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai()</p>
 <br>
 <br>
@@ -2938,7 +3259,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2996,7 +3323,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection = client.collections.get("Document")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3054,7 +3387,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"title": "Hello world",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3112,7 +3451,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3170,7 +3515,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = collection.query.hybrid(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3228,7 +3579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alpha=0.5, # balance between vector and keyword</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3286,7 +3643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3344,7 +3707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** More complex to operate, heavier resource footprint, smaller community than Milvus/Qdrant.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3402,7 +3771,13 @@
 <br>
 <br>
 <br>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant</h3>
+<br>
+<br>
+<br>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3460,6 +3835,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Qdrant is written in Rust and optimized for low-latency, high-throughput scenarios. It has a clean REST API and gRPC support.</p>
 <br>
 <br>
@@ -3489,7 +3867,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from qdrant_client import QdrantClient</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3547,6 +3931,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client.create_collection(</p>
 <br>
 <br>
@@ -3576,7 +3963,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection_name="my-collection",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3634,7 +4027,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3692,7 +4091,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection_name="my-collection",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3750,7 +4155,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PointStruct(id=1, vector=[0.1, 0.2, ...], payload={"text": "Hello"}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3808,7 +4219,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3866,7 +4283,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection_name="my-collection",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3924,6 +4347,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>limit=5,</p>
 <br>
 <br>
@@ -3953,7 +4379,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4011,7 +4443,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** Smaller ecosystem, less mature managed service (recent), fewer integrations.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4069,7 +4507,13 @@
 <br>
 <br>
 <br>
-<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus</h3>
+<br>
+<br>
+<br>
+<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4127,7 +4571,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Milvus is designed for horizontal scaling from the ground up. It uses a cloud-native architecture with separate storage and compute layers.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4185,7 +4635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>connections.connect("default", host="localhost", port="19530")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4243,7 +4699,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FieldSchema("id", dtype=DataType.INT64, is_primary=True),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4301,7 +4763,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4359,7 +4827,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>index_params = {"index_type": "IVF_FLAT", "params": {"nlist": 1024}, "metric_type": "L2"}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4417,7 +4891,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = collection.search(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4475,7 +4955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>anns_field="embedding",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4533,6 +5019,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>limit=5,</p>
 <br>
 <br>
@@ -4562,7 +5051,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4620,7 +5115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** Complex to deploy and operate (requires Kafka, etcd, MinIO), most complex API, overkill for small-medium needs.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4678,7 +5179,13 @@
 <br>
 <br>
 <br>
-<h3>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector</h3>
+<br>
+<br>
+<br>
+<h3>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4736,7 +5243,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pgvector adds vector similarity search as a PostgreSQL extension. It's not a separate database — it's a new index type in your existing Postgres instance.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4794,7 +5307,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE documents (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4852,7 +5371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>content TEXT,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4910,7 +5435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4968,7 +5499,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT content, 1 - (embedding <=> '[0.1, 0.2, ...]') AS similarity</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5026,7 +5563,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ORDER BY embedding <=> '[0.1, 0.2, ...]'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5084,7 +5627,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import psycopg2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5142,7 +5691,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cur = conn.cursor()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5200,7 +5755,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"SELECT content FROM documents ORDER BY embedding <=> %s LIMIT 5",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5258,7 +5819,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5316,7 +5883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons:** No hybrid search out of the box (use pg_bm25 extension), limited to single-node, slower than dedicated vector DBs at scale, fewer tuning options.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5374,7 +5947,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Performance Benchmarks</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5432,7 +6011,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Database | Query Latency (p50) | Query Latency (p99) | QPS | Recall@10 | Memory (1M vecs) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5490,7 +6075,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Qdrant** | 2ms | 8ms | 18,000 | 0.98 | 1.2 GB |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5548,7 +6139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Milvus** (CPU) | 5ms | 20ms | 10,000 | 0.99 | 1.5 GB |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5606,7 +6203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Weaviate** | 6ms | 25ms | 7,000 | 0.96 | 1.8 GB |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5664,7 +6267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Chroma** | 15ms | 50ms | 2,000 | 0.93 | 2.0 GB |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5722,7 +6331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>*Pinecone uses their own proprietary index — memory is managed server-side.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5780,7 +6395,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  When to Use What</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5838,7 +6459,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You don't want to manage infrastructure</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5890,6 +6517,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Your team has no DevOps experience</p>
 <br>
 <br>
@@ -5916,7 +6546,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Budget is not the primary concern</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5974,7 +6610,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You're prototyping or building a demo</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6026,6 +6668,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You're building for edge/browser deployment</p>
 <br>
 <br>
@@ -6052,7 +6697,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You're in a Jupyter notebook exploring data</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6110,7 +6761,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need hybrid search (vector + keyword)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6162,6 +6819,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You like GraphQL</p>
 <br>
 <br>
@@ -6188,7 +6848,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need multi-tenancy built in</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6246,7 +6912,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Performance is your top priority</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6298,6 +6970,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You want to minimize infrastructure cost</p>
 <br>
 <br>
@@ -6324,7 +6999,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You're building real-time recommendation systems</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6382,7 +7063,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You have more than 10M vectors</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6434,6 +7121,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You're building enterprise-scale infrastructure</p>
 <br>
 <br>
@@ -6460,7 +7150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need to scale to billions of vectors</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6518,7 +7214,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You already use PostgreSQL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6570,6 +7272,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You want atomic vector + relational data updates</p>
 <br>
 <br>
@@ -6596,7 +7301,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Your dataset is under 1M vectors</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6654,7 +7365,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When moving to production with any vector database:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6712,10 +7429,10 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** — benchmark with your actual data size, not a sample. Index build time scales O(n log n).</p>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** — benchmark with your actual data size, not a sample. Index build time scales O(n log n).</p>
 <br>
 <br>
 <br>
@@ -6741,13 +7458,13 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** — some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters.</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** — some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters.</p>
 <br>
 <br>
 <br>
@@ -6770,7 +7487,6 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** — HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x.</p>
 <br>
 <br>
 <br>
@@ -6780,6 +7496,7 @@
 <br>
 <br>
 <br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** — HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x.</p>
 <br>
 <br>
 <br>
@@ -6799,7 +7516,6 @@
 <br>
 <br>
 <br>
-<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** — vector databases are stateful. Know your backup mechanism before you need it.</p>
 <br>
 <br>
 <br>
@@ -6812,6 +7528,7 @@
 <br>
 <br>
 <br>
+<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** — vector databases are stateful. Know your backup mechanism before you need it.</p>
 <br>
 <br>
 <br>
@@ -6828,7 +7545,25 @@
 <br>
 <br>
 <br>
-<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** — managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors.</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** — managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6886,7 +7621,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Here's how a production RAG system looks with Qdrant + FastAPI:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6944,7 +7685,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from sentence_transformers import SentenceTransformer</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7002,7 +7749,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from openai import OpenAI</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7060,7 +7813,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>encoder = SentenceTransformer("all-MiniLM-L6-v2")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7118,7 +7877,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>llm = OpenAI()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7176,7 +7941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@app.post("/ask")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7234,7 +8005,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7292,7 +8069,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7350,7 +8133,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection_name=COLLECTION,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7408,6 +8197,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>limit=5,</p>
 <br>
 <br>
@@ -7437,7 +8229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7495,7 +8293,13 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context</h1>
+<br>
+<br>
+<br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7553,7 +8357,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="claude-sonnet-4-6",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7611,7 +8421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"role": "system", "content": f"Answer using this context:\n{context}"},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7669,7 +8485,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7727,7 +8549,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"answer": response.choices[0].message.content}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7785,7 +8613,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Starting a new project?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7843,7 +8677,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ └── Yes → pgvector (keep it simple)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7901,7 +8741,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ └── Chroma (quickest prototype)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7959,7 +8805,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>├── Building for production?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8017,7 +8869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ └── Pinecone (fastest time-to-production)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8075,7 +8933,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ └── Weaviate (best hybrid out of box)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8133,7 +8997,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ └── Qdrant (fastest, lowest cost/query)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8191,7 +9061,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ └── Milvus (true horizontal scaling)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8249,7 +9125,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>└── Milvus (mature, GPU, 100B+ vectors)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8307,7 +9189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| If you want… | Pick this |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8365,7 +9253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Ship fast, zero ops | **Pinecone** |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8423,7 +9317,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Full-featured, hybrid search | **Weaviate** |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8481,6 +9381,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Enterprise scale | **Milvus** |</p>
 <br>
 <br>
@@ -8510,7 +9413,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| No new infra (Postgres) | **pgvector** |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

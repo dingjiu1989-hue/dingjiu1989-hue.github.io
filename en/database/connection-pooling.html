@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Connection Pooling Guide">
     <meta name="twitter:description" content="Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and resource usage.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Database, SQL">
     <title>Connection Pooling Guide — SourceHub</title>
     <meta name="description" content="Master database connection pooling with PgBouncer, HikariCP, and application-level pools to optimize performance and resource usage.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/connection-pooling.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1123",
+      "wordCount": "1236",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/connection-pooling-guide-5f4j"
       ],
-      "articleBody": "Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Why Connection Pooling Matters Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections. How Pools Work A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits. Pool Configuration | Parameter | Recommended | |-----------|-------------| | maxSize | 10-20 per CPU core | | connectionTimeout | 30000ms | | maxLifetime | 1800000ms (30min) | HikariCP (Java) spring.datasource.hikari: maximum-pool-size: 20 minimum-idle: 5 connection-timeout: 30000 max-lifetime: 1800000 PgBouncer (PostgreSQL) [pgbouncer] pool_mode = transaction default_pool_size = 25 max_client_conn = 100 Pgbouncer sits between application and database. Transaction mode returns connections to pool after each transaction. Sizing Formula pool_size = (core_count * 2) + effective_spindle_count For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead. Monitoring SELECT state, count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' GROUP BY state; Monitor for idle-in-transaction connections and pool exhaustion. Conclusion Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks."
+      "articleBody": "Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Connection Pooling Guide Why Connection Pooling Matters Creating database connections is expensive: TCP handshake, SSL negotiation, and authentication add 7-35ms per connection. Connection pooling reuses established connections. How Pools Work A pool maintains a set of open connections. When a thread requests one, an idle connection is returned immediately. If all are busy, the thread waits. Pool Configuration | Parameter | Recommended | |-----------|-------------| | maxSize | 10-20 per CPU core | | connectionTimeout | 30000ms | | maxLifetime | 1800000ms (30min) | HikariCP (Java) spring.datasource.hikari: maximum-pool-size: 20 minimum-idle: 5 connection-timeout: 30000 max-lifetime: 1800000 PgBouncer (PostgreSQL) [pgbouncer] pool_mode = transaction default_pool_size = 25 max_client_conn = 100 Pgbouncer sits between application and database. Transaction mode returns connections to pool after each transaction. Sizing Formula pool_size = (core_count * 2) + effective_spindle_count For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead. Monitoring SELECT state, count(*) FROM pg_stat_activity WHERE backend_type = 'client backend' GROUP BY state; Monitor for idle-in-transaction connections and pool exhaustion. Conclusion Size pools based on CPU cores, not concurrent users. Use PgBouncer for high-scale PostgreSQL deployments. Set timeouts and max lifetimes. Monitor pool usage and connection leaks."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Connection Pooling Guide"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -204,7 +217,39 @@
 <br>
 <br>
 <br>
+<h1>Connection Pooling Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Connection Pooling Matters </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -250,7 +295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>How Pools Work </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -296,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pool Configuration </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -342,7 +399,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>HikariCP (Java) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -394,7 +457,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>maximum-pool-size: 20</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -446,7 +515,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>connection-timeout: 30000</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -498,7 +573,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PgBouncer (PostgreSQL) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -550,7 +631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pool_mode = transaction</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -602,7 +689,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>max_client_conn = 100</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -651,7 +744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sizing Formula </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -703,6 +802,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead. </p>
 <br>
 <br>
@@ -726,7 +828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Monitoring </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -778,7 +886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE backend_type = 'client backend' GROUP BY state;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -827,7 +941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

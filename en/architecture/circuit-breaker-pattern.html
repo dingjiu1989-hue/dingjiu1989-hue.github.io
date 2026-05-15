@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Circuit Breaker Pattern: Building Resilient Systems">
     <meta name="twitter:description" content="Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Architecture, System Design">
     <title>Circuit Breaker Pattern: Building Resilient Systems — SourceHub</title>
     <meta name="description" content="Circuit breaker state machine (closed/open/half-open), implementation with Resilience4j, monitoring, and recovery strategies.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/circuit-breaker-pattern.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "8786",
+      "wordCount": "9626",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-pattern.html"},
-      "articleBody": "Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. The Circuit Breaker State Machine A circuit breaker has three states: Closed, Open, and Half-Open. +-----------+ +--------->| CLOSED | | | (\u6b63\u5e38) | | | +-----+-----+ | | | | [Recovery] [Failure [Success] complete] threshold] threshold] | | | | +-----v-----+ | +----------| OPEN |----------+ | (\u65ad\u5f00) | +-----+-----+ | [Timeout] | +-----v-----+ | HALF-OPEN | | (\u534a\u5f00) | +-----------+ Closed State In the closed state, the circuit breaker allows requests to pass through to the remote service. It tracks the failure rate. When the failure rate exceeds a threshold, the circuit breaker trips to the open state. * All calls pass through. * Metrics are tracked (failure count, failure rate, slow call rate). * When the failure threshold is exceeded, the breaker opens. Open State In the open state, the circuit breaker immediately rejects requests without calling the remote service. This prevents overwhelming a failing service and allows it time to recover. * All calls fail fast with a `CircuitBreakerOpenException`. * A timer starts. When it expires, the breaker transitions to half-open. * The open duration should be long enough for the service to recover but short enough to minimize downtime. Half-Open State In the half-open state, the circuit breaker allows a limited number of trial requests. If these requests succeed, the breaker closes. If they fail, the breaker reopens. * A configurable number of trial calls are allowed. * Success threshold reached: transition to closed. * Any failure: transition back to open. Implementation with Resilience4j Resilience4j is a lightweight, easy-to-use fault tolerance library for Java. It provides circuit breaker, rate limiter, retry, bulkhead, and time limiter modules. Basic Circuit Breaker Configuration import io.github.resilience4j.circuitbreaker.CircuitBreaker; import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig; import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry; import java.time.Duration; // Create a circuit breaker configuration CircuitBreakerConfig config = CircuitBreakerConfig.custom() .failureRateThreshold(50) // Open when 50% of calls fail .slowCallRateThreshold(50) // Open when 50% are slow .slowCallDurationThreshold(Duration.ofSeconds(2)) // Call > 2s is slow .waitDurationInOpenState(Duration.ofSeconds(30)) // Time in open before half-open .permittedNumberOfCallsInHalfOpenState(3) // Trial calls in half-open .minimumNumberOfCalls(10) // Min calls before evaluating .slidingWindowSize(20) // Window for metrics .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED) .recordExceptions(IOException.class, TimeoutException.class) .ignoreExceptions(BusinessException.class) // Don't count business errors .build(); // Create the circuit breaker CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config); CircuitBreaker circuitBreaker = registry.circuitBreaker(\"paymentService\"); Decorating Calls // Decorate a function with circuit breaker Supplier decoratedSupplier = CircuitBreaker .decorateSupplier(circuitBreaker, () -> paymentService.processPayment(request)); // Call with circuit breaker protection try { String result = decoratedSupplier.get(); } catch (CircuitBreakerOpenException e) { // Circuit is open, handle gracefully return fallbackResponse(); } Spring Boot Integration import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker; import org.springframework.stereotype.Service; @Service public class PaymentService { @CircuitBreaker(name = \"paymentService\", fallbackMethod = \"paymentFallback\") public PaymentResponse processPayment(PaymentRequest request) { return paymentGateway.charge(request); } public PaymentResponse paymentFallback(PaymentRequest request, Throwable t) { log.warn(\"Payment service unavailable, using fallback. Error: {}\", t.getMessage()); return PaymentResponse.failed(\"Payment temporarily unavailable, please retry\"); } } application.yml resilience4j.circuitbreaker: configs: default: failureRateThreshold: 50 waitDurationInOpenState: 30s permittedNumberOfCallsInHalfOpenState: 3 slidingWindowSize: 20 minimumNumberOfCalls: 10 instances: paymentService: baseConfig: default inventoryService: failureRateThreshold: 30 waitDurationInOpenState: 60s Python Implementation (Simple) import time import threading from enum import Enum class CircuitState(Enum): CLOSED = \"closed\" OPEN = \"open\" HALF_OPEN = \"half_open\" class CircuitBreaker: def __init__(self, failure_threshold=5, recovery_timeout=30, half_open_max_calls=3): self.failure_threshold = failure_threshold self.recovery_timeout = recovery_timeout self.half_open_max_calls = half_open_max_calls self.state = CircuitState.CLOSED self.failure_count = 0 self.last_failure_time = None self.half_open_calls = 0 self.lock = threading.Lock() def call(self, func, fallback_func=None, *args, **kwargs): with self.lock: if self.state == CircuitState.OPEN: if time.time() - self.last_failure_time >= self.recovery_timeout: self.state = CircuitState.HALF_OPEN self.half_open_calls = 0 else: return self._handle_open(fallback_func) if self.state == CircuitState.HALF_OPEN: if self.half_open_calls >= self.half_open_max_calls: return self._handle_open(fallback_func) self.half_open_calls += 1 try: result = func(*args, **kwargs) self._on_success() return result except Exception as e: self._on_failure() return self._handle_open(fallback_func) def _on_success(self): with self.lock: if self.state == CircuitState.HALF_OPEN: self.state = CircuitState.CLOSED self.failure_count = 0 elif self.state == CircuitState.CLOSED: self.failure_count = max(0, self.failure_count - 1) def _on_failure(self): with self.lock: self.failure_count += 1 self.last_failure_time = time.time() if self.failure_count >= self.failure_threshold: self.state = CircuitState.OPEN def _handle_open(self, fallback_func): if fallback_func: return fallback_func() raise CircuitBreakerOpenException(\"Circuit breaker is open\") Monitoring Circuit Breakers Exposing Metrics Resilience4j integrates with Micrometer for metrics export: // Register circuit breaker metrics with Micrometer MeterRegistry meterRegistry = new SimpleMeterRegistry(); CircuitBreakerMetrics circuitBreakerMetrics = circuitBreaker.getMetrics(); // Record state changes circuitBreaker.getEventPublisher() .onStateTransition(event -> { log.info(\"Circuit breaker state changed: {} -> {}\", event.getStateTransition().getFromState(), event.getStateTransition().getToState()); }) .onFailureRateExceeded(event -> { log.warn(\"Failure rate exceeded threshold: {}\", event.getFailureRate()); }); Key Metrics to Monitor * **State**: Is the circuit closed, open, or half-open? * **Failure rate**: Current failure rate within the sliding window. * **Call count**: Total calls, successful calls, failed calls, and ignored calls. * **Not permitted calls**: Number of calls rejected while the breaker is open. * **Buffered calls**: Number of buffered calls in the current sliding window. Prometheus metric format (from Resilience4j exporter) resilience4j_circuitbreaker_state{name=\"paymentService\",state=\"closed\"} 1 resilience4j_circuitbreaker_calls{name=\"paymentService\",kind=\"successful\"} 142 resilience4j_circuitbreaker_calls{name=\"paymentService\",kind=\"failed\"} 8 resilience4j_circuitbreaker_not_permitted_calls{name=\"paymentService\"} 34 Grafana Alert Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: CircuitBreakerOpen expr: resilience4j_circuitbreaker_state{state=\"open\"} == 1 for: 5m annotations: summary: \"Circuit breaker {{ $labels.name }} is open\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighFailureRate expr: resilience4j_circuitbreaker_failure_rate > 40 for: 2m annotations: summary: \"Circuit breaker {{ $labels.name }} failure rate is {{ $value }}%\" Recovery Strategies Gradual Recovery When a circuit breaker closes after recovery, the previously failing service may be overwhelmed by the sudden return of all traffic. Use gradual recovery: // Gradual recovery: allow 50% of usual traffic initially, ramp up CircuitBreakerConfig config = CircuitBreakerConfig.custom() .waitDurationInOpenState(Duration.ofSeconds(30)) .permittedNumberOfCallsInHalfOpenState(10) // Allow 10 trial calls .slidingWindowSize(20) .build(); Fallback Strategies * **Cache**: Return cached response from the last successful call. * **Default value**: Return a safe default (empty list, zero). * **Degraded functionality**: Return partial results (e.g., show product page without recommendations). * **Queue for retry**: Store the request and retry later. @CircuitBreaker(name = \"recommendationService\", fallbackMethod = \"recommendationFallback\") public List getRecommendations(String userId) { return recommendationClient.fetch(userId); } public List recommendationFallback(String userId, Throwable t) { if (t instanceof CircuitBreakerOpenException) { log.info(\"Recommendations unavailable, returning popular products instead\"); return popularProductsCache.get(\"global\"); } return Collections.emptyList(); } Bulkhead Pattern Combine circuit breakers with bulkheads to isolate failure domains: import io.github.resilience4j.bulkhead.Bulkhead; import io.github.resilience4j.bulkhead.BulkheadConfig; BulkheadConfig bulkheadConfig = BulkheadConfig.custom() .maxConcurrentCalls(10) .maxWaitDuration(Duration.ofMillis(500)) .build(); Bulkhead bulkhead = Bulkhead.of(\"paymentService\", bulkheadConfig); // Combined: circuit breaker wraps bulkhead wraps function Supplier decorated = Decorators .ofSupplier(() -> paymentService.processPayment(request)) .withCircuitBreaker(circuitBreaker) .withBulkhead(bulkhead) .decorate(); Common Pitfalls * **Too short timeout**: Circuit opens too frequently due to normal latency spikes. Set thresholds based on observed p99 latency. * **Too long open duration**: Service recovers quickly but the circuit stays open. Monitor recovery patterns and tune accordingly. * **No fallback**: An open circuit breaker still needs to return something useful to the caller. * **All-or-nothing thinking**: Not all dependencies need circuit breakers. Use them for external APIs, databases, and critical services. * **Ignoring half-open**: The half-open state is critical for recovery. Do not skip it. Conclusion The circuit breaker pattern prevents cascading failures by detecting when a remote service is failing and stopping calls to it. Implement the three-state state machine (closed, open, half-open) with libraries like Resilience4j. Monitor circuit breaker state in production dashboards. Combine with fallbacks, bulkheads, and gradual recovery for a comprehensive resilience strategy. Circuit breakers are not a silver bullet, but they are an essential tool in building systems that degrade gracefully instead of failing catastrophically."
+      "articleBody": "Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems Circuit Breaker Pattern: Building Resilient Systems The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. The Circuit Breaker State Machine A circuit breaker has three states: Closed, Open, and Half-Open. +-----------+ +--------->| CLOSED | | | (\u6b63\u5e38) | | | +-----+-----+ | | | | [Recovery] [Failure [Success] complete] threshold] threshold] | | | | +-----v-----+ | +----------| OPEN |----------+ | (\u65ad\u5f00) | +-----+-----+ | [Timeout] | +-----v-----+ | HALF-OPEN | | (\u534a\u5f00) | +-----------+ Closed State In the closed state, the circuit breaker allows requests to pass through to the remote service. It tracks the failure rate. When the failure rate exceeds a threshold, the circuit breaker trips to the open state. * All calls pass through. * Metrics are tracked (failure count, failure rate, slow call rate). * When the failure threshold is exceeded, the breaker opens. Open State In the open state, the circuit breaker immediately rejects requests without calling the remote service. This prevents overwhelming a failing service and allows it time to recover. * All calls fail fast with a `CircuitBreakerOpenException`. * A timer starts. When it expires, the breaker transitions to half-open. * The open duration should be long enough for the service to recover but short enough to minimize downtime. Half-Open State In the half-open state, the circuit breaker allows a limited number of trial requests. If these requests succeed, the breaker closes. If they fail, the breaker reopens. * A configurable number of trial calls are allowed. * Success threshold reached: transition to closed. * Any failure: transition back to open. Implementation with Resilience4j Resilience4j is a lightweight, easy-to-use fault tolerance library for Java. It provides circuit breaker, rate limiter, retry, bulkhead, and time limiter modules. Basic Circuit Breaker Configuration import io.github.resilience4j.circuitbreaker.CircuitBreaker; import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig; import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry; import java.time.Duration; // Create a circuit breaker configuration CircuitBreakerConfig config = CircuitBreakerConfig.custom() .failureRateThreshold(50) // Open when 50% of calls fail .slowCallRateThreshold(50) // Open when 50% are slow .slowCallDurationThreshold(Duration.ofSeconds(2)) // Call > 2s is slow .waitDurationInOpenState(Duration.ofSeconds(30)) // Time in open before half-open .permittedNumberOfCallsInHalfOpenState(3) // Trial calls in half-open .minimumNumberOfCalls(10) // Min calls before evaluating .slidingWindowSize(20) // Window for metrics .slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED) .recordExceptions(IOException.class, TimeoutException.class) .ignoreExceptions(BusinessException.class) // Don't count business errors .build(); // Create the circuit breaker CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config); CircuitBreaker circuitBreaker = registry.circuitBreaker(\"paymentService\"); Decorating Calls // Decorate a function with circuit breaker Supplier decoratedSupplier = CircuitBreaker .decorateSupplier(circuitBreaker, () -> paymentService.processPayment(request)); // Call with circuit breaker protection try { String result = decoratedSupplier.get(); } catch (CircuitBreakerOpenException e) { // Circuit is open, handle gracefully return fallbackResponse(); } Spring Boot Integration import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker; import org.springframework.stereotype.Service; @Service public class PaymentService { @CircuitBreaker(name = \"paymentService\", fallbackMethod = \"paymentFallback\") public PaymentResponse processPayment(PaymentRequest request) { return paymentGateway.charge(request); } public PaymentResponse paymentFallback(PaymentRequest request, Throwable t) { log.warn(\"Payment service unavailable, using fallback. Error: {}\", t.getMessage()); return PaymentResponse.failed(\"Payment temporarily unavailable, please retry\"); } } application.yml resilience4j.circuitbreaker: configs: default: failureRateThreshold: 50 waitDurationInOpenState: 30s permittedNumberOfCallsInHalfOpenState: 3 slidingWindowSize: 20 minimumNumberOfCalls: 10 instances: paymentService: baseConfig: default inventoryService: failureRateThreshold: 30 waitDurationInOpenState: 60s Python Implementation (Simple) import time import threading from enum import Enum class CircuitState(Enum): CLOSED = \"closed\" OPEN = \"open\" HALF_OPEN = \"half_open\" class CircuitBreaker: def __init__(self, failure_threshold=5, recovery_timeout=30, half_open_max_calls=3): self.failure_threshold = failure_threshold self.recovery_timeout = recovery_timeout self.half_open_max_calls = half_open_max_calls self.state = CircuitState.CLOSED self.failure_count = 0 self.last_failure_time = None self.half_open_calls = 0 self.lock = threading.Lock() def call(self, func, fallback_func=None, *args, **kwargs): with self.lock: if self.state == CircuitState.OPEN: if time.time() - self.last_failure_time >= self.recovery_timeout: self.state = CircuitState.HALF_OPEN self.half_open_calls = 0 else: return self._handle_open(fallback_func) if self.state == CircuitState.HALF_OPEN: if self.half_open_calls >= self.half_open_max_calls: return self._handle_open(fallback_func) self.half_open_calls += 1 try: result = func(*args, **kwargs) self._on_success() return result except Exception as e: self._on_failure() return self._handle_open(fallback_func) def _on_success(self): with self.lock: if self.state == CircuitState.HALF_OPEN: self.state = CircuitState.CLOSED self.failure_count = 0 elif self.state == CircuitState.CLOSED: self.failure_count = max(0, self.failure_count - 1) def _on_failure(self): with self.lock: self.failure_count += 1 self.last_failure_time = time.time() if self.failure_count >= self.failure_threshold: self.state = CircuitState.OPEN def _handle_open(self, fallback_func): if fallback_func: return fallback_func() raise CircuitBreakerOpenException(\"Circuit breaker is open\") Monitoring Circuit Breakers Exposing Metrics Resilience4j integrates with Micrometer for metrics export: // Register circuit breaker metrics with Micrometer MeterRegistry meterRegistry = new SimpleMeterRegistry(); CircuitBreakerMetrics circuitBreakerMetrics = circuitBreaker.getMetrics(); // Record state changes circuitBreaker.getEventPublisher() .onStateTransition(event -> { log.info(\"Circuit breaker state changed: {} -> {}\", event.getStateTransition().getFromState(), event.getStateTransition().getToState()); }) .onFailureRateExceeded(event -> { log.warn(\"Failure rate exceeded threshold: {}\", event.getFailureRate()); }); Key Metrics to Monitor * **State**: Is the circuit closed, open, or half-open? * **Failure rate**: Current failure rate within the sliding window. * **Call count**: Total calls, successful calls, failed calls, and ignored calls. * **Not permitted calls**: Number of calls rejected while the breaker is open. * **Buffered calls**: Number of buffered calls in the current sliding window. Prometheus metric format (from Resilience4j exporter) resilience4j_circuitbreaker_state{name=\"paymentService\",state=\"closed\"} 1 resilience4j_circuitbreaker_calls{name=\"paymentService\",kind=\"successful\"} 142 resilience4j_circuitbreaker_calls{name=\"paymentService\",kind=\"failed\"} 8 resilience4j_circuitbreaker_not_permitted_calls{name=\"paymentService\"} 34 Grafana Alert Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: CircuitBreakerOpen expr: resilience4j_circuitbreaker_state{state=\"open\"} == 1 for: 5m annotations: summary: \"Circuit breaker {{ $labels.name }} is open\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighFailureRate expr: resilience4j_circuitbreaker_failure_rate > 40 for: 2m annotations: summary: \"Circuit breaker {{ $labels.name }} failure rate is {{ $value }}%\" Recovery Strategies Gradual Recovery When a circuit breaker closes after recovery, the previously failing service may be overwhelmed by the sudden return of all traffic. Use gradual recovery: // Gradual recovery: allow 50% of usual traffic initially, ramp up CircuitBreakerConfig config = CircuitBreakerConfig.custom() .waitDurationInOpenState(Duration.ofSeconds(30)) .permittedNumberOfCallsInHalfOpenState(10) // Allow 10 trial calls .slidingWindowSize(20) .build(); Fallback Strategies * **Cache**: Return cached response from the last successful call. * **Default value**: Return a safe default (empty list, zero). * **Degraded functionality**: Return partial results (e.g., show product page without recommendations). * **Queue for retry**: Store the request and retry later. @CircuitBreaker(name = \"recommendationService\", fallbackMethod = \"recommendationFallback\") public List getRecommendations(String userId) { return recommendationClient.fetch(userId); } public List recommendationFallback(String userId, Throwable t) { if (t instanceof CircuitBreakerOpenException) { log.info(\"Recommendations unavailable, returning popular products instead\"); return popularProductsCache.get(\"global\"); } return Collections.emptyList(); } Bulkhead Pattern Combine circuit breakers with bulkheads to isolate failure domains: import io.github.resilience4j.bulkhead.Bulkhead; import io.github.resilience4j.bulkhead.BulkheadConfig; BulkheadConfig bulkheadConfig = BulkheadConfig.custom() .maxConcurrentCalls(10) .maxWaitDuration(Duration.ofMillis(500)) .build(); Bulkhead bulkhead = Bulkhead.of(\"paymentService\", bulkheadConfig); // Combined: circuit breaker wraps bulkhead wraps function Supplier decorated = Decorators .ofSupplier(() -> paymentService.processPayment(request)) .withCircuitBreaker(circuitBreaker) .withBulkhead(bulkhead) .decorate(); Common Pitfalls * **Too short timeout**: Circuit opens too frequently due to normal latency spikes. Set thresholds based on observed p99 latency. * **Too long open duration**: Service recovers quickly but the circuit stays open. Monitor recovery patterns and tune accordingly. * **No fallback**: An open circuit breaker still needs to return something useful to the caller. * **All-or-nothing thinking**: Not all dependencies need circuit breakers. Use them for external APIs, databases, and critical services. * **Ignoring half-open**: The half-open state is critical for recovery. Do not skip it. Conclusion The circuit breaker pattern prevents cascading failures by detecting when a remote service is failing and stopping calls to it. Implement the three-state state machine (closed, open, half-open) with libraries like Resilience4j. Monitor circuit breaker state in production dashboards. Combine with fallbacks, bulkheads, and gradual recovery for a comprehensive resilience strategy. Circuit breakers are not a silver bullet, but they are an essential tool in building systems that degrade gracefully instead of failing catastrophically."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Circuit Breaker Pattern: Building Resilient Systems"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -201,7 +214,39 @@
 <br>
 <br>
 <br>
+<h1>Circuit Breaker Pattern: Building Resilient Systems</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The circuit breaker pattern prevents cascading failures in distributed systems. When a service depends on another service that is failing, the circuit breaker detects the failures and stops sending requests to the failing service, allowing it time to recover. This article covers the circuit breaker state machine, implementation with Resilience4j, monitoring, and recovery strategies. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -247,7 +292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A circuit breaker has three states: Closed, Open, and Half-Open. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -299,7 +350,13 @@
 <br>
 <br>
 <br>
-<p>+--------->| CLOSED |<\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---------+</p>
+<br>
+<br>
+<br>
+<p>+--------->| CLOSED |<\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---------+</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,6 +408,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| +-----+-----+ |</p>
 <br>
 <br>
@@ -377,7 +437,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| | |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +495,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>complete] threshold] threshold]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -481,7 +553,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| +-----v-----+ |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -533,7 +611,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| (断开) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -585,7 +669,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -637,7 +727,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -689,7 +785,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| HALF-OPEN |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -741,7 +843,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>+-----------+</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -790,7 +898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>In the closed state, the circuit breaker allows requests to pass through to the remote service. It tracks the failure rate. When the failure rate exceeds a threshold, the circuit breaker trips to the open state. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -839,7 +953,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Metrics are tracked (failure count, failure rate, slow call rate).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -888,7 +1008,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Open State </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -937,6 +1063,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* All calls fail fast with a `CircuitBreakerOpenException`.</p>
 <br>
 <br>
@@ -960,7 +1089,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* A timer starts. When it expires, the breaker transitions to half-open.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1009,7 +1144,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Half-Open State </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1058,6 +1199,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* A configurable number of trial calls are allowed.</p>
 <br>
 <br>
@@ -1081,7 +1225,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Success threshold reached: transition to closed.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1130,7 +1280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Implementation with Resilience4j </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1176,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Basic Circuit Breaker Configuration </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1228,7 +1390,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,7 +1448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import java.time.Duration;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1332,7 +1506,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CircuitBreakerConfig config = CircuitBreakerConfig.custom()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1384,7 +1564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.slowCallRateThreshold(50) // Open when 50% are slow</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1436,7 +1622,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.waitDurationInOpenState(Duration.ofSeconds(30)) // Time in open before half-open</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1488,7 +1680,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.minimumNumberOfCalls(10) // Min calls before evaluating</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1540,7 +1738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.slidingWindowType(CircuitBreakerConfig.SlidingWindowType.COUNT_BASED)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1592,6 +1796,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.ignoreExceptions(BusinessException.class) // Don't count business errors</p>
 <br>
 <br>
@@ -1618,7 +1825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.build();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1670,7 +1883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CircuitBreakerRegistry registry = CircuitBreakerRegistry.of(config);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1722,7 +1941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Decorating Calls </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1774,7 +1999,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Supplier decoratedSupplier = CircuitBreaker</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1826,7 +2057,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Call with circuit breaker protection</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1878,7 +2115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>String result = decoratedSupplier.get();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1930,7 +2173,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Circuit is open, handle gracefully</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1982,7 +2231,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2034,7 +2289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2086,7 +2347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@Service</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2138,7 +2405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@CircuitBreaker(name = "paymentService", fallbackMethod = "paymentFallback")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2190,6 +2463,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return paymentGateway.charge(request);</p>
 <br>
 <br>
@@ -2216,7 +2492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2268,7 +2550,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>log.warn("Payment service unavailable, using fallback. Error: {}", t.getMessage());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2320,33 +2608,42 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2398,7 +2695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resilience4j.circuitbreaker:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2450,7 +2753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>default:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2502,7 +2811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>waitDurationInOpenState: 30s</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2554,7 +2869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>slidingWindowSize: 20</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2606,7 +2927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>instances:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2658,7 +2985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>baseConfig: default</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2710,7 +3043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>failureRateThreshold: 30</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2762,7 +3101,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Python Implementation (Simple) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2814,7 +3159,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import threading</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2866,7 +3217,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class CircuitState(Enum):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2918,7 +3275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>OPEN = "open"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2970,7 +3333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class CircuitBreaker:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3022,7 +3391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.failure_threshold = failure_threshold</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3074,7 +3449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.half_open_max_calls = half_open_max_calls</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3126,7 +3507,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.failure_count = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3178,7 +3565,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.half_open_calls = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3230,6 +3623,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def call(self, func, fallback_func=None, *args, **kwargs):</p>
 <br>
 <br>
@@ -3256,7 +3652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with self.lock:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3308,7 +3710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if time.time() - self.last_failure_time >= self.recovery_timeout:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3360,7 +3768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.half_open_calls = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3412,6 +3826,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self._handle_open(fallback_func)</p>
 <br>
 <br>
@@ -3438,7 +3855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if self.state == CircuitState.HALF_OPEN:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3490,7 +3913,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self._handle_open(fallback_func)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3542,7 +3971,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>try:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3594,7 +4029,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self._on_success()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3646,7 +4087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>except Exception as e:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3698,7 +4145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self._handle_open(fallback_func)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3750,7 +4203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with self.lock:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3802,7 +4261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.state = CircuitState.CLOSED</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3854,7 +4319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif self.state == CircuitState.CLOSED:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3906,7 +4377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _on_failure(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3958,7 +4435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.failure_count += 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4010,7 +4493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if self.failure_count >= self.failure_threshold:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4062,7 +4551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _handle_open(self, fallback_func):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4114,7 +4609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fallback_func()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4166,7 +4667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Monitoring Circuit Breakers </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4212,7 +4719,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Resilience4j integrates with Micrometer for metrics export: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4264,7 +4777,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MeterRegistry meterRegistry = new SimpleMeterRegistry();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4316,7 +4835,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>circuitBreaker.getMetrics();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4368,7 +4893,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>circuitBreaker.getEventPublisher()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4420,7 +4951,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>log.info("Circuit breaker state changed: {} -> {}", </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4472,7 +5009,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>event.getStateTransition().getToState());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4524,7 +5067,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.onFailureRateExceeded(event -> {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4576,7 +5125,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>event.getFailureRate());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4628,7 +5183,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Key Metrics to Monitor </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4677,7 +5238,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Failure rate**: Current failure rate within the sliding window.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4723,6 +5290,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Not permitted calls**: Number of calls rejected while the breaker is open.</p>
 <br>
 <br>
@@ -4746,7 +5316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Buffered calls**: Number of buffered calls in the current sliding window.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4798,7 +5374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resilience4j_circuitbreaker_state{name="paymentService",state="closed"} 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4850,7 +5432,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resilience4j_circuitbreaker_calls{name="paymentService",kind="failed"} 8</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4902,6 +5490,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Grafana Alert Rules </p>
 <br>
 <br>
@@ -4928,7 +5519,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: CircuitBreakerOpen</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: CircuitBreakerOpen</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4980,6 +5577,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for: 5m</p>
 <br>
 <br>
@@ -5006,7 +5606,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>annotations:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5058,7 +5664,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighFailureRate</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighFailureRate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5110,7 +5722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for: 2m</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5162,7 +5780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>summary: "Circuit breaker {{ $labels.name }} failure rate is {{ $value }}%"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5211,6 +5835,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Gradual Recovery </p>
 <br>
 <br>
@@ -5234,7 +5861,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When a circuit breaker closes after recovery, the previously failing service may be overwhelmed by the sudden return of all traffic. Use gradual recovery: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5286,7 +5919,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CircuitBreakerConfig config = CircuitBreakerConfig.custom()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5338,7 +5977,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.permittedNumberOfCallsInHalfOpenState(10) // Allow 10 trial calls</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5390,7 +6035,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.build();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5442,7 +6093,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Cache**: Return cached response from the last successful call.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5488,6 +6145,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Degraded functionality**: Return partial results (e.g., show product page without recommendations).</p>
 <br>
 <br>
@@ -5511,7 +6171,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Queue for retry**: Store the request and retry later.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5563,7 +6229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>public List getRecommendations(String userId) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5615,7 +6287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5667,7 +6345,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (t instanceof CircuitBreakerOpenException) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5719,6 +6403,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return popularProductsCache.get("global");</p>
 <br>
 <br>
@@ -5745,7 +6432,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5797,7 +6490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5846,7 +6545,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Combine circuit breakers with bulkheads to isolate failure domains: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5898,7 +6603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import io.github.resilience4j.bulkhead.BulkheadConfig;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5950,7 +6661,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.maxConcurrentCalls(10)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6002,7 +6719,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.build();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6054,7 +6777,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Combined: circuit breaker wraps bulkhead wraps function</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6106,7 +6835,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.ofSupplier(() -> paymentService.processPayment(request))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6158,7 +6893,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.withBulkhead(bulkhead)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6210,7 +6951,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Common Pitfalls </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6259,7 +7006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Too long open duration**: Service recovers quickly but the circuit stays open. Monitor recovery patterns and tune accordingly.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6305,7 +7058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **All-or-nothing thinking**: Not all dependencies need circuit breakers. Use them for external APIs, databases, and critical services.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6354,7 +7113,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Distributed Tracing with OpenTelemetry">
     <meta name="twitter:description" content="Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Distributed Tracing with OpenTelemetry — SourceHub</title>
     <meta name="description" content="Implement distributed tracing with OpenTelemetry covering spans, context propagation, sampling strategies, Jaeger/Zipkin visualization, and log/metric correlation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/distributed-tracing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "8285",
+      "wordCount": "9651",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/distributed-tracing-with-opentelemetry-50bf"
       ],
-      "articleBody": "Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Introduction Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production. Core Concepts: Traces, Spans, and Context A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships: import { trace, Span, SpanStatusCode } from \"@opentelemetry/api\"; const tracer = trace.getTracer(\"payment-service\"); async function processPayment(orderId: string, amount: number) { // Create a new span as the root of a sub-operation const span = tracer.startSpan(\"process-payment\", { attributes: { \"payment.order_id\": orderId, \"payment.amount\": amount, \"payment.currency\": \"USD\", }, }); try { const result = await chargePaymentGateway(orderId, amount); span.setStatus({ code: SpanStatusCode.OK }); span.setAttribute(\"payment.transaction_id\", result.transactionId); return result; } catch (error) { span.setStatus({ code: SpanStatusCode.ERROR, message: error.message, }); span.recordException(error); throw error; } finally { span.end(); } } Context Propagation Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard: // Instrument outgoing HTTP requests import { context, propagation } from \"@opentelemetry/api\"; import * as http from \"http\"; function makeRequest(url: string, headers: Record) { // Inject current context into outgoing headers const activeContext = context.active(); const carrier: Record = {}; propagation.inject(activeContext, carrier); const allHeaders = { ...headers, ...carrier }; return http.get(url, { headers: allHeaders }); } For message queues, propagate context through message headers: // Producer: inject context into message import { propagation } from \"@opentelemetry/api\"; function publishMessage(topic: string, payload: any) { const carrier: Record = {}; propagation.inject(context.active(), carrier); const message = { value: JSON.stringify(payload), headers: { ...carrier, \"content-type\": \"application/json\", }, }; return kafkaProducer.send({ topic, messages: [message] }); } // Consumer: extract context from message import { propagation, context } from \"@opentelemetry/api\"; kafkaConsumer.on(\"message\", (message) => { const extractedContext = propagation.extract( context.active(), message.headers ); context.with(extractedContext, async () => { // This operation is now part of the parent trace const span = tracer.startSpan(\"process-order\"); // Process message... span.end(); }); }); Sampling Strategies Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection: OpenTelemetry Collector: tail-based sampling processors: tail_sampling: decision_wait: 30s num_traces: 10000 expected_new_traces_per_sec: 100 policies: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: error-sampling type: status_code config: status_code: ERROR sampling_percentage: 100 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: latency-sampling type: latency config: threshold_ms: 500 sampling_percentage: 50 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: probabilistic type: probabilistic config: sampling_percentage: 5 For head-based sampling in application code: import { SamplingDecision } from \"@opentelemetry/api\"; import { Sampler, SpanKind, Attributes } from \"@opentelemetry/api\"; class CustomSampler implements Sampler { shouldSample( context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes ) { // Always sample error-prone operations if (spanName.startsWith(\"payment.\")) { return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } // Sample 10% of health checks if (spanName === \"health-check\") { return { decision: SamplingDecision.DROP }; } // Default probabilistic sampling return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } } Visualization with Jaeger and Zipkin Jaeger provides rich trace visualization and analysis capabilities: docker-compose.yml for Jaeger services: jaeger: image: jaegertracing/all-in-one:latest environment: COLLECTOR_OTLP_ENABLED: \"true\" ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"16686:16686\" # UI \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"4318:4318\" # OTLP HTTP Configure the OpenTelemetry Collector to forward traces to Jaeger: receivers: otlp: protocols: http: endpoint: \"0.0.0.0:4318\" exporters: jaeger: endpoint: \"jaeger:14250\" tls: insecure: true service: pipelines: traces: receivers: [otlp] exporters: [jaeger] Baggage Propagation Baggage carries non-sampling key-value pairs across service boundaries for contextual information: import { propagation } from \"@opentelemetry/api\"; // Set baggage in the entry service propagation.setBaggage(context.active(), propagation.createBaggage({ \"user.id\": { value: userId }, \"session.region\": { value: region }, \"request.source\": { value: source }, }) ); Access baggage in downstream services without modifying API contracts: import { propagation, getBaggage } from \"@opentelemetry/api\"; function getCurrentUserId(): string | undefined { const baggage = getBaggage(context.active()); return baggage?.getEntry(\"user.id\")?.value; } Correlation with Logs and Metrics Link traces to logs using `trace_id` and `span_id`: import { trace } from \"@opentelemetry/api\"; function enrichLogger(logger: Logger): Logger { const span = trace.getActiveSpan(); return logger.child({ trace_id: span?.spanContext().traceId, span_id: span?.spanContext().spanId, trace_flags: span?.spanContext().traceFlags, }); } Emit metrics with trace context for full observability: import { metrics } from \"@opentelemetry/api\"; const meter = metrics.getMeter(\"payment-service\"); const requestCounter = meter.createCounter(\"payment.requests\", { description: \"Count of payment requests\", }); function trackPayment(status: string) { const spanContext = trace.getActiveSpan()?.spanContext(); requestCounter.add(1, { status, trace_id: spanContext?.traceId, }); } Production Configuration Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration: apiVersion: apps/v1 kind: DaemonSet metadata: name: otel-collector spec: template: spec: containers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-collector image: otel/opentelemetry-collector-contrib:latest args: [\"--config=/etc/otel/config.yaml\"] ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes."
+      "articleBody": "Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Distributed Tracing with OpenTelemetry Introduction Distributed tracing provides end-to-end visibility into requests as they traverse multiple services. Unlike logs (which are service-local) and metrics (which are aggregate), traces capture the causal relationship between operations in a distributed system. OpenTelemetry has become the industry standard for instrumentation, offering a unified API for traces, metrics, and logs. This article covers implementing distributed tracing with OpenTelemetry in production. Core Concepts: Traces, Spans, and Context A trace represents a complete request flow. Each unit of work within a trace is a span, carrying metadata about timing, status, and parent-child relationships: import { trace, Span, SpanStatusCode } from \"@opentelemetry/api\"; const tracer = trace.getTracer(\"payment-service\"); async function processPayment(orderId: string, amount: number) { // Create a new span as the root of a sub-operation const span = tracer.startSpan(\"process-payment\", { attributes: { \"payment.order_id\": orderId, \"payment.amount\": amount, \"payment.currency\": \"USD\", }, }); try { const result = await chargePaymentGateway(orderId, amount); span.setStatus({ code: SpanStatusCode.OK }); span.setAttribute(\"payment.transaction_id\", result.transactionId); return result; } catch (error) { span.setStatus({ code: SpanStatusCode.ERROR, message: error.message, }); span.recordException(error); throw error; } finally { span.end(); } } Context Propagation Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard: // Instrument outgoing HTTP requests import { context, propagation } from \"@opentelemetry/api\"; import * as http from \"http\"; function makeRequest(url: string, headers: Record) { // Inject current context into outgoing headers const activeContext = context.active(); const carrier: Record = {}; propagation.inject(activeContext, carrier); const allHeaders = { ...headers, ...carrier }; return http.get(url, { headers: allHeaders }); } For message queues, propagate context through message headers: // Producer: inject context into message import { propagation } from \"@opentelemetry/api\"; function publishMessage(topic: string, payload: any) { const carrier: Record = {}; propagation.inject(context.active(), carrier); const message = { value: JSON.stringify(payload), headers: { ...carrier, \"content-type\": \"application/json\", }, }; return kafkaProducer.send({ topic, messages: [message] }); } // Consumer: extract context from message import { propagation, context } from \"@opentelemetry/api\"; kafkaConsumer.on(\"message\", (message) => { const extractedContext = propagation.extract( context.active(), message.headers ); context.with(extractedContext, async () => { // This operation is now part of the parent trace const span = tracer.startSpan(\"process-order\"); // Process message... span.end(); }); }); Sampling Strategies Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection: OpenTelemetry Collector: tail-based sampling processors: tail_sampling: decision_wait: 30s num_traces: 10000 expected_new_traces_per_sec: 100 policies: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: error-sampling type: status_code config: status_code: ERROR sampling_percentage: 100 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: latency-sampling type: latency config: threshold_ms: 500 sampling_percentage: 50 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: probabilistic type: probabilistic config: sampling_percentage: 5 For head-based sampling in application code: import { SamplingDecision } from \"@opentelemetry/api\"; import { Sampler, SpanKind, Attributes } from \"@opentelemetry/api\"; class CustomSampler implements Sampler { shouldSample( context: Context, traceId: string, spanName: string, spanKind: SpanKind, attributes: Attributes ) { // Always sample error-prone operations if (spanName.startsWith(\"payment.\")) { return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } // Sample 10% of health checks if (spanName === \"health-check\") { return { decision: SamplingDecision.DROP }; } // Default probabilistic sampling return { decision: SamplingDecision.RECORD_AND_SAMPLED }; } } Visualization with Jaeger and Zipkin Jaeger provides rich trace visualization and analysis capabilities: docker-compose.yml for Jaeger services: jaeger: image: jaegertracing/all-in-one:latest environment: COLLECTOR_OTLP_ENABLED: \"true\" ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"16686:16686\" # UI \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"4318:4318\" # OTLP HTTP Configure the OpenTelemetry Collector to forward traces to Jaeger: receivers: otlp: protocols: http: endpoint: \"0.0.0.0:4318\" exporters: jaeger: endpoint: \"jaeger:14250\" tls: insecure: true service: pipelines: traces: receivers: [otlp] exporters: [jaeger] Baggage Propagation Baggage carries non-sampling key-value pairs across service boundaries for contextual information: import { propagation } from \"@opentelemetry/api\"; // Set baggage in the entry service propagation.setBaggage(context.active(), propagation.createBaggage({ \"user.id\": { value: userId }, \"session.region\": { value: region }, \"request.source\": { value: source }, }) ); Access baggage in downstream services without modifying API contracts: import { propagation, getBaggage } from \"@opentelemetry/api\"; function getCurrentUserId(): string | undefined { const baggage = getBaggage(context.active()); return baggage?.getEntry(\"user.id\")?.value; } Correlation with Logs and Metrics Link traces to logs using `trace_id` and `span_id`: import { trace } from \"@opentelemetry/api\"; function enrichLogger(logger: Logger): Logger { const span = trace.getActiveSpan(); return logger.child({ trace_id: span?.spanContext().traceId, span_id: span?.spanContext().spanId, trace_flags: span?.spanContext().traceFlags, }); } Emit metrics with trace context for full observability: import { metrics } from \"@opentelemetry/api\"; const meter = metrics.getMeter(\"payment-service\"); const requestCounter = meter.createCounter(\"payment.requests\", { description: \"Count of payment requests\", }); function trackPayment(status: string) { const spanContext = trace.getActiveSpan()?.spanContext(); requestCounter.add(1, { status, trace_id: spanContext?.traceId, }); } Production Configuration Deploy the OpenTelemetry Collector as a sidecar or DaemonSet for centralized configuration: apiVersion: apps/v1 kind: DaemonSet metadata: name: otel-collector spec: template: spec: containers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-collector image: otel/opentelemetry-collector-contrib:latest args: [\"--config=/etc/otel/config.yaml\"] ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP Instrumentation should be additive and never break business logic. Start with critical paths (payment, auth, order creation) and expand coverage iteratively. A well-instrumented system reduces mean time to diagnosis from hours to minutes."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Distributed Tracing with OpenTelemetry"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -263,7 +276,45 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Distributed Tracing with OpenTelemetry</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -321,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Core Concepts: Traces, Spans, and Context</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -379,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { trace, Span, SpanStatusCode } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -437,7 +500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async function processPayment(orderId: string, amount: number) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -495,7 +564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const span = tracer.startSpan("process-payment", {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"payment.order_id": orderId,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,7 +692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"payment.currency": "USD",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const result = await chargePaymentGateway(orderId, amount);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>span.setAttribute("payment.transaction_id", result.transactionId);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>} catch (error) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>code: SpanStatusCode.ERROR,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>throw error;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1075,6 +1204,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>span.end();</p>
 <br>
 <br>
@@ -1104,36 +1236,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Propagation carries trace context across service boundaries. For HTTP services, the `W3C TraceContext` format is standard:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { context, propagation } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>function makeRequest(url: string, headers: Record) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,6 +1524,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const activeContext = context.active();</p>
 <br>
 <br>
@@ -1394,7 +1556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const carrier: Record = {};</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const allHeaders = { ...headers, ...carrier };</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1568,6 +1748,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Producer: inject context into message</p>
 <br>
 <br>
@@ -1597,7 +1780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { propagation } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1655,7 +1844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const carrier: Record = {};</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1713,7 +1908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const message = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1771,7 +1972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1829,7 +2036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content-type": "application/json",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1887,7 +2100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>};</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1945,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2003,7 +2228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { propagation, context } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2061,7 +2292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const extractedContext = propagation.extract(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2119,6 +2356,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>message.headers</p>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// This operation is now part of the parent trace</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Process message...</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,36 +2580,45 @@
 <br>
 <br>
 <br>
-<p>});</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>});</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2409,7 +2676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sampling controls the volume of traces collected. Use head-based sampling for simplicity or tail-based for intelligent selection:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>processors:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,7 +2804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>decision_wait: 30s</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2583,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expected_new_traces_per_sec: 100</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2641,7 +2932,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: error-sampling</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: error-sampling</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2699,7 +2996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>config:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2757,6 +3060,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sampling_percentage: 100</p>
 <br>
 <br>
@@ -2786,7 +3092,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: latency-sampling</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: latency-sampling</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3156,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>config:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2902,6 +3220,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sampling_percentage: 50</p>
 <br>
 <br>
@@ -2931,7 +3252,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: probabilistic</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: probabilistic</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>config:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For head-based sampling in application code:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { Sampler, SpanKind, Attributes } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3163,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>shouldSample(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>traceId: string,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3279,7 +3636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spanKind: SpanKind,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3337,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3395,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (spanName.startsWith("payment.")) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3453,7 +3828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (spanName === "health-check") {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3569,7 +3956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,6 +4020,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return { decision: SamplingDecision.RECORD_AND_SAMPLED };</p>
 <br>
 <br>
@@ -3656,36 +4052,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3743,7 +4148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Jaeger provides rich trace visualization and analysis capabilities:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3801,6 +4212,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>services:</p>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>jaeger:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>environment:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,6 +4372,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ports:</p>
 <br>
 <br>
@@ -3975,7 +4404,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "16686:16686" # UI</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "16686:16686" # UI</p>
 <br>
 <br>
 <br>
@@ -4004,7 +4436,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4062,7 +4500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>receivers:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4120,7 +4564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>protocols:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4178,7 +4628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>endpoint: "0.0.0.0:4318"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4236,7 +4692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>jaeger:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4294,7 +4756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tls:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +4820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>service:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4410,7 +4884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>traces:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4468,7 +4948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exporters: [jaeger]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4526,7 +5012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Baggage carries non-sampling key-value pairs across service boundaries for contextual information:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4584,7 +5076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Set baggage in the entry service</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4642,7 +5140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>propagation.createBaggage({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4700,7 +5204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"session.region": { value: region },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4758,7 +5268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4816,7 +5332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Access baggage in downstream services without modifying API contracts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4874,7 +5396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>function getCurrentUserId(): string | undefined {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4932,6 +5460,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return baggage?.getEntry("user.id")?.value;</p>
 <br>
 <br>
@@ -4961,7 +5492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5019,7 +5556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Link traces to logs using `trace_id` and `span_id`:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5077,7 +5620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>function enrichLogger(logger: Logger): Logger {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5135,7 +5684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return logger.child({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5193,7 +5748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>span_id: span?.spanContext().spanId,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5251,6 +5812,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
 <br>
 <br>
@@ -5280,7 +5844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5338,7 +5908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { metrics } from "@opentelemetry/api";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5396,7 +5972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const requestCounter = meter.createCounter("payment.requests", {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5454,7 +6036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5512,7 +6100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const spanContext = trace.getActiveSpan()?.spanContext();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5570,7 +6164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>status,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5628,7 +6228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5686,7 +6292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Production Configuration</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5744,7 +6356,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: apps/v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5802,7 +6420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>metadata:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5860,7 +6484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spec:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5918,7 +6548,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spec:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5976,7 +6612,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-collector</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-collector</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6034,7 +6676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>args: ["--config=/etc/otel/config.yaml"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6092,7 +6740,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 4318 # OTLP HTTP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

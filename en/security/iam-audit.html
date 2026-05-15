@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="IAM Audit">
     <meta name="twitter:description" content="Performing effective IAM audits with permission reviews, unused role detection, and privilege escalation path analysis.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>IAM Audit — SourceHub</title>
     <meta name="description" content="Performing effective IAM audits with permission reviews, unused role detection, and privilege escalation path analysis.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/iam-audit.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4313",
+      "wordCount": "4910",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/iam-audit.html"},
-      "articleBody": "IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit Fundamentals Identity and Access Management (IAM) audits verify that users have appropriate permissions. Regular audits prevent privilege creep, detect unused roles, and identify security gaps. Permission Review Automate permission reviews across cloud providers: import boto3 import json class IAMAuditor: def __init__(self): self.iam = boto3.client(\"iam\") def get_all_users_with_permissions(self): users = [] paginator = self.iam.get_paginator(\"list_users\") for page in paginator.paginate(): for user in page[\"Users\"]: user_info = { \"username\": user[\"UserName\"], \"created\": user[\"CreateDate\"], \"policies\": [], \"groups\": [], \"last_used\": None } Inline policies policies = self.iam.list_user_policies(UserName=user[\"UserName\"]) user_info[\"policies\"] = policies[\"PolicyNames\"] Attached managed policies attached = self.iam.list_attached_user_policies(UserName=user[\"UserName\"]) user_info[\"managed_policies\"] = [p[\"PolicyName\"] for p in attached[\"AttachedPolicies\"]] Groups groups = self.iam.list_groups_for_user(UserName=user[\"UserName\"]) user_info[\"groups\"] = [g[\"GroupName\"] for g in groups[\"Groups\"]] Last activity last_used = self.iam.get_user(UserName=user[\"UserName\"]) if \"PasswordLastUsed\" in last_used[\"User\"]: user_info[\"last_used\"] = last_used[\"User\"][\"PasswordLastUsed\"] users.append(user_info) return users Unused Role Detection def find_unused_roles(days_threshold=90): cutoff = datetime.utcnow() - timedelta(days=days_threshold) unused = [] paginator = client.get_paginator(\"list_roles\") for page in paginator.paginate(): for role in page[\"Roles\"]: if \"LastUsedDate\" not in role: unused.append({ \"role\": role[\"RoleName\"], \"created\": role[\"CreateDate\"], \"reason\": \"Never used\" }) elif role[\"LastUsedDate\"] unused.append({ \"role\": role[\"RoleName\"], \"last_used\": role[\"LastUsedDate\"], \"reason\": f\"Not used in {days_threshold} days\" }) return unused Privilege Escalation Path Analysis Identify paths where a user can grant themselves additional permissions: def analyze_escalation_paths(policy_document): \"\"\" Check if a policy allows privilege escalation. \"\"\" risks = [] statement = policy_document.get(\"Statement\", []) for stmt in statement: actions = stmt.get(\"Action\", []) if isinstance(actions, str): actions = [actions] resource = stmt.get(\"Resource\", \"*\") Check for IAM modify permissions escalation_actions = [ \"iam:CreatePolicy\", \"iam:AttachUserPolicy\", \"iam:PutUserPolicy\", \"iam:CreateAccessKey\", \"iam:UpdateAssumeRolePolicy\", \"iam:PassRole\" ] for action in actions: if any(action.endswith(esc_act.split(\":\")[1]) or action == \"*\" for esc_act in escalation_actions): risks.append({ \"risk\": f\"Privilege escalation via {action}\", \"resource\": resource }) return risks Audit Report Generation def generate_audit_report(findings): report = { \"generated_at\": datetime.utcnow().isoformat(), \"summary\": { \"total_users\": len(findings[\"users\"]), \"unused_roles\": len(findings[\"unused_roles\"]), \"escalation_paths\": len(findings[\"escalation_risks\"]), \"over_permissioned\": 0 }, \"findings\": findings } Flag users with admin access who don't need it for user in findings[\"users\"]: if \"AdministratorAccess\" in user.get(\"managed_policies\", []): if user.get(\"last_used\") and \\ (datetime.utcnow() - user[\"last_used\"]).days > 30: report[\"summary\"][\"over_permissioned\"] += 1 return report Remediation Workflow iam_audit_remediation: critical: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- privilege_escalation_path: immediate_revoke \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_admin_role: disable_within_24h high: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- over_permissioned_user: reduce_to_least_privilege \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_role_over_90_days: request_review medium: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_mfa: require_enrollment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_password_rotation: enforce_policy low: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_tags: auto_tag \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- incomplete_documentation: notify_owner Conclusion Regular IAM audits are essential for maintaining least privilege. Automate permission reviews, detect unused roles, and analyze privilege escalation paths. Generate actionable reports and enforce remediation SLAs. Audit at least quarterly, with automated scanning running continuously."
+      "articleBody": "IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit IAM Audit Fundamentals Identity and Access Management (IAM) audits verify that users have appropriate permissions. Regular audits prevent privilege creep, detect unused roles, and identify security gaps. Permission Review Automate permission reviews across cloud providers: import boto3 import json class IAMAuditor: def __init__(self): self.iam = boto3.client(\"iam\") def get_all_users_with_permissions(self): users = [] paginator = self.iam.get_paginator(\"list_users\") for page in paginator.paginate(): for user in page[\"Users\"]: user_info = { \"username\": user[\"UserName\"], \"created\": user[\"CreateDate\"], \"policies\": [], \"groups\": [], \"last_used\": None } Inline policies policies = self.iam.list_user_policies(UserName=user[\"UserName\"]) user_info[\"policies\"] = policies[\"PolicyNames\"] Attached managed policies attached = self.iam.list_attached_user_policies(UserName=user[\"UserName\"]) user_info[\"managed_policies\"] = [p[\"PolicyName\"] for p in attached[\"AttachedPolicies\"]] Groups groups = self.iam.list_groups_for_user(UserName=user[\"UserName\"]) user_info[\"groups\"] = [g[\"GroupName\"] for g in groups[\"Groups\"]] Last activity last_used = self.iam.get_user(UserName=user[\"UserName\"]) if \"PasswordLastUsed\" in last_used[\"User\"]: user_info[\"last_used\"] = last_used[\"User\"][\"PasswordLastUsed\"] users.append(user_info) return users Unused Role Detection def find_unused_roles(days_threshold=90): cutoff = datetime.utcnow() - timedelta(days=days_threshold) unused = [] paginator = client.get_paginator(\"list_roles\") for page in paginator.paginate(): for role in page[\"Roles\"]: if \"LastUsedDate\" not in role: unused.append({ \"role\": role[\"RoleName\"], \"created\": role[\"CreateDate\"], \"reason\": \"Never used\" }) elif role[\"LastUsedDate\"] unused.append({ \"role\": role[\"RoleName\"], \"last_used\": role[\"LastUsedDate\"], \"reason\": f\"Not used in {days_threshold} days\" }) return unused Privilege Escalation Path Analysis Identify paths where a user can grant themselves additional permissions: def analyze_escalation_paths(policy_document): \"\"\" Check if a policy allows privilege escalation. \"\"\" risks = [] statement = policy_document.get(\"Statement\", []) for stmt in statement: actions = stmt.get(\"Action\", []) if isinstance(actions, str): actions = [actions] resource = stmt.get(\"Resource\", \"*\") Check for IAM modify permissions escalation_actions = [ \"iam:CreatePolicy\", \"iam:AttachUserPolicy\", \"iam:PutUserPolicy\", \"iam:CreateAccessKey\", \"iam:UpdateAssumeRolePolicy\", \"iam:PassRole\" ] for action in actions: if any(action.endswith(esc_act.split(\":\")[1]) or action == \"*\" for esc_act in escalation_actions): risks.append({ \"risk\": f\"Privilege escalation via {action}\", \"resource\": resource }) return risks Audit Report Generation def generate_audit_report(findings): report = { \"generated_at\": datetime.utcnow().isoformat(), \"summary\": { \"total_users\": len(findings[\"users\"]), \"unused_roles\": len(findings[\"unused_roles\"]), \"escalation_paths\": len(findings[\"escalation_risks\"]), \"over_permissioned\": 0 }, \"findings\": findings } Flag users with admin access who don't need it for user in findings[\"users\"]: if \"AdministratorAccess\" in user.get(\"managed_policies\", []): if user.get(\"last_used\") and \\ (datetime.utcnow() - user[\"last_used\"]).days > 30: report[\"summary\"][\"over_permissioned\"] += 1 return report Remediation Workflow iam_audit_remediation: critical: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- privilege_escalation_path: immediate_revoke \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_admin_role: disable_within_24h high: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- over_permissioned_user: reduce_to_least_privilege \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_role_over_90_days: request_review medium: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_mfa: require_enrollment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_password_rotation: enforce_policy low: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_tags: auto_tag \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- incomplete_documentation: notify_owner Conclusion Regular IAM audits are essential for maintaining least privilege. Automate permission reviews, detect unused roles, and analyze privilege escalation paths. Generate actionable reports and enforce remediation SLAs. Audit at least quarterly, with automated scanning running continuously."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "IAM Audit"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>IAM Audit</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>IAM Audit Fundamentals </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,6 +293,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Permission Review </p>
 <br>
 <br>
@@ -271,7 +319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Automate permission reviews across cloud providers: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -323,7 +377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -375,7 +435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -427,7 +493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_all_users_with_permissions(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -479,6 +551,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>paginator = self.iam.get_paginator("list_users")</p>
 <br>
 <br>
@@ -505,7 +580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for page in paginator.paginate():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -557,7 +638,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user_info = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -609,7 +696,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"created": user["CreateDate"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -661,7 +754,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"groups": [],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -713,7 +812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -765,7 +870,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>policies = self.iam.list_user_policies(UserName=user["UserName"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -817,7 +928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Attached managed policies</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -869,7 +986,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user_info["managed_policies"] = [p["PolicyName"] for p in attached["AttachedPolicies"]]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -921,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>groups = self.iam.list_groups_for_user(UserName=user["UserName"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -973,7 +1102,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Last activity</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1025,7 +1160,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if "PasswordLastUsed" in last_used["User"]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1077,7 +1218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>users.append(user_info)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1129,7 +1276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Unused Role Detection </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1181,7 +1334,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cutoff = datetime.utcnow() - timedelta(days=days_threshold)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1233,7 +1392,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>paginator = client.get_paginator("list_roles")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1285,7 +1450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for role in page["Roles"]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1337,6 +1508,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>unused.append({</p>
 <br>
 <br>
@@ -1363,7 +1537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"role": role["RoleName"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1415,6 +1595,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"reason": "Never used"</p>
 <br>
 <br>
@@ -1441,7 +1624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1493,7 +1682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>unused.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1545,7 +1740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"last_used": role["LastUsedDate"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1649,6 +1856,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Privilege Escalation Path Analysis </p>
 <br>
 <br>
@@ -1672,7 +1882,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Identify paths where a user can grant themselves additional permissions: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1724,7 +1940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1776,7 +1998,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1828,7 +2056,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>statement = policy_document.get("Statement", [])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1880,7 +2114,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actions = stmt.get("Action", [])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1932,7 +2172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actions = [actions]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1984,7 +2230,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check for IAM modify permissions</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2036,7 +2288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"iam:CreatePolicy",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2088,7 +2346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"iam:PutUserPolicy",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2140,7 +2404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"iam:UpdateAssumeRolePolicy",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2192,7 +2462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2244,7 +2520,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if any(action.endswith(esc_act.split(":")[1]) or action == "*" </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2296,7 +2578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>risks.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2348,7 +2636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"resource": resource</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2400,7 +2694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return risks</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2452,7 +2752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def generate_audit_report(findings):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2504,7 +2810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"generated_at": datetime.utcnow().isoformat(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2556,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"total_users": len(findings["users"]),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2608,7 +2926,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"escalation_paths": len(findings["escalation_risks"]),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2660,7 +2984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2712,7 +3042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2764,7 +3100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for user in findings["users"]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2816,7 +3158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if user.get("last_used") and \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2868,7 +3216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>report["summary"]["over_permissioned"] += 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2920,7 +3274,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Remediation Workflow </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2972,6 +3332,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>critical:</p>
 <br>
 <br>
@@ -2998,7 +3361,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- privilege_escalation_path: immediate_revoke</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- privilege_escalation_path: immediate_revoke</p>
 <br>
 <br>
 <br>
@@ -3024,7 +3390,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_admin_role: disable_within_24h</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_admin_role: disable_within_24h</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3076,7 +3448,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- over_permissioned_user: reduce_to_least_privilege</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- over_permissioned_user: reduce_to_least_privilege</p>
 <br>
 <br>
 <br>
@@ -3102,7 +3477,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_role_over_90_days: request_review</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unused_role_over_90_days: request_review</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3154,7 +3535,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_mfa: require_enrollment</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_mfa: require_enrollment</p>
 <br>
 <br>
 <br>
@@ -3180,7 +3564,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_password_rotation: enforce_policy</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_password_rotation: enforce_policy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3232,7 +3622,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_tags: auto_tag</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- missing_tags: auto_tag</p>
 <br>
 <br>
 <br>
@@ -3258,7 +3651,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- incomplete_documentation: notify_owner</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- incomplete_documentation: notify_owner</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3285,6 +3684,9 @@
 <br>
 <br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

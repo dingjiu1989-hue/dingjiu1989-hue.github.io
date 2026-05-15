@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Database Table Partitioning: Range, List, Hash">
     <meta name="twitter:description" content="Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Database, Backend, Data">
     <title>Database Table Partitioning: Range, List, Hash — SourceHub</title>
     <meta name="description" content="Explore PostgreSQL table partitioning methods including range, list, and hash. Learn partition pruning, maintenance strategies, and performance implications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-partitioning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3944",
+      "wordCount": "4399",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-partitioning.html"},
-      "articleBody": "Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Partitioning splits a large logical table into smaller physical pieces called partitions. Each partition holds a subset of rows based on a partition key. PostgreSQL has supported declarative partitioning since version 10, with major improvements in subsequent releases. Why Partition? Tables exceeding hundreds of gigabytes benefit from partitioning for several reasons: * **Query performance**: The query planner can skip irrelevant partitions (partition pruning), dramatically reducing the amount of data scanned. * **Maintenance speed**: Operations like `VACUUM`, `REINDEX`, and `CLUSTER` can target individual partitions instead of the entire table. * **Bulk deletes**: Dropping an entire partition is far faster than `DELETE FROM large_table WHERE ...` because it bypasses the need to vacuum dead tuples. * **Archival**: Older partitions can be detached and moved to cheaper storage without affecting access to recent data. Partitioning Methods PostgreSQL supports three built-in partitioning methods: range, list, and hash. Range Partitioning Range partitioning divides data by contiguous ranges of the partition key. It is ideal for time-series data, log tables, and date-range datasets. CREATE TABLE orders ( id BIGSERIAL, order_date DATE NOT NULL, customer_id INTEGER, total NUMERIC(10,2) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2025_q1 PARTITION OF orders FOR VALUES FROM ('2025-01-01') TO ('2025-04-01'); CREATE TABLE orders_2025_q2 PARTITION OF orders FOR VALUES FROM ('2025-04-01') TO ('2025-07-01'); CREATE TABLE orders_2025_q3 PARTITION OF orders FOR VALUES FROM ('2025-07-01') TO ('2025-10-01'); The planner prunes partitions when the query includes a filter on `order_date`: EXPLAIN SELECT * FROM orders WHERE order_date = '2025-05-15'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans orders_2025_q2 List Partitioning List partitioning assigns rows to partitions based on a discrete set of values. This works well for categorical data such as region, status, or department. CREATE TABLE events ( id BIGSERIAL, event_type TEXT NOT NULL, payload JSONB, created_at TIMESTAMPTZ DEFAULT NOW() ) PARTITION BY LIST (event_type); CREATE TABLE events_pageview PARTITION OF events FOR VALUES IN ('pageview'); CREATE TABLE events_click PARTITION OF events FOR VALUES IN ('click', 'dblclick'); CREATE TABLE events_custom PARTITION OF events FOR VALUES IN ('custom'); Queries filtering on `event_type` prune to the matching partition: EXPLAIN SELECT * FROM events WHERE event_type = 'click'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans events_click Hash Partitioning Hash partitioning distributes rows evenly across a fixed number of partitions using a hash function on the partition key. It is useful when there is no natural partitioning column and you want uniform data distribution for parallel I/O. CREATE TABLE sessions ( session_id UUID NOT NULL, user_id INTEGER, payload JSONB, started_at TIMESTAMPTZ ) PARTITION BY HASH (session_id); CREATE TABLE sessions_0 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 0); CREATE TABLE sessions_1 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 1); CREATE TABLE sessions_2 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 2); CREATE TABLE sessions_3 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 3); Hash partitioning ensures roughly equal row counts across partitions. It does not support partition pruning on range queries, but it does prune when the partition key is filtered by equality. Partition Pruning Partition pruning is the query planner's ability to skip partitions that cannot contain matching rows. This optimization applies at execution time and, since PostgreSQL 11, also at plan time. EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM orders WHERE order_date = '2025-06-20'; The plan should show only one partition being scanned. Without pruning, a query scans every partition in sequence. Sub-partitioning Partitions can themselves be partitioned, creating a hierarchical design: CREATE TABLE logs ( id BIGSERIAL, severity TEXT, logged_at TIMESTAMPTZ NOT NULL, message TEXT ) PARTITION BY RANGE (logged_at); CREATE TABLE logs_2025 PARTITION OF logs FOR VALUES FROM ('2025-01-01') TO ('2026-01-01') PARTITION BY LIST (severity); CREATE TABLE logs_2025_error PARTITION OF logs_2025 FOR VALUES IN ('ERROR', 'FATAL'); CREATE TABLE logs_2025_info PARTITION OF logs_2025 FOR VALUES IN ('INFO', 'DEBUG'); Maintenance Managing partitions over time is a routine task. A typical monthly maintenance workflow includes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Detach an old partition for archival ALTER TABLE orders DETACH PARTITION orders_2025_q1; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Attach a new partition CREATE TABLE orders_2025_q4 PARTITION OF orders FOR VALUES FROM ('2025-10-01') TO ('2026-01-01'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reindex a specific partition REINDEX INDEX orders_2025_q2_total_idx; An automated job (often via `pg_cron` or a scheduled task) handles partition rotation. Common Pitfalls * **Primary keys must include the partition key** unless a globally unique index (via constraint exclusion) is used. * **Foreign keys cannot reference a partitioned table directly** unless using PostgreSQL 12+ with proper setup. * **Row triggers on the parent table** can have unexpected behavior; apply triggers to partitions instead. * **Too many partitions** degrade planner performance and increase memory usage. Aim for 50-500 partitions for most workloads. Partitioning is a powerful technique when applied deliberately. Measure your workload patterns, choose the right method, and automate partition lifecycle management to keep your database performing predictably as it grows."
+      "articleBody": "Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Database Table Partitioning: Range, List, Hash Partitioning splits a large logical table into smaller physical pieces called partitions. Each partition holds a subset of rows based on a partition key. PostgreSQL has supported declarative partitioning since version 10, with major improvements in subsequent releases. Why Partition? Tables exceeding hundreds of gigabytes benefit from partitioning for several reasons: * **Query performance**: The query planner can skip irrelevant partitions (partition pruning), dramatically reducing the amount of data scanned. * **Maintenance speed**: Operations like `VACUUM`, `REINDEX`, and `CLUSTER` can target individual partitions instead of the entire table. * **Bulk deletes**: Dropping an entire partition is far faster than `DELETE FROM large_table WHERE ...` because it bypasses the need to vacuum dead tuples. * **Archival**: Older partitions can be detached and moved to cheaper storage without affecting access to recent data. Partitioning Methods PostgreSQL supports three built-in partitioning methods: range, list, and hash. Range Partitioning Range partitioning divides data by contiguous ranges of the partition key. It is ideal for time-series data, log tables, and date-range datasets. CREATE TABLE orders ( id BIGSERIAL, order_date DATE NOT NULL, customer_id INTEGER, total NUMERIC(10,2) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2025_q1 PARTITION OF orders FOR VALUES FROM ('2025-01-01') TO ('2025-04-01'); CREATE TABLE orders_2025_q2 PARTITION OF orders FOR VALUES FROM ('2025-04-01') TO ('2025-07-01'); CREATE TABLE orders_2025_q3 PARTITION OF orders FOR VALUES FROM ('2025-07-01') TO ('2025-10-01'); The planner prunes partitions when the query includes a filter on `order_date`: EXPLAIN SELECT * FROM orders WHERE order_date = '2025-05-15'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans orders_2025_q2 List Partitioning List partitioning assigns rows to partitions based on a discrete set of values. This works well for categorical data such as region, status, or department. CREATE TABLE events ( id BIGSERIAL, event_type TEXT NOT NULL, payload JSONB, created_at TIMESTAMPTZ DEFAULT NOW() ) PARTITION BY LIST (event_type); CREATE TABLE events_pageview PARTITION OF events FOR VALUES IN ('pageview'); CREATE TABLE events_click PARTITION OF events FOR VALUES IN ('click', 'dblclick'); CREATE TABLE events_custom PARTITION OF events FOR VALUES IN ('custom'); Queries filtering on `event_type` prune to the matching partition: EXPLAIN SELECT * FROM events WHERE event_type = 'click'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans events_click Hash Partitioning Hash partitioning distributes rows evenly across a fixed number of partitions using a hash function on the partition key. It is useful when there is no natural partitioning column and you want uniform data distribution for parallel I/O. CREATE TABLE sessions ( session_id UUID NOT NULL, user_id INTEGER, payload JSONB, started_at TIMESTAMPTZ ) PARTITION BY HASH (session_id); CREATE TABLE sessions_0 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 0); CREATE TABLE sessions_1 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 1); CREATE TABLE sessions_2 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 2); CREATE TABLE sessions_3 PARTITION OF sessions FOR VALUES WITH (MODULUS 4, REMAINDER 3); Hash partitioning ensures roughly equal row counts across partitions. It does not support partition pruning on range queries, but it does prune when the partition key is filtered by equality. Partition Pruning Partition pruning is the query planner's ability to skip partitions that cannot contain matching rows. This optimization applies at execution time and, since PostgreSQL 11, also at plan time. EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM orders WHERE order_date = '2025-06-20'; The plan should show only one partition being scanned. Without pruning, a query scans every partition in sequence. Sub-partitioning Partitions can themselves be partitioned, creating a hierarchical design: CREATE TABLE logs ( id BIGSERIAL, severity TEXT, logged_at TIMESTAMPTZ NOT NULL, message TEXT ) PARTITION BY RANGE (logged_at); CREATE TABLE logs_2025 PARTITION OF logs FOR VALUES FROM ('2025-01-01') TO ('2026-01-01') PARTITION BY LIST (severity); CREATE TABLE logs_2025_error PARTITION OF logs_2025 FOR VALUES IN ('ERROR', 'FATAL'); CREATE TABLE logs_2025_info PARTITION OF logs_2025 FOR VALUES IN ('INFO', 'DEBUG'); Maintenance Managing partitions over time is a routine task. A typical monthly maintenance workflow includes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Detach an old partition for archival ALTER TABLE orders DETACH PARTITION orders_2025_q1; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Attach a new partition CREATE TABLE orders_2025_q4 PARTITION OF orders FOR VALUES FROM ('2025-10-01') TO ('2026-01-01'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reindex a specific partition REINDEX INDEX orders_2025_q2_total_idx; An automated job (often via `pg_cron` or a scheduled task) handles partition rotation. Common Pitfalls * **Primary keys must include the partition key** unless a globally unique index (via constraint exclusion) is used. * **Foreign keys cannot reference a partitioned table directly** unless using PostgreSQL 12+ with proper setup. * **Row triggers on the parent table** can have unexpected behavior; apply triggers to partitions instead. * **Too many partitions** degrade planner performance and increase memory usage. Aim for 50-500 partitions for most workloads. Partitioning is a powerful technique when applied deliberately. Measure your workload patterns, choose the right method, and automate partition lifecycle management to keep your database performing predictably as it grows."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Database Table Partitioning: Range, List, Hash"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>Database Table Partitioning: Range, List, Hash</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database Table Partitioning: Range, List, Hash </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,7 +293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Why Partition? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -297,7 +348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Query performance**: The query planner can skip irrelevant partitions (partition pruning), dramatically reducing the amount of data scanned.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -343,7 +400,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Bulk deletes**: Dropping an entire partition is far faster than `DELETE FROM large_table WHERE ...` because it bypasses the need to vacuum dead tuples.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -392,7 +455,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partitioning Methods </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -438,6 +507,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Range Partitioning </p>
 <br>
 <br>
@@ -461,7 +533,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Range partitioning divides data by contiguous ranges of the partition key. It is ideal for time-series data, log tables, and date-range datasets. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -513,7 +591,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id BIGSERIAL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -565,7 +649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>customer_id INTEGER,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -617,7 +707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) PARTITION BY RANGE (order_date);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +765,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2025-01-01') TO ('2025-04-01');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -721,7 +823,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2025-04-01') TO ('2025-07-01');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -773,7 +881,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2025-07-01') TO ('2025-10-01');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -825,6 +939,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>EXPLAIN SELECT * FROM orders WHERE order_date = '2025-05-15';</p>
 <br>
 <br>
@@ -851,7 +968,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans orders_2025_q2</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans orders_2025_q2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -900,7 +1023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>List partitioning assigns rows to partitions based on a discrete set of values. This works well for categorical data such as region, status, or department. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -952,7 +1081,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id BIGSERIAL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1004,7 +1139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>payload JSONB,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1056,7 +1197,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) PARTITION BY LIST (event_type);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1108,7 +1255,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES IN ('pageview');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1160,7 +1313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES IN ('click', 'dblclick');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1212,7 +1371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES IN ('custom');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1264,6 +1429,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>EXPLAIN SELECT * FROM events WHERE event_type = 'click';</p>
 <br>
 <br>
@@ -1290,7 +1458,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans events_click</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only scans events_click</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1339,7 +1513,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Hash partitioning distributes rows evenly across a fixed number of partitions using a hash function on the partition key. It is useful when there is no natural partitioning column and you want uniform data distribution for parallel I/O. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1391,7 +1571,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>session_id UUID NOT NULL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1443,7 +1629,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>payload JSONB,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1495,7 +1687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) PARTITION BY HASH (session_id);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1547,7 +1745,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES WITH (MODULUS 4, REMAINDER 0);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1599,7 +1803,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES WITH (MODULUS 4, REMAINDER 1);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1651,7 +1861,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES WITH (MODULUS 4, REMAINDER 2);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1703,7 +1919,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES WITH (MODULUS 4, REMAINDER 3);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1752,6 +1974,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partition Pruning </p>
 <br>
 <br>
@@ -1775,7 +2000,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partition pruning is the query planner's ability to skip partitions that cannot contain matching rows. This optimization applies at execution time and, since PostgreSQL 11, also at plan time. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1827,7 +2058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM orders WHERE order_date = '2025-06-20';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1876,6 +2113,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sub-partitioning </p>
 <br>
 <br>
@@ -1899,7 +2139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partitions can themselves be partitioned, creating a hierarchical design: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1951,7 +2197,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id BIGSERIAL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2003,7 +2255,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>logged_at TIMESTAMPTZ NOT NULL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2055,7 +2313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) PARTITION BY RANGE (logged_at);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2107,7 +2371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2025-01-01') TO ('2026-01-01')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2159,7 +2429,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE logs_2025_error PARTITION OF logs_2025</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2211,7 +2487,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE logs_2025_info PARTITION OF logs_2025</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2263,7 +2545,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Maintenance </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2312,7 +2600,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Detach an old partition for archival</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Detach an old partition for archival</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2364,7 +2658,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Attach a new partition</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Attach a new partition</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2416,6 +2716,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2025-10-01') TO ('2026-01-01');</p>
 <br>
 <br>
@@ -2442,7 +2745,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reindex a specific partition</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Reindex a specific partition</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2494,7 +2803,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>An automated job (often via `pg_cron` or a scheduled task) handles partition rotation. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2543,7 +2858,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Primary keys must include the partition key** unless a globally unique index (via constraint exclusion) is used.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2589,6 +2910,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Row triggers on the parent table** can have unexpected behavior; apply triggers to partitions instead.</p>
 <br>
 <br>
@@ -2612,7 +2936,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Too many partitions** degrade planner performance and increase memory usage. Aim for 50-500 partitions for most workloads.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

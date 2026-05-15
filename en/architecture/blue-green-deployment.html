@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Blue-Green Deployment Strategy">
     <meta name="twitter:description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Blue-Green Deployment Strategy — SourceHub</title>
     <meta name="description" content="Master blue-green deployments for zero-downtime releases, rollback safety, and production traffic switching.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/blue-green-deployment.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "875",
+      "wordCount": "941",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.html"},
-      "articleBody": "Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-green deployment is a release strategy that maintains two identical production environments\u2014blue (current) and green (new)\u2014and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability. How Blue-Green Works The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue. This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors. Advantages Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial\u2014switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment. Challenges Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue. The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements. Best Practices Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch\u2014gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly."
+      "articleBody": "Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-Green Deployment Strategy Blue-green deployment is a release strategy that maintains two identical production environments\u2014blue (current) and green (new)\u2014and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability. How Blue-Green Works The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue. This design requires the infrastructure to run both environments simultaneously. For cloud deployments, this means double the infrastructure cost during the transition period. Container orchestration platforms like Kubernetes can reduce this overhead by running both versions within the same cluster and switching service selectors. Advantages Zero-downtime deployments are the primary benefit. Users never experience service interruption because the switch is instantaneous at the load balancer level. Rollback is trivial\u2014switch traffic back to the previous environment. The strategy also supports pre-deployment validation in a production-like environment. Challenges Database schema changes require careful handling. If the green deployment includes database migrations, both environments must be compatible with the schema during the transition. Techniques like backward-compatible migrations and phased rollouts address this issue. The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements. Best Practices Automate the entire process from environment provisioning to traffic switching. Use canary analysis during the switch\u2014gradually shift traffic percentage and monitor error rates. Keep the overlap period short to minimize costs. Document the rollback procedure and test it regularly."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Blue-Green Deployment Strategy"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -199,7 +212,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Blue-Green Deployment Strategy</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -251,7 +296,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -303,7 +354,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Advantages</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -355,7 +412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Challenges</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -407,6 +470,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.</p>
 <br>
 <br>
@@ -433,7 +499,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Best Practices</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

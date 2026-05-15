@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization">
     <meta name="twitter:description" content="Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization — SourceHub</title>
     <meta name="description" content="Compare mocking and service virtualization tools: MSW for API mocking in the browser, nock for Node.js HTTP interception, sinon for function stubs, and WireMock">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/mock-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "6444",
+      "wordCount": "6991",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/mocking-tools-msw-nock-sinon-wiremock-service-virtualization-6m3"
       ],
-      "articleBody": "Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Introduction Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches. MSW (Mock Service Worker) MSW intercepts network requests at the service worker level, working in both browser and Node.js: // mocks/handlers.ts import { http, HttpResponse } from \"msw\"; export const handlers = [ // REST API handler http.get(\"https://api.example.com/users\", ({ request }) => { const url = new URL(request.url); const page = url.searchParams.get(\"page\") || \"1\"; return HttpResponse.json({ users: [ { id: 1, name: \"Alice\" }, { id: 2, name: \"Bob\" }, ], total: 50, page: Number(page), }); }), // POST handler with request validation http.post(\"https://api.example.com/users\", async ({ request }) => { const body = await request.json(); if (!body.name) { return HttpResponse.json( { error: \"Name is required\" }, { status: 400 } ); } return HttpResponse.json( { id: 3, name: body.name }, { status: 201 } ); }), // GraphQL handler http.post(\"https://api.example.com/graphql\", async ({ request }) => { const { query } = await request.json(); if (query.includes(\"currentUser\")) { return HttpResponse.json({ data: { currentUser: { id: 1, name: \"Alice\", role: \"admin\" } }, }); } }), ]; // test setup import { setupServer } from \"msw/node\"; import { handlers } from \"./handlers\"; const server = setupServer(...handlers); beforeAll(() => server.listen()); afterEach(() => server.resetHandlers()); afterAll(() => server.close()); // Override handler for specific test test(\"handles network error\", async () => { server.use( http.get(\"https://api.example.com/users\", () => { return HttpResponse.error(); }) ); // Test error handling logic }); **Strengths**: Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support. nock nock intercepts HTTP requests at the Node.js `http` module level: const nock = require(\"nock\"); // Mock a GET request nock(\"https://api.example.com\") .get(\"/users\") .query({ page: 1, limit: 10 }) .reply(200, { users: [{ id: 1, name: \"Alice\" }], total: 1, }); // Mock with dynamic response nock(\"https://api.example.com\") .post(\"/users\", (body) => body.name && body.email) .reply(201, (uri, requestBody) => { const body = JSON.parse(requestBody); return { id: Date.now(), ...body, createdAt: new Date().toISOString() }; }); // Mock multiple times with different responses nock(\"https://api.example.com\") .get(\"/status\") .times(3) .reply(200, { status: \"ok\" }); // Persist mock for repeated calls nock(\"https://api.example.com\") .get(\"/health\") .times(Infinity) .reply(200, { healthy: true }); // Scope assertion const scope = nock(\"https://api.example.com\") .get(\"/users\") .reply(200, []); // After test, verify all mocked endpoints were called expect(scope.isDone()).toBe(true); nock.cleanAll(); **Strengths**: Fine-grained request matching, supports regex URL matching, response templating, scope isolation. **Weaknesses**: Node.js only, module-level interception (not browser), can be slow with many mocks. Sinon Sinon provides standalone test doubles (spies, stubs, mocks): const sinon = require(\"sinon\"); // Spy: observe function calls const spy = sinon.spy(); spy(\"hello\", \"world\"); console.log(spy.calledOnce); // true console.log(spy.args[0]); // [\"hello\", \"world\"] // Stub: replace function behavior const stub = sinon.stub(); stub.returns(42); stub.withArgs(\"special\").returns(100); console.log(stub(\"anything\")); // 42 console.log(stub(\"special\")); // 100 // Stub an object method const api = { fetch: async (url) => ({ data: [] }) }; const fetchStub = sinon.stub(api, \"fetch\"); fetchStub.resolves({ data: [{ id: 1 }] }); fetchStub.rejects(new Error(\"Network error\")); // Restore original after test fetchStub.restore(); // Timers: control time-dependent code const clock = sinon.useFakeTimers(); let callback = sinon.spy(); setTimeout(callback, 1000); clock.tick(1000); expect(callback.calledOnce).toBe(true); clock.restore(); **Strengths**: Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking. WireMock WireMock runs as a standalone HTTP server, perfect for integration tests: // Java example (WireMock also has HTTP API) import static com.github.tomakehurst.wiremock.client.WireMock.*; // Start WireMock server WireMockServer wireMockServer = new WireMockServer(8089); wireMockServer.start(); // Stub a GET endpoint stubFor(get(urlEqualTo(\"/api/users/1\")) .willReturn(aResponse() .withStatus(200) .withHeader(\"Content-Type\", \"application/json\") .withBody(\"{ \\\"id\\\": 1, \\\"name\\\": \\\"Alice\\\" }\"))); // Stub with response templating stubFor(post(urlEqualTo(\"/api/users\")) .willReturn(aResponse() .withStatus(201) .withBody(\"{{request.body}}\") .withTransformers(\"response-template\"))); // Verify request was made verify(getRequestedFor(urlPathEqualTo(\"/api/users/1\")) .withHeader(\"Authorization\", containing(\"Bearer\"))); Start WireMock standalone java -jar wiremock-standalone.jar --port 8089 --verbose Configure via JSON files in mappings/ directory __files/response.json contains the response body Comparison | Feature | MSW | nock | Sinon | WireMock | |---------|-----|------|-------|----------| | Level | Network (SW) | Network (http) | Function | HTTP server | | Browser | Yes | No | Yes | No | | Node.js | Yes | Yes | Yes | Yes | | Real HTTP | Yes | No (hijacked) | No | Yes | | Setup complexity | Medium | Low | Low | Medium | | Best for | Frontend tests | Backend tests | Unit tests | Integration tests | Recommendations * **Frontend API mocking**: MSW is the best choice \u2014 it works in both test and development environments. * **Backend HTTP mocking**: nock for simple cases, WireMock for complex integration tests. * **Function-level mocking**: Sinon for spying, stubbing, and fake timers. * **Integration/E2E tests**: WireMock as a standalone HTTP server for contract testing. Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing service-to-service HTTP interactions at the integration level."
+      "articleBody": "Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Mocking Tools: MSW, nock, sinon, WireMock \u2014 Service Virtualization Introduction Mocking is essential for isolated testing. The right mocking strategy depends on what you are testing: frontend components that make HTTP calls, backend services with external dependencies, or complex interactions between multiple services. This article covers four complementary mocking approaches. MSW (Mock Service Worker) MSW intercepts network requests at the service worker level, working in both browser and Node.js: // mocks/handlers.ts import { http, HttpResponse } from \"msw\"; export const handlers = [ // REST API handler http.get(\"https://api.example.com/users\", ({ request }) => { const url = new URL(request.url); const page = url.searchParams.get(\"page\") || \"1\"; return HttpResponse.json({ users: [ { id: 1, name: \"Alice\" }, { id: 2, name: \"Bob\" }, ], total: 50, page: Number(page), }); }), // POST handler with request validation http.post(\"https://api.example.com/users\", async ({ request }) => { const body = await request.json(); if (!body.name) { return HttpResponse.json( { error: \"Name is required\" }, { status: 400 } ); } return HttpResponse.json( { id: 3, name: body.name }, { status: 201 } ); }), // GraphQL handler http.post(\"https://api.example.com/graphql\", async ({ request }) => { const { query } = await request.json(); if (query.includes(\"currentUser\")) { return HttpResponse.json({ data: { currentUser: { id: 1, name: \"Alice\", role: \"admin\" } }, }); } }), ]; // test setup import { setupServer } from \"msw/node\"; import { handlers } from \"./handlers\"; const server = setupServer(...handlers); beforeAll(() => server.listen()); afterEach(() => server.resetHandlers()); afterAll(() => server.close()); // Override handler for specific test test(\"handles network error\", async () => { server.use( http.get(\"https://api.example.com/users\", () => { return HttpResponse.error(); }) ); // Test error handling logic }); **Strengths**: Works at the network level (not module level), browser and Node.js support, realistic interception, first-class GraphQL support. nock nock intercepts HTTP requests at the Node.js `http` module level: const nock = require(\"nock\"); // Mock a GET request nock(\"https://api.example.com\") .get(\"/users\") .query({ page: 1, limit: 10 }) .reply(200, { users: [{ id: 1, name: \"Alice\" }], total: 1, }); // Mock with dynamic response nock(\"https://api.example.com\") .post(\"/users\", (body) => body.name && body.email) .reply(201, (uri, requestBody) => { const body = JSON.parse(requestBody); return { id: Date.now(), ...body, createdAt: new Date().toISOString() }; }); // Mock multiple times with different responses nock(\"https://api.example.com\") .get(\"/status\") .times(3) .reply(200, { status: \"ok\" }); // Persist mock for repeated calls nock(\"https://api.example.com\") .get(\"/health\") .times(Infinity) .reply(200, { healthy: true }); // Scope assertion const scope = nock(\"https://api.example.com\") .get(\"/users\") .reply(200, []); // After test, verify all mocked endpoints were called expect(scope.isDone()).toBe(true); nock.cleanAll(); **Strengths**: Fine-grained request matching, supports regex URL matching, response templating, scope isolation. **Weaknesses**: Node.js only, module-level interception (not browser), can be slow with many mocks. Sinon Sinon provides standalone test doubles (spies, stubs, mocks): const sinon = require(\"sinon\"); // Spy: observe function calls const spy = sinon.spy(); spy(\"hello\", \"world\"); console.log(spy.calledOnce); // true console.log(spy.args[0]); // [\"hello\", \"world\"] // Stub: replace function behavior const stub = sinon.stub(); stub.returns(42); stub.withArgs(\"special\").returns(100); console.log(stub(\"anything\")); // 42 console.log(stub(\"special\")); // 100 // Stub an object method const api = { fetch: async (url) => ({ data: [] }) }; const fetchStub = sinon.stub(api, \"fetch\"); fetchStub.resolves({ data: [{ id: 1 }] }); fetchStub.rejects(new Error(\"Network error\")); // Restore original after test fetchStub.restore(); // Timers: control time-dependent code const clock = sinon.useFakeTimers(); let callback = sinon.spy(); setTimeout(callback, 1000); clock.tick(1000); expect(callback.calledOnce).toBe(true); clock.restore(); **Strengths**: Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking. WireMock WireMock runs as a standalone HTTP server, perfect for integration tests: // Java example (WireMock also has HTTP API) import static com.github.tomakehurst.wiremock.client.WireMock.*; // Start WireMock server WireMockServer wireMockServer = new WireMockServer(8089); wireMockServer.start(); // Stub a GET endpoint stubFor(get(urlEqualTo(\"/api/users/1\")) .willReturn(aResponse() .withStatus(200) .withHeader(\"Content-Type\", \"application/json\") .withBody(\"{ \\\"id\\\": 1, \\\"name\\\": \\\"Alice\\\" }\"))); // Stub with response templating stubFor(post(urlEqualTo(\"/api/users\")) .willReturn(aResponse() .withStatus(201) .withBody(\"{{request.body}}\") .withTransformers(\"response-template\"))); // Verify request was made verify(getRequestedFor(urlPathEqualTo(\"/api/users/1\")) .withHeader(\"Authorization\", containing(\"Bearer\"))); Start WireMock standalone java -jar wiremock-standalone.jar --port 8089 --verbose Configure via JSON files in mappings/ directory __files/response.json contains the response body Comparison | Feature | MSW | nock | Sinon | WireMock | |---------|-----|------|-------|----------| | Level | Network (SW) | Network (http) | Function | HTTP server | | Browser | Yes | No | Yes | No | | Node.js | Yes | Yes | Yes | Yes | | Real HTTP | Yes | No (hijacked) | No | Yes | | Setup complexity | Medium | Low | Low | Medium | | Best for | Frontend tests | Backend tests | Unit tests | Integration tests | Recommendations * **Frontend API mocking**: MSW is the best choice \u2014 it works in both test and development environments. * **Backend HTTP mocking**: nock for simple cases, WireMock for complex integration tests. * **Function-level mocking**: Sinon for spying, stubbing, and fake timers. * **Integration/E2E tests**: WireMock as a standalone HTTP server for contract testing. Use MSW + Sinon as your core mocking stack. Add nock or WireMock when testing service-to-service HTTP interactions at the integration level."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  MSW (Mock Service Worker)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// mocks/handlers.ts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>export const handlers = [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>http.get("https://api.example.com/users", ({ request }) => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,6 +596,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const page = url.searchParams.get("page") || "1";</p>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return HttpResponse.json({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,7 +692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ id: 1, name: "Alice" },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>page: Number(page),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>http.post("https://api.example.com/users", async ({ request }) => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,6 +1012,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (!body.name) {</p>
 <br>
 <br>
@@ -930,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return HttpResponse.json(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ status: 400 }</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1104,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ id: 3, name: body.name },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,6 +1300,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>http.post("https://api.example.com/graphql", async ({ request }) => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (query.includes("currentUser")) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,6 +1524,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data: { currentUser: { id: 1, name: "Alice", role: "admin" } },</p>
 <br>
 <br>
@@ -1394,7 +1556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// test setup</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1568,7 +1748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { handlers } from "./handlers";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1626,7 +1812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>beforeAll(() => server.listen());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1684,7 +1876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>afterAll(() => server.close());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1742,7 +1940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>test("handles network error", async () => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1800,7 +2004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>http.get("https://api.example.com/users", () => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1858,7 +2068,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1916,6 +2132,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Test error handling logic</p>
 <br>
 <br>
@@ -1945,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2003,7 +2228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  nock</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2061,7 +2292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const nock = require("nock");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2119,6 +2356,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nock("https://api.example.com")</p>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.get("/users")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.reply(200, {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,6 +2516,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>total: 1,</p>
 <br>
 <br>
@@ -2293,7 +2548,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2351,7 +2612,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nock("https://api.example.com")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2409,7 +2676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.reply(201, (uri, requestBody) => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return { id: Date.now(), ...body, createdAt: new Date().toISOString() };</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,6 +2804,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Mock multiple times with different responses</p>
 <br>
 <br>
@@ -2554,7 +2836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nock("https://api.example.com")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2612,7 +2900,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.times(3)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2670,7 +2964,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Persist mock for repeated calls</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2728,7 +3028,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.get("/health")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2786,7 +3092,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.reply(200, { healthy: true });</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3156,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const scope = nock("https://api.example.com")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2902,7 +3220,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.reply(200, []);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2960,7 +3284,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expect(scope.isDone()).toBe(true);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3018,7 +3348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Fine-grained request matching, supports regex URL matching, response templating, scope isolation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3076,7 +3412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Sinon</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3134,7 +3476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const sinon = require("sinon");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3192,7 +3540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const spy = sinon.spy();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3250,7 +3604,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>console.log(spy.calledOnce); // true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3308,7 +3668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Stub: replace function behavior</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3366,7 +3732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stub.returns(42);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3424,7 +3796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>console.log(stub("anything")); // 42</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3482,7 +3860,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Stub an object method</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3540,7 +3924,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const fetchStub = sinon.stub(api, "fetch");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3598,7 +3988,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>fetchStub.rejects(new Error("Network error"));</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3656,7 +4052,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>fetchStub.restore();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3714,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const clock = sinon.useFakeTimers();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3772,7 +4180,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>setTimeout(callback, 1000);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expect(callback.calledOnce).toBe(true);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,7 +4372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WireMock runs as a standalone HTTP server, perfect for integration tests:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4004,7 +4436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import static com.github.tomakehurst.wiremock.client.WireMock.*;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4062,7 +4500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WireMockServer wireMockServer = new WireMockServer(8089);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4120,7 +4564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Stub a GET endpoint</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4178,7 +4628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.willReturn(aResponse()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4236,7 +4692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.withHeader("Content-Type", "application/json")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4294,7 +4756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Stub with response templating</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +4820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.willReturn(aResponse()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4410,7 +4884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.withBody("{{request.body}}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4468,7 +4948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Verify request was made</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4526,7 +5012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.withHeader("Authorization", containing("Bearer")));</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4584,7 +5076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>java -jar wiremock-standalone.jar --port 8089 --verbose</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4642,7 +5140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>__files/response.json contains the response body</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4700,7 +5204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | MSW | nock | Sinon | WireMock |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4758,7 +5268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Level | Network (SW) | Network (http) | Function | HTTP server |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4816,7 +5332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Node.js | Yes | Yes | Yes | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4874,7 +5396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Setup complexity | Medium | Low | Low | Medium |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4932,7 +5460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Recommendations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4987,7 +5521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Backend HTTP mocking**: nock for simple cases, WireMock for complex integration tests.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5039,7 +5579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Integration/E2E tests**: WireMock as a standalone HTTP server for contract testing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

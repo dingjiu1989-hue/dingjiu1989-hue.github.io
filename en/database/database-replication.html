@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Database Replication Patterns">
     <meta name="twitter:description" content="Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Database, SQL">
     <title>Database Replication Patterns — SourceHub</title>
     <meta name="description" content="Explore database replication patterns including leader-follower, multi-leader, peer-to-peer, and strategies for high availability and read scaling.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-replication.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1347",
+      "wordCount": "1504",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/database-replication-patterns-2g3d"
       ],
-      "articleBody": "Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Replication Fundamentals Database replication copies data from one server to another for redundancy, read scaling, and disaster recovery. Synchronous Replication The primary waits for replicas to acknowledge writes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication synchronous_commit = on synchronous_standby_names = '2 (standby1, standby2, standby3)' SELECT application_name, state, sync_state, sync_priority FROM pg_stat_replication; Synchronous replication guarantees no data loss but increases latency. Asynchronous Replication The primary does not wait for replicas: def check_replication_lag(): cur.execute(\"\"\" SELECT client_addr, application_name, pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes, EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp())) AS lag_seconds FROM pg_stat_replication; \"\"\") for row in cur.fetchall(): if row[3] > 60: alert(f\"Replication lag critical on {row[1]}\") Conflict Resolution Multi-primary replication requires conflict resolution: class ConflictResolver: strategies = { \"last_write_wins\": lambda a, b: a if a[\"timestamp\"] > b[\"timestamp\"] else b, \"majority_wins\": lambda versions: Counter(versions).most_common(1)[0][0] } Replication Topologies | Topology | Pros | Cons | |----------|------|------| | Primary-replica | Simple | Single point of failure | | Multi-primary | HA writes | Conflict resolution needed | | Cascading | Reduced primary load | Increased lag | Conclusion Choose synchronous for zero data loss, asynchronous for performance. Monitor replication lag closely. Test failover procedures regularly."
+      "articleBody": "Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Database Replication Patterns Replication Fundamentals Database replication copies data from one server to another for redundancy, read scaling, and disaster recovery. Synchronous Replication The primary waits for replicas to acknowledge writes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication synchronous_commit = on synchronous_standby_names = '2 (standby1, standby2, standby3)' SELECT application_name, state, sync_state, sync_priority FROM pg_stat_replication; Synchronous replication guarantees no data loss but increases latency. Asynchronous Replication The primary does not wait for replicas: def check_replication_lag(): cur.execute(\"\"\" SELECT client_addr, application_name, pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes, EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp())) AS lag_seconds FROM pg_stat_replication; \"\"\") for row in cur.fetchall(): if row[3] > 60: alert(f\"Replication lag critical on {row[1]}\") Conflict Resolution Multi-primary replication requires conflict resolution: class ConflictResolver: strategies = { \"last_write_wins\": lambda a, b: a if a[\"timestamp\"] > b[\"timestamp\"] else b, \"majority_wins\": lambda versions: Counter(versions).most_common(1)[0][0] } Replication Topologies | Topology | Pros | Cons | |----------|------|------| | Primary-replica | Simple | Single point of failure | | Multi-primary | HA writes | Conflict resolution needed | | Cascading | Reduced primary load | Increased lag | Conclusion Choose synchronous for zero data loss, asynchronous for performance. Monitor replication lag closely. Test failover procedures regularly."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Database Replication Patterns"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -204,7 +217,39 @@
 <br>
 <br>
 <br>
+<h1>Database Replication Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Replication Fundamentals </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -250,7 +295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Synchronous Replication </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -299,7 +350,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,7 +408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>synchronous_standby_names = '2 (standby1, standby2, standby3)'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +466,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM pg_stat_replication;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,6 +521,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Asynchronous Replication </p>
 <br>
 <br>
@@ -475,7 +547,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The primary does not wait for replicas: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -527,7 +605,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cur.execute("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -579,7 +663,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -631,7 +721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM pg_stat_replication;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -683,7 +779,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for row in cur.fetchall():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -735,7 +837,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alert(f"Replication lag critical on {row[1]}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -784,7 +892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Multi-primary replication requires conflict resolution: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -836,7 +950,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>strategies = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -888,7 +1008,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"majority_wins": lambda versions: Counter(versions).most_common(1)[0][0]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -940,7 +1066,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Replication Topologies </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -986,7 +1118,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="AI Agent Frameworks Compared">
     <meta name="twitter:description" content="Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonomous agents.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-frameworks.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Artificial Intelligence, Machine Learning">
     <title>AI Agent Frameworks Compared — SourceHub</title>
     <meta name="description" content="Compare leading AI agent frameworks including LangGraph, CrewAI, AutoGen, and OpenAI Assistants API for building autonomous agents.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-agents-frameworks.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4372",
+      "wordCount": "4726",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-agent-frameworks-compared-4iii"
       ],
-      "articleBody": "AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared Introduction AI agents \u2014 systems that can independently plan, use tools, and execute multi-step tasks \u2014 represent the frontier of LLM applications. Several frameworks have emerged to simplify agent development, each with different design philosophies. This guide compares the leading frameworks to help you choose the right one for your project. What Makes an AI Agent? Before comparing frameworks, it's important to define what we mean by \"agent.\" An agentic system typically includes: * **Planning**: Break down a goal into sub-steps * **Memory**: Remember past actions and observations * **Tool use**: Call external functions, APIs, and databases * **Execution loop**: Iterate between thinking and acting * **Self-reflection**: Evaluate outcomes and adjust plans Framework Comparison LangGraph LangGraph, part of the LangChain ecosystem, models agent workflows as directed graphs. Each node is a step (LLM call, tool call, human input), and edges define the control flow. **Key features:** * Graph-based workflow modeling for complex, non-linear execution * Built-in persistence for state management across steps * Human-in-the-loop support for approval workflows * Streaming of intermediate results **Example \u2014 simple agent with tool use:** from langgraph.graph import StateGraph, END from typing import TypedDict, List class AgentState(TypedDict): messages: List[dict] next_step: str def call_model(state): response = llm.invoke(state[\"messages\"]) return {\"messages\": state[\"messages\"] + [response]} def execute_tool(state): tool_call = get_tool_call(state[\"messages\"][-1]) result = execute_function(tool_call) return {\"messages\": state[\"messages\"] + [result]} graph = StateGraph(AgentState) graph.add_node(\"agent\", call_model) graph.add_node(\"tool\", execute_tool) graph.add_conditional_edges(\"agent\", should_continue, {\"continue\": \"tool\", \"end\": END}) graph.set_entry_point(\"agent\") **Best for:** Production systems requiring complex, stateful workflows with human oversight. CrewAI CrewAI focuses on multi-agent collaboration, where specialized agents work together on tasks. **Key features:** * Role-based agent definition with goals and backstories * Task assignment and delegation between agents * Sequential and hierarchical task execution * Built-in tool library and custom tool support **Example \u2014 research team:** from crewai import Agent, Task, Crew researcher = Agent( role=\"Research Analyst\", goal=\"Find comprehensive information on the topic\", backstory=\"Expert researcher with 15 years of experience\", tools=[search_tool, web_scraper] ) writer = Agent( role=\"Content Writer\", goal=\"Synthesize research into clear, engaging content\", backstory=\"Award-winning technical writer\", ) research_task = Task( description=\"Research the latest developments in AI agents\", agent=researcher ) write_task = Task( description=\"Write a summary based on the research\", agent=writer ) crew = Crew(agents=[researcher, writer], tasks=[research_task, write_task]) result = crew.kickoff() **Best for:** Multi-agent systems where different roles handle different aspects of a task. AutoGen (Microsoft) AutoGen, developed by Microsoft Research, enables multi-agent conversations with flexible conversation patterns. **Key features:** * Conversational multi-agent framework * Nested chat and hierarchical conversations * Code execution in sandboxed environments * Strong support for human participation **Best for:** Research and complex multi-agent scenarios requiring conversation-based problem solving. OpenAI Assistants API OpenAI's managed agent platform handles infrastructure concerns like state management and retrieval out of the box. **Key features:** * Fully managed \u2014 no infrastructure to manage * Built-in code interpreter, file search, and function calling * Thread management for conversation state * Vector store integration for RAG **Best for:** Rapid prototyping and applications already in the OpenAI ecosystem. Comparison Table | Feature | LangGraph | CrewAI | AutoGen | Assistants API | |---------|-----------|--------|---------|---------------| | Architecture | Graph-based | Role-based | Conversation | Thread-based | | Multi-agent | Yes | Yes | Yes | Single agent | | State management | Built-in | Basic | Basic | Managed | | Human-in-loop | Excellent | Good | Good | Limited | | Open source | Yes | Yes | Yes | No | | Self-hosted | Yes | Yes | Yes | No | | Learning curve | Steep | Moderate | Steep | Low | Choosing the Right Framework * **LangGraph**: Choose when you need complex, production-grade workflows with human oversight * **CrewAI**: Choose when different agents need specialized roles and collaboration * **AutoGen**: Choose for research-oriented multi-agent conversations and experiments * **Assistants API**: Choose for rapid prototyping and managed infrastructure Emerging Patterns The agent framework landscape is evolving rapidly. Key trends to watch: * **Agent-as-API**: Running agents as microservices with standardized interfaces * **Observability**: Built-in tracing, logging, and debugging for agent decision-making * **Safety guardrails**: Automated checks for agent actions before execution * **Tool marketplaces**: Shared catalogs of agent-compatible tools and APIs Conclusion The right agent framework depends on your application's complexity and deployment model. LangGraph offers the most control for production workflows, CrewAI excels at multi-agent collaboration, and the Assistants API provides the fastest path to a working prototype. As the field matures, expect convergence toward standardized patterns for agent communication, safety, and observability."
+      "articleBody": "AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared AI Agent Frameworks Compared Introduction AI agents \u2014 systems that can independently plan, use tools, and execute multi-step tasks \u2014 represent the frontier of LLM applications. Several frameworks have emerged to simplify agent development, each with different design philosophies. This guide compares the leading frameworks to help you choose the right one for your project. What Makes an AI Agent? Before comparing frameworks, it's important to define what we mean by \"agent.\" An agentic system typically includes: * **Planning**: Break down a goal into sub-steps * **Memory**: Remember past actions and observations * **Tool use**: Call external functions, APIs, and databases * **Execution loop**: Iterate between thinking and acting * **Self-reflection**: Evaluate outcomes and adjust plans Framework Comparison LangGraph LangGraph, part of the LangChain ecosystem, models agent workflows as directed graphs. Each node is a step (LLM call, tool call, human input), and edges define the control flow. **Key features:** * Graph-based workflow modeling for complex, non-linear execution * Built-in persistence for state management across steps * Human-in-the-loop support for approval workflows * Streaming of intermediate results **Example \u2014 simple agent with tool use:** from langgraph.graph import StateGraph, END from typing import TypedDict, List class AgentState(TypedDict): messages: List[dict] next_step: str def call_model(state): response = llm.invoke(state[\"messages\"]) return {\"messages\": state[\"messages\"] + [response]} def execute_tool(state): tool_call = get_tool_call(state[\"messages\"][-1]) result = execute_function(tool_call) return {\"messages\": state[\"messages\"] + [result]} graph = StateGraph(AgentState) graph.add_node(\"agent\", call_model) graph.add_node(\"tool\", execute_tool) graph.add_conditional_edges(\"agent\", should_continue, {\"continue\": \"tool\", \"end\": END}) graph.set_entry_point(\"agent\") **Best for:** Production systems requiring complex, stateful workflows with human oversight. CrewAI CrewAI focuses on multi-agent collaboration, where specialized agents work together on tasks. **Key features:** * Role-based agent definition with goals and backstories * Task assignment and delegation between agents * Sequential and hierarchical task execution * Built-in tool library and custom tool support **Example \u2014 research team:** from crewai import Agent, Task, Crew researcher = Agent( role=\"Research Analyst\", goal=\"Find comprehensive information on the topic\", backstory=\"Expert researcher with 15 years of experience\", tools=[search_tool, web_scraper] ) writer = Agent( role=\"Content Writer\", goal=\"Synthesize research into clear, engaging content\", backstory=\"Award-winning technical writer\", ) research_task = Task( description=\"Research the latest developments in AI agents\", agent=researcher ) write_task = Task( description=\"Write a summary based on the research\", agent=writer ) crew = Crew(agents=[researcher, writer], tasks=[research_task, write_task]) result = crew.kickoff() **Best for:** Multi-agent systems where different roles handle different aspects of a task. AutoGen (Microsoft) AutoGen, developed by Microsoft Research, enables multi-agent conversations with flexible conversation patterns. **Key features:** * Conversational multi-agent framework * Nested chat and hierarchical conversations * Code execution in sandboxed environments * Strong support for human participation **Best for:** Research and complex multi-agent scenarios requiring conversation-based problem solving. OpenAI Assistants API OpenAI's managed agent platform handles infrastructure concerns like state management and retrieval out of the box. **Key features:** * Fully managed \u2014 no infrastructure to manage * Built-in code interpreter, file search, and function calling * Thread management for conversation state * Vector store integration for RAG **Best for:** Rapid prototyping and applications already in the OpenAI ecosystem. Comparison Table | Feature | LangGraph | CrewAI | AutoGen | Assistants API | |---------|-----------|--------|---------|---------------| | Architecture | Graph-based | Role-based | Conversation | Thread-based | | Multi-agent | Yes | Yes | Yes | Single agent | | State management | Built-in | Basic | Basic | Managed | | Human-in-loop | Excellent | Good | Good | Limited | | Open source | Yes | Yes | Yes | No | | Self-hosted | Yes | Yes | Yes | No | | Learning curve | Steep | Moderate | Steep | Low | Choosing the Right Framework * **LangGraph**: Choose when you need complex, production-grade workflows with human oversight * **CrewAI**: Choose when different agents need specialized roles and collaboration * **AutoGen**: Choose for research-oriented multi-agent conversations and experiments * **Assistants API**: Choose for rapid prototyping and managed infrastructure Emerging Patterns The agent framework landscape is evolving rapidly. Key trends to watch: * **Agent-as-API**: Running agents as microservices with standardized interfaces * **Observability**: Built-in tracing, logging, and debugging for agent decision-making * **Safety guardrails**: Automated checks for agent actions before execution * **Tool marketplaces**: Shared catalogs of agent-compatible tools and APIs Conclusion The right agent framework depends on your application's complexity and deployment model. LangGraph offers the most control for production workflows, CrewAI excels at multi-agent collaboration, and the Assistants API provides the fastest path to a working prototype. As the field matures, expect convergence toward standardized patterns for agent communication, safety, and observability."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "AI Agent Frameworks Compared"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -233,7 +246,42 @@
 <br>
 <br>
 <br>
+<h1>AI Agent Frameworks Compared</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -291,7 +339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  What Makes an AI Agent?</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -349,7 +403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Planning**: Break down a goal into sub-steps</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -401,7 +461,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Tool use**: Call external functions, APIs, and databases</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -453,7 +519,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Self-reflection**: Evaluate outcomes and adjust plans</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -511,7 +583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>LangGraph</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +647,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -624,7 +708,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Built-in persistence for state management across steps</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -676,7 +766,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Streaming of intermediate results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -734,7 +830,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from langgraph.graph import StateGraph, END</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -792,7 +894,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class AgentState(TypedDict):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -850,7 +958,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>next_step: str</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -908,7 +1022,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = llm.invoke(state["messages"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -966,7 +1086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def execute_tool(state):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1024,7 +1150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = execute_function(tool_call)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1082,7 +1214,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>graph = StateGraph(AgentState)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1140,7 +1278,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>graph.add_node("tool", execute_tool)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1198,7 +1342,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>graph.set_entry_point("agent")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1256,7 +1406,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>CrewAI</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1314,7 +1470,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1369,7 +1531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Task assignment and delegation between agents</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1421,7 +1589,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Built-in tool library and custom tool support</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1479,7 +1653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from crewai import Agent, Task, Crew</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1537,7 +1717,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>role="Research Analyst",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1595,7 +1781,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>backstory="Expert researcher with 15 years of experience",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1653,7 +1845,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1711,7 +1909,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>role="Content Writer",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1769,6 +1973,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>backstory="Award-winning technical writer",</p>
 <br>
 <br>
@@ -1798,7 +2005,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1856,7 +2069,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description="Research the latest developments in AI agents",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1914,7 +2133,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1972,7 +2197,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description="Write a summary based on the research",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2030,7 +2261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2088,7 +2325,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = crew.kickoff()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2146,7 +2389,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>AutoGen (Microsoft)</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2204,7 +2453,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2259,7 +2514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Nested chat and hierarchical conversations</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2311,7 +2572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Strong support for human participation</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2369,7 +2636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>OpenAI Assistants API</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2427,7 +2700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2482,7 +2761,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Built-in code interpreter, file search, and function calling</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2534,7 +2819,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Vector store integration for RAG</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2592,7 +2883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Comparison Table</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2650,7 +2947,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|-----------|--------|---------|---------------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2708,7 +3011,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Multi-agent | Yes | Yes | Yes | Single agent |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2766,7 +3075,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Human-in-loop | Excellent | Good | Good | Limited |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2824,7 +3139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Self-hosted | Yes | Yes | Yes | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2882,7 +3203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Choosing the Right Framework</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2937,7 +3264,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **CrewAI**: Choose when different agents need specialized roles and collaboration</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Assistants API**: Choose for rapid prototyping and managed infrastructure</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The agent framework landscape is evolving rapidly. Key trends to watch:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3102,6 +3447,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Observability**: Built-in tracing, logging, and debugging for agent decision-making</p>
 <br>
 <br>
@@ -3128,7 +3476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Safety guardrails**: Automated checks for agent actions before execution</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3183,7 +3537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

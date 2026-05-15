@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="DDoS Mitigation">
     <meta name="twitter:description" content="Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/ddos-mitigation.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>DDoS Mitigation — SourceHub</title>
     <meta name="description" content="Implementing DDoS mitigation with detection, traffic scrubbing, rate limiting, and CDN-based protection.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/ddos-mitigation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1487",
+      "wordCount": "1580",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ddos-mitigation-5db2"
       ],
-      "articleBody": "DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation: Detection, Scrubbing, Rate Limiting, and CDN Protection Distributed Denial of Service (DDoS) attacks flood services with traffic to exhaust resources and block legitimate users. Modern DDoS attacks have grown in scale (terabits per second), sophistication (multi-vector), and affordability (DDoS-for-hire services). Effective mitigation requires a layered defense strategy. Attack Types Volumetric attacks overwhelm network bandwidth with massive traffic volumes. Common vectors include UDP floods, ICMP floods, and DNS amplification. The attacker uses botnets or reflection techniques to generate more traffic than the target's network capacity. Protocol attacks target network infrastructure at layers 3 and 4. SYN floods exhaust connection state tables by sending TCP SYN packets without completing handshakes. ACK floods and fragmented packet attacks consume firewall and load balancer resources. Application-layer attacks target the application itself with seemingly legitimate requests. HTTP floods request resource-intensive pages repeatedly. Slowloris opens many connections and sends partial requests, tying up server threads. Detection Baseline normal traffic patterns before an attack. Track requests per second, bandwidth utilization, connection counts, and error rates. DDoS attacks typically show sudden traffic spikes, unusual geographic concentration, and abnormal request patterns. Deploy network flow analysis (NetFlow, sFlow) to detect volumetric attacks at the network layer. Use application performance monitoring (APM) for application-layer anomaly detection. Configure alerting thresholds that balance sensitivity against false positives. Traffic Scrubbing Scrubbing centers filter incoming traffic, removing malicious packets while forwarding legitimate requests. Major cloud providers (Cloudflare, AWS Shield, Akamai) operate global scrubbing networks. During an attack, traffic is routed through scrubbing centers via BGP announcements or DNS changes. Scrubbing uses multiple techniques: IP reputation filtering blocks known malicious sources. Rate limiting drops excessive requests from individual IPs. Challenge-response mechanisms (CAPTCHAs, JavaScript challenges) distinguish bots from humans. Rate Limiting Rate limiting is effective against application-layer attacks. Per-IP rate limits prevent individual sources from overwhelming the service. Per-endpoint limits protect expensive API calls. Token bucket and sliding window algorithms provide granular control. Tiered rate limiting applies different thresholds based on authentication state. Anonymous users get conservative limits. Authenticated users get higher limits. Internal and admin traffic bypasses rate limiting entirely. CDN-Based Protection Content Delivery Networks (CDNs) absorb DDoS traffic through their distributed infrastructure. Cloudflare, Fastly, and Akamai operate networks with Tbps-scale capacity. Their anycast networks distribute traffic across global points of presence, diluting attacks. CDN protection includes automatic DDoS detection, always-on mitigation for known attack patterns, and on-demand scrubbing for large-scale attacks. Most CDNs include DDoS protection in their standard plans. Layered Defense A single defense layer is insufficient. Combine BGP-based network filtering, CDN traffic absorption, rate limiting at the application layer, and Web Application Firewall (WAF) rules. Each layer catches attacks that bypass the previous one. Develop an incident response playbook. Document who to contact when an attack is detected, how to enable enhanced protection, and how to communicate with users. Test the playbook with tabletop exercises. Cloud providers offer DDoS protection services: AWS Shield Standard (included) and Advanced (managed protection with cost protection), Google Cloud Armor (integrated with GCLB), Azure DDoS Protection (integrated with VNet). Choose based on your cloud provider and protection requirements."
+      "articleBody": "DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation DDoS Mitigation: Detection, Scrubbing, Rate Limiting, and CDN Protection Distributed Denial of Service (DDoS) attacks flood services with traffic to exhaust resources and block legitimate users. Modern DDoS attacks have grown in scale (terabits per second), sophistication (multi-vector), and affordability (DDoS-for-hire services). Effective mitigation requires a layered defense strategy. Attack Types Volumetric attacks overwhelm network bandwidth with massive traffic volumes. Common vectors include UDP floods, ICMP floods, and DNS amplification. The attacker uses botnets or reflection techniques to generate more traffic than the target's network capacity. Protocol attacks target network infrastructure at layers 3 and 4. SYN floods exhaust connection state tables by sending TCP SYN packets without completing handshakes. ACK floods and fragmented packet attacks consume firewall and load balancer resources. Application-layer attacks target the application itself with seemingly legitimate requests. HTTP floods request resource-intensive pages repeatedly. Slowloris opens many connections and sends partial requests, tying up server threads. Detection Baseline normal traffic patterns before an attack. Track requests per second, bandwidth utilization, connection counts, and error rates. DDoS attacks typically show sudden traffic spikes, unusual geographic concentration, and abnormal request patterns. Deploy network flow analysis (NetFlow, sFlow) to detect volumetric attacks at the network layer. Use application performance monitoring (APM) for application-layer anomaly detection. Configure alerting thresholds that balance sensitivity against false positives. Traffic Scrubbing Scrubbing centers filter incoming traffic, removing malicious packets while forwarding legitimate requests. Major cloud providers (Cloudflare, AWS Shield, Akamai) operate global scrubbing networks. During an attack, traffic is routed through scrubbing centers via BGP announcements or DNS changes. Scrubbing uses multiple techniques: IP reputation filtering blocks known malicious sources. Rate limiting drops excessive requests from individual IPs. Challenge-response mechanisms (CAPTCHAs, JavaScript challenges) distinguish bots from humans. Rate Limiting Rate limiting is effective against application-layer attacks. Per-IP rate limits prevent individual sources from overwhelming the service. Per-endpoint limits protect expensive API calls. Token bucket and sliding window algorithms provide granular control. Tiered rate limiting applies different thresholds based on authentication state. Anonymous users get conservative limits. Authenticated users get higher limits. Internal and admin traffic bypasses rate limiting entirely. CDN-Based Protection Content Delivery Networks (CDNs) absorb DDoS traffic through their distributed infrastructure. Cloudflare, Fastly, and Akamai operate networks with Tbps-scale capacity. Their anycast networks distribute traffic across global points of presence, diluting attacks. CDN protection includes automatic DDoS detection, always-on mitigation for known attack patterns, and on-demand scrubbing for large-scale attacks. Most CDNs include DDoS protection in their standard plans. Layered Defense A single defense layer is insufficient. Combine BGP-based network filtering, CDN traffic absorption, rate limiting at the application layer, and Web Application Firewall (WAF) rules. Each layer catches attacks that bypass the previous one. Develop an incident response playbook. Document who to contact when an attack is detected, how to enable enhanced protection, and how to communicate with users. Test the playbook with tabletop exercises. Cloud providers offer DDoS protection services: AWS Shield Standard (included) and Advanced (managed protection with cost protection), Google Cloud Armor (integrated with GCLB), Azure DDoS Protection (integrated with VNet). Choose based on your cloud provider and protection requirements."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "DDoS Mitigation"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -179,7 +192,36 @@
 <br>
 <br>
 <br>
+<h1>DDoS Mitigation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>DDoS Mitigation: Detection, Scrubbing, Rate Limiting, and CDN Protection</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -231,7 +273,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Attack Types</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -283,7 +331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Protocol attacks target network infrastructure at layers 3 and 4. SYN floods exhaust connection state tables by sending TCP SYN packets without completing handshakes. ACK floods and fragmented packet attacks consume firewall and load balancer resources.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -335,7 +389,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Detection</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -387,7 +447,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Deploy network flow analysis (NetFlow, sFlow) to detect volumetric attacks at the network layer. Use application performance monitoring (APM) for application-layer anomaly detection. Configure alerting thresholds that balance sensitivity against false positives.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -439,7 +505,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Scrubbing centers filter incoming traffic, removing malicious packets while forwarding legitimate requests. Major cloud providers (Cloudflare, AWS Shield, Akamai) operate global scrubbing networks. During an attack, traffic is routed through scrubbing centers via BGP announcements or DNS changes.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -491,7 +563,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Rate Limiting</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -543,7 +621,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Tiered rate limiting applies different thresholds based on authentication state. Anonymous users get conservative limits. Authenticated users get higher limits. Internal and admin traffic bypasses rate limiting entirely.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -595,7 +679,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Content Delivery Networks (CDNs) absorb DDoS traffic through their distributed infrastructure. Cloudflare, Fastly, and Akamai operate networks with Tbps-scale capacity. Their anycast networks distribute traffic across global points of presence, diluting attacks.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -647,7 +737,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Layered Defense</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -699,7 +795,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Develop an incident response playbook. Document who to contact when an attack is detected, how to enable enhanced protection, and how to communicate with users. Test the playbook with tabletop exercises.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

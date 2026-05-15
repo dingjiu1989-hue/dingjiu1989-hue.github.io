@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Transformer Mechanisms in Deep Learning">
     <meta name="twitter:description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Transformer Mechanisms in Deep Learning — SourceHub</title>
     <meta name="description" content="Understand transformer model internals: self-attention, multi-head attention, positional encoding, and feed-forward networks.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/transformer-mechanisms.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1125",
+      "wordCount": "1202",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/transformer-mechanisms-in-deep-learning-3a4j"
       ],
-      "articleBody": "Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning The transformer architecture, introduced in \"Attention Is All You Need\" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs. Self-Attention Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q\u00b7K^T / sqrt(d_k), measuring how much each token should attend to others. The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance\u2014unlike RNNs which process sequentially. Multi-Head Attention Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head. Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language. Positional Encoding Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training. Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information\u2014attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores. Feed-Forward Networks Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension. The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling."
+      "articleBody": "Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning Transformer Mechanisms in Deep Learning The transformer architecture, introduced in \"Attention Is All You Need\" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs. Self-Attention Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q\u00b7K^T / sqrt(d_k), measuring how much each token should attend to others. The softmax function normalizes attention scores into a probability distribution over attended tokens. The weighted sum of Value vectors produces the attention output. Self-attention captures relationships between all token pairs regardless of distance\u2014unlike RNNs which process sequentially. Multi-Head Attention Multi-head attention runs multiple self-attention operations (heads) in parallel. Each head learns different relationship types: syntactic relationships, semantic relationships, positional relationships. Typical configurations use 8-96 heads with dimension 64-128 per head. Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language. Positional Encoding Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training. Rotary Position Embedding (RoPE) rotates query and key vectors based on position. RoPE provides relative position information\u2014attention depends on token distance, not absolute position. RoPE is used in Llama, Mistral, and most modern LLMs. ALiBi (Attention with Linear Biases) adds position-based bias to attention scores. Feed-Forward Networks Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension. The FFN stores factual knowledge learned during training. Intermediate representations at the FFN's wide layer capture complex patterns. The gating mechanism (SwiGLU, used in Llama 2/3) adds a learnable gate for improved expressiveness. Sparse MoE layers replace FFNs with multiple experts for efficient scaling."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "Transformer Mechanisms in Deep Learning"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -231,7 +244,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Transformer Mechanisms in Deep Learning</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The transformer architecture, introduced in "Attention Is All You Need" (Vaswani et al., 2017), revolutionized deep learning. Understanding its mechanisms is essential for working with modern LLMs.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -289,7 +337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Self-attention computes weighted representations of input sequences. Each input token generates Query (Q), Key (K), and Value (V) vectors through learned linear transformations. The attention score between tokens is computed as Q·K^T / sqrt(d_k), measuring how much each token should attend to others.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -347,7 +401,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Multi-Head Attention</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -405,7 +465,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Head outputs are concatenated and linearly projected to the model dimension. Different heads specialize in different patterns. Some heads learn positional relationships (next token prediction). Others learn syntactic dependencies (subject-verb agreement). Analyzing head patterns reveals how the model processes language.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -463,7 +529,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transformers have no inherent notion of token order. Positional encodings add position information to input embeddings. Sinusoidal encodings (original paper) use sine and cosine functions of different frequencies. Learned positional embeddings train position vectors during pre-training.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -521,6 +593,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Feed-Forward Networks</h2>
 <br>
 <br>
@@ -550,7 +625,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Each transformer layer includes a feed-forward network (FFN) after the attention sublayer. The FFN consists of two linear transformations with a non-linear activation (ReLU, GELU, SwiGLU). The hidden dimension is typically 2-4x the model dimension.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Load Testing Tools: k6, Locust, Gatling, Artillery">
     <meta name="twitter:description" content="Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Load Testing Tools: k6, Locust, Gatling, Artillery — SourceHub</title>
     <meta name="description" content="Compare load testing frameworks: k6 for JavaScript-based testing, Locust for Python, Gatling for Scala/Java, and Artillery for Node.js. Script examples, metrics">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/load-testing-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "7547",
+      "wordCount": "8618",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/load-testing-tools-k6-locust-gatling-artillery-15ae"
       ],
-      "articleBody": "Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Introduction Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery. k6 Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics: // load-test.js import http from \"k6/http\"; import { check, sleep, group } from \"k6\"; import { Rate, Trend, Counter } from \"k6/metrics\"; // Custom metrics const errorRate = new Rate(\"errors\"); const responseTime = new Trend(\"response_time\"); // Test configuration export const options = { stages: [ { duration: \"2m\", target: 50 }, // Ramp up { duration: \"5m\", target: 50 }, // Stay at 50 users { duration: \"2m\", target: 100 }, // Ramp up { duration: \"5m\", target: 100 }, // Stay at 100 { duration: \"2m\", target: 0 }, // Ramp down ], thresholds: { http_req_duration: [\"p(95) errors: [\"rate http_req_failed: [\"rate }, }; export default function () { group(\"User API endpoints\", () => { // GET request const getRes = http.get(\"https://api.example.com/users\", { headers: { Authorization: \"Bearer test-token\" }, }); check(getRes, { \"status is 200\": (r) => r.status === 200, \"response time r.timings.duration }); errorRate.add(getRes.status !== 200); responseTime.add(getRes.timings.duration); // POST request const payload = JSON.stringify({ name: \"Test User\" }); const postRes = http.post(\"https://api.example.com/users\", payload, { headers: { \"Content-Type\": \"application/json\" }, }); check(postRes, { \"created status is 201\": (r) => r.status === 201, }); sleep(1); }); } Run test k6 run load-test.js With HTML report k6 run load-test.js --out json=results.json --out html=report.html **Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration. Locust Python-based load testing with a web UI for real-time monitoring: locustfile.py from locust import HttpUser, task, between, tag import json class WebsiteUser(HttpUser): wait_time = between(1, 5) # Simulate user think time def on_start(self): \"\"\"Login before starting tasks.\"\"\" response = self.client.post(\"/login\", json={ \"username\": \"testuser\", \"password\": \"testpass\", }) self.token = response.json().get(\"token\") @task(3) # Weight: 3x more likely @tag(\"read\") def view_users(self): headers = {\"Authorization\": f\"Bearer {self.token}\"} with self.client.get( \"/users\", headers=headers, catch_response=True, name=\"/users\" # Group in reports ) as response: if response.status_code == 200: response.success() else: response.failure(f\"Got status {response.status_code}\") @task(1) @tag(\"write\") def create_user(self): payload = { \"name\": f\"user_{self.id}\", \"email\": f\"user_{self.id}@example.com\", } self.client.post(\"/users\", json=payload) Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m Web UI: locust -f locustfile.py (then open http://localhost:8089) **Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks. Gatling High-performance Scala/Java load testing with detailed HTML reports: // BasicSimulation.scala import io.gatling.core.Predef._ import io.gatling.http.Predef._ import scala.concurrent.duration._ class BasicSimulation extends Simulation { val httpProtocol = http .baseUrl(\"https://api.example.com\") .acceptHeader(\"application/json\") .contentTypeHeader(\"application/json\") .userAgentHeader(\"Gatling\") val feeder = csv(\"users.csv\").circular val scn = scenario(\"User API Test\") .feed(feeder) .exec(http(\"List Users\") .get(\"/users\") .check(status.is(200)) .check(jsonPath(\"$.users[*].id\").exists)) .pause(1) .exec(http(\"Create User\") .post(\"/users\") .body(StringBody(\"\"\"{\"name\": \"${name}\", \"email\": \"${email}\"}\"\"\")) .asJson .check(status.is(201)) .check(jsonPath(\"$.id\").saveAs(\"userId\"))) .exec(http(\"Get User\") .get(\"/users/${userId}\") .check(status.is(200))) setUp( scn.inject( nothingFor(10.seconds), rampUsers(50).during(2.minutes), constantUsersPerSec(20).during(5.minutes), rampUsers(100).during(2.minutes), ) ).protocols(httpProtocol) } Run gatling.sh -s BasicSimulation -rf results/ **Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing. Artillery Node.js-based load testing focused on developer experience: artillery.yml config: target: \"https://api.example.com\" phases: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 60 arrivalRate: 5 rampTo: 50 name: \"Warm up\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 300 arrivalRate: 50 name: \"Sustained load\" defaults: headers: Authorization: \"Bearer {{ token }}\" scenarios: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: \"Browse and purchase\" flow: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get: url: \"/products\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 2 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get: url: \"/products/{{ $randomString }}\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post: url: \"/cart\" json: product_id: \"{{ $randomString }}\" quantity: 1 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 1 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post: url: \"/checkout\" json: payment_method: \"card\" Run npx artillery run artillery.yml Report natsby art run artillery.yml --output report.json npx artillery report report.json Comparison | Feature | k6 | Locust | Gatling | Artillery | |---------|-----|--------|---------|-----------| | Language | JavaScript | Python | Scala/Java | YAML + JS | | Performance | Excellent | Good | Excellent | Good | | Web UI | Cloud only | Built-in | Built-in | No | | CI integration | Excellent | Good | Good | Good | | Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io | | Learning curve | Low | Low | Medium | Low | | Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML | Recommendations * **JavaScript teams**: k6 for the best balance of scripting ease and performance. * **Python teams**: Locust for familiar Python scripting with live web monitoring. * **High-throughput testing**: Gatling for the most detailed performance analysis. * **Quick setup**: Artillery for YAML-based configuration without coding. * **CI/CD integration**: k6 with Grafana dashboards for production load testing. All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests."
+      "articleBody": "Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Load Testing Tools: k6, Locust, Gatling, Artillery Introduction Load testing ensures your application handles expected traffic without degradation. Modern load testing tools use real programming languages instead of XML/JSON configuration, making tests maintainable, version-controllable, and integrable with CI/CD pipelines. This article compares k6, Locust, Gatling, and Artillery. k6 Grafana k6 is a JavaScript-based load testing tool with excellent performance metrics: // load-test.js import http from \"k6/http\"; import { check, sleep, group } from \"k6\"; import { Rate, Trend, Counter } from \"k6/metrics\"; // Custom metrics const errorRate = new Rate(\"errors\"); const responseTime = new Trend(\"response_time\"); // Test configuration export const options = { stages: [ { duration: \"2m\", target: 50 }, // Ramp up { duration: \"5m\", target: 50 }, // Stay at 50 users { duration: \"2m\", target: 100 }, // Ramp up { duration: \"5m\", target: 100 }, // Stay at 100 { duration: \"2m\", target: 0 }, // Ramp down ], thresholds: { http_req_duration: [\"p(95) errors: [\"rate http_req_failed: [\"rate }, }; export default function () { group(\"User API endpoints\", () => { // GET request const getRes = http.get(\"https://api.example.com/users\", { headers: { Authorization: \"Bearer test-token\" }, }); check(getRes, { \"status is 200\": (r) => r.status === 200, \"response time r.timings.duration }); errorRate.add(getRes.status !== 200); responseTime.add(getRes.timings.duration); // POST request const payload = JSON.stringify({ name: \"Test User\" }); const postRes = http.post(\"https://api.example.com/users\", payload, { headers: { \"Content-Type\": \"application/json\" }, }); check(postRes, { \"created status is 201\": (r) => r.status === 201, }); sleep(1); }); } Run test k6 run load-test.js With HTML report k6 run load-test.js --out json=results.json --out html=report.html **Strengths**: Go-based (efficient), JavaScript scripting, rich metrics, threshold system, extensive protocol support (HTTP, gRPC, WebSocket, browser), cloud integration. Locust Python-based load testing with a web UI for real-time monitoring: locustfile.py from locust import HttpUser, task, between, tag import json class WebsiteUser(HttpUser): wait_time = between(1, 5) # Simulate user think time def on_start(self): \"\"\"Login before starting tasks.\"\"\" response = self.client.post(\"/login\", json={ \"username\": \"testuser\", \"password\": \"testpass\", }) self.token = response.json().get(\"token\") @task(3) # Weight: 3x more likely @tag(\"read\") def view_users(self): headers = {\"Authorization\": f\"Bearer {self.token}\"} with self.client.get( \"/users\", headers=headers, catch_response=True, name=\"/users\" # Group in reports ) as response: if response.status_code == 200: response.success() else: response.failure(f\"Got status {response.status_code}\") @task(1) @tag(\"write\") def create_user(self): payload = { \"name\": f\"user_{self.id}\", \"email\": f\"user_{self.id}@example.com\", } self.client.post(\"/users\", json=payload) Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m Web UI: locust -f locustfile.py (then open http://localhost:8089) **Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks. Gatling High-performance Scala/Java load testing with detailed HTML reports: // BasicSimulation.scala import io.gatling.core.Predef._ import io.gatling.http.Predef._ import scala.concurrent.duration._ class BasicSimulation extends Simulation { val httpProtocol = http .baseUrl(\"https://api.example.com\") .acceptHeader(\"application/json\") .contentTypeHeader(\"application/json\") .userAgentHeader(\"Gatling\") val feeder = csv(\"users.csv\").circular val scn = scenario(\"User API Test\") .feed(feeder) .exec(http(\"List Users\") .get(\"/users\") .check(status.is(200)) .check(jsonPath(\"$.users[*].id\").exists)) .pause(1) .exec(http(\"Create User\") .post(\"/users\") .body(StringBody(\"\"\"{\"name\": \"${name}\", \"email\": \"${email}\"}\"\"\")) .asJson .check(status.is(201)) .check(jsonPath(\"$.id\").saveAs(\"userId\"))) .exec(http(\"Get User\") .get(\"/users/${userId}\") .check(status.is(200))) setUp( scn.inject( nothingFor(10.seconds), rampUsers(50).during(2.minutes), constantUsersPerSec(20).during(5.minutes), rampUsers(100).during(2.minutes), ) ).protocols(httpProtocol) } Run gatling.sh -s BasicSimulation -rf results/ **Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing. Artillery Node.js-based load testing focused on developer experience: artillery.yml config: target: \"https://api.example.com\" phases: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 60 arrivalRate: 5 rampTo: 50 name: \"Warm up\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 300 arrivalRate: 50 name: \"Sustained load\" defaults: headers: Authorization: \"Bearer {{ token }}\" scenarios: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: \"Browse and purchase\" flow: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get: url: \"/products\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 2 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get: url: \"/products/{{ $randomString }}\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post: url: \"/cart\" json: product_id: \"{{ $randomString }}\" quantity: 1 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 1 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post: url: \"/checkout\" json: payment_method: \"card\" Run npx artillery run artillery.yml Report natsby art run artillery.yml --output report.json npx artillery report report.json Comparison | Feature | k6 | Locust | Gatling | Artillery | |---------|-----|--------|---------|-----------| | Language | JavaScript | Python | Scala/Java | YAML + JS | | Performance | Excellent | Good | Excellent | Good | | Web UI | Cloud only | Built-in | Built-in | No | | CI integration | Excellent | Good | Good | Good | | Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io | | Learning curve | Low | Low | Medium | Low | | Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML | Recommendations * **JavaScript teams**: k6 for the best balance of scripting ease and performance. * **Python teams**: Locust for familiar Python scripting with live web monitoring. * **High-throughput testing**: Gatling for the most detailed performance analysis. * **Quick setup**: Artillery for YAML-based configuration without coding. * **CI/CD integration**: k6 with Grafana dashboards for production load testing. All four tools support CI integration. k6 has the strongest Grafana ecosystem. Locust excels for teams already using Python data tools. Gatling produces the most detailed HTML reports. Artillery is the fastest to set up for simple tests."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Load Testing Tools: k6, Locust, Gatling, Artillery"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>Load Testing Tools: k6, Locust, Gatling, Artillery</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  k6</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// load-test.js</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { check, sleep, group } from "k6";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Custom metrics</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,7 +596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const responseTime = new Trend("response_time");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -582,7 +660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>export const options = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -640,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ duration: "2m", target: 50 }, // Ramp up</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -698,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ duration: "2m", target: 100 }, // Ramp up</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -756,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ duration: "2m", target: 0 }, // Ramp down</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -814,7 +916,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>thresholds: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -872,7 +980,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>errors: ["rate<0.05"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -930,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>export default function () {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// GET request</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1104,6 +1236,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers: { Authorization: "Bearer test-token" },</p>
 <br>
 <br>
@@ -1133,7 +1268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"status is 200": (r) => r.status === 200,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>responseTime.add(getRes.timings.duration);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const payload = JSON.stringify({ name: "Test User" });</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1423,6 +1588,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers: { "Content-Type": "application/json" },</p>
 <br>
 <br>
@@ -1452,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,6 +1684,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"created status is 201": (r) => r.status === 201,</p>
 <br>
 <br>
@@ -1539,7 +1716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,6 +1780,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
 <br>
 <br>
@@ -1626,7 +1812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1684,7 +1876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>k6 run load-test.js</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1742,7 +1940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>k6 run load-test.js --out json=results.json --out html=report.html</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1800,7 +2004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Locust</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1858,7 +2068,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>locustfile.py</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1916,7 +2132,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1974,7 +2196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>wait_time = between(1, 5) # Simulate user think time</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2032,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Login before starting tasks."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2090,7 +2324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"username": "testuser",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@task(3) # Weight: 3x more likely</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def view_users(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,7 +2580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with self.client.get(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2380,7 +2644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers=headers,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,7 +2708,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name="/users" # Group in reports</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2496,7 +2772,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if response.status_code == 200:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2554,7 +2836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2612,7 +2900,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@task(1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2670,7 +2964,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def create_user(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2728,7 +3028,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": f"user_{self.id}",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2786,7 +3092,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3156,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run: locust -f locustfile.py --headless -u 100 -r 10 -t 10m</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2902,7 +3220,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Python scripting (familiar for data teams), distributed execution, web UI for live monitoring, extensible with custom event hooks.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2960,7 +3284,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>High-performance Scala/Java load testing with detailed HTML reports:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3018,7 +3348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import io.gatling.core.Predef._</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3076,7 +3412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import scala.concurrent.duration._</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3134,7 +3476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>val httpProtocol = http</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3192,7 +3540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.acceptHeader("application/json")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3250,7 +3604,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.userAgentHeader("Gatling")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3308,7 +3668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>val scn = scenario("User API Test")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3366,7 +3732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.exec(http("List Users")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3424,7 +3796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.check(status.is(200))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3482,7 +3860,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.pause(1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3540,7 +3924,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.post("/users")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3598,7 +3988,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.asJson</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3656,7 +4052,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.check(jsonPath("$.id").saveAs("userId")))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3714,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.get("/users/${userId}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3772,7 +4180,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>setUp(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nothingFor(10.seconds),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>constantUsersPerSec(20).during(5.minutes),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,7 +4372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4004,6 +4436,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -4033,7 +4468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4091,7 +4532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Best performance (Akka-based), richest HTML reports, powerful DSL, excellent for high-throughput testing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4149,7 +4596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Node.js-based load testing focused on developer experience:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4207,7 +4660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>config:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4265,6 +4724,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>phases:</p>
 <br>
 <br>
@@ -4294,7 +4756,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 60</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 60</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +4820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rampTo: 50</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4410,7 +4884,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 300</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- duration: 300</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4468,7 +4948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: "Sustained load"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4526,7 +5012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4584,6 +5076,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scenarios:</p>
 <br>
 <br>
@@ -4613,7 +5108,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Browse and purchase"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Browse and purchase"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4671,7 +5172,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4729,7 +5236,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 2</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 2</p>
 <br>
 <br>
 <br>
@@ -4758,7 +5268,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- get:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4816,7 +5332,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4874,7 +5396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>json:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4932,6 +5460,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>quantity: 1</p>
 <br>
 <br>
@@ -4961,7 +5492,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 1</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- think: 1</p>
 <br>
 <br>
 <br>
@@ -4990,7 +5524,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- post:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5048,7 +5588,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>json:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5106,7 +5652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5164,7 +5716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Report</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5222,7 +5780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npx artillery report report.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5280,7 +5844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | k6 | Locust | Gatling | Artillery |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5338,7 +5908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Language | JavaScript | Python | Scala/Java | YAML + JS |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5396,7 +5972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Web UI | Cloud only | Built-in | Built-in | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5454,7 +6036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Protocol support | HTTP/2, gRPC, WS | HTTP | HTTP, JMS, MQTT | HTTP, Socket.io |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5512,7 +6100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Reports | JSON/HTML | CSV/HTML | HTML (excellent) | JSON/HTML |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5570,7 +6164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **JavaScript teams**: k6 for the best balance of scripting ease and performance.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5622,7 +6222,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **High-throughput testing**: Gatling for the most detailed performance analysis.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5674,7 +6280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **CI/CD integration**: k6 with Grafana dashboards for production load testing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

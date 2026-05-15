@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared">
     <meta name="twitter:description" content="Comparative analysis of infrastructure and container vulnerability scanners covering Trivy, Grype, Snyk, and OWASP Dependency-Check for CI/CD integration and SBOM generation.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/infrastructure-scanners.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared — SourceHub</title>
     <meta name="description" content="Comparative analysis of infrastructure and container vulnerability scanners covering Trivy, Grype, Snyk, and OWASP Dependency-Check for CI/CD integration and SBOM generation.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/infrastructure-scanners.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2578",
+      "wordCount": "2746",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/infrastructure-scanners-trivy-grype-snyk-and-dependency-check-compared-2cbe"
       ],
-      "articleBody": "Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Introduction Vulnerability scanning has become a mandatory component of secure software development lifecycles. With supply chain attacks on the rise and regulatory requirements like SLSA and Executive Order 14028 mandating software provenance, infrastructure scanners are no longer optional. Modern scanners analyze container images, filesystem dependencies, IaC configurations, and Kubernetes manifests for known vulnerabilities and misconfigurations. This article compares four leading open-source and commercial scanners: Trivy, Grype, Snyk, and OWASP Dependency-Check. Trivy: The All-in-One Scanner Aqua Security's Trivy has rapidly become the most popular open-source vulnerability scanner. It scans container images, filesystems, Git repositories, Kubernetes manifests, IaC templates, and SBOMs. Trivy covers vulnerabilities (CVEs), misconfigurations, secrets, and licenses. Trivy uses multiple vulnerability databases \u2014 NVD, Red Hat, Debian, Alpine, Amazon, and GitHub Security Advisories \u2014 for comprehensive coverage. Its vulnerability detection is fast because it avoids fetching the entire database on each run, instead downloading only relevant data. trivy image nginx:latest trivy fs --severity CRITICAL,HIGH /path/to/project trivy config --severity CRITICAL ./infra/ trivy repo https://github.com/org/repo Trivy supports multiple output formats: table, JSON, SARIF (for IDE integration), and CycloneDX or SPDX SBOM formats. Its SARIF output integrates with GitHub Code Scanning and GitLab SAST. A key advantage is Trivy's IaC scanning capability, detecting misconfigurations in Terraform, CloudFormation, Dockerfile, and Kubernetes YAML. This makes Trivy a single tool for both application security and cloud security scanning. Grype: Anchore's Vulnerability Scanner Grype is Anchore's open-source vulnerability scanner, focusing on container images and filesystems. It uses GrypeDB, which aggregates vulnerability data from multiple sources including NVD, Red Hat, Debian, Alpine, Ubuntu, Amazon, and GitHub Security Advisories. Grype integrates tightly with Syft, Anchore's SBOM generation tool. The typical workflow generates an SBOM with Syft, then scans it with Grype: syft nginx:latest -o json > sbom.json grype sbom:sbom.json Grype supports YAML and JSON output formats and integrates with CI/CD pipelines via GitHub Actions, GitLab CI, and Jenkins. Its query language allows filtering vulnerabilities by severity, fix state, or package type. Grype's strength is its focused scope \u2014 it does one thing (vulnerability scanning) and does it well. The downside is that IaC scanning and secret detection require additional tools. Snyk: Developer-First Security Platform Snyk is a commercial security platform (with a free tier) that scans containers, open-source dependencies, IaC, and Kubernetes configurations. Its developer-first experience includes IDE plugins, PR checks, and CLI integration. Snyk's container scanning detects vulnerabilities in base images and application dependencies. Its Reachability Analysis maps vulnerabilities to actual code paths, reducing noise by filtering non-exploitable vulnerabilities. Snyk's Fix PRs automatically open pull requests to upgrade vulnerable dependencies. Snyk's IaC scanning covers Terraform, CloudFormation, and Kubernetes manifests, providing fix guidance for each finding. The Snyk Advisor dashboard gives organizations visibility into security posture across projects. The primary trade-off is cost. While open-source project scanning is free, organizational use requires paid licensing. The developer experience and reachability analysis justify the cost for organizations prioritizing developer adoption. OWASP Dependency-Check Dependency-Check is the OWASP Foundation's software composition analysis tool. It identifies known vulnerabilities in project dependencies by checking against the NVD (National Vulnerability Database). Dependency-Check supports Java (.jar, .war), .NET, Python (pip), Ruby (gem), Node.js (npm), and several other ecosystems. It generates HTML, JSON, and XML reports with vulnerability severity, CVSS scores, and CVE references. dependency-check --scan /path/to/project --format JSON --out /reports Dependency-Check is particularly common in government and regulated industries where OWASP guidance is mandated. Its primary limitation is NVD-only coverage, which means slower vulnerability updates compared to Trivy or Grype that aggregate multiple databases. Comparison Summary | Feature | Trivy | Grype | Snyk | Dependency-Check | |---|---|---|---|---| | Container scanning | Yes | Yes | Yes | No | | Filesystem scanning | Yes | Yes | Yes | Yes | | IaC scanning | Yes | No | Yes | No | | SBOM generation | Yes (via Syft) | Yes (via Syft) | Yes | No | | Reachability | No | No | Yes | No | | Cost | Free | Free | Freemium | Free | | CI/CD integration | Excellent | Good | Excellent | Good | Conclusion For most teams, Trivy offers the best balance of coverage, speed, and cost. Its all-in-one approach covers containers, filesystems, IaC, and secrets with a single tool. Grype is an excellent choice for teams already using Syft or preferring focused tools. Snyk excels in developer experience and enterprise workflows. Dependency-Check remains relevant in regulated environments requiring OWASP tooling. A pragmatic approach combines Trivy for comprehensive scanning with Snyk for developer workflow integration."
+      "articleBody": "Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared Introduction Vulnerability scanning has become a mandatory component of secure software development lifecycles. With supply chain attacks on the rise and regulatory requirements like SLSA and Executive Order 14028 mandating software provenance, infrastructure scanners are no longer optional. Modern scanners analyze container images, filesystem dependencies, IaC configurations, and Kubernetes manifests for known vulnerabilities and misconfigurations. This article compares four leading open-source and commercial scanners: Trivy, Grype, Snyk, and OWASP Dependency-Check. Trivy: The All-in-One Scanner Aqua Security's Trivy has rapidly become the most popular open-source vulnerability scanner. It scans container images, filesystems, Git repositories, Kubernetes manifests, IaC templates, and SBOMs. Trivy covers vulnerabilities (CVEs), misconfigurations, secrets, and licenses. Trivy uses multiple vulnerability databases \u2014 NVD, Red Hat, Debian, Alpine, Amazon, and GitHub Security Advisories \u2014 for comprehensive coverage. Its vulnerability detection is fast because it avoids fetching the entire database on each run, instead downloading only relevant data. trivy image nginx:latest trivy fs --severity CRITICAL,HIGH /path/to/project trivy config --severity CRITICAL ./infra/ trivy repo https://github.com/org/repo Trivy supports multiple output formats: table, JSON, SARIF (for IDE integration), and CycloneDX or SPDX SBOM formats. Its SARIF output integrates with GitHub Code Scanning and GitLab SAST. A key advantage is Trivy's IaC scanning capability, detecting misconfigurations in Terraform, CloudFormation, Dockerfile, and Kubernetes YAML. This makes Trivy a single tool for both application security and cloud security scanning. Grype: Anchore's Vulnerability Scanner Grype is Anchore's open-source vulnerability scanner, focusing on container images and filesystems. It uses GrypeDB, which aggregates vulnerability data from multiple sources including NVD, Red Hat, Debian, Alpine, Ubuntu, Amazon, and GitHub Security Advisories. Grype integrates tightly with Syft, Anchore's SBOM generation tool. The typical workflow generates an SBOM with Syft, then scans it with Grype: syft nginx:latest -o json > sbom.json grype sbom:sbom.json Grype supports YAML and JSON output formats and integrates with CI/CD pipelines via GitHub Actions, GitLab CI, and Jenkins. Its query language allows filtering vulnerabilities by severity, fix state, or package type. Grype's strength is its focused scope \u2014 it does one thing (vulnerability scanning) and does it well. The downside is that IaC scanning and secret detection require additional tools. Snyk: Developer-First Security Platform Snyk is a commercial security platform (with a free tier) that scans containers, open-source dependencies, IaC, and Kubernetes configurations. Its developer-first experience includes IDE plugins, PR checks, and CLI integration. Snyk's container scanning detects vulnerabilities in base images and application dependencies. Its Reachability Analysis maps vulnerabilities to actual code paths, reducing noise by filtering non-exploitable vulnerabilities. Snyk's Fix PRs automatically open pull requests to upgrade vulnerable dependencies. Snyk's IaC scanning covers Terraform, CloudFormation, and Kubernetes manifests, providing fix guidance for each finding. The Snyk Advisor dashboard gives organizations visibility into security posture across projects. The primary trade-off is cost. While open-source project scanning is free, organizational use requires paid licensing. The developer experience and reachability analysis justify the cost for organizations prioritizing developer adoption. OWASP Dependency-Check Dependency-Check is the OWASP Foundation's software composition analysis tool. It identifies known vulnerabilities in project dependencies by checking against the NVD (National Vulnerability Database). Dependency-Check supports Java (.jar, .war), .NET, Python (pip), Ruby (gem), Node.js (npm), and several other ecosystems. It generates HTML, JSON, and XML reports with vulnerability severity, CVSS scores, and CVE references. dependency-check --scan /path/to/project --format JSON --out /reports Dependency-Check is particularly common in government and regulated industries where OWASP guidance is mandated. Its primary limitation is NVD-only coverage, which means slower vulnerability updates compared to Trivy or Grype that aggregate multiple databases. Comparison Summary | Feature | Trivy | Grype | Snyk | Dependency-Check | |---|---|---|---|---| | Container scanning | Yes | Yes | Yes | No | | Filesystem scanning | Yes | Yes | Yes | Yes | | IaC scanning | Yes | No | Yes | No | | SBOM generation | Yes (via Syft) | Yes (via Syft) | Yes | No | | Reachability | No | No | Yes | No | | Cost | Free | Free | Freemium | Free | | CI/CD integration | Excellent | Good | Excellent | Good | Conclusion For most teams, Trivy offers the best balance of coverage, speed, and cost. Its all-in-one approach covers containers, filesystems, IaC, and secrets with a single tool. Grype is an excellent choice for teams already using Syft or preferring focused tools. Snyk excels in developer experience and enterprise workflows. Dependency-Check remains relevant in regulated environments requiring OWASP tooling. A pragmatic approach combines Trivy for comprehensive scanning with Snyk for developer workflow integration."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>Infrastructure Scanners: Trivy, Grype, Snyk, and Dependency-Check Compared</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This article compares four leading open-source and commercial scanners: Trivy, Grype, Snyk, and OWASP Dependency-Check.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Aqua Security's Trivy has rapidly become the most popular open-source vulnerability scanner. It scans container images, filesystems, Git repositories, Kubernetes manifests, IaC templates, and SBOMs. Trivy covers vulnerabilities (CVEs), misconfigurations, secrets, and licenses.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>trivy image nginx:latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>trivy config --severity CRITICAL ./infra/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,7 +596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Trivy supports multiple output formats: table, JSON, SARIF (for IDE integration), and CycloneDX or SPDX SBOM formats. Its SARIF output integrates with GitHub Code Scanning and GitLab SAST.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -582,7 +660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Grype: Anchore's Vulnerability Scanner</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -640,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Grype integrates tightly with Syft, Anchore's SBOM generation tool. The typical workflow generates an SBOM with Syft, then scans it with Grype:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -698,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>grype sbom:sbom.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -756,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Grype's strength is its focused scope — it does one thing (vulnerability scanning) and does it well. The downside is that IaC scanning and secret detection require additional tools.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -814,7 +916,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Snyk is a commercial security platform (with a free tier) that scans containers, open-source dependencies, IaC, and Kubernetes configurations. Its developer-first experience includes IDE plugins, PR checks, and CLI integration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -872,7 +980,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Snyk's IaC scanning covers Terraform, CloudFormation, and Kubernetes manifests, providing fix guidance for each finding. The Snyk Advisor dashboard gives organizations visibility into security posture across projects.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -930,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  OWASP Dependency-Check</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dependency-Check supports Java (.jar, .war), .NET, Python (pip), Ruby (gem), Node.js (npm), and several other ecosystems. It generates HTML, JSON, and XML reports with vulnerability severity, CVSS scores, and CVE references.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dependency-Check is particularly common in government and regulated industries where OWASP guidance is mandated. Its primary limitation is NVD-only coverage, which means slower vulnerability updates compared to Trivy or Grype that aggregate multiple databases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1104,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | Trivy | Grype | Snyk | Dependency-Check |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,7 +1300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Container scanning | Yes | Yes | Yes | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1220,7 +1364,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| IaC scanning | Yes | No | Yes | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1278,7 +1428,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Reachability | No | No | Yes | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1336,6 +1492,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| CI/CD integration | Excellent | Good | Excellent | Good |</p>
 <br>
 <br>
@@ -1365,7 +1524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

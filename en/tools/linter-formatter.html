@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Linter and Formatter: ESLint, Prettier, Biome, Ruff">
     <meta name="twitter:description" content="Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rust alternative, and Ruff for Python linting and formatting.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Technology, DevTools, Productivity">
     <title>Linter and Formatter: ESLint, Prettier, Biome, Ruff — SourceHub</title>
     <meta name="description" content="Compare linters and formatters in 2026: ESLint + Prettier for JavaScript, Biome as an all-in-one Rust alternative, and Ruff for Python linting and formatting.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/linter-formatter.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5613",
+      "wordCount": "6097",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/linter-and-formatter-eslint-prettier-biome-ruff-klo"
       ],
-      "articleBody": "Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Introduction Code quality tools have converged into two categories: linters (find bugs and enforce style rules) and formatters (automatically format code). The traditional approach uses separate tools for each. Newer all-in-one tools combine both in a single binary. This article compares ESLint + Prettier, Biome, and Ruff. ESLint + Prettier The established standard for JavaScript/TypeScript: // eslint.config.js (flat config \u2014 v9+) import js from \"@eslint/js\"; import tseslint from \"typescript-eslint\"; import react from \"eslint-plugin-react\"; export default [ js.configs.recommended, ...tseslint.configs.recommended, { plugins: { react }, rules: { \"react/jsx-key\": \"error\", \"@typescript-eslint/no-unused-vars\": [\"error\", { argsIgnorePattern: \"^_\" }], \"no-console\": \"warn\", \"prefer-const\": \"error\", \"no-var\": \"error\", }, ignores: [\"dist/**\", \"node_modules/**\"], }, ]; // .prettierrc { \"semi\": true, \"trailingComma\": \"all\", \"singleQuote\": false, \"printWidth\": 100, \"tabWidth\": 2, \"arrowParens\": \"always\", \"endOfLine\": \"lf\" } Check and fix npx eslint src/ npx eslint src/ --fix npx prettier --check src/ npx prettier --write src/ **Strengths**: Largest ecosystem with 1000s of plugins, extensive customization, well-documented rules, strong community. **Weaknesses**: Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time. Biome A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS: // biome.json { \"$schema\": \"https://biomejs.dev/schemas/1.8.0/schema.json\", \"organizeImports\": { \"enabled\": true }, \"linter\": { \"enabled\": true, \"rules\": { \"recommended\": true, \"complexity\": { \"noBannedTypes\": \"error\", \"noUselessConstructor\": \"error\" }, \"correctness\": { \"noUnusedVariables\": \"error\", \"noUnusedImports\": \"error\" }, \"style\": { \"noNonNullAssertion\": \"warn\", \"useConst\": \"error\" } } }, \"formatter\": { \"enabled\": true, \"indentStyle\": \"space\", \"indentWidth\": 2, \"lineWidth\": 100, \"formatWithErrors\": false }, \"javascript\": { \"formatter\": { \"quoteStyle\": \"double\", \"semicolons\": \"always\", \"trailingComma\": \"all\" } } } Check and format biome check src/ biome check src/ --apply biome format src/ biome ci src/ # CI mode (strict) Lint only biome lint src/ Organize imports biome check --formatter-enabled=true --linter-enabled=true **Speed**: 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint. **Strengths**: Single binary (Rust), unified configuration, dramatically faster, organizes imports automatically, fewer dependencies (no separate tools). **Weaknesses**: Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint. Ruff A Rust-based linter and formatter for Python: pyproject.toml [tool.ruff] target-version = \"py311\" line-length = 100 [tool.ruff.lint] select = [ \"E\", # pycodestyle errors \"W\", # pycodestyle warnings \"F\", # pyflakes \"I\", # isort \"N\", # pep8-naming \"UP\", # pyupgrade \"B\", # bugbear \"SIM\", # flake8-simplify \"ARG\", # flake8-unused-arguments ] ignore = [ \"E501\", # Line too long (handled by formatter) ] [tool.ruff.format] quote-style = \"double\" indent-style = \"space\" skip-magic-trailing-comma = false line-ending = \"lf\" [tool.ruff.lint.per-file-ignores] \"__init__.py\" = [\"F401\", \"I001\"] \"tests/**\" = [\"S101\"] # Allow assert in tests Check and fix ruff check src/ ruff check src/ --fix ruff format src/ # Format only ruff check src/ --watch # Watch mode **Speed**: 10-100x faster than Flake8 + Black + isort combination. Ruff replaces dozens of linting plugins in a single binary. **Strengths**: Drop-in replacement for Flake8, isort, pyupgrade, and many more. Extremely fast. Single configuration file. Active development with frequent releases. **Weaknesses**: Some rules not yet implemented (Pylint plugin parity). Python only. Comparison | Feature | ESLint + Prettier | Biome | Ruff | |---------|------------------|-------|------| | Language | JS/TS | JS/TS/CSS/JSON | Python | | Language | JavaScript/TypeScript | JavaScript/TypeScript/CSS | Python | | Architecture | Node.js (JS) | Rust | Rust | | Speed (10K files) | ~60s | ~2s | ~1s | | Linter + Formatter | Separate tools | Single tool | Single tool | | Plugin ecosystem | 1000s | Growing | Comprehensive | | Configuration | Complex | Simple | Simple | | Migrate from | N/A | `biome migrate eslint` | `ruff migrate` | Recommendations * **New JS/TS projects**: Start with Biome for the best developer experience and speed. * **Existing ESLint + Prettier projects**: Migration to Biome is straightforward with `biome migrate eslint`. Otherwise, stick with the proven combination. * **Python projects**: Ruff is the clear winner. It replaces Flake8, isort, Black, pyupgrade, and pylint in a single tool. * **CI pipelines**: Biome and Ruff reduce CI lint times from minutes to seconds. * **Pre-commit hooks**: All tools support staged-file-only checks with `--staged` flag. The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruff represent the future of code quality tooling: fast, unified, and simple to configure."
+      "articleBody": "Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Linter and Formatter: ESLint, Prettier, Biome, Ruff Introduction Code quality tools have converged into two categories: linters (find bugs and enforce style rules) and formatters (automatically format code). The traditional approach uses separate tools for each. Newer all-in-one tools combine both in a single binary. This article compares ESLint + Prettier, Biome, and Ruff. ESLint + Prettier The established standard for JavaScript/TypeScript: // eslint.config.js (flat config \u2014 v9+) import js from \"@eslint/js\"; import tseslint from \"typescript-eslint\"; import react from \"eslint-plugin-react\"; export default [ js.configs.recommended, ...tseslint.configs.recommended, { plugins: { react }, rules: { \"react/jsx-key\": \"error\", \"@typescript-eslint/no-unused-vars\": [\"error\", { argsIgnorePattern: \"^_\" }], \"no-console\": \"warn\", \"prefer-const\": \"error\", \"no-var\": \"error\", }, ignores: [\"dist/**\", \"node_modules/**\"], }, ]; // .prettierrc { \"semi\": true, \"trailingComma\": \"all\", \"singleQuote\": false, \"printWidth\": 100, \"tabWidth\": 2, \"arrowParens\": \"always\", \"endOfLine\": \"lf\" } Check and fix npx eslint src/ npx eslint src/ --fix npx prettier --check src/ npx prettier --write src/ **Strengths**: Largest ecosystem with 1000s of plugins, extensive customization, well-documented rules, strong community. **Weaknesses**: Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time. Biome A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS: // biome.json { \"$schema\": \"https://biomejs.dev/schemas/1.8.0/schema.json\", \"organizeImports\": { \"enabled\": true }, \"linter\": { \"enabled\": true, \"rules\": { \"recommended\": true, \"complexity\": { \"noBannedTypes\": \"error\", \"noUselessConstructor\": \"error\" }, \"correctness\": { \"noUnusedVariables\": \"error\", \"noUnusedImports\": \"error\" }, \"style\": { \"noNonNullAssertion\": \"warn\", \"useConst\": \"error\" } } }, \"formatter\": { \"enabled\": true, \"indentStyle\": \"space\", \"indentWidth\": 2, \"lineWidth\": 100, \"formatWithErrors\": false }, \"javascript\": { \"formatter\": { \"quoteStyle\": \"double\", \"semicolons\": \"always\", \"trailingComma\": \"all\" } } } Check and format biome check src/ biome check src/ --apply biome format src/ biome ci src/ # CI mode (strict) Lint only biome lint src/ Organize imports biome check --formatter-enabled=true --linter-enabled=true **Speed**: 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint. **Strengths**: Single binary (Rust), unified configuration, dramatically faster, organizes imports automatically, fewer dependencies (no separate tools). **Weaknesses**: Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint. Ruff A Rust-based linter and formatter for Python: pyproject.toml [tool.ruff] target-version = \"py311\" line-length = 100 [tool.ruff.lint] select = [ \"E\", # pycodestyle errors \"W\", # pycodestyle warnings \"F\", # pyflakes \"I\", # isort \"N\", # pep8-naming \"UP\", # pyupgrade \"B\", # bugbear \"SIM\", # flake8-simplify \"ARG\", # flake8-unused-arguments ] ignore = [ \"E501\", # Line too long (handled by formatter) ] [tool.ruff.format] quote-style = \"double\" indent-style = \"space\" skip-magic-trailing-comma = false line-ending = \"lf\" [tool.ruff.lint.per-file-ignores] \"__init__.py\" = [\"F401\", \"I001\"] \"tests/**\" = [\"S101\"] # Allow assert in tests Check and fix ruff check src/ ruff check src/ --fix ruff format src/ # Format only ruff check src/ --watch # Watch mode **Speed**: 10-100x faster than Flake8 + Black + isort combination. Ruff replaces dozens of linting plugins in a single binary. **Strengths**: Drop-in replacement for Flake8, isort, pyupgrade, and many more. Extremely fast. Single configuration file. Active development with frequent releases. **Weaknesses**: Some rules not yet implemented (Pylint plugin parity). Python only. Comparison | Feature | ESLint + Prettier | Biome | Ruff | |---------|------------------|-------|------| | Language | JS/TS | JS/TS/CSS/JSON | Python | | Language | JavaScript/TypeScript | JavaScript/TypeScript/CSS | Python | | Architecture | Node.js (JS) | Rust | Rust | | Speed (10K files) | ~60s | ~2s | ~1s | | Linter + Formatter | Separate tools | Single tool | Single tool | | Plugin ecosystem | 1000s | Growing | Comprehensive | | Configuration | Complex | Simple | Simple | | Migrate from | N/A | `biome migrate eslint` | `ruff migrate` | Recommendations * **New JS/TS projects**: Start with Biome for the best developer experience and speed. * **Existing ESLint + Prettier projects**: Migration to Biome is straightforward with `biome migrate eslint`. Otherwise, stick with the proven combination. * **Python projects**: Ruff is the clear winner. It replaces Flake8, isort, Black, pyupgrade, and pylint in a single tool. * **CI pipelines**: Biome and Ruff reduce CI lint times from minutes to seconds. * **Pre-commit hooks**: All tools support staged-file-only checks with `--staged` flag. The industry is clearly moving toward Rust-based all-in-one tools. Biome and Ruff represent the future of code quality tooling: fast, unified, and simple to configure."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Linter and Formatter: ESLint, Prettier, Biome, Ruff"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>Linter and Formatter: ESLint, Prettier, Biome, Ruff</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  ESLint + Prettier</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// eslint.config.js (flat config — v9+)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import tseslint from "typescript-eslint";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>export default [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,6 +596,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>...tseslint.configs.recommended,</p>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,7 +692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rules: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"prefer-const": "error",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,6 +1012,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// .prettierrc</p>
 <br>
 <br>
@@ -930,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"trailingComma": "all",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"printWidth": 100,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1104,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"arrowParens": "always",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,6 +1300,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check and fix</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npx eslint src/ --fix</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npx prettier --write src/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1423,7 +1588,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1481,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1539,7 +1716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"organizeImports": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1655,7 +1844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"enabled": true,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1713,7 +1908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"recommended": true,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1771,7 +1972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"noBannedTypes": "error",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1829,7 +2036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1887,7 +2100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"noUnusedVariables": "error",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1945,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2003,7 +2228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"noNonNullAssertion": "warn",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2061,36 +2292,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"formatter": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"indentStyle": "space",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"lineWidth": 100,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,7 +2580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2380,7 +2644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"formatter": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,7 +2708,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"semicolons": "always",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2496,32 +2772,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -2554,7 +2804,45 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2612,7 +2900,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>biome check src/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2670,7 +2964,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>biome format src/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2728,7 +3028,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Lint only</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2786,7 +3092,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Organize imports</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3156,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Speed**: 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2902,7 +3220,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2960,7 +3284,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A Rust-based linter and formatter for Python:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3018,7 +3348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>[tool.ruff]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3076,7 +3412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>line-length = 100</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3134,7 +3476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>select = [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3192,7 +3540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"W", # pycodestyle warnings</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3250,7 +3604,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"I", # isort</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3308,7 +3668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"UP", # pyupgrade</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3366,7 +3732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"SIM", # flake8-simplify</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3424,7 +3796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3482,7 +3860,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"E501", # Line too long (handled by formatter)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3540,7 +3924,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>[tool.ruff.format]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3598,7 +3988,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>indent-style = "space"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3656,7 +4052,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>line-ending = "lf"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3714,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"__init__.py" = ["F401", "I001"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3772,7 +4180,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check and fix</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ruff check src/ --fix</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ruff check src/ --watch # Watch mode</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,7 +4372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Drop-in replacement for Flake8, isort, pyupgrade, and many more. Extremely fast. Single configuration file. Active development with frequent releases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4004,7 +4436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4062,7 +4500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|------------------|-------|------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4120,7 +4564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Language | JavaScript/TypeScript | JavaScript/TypeScript/CSS | Python |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4178,7 +4628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Speed (10K files) | ~60s | ~2s | ~1s |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4236,7 +4692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Plugin ecosystem | 1000s | Growing | Comprehensive |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4294,7 +4756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Migrate from | N/A | `biome migrate eslint` | `ruff migrate` |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +4820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **New JS/TS projects**: Start with Biome for the best developer experience and speed.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4404,7 +4878,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Python projects**: Ruff is the clear winner. It replaces Flake8, isort, Black, pyupgrade, and pylint in a single tool.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4456,7 +4936,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Pre-commit hooks**: All tools support staged-file-only checks with `--staged` flag.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

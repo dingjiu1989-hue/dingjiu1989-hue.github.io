@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Threat Intelligence Feeds">
     <meta name="twitter:description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Threat Intelligence Feeds — SourceHub</title>
     <meta name="description" content="Integrating threat intelligence feeds with STIX/TAXII, SIEM correlation, and scoring for actionable insights.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-intel-feeds.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2960",
+      "wordCount": "3354",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html"},
-      "articleBody": "Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Fundamentals Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles. STIX and TAXII Standards STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. from stix2 import Indicator, Bundle, TAXIICollectionSource from taxii2client import Collection Create a STIX indicator indicator = Indicator( name=\"Malicious IP\", indicator_types=[\"malicious-activity\"], pattern=\"[ipv4-addr:value = '203.0.113.5']\", pattern_type=\"stix\", valid_from=\"2026-01-01T00:00:00Z\" ) Bundle indicators bundle = Bundle(indicator) print(bundle.serialize(pretty=True)) Consume from TAXII feed collection = Collection(\"https://taxii.example.com/collections/123\") source = TAXIICollectionSource(collection) for indicator in source.query(): print(indicator[\"name\"], indicator[\"pattern\"]) Feed Integration with SIEM Ingest feeds into your SIEM for correlation: import requests from elasticsearch import Elasticsearch class ThreatIntelIngestor: def __init__(self, es_host=\"localhost:9200\"): self.es = Elasticsearch([es_host]) def fetch_and_index(self, feed_url, feed_name): resp = requests.get(feed_url, headers={\"Accept\": \"application/stix+json\"}) indicators = resp.json().get(\"objects\", []) for ioc in indicators: doc = { \"feed\": feed_name, \"type\": ioc.get(\"type\"), \"pattern\": ioc.get(\"pattern\"), \"severity\": ioc.get(\"confidence\", 50), \"valid_until\": ioc.get(\"valid_until\"), \"ingested_at\": \"now\" } self.es.index(index=\"threat-intel\", body=doc) print(f\"Ingested {len(indicators)} indicators from {feed_name}\") IOC Scoring Not all indicators are equally reliable. Implement scoring: def score_indicator(ioc, context): score = 50 # Base score Age decay: newer indicators are more valuable age_days = (datetime.utcnow() - ioc.valid_from).days score -= min(age_days * 2, 30) Multiple feeds increase confidence feed_count = len(ioc.get(\"sources\", [])) score += feed_count * 10 Context matching increases relevance if context.get(\"industry\") in ioc.get(\"target_industries\", []): score += 20 return min(max(score, 0), 100) Feed Quality Metrics Evaluate feeds on these criteria: | Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | 80% | | Freshness | Update frequency | Continuous | Automated Blocking High-confidence indicators can trigger automated blocking: threat-intel-automation.yaml automation_rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips trigger: new_indicator conditions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: \">= 80\" actions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall: action: deny source: indicator.value \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: severity: high channel: security-operations Conclusion Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones."
+      "articleBody": "Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Feeds Threat Intelligence Fundamentals Threat intelligence transforms raw data into actionable security insights. Feeds provide indicators of compromise (IOCs), tactics techniques and procedures (TTPs), and adversary profiles. STIX and TAXII Standards STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. from stix2 import Indicator, Bundle, TAXIICollectionSource from taxii2client import Collection Create a STIX indicator indicator = Indicator( name=\"Malicious IP\", indicator_types=[\"malicious-activity\"], pattern=\"[ipv4-addr:value = '203.0.113.5']\", pattern_type=\"stix\", valid_from=\"2026-01-01T00:00:00Z\" ) Bundle indicators bundle = Bundle(indicator) print(bundle.serialize(pretty=True)) Consume from TAXII feed collection = Collection(\"https://taxii.example.com/collections/123\") source = TAXIICollectionSource(collection) for indicator in source.query(): print(indicator[\"name\"], indicator[\"pattern\"]) Feed Integration with SIEM Ingest feeds into your SIEM for correlation: import requests from elasticsearch import Elasticsearch class ThreatIntelIngestor: def __init__(self, es_host=\"localhost:9200\"): self.es = Elasticsearch([es_host]) def fetch_and_index(self, feed_url, feed_name): resp = requests.get(feed_url, headers={\"Accept\": \"application/stix+json\"}) indicators = resp.json().get(\"objects\", []) for ioc in indicators: doc = { \"feed\": feed_name, \"type\": ioc.get(\"type\"), \"pattern\": ioc.get(\"pattern\"), \"severity\": ioc.get(\"confidence\", 50), \"valid_until\": ioc.get(\"valid_until\"), \"ingested_at\": \"now\" } self.es.index(index=\"threat-intel\", body=doc) print(f\"Ingested {len(indicators)} indicators from {feed_name}\") IOC Scoring Not all indicators are equally reliable. Implement scoring: def score_indicator(ioc, context): score = 50 # Base score Age decay: newer indicators are more valuable age_days = (datetime.utcnow() - ioc.valid_from).days score -= min(age_days * 2, 30) Multiple feeds increase confidence feed_count = len(ioc.get(\"sources\", [])) score += feed_count * 10 Context matching increases relevance if context.get(\"industry\") in ioc.get(\"target_industries\", []): score += 20 return min(max(score, 0), 100) Feed Quality Metrics Evaluate feeds on these criteria: | Metric | Description | Target | |--------|-------------|--------| | False positive rate | Incorrect alerts | 80% | | Freshness | Update frequency | Continuous | Automated Blocking High-confidence indicators can trigger automated blocking: threat-intel-automation.yaml automation_rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips trigger: new_indicator conditions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: \">= 80\" actions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall: action: deny source: indicator.value \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: severity: high channel: security-operations Conclusion Threat intelligence feeds provide critical context for security operations. Standardize on STIX/TAXII, integrate with your SIEM, score indicators for relevance, and automate high-confidence blocking. Quality over quantity: five well-curated feeds beat fifty noisy ones."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "Threat Intelligence Feeds"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>Threat Intelligence Feeds</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Threat Intelligence Fundamentals </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,6 +293,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>STIX and TAXII Standards </p>
 <br>
 <br>
@@ -271,7 +319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -323,7 +377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from taxii2client import Collection</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -375,7 +435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>indicator = Indicator(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -427,7 +493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>indicator_types=["malicious-activity"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -479,7 +551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pattern_type="stix",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -531,7 +609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -583,7 +667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>bundle = Bundle(indicator)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -635,7 +725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Consume from TAXII feed</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -687,7 +783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>source = TAXIICollectionSource(collection)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -739,7 +841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(indicator["name"], indicator["pattern"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +896,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Ingest feeds into your SIEM for correlation: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -840,7 +954,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from elasticsearch import Elasticsearch</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -892,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, es_host="localhost:9200"):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -944,7 +1070,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def fetch_and_index(self, feed_url, feed_name):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -996,7 +1128,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>indicators = resp.json().get("objects", [])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1048,7 +1186,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>doc = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1100,7 +1244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": ioc.get("type"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1152,7 +1302,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"severity": ioc.get("confidence", 50),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1204,7 +1360,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"ingested_at": "now"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1256,7 +1418,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.es.index(index="threat-intel", body=doc)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1308,6 +1476,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>IOC Scoring </p>
 <br>
 <br>
@@ -1331,7 +1502,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Not all indicators are equally reliable. Implement scoring: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1383,7 +1560,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>score = 50 # Base score</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1435,7 +1618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>age_days = (datetime.utcnow() - ioc.valid_from).days</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1487,7 +1676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Multiple feeds increase confidence</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1539,7 +1734,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>score += feed_count * 10</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1591,7 +1792,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if context.get("industry") in ioc.get("target_industries", []):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1643,7 +1850,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return min(max(score, 0), 100)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1692,7 +1905,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Evaluate feeds on these criteria: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1738,6 +1957,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Automated Blocking </p>
 <br>
 <br>
@@ -1761,7 +1983,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>High-confidence indicators can trigger automated blocking: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1813,6 +2041,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>automation_rules:</p>
 <br>
 <br>
@@ -1839,7 +2070,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1891,6 +2128,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>conditions:</p>
 <br>
 <br>
@@ -1917,7 +2157,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr</p>
 <br>
 <br>
 <br>
@@ -1943,7 +2186,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: ">= 80"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: ">= 80"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1995,7 +2244,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2047,6 +2302,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>source: indicator.value</p>
 <br>
 <br>
@@ -2073,7 +2331,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2125,6 +2389,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>channel: security-operations</p>
 <br>
 <br>
@@ -2151,7 +2418,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

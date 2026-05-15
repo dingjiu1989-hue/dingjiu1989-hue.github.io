@@ -13338,6 +13338,7 @@ def make_article_html(art, board_id, board_name, all_posts):
 
     # Cover image for social sharing + article hero
     cover_url = f'https://dingjiu1989-hue.github.io/images/covers/en/{board_id}/{slug}.png'
+    tags_str = ', '.join(art.get('tags', []))
 
     og_tags = f'''    <meta property="og:title" content="{art['title']}">
     <meta property="og:description" content="{art['description']}">
@@ -13351,7 +13352,10 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{art['title']}">
     <meta name="twitter:description" content="{art['description']}">
-    <meta name="twitter:image" content="{cover_url}">'''
+    <meta name="twitter:image" content="{cover_url}">
+    <meta property="article:published_time" content="{art['date']}">
+    <meta property="article:modified_time" content="{art.get('lastActive', art['date'])}">
+    <meta property="article:tag" content="{tags_str}">'''
 
     # sameAs cross-platform identity for AI crawlers
     sameas_urls = SAMEAS_URLS.get(slug, [])
@@ -13364,7 +13368,7 @@ def make_article_html(art, board_id, board_name, all_posts):
     body_html_all = get_body(slug, board_id)
     body_text = re.sub(r'<[^>]+>', '', body_html_all)
     body_text = re.sub(r'\s+', ' ', body_text).strip()
-    body_json = json.dumps(body_text[:50000])
+    body_json = json.dumps(body_text[:200000])
 
     # FAQ Schema for articles that have Q&A sections
     faq_schema = ''
@@ -13389,7 +13393,6 @@ def make_article_html(art, board_id, board_name, all_posts):
     </script>'''
 
     # Article schema with AI-optimized properties
-    tags_str = ', '.join(art.get('tags', []))
     body_len = len(get_body(slug, board_id))
     word_est = max(300, body_len // 5)  # rough estimate from body chars
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
@@ -13478,6 +13481,16 @@ def make_article_html(art, board_id, board_name, all_posts):
       ]
     }}
     </script>{faq_schema}
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {{
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }}
+    }}
+    </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
 </head>
 <body>
@@ -13564,7 +13577,15 @@ def make_homepage(data):
       "@type": "WebSite",
       "name": "SourceHub",
       "url": "https://dingjiu1989-hue.github.io/en/",
-      "description": "{site['tagline']}"
+      "description": "{site['tagline']}",
+      "potentialAction": {{
+        "@type": "SearchAction",
+        "target": {{
+          "@type": "EntryPoint",
+          "urlTemplate": "https://dingjiu1989-hue.github.io/en/?search={{search_term_string}}"
+        }},
+        "query-input": "required name=search_term_string"
+      }}
     }}
     </script>
     <script type="application/ld+json">

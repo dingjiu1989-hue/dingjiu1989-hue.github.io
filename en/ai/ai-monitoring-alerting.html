@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection">
     <meta name="twitter:description" content="Monitor LLM applications in production: track latency percentiles, token consumption, error rates by type, and detect response drift with automated alerting.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection — SourceHub</title>
     <meta name="description" content="Monitor LLM applications in production: track latency percentiles, token consumption, error rates by type, and detect response drift with automated alerting.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-monitoring-alerting.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5982",
+      "wordCount": "6466",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-monitoring-and-alerting-latency-token-usage-error-rates-drift-detection-4bpa"
       ],
-      "articleBody": "AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection Introduction AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain. Core Metrics Every AI application should track these foundational metrics: from prometheus_client import Counter, Histogram, Gauge import time class AIMetrics: def __init__(self): self.request_count = Counter( \"llm_requests_total\", \"Total LLM requests\", [\"provider\", \"model\", \"status\"], ) self.latency = Histogram( \"llm_latency_ms\", \"LLM response latency\", [\"provider\", \"model\"], buckets=[100, 250, 500, 1000, 2000, 5000, 10000], ) self.token_usage = Counter( \"llm_tokens_total\", \"Token usage\", [\"provider\", \"model\", \"token_type\"], # token_type: input/output ) self.cost_total = Counter( \"llm_cost_usd\", \"Total cost in USD\", [\"provider\", \"model\"], ) self.cache_hit_ratio = Gauge( \"llm_cache_hit_ratio\", \"Cache hit ratio\", [\"cache_level\"], # cache_level: exact/semantic ) def record_request(self, provider: str, model: str, duration_ms: float, status: str = \"success\"): self.request_count.labels(provider=provider, model=model, status=status).inc() self.latency.labels(provider=provider, model=model).observe(duration_ms) def record_tokens(self, provider: str, model: str, input_tokens: int, output_tokens: int, cost: float): self.token_usage.labels(provider=provider, model=model, token_type=\"input\").inc(input_tokens) self.token_usage.labels(provider=provider, model=model, token_type=\"output\").inc(output_tokens) self.cost_total.labels(provider=provider, model=model).inc(cost) Token Usage Tracking Monitor token consumption per user, feature, and time period: class TokenUsageTracker: def __init__(self, db): self.db = db async def log_usage(self, user_id: str, feature: str, provider: str, model: str, input_tokens: int, output_tokens: int, latency_ms: float): await self.db.execute(\"\"\" INSERT INTO token_usage (user_id, feature, provider, model, input_tokens, output_tokens, latency_ms, cost, timestamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW()) \"\"\", user_id, feature, provider, model, input_tokens, output_tokens, latency_ms, self._calculate_cost(input_tokens, output_tokens, provider, model)) async def get_daily_usage(self, date: str) -> dict: row = await self.db.fetchrow(\"\"\" SELECT SUM(input_tokens) as input, SUM(output_tokens) as output, SUM(cost) as cost, COUNT(*) as requests FROM token_usage WHERE DATE(timestamp) = $1 \"\"\", date) return dict(row) if row else {\"input\": 0, \"output\": 0, \"cost\": 0, \"requests\": 0} async def check_budget(self, user_id: str, daily_budget: float) -> bool: row = await self.db.fetchrow(\"\"\" SELECT SUM(cost) as today_cost FROM token_usage WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE \"\"\", user_id) return (row[\"today_cost\"] or 0) Error Rate Monitoring LLM applications experience distinctive error types: from enum import Enum class LLMErrorType(Enum): RATE_LIMIT = \"rate_limit\" CONTEXT_WINDOW = \"context_window_exceeded\" CONTENT_FILTER = \"content_filter_blocked\" TIMEOUT = \"timeout\" INVALID_RESPONSE = \"invalid_response\" PROVIDER_DOWN = \"provider_down\" class ErrorMonitor: def __init__(self, alert_threshold: float = 0.05): self.alert_threshold = alert_threshold self.error_counts: dict[str, int] = {} self.total_requests: int = 0 def record_error(self, error_type: LLMErrorType, provider: str): key = f\"{error_type.value}:{provider}\" self.error_counts[key] = self.error_counts.get(key, 0) + 1 self.total_requests += 1 def check_alerts(self) -> list[str]: alerts = [] for key, count in self.error_counts.items(): rate = count / max(self.total_requests, 1) if rate > self.alert_threshold: alerts.append(f\"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}\") return alerts Drift Detection The most critical AI-specific monitoring: detect when model behavior changes: import numpy as np from scipy import stats class ResponseDriftDetector: def __init__(self, reference_embeddings: list, drift_threshold: float = 0.1): self.reference = np.mean(reference_embeddings, axis=0) self.threshold = drift_threshold self.recent_embeddings: list = [] def analyze_response(self, query: str, response: str) -> dict: emb = self._embed(response) self.recent_embeddings.append(emb) if len(self.recent_embeddings) >= 100: drift_score = self._compute_drift() self.recent_embeddings = [] return {\"drift_detected\": drift_score > self.threshold, \"drift_score\": drift_score} return {\"drift_detected\": False, \"drift_score\": 0.0} def _embed(self, text: str) -> np.ndarray: return embedding_model.encode(text) def _compute_drift(self) -> float: recent_mean = np.mean(self.recent_embeddings, axis=0) return float(np.linalg.norm(recent_mean - self.reference)) def detect_refusal_rate_change(self, recent_responses: list[str], baseline_rate: float) -> dict: refusal_patterns = [\"I cannot\", \"I'm unable\", \"I apologize\", \"cannot assist\"] current_rate = sum( 1 for r in recent_responses if any(p in r.lower() for p in refusal_patterns) ) / len(recent_responses) change = abs(current_rate - baseline_rate) return {\"changed\": change > 0.05, \"baseline\": baseline_rate, \"current\": current_rate, \"change\": change} Alerting Configuration class AIAlertManager: def __init__(self, pagerduty_key: str, slack_webhook: str): self.pagerduty = pagerduty_key self.slack = slack_webhook def check_and_alert(self, metrics: dict): alerts = [] Latency alerts if metrics.get(\"p99_latency_ms\", 0) > 10000: alerts.append(Alert(severity=\"critical\", title=\"High P99 latency\", message=f\"P99 latency is {metrics['p99_latency_ms']}ms\")) Error rate alerts if metrics.get(\"error_rate\", 0) > 0.05: alerts.append(Alert(severity=\"critical\", title=\"Elevated error rate\", message=f\"Error rate is {metrics['error_rate']:.1%}\")) Cost anomaly alerts if metrics.get(\"daily_cost\", 0) > metrics.get(\"daily_budget\", float(\"inf\")) * 1.2: alerts.append(Alert(severity=\"warning\", title=\"Cost anomaly detected\", message=f\"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget\")) Drift alerts if metrics.get(\"drift_detected\", False): alerts.append(Alert(severity=\"warning\", title=\"Response drift detected\", message=f\"Drift score: {metrics.get('drift_score', 0):.3f}\")) return alerts Conclusion AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline."
+      "articleBody": "AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection Introduction AI applications introduce new monitoring dimensions beyond traditional infrastructure metrics. LLM responses can be slow, expensive, incorrect, or suddenly change behavior when providers update models. This article covers the metrics, tools, and alerting strategies for production AI monitoring, including drift detection that catches quality degradation before users complain. Core Metrics Every AI application should track these foundational metrics: from prometheus_client import Counter, Histogram, Gauge import time class AIMetrics: def __init__(self): self.request_count = Counter( \"llm_requests_total\", \"Total LLM requests\", [\"provider\", \"model\", \"status\"], ) self.latency = Histogram( \"llm_latency_ms\", \"LLM response latency\", [\"provider\", \"model\"], buckets=[100, 250, 500, 1000, 2000, 5000, 10000], ) self.token_usage = Counter( \"llm_tokens_total\", \"Token usage\", [\"provider\", \"model\", \"token_type\"], # token_type: input/output ) self.cost_total = Counter( \"llm_cost_usd\", \"Total cost in USD\", [\"provider\", \"model\"], ) self.cache_hit_ratio = Gauge( \"llm_cache_hit_ratio\", \"Cache hit ratio\", [\"cache_level\"], # cache_level: exact/semantic ) def record_request(self, provider: str, model: str, duration_ms: float, status: str = \"success\"): self.request_count.labels(provider=provider, model=model, status=status).inc() self.latency.labels(provider=provider, model=model).observe(duration_ms) def record_tokens(self, provider: str, model: str, input_tokens: int, output_tokens: int, cost: float): self.token_usage.labels(provider=provider, model=model, token_type=\"input\").inc(input_tokens) self.token_usage.labels(provider=provider, model=model, token_type=\"output\").inc(output_tokens) self.cost_total.labels(provider=provider, model=model).inc(cost) Token Usage Tracking Monitor token consumption per user, feature, and time period: class TokenUsageTracker: def __init__(self, db): self.db = db async def log_usage(self, user_id: str, feature: str, provider: str, model: str, input_tokens: int, output_tokens: int, latency_ms: float): await self.db.execute(\"\"\" INSERT INTO token_usage (user_id, feature, provider, model, input_tokens, output_tokens, latency_ms, cost, timestamp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW()) \"\"\", user_id, feature, provider, model, input_tokens, output_tokens, latency_ms, self._calculate_cost(input_tokens, output_tokens, provider, model)) async def get_daily_usage(self, date: str) -> dict: row = await self.db.fetchrow(\"\"\" SELECT SUM(input_tokens) as input, SUM(output_tokens) as output, SUM(cost) as cost, COUNT(*) as requests FROM token_usage WHERE DATE(timestamp) = $1 \"\"\", date) return dict(row) if row else {\"input\": 0, \"output\": 0, \"cost\": 0, \"requests\": 0} async def check_budget(self, user_id: str, daily_budget: float) -> bool: row = await self.db.fetchrow(\"\"\" SELECT SUM(cost) as today_cost FROM token_usage WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE \"\"\", user_id) return (row[\"today_cost\"] or 0) Error Rate Monitoring LLM applications experience distinctive error types: from enum import Enum class LLMErrorType(Enum): RATE_LIMIT = \"rate_limit\" CONTEXT_WINDOW = \"context_window_exceeded\" CONTENT_FILTER = \"content_filter_blocked\" TIMEOUT = \"timeout\" INVALID_RESPONSE = \"invalid_response\" PROVIDER_DOWN = \"provider_down\" class ErrorMonitor: def __init__(self, alert_threshold: float = 0.05): self.alert_threshold = alert_threshold self.error_counts: dict[str, int] = {} self.total_requests: int = 0 def record_error(self, error_type: LLMErrorType, provider: str): key = f\"{error_type.value}:{provider}\" self.error_counts[key] = self.error_counts.get(key, 0) + 1 self.total_requests += 1 def check_alerts(self) -> list[str]: alerts = [] for key, count in self.error_counts.items(): rate = count / max(self.total_requests, 1) if rate > self.alert_threshold: alerts.append(f\"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}\") return alerts Drift Detection The most critical AI-specific monitoring: detect when model behavior changes: import numpy as np from scipy import stats class ResponseDriftDetector: def __init__(self, reference_embeddings: list, drift_threshold: float = 0.1): self.reference = np.mean(reference_embeddings, axis=0) self.threshold = drift_threshold self.recent_embeddings: list = [] def analyze_response(self, query: str, response: str) -> dict: emb = self._embed(response) self.recent_embeddings.append(emb) if len(self.recent_embeddings) >= 100: drift_score = self._compute_drift() self.recent_embeddings = [] return {\"drift_detected\": drift_score > self.threshold, \"drift_score\": drift_score} return {\"drift_detected\": False, \"drift_score\": 0.0} def _embed(self, text: str) -> np.ndarray: return embedding_model.encode(text) def _compute_drift(self) -> float: recent_mean = np.mean(self.recent_embeddings, axis=0) return float(np.linalg.norm(recent_mean - self.reference)) def detect_refusal_rate_change(self, recent_responses: list[str], baseline_rate: float) -> dict: refusal_patterns = [\"I cannot\", \"I'm unable\", \"I apologize\", \"cannot assist\"] current_rate = sum( 1 for r in recent_responses if any(p in r.lower() for p in refusal_patterns) ) / len(recent_responses) change = abs(current_rate - baseline_rate) return {\"changed\": change > 0.05, \"baseline\": baseline_rate, \"current\": current_rate, \"change\": change} Alerting Configuration class AIAlertManager: def __init__(self, pagerduty_key: str, slack_webhook: str): self.pagerduty = pagerduty_key self.slack = slack_webhook def check_and_alert(self, metrics: dict): alerts = [] Latency alerts if metrics.get(\"p99_latency_ms\", 0) > 10000: alerts.append(Alert(severity=\"critical\", title=\"High P99 latency\", message=f\"P99 latency is {metrics['p99_latency_ms']}ms\")) Error rate alerts if metrics.get(\"error_rate\", 0) > 0.05: alerts.append(Alert(severity=\"critical\", title=\"Elevated error rate\", message=f\"Error rate is {metrics['error_rate']:.1%}\")) Cost anomaly alerts if metrics.get(\"daily_cost\", 0) > metrics.get(\"daily_budget\", float(\"inf\")) * 1.2: alerts.append(Alert(severity=\"warning\", title=\"Cost anomaly detected\", message=f\"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget\")) Drift alerts if metrics.get(\"drift_detected\", False): alerts.append(Alert(severity=\"warning\", title=\"Response drift detected\", message=f\"Drift score: {metrics.get('drift_score', 0):.3f}\")) return alerts Conclusion AI monitoring extends traditional observability with LLM-specific metrics. Track latency percentiles (P50, P95, P99) to detect slowdowns. Monitor token usage and cost per user and feature to control spending. Categorize errors by type (rate limit, context window, content filter) to identify provider issues. Most importantly, implement drift detection to catch subtle quality changes when models are updated or system prompts are modified. Alert on all four dimensions and investigate any metric that deviates more than 20% from its baseline."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Core Metrics</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from prometheus_client import Counter, Histogram, Gauge</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class AIMetrics:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.request_count = Counter(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,6 +596,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>["provider", "model", "status"],</p>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,6 +692,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"llm_latency_ms", "LLM response latency",</p>
 <br>
 <br>
@@ -640,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>["provider", "model"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -698,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -756,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"llm_tokens_total", "Token usage",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -814,7 +916,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -872,7 +980,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"llm_cost_usd", "Total cost in USD",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -930,7 +1044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"llm_cache_hit_ratio", "Cache hit ratio",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1104,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.request_count.labels(provider=provider, model=model, status=status).inc()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,7 +1300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def record_tokens(self, provider: str, model: str, input_tokens: int, output_tokens: int, cost: float):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1220,7 +1364,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.token_usage.labels(provider=provider, model=model, token_type="output").inc(output_tokens)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1278,7 +1428,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Token Usage Tracking</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1336,7 +1492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class TokenUsageTracker:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1394,7 +1556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.db = db</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>input_tokens: int, output_tokens: int, latency_ms: float):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>INSERT INTO token_usage</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1568,7 +1748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>latency_ms, cost, timestamp)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1626,7 +1812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""", user_id, feature, provider, model, input_tokens, output_tokens,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1684,6 +1876,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def get_daily_usage(self, date: str) -> dict:</p>
 <br>
 <br>
@@ -1713,7 +1908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>row = await self.db.fetchrow("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1771,7 +1972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SUM(cost) as cost, COUNT(*) as requests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1829,7 +2036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""", date)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1887,7 +2100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def check_budget(self, user_id: str, daily_budget: float) -> bool:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1945,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT SUM(cost) as today_cost</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2003,7 +2228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2061,7 +2292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return (row["today_cost"] or 0) < daily_budget</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2119,7 +2356,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LLM applications experience distinctive error types:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2177,7 +2420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class LLMErrorType(Enum):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2235,7 +2484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CONTEXT_WINDOW = "context_window_exceeded"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2293,7 +2548,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TIMEOUT = "timeout"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2351,7 +2612,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PROVIDER_DOWN = "provider_down"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2409,7 +2676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, alert_threshold: float = 0.05):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.error_counts: dict[str, int] = {}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,7 +2804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def record_error(self, error_type: LLMErrorType, provider: str):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2583,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.error_counts[key] = self.error_counts.get(key, 0) + 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2641,6 +2932,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def check_alerts(self) -> list[str]:</p>
 <br>
 <br>
@@ -2670,7 +2964,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2728,7 +3028,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rate = count / max(self.total_requests, 1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2786,6 +3092,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}")</p>
 <br>
 <br>
@@ -2815,7 +3124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return alerts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,7 +3188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The most critical AI-specific monitoring: detect when model behavior changes:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2931,7 +3252,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from scipy import stats</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, reference_embeddings: list, drift_threshold: float = 0.1):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.threshold = drift_threshold</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def analyze_response(self, query: str, response: str) -> dict:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3163,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.recent_embeddings.append(emb)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>drift_score = self._compute_drift()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3279,7 +3636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"drift_detected": drift_score > self.threshold, "drift_score": drift_score}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3337,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _embed(self, text: str) -> np.ndarray:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3395,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _compute_drift(self) -> float:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3453,7 +3828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return float(np.linalg.norm(recent_mean - self.reference))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>refusal_patterns = ["I cannot", "I'm unable", "I apologize", "cannot assist"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3569,7 +3956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>1 for r in recent_responses</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,7 +4020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) / len(recent_responses)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3685,7 +4084,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"changed": change > 0.05, "baseline": baseline_rate, "current": current_rate, "change": change}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3743,7 +4148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class AIAlertManager:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3801,7 +4212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.pagerduty = pagerduty_key</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3859,7 +4276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def check_and_alert(self, metrics: dict):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3917,7 +4340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Latency alerts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3975,7 +4404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts.append(Alert(severity="critical", title="High P99 latency",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4033,7 +4468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Error rate alerts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4091,7 +4532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts.append(Alert(severity="critical", title="Elevated error rate",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4149,7 +4596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Cost anomaly alerts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4207,7 +4660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts.append(Alert(severity="warning", title="Cost anomaly detected",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4265,7 +4724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Drift alerts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4323,7 +4788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alerts.append(Alert(severity="warning", title="Response drift detected",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4381,6 +4852,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return alerts</p>
 <br>
 <br>
@@ -4410,7 +4884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

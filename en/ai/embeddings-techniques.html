@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Embeddings: Techniques and Best Practices">
     <meta name="twitter:description" content="Learn embeddings techniques for semantic search, clustering, and similarity matching with vector databases.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/embeddings-techniques.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Embeddings: Techniques and Best Practices — SourceHub</title>
     <meta name="description" content="Learn embeddings techniques for semantic search, clustering, and similarity matching with vector databases.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/embeddings-techniques.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1192",
+      "wordCount": "1276",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/embeddings-techniques-and-best-practices-eep"
       ],
-      "articleBody": "Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings convert text into dense vector representations that capture semantic meaning. They are the foundation of semantic search, clustering, recommendation systems, and retrieval-augmented generation. Embedding Models Different embedding models excel at different tasks. OpenAI text-embedding-ada-002 (1536 dimensions) is a strong general-purpose model. text-embedding-3-small (512-1536) offers better performance at lower cost. Sentence-transformers (all-MiniLM-L6-v2, 384 dimensions) run locally. Multilingual embeddings support cross-lingual retrieval. intfloat/multilingual-e5-large works across 100+ languages. Cohere embed-multilingual supports semantic search in multiple languages. Domain-specific embeddings fine-tuned on your data outperform general models. Embedding Quality Factors Embedding quality depends on training data, model architecture, and dimension. Higher dimensions capture more information but cost more to store and query. Matryoshka embeddings adjust dimensionality without retraining. Text normalization matters. Remove irrelevant formatting, standardize whitespace, and handle special characters consistently. Longer texts average out\u20141024 tokens is a good default chunk size. Experiment with different prefix instructions (\"search_query:\" vs \"search_document:\") for asymmetric search. Similarity Metrics Cosine similarity is the most common metric. It measures the angle between vectors, ignoring magnitude. Dot product considers both angle and magnitude\u2014use with normalized vectors for cosine equivalence. Euclidean distance captures magnitude differences\u2014useful for clustering. Choose similarity based on your embedding model. OpenAI embeddings use cosine similarity. Cohere embeddings use dot product. Sentence-transformers use cosine similarity. Check your model's documentation. Vector Databases Pinecone, Weaviate, Qdrant, and Milvus are purpose-built vector databases. PostgreSQL with pgvector extends existing databases with vector search. Chroma is lightweight for development. Each offers different trade-offs in scalability, consistency, and query features. Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Navigable Small World) offers fast approximate nearest neighbor search. IVF (Inverted File Index) is more memory-efficient. Brute force search is exact but slow for large collections. Preprocessing Clean text before embedding. Remove HTML tags, normalize unicode, standardize whitespace, and handle special characters. For retrieval, prepend task prefixes matching the embedding model's training format. Test different chunk sizes and overlap strategies for your specific use case."
+      "articleBody": "Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings: Techniques and Best Practices Embeddings convert text into dense vector representations that capture semantic meaning. They are the foundation of semantic search, clustering, recommendation systems, and retrieval-augmented generation. Embedding Models Different embedding models excel at different tasks. OpenAI text-embedding-ada-002 (1536 dimensions) is a strong general-purpose model. text-embedding-3-small (512-1536) offers better performance at lower cost. Sentence-transformers (all-MiniLM-L6-v2, 384 dimensions) run locally. Multilingual embeddings support cross-lingual retrieval. intfloat/multilingual-e5-large works across 100+ languages. Cohere embed-multilingual supports semantic search in multiple languages. Domain-specific embeddings fine-tuned on your data outperform general models. Embedding Quality Factors Embedding quality depends on training data, model architecture, and dimension. Higher dimensions capture more information but cost more to store and query. Matryoshka embeddings adjust dimensionality without retraining. Text normalization matters. Remove irrelevant formatting, standardize whitespace, and handle special characters consistently. Longer texts average out\u20141024 tokens is a good default chunk size. Experiment with different prefix instructions (\"search_query:\" vs \"search_document:\") for asymmetric search. Similarity Metrics Cosine similarity is the most common metric. It measures the angle between vectors, ignoring magnitude. Dot product considers both angle and magnitude\u2014use with normalized vectors for cosine equivalence. Euclidean distance captures magnitude differences\u2014useful for clustering. Choose similarity based on your embedding model. OpenAI embeddings use cosine similarity. Cohere embeddings use dot product. Sentence-transformers use cosine similarity. Check your model's documentation. Vector Databases Pinecone, Weaviate, Qdrant, and Milvus are purpose-built vector databases. PostgreSQL with pgvector extends existing databases with vector search. Chroma is lightweight for development. Each offers different trade-offs in scalability, consistency, and query features. Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Navigable Small World) offers fast approximate nearest neighbor search. IVF (Inverted File Index) is more memory-efficient. Brute force search is exact but slow for large collections. Preprocessing Clean text before embedding. Remove HTML tags, normalize unicode, standardize whitespace, and handle special characters. For retrieval, prepend task prefixes matching the embedding model's training format. Test different chunk sizes and overlap strategies for your specific use case."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "Embeddings: Techniques and Best Practices"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -231,7 +244,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Embeddings: Techniques and Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Embeddings convert text into dense vector representations that capture semantic meaning. They are the foundation of semantic search, clustering, recommendation systems, and retrieval-augmented generation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -289,7 +337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Different embedding models excel at different tasks. OpenAI text-embedding-ada-002 (1536 dimensions) is a strong general-purpose model. text-embedding-3-small (512-1536) offers better performance at lower cost. Sentence-transformers (all-MiniLM-L6-v2, 384 dimensions) run locally.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -347,7 +401,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Embedding Quality Factors</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -405,7 +465,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Text normalization matters. Remove irrelevant formatting, standardize whitespace, and handle special characters consistently. Longer texts average out—1024 tokens is a good default chunk size. Experiment with different prefix instructions ("search_query:" vs "search_document:") for asymmetric search.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -463,7 +529,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cosine similarity is the most common metric. It measures the angle between vectors, ignoring magnitude. Dot product considers both angle and magnitude—use with normalized vectors for cosine equivalence. Euclidean distance captures magnitude differences—useful for clustering.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -521,7 +593,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Vector Databases</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -579,6 +657,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Index type determines search speed-accuracy trade-off. HNSW (Hierarchical Navigable Small World) offers fast approximate nearest neighbor search. IVF (Inverted File Index) is more memory-efficient. Brute force search is exact but slow for large collections.</p>
 <br>
 <br>
@@ -608,7 +689,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Preprocessing</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

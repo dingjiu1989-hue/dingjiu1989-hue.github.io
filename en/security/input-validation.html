@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Input Validation Deep Dive">
     <meta name="twitter:description" content="In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Input Validation Deep Dive — SourceHub</title>
     <meta name="description" content="In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/input-validation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1333",
+      "wordCount": "1456",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/input-validation-deep-dive-16he"
       ],
-      "articleBody": "Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Introduction Input validation is the first line of defense against injection attacks. Every piece of data entering an application \u2014 form fields, HTTP headers, URL parameters, file uploads, API payloads \u2014 must be validated before processing. The principle is simple: never trust user input. Whitelist vs Blacklist Whitelist (Allowlist) Validation Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. import re Whitelist: only allow specific characters def validate_username_whitelist(username): \"\"\"Allow only alphanumeric, underscore, and hyphen.\"\"\" pattern = r'^[a-zA-Z0-9_-]{3,32}$' if not re.match(pattern, username): raise ValueError( f\"Username '{username}' contains invalid characters. \" \"Only letters, numbers, underscores, and hyphens are allowed.\" ) return username Whitelist for country codes ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'} def validate_country_code(code): if code.upper() not in ALLOWED_COUNTRIES: raise ValueError(f\"Country '{code}' is not in the allowed list\") return code.upper() Blacklist (Blocklist) Validation Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. WEAK: Blacklist approach (easily bypassed) def validate_input_blacklist(input_string): Easily bypassed \u2014 attacker uses alternative syntax blocklist = ['"
+      "articleBody": "Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Introduction Input validation is the first line of defense against injection attacks. Every piece of data entering an application \u2014 form fields, HTTP headers, URL parameters, file uploads, API payloads \u2014 must be validated before processing. The principle is simple: never trust user input. Whitelist vs Blacklist Whitelist (Allowlist) Validation Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. import re Whitelist: only allow specific characters def validate_username_whitelist(username): \"\"\"Allow only alphanumeric, underscore, and hyphen.\"\"\" pattern = r'^[a-zA-Z0-9_-]{3,32}$' if not re.match(pattern, username): raise ValueError( f\"Username '{username}' contains invalid characters. \" \"Only letters, numbers, underscores, and hyphens are allowed.\" ) return username Whitelist for country codes ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'} def validate_country_code(code): if code.upper() not in ALLOWED_COUNTRIES: raise ValueError(f\"Country '{code}' is not in the allowed list\") return code.upper() Blacklist (Blocklist) Validation Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. WEAK: Blacklist approach (easily bypassed) def validate_input_blacklist(input_string): Easily bypassed \u2014 attacker uses alternative syntax blocklist = ['"
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "Input Validation Deep Dive"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -263,7 +276,45 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Input Validation Deep Dive</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Introduction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -321,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Whitelist vs Blacklist </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -379,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -437,7 +500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Whitelist: only allow specific characters</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -495,7 +564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Allow only alphanumeric, underscore, and hyphen."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not re.match(pattern, username):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,7 +692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f"Username '{username}' contains invalid characters. "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Whitelist for country codes</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def validate_country_code(code):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError(f"Country '{code}' is not in the allowed list")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Blacklist (Blocklist) Validation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>WEAK: Blacklist approach (easily bypassed)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Easily bypassed — attacker uses alternative syntax</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

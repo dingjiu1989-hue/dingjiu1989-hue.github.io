@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)">
     <meta name="twitter:description" content="Compare InfluxDB, TimescaleDB, and ClickHouse for time-series data workloads including monitoring, IoT, and real-time analytics.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/time-series-databases.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Database, SQL">
     <title>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) — SourceHub</title>
     <meta name="description" content="Compare InfluxDB, TimescaleDB, and ClickHouse for time-series data workloads including monitoring, IoT, and real-time analytics.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/time-series-databases.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1199",
+      "wordCount": "1318",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/time-series-databases-influxdb-timescaledb-clickhouse-361k"
       ],
-      "articleBody": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time-Series Data Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. Database Comparison | Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | InfluxDB Purpose-built time-series with automatic downsampling: from influxdb_client import InfluxDBClient client = InfluxDBClient(url=\"http://localhost:8086\", token=\"my-token\") write_api = client.write_api() p = Point(\"cpu\").tag(\"host\", \"server01\").field(\"usage_user\", 45.2) write_api.write(bucket=\"metrics\", record=p) TimescaleDB PostgreSQL extension with hypertables: CREATE TABLE sensor_data ( time TIMESTAMPTZ NOT NULL, device_id INTEGER, temperature DOUBLE PRECISION ); SELECT create_hypertable('sensor_data', 'time'); SELECT time_bucket('5m', time) AS bucket, AVG(temperature) FROM sensor_data WHERE time > NOW() - INTERVAL '24h' GROUP BY bucket; Performance For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. Conclusion Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies."
+      "articleBody": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time Series Databases (InfluxDB, TimescaleDB, ClickHouse) Time-Series Data Time-series data is a sequence of data points indexed by time. Examples include server metrics, IoT sensor readings, and financial tick data. Database Comparison | Feature | InfluxDB | TimescaleDB | QuestDB | |---------|----------|-------------|---------| | Architecture | Custom TS engine | PostgreSQL extension | Columnar | | SQL | Flux / SQL | Full SQL | SQL | | Write throughput | Very high | High | Very high | | Compression | Excellent | Good | Excellent | InfluxDB Purpose-built time-series with automatic downsampling: from influxdb_client import InfluxDBClient client = InfluxDBClient(url=\"http://localhost:8086\", token=\"my-token\") write_api = client.write_api() p = Point(\"cpu\").tag(\"host\", \"server01\").field(\"usage_user\", 45.2) write_api.write(bucket=\"metrics\", record=p) TimescaleDB PostgreSQL extension with hypertables: CREATE TABLE sensor_data ( time TIMESTAMPTZ NOT NULL, device_id INTEGER, temperature DOUBLE PRECISION ); SELECT create_hypertable('sensor_data', 'time'); SELECT time_bucket('5m', time) AS bucket, AVG(temperature) FROM sensor_data WHERE time > NOW() - INTERVAL '24h' GROUP BY bucket; Performance For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. Conclusion Choose InfluxDB for purpose-built time-series, TimescaleDB for SQL compatibility, and QuestDB for maximum performance. All support downsampling and retention policies."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -204,7 +217,39 @@
 <br>
 <br>
 <br>
+<h1>Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Time-Series Data </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -250,7 +295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Database Comparison </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -296,6 +347,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>InfluxDB </p>
 <br>
 <br>
@@ -319,7 +373,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Purpose-built time-series with automatic downsampling: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -371,7 +431,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client = InfluxDBClient(url="http://localhost:8086", token="my-token")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -423,7 +489,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>p = Point("cpu").tag("host", "server01").field("usage_user", 45.2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -475,6 +547,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TimescaleDB </p>
 <br>
 <br>
@@ -498,7 +573,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PostgreSQL extension with hypertables: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -550,7 +631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>time TIMESTAMPTZ NOT NULL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -602,7 +689,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>temperature DOUBLE PRECISION</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -654,7 +747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT create_hypertable('sensor_data', 'time');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -706,7 +805,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AVG(temperature) FROM sensor_data</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -758,7 +863,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY bucket;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -807,6 +918,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. </p>
 <br>
 <br>
@@ -830,7 +944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

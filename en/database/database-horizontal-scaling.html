@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Database Horizontal Scaling Strategies">
     <meta name="twitter:description" content="Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distributed architectures.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Database, Backend, Data">
     <title>Database Horizontal Scaling Strategies — SourceHub</title>
     <meta name="description" content="Learn horizontal scaling strategies for databases: sharding, replication, read replicas, and distributed architectures.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-horizontal-scaling.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1074",
+      "wordCount": "1153",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-horizontal-scaling.html"},
-      "articleBody": "Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity. Sharding Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads. Choosing the right shard key is critical. A good shard key evenly distributes data and queries. Common strategies include hash-based sharding (shard key % N), range-based sharding (user IDs 1-10000 on shard A, 10001-20000 on shard B), and geographic sharding (US customers on one shard, EU on another). Read Replicas Read replicas handle read-only queries. The primary database handles writes and asynchronously replicates to read replicas. This scales read capacity without affecting write performance. Read replicas are simpler than sharding\u2014no data partitioning needed. They work best for read-heavy applications: content management systems, reporting dashboards, analytics queries. The trade-off is replication lag\u2014read replicas may serve slightly stale data. Database Federation Federation splits a database schema across multiple databases by domain. User data in one database, product data in another, orders in a third. Each database is independently scaled based on its workload characteristics. Federation reduces contention between domains. A heavy reporting query on the order database does not affect the user database. The trade-off is that cross-domain queries require application-level joins. Distributed SQL Modern distributed SQL databases (CockroachDB, YugabyteDB, Google Spanner) provide horizontal scaling with SQL semantics. They automatically distribute and replicate data across nodes. Applications use standard SQL without sharding logic. Distributed SQL databases offer the scalability of NoSQL with the consistency and query capabilities of SQL. The trade-off is higher latency for distributed transactions and higher resource overhead. Choosing a Strategy Use read replicas when reads far exceed writes and eventual consistency is acceptable. Use sharding when write throughput exceeds a single node's capacity. Use federation when different data domains have different scaling requirements. Consider distributed SQL for greenfield applications that anticipate massive scale."
+      "articleBody": "Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Database Horizontal Scaling Strategies Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity. Sharding Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads. Choosing the right shard key is critical. A good shard key evenly distributes data and queries. Common strategies include hash-based sharding (shard key % N), range-based sharding (user IDs 1-10000 on shard A, 10001-20000 on shard B), and geographic sharding (US customers on one shard, EU on another). Read Replicas Read replicas handle read-only queries. The primary database handles writes and asynchronously replicates to read replicas. This scales read capacity without affecting write performance. Read replicas are simpler than sharding\u2014no data partitioning needed. They work best for read-heavy applications: content management systems, reporting dashboards, analytics queries. The trade-off is replication lag\u2014read replicas may serve slightly stale data. Database Federation Federation splits a database schema across multiple databases by domain. User data in one database, product data in another, orders in a third. Each database is independently scaled based on its workload characteristics. Federation reduces contention between domains. A heavy reporting query on the order database does not affect the user database. The trade-off is that cross-domain queries require application-level joins. Distributed SQL Modern distributed SQL databases (CockroachDB, YugabyteDB, Google Spanner) provide horizontal scaling with SQL semantics. They automatically distribute and replicate data across nodes. Applications use standard SQL without sharding logic. Distributed SQL databases offer the scalability of NoSQL with the consistency and query capabilities of SQL. The trade-off is higher latency for distributed transactions and higher resource overhead. Choosing a Strategy Use read replicas when reads far exceed writes and eventual consistency is acceptable. Use sharding when write throughput exceeds a single node's capacity. Use federation when different data domains have different scaling requirements. Consider distributed SQL for greenfield applications that anticipate massive scale."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Database Horizontal Scaling Strategies"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -200,7 +213,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Database Horizontal Scaling Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Horizontal scaling distributes database load across multiple machines. Unlike vertical scaling (upgrading to a bigger server), horizontal scaling adds more servers to handle increased load. This approach provides near-linear scalability but adds architectural complexity.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -252,7 +297,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sharding splits data across multiple database instances based on a shard key. Each shard holds a subset of the data. Sharding distributes both read and write load, making it suitable for write-heavy workloads.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -304,7 +355,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Read Replicas</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -356,7 +413,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Read replicas are simpler than sharding—no data partitioning needed. They work best for read-heavy applications: content management systems, reporting dashboards, analytics queries. The trade-off is replication lag—read replicas may serve slightly stale data.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +471,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Federation splits a database schema across multiple databases by domain. User data in one database, product data in another, orders in a third. Each database is independently scaled based on its workload characteristics.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -460,7 +529,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Distributed SQL</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -512,6 +587,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Distributed SQL databases offer the scalability of NoSQL with the consistency and query capabilities of SQL. The trade-off is higher latency for distributed transactions and higher resource overhead.</p>
 <br>
 <br>
@@ -538,7 +616,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Choosing a Strategy</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

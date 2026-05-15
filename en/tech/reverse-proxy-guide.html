@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Reverse Proxy Guide">
     <meta name="twitter:description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tech/reverse-proxy-guide.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Technology, Programming, DevOps">
     <title>Reverse Proxy Guide — SourceHub</title>
     <meta name="description" content="Complete guide to reverse proxy configuration with Nginx and Caddy, covering SSL, caching, and load balancing.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/reverse-proxy-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "5546",
+      "wordCount": "6009",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/reverse-proxy-guide-2n9g"
       ],
-      "articleBody": "Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy. Why Use a Reverse Proxy * **TLS termination**: Handle HTTPS once at the proxy layer. * **Load balancing**: Distribute traffic across multiple backend instances. * **Caching**: Cache responses to reduce backend load. * **Security**: Filter malicious requests, rate limiting, IP blocking. * **Multiple services**: Route different paths to different backends from one domain. Nginx Reverse Proxy Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable. Basic Reverse Proxy Configuration server { listen 80; server_name app.example.com; location / { proxy_pass http://127.0.0.1:3000; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } } The `proxy_pass` directive sends requests to the backend. Always forward the original host and client IP headers so your application has accurate client information. WebSocket Support location /ws/ { proxy_pass http://127.0.0.1:3001; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection \"upgrade\"; proxy_set_header Host $host; proxy_read_timeout 86400s; } The `Upgrade` and `Connection` headers are required for WebSocket connections. Set `proxy_read_timeout` to a long duration since WebSocket connections remain open. Load Balancing Distribute traffic across multiple backends: upstream app_cluster { least_conn; server 10.0.0.1:3000 weight=3; server 10.0.0.2:3000; server 10.0.0.3:3000 backup; } server { location / { proxy_pass http://app_cluster; } } Load balancing methods: `round-robin` (default), `least_conn` (fewest active connections), `ip_hash` (session persistence). Assign higher `weight` to more powerful servers. Caching Cache responses from the backend: proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=appcache:10m max_size=1g; server { location / { proxy_cache appcache; proxy_cache_valid 200 30m; proxy_cache_valid 404 1m; proxy_cache_use_stale error timeout updating; add_header X-Cache-Status $upstream_cache_status; } } The `$upstream_cache_status` header helps debug caching (HIT, MISS, STALE, etc.). `proxy_cache_use_stale` serves stale content when the backend is down. Caddy Reverse Proxy Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go-based performance. It is ideal for teams that want a zero-fuss reverse proxy. Basic Reverse Proxy Caddyfile app.example.com { reverse_proxy localhost:3000 } That is the entire configuration. Caddy automatically obtains and renews Let's Encrypt TLS certificates. Multiple Backends with Load Balancing app.example.com { reverse_proxy 10.0.0.1:3000 10.0.0.2:3000 10.0.0.3:3000 { lb_policy least_conn health_uri /health health_interval 30s } } Caddy supports multiple load balancing policies: `random`, `least_conn`, `round_robin`, `first`, `ip_hash`. Path-Based Routing Route different paths to different services: api.example.com { reverse_proxy /api/* localhost:3000 reverse_proxy /auth/* localhost:3001 reverse_proxy localhost:3002 # default } Request Manipulation app.example.com { reverse_proxy localhost:3000 { header_up Host {host} header_up X-Real-IP {remote_host} } Add security headers header { X-Frame-Options \"SAMEORIGIN\" X-Content-Type-Options \"nosniff\" } } Caddy's `header` directive works for both request and response headers. Nginx vs Caddy: Comparison | Feature | Nginx | Caddy | |---------|-------|-------| | Configuration | Complex, powerful | Simple, opinionated | | TLS | Manual cert management | Automatic Let's Encrypt | | Performance | Excellent | Very good | | Ecosystem | Vast (modules, guides) | Growing but smaller | | Docker support | Official image | Official image | | Learning curve | Steep | Gentle | | Dynamic configuration | Limited | REST API available | | HTTP/3 | Supported | Supported | Security Headers Regardless of which reverse proxy you choose, add these security headers: For Nginx: add_header X-Frame-Options \"SAMEORIGIN\" always; add_header X-Content-Type-Options \"nosniff\" always; add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always; add_header Content-Security-Policy \"default-src 'self';\" always; For Caddy: header { X-Frame-Options \"SAMEORIGIN\" X-Content-Type-Options \"nosniff\" Strict-Transport-Security \"max-age=31536000; includeSubDomains\" } Rate Limiting Nginx: limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s; location /api/ { limit_req zone=api burst=20 nodelay; proxy_pass http://backend; } Caddy: app.example.com { rate_limit { zone api { key {remote_host} events 10 window 1s } } reverse_proxy localhost:3000 } Health Checks Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them. Summary Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance."
+      "articleBody": "Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide Reverse Proxy Guide A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy. Why Use a Reverse Proxy * **TLS termination**: Handle HTTPS once at the proxy layer. * **Load balancing**: Distribute traffic across multiple backend instances. * **Caching**: Cache responses to reduce backend load. * **Security**: Filter malicious requests, rate limiting, IP blocking. * **Multiple services**: Route different paths to different backends from one domain. Nginx Reverse Proxy Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable. Basic Reverse Proxy Configuration server { listen 80; server_name app.example.com; location / { proxy_pass http://127.0.0.1:3000; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; } } The `proxy_pass` directive sends requests to the backend. Always forward the original host and client IP headers so your application has accurate client information. WebSocket Support location /ws/ { proxy_pass http://127.0.0.1:3001; proxy_http_version 1.1; proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection \"upgrade\"; proxy_set_header Host $host; proxy_read_timeout 86400s; } The `Upgrade` and `Connection` headers are required for WebSocket connections. Set `proxy_read_timeout` to a long duration since WebSocket connections remain open. Load Balancing Distribute traffic across multiple backends: upstream app_cluster { least_conn; server 10.0.0.1:3000 weight=3; server 10.0.0.2:3000; server 10.0.0.3:3000 backup; } server { location / { proxy_pass http://app_cluster; } } Load balancing methods: `round-robin` (default), `least_conn` (fewest active connections), `ip_hash` (session persistence). Assign higher `weight` to more powerful servers. Caching Cache responses from the backend: proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=appcache:10m max_size=1g; server { location / { proxy_cache appcache; proxy_cache_valid 200 30m; proxy_cache_valid 404 1m; proxy_cache_use_stale error timeout updating; add_header X-Cache-Status $upstream_cache_status; } } The `$upstream_cache_status` header helps debug caching (HIT, MISS, STALE, etc.). `proxy_cache_use_stale` serves stale content when the backend is down. Caddy Reverse Proxy Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go-based performance. It is ideal for teams that want a zero-fuss reverse proxy. Basic Reverse Proxy Caddyfile app.example.com { reverse_proxy localhost:3000 } That is the entire configuration. Caddy automatically obtains and renews Let's Encrypt TLS certificates. Multiple Backends with Load Balancing app.example.com { reverse_proxy 10.0.0.1:3000 10.0.0.2:3000 10.0.0.3:3000 { lb_policy least_conn health_uri /health health_interval 30s } } Caddy supports multiple load balancing policies: `random`, `least_conn`, `round_robin`, `first`, `ip_hash`. Path-Based Routing Route different paths to different services: api.example.com { reverse_proxy /api/* localhost:3000 reverse_proxy /auth/* localhost:3001 reverse_proxy localhost:3002 # default } Request Manipulation app.example.com { reverse_proxy localhost:3000 { header_up Host {host} header_up X-Real-IP {remote_host} } Add security headers header { X-Frame-Options \"SAMEORIGIN\" X-Content-Type-Options \"nosniff\" } } Caddy's `header` directive works for both request and response headers. Nginx vs Caddy: Comparison | Feature | Nginx | Caddy | |---------|-------|-------| | Configuration | Complex, powerful | Simple, opinionated | | TLS | Manual cert management | Automatic Let's Encrypt | | Performance | Excellent | Very good | | Ecosystem | Vast (modules, guides) | Growing but smaller | | Docker support | Official image | Official image | | Learning curve | Steep | Gentle | | Dynamic configuration | Limited | REST API available | | HTTP/3 | Supported | Supported | Security Headers Regardless of which reverse proxy you choose, add these security headers: For Nginx: add_header X-Frame-Options \"SAMEORIGIN\" always; add_header X-Content-Type-Options \"nosniff\" always; add_header Strict-Transport-Security \"max-age=31536000; includeSubDomains\" always; add_header Content-Security-Policy \"default-src 'self';\" always; For Caddy: header { X-Frame-Options \"SAMEORIGIN\" X-Content-Type-Options \"nosniff\" Strict-Transport-Security \"max-age=31536000; includeSubDomains\" } Rate Limiting Nginx: limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s; location /api/ { limit_req zone=api burst=20 nodelay; proxy_pass http://backend; } Caddy: app.example.com { rate_limit { zone api { key {remote_host} events 10 window 1s } } reverse_proxy localhost:3000 } Health Checks Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them. Summary Nginx and Caddy are both excellent reverse proxies. Nginx offers unmatched flexibility and performance for complex deployments. Caddy provides automatic TLS and simpler configuration, making it ideal for smaller teams or simpler setups. For TLS-heavy deployments, Caddy's automatic certificates save significant operational overhead. For high-traffic scenarios requiring fine-grained control, Nginx remains the standard. Both can route traffic, terminate TLS, add security headers, and cache responses -- choose based on your team's expertise and operational complexity tolerance."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Reverse Proxy Guide"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -263,7 +276,45 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Reverse Proxy Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -321,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **TLS termination**: Handle HTTPS once at the proxy layer.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -379,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Caching**: Cache responses to reduce backend load.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -437,7 +500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Multiple services**: Route different paths to different backends from one domain.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -495,7 +564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>server {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,6 +692,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>server_name app.example.com;</p>
 <br>
 <br>
@@ -640,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location / {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -698,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_set_header Host $host;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -756,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -814,36 +916,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>WebSocket Support</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_pass http://127.0.0.1:3001;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_set_header Upgrade $http_upgrade;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1075,7 +1204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_set_header Host $host;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1133,7 +1268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Load Balancing</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>upstream app_cluster {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>server 10.0.0.1:3000 weight=3;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>server 10.0.0.3:3000 backup;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1423,6 +1588,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>server {</p>
 <br>
 <br>
@@ -1452,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location / {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,36 +1684,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Caching</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1655,7 +1844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=appcache:10m max_size=1g;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1713,7 +1908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location / {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1771,7 +1972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_cache_valid 200 30m;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1829,7 +2036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_cache_use_stale error timeout updating;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1887,36 +2100,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1974,7 +2196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Caddy Reverse Proxy</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2032,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Basic Reverse Proxy</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2090,7 +2324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.example.com {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,6 +2452,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Multiple Backends with Load Balancing</h3>
 <br>
 <br>
@@ -2235,7 +2484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.example.com {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2293,7 +2548,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>lb_policy least_conn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2351,6 +2612,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>health_interval 30s</p>
 <br>
 <br>
@@ -2380,36 +2644,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Path-Based Routing</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,7 +2804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>api.example.com {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2583,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>reverse_proxy /auth/* localhost:3001</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2641,7 +2932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2699,7 +2996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.example.com {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2757,7 +3060,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>header_up Host {host}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2815,7 +3124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,7 +3188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>header {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2931,6 +3252,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>X-Content-Type-Options "nosniff"</p>
 <br>
 <br>
@@ -2960,36 +3284,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Nginx vs Caddy: Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|-------|-------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3163,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| TLS | Manual cert management | Automatic Let's Encrypt |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Ecosystem | Vast (modules, guides) | Growing but smaller |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3279,7 +3636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Learning curve | Steep | Gentle |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3337,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| HTTP/3 | Supported | Supported |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3395,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Regardless of which reverse proxy you choose, add these security headers:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3453,7 +3828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>add_header X-Frame-Options "SAMEORIGIN" always;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3569,7 +3956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For Caddy:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,7 +4020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>X-Frame-Options "SAMEORIGIN"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3685,6 +4084,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Strict-Transport-Security "max-age=31536000; includeSubDomains"</p>
 <br>
 <br>
@@ -3714,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3772,7 +4180,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Nginx:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location /api/ {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,6 +4308,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>proxy_pass http://backend;</p>
 <br>
 <br>
@@ -3917,7 +4340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3975,7 +4404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.example.com {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4033,7 +4468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>zone api {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4091,7 +4532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>events 10</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4149,36 +4596,45 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4236,7 +4692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4294,6 +4756,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.</p>
 <br>
 <br>
@@ -4323,7 +4788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Summary</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

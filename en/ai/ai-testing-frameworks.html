@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration">
     <meta name="twitter:description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration — SourceHub</title>
     <meta name="description" content="Comprehensive guide to AI testing frameworks including DeepEval, Ragas, and LangSmith. Implement automated evaluation in CI pipelines for LLM applications.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-testing-frameworks.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5533",
+      "wordCount": "6237",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-testing-frameworks-deepeval-ragas-langsmith-ci-integration-1f84"
       ],
-      "articleBody": "AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration Introduction Testing AI applications is fundamentally different from testing traditional software. LLM outputs are non-deterministic, there is no single correct answer, and failures manifest as subtle quality degradations rather than crashes. Dedicated AI testing frameworks address these challenges with automated evaluation metrics, test case generation, and regression detection. DeepEval DeepEval is an open-source testing framework designed for LLM applications: from deepeval import assert_test from deepeval.metrics import ( HallucinationMetric, AnswerRelevancyMetric, ContextualPrecisionMetric, FaithfulnessMetric, BiasMetric, ToxicityMetric, ) from deepeval.test_case import LLMTestCase def test_rag_response_no_hallucination(): test_case = LLMTestCase( input=\"What is the capital of France?\", actual_output=\"The capital of France is Paris, located in the Ile-de-France region.\", retrieval_context=[\"Paris is the capital and most populous city of France.\"], ) hallucination_metric = HallucinationMetric(threshold=0.3) assert_test(test_case, [hallucination_metric]) def test_response_relevancy(): test_case = LLMTestCase( input=\"Explain Kubernetes pods\", actual_output=\"Kubernetes is a container orchestration platform...\", retrieval_context=[ \"A pod is the smallest deployable unit in Kubernetes.\", \"Pods can contain one or more containers.\", ], ) relevancy_metric = AnswerRelevancyMetric(threshold=0.7) assert_test(test_case, [relevancy_metric]) Run tests: deepeval test run test_ai.py DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold. Ragas Ragas is specialized for evaluating RAG pipelines end-to-end: from ragas import evaluate from ragas.metrics import ( faithfulness, answer_relevancy, context_precision, context_recall, ) from datasets import Dataset Prepare evaluation dataset test_data = Dataset.from_dict({ \"question\": [ \"What is a Kubernetes pod?\", \"How does load balancing work?\", ], \"answer\": [ \"A pod is the smallest deployable unit...\", \"Load balancing distributes traffic...\", ], \"contexts\": [ [\"Pods can contain one or more containers.\"], [\"Load balancers distribute incoming traffic.\"], ], \"ground_truth\": [ \"A pod is the smallest deployable unit in Kubernetes.\", \"Load balancing distributes network traffic across servers.\", ], }) Compute RAG metrics result = evaluate( test_data, metrics=[ faithfulness, answer_relevancy, context_precision, context_recall, ], ) print(result) { \"faithfulness\": 0.92, \"answer_relevancy\": 0.88, \"context_precision\": 0.95, \"context_recall\": 0.85 } Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?). LangSmith LangSmith provides a hosted evaluation platform with tracing and annotation: from langsmith import Client, evaluate from langsmith.schemas import Example, Run client = Client() Define a custom evaluator def answer_correctness(run: Run, example: Example) -> dict: Compare model output against expected output predicted = run.outputs.get(\"output\", \"\") expected = example.outputs.get(\"answer\", \"\") Use LLM-as-judge for evaluation from langsmith.evaluation import evaluate as langsmith_eval return {\"score\": compute_similarity(predicted, expected)} Run evaluation on a dataset results = evaluate( lambda inputs: my_llm_chain(inputs[\"question\"]), data=\"my-test-dataset\", evaluators=[answer_correctness], experiment_prefix=\"rag-v2-eval\", ) View results in LangSmith dashboard print(results) LangSmith excels at trace-level evaluation. Every LLM call, retrieval step, and prompt template is recorded and can be compared across experiments. CI Integration Integrate AI tests into your CI pipeline to catch regressions automatically: .github/workflows/ai-tests.yml name: AI Evaluation Tests on: push: branches: [main] pull_request: jobs: evaluate: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5 with: python-version: \"3.11\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies run: pip install deepeval ragas langsmith \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests env: OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }} run: | deepeval test run tests/ai_evaluation.py \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate run: | deepeval metrics --min-threshold 0.7 Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests. Conclusion AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time."
+      "articleBody": "AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration Introduction Testing AI applications is fundamentally different from testing traditional software. LLM outputs are non-deterministic, there is no single correct answer, and failures manifest as subtle quality degradations rather than crashes. Dedicated AI testing frameworks address these challenges with automated evaluation metrics, test case generation, and regression detection. DeepEval DeepEval is an open-source testing framework designed for LLM applications: from deepeval import assert_test from deepeval.metrics import ( HallucinationMetric, AnswerRelevancyMetric, ContextualPrecisionMetric, FaithfulnessMetric, BiasMetric, ToxicityMetric, ) from deepeval.test_case import LLMTestCase def test_rag_response_no_hallucination(): test_case = LLMTestCase( input=\"What is the capital of France?\", actual_output=\"The capital of France is Paris, located in the Ile-de-France region.\", retrieval_context=[\"Paris is the capital and most populous city of France.\"], ) hallucination_metric = HallucinationMetric(threshold=0.3) assert_test(test_case, [hallucination_metric]) def test_response_relevancy(): test_case = LLMTestCase( input=\"Explain Kubernetes pods\", actual_output=\"Kubernetes is a container orchestration platform...\", retrieval_context=[ \"A pod is the smallest deployable unit in Kubernetes.\", \"Pods can contain one or more containers.\", ], ) relevancy_metric = AnswerRelevancyMetric(threshold=0.7) assert_test(test_case, [relevancy_metric]) Run tests: deepeval test run test_ai.py DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold. Ragas Ragas is specialized for evaluating RAG pipelines end-to-end: from ragas import evaluate from ragas.metrics import ( faithfulness, answer_relevancy, context_precision, context_recall, ) from datasets import Dataset Prepare evaluation dataset test_data = Dataset.from_dict({ \"question\": [ \"What is a Kubernetes pod?\", \"How does load balancing work?\", ], \"answer\": [ \"A pod is the smallest deployable unit...\", \"Load balancing distributes traffic...\", ], \"contexts\": [ [\"Pods can contain one or more containers.\"], [\"Load balancers distribute incoming traffic.\"], ], \"ground_truth\": [ \"A pod is the smallest deployable unit in Kubernetes.\", \"Load balancing distributes network traffic across servers.\", ], }) Compute RAG metrics result = evaluate( test_data, metrics=[ faithfulness, answer_relevancy, context_precision, context_recall, ], ) print(result) { \"faithfulness\": 0.92, \"answer_relevancy\": 0.88, \"context_precision\": 0.95, \"context_recall\": 0.85 } Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?). LangSmith LangSmith provides a hosted evaluation platform with tracing and annotation: from langsmith import Client, evaluate from langsmith.schemas import Example, Run client = Client() Define a custom evaluator def answer_correctness(run: Run, example: Example) -> dict: Compare model output against expected output predicted = run.outputs.get(\"output\", \"\") expected = example.outputs.get(\"answer\", \"\") Use LLM-as-judge for evaluation from langsmith.evaluation import evaluate as langsmith_eval return {\"score\": compute_similarity(predicted, expected)} Run evaluation on a dataset results = evaluate( lambda inputs: my_llm_chain(inputs[\"question\"]), data=\"my-test-dataset\", evaluators=[answer_correctness], experiment_prefix=\"rag-v2-eval\", ) View results in LangSmith dashboard print(results) LangSmith excels at trace-level evaluation. Every LLM call, retrieval step, and prompt template is recorded and can be compared across experiments. CI Integration Integrate AI tests into your CI pipeline to catch regressions automatically: .github/workflows/ai-tests.yml name: AI Evaluation Tests on: push: branches: [main] pull_request: jobs: evaluate: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5 with: python-version: \"3.11\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies run: pip install deepeval ragas langsmith \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests env: OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }} run: | deepeval test run tests/ai_evaluation.py \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate run: | deepeval metrics --min-threshold 0.7 Set a quality gate that blocks merges when metrics fall below thresholds. This prevents gradual quality degradation that is invisible in traditional tests. Conclusion AI testing requires specialized frameworks that understand non-deterministic outputs. Use DeepEval for unit-test-style evaluation with configurable metrics. Use Ragas for end-to-end RAG pipeline evaluation. Use LangSmith for trace-level debugging and comparison across experiments. Integrate all three into CI pipelines with automated quality gates to maintain production AI quality over time."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  DeepEval</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from deepeval import assert_test</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>HallucinationMetric,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ContextualPrecisionMetric,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,7 +596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>BiasMetric,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -582,7 +660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -640,6 +724,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def test_rag_response_no_hallucination():</p>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>test_case = LLMTestCase(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actual_output="The capital of France is Paris, located in the Ile-de-France region.",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>assert_test(test_case, [hallucination_metric])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>test_case = LLMTestCase(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actual_output="Kubernetes is a container orchestration platform...",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"A pod is the smallest deployable unit in Kubernetes.",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1075,6 +1204,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
 <br>
 <br>
@@ -1104,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,7 +1300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>assert_test(test_case, [relevancy_metric])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1220,7 +1364,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1278,7 +1428,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Ragas is specialized for evaluating RAG pipelines end-to-end:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1336,7 +1492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from ragas.metrics import (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1394,7 +1556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>answer_relevancy,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,6 +1620,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_recall,</p>
 <br>
 <br>
@@ -1481,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1539,7 +1716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Prepare evaluation dataset</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"question": [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1655,6 +1844,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"How does load balancing work?",</p>
 <br>
 <br>
@@ -1684,7 +1876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1742,7 +1940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"A pod is the smallest deployable unit...",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1800,7 +2004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1858,7 +2068,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>["Pods can contain one or more containers."],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1916,7 +2132,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1974,7 +2196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"A pod is the smallest deployable unit in Kubernetes.",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2032,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2090,7 +2324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Compute RAG metrics</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>test_data,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>faithfulness,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_precision,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,6 +2580,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
 <br>
 <br>
@@ -2351,7 +2612,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2409,7 +2676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>{</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>"answer_relevancy": 0.88,</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,7 +2804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>"context_recall": 0.85</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2583,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2641,7 +2932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LangSmith provides a hosted evaluation platform with tracing and annotation:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2699,7 +2996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from langsmith.schemas import Example, Run</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2757,7 +3060,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Define a custom evaluator</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2815,7 +3124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Compare model output against expected output</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,7 +3188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expected = example.outputs.get("answer", "")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2931,7 +3252,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from langsmith.evaluation import evaluate as langsmith_eval</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run evaluation on a dataset</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>lambda inputs: my_llm_chain(inputs["question"]),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>evaluators=[answer_correctness],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3163,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(results)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3279,7 +3636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  CI Integration</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3337,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>.github/workflows/ai-tests.yml</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3395,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>on:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3453,7 +3828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>branches: [main]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>jobs:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3569,7 +3956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>runs-on: ubuntu-latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,7 +4020,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
 <br>
 <br>
 <br>
@@ -3656,7 +4052,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3714,6 +4116,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>python-version: "3.11"</p>
 <br>
 <br>
@@ -3743,7 +4148,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3801,7 +4212,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3859,7 +4276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3917,7 +4340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>run: |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3975,7 +4404,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4033,7 +4468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deepeval metrics --min-threshold 0.7</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4091,7 +4532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

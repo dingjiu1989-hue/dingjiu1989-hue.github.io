@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Modular Monolith Architecture">
     <meta name="twitter:description" content="Module boundaries, in-process communication, and future extraction paths in modular monolith design">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Architecture, System Design, Backend">
     <title>Modular Monolith Architecture — SourceHub</title>
     <meta name="description" content="Module boundaries, in-process communication, and future extraction paths in modular monolith design">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/modular-monolith.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1051",
+      "wordCount": "1108",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/modular-monolith.html"},
-      "articleBody": "Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices \u2014 separation of concerns, bounded contexts, independent evolvability \u2014 without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. Module boundaries are the central design challenge. Each module should represent a coherent domain capability with its own data ownership, business logic, and public API. Modules communicate through in-process interfaces, typically defined as Java interfaces or Go interfaces, with implementation classes hidden behind the boundary. The module's internals, including its database tables, internal classes, and private functions, are inaccessible to other modules. Dependency rules must be explicit and enforced. A common pattern is to establish a strict layered dependency graph: presentation modules depend on application modules, which depend on domain modules, which depend on infrastructure modules. Circular dependencies between modules are forbidden. Tools like ArchUnit (Java), modules in Go, or dependency-cruiser (Node.js) can enforce these rules in CI pipelines, preventing boundary erosion over time. In-process communication offers significant advantages over inter-service calls. Method invocations are nanoseconds rather than milliseconds; there is no network failure mode, no serialization overhead, and no distributed tracing complexity for internal flows. Transactions span modules naturally without two-phase commit or saga patterns. This makes the modular monolith dramatically simpler to develop, test, and debug while still enforcing domain boundaries. However, in-process communication requires discipline. Modules must not share internal state or bypass each other's public APIs. A common anti-pattern is modules reaching directly into shared databases or calling internal methods through reflection or backdoors. The module boundary must be treated as seriously as a network boundary would be in a microservice architecture. The future extraction path is an explicit design consideration. Each module should be extractable into an independent service without rewriting. This means modules should have their own database schemas (or at least logically isolated tables), communicate through interfaces that could be replaced with HTTP or gRPC calls, and operate without synchronous assumptions about other modules' availability. The \"backyard\" pattern \u2014 where modules maintain separate database connections even within the monolith \u2014 makes extraction significantly easier. Testing benefits are substantial. Integration tests can cover cross-module flows without network mocking, deployment complexity, or environment orchestration. A single process can run the entire system for end-to-end tests, making test suites orders of magnitude faster than their distributed counterparts. The modular monolith is not a permanent state \u2014 it is a starting position. As the organization grows and domain boundaries stabilize, individual modules can be extracted to independent services with confidence, knowing the extraction path was designed from the beginning. The key is treating the monolith not as a technical compromise but as a deliberate architectural choice with its own design patterns and tradeoffs."
+      "articleBody": "Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture Modular Monolith Architecture A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices \u2014 separation of concerns, bounded contexts, independent evolvability \u2014 without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. Module boundaries are the central design challenge. Each module should represent a coherent domain capability with its own data ownership, business logic, and public API. Modules communicate through in-process interfaces, typically defined as Java interfaces or Go interfaces, with implementation classes hidden behind the boundary. The module's internals, including its database tables, internal classes, and private functions, are inaccessible to other modules. Dependency rules must be explicit and enforced. A common pattern is to establish a strict layered dependency graph: presentation modules depend on application modules, which depend on domain modules, which depend on infrastructure modules. Circular dependencies between modules are forbidden. Tools like ArchUnit (Java), modules in Go, or dependency-cruiser (Node.js) can enforce these rules in CI pipelines, preventing boundary erosion over time. In-process communication offers significant advantages over inter-service calls. Method invocations are nanoseconds rather than milliseconds; there is no network failure mode, no serialization overhead, and no distributed tracing complexity for internal flows. Transactions span modules naturally without two-phase commit or saga patterns. This makes the modular monolith dramatically simpler to develop, test, and debug while still enforcing domain boundaries. However, in-process communication requires discipline. Modules must not share internal state or bypass each other's public APIs. A common anti-pattern is modules reaching directly into shared databases or calling internal methods through reflection or backdoors. The module boundary must be treated as seriously as a network boundary would be in a microservice architecture. The future extraction path is an explicit design consideration. Each module should be extractable into an independent service without rewriting. This means modules should have their own database schemas (or at least logically isolated tables), communicate through interfaces that could be replaced with HTTP or gRPC calls, and operate without synchronous assumptions about other modules' availability. The \"backyard\" pattern \u2014 where modules maintain separate database connections even within the monolith \u2014 makes extraction significantly easier. Testing benefits are substantial. Integration tests can cover cross-module flows without network mocking, deployment complexity, or environment orchestration. A single process can run the entire system for end-to-end tests, making test suites orders of magnitude faster than their distributed counterparts. The modular monolith is not a permanent state \u2014 it is a starting position. As the organization grows and domain boundaries stabilize, individual modules can be extracted to independent services with confidence, knowing the extraction path was designed from the beginning. The key is treating the monolith not as a technical compromise but as a deliberate architectural choice with its own design patterns and tradeoffs."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://dingjiu1989-hue.github.io/en/architecture/"},
         {"@type": "ListItem", "position": 3, "name": "Modular Monolith Architecture"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>Modular Monolith Architecture</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices — separation of concerns, bounded contexts, independent evolvability — without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,7 +293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dependency rules must be explicit and enforced. A common pattern is to establish a strict layered dependency graph: presentation modules depend on application modules, which depend on domain modules, which depend on infrastructure modules. Circular dependencies between modules are forbidden. Tools like ArchUnit (Java), modules in Go, or dependency-cruiser (Node.js) can enforce these rules in CI pipelines, preventing boundary erosion over time. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -294,7 +345,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>However, in-process communication requires discipline. Modules must not share internal state or bypass each other's public APIs. A common anti-pattern is modules reaching directly into shared databases or calling internal methods through reflection or backdoors. The module boundary must be treated as seriously as a network boundary would be in a microservice architecture. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -340,7 +397,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Testing benefits are substantial. Integration tests can cover cross-module flows without network mocking, deployment complexity, or environment orchestration. A single process can run the entire system for end-to-end tests, making test suites orders of magnitude faster than their distributed counterparts. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

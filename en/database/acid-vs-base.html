@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="ACID vs BASE Transactions">
     <meta name="twitter:description" content="Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, and partition tolerance.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png">
+    <meta property="article:published_time" content="2026-05-11">
+    <meta property="article:modified_time" content="2026-05-11">
+    <meta property="article:tag" content="Database, SQL">
     <title>ACID vs BASE Transactions — SourceHub</title>
     <meta name="description" content="Compare ACID and BASE transaction models, when to use each, and how modern databases balance consistency, availability, and partition tolerance.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/acid-vs-base.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "1118",
+      "wordCount": "1256",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/acid-vs-base-transactions-19ob"
       ],
-      "articleBody": "ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions Consistency Models ACID and BASE represent opposing philosophies for database consistency. ACID guarantees strict consistency while BASE prioritizes availability. ACID Properties Atomicity, Consistency, Isolation, Durability: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ACID transaction example BEGIN TRANSACTION; UPDATE accounts SET balance = balance - 100 WHERE account_id = 1; UPDATE accounts SET balance = balance + 100 WHERE account_id = 2; COMMIT; BASE Properties Basically Available, Soft state, Eventual consistency: class EventualConsistentLedger: def __init__(self): self.pending = [] def transfer(self, sender, recipient, amount): self.pending.append({ \"sender\": sender, \"recipient\": recipient, \"amount\": amount, \"timestamp\": time.time() }) return {\"status\": \"accepted\"} def reconcile(self): for tx in self.pending: self.apply_transaction(tx) When to Relax ACID | Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics | Conclusion Choose ACID where correctness is critical and BASE where scale matters. Modern databases increasingly blur the line. Understand your consistency requirements and choose accordingly."
+      "articleBody": "ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions ACID vs BASE Transactions Consistency Models ACID and BASE represent opposing philosophies for database consistency. ACID guarantees strict consistency while BASE prioritizes availability. ACID Properties Atomicity, Consistency, Isolation, Durability: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ACID transaction example BEGIN TRANSACTION; UPDATE accounts SET balance = balance - 100 WHERE account_id = 1; UPDATE accounts SET balance = balance + 100 WHERE account_id = 2; COMMIT; BASE Properties Basically Available, Soft state, Eventual consistency: class EventualConsistentLedger: def __init__(self): self.pending = [] def transfer(self, sender, recipient, amount): self.pending.append({ \"sender\": sender, \"recipient\": recipient, \"amount\": amount, \"timestamp\": time.time() }) return {\"status\": \"accepted\"} def reconcile(self): for tx in self.pending: self.apply_transaction(tx) When to Relax ACID | Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics | Conclusion Choose ACID where correctness is critical and BASE where scale matters. Modern databases increasingly blur the line. Understand your consistency requirements and choose accordingly."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "ACID vs BASE Transactions"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -204,7 +217,39 @@
 <br>
 <br>
 <br>
+<h1>ACID vs BASE Transactions</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Consistency Models </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -250,7 +295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ACID Properties </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -299,7 +350,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ACID transaction example</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ACID transaction example</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,7 +408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +466,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>COMMIT;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Basically Available, Soft state, Eventual consistency: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -504,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -556,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def transfer(self, sender, recipient, amount):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -608,7 +695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"sender": sender, "recipient": recipient,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -660,7 +753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -712,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def reconcile(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -764,7 +869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.apply_transaction(tx)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -813,6 +924,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Requirement | ACID | BASE | |-------------|------|------| | Consistency | Strong | Eventual | | Availability | Lower | Higher | | Latency | Higher | Lower | | Use case | Financial | Analytics | </p>
 <br>
 <br>
@@ -836,7 +950,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection">
     <meta name="twitter:description" content="Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="AI, Machine Learning, LLM">
     <title>Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection — SourceHub</title>
     <meta name="description" content="Explore agent planning frameworks: ReAct for reasoning and acting, Plan-and-Execute for task decomposition, Tree of Thoughts for exploration, and self-reflectio">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-planning.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "7850",
+      "wordCount": "8967",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/agent-planning-react-plan-and-execute-tree-of-thoughts-reflection-49c0"
       ],
-      "articleBody": "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Introduction Planning transforms LLMs from reactive responders into proactive agents that can decompose complex goals, explore solution paths, and recover from failures. This article covers four major planning frameworks: ReAct for tight coupling of reasoning and action, Plan-and-Execute for hierarchical decomposition, Tree of Thoughts for exploring multiple reasoning paths, and self-reflection for learning from mistakes. ReAct (Reasoning + Acting) ReAct interleaves reasoning traces with tool calls, allowing the agent to think about what to do next based on current observations: class ReActAgent: def __init__(self, tools: list[dict], llm_fn): self.tools = tools self.llm = llm_fn def run(self, task: str, max_steps: int = 10) -> str: messages = [{\"role\": \"system\", \"content\": self._system_prompt()}, {\"role\": \"user\", \"content\": task}] for step in range(max_steps): response = self.llm(messages, tools=self.tools) if \"Final Answer:\" in response: return response.split(\"Final Answer:\")[-1].strip() Parse the Thought/Action/Observation cycle thought = self._extract(response, \"Thought:\") action = self._extract_action(response) if action: observation = self._execute_tool(action) messages.append({\"role\": \"assistant\", \"content\": response}) messages.append({\"role\": \"system\", \"content\": f\"Observation: {observation}\"}) return \"Failed to complete task within step limit.\" def _system_prompt(self) -> str: return \"\"\"You are a ReAct agent. For each step: Thought: Reason about what to do next Action: Choose a tool and specify arguments (Wait for observation) ...repeat until done... Final Answer: Provide the complete answer\"\"\" def _extract_action(self, text: str) -> dict | None: \"\"\"Parse Action: ToolName(arg1=val1, arg2=val2) from text.\"\"\" import re match = re.search(r\"Action:\\s*(\\w+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\((.+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\)\", text) if not match: return None tool_name = match.group(1) args_text = match.group(2) args = dict(re.findall(r\"(\\w+)=([^,)]+)\", args_text)) return {\"name\": tool_name, \"args\": args} def _execute_tool(self, action: dict) -> str: for tool in self.tools: if tool[\"name\"] == action[\"name\"]: return tool[\"function\"](**action[\"args\"]) return f\"Error: Unknown tool '{action['name']}'\" Plan-and-Execute This framework separates planning from execution. A planner creates a step-by-step plan, then an executor follows it: class PlanAndExecute: def __init__(self, llm_fn, tools): self.planner_llm = llm_fn self.executor_llm = llm_fn self.tools = tools async def run(self, task: str) -> str: Phase 1: Create a plan plan = await self._create_plan(task) results = [] Phase 2: Execute each step for i, step in enumerate(plan): print(f\"Executing step {i+1}: {step['description']}\") Check dependencies context = self._gather_context(step, results) result = await self._execute_step(step, context) Verify step completion verified = await self._verify_step(step, result) if not verified: Re-plan from this point plan = await self._replan(task, i, plan, result) continue results.append({\"step\": step, \"result\": result}) Phase 3: Synthesize final answer return await self._synthesize(task, plan, results) async def _create_plan(self, task: str) -> list[dict]: response = self.planner_llm(f\"\"\" Create a step-by-step plan for: {task} For each step, specify: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- description: what to do \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tool: which tool to use (or 'none') \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependencies: which step numbers this step depends on Output as a JSON array. \"\"\") return json.loads(response) async def _replan(self, original_task: str, failed_step: int, old_plan: list, error: str) -> list: response = self.planner_llm(f\"\"\" Step {failed_step} failed: {error} Original plan: {old_plan} Original task: {original_task} Create a revised plan starting from the failure point. \"\"\") return json.loads(response) Tree of Thoughts (ToT) ToT explores multiple reasoning paths simultaneously, evaluating each branch: class TreeOfThoughts: def __init__(self, llm_fn, branches: int = 3, depth: int = 3): self.llm = llm_fn self.branches = branches self.depth = depth def solve(self, problem: str) -> str: Initialize the tree with root thoughts candidates = self._generate_thoughts(problem, []) best_path = None best_score = float(\"-inf\") for level in range(self.depth): Evaluate each candidate scored = [] for thought in candidates: state = thought # The thought is the reasoning so far score = self._evaluate_thought(problem, state) scored.append((state, score)) if score > best_score and level == self.depth - 1: best_score = score best_path = state Select top-k candidates for expansion scored.sort(key=lambda x: x[1], reverse=True) top_candidates = scored[:self.branches] if level Generate next thoughts from top candidates candidates = [] for state, _ in top_candidates: next_thoughts = self._generate_thoughts(problem, state) candidates.extend(next_thoughts) return best_path or \"No solution found.\" def _generate_thoughts(self, problem: str, current_state: list[str]) -> list[list[str]]: context = \"\\n\".join(current_state) if current_state else \"No reasoning yet.\" response = self.llm(f\"\"\" Problem: {problem} Current reasoning: {context} Generate {self.branches} different next steps in reasoning. Each should be a plausible continuation. Be diverse. \"\"\") Parse response into multiple thought continuations return [current_state + [t] for t in parse_thoughts(response)] def _evaluate_thought(self, problem: str, state: list[str]) -> float: context = \"\\n\".join(state) score = self.llm(f\"\"\" Problem: {problem} Reasoning so far: {context} Rate the promise of this reasoning path on a scale of 0 to 1. Output ONLY a number. \"\"\") return float(score.strip()) Reflection Reflection enables agents to learn from their mistakes during execution: class ReflectiveAgent: def __init__(self, llm_fn, tools): self.llm = llm_fn self.tools = tools self.reflection_log = [] async def run(self, task: str) -> str: max_attempts = 3 for attempt in range(max_attempts): result = await self._attempt(task) if self._is_successful(result): return result[\"output\"] Reflect on the failure reflection = self._reflect(task, result) self.reflection_log.append(reflection) Update strategy based on reflection task = self._revise_task(task, reflection) return \"Failed after multiple attempts.\" def _reflect(self, task: str, result: dict) -> str: return self.llm(f\"\"\" Task: {task} What went wrong: {result.get('error', 'Unknown error')} Actions taken: {result.get('actions', [])} Partial output: {result.get('partial_output', '')} Reflect on: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What was the root cause of the failure? 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What should be done differently next time? 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Is there missing information needed? Reflection: \"\"\") def _revise_task(self, task: str, reflection: str) -> str: return self.llm(f\"\"\" Original task: {task} After reflecting: {reflection} Revise the task description to incorporate lessons learned and avoid repeating the same mistake. \"\"\") Choosing a Framework | Framework | Best For | When to Use | |-----------|----------|-------------| | ReAct | Interactive tasks with tools | Standard agent tasks requiring reasoning | | Plan-and-Execute | Complex multi-step tasks | When the plan is knowable upfront | | Tree of Thoughts | Creative/exploratory tasks | When multiple approaches are valid | | Reflection | Error-prone environments | When learning from mistakes is critical | Conclusion Agent planning frameworks provide structure for LLM reasoning. ReAct couples reasoning with tool use for interactive tasks. Plan-and-Execute separates planning from execution for complex workflows. Tree of Thoughts explores multiple reasoning paths for problems with branching solutions. Reflection enables continuous improvement by learning from failures. In practice, combine these patterns: use ReAct for execution, Plan-and-Execute for structure, ToT for exploration, and Reflection for improvement."
+      "articleBody": "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection Introduction Planning transforms LLMs from reactive responders into proactive agents that can decompose complex goals, explore solution paths, and recover from failures. This article covers four major planning frameworks: ReAct for tight coupling of reasoning and action, Plan-and-Execute for hierarchical decomposition, Tree of Thoughts for exploring multiple reasoning paths, and self-reflection for learning from mistakes. ReAct (Reasoning + Acting) ReAct interleaves reasoning traces with tool calls, allowing the agent to think about what to do next based on current observations: class ReActAgent: def __init__(self, tools: list[dict], llm_fn): self.tools = tools self.llm = llm_fn def run(self, task: str, max_steps: int = 10) -> str: messages = [{\"role\": \"system\", \"content\": self._system_prompt()}, {\"role\": \"user\", \"content\": task}] for step in range(max_steps): response = self.llm(messages, tools=self.tools) if \"Final Answer:\" in response: return response.split(\"Final Answer:\")[-1].strip() Parse the Thought/Action/Observation cycle thought = self._extract(response, \"Thought:\") action = self._extract_action(response) if action: observation = self._execute_tool(action) messages.append({\"role\": \"assistant\", \"content\": response}) messages.append({\"role\": \"system\", \"content\": f\"Observation: {observation}\"}) return \"Failed to complete task within step limit.\" def _system_prompt(self) -> str: return \"\"\"You are a ReAct agent. For each step: Thought: Reason about what to do next Action: Choose a tool and specify arguments (Wait for observation) ...repeat until done... Final Answer: Provide the complete answer\"\"\" def _extract_action(self, text: str) -> dict | None: \"\"\"Parse Action: ToolName(arg1=val1, arg2=val2) from text.\"\"\" import re match = re.search(r\"Action:\\s*(\\w+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\((.+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\)\", text) if not match: return None tool_name = match.group(1) args_text = match.group(2) args = dict(re.findall(r\"(\\w+)=([^,)]+)\", args_text)) return {\"name\": tool_name, \"args\": args} def _execute_tool(self, action: dict) -> str: for tool in self.tools: if tool[\"name\"] == action[\"name\"]: return tool[\"function\"](**action[\"args\"]) return f\"Error: Unknown tool '{action['name']}'\" Plan-and-Execute This framework separates planning from execution. A planner creates a step-by-step plan, then an executor follows it: class PlanAndExecute: def __init__(self, llm_fn, tools): self.planner_llm = llm_fn self.executor_llm = llm_fn self.tools = tools async def run(self, task: str) -> str: Phase 1: Create a plan plan = await self._create_plan(task) results = [] Phase 2: Execute each step for i, step in enumerate(plan): print(f\"Executing step {i+1}: {step['description']}\") Check dependencies context = self._gather_context(step, results) result = await self._execute_step(step, context) Verify step completion verified = await self._verify_step(step, result) if not verified: Re-plan from this point plan = await self._replan(task, i, plan, result) continue results.append({\"step\": step, \"result\": result}) Phase 3: Synthesize final answer return await self._synthesize(task, plan, results) async def _create_plan(self, task: str) -> list[dict]: response = self.planner_llm(f\"\"\" Create a step-by-step plan for: {task} For each step, specify: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- description: what to do \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tool: which tool to use (or 'none') \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependencies: which step numbers this step depends on Output as a JSON array. \"\"\") return json.loads(response) async def _replan(self, original_task: str, failed_step: int, old_plan: list, error: str) -> list: response = self.planner_llm(f\"\"\" Step {failed_step} failed: {error} Original plan: {old_plan} Original task: {original_task} Create a revised plan starting from the failure point. \"\"\") return json.loads(response) Tree of Thoughts (ToT) ToT explores multiple reasoning paths simultaneously, evaluating each branch: class TreeOfThoughts: def __init__(self, llm_fn, branches: int = 3, depth: int = 3): self.llm = llm_fn self.branches = branches self.depth = depth def solve(self, problem: str) -> str: Initialize the tree with root thoughts candidates = self._generate_thoughts(problem, []) best_path = None best_score = float(\"-inf\") for level in range(self.depth): Evaluate each candidate scored = [] for thought in candidates: state = thought # The thought is the reasoning so far score = self._evaluate_thought(problem, state) scored.append((state, score)) if score > best_score and level == self.depth - 1: best_score = score best_path = state Select top-k candidates for expansion scored.sort(key=lambda x: x[1], reverse=True) top_candidates = scored[:self.branches] if level Generate next thoughts from top candidates candidates = [] for state, _ in top_candidates: next_thoughts = self._generate_thoughts(problem, state) candidates.extend(next_thoughts) return best_path or \"No solution found.\" def _generate_thoughts(self, problem: str, current_state: list[str]) -> list[list[str]]: context = \"\\n\".join(current_state) if current_state else \"No reasoning yet.\" response = self.llm(f\"\"\" Problem: {problem} Current reasoning: {context} Generate {self.branches} different next steps in reasoning. Each should be a plausible continuation. Be diverse. \"\"\") Parse response into multiple thought continuations return [current_state + [t] for t in parse_thoughts(response)] def _evaluate_thought(self, problem: str, state: list[str]) -> float: context = \"\\n\".join(state) score = self.llm(f\"\"\" Problem: {problem} Reasoning so far: {context} Rate the promise of this reasoning path on a scale of 0 to 1. Output ONLY a number. \"\"\") return float(score.strip()) Reflection Reflection enables agents to learn from their mistakes during execution: class ReflectiveAgent: def __init__(self, llm_fn, tools): self.llm = llm_fn self.tools = tools self.reflection_log = [] async def run(self, task: str) -> str: max_attempts = 3 for attempt in range(max_attempts): result = await self._attempt(task) if self._is_successful(result): return result[\"output\"] Reflect on the failure reflection = self._reflect(task, result) self.reflection_log.append(reflection) Update strategy based on reflection task = self._revise_task(task, reflection) return \"Failed after multiple attempts.\" def _reflect(self, task: str, result: dict) -> str: return self.llm(f\"\"\" Task: {task} What went wrong: {result.get('error', 'Unknown error')} Actions taken: {result.get('actions', [])} Partial output: {result.get('partial_output', '')} Reflect on: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What was the root cause of the failure? 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What should be done differently next time? 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Is there missing information needed? Reflection: \"\"\") def _revise_task(self, task: str, reflection: str) -> str: return self.llm(f\"\"\" Original task: {task} After reflecting: {reflection} Revise the task description to incorporate lessons learned and avoid repeating the same mistake. \"\"\") Choosing a Framework | Framework | Best For | When to Use | |-----------|----------|-------------| | ReAct | Interactive tasks with tools | Standard agent tasks requiring reasoning | | Plan-and-Execute | Complex multi-step tasks | When the plan is knowable upfront | | Tree of Thoughts | Creative/exploratory tasks | When multiple approaches are valid | | Reflection | Error-prone environments | When learning from mistakes is critical | Conclusion Agent planning frameworks provide structure for LLM reasoning. ReAct couples reasoning with tool use for interactive tasks. Plan-and-Execute separates planning from execution for complex workflows. Tree of Thoughts explores multiple reasoning paths for problems with branching solutions. Reflection enables continuous improvement by learning from failures. In practice, combine these patterns: use ReAct for execution, Plan-and-Execute for structure, ToT for exploration, and Reflection for improvement."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "AI Tutorials", "item": "https://dingjiu1989-hue.github.io/en/ai/"},
         {"@type": "ListItem", "position": 3, "name": "Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -234,7 +247,42 @@
 <br>
 <br>
 <br>
+<h1>Agent Planning: ReAct, Plan-and-Execute, Tree of Thoughts, Reflection</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +340,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  ReAct (Reasoning + Acting)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ReActAgent:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -408,6 +468,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.tools = tools</p>
 <br>
 <br>
@@ -437,7 +500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.llm = llm_fn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -495,7 +564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages = [{"role": "system", "content": self._system_prompt()},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -553,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for step in range(max_steps):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -611,7 +692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if "Final Answer:" in response:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,7 +756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Parse the Thought/Action/Observation cycle</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>action = self._extract_action(response)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>observation = self._execute_tool(action)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages.append({"role": "system", "content": f"Observation: {observation}"})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -901,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _system_prompt(self) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Thought: Reason about what to do next</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>(Wait for observation)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1075,7 +1204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Final Answer: Provide the complete answer"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1133,7 +1268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Parse Action: ToolName(arg1=val1, arg2=val2) from text."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1191,7 +1332,13 @@
 <br>
 <br>
 <br>
-<p>match = re.search(r"Action:\s*(\w+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\((.+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\)", text)</p>
+<br>
+<br>
+<br>
+<p>match = re.search(r"Action:\s*(\w+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\((.+)\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\)", text)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>args_text = match.group(2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"name": tool_name, "args": args}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1423,7 +1588,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for tool in self.tools:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1481,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return tool["function"](**action["args"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1539,7 +1716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Plan-and-Execute</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,6 +1780,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class PlanAndExecute:</p>
 <br>
 <br>
@@ -1626,7 +1812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, llm_fn, tools):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1684,7 +1876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.executor_llm = llm_fn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1742,7 +1940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def run(self, task: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1800,7 +2004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>plan = await self._create_plan(task)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1858,7 +2068,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Phase 2: Execute each step</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1916,7 +2132,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Executing step {i+1}: {step['description']}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1974,7 +2196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context = self._gather_context(step, results)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2032,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Verify step completion</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2090,7 +2324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not verified:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2148,7 +2388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>plan = await self._replan(task, i, plan, result)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results.append({"step": step, "result": result})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2264,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return await self._synthesize(task, plan, results)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,7 +2580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = self.planner_llm(f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2380,6 +2644,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For each step, specify:</p>
 <br>
 <br>
@@ -2409,7 +2676,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- description: what to do</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- description: what to do</p>
 <br>
 <br>
 <br>
@@ -2438,7 +2708,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tool: which tool to use (or 'none')</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tool: which tool to use (or 'none')</p>
 <br>
 <br>
 <br>
@@ -2467,7 +2740,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependencies: which step numbers this step depends on</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependencies: which step numbers this step depends on</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2525,6 +2804,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
 <br>
 <br>
@@ -2554,7 +2836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(response)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2612,7 +2900,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = self.planner_llm(f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2670,7 +2964,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Original plan: {old_plan}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2728,6 +3028,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Create a revised plan starting from the failure point.</p>
 <br>
 <br>
@@ -2757,7 +3060,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2815,7 +3124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Tree of Thoughts (ToT)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,7 +3188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class TreeOfThoughts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2931,7 +3252,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.llm = llm_fn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.depth = depth</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3047,7 +3380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Initialize the tree with root thoughts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>best_path = None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3163,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for level in range(self.depth):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3572,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scored = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3279,7 +3636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>state = thought # The thought is the reasoning so far</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3337,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scored.append((state, score))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3395,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>best_score = score</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3453,7 +3828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Select top-k candidates for expansion</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>top_candidates = scored[:self.branches]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3569,7 +3956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Generate next thoughts from top candidates</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,7 +4020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for state, _ in top_candidates:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3685,7 +4084,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>candidates.extend(next_thoughts)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3743,7 +4148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _generate_thoughts(self, problem: str, current_state: list[str]) -> list[list[str]]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3801,6 +4212,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = self.llm(f"""</p>
 <br>
 <br>
@@ -3830,7 +4244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Problem: {problem}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3888,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Generate {self.branches} different next steps in reasoning.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,7 +4372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4004,7 +4436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return [current_state + [t] for t in parse_thoughts(response)]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4062,7 +4500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context = "\n".join(state)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4120,7 +4564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Problem: {problem}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4178,7 +4628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rate the promise of this reasoning path on a scale of 0 to 1.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4236,7 +4692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4294,7 +4756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Reflection</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +4820,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ReflectiveAgent:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4410,7 +4884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.llm = llm_fn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4468,7 +4948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.reflection_log = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4526,7 +5012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>max_attempts = 3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4584,7 +5076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = await self._attempt(task)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4642,7 +5140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return result["output"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4700,7 +5204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>reflection = self._reflect(task, result)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4758,7 +5268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Update strategy based on reflection</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4816,7 +5332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "Failed after multiple attempts."</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4874,7 +5396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self.llm(f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4932,7 +5460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>What went wrong: {result.get('error', 'Unknown error')}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4990,7 +5524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partial output: {result.get('partial_output', '')}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5048,7 +5588,10 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What was the root cause of the failure?</p>
+<br>
+<br>
+<br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What was the root cause of the failure?</p>
 <br>
 <br>
 <br>
@@ -5077,7 +5620,10 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What should be done differently next time?</p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What should be done differently next time?</p>
 <br>
 <br>
 <br>
@@ -5106,7 +5652,13 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Is there missing information needed?</p>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Is there missing information needed?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5164,7 +5716,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5222,7 +5780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self.llm(f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5280,7 +5844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>After reflecting: {reflection}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5338,7 +5908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>and avoid repeating the same mistake.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5396,7 +5972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Choosing a Framework</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5454,7 +6036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|-----------|----------|-------------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5512,7 +6100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Plan-and-Execute | Complex multi-step tasks | When the plan is knowable upfront |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5570,6 +6164,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Reflection | Error-prone environments | When learning from mistakes is critical |</p>
 <br>
 <br>
@@ -5599,7 +6196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

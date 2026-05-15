@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR">
     <meta name="twitter:description" content="Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera Cluster for MySQL, and PostgreSQL BDR.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Database, Backend, Data">
     <title>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR — SourceHub</title>
     <meta name="description" content="Explore multi-master replication strategies including conflict resolution techniques, CRDTs, Galera Cluster for MySQL, and PostgreSQL BDR.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/multi-master-replication.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4427",
+      "wordCount": "5164",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/multi-master-replication.html"},
-      "articleBody": "Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-master replication allows writes to multiple database nodes simultaneously. Unlike primary-replica setups, there is no single point for writes. The trade-off is complexity, particularly around conflict resolution. Why Multi-Master? The primary reasons to consider multi-master replication are: * **Multi-region writes**: Users in the US and Europe both write with local latency. * **Zero downtime upgrades**: Any node can be taken offline without losing write availability. * **Read scalability with local writes**: Each node can serve both reads and writes with low latency. Conflict Resolution Strategies When two nodes concurrently modify the same row, a conflict occurs. Resolution strategies vary by system: Last-Write-Wins (LWW) Each row carries a timestamp. The write with the latest timestamp wins. Simple but lossy: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra default UPDATE users SET email = 'new@example.com', updated_at = now() WHERE id = 1; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The LWW with the highest timestamp wins **Pros**: Simple, always converges. **Cons**: Loses data silently. Application-Mediated Conflict Resolution The database detects conflicts and presents them to the application for resolution. BDR (Bi-Directional Replication) for PostgreSQL supports this: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a conflict handler function CREATE OR REPLACE FUNCTION resolve_conflict() RETURNS trigger AS $$ BEGIN \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Custom logic: keep the row with the higher version IF NEW.version >= OLD.version THEN RETURN NEW; END IF; RETURN OLD; END; $$ LANGUAGE plpgsql; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Apply to the replication set SELECT bdr.conflict_handler('orders', 'resolve_conflict'); CRDT-Based Reconciliation Conflict-free Replicated Data Types (CRDTs) mathematically guarantee convergence without coordination. Instead of storing a scalar value, you store a data structure where concurrent operations commute or combine: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Counter CRDT table CREATE TABLE page_views ( page_id INTEGER PRIMARY KEY, counter INTEGER DEFAULT 0 ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each replica increments independently UPDATE page_views SET counter = counter + 1 WHERE page_id = 42; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The final value after reconciliation: MAX of all replicas' counters (for grow-only counters) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- or SUM (for counters implemented as PN-Counters) More sophisticated CRDTs include: * **G-Set** (grow-only set): Elements can only be added. Union merges converge. * **LWW-Register**: Last-write-wins register (if using wall clocks) or compare-and-swap. * **OR-Set** (observed-remove set): Supports both add and remove without losing concurrent adds. Galera Cluster (MySQL / MariaDB) Galera Cluster implements synchronous multi-master replication for MySQL. All nodes coordinate before committing: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- All nodes are writable \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On each node: CREATE TABLE users ( id INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) NOT NULL ); INSERT INTO users (email) VALUES ('alice@example.com'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- This INSERT is certified on all nodes before returning Galera Key Properties * **Synchronous replication**: All nodes apply changes simultaneously. * **Certification-based**: Transactions are certified on every node before commit. * **Automatic node provisioning**: New nodes join via State Snapshot Transfer (SST) or Incremental State Transfer (IST). * **No replication lag**: All nodes are consistent at commit time. Galera Limitations * Cluster size penalty: 2-3 nodes is optimal. More nodes increase certification overhead. * Full table writes locks must be avoided; `SELECT ... FOR UPDATE` on uncached workloads causes deadlocks. * Network latency between nodes directly impacts write latency (the \"slowest node\" problem). * `REPEATABLE READ` is the default; `SERIALIZABLE` causes high conflict rates. PostgreSQL BDR (Bi-Directional Replication) BDR extends PostgreSQL's logical replication for multi-master scenarios. It operates at row level with conflict resolution: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure BDR group SELECT bdr.create_node( node_name := 'node1', dsn := 'host=node1.example.com port=5432 dbname=appdb' ); SELECT bdr.create_node( node_name := 'node2', dsn := 'host=node2.example.com port=5432 dbname=appdb' ); SELECT bdr.create_group( group_name := 'global_app', nodes := ARRAY['node1', 'node2'] ); BDR supports multiple conflict resolution modes: * `latest_timestamp_wins` * `latest_version_wins` * `apply_remote` * `apply_local` CAP Theorem Implications Multi-master systems live in the CAP trade-off space: * **Galera**: CP (Consistency + Partition tolerance). Sacrifices availability during network partitions because writes must certify on all nodes. * **Cassandra-style LWW**: AP (Availability + Partition tolerance). Sacrifices immediate consistency but always accepts writes. * **BDR with custom handlers**: Tunable. Configure per-table conflict strategies. When to Avoid Multi-Master Multi-master replication is not the default for good reasons: * **Single-region apps**: A single PostgreSQL primary with streaming replicas handles the vast majority of workloads. * **Apps with hot rows**: If 90% of writes target 10 rows (e.g., a counter), conflicts are guaranteed. * **Teams without operational maturity**: Multi-master requires monitoring replication lag, conflict rates, and node health. Monitoring Conflicts Whichever system you choose, monitor conflict rates: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BDR conflict stats SELECT * FROM bdr.conflict_history; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Galeria cluster status SHOW STATUS LIKE 'wsrep_cluster_size'; SHOW STATUS LIKE 'wsrep_local_cert_failures'; A rising conflict rate indicates application-level contention that might be better solved by sharding the data model rather than relying on replication to resolve conflicts. Multi-master replication is a powerful but complex tool. Start with single-master and add multi-master only when your availability or latency requirements genuinely demand it."
+      "articleBody": "Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR Multi-master replication allows writes to multiple database nodes simultaneously. Unlike primary-replica setups, there is no single point for writes. The trade-off is complexity, particularly around conflict resolution. Why Multi-Master? The primary reasons to consider multi-master replication are: * **Multi-region writes**: Users in the US and Europe both write with local latency. * **Zero downtime upgrades**: Any node can be taken offline without losing write availability. * **Read scalability with local writes**: Each node can serve both reads and writes with low latency. Conflict Resolution Strategies When two nodes concurrently modify the same row, a conflict occurs. Resolution strategies vary by system: Last-Write-Wins (LWW) Each row carries a timestamp. The write with the latest timestamp wins. Simple but lossy: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra default UPDATE users SET email = 'new@example.com', updated_at = now() WHERE id = 1; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The LWW with the highest timestamp wins **Pros**: Simple, always converges. **Cons**: Loses data silently. Application-Mediated Conflict Resolution The database detects conflicts and presents them to the application for resolution. BDR (Bi-Directional Replication) for PostgreSQL supports this: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a conflict handler function CREATE OR REPLACE FUNCTION resolve_conflict() RETURNS trigger AS $$ BEGIN \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Custom logic: keep the row with the higher version IF NEW.version >= OLD.version THEN RETURN NEW; END IF; RETURN OLD; END; $$ LANGUAGE plpgsql; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Apply to the replication set SELECT bdr.conflict_handler('orders', 'resolve_conflict'); CRDT-Based Reconciliation Conflict-free Replicated Data Types (CRDTs) mathematically guarantee convergence without coordination. Instead of storing a scalar value, you store a data structure where concurrent operations commute or combine: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Counter CRDT table CREATE TABLE page_views ( page_id INTEGER PRIMARY KEY, counter INTEGER DEFAULT 0 ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each replica increments independently UPDATE page_views SET counter = counter + 1 WHERE page_id = 42; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The final value after reconciliation: MAX of all replicas' counters (for grow-only counters) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- or SUM (for counters implemented as PN-Counters) More sophisticated CRDTs include: * **G-Set** (grow-only set): Elements can only be added. Union merges converge. * **LWW-Register**: Last-write-wins register (if using wall clocks) or compare-and-swap. * **OR-Set** (observed-remove set): Supports both add and remove without losing concurrent adds. Galera Cluster (MySQL / MariaDB) Galera Cluster implements synchronous multi-master replication for MySQL. All nodes coordinate before committing: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- All nodes are writable \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On each node: CREATE TABLE users ( id INT PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) NOT NULL ); INSERT INTO users (email) VALUES ('alice@example.com'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- This INSERT is certified on all nodes before returning Galera Key Properties * **Synchronous replication**: All nodes apply changes simultaneously. * **Certification-based**: Transactions are certified on every node before commit. * **Automatic node provisioning**: New nodes join via State Snapshot Transfer (SST) or Incremental State Transfer (IST). * **No replication lag**: All nodes are consistent at commit time. Galera Limitations * Cluster size penalty: 2-3 nodes is optimal. More nodes increase certification overhead. * Full table writes locks must be avoided; `SELECT ... FOR UPDATE` on uncached workloads causes deadlocks. * Network latency between nodes directly impacts write latency (the \"slowest node\" problem). * `REPEATABLE READ` is the default; `SERIALIZABLE` causes high conflict rates. PostgreSQL BDR (Bi-Directional Replication) BDR extends PostgreSQL's logical replication for multi-master scenarios. It operates at row level with conflict resolution: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure BDR group SELECT bdr.create_node( node_name := 'node1', dsn := 'host=node1.example.com port=5432 dbname=appdb' ); SELECT bdr.create_node( node_name := 'node2', dsn := 'host=node2.example.com port=5432 dbname=appdb' ); SELECT bdr.create_group( group_name := 'global_app', nodes := ARRAY['node1', 'node2'] ); BDR supports multiple conflict resolution modes: * `latest_timestamp_wins` * `latest_version_wins` * `apply_remote` * `apply_local` CAP Theorem Implications Multi-master systems live in the CAP trade-off space: * **Galera**: CP (Consistency + Partition tolerance). Sacrifices availability during network partitions because writes must certify on all nodes. * **Cassandra-style LWW**: AP (Availability + Partition tolerance). Sacrifices immediate consistency but always accepts writes. * **BDR with custom handlers**: Tunable. Configure per-table conflict strategies. When to Avoid Multi-Master Multi-master replication is not the default for good reasons: * **Single-region apps**: A single PostgreSQL primary with streaming replicas handles the vast majority of workloads. * **Apps with hot rows**: If 90% of writes target 10 rows (e.g., a counter), conflicts are guaranteed. * **Teams without operational maturity**: Multi-master requires monitoring replication lag, conflict rates, and node health. Monitoring Conflicts Whichever system you choose, monitor conflict rates: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BDR conflict stats SELECT * FROM bdr.conflict_history; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Galeria cluster status SHOW STATUS LIKE 'wsrep_cluster_size'; SHOW STATUS LIKE 'wsrep_local_cert_failures'; A rising conflict rate indicates application-level contention that might be better solved by sharding the data model rather than relying on replication to resolve conflicts. Multi-master replication is a powerful but complex tool. Start with single-master and add multi-master only when your availability or latency requirements genuinely demand it."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Multi-Master Replication: Conflict Resolution, CRDTs, Galera, and BDR </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,7 +293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Why Multi-Master? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -297,6 +348,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Multi-region writes**: Users in the US and Europe both write with local latency.</p>
 <br>
 <br>
@@ -320,7 +374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Zero downtime upgrades**: Any node can be taken offline without losing write availability.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -369,7 +429,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conflict Resolution Strategies </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -415,7 +481,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Last-Write-Wins (LWW) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -464,7 +536,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra default</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra default</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -516,7 +594,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The LWW with the highest timestamp wins</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The LWW with the highest timestamp wins</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -565,7 +649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application-Mediated Conflict Resolution </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -614,7 +704,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a conflict handler function</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a conflict handler function</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -666,7 +762,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURNS trigger AS $$</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -718,7 +820,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Custom logic: keep the row with the higher version</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Custom logic: keep the row with the higher version</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -770,7 +878,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURN NEW;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -822,7 +936,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURN OLD;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -874,6 +994,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>$$ LANGUAGE plpgsql;</p>
 <br>
 <br>
@@ -900,7 +1023,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Apply to the replication set</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Apply to the replication set</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -952,7 +1081,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CRDT-Based Reconciliation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1001,7 +1136,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Counter CRDT table</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Counter CRDT table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1053,7 +1194,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>page_id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1105,6 +1252,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
 <br>
 <br>
@@ -1131,7 +1281,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each replica increments independently</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each replica increments independently</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1183,7 +1339,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The final value after reconciliation: MAX of all replicas' counters (for grow-only counters)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The final value after reconciliation: MAX of all replicas' counters (for grow-only counters)</p>
 <br>
 <br>
 <br>
@@ -1209,7 +1368,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- or SUM (for counters implemented as PN-Counters)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- or SUM (for counters implemented as PN-Counters)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1261,6 +1426,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **G-Set** (grow-only set): Elements can only be added. Union merges converge.</p>
 <br>
 <br>
@@ -1284,7 +1452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **LWW-Register**: Last-write-wins register (if using wall clocks) or compare-and-swap.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1333,7 +1507,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Galera Cluster (MySQL / MariaDB) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1382,7 +1562,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- All nodes are writable</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- All nodes are writable</p>
 <br>
 <br>
 <br>
@@ -1408,7 +1591,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On each node:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On each node:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1460,7 +1649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id INT PRIMARY KEY AUTO_INCREMENT,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1512,7 +1707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1564,7 +1765,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- This INSERT is certified on all nodes before returning</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- This INSERT is certified on all nodes before returning</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1616,7 +1823,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Synchronous replication**: All nodes apply changes simultaneously.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1662,6 +1875,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Automatic node provisioning**: New nodes join via State Snapshot Transfer (SST) or Incremental State Transfer (IST).</p>
 <br>
 <br>
@@ -1685,7 +1901,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **No replication lag**: All nodes are consistent at commit time.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1737,7 +1959,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Cluster size penalty: 2-3 nodes is optimal. More nodes increase certification overhead.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1783,7 +2011,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Network latency between nodes directly impacts write latency (the "slowest node" problem).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1832,7 +2066,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PostgreSQL BDR (Bi-Directional Replication) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1881,7 +2121,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure BDR group</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure BDR group</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1908,6 +2154,9 @@
 <br>
 <br>
 <p>SELECT bdr.create_node(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1959,6 +2208,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dsn := 'host=node1.example.com port=5432 dbname=appdb'</p>
 <br>
 <br>
@@ -1985,7 +2237,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2037,7 +2295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>node_name := 'node2',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2089,7 +2353,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2141,7 +2411,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>group_name := 'global_app',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2193,7 +2469,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2245,7 +2527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `latest_timestamp_wins`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2291,7 +2579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `apply_remote`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2340,7 +2634,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CAP Theorem Implications </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,6 +2689,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Galera**: CP (Consistency + Partition tolerance). Sacrifices availability during network partitions because writes must certify on all nodes.</p>
 <br>
 <br>
@@ -2412,7 +2715,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Cassandra-style LWW**: AP (Availability + Partition tolerance). Sacrifices immediate consistency but always accepts writes.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2461,7 +2770,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When to Avoid Multi-Master </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2510,6 +2825,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Single-region apps**: A single PostgreSQL primary with streaming replicas handles the vast majority of workloads.</p>
 <br>
 <br>
@@ -2533,7 +2851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Apps with hot rows**: If 90% of writes target 10 rows (e.g., a counter), conflicts are guaranteed.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2582,7 +2906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Monitoring Conflicts </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2631,7 +2961,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BDR conflict stats</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BDR conflict stats</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2683,7 +3019,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Galeria cluster status</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Galeria cluster status</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2735,6 +3077,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SHOW STATUS LIKE 'wsrep_local_cert_failures';</p>
 <br>
 <br>
@@ -2761,7 +3106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A rising conflict rate indicates application-level contention that might be better solved by sharding the data model rather than relying on replication to resolve conflicts. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

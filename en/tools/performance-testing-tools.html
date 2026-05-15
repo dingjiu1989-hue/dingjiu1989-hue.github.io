@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Performance Testing Tools: k6 vs Locust vs JMeter">
     <meta name="twitter:description" content="Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-testing-tools.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Developer Tools, Productivity">
     <title>Performance Testing Tools: k6 vs Locust vs JMeter — SourceHub</title>
     <meta name="description" content="Compare k6, Locust, and JMeter for performance testing including script types, distributed testing, CI integration, reporting, and protocol support.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,7 +44,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/performance-testing-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "7637",
+      "wordCount": "8575",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +52,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/performance-testing-tools-k6-vs-locust-vs-jmeter-58pn"
       ],
-      "articleBody": "Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Introduction Performance testing is not optional for production services. Without it, you discover scaling bottlenecks during traffic spikes or product launches. The three leading open-source tools--k6, Locust, and JMeter--each approach load testing from different angles. This article compares their scripting models, distributed testing capabilities, CI integration, and reporting to help you choose the right tool for your use case. k6 k6 is a modern load testing tool built with JavaScript/Go, designed for developer workflows and CI integration: // k6 test script import http from 'k6/http'; import { check, sleep, group } from 'k6'; import { Rate, Trend, Counter } from 'k6/metrics'; // Custom metrics const errorRate = new Rate('errors'); const paymentLatency = new Trend('payment_latency'); const successCount = new Counter('successful_payments'); // Test configuration export const options = { stages: [ { duration: '2m', target: 50 }, // Ramp up to 50 users { duration: '5m', target: 100 }, // Stay at 100 users { duration: '2m', target: 200 }, // Spike to 200 { duration: '2m', target: 0 }, // Ramp down ], thresholds: { http_req_duration: ['p(95) errors: ['rate 'payment_latency': ['p(99) }, }; export default function () { group('Payment Flow', () => { const payload = JSON.stringify({ amount: 49.99, currency: 'USD', token: 'tok_test_123', }); const params = { headers: { 'Content-Type': 'application/json' }, tags: { endpoint: 'charge' }, }; const response = http.post( 'https://api.example.com/v1/charges', payload, params ); check(response, { 'status is 200': (r) => r.status === 200, 'response time r.timings.duration 'has transaction id': (r) => r.json('id') !== undefined, }); paymentLatency.add(response.timings.duration); errorRate.add(response.status !== 200); if (response.status === 200) successCount.add(1); sleep(1); }); } CI Integration .github/workflows/performance-test.yml name: Performance Test on: push: branches: [main] schedule: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cron: '0 6 * * 1-5' # Weekdays at 6 AM jobs: load-test: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run k6 test uses: grafana/k6-action@v0.3.0 with: filename: tests/performance/payment-flow.js flags: --out json=results.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results uses: actions/upload-artifact@v4 with: name: k6-results path: results.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Compare thresholds run: | if grep -q '\"thresholds\": {\"failed\":' results.json; then echo \"Performance thresholds exceeded!\" exit 1 fi Locust Locust uses Python for test scenarios, making it ideal for teams already in the Python ecosystem: locustfile.py from locust import HttpUser, task, between, events from locust.runners import MasterRunner import json import logging class PaymentUser(HttpUser): wait_time = between(0.5, 2.5) def on_start(self): \"\"\"Login before starting tasks\"\"\" response = self.client.post(\"/auth/login\", json={ \"username\": f\"test_user_{self.id}\", \"password\": \"test_password\", }) self.token = response.json().get(\"token\") self.client.headers.update({ \"Authorization\": f\"Bearer {self.token}\" }) @task(3) def create_payment(self): \"\"\"Create a payment - weight 3\"\"\" payload = { \"amount\": 99.99, \"currency\": \"USD\", \"description\": \"Load test payment\", } with self.client.post( \"/api/v1/charges\", json=payload, catch_response=True, name=\"/api/v1/charges [POST]\", ) as response: if response.status_code != 201: response.failure(f\"Unexpected status: {response.status_code}\") elif response.elapsed.total_seconds() > 2.0: response.failure(\"Request took too long\") @task(1) def get_balance(self): \"\"\"Check balance - weight 1\"\"\" self.client.get(\"/api/v1/balance\", name=\"/api/v1/balance [GET]\") @task(1) def list_transactions(self): \"\"\"List recent transactions\"\"\" self.client.get( \"/api/v1/transactions?limit=10\", name=\"/api/v1/transactions [GET]\", ) Distributed testing hook @events.init.add_listener def on_locust_init(environment, **kwargs): if isinstance(environment.runner, MasterRunner): print(\"Starting distributed load test with master node\") JMeter JMeter provides a GUI for test plan creation, useful for non-developer team members: https://api.example.com 100 60 true 600 testclass=\"HTTPSamplerProxy\"> ${base_url} /api/v1/charges POST true https testclass=\"ResponseAssertion\"> 806856195 false \"status\": \"success\" Distributed Testing | Feature | k6 | Locust | JMeter | |---|---|---|---| | Distributed mode | k6-operator (K8s) | Master/worker (built-in) | Master/slave (built-in) | | Cloud execution | Grafana Cloud k6 | Locust Cloud | BlazeMeter | | Scaling | Horizontal via K8s | Built-in RPC | CLI parameters | k6 distributed testing with Kubernetes: k6-operator CRD for distributed tests apiVersion: k6.io/v1alpha1 kind: TestRun metadata: name: payment-load-test spec: parallelism: 6 script: configMap: name: k6-test-scripts file: payment-flow.js runner: image: grafana/k6:latest env: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: TARGET_URL value: \"https://api.example.com\" resources: limits: cpu: \"1\" memory: 512Mi requests: cpu: 500m memory: 256Mi Protocol Support | Protocol | k6 | Locust | JMeter | |---|---|---|---| | HTTP/1.1 | Native | Native | Native | | HTTP/2 | Native | Extension | Native | | gRPC | Extension | Extension | Native | | WebSocket | Extension | Extension | Native | | JDBC | No | No | Native | | JMS | No | No | Native | | MQTT | Extension | Extension | Plugin | When to Use Which * **k6**: Best for developer-led teams wanting CI-native load testing with JavaScript. Excellent for REST API and microservice testing. * **Locust**: Best for Python-centric teams who need complex test scenarios and real-time monitoring. Ideal for behavioral load testing. * **JMeter**: Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows. For most modern web applications, k6 provides the best developer experience and CI integration. Choose Locust when your test scenarios require complex Python logic. Reserve JMeter for situations requiring its broad protocol support or when non-developers need to create and modify test plans."
+      "articleBody": "Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Performance Testing Tools: k6 vs Locust vs JMeter Introduction Performance testing is not optional for production services. Without it, you discover scaling bottlenecks during traffic spikes or product launches. The three leading open-source tools--k6, Locust, and JMeter--each approach load testing from different angles. This article compares their scripting models, distributed testing capabilities, CI integration, and reporting to help you choose the right tool for your use case. k6 k6 is a modern load testing tool built with JavaScript/Go, designed for developer workflows and CI integration: // k6 test script import http from 'k6/http'; import { check, sleep, group } from 'k6'; import { Rate, Trend, Counter } from 'k6/metrics'; // Custom metrics const errorRate = new Rate('errors'); const paymentLatency = new Trend('payment_latency'); const successCount = new Counter('successful_payments'); // Test configuration export const options = { stages: [ { duration: '2m', target: 50 }, // Ramp up to 50 users { duration: '5m', target: 100 }, // Stay at 100 users { duration: '2m', target: 200 }, // Spike to 200 { duration: '2m', target: 0 }, // Ramp down ], thresholds: { http_req_duration: ['p(95) errors: ['rate 'payment_latency': ['p(99) }, }; export default function () { group('Payment Flow', () => { const payload = JSON.stringify({ amount: 49.99, currency: 'USD', token: 'tok_test_123', }); const params = { headers: { 'Content-Type': 'application/json' }, tags: { endpoint: 'charge' }, }; const response = http.post( 'https://api.example.com/v1/charges', payload, params ); check(response, { 'status is 200': (r) => r.status === 200, 'response time r.timings.duration 'has transaction id': (r) => r.json('id') !== undefined, }); paymentLatency.add(response.timings.duration); errorRate.add(response.status !== 200); if (response.status === 200) successCount.add(1); sleep(1); }); } CI Integration .github/workflows/performance-test.yml name: Performance Test on: push: branches: [main] schedule: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cron: '0 6 * * 1-5' # Weekdays at 6 AM jobs: load-test: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run k6 test uses: grafana/k6-action@v0.3.0 with: filename: tests/performance/payment-flow.js flags: --out json=results.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results uses: actions/upload-artifact@v4 with: name: k6-results path: results.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Compare thresholds run: | if grep -q '\"thresholds\": {\"failed\":' results.json; then echo \"Performance thresholds exceeded!\" exit 1 fi Locust Locust uses Python for test scenarios, making it ideal for teams already in the Python ecosystem: locustfile.py from locust import HttpUser, task, between, events from locust.runners import MasterRunner import json import logging class PaymentUser(HttpUser): wait_time = between(0.5, 2.5) def on_start(self): \"\"\"Login before starting tasks\"\"\" response = self.client.post(\"/auth/login\", json={ \"username\": f\"test_user_{self.id}\", \"password\": \"test_password\", }) self.token = response.json().get(\"token\") self.client.headers.update({ \"Authorization\": f\"Bearer {self.token}\" }) @task(3) def create_payment(self): \"\"\"Create a payment - weight 3\"\"\" payload = { \"amount\": 99.99, \"currency\": \"USD\", \"description\": \"Load test payment\", } with self.client.post( \"/api/v1/charges\", json=payload, catch_response=True, name=\"/api/v1/charges [POST]\", ) as response: if response.status_code != 201: response.failure(f\"Unexpected status: {response.status_code}\") elif response.elapsed.total_seconds() > 2.0: response.failure(\"Request took too long\") @task(1) def get_balance(self): \"\"\"Check balance - weight 1\"\"\" self.client.get(\"/api/v1/balance\", name=\"/api/v1/balance [GET]\") @task(1) def list_transactions(self): \"\"\"List recent transactions\"\"\" self.client.get( \"/api/v1/transactions?limit=10\", name=\"/api/v1/transactions [GET]\", ) Distributed testing hook @events.init.add_listener def on_locust_init(environment, **kwargs): if isinstance(environment.runner, MasterRunner): print(\"Starting distributed load test with master node\") JMeter JMeter provides a GUI for test plan creation, useful for non-developer team members: https://api.example.com 100 60 true 600 testclass=\"HTTPSamplerProxy\"> ${base_url} /api/v1/charges POST true https testclass=\"ResponseAssertion\"> 806856195 false \"status\": \"success\" Distributed Testing | Feature | k6 | Locust | JMeter | |---|---|---|---| | Distributed mode | k6-operator (K8s) | Master/worker (built-in) | Master/slave (built-in) | | Cloud execution | Grafana Cloud k6 | Locust Cloud | BlazeMeter | | Scaling | Horizontal via K8s | Built-in RPC | CLI parameters | k6 distributed testing with Kubernetes: k6-operator CRD for distributed tests apiVersion: k6.io/v1alpha1 kind: TestRun metadata: name: payment-load-test spec: parallelism: 6 script: configMap: name: k6-test-scripts file: payment-flow.js runner: image: grafana/k6:latest env: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: TARGET_URL value: \"https://api.example.com\" resources: limits: cpu: \"1\" memory: 512Mi requests: cpu: 500m memory: 256Mi Protocol Support | Protocol | k6 | Locust | JMeter | |---|---|---|---| | HTTP/1.1 | Native | Native | Native | | HTTP/2 | Native | Extension | Native | | gRPC | Extension | Extension | Native | | WebSocket | Extension | Extension | Native | | JDBC | No | No | Native | | JMS | No | No | Native | | MQTT | Extension | Extension | Plugin | When to Use Which * **k6**: Best for developer-led teams wanting CI-native load testing with JavaScript. Excellent for REST API and microservice testing. * **Locust**: Best for Python-centric teams who need complex test scenarios and real-time monitoring. Ideal for behavioral load testing. * **JMeter**: Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows. For most modern web applications, k6 provides the best developer experience and CI integration. Choose Locust when your test scenarios require complex Python logic. Reserve JMeter for situations requiring its broad protocol support or when non-developers need to create and modify test plans."
     }
     </script>
     <script type="application/ld+json">
@@ -61,6 +64,16 @@
         {"@type": "ListItem", "position": 2, "name": "Tool Recommendations", "item": "https://dingjiu1989-hue.github.io/en/tools/"},
         {"@type": "ListItem", "position": 3, "name": "Performance Testing Tools: k6 vs Locust vs JMeter"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -233,7 +246,42 @@
 <br>
 <br>
 <br>
+<h1>Performance Testing Tools: k6 vs Locust vs JMeter</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -291,7 +339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  k6</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -349,7 +403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// k6 test script</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -407,7 +467,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { check, sleep, group } from 'k6';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Custom metrics</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -523,7 +595,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const paymentLatency = new Trend('payment_latency');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -581,7 +659,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Test configuration</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -639,7 +723,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stages: [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -697,7 +787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ duration: '5m', target: 100 }, // Stay at 100 users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -755,7 +851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ duration: '2m', target: 0 }, // Ramp down</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -813,7 +915,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>thresholds: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -871,7 +979,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>errors: ['rate<0.05'],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -929,6 +1043,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
 <br>
 <br>
@@ -958,7 +1075,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>};</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1016,7 +1139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>group('Payment Flow', () => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1074,7 +1203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>amount: 49.99,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1132,6 +1267,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token: 'tok_test_123',</p>
 <br>
 <br>
@@ -1161,7 +1299,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,7 +1363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers: { 'Content-Type': 'application/json' },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1277,7 +1427,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>};</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1335,7 +1491,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'https://api.example.com/v1/charges',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1393,7 +1555,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>params</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1451,7 +1619,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>check(response, {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1509,7 +1683,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'response time < 300ms': (r) => r.timings.duration < 300,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1567,7 +1747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1625,7 +1811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>errorRate.add(response.status !== 200);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1683,7 +1875,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sleep(1);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1741,7 +1939,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1799,7 +2003,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>.github/workflows/performance-test.yml</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1857,7 +2067,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>on:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1915,7 +2131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>branches: [main]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1973,7 +2195,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cron: '0 6 * * 1-5' # Weekdays at 6 AM</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- cron: '0 6 * * 1-5' # Weekdays at 6 AM</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2031,7 +2259,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>load-test:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2089,6 +2323,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>steps:</p>
 <br>
 <br>
@@ -2118,7 +2355,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
 <br>
 <br>
 <br>
@@ -2147,7 +2387,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run k6 test</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run k6 test</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2205,7 +2451,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2263,6 +2515,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>flags: --out json=results.json</p>
 <br>
 <br>
@@ -2292,7 +2547,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Upload results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2350,7 +2611,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2408,6 +2675,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path: results.json</p>
 <br>
 <br>
@@ -2437,7 +2707,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Compare thresholds</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Compare thresholds</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2495,7 +2771,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if grep -q '"thresholds": {"failed":' results.json; then</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2553,7 +2835,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exit 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2611,7 +2899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Locust</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2669,7 +2963,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>locustfile.py</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2727,7 +3027,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from locust.runners import MasterRunner</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2785,7 +3091,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import logging</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2843,7 +3155,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>wait_time = between(0.5, 2.5)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2901,7 +3219,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Login before starting tasks"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2959,7 +3283,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"username": f"test_user_{self.id}",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3017,7 +3347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3075,7 +3411,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.client.headers.update({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3133,7 +3475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3191,7 +3539,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def create_payment(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3249,7 +3603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>payload = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3307,7 +3667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"currency": "USD",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3365,7 +3731,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3423,7 +3795,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"/api/v1/charges",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3481,7 +3859,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>catch_response=True,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3539,7 +3923,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) as response:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3597,7 +3987,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response.failure(f"Unexpected status: {response.status_code}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3655,6 +4051,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response.failure("Request took too long")</p>
 <br>
 <br>
@@ -3684,7 +4083,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@task(1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3742,7 +4147,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Check balance - weight 1"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3800,7 +4211,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@task(1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3858,7 +4275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""List recent transactions"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3916,7 +4339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"/api/v1/transactions?limit=10",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3974,7 +4403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4032,7 +4467,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@events.init.add_listener</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4090,7 +4531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if isinstance(environment.runner, MasterRunner):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4148,6 +4595,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  JMeter</h2>
 <br>
 <br>
@@ -4177,7 +4627,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JMeter provides a GUI for test plan creation, useful for non-developer team members:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4277,7 +4733,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>100</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4335,7 +4797,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4402,7 +4870,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>testclass="HTTPSamplerProxy"></p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4460,7 +4934,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>/api/v1/charges</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4518,7 +4998,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4585,7 +5071,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>testclass="ResponseAssertion"></p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4643,7 +5135,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>false</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4725,7 +5223,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Distributed Testing</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4783,7 +5287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---|---|---|---|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4841,7 +5351,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Cloud execution | Grafana Cloud k6 | Locust Cloud | BlazeMeter |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4899,7 +5415,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>k6 distributed testing with Kubernetes:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4957,7 +5479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: k6.io/v1alpha1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5015,7 +5543,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>metadata:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5073,7 +5607,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spec:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5131,7 +5671,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>script:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5189,7 +5735,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: k6-test-scripts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5247,7 +5799,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>runner:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5305,6 +5863,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>env:</p>
 <br>
 <br>
@@ -5334,7 +5895,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: TARGET_URL</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: TARGET_URL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5392,7 +5959,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resources:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5450,7 +6023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cpu: "1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5508,7 +6087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>requests:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5566,7 +6151,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>memory: 256Mi</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5624,7 +6215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Protocol | k6 | Locust | JMeter |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5682,7 +6279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| HTTP/1.1 | Native | Native | Native |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5740,7 +6343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| gRPC | Extension | Extension | Native |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5798,7 +6407,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| JDBC | No | No | Native |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5856,7 +6471,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| MQTT | Extension | Extension | Plugin |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5914,7 +6535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **k6**: Best for developer-led teams wanting CI-native load testing with JavaScript. Excellent for REST API and microservice testing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5966,7 +6593,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **JMeter**: Best for organizations requiring broad protocol support, GUI-based test creation, or integration with legacy performance testing workflows.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

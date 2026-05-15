@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Distributed Databases: Concepts and Implementation">
     <meta name="twitter:description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Database, SQL">
     <title>Distributed Databases: Concepts and Implementation — SourceHub</title>
     <meta name="description" content="Explore Raft/Paxos consensus, gossip protocols, CRDTs, and the architectures behind Amazon Dynamo and Google Spanner.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/distributed-databases.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1451",
+      "wordCount": "1619",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/distributed-databases.html"},
-      "articleBody": "Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Database Architecture Distributed databases store data across multiple nodes, presenting a unified interface. They provide scalability and fault tolerance. CAP Theorem A distributed system can provide at most two of: Consistency, Availability, Partition Tolerance. Since partitions are inevitable, systems choose CP or AP. Consensus Algorithms Raft Raft is a consensus algorithm designed for understandability: class RaftNode: def __init__(self): self.state = \"FOLLOWER\" self.current_term = 0 def start_election(self): self.state = \"CANDIDATE\" votes = 1 for peer in self.peers: if peer.request_vote(self.current_term): votes += 1 if votes > len(self.peers) // 2: self.state = \"LEADER\" Raft powers etcd, Consul, and MongoDB replication. Paxos Paxos is the original consensus algorithm. It is correct but difficult to understand. Used in Google Spanner and Chubby. Gossip Protocol Nodes periodically exchange state with random peers. Information spreads in O(log N) rounds. Used in Cassandra for membership detection and failure detection. Dynamo-Style Architecture Amazon DynamoDB and Cassandra prioritize availability: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra: tunable consistency INSERT INTO users (user_id, name) VALUES ('u1', 'Alice') USING CONSISTENCY QUORUM; SELECT * FROM users WHERE user_id = 'u1' USING CONSISTENCY ONE; Spanner-Style Architecture Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency. Conclusion Choose Dynamo-style (Cassandra, DynamoDB) for availability and tunable consistency. Choose Spanner-style (Spanner, CockroachDB) for strong consistency. Choose Raft-based systems (etcd) for coordination. Consider your consistency requirements carefully."
+      "articleBody": "Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Databases: Concepts and Implementation Distributed Database Architecture Distributed databases store data across multiple nodes, presenting a unified interface. They provide scalability and fault tolerance. CAP Theorem A distributed system can provide at most two of: Consistency, Availability, Partition Tolerance. Since partitions are inevitable, systems choose CP or AP. Consensus Algorithms Raft Raft is a consensus algorithm designed for understandability: class RaftNode: def __init__(self): self.state = \"FOLLOWER\" self.current_term = 0 def start_election(self): self.state = \"CANDIDATE\" votes = 1 for peer in self.peers: if peer.request_vote(self.current_term): votes += 1 if votes > len(self.peers) // 2: self.state = \"LEADER\" Raft powers etcd, Consul, and MongoDB replication. Paxos Paxos is the original consensus algorithm. It is correct but difficult to understand. Used in Google Spanner and Chubby. Gossip Protocol Nodes periodically exchange state with random peers. Information spreads in O(log N) rounds. Used in Cassandra for membership detection and failure detection. Dynamo-Style Architecture Amazon DynamoDB and Cassandra prioritize availability: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra: tunable consistency INSERT INTO users (user_id, name) VALUES ('u1', 'Alice') USING CONSISTENCY QUORUM; SELECT * FROM users WHERE user_id = 'u1' USING CONSISTENCY ONE; Spanner-Style Architecture Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency. Conclusion Choose Dynamo-style (Cassandra, DynamoDB) for availability and tunable consistency. Choose Spanner-style (Spanner, CockroachDB) for strong consistency. Choose Raft-based systems (etcd) for coordination. Consider your consistency requirements carefully."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Database", "item": "https://dingjiu1989-hue.github.io/en/database/"},
         {"@type": "ListItem", "position": 3, "name": "Distributed Databases: Concepts and Implementation"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -201,7 +214,39 @@
 <br>
 <br>
 <br>
+<h1>Distributed Databases: Concepts and Implementation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Distributed Database Architecture </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -247,7 +292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CAP Theorem </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -293,7 +344,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Consensus Algorithms </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -339,7 +396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Raft is a consensus algorithm designed for understandability: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -391,7 +454,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,7 +512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.current_term = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -495,7 +570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.state = "CANDIDATE"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -547,7 +628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for peer in self.peers:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -599,7 +686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>votes += 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -651,7 +744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.state = "LEADER"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -700,7 +799,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Paxos </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -746,7 +851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Gossip Protocol </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -792,7 +903,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dynamo-Style Architecture </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -841,7 +958,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra: tunable consistency</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Cassandra: tunable consistency</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -893,7 +1016,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>USING CONSISTENCY QUORUM;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -945,7 +1074,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>USING CONSISTENCY ONE;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -994,6 +1129,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Google Spanner provides strong consistency globally using TrueTime (GPS + atomic clocks) for external consistency. </p>
 <br>
 <br>
@@ -1017,7 +1155,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

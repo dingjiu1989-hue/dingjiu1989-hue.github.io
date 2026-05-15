@@ -26,6 +26,9 @@
     <meta name="twitter:title" content="Threat Modeling">
     <meta name="twitter:description" content="Threat modeling methodologies including STRIDE, DREAD, PASTA, attack trees, and practical tooling.">
     <meta name="twitter:image" content="https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png">
+    <meta property="article:published_time" content="2026-05-12">
+    <meta property="article:modified_time" content="2026-05-12">
+    <meta property="article:tag" content="Security, DevOps, Cloud">
     <title>Threat Modeling — SourceHub</title>
     <meta name="description" content="Threat modeling methodologies including STRIDE, DREAD, PASTA, attack trees, and practical tooling.">
     <link rel="stylesheet" href="/css/style.css">
@@ -41,12 +44,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-modeling.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5090",
+      "wordCount": "5918",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-modeling.html"},
-      "articleBody": "Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Why Threat Model? Threat modeling identifies potential security issues during design, when they are cheapest to fix. It shifts security left and builds protection into architecture. STRIDE Methodology Microsoft's STRIDE categorizes threats: | Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | STRIDE threat analysis def analyze_with_stride(component, data_flow): threats = [] Spoofing if not component.get(\"authentication\"): threats.append({ \"category\": \"Spoofing\", \"threat\": f\"Attacker could impersonate {component['name']}\", \"mitigation\": \"Implement mutual TLS authentication\" }) Tampering if not data_flow.get(\"integrity_check\"): threats.append({ \"category\": \"Tampering\", \"threat\": f\"Data in {data_flow['name']} could be modified\", \"mitigation\": \"Use message signing or HMAC\" }) Information Disclosure if not data_flow.get(\"encryption\"): threats.append({ \"category\": \"Information Disclosure\", \"threat\": f\"Data in {data_flow['name']} could be intercepted\", \"mitigation\": \"Encrypt data in transit with TLS\" }) return threats DREAD Risk Rating DREAD helps prioritize threats: def dread_rating(threat): scores = { \"damage\": threat[\"damage_potential\"], # 1-10 \"reproducibility\": threat[\"reproducibility\"], # 1-10 \"exploitability\": threat[\"exploitability\"], # 1-10 \"affected_users\": threat[\"affected_users\"], # 1-10 \"discoverability\": threat[\"discoverability\"] # 1-10 } total = sum(scores.values()) rating = total / 5 if rating >= 7: return \"Critical\" elif rating >= 4: return \"High\" elif rating >= 2: return \"Medium\" else: return \"Low\" PASTA Methodology Process for Attack Simulation and Threat Analysis (PASTA) has seven stages: pasta_stages: 1: \"Define business and security objectives\" 2: \"Define technical scope\" 3: \"Application decomposition\" 4: \"Threat analysis\" 5: \"Vulnerability analysis\" 6: \"Attack modeling\" 7: \"Risk and impact analysis\" stage_4_threat_analysis: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technique: \"Create threat tree for each asset\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- example: asset: \"User database\" threats: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"SQL injection via search endpoint\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"Insider threat with direct DB access\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"Unencrypted backup compromise\" Attack Trees Model attacker goals and paths: class AttackTreeNode: def __init__(self, name, description, children=None): self.name = name self.description = description self.children = children or [] self.mitigations = [] def add_child(self, node): self.children.append(node) return self def add_mitigation(self, mitigation): self.mitigations.append(mitigation) return self Example: Attack tree for credential theft root = AttackTreeNode( \"Steal User Credentials\", \"Attacker goal: acquire valid credentials\" ) root.add_child(AttackTreeNode( \"Phishing Attack\", \"Send convincing phishing email\" ).add_child(AttackTreeNode( \"Clone legitimate site\", \"Create replica of login page\" ))) root.add_child(AttackTreeNode( \"Credential Stuffing\", \"Use leaked credentials from other breaches\" )) root.add_child(AttackTreeNode( \"Keylogging\", \"Install malware to capture keystrokes\" ).add_child(AttackTreeNode( \"Drive-by download\", \"Exploit browser vulnerability\" ))) Threat Modeling Tools Microsoft Threat Modeling Tool OWASP Threat Dragon PyTM - Pythonic threat modeling Example: PyTM model from pytm import TM, Server, Dataflow, Boundary tm = TM(\"Web Application\") internet = Boundary(\"Internet\") web_server = Server(\"Web Server\") database = Server(\"Database\") web_server.inBoundary = internet request = Dataflow(web_server, database, \"SQL Query\") request.protocol = \"TCP\" request.data = \"SQL Query\" tm.process() Integration with Development Threat modeling in CI threat_modeling_pipeline: triggers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- architecture_change \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- third_party_integration automated_checks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_flow_diagram_required \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trust_boundaries_defined \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authentication_documented \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorization_model_defined review_gates: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical_threats: must_have_mitigation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high_threats: must_have_mitigation_or_acceptance \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium_threats: reviewed_and_documented Conclusion Threat modeling is an essential security practice. Use STRIDE for threat identification, DREAD for prioritization, and PASTA for comprehensive analysis. Build attack trees to explore attacker paths. Integrate threat modeling into your development lifecycle. Automate where possible but maintain human oversight for design-level analysis. The goal is to find and fix security issues before they reach production."
+      "articleBody": "Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Threat Modeling Why Threat Model? Threat modeling identifies potential security issues during design, when they are cheapest to fix. It shifts security left and builds protection into architecture. STRIDE Methodology Microsoft's STRIDE categorizes threats: | Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | STRIDE threat analysis def analyze_with_stride(component, data_flow): threats = [] Spoofing if not component.get(\"authentication\"): threats.append({ \"category\": \"Spoofing\", \"threat\": f\"Attacker could impersonate {component['name']}\", \"mitigation\": \"Implement mutual TLS authentication\" }) Tampering if not data_flow.get(\"integrity_check\"): threats.append({ \"category\": \"Tampering\", \"threat\": f\"Data in {data_flow['name']} could be modified\", \"mitigation\": \"Use message signing or HMAC\" }) Information Disclosure if not data_flow.get(\"encryption\"): threats.append({ \"category\": \"Information Disclosure\", \"threat\": f\"Data in {data_flow['name']} could be intercepted\", \"mitigation\": \"Encrypt data in transit with TLS\" }) return threats DREAD Risk Rating DREAD helps prioritize threats: def dread_rating(threat): scores = { \"damage\": threat[\"damage_potential\"], # 1-10 \"reproducibility\": threat[\"reproducibility\"], # 1-10 \"exploitability\": threat[\"exploitability\"], # 1-10 \"affected_users\": threat[\"affected_users\"], # 1-10 \"discoverability\": threat[\"discoverability\"] # 1-10 } total = sum(scores.values()) rating = total / 5 if rating >= 7: return \"Critical\" elif rating >= 4: return \"High\" elif rating >= 2: return \"Medium\" else: return \"Low\" PASTA Methodology Process for Attack Simulation and Threat Analysis (PASTA) has seven stages: pasta_stages: 1: \"Define business and security objectives\" 2: \"Define technical scope\" 3: \"Application decomposition\" 4: \"Threat analysis\" 5: \"Vulnerability analysis\" 6: \"Attack modeling\" 7: \"Risk and impact analysis\" stage_4_threat_analysis: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technique: \"Create threat tree for each asset\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- example: asset: \"User database\" threats: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"SQL injection via search endpoint\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"Insider threat with direct DB access\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"Unencrypted backup compromise\" Attack Trees Model attacker goals and paths: class AttackTreeNode: def __init__(self, name, description, children=None): self.name = name self.description = description self.children = children or [] self.mitigations = [] def add_child(self, node): self.children.append(node) return self def add_mitigation(self, mitigation): self.mitigations.append(mitigation) return self Example: Attack tree for credential theft root = AttackTreeNode( \"Steal User Credentials\", \"Attacker goal: acquire valid credentials\" ) root.add_child(AttackTreeNode( \"Phishing Attack\", \"Send convincing phishing email\" ).add_child(AttackTreeNode( \"Clone legitimate site\", \"Create replica of login page\" ))) root.add_child(AttackTreeNode( \"Credential Stuffing\", \"Use leaked credentials from other breaches\" )) root.add_child(AttackTreeNode( \"Keylogging\", \"Install malware to capture keystrokes\" ).add_child(AttackTreeNode( \"Drive-by download\", \"Exploit browser vulnerability\" ))) Threat Modeling Tools Microsoft Threat Modeling Tool OWASP Threat Dragon PyTM - Pythonic threat modeling Example: PyTM model from pytm import TM, Server, Dataflow, Boundary tm = TM(\"Web Application\") internet = Boundary(\"Internet\") web_server = Server(\"Web Server\") database = Server(\"Database\") web_server.inBoundary = internet request = Dataflow(web_server, database, \"SQL Query\") request.protocol = \"TCP\" request.data = \"SQL Query\" tm.process() Integration with Development Threat modeling in CI threat_modeling_pipeline: triggers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- architecture_change \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- third_party_integration automated_checks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_flow_diagram_required \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trust_boundaries_defined \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authentication_documented \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorization_model_defined review_gates: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical_threats: must_have_mitigation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high_threats: must_have_mitigation_or_acceptance \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium_threats: reviewed_and_documented Conclusion Threat modeling is an essential security practice. Use STRIDE for threat identification, DREAD for prioritization, and PASTA for comprehensive analysis. Build attack trees to explore attacker paths. Integrate threat modeling into your development lifecycle. Automate where possible but maintain human oversight for design-level analysis. The goal is to find and fix security issues before they reach production."
     }
     </script>
     <script type="application/ld+json">
@@ -58,6 +61,16 @@
         {"@type": "ListItem", "position": 2, "name": "Security", "item": "https://dingjiu1989-hue.github.io/en/security/"},
         {"@type": "ListItem", "position": 3, "name": "Threat Modeling"}
       ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": ["/html/head/title", "/html/head/meta[@name='description']/@content"]
+      }
     }
     </script>
     <link rel="alternate" type="application/rss+xml" title="AI Study Room (English)" href="/en/feed.xml">
@@ -202,7 +215,39 @@
 <br>
 <br>
 <br>
+<h1>Threat Modeling</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Threat Model? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -248,7 +293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>STRIDE Methodology </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -294,7 +345,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Category | Definition | Example | |----------|------------|---------| | Spoofing | Impersonating someone | Fake login page | | Tampering | Modifying data | Altering database records | | Repudiation | Denying actions | Missing audit logs | | Information Disclosure | Exposing data | SQL injection | | Denial of Service | Disrupting service | DDoS attack | | Elevation of Privilege | Gaining unauthorized access | Buffer overflow | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -346,7 +403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def analyze_with_stride(component, data_flow):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -398,7 +461,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Spoofing</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -450,7 +519,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>threats.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -502,7 +577,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"threat": f"Attacker could impersonate {component['name']}",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -554,7 +635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -606,6 +693,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not data_flow.get("integrity_check"):</p>
 <br>
 <br>
@@ -632,7 +722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>threats.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -684,7 +780,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"threat": f"Data in {data_flow['name']} could be modified",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -736,7 +838,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +896,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not data_flow.get("encryption"):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -840,7 +954,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"category": "Information Disclosure",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -892,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"mitigation": "Encrypt data in transit with TLS"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -944,7 +1070,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return threats</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -993,7 +1125,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DREAD helps prioritize threats: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1045,7 +1183,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scores = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1097,7 +1241,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"reproducibility": threat["reproducibility"], # 1-10</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1149,7 +1299,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"affected_users": threat["affected_users"], # 1-10</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1201,7 +1357,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1253,7 +1415,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rating = total / 5</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1305,7 +1473,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "Critical"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1357,7 +1531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "High"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1409,7 +1589,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "Medium"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1461,7 +1647,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "Low"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,7 +1702,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Process for Attack Simulation and Threat Analysis (PASTA) has seven stages: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1562,7 +1760,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>1: "Define business and security objectives"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1614,7 +1818,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>3: "Application decomposition"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1666,7 +1876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>5: "Vulnerability analysis"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1718,7 +1934,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>7: "Risk and impact analysis"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1770,7 +1992,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technique: "Create threat tree for each asset"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technique: "Create threat tree for each asset"</p>
 <br>
 <br>
 <br>
@@ -1796,7 +2021,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- example:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- example:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1848,6 +2079,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>threats:</p>
 <br>
 <br>
@@ -1874,7 +2108,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "SQL injection via search endpoint"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "SQL injection via search endpoint"</p>
 <br>
 <br>
 <br>
@@ -1900,7 +2137,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Insider threat with direct DB access"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Insider threat with direct DB access"</p>
 <br>
 <br>
 <br>
@@ -1926,7 +2166,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Unencrypted backup compromise"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Unencrypted backup compromise"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1975,7 +2221,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Model attacker goals and paths: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2027,7 +2279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, name, description, children=None):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2079,7 +2337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.description = description</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2131,7 +2395,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.mitigations = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2183,6 +2453,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.children.append(node)</p>
 <br>
 <br>
@@ -2209,7 +2482,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2261,7 +2540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.mitigations.append(mitigation)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2313,7 +2598,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Example: Attack tree for credential theft</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2365,7 +2656,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Steal User Credentials",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2417,6 +2714,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
 <br>
 <br>
@@ -2443,7 +2743,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>root.add_child(AttackTreeNode(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2495,6 +2801,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Send convincing phishing email"</p>
 <br>
 <br>
@@ -2521,7 +2830,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>).add_child(AttackTreeNode(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2573,7 +2888,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Create replica of login page"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2625,7 +2946,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>root.add_child(AttackTreeNode(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2677,7 +3004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Use leaked credentials from other breaches"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2729,7 +3062,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>root.add_child(AttackTreeNode(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2781,7 +3120,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Install malware to capture keystrokes"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2833,7 +3178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Drive-by download",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2885,7 +3236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2937,7 +3294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Microsoft Threat Modeling Tool</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2989,7 +3352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>PyTM - Pythonic threat modeling</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3041,7 +3410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from pytm import TM, Server, Dataflow, Boundary</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3093,7 +3468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>internet = Boundary("Internet")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3145,7 +3526,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>database = Server("Database")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3197,7 +3584,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>request = Dataflow(web_server, database, "SQL Query")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3249,7 +3642,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>request.data = "SQL Query"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3301,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Integration with Development </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3353,7 +3758,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>threat_modeling_pipeline:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3405,7 +3816,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_feature_creation</p>
 <br>
 <br>
 <br>
@@ -3431,7 +3845,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- architecture_change</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- architecture_change</p>
 <br>
 <br>
 <br>
@@ -3457,7 +3874,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- third_party_integration</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- third_party_integration</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3509,10 +3932,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_flow_diagram_required</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data_flow_diagram_required</p>
 <br>
 <br>
 <br>
@@ -3535,13 +3958,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trust_boundaries_defined</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trust_boundaries_defined</p>
 <br>
 <br>
 <br>
@@ -3561,7 +3984,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authentication_documented</p>
 <br>
 <br>
 <br>
@@ -3571,6 +3993,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authentication_documented</p>
 <br>
 <br>
 <br>
@@ -3587,7 +4010,22 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorization_model_defined</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- authorization_model_defined</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3639,7 +4077,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical_threats: must_have_mitigation</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- critical_threats: must_have_mitigation</p>
 <br>
 <br>
 <br>
@@ -3665,7 +4106,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high_threats: must_have_mitigation_or_acceptance</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- high_threats: must_have_mitigation_or_acceptance</p>
 <br>
 <br>
 <br>
@@ -3691,7 +4135,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium_threats: reviewed_and_documented</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- medium_threats: reviewed_and_documented</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3718,6 +4168,9 @@
 <br>
 <br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
