@@ -13436,6 +13436,7 @@ def make_article_html(art, board_id, board_name, all_posts):
 <head>
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
     <!-- Google tag (gtag.js) -->
@@ -13540,6 +13541,7 @@ def make_homepage(data):
 <head>
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
     <!-- Google tag (gtag.js) -->
@@ -13702,6 +13704,7 @@ def make_category(data, board_id):
 <head>
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="XzThATs15kR08VOM-tCxIztKjEGW8ft-T75SmH_Wz38" />
+    <meta name="msvalidate.01" content="6D67B742819758DC63A576B495E40ACC" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base-path" content="/en">
     <!-- Google tag (gtag.js) -->
