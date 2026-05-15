@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-monitoring-alerting.html
   
 
 
+# AI Monitoring and Alerting: Latency, Token Usage, Error Rates, Drift Detection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ AI applications introduce new monitoring dimensions beyond traditional infrastru
   
   
   
+  
+  
+  
 
 
 ##  Core Metrics
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Every AI application should track these foundational metrics:
   
   
   
+  
+  
+  
 
 
 from prometheus_client import Counter, Histogram, Gauge
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import time
   
   
   
+  
+  
+  
 
 
 class AIMetrics:
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 self.request_count = Counter(
 
+  
+  
+  
   
   
   
@@ -390,6 +446,9 @@ self.request_count = Counter(
   
   
   
+  
+  
+  
 
 
 ["provider", "model", "status"],
@@ -416,10 +475,16 @@ self.request_count = Counter(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -468,6 +533,9 @@ self.latency = Histogram(
   
   
   
+  
+  
+  
 
 
 "llm_latency_ms", "LLM response latency",
@@ -494,10 +562,16 @@ self.latency = Histogram(
   
   
   
+  
+  
+  
 
 
 ["provider", "model"],
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ buckets=[100, 250, 500, 1000, 2000, 5000, 10000],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ self.token_usage = Counter(
   
   
   
+  
+  
+  
 
 
 "llm_tokens_total", "Token usage",
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ self.token_usage = Counter(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ self.cost_total = Counter(
   
   
   
+  
+  
+  
 
 
 "llm_cost_usd", "Total cost in USD",
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ self.cost_total = Counter(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ self.cache_hit_ratio = Gauge(
   
   
   
+  
+  
+  
 
 
 "llm_cache_hit_ratio", "Cache hit ratio",
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ self.cache_hit_ratio = Gauge(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ def record_request(self, provider: str, model: str, duration_ms: float, status: 
   
   
   
+  
+  
+  
 
 
 self.request_count.labels(provider=provider, model=model, status=status).inc()
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ self.latency.labels(provider=provider, model=model).observe(duration_ms)
   
   
   
+  
+  
+  
 
 
 def record_tokens(self, provider: str, model: str, input_tokens: int, output_tokens: int, cost: float):
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ self.token_usage.labels(provider=provider, model=model, token_type="input").inc(
   
   
   
+  
+  
+  
 
 
 self.token_usage.labels(provider=provider, model=model, token_type="output").inc(output_tokens)
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ self.cost_total.labels(provider=provider, model=model).inc(cost)
   
   
   
+  
+  
+  
 
 
 ##  Token Usage Tracking
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ Monitor token consumption per user, feature, and time period:
   
   
   
+  
+  
+  
 
 
 class TokenUsageTracker:
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ def __init__(self, db):
   
   
   
+  
+  
+  
 
 
 self.db = db
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ async def log_usage(self, user_id: str, feature: str, provider: str, model: str,
   
   
   
+  
+  
+  
 
 
 input_tokens: int, output_tokens: int, latency_ms: float):
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ await self.db.execute("""
   
   
   
+  
+  
+  
 
 
 INSERT INTO token_usage
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ INSERT INTO token_usage
   
   
   
+  
+  
+  
 
 
 latency_ms, cost, timestamp)
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
   
   
   
+  
+  
+  
 
 
 """, user_id, feature, provider, model, input_tokens, output_tokens,
 
+  
+  
+  
   
   
   
@@ -1430,6 +1606,9 @@ latency_ms, self._calculate_cost(input_tokens, output_tokens, provider, model))
   
   
   
+  
+  
+  
 
 
 async def get_daily_usage(self, date: str) -> dict:
@@ -1456,10 +1635,16 @@ async def get_daily_usage(self, date: str) -> dict:
   
   
   
+  
+  
+  
 
 
 row = await self.db.fetchrow("""
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ SELECT SUM(input_tokens) as input, SUM(output_tokens) as output,
   
   
   
+  
+  
+  
 
 
 SUM(cost) as cost, COUNT(*) as requests
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ FROM token_usage WHERE DATE(timestamp) = $1
   
   
   
+  
+  
+  
 
 
 """, date)
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ return dict(row) if row else {"input": 0, "output": 0, "cost": 0, "requests": 0}
   
   
   
+  
+  
+  
 
 
 async def check_budget(self, user_id: str, daily_budget: float) -> bool:
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ row = await self.db.fetchrow("""
   
   
   
+  
+  
+  
 
 
 SELECT SUM(cost) as today_cost
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ FROM token_usage
   
   
   
+  
+  
+  
 
 
 WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ WHERE user_id = $1 AND DATE(timestamp) = CURRENT_DATE
   
   
   
+  
+  
+  
 
 
 return (row["today_cost"] or 0) < daily_budget
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ return (row["today_cost"] or 0) < daily_budget
   
   
   
+  
+  
+  
 
 
 LLM applications experience distinctive error types:
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ from enum import Enum
   
   
   
+  
+  
+  
 
 
 class LLMErrorType(Enum):
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ RATE_LIMIT = "rate_limit"
   
   
   
+  
+  
+  
 
 
 CONTEXT_WINDOW = "context_window_exceeded"
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ CONTENT_FILTER = "content_filter_blocked"
   
   
   
+  
+  
+  
 
 
 TIMEOUT = "timeout"
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ INVALID_RESPONSE = "invalid_response"
   
   
   
+  
+  
+  
 
 
 PROVIDER_DOWN = "provider_down"
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ class ErrorMonitor:
   
   
   
+  
+  
+  
 
 
 def __init__(self, alert_threshold: float = 0.05):
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ self.alert_threshold = alert_threshold
   
   
   
+  
+  
+  
 
 
 self.error_counts: dict[str, int] = {}
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ self.total_requests: int = 0
   
   
   
+  
+  
+  
 
 
 def record_error(self, error_type: LLMErrorType, provider: str):
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ key = f"{error_type.value}:{provider}"
   
   
   
+  
+  
+  
 
 
 self.error_counts[key] = self.error_counts.get(key, 0) + 1
 
+  
+  
+  
   
   
   
@@ -2288,6 +2563,9 @@ self.total_requests += 1
   
   
   
+  
+  
+  
 
 
 def check_alerts(self) -> list[str]:
@@ -2314,10 +2592,16 @@ def check_alerts(self) -> list[str]:
   
   
   
+  
+  
+  
 
 
 alerts = []
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ for key, count in self.error_counts.items():
   
   
   
+  
+  
+  
 
 
 rate = count / max(self.total_requests, 1)
 
+  
+  
+  
   
   
   
@@ -2418,6 +2708,9 @@ if rate > self.alert_threshold:
   
   
   
+  
+  
+  
 
 
 alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_threshold:.1%}")
@@ -2444,10 +2737,16 @@ alerts.append(f"Error rate {rate:.1%} for {key} exceeds threshold {self.alert_th
   
   
   
+  
+  
+  
 
 
 return alerts
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ return alerts
   
   
   
+  
+  
+  
 
 
 The most critical AI-specific monitoring: detect when model behavior changes:
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ import numpy as np
   
   
   
+  
+  
+  
 
 
 from scipy import stats
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ class ResponseDriftDetector:
   
   
   
+  
+  
+  
 
 
 def __init__(self, reference_embeddings: list, drift_threshold: float = 0.1):
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ self.reference = np.mean(reference_embeddings, axis=0)
   
   
   
+  
+  
+  
 
 
 self.threshold = drift_threshold
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ self.recent_embeddings: list = []
   
   
   
+  
+  
+  
 
 
 def analyze_response(self, query: str, response: str) -> dict:
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ emb = self._embed(response)
   
   
   
+  
+  
+  
 
 
 self.recent_embeddings.append(emb)
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ if len(self.recent_embeddings) >= 100:
   
   
   
+  
+  
+  
 
 
 drift_score = self._compute_drift()
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ self.recent_embeddings = []
   
   
   
+  
+  
+  
 
 
 return {"drift_detected": drift_score > self.threshold, "drift_score": drift_score}
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ return {"drift_detected": False, "drift_score": 0.0}
   
   
   
+  
+  
+  
 
 
 def _embed(self, text: str) -> np.ndarray:
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ return embedding_model.encode(text)
   
   
   
+  
+  
+  
 
 
 def _compute_drift(self) -> float:
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ recent_mean = np.mean(self.recent_embeddings, axis=0)
   
   
   
+  
+  
+  
 
 
 return float(np.linalg.norm(recent_mean - self.reference))
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ def detect_refusal_rate_change(self, recent_responses: list[str], baseline_rate:
   
   
   
+  
+  
+  
 
 
 refusal_patterns = ["I cannot", "I'm unable", "I apologize", "cannot assist"]
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ current_rate = sum(
   
   
   
+  
+  
+  
 
 
 1 for r in recent_responses
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ if any(p in r.lower() for p in refusal_patterns)
   
   
   
+  
+  
+  
 
 
 ) / len(recent_responses)
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ change = abs(current_rate - baseline_rate)
   
   
   
+  
+  
+  
 
 
 return {"changed": change > 0.05, "baseline": baseline_rate, "current": current_rate, "change": change}
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ return {"changed": change > 0.05, "baseline": baseline_rate, "current": current_
   
   
   
+  
+  
+  
 
 
 class AIAlertManager:
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ def __init__(self, pagerduty_key: str, slack_webhook: str):
   
   
   
+  
+  
+  
 
 
 self.pagerduty = pagerduty_key
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ self.slack = slack_webhook
   
   
   
+  
+  
+  
 
 
 def check_and_alert(self, metrics: dict):
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ alerts = []
   
   
   
+  
+  
+  
 
 
 # Latency alerts
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ if metrics.get("p99_latency_ms", 0) > 10000:
   
   
   
+  
+  
+  
 
 
 alerts.append(Alert(severity="critical", title="High P99 latency",
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ message=f"P99 latency is {metrics['p99_latency_ms']}ms"))
   
   
   
+  
+  
+  
 
 
 # Error rate alerts
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ if metrics.get("error_rate", 0) > 0.05:
   
   
   
+  
+  
+  
 
 
 alerts.append(Alert(severity="critical", title="Elevated error rate",
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ message=f"Error rate is {metrics['error_rate']:.1%}"))
   
   
   
+  
+  
+  
 
 
 # Cost anomaly alerts
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ if metrics.get("daily_cost", 0) > metrics.get("daily_budget", float("inf")) * 1.
   
   
   
+  
+  
+  
 
 
 alerts.append(Alert(severity="warning", title="Cost anomaly detected",
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ message=f"Cost ${metrics['daily_cost']:.2f} exceeds 120% of budget"))
   
   
   
+  
+  
+  
 
 
 # Drift alerts
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ if metrics.get("drift_detected", False):
   
   
   
+  
+  
+  
 
 
 alerts.append(Alert(severity="warning", title="Response drift detected",
 
+  
+  
+  
   
   
   
@@ -3848,6 +4303,9 @@ message=f"Drift score: {metrics.get('drift_score', 0):.3f}"))
   
   
   
+  
+  
+  
 
 
 return alerts
@@ -3874,10 +4332,16 @@ return alerts
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

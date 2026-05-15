@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/planetscale-vs-neon.html
   
 
 
+# PlanetScale vs Neon
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ PlanetScale and Neon represent a new generation of database platforms built for 
   
   
   
+  
+  
+  
 
 
 ##  Database Technology
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ PlanetScale and Neon represent a new generation of database platforms built for 
   
   
   
+  
+  
+  
 
 
 PlanetScale is built on MySQL-compatible Vitess, the same technology that powers YouTube's database infrastructure.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ PlanetScale is built on MySQL-compatible Vitess, the same technology that powers
   
   
   
+  
+  
+  
 
 
 * MySQL-compatible (most MySQL tools and ORMs work)
 
+  
+  
+  
   
   
   
@@ -332,10 +382,16 @@ PlanetScale is built on MySQL-compatible Vitess, the same technology that powers
   
   
   
+  
+  
+  
 
 
 * Strong consistency with distributed transactions
 
+  
+  
+  
   
   
   
@@ -381,10 +437,16 @@ PlanetScale is built on MySQL-compatible Vitess, the same technology that powers
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PlanetScale: standard MySQL syntax
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PlanetScale: standard MySQL syntax
 
+  
+  
+  
   
   
   
@@ -411,6 +473,9 @@ PlanetScale is built on MySQL-compatible Vitess, the same technology that powers
 
 CREATE TABLE users (
 
+  
+  
+  
   
   
   
@@ -459,10 +524,16 @@ id BIGINT AUTO_INCREMENT PRIMARY KEY,
   
   
   
+  
+  
+  
 
 
 email VARCHAR(255) NOT NULL,
 
+  
+  
+  
   
   
   
@@ -511,10 +582,16 @@ name VARCHAR(100),
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+  
+  
+  
   
   
   
@@ -563,6 +640,9 @@ UNIQUE KEY idx_email (email)
   
   
   
+  
+  
+  
 
 
 );
@@ -589,36 +669,45 @@ UNIQUE KEY idx_email (email)
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PlanetScale-specific: no foreign key constraints
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- (Vitess does not enforce FKs across shards)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PlanetScale-specific: no foreign key constraints
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- (Vitess does not enforce FKs across shards)
+
+  
+  
+  
   
   
   
@@ -667,10 +756,16 @@ UNIQUE KEY idx_email (email)
   
   
   
+  
+  
+  
 
 
 ### Neon: Serverless PostgreSQL
 
+  
+  
+  
   
   
   
@@ -719,10 +814,16 @@ Neon is built on PostgreSQL with a custom storage engine that separates compute 
   
   
   
+  
+  
+  
 
 
 **Key characteristics:**
 
+  
+  
+  
   
   
   
@@ -768,6 +869,9 @@ Neon is built on PostgreSQL with a custom storage engine that separates compute 
   
   
   
+  
+  
+  
 
 
 * Bottomless storage with page-level tiering
@@ -791,10 +895,16 @@ Neon is built on PostgreSQL with a custom storage engine that separates compute 
   
   
   
+  
+  
+  
 
 
 * Instant branching using copy-on-write
 
+  
+  
+  
   
   
   
@@ -840,10 +950,16 @@ Neon is built on PostgreSQL with a custom storage engine that separates compute 
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Neon: full PostgreSQL with all features
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Neon: full PostgreSQL with all features
 
+  
+  
+  
   
   
   
@@ -892,10 +1008,16 @@ CREATE TABLE users (
   
   
   
+  
+  
+  
 
 
 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
+  
+  
+  
   
   
   
@@ -944,10 +1066,16 @@ email TEXT NOT NULL UNIQUE,
   
   
   
+  
+  
+  
 
 
 name TEXT,
 
+  
+  
+  
   
   
   
@@ -996,10 +1124,16 @@ created_at TIMESTAMPTZ DEFAULT NOW()
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -1048,10 +1182,16 @@ CREATE TABLE posts (
   
   
   
+  
+  
+  
 
 
 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
+  
+  
+  
   
   
   
@@ -1100,10 +1240,16 @@ author_id UUID REFERENCES users(id),
   
   
   
+  
+  
+  
 
 
 title TEXT NOT NULL,
 
+  
+  
+  
   
   
   
@@ -1152,10 +1298,16 @@ body TEXT,
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMPTZ DEFAULT NOW()
 
+  
+  
+  
   
   
   
@@ -1204,10 +1356,16 @@ created_at TIMESTAMPTZ DEFAULT NOW()
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Full PostgreSQL features work: JSONB, full-text search, GIS
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Full PostgreSQL features work: JSONB, full-text search, GIS
 
+  
+  
+  
   
   
   
@@ -1256,10 +1414,16 @@ CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector('english', title ||
   
   
   
+  
+  
+  
 
 
 **Strengths:** Full PostgreSQL compatibility including foreign keys, JSONB, full-text search, PostGIS, and all PostgreSQL extensions.
 
+  
+  
+  
   
   
   
@@ -1308,10 +1472,16 @@ CREATE INDEX idx_posts_search ON posts USING GIN(to_tsvector('english', title ||
   
   
   
+  
+  
+  
 
 
 Branching is the killer feature of both platforms, modeled after Git.
 
+  
+  
+  
   
   
   
@@ -1360,10 +1530,16 @@ Branching is the killer feature of both platforms, modeled after Git.
   
   
   
+  
+  
+  
 
 
 # PlanetScale CLI
 
+  
+  
+  
   
   
   
@@ -1412,10 +1588,16 @@ pscale branch create myapp add-billing-feature
   
   
   
+  
+  
+  
 
 
 pscale branch promote myapp add-billing-feature
 
+  
+  
+  
   
   
   
@@ -1464,10 +1646,16 @@ pscale branch promote myapp add-billing-feature
   
   
   
+  
+  
+  
 
 
 neonctl branches create --parent myapp --name add-billing-feature
 
+  
+  
+  
   
   
   
@@ -1516,10 +1704,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 * Branches are full read-write copies of the data
 
+  
+  
+  
   
   
   
@@ -1562,10 +1756,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 * Deploy requests show schema diff, handle migrations, and auto-resolve conflicts
 
+  
+  
+  
   
   
   
@@ -1614,10 +1814,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 * Branches use copy-on-write at the page level — nearly instant and storage-efficient
 
+  
+  
+  
   
   
   
@@ -1660,10 +1866,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 * Time-travel: connect to any point in time within the retention window (like `git checkout` for databases)
 
+  
+  
+  
   
   
   
@@ -1712,10 +1924,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Feature | PlanetScale | Neon |
 
+  
+  
+  
   
   
   
@@ -1764,10 +1982,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Scale-to-zero | Yes (after inactivity) | Yes (after 5-60 min) |
 
+  
+  
+  
   
   
   
@@ -1816,10 +2040,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Max storage | 500GB (scalable) | 200GB (scalable) |
 
+  
+  
+  
   
   
   
@@ -1868,10 +2098,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Compute scaling | Vertical (plan based) | Auto (0.25-16 vCPU) |
 
+  
+  
+  
   
   
   
@@ -1920,10 +2156,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 ##  Pricing
 
+  
+  
+  
   
   
   
@@ -1972,10 +2214,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 |------|-------------|------|
 
+  
+  
+  
   
   
   
@@ -2024,10 +2272,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Paid starter | ~$39/month | ~$19/month |
 
+  
+  
+  
   
   
   
@@ -2076,10 +2330,16 @@ neonctl branches create --parent myapp --name add-billing-feature
   
   
   
+  
+  
+  
 
 
 | Enterprise | Custom | Custom |
 
+  
+  
+  
   
   
   
@@ -2128,10 +2388,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 ##  Developer Experience
 
+  
+  
+  
   
   
   
@@ -2180,10 +2446,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Web console with schema visualization
 
+  
+  
+  
   
   
   
@@ -2226,10 +2498,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Deploy request workflow (like GitHub PRs)
 
+  
+  
+  
   
   
   
@@ -2272,10 +2550,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Connection pooling via PlanetScale Boost
 
+  
+  
+  
   
   
   
@@ -2324,10 +2608,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Web console with SQL editor
 
+  
+  
+  
   
   
   
@@ -2370,10 +2660,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Connection pooling via PgBouncer (built-in)
 
+  
+  
+  
   
   
   
@@ -2416,10 +2712,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Drizzle Studio integration
 
+  
+  
+  
   
   
   
@@ -2468,10 +2770,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 **PlanetScale** works with MySQL-compatible ORMs:
 
+  
+  
+  
   
   
   
@@ -2517,10 +2825,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Drizzle (MySQL adapter)
 
+  
+  
+  
   
   
   
@@ -2563,6 +2877,9 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Knex
@@ -2586,10 +2903,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Raw `mysql2` driver
 
+  
+  
+  
   
   
   
@@ -2638,10 +2961,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Prisma (PostgreSQL adapter)
 
+  
+  
+  
   
   
   
@@ -2684,10 +3013,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * TypeORM
 
+  
+  
+  
   
   
   
@@ -2730,6 +3065,9 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Raw `pg` driver
@@ -2753,10 +3091,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Supabase SDK
 
+  
+  
+  
   
   
   
@@ -2805,10 +3149,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 **Choose PlanetScale when:**
 
+  
+  
+  
   
   
   
@@ -2854,10 +3204,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * You want the deploy-request workflow for database schema changes
 
+  
+  
+  
   
   
   
@@ -2900,10 +3256,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * Your application uses MySQL-compatible tools
 
+  
+  
+  
   
   
   
@@ -2952,10 +3314,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * You want full PostgreSQL compatibility (foreign keys, extensions)
 
+  
+  
+  
   
   
   
@@ -2998,6 +3366,9 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * You want more predictable pricing
@@ -3021,10 +3392,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 * You value time-travel queries and instant branching
 
+  
+  
+  
   
   
   
@@ -3070,10 +3447,16 @@ Neon is generally more affordable at lower tiers. PlanetScale's pricing scales w
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

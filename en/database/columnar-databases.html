@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/columnar-databases.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "865",
+      "wordCount": "983",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/columnar-databases.html"},
-      "articleBody": "Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Storage Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries. Row vs Columnar Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse: columnar query SELECT region, SUM(revenue) FROM sales WHERE year = 2026 GROUP BY region; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only reads 3 columns instead of all columns Compression Techniques Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common. When to Use Columnar | Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture | \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse table CREATE TABLE events ( timestamp DateTime, event_type String, user_id UInt32 ) ENGINE = MergeTree() ORDER BY (event_type, timestamp); Conclusion Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations."
+      "articleBody": "Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Databases: When and How to Use Them Columnar Storage Columnar databases store data by column rather than by row. This enables aggressive compression and fast analytical queries. Row vs Columnar Row-oriented storage writes each row contiguously. Columnar stores all values of a column together, enabling efficient scans of a few columns across millions of rows. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse: columnar query SELECT region, SUM(revenue) FROM sales WHERE year = 2026 GROUP BY region; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only reads 3 columns instead of all columns Compression Techniques Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common. When to Use Columnar | Database | Best For | Notable Feature | |----------|----------|-----------------| | ClickHouse | Real-time analytics | MergeTree engine | | DuckDB | Embedded analytics | In-process OLAP | | Redshift | Cloud data warehousing | MPP architecture | \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse table CREATE TABLE events ( timestamp DateTime, event_type String, user_id UInt32 ) ENGINE = MergeTree() ORDER BY (event_type, timestamp); Conclusion Use columnar databases for analytical workloads scanning many rows but few columns. ClickHouse for real-time, DuckDB for embedded, Redshift for cloud. Avoid for transactional workloads with frequent single-row operations."
     }
     </script>
     <script type="application/ld+json">
@@ -152,7 +152,33 @@
 <br>
 <br>
 <br>
+<h1>Columnar Databases: When and How to Use Them</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Columnar Storage </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -186,7 +212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Row vs Columnar </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -223,7 +255,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse: columnar query</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse: columnar query</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -263,7 +301,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM sales</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -303,6 +347,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY region;</p>
 <br>
 <br>
@@ -323,7 +370,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only reads 3 columns instead of all columns</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Only reads 3 columns instead of all columns</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,6 +413,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Columnar databases use specialized compression: run-length encoding for low-cardinality columns, dictionary encoding, and delta encoding for sorted columns. Compression ratios of 5-10x are common. </p>
 <br>
 <br>
@@ -377,7 +433,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When to Use Columnar </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -414,7 +476,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse table</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -454,7 +522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>timestamp DateTime,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -494,7 +568,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user_id UInt32</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -534,6 +614,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ORDER BY (event_type, timestamp);</p>
 <br>
 <br>
@@ -554,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

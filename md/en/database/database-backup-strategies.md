@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/database-backup-strategies.ht
   
 
 
+# Database Backup and Recovery Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 RPO and RTO 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ RPO (Recovery Point Objective): Maximum acceptable data loss. RTO (Recovery Time
   
   
   
+  
+  
+  
 
 
 | System | RPO | RTO | |--------|-----|-----| | Banking | < 1 min | < 5 min | | E-commerce | < 5 min | < 1 hour | | Analytics | < 24 hours | < 24 hours | 
 
+  
+  
+  
   
   
   
@@ -184,6 +219,9 @@ Backup Types
   
   
   
+  
+  
+  
 
 
 | Type | Size | Speed | Restore | |------|------|-------|---------| | Full | Largest | Slowest | Fastest | | Incremental | Smallest | Fastest | Slowest | | Differential | Medium | Medium | Medium | 
@@ -204,10 +242,16 @@ Backup Types
   
   
   
+  
+  
+  
 
 
 Point-in-Time Recovery (WAL Archiving) 
 
+  
+  
+  
   
   
   
@@ -250,10 +294,16 @@ Point-in-Time Recovery (WAL Archiving)
   
   
   
+  
+  
+  
 
 
 wal_level = replica
 
+  
+  
+  
   
   
   
@@ -296,10 +346,16 @@ archive_mode = on
   
   
   
+  
+  
+  
 
 
 archive_command = 'cp %p /backups/wal/%f'
 
+  
+  
+  
   
   
   
@@ -342,10 +398,16 @@ archive_timeout = 60
   
   
   
+  
+  
+  
 
 
 # Full base backup
 
+  
+  
+  
   
   
   
@@ -388,10 +450,16 @@ pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P
   
   
   
+  
+  
+  
 
 
 # Restore to point in time
 
+  
+  
+  
   
   
   
@@ -434,10 +502,16 @@ pg_basebackup -h localhost -D /backups/base/$(date +%Y%m%d) -X stream -P
   
   
   
+  
+  
+  
 
 
 restore_command = 'cp /backups/wal/%f %p'
 
+  
+  
+  
   
   
   
@@ -480,10 +554,16 @@ recovery_target_time = '2026-05-11 14:23:45'
   
   
   
+  
+  
+  
 
 
 Cloud Backups 
 
+  
+  
+  
   
   
   
@@ -526,10 +606,16 @@ Cloud Backups
   
   
   
+  
+  
+  
 
 
 aws rds create-db-snapshot --db-instance-identifier mydb
 
+  
+  
+  
   
   
   
@@ -572,33 +658,42 @@ aws rds restore-db-instance-from-db-snapshot \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-restored \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-restored \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-snapshot-identifier mydb-snapshot
+
+  
+  
+  
   
   
   
@@ -641,6 +736,9 @@ aws rds restore-db-instance-from-db-snapshot \
   
   
   
+  
+  
+  
 
 
 aws rds restore-db-instance-to-point-in-time \
@@ -664,33 +762,16 @@ aws rds restore-db-instance-to-point-in-time \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-db-instance-identifier mydb-restored \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \
 
+  
+  
+  
   
   
   
@@ -712,8 +793,37 @@ aws rds restore-db-instance-to-point-in-time \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--restore-time "2026-05-11T14:23:45Z"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--target-db-instance-identifier mydb-restored \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--restore-time "2026-05-11T14:23:45Z"
+
+  
+  
+  
   
   
   
@@ -753,6 +863,9 @@ The 3-2-1 Rule
   
   
   
+  
+  
+  
 
 
 3 copies of data, 2 different media types, 1 off-site copy. Test restores regularly. 
@@ -773,10 +886,16 @@ The 3-2-1 Rule
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

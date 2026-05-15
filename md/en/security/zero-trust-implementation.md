@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/zero-trust-implementation.htm
   
 
 
+# Zero Trust Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Zero Trust Principles 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Zero Trust replaces the castle-and-moat model with "never trust, always verify."
   
   
   
+  
+  
+  
 
 
 Micro-Segmentation 
@@ -164,10 +196,16 @@ Micro-Segmentation
   
   
   
+  
+  
+  
 
 
 Divide your network into small, isolated zones. Each zone requires separate authentication. 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ Divide your network into small, isolated zones. Each zone requires separate auth
   
   
   
+  
+  
+  
 
 
 resource "aws_security_group" "app_to_db" {
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ name = "app-db-ingress"
   
   
   
+  
+  
+  
 
 
 description = "Allow app tier to database"
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ vpc_id = var.vpc_id
   
   
   
+  
+  
+  
 
 
 ingress {
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ from_port = 5432
   
   
   
+  
+  
+  
 
 
 to_port = 5432
 
+  
+  
+  
   
   
   
@@ -394,6 +456,9 @@ protocol = "tcp"
   
   
   
+  
+  
+  
 
 
 security_groups = [aws_security_group.app_tier.id]
@@ -417,10 +482,16 @@ security_groups = [aws_security_group.app_tier.id]
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ egress {
   
   
   
+  
+  
+  
 
 
 from_port = 0
 
+  
+  
+  
   
   
   
@@ -509,10 +586,16 @@ to_port = 0
   
   
   
+  
+  
+  
 
 
 protocol = "-1"
 
+  
+  
+  
   
   
   
@@ -555,26 +638,6 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -582,6 +645,35 @@ cidr_blocks = ["0.0.0.0/0"]
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -621,10 +713,16 @@ Least Privilege Access
   
   
   
+  
+  
+  
 
 
 Implement just-in-time (JIT) access with ephemeral credentials. 
 
+  
+  
+  
   
   
   
@@ -667,10 +765,16 @@ Implement just-in-time (JIT) access with ephemeral credentials.
   
   
   
+  
+  
+  
 
 
 from datetime import datetime, timedelta
 
+  
+  
+  
   
   
   
@@ -713,10 +817,16 @@ import boto3
   
   
   
+  
+  
+  
 
 
 def grant_just_in_time_access(user, resource, duration_minutes=60):
 
+  
+  
+  
   
   
   
@@ -759,10 +869,16 @@ iam = boto3.client("iam")
   
   
   
+  
+  
+  
 
 
 policy = {
 
+  
+  
+  
   
   
   
@@ -805,10 +921,16 @@ policy = {
   
   
   
+  
+  
+  
 
 
 "Statement": [{
 
+  
+  
+  
   
   
   
@@ -851,10 +973,16 @@ policy = {
   
   
   
+  
+  
+  
 
 
 "Action": resource["actions"],
 
+  
+  
+  
   
   
   
@@ -897,10 +1025,16 @@ policy = {
   
   
   
+  
+  
+  
 
 
 "Condition": {
 
+  
+  
+  
   
   
   
@@ -943,10 +1077,16 @@ policy = {
   
   
   
+  
+  
+  
 
 
 "aws:CurrentTime": (datetime.utcnow() + 
 
+  
+  
+  
   
   
   
@@ -989,26 +1129,6 @@ timedelta(minutes=duration_minutes)).isoformat()
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1016,6 +1136,35 @@ timedelta(minutes=duration_minutes)).isoformat()
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1058,10 +1207,16 @@ timedelta(minutes=duration_minutes)).isoformat()
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1104,10 +1259,16 @@ return iam.create_policy(PolicyName=f"jit-{user}-{int(datetime.utcnow().timestam
   
   
   
+  
+  
+  
 
 
 PolicyDocument=json.dumps(policy))
 
+  
+  
+  
   
   
   
@@ -1147,10 +1308,16 @@ Verify Every Request
   
   
   
+  
+  
+  
 
 
 Every API call must be verified at the application layer. 
 
+  
+  
+  
   
   
   
@@ -1193,10 +1360,16 @@ Every API call must be verified at the application layer.
   
   
   
+  
+  
+  
 
 
 function zeroTrustMiddleware(req, res, next) {
 
+  
+  
+  
   
   
   
@@ -1239,10 +1412,16 @@ const context = {
   
   
   
+  
+  
+  
 
 
 userId: req.headers["x-user-id"],
 
+  
+  
+  
   
   
   
@@ -1285,10 +1464,16 @@ deviceId: req.headers["x-device-id"],
   
   
   
+  
+  
+  
 
 
 geo: req.headers["x-geo-location"],
 
+  
+  
+  
   
   
   
@@ -1331,10 +1516,16 @@ time: Date.now(),
   
   
   
+  
+  
+  
 
 
 path: req.path
 
+  
+  
+  
   
   
   
@@ -1377,10 +1568,16 @@ path: req.path
   
   
   
+  
+  
+  
 
 
 Promise.all([
 
+  
+  
+  
   
   
   
@@ -1423,10 +1620,16 @@ verifyIdentity(context.userId),
   
   
   
+  
+  
+  
 
 
 verifyDevice(context.deviceId),
 
+  
+  
+  
   
   
   
@@ -1469,10 +1672,16 @@ checkGeoPolicy(context.geo, context.path),
   
   
   
+  
+  
+  
 
 
 checkTimePolicy(context.time)
 
+  
+  
+  
   
   
   
@@ -1515,10 +1724,16 @@ checkTimePolicy(context.time)
   
   
   
+  
+  
+  
 
 
 if (identity && device && geo.allowed && time.allowed) {
 
+  
+  
+  
   
   
   
@@ -1561,10 +1776,16 @@ next();
   
   
   
+  
+  
+  
 
 
 } else {
 
+  
+  
+  
   
   
   
@@ -1607,10 +1828,16 @@ res.status(401).json({ error: "Access denied" });
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1653,10 +1880,16 @@ res.status(401).json({ error: "Access denied" });
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1696,6 +1929,9 @@ Continuous Monitoring
   
   
   
+  
+  
+  
 
 
 Log and analyze all access attempts in real time. 
@@ -1719,10 +1955,16 @@ Log and analyze all access attempts in real time.
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query
 
+  
+  
+  
   
   
   
@@ -1765,10 +2007,16 @@ SELECT user_id, COUNT(*) as attempts,
   
   
   
+  
+  
+  
 
 
 COUNT(DISTINCT ip_address) as ips,
 
+  
+  
+  
   
   
   
@@ -1811,10 +2059,16 @@ COUNT(DISTINCT geo_location) as regions
   
   
   
+  
+  
+  
 
 
 FROM access_logs
 
+  
+  
+  
   
   
   
@@ -1857,10 +2111,16 @@ WHERE timestamp > NOW() - INTERVAL '1 hour'
   
   
   
+  
+  
+  
 
 
 AND denied = true
 
+  
+  
+  
   
   
   
@@ -1903,6 +2163,9 @@ GROUP BY user_id
   
   
   
+  
+  
+  
 
 
 HAVING COUNT(*) > 10;
@@ -1926,10 +2189,16 @@ HAVING COUNT(*) > 10;
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

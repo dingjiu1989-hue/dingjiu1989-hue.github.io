@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/feature-prioritization.html
   
 
 
+# Feature Prioritization: RICE, MoSCoW, and Opportunity Scoring
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Feature Prioritization Frameworks for SaaS
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Feature prioritization is the most consequential product decision a founder make
   
   
   
+  
+  
+  
 
 
 ### RICE Scoring
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ RICE (Reach, Impact, Confidence, Effort) provides a quantitative framework for c
   
   
   
+  
+  
+  
 
 
 **Reach:** How many users will this feature affect in a given time period? For a SaaS product, reach could be monthly active users, new signups per week, or support tickets deflected. A bug fix affecting all 10,000 users has higher reach than a premium feature for 500 enterprise customers.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ RICE (Reach, Impact, Confidence, Effort) provides a quantitative framework for c
   
   
   
+  
+  
+  
 
 
 **Confidence:** How sure are you about the reach and impact estimates? Qualitative feedback from 3 power users gets 50% confidence. Quantitative data from user analytics gets 80%. A/B test results get 100%.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ RICE (Reach, Impact, Confidence, Effort) provides a quantitative framework for c
   
   
   
+  
+  
+  
 
 
 The RICE score is (Reach x Impact x Confidence) / Effort. Sort features by RICE score and build from the top.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ The RICE score is (Reach x Impact x Confidence) / Effort. Sort features by RICE 
   
   
   
+  
+  
+  
 
 
 MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed releases and complements RICE's continuous prioritization.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed r
   
   
   
+  
+  
+  
 
 
 **Should-have:** Important but not critical. These can be postponed if time runs short. Typically 20% of features.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed r
   
   
   
+  
+  
+  
 
 
 **Won't-have:** Explicitly out of scope for this release. Documenting these prevents scope creep.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ MoSCoW (Must-have, Should-have, Could-have, Won't-have) is used for time-boxed r
   
   
   
+  
+  
+  
 
 
 Opportunity scoring identifies gaps between how important a feature is and how satisfied users are with current solutions. Survey users: "How important is X?" (1-10) and "How satisfied are you with current X?" (1-10).
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ The opportunity score formula prioritizes features where importance is high but 
   
   
   
+  
+  
+  
 
 
 This framework is particularly useful for established products where you need to identify the biggest gaps in user experience rather than evaluate net-new features.
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ This framework is particularly useful for established products where you need to
   
   
   
+  
+  
+  
 
 
 Use RICE for initial prioritization of your backlog. Apply MoSCoW to scope each release. Use opportunity scoring quarterly to validate your roadmap against user sentiment.
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ A practical workflow: maintain a feature request database (Canny, Productboard, 
   
   
   
+  
+  
+  
 
 
 ### Common Pitfalls
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ Avoid prioritizing by vocal minority — a few loud customers don't represent yo
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/database/database-pagination-technique
   
   
   
+  
+  
+  
+
+
+# Database Pagination: Offset, Cursor, Keyset, and Seek Methods
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Pagination divides large result sets into manageable pages. The choice of pagination method affects query performance, data consistency, and user experience. Different approaches suit different use cases.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Pagination divides large result sets into manageable pages. The choice of pagina
   
   
   
+  
+  
+  
 
 
 OFFSET/LIMIT pagination is the simplest approach. SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 40 returns page 3 with 20 items per page. It is intuitive and easy to implement.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Problems: OFFSET scans and discards skipped rows—OFFSET 100000 on a query scan
   
   
   
+  
+  
+  
 
 
 Offset pagination is acceptable for small datasets (under 10,000 rows) and admin interfaces where exact consistency does not matter. It is not suitable for infinite scroll or real-time feeds.
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Offset pagination is acceptable for small datasets (under 10,000 rows) and admin
   
   
   
+  
+  
+  
 
 
 Keyset pagination (also called seek method) uses WHERE clauses on the last item's values. SELECT * FROM orders WHERE (created_at, id) > ('2026-01-15T10:30:00', 5000) ORDER BY created_at, id LIMIT 20. It uses a regular index seek.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Advantages: consistent performance regardless of page number. Index scan reads e
   
   
   
+  
+  
+  
 
 
 Requirements: the WHERE clause must use a unique combination of columns for unambiguous ordering. Composite index must exist on the pagination columns. Clients must track the last item's sort values.
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ Keyset pagination is ideal for infinite scroll, real-time feeds, and APIs with s
   
   
   
+  
+  
+  
 
 
 ##  Cursor-Based Pagination
 
+  
+  
+  
   
   
   
@@ -377,10 +436,16 @@ Cursor-based pagination encodes the sort position as an opaque token. The API re
   
   
   
+  
+  
+  
 
 
 Implementation: encode the last row's sort values (base64 JSON or binary). ORM libraries often support cursor pagination natively. GraphQL connections use cursor-based pagination as standard.
 
+  
+  
+  
   
   
   
@@ -423,10 +488,16 @@ Cursor pagination hides pagination details from clients. The cursor can contain 
   
   
   
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
   
   
   
@@ -469,10 +540,16 @@ Offset is easiest but breaks at scale. Keyset is fast but requires exposing sort
   
   
   
+  
+  
+  
 
 
 ##  Hybrid Approach
 
+  
+  
+  
   
   
   

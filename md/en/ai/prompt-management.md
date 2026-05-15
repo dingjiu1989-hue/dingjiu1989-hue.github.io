@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/prompt-management.html
   
 
 
+# Prompt Management: Versioning, Testing, Collaboration, Deployment
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Prompts are the primary interface for controlling LLM behavior, yet most teams m
   
   
   
+  
+  
+  
 
 
 ##  Prompt as Code
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Store prompts in a structured, version-controlled format:
   
   
   
+  
+  
+  
 
 
 # prompts/summarization.yaml
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ name: document_summarizer
   
   
   
+  
+  
+  
 
 
 version: 2.3.0
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ model: claude-sonnet-4-20260512
   
   
   
+  
+  
+  
 
 
 parameters:
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ temperature: 0.3
   
   
   
+  
+  
+  
 
 
 max_tokens: 1024
 
+  
+  
+  
   
   
   
@@ -442,6 +504,9 @@ system_prompt: |
   
   
   
+  
+  
+  
 
 
 You are a technical document summarizer. Follow these rules:
@@ -468,36 +533,16 @@ You are a technical document summarizer. Follow these rules:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract the core thesis and key supporting points
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Preserve technical accuracy - do not simplify concepts
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract the core thesis and key supporting points
 
+  
+  
+  
   
   
   
@@ -522,34 +567,11 @@ You are a technical document summarizer. Follow these rules:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain the original document's structure
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Preserve technical accuracy - do not simplify concepts
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output in the requested format
-
   
   
   
@@ -574,8 +596,69 @@ You are a technical document summarizer. Follow these rules:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never add information not present in the source
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Maintain the original document's structure
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Output in the requested format
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never add information not present in the source
+
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ user_template: |
   
   
   
+  
+  
+  
 
 
 Document: {document_text}
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Format: {output_format}
   
   
   
+  
+  
+  
 
 
 Max length: {max_length} words
 
+  
+  
+  
   
   
   
@@ -728,6 +823,9 @@ Summary:
   
   
   
+  
+  
+  
 
 
 tests:
@@ -754,10 +852,16 @@ tests:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- input:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- input:
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ document_text: "Kubernetes is a container orchestration platform..."
   
   
   
+  
+  
+  
 
 
 output_format: bullet_points
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ max_length: 100
   
   
   
+  
+  
+  
 
 
 expected_output_contains: ["container orchestration", "pods"]
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ min_length: 50
   
   
   
+  
+  
+  
 
 
 max_length: 150
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ max_length: 150
   
   
   
+  
+  
+  
 
 
 A central registry stores all prompt versions with metadata:
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ import hashlib
   
   
   
+  
+  
+  
 
 
 import yaml
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ from datetime import datetime
   
   
   
+  
+  
+  
 
 
 class PromptRegistry:
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ def __init__(self, storage_backend):
   
   
   
+  
+  
+  
 
 
 self.storage = storage_backend
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ def register_prompt(self, name: str, prompt_data: dict) -> str:
   
   
   
+  
+  
+  
 
 
 version = prompt_data.get("version", "1.0.0")
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ prompt_hash = hashlib.sha256(yaml.dump(prompt_data).encode()).hexdigest()[:12]
   
   
   
+  
+  
+  
 
 
 entry = {
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "version": version,
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "prompt": prompt_data,
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "status": "draft",
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 self.storage.save(f"prompts/{name}/{version}", entry)
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ return prompt_hash
   
   
   
+  
+  
+  
 
 
 def get_prompt(self, name: str, version: str = "latest") -> dict:
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ if version == "latest":
   
   
   
+  
+  
+  
 
 
 versions = self.storage.list(f"prompts/{name}")
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ version = sorted(versions)[-1]
   
   
   
+  
+  
+  
 
 
 return self.storage.load(f"prompts/{name}/{version}")
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ def promote_to_production(self, name: str, version: str):
   
   
   
+  
+  
+  
 
 
 entry = self.storage.load(f"prompts/{name}/{version}")
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ entry["status"] = "production"
   
   
   
+  
+  
+  
 
 
 entry["promoted_at"] = datetime.now().isoformat()
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ self.storage.save(f"prompts/{name}/{version}", entry)
   
   
   
+  
+  
+  
 
 
 def diff(self, name: str, version_a: str, version_b: str) -> str:
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ prompt_a = self.get_prompt(name, version_a)["prompt"]
   
   
   
+  
+  
+  
 
 
 prompt_b = self.get_prompt(name, version_b)["prompt"]
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ return self._compute_diff(prompt_a, prompt_b)
   
   
   
+  
+  
+  
 
 
 ##  Automated Prompt Testing
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ Test prompts against a suite of evaluation cases:
   
   
   
+  
+  
+  
 
 
 class PromptTester:
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ def __init__(self, llm_fn):
   
   
   
+  
+  
+  
 
 
 self.llm = llm_fn
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ def run_tests(self, prompt_entry: dict) -> dict:
   
   
   
+  
+  
+  
 
 
 prompt_data = prompt_entry["prompt"]
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ tests = prompt_data.get("tests", [])
   
   
   
+  
+  
+  
 
 
 results = {"passed": 0, "failed": 0, "details": []}
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ for test in tests:
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ result = self._run_single_test(prompt_data, test)
   
   
   
+  
+  
+  
 
 
 results["details"].append(result)
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ if result["passed"]:
   
   
   
+  
+  
+  
 
 
 results["passed"] += 1
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ else:
   
   
   
+  
+  
+  
 
 
 results["failed"] += 1
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 results["failed"] += 1
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ results["details"].append({
   
   
   
+  
+  
+  
 
 
 "test": test,
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ results["details"].append({
   
   
   
+  
+  
+  
 
 
 "error": str(e),
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ results["details"].append({
   
   
   
+  
+  
+  
 
 
 results["pass_rate"] = results["passed"] / len(tests) if tests else 1.0
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ return results
   
   
   
+  
+  
+  
 
 
 def _run_single_test(self, prompt_data: dict, test: dict) -> dict:
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ def _run_single_test(self, prompt_data: dict, test: dict) -> dict:
   
   
   
+  
+  
+  
 
 
 system = prompt_data.get("system_prompt", "")
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ template = prompt_data.get("user_template", "")
   
   
   
+  
+  
+  
 
 
 inputs = test.get("input", {})
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ full_prompt = template.format(**inputs) if inputs else template
   
   
   
+  
+  
+  
 
 
 # Run the model
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ response = self.llm(system, full_prompt, prompt_data.get("parameters", {}))
   
   
   
+  
+  
+  
 
 
 # Check assertions
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ failures = []
   
   
   
+  
+  
+  
 
 
 if "expected_output_contains" in test:
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ for expected in test["expected_output_contains"]:
   
   
   
+  
+  
+  
 
 
 if expected not in response:
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ failures.append(f"Missing expected content: {expected}")
   
   
   
+  
+  
+  
 
 
 if "min_length" in test and len(response) < test["min_length"]:
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ failures.append(f"Response too short: {len(response)} < {test['min_length']}")
   
   
   
+  
+  
+  
 
 
 if "max_length" in test and len(response) > test["max_length"]:
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ failures.append(f"Response too long: {len(response)} > {test['max_length']}")
   
   
   
+  
+  
+  
 
 
 return {"test": test, "passed": len(failures) == 0, "failures": failures, "response_preview": response[:200]}
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ return {"test": test, "passed": len(failures) == 0, "failures": failures, "respo
   
   
   
+  
+  
+  
 
 
 Integrate prompt changes into your deployment pipeline:
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ Integrate prompt changes into your deployment pipeline:
   
   
   
+  
+  
+  
 
 
 name: Prompt Deployment
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ on:
   
   
   
+  
+  
+  
 
 
 push:
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ paths:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'prompts/**/*.yaml'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'prompts/**/*.yaml'
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ jobs:
   
   
   
+  
+  
+  
 
 
 test-prompts:
 
+  
+  
+  
   
   
   
@@ -3302,6 +3694,9 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
 
 
 steps:
@@ -3328,36 +3723,16 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
   
   
   
@@ -3382,8 +3757,40 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Validate prompt YAML
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Validate prompt YAML
+
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ run: python scripts/validate_prompts.py
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run prompt tests
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run prompt tests
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ env:
   
   
   
+  
+  
+  
 
 
 ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ run: python scripts/test_prompts.py --min-pass-rate 0.8
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to staging
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to staging
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ if: github.ref == 'refs/heads/main'
   
   
   
+  
+  
+  
 
 
 run: python scripts/deploy_prompts.py --env staging
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ deploy-production:
   
   
   
+  
+  
+  
 
 
 needs: test-prompts
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ if: github.event_name == 'push' && github.ref == 'refs/heads/main'
   
   
   
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ steps:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: python scripts/deploy_prompts.py --env production
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ steps:
   
   
   
+  
+  
+  
 
 
 class PromptReviewWorkflow:
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ def __init__(self, registry: PromptRegistry):
   
   
   
+  
+  
+  
 
 
 self.registry = registry
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ def create_pr(self, prompt_name: str, new_version: dict, author: str) -> str:
   
   
   
+  
+  
+  
 
 
 """Create a prompt change request for review."""
 
+  
+  
+  
   
   
   
@@ -3952,10 +4419,16 @@ current = self.registry.get_prompt(prompt_name)
   
   
   
+  
+  
+  
 
 
 diff = self.registry.diff(prompt_name, current["version"], "new")
 
+  
+  
+  
   
   
   
@@ -4004,10 +4477,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 "id": f"prompt-pr-{uuid.uuid4().hex[:8]}",
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 "author": author,
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 "proposed_version": new_version.get("version"),
 
+  
+  
+  
   
   
   
@@ -4160,10 +4651,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 "status": "open",
 
+  
+  
+  
   
   
   
@@ -4212,10 +4709,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 "comments": [],
 
+  
+  
+  
   
   
   
@@ -4264,10 +4767,16 @@ pr = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4316,10 +4825,16 @@ self.storage.save(f"reviews/{pr['id']}", pr)
   
   
   
+  
+  
+  
 
 
 return pr["id"]
 
+  
+  
+  
   
   
   
@@ -4368,10 +4883,16 @@ def approve(self, pr_id: str, reviewer: str, comment: str = ""):
   
   
   
+  
+  
+  
 
 
 pr = self.storage.load(f"reviews/{pr_id}")
 
+  
+  
+  
   
   
   
@@ -4420,10 +4941,16 @@ pr["status"] = "approved"
   
   
   
+  
+  
+  
 
 
 pr["reviewers"].append({"name": reviewer, "action": "approve", "comment": comment})
 
+  
+  
+  
   
   
   
@@ -4472,10 +4999,16 @@ self.storage.save(f"reviews/{pr_id}", pr)
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

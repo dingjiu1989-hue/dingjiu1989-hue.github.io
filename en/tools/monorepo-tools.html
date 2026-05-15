@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/monorepo-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4732",
+      "wordCount": "5219",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html"},
-      "articleBody": "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Introduction Monorepos \u2014 storing multiple projects in a single repository \u2014 offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage. Turborepo Vercel's build orchestrator focuses on caching and task scheduling: // turbo.json { \"$schema\": \"https://turbo.build/schema.json\", \"pipeline\": { \"build\": { \"dependsOn\": [\"^build\"], \"outputs\": [\"dist/**\", \".next/**\"], \"cache\": { \"inputs\": [\"src/**\", \"tsconfig.json\"], \"outputMode\": \"new-only\" } }, \"test\": { \"dependsOn\": [\"build\"], \"outputs\": [], \"inputs\": [\"src/**\", \"*.test.ts\"] }, \"lint\": { \"outputs\": [] }, \"dev\": { \"cache\": false, \"persistent\": true } } } Run builds across all workspaces in dependency order turbo run build Run with parallel execution (default: CPU count) turbo run build --parallel Dry run to see execution plan turbo run build --dry Filter specific packages turbo run build --filter=packages/core... Remote caching (Vercel) turbo run build --remote-only **Strengths**: Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed. **Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel. Nx Nx provides build orchestration with powerful code generation and dependency analysis: Create an Nx workspace npx create-nx-workspace@latest myorg Add capabilities nx g @nx/next:app my-app nx g @nx/react:lib shared-ui nx g @nx/node:lib api-interfaces Run tasks nx run-many -t build test lint Visualize dependencies nx graph Affected commands (only run what changed) nx affected:test --base=main // nx.json { \"tasksRunnerOptions\": { \"default\": { \"runner\": \"nx-cloud\", // or \"nx/tasks-runners/default\" \"options\": { \"cacheableOperations\": [\"build\", \"test\", \"lint\", \"e2e\"], \"parallel\": 5, \"accessToken\": \"your-token\" } } }, \"targetDefaults\": { \"build\": { \"dependsOn\": [\"^build\"], \"inputs\": [\"!{projectRoot}/test/**/*\"] } } } **Strengths**: Language-agnostic, powerful dependency graph analysis, code generation reduces boilerplate, affected commands save CI time, plugin ecosystem extends to any tool. **Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features. Bazel Google's build system prioritizes correctness and hermetic builds: BUILD.bazel load(\"@npm//:defs.bzl\", \"npm_link_all_packages\") npm_link_all_packages(name = \"node_modules\") load(\"@aspect_rules_ts//ts:defs.bzl\", \"ts_project\") ts_project( name = \"core\", srcs = glob([\"src/**/*.ts\"]), deps = [ \"//packages/utils\", \"@npm//lodash\", \"@npm//zod\", ], tsconfig = \"//:tsconfig\", out_dir = \"dist\", ) python_binary for a data science component load(\"@rules_python//python:defs.bzl\", \"py_binary\") py_binary( name = \"data_pipeline\", srcs = [\"pipeline.py\"], deps = [\"@pypi//pandas\"], ) Build with caching and parallelism bazel build //packages/core:all Run tests bazel test //packages/... Query dependency graph bazel query \"deps(//packages/core)\" Remote execution bazel build --config=remote //... **Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos. **Weaknesses**: Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure. Lage Microsoft's task runner focused on simplicity: // lage.config.js module.exports = { pipeline: { build: [\"^build\"], test: [\"build\"], lint: [], typecheck: [], }, npmClient: \"pnpm\", cache: true, concurrency: 8, }; Run the build pipeline lage build Run tests lage test Show execution plan lage build --dry Filter by scope lage build --scope packages/core **Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight. **Weaknesses**: Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS. Comparison | Feature | Turborepo | Nx | Bazel | Lage | |---------|-----------|-----|-------|------| | Setup time | Minutes | Minutes | Hours | Minutes | | Caching | File-level | File-level | Content-addressed | File-level | | Remote caching | Vercel only | Nx Cloud | Built-in | No | | Polyglot | No | Yes | Yes | No | | Code generation | No | Yes | No | No | | Learning curve | Low | Medium | High | Low | | Ideal repo size | Small-large | Small-large | Large | Small-medium | Recommendations * **Start simple**: Use Turborepo for most JavaScript/TypeScript monorepos \u2014 best setup experience. * **Need code generation**: Nx reduces boilerplate significantly for large teams. * **Polyglot monorepo**: Nx or Bazel if you need multiple languages in one repo. * **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements. * **Simple needs within Microsoft ecosystem**: Lage for lightweight orchestration."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/monorepo-tools-turborepo-nx-bazel-lage-comparison-bk"
+      ],
+      "articleBody": "Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison Introduction Monorepos \u2014 storing multiple projects in a single repository \u2014 offer simplified dependency management, atomic commits, and shared tooling. But without the right build tool, monorepos become slow as they grow. This article compares four leading monorepo orchestration tools: Turborepo, Nx, Bazel, and Lage. Turborepo Vercel's build orchestrator focuses on caching and task scheduling: // turbo.json { \"$schema\": \"https://turbo.build/schema.json\", \"pipeline\": { \"build\": { \"dependsOn\": [\"^build\"], \"outputs\": [\"dist/**\", \".next/**\"], \"cache\": { \"inputs\": [\"src/**\", \"tsconfig.json\"], \"outputMode\": \"new-only\" } }, \"test\": { \"dependsOn\": [\"build\"], \"outputs\": [], \"inputs\": [\"src/**\", \"*.test.ts\"] }, \"lint\": { \"outputs\": [] }, \"dev\": { \"cache\": false, \"persistent\": true } } } Run builds across all workspaces in dependency order turbo run build Run with parallel execution (default: CPU count) turbo run build --parallel Dry run to see execution plan turbo run build --dry Filter specific packages turbo run build --filter=packages/core... Remote caching (Vercel) turbo run build --remote-only **Strengths**: Fastest setup, excellent documentation, incremental adoption, parallel execution, remote caching with Vercel integration. The caching granularity (file-level inputs) is well-designed. **Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel. Nx Nx provides build orchestration with powerful code generation and dependency analysis: Create an Nx workspace npx create-nx-workspace@latest myorg Add capabilities nx g @nx/next:app my-app nx g @nx/react:lib shared-ui nx g @nx/node:lib api-interfaces Run tasks nx run-many -t build test lint Visualize dependencies nx graph Affected commands (only run what changed) nx affected:test --base=main // nx.json { \"tasksRunnerOptions\": { \"default\": { \"runner\": \"nx-cloud\", // or \"nx/tasks-runners/default\" \"options\": { \"cacheableOperations\": [\"build\", \"test\", \"lint\", \"e2e\"], \"parallel\": 5, \"accessToken\": \"your-token\" } } }, \"targetDefaults\": { \"build\": { \"dependsOn\": [\"^build\"], \"inputs\": [\"!{projectRoot}/test/**/*\"] } } } **Strengths**: Language-agnostic, powerful dependency graph analysis, code generation reduces boilerplate, affected commands save CI time, plugin ecosystem extends to any tool. **Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features. Bazel Google's build system prioritizes correctness and hermetic builds: BUILD.bazel load(\"@npm//:defs.bzl\", \"npm_link_all_packages\") npm_link_all_packages(name = \"node_modules\") load(\"@aspect_rules_ts//ts:defs.bzl\", \"ts_project\") ts_project( name = \"core\", srcs = glob([\"src/**/*.ts\"]), deps = [ \"//packages/utils\", \"@npm//lodash\", \"@npm//zod\", ], tsconfig = \"//:tsconfig\", out_dir = \"dist\", ) python_binary for a data science component load(\"@rules_python//python:defs.bzl\", \"py_binary\") py_binary( name = \"data_pipeline\", srcs = [\"pipeline.py\"], deps = [\"@pypi//pandas\"], ) Build with caching and parallelism bazel build //packages/core:all Run tests bazel test //packages/... Query dependency graph bazel query \"deps(//packages/core)\" Remote execution bazel build --config=remote //... **Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos. **Weaknesses**: Very steep learning curve, verbose configuration, not JavaScript-native, slower cold builds, requires significant infrastructure. Lage Microsoft's task runner focused on simplicity: // lage.config.js module.exports = { pipeline: { build: [\"^build\"], test: [\"build\"], lint: [], typecheck: [], }, npmClient: \"pnpm\", cache: true, concurrency: 8, }; Run the build pipeline lage build Run tests lage test Show execution plan lage build --dry Filter by scope lage build --scope packages/core **Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight. **Weaknesses**: Smaller community, fewer features than Turborepo/Nx, limited plugin ecosystem, primarily JS/TS. Comparison | Feature | Turborepo | Nx | Bazel | Lage | |---------|-----------|-----|-------|------| | Setup time | Minutes | Minutes | Hours | Minutes | | Caching | File-level | File-level | Content-addressed | File-level | | Remote caching | Vercel only | Nx Cloud | Built-in | No | | Polyglot | No | Yes | Yes | No | | Code generation | No | Yes | No | No | | Learning curve | Low | Medium | High | Low | | Ideal repo size | Small-large | Small-large | Large | Small-medium | Recommendations * **Start simple**: Use Turborepo for most JavaScript/TypeScript monorepos \u2014 best setup experience. * **Need code generation**: Nx reduces boilerplate significantly for large teams. * **Polyglot monorepo**: Nx or Bazel if you need multiple languages in one repo. * **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements. * **Simple needs within Microsoft ecosystem**: Lage for lightweight orchestration."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -222,7 +254,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Turborepo</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -268,6 +306,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// turbo.json</p>
 <br>
 <br>
@@ -291,7 +332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -337,7 +384,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"pipeline": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -383,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"dependsOn": ["^build"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +488,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"cache": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -475,7 +540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"outputMode": "new-only"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -521,7 +592,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -567,7 +644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"dependsOn": ["build"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -613,6 +696,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"inputs": ["src/**", "*.test.ts"]</p>
 <br>
 <br>
@@ -636,7 +722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -682,6 +774,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"outputs": []</p>
 <br>
 <br>
@@ -705,7 +800,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -751,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"cache": false,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -797,26 +904,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -843,7 +930,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -889,7 +1008,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>turbo run build</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -935,7 +1060,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>turbo run build --parallel</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -981,7 +1112,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>turbo run build --dry</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1027,7 +1164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>turbo run build --filter=packages/core...</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1073,7 +1216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>turbo run build --remote-only</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1119,7 +1268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1165,7 +1320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Nx provides build orchestration with powerful code generation and dependency analysis:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1211,7 +1372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npx create-nx-workspace@latest myorg</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1257,7 +1424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nx g @nx/next:app my-app</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1303,7 +1476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nx g @nx/node:lib api-interfaces</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1349,7 +1528,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nx run-many -t build test lint</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1395,7 +1580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nx graph</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1441,7 +1632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nx affected:test --base=main</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1487,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1533,7 +1736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"default": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1579,7 +1788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"options": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1625,7 +1840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"parallel": 5,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1671,30 +1892,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1718,6 +1948,9 @@
 <br>
 <br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1763,7 +1996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"build": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1809,6 +2048,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"inputs": ["!{projectRoot}/test/**/*"]</p>
 <br>
 <br>
@@ -1832,26 +2074,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -1878,7 +2100,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1924,7 +2178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1970,7 +2230,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Google's build system prioritizes correctness and hermetic builds:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2016,7 +2282,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>load("@npm//:defs.bzl", "npm_link_all_packages")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2062,7 +2334,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>load("@aspect_rules_ts//ts:defs.bzl", "ts_project")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2108,7 +2386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name = "core",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2154,7 +2438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deps = [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2200,7 +2490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"@npm//lodash",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2246,7 +2542,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2292,6 +2594,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>out_dir = "dist",</p>
 <br>
 <br>
@@ -2315,7 +2620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2361,7 +2672,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>load("@rules_python//python:defs.bzl", "py_binary")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2407,7 +2724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name = "data_pipeline",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2453,7 +2776,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deps = ["@pypi//pandas"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2499,7 +2828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Build with caching and parallelism</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2545,7 +2880,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run tests</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2591,7 +2932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Query dependency graph</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2637,7 +2984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Remote execution</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2683,7 +3036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2729,7 +3088,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Lage</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2775,7 +3140,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// lage.config.js</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2821,7 +3192,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pipeline: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2867,7 +3244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>test: ["build"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2913,7 +3296,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>typecheck: [],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2959,7 +3348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npmClient: "pnpm",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3005,7 +3400,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>concurrency: 8,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3051,7 +3452,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run the build pipeline</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3097,7 +3504,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Run tests</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3143,7 +3556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Show execution plan</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3189,7 +3608,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Filter by scope</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3235,7 +3660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3281,7 +3712,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Comparison</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3327,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|-----------|-----|-------|------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3373,7 +3816,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Caching | File-level | File-level | Content-addressed | File-level |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3419,7 +3868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Polyglot | No | Yes | Yes | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3465,7 +3920,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Learning curve | Low | Medium | High | Low |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Recommendations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3554,7 +4021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Need code generation**: Nx reduces boilerplate significantly for large teams.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3594,7 +4067,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

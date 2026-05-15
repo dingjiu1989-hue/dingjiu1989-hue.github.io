@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/kafka-vs-rabbitmq.html
   
 
 
+# Kafka vs RabbitMQ vs Apache Pulsar
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Kafka vs RabbitMQ: Choosing Your Message Broker
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Message queuing remains a critical architectural decision in 2026, with Apache K
   
   
   
+  
+  
+  
 
 
 ### Core Architecture
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Kafka operates as a distributed commit log. Messages are appended to immutable p
   
   
   
+  
+  
+  
 
 
 RabbitMQ implements the AMQP 0-9-1 standard with a more traditional exchange-queue binding model. Messages are routed through exchanges to queues based on routing keys and binding patterns. Once consumed and acknowledged, messages are deleted by default. RabbitMQ excels at complex routing scenarios with its exchange types: direct, topic, fanout, and headers.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ RabbitMQ implements the AMQP 0-9-1 standard with a more traditional exchange-que
   
   
   
+  
+  
+  
 
 
 Kafka achieves extraordinary throughput, handling millions of messages per second on modest hardware. Its zero-copy optimization and sequential disk writes enable sustained high performance. A three-node Kafka cluster can process 2+ million messages per second with proper tuning.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ RabbitMQ handles tens of thousands to low hundreds of thousands of messages per 
   
   
   
+  
+  
+  
 
 
 ### Routing and Delivery Guarantees
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ RabbitMQ offers the most sophisticated routing. A single message can be routed t
   
   
   
+  
+  
+  
 
 
 Kafka's routing is simpler: producers write to topics partitioned by key, and consumers subscribe to topics. Delivery semantics include at-most-once, at-least-once, and exactly-once (via idempotent producers and transactions). Kafka's exactly-once semantics are more mature than RabbitMQ's, which typically achieves at-least-once delivery.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Kafka's routing is simpler: producers write to topics partitioned by key, and co
   
   
   
+  
+  
+  
 
 
 Kafka requires more operational investment. Running ZooKeeper or KRaft consensus, managing partition rebalancing, and tuning broker configurations demand dedicated expertise. Kafka's storage model can be disk-intensive, and recovery from failures requires careful planning.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ RabbitMQ is simpler to operate, with a management UI, easier configuration, and 
   
   
   
+  
+  
+  
 
 
 ### When to Choose Each
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ Prefer Kafka for event sourcing, log aggregation, metrics collection, stream pro
   
   
   
+  
+  
+  
 
 
 Prefer RabbitMQ for task queues, RPC-style request-reply, complex routing requirements, and when operational simplicity is paramount. Its mature ecosystem of plugins and management tools makes it developer-friendly.
@@ -572,10 +649,16 @@ Prefer RabbitMQ for task queues, RPC-style request-reply, complex routing requir
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

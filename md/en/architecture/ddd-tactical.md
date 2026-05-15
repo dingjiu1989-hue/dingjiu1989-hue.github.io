@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-tactical.html
   
 
 
+# DDD Tactical Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Domain-Driven Design (DDD) tactical patterns provide concrete building blocks for implementing domain models. While strategic DDD focuses on boundaries and relationships between domains, tactical patterns guide the implementation of individual domain elements. This article explores the core tactical patterns: entities, value objects, aggregates, domain services, repositories, and domain events. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Entities
   
   
   
+  
+  
+  
 
 
 An entity is an object that has a distinct identity that runs through time and across different states. Two entities with the same attributes but different identities are different objects. The identity is typically represented by a unique identifier—a UUID, a database-generated ID, or a business key. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Entities are mutable and their state changes over time. An `Order` entity change
   
   
   
+  
+  
+  
 
 
 Implementing entities requires careful identity management. The identity should be assigned when the entity is created and should never change. Entity equality should be based on identity, not on attribute values. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Value Objects
   
   
   
+  
+  
+  
 
 
 A value object is an immutable object whose equality is based on the values of its attributes rather than on identity. A `Money` object with amount 100 and currency USD is equal to another `Money` object with the same values. Value objects have no identity and should be treated as immutable. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Value objects are powerful modeling tools. They encapsulate domain concepts with
   
   
   
+  
+  
+  
 
 
 The preference in DDD is to use value objects over entities whenever possible. They are easier to reason about, thread-safe by nature, and reduce complexity. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ Aggregates
   
   
   
+  
+  
+  
 
 
 An aggregate is a cluster of domain objects that can be treated as a single unit. An aggregate has a root entity, the aggregate root, which is the only object external clients can reference directly. The aggregate root enforces invariants for all objects within the aggregate boundary. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ For example, an `Order` aggregate might contain `OrderItem` entities and `Shippi
   
   
   
+  
+  
+  
 
 
 Aggregate design is critical for consistency. The general rule is to keep aggregates small—only include objects that must be consistent together. Large aggregates cause performance problems and contention issues. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Domain Services
   
   
   
+  
+  
+  
 
 
 A domain service is a stateless object that implements business logic that does not naturally fit within an entity or value object. Domain services are named after the business activity they perform. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ For example, a `TransferService` handles the logic of transferring money between
   
   
   
+  
+  
+  
 
 
 Repositories 
 
+  
+  
+  
   
   
   
@@ -464,10 +541,16 @@ A repository provides a collection-like interface for accessing aggregates from 
   
   
   
+  
+  
+  
 
 
 Repositories should be defined as interfaces in the domain layer and implemented in the infrastructure layer. This follows the dependency inversion principle and keeps the domain model independent of persistence technology. 
 
+  
+  
+  
   
   
   

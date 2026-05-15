@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/container-runtime-security.ht
   
 
 
+# Container Runtime Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Runtime Security Fundamentals 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Container runtime security monitors and restricts container behavior during exec
   
   
   
+  
+  
+  
 
 
 seccomp Profiles 
 
+  
+  
+  
   
   
   
@@ -187,10 +222,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -233,10 +274,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 "architectures": ["SCMP_ARCH_X86_64"],
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -325,10 +378,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 "accept4", "bind", "connect", "listen",
 
+  
+  
+  
   
   
   
@@ -371,10 +430,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 "mmap", "munmap", "brk",
 
+  
+  
+  
   
   
   
@@ -417,10 +482,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -509,10 +586,16 @@ seccomp (Secure Computing Mode) restricts system calls:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -555,10 +638,16 @@ Apply profiles in Kubernetes:
   
   
   
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
   
   
   
@@ -601,10 +690,16 @@ kind: Pod
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -647,10 +742,16 @@ name: secure-app
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -693,6 +794,9 @@ securityContext:
   
   
   
+  
+  
+  
 
 
 seccompProfile:
@@ -716,10 +820,16 @@ seccompProfile:
   
   
   
+  
+  
+  
 
 
 type: Localhost
 
+  
+  
+  
   
   
   
@@ -762,6 +872,9 @@ localhostProfile: profiles/audit.json
   
   
   
+  
+  
+  
 
 
 containers:
@@ -785,10 +898,16 @@ containers:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
 
+  
+  
+  
   
   
   
@@ -831,10 +950,16 @@ image: myapp:latest
   
   
   
+  
+  
+  
 
 
 securityContext:
 
+  
+  
+  
   
   
   
@@ -877,10 +1002,16 @@ seccompProfile:
   
   
   
+  
+  
+  
 
 
 type: Localhost
 
+  
+  
+  
   
   
   
@@ -923,6 +1054,9 @@ localhostProfile: profiles/strict.json
   
   
   
+  
+  
+  
 
 
 AppArmor 
@@ -943,10 +1077,16 @@ AppArmor
   
   
   
+  
+  
+  
 
 
 AppArmor uses path-based access control: 
 
+  
+  
+  
   
   
   
@@ -989,10 +1129,16 @@ AppArmor uses path-based access control:
   
   
   
+  
+  
+  
 
 
 #include 
 
+  
+  
+  
   
   
   
@@ -1035,10 +1181,16 @@ profile container-strict flags=(attach_disconnected) {
   
   
   
+  
+  
+  
 
 
 #include 
 
+  
+  
+  
   
   
   
@@ -1081,10 +1233,16 @@ profile container-strict flags=(attach_disconnected) {
   
   
   
+  
+  
+  
 
 
 network inet tcp,
 
+  
+  
+  
   
   
   
@@ -1127,10 +1285,16 @@ network inet udp,
   
   
   
+  
+  
+  
 
 
 # Filesystem
 
+  
+  
+  
   
   
   
@@ -1173,10 +1337,16 @@ network inet udp,
   
   
   
+  
+  
+  
 
 
 /proc/*/status r,
 
+  
+  
+  
   
   
   
@@ -1219,10 +1389,16 @@ network inet udp,
   
   
   
+  
+  
+  
 
 
 /app/** r,
 
+  
+  
+  
   
   
   
@@ -1265,10 +1441,16 @@ network inet udp,
   
   
   
+  
+  
+  
 
 
 # Deny everything else
 
+  
+  
+  
   
   
   
@@ -1311,10 +1493,16 @@ deny /etc/shadow r,
   
   
   
+  
+  
+  
 
 
 deny /sys/** r,
 
+  
+  
+  
   
   
   
@@ -1357,10 +1545,16 @@ deny /proc/** w,
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1400,10 +1594,16 @@ SELinux for Containers
   
   
   
+  
+  
+  
 
 
 SELinux provides mandatory access control: 
 
+  
+  
+  
   
   
   
@@ -1446,10 +1646,16 @@ SELinux provides mandatory access control:
   
   
   
+  
+  
+  
 
 
 sudo setenforce 1
 
+  
+  
+  
   
   
   
@@ -1492,10 +1698,16 @@ sudo semanage permissive -a container_t
   
   
   
+  
+  
+  
 
 
 # Apply SELinux context to container
 
+  
+  
+  
   
   
   
@@ -1538,33 +1750,42 @@ podman run \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=type:container_t \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=level:s0:c1,c2 \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=type:container_t \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--security-opt label=level:s0:c1,c2 \
+
+  
+  
+  
   
   
   
@@ -1607,10 +1828,16 @@ nginx
   
   
   
+  
+  
+  
 
 
 # Check SELinux context
 
+  
+  
+  
   
   
   
@@ -1653,6 +1880,9 @@ ps -eZ | grep container
   
   
   
+  
+  
+  
 
 
 Falco Runtime Detection 
@@ -1673,10 +1903,16 @@ Falco Runtime Detection
   
   
   
+  
+  
+  
 
 
 Falco detects anomalous behavior: 
 
+  
+  
+  
   
   
   
@@ -1719,10 +1955,16 @@ Falco detects anomalous behavior:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Terminal shell in container
 
+  
+  
+  
   
   
   
@@ -1765,10 +2007,16 @@ desc: Detect shell spawn in container
   
   
   
+  
+  
+  
 
 
 condition: >
 
+  
+  
+  
   
   
   
@@ -1811,10 +2059,16 @@ spawned_process
   
   
   
+  
+  
+  
 
 
 and container 
 
+  
+  
+  
   
   
   
@@ -1857,6 +2111,9 @@ and proc.name in (bash, zsh, sh, dash)
   
   
   
+  
+  
+  
 
 
 and not proc.pname in (docker, kubectl)
@@ -1880,10 +2137,16 @@ and not proc.pname in (docker, kubectl)
   
   
   
+  
+  
+  
 
 
 output: >
 
+  
+  
+  
   
   
   
@@ -1926,6 +2189,9 @@ Shell spawned in container (%user_name %container_name)
   
   
   
+  
+  
+  
 
 
 priority: WARNING
@@ -1949,10 +2215,16 @@ priority: WARNING
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Unexpected outbound connection
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Unexpected outbound connection
 
+  
+  
+  
   
   
   
@@ -1995,10 +2267,16 @@ desc: Detect reverse shell or data exfiltration
   
   
   
+  
+  
+  
 
 
 condition: >
 
+  
+  
+  
   
   
   
@@ -2041,10 +2319,16 @@ outbound
   
   
   
+  
+  
+  
 
 
 and container 
 
+  
+  
+  
   
   
   
@@ -2087,10 +2371,16 @@ and not allowed_outbound_destination
   
   
   
+  
+  
+  
 
 
 output: >
 
+  
+  
+  
   
   
   
@@ -2133,6 +2423,9 @@ Unexpected outbound connection from container
   
   
   
+  
+  
+  
 
 
 priority: CRITICAL
@@ -2156,10 +2449,16 @@ priority: CRITICAL
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Write to sensitive path
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rule: Write to sensitive path
 
+  
+  
+  
   
   
   
@@ -2202,10 +2501,16 @@ desc: Detect attempts to write to host filesystem
   
   
   
+  
+  
+  
 
 
 condition: >
 
+  
+  
+  
   
   
   
@@ -2248,10 +2553,16 @@ open_write
   
   
   
+  
+  
+  
 
 
 and container 
 
+  
+  
+  
   
   
   
@@ -2294,10 +2605,16 @@ and fd.name startswith /etc/cron
   
   
   
+  
+  
+  
 
 
 output: >
 
+  
+  
+  
   
   
   
@@ -2340,10 +2657,16 @@ Write to sensitive host path from container
   
   
   
+  
+  
+  
 
 
 priority: CRITICAL
 
+  
+  
+  
   
   
   
@@ -2386,10 +2709,16 @@ priority: CRITICAL
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -2432,10 +2761,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 def handle_falco_events():
 
+  
+  
+  
   
   
   
@@ -2478,10 +2813,16 @@ resp = requests.get(
   
   
   
+  
+  
+  
 
 
 "http://localhost:8765/events",
 
+  
+  
+  
   
   
   
@@ -2524,10 +2865,16 @@ stream=True
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2570,10 +2917,16 @@ for line in resp.iter_lines():
   
   
   
+  
+  
+  
 
 
 if line:
 
+  
+  
+  
   
   
   
@@ -2616,10 +2969,16 @@ event = json.loads(line)
   
   
   
+  
+  
+  
 
 
 priority = event.get("priority")
 
+  
+  
+  
   
   
   
@@ -2662,10 +3021,16 @@ rule = event.get("rule")
   
   
   
+  
+  
+  
 
 
 output = event.get("output")
 
+  
+  
+  
   
   
   
@@ -2708,10 +3073,16 @@ if priority in ["CRITICAL", "EMERGENCY"]:
   
   
   
+  
+  
+  
 
 
 trigger_incident_response(rule, output)
 
+  
+  
+  
   
   
   
@@ -2754,10 +3125,16 @@ elif priority in ["WARNING", "ERROR"]:
   
   
   
+  
+  
+  
 
 
 alert_security_team(rule, output)
 
+  
+  
+  
   
   
   
@@ -2800,10 +3177,16 @@ Runtime Security Best Practices
   
   
   
+  
+  
+  
 
 
 runtime_security:
 
+  
+  
+  
   
   
   
@@ -2846,33 +3229,16 @@ images:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan_before_run
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- block_known_vulnerable
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan_before_run
 
+  
+  
+  
   
   
   
@@ -2894,8 +3260,37 @@ images:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- enforce_signing
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- block_known_vulnerable
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- enforce_signing
+
+  
+  
+  
   
   
   
@@ -2938,33 +3333,16 @@ containers:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- read_only_root_filesystem: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- drop_all_capabilities
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- read_only_root_filesystem: true
 
+  
+  
+  
   
   
   
@@ -2986,31 +3364,11 @@ containers:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- add_capabilities_selectively
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- drop_all_capabilities
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run_as_non_root
-
   
   
   
@@ -3032,31 +3390,11 @@ containers:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- seccomp: custom_profile
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- add_capabilities_selectively
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apparmor: enforced
-
   
   
   
@@ -3078,8 +3416,89 @@ containers:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_new_privileges: true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run_as_non_root
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- seccomp: custom_profile
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apparmor: enforced
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_new_privileges: true
+
+  
+  
+  
   
   
   
@@ -3122,33 +3541,16 @@ monitoring:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- falco_runtime_detection
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- audit_log_collection
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- falco_runtime_detection
 
+  
+  
+  
   
   
   
@@ -3170,8 +3572,37 @@ monitoring:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- behavioral_baselining
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- audit_log_collection
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- behavioral_baselining
+
+  
+  
+  
   
   
   
@@ -3195,6 +3626,9 @@ monitoring:
 
 Conclusion 
 
+  
+  
+  
   
   
   

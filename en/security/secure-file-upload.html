@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-file-upload.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4406",
+      "wordCount": "5122",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-file-upload.html"},
-      "articleBody": "Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation The Risk of File Uploads File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. Threat Model | Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | Validation Strategy 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases. ALLOWED_EXTENSIONS = { Images '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', Documents '.pdf', '.doc', '.docx', '.xls', '.xlsx', Other '.txt', '.csv' } def validate_extension(filename): ext = os.path.splitext(filename)[1].lower() if ext not in ALLOWED_EXTENSIONS: raise ValueError(f\"Extension {ext} not allowed\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type Never trust the `Content-Type` header from the client. Inspect the actual file content: import magic def validate_mime(file_stream): mime = magic.from_buffer(file_stream.read(2048), mime=True) file_stream.seek(0) ALLOWED_MIMES = { 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf', 'text/plain', 'text/csv' } if mime not in ALLOWED_MIMES: raise ValueError(f\"MIME type {mime} not allowed\") 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size Enforce strict limits at multiple layers: // Express middleware const multer = require('multer'); const upload = multer({ limits: { fileSize: 10 * 1024 * 1024, // 10 MB files: 1 }, fileFilter: (req, file, cb) => { const allowed = ['image/jpeg', 'image/png', 'application/pdf']; if (!allowed.includes(file.mimetype)) { return cb(new Error('Invalid file type'), false); } cb(null, true); } }); 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads: from PIL import Image import io def sanitize_image(file_bytes): \"\"\"Re-encode image to strip metadata and break embedded payloads.\"\"\" img = Image.open(io.BytesIO(file_bytes)) Convert to ensure clean output img = img.convert('RGB') output = io.BytesIO() img.save(output, format='PNG') return output.getvalue() Secure Storage Never Store in Webroot Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. UNSAFE: Stored in webroot upload_dir = '/var/www/html/uploads/' SAFE: Outside webroot upload_dir = '/data/uploads/' # Served through app logic Generate Safe Filenames Never use user-provided filenames. Generate random filenames: import uuid import os def safe_filename(original_name): ext = os.path.splitext(original_name)[1].lower() return f\"{uuid.uuid4().hex}{ext}\" Object Storage For production systems, use object storage with pre-signed URLs: import boto3 s3 = boto3.client('s3') def upload_file(file_bytes, content_type): key = f\"uploads/{uuid.uuid4().hex}.pdf\" s3.put_object( Bucket='my-app-uploads', Key=key, Body=file_bytes, ContentType=content_type ) return key def get_download_url(key, expires=3600): return s3.generate_presigned_url( 'get_object', Params={'Bucket': 'my-app-uploads', 'Key': key}, ExpiresIn=expires ) Antivirus Scanning Integrate virus scanning into the upload pipeline: import subprocess def scan_file(file_path): result = subprocess.run( ['clamscan', '--stdout', file_path], capture_output=True, text=True ) if 'FOUND' in result.stdout: os.remove(file_path) raise SecurityError(\"Malware detected in uploaded file\") Storage Limits and Quotas | Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | Server Configuration Prevent uploaded files from being executed by the web server: Nginx configuration location /uploads/ { Only serve specific file types location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ { add_header Content-Disposition 'attachment'; expires 30d; } Deny everything else location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. { deny all; return 404; } } Summary Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/secure-file-upload-implementation-3ecd"
+      ],
+      "articleBody": "Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation Secure File Upload Implementation The Risk of File Uploads File upload functionality is one of the most dangerous features an application can expose. An unrestricted file upload can lead to remote code execution, malware distribution, data breaches, and server compromise. Every file upload endpoint must be treated as a critical attack surface. Threat Model | Attack | Description | |--------|-------------| | Malicious file upload | Attacker uploads a PHP shell or executable | | File size DoS | Huge files exhaust disk space or memory | | Path traversal | Filename manipulates directory traversal | | MIME type spoofing | File extension does not match content | | Malware distribution | Legitimate-looking files containing malware | | Zip bombs | Compressed archive that expands to enormous size | | SSRF via file processing | Server-side parsing of attacker-controlled files | Validation Strategy 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension Allowlist-based validation is essential. Blocklisting (e.g., rejecting `.exe` files) will always miss edge cases. ALLOWED_EXTENSIONS = { Images '.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', Documents '.pdf', '.doc', '.docx', '.xls', '.xlsx', Other '.txt', '.csv' } def validate_extension(filename): ext = os.path.splitext(filename)[1].lower() if ext not in ALLOWED_EXTENSIONS: raise ValueError(f\"Extension {ext} not allowed\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type Never trust the `Content-Type` header from the client. Inspect the actual file content: import magic def validate_mime(file_stream): mime = magic.from_buffer(file_stream.read(2048), mime=True) file_stream.seek(0) ALLOWED_MIMES = { 'image/jpeg', 'image/png', 'image/gif', 'image/webp', 'application/pdf', 'text/plain', 'text/csv' } if mime not in ALLOWED_MIMES: raise ValueError(f\"MIME type {mime} not allowed\") 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size Enforce strict limits at multiple layers: // Express middleware const multer = require('multer'); const upload = multer({ limits: { fileSize: 10 * 1024 * 1024, // 10 MB files: 1 }, fileFilter: (req, file, cb) => { const allowed = ['image/jpeg', 'image/png', 'application/pdf']; if (!allowed.includes(file.mimetype)) { return cb(new Error('Invalid file type'), false); } cb(null, true); } }); 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content For images, attempt to re-process them. This strips embedded metadata and breaks hidden payloads: from PIL import Image import io def sanitize_image(file_bytes): \"\"\"Re-encode image to strip metadata and break embedded payloads.\"\"\" img = Image.open(io.BytesIO(file_bytes)) Convert to ensure clean output img = img.convert('RGB') output = io.BytesIO() img.save(output, format='PNG') return output.getvalue() Secure Storage Never Store in Webroot Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. UNSAFE: Stored in webroot upload_dir = '/var/www/html/uploads/' SAFE: Outside webroot upload_dir = '/data/uploads/' # Served through app logic Generate Safe Filenames Never use user-provided filenames. Generate random filenames: import uuid import os def safe_filename(original_name): ext = os.path.splitext(original_name)[1].lower() return f\"{uuid.uuid4().hex}{ext}\" Object Storage For production systems, use object storage with pre-signed URLs: import boto3 s3 = boto3.client('s3') def upload_file(file_bytes, content_type): key = f\"uploads/{uuid.uuid4().hex}.pdf\" s3.put_object( Bucket='my-app-uploads', Key=key, Body=file_bytes, ContentType=content_type ) return key def get_download_url(key, expires=3600): return s3.generate_presigned_url( 'get_object', Params={'Bucket': 'my-app-uploads', 'Key': key}, ExpiresIn=expires ) Antivirus Scanning Integrate virus scanning into the upload pipeline: import subprocess def scan_file(file_path): result = subprocess.run( ['clamscan', '--stdout', file_path], capture_output=True, text=True ) if 'FOUND' in result.stdout: os.remove(file_path) raise SecurityError(\"Malware detected in uploaded file\") Storage Limits and Quotas | Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | Server Configuration Prevent uploaded files from being executed by the web server: Nginx configuration location /uploads/ { Only serve specific file types location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ { add_header Content-Disposition 'attachment'; expires 30d; } Deny everything else location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. { deny all; return 404; } } Summary Secure file upload requires defense in depth. Validate extensions and MIME types server-side, sanitize images by re-encoding them, generate random filenames, store files outside the webroot or in object storage, enforce strict size limits at multiple layers, and scan for malware. Never trust client-provided metadata, and process uploaded files with minimal privileges in isolated environments."
     }
     </script>
     <script type="application/ld+json">
@@ -198,7 +201,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Secure File Upload Implementation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The Risk of File Uploads </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -244,7 +279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Threat Model </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -290,6 +331,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Validation Strategy </p>
 <br>
 <br>
@@ -313,7 +357,13 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension </p>
+<br>
+<br>
+<br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Extension </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -359,7 +409,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ALLOWED_EXTENSIONS = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -405,7 +461,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -451,7 +513,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'.pdf', '.doc', '.docx', '.xls', '.xlsx',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -497,6 +565,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'.txt', '.csv'</p>
 <br>
 <br>
@@ -520,7 +591,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -566,7 +643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ext = os.path.splitext(filename)[1].lower()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -612,6 +695,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError(f"Extension {ext} not allowed")</p>
 <br>
 <br>
@@ -635,7 +721,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate MIME Type </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -681,7 +773,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import magic</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -727,7 +825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mime = magic.from_buffer(file_stream.read(2048), mime=True)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -773,7 +877,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ALLOWED_MIMES = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -819,7 +929,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'image/webp', 'application/pdf',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -865,7 +981,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -911,6 +1033,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError(f"MIME type {mime} not allowed")</p>
 <br>
 <br>
@@ -934,7 +1059,13 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size </p>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Size </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -980,7 +1111,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Express middleware</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1026,7 +1163,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const upload = multer({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1072,7 +1215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>fileSize: 10 * 1024 * 1024, // 10 MB</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1118,7 +1267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1164,7 +1319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const allowed = ['image/jpeg', 'image/png', 'application/pdf'];</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1210,6 +1371,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return cb(new Error('Invalid file type'), false);</p>
 <br>
 <br>
@@ -1233,7 +1397,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1279,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1325,7 +1501,13 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content </p>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validate File Content </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1371,7 +1553,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from PIL import Image</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1417,7 +1605,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def sanitize_image(file_bytes):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1463,7 +1657,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>img = Image.open(io.BytesIO(file_bytes))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1509,7 +1709,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>img = img.convert('RGB')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1555,7 +1761,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>img.save(output, format='PNG')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1601,7 +1813,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Secure Storage </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1647,7 +1865,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Storing uploaded files inside the web server's document root is dangerous. If the filename or path is guessable, files can be accessed directly. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1693,7 +1917,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>upload_dir = '/var/www/html/uploads/'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1739,7 +1969,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>upload_dir = '/data/uploads/' # Served through app logic</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1785,7 +2021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Never use user-provided filenames. Generate random filenames: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1831,7 +2073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import os</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1877,7 +2125,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ext = os.path.splitext(original_name)[1].lower()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1923,7 +2177,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Object Storage </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1969,7 +2229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import boto3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2015,7 +2281,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def upload_file(file_bytes, content_type):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2061,7 +2333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>s3.put_object(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2107,7 +2385,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Key=key,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2153,6 +2437,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ContentType=content_type</p>
 <br>
 <br>
@@ -2176,7 +2463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2222,7 +2515,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_download_url(key, expires=3600):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2268,7 +2567,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'get_object',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2314,6 +2619,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ExpiresIn=expires</p>
 <br>
 <br>
@@ -2337,7 +2645,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2383,7 +2697,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Integrate virus scanning into the upload pipeline: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2429,7 +2749,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def scan_file(file_path):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2475,7 +2801,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>['clamscan', '--stdout', file_path],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2521,7 +2853,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text=True</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2567,7 +2905,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if 'FOUND' in result.stdout:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2613,7 +2957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise SecurityError("Malware detected in uploaded file")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2659,7 +3009,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Level | Limit | Mitigation | |-------|-------|------------| | Per file | 10 MB | Reject on client and server | | Per user | 500 MB | Track in database, reject when exceeded | | Per day (total) | 5 GB | Aggregate monitoring, rate limit | | Disk usage | 80% capacity | Alert, stop accepting uploads | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2705,7 +3061,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Prevent uploaded files from being executed by the web server: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2751,7 +3113,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location /uploads/ {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2797,7 +3165,13 @@
 <br>
 <br>
 <br>
-<p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ {</p>
+<br>
+<br>
+<br>
+<p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|jpeg|png|gif|pdf)$ {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2843,6 +3217,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expires 30d;</p>
 <br>
 <br>
@@ -2866,7 +3243,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2912,7 +3295,13 @@
 <br>
 <br>
 <br>
-<p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. {</p>
+<br>
+<br>
+<br>
+<p>location ~* \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2958,6 +3347,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return 404;</p>
 <br>
 <br>
@@ -2981,30 +3373,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3028,6 +3429,9 @@
 <br>
 <br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

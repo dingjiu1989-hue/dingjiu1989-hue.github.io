@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/github-actions-workflows.html
   
   
   
+  
+  
+  
+
+
+# GitHub Actions Workflows: Advanced Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 GitHub Actions powers CI/CD for millions of repositories. Beyond basic workflows, advanced patterns improve reliability, speed, and maintainability.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ GitHub Actions powers CI/CD for millions of repositories. Beyond basic workflows
   
   
   
+  
+  
+  
 
 
 Matrix builds run the same workflow across multiple configurations. Define a matrix strategy with OS versions, language versions, or dependency configurations. GitHub Actions runs each combination as a separate job in parallel.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Use include and exclude to fine-tune the matrix. Add specific combinations while
   
   
   
+  
+  
+  
 
 
 ##  Reusable Workflows
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Reusable workflows (.github/workflows/ with workflow_call trigger) encapsulate c
   
   
   
+  
+  
+  
 
 
 Composite actions combine multiple steps into a single action. Unlike reusable workflows, composite actions run in the calling workflow's context. Use composites for step-level reuse within a single workflow.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Composite actions combine multiple steps into a single action. Unlike reusable w
   
   
   
+  
+  
+  
 
 
 Cache dependencies with actions/cache. Hash lockfiles (package-lock.json, requirements.txt) to create unique cache keys. Use restore-keys for partial cache matches. Cache npm, pip, Maven, Gradle, and Go module caches for faster builds.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ For large monorepos, cache individual package manager caches separately. Monitor
   
   
   
+  
+  
+  
 
 
 ##  Environment Protection
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Environments add protection gates. Require reviewers for production deployments.
   
   
   
+  
+  
+  
 
 
 Deployment branches restrict which branches can deploy to an environment. Combined with branch protection rules, this creates a secure deployment pipeline. Audit logs track every deployment.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Deployment branches restrict which branches can deploy to an environment. Combin
   
   
   
+  
+  
+  
 
 
 Write custom actions in JavaScript, Docker, or composite. JavaScript actions run directly (fastest). Docker actions support any language. Composite actions compose multiple steps. Publish actions to the Marketplace for organization-wide use.
 
+  
+  
+  
   
   
   

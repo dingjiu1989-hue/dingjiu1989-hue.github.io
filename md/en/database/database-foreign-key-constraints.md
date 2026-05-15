@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constrai
   
   
   
+  
+  
+  
+
+
+# Foreign Key Constraints: Referential Integrity in Practice
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Foreign key constraints enforce referential integrity between related tables. Th
   
   
   
+  
+  
+  
 
 
 ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ ON DELETE SET NULL sets the foreign key column to NULL when the parent is delete
   
   
   
+  
+  
+  
 
 
 ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default—it prevents accidental data loss.
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is 
   
   
   
+  
+  
+  
 
 
 Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Indexes on foreign key columns are essential. Without indexes, each write to the
   
   
   
+  
+  
+  
 
 
 ##  Practical Guidelines
 
+  
+  
+  
   
   
   

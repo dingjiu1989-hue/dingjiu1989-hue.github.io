@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/model-deployment.html
   
 
 
+# Model Deployment: vLLM, TGI, ONNX, Quantization, GPU Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Deploying large language models for production inference requires specialized in
   
   
   
+  
+  
+  
 
 
 ##  vLLM
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
   
   
   
+  
+  
+  
 
 
 # Using vLLM's OpenAI-compatible API server
 
+  
+  
+  
   
   
   
@@ -286,6 +330,9 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
   
   
   
+  
+  
+  
 
 
 # python -m vllm.entrypoints.openai.api_server \
@@ -312,36 +359,16 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
   
   
   
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--model meta-llama/Llama-3.1-8B-Instruct \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--tensor-parallel-size 2 \
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--model meta-llama/Llama-3.1-8B-Instruct \
 
+  
+  
+  
   
   
   
@@ -366,34 +393,11 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--gpu-memory-utilization 0.95 \
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--tensor-parallel-size 2 \
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-model-len 8192 \
-
   
   
   
@@ -418,8 +422,69 @@ vLLM is the most popular open-source LLM serving framework, featuring PagedAtten
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--dtype bfloat16
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--gpu-memory-utilization 0.95 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-model-len 8192 \
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--dtype bfloat16
+
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI(
 
+  
+  
+  
   
   
   
@@ -520,6 +591,9 @@ base_url="http://localhost:8000/v1",
   
   
   
+  
+  
+  
 
 
 api_key="token-not-needed",
@@ -546,10 +620,16 @@ api_key="token-not-needed",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ response = client.chat.completions.create(
   
   
   
+  
+  
+  
 
 
 model="meta-llama/Llama-3.1-8B-Instruct",
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ messages=[{"role": "user", "content": "What is vLLM?"}],
   
   
   
+  
+  
+  
 
 
 temperature=0.7,
 
+  
+  
+  
   
   
   
@@ -702,6 +794,9 @@ max_tokens=1024,
   
   
   
+  
+  
+  
 
 
 stream=True,
@@ -728,10 +823,16 @@ stream=True,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ for chunk in response:
   
   
   
+  
+  
+  
 
 
 if chunk.choices[0].delta.content:
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ print(chunk.choices[0].delta.content, end="")
   
   
   
+  
+  
+  
 
 
 vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fragmentation and enabling near-100% GPU memory utilization. It supports continuous batching, meaning new requests can start processing as soon as previous ones complete generation.
 
+  
+  
+  
   
   
   
@@ -884,6 +997,9 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
   
   
   
+  
+  
+  
 
 
 # Key vLLM performance flags
@@ -910,36 +1026,16 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-num-seqs 256 # Max concurrent sequences
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-num-batched-tokens 8192 # Tokens processed per batch
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-num-seqs 256 # Max concurrent sequences
 
+  
+  
+  
   
   
   
@@ -964,7 +1060,7 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--enable-chunked-prefill # Longer prompts handled efficiently
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--max-num-batched-tokens 8192 # Tokens processed per batch
 
   
   
@@ -988,10 +1084,45 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--enforce-eager # Disable CUDA graphs (saves memory)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--enable-chunked-prefill # Longer prompts handled efficiently
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--enforce-eager # Disable CUDA graphs (saves memory)
+
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ vLLM's PagedAttention manages the KV cache in fixed-size blocks, eliminating fra
   
   
   
+  
+  
+  
 
 
 Text Generation Inference (TGI) is Hugging Face's optimized serving solution:
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ Text Generation Inference (TGI) is Hugging Face's optimized serving solution:
   
   
   
+  
+  
+  
 
 
 version: "3.8"
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ services:
   
   
   
+  
+  
+  
 
 
 tgi:
 
+  
+  
+  
   
   
   
@@ -1196,6 +1345,9 @@ image: ghcr.io/huggingface/text-generation-inference:latest
   
   
   
+  
+  
+  
 
 
 environment:
@@ -1222,36 +1374,16 @@ environment:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MODEL_ID=mistralai/Mistral-7B-Instruct-v0.3
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- NUM_SHARD=2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MODEL_ID=mistralai/Mistral-7B-Instruct-v0.3
 
+  
+  
+  
   
   
   
@@ -1276,34 +1408,11 @@ environment:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MAX_INPUT_TOKENS=4096
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- NUM_SHARD=2
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MAX_TOTAL_TOKENS=8192
-
   
   
   
@@ -1328,8 +1437,69 @@ environment:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HF_TOKEN=${HF_TOKEN}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MAX_INPUT_TOKENS=4096
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- MAX_TOTAL_TOKENS=8192
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HF_TOKEN=${HF_TOKEN}
+
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8080:80"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8080:80"
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ volumes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ~/.cache/huggingface:/data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ~/.cache/huggingface:/data
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ deploy:
   
   
   
+  
+  
+  
 
 
 resources:
 
+  
+  
+  
   
   
   
@@ -1534,6 +1722,9 @@ reservations:
   
   
   
+  
+  
+  
 
 
 devices:
@@ -1560,10 +1751,16 @@ devices:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- driver: nvidia
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- driver: nvidia
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ count: 2
   
   
   
+  
+  
+  
 
 
 capabilities: [gpu]
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 response = requests.post(
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ response = requests.post(
   
   
   
+  
+  
+  
 
 
 json={
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ json={
   
   
   
+  
+  
+  
 
 
 "parameters": {
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ json={
   
   
   
+  
+  
+  
 
 
 "temperature": 0.7,
 
+  
+  
+  
   
   
   
@@ -1872,29 +2099,6 @@ json={
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1902,6 +2106,38 @@ json={
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1928,6 +2164,9 @@ json={
 
 )
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ print(response.json()["generated_text"])
   
   
   
+  
+  
+  
 
 
 TGI provides native support for tensor parallelism across GPUs, watermarking, and speculative decoding for faster generation.
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ TGI provides native support for tensor parallelism across GPUs, watermarking, an
   
   
   
+  
+  
+  
 
 
 ONNX Runtime enables deployment across GPU and CPU with hardware-specific optimizations:
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ import onnxruntime as ort
   
   
   
+  
+  
+  
 
 
 from transformers import AutoTokenizer, AutoConfig
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ import numpy as np
   
   
   
+  
+  
+  
 
 
 # Load ONNX-optimized model
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ session = ort.InferenceSession(
   
   
   
+  
+  
+  
 
 
 "model_optimized.onnx",
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ providers=["CUDAExecutionProvider", "CPUExecutionProvider"],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ tokenizer = AutoTokenizer.from_pretrained("model-name")
   
   
   
+  
+  
+  
 
 
 # Prepare inputs
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ inputs = tokenizer("Explain model quantization.", return_tensors="np")
   
   
   
+  
+  
+  
 
 
 onnx_inputs = {
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ onnx_inputs = {
   
   
   
+  
+  
+  
 
 
 "attention_mask": inputs["attention_mask"],
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ onnx_inputs = {
   
   
   
+  
+  
+  
 
 
 # Run inference
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ outputs = session.run(None, onnx_inputs)
   
   
   
+  
+  
+  
 
 
 ONNX models require an initial conversion step but benefit from aggressive graph optimizations and operator fusion.
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ ONNX models require an initial conversion step but benefit from aggressive graph
   
   
   
+  
+  
+  
 
 
 Quantization reduces model size and accelerates inference by using lower-precision numbers:
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
   
   
   
+  
+  
+  
 
 
 import torch
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ import torch
   
   
   
+  
+  
+  
 
 
 quant_config = BitsAndBytesConfig(
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ load_in_4bit=True,
   
   
   
+  
+  
+  
 
 
 bnb_4bit_compute_dtype=torch.bfloat16,
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ bnb_4bit_use_double_quant=True,
   
   
   
+  
+  
+  
 
 
 bnb_4bit_quant_type="nf4",
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ bnb_4bit_quant_type="nf4",
   
   
   
+  
+  
+  
 
 
 model = AutoModelForCausalLM.from_pretrained(
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ model = AutoModelForCausalLM.from_pretrained(
   
   
   
+  
+  
+  
 
 
 quantization_config=quant_config,
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ device_map="auto",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ device_map="auto",
   
   
   
+  
+  
+  
 
 
 |-----------|-----------|----------------|--------------|--------------|
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ device_map="auto",
   
   
   
+  
+  
+  
 
 
 | INT8 | 8-bit | 4x vs FP32 | 2-3x | Minimal |
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ device_map="auto",
   
   
   
+  
+  
+  
 
 
 | INT4 (AWQ) | 4-bit | 8x vs FP32 | 3-4x | Minor |
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ device_map="auto",
   
   
   
+  
+  
+  
 
 
 ##  GPU Optimization
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ Beyond framework choice, several techniques maximize GPU utilization:
   
   
   
+  
+  
+  
 
 
 # Flash Attention 2: memory-efficient attention
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ model = AutoModelForCausalLM.from_pretrained(
   
   
   
+  
+  
+  
 
 
 "model-name",
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ attn_implementation="flash_attention_2",
   
   
   
+  
+  
+  
 
 
 torch_dtype=torch.bfloat16,
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ torch_dtype=torch.bfloat16,
   
   
   
+  
+  
+  
 
 
 # Continuous batching: process multiple requests concurrently
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ torch_dtype=torch.bfloat16,
   
   
   
+  
+  
+  
 
 
 # Prefix caching: reuse KV cache for shared prompt prefixes
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ torch_dtype=torch.bfloat16,
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

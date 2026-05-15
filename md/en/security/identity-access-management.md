@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/security/identity-access-management.ht
   
   
   
+  
+  
+  
+
+
+# IAM: Identity and Access Management Fundamentals
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Identity and Access Management (IAM) controls who can access what resources under which conditions. It is the foundation of enterprise security.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Identity and Access Management (IAM) controls who can access what resources unde
   
   
   
+  
+  
+  
 
 
 Identity management handles user identity throughout the lifecycle: joiner (provision accounts and access), mover (update access as roles change), and leaver (deprovision accounts and revoke access). Identity lifecycle automation reduces both security risk and administrative overhead.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Authentication verifies identity. Methods include passwords (weakest, still most
   
   
   
+  
+  
+  
 
 
 Authorization determines what authenticated users can do. Role-Based Access Control (RBAC) assigns permissions to roles and roles to users. Attribute-Based Access Control (ABAC) considers user attributes, resource attributes, and environmental conditions.
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Authorization determines what authenticated users can do. Role-Based Access Cont
   
   
   
+  
+  
+  
 
 
 SSO reduces password fatigue and improves security. One strong authentication provides access to all connected applications. SAML 2.0 and OpenID Connect (OIDC) are the standard SSO protocols. OIDC is simpler and more modern, built on OAuth 2.0.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Identity providers (IdP) implement SSO: Azure AD, Okta, Keycloak, Auth0. Service
   
   
   
+  
+  
+  
 
 
 ##  Multi-Factor Authentication
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ MFA dramatically reduces account compromise risk. SMS codes are better than no M
   
   
   
+  
+  
+  
 
 
 Implement MFA for all users, not just administrators. Risk-based MFA prompts additional factors for high-risk actions. Enforce MFA for all third-party access. Provide backup MFA methods and account recovery processes.
 
+  
+  
+  
   
   
   
@@ -377,10 +436,16 @@ Implement MFA for all users, not just administrators. Risk-based MFA prompts add
   
   
   
+  
+  
+  
 
 
 JIT access grants elevated permissions temporarily. Users request access when needed, with automatic approval workflows. Access expires automatically after a defined period. JIT reduces the standing privilege attack surface.
 
+  
+  
+  
   
   
   
@@ -423,10 +488,16 @@ Implement JIT for administrative access, database access, and production systems
   
   
   
+  
+  
+  
 
 
 ##  Identity Governance
 
+  
+  
+  
   
   
   

@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/ai/mlops-pipeline.html
   
   
   
+  
+  
+  
+
+
+# MLOps Pipeline: From Training to Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 MLOps applies DevOps principles to machine learning. A robust MLOps pipeline automates the ML lifecycle from data preparation through production monitoring, ensuring reliable and reproducible model deployments.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ MLOps applies DevOps principles to machine learning. A robust MLOps pipeline aut
   
   
   
+  
+  
+  
 
 
 An MLOps pipeline includes: data ingestion (collect raw data), data validation (check schema, statistics, anomalies), feature engineering (transform raw data), model training (train with hyperparameter tuning), model evaluation (validate against test sets), model deployment (promote to production), and monitoring (track performance in production).
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Each stage produces artifacts that the next stage consumes. Artifact versioning 
   
   
   
+  
+  
+  
 
 
 ##  Data Validation
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Data quality determines model quality. Validate schema (column types, allowed va
   
   
   
+  
+  
+  
 
 
 Detect data drift (changes in input distribution) and concept drift (changes in target relationship). Monitor feature distributions over time. Set up alerts when drift exceeds thresholds. Data validation failures should block pipeline execution.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Detect data drift (changes in input distribution) and concept drift (changes in 
   
   
   
+  
+  
+  
 
 
 Track experiments systematically. MLflow tracks parameters, metrics, artifacts, and source code for each run. Weights & Biases provides rich experiment dashboards with hyperparameter visualization. Neptune adds team collaboration features.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Log every experiment detail: dataset version, preprocessing steps, model archite
   
   
   
+  
+  
+  
 
 
 ##  Model Registry
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ The model registry manages model versions across environments. Register models w
   
   
   
+  
+  
+  
 
 
 MLflow Model Registry, Hugging Face Hub, and Seldon Core provide model registry capabilities. Store model artifacts in blob storage (S3, GCS). Version models semantically or with commit hashes. Document model lineage: which training run produced which model version.
 
+  
+  
+  
   
   
   
@@ -491,6 +559,9 @@ MLflow Model Registry, Hugging Face Hub, and Seldon Core provide model registry 
   
   
   
+  
+  
+  
 
 
 Deploy models as REST APIs (FastAPI, BentoML), streaming services (Kafka, Flink), or batch jobs (Spark, Dataflow). Containerize models with Docker for consistent environments. Use A/B testing for production validation. Shadow deployment sends traffic to new models without affecting user-facing responses.
@@ -517,10 +588,16 @@ Deploy models as REST APIs (FastAPI, BentoML), streaming services (Kafka, Flink)
   
   
   
+  
+  
+  
 
 
 ##  Monitoring
 
+  
+  
+  
   
   
   

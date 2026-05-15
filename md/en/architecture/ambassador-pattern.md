@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ambassador-pattern.html
   
   
   
+  
+  
+  
+
+
+# Ambassador Pattern for Service Communication
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The ambassador pattern places a helper service between a client and a remote service to handle cross-cutting communication concerns. Unlike the sidecar pattern which runs as a local helper, the ambassador acts as a smart proxy that manages retries, circuit breaking, authentication, and protocol translation on behalf of the client.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ The ambassador pattern places a helper service between a client and a remote ser
   
   
   
+  
+  
+  
 
 
 The ambassador sits at the edge of a service boundary, intercepting all outbound communication. The client service connects to a local ambassador instance, which forwards requests to the target service. This indirection allows the ambassador to add capabilities that the client does not natively support.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ In Kubernetes environments, the ambassador is often deployed as a container in t
   
   
   
+  
+  
+  
 
 
 ##  When to Use the Ambassador Pattern
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Use the ambassador pattern when you need to integrate with legacy systems that s
   
   
   
+  
+  
+  
 
 
 The pattern is particularly valuable in migration scenarios. When moving from a monolith to microservices, an ambassador can route traffic to both old and new systems, enabling incremental migration without client changes.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ The pattern is particularly valuable in migration scenarios. When moving from a 
   
   
   
+  
+  
+  
 
 
 While both patterns deploy helper components alongside services, they serve different purposes. The sidecar focuses on inbound traffic and local concerns (logging, monitoring). The ambassador focuses on outbound traffic and remote concerns (routing, retries, protocol translation).
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ In practice, many implementations combine both patterns. A service mesh uses sid
   
   
   
+  
+  
+  
 
 
 ##  Implementation Considerations
 
+  
+  
+  
   
   
   

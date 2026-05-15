@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/github-actions-vs-gitlab-ci.ht
   
 
 
+# GitHub Actions vs GitLab CI: CI/CD Platforms Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  GitHub Actions vs GitLab CI: CI/CD Platform Comparison
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ CI/CD pipelines are essential for modern software delivery, and GitHub Actions a
   
   
   
+  
+  
+  
 
 
 ### Pipeline DSL and Configuration
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ GitHub Actions uses YAML with a workflow-centric model. Workflows are triggered 
   
   
   
+  
+  
+  
 
 
 GitLab CI uses YAML with a pipeline-centric model. The `.gitlab-ci.yml` defines stages (build, test, deploy), and jobs within each stage run in parallel. The `needs` keyword enables DAG-style pipeline optimization where jobs can start independently of stage ordering. GitLab's `include` keyword enables pipeline composition — breaking CI config into reusable templates stored in separate files or repositories.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ GitLab CI uses YAML with a pipeline-centric model. The `.gitlab-ci.yml` defines 
   
   
   
+  
+  
+  
 
 
 GitHub Actions provides cache actions (`actions/cache` and `actions/setup-*`) that store dependencies based on cache keys. The cache is automatically pruned using a least-recently-used policy with a 7-day retention. Cache size per repository is limited to 10GB on free plans. Artifacts support upload/download between jobs within the same workflow run.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ GitLab CI offers native cache configuration with `cache:` and `artifacts:` keywo
   
   
   
+  
+  
+  
 
 
 ### Runner Architecture
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ GitHub Actions offers hosted runners (Ubuntu, Windows, macOS) and self-hosted ru
   
   
   
+  
+  
+  
 
 
 GitLab CI provides shared runners (hosted by GitLab) and specific runners (registered per project or group). GitLab runners use a more flexible executor system: Shell, Docker, Docker Machine, Kubernetes, SSH, VirtualBox, and Parallels. The `tags` system enables precise runner assignment (e.g., `tags: [gpu, windows]`). Auto-scaling runner groups with Docker Machine or Kubernetes provide elastic capacity.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ GitLab CI provides shared runners (hosted by GitLab) and specific runners (regis
   
   
   
+  
+  
+  
 
 
 GitHub Actions free tier includes 2,000 minutes/month for public and private repositories. Paid plans increase minutes and concurrent jobs. macOS and Windows minutes are priced at a premium (10x and 2x respectively). Self-hosted runners have no per-minute cost.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ GitLab CI free tier on GitLab.com includes 400 compute minutes/month. The cost s
   
   
   
+  
+  
+  
 
 
 ### Integration Depth
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ GitHub Actions integrates seamlessly with the GitHub ecosystem: PR checks, issue
   
   
   
+  
+  
+  
 
 
 GitLab CI's advantage is that CI/CD is built into the platform rather than added on. This enables features like auto DevOps (automatic pipeline generation based on project analysis), review apps (ephemeral environments per branch), and comprehensive merge request integration with pipeline visualization.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ GitLab CI's advantage is that CI/CD is built into the platform rather than added
   
   
   
+  
+  
+  
 
 
 Choose GitHub Actions when already invested in GitHub for source control, when the actions marketplace provides needed functionality, or when GitHub-native integration (PR checks, deployment environments) is valuable.
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ Choose GitLab CI when requiring a single DevOps platform (source control + CI/CD
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

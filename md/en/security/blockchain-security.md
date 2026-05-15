@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/blockchain-security.html
   
 
 
+# Blockchain and Smart Contract Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Blockchain and smart contract security presents unique challenges. Once deployed, smart contracts are immutable. A vulnerability in a contract can result in millions of dollars in losses with no recourse. This article covers common smart contract vulnerabilities, auditing tools and techniques, formal verification, and wallet security.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Blockchain and smart contract security presents unique challenges. Once deployed
   
   
   
+  
+  
+  
 
 
 ### Reentrancy
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Reentrancy is the most infamous smart contract vulnerability. It occurs when a c
   
   
   
+  
+  
+  
 
 
 // VULNERABLE: Reentrancy
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ contract VulnerableWithdraw {
   
   
   
+  
+  
+  
 
 
 mapping(address => uint) public balances;
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ function withdraw(uint amount) public {
   
   
   
+  
+  
+  
 
 
 require(balances[msg.sender] >= amount);
 
+  
+  
+  
   
   
   
@@ -390,6 +446,9 @@ require(balances[msg.sender] >= amount);
   
   
   
+  
+  
+  
 
 
 (bool success, ) = msg.sender.call{value: amount}("");
@@ -416,10 +475,16 @@ require(balances[msg.sender] >= amount);
   
   
   
+  
+  
+  
 
 
 require(success, "Transfer failed");
 
+  
+  
+  
   
   
   
@@ -468,29 +533,6 @@ balances[msg.sender] -= amount; // TOO LATE
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -498,6 +540,38 @@ balances[msg.sender] -= amount; // TOO LATE
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ An attacker contract can exploit this by calling `withdraw` repeatedly from its 
   
   
   
+  
+  
+  
 
 
 **Prevention**:
 
+  
+  
+  
   
   
   
@@ -595,10 +675,16 @@ An attacker contract can exploit this by calling `withdraw` repeatedly from its 
   
   
   
+  
+  
+  
 
 
 * Use OpenZeppelin's ReentrancyGuard modifier.
 
+  
+  
+  
   
   
   
@@ -647,10 +733,16 @@ An attacker contract can exploit this by calling `withdraw` repeatedly from its 
   
   
   
+  
+  
+  
 
 
 contract SafeWithdraw {
 
+  
+  
+  
   
   
   
@@ -699,10 +791,16 @@ using ReentrancyGuard for *;
   
   
   
+  
+  
+  
 
 
 mapping(address => uint) public balances;
 
+  
+  
+  
   
   
   
@@ -751,10 +849,16 @@ function withdraw(uint amount) public nonReentrant {
   
   
   
+  
+  
+  
 
 
 require(balances[msg.sender] >= amount);
 
+  
+  
+  
   
   
   
@@ -803,10 +907,16 @@ balances[msg.sender] -= amount; // Update state first
   
   
   
+  
+  
+  
 
 
 (bool success, ) = msg.sender.call{value: amount}("");
 
+  
+  
+  
   
   
   
@@ -855,29 +965,6 @@ require(success, "Transfer failed");
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -885,6 +972,38 @@ require(success, "Transfer failed");
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -933,10 +1052,16 @@ require(success, "Transfer failed");
   
   
   
+  
+  
+  
 
 
 Smart contracts rely on oracles to bring off-chain data (price feeds, randomness) on-chain. If an oracle is manipulated, contracts depending on that data behave incorrectly.
 
+  
+  
+  
   
   
   
@@ -985,10 +1110,16 @@ Smart contracts rely on oracles to bring off-chain data (price feeds, randomness
   
   
   
+  
+  
+  
 
 
 **Prevention**:
 
+  
+  
+  
   
   
   
@@ -1034,6 +1165,9 @@ Smart contracts rely on oracles to bring off-chain data (price feeds, randomness
   
   
   
+  
+  
+  
 
 
 * Implement time-weighted average prices (TWAP) rather than spot prices.
@@ -1057,10 +1191,16 @@ Smart contracts rely on oracles to bring off-chain data (price feeds, randomness
   
   
   
+  
+  
+  
 
 
 * Add sanity checks and circuit breakers for price movements beyond normal ranges.
 
+  
+  
+  
   
   
   
@@ -1109,10 +1249,16 @@ Smart contracts rely on oracles to bring off-chain data (price feeds, randomness
   
   
   
+  
+  
+  
 
 
 contract SafePrice {
 
+  
+  
+  
   
   
   
@@ -1161,10 +1307,16 @@ AggregatorV3Interface internal priceFeed;
   
   
   
+  
+  
+  
 
 
 constructor() {
 
+  
+  
+  
   
   
   
@@ -1213,10 +1365,16 @@ priceFeed = AggregatorV3Interface(
   
   
   
+  
+  
+  
 
 
 0x... // Chainlink ETH/USD feed address
 
+  
+  
+  
   
   
   
@@ -1265,10 +1423,16 @@ priceFeed = AggregatorV3Interface(
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1317,10 +1481,16 @@ function getSafePrice() public view returns (uint) {
   
   
   
+  
+  
+  
 
 
 // Use historical data to prevent flash loan manipulation
 
+  
+  
+  
   
   
   
@@ -1369,10 +1539,16 @@ uint price1 = getRoundData(roundsAgo: 1);
   
   
   
+  
+  
+  
 
 
 uint price2 = getRoundData(roundsAgo: 2);
 
+  
+  
+  
   
   
   
@@ -1421,6 +1597,9 @@ uint price3 = getRoundData(roundsAgo: 3);
   
   
   
+  
+  
+  
 
 
 return (price1 + price2 + price3) / 3;
@@ -1447,29 +1626,6 @@ return (price1 + price2 + price3) / 3;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1477,6 +1633,38 @@ return (price1 + price2 + price3) / 3;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1525,10 +1713,16 @@ return (price1 + price2 + price3) / 3;
   
   
   
+  
+  
+  
 
 
 Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) bots monitor the mempool and submit transactions ahead of profitable trades.
 
+  
+  
+  
   
   
   
@@ -1577,10 +1771,16 @@ Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) 
   
   
   
+  
+  
+  
 
 
 * Use commit-reveal schemes where users commit to an action in one transaction and reveal details in another.
 
+  
+  
+  
   
   
   
@@ -1623,10 +1823,16 @@ Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) 
   
   
   
+  
+  
+  
 
 
 * Use private transaction relayers (Flashbots, MEV Blocker).
 
+  
+  
+  
   
   
   
@@ -1675,10 +1881,16 @@ Transactions in the mempool are visible to all. MEV (Maximal Extractable Value) 
   
   
   
+  
+  
+  
 
 
 While Solidity 0.8+ includes built-in overflow checking via `unchecked` blocks, older versions required SafeMath. Always use SafeMath or Solidity 0.8+ for arithmetic.
 
+  
+  
+  
   
   
   
@@ -1727,10 +1939,16 @@ While Solidity 0.8+ includes built-in overflow checking via `unchecked` blocks, 
   
   
   
+  
+  
+  
 
 
 uint256 max = type(uint256).max;
 
+  
+  
+  
   
   
   
@@ -1779,10 +1997,16 @@ uint256 result = max + 1; // Reverts
   
   
   
+  
+  
+  
 
 
 // Use unchecked only when you know bounds are safe
 
+  
+  
+  
   
   
   
@@ -1831,6 +2055,9 @@ unchecked {
   
   
   
+  
+  
+  
 
 
 uint256 result = max + 1; // Wraps around (use with caution)
@@ -1857,10 +2084,16 @@ uint256 result = max + 1; // Wraps around (use with caution)
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1909,10 +2142,16 @@ uint256 result = max + 1; // Wraps around (use with caution)
   
   
   
+  
+  
+  
 
 
 Improper access control allows unauthorized users to call privileged functions. The Parity multi-sig wallet hack (2017) lost 30 million dollars due to an unprotected `initWallet` function.
 
+  
+  
+  
   
   
   
@@ -1961,10 +2200,16 @@ Improper access control allows unauthorized users to call privileged functions. 
   
   
   
+  
+  
+  
 
 
 * Use OpenZeppelin's Ownable and AccessControl libraries.
 
+  
+  
+  
   
   
   
@@ -2007,6 +2252,9 @@ Improper access control allows unauthorized users to call privileged functions. 
   
   
   
+  
+  
+  
 
 
 * Follow the principle of least privilege for admin functions.
@@ -2030,10 +2278,16 @@ Improper access control allows unauthorized users to call privileged functions. 
   
   
   
+  
+  
+  
 
 
 * Use multi-signature wallets for privileged operations.
 
+  
+  
+  
   
   
   
@@ -2082,10 +2336,16 @@ Improper access control allows unauthorized users to call privileged functions. 
   
   
   
+  
+  
+  
 
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
+  
+  
+  
   
   
   
@@ -2134,10 +2394,16 @@ contract SecureContract is AccessControl {
   
   
   
+  
+  
+  
 
 
 bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
 
+  
+  
+  
   
   
   
@@ -2186,10 +2452,16 @@ bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
   
   
   
+  
+  
+  
 
 
 constructor() {
 
+  
+  
+  
   
   
   
@@ -2238,6 +2510,9 @@ _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
   
   
   
+  
+  
+  
 
 
 _grantRole(PAUSER_ROLE, msg.sender);
@@ -2264,10 +2539,16 @@ _grantRole(PAUSER_ROLE, msg.sender);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2316,6 +2597,9 @@ function pause() public onlyRole(PAUSER_ROLE) {
   
   
   
+  
+  
+  
 
 
 _pause();
@@ -2342,29 +2626,6 @@ _pause();
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2372,6 +2633,38 @@ _pause();
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2420,10 +2713,16 @@ _pause();
   
   
   
+  
+  
+  
 
 
 Auditing is the primary defense against smart contract vulnerabilities. A thorough audit combines automated scanning with manual review.
 
+  
+  
+  
   
   
   
@@ -2472,10 +2771,16 @@ Auditing is the primary defense against smart contract vulnerabilities. A thorou
   
   
   
+  
+  
+  
 
 
 * **Slither**: Static analysis framework for Solidity. Detects common vulnerabilities, generates contract inheritance graphs, and identifies dangerous patterns.
 
+  
+  
+  
   
   
   
@@ -2518,10 +2823,16 @@ Auditing is the primary defense against smart contract vulnerabilities. A thorou
   
   
   
+  
+  
+  
 
 
 * **Echidna**: Fuzzing tool that tests contract properties using random inputs.
 
+  
+  
+  
   
   
   
@@ -2570,10 +2881,16 @@ Auditing is the primary defense against smart contract vulnerabilities. A thorou
   
   
   
+  
+  
+  
 
 
 slither my_contract.sol --print human-summary
 
+  
+  
+  
   
   
   
@@ -2622,10 +2939,16 @@ slither my_contract.sol --print human-summary
   
   
   
+  
+  
+  
 
 
 slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth
 
+  
+  
+  
   
   
   
@@ -2674,10 +2997,16 @@ slither my_contract.sol --detect reentrancy-eth,reentrancy-no-eth
   
   
   
+  
+  
+  
 
 
 myth analyze my_contract.sol --solc-json solc.json
 
+  
+  
+  
   
   
   
@@ -2726,10 +3055,16 @@ myth analyze my_contract.sol --solc-json solc.json
   
   
   
+  
+  
+  
 
 
 Foundry is a modern Solidity testing framework that supports fuzz testing and invariant testing.
 
+  
+  
+  
   
   
   
@@ -2778,10 +3113,16 @@ Foundry is a modern Solidity testing framework that supports fuzz testing and in
   
   
   
+  
+  
+  
 
 
 contract TestToken is Test {
 
+  
+  
+  
   
   
   
@@ -2830,10 +3171,16 @@ Token token;
   
   
   
+  
+  
+  
 
 
 function setUp() public {
 
+  
+  
+  
   
   
   
@@ -2882,10 +3229,16 @@ token = new Token();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2934,10 +3287,16 @@ token = new Token();
   
   
   
+  
+  
+  
 
 
 function testTotalSupplyNeverDecreases(uint256 amount) public {
 
+  
+  
+  
   
   
   
@@ -2986,10 +3345,16 @@ uint256 before = token.totalSupply();
   
   
   
+  
+  
+  
 
 
 vm.assume(amount > 0 && amount < 1_000_000 ether);
 
+  
+  
+  
   
   
   
@@ -3038,10 +3403,16 @@ vm.prank(address(0xdead));
   
   
   
+  
+  
+  
 
 
 token.mint(amount);
 
+  
+  
+  
   
   
   
@@ -3090,29 +3461,6 @@ assertGe(token.totalSupply(), before);
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3120,6 +3468,38 @@ assertGe(token.totalSupply(), before);
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -3168,10 +3548,16 @@ assertGe(token.totalSupply(), before);
   
   
   
+  
+  
+  
 
 
 Automated tools catch common patterns but miss business logic flaws. Manual review is essential.
 
+  
+  
+  
   
   
   
@@ -3217,10 +3603,16 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
   
   
   
+  
+  
+  
 
 
 * **State consistency**: Are internal bookkeeping values consistent with actual token balances?
 
+  
+  
+  
   
   
   
@@ -3263,10 +3655,16 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
   
   
   
+  
+  
+  
 
 
 * **Upgradeability**: Can the admin arbitrarily steal funds via proxy upgrade?
 
+  
+  
+  
   
   
   
@@ -3309,10 +3707,16 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
   
   
   
+  
+  
+  
 
 
 * **Token handling**: Does the contract handle non-standard ERC-20 tokens (USDT, fee-on-transfer)?
 
+  
+  
+  
   
   
   
@@ -3361,10 +3765,16 @@ Automated tools catch common patterns but miss business logic flaws. Manual revi
   
   
   
+  
+  
+  
 
 
 Formal verification mathematically proves that a contract satisfies specified properties. It is the highest assurance level for smart contract security.
 
+  
+  
+  
   
   
   
@@ -3413,10 +3823,16 @@ Formal verification mathematically proves that a contract satisfies specified pr
   
   
   
+  
+  
+  
 
 
 * **Certora Prover**: Automated formal verification platform with property specification language.
 
+  
+  
+  
   
   
   
@@ -3459,10 +3875,16 @@ Formal verification mathematically proves that a contract satisfies specified pr
   
   
   
+  
+  
+  
 
 
 * **Halmos**: Symbolic testing tool for Foundry-compatible projects.
 
+  
+  
+  
   
   
   
@@ -3511,10 +3933,16 @@ Formal verification mathematically proves that a contract satisfies specified pr
   
   
   
+  
+  
+  
 
 
 rule total_supply_invariant() {
 
+  
+  
+  
   
   
   
@@ -3563,10 +3991,16 @@ uint256 supply_before = totalSupply();
   
   
   
+  
+  
+  
 
 
 // Any operation
 
+  
+  
+  
   
   
   
@@ -3615,10 +4049,16 @@ method f; env e;
   
   
   
+  
+  
+  
 
 
 calldataarg args;
 
+  
+  
+  
   
   
   
@@ -3667,10 +4107,16 @@ f(e, args);
   
   
   
+  
+  
+  
 
 
 uint256 supply_after = totalSupply();
 
+  
+  
+  
   
   
   
@@ -3719,6 +4165,9 @@ uint256 supply_after = totalSupply();
   
   
   
+  
+  
+  
 
 
 assert supply_after >= supply_before;
@@ -3745,10 +4194,16 @@ assert supply_after >= supply_before;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3797,10 +4252,16 @@ Formal verification is most valuable for high-value contracts (DeFi protocols, b
   
   
   
+  
+  
+  
 
 
 ##  Wallet Security
 
+  
+  
+  
   
   
   
@@ -3849,10 +4310,16 @@ User wallets are a major attack vector. Protecting wallet infrastructure is crit
   
   
   
+  
+  
+  
 
 
 ### Key Management
 
+  
+  
+  
   
   
   
@@ -3898,6 +4365,9 @@ User wallets are a major attack vector. Protecting wallet infrastructure is crit
   
   
   
+  
+  
+  
 
 
 * Use hardware security modules (HSMs) or cloud KMS for server-side keys.
@@ -3921,10 +4391,16 @@ User wallets are a major attack vector. Protecting wallet infrastructure is crit
   
   
   
+  
+  
+  
 
 
 * Implement multi-party computation (MPC) for distributed key management.
 
+  
+  
+  
   
   
   
@@ -3973,10 +4449,16 @@ User wallets are a major attack vector. Protecting wallet infrastructure is crit
   
   
   
+  
+  
+  
 
 
 Use typed data signing (EIP-712) to make signed data readable in wallets, reducing phishing risk.
 
+  
+  
+  
   
   
   
@@ -4025,10 +4507,16 @@ Use typed data signing (EIP-712) to make signed data readable in wallets, reduci
   
   
   
+  
+  
+  
 
 
 struct Permit {
 
+  
+  
+  
   
   
   
@@ -4077,10 +4565,16 @@ address owner;
   
   
   
+  
+  
+  
 
 
 address spender;
 
+  
+  
+  
   
   
   
@@ -4129,10 +4623,16 @@ uint256 value;
   
   
   
+  
+  
+  
 
 
 uint256 nonce;
 
+  
+  
+  
   
   
   
@@ -4181,10 +4681,16 @@ uint256 deadline;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4233,10 +4739,16 @@ bytes32 constant PERMIT_TYPEHASH = keccak256(
   
   
   
+  
+  
+  
 
 
 "Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)"
 
+  
+  
+  
   
   
   
@@ -4285,10 +4797,16 @@ bytes32 constant PERMIT_TYPEHASH = keccak256(
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

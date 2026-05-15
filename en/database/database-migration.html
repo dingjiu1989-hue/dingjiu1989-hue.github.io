@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-migration.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4058",
+      "wordCount": "4584",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-migration.html"},
-      "articleBody": "Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Why Database Migrations Matter Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. Migration Tools by Language | Language | Tool | Pros | |----------|------|------| | Python | Alembic (SQLAlchemy) | Auto-generation, async support | | Node.js | Knex.js | Transactional migrations, seed support | | Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem | | Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly | | Go | golang-migrate, Goose | No-dependency binaries | | Rust | Diesel | Type-safe, compile-time checking | Alembic (Python) Setup pip install alembic alembic init alembic alembic/env.py from myapp.models import Base target_metadata = Base.metadata Creating Migrations Auto-generate migration alembic revision --autogenerate -m \"add user roles table\" Apply migrations alembic upgrade head Rollback alembic downgrade -1 Migration File \"\"\"add user roles table Revision ID: abc123 Revises: def456 \"\"\" from alembic import op import sqlalchemy as sa def upgrade(): op.create_table( 'user_roles', sa.Column('id', sa.Integer(), nullable=False), sa.Column('user_id', sa.Integer(), nullable=False), sa.Column('role', sa.String(length=50), nullable=False), sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()), sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'), sa.PrimaryKeyConstraint('id') ) op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id']) def downgrade(): op.drop_index('ix_user_roles_user_id') op.drop_table('user_roles') Flyway (Java) Migration naming convention: V1__create_users.sql V2__add_email_column.sql V3__create_orders_table.sql Apply migrations flyway migrate Check status flyway info Repair checksums flyway repair \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V3__create_orders_table.sql CREATE TABLE orders ( id BIGSERIAL PRIMARY KEY, user_id BIGINT NOT NULL REFERENCES users(id), total DECIMAL(10,2) NOT NULL, status VARCHAR(20) NOT NULL DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() ); CREATE INDEX idx_orders_user_id ON orders(user_id); Strategies for Complex Migrations Expand-Contract Pattern (Zero Downtime) For making backward-incompatible changes without downtime: **Phase 1: Expand** \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add new column alongside old one ALTER TABLE users ADD COLUMN email_new VARCHAR(255); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Start writing to both columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows UPDATE users SET email_new = email WHERE email_new IS NULL; **Phase 2: Migrate** Application reads from new column, still writes to both Deploy application update **Phase 3: Contract** \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column ALTER TABLE users DROP COLUMN email; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or rename ALTER TABLE users RENAME COLUMN email TO email_old; Batch Migrations for Large Tables \"\"\"migrate large table in batches\"\"\" from sqlalchemy import text def upgrade(): batch_size = 10000 offset = 0 while True: result = op.execute( text(\"\"\" UPDATE users SET email_lower = LOWER(email) WHERE id IN ( SELECT id FROM users WHERE email_lower IS NULL ORDER BY id LIMIT :batch_size ) RETURNING id \"\"\"), {'batch_size': batch_size} ) if result.rowcount == 0: break offset += batch_size print(f\"Updated {offset} rows...\") Online Schema Change (pt-online-schema-change) For MySQL without downtime pt-online-schema-change \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter \"ADD COLUMN email VARCHAR(255)\" \\ D=database,t=users \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--execute Migration Best Practices Always Have a Rollback Every migration must have a tested downgrade path: def upgrade(): op.add_column('users', sa.Column('email', sa.String(255))) def downgrade(): op.drop_column('users', 'email') Test Migrations Test upgrade and downgrade alembic upgrade head alembic downgrade base alembic upgrade head CI/CD Integration .github/workflows/migrate.yml jobs: migrate: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run migrations env: DATABASE_URL: ${{ secrets.DATABASE_URL }} run: | alembic upgrade head \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Verify schema run: | alembic check # Detect schema drift Common Mistakes | Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | Summary Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/database-migration-tools-and-strategies-4jo4"
+      ],
+      "articleBody": "Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Database Migration Tools and Strategies Why Database Migrations Matter Database migrations are how you version-control your schema changes. Without a migration system, schema changes are applied manually, untracked, and unrepeatable. Migrations ensure that every environment (dev, staging, production) has the same schema, changes are auditable, and rollbacks are possible. Migration Tools by Language | Language | Tool | Pros | |----------|------|------| | Python | Alembic (SQLAlchemy) | Auto-generation, async support | | Node.js | Knex.js | Transactional migrations, seed support | | Ruby | ActiveRecord Migrations | Simple DSL, mature ecosystem | | Java | Flyway, Liquibase | Repeatable migrations, CI/CD friendly | | Go | golang-migrate, Goose | No-dependency binaries | | Rust | Diesel | Type-safe, compile-time checking | Alembic (Python) Setup pip install alembic alembic init alembic alembic/env.py from myapp.models import Base target_metadata = Base.metadata Creating Migrations Auto-generate migration alembic revision --autogenerate -m \"add user roles table\" Apply migrations alembic upgrade head Rollback alembic downgrade -1 Migration File \"\"\"add user roles table Revision ID: abc123 Revises: def456 \"\"\" from alembic import op import sqlalchemy as sa def upgrade(): op.create_table( 'user_roles', sa.Column('id', sa.Integer(), nullable=False), sa.Column('user_id', sa.Integer(), nullable=False), sa.Column('role', sa.String(length=50), nullable=False), sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()), sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'), sa.PrimaryKeyConstraint('id') ) op.create_index('ix_user_roles_user_id', 'user_roles', ['user_id']) def downgrade(): op.drop_index('ix_user_roles_user_id') op.drop_table('user_roles') Flyway (Java) Migration naming convention: V1__create_users.sql V2__add_email_column.sql V3__create_orders_table.sql Apply migrations flyway migrate Check status flyway info Repair checksums flyway repair \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql ALTER TABLE users ADD COLUMN email VARCHAR(255) UNIQUE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V3__create_orders_table.sql CREATE TABLE orders ( id BIGSERIAL PRIMARY KEY, user_id BIGINT NOT NULL REFERENCES users(id), total DECIMAL(10,2) NOT NULL, status VARCHAR(20) NOT NULL DEFAULT 'pending', created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() ); CREATE INDEX idx_orders_user_id ON orders(user_id); Strategies for Complex Migrations Expand-Contract Pattern (Zero Downtime) For making backward-incompatible changes without downtime: **Phase 1: Expand** \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add new column alongside old one ALTER TABLE users ADD COLUMN email_new VARCHAR(255); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Start writing to both columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows UPDATE users SET email_new = email WHERE email_new IS NULL; **Phase 2: Migrate** Application reads from new column, still writes to both Deploy application update **Phase 3: Contract** \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column ALTER TABLE users DROP COLUMN email; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or rename ALTER TABLE users RENAME COLUMN email TO email_old; Batch Migrations for Large Tables \"\"\"migrate large table in batches\"\"\" from sqlalchemy import text def upgrade(): batch_size = 10000 offset = 0 while True: result = op.execute( text(\"\"\" UPDATE users SET email_lower = LOWER(email) WHERE id IN ( SELECT id FROM users WHERE email_lower IS NULL ORDER BY id LIMIT :batch_size ) RETURNING id \"\"\"), {'batch_size': batch_size} ) if result.rowcount == 0: break offset += batch_size print(f\"Updated {offset} rows...\") Online Schema Change (pt-online-schema-change) For MySQL without downtime pt-online-schema-change \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter \"ADD COLUMN email VARCHAR(255)\" \\ D=database,t=users \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--execute Migration Best Practices Always Have a Rollback Every migration must have a tested downgrade path: def upgrade(): op.add_column('users', sa.Column('email', sa.String(255))) def downgrade(): op.drop_column('users', 'email') Test Migrations Test upgrade and downgrade alembic upgrade head alembic downgrade base alembic upgrade head CI/CD Integration .github/workflows/migrate.yml jobs: migrate: runs-on: ubuntu-latest steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run migrations env: DATABASE_URL: ${{ secrets.DATABASE_URL }} run: | alembic upgrade head \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Verify schema run: | alembic check # Detect schema drift Common Mistakes | Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | Summary Database migrations bring the same version control discipline to schema changes that Git brings to code. Use tools like Alembic or Flyway, always write reversible migrations with upgrade and downgrade paths, adopt the expand-contract pattern for zero-downtime changes, batch large table modifications, and integrate migrations into your CI/CD pipeline. Test every migration against a copy of production data before deploying to production."
     }
     </script>
     <script type="application/ld+json">
@@ -152,7 +155,33 @@
 <br>
 <br>
 <br>
+<h1>Database Migration Tools and Strategies</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Database Migrations Matter </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -186,7 +215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Migration Tools by Language </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -220,6 +255,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Alembic (Python) </p>
 <br>
 <br>
@@ -237,7 +275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Setup </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -277,7 +321,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic init alembic</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -317,7 +367,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from myapp.models import Base</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -357,7 +413,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Creating Migrations </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -397,7 +459,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic revision --autogenerate -m "add user roles table"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -437,7 +505,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic upgrade head</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -477,7 +551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic downgrade -1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -517,7 +597,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""add user roles table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -557,7 +643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Revises: def456</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -597,7 +689,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from alembic import op</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -637,7 +735,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def upgrade():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -677,7 +781,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'user_roles',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -717,7 +827,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sa.Column('user_id', sa.Integer(), nullable=False),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -757,7 +873,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sa.Column('created_at', sa.DateTime(), server_default=sa.func.now()),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -797,6 +919,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sa.PrimaryKeyConstraint('id')</p>
 <br>
 <br>
@@ -817,7 +942,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -857,7 +988,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def downgrade():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -897,7 +1034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>op.drop_table('user_roles')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -937,7 +1080,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Migration naming convention:</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -977,7 +1126,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>V2__add_email_column.sql</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Apply migrations</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1057,7 +1218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check status</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1097,7 +1264,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Repair checksums</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1137,7 +1310,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V2__add_email_column.sql</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1177,7 +1356,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V3__create_orders_table.sql</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- V3__create_orders_table.sql</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1217,7 +1402,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1257,7 +1448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>total DECIMAL(10,2) NOT NULL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1297,7 +1494,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1337,7 +1540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE INDEX idx_orders_user_id ON orders(user_id);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1374,6 +1583,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Expand-Contract Pattern (Zero Downtime) </p>
 <br>
 <br>
@@ -1391,7 +1603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For making backward-incompatible changes without downtime: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1428,7 +1646,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add new column alongside old one</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add new column alongside old one</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1468,7 +1692,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Start writing to both columns</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Start writing to both columns</p>
 <br>
 <br>
 <br>
@@ -1488,7 +1715,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Backfill existing rows</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1528,7 +1761,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Phase 2: Migrate** </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1568,7 +1807,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Deploy application update</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1608,7 +1853,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Stop writing to old column</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1648,7 +1899,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or rename</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or rename</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1688,7 +1945,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch Migrations for Large Tables </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1728,6 +1991,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from sqlalchemy import text</p>
 <br>
 <br>
@@ -1748,7 +2014,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def upgrade():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1788,7 +2060,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>offset = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1828,7 +2106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = op.execute(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1868,7 +2152,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UPDATE users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1908,7 +2198,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE id IN (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1948,7 +2244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE email_lower IS NULL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1988,6 +2290,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LIMIT :batch_size</p>
 <br>
 <br>
@@ -2008,7 +2313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2048,7 +2359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2088,7 +2405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2128,7 +2451,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>break</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2168,7 +2497,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Updated {offset} rows...")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2208,7 +2543,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>For MySQL without downtime</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2248,7 +2589,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--alter "ADD COLUMN email VARCHAR(255)" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2288,7 +2635,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--execute</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--execute</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2325,6 +2678,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Always Have a Rollback </p>
 <br>
 <br>
@@ -2342,7 +2698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Every migration must have a tested downgrade path: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2382,7 +2744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>op.add_column('users', sa.Column('email', sa.String(255)))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2422,7 +2790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>op.drop_column('users', 'email')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2462,6 +2836,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Test upgrade and downgrade</h1>
 <br>
 <br>
@@ -2482,7 +2859,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic upgrade head</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2522,7 +2905,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic upgrade head</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2562,7 +2951,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>.github/workflows/migrate.yml</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2602,7 +2997,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>migrate:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2642,6 +3043,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>steps:</p>
 <br>
 <br>
@@ -2662,7 +3066,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4</p>
 <br>
 <br>
 <br>
@@ -2682,7 +3089,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run migrations</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run migrations</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2722,6 +3135,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DATABASE_URL: ${{ secrets.DATABASE_URL }}</p>
 <br>
 <br>
@@ -2742,7 +3158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>run: |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2782,7 +3204,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Verify schema</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Verify schema</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2822,7 +3250,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>alembic check # Detect schema drift</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2859,6 +3293,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Mistake | Consequence | Prevention | |---------|-------------|------------| | No rollback plan | Cannot undo failed migration | Always write downgrade | | Long-running locks | Table locked, queries fail | Use batch/online migrations | | Missing default values | NULL violations in existing rows | Add with default or nullable first | | Schema drift | Environments out of sync | Automate migrations, check in CI | | No data migration | New columns are empty | Backfill after schema change | </p>
 <br>
 <br>
@@ -2876,7 +3313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

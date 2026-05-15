@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html
   
 
 
+# Kubernetes Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Kubernetes Security Challenges 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Kubernetes introduces a large attack surface: the API server, etcd, kubelets, an
   
   
   
+  
+  
+  
 
 
 RBAC Configuration 
@@ -164,10 +196,16 @@ RBAC Configuration
   
   
   
+  
+  
+  
 
 
 Implement least-privilege RBAC: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ apiVersion: rbac.authorization.k8s.io/v1
   
   
   
+  
+  
+  
 
 
 kind: Role
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ metadata:
   
   
   
+  
+  
+  
 
 
 namespace: development
 
+  
+  
+  
   
   
   
@@ -302,6 +352,9 @@ name: pod-reader
   
   
   
+  
+  
+  
 
 
 rules:
@@ -325,10 +378,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [""]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [""]
 
+  
+  
+  
   
   
   
@@ -371,6 +430,9 @@ resources: ["pods", "pods/log"]
   
   
   
+  
+  
+  
 
 
 verbs: ["get", "watch", "list"]
@@ -394,10 +456,16 @@ verbs: ["get", "watch", "list"]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
   
   
   
@@ -421,6 +489,9 @@ verbs: ["get", "watch", "list"]
 
 apiVersion: rbac.authorization.k8s.io/v1
 
+  
+  
+  
   
   
   
@@ -463,6 +534,9 @@ kind: RoleBinding
   
   
   
+  
+  
+  
 
 
 metadata:
@@ -486,10 +560,16 @@ metadata:
   
   
   
+  
+  
+  
 
 
 namespace: development
 
+  
+  
+  
   
   
   
@@ -532,6 +612,9 @@ name: read-pods
   
   
   
+  
+  
+  
 
 
 subjects:
@@ -555,10 +638,16 @@ subjects:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount
 
+  
+  
+  
   
   
   
@@ -601,10 +690,16 @@ name: developer-sa
   
   
   
+  
+  
+  
 
 
 namespace: development
 
+  
+  
+  
   
   
   
@@ -647,10 +742,16 @@ roleRef:
   
   
   
+  
+  
+  
 
 
 kind: Role
 
+  
+  
+  
   
   
   
@@ -693,10 +794,16 @@ name: pod-reader
   
   
   
+  
+  
+  
 
 
 apiGroup: rbac.authorization.k8s.io
 
+  
+  
+  
   
   
   
@@ -739,10 +846,16 @@ ClusterRole for cluster-wide resources:
   
   
   
+  
+  
+  
 
 
 apiVersion: rbac.authorization.k8s.io/v1
 
+  
+  
+  
   
   
   
@@ -785,10 +898,16 @@ kind: ClusterRole
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -831,6 +950,9 @@ name: metrics-reader
   
   
   
+  
+  
+  
 
 
 rules:
@@ -854,10 +976,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: ["/metrics"]
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: ["/metrics"]
 
+  
+  
+  
   
   
   
@@ -900,6 +1028,9 @@ verbs: ["get"]
   
   
   
+  
+  
+  
 
 
 Pod Security Standards 
@@ -920,10 +1051,16 @@ Pod Security Standards
   
   
   
+  
+  
+  
 
 
 Enforce Pod Security Standards with admission controllers: 
 
+  
+  
+  
   
   
   
@@ -966,10 +1103,16 @@ Enforce Pod Security Standards with admission controllers:
   
   
   
+  
+  
+  
 
 
 apiVersion: pods-security.admission.config.k8s.io/v1
 
+  
+  
+  
   
   
   
@@ -1012,10 +1155,16 @@ kind: PodSecurityConfiguration
   
   
   
+  
+  
+  
 
 
 defaults:
 
+  
+  
+  
   
   
   
@@ -1058,10 +1207,16 @@ enforce: "restricted"
   
   
   
+  
+  
+  
 
 
 enforce-version: "latest"
 
+  
+  
+  
   
   
   
@@ -1104,10 +1259,16 @@ audit: "restricted"
   
   
   
+  
+  
+  
 
 
 audit-version: "latest"
 
+  
+  
+  
   
   
   
@@ -1150,10 +1311,16 @@ warn: "restricted"
   
   
   
+  
+  
+  
 
 
 warn-version: "latest"
 
+  
+  
+  
   
   
   
@@ -1196,10 +1363,16 @@ exemptions:
   
   
   
+  
+  
+  
 
 
 namespaces: ["kube-system", "kube-public"]
 
+  
+  
+  
   
   
   
@@ -1242,10 +1415,16 @@ namespaces: ["kube-system", "kube-public"]
   
   
   
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
   
   
   
@@ -1288,10 +1467,16 @@ kind: Pod
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ name: secure-pod
   
   
   
+  
+  
+  
 
 
 labels:
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ pod-security.kubernetes.io/enforce: restricted
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1426,10 +1623,16 @@ securityContext:
   
   
   
+  
+  
+  
 
 
 runAsNonRoot: true
 
+  
+  
+  
   
   
   
@@ -1472,10 +1675,16 @@ seccompProfile:
   
   
   
+  
+  
+  
 
 
 type: RuntimeDefault
 
+  
+  
+  
   
   
   
@@ -1518,10 +1727,16 @@ containers:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app
 
+  
+  
+  
   
   
   
@@ -1564,10 +1779,16 @@ image: myapp:latest
   
   
   
+  
+  
+  
 
 
 securityContext:
 
+  
+  
+  
   
   
   
@@ -1610,10 +1831,16 @@ allowPrivilegeEscalation: false
   
   
   
+  
+  
+  
 
 
 capabilities:
 
+  
+  
+  
   
   
   
@@ -1656,10 +1883,16 @@ drop: ["ALL"]
   
   
   
+  
+  
+  
 
 
 readOnlyRootFilesystem: true
 
+  
+  
+  
   
   
   
@@ -1702,10 +1935,16 @@ runAsNonRoot: true
   
   
   
+  
+  
+  
 
 
 runAsUser: 1000
 
+  
+  
+  
   
   
   
@@ -1745,10 +1984,16 @@ Network Policies
   
   
   
+  
+  
+  
 
 
 Isolate workloads with network policies: 
 
+  
+  
+  
   
   
   
@@ -1791,10 +2036,16 @@ apiVersion: networking.k8s.io/v1
   
   
   
+  
+  
+  
 
 
 kind: NetworkPolicy
 
+  
+  
+  
   
   
   
@@ -1837,10 +2088,16 @@ metadata:
   
   
   
+  
+  
+  
 
 
 name: api-network-policy
 
+  
+  
+  
   
   
   
@@ -1883,10 +2140,16 @@ namespace: production
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1929,10 +2192,16 @@ podSelector:
   
   
   
+  
+  
+  
 
 
 matchLabels:
 
+  
+  
+  
   
   
   
@@ -1975,6 +2244,9 @@ app: api
   
   
   
+  
+  
+  
 
 
 policyTypes:
@@ -1998,33 +2270,42 @@ policyTypes:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress
+
+  
+  
+  
   
   
   
@@ -2067,33 +2348,42 @@ ingress:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector:
+
+  
+  
+  
   
   
   
@@ -2117,6 +2407,9 @@ ingress:
 
 matchLabels:
 
+  
+  
+  
   
   
   
@@ -2159,6 +2452,9 @@ name: frontend
   
   
   
+  
+  
+  
 
 
 ports:
@@ -2182,10 +2478,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP
 
+  
+  
+  
   
   
   
@@ -2228,6 +2530,9 @@ port: 8080
   
   
   
+  
+  
+  
 
 
 egress:
@@ -2251,33 +2556,42 @@ egress:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector:
+
+  
+  
+  
   
   
   
@@ -2320,10 +2634,16 @@ matchLabels:
   
   
   
+  
+  
+  
 
 
 app: database
 
+  
+  
+  
   
   
   
@@ -2366,10 +2686,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP
 
+  
+  
+  
   
   
   
@@ -2412,6 +2738,9 @@ port: 5432
   
   
   
+  
+  
+  
 
 
 Audit Logging 
@@ -2432,10 +2761,16 @@ Audit Logging
   
   
   
+  
+  
+  
 
 
 Enable and monitor audit logs: 
 
+  
+  
+  
   
   
   
@@ -2478,10 +2813,16 @@ Enable and monitor audit logs:
   
   
   
+  
+  
+  
 
 
 apiVersion: audit.k8s.io/v1
 
+  
+  
+  
   
   
   
@@ -2524,6 +2865,9 @@ kind: Policy
   
   
   
+  
+  
+  
 
 
 rules:
@@ -2547,10 +2891,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse
 
+  
+  
+  
   
   
   
@@ -2593,6 +2943,9 @@ users: ["system:admin"]
   
   
   
+  
+  
+  
 
 
 resources:
@@ -2616,10 +2969,16 @@ resources:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: ""
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: ""
 
+  
+  
+  
   
   
   
@@ -2662,10 +3021,16 @@ resources: ["secrets", "configmaps"]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata
 
+  
+  
+  
   
   
   
@@ -2708,10 +3073,16 @@ verbs: ["create", "delete", "patch", "update"]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None
 
+  
+  
+  
   
   
   
@@ -2754,6 +3125,9 @@ users: ["system:kube-proxy"]
   
   
   
+  
+  
+  
 
 
 verbs: ["watch"]
@@ -2777,10 +3151,16 @@ verbs: ["watch"]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None
 
+  
+  
+  
   
   
   
@@ -2823,10 +3203,16 @@ requestSources: ["controller"]
   
   
   
+  
+  
+  
 
 
 # Audit log analyzer
 
+  
+  
+  
   
   
   
@@ -2869,10 +3255,16 @@ import json
   
   
   
+  
+  
+  
 
 
 from collections import Counter
 
+  
+  
+  
   
   
   
@@ -2915,10 +3307,16 @@ def analyze_audit_logs(log_lines):
   
   
   
+  
+  
+  
 
 
 suspicious_activities = []
 
+  
+  
+  
   
   
   
@@ -2961,10 +3359,16 @@ for line in log_lines:
   
   
   
+  
+  
+  
 
 
 event = json.loads(line)
 
+  
+  
+  
   
   
   
@@ -3007,10 +3411,16 @@ event = json.loads(line)
   
   
   
+  
+  
+  
 
 
 if event.get("objectRef", {}).get("resource") == "secrets":
 
+  
+  
+  
   
   
   
@@ -3053,10 +3463,16 @@ if event.get("verb") in ["get", "list"]:
   
   
   
+  
+  
+  
 
 
 suspicious_activities.append({
 
+  
+  
+  
   
   
   
@@ -3099,10 +3515,16 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 "user": event.get("user", {}).get("username"),
 
+  
+  
+  
   
   
   
@@ -3145,10 +3567,16 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -3191,10 +3619,16 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":
 
+  
+  
+  
   
   
   
@@ -3237,10 +3671,16 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 "type": "rbac_change",
 
+  
+  
+  
   
   
   
@@ -3283,10 +3723,16 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 "verb": event.get("verb")
 
+  
+  
+  
   
   
   
@@ -3329,6 +3775,9 @@ suspicious_activities.append({
   
   
   
+  
+  
+  
 
 
 return Counter(str(a) for a in suspicious_activities)
@@ -3352,10 +3801,16 @@ return Counter(str(a) for a in suspicious_activities)
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

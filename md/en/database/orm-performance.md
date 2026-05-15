@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/orm-performance.html
   
 
 
+# ORM Performance
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ORM Performance Challenges 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Object-Relational Mappers (ORMs) simplify database access but introduce performa
   
   
   
+  
+  
+  
 
 
 The N+1 Query Problem 
@@ -164,10 +196,16 @@ The N+1 Query Problem
   
   
   
+  
+  
+  
 
 
 The most common ORM performance issue: 
 
+  
+  
+  
   
   
   
@@ -210,6 +248,9 @@ The most common ORM performance issue:
   
   
   
+  
+  
+  
 
 
 users = User.query.all()
@@ -233,10 +274,16 @@ users = User.query.all()
   
   
   
+  
+  
+  
 
 
 for user in users:
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ orders = user.orders # Triggers a query per user!
   
   
   
+  
+  
+  
 
 
 print(len(orders))
 
+  
+  
+  
   
   
   
@@ -325,10 +378,16 @@ print(len(orders))
   
   
   
+  
+  
+  
 
 
 # Solution: 2 queries total
 
+  
+  
+  
   
   
   
@@ -371,10 +430,16 @@ users = User.query.options(joinedload(User.orders)).all()
   
   
   
+  
+  
+  
 
 
 for user in users:
 
+  
+  
+  
   
   
   
@@ -417,10 +482,16 @@ orders = user.orders # Already loaded
   
   
   
+  
+  
+  
 
 
 print(len(orders))
 
+  
+  
+  
   
   
   
@@ -460,10 +531,16 @@ Lazy Loading
   
   
   
+  
+  
+  
 
 
 Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1: 
 
+  
+  
+  
   
   
   
@@ -506,10 +583,16 @@ Lazy loading defers data loading until accessed. It reduces initial query cost b
   
   
   
+  
+  
+  
 
 
 class User(Base):
 
+  
+  
+  
   
   
   
@@ -552,10 +635,16 @@ __tablename__ = 'users'
   
   
   
+  
+  
+  
 
 
 id = Column(Integer, primary_key=True)
 
+  
+  
+  
   
   
   
@@ -598,6 +687,9 @@ orders = relationship("Order", lazy="selectin") # Eager load
   
   
   
+  
+  
+  
 
 
 | Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters | 
@@ -618,10 +710,16 @@ orders = relationship("Order", lazy="selectin") # Eager load
   
   
   
+  
+  
+  
 
 
 Query Optimization 
 
+  
+  
+  
   
   
   
@@ -664,10 +762,16 @@ Query Optimization
   
   
   
+  
+  
+  
 
 
 users = session.query(User).all()
 
+  
+  
+  
   
   
   
@@ -710,10 +814,16 @@ emails = [u.email for u in users]
   
   
   
+  
+  
+  
 
 
 # GOOD: Fetch only needed columns
 
+  
+  
+  
   
   
   
@@ -756,10 +866,16 @@ emails = session.query(User.email).all()
   
   
   
+  
+  
+  
 
 
 # BAD: Loading entire objects
 
+  
+  
+  
   
   
   
@@ -802,10 +918,16 @@ users = User.query.filter(User.status == 'active').all()
   
   
   
+  
+  
+  
 
 
 for u in users:
 
+  
+  
+  
   
   
   
@@ -848,10 +970,16 @@ u.last_login = datetime.utcnow()
   
   
   
+  
+  
+  
 
 
 # GOOD: Bulk update
 
+  
+  
+  
   
   
   
@@ -894,10 +1022,16 @@ User.query.filter(User.status == 'active').update(
   
   
   
+  
+  
+  
 
 
 {"last_login": datetime.utcnow()}
 
+  
+  
+  
   
   
   
@@ -940,6 +1074,9 @@ User.query.filter(User.status == 'active').update(
   
   
   
+  
+  
+  
 
 
 Understanding Generated SQL 
@@ -960,10 +1097,16 @@ Understanding Generated SQL
   
   
   
+  
+  
+  
 
 
 Always check the SQL your ORM generates: 
 
+  
+  
+  
   
   
   
@@ -1006,10 +1149,16 @@ Always check the SQL your ORM generates:
   
   
   
+  
+  
+  
 
 
 query = session.query(User).filter(User.email == 'alice@example.com')
 
+  
+  
+  
   
   
   
@@ -1052,10 +1201,16 @@ print(str(query))
   
   
   
+  
+  
+  
 
 
 # SELECT users.id, users.email, users.name FROM users WHERE users.email = ?
 
+  
+  
+  
   
   
   
@@ -1098,10 +1253,16 @@ Batch Operations
   
   
   
+  
+  
+  
 
 
 # BAD: Individual inserts
 
+  
+  
+  
   
   
   
@@ -1144,10 +1305,16 @@ for user in users:
   
   
   
+  
+  
+  
 
 
 session.add(user)
 
+  
+  
+  
   
   
   
@@ -1190,10 +1357,16 @@ session.commit() # N individual INSERTs
   
   
   
+  
+  
+  
 
 
 # GOOD: Bulk insert
 
+  
+  
+  
   
   
   
@@ -1236,6 +1409,9 @@ session.bulk_insert_mappings(User, [u.__dict__ for u in users])
   
   
   
+  
+  
+  
 
 
 session.commit() # Single batch INSERT
@@ -1259,10 +1435,16 @@ session.commit() # Single batch INSERT
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

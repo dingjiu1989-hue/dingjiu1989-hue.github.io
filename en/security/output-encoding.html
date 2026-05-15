@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/output-encoding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1077",
+      "wordCount": "1176",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/output-encoding.html"},
-      "articleBody": "Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding: Cross-Site Scripting (XSS) Prevention Guide Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks. Why Encoding Matters XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits `` as their username expects the browser to execute that script. Output encoding converts `` to `>`, rendering the attack inert \u2014 the browser displays the text literally instead of executing it. Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers. HTML Body Context Data inserted between HTML tags needs HTML entity encoding. The critical characters are ``, `&`, `\"`, and `'`. Most frameworks handle this automatically through template engines. import html safe_output = html.escape(user_input) \"\" becomes \"\" Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason. HTML Attribute Context Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous \u2014 avoid them entirely. def encode_html_attribute(value): value = value.replace('&', '&') value = value.replace('\"', '\"') value = value.replace(\"'\", ''') value = value.replace(' value = value.replace('>', '>') value = value.replace('/', '/') value = value.replace('`', '`') return value Always quote HTML attributes. Never construct HTML by concatenating strings \u2014 use the DOM API or a template engine. JavaScript Context Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `"
+      "articleBody": "Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding Output Encoding: Cross-Site Scripting (XSS) Prevention Guide Output encoding is the strongest defense against Cross-Site Scripting (XSS). It transforms untrusted data into a safe representation before inserting it into an HTML page. When done correctly for each output context, it neutralizes even sophisticated injection attacks. Why Encoding Matters XSS happens when user-controlled data is inserted into a web page without proper encoding. An attacker who submits `` as their username expects the browser to execute that script. Output encoding converts `` to `>`, rendering the attack inert \u2014 the browser displays the text literally instead of executing it. Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers. HTML Body Context Data inserted between HTML tags needs HTML entity encoding. The critical characters are ``, `&`, `\"`, and `'`. Most frameworks handle this automatically through template engines. import html safe_output = html.escape(user_input) \"\" becomes \"\" Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This handles 80% of encoding needs. Verify that auto-escaping is enabled and never disable it without a documented reason. HTML Attribute Context Attribute encoding is stricter than body encoding. In addition to the standard entities, you must encode spaces, equals signs, and backticks. Unquoted attributes are particularly dangerous \u2014 avoid them entirely. def encode_html_attribute(value): value = value.replace('&', '&') value = value.replace('\"', '\"') value = value.replace(\"'\", ''') value = value.replace(' value = value.replace('>', '>') value = value.replace('/', '/') value = value.replace('`', '`') return value Always quote HTML attributes. Never construct HTML by concatenating strings \u2014 use the DOM API or a template engine. JavaScript Context Data inserted into JavaScript requires JSON encoding or hex entity encoding. Never insert untrusted data directly into a `"
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>Output Encoding</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h1>Output Encoding: Cross-Site Scripting (XSS) Prevention Guide</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -199,7 +225,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Why Encoding Matters</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -245,6 +277,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers.</p>
 <br>
 <br>
@@ -268,7 +303,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  HTML Body Context</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -315,7 +356,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import html</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -355,7 +402,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>"" becomes ""</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +456,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  HTML Attribute Context</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -450,7 +509,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def encode_html_attribute(value):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -490,7 +555,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = value.replace('"', '"')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -530,7 +601,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = value.replace('<', '<')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -570,7 +647,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = value.replace('/', '/')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -610,7 +693,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return value</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -658,7 +747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  JavaScript Context</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

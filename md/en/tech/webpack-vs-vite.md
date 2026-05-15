@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/webpack-vs-vite.html
   
   
   
+  
+  
+  
+
+
+# Webpack vs Vite
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The choice between Webpack and Vite has become one of the most consequential decisions in modern frontend development. Webpack has been the dominant bundler for years, but Vite's emergence has fundamentally changed expectations for development experience and build performance. This article compares both tools across key dimensions.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ The choice between Webpack and Vite has become one of the most consequential dec
   
   
   
+  
+  
+  
 
 
 The most dramatic difference between Webpack and Vite is development server performance. Webpack bundles your entire application before serving it. For large projects, the initial build can take tens of seconds or minutes. Every code change triggers a rebuild, and while Webpack's Hot Module Replacement (HMR) is efficient, it still processes the changed module and its dependencies.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Vite takes a fundamentally different approach. During development, Vite serves m
   
   
   
+  
+  
+  
 
 
 ##  Configuration
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Webpack configuration is notoriously complex. A simple project requires loaders 
   
   
   
+  
+  
+  
 
 
 Vite emphasizes zero-configuration out of the box. It supports TypeScript, JSX, CSS modules, and asset handling with no configuration required. For most projects, the default configuration works well. When customization is needed, Vite's configuration is simpler and more intuitive than Webpack's.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ Vite emphasizes zero-configuration out of the box. It supports TypeScript, JSX, 
   
   
   
+  
+  
+  
 
 
 Vite uses Rollup for production builds, leveraging its efficient tree-shaking and code splitting. The result is typically smaller bundle sizes than Webpack, especially for projects that use ES modules. Vite's pre-configured production optimizations include CSS code splitting, automatic CSS vendor prefixing, and async chunk loading.
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Webpack's production builds are also highly optimized, with aggressive minificat
   
   
   
+  
+  
+  
 
 
 ##  Plugin Ecosystem
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Webpack has a mature plugin ecosystem accumulated over a decade. Thousands of pl
   
   
   
+  
+  
+  
 
 
 Vite's plugin ecosystem is growing rapidly. Vite plugins are compatible with Rollup plugins, giving access to a large existing ecosystem. The Vite plugin API is cleaner and more powerful than Webpack's, but some Webpack-specific plugins have no direct Vite equivalent.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Vite's plugin ecosystem is growing rapidly. Vite plugins are compatible with Rol
   
   
   
+  
+  
+  
 
 
 Migrating from Webpack to Vite depends on the project's complexity. Simple projects with standard configurations can migrate in hours. Projects with extensive custom Webpack plugins may require significant effort to find alternatives or implement custom solutions.
 
+  
+  
+  
   
   
   
@@ -572,6 +649,9 @@ The key migration steps include converting webpack.config.js to vite.config.js, 
   
   
   
+  
+  
+  
 
 
 ##  When to Choose Each
@@ -598,10 +678,16 @@ The key migration steps include converting webpack.config.js to vite.config.js, 
   
   
   
+  
+  
+  
 
 
 Choose Webpack when your project has extensive custom Webpack configuration or plugins, when you are maintaining a legacy project that works well with Webpack, or when your team has deep Webpack expertise. Choose Vite for new projects, when development experience and build speed are priorities, or when you want simpler configuration.
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/grpc-vs-websocket.html
   
 
 
+# gRPC vs WebSocket: Real-Time Communication
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Real-time communication is essential for modern applications--from chat and live
   
   
   
+  
+  
+  
 
 
 ##  Protocol Fundamentals
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Real-time communication is essential for modern applications--from chat and live
   
   
   
+  
+  
+  
 
 
 gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient communication:
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ gRPC leverages HTTP/2 multiplexing and Protocol Buffers for typed, efficient com
   
   
   
+  
+  
+  
 
 
 syntax = "proto3";
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ package order;
   
   
   
+  
+  
+  
 
 
 service OrderService {
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ service OrderService {
   
   
   
+  
+  
+  
 
 
 rpc CreateOrder(CreateOrderRequest) returns (Order);
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ rpc CreateOrder(CreateOrderRequest) returns (Order);
   
   
   
+  
+  
+  
 
 
 rpc SubscribeOrders(OrderFilter) returns (stream Order);
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ rpc SubscribeOrders(OrderFilter) returns (stream Order);
   
   
   
+  
+  
+  
 
 
 rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse);
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ rpc BulkCreateOrders(stream CreateOrderRequest) returns (BulkResponse);
   
   
   
+  
+  
+  
 
 
 rpc ProcessOrders(stream OrderAction) returns (stream OrderResult);
@@ -572,10 +649,16 @@ rpc ProcessOrders(stream OrderAction) returns (stream OrderResult);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ message Order {
   
   
   
+  
+  
+  
 
 
 string id = 1;
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ string user_id = 2;
   
   
   
+  
+  
+  
 
 
 repeated LineItem items = 3;
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ double total = 4;
   
   
   
+  
+  
+  
 
 
 OrderStatus status = 5;
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ google.protobuf.Timestamp created_at = 6;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ message CreateOrderRequest {
   
   
   
+  
+  
+  
 
 
 string user_id = 1;
 
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ repeated LineItem items = 2;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -936,6 +1055,9 @@ message OrderFilter {
   
   
   
+  
+  
+  
 
 
 repeated string statuses = 1;
@@ -962,10 +1084,16 @@ repeated string statuses = 1;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ message LineItem {
   
   
   
+  
+  
+  
 
 
 string product_id = 1;
 
+  
+  
+  
   
   
   
@@ -1066,6 +1200,9 @@ int32 quantity = 2;
   
   
   
+  
+  
+  
 
 
 double price = 3;
@@ -1092,10 +1229,16 @@ double price = 3;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ enum OrderStatus {
   
   
   
+  
+  
+  
 
 
 PENDING = 0;
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ CONFIRMED = 1;
   
   
   
+  
+  
+  
 
 
 PROCESSING = 2;
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ SHIPPED = 3;
   
   
   
+  
+  
+  
 
 
 DELIVERED = 4;
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ CANCELLED = 5;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ Server implementation in Go:
   
   
   
+  
+  
+  
 
 
 package main
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ import (
   
   
   
+  
+  
+  
 
 
 "context"
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ import (
   
   
   
+  
+  
+  
 
 
 "net"
 
+  
+  
+  
   
   
   
@@ -1508,6 +1693,9 @@ import (
   
   
   
+  
+  
+  
 
 
 pb "path/to/proto/order"
@@ -1534,10 +1722,16 @@ pb "path/to/proto/order"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1586,6 +1780,9 @@ type orderServer struct {
   
   
   
+  
+  
+  
 
 
 pb.UnimplementedOrderServiceServer
@@ -1612,10 +1809,16 @@ pb.UnimplementedOrderServiceServer
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ pb.UnimplementedOrderServiceServer
   
   
   
+  
+  
+  
 
 
 func (s *orderServer) ProcessOrders(
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ stream pb.OrderService_ProcessOrdersServer,
   
   
   
+  
+  
+  
 
 
 ) error {
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ for {
   
   
   
+  
+  
+  
 
 
 action, err := stream.Recv()
 
+  
+  
+  
   
   
   
@@ -1820,6 +2041,9 @@ if err != nil {
   
   
   
+  
+  
+  
 
 
 return err
@@ -1846,10 +2070,16 @@ return err
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ return err
   
   
   
+  
+  
+  
 
 
 result := &pb.OrderResult;{
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ OrderId: action.OrderId,
   
   
   
+  
+  
+  
 
 
 Status: pb.OrderStatus_PROCESSING,
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ Message: "Order received and processing",
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2054,6 +2302,9 @@ if err := stream.Send(result); err != nil {
   
   
   
+  
+  
+  
 
 
 return err
@@ -2080,29 +2331,6 @@ return err
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2132,10 +2360,45 @@ return err
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ func main() {
   
   
   
+  
+  
+  
 
 
 lis, _ := net.Listen("tcp", ":50051")
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ s := grpc.NewServer(
   
   
   
+  
+  
+  
 
 
 grpc.MaxRecvMsgSize(4 * 1024 * 1024), // 4MB
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ grpc.MaxSendMsgSize(4 * 1024 * 1024), // 4MB
   
   
   
+  
+  
+  
 
 
 grpc.InitialWindowSize(1<<31 - 1), // Flow control
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ grpc.InitialConnWindowSize(1<<31 - 1),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2392,6 +2679,9 @@ pb.RegisterOrderServiceServer(s, &orderServer;{})
   
   
   
+  
+  
+  
 
 
 log.Fatal(s.Serve(lis))
@@ -2418,10 +2708,16 @@ log.Fatal(s.Serve(lis))
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ Client in Python:
   
   
   
+  
+  
+  
 
 
 import grpc
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ import order_pb2
   
   
   
+  
+  
+  
 
 
 import order_pb2_grpc
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ async def process_orders():
   
   
   
+  
+  
+  
 
 
 async with grpc.aio.insecure_channel('localhost:50051') as channel:
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ stub = order_pb2_grpc.OrderServiceStub(channel)
   
   
   
+  
+  
+  
 
 
 async def generate_actions():
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ for i in range(100):
   
   
   
+  
+  
+  
 
 
 yield order_pb2.OrderAction(
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ order_id=f"ord-{i}",
   
   
   
+  
+  
+  
 
 
 action="process",
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ payload=b"{}",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ async for result in stub.ProcessOrders(generate_actions()):
   
   
   
+  
+  
+  
 
 
 print(f"Order {result.order_id}: {result.status}")
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ print(f"Order {result.order_id}: {result.status}")
   
   
   
+  
+  
+  
 
 
 WebSocket provides a simpler, message-oriented protocol over TCP:
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ WebSocket provides a simpler, message-oriented protocol over TCP:
   
   
   
+  
+  
+  
 
 
 const ws = new WebSocket('wss://api.example.com/orders');
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ const ws = new WebSocket('wss://api.example.com/orders');
   
   
   
+  
+  
+  
 
 
 ws.onopen = () => {
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ console.log('Connected to order service');
   
   
   
+  
+  
+  
 
 
 ws.send(JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ type: 'subscribe',
   
   
   
+  
+  
+  
 
 
 channels: ['orders.created', 'orders.status'],
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ channels: ['orders.created', 'orders.status'],
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -3198,6 +3578,9 @@ ws.onmessage = (event) => {
   
   
   
+  
+  
+  
 
 
 const message = JSON.parse(event.data);
@@ -3224,10 +3607,16 @@ const message = JSON.parse(event.data);
   
   
   
+  
+  
+  
 
 
 switch (message.type) {
 
+  
+  
+  
   
   
   
@@ -3276,6 +3665,9 @@ case 'order.created':
   
   
   
+  
+  
+  
 
 
 displayNewOrder(message.data);
@@ -3302,10 +3694,16 @@ displayNewOrder(message.data);
   
   
   
+  
+  
+  
 
 
 break;
 
+  
+  
+  
   
   
   
@@ -3354,6 +3752,9 @@ case 'order.status':
   
   
   
+  
+  
+  
 
 
 updateOrderStatus(message.data);
@@ -3380,10 +3781,16 @@ updateOrderStatus(message.data);
   
   
   
+  
+  
+  
 
 
 break;
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ case 'error':
   
   
   
+  
+  
+  
 
 
 handleError(message.error);
 
+  
+  
+  
   
   
   
@@ -3484,6 +3897,9 @@ break;
   
   
   
+  
+  
+  
 
 
 }
@@ -3510,10 +3926,16 @@ break;
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ ws.onclose = (event) => {
   
   
   
+  
+  
+  
 
 
 if (event.code !== 1000) {
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ if (event.code !== 1000) {
   
   
   
+  
+  
+  
 
 
 scheduleReconnect(event.code);
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ scheduleReconnect(event.code);
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ ws.onerror = (error) => {
   
   
   
+  
+  
+  
 
 
 console.error('WebSocket error:', error);
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ console.error('WebSocket error:', error);
   
   
   
+  
+  
+  
 
 
 // Send action
 
+  
+  
+  
   
   
   
@@ -3822,6 +4274,9 @@ function processOrder(orderId) {
   
   
   
+  
+  
+  
 
 
 if (ws.readyState === WebSocket.OPEN) {
@@ -3848,10 +4303,16 @@ if (ws.readyState === WebSocket.OPEN) {
   
   
   
+  
+  
+  
 
 
 ws.send(JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ type: 'process_order',
   
   
   
+  
+  
+  
 
 
 order_id: orderId,
 
+  
+  
+  
   
   
   
@@ -3952,6 +4419,9 @@ timestamp: Date.now(),
   
   
   
+  
+  
+  
 
 
 }));
@@ -3978,29 +4448,6 @@ timestamp: Date.now(),
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -4008,6 +4455,38 @@ timestamp: Date.now(),
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ Server in Node.js:
   
   
   
+  
+  
+  
 
 
 import { WebSocketServer } from 'ws';
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ const wss = new WebSocketServer({
   
   
   
+  
+  
+  
 
 
 port: 8080,
 
+  
+  
+  
   
   
   
@@ -4160,6 +4651,9 @@ maxPayload: 1024 * 1024, // 1MB
   
   
   
+  
+  
+  
 
 
 perMessageDeflate: true, // Compression
@@ -4186,10 +4680,16 @@ perMessageDeflate: true, // Compression
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -4238,10 +4738,16 @@ wss.on('connection', (ws, req) => {
   
   
   
+  
+  
+  
 
 
 const clientId = getClientId(req);
 
+  
+  
+  
   
   
   
@@ -4290,10 +4796,16 @@ ws.on('message', async (data) => {
   
   
   
+  
+  
+  
 
 
 try {
 
+  
+  
+  
   
   
   
@@ -4342,10 +4854,16 @@ const message = JSON.parse(data.toString());
   
   
   
+  
+  
+  
 
 
 switch (message.type) {
 
+  
+  
+  
   
   
   
@@ -4394,10 +4912,16 @@ case 'subscribe':
   
   
   
+  
+  
+  
 
 
 // Add client to topic subscriptions
 
+  
+  
+  
   
   
   
@@ -4446,10 +4970,16 @@ channelManager.subscribe(clientId, message.channels);
   
   
   
+  
+  
+  
 
 
 ws.send(JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -4498,10 +5028,16 @@ type: 'subscribed',
   
   
   
+  
+  
+  
 
 
 channels: message.channels,
 
+  
+  
+  
   
   
   
@@ -4550,10 +5086,16 @@ channels: message.channels,
   
   
   
+  
+  
+  
 
 
 break;
 
+  
+  
+  
   
   
   
@@ -4602,10 +5144,16 @@ case 'process_order':
   
   
   
+  
+  
+  
 
 
 // Process order and push status updates
 
+  
+  
+  
   
   
   
@@ -4654,6 +5202,9 @@ await processAndStreamUpdates(ws, message.order_id);
   
   
   
+  
+  
+  
 
 
 break;
@@ -4680,10 +5231,16 @@ break;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4732,10 +5289,16 @@ break;
   
   
   
+  
+  
+  
 
 
 ws.send(JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -4784,10 +5347,16 @@ type: 'error',
   
   
   
+  
+  
+  
 
 
 error: error.message,
 
+  
+  
+  
   
   
   
@@ -4836,6 +5405,9 @@ error: error.message,
   
   
   
+  
+  
+  
 
 
 }
@@ -4862,10 +5434,16 @@ error: error.message,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -4914,6 +5492,9 @@ ws.on('close', () => {
   
   
   
+  
+  
+  
 
 
 channelManager.unsubscribe(clientId);
@@ -4940,29 +5521,6 @@ channelManager.unsubscribe(clientId);
   
   
   
-
-
-});
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -4970,6 +5528,38 @@ channelManager.unsubscribe(clientId);
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
   
   
   
@@ -5018,6 +5608,9 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 | Pattern | gRPC | WebSocket |
@@ -5044,10 +5637,16 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -5096,10 +5695,16 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 | Server streaming | Native (server pushes multiple responses) | Manual (loop sending) |
 
+  
+  
+  
   
   
   
@@ -5148,10 +5753,16 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 | Bidirectional | Native (full duplex) | Native (full duplex) |
 
+  
+  
+  
   
   
   
@@ -5200,10 +5811,16 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 | Request-reply patterns | Natural | Natural |
 
+  
+  
+  
   
   
   
@@ -5252,10 +5869,16 @@ channelManager.unsubscribe(clientId);
   
   
   
+  
+  
+  
 
 
 # Size comparison: gRPC (Protobuf) vs WebSocket (JSON)
 
+  
+  
+  
   
   
   
@@ -5304,10 +5927,16 @@ example_message: |
   
   
   
+  
+  
+  
 
 
 Order with 3 items, totals 200 bytes
 
+  
+  
+  
   
   
   
@@ -5356,6 +5985,9 @@ gRPC (binary Protobuf):
   
   
   
+  
+  
+  
 
 
 encoded_size: ~85 bytes
@@ -5382,10 +6014,16 @@ encoded_size: ~85 bytes
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+ HTTP/2 framing: ~9 bytes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+ HTTP/2 framing: ~9 bytes
 
+  
+  
+  
   
   
   
@@ -5434,10 +6072,16 @@ Total: ~94 bytes
   
   
   
+  
+  
+  
 
 
 WebSocket (JSON):
 
+  
+  
+  
   
   
   
@@ -5486,10 +6130,16 @@ encoded_size: ~320 bytes
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+ WebSocket framing: ~6 bytes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+ WebSocket framing: ~6 bytes
 
+  
+  
+  
   
   
   
@@ -5538,10 +6188,16 @@ Total: ~326 bytes
   
   
   
+  
+  
+  
 
 
 Savings: gRPC is ~3.5x more efficient per message
 
+  
+  
+  
   
   
   
@@ -5590,10 +6246,16 @@ Savings: gRPC is ~3.5x more efficient per message
   
   
   
+  
+  
+  
 
 
 # gRPC: ~94 KB/s + ~30 KB/s header overhead
 
+  
+  
+  
   
   
   
@@ -5642,10 +6304,16 @@ Savings: gRPC is ~3.5x more efficient per message
   
   
   
+  
+  
+  
 
 
 # Daily savings: ~20 GB
 
+  
+  
+  
   
   
   
@@ -5694,10 +6362,16 @@ Type safety comparison:
   
   
   
+  
+  
+  
 
 
 # gRPC: Compile-time type checking
 
+  
+  
+  
   
   
   
@@ -5746,10 +6420,16 @@ Type safety comparison:
   
   
   
+  
+  
+  
 
 
 request = order_pb2.CreateOrderRequest(
 
+  
+  
+  
   
   
   
@@ -5798,10 +6478,16 @@ user_id="user-123",
   
   
   
+  
+  
+  
 
 
 items=[
 
+  
+  
+  
   
   
   
@@ -5850,10 +6536,16 @@ order_pb2.LineItem(product_id="prod-1", quantity=2, price=29.99)
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -5902,10 +6594,16 @@ order_pb2.LineItem(product_id="prod-1", quantity=2, price=29.99)
   
   
   
+  
+  
+  
 
 
 response = stub.CreateOrder(request)
 
+  
+  
+  
   
   
   
@@ -5954,10 +6652,16 @@ response = stub.CreateOrder(request)
   
   
   
+  
+  
+  
 
 
 # No compile-time type checking
 
+  
+  
+  
   
   
   
@@ -6006,10 +6710,16 @@ message = json.loads(data)
   
   
   
+  
+  
+  
 
 
 # Must validate fields manually
 
+  
+  
+  
   
   
   
@@ -6058,10 +6768,16 @@ if not isinstance(message.get('user_id'), str):
   
   
   
+  
+  
+  
 
 
 raise ValueError("Invalid user_id")
 
+  
+  
+  
   
   
   
@@ -6110,6 +6826,9 @@ raise ValueError("Invalid user_id")
   
   
   
+  
+  
+  
 
 
 | Factor | gRPC | WebSocket |
@@ -6136,10 +6855,16 @@ raise ValueError("Invalid user_id")
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -6188,10 +6913,16 @@ raise ValueError("Invalid user_id")
   
   
   
+  
+  
+  
 
 
 | HTTP/2 browser APIs | Limited | Not needed |
 
+  
+  
+  
   
   
   
@@ -6240,10 +6971,16 @@ raise ValueError("Invalid user_id")
   
   
   
+  
+  
+  
 
 
 | Headers and cookies | Via Envoy proxy | Standard HTTP upgrade |
 
+  
+  
+  
   
   
   
@@ -6292,10 +7029,16 @@ raise ValueError("Invalid user_id")
   
   
   
+  
+  
+  
 
 
 # Envoy configuration for gRPC-Web
 
+  
+  
+  
   
   
   
@@ -6344,6 +7087,9 @@ static_resources:
   
   
   
+  
+  
+  
 
 
 listeners:
@@ -6370,10 +7116,16 @@ listeners:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- address:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- address:
 
+  
+  
+  
   
   
   
@@ -6422,10 +7174,16 @@ socket_address:
   
   
   
+  
+  
+  
 
 
 address: 0.0.0.0
 
+  
+  
+  
   
   
   
@@ -6474,6 +7232,9 @@ port_value: 443
   
   
   
+  
+  
+  
 
 
 filter_chains:
@@ -6500,36 +7261,45 @@ filter_chains:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- filters:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.network.http_connection_manager
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- filters:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.network.http_connection_manager
+
+  
+  
+  
   
   
   
@@ -6578,10 +7348,16 @@ typed_config:
   
   
   
+  
+  
+  
 
 
 "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
 
+  
+  
+  
   
   
   
@@ -6630,10 +7406,16 @@ codec_type: AUTO
   
   
   
+  
+  
+  
 
 
 stat_prefix: ingress_http
 
+  
+  
+  
   
   
   
@@ -6682,6 +7464,9 @@ route_config:
   
   
   
+  
+  
+  
 
 
 virtual_hosts:
@@ -6708,10 +7493,16 @@ virtual_hosts:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: backend
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: backend
 
+  
+  
+  
   
   
   
@@ -6760,6 +7551,9 @@ domains: ["*"]
   
   
   
+  
+  
+  
 
 
 routes:
@@ -6786,10 +7580,16 @@ routes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
 
+  
+  
+  
   
   
   
@@ -6838,10 +7638,16 @@ prefix: "/order.OrderService/"
   
   
   
+  
+  
+  
 
 
 route:
 
+  
+  
+  
   
   
   
@@ -6890,6 +7696,9 @@ cluster: grpc-backend
   
   
   
+  
+  
+  
 
 
 http_filters:
@@ -6916,36 +7725,45 @@ http_filters:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.http.grpc_web
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.http.router
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.http.grpc_web
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: envoy.filters.http.router
+
+  
+  
+  
   
   
   
@@ -6994,10 +7812,16 @@ clusters:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: grpc-backend
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: grpc-backend
 
+  
+  
+  
   
   
   
@@ -7046,10 +7870,16 @@ type: LOGICAL_DNS
   
   
   
+  
+  
+  
 
 
 typed_extension_protocol_options:
 
+  
+  
+  
   
   
   
@@ -7098,10 +7928,16 @@ envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
   
   
   
+  
+  
+  
 
 
 "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
 
+  
+  
+  
   
   
   
@@ -7150,10 +7986,16 @@ explicit_http_config:
   
   
   
+  
+  
+  
 
 
 http2_protocol_options: {}
 
+  
+  
+  
   
   
   
@@ -7202,6 +8044,9 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Use Case | Preferred | Reason |
@@ -7228,10 +8073,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -7280,10 +8131,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Browser real-time UI | WebSocket | Native browser support, simpler API |
 
+  
+  
+  
   
   
   
@@ -7332,10 +8189,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Internal API gateway | gRPC | Strong typing, load balancing, authentication |
 
+  
+  
+  
   
   
   
@@ -7384,10 +8247,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Financial ticker | gRPC streaming | Lower latency, smaller payloads |
 
+  
+  
+  
   
   
   
@@ -7436,10 +8305,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | IoT device communication | gRPC | Small binary, resource efficient, bi-directional |
 
+  
+  
+  
   
   
   
@@ -7488,10 +8363,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Metric | gRPC | WebSocket |
 
+  
+  
+  
   
   
   
@@ -7540,10 +8421,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Latency (p50) | ~0.5ms | ~1ms |
 
+  
+  
+  
   
   
   
@@ -7592,10 +8479,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Throughput (single connection) | 10,000 msg/s | 8,000 msg/s |
 
+  
+  
+  
   
   
   
@@ -7644,10 +8537,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 | Compression | Automatic (HTTP/2 HPACK) | Optional (permessage-deflate) |
 
+  
+  
+  
   
   
   
@@ -7696,10 +8595,16 @@ http2_protocol_options: {}
   
   
   
+  
+  
+  
 
 
 Both protocols are fast enough for most use cases. gRPC's advantages compound at high throughput due to binary encoding and HTTP/2 multiplexing.
 
+  
+  
+  
   
   
   
@@ -7748,10 +8653,16 @@ Both protocols are fast enough for most use cases. gRPC's advantages compound at
   
   
   
+  
+  
+  
 
 
 * **Choose gRPC** for server-to-server communication, microservice APIs, IoT backends, or any system where strong typing, efficiency, and streaming matter more than browser compatibility.
 
+  
+  
+  
   
   
   
@@ -7794,10 +8705,16 @@ Both protocols are fast enough for most use cases. gRPC's advantages compound at
   
   
   
+  
+  
+  
 
 
 * **Use both** when your architecture needs gRPC for internal service communication and WebSocket for browser clients, with a gateway translating between them.
 
+  
+  
+  
   
   
   

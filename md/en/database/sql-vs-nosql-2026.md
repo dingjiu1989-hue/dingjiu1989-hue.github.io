@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql-2026.html
   
 
 
+# SQL vs NoSQL in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Database Landscape in 2026 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The SQL vs NoSQL debate has matured. NewSQL databases now combine SQL's consiste
   
   
   
+  
+  
+  
 
 
 When SQL Shines 
 
+  
+  
+  
   
   
   
@@ -187,10 +222,16 @@ Relational databases remain the default for structured data:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Complex joins across relations
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Complex joins across relations
 
+  
+  
+  
   
   
   
@@ -233,10 +274,16 @@ SELECT
   
   
   
+  
+  
+  
 
 
 o.id as order_id,
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ c.name as customer_name,
   
   
   
+  
+  
+  
 
 
 p.name as product_name,
 
+  
+  
+  
   
   
   
@@ -325,10 +378,16 @@ oi.quantity,
   
   
   
+  
+  
+  
 
 
 oi.unit_price
 
+  
+  
+  
   
   
   
@@ -371,10 +430,16 @@ FROM orders o
   
   
   
+  
+  
+  
 
 
 JOIN customers c ON o.customer_id = c.id
 
+  
+  
+  
   
   
   
@@ -417,10 +482,16 @@ JOIN order_items oi ON o.id = oi.order_id
   
   
   
+  
+  
+  
 
 
 JOIN products p ON oi.product_id = p.id
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ WHERE o.created_at >= '2026-01-01'
   
   
   
+  
+  
+  
 
 
 AND c.status = 'active';
 
+  
+  
+  
   
   
   
@@ -506,6 +583,9 @@ Use SQL when: data is structured, relationships are complex, consistency is crit
   
   
   
+  
+  
+  
 
 
 Document DB Maturity 
@@ -526,10 +606,16 @@ Document DB Maturity
   
   
   
+  
+  
+  
 
 
 MongoDB 7+ supports multi-document ACID transactions and joins: 
 
+  
+  
+  
   
   
   
@@ -572,10 +658,16 @@ MongoDB 7+ supports multi-document ACID transactions and joins:
   
   
   
+  
+  
+  
 
 
 const session = db.getMongo().startSession();
 
+  
+  
+  
   
   
   
@@ -618,10 +710,16 @@ session.startTransaction({
   
   
   
+  
+  
+  
 
 
 readConcern: { level: "snapshot" },
 
+  
+  
+  
   
   
   
@@ -664,10 +762,16 @@ writeConcern: { w: "majority" }
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -710,10 +814,16 @@ try {
   
   
   
+  
+  
+  
 
 
 const orders = session.getDatabase("shop").orders;
 
+  
+  
+  
   
   
   
@@ -756,10 +866,16 @@ const inventory = session.getDatabase("shop").inventory;
   
   
   
+  
+  
+  
 
 
 // Update inventory and create order atomically
 
+  
+  
+  
   
   
   
@@ -802,10 +918,16 @@ inventory.updateOne(
   
   
   
+  
+  
+  
 
 
 { productId: "prod-123", quantity: { $gte: 2 } },
 
+  
+  
+  
   
   
   
@@ -848,6 +970,9 @@ inventory.updateOne(
   
   
   
+  
+  
+  
 
 
 { session }
@@ -871,10 +996,16 @@ inventory.updateOne(
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -917,10 +1048,16 @@ orders.insertOne({
   
   
   
+  
+  
+  
 
 
 productId: "prod-123",
 
+  
+  
+  
   
   
   
@@ -963,10 +1100,16 @@ quantity: 2,
   
   
   
+  
+  
+  
 
 
 customerId: "cust-456",
 
+  
+  
+  
   
   
   
@@ -1009,10 +1152,16 @@ status: "confirmed",
   
   
   
+  
+  
+  
 
 
 createdAt: new Date()
 
+  
+  
+  
   
   
   
@@ -1055,10 +1204,16 @@ createdAt: new Date()
   
   
   
+  
+  
+  
 
 
 session.commitTransaction();
 
+  
+  
+  
   
   
   
@@ -1101,10 +1256,16 @@ session.commitTransaction();
   
   
   
+  
+  
+  
 
 
 session.abortTransaction();
 
+  
+  
+  
   
   
   
@@ -1147,10 +1308,16 @@ session.abortTransaction();
   
   
   
+  
+  
+  
 
 
 NewSQL Revival 
 
+  
+  
+  
   
   
   
@@ -1190,10 +1357,16 @@ CockroachDB and YugabyteDB offer SQL with horizontal scaling:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CockroachDB: SQL with global distribution
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- CockroachDB: SQL with global distribution
 
+  
+  
+  
   
   
   
@@ -1236,10 +1409,16 @@ CREATE TABLE user_sessions (
   
   
   
+  
+  
+  
 
 
 id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
+  
+  
+  
   
   
   
@@ -1282,10 +1461,16 @@ user_id UUID NOT NULL REFERENCES users(id),
   
   
   
+  
+  
+  
 
 
 session_data JSONB,
 
+  
+  
+  
   
   
   
@@ -1328,10 +1513,16 @@ created_at TIMESTAMP DEFAULT now(),
   
   
   
+  
+  
+  
 
 
 expires_at TIMESTAMP
 
+  
+  
+  
   
   
   
@@ -1374,33 +1565,42 @@ expires_at TIMESTAMP
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Automatically sharded and replicated
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries work across regions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Automatically sharded and replicated
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries work across regions
+
+  
+  
+  
   
   
   
@@ -1443,10 +1643,16 @@ SELECT * FROM user_sessions
   
   
   
+  
+  
+  
 
 
 WHERE user_id = 'abc-123'
 
+  
+  
+  
   
   
   
@@ -1489,10 +1695,16 @@ AND expires_at > now();
   
   
   
+  
+  
+  
 
 
 Decision Framework 
 
+  
+  
+  
   
   
   
@@ -1535,10 +1747,16 @@ def choose_database(requirements):
   
   
   
+  
+  
+  
 
 
 if requirements.get("complex_joins") or requirements.get("strict_consistency"):
 
+  
+  
+  
   
   
   
@@ -1581,10 +1799,16 @@ if requirements.get("horizontal_scale"):
   
   
   
+  
+  
+  
 
 
 return "NewSQL (CockroachDB, YugabyteDB)"
 
+  
+  
+  
   
   
   
@@ -1627,10 +1851,16 @@ return "PostgreSQL"
   
   
   
+  
+  
+  
 
 
 if requirements.get("flexible_schema") or requirements.get("rapid_prototyping"):
 
+  
+  
+  
   
   
   
@@ -1673,10 +1903,16 @@ if requirements.get("transactions"):
   
   
   
+  
+  
+  
 
 
 return "MongoDB 7+"
 
+  
+  
+  
   
   
   
@@ -1719,10 +1955,16 @@ return "MongoDB or Firebase"
   
   
   
+  
+  
+  
 
 
 if requirements.get("high_volume_writes"):
 
+  
+  
+  
   
   
   
@@ -1765,10 +2007,16 @@ return "Cassandra or ScyllaDB"
   
   
   
+  
+  
+  
 
 
 if requirements.get("time_series"):
 
+  
+  
+  
   
   
   
@@ -1811,10 +2059,16 @@ return "TimescaleDB or InfluxDB"
   
   
   
+  
+  
+  
 
 
 if requirements.get("graph_traversals"):
 
+  
+  
+  
   
   
   
@@ -1857,6 +2111,9 @@ return "Neo4j"
   
   
   
+  
+  
+  
 
 
 return "PostgreSQL (default)"
@@ -1880,10 +2137,16 @@ return "PostgreSQL (default)"
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

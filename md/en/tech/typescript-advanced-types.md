@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-types.html
   
   
   
+  
+  
+  
+
+
+# Advanced TypeScript Types for Better Code
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 TypeScript's type system goes far beyond basic interfaces and enums. Advanced types catch more bugs, reduce boilerplate, and document code more precisely.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ TypeScript's type system goes far beyond basic interfaces and enums. Advanced ty
   
   
   
+  
+  
+  
 
 
 Generics parameterize types. A generic function works with any type while maintaining type safety. Type parameters infer from usage—explicit annotation is often unnecessary. Constrain type parameters with extends to limit acceptable types.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Generic constraints with keyof access the keys of an object type. T[K] (indexed 
   
   
   
+  
+  
+  
 
 
 ##  Conditional Types
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Conditional types select types based on conditions: T extends U ? X : Y. They ar
   
   
   
+  
+  
+  
 
 
 The infer keyword extracts types from within other types. ReturnType uses infer to extract the return type of a function type. Template literal types with infer parse string patterns at the type level.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ The infer keyword extracts types from within other types. ReturnType uses infer 
   
   
   
+  
+  
+  
 
 
 Mapped types transform object types by mapping over keys: { [K in keyof T]: NewType }. Readonly, Partial, and Pick are built-in mapped types. Custom mapped types implement selective transformations.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Key remapping with as creates mapped types that rename keys. Filter keys with as
   
   
   
+  
+  
+  
 
 
 ##  Template Literal Types
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Template literal types construct string types at the type level: `${prefix}${suf
   
   
   
+  
+  
+  
 
 
 ##  Practical Usage
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Use branded types for type-safe IDs (type UserId = string & {__brand: 'UserId'})
   
   
   
+  
+  
+  
 
 
 ##  Utility Types
 
+  
+  
+  
   
   
   

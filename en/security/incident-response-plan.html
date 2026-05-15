@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response-plan.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3042",
+      "wordCount": "3446",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/incident-response-plan.html"},
-      "articleBody": "Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan The NIST Framework The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection & Analysis, Containment Eradication & Recovery, and Post-Incident Activity. Phase 1: Preparation Preparation determines response success. Key elements include: incident-response-tools.yaml tools: siem: elastic-security edr: crowdstrike-falcon ticketing: jira-servicedesk communication: slack + pagerduty playbooks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ransomware.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data-breach.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ddos.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- insider-threat.md team: incident_commander: rotate weekly security_analyst: tier-1/tier-2 legal: on-call communications: PR team Phase 2: Detection and Analysis Detect incidents through multiple signals: import json from datetime import datetime, timedelta class IncidentDetector: def __init__(self): self.correlation_rules = [] def add_rule(self, rule): self.correlation_rules.append(rule) def evaluate(self, events): alerts = [] for rule in self.correlation_rules: matching = [e for e in events if rule[\"condition\"](e)] if len(matching) >= rule[\"threshold\"]: alerts.append({ \"rule\": rule[\"name\"], \"severity\": rule[\"severity\"], \"events\": matching, \"timestamp\": datetime.utcnow().isoformat() }) return alerts Example: Correlate failed logins across accounts detector = IncidentDetector() detector.add_rule({ \"name\": \"Brute Force Detection\", \"condition\": lambda e: e[\"type\"] == \"failed_login\", \"threshold\": 10, \"severity\": \"high\", \"window\": timedelta(minutes=5) }) Phase 3: Containment, Eradication, Recovery #!/bin/bash Incident containment script isolate_host() { local host=$1 Block at network level ansible-playbook isolate_host.yml -e \"target=$host\" Capture forensic data ssh \"user@$host\" \"tar czf /tmp/forensics.tar.gz /var/log /tmp /home\" scp \"user@$host:/tmp/forensics.tar.gz\" ./evidence/ Snapshot for analysis aws ec2 create-snapshot --volume-id $(get_volume_id $host) echo \"Host $host isolated. Forensic data captured.\" } Eradicate malware eradicate() { local host=$1 ansible-playbook malware_removal.yml -e \"target=$host\" verify_clean $host && restore_from_clean_backup $host } Communication Plan Clear communication channels are critical: incident_communication: internal: slacks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: \"#security-alerts\" purpose: \"Real-time technical coordination\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: \"#incident-comm\" purpose: \"Executive updates\" email: incident-response@company.com external: legal_review: required before all external communication breach_notification: timeline: 72_hours template: breach_notification_template.md regulatory: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: \"ICO\" jurisdiction: \"UK\" notification_url: \"https://ico.org.uk/breach\" Tabletop Exercises Run quarterly tabletops to test the plan: Scenario: Ransomware on critical database server Inject 1: Encrypted files detected at 09:00 Question: Who declares the incident? Inject 2: Attacker demands 5 BTC Question: Do we pay? Who decides? Inject 3: Backup restoration fails Question: What is the fallback? Post-Incident Activity Conduct thorough post-mortems: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Track incident metrics SELECT incident_type, AVG(EXTRACT(EPOCH FROM (contained_at - detected_at))) as avg_containment_time, AVG(EXTRACT(EPOCH FROM (resolved_at - detected_at))) as avg_resolution_time FROM incidents WHERE created_at > NOW() - INTERVAL '1 year' GROUP BY incident_type; Conclusion A well-rehearsed incident response plan reduces breach impact by 50% or more. Invest in preparation, run regular tabletop exercises, automate containment where possible, and learn from every incident."
+      "articleBody": "Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan Incident Response Plan The NIST Framework The NIST SP 800-61 framework defines four phases of incident response: Preparation, Detection & Analysis, Containment Eradication & Recovery, and Post-Incident Activity. Phase 1: Preparation Preparation determines response success. Key elements include: incident-response-tools.yaml tools: siem: elastic-security edr: crowdstrike-falcon ticketing: jira-servicedesk communication: slack + pagerduty playbooks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ransomware.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data-breach.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ddos.md \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- insider-threat.md team: incident_commander: rotate weekly security_analyst: tier-1/tier-2 legal: on-call communications: PR team Phase 2: Detection and Analysis Detect incidents through multiple signals: import json from datetime import datetime, timedelta class IncidentDetector: def __init__(self): self.correlation_rules = [] def add_rule(self, rule): self.correlation_rules.append(rule) def evaluate(self, events): alerts = [] for rule in self.correlation_rules: matching = [e for e in events if rule[\"condition\"](e)] if len(matching) >= rule[\"threshold\"]: alerts.append({ \"rule\": rule[\"name\"], \"severity\": rule[\"severity\"], \"events\": matching, \"timestamp\": datetime.utcnow().isoformat() }) return alerts Example: Correlate failed logins across accounts detector = IncidentDetector() detector.add_rule({ \"name\": \"Brute Force Detection\", \"condition\": lambda e: e[\"type\"] == \"failed_login\", \"threshold\": 10, \"severity\": \"high\", \"window\": timedelta(minutes=5) }) Phase 3: Containment, Eradication, Recovery #!/bin/bash Incident containment script isolate_host() { local host=$1 Block at network level ansible-playbook isolate_host.yml -e \"target=$host\" Capture forensic data ssh \"user@$host\" \"tar czf /tmp/forensics.tar.gz /var/log /tmp /home\" scp \"user@$host:/tmp/forensics.tar.gz\" ./evidence/ Snapshot for analysis aws ec2 create-snapshot --volume-id $(get_volume_id $host) echo \"Host $host isolated. Forensic data captured.\" } Eradicate malware eradicate() { local host=$1 ansible-playbook malware_removal.yml -e \"target=$host\" verify_clean $host && restore_from_clean_backup $host } Communication Plan Clear communication channels are critical: incident_communication: internal: slacks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: \"#security-alerts\" purpose: \"Real-time technical coordination\" \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: \"#incident-comm\" purpose: \"Executive updates\" email: incident-response@company.com external: legal_review: required before all external communication breach_notification: timeline: 72_hours template: breach_notification_template.md regulatory: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: \"ICO\" jurisdiction: \"UK\" notification_url: \"https://ico.org.uk/breach\" Tabletop Exercises Run quarterly tabletops to test the plan: Scenario: Ransomware on critical database server Inject 1: Encrypted files detected at 09:00 Question: Who declares the incident? Inject 2: Attacker demands 5 BTC Question: Do we pay? Who decides? Inject 3: Backup restoration fails Question: What is the fallback? Post-Incident Activity Conduct thorough post-mortems: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Track incident metrics SELECT incident_type, AVG(EXTRACT(EPOCH FROM (contained_at - detected_at))) as avg_containment_time, AVG(EXTRACT(EPOCH FROM (resolved_at - detected_at))) as avg_resolution_time FROM incidents WHERE created_at > NOW() - INTERVAL '1 year' GROUP BY incident_type; Conclusion A well-rehearsed incident response plan reduces breach impact by 50% or more. Invest in preparation, run regular tabletop exercises, automate containment where possible, and learn from every incident."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>Incident Response Plan</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The NIST Framework </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,6 +213,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Phase 1: Preparation </p>
 <br>
 <br>
@@ -204,7 +233,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Preparation determines response success. Key elements include: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -244,7 +279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tools:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -284,7 +325,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>edr: crowdstrike-falcon</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -324,7 +371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>communication: slack + pagerduty</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -364,7 +417,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ransomware.md</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ransomware.md</p>
 <br>
 <br>
 <br>
@@ -384,7 +440,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data-breach.md</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- data-breach.md</p>
 <br>
 <br>
 <br>
@@ -404,7 +463,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ddos.md</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ddos.md</p>
 <br>
 <br>
 <br>
@@ -424,7 +486,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- insider-threat.md</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- insider-threat.md</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -464,7 +532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>incident_commander: rotate weekly</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -504,7 +578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>legal: on-call</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -544,6 +624,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Phase 2: Detection and Analysis </p>
 <br>
 <br>
@@ -561,7 +644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Detect incidents through multiple signals: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -601,7 +690,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime, timedelta</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -641,7 +736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -681,7 +782,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def add_rule(self, rule):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -721,7 +828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def evaluate(self, events):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -761,7 +874,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for rule in self.correlation_rules:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -801,7 +920,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if len(matching) >= rule["threshold"]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -841,7 +966,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"rule": rule["name"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -881,7 +1012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"events": matching,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -921,7 +1058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -961,7 +1104,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Example: Correlate failed logins across accounts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1001,7 +1150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>detector.add_rule({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1041,7 +1196,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"condition": lambda e: e["type"] == "failed_login",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1081,7 +1242,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"severity": "high",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1121,7 +1288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1161,7 +1334,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>#!/bin/bash</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1201,6 +1380,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>isolate_host() {</p>
 <br>
 <br>
@@ -1221,7 +1403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>local host=$1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1261,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ansible-playbook isolate_host.yml -e "target=$host"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1301,7 +1495,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssh "user@$host" "tar czf /tmp/forensics.tar.gz /var/log /tmp /home"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1341,7 +1541,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Snapshot for analysis</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1381,6 +1587,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "Host $host isolated. Forensic data captured."</p>
 <br>
 <br>
@@ -1401,7 +1610,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1441,7 +1656,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>eradicate() {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1481,7 +1702,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ansible-playbook malware_removal.yml -e "target=$host"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1521,7 +1748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1558,7 +1791,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Clear communication channels are critical: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1598,7 +1837,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>internal:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1638,7 +1883,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: "#security-alerts"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: "#security-alerts"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1678,7 +1929,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: "#incident-comm"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- channel: "#incident-comm"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1718,7 +1975,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email: incident-response@company.com</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1758,7 +2021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>legal_review: required before all external communication</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1798,7 +2067,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>timeline: 72_hours</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1838,6 +2113,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>regulatory:</p>
 <br>
 <br>
@@ -1858,7 +2136,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "ICO"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "ICO"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1898,7 +2182,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>notification_url: "https://ico.org.uk/breach"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1935,7 +2225,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Run quarterly tabletops to test the plan: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1975,7 +2271,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Inject 1: Encrypted files detected at 09:00</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2015,7 +2317,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Inject 2: Attacker demands 5 BTC</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2055,7 +2363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Inject 3: Backup restoration fails</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2095,7 +2409,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Post-Incident Activity </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2132,7 +2452,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Track incident metrics</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Track incident metrics</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2172,7 +2498,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AVG(EXTRACT(EPOCH FROM (contained_at - detected_at))) as avg_containment_time,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2212,7 +2544,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM incidents</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2252,6 +2590,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY incident_type;</p>
 <br>
 <br>
@@ -2272,7 +2613,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

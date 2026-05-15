@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-model-deployment-strategies.html
   
   
   
+  
+  
+  
+
+
+# AI Model Deployment: Strategies for Production LLM Serving
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Deploying AI models to production requires infrastructure for serving, scaling, and monitoring. LLM deployment differs from traditional ML deployment due to high compute requirements, variable latency, and unique cost models.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Deploying AI models to production requires infrastructure for serving, scaling, 
   
   
   
+  
+  
+  
 
 
 Managed APIs (OpenAI, Anthropic, Google) provide the simplest deployment. No infrastructure management. Pay per token. Best for most applications. Limited customization and data control.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Self-hosted (vLLM, TGI, Triton) provide full control. Lower per-token cost at sc
   
   
   
+  
+  
+  
 
 
 Hybrid: use managed APIs for production and self-hosted for high-volume or sensitive workloads. This balances cost, latency, and control.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Hybrid: use managed APIs for production and self-hosted for high-volume or sensi
   
   
   
+  
+  
+  
 
 
 LLM serving requires GPU instances (A100, H100). Use autoscaling to handle traffic variability. Load balance across instances. Implement request queuing and retry logic. Monitor GPU utilization and memory.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ LLM serving requires GPU instances (A100, H100). Use autoscaling to handle traff
   
   
   
+  
+  
+  
 
 
 Continuous batching: combine multiple requests into a single batch for efficient GPU utilization. Speculative decoding: use a small model to generate tokens that a large model validates. KV-cache optimization: reuse cached attention computations across requests.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Prompt caching: store processed prompt outputs for identical or similar requests
   
   
   
+  
+  
+  
 
 
 ##  Monitoring
 
+  
+  
+  
   
   
   

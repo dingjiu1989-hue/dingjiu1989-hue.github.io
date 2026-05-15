@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/markdown-editors.html
   
 
 
+# Best Markdown Editors
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Markdown has become the default format for documentation, note-taking, and technical writing. The right editor can significantly improve your writing workflow. This guide covers the best Markdown editors for different use cases.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Markdown has become the default format for documentation, note-taking, and techn
   
   
   
+  
+  
+  
 
 
 A good Markdown editor should provide:
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ A good Markdown editor should provide:
   
   
   
+  
+  
+  
 
 
 * Syntax highlighting for code blocks.
 
+  
+  
+  
   
   
   
@@ -277,10 +321,16 @@ A good Markdown editor should provide:
   
   
   
+  
+  
+  
 
 
 * Image paste support.
 
+  
+  
+  
   
   
   
@@ -323,10 +373,16 @@ A good Markdown editor should provide:
   
   
   
+  
+  
+  
 
 
 * Git integration for version control.
 
+  
+  
+  
   
   
   
@@ -375,10 +431,16 @@ A good Markdown editor should provide:
   
   
   
+  
+  
+  
 
 
 VS Code is arguably the best Markdown editor with the right extensions. Its built-in Markdown support is already good, and extensions make it exceptional.
 
+  
+  
+  
   
   
   
@@ -427,10 +489,16 @@ VS Code is arguably the best Markdown editor with the right extensions. Its buil
   
   
   
+  
+  
+  
 
 
 code --install-extension yzhang.markdown-all-in-one
 
+  
+  
+  
   
   
   
@@ -479,10 +547,16 @@ code --install-extension bierner.markdown-mermaid
   
   
   
+  
+  
+  
 
 
 code --install-extension bierner.markdown-preview-github-styles
 
+  
+  
+  
   
   
   
@@ -531,10 +605,16 @@ code --install-extension bierner.markdown-emoji
   
   
   
+  
+  
+  
 
 
 code --install-extension takumii.markdowntable
 
+  
+  
+  
   
   
   
@@ -583,10 +663,16 @@ code --install-extension DavidAnson.vscode-markdownlint
   
   
   
+  
+  
+  
 
 
 **Markdown All-in-One** adds keyboard shortcuts, table of contents generation, and auto-preview. **Markdownlint** enforces consistent formatting. **Mermaid** support allows embedding diagrams directly in Markdown.
 
+  
+  
+  
   
   
   
@@ -635,10 +721,16 @@ code --install-extension DavidAnson.vscode-markdownlint
   
   
   
+  
+  
+  
 
 
 **Cons**: Not a dedicated Markdown editor, can be overwhelming for writers.
 
+  
+  
+  
   
   
   
@@ -687,10 +779,16 @@ code --install-extension DavidAnson.vscode-markdownlint
   
   
   
+  
+  
+  
 
 
 Obsidian has become the most popular Markdown-based knowledge management tool. It treats Markdown files as a personal wiki with internal linking and graph visualization.
 
+  
+  
+  
   
   
   
@@ -739,10 +837,16 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
   
   
   
+  
+  
+  
 
 
 * Local-first -- all notes are plain Markdown files on your filesystem.
 
+  
+  
+  
   
   
   
@@ -785,10 +889,16 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
   
   
   
+  
+  
+  
 
 
 * Canvas and whiteboard for visual thinking.
 
+  
+  
+  
   
   
   
@@ -831,6 +941,9 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
   
   
   
+  
+  
+  
 
 
 * Daily notes, templates, and tagging.
@@ -854,10 +967,16 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
   
   
   
+  
+  
+  
 
 
 * Vim keybindings support.
 
+  
+  
+  
   
   
   
@@ -906,10 +1025,16 @@ Obsidian has become the most popular Markdown-based knowledge management tool. I
   
   
   
+  
+  
+  
 
 
 ##  Links
 
+  
+  
+  
   
   
   
@@ -958,10 +1083,16 @@ Use [[Internal Links]] to connect ideas.
   
   
   
+  
+  
+  
 
 
 Tags: #development #tools
 
+  
+  
+  
   
   
   
@@ -1010,10 +1141,16 @@ Tags: #development #tools
   
   
   
+  
+  
+  
 
 
 ![[Other Note]]
 
+  
+  
+  
   
   
   
@@ -1062,10 +1199,16 @@ Tags: #development #tools
   
   
   
+  
+  
+  
 
 
 **Cons**: Not great for collaborative editing, some features require paid sync.
 
+  
+  
+  
   
   
   
@@ -1114,10 +1257,16 @@ Tags: #development #tools
   
   
   
+  
+  
+  
 
 
 Typora is a minimal Markdown editor with a unique live-preview approach -- it hides Markdown syntax and renders your document as you type.
 
+  
+  
+  
   
   
   
@@ -1166,10 +1315,16 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 * WYSIWYG editing (no split pane -- what you see is what you mean).
 
+  
+  
+  
   
   
   
@@ -1212,10 +1367,16 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 * Export to PDF, HTML, Word, LaTeX.
 
+  
+  
+  
   
   
   
@@ -1258,6 +1419,9 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 * Image and table insertion without Markdown code.
@@ -1281,10 +1445,16 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 * Themes and custom CSS.
 
+  
+  
+  
   
   
   
@@ -1333,10 +1503,16 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 **Cons**: Not open source, no plugin system, limited organization features.
 
+  
+  
+  
   
   
   
@@ -1385,10 +1561,16 @@ Typora is a minimal Markdown editor with a unique live-preview approach -- it hi
   
   
   
+  
+  
+  
 
 
 Notable is a cross-platform Markdown editor with a three-pane layout (folders, files, editor/preview). It focuses on notes and tags organization.
 
+  
+  
+  
   
   
   
@@ -1437,10 +1619,16 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   
   
   
+  
+  
+  
 
 
 * Tag-based organization (no nested folders needed).
 
+  
+  
+  
   
   
   
@@ -1483,10 +1671,16 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   
   
   
+  
+  
+  
 
 
 * Built-in encryption for sensitive notes.
 
+  
+  
+  
   
   
   
@@ -1529,10 +1723,16 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   
   
   
+  
+  
+  
 
 
 * Code snippet support with highlighting.
 
+  
+  
+  
   
   
   
@@ -1581,10 +1781,16 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   
   
   
+  
+  
+  
 
 
 **Cons**: No mobile app, smaller community.
 
+  
+  
+  
   
   
   
@@ -1633,10 +1839,16 @@ Notable is a cross-platform Markdown editor with a three-pane layout (folders, f
   
   
   
+  
+  
+  
 
 
 Logseq is an open-source knowledge management tool that uses an outliner format with Markdown support. It is designed for thought organization and project management.
 
+  
+  
+  
   
   
   
@@ -1685,10 +1897,16 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 * Outliner-based note-taking.
 
+  
+  
+  
   
   
   
@@ -1731,10 +1949,16 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 * Block-level referencing (reference specific paragraphs).
 
+  
+  
+  
   
   
   
@@ -1777,6 +2001,9 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 * PDF annotation support.
@@ -1800,10 +2027,16 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 * Git-based sync.
 
+  
+  
+  
   
   
   
@@ -1852,10 +2085,16 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 **Cons**: Outliner style takes adjustment, not for traditional document writing.
 
+  
+  
+  
   
   
   
@@ -1904,10 +2143,16 @@ Logseq is an open-source knowledge management tool that uses an outliner format 
   
   
   
+  
+  
+  
 
 
 iA Writer is a focused writing app that emphasizes typography and minimalism. It is available on Mac, iOS, Windows, and Android.
 
+  
+  
+  
   
   
   
@@ -1956,10 +2201,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 * Focus mode (highlights current sentence, dims rest).
 
+  
+  
+  
   
   
   
@@ -2002,10 +2253,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 * Syntax control for visual formatting.
 
+  
+  
+  
   
   
   
@@ -2048,10 +2305,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 * Direct publishing to Medium, WordPress.
 
+  
+  
+  
   
   
   
@@ -2100,10 +2363,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 **Cons**: Paid ($29.99 one-time), limited to writing-focused features.
 
+  
+  
+  
   
   
   
@@ -2152,10 +2421,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 | Editor | Platform | Price | Live Preview | Plugins | Best For |
 
+  
+  
+  
   
   
   
@@ -2204,10 +2479,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 | VS Code | Win/Mac/Linux | Free | Split pane | Extensive | Code-heavy docs |
 
+  
+  
+  
   
   
   
@@ -2256,10 +2537,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 | Typora | Win/Mac/Linux | $14.99 (once) | Inline WYSIWYG | Themes | Focused writing |
 
+  
+  
+  
   
   
   
@@ -2308,10 +2595,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 | Logseq | Win/Mac/Linux/Mobile | Free (sync paid) | Side-by-side | Plugins | Thought organization |
 
+  
+  
+  
   
   
   
@@ -2360,10 +2653,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 ##  Specialized Tools
 
+  
+  
+  
   
   
   
@@ -2412,10 +2711,16 @@ iA Writer is a focused writing app that emphasizes typography and minimalism. It
   
   
   
+  
+  
+  
 
 
 npm install -g @marp-team/marp-cli
 
+  
+  
+  
   
   
   
@@ -2464,10 +2769,16 @@ marp presentation.md -o slides.html
   
   
   
+  
+  
+  
 
 
 marp presentation.md --pdf
 
+  
+  
+  
   
   
   
@@ -2516,10 +2827,16 @@ marp presentation.md --pdf
   
   
   
+  
+  
+  
 
 
 SUMMARY.md
 
+  
+  
+  
   
   
   
@@ -2568,10 +2885,16 @@ SUMMARY.md
   
   
   
+  
+  
+  
 
 
 └── Chapter 2
 
+  
+  
+  
   
   
   
@@ -2620,10 +2943,16 @@ SUMMARY.md
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -2669,10 +2998,16 @@ SUMMARY.md
   
   
   
+  
+  
+  
 
 
 * **For personal knowledge management**: Obsidian (best linking and organization).
 
+  
+  
+  
   
   
   
@@ -2715,10 +3050,16 @@ SUMMARY.md
   
   
   
+  
+  
+  
 
 
 * **For presentations**: Marp (Markdown to slides).
 
+  
+  
+  
   
   
   
@@ -2764,10 +3105,16 @@ SUMMARY.md
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

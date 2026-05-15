@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/build-optimization.html
   
   
   
+  
+  
+  
+
+
+# Build Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Build speed directly affects developer productivity. Slow builds break flow, reduce iteration speed, and discourage best practices like running tests before committing. This article examines build optimization strategies across different languages and tools.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Build speed directly affects developer productivity. Slow builds break flow, red
   
   
   
+  
+  
+  
 
 
 Build caching stores the output of build steps that have not changed. When a source file changes, the build system only recompiles the affected parts, reusing cached results for everything else. Effective caching is the highest-impact optimization.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Incremental compilation is the most basic form of caching. Compilers track which
   
   
   
+  
+  
+  
 
 
 Build systems like Bazel, Buck, and Nx take caching further. They hash inputs to each build action and reuse cached results when inputs are identical. This allows caching across different developers and CI runs. A developer's build can reuse results from a CI build if the inputs are identical. This dramatically reduces build times for large projects.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Build systems like Bazel, Buck, and Nx take caching further. They hash inputs to
   
   
   
+  
+  
+  
 
 
 Modern machines have multiple CPU cores. Build systems that fully utilize available cores complete builds faster than sequential systems. Parallelism operates at multiple levels: independent build targets can be built concurrently, and individual compilation units can be compiled in parallel.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ Make and Ninja handle parallelism at the target level with the `-j` flag specify
   
   
   
+  
+  
+  
 
 
 Parallelism has diminishing returns. Beyond a certain point (typically 2-4x the core count), adding more parallel jobs increases context switching overhead without improving throughput. Each project has an optimal parallelism level.
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Parallelism has diminishing returns. Beyond a certain point (typically 2-4x the 
   
   
   
+  
+  
+  
 
 
 Incremental builds rebuild only the parts of the project that changed, reusing previous build outputs for unchanged parts. This is distinct from caching—incremental builds track file-level changes rather than action-level hashes.
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Incremental compilation in TypeScript uses `--incremental` and `--tsBuildInfoFil
   
   
   
+  
+  
+  
 
 
 The incremental build speedup depends on the change scope. A single-file change in a large project should rebuild in seconds rather than minutes. If incremental builds are slow, investigate whether changes to common dependencies are triggering widespread rebuilds.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ The incremental build speedup depends on the change scope. A single-file change 
   
   
   
+  
+  
+  
 
 
 For very large projects, distributed compilation spreads compilation across multiple machines. distcc (for C/C++), Bazel's remote execution, and IncrediBuild distribute compilation tasks to a pool of worker machines.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Distributed compilation is effective when compilation is CPU-bound and the netwo
   
   
   
+  
+  
+  
 
 
 Remote caching (using shared storage for build artifacts) is often more practical than remote execution. Turborepo and Nx provide remote caching for JavaScript/TypeScript builds. Bazel and BuildBuddy provide remote caching for polyglot builds. Remote caching requires significant shared storage but avoids the complexity of remote execution.
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Remote caching (using shared storage for build artifacts) is often more practica
   
   
   
+  
+  
+  
 
 
 The choice of build tool affects optimization options. Modern build tools like Turborepo, Nx, Bazel, and Pants offer built-in caching, parallelism, and distributed build support. Traditional tools like Make, Gradle, and Webpack have plugin ecosystems for optimization.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ JavaScript/TypeScript projects benefit from Turborepo (monorepo caching) or Nx (
   
   
   
+  
+  
+  
 
 
 ##  Practical Steps
 
+  
+  
+  
   
   
   
@@ -728,6 +823,9 @@ The first optimization step is measuring current build times. Identify which par
   
   
   
+  
+  
+  
 
 
 Optimize before scaling up build infrastructure. A project that compiles in 30 seconds does not need distributed compilation. A project that compiles in 30 minutes should be optimized at the project level before investing in distributed build infrastructure.
@@ -754,10 +852,16 @@ Optimize before scaling up build infrastructure. A project that compiles in 30 s
   
   
   
+  
+  
+  
 
 
 Monitor build times in CI. Track trends over time. A gradual increase in build times indicates accumulating complexity that needs attention before it becomes a crisis. Set build time budgets and alert when they are exceeded.
 
+  
+  
+  
   
   
   

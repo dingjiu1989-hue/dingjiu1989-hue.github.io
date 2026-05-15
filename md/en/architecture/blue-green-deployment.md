@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/blue-green-deployment.htm
   
   
   
+  
+  
+  
+
+
+# Blue-Green Deployment Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Blue-green deployment is a release strategy that maintains two identical production environments—blue (current) and green (new)—and switches traffic between them. This approach eliminates downtime during deployments and provides instant rollback capability.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Blue-green deployment is a release strategy that maintains two identical product
   
   
   
+  
+  
+  
 
 
 The blue environment runs the current production version. The green environment is provisioned with the new version and is fully tested. Once green passes all validation, a router or load balancer switches traffic from blue to green. If issues are detected, traffic can be instantly switched back to blue.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ This design requires the infrastructure to run both environments simultaneously.
   
   
   
+  
+  
+  
 
 
 ##  Advantages
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Zero-downtime deployments are the primary benefit. Users never experience servic
   
   
   
+  
+  
+  
 
 
 ##  Challenges
 
+  
+  
+  
   
   
   
@@ -285,6 +332,9 @@ Database schema changes require careful handling. If the green deployment includ
   
   
   
+  
+  
+  
 
 
 The doubled infrastructure cost can be significant for large deployments. Cloud auto-scaling and shorter overlap periods help manage costs. Some organizations use a single environment with blue-green deployment slots (like Azure Deployment Slots) to reduce infrastructure requirements.
@@ -308,10 +358,16 @@ The doubled infrastructure cost can be significant for large deployments. Cloud 
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   

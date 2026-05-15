@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/database/database-locking-mechanisms.h
   
   
   
+  
+  
+  
+
+
+# Database Locking: Row Locks, Table Locks, and Deadlock Prevention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Locking is how databases maintain data consistency under concurrent access. Without locks, concurrent transactions could read partially-written data or overwrite each other's changes. Different databases implement locking differently, but the core concepts are universal.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Locking is how databases maintain data consistency under concurrent access. With
   
   
   
+  
+  
+  
 
 
 Shared locks (read locks) allow multiple transactions to read the same data simultaneously. Multiple shared locks can coexist on the same resource. Shared locks prevent exclusive locks from being acquired.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Exclusive locks (write locks) prevent any other transaction from reading or writ
   
   
   
+  
+  
+  
 
 
 Update locks are a hybrid used to prevent deadlocks during read-then-write operations. An update lock starts as shared but can be promoted to exclusive. Only one transaction can hold an update lock on a resource.
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Update locks are a hybrid used to prevent deadlocks during read-then-write opera
   
   
   
+  
+  
+  
 
 
 Row locks lock individual rows. They provide maximum concurrency but require more locks for the same operation. Row-level locking is the default in modern databases like PostgreSQL and MySQL (InnoDB).
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Page locks lock a group of rows on a database page. They balance concurrency and
   
   
   
+  
+  
+  
 
 
 Table locks lock the entire table. They provide maximum protection but minimum concurrency. Use table locks for DDL operations, bulk data loads, and when row-level locking overhead is unacceptable.
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ Lock escalation: some databases automatically escalate row locks to table locks 
   
   
   
+  
+  
+  
 
 
 ##  Deadlocks
 
+  
+  
+  
   
   
   
@@ -377,10 +436,16 @@ A deadlock occurs when two transactions each hold locks the other needs: Transac
   
   
   
+  
+  
+  
 
 
 Databases detect deadlocks through wait-for graph analysis. When detected, one transaction is chosen as the victim and rolled back. The victim is typically the transaction that accumulated the least work.
 
+  
+  
+  
   
   
   
@@ -423,10 +488,16 @@ Prevent deadlocks: access resources in a consistent order across all transaction
   
   
   
+  
+  
+  
 
 
 ##  Two-Phase Locking
 
+  
+  
+  
   
   
   
@@ -469,6 +540,9 @@ Two-Phase Locking (2PL) is the protocol databases use to ensure serializability.
   
   
   
+  
+  
+  
 
 
 Strict 2PL releases all locks at transaction commit time. This is the most common implementation and prevents cascading aborts. If a transaction aborts, other transactions did not read its uncommitted writes.
@@ -492,10 +566,16 @@ Strict 2PL releases all locks at transaction commit time. This is the most commo
   
   
   
+  
+  
+  
 
 
 ##  Monitoring Locks
 
+  
+  
+  
   
   
   

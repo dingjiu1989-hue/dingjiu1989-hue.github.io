@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/linkedin-personal-brand.htm
   
 
 
+# LinkedIn Personal Brand for Technical Founders
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  LinkedIn Personal Brand for Technical Founders
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ LinkedIn has evolved from a digital resume into the premier platform for B2B pro
   
   
   
+  
+  
+  
 
 
 ### Profile Optimization
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Your LinkedIn profile is the foundation of your personal brand. The headline sho
   
   
   
+  
+  
+  
 
 
 The Featured section should showcase your best content: technical blog posts, product launches, conference talks, and notable achievements. This is the first thing visitors see — curate it aggressively. Include portfolio projects for technical credibility.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ The Featured section should showcase your best content: technical blog posts, pr
   
   
   
+  
+  
+  
 
 
 LinkedIn content for developers requires a different approach than X or blogs. LinkedIn favors longer-form, insight-driven content. Posts in the 1,000-2,000 character range perform best. The format should be: a hook that stops the scroll, a story or insight, specific technical details, and a question or call to action.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Content pillars for technical founders: technical insights (architecture decisio
   
   
   
+  
+  
+  
 
 
 Use document posts (PDF carousels) for technical content. A carousel explaining a system architecture or comparing technologies performs significantly better than text-only posts. Include diagrams, code snippets, and bullet points for scannability.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Use document posts (PDF carousels) for technical content. A carousel explaining 
   
   
   
+  
+  
+  
 
 
 Thought leadership on LinkedIn means sharing original perspectives, not reposting industry news. If 100 people are writing about AI coding assistants, your post needs a unique angle: "Why I stopped using AI coding assistants for this specific task" rather than "AI coding assistants are the future."
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Publish long-form articles on LinkedIn for deep technical topics. These rank in 
   
   
   
+  
+  
+  
 
 
 Engage on others' posts meaningfully. Comments with technical depth (not "Great post!") position you as an authority and expose your profile to others' networks. Reply to comments on your own posts to boost engagement signals.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Engage on others' posts meaningfully. Comments with technical depth (not "Great 
   
   
   
+  
+  
+  
 
 
 Connection requests should be personalized and specific. "I read your post about PostgreSQL indexing and have a question about GiST indexes" is better than "I'd like to connect." After connecting, follow up with a genuine message within a week — share something relevant or ask a thoughtful question.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Join relevant LinkedIn groups in your niche. Contribute answers to technical que
   
   
   
+  
+  
+  
 
 
 ### Consistency and Measurement
 
+  
+  
+  
   
   
   
@@ -598,6 +678,9 @@ Post 2-3 times per week minimum. Inconsistent posting kills momentum. Use Linked
   
   
   
+  
+  
+  
 
 
 Optimize based on data. If architecture diagrams get 3x engagement, create more. If Monday posts underperform, shift to Tuesday through Thursday. LinkedIn's analytics provide detailed demographic data about your audience.
@@ -624,10 +707,16 @@ Optimize based on data. If architecture diagrams get 3x engagement, create more.
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

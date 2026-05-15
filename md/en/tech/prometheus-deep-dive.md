@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/prometheus-deep-dive.html
   
   
   
+  
+  
+  
+
+
+# Prometheus Deep Dive: Metrics, PromQL, Alerting, and High Availability
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Prometheus has emerged as the de facto standard for monitoring cloud-native infr
   
   
   
+  
+  
+  
 
 
 This article explores Prometheus architecture, metrics collection, PromQL, recording rules, alerting, and strategies for high availability.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ This article explores Prometheus architecture, metrics collection, PromQL, recor
   
   
   
+  
+  
+  
 
 
 Prometheus scrapes metrics from instrumented targets over HTTP. Targets expose metrics at a standard endpoint, typically `/metrics`, in plaintext format. Exporters bridge the gap for third-party systems: the Node Exporter provides OS-level metrics, the Blackbox Exporter probes external endpoints, and numerous specialized exporters exist for databases, message queues, and cloud services.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ A key design choice is the pull model. Prometheus scrapes targets on a configura
   
   
   
+  
+  
+  
 
 
 ##  The Multi-Dimensional Data Model
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ Prometheus stores metrics as time series identified by a metric name and a set o
   
   
   
+  
+  
+  
 
 
 http_requests_total{method="POST", endpoint="/api/users", status="200"}
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Labels enable dimensionality. You can aggregate, filter, and compute across any 
   
   
   
+  
+  
+  
 
 
 Metric types include counters (monotonically increasing values), gauges (arbitrarily fluctuating values), histograms (observations counted into configurable buckets), and summaries (quantiles computed on the client). Choosing the right metric type is critical for accurate monitoring and cost-effective cardinality management.
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Metric types include counters (monotonically increasing values), gauges (arbitra
   
   
   
+  
+  
+  
 
 
 PromQL is the heart of Prometheus. It supports instant vector queries, range vector queries, aggregation operators, and binary arithmetic.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Key patterns include:
   
   
   
+  
+  
+  
 
 
 * Rate calculation: `rate(http_requests_total[5m])` computes per-second request rate averaged over 5 minutes.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Key patterns include:
   
   
   
+  
+  
+  
 
 
 * Percentiles: `histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m]))` computes the 99th percentile latency.
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Key patterns include:
   
   
   
+  
+  
+  
 
 
 Understanding PromQL vector matching — one-to-one, many-to-one, and group modifiers — is essential for writing correct queries involving multiple metrics.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Understanding PromQL vector matching — one-to-one, many-to-one, and group modi
   
   
   
+  
+  
+  
 
 
 Recording rules compute frequently needed or computationally expensive expressions in advance. They re-encapsulate a PromQL expression as a new time series, scraped alongside other metrics.
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ groups:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: recording_rules
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: recording_rules
 
+  
+  
+  
   
   
   
@@ -780,6 +881,9 @@ interval: 30s
   
   
   
+  
+  
+  
 
 
 rules:
@@ -806,10 +910,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- record: instance:node_cpu_utilization:rate5m
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- record: instance:node_cpu_utilization:rate5m
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) *
   
   
   
+  
+  
+  
 
 
 Recording rules reduce query latency for dashboards and provide a stable interface between metric collection and consumption.
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ Recording rules reduce query latency for dashboards and provide a stable interfa
   
   
   
+  
+  
+  
 
 
 Alerting in Prometheus is a two-phase process. The Prometheus server evaluates alerting rules and sends firing alerts to Alertmanager, which handles deduplication, silencing, inhibition, and routing.
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ groups:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: alerting_rules
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: alerting_rules
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighCPUUsage
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: HighCPUUsage
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ expr: instance:node_cpu_utilization:rate5m > 80
   
   
   
+  
+  
+  
 
 
 for: 5m
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ labels:
   
   
   
+  
+  
+  
 
 
 severity: warning
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ annotations:
   
   
   
+  
+  
+  
 
 
 summary: "CPU usage above 80%"
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ Alertmanager routes alerts to notification channels (PagerDuty, Slack, email) us
   
   
   
+  
+  
+  
 
 
 ##  High Availability and Long-Term Storage
 
+  
+  
+  
   
   
   
@@ -1274,6 +1432,9 @@ Prometheus is designed for reliability, not durability. A single Prometheus serv
   
   
   
+  
+  
+  
 
 
 For long-term storage, the Thanos and Cortex projects extend Prometheus. Thanos provides global query views across multiple Prometheus instances, unlimited retention via object storage (S3, GCS), and downsampling for fast queries over large time ranges. Cortex offers a horizontally scalable, multi-tenant Prometheus-compatible backend.
@@ -1300,10 +1461,16 @@ For long-term storage, the Thanos and Cortex projects extend Prometheus. Thanos 
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/sli-slo-error-budget.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2285",
+      "wordCount": "2506",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/sli-slo-error-budget.html"},
-      "articleBody": "SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts Introduction Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budgets form the foundation of Site Reliability Engineering (SRE) practice. Originating from Google's SRE teams, these concepts provide a data-driven framework for balancing reliability with feature velocity. Rather than aiming for 100% uptime, SRE uses error budgets to make explicit trade-offs between reliability and innovation. This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design. Defining SLIs An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence). Good SLIs are measurable from the customer's perspective. For a web service, the availability SLI measures whether HTTP requests return successful responses (2xx or 3xx status codes), not whether the server process is running. This distinction is critical: the server could be operational while the application returns 500 errors. SLIs should be captured as a ratio of good events to total events: availability_sli = successful_requests / total_requests latency_sli = fast_requests / total_requests SLI definition requires choosing measurement windows and aggregation methods. A 30-second measurement window catches transient issues, while a 5-minute window smooths noise. Rolling windows (30 days for monthly SLOs) provide stability. Setting SLOs An SLO sets a target value for an SLI over a defined period. Common targets are 99.9% (three nines), 99.99% (four nines), and 99.999% (five nines). Each additional nine approximately increases allowed downtime by an order of magnitude: * 99.9% allows 8.76 hours of downtime per year. * 99.99% allows 52.56 minutes per year. * 99.999% allows 5.26 minutes per year. SLO targets should not be aspirational. A target that has never been met provides no useful signal. Start with a target slightly below current performance and tighten it over time as reliability improves. Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs \u2014 target (internal goal) and minimum (customer commitment) \u2014 provide a buffer between aspirational goals and contractual obligations. Error Budgets The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events \u2014 or approximately 43 minutes of downtime. The error budget defines how much risk the team can take. When the budget is full (the service is exceeding its SLO), the team can deploy new features. When the budget is depleted (the service is at risk of missing its SLO), releases are frozen until reliability improves. Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity. Burn Rate Alerts Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period. A burn rate of 1 means the budget will be fully consumed by the end of the period at the current rate. A burn rate of 2 means the budget will be exhausted in half the period. Multi-window, multi-burn-rate alerting uses fast-burn and slow-burn windows: * Fast-burn alerts (burn rate >= 14 over 1 hour): Catches severe outages immediately. Pages the on-call engineer. * Slow-burn alerts (burn rate >= 2 over 6 hours): Detects gradual degradation. Pages or creates a ticket for next-day investigation. This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget. Implementation with Prometheus Prometheus and the slo-exporter pattern implement SLO monitoring effectively: groups: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate expr: | ( 1 - (rate(http_requests_good_total[1h]) / rate(http_requests_total[1h])) ) > 14 * (1 - 0.999) for: 2m labels: severity: critical The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets. Conclusion SLIs, SLOs, and error budgets transform reliability from a subjective goal into an objective discipline. Well-defined SLIs measure what matters from the customer perspective. Realistic SLOs provide clear targets. Error budgets enable data-driven decisions about feature releases. Burn rate alerts catch problems before they exhaust reliability budgets. Together, these practices enable teams to make explicit, informed trade-offs between reliability and velocity."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/slisloerror-budgets-defining-slis-setting-slos-and-burn-rate-alerts-2phj"
+      ],
+      "articleBody": "SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts Introduction Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budgets form the foundation of Site Reliability Engineering (SRE) practice. Originating from Google's SRE teams, these concepts provide a data-driven framework for balancing reliability with feature velocity. Rather than aiming for 100% uptime, SRE uses error budgets to make explicit trade-offs between reliability and innovation. This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design. Defining SLIs An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence). Good SLIs are measurable from the customer's perspective. For a web service, the availability SLI measures whether HTTP requests return successful responses (2xx or 3xx status codes), not whether the server process is running. This distinction is critical: the server could be operational while the application returns 500 errors. SLIs should be captured as a ratio of good events to total events: availability_sli = successful_requests / total_requests latency_sli = fast_requests / total_requests SLI definition requires choosing measurement windows and aggregation methods. A 30-second measurement window catches transient issues, while a 5-minute window smooths noise. Rolling windows (30 days for monthly SLOs) provide stability. Setting SLOs An SLO sets a target value for an SLI over a defined period. Common targets are 99.9% (three nines), 99.99% (four nines), and 99.999% (five nines). Each additional nine approximately increases allowed downtime by an order of magnitude: * 99.9% allows 8.76 hours of downtime per year. * 99.99% allows 52.56 minutes per year. * 99.999% allows 5.26 minutes per year. SLO targets should not be aspirational. A target that has never been met provides no useful signal. Start with a target slightly below current performance and tighten it over time as reliability improves. Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs \u2014 target (internal goal) and minimum (customer commitment) \u2014 provide a buffer between aspirational goals and contractual obligations. Error Budgets The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events \u2014 or approximately 43 minutes of downtime. The error budget defines how much risk the team can take. When the budget is full (the service is exceeding its SLO), the team can deploy new features. When the budget is depleted (the service is at risk of missing its SLO), releases are frozen until reliability improves. Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity. Burn Rate Alerts Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period. A burn rate of 1 means the budget will be fully consumed by the end of the period at the current rate. A burn rate of 2 means the budget will be exhausted in half the period. Multi-window, multi-burn-rate alerting uses fast-burn and slow-burn windows: * Fast-burn alerts (burn rate >= 14 over 1 hour): Catches severe outages immediately. Pages the on-call engineer. * Slow-burn alerts (burn rate >= 2 over 6 hours): Detects gradual degradation. Pages or creates a ticket for next-day investigation. This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget. Implementation with Prometheus Prometheus and the slo-exporter pattern implement SLO monitoring effectively: groups: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate expr: | ( 1 - (rate(http_requests_good_total[1h]) / rate(http_requests_total[1h])) ) > 14 * (1 - 0.999) for: 2m labels: severity: critical The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets. Conclusion SLIs, SLOs, and error budgets transform reliability from a subjective goal into an objective discipline. Well-defined SLIs measure what matters from the customer perspective. Realistic SLOs provide clear targets. Error budgets enable data-driven decisions about feature releases. Burn rate alerts catch problems before they exhaust reliability budgets. Together, these practices enable teams to make explicit, informed trade-offs between reliability and velocity."
     }
     </script>
     <script type="application/ld+json">
@@ -199,7 +202,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -245,7 +280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -291,7 +332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -337,7 +384,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SLIs should be captured as a ratio of good events to total events:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -383,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>latency_sli = fast_requests / total_requests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +488,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Setting SLOs</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -475,7 +540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* 99.9% allows 8.76 hours of downtime per year.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -521,7 +592,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* 99.999% allows 5.26 minutes per year.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -567,7 +644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs — target (internal goal) and minimum (customer commitment) — provide a buffer between aspirational goals and contractual obligations.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -613,7 +696,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events — or approximately 43 minutes of downtime.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -659,7 +748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -705,7 +800,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -751,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Fast-burn alerts (burn rate >= 14 over 1 hour): Catches severe outages immediately. Pages the on-call engineer.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -797,7 +904,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -843,7 +956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Prometheus and the slo-exporter pattern implement SLO monitoring effectively:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -889,7 +1008,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -935,7 +1060,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -981,7 +1112,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1027,7 +1164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) > 14 * (1 - 0.999)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1073,7 +1216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>labels:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1119,6 +1268,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets.</p>
 <br>
 <br>
@@ -1142,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

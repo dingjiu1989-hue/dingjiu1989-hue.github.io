@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/owasp-top-10-2026.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2747",
+      "wordCount": "3133",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/owasp-top-10-2026.html"},
-      "articleBody": "OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 Overview The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape. Updated Categories A01: Broken Access Control Access control failures remain the top risk. Modern applications must enforce server-side checks: // Server-side access control middleware function requireRole(...roles) { return (req, res, next) => { if (!req.user || !roles.includes(req.user.role)) { // Log the attempt securityLog.warn(\"Unauthorized access attempt\", { user: req.user?.id, path: req.path, ip: req.ip }); return res.status(403).json({ error: \"Insufficient permissions\" }); } next(); }; } // Usage app.get(\"/api/admin/users\", requireRole(\"admin\"), adminController.getUsers); A02: Cryptographic Failures Weak cryptography is increasingly exploited. Use modern algorithms: from cryptography.hazmat.primitives.ciphers.aead import AESGCM import os def encrypt_data(data, key): aesgcm = AESGCM(key) nonce = os.urandom(12) ciphertext = aesgcm.encrypt(nonce, data.encode(), None) return nonce + ciphertext def decrypt_data(encrypted, key): aesgcm = AESGCM(key) nonce = encrypted[:12] ciphertext = encrypted[12:] return aesgcm.decrypt(nonce, ciphertext, None).decode() A03: Injection Injection remains prevalent. Parameterized queries are mandatory: Secure: Parameterized query def find_user(email): query = \"SELECT * FROM users WHERE email = $1\" return db.execute(query, [email]) Also secure: ORM abstraction def find_user_safe(email): return User.query.filter_by(email=email).first() A04: Insecure Design A new emphasis on design-level flaws: threat_modeling_checklist: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are trust boundaries defined? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there a data flow diagram? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are failure modes handled? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there rate limiting on auth endpoints? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are security controls centralized? A07: Identification and Authentication Failures Passwordless and MFA are now expected baselines: // WebAuthn registration async function registerPasskey(userId) { const credential = await navigator.credentials.create({ publicKey: { challenge: new Uint8Array(32), rp: { name: \"Example Corp\" }, user: { id: new TextEncoder().encode(userId), name: userId, displayName: userId }, pubKeyCredParams: [{ alg: -7, type: \"public-key\" }] } }); return credential; } A08: Software and Data Integrity Failures CI/CD pipeline security and supply chain attacks: Supply chain security checks supply_chain_checks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Pin dependency versions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use private registries for verified packages \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sign all releases with cosign Testing Approaches Modern testing combines automation and manual review: def security_test_suite(): results = [] 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST results.extend(run_dast_scan(\"https://staging.example.com\")) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan results.extend(run_sast_scan(\"./src\")) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check results.extend(run_dependency_check(\"./package.json\")) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing results.extend(api_fuzz(\"https://staging.example.com/api\")) return analyze_results(results) Conclusion The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle."
+      "articleBody": "OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 OWASP Top 10 2026 Overview The OWASP Top 10 represents the most critical web application security risks. The 2026 edition introduces several new categories reflecting the evolving threat landscape. Updated Categories A01: Broken Access Control Access control failures remain the top risk. Modern applications must enforce server-side checks: // Server-side access control middleware function requireRole(...roles) { return (req, res, next) => { if (!req.user || !roles.includes(req.user.role)) { // Log the attempt securityLog.warn(\"Unauthorized access attempt\", { user: req.user?.id, path: req.path, ip: req.ip }); return res.status(403).json({ error: \"Insufficient permissions\" }); } next(); }; } // Usage app.get(\"/api/admin/users\", requireRole(\"admin\"), adminController.getUsers); A02: Cryptographic Failures Weak cryptography is increasingly exploited. Use modern algorithms: from cryptography.hazmat.primitives.ciphers.aead import AESGCM import os def encrypt_data(data, key): aesgcm = AESGCM(key) nonce = os.urandom(12) ciphertext = aesgcm.encrypt(nonce, data.encode(), None) return nonce + ciphertext def decrypt_data(encrypted, key): aesgcm = AESGCM(key) nonce = encrypted[:12] ciphertext = encrypted[12:] return aesgcm.decrypt(nonce, ciphertext, None).decode() A03: Injection Injection remains prevalent. Parameterized queries are mandatory: Secure: Parameterized query def find_user(email): query = \"SELECT * FROM users WHERE email = $1\" return db.execute(query, [email]) Also secure: ORM abstraction def find_user_safe(email): return User.query.filter_by(email=email).first() A04: Insecure Design A new emphasis on design-level flaws: threat_modeling_checklist: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are trust boundaries defined? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there a data flow diagram? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are failure modes handled? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there rate limiting on auth endpoints? \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are security controls centralized? A07: Identification and Authentication Failures Passwordless and MFA are now expected baselines: // WebAuthn registration async function registerPasskey(userId) { const credential = await navigator.credentials.create({ publicKey: { challenge: new Uint8Array(32), rp: { name: \"Example Corp\" }, user: { id: new TextEncoder().encode(userId), name: userId, displayName: userId }, pubKeyCredParams: [{ alg: -7, type: \"public-key\" }] } }); return credential; } A08: Software and Data Integrity Failures CI/CD pipeline security and supply chain attacks: Supply chain security checks supply_chain_checks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Pin dependency versions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use private registries for verified packages \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sign all releases with cosign Testing Approaches Modern testing combines automation and manual review: def security_test_suite(): results = [] 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST results.extend(run_dast_scan(\"https://staging.example.com\")) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan results.extend(run_sast_scan(\"./src\")) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check results.extend(run_dependency_check(\"./package.json\")) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing results.extend(api_fuzz(\"https://staging.example.com/api\")) return analyze_results(results) Conclusion The OWASP Top 10 2026 reflects the maturing security landscape. Broken access control remains king, but supply chain security and design flaws have rightfully gained prominence. Adapt your testing approach to cover all categories and integrate security throughout the development lifecycle."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>OWASP Top 10 2026</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>OWASP Top 10 2026 Overview </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,7 +213,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Updated Categories </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -221,7 +253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Access control failures remain the top risk. Modern applications must enforce server-side checks: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -261,7 +299,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>function requireRole(...roles) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -301,7 +345,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (!req.user || !roles.includes(req.user.role)) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -341,7 +391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>securityLog.warn("Unauthorized access attempt", {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -381,7 +437,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path: req.path,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -421,7 +483,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -461,7 +529,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -501,6 +575,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>};</p>
 <br>
 <br>
@@ -521,7 +598,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -561,7 +644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.get("/api/admin/users", requireRole("admin"), adminController.getUsers);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -598,7 +687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Weak cryptography is increasingly exploited. Use modern algorithms: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -638,7 +733,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import os</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -678,7 +779,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aesgcm = AESGCM(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -718,7 +825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ciphertext = aesgcm.encrypt(nonce, data.encode(), None)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -758,7 +871,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def decrypt_data(encrypted, key):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -798,7 +917,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nonce = encrypted[:12]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -838,7 +963,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return aesgcm.decrypt(nonce, ciphertext, None).decode()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -875,7 +1006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Injection remains prevalent. Parameterized queries are mandatory: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -915,7 +1052,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def find_user(email):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -955,7 +1098,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return db.execute(query, [email])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -995,7 +1144,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def find_user_safe(email):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1035,6 +1190,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A04: Insecure Design </p>
 <br>
 <br>
@@ -1052,7 +1210,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A new emphasis on design-level flaws: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1092,10 +1256,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are trust boundaries defined?</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are trust boundaries defined?</p>
 <br>
 <br>
 <br>
@@ -1112,13 +1276,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there a data flow diagram?</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there a data flow diagram?</p>
 <br>
 <br>
 <br>
@@ -1132,7 +1296,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are failure modes handled?</p>
 <br>
 <br>
 <br>
@@ -1142,6 +1305,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are failure modes handled?</p>
 <br>
 <br>
 <br>
@@ -1152,7 +1316,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there rate limiting on auth endpoints?</p>
 <br>
 <br>
 <br>
@@ -1165,6 +1328,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Is there rate limiting on auth endpoints?</p>
 <br>
 <br>
 <br>
@@ -1172,7 +1336,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are security controls centralized?</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Are security controls centralized?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1209,7 +1391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Passwordless and MFA are now expected baselines: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1249,7 +1437,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async function registerPasskey(userId) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1289,7 +1483,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>publicKey: {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1329,7 +1529,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rp: { name: "Example Corp" },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1369,7 +1575,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id: new TextEncoder().encode(userId),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1409,7 +1621,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>displayName: userId</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1449,6 +1667,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pubKeyCredParams: [{ alg: -7, type: "public-key" }]</p>
 <br>
 <br>
@@ -1469,7 +1690,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1509,7 +1736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return credential;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1549,6 +1782,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A08: Software and Data Integrity Failures </p>
 <br>
 <br>
@@ -1566,7 +1802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CI/CD pipeline security and supply chain attacks: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1606,6 +1848,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>supply_chain_checks:</p>
 <br>
 <br>
@@ -1626,10 +1871,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Verify package signatures</p>
 <br>
 <br>
 <br>
@@ -1646,13 +1891,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan dependencies for known vulnerabilities</p>
 <br>
 <br>
 <br>
@@ -1666,7 +1911,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Pin dependency versions</p>
 <br>
 <br>
 <br>
@@ -1676,6 +1920,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Pin dependency versions</p>
 <br>
 <br>
 <br>
@@ -1686,7 +1931,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use private registries for verified packages</p>
 <br>
 <br>
 <br>
@@ -1699,6 +1943,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use private registries for verified packages</p>
 <br>
 <br>
 <br>
@@ -1706,7 +1951,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sign all releases with cosign</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sign all releases with cosign</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1743,7 +2006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Modern testing combines automation and manual review: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1783,6 +2052,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = []</p>
 <br>
 <br>
@@ -1803,7 +2075,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Automated DAST</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automated DAST</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1843,7 +2121,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. SAST scan</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SAST scan</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1883,7 +2167,13 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\. Dependency check</h1>
+<br>
+<br>
+<br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Dependency check</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1923,7 +2213,13 @@
 <br>
 <br>
 <br>
-<h1>4\\\\\\\\\\\\\\\\. API fuzzing</h1>
+<br>
+<br>
+<br>
+<h1>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. API fuzzing</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1963,6 +2259,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return analyze_results(results)</p>
 <br>
 <br>
@@ -1983,7 +2282,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

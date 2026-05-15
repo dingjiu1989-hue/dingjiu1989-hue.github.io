@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/database-high-availability.ht
   
 
 
+# Database High Availability: Failover, Standby Types, Health Checks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database High Availability: Failover, Standby Types, Health Checks 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ High availability (HA) ensures your database remains accessible despite hardware
   
   
   
+  
+  
+  
 
 
 Availability Metrics 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Availability is measured in "nines":
   
   
   
+  
+  
+  
 
 
 | Uptime | Downtime/Year | Classification | |--------|---------------|----------------| | 99% | 87.6 hours | Basic | | 99.9% (three nines) | 8.76 hours | Standard | | 99.99% (four nines) | 52.56 minutes | Enterprise | | 99.999% (five nines) | 5.26 minutes | Mission-critical | 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Achieving higher availability requires increasingly sophisticated (and expensive
   
   
   
+  
+  
+  
 
 
 Standby Types 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Hot Standby
   
   
   
+  
+  
+  
 
 
 A hot standby accepts read queries while replicating from the primary. PostgreSQL's `hot_standby = on` enables this: 
 
+  
+  
+  
   
   
   
@@ -310,10 +363,16 @@ A hot standby accepts read queries while replicating from the primary. PostgreSQ
   
   
   
+  
+  
+  
 
 
 hot_standby = on
 
+  
+  
+  
   
   
   
@@ -356,6 +415,9 @@ hot_standby_feedback = on
   
   
   
+  
+  
+  
 
 
 * **Failover time**: Seconds (already running, just promote).
@@ -376,10 +438,16 @@ hot_standby_feedback = on
   
   
   
+  
+  
+  
 
 
 * **Resource usage**: Full database server resources.
 
+  
+  
+  
   
   
   
@@ -419,6 +487,9 @@ hot_standby_feedback = on
   
   
   
+  
+  
+  
 
 
 Warm Standby 
@@ -439,10 +510,16 @@ Warm Standby
   
   
   
+  
+  
+  
 
 
 A warm standby is running but does not accept connections until promoted: 
 
+  
+  
+  
   
   
   
@@ -485,10 +562,16 @@ A warm standby is running but does not accept connections until promoted:
   
   
   
+  
+  
+  
 
 
 hot_standby = off
 
+  
+  
+  
   
   
   
@@ -528,10 +611,16 @@ hot_standby = off
   
   
   
+  
+  
+  
 
 
 * **Resource usage**: Moderate (receives WAL but no query processing).
 
+  
+  
+  
   
   
   
@@ -571,10 +660,16 @@ hot_standby = off
   
   
   
+  
+  
+  
 
 
 Cold Standby 
 
+  
+  
+  
   
   
   
@@ -614,6 +709,9 @@ A cold standby is an offline copy of the data. It must be started from scratch d
   
   
   
+  
+  
+  
 
 
 * **Failover time**: Minutes to hours (restore from backup, start database).
@@ -634,10 +732,16 @@ A cold standby is an offline copy of the data. It must be started from scratch d
   
   
   
+  
+  
+  
 
 
 * **Resource usage**: Minimal (only storage).
 
+  
+  
+  
   
   
   
@@ -677,10 +781,16 @@ A cold standby is an offline copy of the data. It must be started from scratch d
   
   
   
+  
+  
+  
 
 
 Failover Strategies 
 
+  
+  
+  
   
   
   
@@ -717,10 +827,16 @@ Manual Failover
   
   
   
+  
+  
+  
 
 
 The operator promotes a standby and redirects applications: 
 
+  
+  
+  
   
   
   
@@ -763,10 +879,16 @@ The operator promotes a standby and redirects applications:
   
   
   
+  
+  
+  
 
 
 pg_ctl promote -D /var/lib/postgresql/data
 
+  
+  
+  
   
   
   
@@ -809,10 +931,16 @@ pg_ctl promote -D /var/lib/postgresql/data
   
   
   
+  
+  
+  
 
 
 # This may take minutes and requires human intervention
 
+  
+  
+  
   
   
   
@@ -852,6 +980,9 @@ pg_ctl promote -D /var/lib/postgresql/data
   
   
   
+  
+  
+  
 
 
 Automated Failover with Patroni 
@@ -872,10 +1003,16 @@ Automated Failover with Patroni
   
   
   
+  
+  
+  
 
 
 Patroni is the most popular HA solution for PostgreSQL. It uses distributed consensus (etcd, Consul, or Zookeeper) to elect a new leader: 
 
+  
+  
+  
   
   
   
@@ -918,10 +1055,16 @@ Patroni is the most popular HA solution for PostgreSQL. It uses distributed cons
   
   
   
+  
+  
+  
 
 
 scope: myapp-db
 
+  
+  
+  
   
   
   
@@ -964,10 +1107,16 @@ namespace: /service/
   
   
   
+  
+  
+  
 
 
 name: pg-node-1
 
+  
+  
+  
   
   
   
@@ -1010,10 +1159,16 @@ consul:
   
   
   
+  
+  
+  
 
 
 host: consul.service.consul:8500
 
+  
+  
+  
   
   
   
@@ -1056,10 +1211,16 @@ register_service: true
   
   
   
+  
+  
+  
 
 
 postgresql:
 
+  
+  
+  
   
   
   
@@ -1102,10 +1263,16 @@ listen: 0.0.0.0:5432
   
   
   
+  
+  
+  
 
 
 connect_address: pg-node-1:5432
 
+  
+  
+  
   
   
   
@@ -1148,10 +1315,16 @@ data_dir: /var/lib/postgresql/data
   
   
   
+  
+  
+  
 
 
 bin_dir: /usr/lib/postgresql/16/bin
 
+  
+  
+  
   
   
   
@@ -1194,10 +1367,16 @@ authentication:
   
   
   
+  
+  
+  
 
 
 replication:
 
+  
+  
+  
   
   
   
@@ -1240,10 +1419,16 @@ username: replicator
   
   
   
+  
+  
+  
 
 
 password: secure_password
 
+  
+  
+  
   
   
   
@@ -1286,10 +1471,16 @@ superuser:
   
   
   
+  
+  
+  
 
 
 username: postgres
 
+  
+  
+  
   
   
   
@@ -1332,10 +1523,16 @@ password: secure_password
   
   
   
+  
+  
+  
 
 
 parameters:
 
+  
+  
+  
   
   
   
@@ -1378,10 +1575,16 @@ max_connections: 200
   
   
   
+  
+  
+  
 
 
 use_pg_rewind: true
 
+  
+  
+  
   
   
   
@@ -1424,10 +1627,16 @@ use_slots: true
   
   
   
+  
+  
+  
 
 
 watchdog:
 
+  
+  
+  
   
   
   
@@ -1470,10 +1679,16 @@ mode: required
   
   
   
+  
+  
+  
 
 
 device: /dev/watchdog
 
+  
+  
+  
   
   
   
@@ -1513,10 +1728,16 @@ Health Checks
   
   
   
+  
+  
+  
 
 
 Patroni performs regular health checks: 
 
+  
+  
+  
   
   
   
@@ -1556,10 +1777,16 @@ Patroni performs regular health checks:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Replication lag**: If lag exceeds a threshold, the standby is not eligible for promotion. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consensus health**: The node must be reachable to the DCS (etcd/Consul). 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Replication lag**: If lag exceeds a threshold, the standby is not eligible for promotion. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consensus health**: The node must be reachable to the DCS (etcd/Consul). 
 
+  
+  
+  
   
   
   
@@ -1602,10 +1829,16 @@ Patroni performs regular health checks:
   
   
   
+  
+  
+  
 
 
 pg_isready -h localhost -p 5432
 
+  
+  
+  
   
   
   
@@ -1648,10 +1881,16 @@ pg_isready -h localhost -p 5432
   
   
   
+  
+  
+  
 
 
 # Check replication status
 
+  
+  
+  
   
   
   
@@ -1694,10 +1933,16 @@ psql -c "SELECT * FROM pg_stat_replication;"
   
   
   
+  
+  
+  
 
 
 Failover Flow 
 
+  
+  
+  
   
   
   
@@ -1737,10 +1982,16 @@ Failover Flow
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Patroni holds a leader election via DCS. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The most advanced replica wins (most recent WAL position). 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The replica is promoted to primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The old primary, when it recovers, is reconfigured as a replica. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Patroni holds a leader election via DCS. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The most advanced replica wins (most recent WAL position). 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The replica is promoted to primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. The old primary, when it recovers, is reconfigured as a replica. 
 
+  
+  
+  
   
   
   
@@ -1777,10 +2028,16 @@ Connection Draining and Routing
   
   
   
+  
+  
+  
 
 
 During failover, in-flight transactions are lost. Applications must handle this: 
 
+  
+  
+  
   
   
   
@@ -1823,10 +2080,16 @@ from tenacity import retry, stop_after_attempt, wait_exponential
   
   
   
+  
+  
+  
 
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1))
 
+  
+  
+  
   
   
   
@@ -1869,10 +2132,16 @@ def execute_with_retry(conn, query, params=None):
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -1915,10 +2184,16 @@ with conn.cursor() as cur:
   
   
   
+  
+  
+  
 
 
 cur.execute(query, params or ())
 
+  
+  
+  
   
   
   
@@ -1961,10 +2236,16 @@ conn.commit()
   
   
   
+  
+  
+  
 
 
 except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:
 
+  
+  
+  
   
   
   
@@ -2007,10 +2288,16 @@ except (psycopg2.OperationalError, psycopg2.InterfaceError) as e:
   
   
   
+  
+  
+  
 
 
 conn = psycopg2.connect(dsn)
 
+  
+  
+  
   
   
   
@@ -2053,10 +2340,16 @@ raise
   
   
   
+  
+  
+  
 
 
 Smart DNS (Route53, CloudDNS) 
 
+  
+  
+  
   
   
   
@@ -2099,10 +2392,16 @@ import boto3
   
   
   
+  
+  
+  
 
 
 def failover_to_standby(region, standby_dns):
 
+  
+  
+  
   
   
   
@@ -2145,10 +2444,16 @@ r53 = boto3.client('route53')
   
   
   
+  
+  
+  
 
 
 r53.change_resource_record_sets(
 
+  
+  
+  
   
   
   
@@ -2191,10 +2496,16 @@ HostedZoneId='ZONE_ID',
   
   
   
+  
+  
+  
 
 
 ChangeBatch={
 
+  
+  
+  
   
   
   
@@ -2237,10 +2548,16 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 'Action': 'UPSERT',
 
+  
+  
+  
   
   
   
@@ -2283,10 +2600,16 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 'Name': 'db.myapp.com',
 
+  
+  
+  
   
   
   
@@ -2329,10 +2652,16 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 'TTL': 30,
 
+  
+  
+  
   
   
   
@@ -2375,10 +2704,16 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2421,10 +2756,16 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2467,6 +2808,9 @@ ChangeBatch={
   
   
   
+  
+  
+  
 
 
 Low TTL (30 seconds) ensures fast propagation. 
@@ -2487,10 +2831,16 @@ Low TTL (30 seconds) ensures fast propagation.
   
   
   
+  
+  
+  
 
 
 PostgreSQL High Availability Stack 
 
+  
+  
+  
   
   
   
@@ -2530,6 +2880,9 @@ A production HA setup combines:
   
   
   
+  
+  
+  
 
 
 * **Streaming replication**: 2-3 synchronous standbys.
@@ -2550,10 +2903,16 @@ A production HA setup combines:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Patroni**: Automated failover and cluster management. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **etcd/Consul**: Distributed consensus for leader election. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **HAProxy or PgBouncer**: Connection routing to the current primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Watchdog**: Fencing to prevent split-brain. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Patroni**: Automated failover and cluster management. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **etcd/Consul**: Distributed consensus for leader election. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **HAProxy or PgBouncer**: Connection routing to the current primary. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Watchdog**: Fencing to prevent split-brain. 
 
+  
+  
+  
   
   
   
@@ -2596,10 +2955,16 @@ A production HA setup combines:
   
   
   
+  
+  
+  
 
 
 frontend pg_frontend
 
+  
+  
+  
   
   
   
@@ -2642,10 +3007,16 @@ bind *:5000
   
   
   
+  
+  
+  
 
 
 default_backend pg_backend
 
+  
+  
+  
   
   
   
@@ -2688,10 +3059,16 @@ backend pg_backend
   
   
   
+  
+  
+  
 
 
 option httpchk GET /master
 
+  
+  
+  
   
   
   
@@ -2734,10 +3111,16 @@ server pg-node-1 pg-node-1:5432 check port 8008 inter 2s
   
   
   
+  
+  
+  
 
 
 server pg-node-2 pg-node-2:5432 check port 8008 inter 2s
 
+  
+  
+  
   
   
   
@@ -2780,6 +3163,9 @@ server pg-node-3 pg-node-3:5432 check port 8008 inter 2s
   
   
   
+  
+  
+  
 
 
 Testing HA 
@@ -2800,10 +3186,16 @@ Testing HA
   
   
   
+  
+  
+  
 
 
 Regular failover testing is essential: 
 
+  
+  
+  
   
   
   
@@ -2846,10 +3238,16 @@ Regular failover testing is essential:
   
   
   
+  
+  
+  
 
 
 ssh pg-node-1 "systemctl stop postgresql"
 
+  
+  
+  
   
   
   
@@ -2892,33 +3290,16 @@ ssh pg-node-1 "systemctl stop postgresql"
   
   
   
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Patroni promotes pg-node-2 within 30 seconds
 
+  
+  
+  
   
   
   
@@ -2940,8 +3321,37 @@ ssh pg-node-1 "systemctl stop postgresql"
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- HAProxy routes to pg-node-2
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Applications reconnect and continue
+
+  
+  
+  
   
   
   
@@ -2984,10 +3394,16 @@ ssh pg-node-1 "systemctl stop postgresql"
   
   
   
+  
+  
+  
 
 
 psql -h haproxy -p 5000 -c "SELECT inet_server_addr();"
 
+  
+  
+  
   
   
   
@@ -3030,10 +3446,16 @@ psql -h haproxy -p 5000 -c "SELECT inet_server_addr();"
   
   
   
+  
+  
+  
 
 
 Common Pitfalls 
 
+  
+  
+  
   
   
   
@@ -3073,10 +3495,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 * **Replication lag**: A promoted standby may lose recent transactions if synchronous replication is not configured.
 
+  
+  
+  
   
   
   
@@ -3113,10 +3541,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 * **Untested failover**: The first failover should not be a real incident. Test monthly.
 
+  
+  
+  
   
   
   

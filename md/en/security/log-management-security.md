@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/security/log-management-security.html
   
   
   
+  
+  
+  
+
+
+# Security Log Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Why Log Management Matters for Security 
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Logs are the definitive record of what happened in your system. When a security 
   
   
   
+  
+  
+  
 
 
 What to Log 
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Authentication Events
   
   
   
+  
+  
+  
 
 
 | Event | Severity | Details to Log | |-------|----------|----------------| | Successful login | Info | User, IP, timestamp, user agent | | Failed login | Warning | Username, IP, timestamp, reason | | Password reset | Info | User, IP, timestamp, method | | Account lockout | High | User, IP, duration | | MFA success/failure | Medium | User, method, IP | | Privilege escalation | Critical | User, from_role, to_role | 
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Data Access Events
   
   
   
+  
+  
+  
 
 
 | Event | Severity | Details to Log | |-------|----------|----------------| | Data export | High | User, records count, destination | | Sensitive data read | Medium | User, resource, action | | Bulk query | High | User, query pattern, result count | | Schema change | Critical | User, object, DDL statement | 
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ System Events
   
   
   
+  
+  
+  
 
 
 * Service start/stop
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ System Events
   
   
   
+  
+  
+  
 
 
 * Permission modifications
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ System Events
   
   
   
+  
+  
+  
 
 
 * Certificate expiry warnings
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ System Events
   
   
   
+  
+  
+  
 
 
 Log Structure 
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "event_id": "evt_2k3j4h5g6f",
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "action": "login_failed",
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "message": "Failed login attempt",
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "ip": "203.0.113.42",
 
+  
+  
+  
   
   
   
@@ -832,6 +939,9 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "country": "US"
@@ -858,10 +968,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "user_id": "user_abc123",
 
+  
+  
+  
   
   
   
@@ -962,6 +1084,9 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "session_id": "sess_xyz789"
@@ -988,10 +1113,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "status": "failure",
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "attempt_number": 3
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "context": {
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
+  
+  
+  
 
 
 "environment": "production",
 
+  
+  
+  
   
   
   
@@ -1248,29 +1403,6 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1278,6 +1410,38 @@ Use a consistent, structured format for all logs. JSON is the standard for secur
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ Centralized Log Aggregation
   
   
   
+  
+  
+  
 
 
 Distribute log collection agents and centralize storage: 
 
+  
+  
+  
   
   
   
@@ -1378,6 +1548,9 @@ Distribute log collection agents and centralize storage:
   
   
   
+  
+  
+  
 
 
 filebeat.inputs:
@@ -1404,10 +1577,16 @@ filebeat.inputs:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream
 
+  
+  
+  
   
   
   
@@ -1456,6 +1635,9 @@ id: app-logs
   
   
   
+  
+  
+  
 
 
 paths:
@@ -1482,10 +1664,16 @@ paths:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ json.keys_under_root: true
   
   
   
+  
+  
+  
 
 
 json.overwrite_keys: true
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ filebeat.config.modules:
   
   
   
+  
+  
+  
 
 
 path: ${path.config}/modules.d/*.yml
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ reload.enabled: true
   
   
   
+  
+  
+  
 
 
 output.elasticsearch:
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ hosts: ["https://elasticsearch.internal:9200"]
   
   
   
+  
+  
+  
 
 
 username: ${ES_USERNAME}
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ password: ${ES_PASSWORD}
   
   
   
+  
+  
+  
 
 
 ssl.verification_mode: certificate
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ SIEM Integration
   
   
   
+  
+  
+  
 
 
 A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: 
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ A Security Information and Event Management (SIEM) system correlates logs from m
   
   
   
+  
+  
+  
 
 
 from datetime import datetime, timedelta
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ class BruteForceDetector:
   
   
   
+  
+  
+  
 
 
 def __init__(self, redis_client):
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ self.redis = redis_client
   
   
   
+  
+  
+  
 
 
 self.threshold = 5 # failed attempts
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ self.window = 300 # 5 minutes
   
   
   
+  
+  
+  
 
 
 def process_login_event(self, event):
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ key = f"brute:{event['source']['ip']}:{event['actor']['username']}"
   
   
   
+  
+  
+  
 
 
 if event['outcome']['status'] == 'failure':
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ count = self.redis.incr(key)
   
   
   
+  
+  
+  
 
 
 if count == 1:
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ self.redis.expire(key, self.window)
   
   
   
+  
+  
+  
 
 
 if count >= self.threshold:
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ self.trigger_alert({
   
   
   
+  
+  
+  
 
 
 "type": "brute_force_detected",
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ self.trigger_alert({
   
   
   
+  
+  
+  
 
 
 "username": event['actor']['username'],
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ self.trigger_alert({
   
   
   
+  
+  
+  
 
 
 "window_seconds": self.window
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ self.trigger_alert({
   
   
   
+  
+  
+  
 
 
 return True
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ return False
   
   
   
+  
+  
+  
 
 
 Log Retention Policies 
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ Log Retention Policies
   
   
   
+  
+  
+  
 
 
 Protecting Log Integrity 
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ Logs must be tamper-proof to serve as evidence:
   
   
   
+  
+  
+  
 
 
 import hashlib
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ import hmac
   
   
   
+  
+  
+  
 
 
 class SecureLogger:
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ def __init__(self, secret_key):
   
   
   
+  
+  
+  
 
 
 self.secret_key = secret_key
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ self.previous_hash = self.load_last_hash()
   
   
   
+  
+  
+  
 
 
 def secure_log(self, event):
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ def secure_log(self, event):
   
   
   
+  
+  
+  
 
 
 event['_prev_hash'] = self.previous_hash
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ event['_timestamp'] = datetime.utcnow().isoformat()
   
   
   
+  
+  
+  
 
 
 # Create HMAC signature
 
+  
+  
+  
   
   
   
@@ -2834,6 +3172,9 @@ payload = json.dumps(event, sort_keys=True)
   
   
   
+  
+  
+  
 
 
 signature = hmac.new(
@@ -2860,10 +3201,16 @@ signature = hmac.new(
   
   
   
+  
+  
+  
 
 
 self.secret_key.encode(),
 
+  
+  
+  
   
   
   
@@ -2912,6 +3259,9 @@ payload.encode(),
   
   
   
+  
+  
+  
 
 
 hashlib.sha256
@@ -2938,10 +3288,16 @@ hashlib.sha256
   
   
   
+  
+  
+  
 
 
 ).hexdigest()
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ event['_signature'] = signature
   
   
   
+  
+  
+  
 
 
 self.previous_hash = signature
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ self.previous_hash = signature
   
   
   
+  
+  
+  
 
 
 with open('/var/log/secure/audit.log', 'a') as f:
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ f.write(json.dumps(event) + '\n')
   
   
   
+  
+  
+  
 
 
 def verify_chain(self):
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ def verify_chain(self):
   
   
   
+  
+  
+  
 
 
 previous_hash = ""
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ with open('/var/log/secure/audit.log', 'r') as f:
   
   
   
+  
+  
+  
 
 
 for line in f:
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ event = json.loads(line)
   
   
   
+  
+  
+  
 
 
 expected_sig = hmac.new(
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ self.secret_key.encode(),
   
   
   
+  
+  
+  
 
 
 json.dumps({
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ json.dumps({
   
   
   
+  
+  
+  
 
 
 '_prev_hash': previous_hash
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ json.dumps({
   
   
   
+  
+  
+  
 
 
 hashlib.sha256
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ hashlib.sha256
   
   
   
+  
+  
+  
 
 
 if event['_signature'] != expected_sig:
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ return False, f"Tampered log entry: {event['_timestamp']}"
   
   
   
+  
+  
+  
 
 
 previous_hash = event['_signature']
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ return True, "Log chain intact"
   
   
   
+  
+  
+  
 
 
 PII and Sensitive Data Redaction 
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ Never log sensitive data:
   
   
   
+  
+  
+  
 
 
 import re
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ SENSITIVE_PATTERNS = {
   
   
   
+  
+  
+  
 
 
 'password': r'"password"\s*:\s*"[^"]*"',
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ SENSITIVE_PATTERNS = {
   
   
   
+  
+  
+  
 
 
 'ssn': r'\b\d{3}-\d{2}-\d{4}\b',
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ SENSITIVE_PATTERNS = {
   
   
   
+  
+  
+  
 
 
 'api_key': r'[A-Za-z0-9]{32,}',
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ SENSITIVE_PATTERNS = {
   
   
   
+  
+  
+  
 
 
 def redact_sensitive_data(log_entry):
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ entry = json.dumps(log_entry)
   
   
   
+  
+  
+  
 
 
 for name, pattern in SENSITIVE_PATTERNS.items():
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ entry = re.sub(pattern, f'"[{name}_REDACTED]"', entry)
   
   
   
+  
+  
+  
 
 
 return json.loads(entry)
 
+  
+  
+  
   
   
   
@@ -3978,10 +4448,16 @@ Alerting Strategy
   
   
   
+  
+  
+  
 
 
 Define severity levels and corresponding response actions: 
 
+  
+  
+  
   
   
   
@@ -4030,10 +4506,16 @@ Define severity levels and corresponding response actions:
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

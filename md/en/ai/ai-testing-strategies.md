@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-testing-strategies.html
   
 
 
+# Testing Strategies for AI Applications
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Testing AI applications differs fundamentally from testing deterministic softwar
   
   
   
+  
+  
+  
 
 
 ##  Evaluation Datasets
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Curate high-quality evaluation datasets that reflect real-world usage:
   
   
   
+  
+  
+  
 
 
 from dataclasses import dataclass
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ from typing import List, Callable
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ import json
   
   
   
+  
+  
+  
 
 
 class TestCase:
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ id: str
   
   
   
+  
+  
+  
 
 
 input: str
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ expected_output: str
   
   
   
+  
+  
+  
 
 
 domain: str
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ difficulty: str # "easy", "medium", "hard"
   
   
   
+  
+  
+  
 
 
 tags: List[str]
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ tags: List[str]
   
   
   
+  
+  
+  
 
 
 criteria: List[Callable[[str], bool]]
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ class EvalDataset:
   
   
   
+  
+  
+  
 
 
 def __init__(self, name: str):
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ self.name = name
   
   
   
+  
+  
+  
 
 
 self.test_cases: List[TestCase] = []
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ def add_golden_set(self, path: str):
   
   
   
+  
+  
+  
 
 
 """Load curated golden test cases."""
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ with open(path) as f:
   
   
   
+  
+  
+  
 
 
 data = json.load(f)
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ for item in data:
   
   
   
+  
+  
+  
 
 
 self.test_cases.append(TestCase(
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ id=item["id"],
   
   
   
+  
+  
+  
 
 
 input=item["input"],
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ expected_output=item["expected_output"],
   
   
   
+  
+  
+  
 
 
 domain=item.get("domain", "general"),
 
+  
+  
+  
   
   
   
@@ -962,6 +1084,9 @@ difficulty=item.get("difficulty", "medium"),
   
   
   
+  
+  
+  
 
 
 tags=item.get("tags", []),
@@ -988,10 +1113,16 @@ tags=item.get("tags", []),
   
   
   
+  
+  
+  
 
 
 criteria=[
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ lambda output, expected=item["expected_output"]:
   
   
   
+  
+  
+  
 
 
 expected.lower() in output.lower(),
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ expected.lower() in output.lower(),
   
   
   
+  
+  
+  
 
 
 ))
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ def add_adversarial(self, path: str):
   
   
   
+  
+  
+  
 
 
 """Load adversarial test cases (edge cases, jailbreaks)."""
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ with open(path) as f:
   
   
   
+  
+  
+  
 
 
 data = json.load(f)
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ for item in data:
   
   
   
+  
+  
+  
 
 
 self.test_cases.append(TestCase(
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ id=f"adv_{item['id']}",
   
   
   
+  
+  
+  
 
 
 input=item["input"],
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ expected_output="",
   
   
   
+  
+  
+  
 
 
 domain="adversarial",
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ difficulty="hard",
   
   
   
+  
+  
+  
 
 
 tags=["adversarial"],
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ criteria=[
   
   
   
+  
+  
+  
 
 
 lambda output:
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ lambda output:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ lambda output:
   
   
   
+  
+  
+  
 
 
 ##  Regression Testing
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ Automated regression testing catches model behavior changes:
   
   
   
+  
+  
+  
 
 
 class ModelRegressionTest:
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ def __init__(self, eval_dataset: EvalDataset):
   
   
   
+  
+  
+  
 
 
 self.dataset = eval_dataset
 
+  
+  
+  
   
   
   
@@ -1716,6 +1925,9 @@ self.results_history: List[dict] = []
   
   
   
+  
+  
+  
 
 
 async def run_regression_suite(
@@ -1742,10 +1954,16 @@ async def run_regression_suite(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -1794,6 +2012,9 @@ model_name: str,
   
   
   
+  
+  
+  
 
 
 previous_results: dict = None,
@@ -1820,10 +2041,16 @@ previous_results: dict = None,
   
   
   
+  
+  
+  
 
 
 ) -> dict:
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ results = {
   
   
   
+  
+  
+  
 
 
 "model": model_name,
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ results = {
   
   
   
+  
+  
+  
 
 
 "total": len(self.dataset.test_cases),
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ results = {
   
   
   
+  
+  
+  
 
 
 "failed": 0,
 
+  
+  
+  
   
   
   
@@ -2028,6 +2273,9 @@ results = {
   
   
   
+  
+  
+  
 
 
 "score": 0.0,
@@ -2054,10 +2302,16 @@ results = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ for test_case in self.dataset.test_cases:
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ output = await self._invoke_model(model_name, test_case.input)
   
   
   
+  
+  
+  
 
 
 # Evaluate against all criteria
 
+  
+  
+  
   
   
   
@@ -2210,6 +2476,9 @@ passed = all(
   
   
   
+  
+  
+  
 
 
 criterion(output) for criterion in test_case.criteria
@@ -2236,10 +2505,16 @@ criterion(output) for criterion in test_case.criteria
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ if passed:
   
   
   
+  
+  
+  
 
 
 results["passed"] += 1
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ else:
   
   
   
+  
+  
+  
 
 
 results["failed"] += 1
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 "id": test_case.id,
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 "expected": test_case.expected_output,
 
+  
+  
+  
   
   
   
@@ -2496,6 +2795,9 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 "domain": test_case.domain,
@@ -2522,10 +2824,16 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 results["failed"] += 1
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 "id": test_case.id,
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ results["failures"].append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ results["score"] = results["passed"] / results["total"]
   
   
   
+  
+  
+  
 
 
 # Compare with previous run
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ if previous_results:
   
   
   
+  
+  
+  
 
 
 score_delta = results["score"] - previous_results["score"]
 
+  
+  
+  
   
   
   
@@ -2834,6 +3172,9 @@ results["regression"] = score_delta < -0.02
   
   
   
+  
+  
+  
 
 
 results["score_delta"] = score_delta
@@ -2860,10 +3201,16 @@ results["score_delta"] = score_delta
   
   
   
+  
+  
+  
 
 
 return results
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ def fail_pipeline_if_regression(self, results: dict):
   
   
   
+  
+  
+  
 
 
 """Fail CI if model regressed beyond threshold."""
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ if results.get("regression", False):
   
   
   
+  
+  
+  
 
 
 raise Exception(
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ f"Model regression detected! "
   
   
   
+  
+  
+  
 
 
 f"Score dropped from "
 
+  
+  
+  
   
   
   
@@ -3068,6 +3433,9 @@ f"{results.get('previous_score', 1.0):.2%} to "
   
   
   
+  
+  
+  
 
 
 f"{results['score']:.2%}"
@@ -3094,10 +3462,16 @@ f"{results['score']:.2%}"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ f"{results['score']:.2%}"
   
   
   
+  
+  
+  
 
 
 Compare model versions side by side with structured evaluation:
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ class ABEvaluation:
   
   
   
+  
+  
+  
 
 
 def __init__(self, judge_model: str = "claude-opus-4-20260512"):
 
+  
+  
+  
   
   
   
@@ -3250,6 +3636,9 @@ self.judge = judge_model
   
   
   
+  
+  
+  
 
 
 async def evaluate_pair(
@@ -3276,10 +3665,16 @@ async def evaluate_pair(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ prompt: str,
   
   
   
+  
+  
+  
 
 
 output_a: str,
 
+  
+  
+  
   
   
   
@@ -3380,6 +3781,9 @@ output_b: str,
   
   
   
+  
+  
+  
 
 
 criteria: List[str],
@@ -3406,10 +3810,16 @@ criteria: List[str],
   
   
   
+  
+  
+  
 
 
 ) -> dict:
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ criteria: List[str],
   
   
   
+  
+  
+  
 
 
 evaluation_prompt = f"""
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ Compare these two AI responses to the same prompt.
   
   
   
+  
+  
+  
 
 
 Prompt: "{prompt}"
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ Response A: "{output_a}"
   
   
   
+  
+  
+  
 
 
 Response B: "{output_b}"
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ Evaluate on these criteria: {', '.join(criteria)}
   
   
   
+  
+  
+  
 
 
 For each criterion, state which response is better (A, B, or tie)
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ and provide a brief justification.
   
   
   
+  
+  
+  
 
 
 """
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ response = client.messages.create(
   
   
   
+  
+  
+  
 
 
 model=self.judge,
 
+  
+  
+  
   
   
   
@@ -3770,6 +4216,9 @@ max_tokens=1024,
   
   
   
+  
+  
+  
 
 
 messages=[{"role": "user", "content": evaluation_prompt}],
@@ -3796,10 +4245,16 @@ messages=[{"role": "user", "content": evaluation_prompt}],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3848,6 +4303,9 @@ return self._parse_evaluation(response.content[0].text)
   
   
   
+  
+  
+  
 
 
 async def batch_evaluate(
@@ -3874,10 +4332,16 @@ async def batch_evaluate(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ prompts: List[str],
   
   
   
+  
+  
+  
 
 
 model_a: str,
 
+  
+  
+  
   
   
   
@@ -3978,6 +4448,9 @@ model_b: str,
   
   
   
+  
+  
+  
 
 
 criteria: List[str],
@@ -4004,10 +4477,16 @@ criteria: List[str],
   
   
   
+  
+  
+  
 
 
 ) -> dict:
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ results = {"model_a_wins": 0, "model_b_wins": 0, "ties": 0}
   
   
   
+  
+  
+  
 
 
 for prompt in prompts:
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ output_a = await self._invoke(model_a, prompt)
   
   
   
+  
+  
+  
 
 
 output_b = await self._invoke(model_b, prompt)
 
+  
+  
+  
   
   
   
@@ -4160,6 +4651,9 @@ evaluation = await self.evaluate_pair(
   
   
   
+  
+  
+  
 
 
 prompt, output_a, output_b, criteria
@@ -4186,10 +4680,16 @@ prompt, output_a, output_b, criteria
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4238,10 +4738,16 @@ prompt, output_a, output_b, criteria
   
   
   
+  
+  
+  
 
 
 winner = evaluation["winner"]
 
+  
+  
+  
   
   
   
@@ -4290,10 +4796,16 @@ results[f"{winner}_wins"] += 1
   
   
   
+  
+  
+  
 
 
 results["total"] = len(prompts)
 
+  
+  
+  
   
   
   
@@ -4342,10 +4854,16 @@ results["a_win_rate"] = results["model_a_wins"] / results["total"]
   
   
   
+  
+  
+  
 
 
 results["b_win_rate"] = results["model_b_wins"] / results["total"]
 
+  
+  
+  
   
   
   
@@ -4394,10 +4912,16 @@ return results
   
   
   
+  
+  
+  
 
 
 ##  Hallucination Detection
 
+  
+  
+  
   
   
   
@@ -4446,10 +4970,16 @@ Automated hallucination checks verify factual accuracy:
   
   
   
+  
+  
+  
 
 
 class HallucinationDetector:
 
+  
+  
+  
   
   
   
@@ -4498,10 +5028,16 @@ def __init__(self, knowledge_base: Callable):
   
   
   
+  
+  
+  
 
 
 self.kb = knowledge_base
 
+  
+  
+  
   
   
   
@@ -4550,6 +5086,9 @@ async def check_factual_claims(self, output: str) -> List[dict]:
   
   
   
+  
+  
+  
 
 
 """Extract factual claims and verify them against a knowledge base."""
@@ -4576,10 +5115,16 @@ async def check_factual_claims(self, output: str) -> List[dict]:
   
   
   
+  
+  
+  
 
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Extract atomic claims
 
+  
+  
+  
   
   
   
@@ -4628,10 +5173,16 @@ claims = await self._extract_claims(output)
   
   
   
+  
+  
+  
 
 
 verified_claims = []
 
+  
+  
+  
   
   
   
@@ -4680,10 +5231,16 @@ for claim in claims:
   
   
   
+  
+  
+  
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Search knowledge base
 
+  
+  
+  
   
   
   
@@ -4732,10 +5289,16 @@ evidence = await self.kb.search(claim["text"])
   
   
   
+  
+  
+  
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify claim against evidence
 
+  
+  
+  
   
   
   
@@ -4784,10 +5347,16 @@ verification = await self._verify_claim(
   
   
   
+  
+  
+  
 
 
 claim["text"],
 
+  
+  
+  
   
   
   
@@ -4836,6 +5405,9 @@ evidence,
   
   
   
+  
+  
+  
 
 
 claim["context"],
@@ -4862,10 +5434,16 @@ claim["context"],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4914,10 +5492,16 @@ verified_claims.append({
   
   
   
+  
+  
+  
 
 
 "claim": claim["text"],
 
+  
+  
+  
   
   
   
@@ -4966,10 +5550,16 @@ verified_claims.append({
   
   
   
+  
+  
+  
 
 
 "supported": verification["supported"],
 
+  
+  
+  
   
   
   
@@ -5018,6 +5608,9 @@ verified_claims.append({
   
   
   
+  
+  
+  
 
 
 "context": claim["context"],
@@ -5044,10 +5637,16 @@ verified_claims.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -5096,6 +5695,9 @@ return verified_claims
   
   
   
+  
+  
+  
 
 
 async def _verify_claim(
@@ -5122,10 +5724,16 @@ async def _verify_claim(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -5174,10 +5782,16 @@ claim: str,
   
   
   
+  
+  
+  
 
 
 evidence: List[str],
 
+  
+  
+  
   
   
   
@@ -5226,10 +5840,16 @@ context: str,
   
   
   
+  
+  
+  
 
 
 ) -> dict:
 
+  
+  
+  
   
   
   
@@ -5278,10 +5898,16 @@ prompt = f"""
   
   
   
+  
+  
+  
 
 
 Claim: "{claim}"
 
+  
+  
+  
   
   
   
@@ -5330,10 +5956,16 @@ Context: "{context}"
   
   
   
+  
+  
+  
 
 
 Evidence: {' '.join(evidence[:3])}
 
+  
+  
+  
   
   
   
@@ -5382,10 +6014,16 @@ Is this claim supported by the evidence?
   
   
   
+  
+  
+  
 
 
 Respond with JSON:
 
+  
+  
+  
   
   
   
@@ -5434,10 +6072,16 @@ Respond with JSON:
   
   
   
+  
+  
+  
 
 
 """
 
+  
+  
+  
   
   
   
@@ -5486,10 +6130,16 @@ response = await self._llm_call(prompt)
   
   
   
+  
+  
+  
 
 
 return json.loads(response)
 
+  
+  
+  
   
   
   
@@ -5538,10 +6188,16 @@ def compute_hallucination_rate(
   
   
   
+  
+  
+  
 
 
 self, verified_claims: List[dict]
 
+  
+  
+  
   
   
   
@@ -5590,10 +6246,16 @@ self, verified_claims: List[dict]
   
   
   
+  
+  
+  
 
 
 unsupported = sum(
 
+  
+  
+  
   
   
   
@@ -5642,10 +6304,16 @@ unsupported = sum(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -5694,10 +6362,16 @@ total = len(verified_claims)
   
   
   
+  
+  
+  
 
 
 return unsupported / total if total > 0 else 0.0
 
+  
+  
+  
   
   
   
@@ -5746,10 +6420,16 @@ return unsupported / total if total > 0 else 0.0
   
   
   
+  
+  
+  
 
 
 Version-control prompts with structured testing:
 
+  
+  
+  
   
   
   
@@ -5798,10 +6478,16 @@ class PromptRegistry:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -5850,6 +6536,9 @@ self.prompts = {}
   
   
   
+  
+  
+  
 
 
 def register(
@@ -5876,10 +6565,16 @@ def register(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -5928,10 +6623,16 @@ name: str,
   
   
   
+  
+  
+  
 
 
 template: str,
 
+  
+  
+  
   
   
   
@@ -5980,10 +6681,16 @@ version: str,
   
   
   
+  
+  
+  
 
 
 tests: List[Callable] = None,
 
+  
+  
+  
   
   
   
@@ -6032,10 +6739,16 @@ tests: List[Callable] = None,
   
   
   
+  
+  
+  
 
 
 self.prompts[name] = {
 
+  
+  
+  
   
   
   
@@ -6084,10 +6797,16 @@ self.prompts[name] = {
   
   
   
+  
+  
+  
 
 
 "version": version,
 
+  
+  
+  
   
   
   
@@ -6136,6 +6855,9 @@ self.prompts[name] = {
   
   
   
+  
+  
+  
 
 
 "performance": [],
@@ -6162,10 +6884,16 @@ self.prompts[name] = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -6214,6 +6942,9 @@ async def test_prompt(
   
   
   
+  
+  
+  
 
 
 self, name: str, test_cases: List[dict]
@@ -6240,10 +6971,16 @@ self, name: str, test_cases: List[dict]
   
   
   
+  
+  
+  
 
 
 ) -> dict:
 
+  
+  
+  
   
   
   
@@ -6292,10 +7029,16 @@ prompt = self.prompts[name]
   
   
   
+  
+  
+  
 
 
 results = []
 
+  
+  
+  
   
   
   
@@ -6344,10 +7087,16 @@ for case in test_cases:
   
   
   
+  
+  
+  
 
 
 # Render template with test inputs
 
+  
+  
+  
   
   
   
@@ -6396,10 +7145,16 @@ rendered = prompt["template"].format(**case["inputs"])
   
   
   
+  
+  
+  
 
 
 output = await self._invoke(rendered)
 
+  
+  
+  
   
   
   
@@ -6448,10 +7203,16 @@ output = await self._invoke(rendered)
   
   
   
+  
+  
+  
 
 
 test_results = [
 
+  
+  
+  
   
   
   
@@ -6500,10 +7261,16 @@ test(output) for test in prompt["tests"]
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -6552,10 +7319,16 @@ results.append({
   
   
   
+  
+  
+  
 
 
 "case": case["name"],
 
+  
+  
+  
   
   
   
@@ -6604,10 +7377,16 @@ results.append({
   
   
   
+  
+  
+  
 
 
 "tests_passed": all(test_results),
 
+  
+  
+  
   
   
   
@@ -6656,6 +7435,9 @@ results.append({
   
   
   
+  
+  
+  
 
 
 })
@@ -6682,10 +7464,16 @@ results.append({
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -6734,10 +7522,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "version": prompt["version"],
 
+  
+  
+  
   
   
   
@@ -6786,6 +7580,9 @@ return {
   
   
   
+  
+  
+  
 
 
 "results": results,
@@ -6812,10 +7609,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -6864,10 +7667,16 @@ return {
   
   
   
+  
+  
+  
 
 
 Benchmark latency, throughput, and cost across model versions:
 
+  
+  
+  
   
   
   
@@ -6916,10 +7725,16 @@ class AIPerformanceTest:
   
   
   
+  
+  
+  
 
 
 async def benchmark(
 
+  
+  
+  
   
   
   
@@ -6968,10 +7783,16 @@ self,
   
   
   
+  
+  
+  
 
 
 model: str,
 
+  
+  
+  
   
   
   
@@ -7020,10 +7841,16 @@ concurrency: int = 10,
   
   
   
+  
+  
+  
 
 
 requests: int = 100,
 
+  
+  
+  
   
   
   
@@ -7072,10 +7899,16 @@ requests: int = 100,
   
   
   
+  
+  
+  
 
 
 import time
 
+  
+  
+  
   
   
   
@@ -7124,10 +7957,16 @@ import asyncio
   
   
   
+  
+  
+  
 
 
 semaphore = asyncio.Semaphore(concurrency)
 
+  
+  
+  
   
   
   
@@ -7176,10 +8015,16 @@ latencies = []
   
   
   
+  
+  
+  
 
 
 async def single_request():
 
+  
+  
+  
   
   
   
@@ -7228,10 +8073,16 @@ async with semaphore:
   
   
   
+  
+  
+  
 
 
 start = time.monotonic()
 
+  
+  
+  
   
   
   
@@ -7280,10 +8131,16 @@ await self._invoke_model(model, "Test prompt")
   
   
   
+  
+  
+  
 
 
 latencies.append(time.monotonic() - start)
 
+  
+  
+  
   
   
   
@@ -7332,10 +8189,16 @@ tasks = [single_request() for _ in range(requests)]
   
   
   
+  
+  
+  
 
 
 await asyncio.gather(*tasks)
 
+  
+  
+  
   
   
   
@@ -7384,10 +8247,16 @@ latencies.sort()
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -7436,10 +8305,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "p50": latencies[len(latencies) // 2],
 
+  
+  
+  
   
   
   
@@ -7488,10 +8363,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "p99": latencies[int(len(latencies) * 0.99)],
 
+  
+  
+  
   
   
   
@@ -7540,10 +8421,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "throughput": requests / sum(latencies),
 
+  
+  
+  
   
   
   
@@ -7592,10 +8479,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   

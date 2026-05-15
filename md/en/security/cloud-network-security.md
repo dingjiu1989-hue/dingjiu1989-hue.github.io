@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-network-security.html
   
 
 
+# Cloud Network Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Cloud Network Security Layers 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Cloud networks require defense in depth: VPC isolation, subnet segmentation, sec
   
   
   
+  
+  
+  
 
 
 Security Groups vs NACLs 
@@ -164,10 +196,16 @@ Security Groups vs NACLs
   
   
   
+  
+  
+  
 
 
 Security groups are stateful instance-level firewalls. NACLs are stateless subnet-level filters: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ Security groups are stateful instance-level firewalls. NACLs are stateless subne
   
   
   
+  
+  
+  
 
 
 resource "aws_security_group" "web_sg" {
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ name = "web-tier"
   
   
   
+  
+  
+  
 
 
 description = "Security group for web instances"
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ vpc_id = var.vpc_id
   
   
   
+  
+  
+  
 
 
 ingress {
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ description = "HTTPS from anywhere"
   
   
   
+  
+  
+  
 
 
 from_port = 443
 
+  
+  
+  
   
   
   
@@ -394,10 +456,16 @@ to_port = 443
   
   
   
+  
+  
+  
 
 
 protocol = "tcp"
 
+  
+  
+  
   
   
   
@@ -440,6 +508,9 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
+  
+  
+  
 
 
 }
@@ -463,10 +534,16 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
+  
+  
+  
 
 
 ingress {
 
+  
+  
+  
   
   
   
@@ -509,10 +586,16 @@ description = "SSH from bastion only"
   
   
   
+  
+  
+  
 
 
 from_port = 22
 
+  
+  
+  
   
   
   
@@ -555,10 +638,16 @@ to_port = 22
   
   
   
+  
+  
+  
 
 
 protocol = "tcp"
 
+  
+  
+  
   
   
   
@@ -601,6 +690,9 @@ security_groups = [aws_security_group.bastion.id]
   
   
   
+  
+  
+  
 
 
 }
@@ -624,10 +716,16 @@ security_groups = [aws_security_group.bastion.id]
   
   
   
+  
+  
+  
 
 
 egress {
 
+  
+  
+  
   
   
   
@@ -670,10 +768,16 @@ from_port = 0
   
   
   
+  
+  
+  
 
 
 to_port = 0
 
+  
+  
+  
   
   
   
@@ -716,6 +820,9 @@ protocol = "-1"
   
   
   
+  
+  
+  
 
 
 cidr_blocks = ["0.0.0.0/0"]
@@ -739,26 +846,6 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -766,6 +853,35 @@ cidr_blocks = ["0.0.0.0/0"]
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -808,10 +924,16 @@ cidr_blocks = ["0.0.0.0/0"]
   
   
   
+  
+  
+  
 
 
 resource "aws_network_acl" "public_subnet_acl" {
 
+  
+  
+  
   
   
   
@@ -854,10 +976,16 @@ vpc_id = var.vpc_id
   
   
   
+  
+  
+  
 
 
 ingress {
 
+  
+  
+  
   
   
   
@@ -900,10 +1028,16 @@ rule_no = 100
   
   
   
+  
+  
+  
 
 
 protocol = "tcp"
 
+  
+  
+  
   
   
   
@@ -946,10 +1080,16 @@ from_port = 443
   
   
   
+  
+  
+  
 
 
 to_port = 443
 
+  
+  
+  
   
   
   
@@ -992,6 +1132,9 @@ cidr_block = "0.0.0.0/0"
   
   
   
+  
+  
+  
 
 
 action = "allow"
@@ -1015,10 +1158,16 @@ action = "allow"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1061,10 +1210,16 @@ egress {
   
   
   
+  
+  
+  
 
 
 rule_no = 100
 
+  
+  
+  
   
   
   
@@ -1107,10 +1262,16 @@ protocol = "tcp"
   
   
   
+  
+  
+  
 
 
 from_port = 1024
 
+  
+  
+  
   
   
   
@@ -1153,10 +1314,16 @@ to_port = 65535
   
   
   
+  
+  
+  
 
 
 cidr_block = "0.0.0.0/0"
 
+  
+  
+  
   
   
   
@@ -1199,26 +1366,6 @@ action = "allow"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1226,6 +1373,35 @@ action = "allow"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1268,10 +1444,16 @@ VPC Design
   
   
   
+  
+  
+  
 
 
 # Multi-tier VPC design
 
+  
+  
+  
   
   
   
@@ -1314,10 +1496,16 @@ class VPCDesign:
   
   
   
+  
+  
+  
 
 
 def __init__(self, cidr="10.0.0.0/16"):
 
+  
+  
+  
   
   
   
@@ -1360,10 +1548,16 @@ self.cidr = cidr
   
   
   
+  
+  
+  
 
 
 self.tiers = {
 
+  
+  
+  
   
   
   
@@ -1406,10 +1600,16 @@ self.tiers = {
   
   
   
+  
+  
+  
 
 
 "web": {"cidr": "10.0.10.0/24", "public": False},
 
+  
+  
+  
   
   
   
@@ -1452,10 +1652,16 @@ self.tiers = {
   
   
   
+  
+  
+  
 
 
 "db": {"cidr": "10.0.30.0/24", "public": False},
 
+  
+  
+  
   
   
   
@@ -1498,10 +1704,16 @@ self.tiers = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1544,10 +1756,16 @@ def generate_routing_rules(self):
   
   
   
+  
+  
+  
 
 
 rules = []
 
+  
+  
+  
   
   
   
@@ -1590,10 +1808,16 @@ rules = []
   
   
   
+  
+  
+  
 
 
 rules.append({
 
+  
+  
+  
   
   
   
@@ -1636,10 +1860,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 "to": "app",
 
+  
+  
+  
   
   
   
@@ -1682,6 +1912,9 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 "protocol": "tcp"
@@ -1705,10 +1938,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -1751,10 +1990,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 rules.append({
 
+  
+  
+  
   
   
   
@@ -1797,10 +2042,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 "to": "db",
 
+  
+  
+  
   
   
   
@@ -1843,10 +2094,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 "protocol": "tcp"
 
+  
+  
+  
   
   
   
@@ -1889,10 +2146,16 @@ rules.append({
   
   
   
+  
+  
+  
 
 
 # No direct public access to app or db
 
+  
+  
+  
   
   
   
@@ -1935,6 +2198,9 @@ return rules
   
   
   
+  
+  
+  
 
 
 Traffic Inspection 
@@ -1955,10 +2221,16 @@ Traffic Inspection
   
   
   
+  
+  
+  
 
 
 Deploy inline inspection for east-west traffic: 
 
+  
+  
+  
   
   
   
@@ -2001,6 +2273,9 @@ Deploy inline inspection for east-west traffic:
   
   
   
+  
+  
+  
 
 
 inspection_rules:
@@ -2024,10 +2299,16 @@ inspection_rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_web_app_traffic
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_web_app_traffic
 
+  
+  
+  
   
   
   
@@ -2070,10 +2351,16 @@ source: web-subnet
   
   
   
+  
+  
+  
 
 
 destination: app-subnet
 
+  
+  
+  
   
   
   
@@ -2116,6 +2403,9 @@ inspection: deep_packet
   
   
   
+  
+  
+  
 
 
 threat_prevention: enabled
@@ -2139,10 +2429,16 @@ threat_prevention: enabled
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_app_db_traffic
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: inspect_app_db_traffic
 
+  
+  
+  
   
   
   
@@ -2185,10 +2481,16 @@ source: app-subnet
   
   
   
+  
+  
+  
 
 
 destination: db-subnet
 
+  
+  
+  
   
   
   
@@ -2231,10 +2533,16 @@ inspection: metadata_only
   
   
   
+  
+  
+  
 
 
 anomaly_detection: enabled
 
+  
+  
+  
   
   
   
@@ -2277,10 +2585,16 @@ Firewall Rule Management
   
   
   
+  
+  
+  
 
 
 # Firewall rule analyzer
 
+  
+  
+  
   
   
   
@@ -2323,10 +2637,16 @@ def analyze_firewall_rules(rules):
   
   
   
+  
+  
+  
 
 
 issues = []
 
+  
+  
+  
   
   
   
@@ -2369,10 +2689,16 @@ for rule in rules:
   
   
   
+  
+  
+  
 
 
 # Check for overly permissive rules
 
+  
+  
+  
   
   
   
@@ -2415,10 +2741,16 @@ if rule.get("cidr") == "0.0.0.0/0" and rule.get("port") in [22, 3389]:
   
   
   
+  
+  
+  
 
 
 issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")
 
+  
+  
+  
   
   
   
@@ -2461,10 +2793,16 @@ issues.append(f"Overly permissive: {rule['name']} allows SSH/RDP from anywhere")
   
   
   
+  
+  
+  
 
 
 if rule.get("hit_count", 0) == 0 and rule["age_days"] > 30:
 
+  
+  
+  
   
   
   
@@ -2507,10 +2845,16 @@ issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")
   
   
   
+  
+  
+  
 
 
 # Check for duplicate rules
 
+  
+  
+  
   
   
   
@@ -2553,6 +2897,9 @@ issues.append(f"Unused rule: {rule['name']} has no hits in 30+ days")
   
   
   
+  
+  
+  
 
 
 return issues
@@ -2576,10 +2923,16 @@ return issues
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

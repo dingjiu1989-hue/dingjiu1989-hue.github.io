@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-driven-arch.html
   
 
 
+# Event-Driven Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Event-driven architecture (EDA) is an architectural style in which services communicate through the production, detection, and consumption of events. Unlike request-driven architectures where a service explicitly calls another, EDA enables services to react to state changes throughout the system. This decoupling provides scalability, flexibility, and resilience that are difficult to achieve with synchronous communication. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Core Concepts
   
   
   
+  
+  
+  
 
 
 An event is a record of something that happened in the system: "Order Placed", "Payment Received", "Inventory Updated". Events are immutable facts—they describe what occurred, not what to do. Services produce events when their state changes, and other services consume events they are interested in. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ The event bus (or event broker) is the infrastructure that transports events fro
   
   
   
+  
+  
+  
 
 
 Event Schema 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Every event has a schema that defines its structure: the event type, version, ti
   
   
   
+  
+  
+  
 
 
 A schema registry centralizes schema storage and enforces compatibility rules. When a producer publishes an event, the registry validates the schema against the registered version. Consumers can discover available schemas and understand the event structure. Schema registries support Avro, Protobuf, and JSON Schema, each with different compatibility modes. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Event Versioning
   
   
   
+  
+  
+  
 
 
 Events are long-lived data. An event published today may be consumed by a service deployed months later. Event versioning strategies ensure that old events remain interpretable. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ Backward compatibility ensures that newer consumers can read events produced wit
   
   
   
+  
+  
+  
 
 
 Common versioning practices include adding new fields as optional, never removing fields, using default values for new fields, and creating new event types for fundamentally different schemas. Upcasting transforms old event versions to the current version during consumption. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ Event Processing Patterns
   
   
   
+  
+  
+  
 
 
 Events can be processed in several ways: stream processing processes each event individually, complex event processing identifies patterns across multiple events, and event sourcing uses events as the primary data store. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Stream processing frameworks like Kafka Streams, Apache Flink, and Spark Streami
   
   
   
+  
+  
+  
 
 
 Complex event processing detects patterns across multiple events: "If a customer places three orders in one hour and then requests a refund, flag for review." CEP engines like Esper and Flink CEP evaluate event patterns against temporal and logical conditions. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ Challenges
   
   
   
+  
+  
+  
 
 
 Event-driven architecture introduces challenges. Eventual consistency means that services may have slightly outdated views of the system state. Monitoring becomes more complex because there is no single request to trace—events flow asynchronously across services. Schema evolution requires coordination even with schema registries. 
 
+  
+  
+  
   
   
   
@@ -464,6 +541,9 @@ Event ordering across partitions is not guaranteed without careful design. Event
   
   
   
+  
+  
+  
 
 
 When to Use EDA 
@@ -484,10 +564,16 @@ When to Use EDA
   
   
   
+  
+  
+  
 
 
 Event-driven architecture excels in systems with many loosely coupled services, complex workflows spanning multiple services, real-time processing requirements, and polyglot persistence. It is less suitable for simple CRUD applications, systems requiring strict consistency guarantees, or scenarios where request-response semantics are natural. 
 
+  
+  
+  
   
   
   

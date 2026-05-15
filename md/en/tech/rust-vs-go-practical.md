@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/rust-vs-go-practical.html
   
   
   
+  
+  
+  
+
+
+# Rust vs Go: A Practical Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Rust and Go are two of the most compelling systems programming languages of the past decade. Both address the shortcomings of C and C++ but with fundamentally different philosophies. This article provides a practical comparison across common use cases: web services, CLI tools, concurrency, and deployment.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Rust and Go are two of the most compelling systems programming languages of the 
   
   
   
+  
+  
+  
 
 
 Go excels at building web services. The standard library includes a production-quality HTTP server, and the net/http package is sufficient for most applications. Frameworks like Gin and Echo add routing, middleware, and validation without introducing complexity. Go's goroutines make concurrent request handling trivial, and deployments are straightforward single binaries.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Rust is also capable for web services, but it requires more investment. Framewor
   
   
   
+  
+  
+  
 
 
 ##  CLI Tools
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Both languages produce excellent CLI tools, but they approach the problem differ
   
   
   
+  
+  
+  
 
 
 Rust produces even smaller binaries when optimized with LTO and `strip`. The `clap` crate provides powerful argument parsing. Cross-compilation requires toolchain management but is well supported. Rust's trait system makes CLI tool architecture cleaner for complex tools with multiple subcommands.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ For CLI tools that need maximum performance and minimum resource usage—like `r
   
   
   
+  
+  
+  
 
 
 ##  Concurrency Models
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Go's concurrency model is based on goroutines and channels. Goroutines are light
   
   
   
+  
+  
+  
 
 
 Rust's concurrency model is based on async/await with zero-cost abstractions. Rust's type system prevents data races at compile time through the `Send` and `Sync` traits. The async ecosystem uses Tokio or async-std as runtimes. Rust's model provides finer control over execution and lower overhead, but requires more careful design.
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Go's concurrency is easier to learn and use. Rust's concurrency is more correct 
   
   
   
+  
+  
+  
 
 
 ##  Memory Management
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Go uses garbage collection, which simplifies development but introduces unpredic
   
   
   
+  
+  
+  
 
 
 Rust uses ownership and borrowing instead of garbage collection. The compiler tracks lifetimes and ensures memory is freed when no longer needed—without a runtime garbage collector. This gives predictable performance and minimal memory usage but requires explicit thinking about ownership.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Rust uses ownership and borrowing instead of garbage collection. The compiler tr
   
   
   
+  
+  
+  
 
 
 Both compile to single static binaries. Go's binaries include the runtime but are typically 10-20MB. Rust's binaries with standard library are 1-5MB. Both support scratch Docker images for minimal deployment.
 
+  
+  
+  
   
   
   
@@ -624,6 +707,9 @@ Go's compile times are significantly faster, especially for incremental builds. 
   
   
   
+  
+  
+  
 
 
 ##  Ecosystem
@@ -650,10 +736,16 @@ Go's compile times are significantly faster, especially for incremental builds. 
   
   
   
+  
+  
+  
 
 
 Go's ecosystem is more mature for web services, cloud infrastructure, and DevOps tools. Kubernetes, Docker, Terraform, and Prometheus are written in Go. Rust's ecosystem is stronger for systems programming, WebAssembly, embedded systems, and performance-critical applications. Both ecosystems continue to grow rapidly.
 
+  
+  
+  
   
   
   

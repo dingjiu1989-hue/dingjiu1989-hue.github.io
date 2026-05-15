@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/bash-scripting-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "3678",
+      "wordCount": "4035",
       "keywords": "Technology, Programming, DevOps",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/bash-scripting-guide.html"},
-      "articleBody": "Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices. Start with Strict Mode Every production Bash script should begin with strict mode settings that catch errors early: #!/usr/bin/env bash set -euo pipefail IFS=$'\\n\\t' * `set -e` causes the script to exit immediately when a command fails. * `set -u` treats unset variables as an error. * `set -o pipefail` makes pipeline failures propagate. * Setting `IFS` to newline and tab prevents word-splitting issues with filenames containing spaces. A more advanced option is `set -o errexit` combined with custom error handling: error_handler() { local line=$1 echo \"Error on line $line\" >&2 exit 1 } trap 'error_handler $LINENO' ERR Use Functions for Modularity Avoid writing long linear scripts. Break logic into functions with clear names: validate_input() { ... } process_file() { ... } send_notification() { ... } Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable. Prefer `[[ ]]` Over `[ ]` The double-bracket `[[ ]]` construct is a Bash keyword with fewer surprises: if [[ -f \"$file\" && \"$name\" == \"prod\" ]]; then echo \"Matched\" fi Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting. Quote Everything Unquoted variables are one of the most common sources of bugs: Wrong if [ -f $file ]; then # breaks if file has spaces Right if [[ -f \"$file\" ]]; then Quote all variable expansions: `\"$var\"`, `\"${array[@]}\"`, and command substitutions `\"$(command)\"`. Use `trap` for Cleanup Always clean up temporary files and resources: cleanup() { rm -rf \"$TEMP_DIR\" kill \"$PID\" 2>/dev/null || true } trap cleanup EXIT The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`. Argument Parsing with `getopts` Use `getopts` for reliable argument parsing instead of manual position checks: usage() { echo \"Usage: $0 -f file -o output [-v]\" >&2; exit 1; } while getopts \":f:o:v\" opt; do case $opt in f) INPUT_FILE=\"$OPTARG\" ;; o) OUTPUT_DIR=\"$OPTARG\" ;; v) VERBOSE=true ;; *) usage ;; esac done This handles short flags robustly, including missing argument errors. Use `readonly` and `declare -r` Mark constants and configuration values as readonly: readonly MAX_RETRIES=3 readonly CONFIG_PATH=\"/etc/myapp/config.yml\" This prevents accidental overwrites and documents intent. Prefer `printf` Over `echo` The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output: printf \"Processing file: %s\\n\" \"$filename\" Logging with Timestamps Implement a simple logging function for better observability: log() { local level=\"$1\" shift printf \"[%s] [%s] %s\\n\" \"$(date '+%Y-%m-%d %H:%M:%S')\" \"$level\" \"$*\" >&2 } info() { log \"INFO\" \"$@\"; } error() { log \"ERROR\" \"$@\"; } Send logs to stderr so they don't interfere with stdout data output. Validating Dependencies Check required commands before proceeding: require() { for cmd in \"$@\"; do if ! command -v \"$cmd\" &>/dev/null; then error \"Required command not found: $cmd\" exit 1 fi done } require jq curl openssl Avoid `eval` and Backtick Substitution Never use `eval` unless absolutely necessary -- it is a security risk. Use `$()` instead of backticks for command substitution; `$()` nests cleanly and is visually distinct. Use Arrays for Lists Modern Bash supports arrays, which handle spaces correctly: files=() while IFS= read -r -d '' file; do files+=(\"$file\") done for file in \"${files[@]}\"; do process_file \"$file\" done The `-print0` / `read -d ''` pattern handles filenames with any special characters. ShellCheck Integration Run [ShellCheck](https://www.shellcheck.net/) as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing. Testing Bash Scripts Use `bats` (Bash Automated Testing System) for unit testing: @test \"validate_input rejects empty string\" { run validate_input \"\" [[ \"$status\" -ne 0 ]] } Test your error handlers, edge cases with spaces, and exit codes. Summary Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/bash-scripting-best-practices-27ke"
+      ],
+      "articleBody": "Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash Scripting Best Practices Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices. Start with Strict Mode Every production Bash script should begin with strict mode settings that catch errors early: #!/usr/bin/env bash set -euo pipefail IFS=$'\\n\\t' * `set -e` causes the script to exit immediately when a command fails. * `set -u` treats unset variables as an error. * `set -o pipefail` makes pipeline failures propagate. * Setting `IFS` to newline and tab prevents word-splitting issues with filenames containing spaces. A more advanced option is `set -o errexit` combined with custom error handling: error_handler() { local line=$1 echo \"Error on line $line\" >&2 exit 1 } trap 'error_handler $LINENO' ERR Use Functions for Modularity Avoid writing long linear scripts. Break logic into functions with clear names: validate_input() { ... } process_file() { ... } send_notification() { ... } Declare all functions at the top of the script, followed by argument parsing, followed by the main execution flow. This makes the script readable and testable. Prefer `[[ ]]` Over `[ ]` The double-bracket `[[ ]]` construct is a Bash keyword with fewer surprises: if [[ -f \"$file\" && \"$name\" == \"prod\" ]]; then echo \"Matched\" fi Unlike single brackets, double brackets handle empty variables safely, support pattern matching, and avoid word-splitting. Quote Everything Unquoted variables are one of the most common sources of bugs: Wrong if [ -f $file ]; then # breaks if file has spaces Right if [[ -f \"$file\" ]]; then Quote all variable expansions: `\"$var\"`, `\"${array[@]}\"`, and command substitutions `\"$(command)\"`. Use `trap` for Cleanup Always clean up temporary files and resources: cleanup() { rm -rf \"$TEMP_DIR\" kill \"$PID\" 2>/dev/null || true } trap cleanup EXIT The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`. Argument Parsing with `getopts` Use `getopts` for reliable argument parsing instead of manual position checks: usage() { echo \"Usage: $0 -f file -o output [-v]\" >&2; exit 1; } while getopts \":f:o:v\" opt; do case $opt in f) INPUT_FILE=\"$OPTARG\" ;; o) OUTPUT_DIR=\"$OPTARG\" ;; v) VERBOSE=true ;; *) usage ;; esac done This handles short flags robustly, including missing argument errors. Use `readonly` and `declare -r` Mark constants and configuration values as readonly: readonly MAX_RETRIES=3 readonly CONFIG_PATH=\"/etc/myapp/config.yml\" This prevents accidental overwrites and documents intent. Prefer `printf` Over `echo` The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output: printf \"Processing file: %s\\n\" \"$filename\" Logging with Timestamps Implement a simple logging function for better observability: log() { local level=\"$1\" shift printf \"[%s] [%s] %s\\n\" \"$(date '+%Y-%m-%d %H:%M:%S')\" \"$level\" \"$*\" >&2 } info() { log \"INFO\" \"$@\"; } error() { log \"ERROR\" \"$@\"; } Send logs to stderr so they don't interfere with stdout data output. Validating Dependencies Check required commands before proceeding: require() { for cmd in \"$@\"; do if ! command -v \"$cmd\" &>/dev/null; then error \"Required command not found: $cmd\" exit 1 fi done } require jq curl openssl Avoid `eval` and Backtick Substitution Never use `eval` unless absolutely necessary -- it is a security risk. Use `$()` instead of backticks for command substitution; `$()` nests cleanly and is visually distinct. Use Arrays for Lists Modern Bash supports arrays, which handle spaces correctly: files=() while IFS= read -r -d '' file; do files+=(\"$file\") done for file in \"${files[@]}\"; do process_file \"$file\" done The `-print0` / `read -d ''` pattern handles filenames with any special characters. ShellCheck Integration Run [ShellCheck](https://www.shellcheck.net/) as part of your CI pipeline. It catches hundreds of common pitfalls and enforces consistency. Integrate it with VS Code via the shellcheck extension for real-time feedback during editing. Testing Bash Scripts Use `bats` (Bash Automated Testing System) for unit testing: @test \"validate_input rejects empty string\" { run validate_input \"\" [[ \"$status\" -ne 0 ]] } Test your error handlers, edge cases with spaces, and exit codes. Summary Bash scripting is not dead -- it is the glue that holds modern infrastructure together. By following these practices, you will write scripts that are robust, maintainable, and production-ready. Strict mode, proper quoting, function decomposition, traps, and ShellCheck validation will prevent the majority of common issues before they reach production."
     }
     </script>
     <script type="application/ld+json">
@@ -199,7 +202,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Bash Scripting Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Bash scripting remains one of the most critical skills for developers, DevOps engineers, and system administrators. Despite its age, Bash is everywhere -- from CI/CD pipelines to deployment scripts and system automation. Writing robust, maintainable shell scripts requires discipline and adherence to proven practices.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -245,7 +280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Every production Bash script should begin with strict mode settings that catch errors early:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -291,7 +332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>set -euo pipefail</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -337,7 +384,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `set -e` causes the script to exit immediately when a command fails.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -383,7 +436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `set -o pipefail` makes pipeline failures propagate.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +488,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A more advanced option is `set -o errexit` combined with custom error handling:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -475,7 +540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>local line=$1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -521,6 +592,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exit 1</p>
 <br>
 <br>
@@ -544,7 +618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -590,7 +670,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Use Functions for Modularity</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -636,7 +722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>validate_input() { ... }</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -682,7 +774,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>send_notification() { ... }</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -728,7 +826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Prefer `[[ ]]` Over `[ ]`</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -774,7 +878,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if [[ -f "$file" && "$name" == "prod" ]]; then</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -820,7 +930,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>fi</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -866,7 +982,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Quote Everything</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -912,7 +1034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Wrong</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Right</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1004,7 +1138,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Quote all variable expansions: `"$var"`, `"${array[@]}"`, and command substitutions `"$(command)"`.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1050,7 +1190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Always clean up temporary files and resources:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1096,7 +1242,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rm -rf "$TEMP_DIR"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1142,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1188,7 +1346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The `EXIT` trap fires regardless of why the script exits -- success, failure, or signal. For signal-specific handling, add separate traps for `INT` and `TERM`.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1234,7 +1398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Use `getopts` for reliable argument parsing instead of manual position checks:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,7 +1450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>while getopts ":f:o:v" opt; do</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1326,7 +1502,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f) INPUT_FILE="$OPTARG" ;;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1372,7 +1554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>v) VERBOSE=true ;;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1418,6 +1606,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>esac</p>
 <br>
 <br>
@@ -1441,7 +1632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>done</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1487,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Use `readonly` and `declare -r`</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1533,7 +1736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>readonly MAX_RETRIES=3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1579,7 +1788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This prevents accidental overwrites and documents intent.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1625,7 +1840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The `echo` command behaves differently across shells and platforms. Use `printf` for portable, predictable output:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1671,7 +1892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Logging with Timestamps</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1717,7 +1944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>log() {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1763,7 +1996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>shift</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1809,7 +2048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1855,7 +2100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>error() { log "ERROR" "$@"; }</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1901,7 +2152,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Validating Dependencies</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1947,7 +2204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>require() {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1993,7 +2256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if ! command -v "$cmd" &>/dev/null; then</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2039,7 +2308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exit 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2085,6 +2360,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>done</p>
 <br>
 <br>
@@ -2108,7 +2386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2154,7 +2438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Avoid `eval` and Backtick Substitution</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2200,7 +2490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Use Arrays for Lists</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2246,7 +2542,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>files=()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2292,7 +2594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>files+=("$file")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2338,7 +2646,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for file in "${files[@]}"; do</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2384,7 +2698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>done</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2430,7 +2750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  ShellCheck Integration</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2476,7 +2802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Testing Bash Scripts</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2522,7 +2854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@test "validate_input rejects empty string" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2568,7 +2906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>[[ "$status" -ne 0 ]]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2614,6 +2958,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Test your error handlers, edge cases with spaces, and exit codes.</p>
 <br>
 <br>
@@ -2637,7 +2984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Summary</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

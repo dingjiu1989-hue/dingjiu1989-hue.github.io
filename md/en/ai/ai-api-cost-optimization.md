@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-api-cost-optimization.html
   
 
 
+# AI API Cost Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ LLM API costs can quickly become the largest line item in an AI application's bu
   
   
   
+  
+  
+  
 
 
 ##  Understanding Pricing Models
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Most LLM APIs charge per token — typically at different rates for input and ou
   
   
   
+  
+  
+  
 
 
 * **GPT-4o**: $2.50/M input tokens, $10/M output tokens
 
+  
+  
+  
   
   
   
@@ -280,10 +324,16 @@ Most LLM APIs charge per token — typically at different rates for input and ou
   
   
   
+  
+  
+  
 
 
 * **Claude 3 Haiku**: $0.25/M input tokens, $1.25/M output tokens
 
+  
+  
+  
   
   
   
@@ -326,10 +376,16 @@ Most LLM APIs charge per token — typically at different rates for input and ou
   
   
   
+  
+  
+  
 
 
 * **DeepSeek-V3**: $0.27/M input tokens, $1.10/M output tokens
 
+  
+  
+  
   
   
   
@@ -378,10 +434,16 @@ Output tokens are typically 3-6x more expensive than input tokens. This asymmetr
   
   
   
+  
+  
+  
 
 
 ##  Strategy 1: Model Selection
 
+  
+  
+  
   
   
   
@@ -430,10 +492,16 @@ Output tokens are typically 3-6x more expensive than input tokens. This asymmetr
   
   
   
+  
+  
+  
 
 
 * Classification and extraction: Use Haiku, GPT-4o-mini, or Llama 3 8B
 
+  
+  
+  
   
   
   
@@ -476,6 +544,9 @@ Output tokens are typically 3-6x more expensive than input tokens. This asymmetr
   
   
   
+  
+  
+  
 
 
 * Complex reasoning: Opus, GPT-4o, or DeepSeek-R1
@@ -499,10 +570,16 @@ Output tokens are typically 3-6x more expensive than input tokens. This asymmetr
   
   
   
+  
+  
+  
 
 
 * Code generation: Claude Sonnet or GPT-4o
 
+  
+  
+  
   
   
   
@@ -551,10 +628,16 @@ A router model can direct simple queries to cheap models and complex ones to exp
   
   
   
+  
+  
+  
 
 
 def route_query(query):
 
+  
+  
+  
   
   
   
@@ -603,10 +686,16 @@ complexity_score = estimate_complexity(query)
   
   
   
+  
+  
+  
 
 
 if complexity_score < 0.3:
 
+  
+  
+  
   
   
   
@@ -655,10 +744,16 @@ return "claude-3-haiku" # $0.25/M input
   
   
   
+  
+  
+  
 
 
 elif complexity_score < 0.7:
 
+  
+  
+  
   
   
   
@@ -707,10 +802,16 @@ return "claude-3-sonnet" # $3/M input
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -759,10 +860,16 @@ return "claude-3-opus" # $15/M input
   
   
   
+  
+  
+  
 
 
 This pattern alone can reduce costs by 60-80% while maintaining overall quality.
 
+  
+  
+  
   
   
   
@@ -811,10 +918,16 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
   
   
   
+  
+  
+  
 
 
 **Shorter prompts cost less.** Every token in your system prompt, few-shot examples, and retrieved context costs money.
 
+  
+  
+  
   
   
   
@@ -860,10 +973,16 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
   
   
   
+  
+  
+  
 
 
 * **Few-shot example reduction**: Start with 1-2 examples and measure quality drops before adding more. Many tasks need zero examples.
 
+  
+  
+  
   
   
   
@@ -906,10 +1025,16 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
   
   
   
+  
+  
+  
 
 
 * **Dynamic prompt assembly**: Only include instructions relevant to the current task. Don't include all possible capabilities in every request.
 
+  
+  
+  
   
   
   
@@ -958,10 +1083,16 @@ This pattern alone can reduce costs by 60-80% while maintaining overall quality.
   
   
   
+  
+  
+  
 
 
 Prompt caching can cut input token costs by 50-90% for repeated system prompts and contexts:
 
+  
+  
+  
   
   
   
@@ -1010,10 +1141,16 @@ Prompt caching can cut input token costs by 50-90% for repeated system prompts a
   
   
   
+  
+  
+  
 
 
 response = client.messages.create(
 
+  
+  
+  
   
   
   
@@ -1062,10 +1199,16 @@ model="claude-3-5-sonnet-20241022",
   
   
   
+  
+  
+  
 
 
 system=[
 
+  
+  
+  
   
   
   
@@ -1114,10 +1257,16 @@ system=[
   
   
   
+  
+  
+  
 
 
 "type": "text",
 
+  
+  
+  
   
   
   
@@ -1166,10 +1315,16 @@ system=[
   
   
   
+  
+  
+  
 
 
 "cache_control": {"type": "ephemeral"}
 
+  
+  
+  
   
   
   
@@ -1218,10 +1373,16 @@ system=[
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1270,10 +1431,16 @@ messages=[{"role": "user", "content": query}]
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1322,10 +1489,16 @@ The first request pays full price, but subsequent requests with the same cached 
   
   
   
+  
+  
+  
 
 
 **Application-level caching** stores LLM responses for identical or similar queries:
 
+  
+  
+  
   
   
   
@@ -1374,10 +1547,16 @@ cache = {}
   
   
   
+  
+  
+  
 
 
 def get_llm_response(prompt, model):
 
+  
+  
+  
   
   
   
@@ -1426,10 +1605,16 @@ prompt_hash = hash(prompt)
   
   
   
+  
+  
+  
 
 
 if prompt_hash in cache:
 
+  
+  
+  
   
   
   
@@ -1478,10 +1663,16 @@ return cache[prompt_hash]
   
   
   
+  
+  
+  
 
 
 response = call_llm_api(prompt, model)
 
+  
+  
+  
   
   
   
@@ -1530,10 +1721,16 @@ cache[prompt_hash] = response
   
   
   
+  
+  
+  
 
 
 return response
 
+  
+  
+  
   
   
   
@@ -1582,10 +1779,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 ##  Strategy 4: Batching and Rate Limiting
 
+  
+  
+  
   
   
   
@@ -1631,6 +1834,9 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 * **OpenAI Batch API**: 50% discount for batch processing with 24-hour completion window
@@ -1654,10 +1860,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 * **Rate limit optimization**: Fill your rate limit efficiently rather than making many small requests
 
+  
+  
+  
   
   
   
@@ -1706,10 +1918,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 **Limit output tokens aggressively.** Each output token is 3-6x the cost of an input token:
 
+  
+  
+  
   
   
   
@@ -1755,10 +1973,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 * Use structured outputs (JSON mode) to reduce verbose responses
 
+  
+  
+  
   
   
   
@@ -1801,10 +2025,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 * Generate shorter drafts and iterate rather than requesting comprehensive outputs
 
+  
+  
+  
   
   
   
@@ -1853,10 +2083,16 @@ For semantic caching (similar but not identical queries), use embedding similari
   
   
   
+  
+  
+  
 
 
 Don't use LLMs for everything. A hybrid architecture combines cheap deterministic code with expensive AI calls:
 
+  
+  
+  
   
   
   
@@ -1902,10 +2138,16 @@ Don't use LLMs for everything. A hybrid architecture combines cheap deterministi
   
   
   
+  
+  
+  
 
 
 * **Extraction**: Use regex and rule-based extraction for well-structured text
 
+  
+  
+  
   
   
   
@@ -1948,10 +2190,16 @@ Don't use LLMs for everything. A hybrid architecture combines cheap deterministi
   
   
   
+  
+  
+  
 
 
 * **Fallback chain**: Try cheaper methods first, escalate to more expensive models only when needed
 
+  
+  
+  
   
   
   
@@ -2000,10 +2248,16 @@ Don't use LLMs for everything. A hybrid architecture combines cheap deterministi
   
   
   
+  
+  
+  
 
 
 Implement cost tracking from day one:
 
+  
+  
+  
   
   
   
@@ -2049,6 +2303,9 @@ Implement cost tracking from day one:
   
   
   
+  
+  
+  
 
 
 * Set budget alerts at 50%, 80%, and 100% of monthly budget
@@ -2072,10 +2329,16 @@ Implement cost tracking from day one:
   
   
   
+  
+  
+  
 
 
 * Track cost per unit of business value (cost per generated article, cost per support ticket resolved)
 
+  
+  
+  
   
   
   
@@ -2121,10 +2384,16 @@ Implement cost tracking from day one:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

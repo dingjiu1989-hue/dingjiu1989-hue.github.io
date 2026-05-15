@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/gdpr-technical.html
   
 
 
+# GDPR Technical Controls
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 GDPR Technical Requirements 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ GDPR requires technical controls for data protection by design and by default. K
   
   
   
+  
+  
+  
 
 
 Data Mapping 
@@ -164,10 +196,16 @@ Data Mapping
   
   
   
+  
+  
+  
 
 
 Maintain a comprehensive data inventory: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ class DataMappingService:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ self.data_flows = []
   
   
   
+  
+  
+  
 
 
 def register_data_flow(self, flow):
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "id": str(uuid.uuid4()),
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "data_processor": flow.get("processor"),
 
+  
+  
+  
   
   
   
@@ -394,10 +456,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "data_subjects": flow["subjects"],
 
+  
+  
+  
   
   
   
@@ -440,10 +508,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "legal_basis": flow["legal_basis"],
 
+  
+  
+  
   
   
   
@@ -486,10 +560,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "retention_period": flow["retention"],
 
+  
+  
+  
   
   
   
@@ -532,6 +612,9 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 "created_at": datetime.utcnow().isoformat()
@@ -555,10 +638,16 @@ self.data_flows.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -601,6 +690,9 @@ def search_data_subject(self, subject_id):
   
   
   
+  
+  
+  
 
 
 """Find all data related to a specific subject"""
@@ -624,10 +716,16 @@ def search_data_subject(self, subject_id):
   
   
   
+  
+  
+  
 
 
 results = []
 
+  
+  
+  
   
   
   
@@ -670,10 +768,16 @@ for flow in self.data_flows:
   
   
   
+  
+  
+  
 
 
 if subject_id in flow["data_subjects"]:
 
+  
+  
+  
   
   
   
@@ -716,10 +820,16 @@ results.append(flow)
   
   
   
+  
+  
+  
 
 
 return results
 
+  
+  
+  
   
   
   
@@ -762,6 +872,9 @@ def generate_roppa_report(self):
   
   
   
+  
+  
+  
 
 
 """Generate Record of Processing Activities"""
@@ -785,10 +898,16 @@ def generate_roppa_report(self):
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -831,10 +950,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "dpo": "privacy@example.com",
 
+  
+  
+  
   
   
   
@@ -877,10 +1002,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "generated_at": datetime.utcnow().isoformat()
 
+  
+  
+  
   
   
   
@@ -923,6 +1054,9 @@ return {
   
   
   
+  
+  
+  
 
 
 Consent Management 
@@ -943,10 +1077,16 @@ Consent Management
   
   
   
+  
+  
+  
 
 
 Implement granular consent tracking: 
 
+  
+  
+  
   
   
   
@@ -989,10 +1129,16 @@ Implement granular consent tracking:
   
   
   
+  
+  
+  
 
 
 class ConsentManager {
 
+  
+  
+  
   
   
   
@@ -1035,6 +1181,9 @@ constructor() {
   
   
   
+  
+  
+  
 
 
 this.consentRecords = new Map();
@@ -1058,10 +1207,16 @@ this.consentRecords = new Map();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1104,10 +1259,16 @@ recordConsent(userId, purposes) {
   
   
   
+  
+  
+  
 
 
 const record = {
 
+  
+  
+  
   
   
   
@@ -1150,10 +1311,16 @@ userId,
   
   
   
+  
+  
+  
 
 
 purposes: purposes.map(p => ({
 
+  
+  
+  
   
   
   
@@ -1196,10 +1363,16 @@ id: p.id,
   
   
   
+  
+  
+  
 
 
 granted: p.granted,
 
+  
+  
+  
   
   
   
@@ -1242,10 +1415,16 @@ timestamp: new Date().toISOString(),
   
   
   
+  
+  
+  
 
 
 ip: p.ip,
 
+  
+  
+  
   
   
   
@@ -1288,10 +1467,16 @@ userAgent: p.userAgent
   
   
   
+  
+  
+  
 
 
 })),
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ version: CONSENT_VERSION,
   
   
   
+  
+  
+  
 
 
 createdAt: new Date().toISOString()
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ createdAt: new Date().toISOString()
   
   
   
+  
+  
+  
 
 
 this.consentRecords.set(userId, record);
 
+  
+  
+  
   
   
   
@@ -1426,6 +1623,9 @@ this.auditLog('consent_recorded', { userId, purposes: p.id });
   
   
   
+  
+  
+  
 
 
 return record;
@@ -1449,10 +1649,16 @@ return record;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1495,10 +1701,16 @@ checkConsent(userId, purposeId) {
   
   
   
+  
+  
+  
 
 
 const record = this.consentRecords.get(userId);
 
+  
+  
+  
   
   
   
@@ -1541,10 +1753,16 @@ if (!record) return false;
   
   
   
+  
+  
+  
 
 
 const purpose = record.purposes.find(p => p.id === purposeId);
 
+  
+  
+  
   
   
   
@@ -1587,10 +1805,16 @@ return purpose?.granted === true && !this.isWithdrawn(userId, purposeId);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1633,10 +1857,16 @@ withdrawConsent(userId, purposeId) {
   
   
   
+  
+  
+  
 
 
 // Record withdrawal
 
+  
+  
+  
   
   
   
@@ -1679,10 +1909,16 @@ this.consentRecords.get(userId)?.purposes.forEach(p => {
   
   
   
+  
+  
+  
 
 
 if (p.id === purposeId) {
 
+  
+  
+  
   
   
   
@@ -1725,6 +1961,9 @@ p.granted = false;
   
   
   
+  
+  
+  
 
 
 p.withdrawnAt = new Date().toISOString();
@@ -1748,10 +1987,16 @@ p.withdrawnAt = new Date().toISOString();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1794,10 +2039,16 @@ p.withdrawnAt = new Date().toISOString();
   
   
   
+  
+  
+  
 
 
 // Trigger data deletion if necessary
 
+  
+  
+  
   
   
   
@@ -1840,10 +2091,16 @@ this.deleteDataForPurpose(userId, purposeId);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1886,10 +2143,16 @@ auditLog(action, details) {
   
   
   
+  
+  
+  
 
 
 // Immutable audit log
 
+  
+  
+  
   
   
   
@@ -1932,10 +2195,16 @@ console.log(JSON.stringify({
   
   
   
+  
+  
+  
 
 
 action,
 
+  
+  
+  
   
   
   
@@ -1978,10 +2247,16 @@ details,
   
   
   
+  
+  
+  
 
 
 timestamp: new Date().toISOString()
 
+  
+  
+  
   
   
   
@@ -2024,26 +2299,6 @@ timestamp: new Date().toISOString()
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2051,6 +2306,35 @@ timestamp: new Date().toISOString()
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2090,10 +2374,16 @@ Right to Deletion
   
   
   
+  
+  
+  
 
 
 Implement the right to be forgotten: 
 
+  
+  
+  
   
   
   
@@ -2136,10 +2426,16 @@ class DeletionOrchestrator:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -2182,10 +2478,16 @@ self.data_sources = []
   
   
   
+  
+  
+  
 
 
 def register_data_source(self, name, delete_func, retention_days=30):
 
+  
+  
+  
   
   
   
@@ -2228,10 +2530,16 @@ self.data_sources.append({
   
   
   
+  
+  
+  
 
 
 "name": name,
 
+  
+  
+  
   
   
   
@@ -2274,6 +2582,9 @@ self.data_sources.append({
   
   
   
+  
+  
+  
 
 
 "retention_days": retention_days
@@ -2297,10 +2608,16 @@ self.data_sources.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2343,10 +2660,16 @@ def delete_user_data(self, user_id):
   
   
   
+  
+  
+  
 
 
 results = []
 
+  
+  
+  
   
   
   
@@ -2389,10 +2712,16 @@ errors = []
   
   
   
+  
+  
+  
 
 
 for source in self.data_sources:
 
+  
+  
+  
   
   
   
@@ -2435,10 +2764,16 @@ try:
   
   
   
+  
+  
+  
 
 
 # Soft delete first
 
+  
+  
+  
   
   
   
@@ -2481,6 +2816,9 @@ source["delete"](user_id, soft=True)
   
   
   
+  
+  
+  
 
 
 results.append({
@@ -2504,10 +2842,16 @@ results.append({
   
   
   
+  
+  
+  
 
 
 "source": source["name"],
 
+  
+  
+  
   
   
   
@@ -2550,10 +2894,16 @@ results.append({
   
   
   
+  
+  
+  
 
 
 "retention_until": datetime.utcnow() + timedelta(
 
+  
+  
+  
   
   
   
@@ -2596,6 +2946,9 @@ days=source["retention_days"]
   
   
   
+  
+  
+  
 
 
 )
@@ -2619,10 +2972,16 @@ days=source["retention_days"]
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2665,10 +3024,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 errors.append({
 
+  
+  
+  
   
   
   
@@ -2711,6 +3076,9 @@ errors.append({
   
   
   
+  
+  
+  
 
 
 "error": str(e)
@@ -2734,10 +3102,16 @@ errors.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2780,10 +3154,16 @@ errors.append({
   
   
   
+  
+  
+  
 
 
 schedule_hard_delete(user_id, self.data_sources)
 
+  
+  
+  
   
   
   
@@ -2826,10 +3206,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "user_id": user_id,
 
+  
+  
+  
   
   
   
@@ -2872,10 +3258,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "errors": errors,
 
+  
+  
+  
   
   
   
@@ -2918,10 +3310,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2964,10 +3362,16 @@ Privacy Impact Assessment
   
   
   
+  
+  
+  
 
 
 # Automated PIA template
 
+  
+  
+  
   
   
   
@@ -3010,10 +3414,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "project_name": "",
 
+  
+  
+  
   
   
   
@@ -3056,10 +3466,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "risk_assessment": {
 
+  
+  
+  
   
   
   
@@ -3102,10 +3518,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "systematic_profiling",
 
+  
+  
+  
   
   
   
@@ -3148,10 +3570,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "sensitive_data_processing",
 
+  
+  
+  
   
   
   
@@ -3194,10 +3622,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "cross_border_transfers"
 
+  
+  
+  
   
   
   
@@ -3240,10 +3674,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "identified_risks": [],
 
+  
+  
+  
   
   
   
@@ -3286,10 +3726,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3332,10 +3778,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "data_minimization": False,
 
+  
+  
+  
   
   
   
@@ -3378,10 +3830,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "encryption_at_rest": False,
 
+  
+  
+  
   
   
   
@@ -3424,10 +3882,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 "access_controls": False,
 
+  
+  
+  
   
   
   
@@ -3470,10 +3934,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3516,10 +3986,16 @@ PIA_TEMPLATE = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3562,10 +4038,16 @@ def conduct_pia(project_name, data_flows):
   
   
   
+  
+  
+  
 
 
 pia = copy.deepcopy(PIA_TEMPLATE)
 
+  
+  
+  
   
   
   
@@ -3608,10 +4090,16 @@ pia["project_name"] = project_name
   
   
   
+  
+  
+  
 
 
 pia["data_flows"] = data_flows
 
+  
+  
+  
   
   
   
@@ -3654,10 +4142,16 @@ pia["data_flows"] = data_flows
   
   
   
+  
+  
+  
 
 
 for flow in data_flows:
 
+  
+  
+  
   
   
   
@@ -3700,10 +4194,16 @@ if flow.get("sensitive_data"):
   
   
   
+  
+  
+  
 
 
 pia["risk_assessment"]["identified_risks"].append({
 
+  
+  
+  
   
   
   
@@ -3746,10 +4246,16 @@ pia["risk_assessment"]["identified_risks"].append({
   
   
   
+  
+  
+  
 
 
 "risk": "Sensitive data processing",
 
+  
+  
+  
   
   
   
@@ -3792,10 +4298,16 @@ pia["risk_assessment"]["identified_risks"].append({
   
   
   
+  
+  
+  
 
 
 "impact": "high"
 
+  
+  
+  
   
   
   
@@ -3838,6 +4350,9 @@ pia["risk_assessment"]["identified_risks"].append({
   
   
   
+  
+  
+  
 
 
 return pia
@@ -3861,10 +4376,16 @@ return pia
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

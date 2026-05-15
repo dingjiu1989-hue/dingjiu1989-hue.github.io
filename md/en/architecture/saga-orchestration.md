@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-orchestration.html
   
 
 
+# Saga Orchestration Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Saga orchestration manages distributed transactions through a central coordinator that directs participating services through a sequence of local transactions. Unlike two-phase commit, sagas embrace eventual consistency — each step commits independently, and failures trigger compensating transactions to undo completed steps. The orchestrator provides clear workflow visibility, centralized error handling, and explicit state management. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The orchestrator is a dedicated service responsible for executing the saga. It m
   
   
   
+  
+  
+  
 
 
 Compensation is the mechanism for undoing completed steps. For each step that makes a forward change, the saga designer defines a compensating action that reverses that change. If step 3 fails, the orchestrator invokes the compensations for steps 2 and 1 in reverse order. Compensations must be idempotent — they may be called multiple times if the orchestrator fails during compensation execution. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ State machines provide a natural model for saga orchestration. The saga exists i
   
   
   
+  
+  
+  
 
 
 Temporal is a leading platform for saga orchestration. It provides durable execution of workflow functions — the workflow code is executed on a Temporal worker, and its state is persisted to the Temporal server. If the worker crashes, the workflow resumes from the last completed activity. Temporal handles retries, timeouts, and compensation automatically. The workflow developer writes straightforward sequential code, and Temporal ensures reliable execution. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Concrete implementation requires careful step design. Each step should be a dist
   
   
   
+  
+  
+  
 
 
 Timeout management is critical. Each step has a timeout — if the activity does not complete within the window, the orchestrator determines the appropriate action. Idempotent activities can be retried. Non-idempotent activities may require human intervention or automatic compensation. The orchestrator should implement exponential backoff with jitter for transient failures and escalation policies for persistent failures. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Data accumulation across saga steps requires careful modeling. The orchestrator 
   
   
   
+  
+  
+  
 
 
 Testing orchestrated sagas benefits from the explicit workflow definition. Unit tests verify state transitions and compensation logic. Integration tests verify end-to-end saga execution with actual service instances. Resilience tests verify recovery from orchestrator crashes, participant failures, and network partitions. The explicitness of orchestration makes these tests more comprehensive than testing equivalent choreographed sagas. 
 
+  
+  
+  
   
   
   

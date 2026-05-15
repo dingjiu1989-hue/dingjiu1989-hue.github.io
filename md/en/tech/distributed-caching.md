@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/distributed-caching.html
   
   
   
+  
+  
+  
+
+
+# Distributed Caching
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Distributed caching improves application performance by storing frequently accessed data across multiple nodes. Unlike a local cache, a distributed cache is shared across all application instances, providing consistent data access and higher effective capacity. This article covers Redis Cluster, Memcached, CDN caching, and invalidation strategies.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Distributed caching improves application performance by storing frequently acces
   
   
   
+  
+  
+  
 
 
 A local cache on each application instance is fast but limited. Each instance has its own copy of cached data, leading to duplication and inconsistency. When data changes, each instance must be notified independently. The cache capacity is limited to a single instance's memory.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ A distributed cache pools memory across multiple nodes. All application instance
   
   
   
+  
+  
+  
 
 
 ##  Redis Cluster
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Redis Cluster provides a distributed Redis implementation with automatic shardin
   
   
   
+  
+  
+  
 
 
 Redis Cluster supports replication with a primary-replica configuration. Each primary has one or more replicas. If the primary fails, a replica is promoted automatically. This provides high availability without manual intervention.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ Redis supports multiple data structures: strings, hashes, lists, sets, sorted se
   
   
   
+  
+  
+  
 
 
 ##  Memcached
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Memcached is a simpler, more focused distributed cache. It provides a straightfo
   
   
   
+  
+  
+  
 
 
 Unlike Redis, Memcached does not support persistence, replication, or advanced data structures. Items are automatically evicted when memory is full using an LRU (Least Recently Used) algorithm. The simplicity of Memcached makes it extremely fast—it is often faster than Redis for basic key-value operations.
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Memcached is typically deployed as a pool of servers. Clients use consistent has
   
   
   
+  
+  
+  
 
 
 ##  CDN Caching
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Content Delivery Networks (CDNs) cache content at edge locations close to users.
   
   
   
+  
+  
+  
 
 
 CDN caching uses HTTP cache headers (Cache-Control, ETag, Expires) to control caching behavior. Short TTLs (minutes) for dynamic content. Long TTLs (days or weeks) for static assets with content hashing in URLs.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Cache invalidation in CDNs is challenging. Most CDNs support purge requests that
   
   
   
+  
+  
+  
 
 
 ##  Cache Invalidation Strategies
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Invalidation is one of the hardest problems in caching. TTL-based invalidation s
   
   
   
+  
+  
+  
 
 
 Event-driven invalidation removes cached entries when the underlying data changes. When a database record is updated, the service publishes an invalidation event. Cache listeners remove the affected entries. This provides near-instantaneous invalidation but requires event infrastructure.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Write-through caching updates the cache synchronously when data is written. Read
   
   
   
+  
+  
+  
 
 
 ##  Consistency Considerations
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ Distributed caches are eventually consistent by nature. After a write, there is 
   
   
   
+  
+  
+  
 
 
 Cache-aside (lazy loading) is the most common pattern. The application checks the cache first. On a miss, it reads from the database and populates the cache. This pattern is simple and works well for most use cases. The risk is stale data between cache updates.
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ Cache stampede occurs when many requests miss the cache simultaneously, all hitt
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ Cache data that is expensive to compute and frequently accessed. Identify cachin
   
   
   
+  
+  
+  
 
 
 Use consistent serialization across all cache consumers. Version cached data to handle serialization format changes. Monitor cache memory usage and eviction rates. High eviction rates indicate insufficient cache capacity.
 
+  
+  
+  
   
   
   

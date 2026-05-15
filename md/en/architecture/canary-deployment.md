@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/canary-deployment.html
   
   
   
+  
+  
+  
+
+
+# Canary Deployments for Safe Releases
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Canary deployment is a release strategy that introduces a new version of an application to a small subset of users before rolling it out to the entire user base. Named after the "canary in a coal mine," this approach limits the blast radius of problematic releases.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Canary deployment is a release strategy that introduces a new version of an appl
   
   
   
+  
+  
+  
 
 
 A new version is deployed alongside the stable version. A load balancer or traffic router directs a small percentage of requests—typically 1-5%—to the new version. Monitoring systems compare error rates, latency, and business metrics between the canary and stable versions. If the canary performs well, traffic is gradually increased to 10%, 25%, 50%, and finally 100%.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ A new version is deployed alongside the stable version. A load balancer or traff
   
   
   
+  
+  
+  
 
 
 Successful canary deployments rely on real-time metrics comparison. Key indicators include HTTP error rates (5xx responses), request latency (p50, p95, p99), CPU and memory usage, and business metrics like conversion rates or signup completion.
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Statistical significance matters. If your error rate doubles from 0.1% to 0.2%, 
   
   
   
+  
+  
+  
 
 
 ##  Rolling Back a Canary
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ If metrics degrade during the canary phase, traffic to the new version is automa
   
   
   
+  
+  
+  
 
 
 ##  Comparison with Blue-Green
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ Canary deployment is slower but safer than blue-green. Blue-green switches all t
   
   
   
+  
+  
+  
 
 
 ##  Implementation Tools
 
+  
+  
+  
   
   
   

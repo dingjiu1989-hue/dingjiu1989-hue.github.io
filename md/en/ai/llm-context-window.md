@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-context-window.html
   
 
 
+# LLM Context Window Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Context window size has grown from 2K tokens in early GPT models to 200K tokens 
   
   
   
+  
+  
+  
 
 
 ##  The "Lost in the Middle" Problem
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Research consistently shows that LLMs perform best when relevant information app
   
   
   
+  
+  
+  
 
 
 **Performance by position (approximate):**
 
+  
+  
+  
   
   
   
@@ -283,6 +327,9 @@ Research consistently shows that LLMs perform best when relevant information app
   
   
   
+  
+  
+  
 
 
 * Middle (20-80%): Worst recall, 60-70% accuracy 
@@ -306,10 +353,16 @@ Research consistently shows that LLMs perform best when relevant information app
   
   
   
+  
+  
+  
 
 
 * End (last 20%): Good recall, 85%+ accuracy
 
+  
+  
+  
   
   
   
@@ -358,10 +411,16 @@ This has direct implications for RAG systems: placing the most relevant document
   
   
   
+  
+  
+  
 
 
 ##  Context Budgeting
 
+  
+  
+  
   
   
   
@@ -410,6 +469,9 @@ Treat context like a budget. Allocate tokens deliberately:
   
   
   
+  
+  
+  
 
 
 Total context: 100K tokens (example)
@@ -436,36 +498,16 @@ Total context: 100K tokens (example)
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- System prompt: 2K tokens (2%)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Conversation history: 10K tokens (10%)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- System prompt: 2K tokens (2%)
 
+  
+  
+  
   
   
   
@@ -490,7 +532,7 @@ Total context: 100K tokens (example)
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Retrieved documents: 80K tokens (80%)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Conversation history: 10K tokens (10%)
 
   
   
@@ -514,10 +556,45 @@ Total context: 100K tokens (example)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Current query + formatting: 8K tokens (8%)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Retrieved documents: 80K tokens (80%)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Current query + formatting: 8K tokens (8%)
+
+  
+  
+  
   
   
   
@@ -566,10 +643,16 @@ For each allocation, ask:
   
   
   
+  
+  
+  
 
 
 * Does every token in the system prompt need to be there?
 
+  
+  
+  
   
   
   
@@ -612,6 +695,9 @@ For each allocation, ask:
   
   
   
+  
+  
+  
 
 
 * Are all retrieved documents equally relevant?
@@ -635,10 +721,16 @@ For each allocation, ask:
   
   
   
+  
+  
+  
 
 
 * Can the query be compressed?
 
+  
+  
+  
   
   
   
@@ -687,10 +779,16 @@ For each allocation, ask:
   
   
   
+  
+  
+  
 
 
 ### Sliding Window
 
+  
+  
+  
   
   
   
@@ -739,10 +837,16 @@ Keep only the most recent N turns of conversation:
   
   
   
+  
+  
+  
 
 
 def get_conversation_context(conversation, max_turns=10):
 
+  
+  
+  
   
   
   
@@ -791,10 +895,16 @@ def get_conversation_context(conversation, max_turns=10):
   
   
   
+  
+  
+  
 
 
 trimmed = conversation[-max_turns:]
 
+  
+  
+  
   
   
   
@@ -843,10 +953,16 @@ trimmed = conversation[-max_turns:]
   
   
   
+  
+  
+  
 
 
 if len(conversation) > max_turns:
 
+  
+  
+  
   
   
   
@@ -895,10 +1011,16 @@ summary = summarize_conversation(conversation[:-max_turns])
   
   
   
+  
+  
+  
 
 
 trimmed = [{"role": "system", "content": f"Earlier summary: {summary}"}] + trimmed
 
+  
+  
+  
   
   
   
@@ -947,10 +1069,16 @@ return trimmed
   
   
   
+  
+  
+  
 
 
 ### Conversation Summarization
 
+  
+  
+  
   
   
   
@@ -999,10 +1127,16 @@ Periodically summarize the conversation and replace older messages:
   
   
   
+  
+  
+  
 
 
 def summarize_and_trim(messages, summary_threshold=20):
 
+  
+  
+  
   
   
   
@@ -1051,10 +1185,16 @@ if len(messages) <= summary_threshold:
   
   
   
+  
+  
+  
 
 
 return messages
 
+  
+  
+  
   
   
   
@@ -1103,10 +1243,16 @@ to_summarize = messages[:len(messages) - summary_threshold]
   
   
   
+  
+  
+  
 
 
 summary_prompt = "Summarize the key points from this conversation, preserving any critical information the user has provided:"
 
+  
+  
+  
   
   
   
@@ -1155,10 +1301,16 @@ summary = call_llm(summary_prompt, to_summarize)
   
   
   
+  
+  
+  
 
 
 remaining = messages[-summary_threshold:]
 
+  
+  
+  
   
   
   
@@ -1207,10 +1359,16 @@ return [{"role": "system", "content": f"Conversation summary: {summary}"}] + rem
   
   
   
+  
+  
+  
 
 
 ### Hierarchical Summarization
 
+  
+  
+  
   
   
   
@@ -1259,10 +1417,16 @@ For very long conversations, maintain a hierarchy of summaries:
   
   
   
+  
+  
+  
 
 
 Level 0: Full conversation (raw messages)
 
+  
+  
+  
   
   
   
@@ -1311,10 +1475,16 @@ Level 1: Hourly summaries
   
   
   
+  
+  
+  
 
 
 Level 2: Daily summaries
 
+  
+  
+  
   
   
   
@@ -1363,10 +1533,16 @@ Level 3: Conversation summary (per session)
   
   
   
+  
+  
+  
 
 
 When context is full, replace Level 0 messages with Level 1 summaries, then Level 2, etc.
 
+  
+  
+  
   
   
   
@@ -1415,10 +1591,16 @@ When context is full, replace Level 0 messages with Level 1 summaries, then Leve
   
   
   
+  
+  
+  
 
 
 ### Document Ranking for Context
 
+  
+  
+  
   
   
   
@@ -1467,6 +1649,9 @@ When multiple documents are retrieved but context is limited:
   
   
   
+  
+  
+  
 
 
 * Retrieve many documents (high recall)
@@ -1493,36 +1678,16 @@ When multiple documents are retrieved but context is limited:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rank by relevance using a cross-encoder
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Fill context window starting with the most relevant documents
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rank by relevance using a cross-encoder
 
+  
+  
+  
   
   
   
@@ -1547,34 +1712,11 @@ When multiple documents are retrieved but context is limited:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Place the top document at the END of the context (proven best position)
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Fill context window starting with the most relevant documents
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Place the second-best document at the BEGINNING
-
   
   
   
@@ -1599,8 +1741,69 @@ When multiple documents are retrieved but context is limited:
   
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Fill the middle with remaining documents
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Place the top document at the END of the context (proven best position)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Place the second-best document at the BEGINNING
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Fill the middle with remaining documents
+
+  
+  
+  
   
   
   
@@ -1649,10 +1852,16 @@ When multiple documents are retrieved but context is limited:
   
   
   
+  
+  
+  
 
 
 Instead of ranking entire documents, rank individual chunks. A single relevant paragraph from a marginal document may be more useful than the entire top document:
 
+  
+  
+  
   
   
   
@@ -1701,10 +1910,16 @@ def fill_context(chunks, max_tokens):
   
   
   
+  
+  
+  
 
 
 """Select chunks to fill the context window."""
 
+  
+  
+  
   
   
   
@@ -1753,10 +1968,16 @@ ranked = cross_encoder_rank(chunks, query)
   
   
   
+  
+  
+  
 
 
 selected = []
 
+  
+  
+  
   
   
   
@@ -1805,10 +2026,16 @@ token_count = 0
   
   
   
+  
+  
+  
 
 
 # Always include the top chunk
 
+  
+  
+  
   
   
   
@@ -1857,10 +2084,16 @@ top = ranked[0]
   
   
   
+  
+  
+  
 
 
 if token_count + len(top) <= max_tokens:
 
+  
+  
+  
   
   
   
@@ -1909,10 +2142,16 @@ selected.append(top)
   
   
   
+  
+  
+  
 
 
 token_count += len(top)
 
+  
+  
+  
   
   
   
@@ -1961,10 +2200,16 @@ token_count += len(top)
   
   
   
+  
+  
+  
 
 
 for chunk in ranked[1:]:
 
+  
+  
+  
   
   
   
@@ -2013,10 +2258,16 @@ if token_count + len(chunk) <= max_tokens:
   
   
   
+  
+  
+  
 
 
 selected.append(chunk)
 
+  
+  
+  
   
   
   
@@ -2065,10 +2316,16 @@ token_count += len(chunk)
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -2117,10 +2374,16 @@ break
   
   
   
+  
+  
+  
 
 
 # Reorder: best chunk last, second best first, rest in middle
 
+  
+  
+  
   
   
   
@@ -2169,10 +2432,16 @@ return reorder_for_positioning(selected)
   
   
   
+  
+  
+  
 
 
 ##  Long Document Processing
 
+  
+  
+  
   
   
   
@@ -2221,10 +2490,16 @@ return reorder_for_positioning(selected)
   
   
   
+  
+  
+  
 
 
 Split the document, process each section independently, then combine:
 
+  
+  
+  
   
   
   
@@ -2273,10 +2548,16 @@ def process_long_document(document, chunk_size=4000):
   
   
   
+  
+  
+  
 
 
 chunks = split_into_chunks(document, chunk_size)
 
+  
+  
+  
   
   
   
@@ -2325,10 +2606,16 @@ summaries = []
   
   
   
+  
+  
+  
 
 
 for chunk in chunks:
 
+  
+  
+  
   
   
   
@@ -2377,10 +2664,16 @@ summary = call_llm("Summarize this section:", chunk)
   
   
   
+  
+  
+  
 
 
 summaries.append(summary)
 
+  
+  
+  
   
   
   
@@ -2429,10 +2722,16 @@ final_summary = call_llm(
   
   
   
+  
+  
+  
 
 
 "Combine these section summaries into a coherent overview:",
 
+  
+  
+  
   
   
   
@@ -2481,10 +2780,16 @@ final_summary = call_llm(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2533,10 +2838,16 @@ return final_summary
   
   
   
+  
+  
+  
 
 
 ### Iterative Refinement
 
+  
+  
+  
   
   
   
@@ -2585,6 +2896,9 @@ For analysis of long documents, iterate with targeted queries:
   
   
   
+  
+  
+  
 
 
 * Generate an initial summary
@@ -2611,36 +2925,16 @@ For analysis of long documents, iterate with targeted queries:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Query model for what's missing or unclear
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve specific sections to fill gaps
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Query model for what's missing or unclear
 
+  
+  
+  
   
   
   
@@ -2665,8 +2959,40 @@ For analysis of long documents, iterate with targeted queries:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate refined analysis
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve specific sections to fill gaps
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate refined analysis
+
+  
+  
+  
   
   
   
@@ -2715,10 +3041,16 @@ For analysis of long documents, iterate with targeted queries:
   
   
   
+  
+  
+  
 
 
 Track these metrics per request:
 
+  
+  
+  
   
   
   
@@ -2764,6 +3096,9 @@ Track these metrics per request:
   
   
   
+  
+  
+  
 
 
 * **Effective context ratio**: useful tokens / total tokens
@@ -2787,10 +3122,16 @@ Track these metrics per request:
   
   
   
+  
+  
+  
 
 
 * **Position of relevant information**: where in the context the key data appeared
 
+  
+  
+  
   
   
   
@@ -2836,10 +3177,16 @@ Track these metrics per request:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

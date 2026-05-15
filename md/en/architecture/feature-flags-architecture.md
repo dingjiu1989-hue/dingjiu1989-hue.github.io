@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/feature-flags-architectur
   
 
 
+# Feature Flags Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Feature flags (also called feature toggles) provide runtime control over application behavior without deploying new code. They decouple deployment from release, enabling patterns like canary releases, A/B testing, trunk-based development, and instant rollbacks. The architecture of a feature flag system — how flags are evaluated, stored, distributed, and managed — is critical to both developer experience and system reliability. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Flag evaluation must be fast and reliable. Every request potentially evaluates m
   
   
   
+  
+  
+  
 
 
 SDK design follows a consistent pattern. The SDK initializes with a connection to the flag management service, downloads flag configurations, and stores them in memory. When the application requests a flag value, the SDK evaluates the flag locally using the targeting rules. The SDK periodically polls or receives real-time updates (WebSocket, Server-Sent Events) for configuration changes. This ensures that flag changes take effect quickly without redeployment. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Targeting rules determine which users see which flag variations. Rules can be ba
   
   
   
+  
+  
+  
 
 
 Percentage-based rollouts require consistent bucketing to maintain user experience. If a user is assigned to the 5% cohort for a feature, they should remain in that cohort across requests and sessions. This is achieved through hash-based bucketing: the user ID is hashed with the flag key to produce a consistent bucket assignment. The percentage threshold can be gradually increased as confidence in the feature grows. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Flag management platforms provide the service-side infrastructure. LaunchDarkly 
   
   
   
+  
+  
+  
 
 
 Flag lifecycle management is a practical challenge that grows with flag count. Dead flags — flags that have been rolled out to 100% or removed — must be cleaned up. The cleanup process involves: confirming the flag is stable at 100%, removing the flag evaluation code from the application, removing the flag from the management platform, and updating any dependent tests. Automated flag lifecycle tools can surface flags that have been at a constant value beyond a configurable threshold. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Testing with feature flags requires special consideration. Tests should verify b
   
   
   
+  
+  
+  
 
 
 Security implications of feature flags are significant. Flags that control security-sensitive behavior — authentication flows, authorization rules, payment processing — must be protected from unauthorized modification. Approval workflows, audit logs, and access controls on flag changes are essential. The flag management platform should enforce separation of duties: the developer who creates a flag should not be the one who approves its production rollout. 
 
+  
+  
+  
   
   
   

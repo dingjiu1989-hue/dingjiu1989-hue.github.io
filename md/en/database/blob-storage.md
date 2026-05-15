@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/database/blob-storage.html
   
   
   
+  
+  
+  
+
+
+# Blob Storage: S3, GCS, Azure Blob, MinIO
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Blob (Binary Large Object) storage stores unstructured data such as images, videos, backups, logs, and archives. Unlike block storage (hard drives) or file storage (network file shares), blob storage manages objects with metadata identifiers and provides HTTP-based access.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Blob (Binary Large Object) storage stores unstructured data such as images, vide
   
   
   
+  
+  
+  
 
 
 Amazon S3 is the most mature and widely used object storage service. It offers 99.999999999% durability (11 nines) through automatic replication across multiple availability zones. S3 storage classes range from frequent access (Standard) to archive (Glacier Deep Archive at $1/TB/month).
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ S3 features include versioning (protect against accidental deletion), lifecycle 
   
   
   
+  
+  
+  
 
 
 ##  Google Cloud Storage
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ GCS offers similar functionality with unique features like object holds (prevent
   
   
   
+  
+  
+  
 
 
 GCS excels at integration with Google's AI and analytics services. Data in GCS can feed directly into BigQuery, Vertex AI, and Dataflow without data movement. GCS also offers lower network egress costs compared to S3.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ GCS excels at integration with Google's AI and analytics services. Data in GCS c
   
   
   
+  
+  
+  
 
 
 Azure Blob Storage offers three tiers: hot (frequent access), cool (infrequent access with 30-day minimum), and archive (with 180-day minimum and hours-long retrieval). Azure's unique feature is hierarchical namespace for data lake workloads.
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ Azure Blob integrates deeply with Azure services—Azure CDN, Azure Functions, a
   
   
   
+  
+  
+  
 
 
 ##  MinIO
 
+  
+  
+  
   
   
   
@@ -377,10 +436,16 @@ MinIO is an open-source, S3-compatible object storage server that runs on any in
   
   
   
+  
+  
+  
 
 
 MinIO's lightweight design allows it to run on Kubernetes as a stateful application. The operator automates deployment, scaling, and upgrades. Performance is impressive for Self-hosted storage—10+ GB/s read/write with NVMe drives.
 
+  
+  
+  
   
   
   
@@ -423,10 +488,16 @@ MinIO's lightweight design allows it to run on Kubernetes as a stateful applicat
   
   
   
+  
+  
+  
 
 
 For cloud-native applications, use the cloud provider's native blob storage. For multi-cloud or on-premises requirements, use MinIO or similar S3-compatible solutions. For archival data, consider S3 Glacier or GCS Archive for lowest cost.
 
+  
+  
+  
   
   
   

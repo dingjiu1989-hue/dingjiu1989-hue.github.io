@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/api-testing-2026.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4891",
+      "wordCount": "5441",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/api-testing-2026.html"},
-      "articleBody": "API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 Introduction API testing tools have evolved from simple request builders to full-featured collaboration platforms. The landscape in 2026 offers options for every workflow: Bruno puts collections in Git, Hoppscotch provides a lightweight web experience, Postman remains the enterprise standard, and Insomnia excels with GraphQL. This comparison helps you choose the right tool for your team. Bruno Bruno is a Git-friendly API client that stores collections as plain text files: Collection directory structure bruno/ my-api/ request.bru # Individual request collection.bru # Collection metadata request.bru meta { name: Get Users type: http seq: 1 } get { url: https://api.example.com/users body: none auth: bearer } headers { Authorization: {{authToken}} Content-Type: application/json } script:pre-request { // JavaScript pre-request scripts const timestamp = new Date().toISOString(); bru.setVar(\"timestamp\", timestamp); } script:post-response { // Assertions expect(res.status).to.equal(200); expect(res.body.data).to.be.an('array'); bru.setVar(\"userId\", res.body.data[0].id); } **Strengths**: Local-first (no account needed), Git-friendly diff and PRs, plain text format, offline-capable, open source, no data leaves your machine. **Weaknesses**: No cloud sync, smaller community, fewer collaboration features than Postman. Hoppscotch A web-based, open-source API development platform: // Hoppscotch collection (JSON) { \"v\": 1, \"name\": \"User API\", \"requests\": [ { \"method\": \"GET\", \"endpoint\": \"https://api.example.com/users\", \"params\": [ { \"key\": \"page\", \"value\": \"1\", \"active\": true } ], \"headers\": [ { \"key\": \"Authorization\", \"value\": \"Bearer {{token}}\" } ], \"preRequestScript\": \"// transform request\", \"testScript\": \"// validate response\" } ], \"environments\": [ { \"name\": \"Production\", \"variables\": { \"base_url\": \"https://api.example.com\", \"token\": \"\" } } ] } **Strengths**: Zero installation (browser-based), realtime collaboration, PWA for offline use, GraphQL support, WebSocket testing. **Weaknesses**: Web-based (limited offline without PWA), fewer integrations than Postman. Postman The enterprise standard with comprehensive features: // Postman pre-request script pm.environment.set(\"timestamp\", new Date().toISOString()); pm.variables.set(\"computedToken\", crypto.createHash(\"sha256\") .update(pm.environment.get(\"secret\") + Date.now()) .digest(\"hex\")); // Postman test script pm.test(\"Status code is 200\", () => { pm.response.to.have.status(200); }); pm.test(\"Response has required fields\", () => { const jsonData = pm.response.json(); pm.expect(jsonData).to.have.property(\"users\"); pm.expect(jsonData.users).to.be.an(\"array\"); pm.expect(jsonData.users[0]).to.have.all.keys([\"id\", \"name\", \"email\"]); }); pm.test(\"Response time is acceptable\", () => { pm.expect(pm.response.responseTime).to.be.below(500); }); // Collection runner automation pm-collection run user-api.postman_collection.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit **Strengths**: Most comprehensive feature set, collection runner, monitoring, documentation generation, team workspaces, API mocking, Newman CLI for CI. **Weaknesses**: Heavy resource usage, account required, can be overwhelming, recent UI changes have been controversial. Insomnia Kong's API client with excellent GraphQL support: Insomnia GraphQL query query GetUser($id: ID!) { user(id: $id) { id name email posts { title comments { content } } } } With variables { \"id\": \"1\" } Insomnia's plugin system extends functionality: // Insomnia plugin module.exports.templateTags = [ { name: \"jwt\", displayName: \"JWT Token\", description: \"Generate a signed JWT\", args: [ { type: \"string\", displayName: \"Secret\" }, { type: \"string\", displayName: \"Payload\" }, ], async run(context, secret, payload) { const jwt = require(\"jsonwebtoken\"); return jwt.sign(JSON.parse(payload), secret, { expiresIn: \"1h\" }); }, }, ]; **Strengths**: Clean UI, excellent GraphQL support, plugin system, local data (no cloud required by default), unit testing feature. Comparison | Feature | Bruno | Hoppscotch | Postman | Insomnia | |---------|-------|-----------|---------|----------| | Local-first | Yes | Partial (PWA) | No | Yes | | Git integration | Native | Manual | Newman CLI | Partial | | GraphQL | Basic | Good | Good | Excellent | | WebSocket | No | Yes | Yes | Yes | | CI/CLI | Via Bruno CLI | Via scripts | Newman | Inso CLI | | Team sync | Git | Realtime | Cloud | Git | | Open source | Yes | Yes | No | Yes | | Desktop app | Yes | PWA | Yes | Yes | Recommendations * **Git-native teams**: Bruno for API collections in your repository with PR-based review. * **Quick testing**: Hoppscotch for ad-hoc API testing without installation. * **Enterprise teams**: Postman for comprehensive testing, monitoring, and documentation. * **GraphQL-heavy projects**: Insomnia for its superior GraphQL editor and schema exploration. * **CI integration**: Postman (Newman) or Bruno CLI for automated API testing in pipelines. * **Privacy-conscious**: Bruno or Hoppscotch (self-hosted) for local-only data. The trend is toward local-first, git-integrated tools. Bruno represents this new direction most completely. Postman remains the safest choice for enterprise teams needing the full feature set."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/api-testing-tools-bruno-hoppscotch-postman-insomnia-in-2026-29p2"
+      ],
+      "articleBody": "API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026 Introduction API testing tools have evolved from simple request builders to full-featured collaboration platforms. The landscape in 2026 offers options for every workflow: Bruno puts collections in Git, Hoppscotch provides a lightweight web experience, Postman remains the enterprise standard, and Insomnia excels with GraphQL. This comparison helps you choose the right tool for your team. Bruno Bruno is a Git-friendly API client that stores collections as plain text files: Collection directory structure bruno/ my-api/ request.bru # Individual request collection.bru # Collection metadata request.bru meta { name: Get Users type: http seq: 1 } get { url: https://api.example.com/users body: none auth: bearer } headers { Authorization: {{authToken}} Content-Type: application/json } script:pre-request { // JavaScript pre-request scripts const timestamp = new Date().toISOString(); bru.setVar(\"timestamp\", timestamp); } script:post-response { // Assertions expect(res.status).to.equal(200); expect(res.body.data).to.be.an('array'); bru.setVar(\"userId\", res.body.data[0].id); } **Strengths**: Local-first (no account needed), Git-friendly diff and PRs, plain text format, offline-capable, open source, no data leaves your machine. **Weaknesses**: No cloud sync, smaller community, fewer collaboration features than Postman. Hoppscotch A web-based, open-source API development platform: // Hoppscotch collection (JSON) { \"v\": 1, \"name\": \"User API\", \"requests\": [ { \"method\": \"GET\", \"endpoint\": \"https://api.example.com/users\", \"params\": [ { \"key\": \"page\", \"value\": \"1\", \"active\": true } ], \"headers\": [ { \"key\": \"Authorization\", \"value\": \"Bearer {{token}}\" } ], \"preRequestScript\": \"// transform request\", \"testScript\": \"// validate response\" } ], \"environments\": [ { \"name\": \"Production\", \"variables\": { \"base_url\": \"https://api.example.com\", \"token\": \"\" } } ] } **Strengths**: Zero installation (browser-based), realtime collaboration, PWA for offline use, GraphQL support, WebSocket testing. **Weaknesses**: Web-based (limited offline without PWA), fewer integrations than Postman. Postman The enterprise standard with comprehensive features: // Postman pre-request script pm.environment.set(\"timestamp\", new Date().toISOString()); pm.variables.set(\"computedToken\", crypto.createHash(\"sha256\") .update(pm.environment.get(\"secret\") + Date.now()) .digest(\"hex\")); // Postman test script pm.test(\"Status code is 200\", () => { pm.response.to.have.status(200); }); pm.test(\"Response has required fields\", () => { const jsonData = pm.response.json(); pm.expect(jsonData).to.have.property(\"users\"); pm.expect(jsonData.users).to.be.an(\"array\"); pm.expect(jsonData.users[0]).to.have.all.keys([\"id\", \"name\", \"email\"]); }); pm.test(\"Response time is acceptable\", () => { pm.expect(pm.response.responseTime).to.be.below(500); }); // Collection runner automation pm-collection run user-api.postman_collection.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit **Strengths**: Most comprehensive feature set, collection runner, monitoring, documentation generation, team workspaces, API mocking, Newman CLI for CI. **Weaknesses**: Heavy resource usage, account required, can be overwhelming, recent UI changes have been controversial. Insomnia Kong's API client with excellent GraphQL support: Insomnia GraphQL query query GetUser($id: ID!) { user(id: $id) { id name email posts { title comments { content } } } } With variables { \"id\": \"1\" } Insomnia's plugin system extends functionality: // Insomnia plugin module.exports.templateTags = [ { name: \"jwt\", displayName: \"JWT Token\", description: \"Generate a signed JWT\", args: [ { type: \"string\", displayName: \"Secret\" }, { type: \"string\", displayName: \"Payload\" }, ], async run(context, secret, payload) { const jwt = require(\"jsonwebtoken\"); return jwt.sign(JSON.parse(payload), secret, { expiresIn: \"1h\" }); }, }, ]; **Strengths**: Clean UI, excellent GraphQL support, plugin system, local data (no cloud required by default), unit testing feature. Comparison | Feature | Bruno | Hoppscotch | Postman | Insomnia | |---------|-------|-----------|---------|----------| | Local-first | Yes | Partial (PWA) | No | Yes | | Git integration | Native | Manual | Newman CLI | Partial | | GraphQL | Basic | Good | Good | Excellent | | WebSocket | No | Yes | Yes | Yes | | CI/CLI | Via Bruno CLI | Via scripts | Newman | Inso CLI | | Team sync | Git | Realtime | Cloud | Git | | Open source | Yes | Yes | No | Yes | | Desktop app | Yes | PWA | Yes | Yes | Recommendations * **Git-native teams**: Bruno for API collections in your repository with PR-based review. * **Quick testing**: Hoppscotch for ad-hoc API testing without installation. * **Enterprise teams**: Postman for comprehensive testing, monitoring, and documentation. * **GraphQL-heavy projects**: Insomnia for its superior GraphQL editor and schema exploration. * **CI integration**: Postman (Newman) or Bruno CLI for automated API testing in pipelines. * **Privacy-conscious**: Bruno or Hoppscotch (self-hosted) for local-only data. The trend is toward local-first, git-integrated tools. Bruno represents this new direction most completely. Postman remains the safest choice for enterprise teams needing the full feature set."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -222,7 +254,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Bruno</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -268,7 +306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Collection directory structure</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -314,7 +358,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>my-api/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection.bru # Collection metadata</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -406,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>meta {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,7 +514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>type: http</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -498,7 +566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -544,7 +618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>url: https://api.example.com/users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -590,6 +670,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>auth: bearer</p>
 <br>
 <br>
@@ -613,7 +696,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -659,7 +748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Authorization: {{authToken}}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -705,7 +800,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -751,7 +852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// JavaScript pre-request scripts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -797,6 +904,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>bru.setVar("timestamp", timestamp);</p>
 <br>
 <br>
@@ -820,7 +930,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -866,7 +982,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Assertions</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -912,7 +1034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expect(res.body.data).to.be.an('array');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1004,7 +1138,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: No cloud sync, smaller community, fewer collaboration features than Postman.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1050,7 +1190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A web-based, open-source API development platform:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1096,7 +1242,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1142,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": "User API",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1188,7 +1346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1234,7 +1398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"endpoint": "https://api.example.com/users",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,6 +1450,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ "key": "page", "value": "1", "active": true }</p>
 <br>
 <br>
@@ -1303,7 +1476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1349,6 +1528,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ "key": "Authorization", "value": "Bearer {{token}}" }</p>
 <br>
 <br>
@@ -1372,7 +1554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1418,7 +1606,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"testScript": "// validate response"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1464,7 +1658,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1510,7 +1710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1556,7 +1762,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"variables": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1602,6 +1814,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"token": ""</p>
 <br>
 <br>
@@ -1625,30 +1840,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1694,7 +1918,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1740,7 +1970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Web-based (limited offline without PWA), fewer integrations than Postman.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1786,7 +2022,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The enterprise standard with comprehensive features:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1832,7 +2074,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pm.environment.set("timestamp", new Date().toISOString());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1878,7 +2126,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.update(pm.environment.get("secret") + Date.now())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1924,7 +2178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Postman test script</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1970,6 +2230,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pm.response.to.have.status(200);</p>
 <br>
 <br>
@@ -1993,7 +2256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2039,7 +2308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const jsonData = pm.response.json();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2085,7 +2360,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pm.expect(jsonData.users).to.be.an("array");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2131,7 +2412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2177,7 +2464,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pm.expect(pm.response.responseTime).to.be.below(500);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2223,7 +2516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Collection runner automation</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2269,10 +2568,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json</p>
 <br>
 <br>
 <br>
@@ -2292,13 +2591,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10</p>
 <br>
 <br>
 <br>
@@ -2315,7 +2614,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv</p>
 <br>
 <br>
 <br>
@@ -2325,6 +2623,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv</p>
 <br>
 <br>
 <br>
@@ -2338,7 +2637,22 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2384,7 +2698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Weaknesses**: Heavy resource usage, account required, can be overwhelming, recent UI changes have been controversial.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2430,7 +2750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Kong's API client with excellent GraphQL support:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2476,7 +2802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query GetUser($id: ID!) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2522,7 +2854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2568,7 +2906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2614,7 +2958,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>title</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2660,6 +3010,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>content</p>
 <br>
 <br>
@@ -2683,26 +3036,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -2729,6 +3062,35 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -2752,7 +3114,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2798,7 +3166,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2890,7 +3270,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Insomnia plugin</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2936,7 +3322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2982,7 +3374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>displayName: "JWT Token",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3028,7 +3426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>args: [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3074,7 +3478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ type: "string", displayName: "Payload" },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3120,7 +3530,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async run(context, secret, payload) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3166,6 +3582,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });</p>
 <br>
 <br>
@@ -3189,30 +3608,39 @@
 <br>
 <br>
 <br>
-<p>},</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3258,7 +3686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Strengths**: Clean UI, excellent GraphQL support, plugin system, local data (no cloud required by default), unit testing feature.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3304,7 +3738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | Bruno | Hoppscotch | Postman | Insomnia |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3350,7 +3790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Local-first | Yes | Partial (PWA) | No | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3396,7 +3842,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| GraphQL | Basic | Good | Good | Excellent |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3442,7 +3894,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| CI/CLI | Via Bruno CLI | Via scripts | Newman | Inso CLI |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3488,7 +3946,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Open source | Yes | Yes | No | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3534,7 +3998,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Recommendations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3577,7 +4047,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Quick testing**: Hoppscotch for ad-hoc API testing without installation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3617,7 +4093,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **GraphQL-heavy projects**: Insomnia for its superior GraphQL editor and schema exploration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3657,7 +4139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Privacy-conscious**: Bruno or Hoppscotch (self-hosted) for local-only data.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

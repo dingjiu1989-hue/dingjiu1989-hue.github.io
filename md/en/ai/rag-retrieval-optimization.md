@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-retrieval-optimization.html
   
 
 
+# RAG Retrieval Optimization: Hybrid Search, Re-Ranking, Query Transformation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Retrieval quality is the single biggest factor in RAG system performance. Even t
   
   
   
+  
+  
+  
 
 
 ##  Hybrid Search
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Pure vector search excels at semantic similarity but misses exact keyword matche
   
   
   
+  
+  
+  
 
 
 from qdrant_client import QdrantClient
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ from qdrant_client.models import Filter, HybridFusion
   
   
   
+  
+  
+  
 
 
 client = QdrantClient(host="localhost", port=6333)
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ def hybrid_search(
   
   
   
+  
+  
+  
 
 
 query: str, collection: str = "documents", limit: int = 10
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ query: str, collection: str = "documents", limit: int = 10
   
   
   
+  
+  
+  
 
 
 # Generate dense vector
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ dense_vector = embedding_model.encode(query).tolist()
   
   
   
+  
+  
+  
 
 
 # Sparse vector (BM25-style)
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ sparse_vector = sparse_encoder.encode(query)
   
   
   
+  
+  
+  
 
 
 results = client.search_batch(
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ collection_name=collection,
   
   
   
+  
+  
+  
 
 
 requests=[
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 "limit": limit * 2,
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 "limit": limit * 2,
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ requests=[
   
   
   
+  
+  
+  
 
 
 return rrf_fusion(results[0], results[1], k=60)
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ return rrf_fusion(results[0], results[1], k=60)
   
   
   
+  
+  
+  
 
 
 RRF combines ranked lists from multiple retrieval methods:
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ def rrf_fusion(dense_results: list, sparse_results: list, k: int = 60) -> list[d
   
   
   
+  
+  
+  
 
 
 scores = {}
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ for rank, result in enumerate(dense_results):
   
   
   
+  
+  
+  
 
 
 scores[result.id] = scores.get(result.id, 0) + 1 / (k + rank + 1)
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ for rank, result in enumerate(sparse_results):
   
   
   
+  
+  
+  
 
 
 scores[result.id] = scores.get(result.id, 0) + 1 / (k + rank + 1)
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ reranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
   
   
   
+  
+  
+  
 
 
 return [{"id": id_, "score": score} for id_, score in reranked[:limit]]
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ RRF is simple, effective, and requires no training. The constant `k` (typically 
   
   
   
+  
+  
+  
 
 
 ##  Cross-Encoder Re-Ranking
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ After initial retrieval, a cross-encoder model re-scores candidates with higher 
   
   
   
+  
+  
+  
 
 
 from sentence_transformers import CrossEncoder
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
   
   
   
+  
+  
+  
 
 
 def retrieve_and_rerank(query: str, top_k: int = 50, rerank_top: int = 5) -> list[dict]:
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ def retrieve_and_rerank(query: str, top_k: int = 50, rerank_top: int = 5) -> lis
   
   
   
+  
+  
+  
 
 
 candidates = hybrid_search(query, limit=top_k)
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ candidates = hybrid_search(query, limit=top_k)
   
   
   
+  
+  
+  
 
 
 pairs = [(query, cand["text"]) for cand in candidates]
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ scores = reranker.predict(pairs)
   
   
   
+  
+  
+  
 
 
 for cand, score in zip(candidates, scores):
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ cand["rerank_score"] = float(score)
   
   
   
+  
+  
+  
 
 
 candidates.sort(key=lambda x: x["rerank_score"], reverse=True)
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ return candidates[:rerank_top]
   
   
   
+  
+  
+  
 
 
 Cross-encoders are 10-100x slower than bi-encoders but significantly more accurate. The two-stage pattern (wide bi-encoder retrieval, narrow cross-encoder re-ranking) balances speed and quality.
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ Cross-encoders are 10-100x slower than bi-encoders but significantly more accura
   
   
   
+  
+  
+  
 
 
 User queries are rarely optimal for retrieval. Transform them before searching:
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ def transform_query(user_query: str, technique: str = "expansion") -> str:
   
   
   
+  
+  
+  
 
 
 if technique == "expansion":
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ return expand_query(user_query)
   
   
   
+  
+  
+  
 
 
 elif technique == "decomposition":
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ return decompose_query(user_query)
   
   
   
+  
+  
+  
 
 
 elif technique == "hypothetical":
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ return hyde_query(user_query)
   
   
   
+  
+  
+  
 
 
 def expand_query(query: str) -> str:
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ def expand_query(query: str) -> str:
   
   
   
+  
+  
+  
 
 
 expansions = call_llm(f"""
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ Generate 3 alternative phrasings of this query for better search retrieval.
   
   
   
+  
+  
+  
 
 
 Keep the core meaning but vary terminology.
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ Original: {query}
   
   
   
+  
+  
+  
 
 
 """)
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ return f"{query}\n{expansions}"
   
   
   
+  
+  
+  
 
 
 def hyde_query(query: str) -> str:
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ def hyde_query(query: str) -> str:
   
   
   
+  
+  
+  
 
 
 then use its embedding for retrieval."""
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ hypothetical = call_llm(f"Write a short passage that perfectly answers: {query}"
   
   
   
+  
+  
+  
 
 
 return hypothetical
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ return hypothetical
   
   
   
+  
+  
+  
 
 
 Complex questions should be split into sub-queries, each searched independently:
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ def decompose_and_retrieve(question: str) -> list[dict]:
   
   
   
+  
+  
+  
 
 
 sub_queries = call_llm(f"""
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ Break this question into 2-4 independent sub-questions:
   
   
   
+  
+  
+  
 
 
 {question}
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ Break this question into 2-4 independent sub-questions:
   
   
   
+  
+  
+  
 
 
 sub_queries = parse_list(sub_queries)
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ all_results = []
   
   
   
+  
+  
+  
 
 
 for sq in sub_queries:
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ results = hybrid_search(sq, limit=5)
   
   
   
+  
+  
+  
 
 
 all_results.extend(results)
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ all_results.extend(results)
   
   
   
+  
+  
+  
 
 
 seen = set()
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ unique_results = []
   
   
   
+  
+  
+  
 
 
 for r in all_results:
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ if r["id"] not in seen:
   
   
   
+  
+  
+  
 
 
 seen.add(r["id"])
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ unique_results.append(r)
   
   
   
+  
+  
+  
 
 
 return unique_results[:10]
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ return unique_results[:10]
   
   
   
+  
+  
+  
 
 
 Track these metrics to validate improvements:
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ def evaluate_retrieval(test_queries: list[dict], retriever_fn) -> dict:
   
   
   
+  
+  
+  
 
 
 """test_queries: [{query, relevant_doc_ids}]"""
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ metrics = {"recall@k": {}, "mrr": 0}
   
   
   
+  
+  
+  
 
 
 for k in [1, 3, 5, 10]:
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ recalls = []
   
   
   
+  
+  
+  
 
 
 for tq in test_queries:
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ results = retriever_fn(tq["query"], limit=k)
   
   
   
+  
+  
+  
 
 
 retrieved_ids = {r["id"] for r in results}
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ relevant = set(tq["relevant_doc_ids"])
   
   
   
+  
+  
+  
 
 
 recall = len(retrieved_ids & relevant) / len(relevant) if relevant else 0
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ recalls.append(recall)
   
   
   
+  
+  
+  
 
 
 metrics["recall@k"] = np.mean(recalls)
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ return metrics
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html
   
 
 
+# Retry Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Exponential Backoff
   
   
   
+  
+  
+  
 
 
 Exponential backoff is the most basic retry strategy. After a failure, the system waits an increasing amount of time before each subsequent retry. The wait time typically doubles with each attempt: 100ms, 200ms, 400ms, 800ms, and so on, up to a maximum delay. This prevents the retry storm problem, where many clients retry simultaneously and overwhelm an already-stressed service. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ The formula is straightforward: `delay = base_delay * (2 ^ attempt)`. Most imple
   
   
   
+  
+  
+  
 
 
 The Importance of Jitter 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Pure exponential backoff can cause a phenomenon called thundering herd. When a s
   
   
   
+  
+  
+  
 
 
 The most effective jitter strategy is "full jitter": `delay = random_between(0, min(cap, base * 2 ^ attempt))`. This spreads retries evenly across the interval window. Amazon's AWS SDKs and Google's client libraries use variants of this approach. Full jitter dramatically reduces the probability of synchronized retries. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Retry Budgets
   
   
   
+  
+  
+  
 
 
 Not all failures justify retries. A retry budget limits the total number of retries a service will attempt within a time window. When the budget is exhausted, further retries are rejected immediately, and the error propagates to the caller. Retry budgets prevent a cascade of retries from amplifying an outage. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ A common implementation tracks retry attempts as a fraction of total requests. I
   
   
   
+  
+  
+  
 
 
 Circuit Breaker Integration 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ Retries and circuit breakers are complementary patterns with a critical interact
   
   
   
+  
+  
+  
 
 
 The typical pattern is: retry within the circuit breaker's closed state. If retries continue to fail, the circuit breaker opens and subsequent requests fail fast without attempting retries. After the circuit breaker's timeout period, it transitions to half-open, allowing limited retries to test recovery. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Idempotency and Retries
   
   
   
+  
+  
+  
 
 
 A fundamental requirement for safe retries is idempotency. If the first request succeeded but the response was lost, a retry will execute the operation again. Idempotent operations are essential. Idempotency keys, idempotent PUT operations, and database upserts are common techniques. 
 
+  
+  
+  
   
   
   
@@ -424,6 +495,9 @@ Configuration Best Practices
   
   
   
+  
+  
+  
 
 
 Retry policies should be configurable per dependency. A critical database query might justify more aggressive retries than a non-essential analytics call. Monitor retry rates, success rates, and latency impact. If retries account for a significant portion of traffic, investigate the root cause rather than tuning retry parameters. 
@@ -444,10 +518,16 @@ Retry policies should be configurable per dependency. A critical database query 
   
   
   
+  
+  
+  
 
 
 Modern resilience libraries like Resilience4j, Polly (.NET), and Tenacity (Python) provide composable retry, circuit breaker, and bulkhead decorators with built-in metrics. Using these libraries standardizes retry behavior across services and provides consistent observability. 
 
+  
+  
+  
   
   
   

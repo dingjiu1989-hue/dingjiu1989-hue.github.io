@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html
   
   
   
+  
+  
+  
+
+
+# OAuth 2.0 and PKCE Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 OAuth 2.0 Overview 
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ OAuth 2.0 is an authorization framework that enables third-party applications to
   
   
   
+  
+  
+  
 
 
 Core Roles 
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Core Roles
   
   
   
+  
+  
+  
 
 
 Grant Types 
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ OAuth 2.0 defines several grant types for different scenarios:
   
   
   
+  
+  
+  
 
 
 * **Authorization Code**: The most secure flow, designed for server-side applications.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ OAuth 2.0 defines several grant types for different scenarios:
   
   
   
+  
+  
+  
 
 
 * **Client Credentials**: For server-to-server communication without user involvement.
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ OAuth 2.0 defines several grant types for different scenarios:
   
   
   
+  
+  
+  
 
 
 The Problem PKCE Solves 
 
+  
+  
+  
   
   
   
@@ -468,6 +533,9 @@ Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile a
   
   
   
+  
+  
+  
 
 
 * Access tokens leaked via browser history
@@ -494,10 +562,16 @@ Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile a
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client 
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ PKCE eliminates these issues by introducing a cryptographic challenge-verifier p
   
   
   
+  
+  
+  
 
 
 PKCE Flow Step by Step 
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Step 1: Generate Code Verifier and Challenge
   
   
   
+  
+  
+  
 
 
 The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge). 
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ function generateCodeVerifier() {
   
   
   
+  
+  
+  
 
 
 const array = new Uint8Array(32);
 
+  
+  
+  
   
   
   
@@ -702,6 +794,9 @@ crypto.getRandomValues(array);
   
   
   
+  
+  
+  
 
 
 return base64URLEncode(array);
@@ -728,10 +823,16 @@ return base64URLEncode(array);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ async function generateCodeChallenge(verifier) {
   
   
   
+  
+  
+  
 
 
 const encoder = new TextEncoder();
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ const data = encoder.encode(verifier);
   
   
   
+  
+  
+  
 
 
 const digest = await crypto.subtle.digest('SHA-256', data);
 
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ return base64URLEncode(new Uint8Array(digest));
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -936,6 +1055,9 @@ function base64URLEncode(buffer) {
   
   
   
+  
+  
+  
 
 
 return btoa(String.fromCharCode(...new Uint8Array(buffer)))
@@ -962,10 +1084,16 @@ return btoa(String.fromCharCode(...new Uint8Array(buffer)))
   
   
   
+  
+  
+  
 
 
-.replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-')
+.replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-')
 
+  
+  
+  
   
   
   
@@ -1014,6 +1142,9 @@ return btoa(String.fromCharCode(...new Uint8Array(buffer)))
   
   
   
+  
+  
+  
 
 
 .replace(/=+$/, '');
@@ -1040,10 +1171,16 @@ return btoa(String.fromCharCode(...new Uint8Array(buffer)))
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ Step 2: Redirect to Authorization Server
   
   
   
+  
+  
+  
 
 
 The client redirects the user to the authorization server, including the code challenge and the method used (`S256`). 
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ https://auth.example.com/authorize?
   
   
   
+  
+  
+  
 
 
 response_type=code&
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ client_id=YOUR_CLIENT_ID&
   
   
   
+  
+  
+  
 
 
 redirect_uri=https://yourapp.com/callback&
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ code_challenge=YOUR_SHA256_CHALLENGE&
   
   
   
+  
+  
+  
 
 
 code_challenge_method=S256&
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ state=CSRF_TOKEN
   
   
   
+  
+  
+  
 
 
 The `state` parameter is a CSRF token that must be verified when the user returns. 
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ Step 3: User Authenticates and Consents
   
   
   
+  
+  
+  
 
 
 The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code. 
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ https://yourapp.com/callback?code=AUTH_CODE&state;=CSRF_TOKEN
   
   
   
+  
+  
+  
 
 
 The client must verify that the `state` parameter matches what it sent. 
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ Step 4: Exchange Code for Token
   
   
   
+  
+  
+  
 
 
 The client sends the authorization code along with the original plain-text code verifier to the token endpoint. 
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 -H "Content-Type: application/x-www-form-urlencoded" \
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 -d "code=AUTH_CODE" \
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 -d "client_id=YOUR_CLIENT_ID" \
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens. 
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ The authorization server computes the SHA-256 hash of the verifier and compares 
   
   
   
+  
+  
+  
 
 
 "access_token": "eyJhbGciOiJSUzI1NiIs...",
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ The authorization server computes the SHA-256 hash of the verifier and compares 
   
   
   
+  
+  
+  
 
 
 "expires_in": 3600,
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ The authorization server computes the SHA-256 hash of the verifier and compares 
   
   
   
+  
+  
+  
 
 
 "scope": "openid profile email"
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ The authorization server computes the SHA-256 hash of the verifier and compares 
   
   
   
+  
+  
+  
 
 
 Why PKCE Is Secure 
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ Without PKCE, an intercepted authorization code could be exchanged by an attacke
   
   
   
+  
+  
+  
 
 
 Refresh Tokens with PKCE 
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ Refresh tokens extend access without requiring the user to re-authenticate. When
   
   
   
+  
+  
+  
 
 
 curl -X POST https://auth.example.com/token \
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 -d "grant_type=refresh_token" \
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ curl -X POST https://auth.example.com/token \
   
   
   
+  
+  
+  
 
 
 -d "client_id=YOUR_CLIENT_ID"
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 * Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant.
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 * Use short-lived access tokens (15-60 minutes) with longer-lived refresh tokens.
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 * Validate the `state` parameter to prevent CSRF attacks on the callback.
 
+  
+  
+  
   
   
   
@@ -2288,6 +2563,9 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 * Never log tokens or authorization codes in server logs.
@@ -2314,10 +2592,16 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

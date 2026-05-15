@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/api-versioning-rest-graphql.html
   
   
   
+  
+  
+  
+
+
+# API Versioning Strategies: REST vs GraphQL Approaches
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 API versioning manages changes to public interfaces without breaking existing clients. REST and GraphQL handle versioning differently due to their architectural differences.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ API versioning manages changes to public interfaces without breaking existing cl
   
   
   
+  
+  
+  
 
 
 URL versioning embeds the version in the path: /v1/users, /v2/users. It is the most common approach. Simple to implement and discoverable. It encourages maintaining multiple API versions simultaneously.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ Header versioning uses custom headers: Accept: application/vnd.api+json;version=
   
   
   
+  
+  
+  
 
 
 Query parameter versioning uses ?version=2. Simple but easily overlooked. Not recommended for production APIs.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Query parameter versioning uses ?version=2. Simple but easily overlooked. Not re
   
   
   
+  
+  
+  
 
 
 GraphQL avoids traditional versioning. The schema evolves by adding new fields and deprecating old ones. Clients request only the fields they need, so new fields do not break existing queries.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ Deprecated fields remain in the schema but are marked @deprecated. Clients recei
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

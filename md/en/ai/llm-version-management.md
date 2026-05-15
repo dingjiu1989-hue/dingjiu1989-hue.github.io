@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-version-management.html
   
 
 
+# LLM Version Management: Model Registry, A/B Testing, Rollback
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ LLMs change frequently: new model releases, fine-tuned versions, updated system 
   
   
   
+  
+  
+  
 
 
 ##  Model Registry
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ A model registry tracks metadata for every deployed model version:
   
   
   
+  
+  
+  
 
 
 from datetime import datetime
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ from enum import Enum
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ class ModelStatus(Enum):
   
   
   
+  
+  
+  
 
 
 STAGING = "staging"
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ CANARY = "canary"
   
   
   
+  
+  
+  
 
 
 PRODUCTION = "production"
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ ROLLED_BACK = "rolled_back"
   
   
   
+  
+  
+  
 
 
 DEPRECATED = "deprecated"
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ class ModelRegistry:
   
   
   
+  
+  
+  
 
 
 def __init__(self, storage_backend):
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ self.storage = storage_backend
   
   
   
+  
+  
+  
 
 
 def register_model(self, model_id: str, metadata: dict) -> dict:
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "model_id": model_id,
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "version": metadata.get("version"),
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "parameters": metadata.get("parameters", {}),
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "registered_at": datetime.now().isoformat(),
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "evaluation_scores": {},
 
+  
+  
+  
   
   
   
@@ -858,6 +968,9 @@ entry = {
   
   
   
+  
+  
+  
 
 
 }
@@ -884,10 +997,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 self.storage.save(f"models/{model_id}", entry)
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ return entry
   
   
   
+  
+  
+  
 
 
 def promote(self, model_id: str, target_status: ModelStatus):
 
+  
+  
+  
   
   
   
@@ -988,10 +1113,16 @@ entry = self.storage.load(f"models/{model_id}")
   
   
   
+  
+  
+  
 
 
 entry["status"] = target_status.value
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ entry["deployment_history"].append({
   
   
   
+  
+  
+  
 
 
 "action": f"promoted_to_{target_status.value}",
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ entry["deployment_history"].append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ self.storage.save(f"models/{model_id}", entry)
   
   
   
+  
+  
+  
 
 
 def get_active_model(self) -> dict:
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ def get_active_model(self) -> dict:
   
   
   
+  
+  
+  
 
 
 all_models = self.storage.load_all("models/*")
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ for model in sorted(all_models, key=lambda m: m["registered_at"], reverse=True):
   
   
   
+  
+  
+  
 
 
 if model["status"] == ModelStatus.PRODUCTION.value:
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ return model
   
   
   
+  
+  
+  
 
 
 return None
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ return None
   
   
   
+  
+  
+  
 
 
 registry = ModelRegistry(redis_client)
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ registry.register_model("claude-sonnet-v4-1", {
   
   
   
+  
+  
+  
 
 
 "provider": "anthropic",
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ registry.register_model("claude-sonnet-v4-1", {
   
   
   
+  
+  
+  
 
 
 "parameters": {"temperature": 0.7, "max_tokens": 4096},
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ registry.register_model("claude-sonnet-v4-1", {
   
   
   
+  
+  
+  
 
 
 ##  A/B Testing Framework
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ Compare model versions on live traffic with statistical significance:
   
   
   
+  
+  
+  
 
 
 import random
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ import hashlib
   
   
   
+  
+  
+  
 
 
 class ModelABTest:
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ def __init__(self, registry: ModelRegistry):
   
   
   
+  
+  
+  
 
 
 self.registry = registry
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ self.experiments = {}
   
   
   
+  
+  
+  
 
 
 def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5):
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ self.experiments[name] = {
   
   
   
+  
+  
+  
 
 
 "model_a": model_a,
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ self.experiments[name] = {
   
   
   
+  
+  
+  
 
 
 "traffic_split": traffic_split,
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ self.experiments[name] = {
   
   
   
+  
+  
+  
 
 
 "results": {"a": {"calls": 0, "errors": 0, "latency_ms": []},
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ self.experiments[name] = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ def select_model(self, experiment: str, user_id: str) -> str:
   
   
   
+  
+  
+  
 
 
 exp = self.experiments[experiment]
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ exp = self.experiments[experiment]
   
   
   
+  
+  
+  
 
 
 hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ if (hash_val % 1000) / 1000 < exp["traffic_split"]:
   
   
   
+  
+  
+  
 
 
 return exp["model_a"], "a"
 
+  
+  
+  
   
   
   
@@ -2132,6 +2389,9 @@ return exp["model_b"], "b"
   
   
   
+  
+  
+  
 
 
 def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False):
@@ -2158,10 +2418,16 @@ def record_result(self, experiment: str, variant: str, latency_ms: float, error:
   
   
   
+  
+  
+  
 
 
 exp = self.experiments[experiment]
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ exp["results"][variant]["calls"] += 1
   
   
   
+  
+  
+  
 
 
 exp["results"][variant]["latency_ms"].append(latency_ms)
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ if error:
   
   
   
+  
+  
+  
 
 
 exp["results"][variant]["errors"] += 1
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ def get_winner(self, experiment: str) -> str | None:
   
   
   
+  
+  
+  
 
 
 exp = self.experiments[experiment]
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ results = exp["results"]
   
   
   
+  
+  
+  
 
 
 if results["a"]["calls"] < 100 or results["b"]["calls"] < 100:
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ return None # Not enough data
   
   
   
+  
+  
+  
 
 
 error_rate_a = results["a"]["errors"] / results["a"]["calls"]
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ error_rate_b = results["b"]["errors"] / results["b"]["calls"]
   
   
   
+  
+  
+  
 
 
 # Simple decision: lower error rate wins
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ if error_rate_a < error_rate_b:
   
   
   
+  
+  
+  
 
 
 return exp["model_a"]
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ return exp["model_b"]
   
   
   
+  
+  
+  
 
 
 ##  Gradual Rollout
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ Deploy new models incrementally with automatic rollback:
   
   
   
+  
+  
+  
 
 
 class GradualRollout:
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ def __init__(self, registry: ModelRegistry, evaluation_fn):
   
   
   
+  
+  
+  
 
 
 self.registry = registry
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ self.evaluate = evaluation_fn
   
   
   
+  
+  
+  
 
 
 async def deploy(self, model_id: str, stages: list[dict] = None):
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ if stages is None:
   
   
   
+  
+  
+  
 
 
 stages = [
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ stages = [
   
   
   
+  
+  
+  
 
 
 {"name": "small", "traffic": 0.10, "duration_min": 120, "eval_threshold": 0.95},
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ stages = [
   
   
   
+  
+  
+  
 
 
 {"name": "large", "traffic": 0.50, "duration_min": 720, "eval_threshold": 0.95},
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ stages = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ for stage in stages:
   
   
   
+  
+  
+  
 
 
 print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ self.registry.promote(model_id, ModelStatus.CANARY)
   
   
   
+  
+  
+  
 
 
 await self._route_traffic(model_id, stage["traffic"])
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ await self._route_traffic(model_id, stage["traffic"])
   
   
   
+  
+  
+  
 
 
 await asyncio.sleep(stage["duration_min"] * 60)
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ await asyncio.sleep(stage["duration_min"] * 60)
   
   
   
+  
+  
+  
 
 
 scores = await self.evaluate(model_id)
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ if scores.get("overall", 0) < stage["eval_threshold"]:
   
   
   
+  
+  
+  
 
 
 print(f"Stage {stage['name']} failed evaluation. Rolling back.")
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ await self.rollback(model_id)
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ self.registry.promote(model_id, ModelStatus.PRODUCTION)
   
   
   
+  
+  
+  
 
 
 return True
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ async def rollback(self, model_id: str):
   
   
   
+  
+  
+  
 
 
 previous_model = self.registry.get_active_model()
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ self.registry.promote(previous_model["model_id"], ModelStatus.PRODUCTION)
   
   
   
+  
+  
+  
 
 
 self.registry.promote(model_id, ModelStatus.ROLLED_BACK)
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ print(f"Rolled back to {previous_model['model_id']}")
   
   
   
+  
+  
+  
 
 
 ##  Evaluation Gate
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ Automated evaluation runs before any model promotion:
   
   
   
+  
+  
+  
 
 
 class EvaluationGate:
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ def __init__(self, test_suite: list[dict]):
   
   
   
+  
+  
+  
 
 
 self.test_suite = test_suite # [{input, expected_output, metrics}]
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ async def evaluate_model(self, model_fn) -> dict:
   
   
   
+  
+  
+  
 
 
 results = {"passed": 0, "failed": 0, "details": []}
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ for test in self.test_suite:
   
   
   
+  
+  
+  
 
 
 output = await model_fn(test["input"])
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ score = self._score_output(output, test)
   
   
   
+  
+  
+  
 
 
 if score >= test.get("threshold", 0.8):
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ results["passed"] += 1
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ results["failed"] += 1
   
   
   
+  
+  
+  
 
 
 results["details"].append({"test": test["input"], "score": score})
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ results["pass_rate"] = results["passed"] / len(self.test_suite)
   
   
   
+  
+  
+  
 
 
 return results
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ def _score_output(self, output: str, test: dict) -> float:
   
   
   
+  
+  
+  
 
 
 if "expected_output" in test:
 
+  
+  
+  
   
   
   
@@ -3978,6 +4448,9 @@ return self._similarity(output, test["expected_output"])
   
   
   
+  
+  
+  
 
 
 return 0.0
@@ -4004,10 +4477,16 @@ return 0.0
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

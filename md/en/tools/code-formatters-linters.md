@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-formatters-linters.html
   
 
 
+# Best Code Formatters and Linters
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Code formatters and linters enforce consistent style and catch bugs before they reach production. Modern tools have evolved significantly, with Rust-based formatters offering dramatic speed improvements over earlier JavaScript-based tools.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Code formatters and linters enforce consistent style and catch bugs before they 
   
   
   
+  
+  
+  
 
 
 In 2026, the landscape has shifted toward unified, fast tools that combine formatting and linting:
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ JavaScript: ESLint → Biome (migration in progress)
   
   
   
+  
+  
+  
 
 
 Python: autopep8 → Ruff (fast, Rust-based)
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Rust: rustfmt, Clippy (built-in)
   
   
   
+  
+  
+  
 
 
 Go: gofmt (official)
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Ruby: RuboCop
   
   
   
+  
+  
+  
 
 
 Swift: SwiftFormat
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Kotlin: ktlint
   
   
   
+  
+  
+  
 
 
 The trend is clear: Rust-based tools are replacing slower alternatives across the ecosystem.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ The trend is clear: Rust-based tools are replacing slower alternatives across th
   
   
   
+  
+  
+  
 
 
 Biome has emerged as the leading tool for JavaScript and TypeScript, unifying the roles of ESLint (linting) and Prettier (formatting).
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Biome has emerged as the leading tool for JavaScript and TypeScript, unifying th
   
   
   
+  
+  
+  
 
 
 npm install --save-dev --save-exact @biomejs/biome
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ npm install --save-dev --save-exact @biomejs/biome
   
   
   
+  
+  
+  
 
 
 npx @biomejs/biome init
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "organizeImports": {
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "enabled": true,
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "recommended": true,
 
+  
+  
+  
   
   
   
@@ -858,6 +968,9 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "noUselessConstructor": "error"
@@ -884,10 +997,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -936,6 +1055,9 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "noUnusedVariables": "error"
@@ -962,10 +1084,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1014,6 +1142,9 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "useConst": "error"
@@ -1040,29 +1171,6 @@ npx @biomejs/biome init
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1070,6 +1178,38 @@ npx @biomejs/biome init
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1096,6 +1236,9 @@ npx @biomejs/biome init
 
 },
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "enabled": true,
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 "indentWidth": 2,
 
+  
+  
+  
   
   
   
@@ -1248,29 +1403,6 @@ npx @biomejs/biome init
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1278,6 +1410,38 @@ npx @biomejs/biome init
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ npx @biomejs/biome init
   
   
   
+  
+  
+  
 
 
 npx @biomejs/biome check src/
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ npx @biomejs/biome check src/
   
   
   
+  
+  
+  
 
 
 npx @biomejs/biome format --write src/
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ npx @biomejs/biome format --write src/
   
   
   
+  
+  
+  
 
 
 npx @biomejs/biome check --apply src/
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ Biome is 20-50x faster than Prettier and ESLint combined for most projects.
   
   
   
+  
+  
+  
 
 
 ### ESLint (Still Relevant)
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ For projects with extensive custom rules or older codebases, ESLint remains the 
   
   
   
+  
+  
+  
 
 
 npm init @eslint/config@latest
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ npm init @eslint/config@latest
   
   
   
+  
+  
+  
 
 
 import js from "@eslint/js";
 
+  
+  
+  
   
   
   
@@ -1638,6 +1838,9 @@ export default [
   
   
   
+  
+  
+  
 
 
 js.configs.recommended,
@@ -1664,10 +1867,16 @@ js.configs.recommended,
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 "no-unused-vars": "error",
 
+  
+  
+  
   
   
   
@@ -1768,6 +1983,9 @@ rules: {
   
   
   
+  
+  
+  
 
 
 "prefer-const": "error",
@@ -1794,29 +2012,6 @@ rules: {
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1824,6 +2019,38 @@ rules: {
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 ESLint's flat config (v9+) simplified the configuration significantly. The ecosystem is gradually migrating, but the large plugin library still makes ESLint valuable for specialized needs.
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ ESLint's flat config (v9+) simplified the configuration significantly. The ecosy
   
   
   
+  
+  
+  
 
 
 Ruff has revolutionized Python linting and formatting. Written in Rust, it is 10-100x faster than Flake8 and Black.
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ pip install ruff
   
   
   
+  
+  
+  
 
 
 # pyproject.toml
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ pip install ruff
   
   
   
+  
+  
+  
 
 
 line-length = 88
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ target-version = "py312"
   
   
   
+  
+  
+  
 
 
 [tool.ruff.lint]
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ select = ["E", "F", "I", "N", "W", "UP"]
   
   
   
+  
+  
+  
 
 
 ignore = ["E501"]
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ ignore = ["E501"]
   
   
   
+  
+  
+  
 
 
 quote-style = "double"
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ indent-style = "space"
   
   
   
+  
+  
+  
 
 
 # Lint
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ ruff check src/
   
   
   
+  
+  
+  
 
 
 # Format
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ ruff format src/
   
   
   
+  
+  
+  
 
 
 # Fix
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ ruff check --fix src/
   
   
   
+  
+  
+  
 
 
 Ruff replaces Flake8, isort, pyupgrade, and autopep8 with a single tool.
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ Ruff replaces Flake8, isort, pyupgrade, and autopep8 with a single tool.
   
   
   
+  
+  
+  
 
 
 Rust's tooling is built-in and first-class:
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ Rust's tooling is built-in and first-class:
   
   
   
+  
+  
+  
 
 
 rustfmt src/main.rs
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ rustfmt src/main.rs
   
   
   
+  
+  
+  
 
 
 cargo clippy
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ cargo clippy
   
   
   
+  
+  
+  
 
 
 cargo clippy -- -W clippy::pedantic
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ cargo clippy -- -W clippy::pedantic
   
   
   
+  
+  
+  
 
 
 max_width = 100
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ tab_spaces = 4
   
   
   
+  
+  
+  
 
 
 edition = "2024"
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ edition = "2024"
   
   
   
+  
+  
+  
 
 
 Go has the simplest approach -- `gofmt` is the official formatter, and there is no debate about style:
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ Go has the simplest approach -- `gofmt` is the official formatter, and there is 
   
   
   
+  
+  
+  
 
 
 gofmt -w .
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ gofmt -w .
   
   
   
+  
+  
+  
 
 
 go vet ./...
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ go vet ./...
   
   
   
+  
+  
+  
 
 
 go install honnef.co/go/tools/cmd/staticcheck@latest
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ staticcheck ./...
   
   
   
+  
+  
+  
 
 
 ##  Multi-Language: pre-commit Hooks
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ Run formatters and linters automatically before every commit:
   
   
   
+  
+  
+  
 
 
 # .pre-commit-config.yaml
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ repos:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/biomejs/pre-commit
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/biomejs/pre-commit
 
+  
+  
+  
   
   
   
@@ -3120,6 +3491,9 @@ rev: v0.1.0
   
   
   
+  
+  
+  
 
 
 hooks:
@@ -3146,10 +3520,16 @@ hooks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: biome-check
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: biome-check
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ args: [--apply]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/astral-sh/ruff-pre-commit
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/astral-sh/ruff-pre-commit
 
+  
+  
+  
   
   
   
@@ -3250,6 +3636,9 @@ rev: v0.4.0
   
   
   
+  
+  
+  
 
 
 hooks:
@@ -3276,10 +3665,16 @@ hooks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: ruff
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: ruff
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ args: [--fix]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/mirrors-prettier
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/mirrors-prettier
 
+  
+  
+  
   
   
   
@@ -3380,6 +3781,9 @@ rev: v3.1.0
   
   
   
+  
+  
+  
 
 
 hooks:
@@ -3406,36 +3810,45 @@ hooks:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: prettier
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/pre-commit-hooks
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: prettier
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/pre-commit/pre-commit-hooks
+
+  
+  
+  
   
   
   
@@ -3484,6 +3897,9 @@ rev: v4.6.0
   
   
   
+  
+  
+  
 
 
 hooks:
@@ -3510,36 +3926,16 @@ hooks:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: trailing-whitespace
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: end-of-file-fixer
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: trailing-whitespace
 
+  
+  
+  
   
   
   
@@ -3564,8 +3960,40 @@ hooks:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: check-yaml
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: end-of-file-fixer
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: check-yaml
+
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ pip install pre-commit
   
   
   
+  
+  
+  
 
 
 pre-commit install
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ pre-commit install
   
   
   
+  
+  
+  
 
 
 All major editors support formatters and linters via LSP:
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ All major editors support formatters and linters via LSP:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ All major editors support formatters and linters via LSP:
   
   
   
+  
+  
+  
 
 
 "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ All major editors support formatters and linters via LSP:
   
   
   
+  
+  
+  
 
 
 "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ All major editors support formatters and linters via LSP:
   
   
   
+  
+  
+  
 
 
 ##  CI Integration
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ Enforce formatting and linting in CI:
   
   
   
+  
+  
+  
 
 
 # .github/workflows/lint.yml
 
+  
+  
+  
   
   
   
@@ -3978,10 +4448,16 @@ name: Lint
   
   
   
+  
+  
+  
 
 
 on: [pull_request]
 
+  
+  
+  
   
   
   
@@ -4030,10 +4506,16 @@ jobs:
   
   
   
+  
+  
+  
 
 
 lint:
 
+  
+  
+  
   
   
   
@@ -4082,6 +4564,9 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
 
 
 steps:
@@ -4108,36 +4593,16 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
   
   
   
@@ -4162,7 +4627,7 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm ci
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-node@v4
 
   
   
@@ -4186,10 +4651,45 @@ steps:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npx @biomejs/biome ci src/
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npm ci
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: npx @biomejs/biome ci src/
+
+  
+  
+  
   
   
   
@@ -4216,6 +4716,9 @@ steps:
 
 ##  Summary
 
+  
+  
+  
   
   
   

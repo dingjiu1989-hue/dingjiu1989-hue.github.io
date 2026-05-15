@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-notification-vs-eve
   
   
   
+  
+  
+  
+
+
+# Event Notification vs Event-Carried State Transfer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Event notification and event-carried state transfer are two patterns for communi
   
   
   
+  
+  
+  
 
 
 The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling—consumers know only that something changed. The publisher's API remains the source of truth.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Drawbacks: each consumer must make additional API calls. This increases latency 
   
   
   
+  
+  
+  
 
 
 ##  Event-Carried State Transfer
 
+  
+  
+  
   
   
   
@@ -239,6 +280,9 @@ The publisher includes all relevant data in the event. Consumers can process eve
   
   
   
+  
+  
+  
 
 
 Trade-offs: data duplication increases storage requirements. Consumers may have stale data if the publisher changes its data model. The event schema becomes a public contract between publisher and consumers.
@@ -262,10 +306,16 @@ Trade-offs: data duplication increases storage requirements. Consumers may have 
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-document-processing.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4828",
+      "wordCount": "5420",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-document-processing.html"},
-      "articleBody": "AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing Introduction Document processing is one of the highest-ROI applications of AI in business. Organizations spend countless hours manually extracting data from invoices, contracts, forms, and reports. AI-powered document processing can handle these tasks in seconds, with higher accuracy and lower cost than human operators. The Document Processing Pipeline A complete document processing system has five stages: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Ingestion Documents arrive in various formats: * **PDFs**: Scanned images, digital PDFs, fillable forms * **Images**: JPEG, PNG, TIFF from phone cameras or scanners * **Office formats**: DOCX, XLSX with embedded data * **HTML/emails**: Web content and email attachments Each format requires different preprocessing: def preprocess_document(file_path): ext = Path(file_path).suffix.lower() if ext == \".pdf\": images = pdf_to_images(file_path, dpi=300) text = pdf_to_text(file_path) # For digital PDFs return {\"images\": images, \"text\": text, \"type\": \"pdf\"} elif ext in (\".jpg\", \".jpeg\", \".png\", \".tiff\"): image = enhance_image(file_path) # Denoise, deskew, enhance contrast return {\"images\": [image], \"type\": \"image\"} elif ext == \".docx\": text = docx_to_text(file_path) return {\"text\": text, \"type\": \"docx\"} else: raise ValueError(f\"Unsupported format: {ext}\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Optical Character Recognition (OCR) For scanned documents and images, OCR converts visual text to machine-readable text: import pytesseract from PIL import Image def ocr_document(image_path): image = Image.open(image_path) Configure OCR for better accuracy custom_config = r'--oem 3 --psm 6 -l eng' data = pytesseract.image_to_data( image, config=custom_config, output_type=pytesseract.Output.DICT ) return { \"full_text\": pytesseract.image_to_string(image, config=custom_config), \"words\": data[\"text\"], \"positions\": list(zip(data[\"left\"], data[\"top\"], data[\"width\"], data[\"height\"])) } **Modern OCR alternatives**: * **Azure Document Intelligence**: Best-in-class for structured documents (invoices, receipts) * **Google Document AI**: Strong general-purpose OCR with entity extraction * **Tesseract + Post-processing**: Free, but requires cleanup for quality results 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Classification Classify documents before extraction to route them to the correct pipeline: def classify_document(text): categories = [ \"invoice\", \"contract\", \"resume\", \"receipt\", \"medical_record\", \"legal_filing\", \"report\", \"other\" ] classification = call_llm(f\"\"\" Classify this document into exactly one category: {', '.join(categories)} Respond with only the category name. Document text: {text[:2000]} \"\"\") confidence = extract_confidence(classification) return classification, confidence 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Data Extraction Extract structured data from documents using schema-driven prompts: def extract_invoice_data(text): schema = { \"invoice_number\": \"string\", \"date\": \"date (YYYY-MM-DD)\", \"vendor_name\": \"string\", \"vendor_address\": \"string\", \"customer_name\": \"string\", \"line_items\": [\"description\", \"quantity\", \"unit_price\", \"total\"], \"subtotal\": \"number\", \"tax\": \"number\", \"total\": \"number\", \"currency\": \"string\" } extraction = call_llm(f\"\"\" Extract the following fields from this invoice text. Return ONLY valid JSON matching this schema: {json.dumps(schema, indent=2)} Invoice text: {text} If a field is not found, use null. Do not guess values. \"\"\") return json.loads(extraction) **Multimodal extraction** with vision-capable LLMs (GPT-4o, Claude 3.5) can process document images directly, bypassing OCR: def extract_from_image(image_path, schema): import base64 with open(image_path, \"rb\") as f: image_b64 = base64.b64encode(f.read()).decode() response = client.chat.completions.create( model=\"gpt-4o\", messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"text\", \"text\": f\"Extract data from this document image. Return JSON matching: {json.dumps(schema)}\"}, {\"type\": \"image_url\", \"image_url\": {\"url\": f\"data:image/jpeg;base64,{image_b64}\"}} ] }] ) return json.loads(response.choices[0].message.content) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validation and Export Validate extracted data against business rules before export: def validate_extraction(data, schema): errors = [] for field, rules in schema.items(): if rules.get(\"required\") and data.get(field) is None: errors.append(f\"Missing required field: {field}\") if \"pattern\" in rules and data.get(field): if not re.match(rules[\"pattern\"], str(data[field])): errors.append(f\"Field {field} fails pattern validation\") return errors Production Architecture Documents \u2192 Queue \u2192 Worker Pool \u2192 Storage \u2193 Classification Router \u2199 \u2193 \u2198 Invoice Contract Report Pipeline Pipeline Pipeline \u2199 \u2193 \u2198 Extraction \u2192 Validation \u2192 Export \u2192 Database \u2193 Exception Queue \u2193 Human Review Key components: * **Document queue**: SQS, RabbitMQ, or Redis for managing processing load * **Worker pool**: Auto-scaling workers for parallel processing * **Exception queue**: Documents with low confidence or validation errors * **Human review interface**: Dashboard for manual review of exceptions Handling Edge Cases * **Poor quality scans**: Apply image enhancement (deskew, denoise, contrast adjustment) * **Multi-language documents**: Use language detection and route to appropriate model * **Handwritten text**: Requires specialized handwriting recognition (Azure, Google) * **Tables and forms**: Structure-aware extraction using layout understanding * **Very long documents**: Chunk and process section by section, then merge results Measuring Accuracy Track these metrics per document type: * **Field-level accuracy**: Correct extractions / total fields * **Document-level accuracy**: Perfect extractions / total documents * **Rejection rate**: Documents sent to human review * **Time savings**: Manual processing time vs AI processing time Conclusion AI document processing transforms document-heavy workflows from hours of manual work to seconds of automated processing. The key to success is building a pipeline that handles format diversity, uses the right OCR/extraction approach for each document type, and includes robust validation with human review for edge cases. Start with a single document type (like invoices), perfect the pipeline, then expand to additional types."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/ai-document-processing-5b5g"
+      ],
+      "articleBody": "AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing AI Document Processing Introduction Document processing is one of the highest-ROI applications of AI in business. Organizations spend countless hours manually extracting data from invoices, contracts, forms, and reports. AI-powered document processing can handle these tasks in seconds, with higher accuracy and lower cost than human operators. The Document Processing Pipeline A complete document processing system has five stages: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Ingestion Documents arrive in various formats: * **PDFs**: Scanned images, digital PDFs, fillable forms * **Images**: JPEG, PNG, TIFF from phone cameras or scanners * **Office formats**: DOCX, XLSX with embedded data * **HTML/emails**: Web content and email attachments Each format requires different preprocessing: def preprocess_document(file_path): ext = Path(file_path).suffix.lower() if ext == \".pdf\": images = pdf_to_images(file_path, dpi=300) text = pdf_to_text(file_path) # For digital PDFs return {\"images\": images, \"text\": text, \"type\": \"pdf\"} elif ext in (\".jpg\", \".jpeg\", \".png\", \".tiff\"): image = enhance_image(file_path) # Denoise, deskew, enhance contrast return {\"images\": [image], \"type\": \"image\"} elif ext == \".docx\": text = docx_to_text(file_path) return {\"text\": text, \"type\": \"docx\"} else: raise ValueError(f\"Unsupported format: {ext}\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Optical Character Recognition (OCR) For scanned documents and images, OCR converts visual text to machine-readable text: import pytesseract from PIL import Image def ocr_document(image_path): image = Image.open(image_path) Configure OCR for better accuracy custom_config = r'--oem 3 --psm 6 -l eng' data = pytesseract.image_to_data( image, config=custom_config, output_type=pytesseract.Output.DICT ) return { \"full_text\": pytesseract.image_to_string(image, config=custom_config), \"words\": data[\"text\"], \"positions\": list(zip(data[\"left\"], data[\"top\"], data[\"width\"], data[\"height\"])) } **Modern OCR alternatives**: * **Azure Document Intelligence**: Best-in-class for structured documents (invoices, receipts) * **Google Document AI**: Strong general-purpose OCR with entity extraction * **Tesseract + Post-processing**: Free, but requires cleanup for quality results 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Classification Classify documents before extraction to route them to the correct pipeline: def classify_document(text): categories = [ \"invoice\", \"contract\", \"resume\", \"receipt\", \"medical_record\", \"legal_filing\", \"report\", \"other\" ] classification = call_llm(f\"\"\" Classify this document into exactly one category: {', '.join(categories)} Respond with only the category name. Document text: {text[:2000]} \"\"\") confidence = extract_confidence(classification) return classification, confidence 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Data Extraction Extract structured data from documents using schema-driven prompts: def extract_invoice_data(text): schema = { \"invoice_number\": \"string\", \"date\": \"date (YYYY-MM-DD)\", \"vendor_name\": \"string\", \"vendor_address\": \"string\", \"customer_name\": \"string\", \"line_items\": [\"description\", \"quantity\", \"unit_price\", \"total\"], \"subtotal\": \"number\", \"tax\": \"number\", \"total\": \"number\", \"currency\": \"string\" } extraction = call_llm(f\"\"\" Extract the following fields from this invoice text. Return ONLY valid JSON matching this schema: {json.dumps(schema, indent=2)} Invoice text: {text} If a field is not found, use null. Do not guess values. \"\"\") return json.loads(extraction) **Multimodal extraction** with vision-capable LLMs (GPT-4o, Claude 3.5) can process document images directly, bypassing OCR: def extract_from_image(image_path, schema): import base64 with open(image_path, \"rb\") as f: image_b64 = base64.b64encode(f.read()).decode() response = client.chat.completions.create( model=\"gpt-4o\", messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"text\", \"text\": f\"Extract data from this document image. Return JSON matching: {json.dumps(schema)}\"}, {\"type\": \"image_url\", \"image_url\": {\"url\": f\"data:image/jpeg;base64,{image_b64}\"}} ] }] ) return json.loads(response.choices[0].message.content) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validation and Export Validate extracted data against business rules before export: def validate_extraction(data, schema): errors = [] for field, rules in schema.items(): if rules.get(\"required\") and data.get(field) is None: errors.append(f\"Missing required field: {field}\") if \"pattern\" in rules and data.get(field): if not re.match(rules[\"pattern\"], str(data[field])): errors.append(f\"Field {field} fails pattern validation\") return errors Production Architecture Documents \u2192 Queue \u2192 Worker Pool \u2192 Storage \u2193 Classification Router \u2199 \u2193 \u2198 Invoice Contract Report Pipeline Pipeline Pipeline \u2199 \u2193 \u2198 Extraction \u2192 Validation \u2192 Export \u2192 Database \u2193 Exception Queue \u2193 Human Review Key components: * **Document queue**: SQS, RabbitMQ, or Redis for managing processing load * **Worker pool**: Auto-scaling workers for parallel processing * **Exception queue**: Documents with low confidence or validation errors * **Human review interface**: Dashboard for manual review of exceptions Handling Edge Cases * **Poor quality scans**: Apply image enhancement (deskew, denoise, contrast adjustment) * **Multi-language documents**: Use language detection and route to appropriate model * **Handwritten text**: Requires specialized handwriting recognition (Azure, Google) * **Tables and forms**: Structure-aware extraction using layout understanding * **Very long documents**: Chunk and process section by section, then merge results Measuring Accuracy Track these metrics per document type: * **Field-level accuracy**: Correct extractions / total fields * **Document-level accuracy**: Perfect extractions / total documents * **Rejection rate**: Documents sent to human review * **Time savings**: Manual processing time vs AI processing time Conclusion AI document processing transforms document-heavy workflows from hours of manual work to seconds of automated processing. The key to success is building a pipeline that handles format diversity, uses the right OCR/extraction approach for each document type, and includes robust validation with human review for edge cases. Start with a single document type (like invoices), perfect the pipeline, then expand to additional types."
     }
     </script>
     <script type="application/ld+json">
@@ -175,7 +178,36 @@
 <br>
 <br>
 <br>
+<h1>AI Document Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -221,7 +253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  The Document Processing Pipeline</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -267,7 +305,13 @@
 <br>
 <br>
 <br>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Ingestion</h3>
+<br>
+<br>
+<br>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Ingestion</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -313,7 +357,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **PDFs**: Scanned images, digital PDFs, fillable forms</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -353,6 +403,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Office formats**: DOCX, XLSX with embedded data</p>
 <br>
 <br>
@@ -373,7 +426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **HTML/emails**: Web content and email attachments</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -419,7 +478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def preprocess_document(file_path):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +530,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if ext == ".pdf":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -511,7 +582,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text = pdf_to_text(file_path) # For digital PDFs</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -557,7 +634,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif ext in (".jpg", ".jpeg", ".png", ".tiff"):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -603,7 +686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"images": [image], "type": "image"}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -649,7 +738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text = docx_to_text(file_path)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -695,7 +790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -741,7 +842,13 @@
 <br>
 <br>
 <br>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Optical Character Recognition (OCR)</h3>
+<br>
+<br>
+<br>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Optical Character Recognition (OCR)</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -787,7 +894,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import pytesseract</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -833,7 +946,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def ocr_document(image_path):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -879,7 +998,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Configure OCR for better accuracy</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -925,7 +1050,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data = pytesseract.image_to_data(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -971,7 +1102,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>config=custom_config,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1017,7 +1154,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1063,7 +1206,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"full_text": pytesseract.image_to_string(image, config=custom_config),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1109,6 +1258,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"positions": list(zip(data["left"], data["top"], data["width"], data["height"]))</p>
 <br>
 <br>
@@ -1132,7 +1284,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1178,6 +1336,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Azure Document Intelligence**: Best-in-class for structured documents (invoices, receipts)</p>
 <br>
 <br>
@@ -1198,7 +1359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Google Document AI**: Strong general-purpose OCR with entity extraction</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1241,7 +1408,13 @@
 <br>
 <br>
 <br>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Classification</h3>
+<br>
+<br>
+<br>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Document Classification</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1287,7 +1460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def classify_document(text):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1333,7 +1512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"invoice", "contract", "resume", "receipt",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1379,7 +1564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1425,7 +1616,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Classify this document into exactly one category: {', '.join(categories)}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1471,7 +1668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Document text:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1517,7 +1720,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1563,6 +1772,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return classification, confidence</p>
 <br>
 <br>
@@ -1586,7 +1798,13 @@
 <br>
 <br>
 <br>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Data Extraction</h3>
+<br>
+<br>
+<br>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Data Extraction</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1632,7 +1850,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def extract_invoice_data(text):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1678,7 +1902,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"invoice_number": "string",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1724,7 +1954,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"vendor_name": "string",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1770,7 +2006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"customer_name": "string",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1816,7 +2058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"subtotal": "number",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1862,7 +2110,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"total": "number",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1908,7 +2162,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1954,7 +2214,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Extract the following fields from this invoice text.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2000,7 +2266,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{json.dumps(schema, indent=2)}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2046,7 +2318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{text}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2092,7 +2370,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2138,7 +2422,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Multimodal extraction** with vision-capable LLMs (GPT-4o, Claude 3.5) can process document images directly, bypassing OCR:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2184,7 +2474,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import base64</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2230,7 +2526,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>image_b64 = base64.b64encode(f.read()).decode()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2276,7 +2578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="gpt-4o",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2322,7 +2630,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"role": "user",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2368,7 +2682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"type": "text", "text": f"Extract data from this document image. Return JSON matching: {json.dumps(schema)}"},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2414,7 +2734,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2460,7 +2786,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2506,7 +2838,13 @@
 <br>
 <br>
 <br>
-<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validation and Export</h3>
+<br>
+<br>
+<br>
+<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Validation and Export</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2552,7 +2890,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def validate_extraction(data, schema):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2598,7 +2942,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for field, rules in schema.items():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2644,7 +2994,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>errors.append(f"Missing required field: {field}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2690,7 +3046,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not re.match(rules["pattern"], str(data[field])):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2736,7 +3098,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return errors</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2782,6 +3150,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Documents → Queue → Worker Pool → Storage</p>
 <br>
 <br>
@@ -2805,7 +3176,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2851,7 +3228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↙ ↓ ↘</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2897,7 +3280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pipeline Pipeline Pipeline</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2943,6 +3332,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Extraction → Validation → Export → Database</p>
 <br>
 <br>
@@ -2966,7 +3358,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3012,7 +3410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>↓</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3058,7 +3462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Key components:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3101,7 +3511,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Worker pool**: Auto-scaling workers for parallel processing</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3141,7 +3557,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Human review interface**: Dashboard for manual review of exceptions</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3187,7 +3609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Poor quality scans**: Apply image enhancement (deskew, denoise, contrast adjustment)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3227,7 +3655,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Handwritten text**: Requires specialized handwriting recognition (Azure, Google)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3267,7 +3701,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Very long documents**: Chunk and process section by section, then merge results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3313,7 +3753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Track these metrics per document type:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3356,6 +3802,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Document-level accuracy**: Perfect extractions / total documents</p>
 <br>
 <br>
@@ -3376,7 +3825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Rejection rate**: Documents sent to human review</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3419,7 +3874,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

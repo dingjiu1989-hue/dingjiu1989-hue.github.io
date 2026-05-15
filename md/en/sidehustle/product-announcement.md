@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/product-announcement.html
   
 
 
+# Product Launch Strategy: Product Hunt, Hacker News, Social Media
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Product Launch Strategy for Indie Developers
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Launching a product is not an event — it's a process. Successful launches buil
   
   
   
+  
+  
+  
 
 
 ### Product Hunt Strategy
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Product Hunt remains the top platform for B2B SaaS launches. A successful Produc
   
   
   
+  
+  
+  
 
 
 Your Product Hunt listing needs a compelling tagline that explains what your product does and why it matters in under 60 characters. The first comment is critical — it should tell the story of why you built the product and include a call to action. Prepare GIFs and a demo video (under 3 minutes) that shows the product in action.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Launch preparation: notify your email list 3 days before, post teasers on Twitte
   
   
   
+  
+  
+  
 
 
 ### Hacker News Launch
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Hacker News launches are higher risk but potentially higher reward than Product 
   
   
   
+  
+  
+  
 
 
 The key to HN: be transparent about limitations, engage constructively in comments (even critical ones), and avoid marketing language. Include source code if you're building in public. Technical depth in comments correlates with upvotes. The best HN submissions provide working demos without requiring signups.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Timing matters on HN. Weekday mornings (Eastern Time) perform best. Avoid launch
   
   
   
+  
+  
+  
 
 
 ### Social Media Amplification
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Twitter (X) is the most effective social platform for developer tools. Build a p
   
   
   
+  
+  
+  
 
 
 LinkedIn is effective for B2B SaaS targeted at business decision-makers. Share the product launch as a post, ideally including a video demonstration. Engage relevant LinkedIn groups. For technical products, dev.to and Reddit (r/SideProject, r/SaaS, r/webdev) provide additional reach.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ LinkedIn is effective for B2B SaaS targeted at business decision-makers. Share t
   
   
   
+  
+  
+  
 
 
 Extend your launch beyond a single day. Schedule blog posts, social media threads, and newsletter outreach across the launch week. Follow Product Hunt with a deeper technical blog post on day 2. Send personalized outreach to industry newsletter authors and tool directories on day 3.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Create launch assets in advance: social media graphics in multiple sizes, GIFs s
   
   
   
+  
+  
+  
 
 
 ### Post-Launch Retention
 
+  
+  
+  
   
   
   
@@ -598,6 +678,9 @@ The real work begins after launch day. Most products see a spike in signups foll
   
   
   
+  
+  
+  
 
 
 Set up automated onboarding sequences for launch-day signups. Create a dedicated Slack or Discord channel for new users. Send personalized thank-you emails to early supporters. Track cohort retention from launch day versus organic signups to understand launch user quality.
@@ -624,10 +707,16 @@ Set up automated onboarding sequences for launch-day signups. Create a dedicated
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

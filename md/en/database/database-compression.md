@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/database-compression.html
   
 
 
+# Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Compression: Page-Level, Tuple-Level, Columnar, and TOAST 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Database compression reduces storage footprint and, more importantly, improves q
   
   
   
+  
+  
+  
 
 
 Why Compression Matters 
 
+  
+  
+  
   
   
   
@@ -187,6 +222,9 @@ Compression provides three benefits:
   
   
   
+  
+  
+  
 
 
 * **Storage savings**: Reduce disk costs by 2x-10x depending on data characteristics.
@@ -207,10 +245,16 @@ Compression provides three benefits:
   
   
   
+  
+  
+  
 
 
 * **I/O reduction**: Fewer pages read per query means faster scans.
 
+  
+  
+  
   
   
   
@@ -250,10 +294,16 @@ Compression provides three benefits:
   
   
   
+  
+  
+  
 
 
 The trade-off is CPU usage for compression and decompression. Modern hardware makes this trade-off favorable for most workloads. 
 
+  
+  
+  
   
   
   
@@ -290,10 +340,16 @@ PostgreSQL Compression Layers
   
   
   
+  
+  
+  
 
 
 Page-Level Compression 
 
+  
+  
+  
   
   
   
@@ -333,10 +389,16 @@ PostgreSQL stores data in 8 KB pages. Page-level compression compresses the enti
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable page compression on a table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable page compression on a table
 
+  
+  
+  
   
   
   
@@ -379,10 +441,16 @@ CREATE TABLE logs_compressed (
   
   
   
+  
+  
+  
 
 
 id BIGSERIAL,
 
+  
+  
+  
   
   
   
@@ -425,10 +493,16 @@ payload TEXT,
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMPTZ
 
+  
+  
+  
   
   
   
@@ -471,10 +545,16 @@ created_at TIMESTAMPTZ
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or alter existing table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Or alter existing table
 
+  
+  
+  
   
   
   
@@ -517,6 +597,9 @@ ALTER TABLE logs SET (compression = 'pglz');
   
   
   
+  
+  
+  
 
 
 Page compression works transparently: the database decompresses pages when reading and compresses when writing. The overhead is minimal for sequential scans. 
@@ -537,10 +620,16 @@ Page compression works transparently: the database decompresses pages when readi
   
   
   
+  
+  
+  
 
 
 TOAST (The Oversized-Attribute Storage Technique) 
 
+  
+  
+  
   
   
   
@@ -580,10 +669,16 @@ TOAST is PostgreSQL's built-in mechanism for handling large field values. When a
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check TOAST compression settings
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check TOAST compression settings
 
+  
+  
+  
   
   
   
@@ -626,10 +721,16 @@ SELECT attname,
   
   
   
+  
+  
+  
 
 
 CASE attstorage
 
+  
+  
+  
   
   
   
@@ -672,10 +773,16 @@ WHEN 'p' THEN 'plain'
   
   
   
+  
+  
+  
 
 
 WHEN 'm' THEN 'main'
 
+  
+  
+  
   
   
   
@@ -718,10 +825,16 @@ WHEN 'x' THEN 'extended'
   
   
   
+  
+  
+  
 
 
 WHEN 'e' THEN 'external'
 
+  
+  
+  
   
   
   
@@ -764,10 +877,16 @@ END AS storage_type
   
   
   
+  
+  
+  
 
 
 FROM pg_attribute
 
+  
+  
+  
   
   
   
@@ -810,10 +929,16 @@ WHERE attrelid = 'documents'::regclass
   
   
   
+  
+  
+  
 
 
 AND attnum > 0;
 
+  
+  
+  
   
   
   
@@ -856,10 +981,16 @@ Storage types:
   
   
   
+  
+  
+  
 
 
 * `PLAIN`: No compression, no TOAST. For fixed-width types like `INTEGER`.
 
+  
+  
+  
   
   
   
@@ -896,10 +1027,16 @@ Storage types:
   
   
   
+  
+  
+  
 
 
 * `EXTERNAL`: Move to TOAST without compression. Useful for data that is already compressed (e.g., JPEG, JSON).
 
+  
+  
+  
   
   
   
@@ -939,10 +1076,16 @@ Storage types:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Change storage type for a column
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Change storage type for a column
 
+  
+  
+  
   
   
   
@@ -985,6 +1128,9 @@ ALTER TABLE documents ALTER COLUMN image SET STORAGE EXTERNAL;
   
   
   
+  
+  
+  
 
 
 TOAST compression uses a fast, lightweight algorithm (pglz or zstd). It is invisible to queries: SELECT statements decompress transparently. 
@@ -1005,10 +1151,16 @@ TOAST compression uses a fast, lightweight algorithm (pglz or zstd). It is invis
   
   
   
+  
+  
+  
 
 
 Tuple-Level Compression 
 
+  
+  
+  
   
   
   
@@ -1048,10 +1200,16 @@ Tuple-level compression compresses individual row values. PostgreSQL's built-in 
   
   
   
+  
+  
+  
 
 
 CREATE TABLE events (
 
+  
+  
+  
   
   
   
@@ -1094,10 +1252,16 @@ id BIGSERIAL,
   
   
   
+  
+  
+  
 
 
 event_type TEXT COMPRESSION lz4,
 
+  
+  
+  
   
   
   
@@ -1140,10 +1304,16 @@ payload JSONB COMPRESSION zstd,
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMPTZ
 
+  
+  
+  
   
   
   
@@ -1186,10 +1356,16 @@ created_at TIMESTAMPTZ
   
   
   
+  
+  
+  
 
 
 Supported algorithms: `pglz`, `lz4`, `zstd` (with `--with-zstd` build flag). LZ4 is fastest with moderate compression; Zstd offers the best ratio. 
 
+  
+  
+  
   
   
   
@@ -1226,10 +1402,16 @@ External Compression with pgstattuple
   
   
   
+  
+  
+  
 
 
 Measure your current compression benefits: 
 
+  
+  
+  
   
   
   
@@ -1272,6 +1454,9 @@ CREATE EXTENSION pgstattuple;
   
   
   
+  
+  
+  
 
 
 SELECT * FROM pgstattuple('large_table');
@@ -1295,10 +1480,16 @@ SELECT * FROM pgstattuple('large_table');
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- free_space, tuple_count, tuple_len, dead_tuple_count, dead_tuple_len
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- free_space, tuple_count, tuple_len, dead_tuple_count, dead_tuple_len
 
+  
+  
+  
   
   
   
@@ -1338,6 +1529,9 @@ Columnar Compression
   
   
   
+  
+  
+  
 
 
 Columnar databases like ClickHouse, Redshift, and Parquet-format files compress extremely well because same-typed values repeat within a column: 
@@ -1361,10 +1555,16 @@ Columnar databases like ClickHouse, Redshift, and Parquet-format files compress 
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse example: columnar compression is automatic
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ClickHouse example: columnar compression is automatic
 
+  
+  
+  
   
   
   
@@ -1407,10 +1607,16 @@ CREATE TABLE events (
   
   
   
+  
+  
+  
 
 
 event_type LowCardinality(String),
 
+  
+  
+  
   
   
   
@@ -1453,10 +1659,16 @@ user_id UInt32,
   
   
   
+  
+  
+  
 
 
 timestamp DateTime,
 
+  
+  
+  
   
   
   
@@ -1499,10 +1711,16 @@ payload String
   
   
   
+  
+  
+  
 
 
 ) ENGINE = MergeTree()
 
+  
+  
+  
   
   
   
@@ -1545,33 +1763,16 @@ ORDER BY timestamp;
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each column is compressed independently
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- event_type: run-length encoding after dictionary compression
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Each column is compressed independently
 
+  
+  
+  
   
   
   
@@ -1593,7 +1794,7 @@ ORDER BY timestamp;
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- user_id: delta encoding + zstd
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- event_type: run-length encoding after dictionary compression
 
   
   
@@ -1614,10 +1815,42 @@ ORDER BY timestamp;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- payload: zstd
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- user_id: delta encoding + zstd
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- payload: zstd
+
+  
+  
+  
   
   
   
@@ -1657,10 +1890,16 @@ Columnar compression ratios are often 5x-10x higher than row-oriented compressio
   
   
   
+  
+  
+  
 
 
 Compression Algorithm Comparison 
 
+  
+  
+  
   
   
   
@@ -1697,10 +1936,16 @@ Compression Algorithm Comparison
   
   
   
+  
+  
+  
 
 
 Benchmarks show LZ4 compresses at 2-3 GB/s per core, while Zstd achieves 15-30% better ratios at 500 MB/s. 
 
+  
+  
+  
   
   
   
@@ -1737,10 +1982,16 @@ Real-World Storage Savings
   
   
   
+  
+  
+  
 
 
 | Data Type | Raw Size | pglz | zstd | Notes | |-----------|----------|------|------|-------| | Log text | 100 GB | 35 GB | 22 GB | Highly compressible | | JSON payloads | 50 GB | 42 GB | 30 GB | Semi-structured | | UUIDs | 10 GB | 10 GB | 10 GB | Incompressible | | Numeric arrays | 20 GB | 8 GB | 5 GB | Delta encoding helps | 
 
+  
+  
+  
   
   
   
@@ -1780,10 +2031,16 @@ Monitoring Compression
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Table size breakdown
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Table size breakdown
 
+  
+  
+  
   
   
   
@@ -1826,10 +2083,16 @@ SELECT schemaname, tablename,
   
   
   
+  
+  
+  
 
 
 pg_size_pretty(pg_table_size(relid)) AS table_size,
 
+  
+  
+  
   
   
   
@@ -1872,10 +2135,16 @@ pg_size_pretty(pg_indexes_size(relid)) AS index_size,
   
   
   
+  
+  
+  
 
 
 pg_size_pretty(pg_total_relation_size(relid)) AS total_size
 
+  
+  
+  
   
   
   
@@ -1918,10 +2187,16 @@ FROM pg_catalog.pg_statio_user_tables
   
   
   
+  
+  
+  
 
 
 ORDER BY pg_total_relation_size(relid) DESC;
 
+  
+  
+  
   
   
   
@@ -1964,10 +2239,16 @@ For TOAST-specific sizes:
   
   
   
+  
+  
+  
 
 
 SELECT relname,
 
+  
+  
+  
   
   
   
@@ -2010,10 +2291,16 @@ pg_size_pretty(relpages::bigint * 8192) AS toast_size
   
   
   
+  
+  
+  
 
 
 FROM pg_class
 
+  
+  
+  
   
   
   
@@ -2056,10 +2343,16 @@ WHERE oid = (
   
   
   
+  
+  
+  
 
 
 SELECT reltoastrelid FROM pg_class WHERE relname = 'large_table'
 
+  
+  
+  
   
   
   
@@ -2102,10 +2395,16 @@ SELECT reltoastrelid FROM pg_class WHERE relname = 'large_table'
   
   
   
+  
+  
+  
 
 
 Best Practices 
 
+  
+  
+  
   
   
   
@@ -2145,10 +2444,16 @@ Best Practices
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use EXTERNAL storage** for columns that are already compressed (images, compressed archives). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Benchmark your workload**: Compression benefits vary. Run `pgstattuple` before and after. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consider BRIN indexes** on compressed, naturally ordered columns (timestamps, sequence IDs) for additional space savings. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Balance CPU and I/O**: If your database is CPU-bound, avoid heavy compression. If I/O-bound, compress aggressively. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use EXTERNAL storage** for columns that are already compressed (images, compressed archives). 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Benchmark your workload**: Compression benefits vary. Run `pgstattuple` before and after. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Consider BRIN indexes** on compressed, naturally ordered columns (timestamps, sequence IDs) for additional space savings. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Balance CPU and I/O**: If your database is CPU-bound, avoid heavy compression. If I/O-bound, compress aggressively. 
 
+  
+  
+  
   
   
   

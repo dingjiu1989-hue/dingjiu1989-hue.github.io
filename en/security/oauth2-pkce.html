@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-pkce.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "3408",
+      "wordCount": "3850",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/oauth2-pkce.html"},
-      "articleBody": "OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 Overview OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to a user's resources without exposing credentials. It has become the industry standard for API authorization, used by Google, GitHub, Facebook, and virtually every major platform. Core Roles | Role | Description | Example | |------|-------------|---------| | Resource Owner | The user who grants access | You, the end user | | Client | The application requesting access | Your mobile app or SPA | | Authorization Server | Issues tokens after authentication | Google's OAuth 2.0 endpoint | | Resource Server | Hosts the protected resources | Google Calendar API | Grant Types OAuth 2.0 defines several grant types for different scenarios: * **Authorization Code**: The most secure flow, designed for server-side applications. * **Authorization Code with PKCE**: An enhanced version for mobile and single-page applications. * **Client Credentials**: For server-to-server communication without user involvement. * **Device Code**: For devices without a browser, like smart TVs or CLI tools. The Problem PKCE Solves Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile apps used the Implicit Grant, which returned the access token directly in the URL fragment. This approach had serious security issues: * Access tokens leaked via browser history 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client PKCE eliminates these issues by introducing a cryptographic challenge-verifier pair. PKCE Flow Step by Step Step 1: Generate Code Verifier and Challenge The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge). function generateCodeVerifier() { const array = new Uint8Array(32); crypto.getRandomValues(array); return base64URLEncode(array); } async function generateCodeChallenge(verifier) { const encoder = new TextEncoder(); const data = encoder.encode(verifier); const digest = await crypto.subtle.digest('SHA-256', data); return base64URLEncode(new Uint8Array(digest)); } function base64URLEncode(buffer) { return btoa(String.fromCharCode(...new Uint8Array(buffer))) .replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-') .replace(/\\//g, '_') .replace(/=+$/, ''); } Step 2: Redirect to Authorization Server The client redirects the user to the authorization server, including the code challenge and the method used (`S256`). https://auth.example.com/authorize? response_type=code& client_id=YOUR_CLIENT_ID& redirect_uri=https://yourapp.com/callback& code_challenge=YOUR_SHA256_CHALLENGE& code_challenge_method=S256& state=CSRF_TOKEN The `state` parameter is a CSRF token that must be verified when the user returns. Step 3: User Authenticates and Consents The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code. https://yourapp.com/callback?code=AUTH_CODE&state;=CSRF_TOKEN The client must verify that the `state` parameter matches what it sent. Step 4: Exchange Code for Token The client sends the authorization code along with the original plain-text code verifier to the token endpoint. curl -X POST https://auth.example.com/token \\ -H \"Content-Type: application/x-www-form-urlencoded\" \\ -d \"grant_type=authorization_code\" \\ -d \"code=AUTH_CODE\" \\ -d \"redirect_uri=https://yourapp.com/callback\" \\ -d \"client_id=YOUR_CLIENT_ID\" \\ -d \"code_verifier=ORIGINAL_VERIFIER\" The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens. { \"access_token\": \"eyJhbGciOiJSUzI1NiIs...\", \"token_type\": \"Bearer\", \"expires_in\": 3600, \"refresh_token\": \"dGhpcyBpcyBhIHJlZnJl...\", \"scope\": \"openid profile email\" } Why PKCE Is Secure Without PKCE, an intercepted authorization code could be exchanged by an attacker. With PKCE, the attacker would also need the original code verifier, which was never transmitted during the authorization step. Since only the legitimate client possesses the verifier, the exchange is secure even over an insecure channel. Refresh Tokens with PKCE Refresh tokens extend access without requiring the user to re-authenticate. When the access token expires, the client uses the refresh token to obtain a new one: curl -X POST https://auth.example.com/token \\ -H \"Content-Type: application/x-www-form-urlencoded\" \\ -d \"grant_type=refresh_token\" \\ -d \"refresh_token=REFRESH_TOKEN\" \\ -d \"client_id=YOUR_CLIENT_ID\" Best Practices * Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant. * Store tokens in memory for SPAs, never in localStorage or sessionStorage. * Use short-lived access tokens (15-60 minutes) with longer-lived refresh tokens. * Implement token rotation for refresh tokens to detect theft. * Validate the `state` parameter to prevent CSRF attacks on the callback. * Use the `S256` challenge method instead of `plain`. * Never log tokens or authorization codes in server logs. Summary PKCE transforms the authorization code flow into a secure protocol for public clients by adding a cryptographic binding between the authorization request and the token exchange. Its proof-of-possession model ensures that even if the authorization code is intercepted, it cannot be exchanged without the original verifier. For any new application, the PKCE-authorized code flow is the recommended OAuth 2.0 grant type."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/oauth-20-and-pkce-explained-5kj"
+      ],
+      "articleBody": "OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 and PKCE Explained OAuth 2.0 Overview OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to a user's resources without exposing credentials. It has become the industry standard for API authorization, used by Google, GitHub, Facebook, and virtually every major platform. Core Roles | Role | Description | Example | |------|-------------|---------| | Resource Owner | The user who grants access | You, the end user | | Client | The application requesting access | Your mobile app or SPA | | Authorization Server | Issues tokens after authentication | Google's OAuth 2.0 endpoint | | Resource Server | Hosts the protected resources | Google Calendar API | Grant Types OAuth 2.0 defines several grant types for different scenarios: * **Authorization Code**: The most secure flow, designed for server-side applications. * **Authorization Code with PKCE**: An enhanced version for mobile and single-page applications. * **Client Credentials**: For server-to-server communication without user involvement. * **Device Code**: For devices without a browser, like smart TVs or CLI tools. The Problem PKCE Solves Before PKCE (Proof Key for Code Exchange), public clients like SPAs and mobile apps used the Implicit Grant, which returned the access token directly in the URL fragment. This approach had serious security issues: * Access tokens leaked via browser history 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client PKCE eliminates these issues by introducing a cryptographic challenge-verifier pair. PKCE Flow Step by Step Step 1: Generate Code Verifier and Challenge The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge). function generateCodeVerifier() { const array = new Uint8Array(32); crypto.getRandomValues(array); return base64URLEncode(array); } async function generateCodeChallenge(verifier) { const encoder = new TextEncoder(); const data = encoder.encode(verifier); const digest = await crypto.subtle.digest('SHA-256', data); return base64URLEncode(new Uint8Array(digest)); } function base64URLEncode(buffer) { return btoa(String.fromCharCode(...new Uint8Array(buffer))) .replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-') .replace(/\\//g, '_') .replace(/=+$/, ''); } Step 2: Redirect to Authorization Server The client redirects the user to the authorization server, including the code challenge and the method used (`S256`). https://auth.example.com/authorize? response_type=code& client_id=YOUR_CLIENT_ID& redirect_uri=https://yourapp.com/callback& code_challenge=YOUR_SHA256_CHALLENGE& code_challenge_method=S256& state=CSRF_TOKEN The `state` parameter is a CSRF token that must be verified when the user returns. Step 3: User Authenticates and Consents The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code. https://yourapp.com/callback?code=AUTH_CODE&state;=CSRF_TOKEN The client must verify that the `state` parameter matches what it sent. Step 4: Exchange Code for Token The client sends the authorization code along with the original plain-text code verifier to the token endpoint. curl -X POST https://auth.example.com/token \\ -H \"Content-Type: application/x-www-form-urlencoded\" \\ -d \"grant_type=authorization_code\" \\ -d \"code=AUTH_CODE\" \\ -d \"redirect_uri=https://yourapp.com/callback\" \\ -d \"client_id=YOUR_CLIENT_ID\" \\ -d \"code_verifier=ORIGINAL_VERIFIER\" The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens. { \"access_token\": \"eyJhbGciOiJSUzI1NiIs...\", \"token_type\": \"Bearer\", \"expires_in\": 3600, \"refresh_token\": \"dGhpcyBpcyBhIHJlZnJl...\", \"scope\": \"openid profile email\" } Why PKCE Is Secure Without PKCE, an intercepted authorization code could be exchanged by an attacker. With PKCE, the attacker would also need the original code verifier, which was never transmitted during the authorization step. Since only the legitimate client possesses the verifier, the exchange is secure even over an insecure channel. Refresh Tokens with PKCE Refresh tokens extend access without requiring the user to re-authenticate. When the access token expires, the client uses the refresh token to obtain a new one: curl -X POST https://auth.example.com/token \\ -H \"Content-Type: application/x-www-form-urlencoded\" \\ -d \"grant_type=refresh_token\" \\ -d \"refresh_token=REFRESH_TOKEN\" \\ -d \"client_id=YOUR_CLIENT_ID\" Best Practices * Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant. * Store tokens in memory for SPAs, never in localStorage or sessionStorage. * Use short-lived access tokens (15-60 minutes) with longer-lived refresh tokens. * Implement token rotation for refresh tokens to detect theft. * Validate the `state` parameter to prevent CSRF attacks on the callback. * Use the `S256` challenge method instead of `plain`. * Never log tokens or authorization codes in server logs. Summary PKCE transforms the authorization code flow into a secure protocol for public clients by adding a cryptographic binding between the authorization request and the token exchange. Its proof-of-possession model ensures that even if the authorization code is intercepted, it cannot be exchanged without the original verifier. For any new application, the PKCE-authorized code flow is the recommended OAuth 2.0 grant type."
     }
     </script>
     <script type="application/ld+json">
@@ -198,7 +201,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>OAuth 2.0 and PKCE Explained</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>OAuth 2.0 Overview </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -244,7 +279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Core Roles </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -290,7 +331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Grant Types </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Authorization Code**: The most secure flow, designed for server-side applications.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -382,7 +435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Client Credentials**: For server-to-server communication without user involvement.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -428,7 +487,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The Problem PKCE Solves </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -474,6 +539,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Access tokens leaked via browser history</p>
 <br>
 <br>
@@ -497,7 +565,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tokens were accessible to JavaScript in the same origin 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. No way to verify the authorization code exchange came from the legitimate client </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -543,7 +617,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PKCE Flow Step by Step </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -589,7 +669,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The client generates a cryptographically random string called the code verifier, then creates a SHA-256 hash (the code challenge). </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -635,7 +721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const array = new Uint8Array(32);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -681,6 +773,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return base64URLEncode(array);</p>
 <br>
 <br>
@@ -704,7 +799,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -750,7 +851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const encoder = new TextEncoder();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -796,7 +903,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const digest = await crypto.subtle.digest('SHA-256', data);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -842,7 +955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -888,6 +1007,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return btoa(String.fromCharCode(...new Uint8Array(buffer)))</p>
 <br>
 <br>
@@ -911,7 +1033,13 @@
 <br>
 <br>
 <br>
-<p>.replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-')</p>
+<br>
+<br>
+<br>
+<p>.replace(/\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+/g, '-')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -957,6 +1085,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.replace(/=+$/, '');</p>
 <br>
 <br>
@@ -980,7 +1111,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1026,7 +1163,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The client redirects the user to the authorization server, including the code challenge and the method used (`S256`). </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1072,7 +1215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response_type=code&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1118,7 +1267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redirect_uri=https://yourapp.com/callback&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1164,7 +1319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>code_challenge_method=S256&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1210,7 +1371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The `state` parameter is a CSRF token that must be verified when the user returns. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1256,7 +1423,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The authorization server authenticates the user, presents a consent screen, and redirects back to the client with a temporary authorization code. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1302,7 +1475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The client must verify that the `state` parameter matches what it sent. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1348,7 +1527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The client sends the authorization code along with the original plain-text code verifier to the token endpoint. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1394,7 +1579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-H "Content-Type: application/x-www-form-urlencoded" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1440,7 +1631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-d "code=AUTH_CODE" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1486,7 +1683,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-d "client_id=YOUR_CLIENT_ID" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1532,7 +1735,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The authorization server computes the SHA-256 hash of the verifier and compares it to the challenge received in step 2. If they match, it issues tokens. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1578,7 +1787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"access_token": "eyJhbGciOiJSUzI1NiIs...",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1624,7 +1839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"expires_in": 3600,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1670,7 +1891,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"scope": "openid profile email"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1716,7 +1943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Why PKCE Is Secure </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1762,7 +1995,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Refresh Tokens with PKCE </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1808,7 +2047,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>curl -X POST https://auth.example.com/token \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1854,7 +2099,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-d "grant_type=refresh_token" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1900,7 +2151,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-d "client_id=YOUR_CLIENT_ID"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1946,7 +2203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Always use PKCE for SPAs and mobile apps. Never use the Implicit Grant.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1992,7 +2255,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Use short-lived access tokens (15-60 minutes) with longer-lived refresh tokens.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2038,7 +2307,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Validate the `state` parameter to prevent CSRF attacks on the callback.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2084,6 +2359,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Never log tokens or authorization codes in server logs.</p>
 <br>
 <br>
@@ -2107,7 +2385,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

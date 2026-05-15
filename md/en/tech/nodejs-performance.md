@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/nodejs-performance.html
   
   
   
+  
+  
+  
+
+
+# Node.js Performance Optimization Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Node.js powers high-throughput web applications, but performance requires understanding its single-threaded event loop and non-blocking I/O model.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Node.js powers high-throughput web applications, but performance requires unders
   
   
   
+  
+  
+  
 
 
 The event loop processes callbacks in phases: timers, I/O callbacks, idle/prepare, poll, check (setImmediate), and close callbacks. Each phase has a FIFO queue of callbacks. Blocking any phase delays all subsequent callbacks.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Avoid blocking the event loop. CPU-intensive operations (JSON parsing, cryptogra
   
   
   
+  
+  
+  
 
 
 ##  Profiling
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Use the built-in --prof flag for V8 CPU profiling. Generate flame graphs with --
   
   
   
+  
+  
+  
 
 
 Clinic.js provides visualization for event loop lag, garbage collection, and heap growth. Use autocannon or wrk for load testing. Profile in production-like environments—performance characteristics differ between development and production.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Clinic.js provides visualization for event loop lag, garbage collection, and hea
   
   
   
+  
+  
+  
 
 
 Monitor memory with process.memoryUsage(). Watch for heap growth between garbage collection cycles. Use heap snapshots (node --inspect, then Memory tab) to identify memory leaks.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Common leak sources: global variables, event listeners not removed, closures ret
   
   
   
+  
+  
+  
 
 
 ##  Async Performance
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Use native Promises instead of callback patterns. Native Promises are optimized 
   
   
   
+  
+  
+  
 
 
 Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit concurrent async operations with p-limit or similar. Unhandled promise rejections crash Node.js in recent versions—handle all promise rejections.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Avoid mixing promise styles. Use util.promisify for callback-based APIs. Limit c
   
   
   
+  
+  
+  
 
 
 Set NODE_ENV=production for framework optimizations. Configure max-old-space-size to 75% of available memory. Use clustering (cluster module) or PM2 for multi-core utilization. Implement graceful shutdown with SIGTERM handling.
 
+  
+  
+  
   
   
   

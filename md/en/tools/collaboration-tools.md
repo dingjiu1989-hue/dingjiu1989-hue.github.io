@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/collaboration-tools.html
   
 
 
+# Developer Collaboration Tools: Slack vs Discord vs Linear
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Developer collaboration extends far beyond chat messages. Modern engineering tea
   
   
   
+  
+  
+  
 
 
 ##  Collaboration Platform Capabilities
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Developer collaboration extends far beyond chat messages. Modern engineering tea
   
   
   
+  
+  
+  
 
 
 Slack remains the dominant platform for professional communication with deep enterprise integrations:
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Slack remains the dominant platform for professional communication with deep ent
   
   
   
+  
+  
+  
 
 
 const { App } = require('@slack/bolt');
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ const app = new App({
   
   
   
+  
+  
+  
 
 
 token: process.env.SLACK_BOT_TOKEN,
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ signingSecret: process.env.SLACK_SIGNING_SECRET,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ signingSecret: process.env.SLACK_SIGNING_SECRET,
   
   
   
+  
+  
+  
 
 
 app.message('deploy', async ({ message, say }) => {
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ const { text } = message;
   
   
   
+  
+  
+  
 
 
 const match = text.match(/deploy (\S+) to (\S+)/);
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ if (!match) return;
   
   
   
+  
+  
+  
 
 
 const [, service, env] = match;
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ const [, service, env] = match;
   
   
   
+  
+  
+  
 
 
 const response = await fetch('https://api.github.com/repos/my-org/my-repo/dispatches', {
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ method: 'POST',
   
   
   
+  
+  
+  
 
 
 headers: {
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Authorization: `Bearer ${process.env.GH_TOKEN}`,
   
   
   
+  
+  
+  
 
 
 'Content-Type': 'application/json',
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ Authorization: `Bearer ${process.env.GH_TOKEN}`,
   
   
   
+  
+  
+  
 
 
 body: JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ event_type: 'deploy',
   
   
   
+  
+  
+  
 
 
 client_payload: { service, env },
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ client_payload: { service, env },
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ await say({
   
   
   
+  
+  
+  
 
 
 blocks: [
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ blocks: [
   
   
   
+  
+  
+  
 
 
 type: 'section',
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ text: {
   
   
   
+  
+  
+  
 
 
 type: 'mrkdwn',
 
+  
+  
+  
   
   
   
@@ -1066,29 +1200,6 @@ text: `:rocket: Deploying *${service}* to *${env}*`,
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1096,6 +1207,38 @@ text: `:rocket: Deploying *${service}* to *${env}*`,
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1122,6 +1265,9 @@ text: `:rocket: Deploying *${service}* to *${env}*`,
 
 {
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ type: 'context',
   
   
   
+  
+  
+  
 
 
 elements: [
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ elements: [
   
   
   
+  
+  
+  
 
 
 type: 'mrkdwn',
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ text: `Triggered by <@${message.user}>`,
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ text: `Triggered by <@${message.user}>`,
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1378,29 +1548,6 @@ text: `Triggered by <@${message.user}>`,
   
   
   
-
-
-});
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1408,6 +1555,38 @@ text: `Triggered by <@${message.user}>`,
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ text: `Triggered by <@${message.user}>`,
   
   
   
+  
+  
+  
 
 
 Slack offers dedicated incident management features:
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ Slack offers dedicated incident management features:
   
   
   
+  
+  
+  
 
 
 async function triggerIncident(service, severity, summary) {
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ const response = await fetch('https://api.pagerduty.com/incidents', {
   
   
   
+  
+  
+  
 
 
 method: 'POST',
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ headers: {
   
   
   
+  
+  
+  
 
 
 Authorization: `Token token=${process.env.PAGERDUTY_TOKEN}`,
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ Authorization: `Token token=${process.env.PAGERDUTY_TOKEN}`,
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ body: JSON.stringify({
   
   
   
+  
+  
+  
 
 
 incident: {
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ type: 'incident',
   
   
   
+  
+  
+  
 
 
 title: `[${severity}] ${service}: ${summary}`,
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ service: { id: serviceId, type: 'service_reference' },
   
   
   
+  
+  
+  
 
 
 urgency: severity === 'critical' ? 'high' : 'low',
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ body: { type: 'incident_body', details: summary },
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ body: { type: 'incident_body', details: summary },
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ body: { type: 'incident_body', details: summary },
   
   
   
+  
+  
+  
 
 
 const channel = await app.client.conversations.create({
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ name: `inc-${Date.now()}-${service}`,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ name: `inc-${Date.now()}-${service}`,
   
   
   
+  
+  
+  
 
 
 await app.client.chat.postMessage({
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ channel: channel.id,
   
   
   
+  
+  
+  
 
 
 blocks: [
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ blocks: [
   
   
   
+  
+  
+  
 
 
 type: 'section',
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ text: {
   
   
   
+  
+  
+  
 
 
 type: 'mrkdwn',
 
+  
+  
+  
   
   
   
@@ -2288,29 +2563,6 @@ text: `:rotating_light: *Incident: ${service}* (${severity})`,
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2318,6 +2570,38 @@ text: `:rotating_light: *Incident: ${service}* (${severity})`,
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ text: `:rotating_light: *Incident: ${service}* (${severity})`,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ return channel.id;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ return channel.id;
   
   
   
+  
+  
+  
 
 
 Discord's voice channels and low-latency features make it popular for gaming-adjacent developer communities:
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ import discord
   
   
   
+  
+  
+  
 
 
 from discord.ext import commands
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ bot = commands.Bot(command_prefix='!')
   
   
   
+  
+  
+  
 
 
 @bot.event
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ async def on_ready():
   
   
   
+  
+  
+  
 
 
 print(f'{bot.user} connected')
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ print(f'{bot.user} connected')
   
   
   
+  
+  
+  
 
 
 channel = bot.get_channel(STANDUP_VOICE_ID)
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ if channel:
   
   
   
+  
+  
+  
 
 
 await channel.send(
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ await channel.send(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ await channel.send(
   
   
   
+  
+  
+  
 
 
 async def deploy_command(ctx, service: str, env: str):
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ async def deploy_command(ctx, service: str, env: str):
   
   
   
+  
+  
+  
 
 
 embed = discord.Embed(
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ title=f'Deploying {service} to {env}',
   
   
   
+  
+  
+  
 
 
 color=discord.Color.blue(),
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ timestamp=discord.utils.utcnow(),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ embed.add_field(name='Service', value=service)
   
   
   
+  
+  
+  
 
 
 embed.add_field(name='Environment', value=env)
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ embed.add_field(name='Environment', value=env)
   
   
   
+  
+  
+  
 
 
 await ctx.send(embed=embed)
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ bot.run(os.getenv('DISCORD_TOKEN'))
   
   
   
+  
+  
+  
 
 
 ### Linear
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ Linear occupies a different niche: project management and issue tracking optimiz
   
   
   
+  
+  
+  
 
 
 // Linear GraphQL API for workflow automation
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ mutation CreateIssue {
   
   
   
+  
+  
+  
 
 
 issueCreate(
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ input: {
   
   
   
+  
+  
+  
 
 
 title: "Investigate payment latency spike"
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ description: """
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   
@@ -3406,6 +3810,9 @@ P99 latency for /api/charge increased from 200ms to 2s
   
   
   
+  
+  
+  
 
 
 ##  Investigation Steps
@@ -3432,36 +3839,16 @@ P99 latency for /api/charge increased from 200ms to 2s
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check database query performance
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Review recent deployments
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check database query performance
 
+  
+  
+  
   
   
   
@@ -3486,7 +3873,7 @@ P99 latency for /api/charge increased from 200ms to 2s
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Analyze trace data in Jaeger
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Review recent deployments
 
   
   
@@ -3510,10 +3897,45 @@ P99 latency for /api/charge increased from 200ms to 2s
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check downstream dependencies
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Analyze trace data in Jaeger
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Check downstream dependencies
+
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ P99 latency for /api/charge increased from 200ms to 2s
   
   
   
+  
+  
+  
 
 
 Sentry error: PAY-1234
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ Deploy: v2.1.3 to production
   
   
   
+  
+  
+  
 
 
 """
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ teamId: "team-engineering"
   
   
   
+  
+  
+  
 
 
 priority: urgent
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ labels: ["incident", "performance"]
   
   
   
+  
+  
+  
 
 
 assigneeId: "user-oncall"
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ parentId: "issue-incident-tracking"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ parentId: "issue-incident-tracking"
   
   
   
+  
+  
+  
 
 
 success
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ issue {
   
   
   
+  
+  
+  
 
 
 id
 
+  
+  
+  
   
   
   
@@ -3926,29 +4390,6 @@ url
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3978,10 +4419,45 @@ url
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -4030,10 +4506,16 @@ Linear's keyboard-first interface and automation rules reduce issue management o
   
   
   
+  
+  
+  
 
 
 # Linear automations
 
+  
+  
+  
   
   
   
@@ -4082,10 +4564,16 @@ workflows:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Auto-triage bugs
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Auto-triage bugs
 
+  
+  
+  
   
   
   
@@ -4134,10 +4622,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- condition:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- condition:
 
+  
+  
+  
   
   
   
@@ -4186,10 +4680,16 @@ field: label
   
   
   
+  
+  
+  
 
 
 operator: contains
 
+  
+  
+  
   
   
   
@@ -4238,6 +4738,9 @@ value: bug
   
   
   
+  
+  
+  
 
 
 actions:
@@ -4264,10 +4767,16 @@ actions:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: set_priority
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: set_priority
 
+  
+  
+  
   
   
   
@@ -4316,10 +4825,16 @@ value: high
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: add_label
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: add_label
 
+  
+  
+  
   
   
   
@@ -4368,10 +4883,16 @@ value: needs-triage
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: notify_slack
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: notify_slack
 
+  
+  
+  
   
   
   
@@ -4420,10 +4941,16 @@ channel: "#bug-triage"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Close stale issues
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Close stale issues
 
+  
+  
+  
   
   
   
@@ -4472,10 +4999,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- condition:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- condition:
 
+  
+  
+  
   
   
   
@@ -4524,10 +5057,16 @@ field: updated_at
   
   
   
+  
+  
+  
 
 
 operator: older_than
 
+  
+  
+  
   
   
   
@@ -4576,6 +5115,9 @@ value: 30d
   
   
   
+  
+  
+  
 
 
 actions:
@@ -4602,10 +5144,16 @@ actions:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: add_comment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: add_comment
 
+  
+  
+  
   
   
   
@@ -4654,10 +5202,16 @@ template: "This issue has been inactive for 30 days. Closing."
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: set_status
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: set_status
 
+  
+  
+  
   
   
   
@@ -4706,10 +5260,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 ##  API Access and Automation
 
+  
+  
+  
   
   
   
@@ -4758,10 +5318,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
   
   
   
@@ -4810,10 +5376,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 | Rate limits | ~1/sec per workspace | 50/sec per bot | 250/min |
 
+  
+  
+  
   
   
   
@@ -4862,10 +5434,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 | Slash commands | Yes | Yes | No |
 
+  
+  
+  
   
   
   
@@ -4914,10 +5492,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 ##  Knowledge Management
 
+  
+  
+  
   
   
   
@@ -4963,6 +5547,9 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 * **Discord**: Forum channels and threads for Q&A;, searchable but designed for ephemeral conversation.
@@ -4986,10 +5573,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 * **Linear**: Documents linked to projects with rich formatting and issue references.
 
+  
+  
+  
   
   
   
@@ -5038,10 +5631,16 @@ value: canceled
   
   
   
+  
+  
+  
 
 
 Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. Discord's bot ecosystem is developer-centric but less business-oriented. Linear's integrations focus on developer tools (GitHub, GitLab, Sentry, Figma) and are purpose-built rather than generic.
 
+  
+  
+  
   
   
   
@@ -5090,10 +5689,16 @@ Slack's 2,400+ app directory is unmatched for enterprise toolchain integration. 
   
   
   
+  
+  
+  
 
 
 Technical Design Doc (Linear)
 
+  
+  
+  
   
   
   
@@ -5142,10 +5747,16 @@ Technical Design Doc (Linear)
   
   
   
+  
+  
+  
 
 
 v
 
+  
+  
+  
   
   
   
@@ -5194,6 +5805,9 @@ Review Thread (Slack Canvas)
   
   
   
+  
+  
+  
 
 
 |
@@ -5220,10 +5834,16 @@ Review Thread (Slack Canvas)
   
   
   
+  
+  
+  
 
 
 v
 
+  
+  
+  
   
   
   
@@ -5272,6 +5892,9 @@ Implementation (GitHub Issues linked to Linear)
   
   
   
+  
+  
+  
 
 
 |
@@ -5298,10 +5921,16 @@ Implementation (GitHub Issues linked to Linear)
   
   
   
+  
+  
+  
 
 
 v
 
+  
+  
+  
   
   
   
@@ -5350,6 +5979,9 @@ Code Review (GitHub PR)
   
   
   
+  
+  
+  
 
 
 |
@@ -5376,10 +6008,16 @@ Code Review (GitHub PR)
   
   
   
+  
+  
+  
 
 
 v
 
+  
+  
+  
   
   
   
@@ -5428,10 +6066,16 @@ Deploy Notification (Slack bot)
   
   
   
+  
+  
+  
 
 
 |
 
+  
+  
+  
   
   
   
@@ -5480,10 +6124,16 @@ v
   
   
   
+  
+  
+  
 
 
 Post-Deploy Monitoring (Datadog alert in Slack)
 
+  
+  
+  
   
   
   
@@ -5532,10 +6182,16 @@ Post-Deploy Monitoring (Datadog alert in Slack)
   
   
   
+  
+  
+  
 
 
 * **Slack**: Best for professional teams of 10+ with complex workflows and enterprise compliance needs.
 
+  
+  
+  
   
   
   
@@ -5578,10 +6234,16 @@ Post-Deploy Monitoring (Datadog alert in Slack)
   
   
   
+  
+  
+  
 
 
 * **Linear**: Best for any team that wants fast, focused issue tracking regardless of chat tool choice.
 
+  
+  
+  
   
   
   

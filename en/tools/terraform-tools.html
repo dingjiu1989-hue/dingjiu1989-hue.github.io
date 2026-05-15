@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/terraform-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5933",
+      "wordCount": "6643",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tools/terraform-tools.html"},
-      "articleBody": "Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Introduction Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples. Terragrunt A thin wrapper that keeps Terraform configurations DRY: terragrunt.hcl (root configuration) remote_state { backend = \"s3\" config = { bucket = \"my-company-terraform-state\" key = \"${path_relative_to_include()}/terraform.tfstate\" region = \"us-east-1\" encrypt = true dynamodb_table = \"terraform-locks\" } } generate \"provider\" { path = \"provider.tf\" if_exists = \"overwrite_terragrunt\" contents = provider \"aws\" { region = local.aws_region default_tags { tags = { Environment = local.environment ManagedBy = \"terragrunt\" } } } EOF } locals { aws_region = \"us-east-1\" environment = reverse(split(\"/\", get_terragrunt_dir()))[1] } dev/vpc/terragrunt.hcl terraform { source = \"../../modules/vpc\" } include \"root\" { path = find_in_parent_folders() } inputs = { vpc_name = \"dev-vpc\" cidr_block = \"10.0.0.0/16\" enable_nat = true enable_vpn = false private_subnets = [\"10.0.1.0/24\", \"10.0.2.0/24\"] public_subnets = [\"10.0.101.0/24\", \"10.0.102.0/24\"] } Apply all modules in dependency order terragrunt run-all apply Plan only changed modules terragrunt run-all plan Output dependency graph terragrunt graph | dot -Tpng > graph.png Validate all configurations terragrunt run-all validate Destroy with confirmation terragrunt run-all destroy Terratest Go library for writing automated infrastructure tests: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/gruntwork-io/terratest/modules/aws\" \"github.com/stretchr/testify/assert\" ) func TestVPCDeployment(t *testing.T) { terraformOptions := &terraform.Options;{ TerraformDir: \"../examples/vpc\", Vars: map[string]interface{}{ \"vpc_name\": \"test-vpc\", \"cidr_block\": \"10.0.0.0/16\", }, NoColor: true, } // Clean up at the end defer terraform.Destroy(t, terraformOptions) // Deploy infrastructure terraform.InitAndApply(t, terraformOptions) // Verify outputs vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, vpcID) // Verify the VPC actually exists in AWS vpc := aws.GetVpcById(t, vpcID, \"us-east-1\") assert.Equal(t, \"10.0.0.0/16\", vpc.CidrBlock) // Verify subnets were created subnets := aws.GetSubnetsForVpc(t, vpcID, \"us-east-1\") assert.Len(t, subnets, 4) // Verify security group rules sgID := terraform.Output(t, terraformOptions, \"web_sg_id\") sgRules := aws.GetSecurityGroupRules(t, sgID, \"us-east-1\") assert.GreaterOrEqual(t, len(sgRules), 2) } tfsec (now Trivy) Security scanning for Terraform configurations: Install tfsec brew install tfsec Or use Trivy which includes tfsec rules brew install trivy Scan Terraform files tfsec . tfsec ./environments/production tfsec --no-color --format json > scan-results.json In CI tfsec --soft-fail # Don't fail CI, just report Trivy equivalent trivy config --severity HIGH,CRITICAL . Bad configuration that tfsec catches resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" acl = \"public-read\" # tfsec: aws-s3-no-public-read-acl } resource \"aws_security_group\" \"web\" { ingress { from_port = 22 to_port = 22 protocol = \"tcp\" cidr_blocks = [\"0.0.0.0/0\"] # tfsec: aws-vpc-no-public-ingress-sgr } } Fixed configuration resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" acl = \"private\" } resource \"aws_security_group\" \"web\" { ingress { from_port = 22 to_port = 22 protocol = \"tcp\" cidr_blocks = [\"10.0.0.0/8\"] # Restricted to internal network } } Infracost Cost estimation for Terraform projects: Install brew install infracost infracost auth login Generate cost estimate for current state infracost breakdown --path . Compare with previous state infracost diff --path . --compare-to previous-cost.json Output in different formats infracost breakdown --path . --format json infracost breakdown --path . --format html --out-file cost-report.html In CI infracost diff --path . --show-skipped .infracost.yml \u2014 usage estimates version: 0.1 projects: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production usage: aws_instance.web: monthly_cpu_credit_hrs: 100 monthly_hrs: 730 aws_lambda.function: monthly_requests: 1000000 request_duration_ms: 500 aws_s3_bucket.data: storage_gb: 500 monthly_tier_1_requests: 10000 Other Essential Tools **pre-commit hooks** for Terraform: .pre-commit-config.yaml repos: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform rev: v1.96.0 hooks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_fmt \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_validate \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_tflint \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_trivy \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_docs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: checkov Comparison | Tool | Purpose | Essential For | |------|---------|---------------| | Terragrunt | DRY configuration | Multi-environment, multi-module projects | | Terratest | Infrastructure testing | Automated validation of deployments | | tfsec/Trivy | Security scanning | Catching misconfigurations before deploy | | Infracost | Cost estimation | Budget planning and cost awareness | | pre-commit | Code quality | Consistent formatting and validation | Recommendations * **Multi-environment IaC**: Use Terragrunt to eliminate configuration duplication across environments. * **Production safety**: Use Terratest to write automated tests that verify infrastructure after deployment. * **Security compliance**: Run tfsec or Trivy in CI pipelines to catch misconfigurations before merge. * **Cost awareness**: Use Infracost in PR pipelines to show cost implications of infrastructure changes. * **Code quality**: Set up pre-commit hooks for terraform fmt, validate, tflint, and docs. The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/terraform-tools-terragrunt-terratest-tfsec-infracost-5ae1"
+      ],
+      "articleBody": "Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Terraform Tools: Terragrunt, terratest, tfsec, Infracost Introduction Terraform has become the standard for infrastructure as code, but managing Terraform at scale requires additional tools. Terragrunt reduces configuration duplication. Terratest enables automated infrastructure testing. Tfsec scans configurations for security issues. Infracost provides cost estimates before deployment. This article covers each tool with practical examples. Terragrunt A thin wrapper that keeps Terraform configurations DRY: terragrunt.hcl (root configuration) remote_state { backend = \"s3\" config = { bucket = \"my-company-terraform-state\" key = \"${path_relative_to_include()}/terraform.tfstate\" region = \"us-east-1\" encrypt = true dynamodb_table = \"terraform-locks\" } } generate \"provider\" { path = \"provider.tf\" if_exists = \"overwrite_terragrunt\" contents = provider \"aws\" { region = local.aws_region default_tags { tags = { Environment = local.environment ManagedBy = \"terragrunt\" } } } EOF } locals { aws_region = \"us-east-1\" environment = reverse(split(\"/\", get_terragrunt_dir()))[1] } dev/vpc/terragrunt.hcl terraform { source = \"../../modules/vpc\" } include \"root\" { path = find_in_parent_folders() } inputs = { vpc_name = \"dev-vpc\" cidr_block = \"10.0.0.0/16\" enable_nat = true enable_vpn = false private_subnets = [\"10.0.1.0/24\", \"10.0.2.0/24\"] public_subnets = [\"10.0.101.0/24\", \"10.0.102.0/24\"] } Apply all modules in dependency order terragrunt run-all apply Plan only changed modules terragrunt run-all plan Output dependency graph terragrunt graph | dot -Tpng > graph.png Validate all configurations terragrunt run-all validate Destroy with confirmation terragrunt run-all destroy Terratest Go library for writing automated infrastructure tests: package test import ( \"testing\" \"github.com/gruntwork-io/terratest/modules/terraform\" \"github.com/gruntwork-io/terratest/modules/aws\" \"github.com/stretchr/testify/assert\" ) func TestVPCDeployment(t *testing.T) { terraformOptions := &terraform.Options;{ TerraformDir: \"../examples/vpc\", Vars: map[string]interface{}{ \"vpc_name\": \"test-vpc\", \"cidr_block\": \"10.0.0.0/16\", }, NoColor: true, } // Clean up at the end defer terraform.Destroy(t, terraformOptions) // Deploy infrastructure terraform.InitAndApply(t, terraformOptions) // Verify outputs vpcID := terraform.Output(t, terraformOptions, \"vpc_id\") assert.NotEmpty(t, vpcID) // Verify the VPC actually exists in AWS vpc := aws.GetVpcById(t, vpcID, \"us-east-1\") assert.Equal(t, \"10.0.0.0/16\", vpc.CidrBlock) // Verify subnets were created subnets := aws.GetSubnetsForVpc(t, vpcID, \"us-east-1\") assert.Len(t, subnets, 4) // Verify security group rules sgID := terraform.Output(t, terraformOptions, \"web_sg_id\") sgRules := aws.GetSecurityGroupRules(t, sgID, \"us-east-1\") assert.GreaterOrEqual(t, len(sgRules), 2) } tfsec (now Trivy) Security scanning for Terraform configurations: Install tfsec brew install tfsec Or use Trivy which includes tfsec rules brew install trivy Scan Terraform files tfsec . tfsec ./environments/production tfsec --no-color --format json > scan-results.json In CI tfsec --soft-fail # Don't fail CI, just report Trivy equivalent trivy config --severity HIGH,CRITICAL . Bad configuration that tfsec catches resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" acl = \"public-read\" # tfsec: aws-s3-no-public-read-acl } resource \"aws_security_group\" \"web\" { ingress { from_port = 22 to_port = 22 protocol = \"tcp\" cidr_blocks = [\"0.0.0.0/0\"] # tfsec: aws-vpc-no-public-ingress-sgr } } Fixed configuration resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" acl = \"private\" } resource \"aws_security_group\" \"web\" { ingress { from_port = 22 to_port = 22 protocol = \"tcp\" cidr_blocks = [\"10.0.0.0/8\"] # Restricted to internal network } } Infracost Cost estimation for Terraform projects: Install brew install infracost infracost auth login Generate cost estimate for current state infracost breakdown --path . Compare with previous state infracost diff --path . --compare-to previous-cost.json Output in different formats infracost breakdown --path . --format json infracost breakdown --path . --format html --out-file cost-report.html In CI infracost diff --path . --show-skipped .infracost.yml \u2014 usage estimates version: 0.1 projects: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production usage: aws_instance.web: monthly_cpu_credit_hrs: 100 monthly_hrs: 730 aws_lambda.function: monthly_requests: 1000000 request_duration_ms: 500 aws_s3_bucket.data: storage_gb: 500 monthly_tier_1_requests: 10000 Other Essential Tools **pre-commit hooks** for Terraform: .pre-commit-config.yaml repos: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform rev: v1.96.0 hooks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_fmt \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_validate \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_tflint \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_trivy \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_docs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: checkov Comparison | Tool | Purpose | Essential For | |------|---------|---------------| | Terragrunt | DRY configuration | Multi-environment, multi-module projects | | Terratest | Infrastructure testing | Automated validation of deployments | | tfsec/Trivy | Security scanning | Catching misconfigurations before deploy | | Infracost | Cost estimation | Budget planning and cost awareness | | pre-commit | Code quality | Consistent formatting and validation | Recommendations * **Multi-environment IaC**: Use Terragrunt to eliminate configuration duplication across environments. * **Production safety**: Use Terratest to write automated tests that verify infrastructure after deployment. * **Security compliance**: Run tfsec or Trivy in CI pipelines to catch misconfigurations before merge. * **Cost awareness**: Use Infracost in PR pipelines to show cost implications of infrastructure changes. * **Code quality**: Set up pre-commit hooks for terraform fmt, validate, tflint, and docs. The ideal Terraform workflow combines all these tools: Terragrunt for structure, pre-commit for quality, tfssec for security, Infracost for cost awareness, and Terratest for deployment validation."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Terraform Tools: Terragrunt, terratest, tfsec, Infracost</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -222,7 +254,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Terragrunt</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -268,7 +306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>terragrunt.hcl (root configuration)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -314,7 +358,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>backend = "s3"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>bucket = "my-company-terraform-state"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -406,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>region = "us-east-1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,6 +514,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dynamodb_table = "terraform-locks"</p>
 <br>
 <br>
@@ -475,30 +540,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -544,7 +618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path = "provider.tf"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -590,6 +670,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>contents = <</p>
 <br>
 <br>
@@ -611,7 +694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>provider "aws" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -657,7 +746,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>default_tags {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -703,7 +798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Environment = local.environment</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -749,26 +850,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -795,7 +876,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -841,7 +954,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -887,7 +1006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws_region = "us-east-1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -933,7 +1058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -979,7 +1110,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terraform {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1025,7 +1162,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1071,6 +1214,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path = find_in_parent_folders()</p>
 <br>
 <br>
@@ -1094,7 +1240,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1140,7 +1292,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vpc_name = "dev-vpc"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1186,7 +1344,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>enable_nat = true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1232,7 +1396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1278,7 +1448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1324,7 +1500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terragrunt run-all apply</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1370,7 +1552,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terragrunt run-all plan</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1416,7 +1604,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terragrunt graph | dot -Tpng > graph.png</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1462,7 +1656,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terragrunt run-all validate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1508,7 +1708,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terragrunt run-all destroy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1554,7 +1760,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Go library for writing automated infrastructure tests:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1600,7 +1812,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1646,7 +1864,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"github.com/gruntwork-io/terratest/modules/terraform"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1692,7 +1916,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"github.com/stretchr/testify/assert"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1738,7 +1968,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>func TestVPCDeployment(t *testing.T) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1784,7 +2020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TerraformDir: "../examples/vpc",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1830,7 +2072,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"vpc_name": "test-vpc",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1876,7 +2124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1922,7 +2176,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1968,7 +2228,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>defer terraform.Destroy(t, terraformOptions)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2014,7 +2280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terraform.InitAndApply(t, terraformOptions)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2060,7 +2332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vpcID := terraform.Output(t, terraformOptions, "vpc_id")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2106,7 +2384,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Verify the VPC actually exists in AWS</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2152,7 +2436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>assert.Equal(t, "10.0.0.0/16", vpc.CidrBlock)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2198,7 +2488,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>subnets := aws.GetSubnetsForVpc(t, vpcID, "us-east-1")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2244,7 +2540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Verify security group rules</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2290,7 +2592,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sgRules := aws.GetSecurityGroupRules(t, sgID, "us-east-1")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2336,7 +2644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2382,7 +2696,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Security scanning for Terraform configurations:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2428,7 +2748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>brew install tfsec</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2474,7 +2800,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>brew install trivy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2520,7 +2852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tfsec .</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2566,6 +2904,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tfsec --no-color --format json > scan-results.json</p>
 <br>
 <br>
@@ -2589,7 +2930,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>In CI</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2635,7 +2982,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Trivy equivalent</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2681,7 +3034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Bad configuration that tfsec catches</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2727,7 +3086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>bucket = "my-data-bucket"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2773,7 +3138,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2819,7 +3190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ingress {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2865,6 +3242,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>to_port = 22</p>
 <br>
 <br>
@@ -2888,7 +3268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>protocol = "tcp"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2934,30 +3320,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3003,7 +3398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_s3_bucket" "data" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3049,6 +3450,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>acl = "private"</p>
 <br>
 <br>
@@ -3072,7 +3476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3118,7 +3528,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ingress {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3164,7 +3580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>to_port = 22</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3210,6 +3632,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cidr_blocks = ["10.0.0.0/8"] # Restricted to internal network</p>
 <br>
 <br>
@@ -3233,30 +3658,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3302,7 +3736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cost estimation for Terraform projects:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3348,7 +3788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>brew install infracost</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3394,7 +3840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Generate cost estimate for current state</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3440,7 +3892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Compare with previous state</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3486,7 +3944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Output in different formats</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3532,7 +3996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>infracost breakdown --path . --format html --out-file cost-report.html</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3578,7 +4048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>infracost diff --path . --show-skipped</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3624,7 +4100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>version: 0.1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3670,7 +4152,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- path: ./environments/production</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3716,7 +4204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws_instance.web:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3762,7 +4256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>monthly_hrs: 730</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3808,7 +4308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>monthly_requests: 1000000</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3854,7 +4360,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws_s3_bucket.data:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3900,7 +4412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>monthly_tier_1_requests: 10000</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3946,7 +4464,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**pre-commit hooks** for Terraform:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3992,6 +4516,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>repos:</p>
 <br>
 <br>
@@ -4015,7 +4542,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- repo: https://github.com/antonbabenko/pre-commit-terraform</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4061,6 +4594,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hooks:</p>
 <br>
 <br>
@@ -4084,10 +4620,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_fmt</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_fmt</p>
 <br>
 <br>
 <br>
@@ -4107,13 +4643,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_validate</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_validate</p>
 <br>
 <br>
 <br>
@@ -4130,7 +4666,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_tflint</p>
 <br>
 <br>
 <br>
@@ -4140,6 +4675,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_tflint</p>
 <br>
 <br>
 <br>
@@ -4153,7 +4689,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_trivy</p>
 <br>
 <br>
 <br>
@@ -4166,6 +4701,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_trivy</p>
 <br>
 <br>
 <br>
@@ -4176,7 +4712,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_docs</p>
 <br>
 <br>
 <br>
@@ -4192,6 +4727,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: terraform_docs</p>
 <br>
 <br>
 <br>
@@ -4199,7 +4735,28 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: checkov</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: checkov</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4245,7 +4802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Tool | Purpose | Essential For |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4291,7 +4854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Terragrunt | DRY configuration | Multi-environment, multi-module projects |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4337,7 +4906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| tfsec/Trivy | Security scanning | Catching misconfigurations before deploy |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4383,7 +4958,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| pre-commit | Code quality | Consistent formatting and validation |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4429,7 +5010,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Multi-environment IaC**: Use Terragrunt to eliminate configuration duplication across environments.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4469,7 +5056,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Security compliance**: Run tfsec or Trivy in CI pipelines to catch misconfigurations before merge.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4509,7 +5102,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Code quality**: Set up pre-commit hooks for terraform fmt, validate, tflint, and docs.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

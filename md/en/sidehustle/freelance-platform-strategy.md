@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/freelance-platform-strategy
   
   
   
+  
+  
+  
+
+
+# Freelancing Platforms: Strategy for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Freelancing platforms connect developers with clients. Success requires a strategic approach to profiles, proposals, pricing, and client relationships.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Freelancing platforms connect developers with clients. Success requires a strate
   
   
   
+  
+  
+  
 
 
 Upwork is the largest general freelancing platform with the most job variety. Categories include web development, mobile apps, APIs, cloud infrastructure, and DevOps. Rates range from $30-150/hour. Upwork takes 20% for the first $500, then 5% after $10,000.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Toptal is an invite-only platform that accepts only the top 3% of applicants. Th
   
   
   
+  
+  
+  
 
 
 Fiverr flips the model—you create "gigs" that clients purchase. Create detailed service packages with clear deliverables. Tiered pricing (basic, standard, premium) captures different budget levels. Fiverr works best for defined deliverables (build a landing page, create an API, fix a bug).
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Fiverr flips the model—you create "gigs" that clients purchase. Create detaile
   
   
   
+  
+  
+  
 
 
 Your profile is your sales page. Write a clear headline: "Senior React Developer specializing in Next.js and TypeScript" not "Full Stack Developer." Showcase specific outcomes, not generic responsibilities.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Portfolio projects demonstrate capability. Include links to live applications an
   
   
   
+  
+  
+  
 
 
 ##  Winning Proposals
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Custom proposals outperform templates by 3-5x. Read the job post carefully. Addr
   
   
   
+  
+  
+  
 
 
 Show similar work. "I built a similar dashboard for a logistics company" is more convincing than "I have 5 years of React experience." Propose a clear next step: a 30-minute call, a wireframe, or a small paid trial.
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Show similar work. "I built a similar dashboard for a logistics company" is more
   
   
   
+  
+  
+  
 
 
 New freelancers should start below market rate to get initial reviews and platform history. Increase rates with each successful project and positive review. Track your ratings and adjust accordingly—initial low rates build portfolio, not long-term strategy.
 
+  
+  
+  
   
   
   
@@ -491,6 +559,9 @@ Fixed-price projects require clear scope. Define what's included and what's addi
   
   
   
+  
+  
+  
 
 
 ##  Client Management
@@ -517,10 +588,16 @@ Fixed-price projects require clear scope. Define what's included and what's addi
   
   
   
+  
+  
+  
 
 
 Set clear expectations in writing: scope, timeline, deliverables, revision policy. Communicate proactively—status updates every 2-3 days even without progress. Use platform messaging for record. Move to complex communication tools only after establishing trust.
 
+  
+  
+  
   
   
   

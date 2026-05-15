@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/caching-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "7345",
+      "wordCount": "8199",
       "keywords": "Architecture, System Design",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/caching-strategies.html"},
-      "articleBody": "Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. Caching Patterns Cache-Aside (Lazy Loading) Cache-aside is the most common caching pattern. The application checks the cache first. On a cache miss, it reads from the database and populates the cache. class CacheAside: def __init__(self, cache, database): self.cache = cache self.database = database def get_user(self, user_id): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first cached = self.cache.get(f\"user:{user_id}\") if cached is not None: return cached 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) if user: 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time self.cache.set(f\"user:{user_id}\", user, ttl=3600) return user def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database self.database.execute(\"UPDATE users SET name = ? WHERE id = ?\", data['name'], user_id) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!) self.cache.delete(f\"user:{user_id}\") **Advantages**: * Only caches data that is actually requested (no wasted space). * Simple to implement and understand. * Cache failures are not fatal (system falls back to database). **Disadvantages**: * Cache miss penalty includes both cache check and database read. * Stale data until TTL expires (if items are not invalidated on update). * Thundering herd problem on cache miss for popular items. Write-Through Write-through caches update the cache synchronously when data is written to the database. class WriteThrough: def __init__(self, cache, database): self.cache = cache self.database = database def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database self.database.execute(\"UPDATE users SET name = ? WHERE id = ?\", data['name'], user_id) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) self.cache.set(f\"user:{user_id}\", user, ttl=3600) **Advantages**: * Cache is always consistent with the database (no stale data). * No cache miss penalty for reads. * Read path is simple (always from cache or cache-miss-then-database). **Disadvantages**: * Writes are slower (must update both database and cache). * Writes more data to cache than may ever be read (cache pollution). * Cache and database updates are not atomic (risk of inconsistency). Write-Behind (Write-Back) Write-behind caches write to the cache immediately and asynchronously update the database. import asyncio class WriteBehind: def __init__(self, cache, database): self.cache = cache self.database = database self.write_queue = asyncio.Queue() self._start_flusher() def _start_flusher(self): \"\"\"Background task that flushes writes to database.\"\"\" async def flusher(): while True: Batch writes and flush periodically batch = [] for _ in range(100): # Batch size try: item = await asyncio.wait_for( self.write_queue.get(), timeout=1.0 ) batch.append(item) except asyncio.TimeoutError: break if batch: self._flush_to_database(batch) asyncio.create_task(flusher()) def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately user = {**self.cache.get(f\"user:{user_id}\", {}), **data} self.cache.set(f\"user:{user_id}\", user) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update self.write_queue.put_nowait({ \"type\": \"update_user\", \"user_id\": user_id, \"data\": data }) **Advantages**: * Very fast writes (no database latency). * Can batch database writes for efficiency. * Reduces database write load. **Disadvantages**: * Risk of data loss if cache fails before flush completes. * Complex to implement correctly. * Inconsistency window between cache update and database update. Refresh-Ahead Refresh-ahead proactively refreshes the cache before data expires. class RefreshAhead: def __init__(self, cache, database, refresh_threshold=0.8): self.cache = cache self.database = database self.refresh_threshold = refresh_threshold # Refresh when 80% of TTL elapsed def get_user(self, user_id): cached = self.cache.get(f\"user:{user_id}\") if cached is None: user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) self.cache.set(f\"user:{user_id}\", user, ttl=3600) return user Check if we should refresh ttl = self.cache.ttl(f\"user:{user_id}\") if ttl Asynchronously refresh in background self._async_refresh(f\"user:{user_id}\", user_id) return cached def _async_refresh(self, cache_key, user_id): \"\"\"Background refresh task.\"\"\" import threading def refresh(): user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) if user: self.cache.set(cache_key, user, ttl=3600) threading.Thread(target=refresh, daemon=True).start() Cache Eviction Policies Least Recently Used (LRU) Evicts the item that was accessed least recently. Good for workloads with temporal locality. Cache: [A(1min ago), B(30s ago), C(5s ago), D(now)] A is accessed least recently -> evict A Redis implements LRU approximation with `maxmemory-policy allkeys-lru`. Least Frequently Used (LFU) Evicts the item accessed least frequently. Good for workloads with skewed popularity. Cache: [A(100x), B(50x), C(30x), D(5x)] D is least frequently accessed -> evict D Redis supports LFU with `maxmemory-policy allkeys-lfu`. Time-To-Live (TTL) Evicts items based on their TTL. Items expire regardless of access pattern. Essential for all caching systems. First In, First Out (FIFO) Evicts the oldest item regardless of access frequency. Simple but less effective than LRU. Choosing an Eviction Policy | Workload | Best Policy | |----------|-------------| | Uniform access (all items equally likely) | FIFO or TTL | | Temporal locality (recent items more likely) | LRU | | Skewed access (some items much more popular) | LFU | | Time-sensitive data (session, expiring offers) | TTL | | Unknown | LRU + TTL | Distributed Caching with Redis Redis is the dominant distributed cache. It provides in-memory data structures, replication, persistence, and high availability. Redis Cluster Setup docker-compose.yml for Redis Cluster version: '3' services: redis-cluster: image: redis:7-alpine command: redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-replicas 1 ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"7000-7005:7000-7005\" Redis Caching Best Practices import redis import json class RedisCache: def __init__(self, redis_url): self.client = redis.from_url(redis_url) def get_or_compute(self, key, compute_func, ttl=300): \"\"\"Cache-aside with compute function.\"\"\" cached = self.client.get(key) if cached is not None: return json.loads(cached) value = compute_func() self.client.setex(key, ttl, json.dumps(value)) return value def get_batch(self, keys): \"\"\"Batch cache get using pipeline.\"\"\" pipeline = self.client.pipeline() for key in keys: pipeline.get(key) results = pipeline.execute() return { key: json.loads(val) if val else None for key, val in zip(keys, results) } Cache Sharding For very large caches, shard across multiple Redis nodes. import hashlib class ShardedRedis: def __init__(self, nodes): self.nodes = nodes # List of Redis clients def _get_node(self, key): \"\"\"Determine which node holds this key.\"\"\" hash_val = int(hashlib.md5(key.encode()).hexdigest(), 16) return self.nodes[hash_val % len(self.nodes)] def get(self, key): node = self._get_node(key) return node.get(key) def set(self, key, value, ttl=300): node = self._get_node(key) node.setex(key, ttl, value) CDN Caching Content Delivery Networks (CDNs) cache static and dynamic content at edge locations close to users. Cache Control Headers Nginx: Static asset caching headers location /static/ { expires 365d; add_header Cache-Control \"public, immutable\"; } location /api/content/ { Dynamic content: shorter cache expires 5m; add_header Cache-Control \"public, must-revalidate\"; } location /api/user/ { Private content: no CDN caching add_header Cache-Control \"private, no-cache\"; } CDN Cache Invalidation CloudFront: Invalidate specific paths aws cloudfront create-invalidation \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths \"/api/content/*\" \"/index.html\" Fastly: Purge by key curl -X POST https://api.fastly.com/service/SERVICE/purge \\ -H \"Fastly-Key: $API_KEY\" \\ -H \"Surrogate-Key: product:1234\" \\ -H \"Accept: application/json\" Cache Invalidation Cache invalidation is notoriously difficult. These strategies help. Time-Based Invalidation (TTL) The simplest approach. Every cache entry has a TTL. Data is stale until the TTL expires. Always safe: stale data is eventually replaced. Always simple: no complex invalidation logic. Limitation: data can be arbitrarily stale within the TTL window. Event-Driven Invalidation When data changes, publish an invalidation event. Event-driven invalidation class EventDrivenCache: def __init__(self, cache, message_bus): self.cache = cache self.message_bus = message_bus Subscribe to invalidation events self.message_bus.subscribe(\"cache.invalidate\", self.handle_invalidation) def handle_invalidation(self, event): key = event.data['key'] self.cache.delete(key) log.info(f\"Invalidated cache key: {key} due to {event.data['reason']}\") Write-Through Invalidation Invalidate (or update) the cache as part of the write transaction. def update_product(product_id, data): with transaction(): Update database db.execute(\"UPDATE products SET price = ? WHERE id = ?\", data['price'], product_id) Invalidate cache in same transaction if possible cache.delete(f\"product:{product_id}\") Publish invalidation for other cache nodes message_bus.publish(\"cache.invalidate\", {\"key\": f\"product:{product_id}\"}) Conclusion Choose cache-aside for most general-purpose caching. Use write-through when read consistency is critical. Use write-behind when write performance is paramount. Use refresh-ahead for predictable access patterns. Set appropriate TTLs as a safety net. Use Redis for distributed caching with proper cluster configuration. Use CDNs for content delivery to global users. Remember that cache invalidation is hard: prefer TTLs over complex invalidation logic, use event-driven invalidation when TTLs are insufficient, and always have a fallback to the original data source."
+      "articleBody": "Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching Strategies and Patterns in Distributed Systems Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. Caching Patterns Cache-Aside (Lazy Loading) Cache-aside is the most common caching pattern. The application checks the cache first. On a cache miss, it reads from the database and populates the cache. class CacheAside: def __init__(self, cache, database): self.cache = cache self.database = database def get_user(self, user_id): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first cached = self.cache.get(f\"user:{user_id}\") if cached is not None: return cached 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) if user: 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time self.cache.set(f\"user:{user_id}\", user, ttl=3600) return user def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database self.database.execute(\"UPDATE users SET name = ? WHERE id = ?\", data['name'], user_id) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!) self.cache.delete(f\"user:{user_id}\") **Advantages**: * Only caches data that is actually requested (no wasted space). * Simple to implement and understand. * Cache failures are not fatal (system falls back to database). **Disadvantages**: * Cache miss penalty includes both cache check and database read. * Stale data until TTL expires (if items are not invalidated on update). * Thundering herd problem on cache miss for popular items. Write-Through Write-through caches update the cache synchronously when data is written to the database. class WriteThrough: def __init__(self, cache, database): self.cache = cache self.database = database def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database self.database.execute(\"UPDATE users SET name = ? WHERE id = ?\", data['name'], user_id) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) self.cache.set(f\"user:{user_id}\", user, ttl=3600) **Advantages**: * Cache is always consistent with the database (no stale data). * No cache miss penalty for reads. * Read path is simple (always from cache or cache-miss-then-database). **Disadvantages**: * Writes are slower (must update both database and cache). * Writes more data to cache than may ever be read (cache pollution). * Cache and database updates are not atomic (risk of inconsistency). Write-Behind (Write-Back) Write-behind caches write to the cache immediately and asynchronously update the database. import asyncio class WriteBehind: def __init__(self, cache, database): self.cache = cache self.database = database self.write_queue = asyncio.Queue() self._start_flusher() def _start_flusher(self): \"\"\"Background task that flushes writes to database.\"\"\" async def flusher(): while True: Batch writes and flush periodically batch = [] for _ in range(100): # Batch size try: item = await asyncio.wait_for( self.write_queue.get(), timeout=1.0 ) batch.append(item) except asyncio.TimeoutError: break if batch: self._flush_to_database(batch) asyncio.create_task(flusher()) def update_user(self, user_id, data): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately user = {**self.cache.get(f\"user:{user_id}\", {}), **data} self.cache.set(f\"user:{user_id}\", user) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update self.write_queue.put_nowait({ \"type\": \"update_user\", \"user_id\": user_id, \"data\": data }) **Advantages**: * Very fast writes (no database latency). * Can batch database writes for efficiency. * Reduces database write load. **Disadvantages**: * Risk of data loss if cache fails before flush completes. * Complex to implement correctly. * Inconsistency window between cache update and database update. Refresh-Ahead Refresh-ahead proactively refreshes the cache before data expires. class RefreshAhead: def __init__(self, cache, database, refresh_threshold=0.8): self.cache = cache self.database = database self.refresh_threshold = refresh_threshold # Refresh when 80% of TTL elapsed def get_user(self, user_id): cached = self.cache.get(f\"user:{user_id}\") if cached is None: user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) self.cache.set(f\"user:{user_id}\", user, ttl=3600) return user Check if we should refresh ttl = self.cache.ttl(f\"user:{user_id}\") if ttl Asynchronously refresh in background self._async_refresh(f\"user:{user_id}\", user_id) return cached def _async_refresh(self, cache_key, user_id): \"\"\"Background refresh task.\"\"\" import threading def refresh(): user = self.database.query(\"SELECT * FROM users WHERE id = ?\", user_id) if user: self.cache.set(cache_key, user, ttl=3600) threading.Thread(target=refresh, daemon=True).start() Cache Eviction Policies Least Recently Used (LRU) Evicts the item that was accessed least recently. Good for workloads with temporal locality. Cache: [A(1min ago), B(30s ago), C(5s ago), D(now)] A is accessed least recently -> evict A Redis implements LRU approximation with `maxmemory-policy allkeys-lru`. Least Frequently Used (LFU) Evicts the item accessed least frequently. Good for workloads with skewed popularity. Cache: [A(100x), B(50x), C(30x), D(5x)] D is least frequently accessed -> evict D Redis supports LFU with `maxmemory-policy allkeys-lfu`. Time-To-Live (TTL) Evicts items based on their TTL. Items expire regardless of access pattern. Essential for all caching systems. First In, First Out (FIFO) Evicts the oldest item regardless of access frequency. Simple but less effective than LRU. Choosing an Eviction Policy | Workload | Best Policy | |----------|-------------| | Uniform access (all items equally likely) | FIFO or TTL | | Temporal locality (recent items more likely) | LRU | | Skewed access (some items much more popular) | LFU | | Time-sensitive data (session, expiring offers) | TTL | | Unknown | LRU + TTL | Distributed Caching with Redis Redis is the dominant distributed cache. It provides in-memory data structures, replication, persistence, and high availability. Redis Cluster Setup docker-compose.yml for Redis Cluster version: '3' services: redis-cluster: image: redis:7-alpine command: redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-replicas 1 ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- \"7000-7005:7000-7005\" Redis Caching Best Practices import redis import json class RedisCache: def __init__(self, redis_url): self.client = redis.from_url(redis_url) def get_or_compute(self, key, compute_func, ttl=300): \"\"\"Cache-aside with compute function.\"\"\" cached = self.client.get(key) if cached is not None: return json.loads(cached) value = compute_func() self.client.setex(key, ttl, json.dumps(value)) return value def get_batch(self, keys): \"\"\"Batch cache get using pipeline.\"\"\" pipeline = self.client.pipeline() for key in keys: pipeline.get(key) results = pipeline.execute() return { key: json.loads(val) if val else None for key, val in zip(keys, results) } Cache Sharding For very large caches, shard across multiple Redis nodes. import hashlib class ShardedRedis: def __init__(self, nodes): self.nodes = nodes # List of Redis clients def _get_node(self, key): \"\"\"Determine which node holds this key.\"\"\" hash_val = int(hashlib.md5(key.encode()).hexdigest(), 16) return self.nodes[hash_val % len(self.nodes)] def get(self, key): node = self._get_node(key) return node.get(key) def set(self, key, value, ttl=300): node = self._get_node(key) node.setex(key, ttl, value) CDN Caching Content Delivery Networks (CDNs) cache static and dynamic content at edge locations close to users. Cache Control Headers Nginx: Static asset caching headers location /static/ { expires 365d; add_header Cache-Control \"public, immutable\"; } location /api/content/ { Dynamic content: shorter cache expires 5m; add_header Cache-Control \"public, must-revalidate\"; } location /api/user/ { Private content: no CDN caching add_header Cache-Control \"private, no-cache\"; } CDN Cache Invalidation CloudFront: Invalidate specific paths aws cloudfront create-invalidation \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths \"/api/content/*\" \"/index.html\" Fastly: Purge by key curl -X POST https://api.fastly.com/service/SERVICE/purge \\ -H \"Fastly-Key: $API_KEY\" \\ -H \"Surrogate-Key: product:1234\" \\ -H \"Accept: application/json\" Cache Invalidation Cache invalidation is notoriously difficult. These strategies help. Time-Based Invalidation (TTL) The simplest approach. Every cache entry has a TTL. Data is stale until the TTL expires. Always safe: stale data is eventually replaced. Always simple: no complex invalidation logic. Limitation: data can be arbitrarily stale within the TTL window. Event-Driven Invalidation When data changes, publish an invalidation event. Event-driven invalidation class EventDrivenCache: def __init__(self, cache, message_bus): self.cache = cache self.message_bus = message_bus Subscribe to invalidation events self.message_bus.subscribe(\"cache.invalidate\", self.handle_invalidation) def handle_invalidation(self, event): key = event.data['key'] self.cache.delete(key) log.info(f\"Invalidated cache key: {key} due to {event.data['reason']}\") Write-Through Invalidation Invalidate (or update) the cache as part of the write transaction. def update_product(product_id, data): with transaction(): Update database db.execute(\"UPDATE products SET price = ? WHERE id = ?\", data['price'], product_id) Invalidate cache in same transaction if possible cache.delete(f\"product:{product_id}\") Publish invalidation for other cache nodes message_bus.publish(\"cache.invalidate\", {\"key\": f\"product:{product_id}\"}) Conclusion Choose cache-aside for most general-purpose caching. Use write-through when read consistency is critical. Use write-behind when write performance is paramount. Use refresh-ahead for predictable access patterns. Set appropriate TTLs as a safety net. Use Redis for distributed caching with proper cluster configuration. Use CDNs for content delivery to global users. Remember that cache invalidation is hard: prefer TTLs over complex invalidation logic, use event-driven invalidation when TTLs are insufficient, and always have a fallback to the original data source."
     }
     </script>
     <script type="application/ld+json">
@@ -152,7 +152,33 @@
 <br>
 <br>
 <br>
+<h1>Caching Strategies and Patterns in Distributed Systems</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Caching is the single most effective performance optimization in distributed systems. A well-designed cache reduces database load, decreases response latency, and improves system throughput. This article covers the major caching patterns, eviction policies, distributed caching with Redis, CDN caching, and the hardest problem in computer science: cache invalidation. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -186,6 +212,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache-Aside (Lazy Loading) </p>
 <br>
 <br>
@@ -203,7 +232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache-aside is the most common caching pattern. The application checks the cache first. On a cache miss, it reads from the database and populates the cache. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -243,7 +278,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, cache, database):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -283,7 +324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.database = database</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -323,7 +370,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Try cache first</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Try cache first</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -363,7 +416,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if cached is not None:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +462,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. Cache miss: read from database</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Cache miss: read from database</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,6 +508,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if user:</p>
 <br>
 <br>
@@ -463,7 +531,13 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\. Populate cache for next time</h1>
+<br>
+<br>
+<br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Populate cache for next time</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -503,7 +577,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -543,7 +623,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Update database</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -583,6 +669,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data['name'], user_id)</p>
 <br>
 <br>
@@ -603,7 +692,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Invalidate cache (not update!)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -643,7 +738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Advantages**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -677,7 +778,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Simple to implement and understand.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -714,7 +821,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Disadvantages**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -748,7 +861,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Stale data until TTL expires (if items are not invalidated on update).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,6 +904,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-Through </p>
 <br>
 <br>
@@ -802,7 +924,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-through caches update the cache synchronously when data is written to the database. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -842,7 +970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, cache, database):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -882,7 +1016,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.database = database</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -922,7 +1062,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Update database</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update database</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -962,6 +1108,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data['name'], user_id)</p>
 <br>
 <br>
@@ -982,7 +1131,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. Update cache synchronously</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache synchronously</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1022,7 +1177,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache.set(f"user:{user_id}", user, ttl=3600)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1059,6 +1220,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Cache is always consistent with the database (no stale data).</p>
 <br>
 <br>
@@ -1076,7 +1240,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* No cache miss penalty for reads.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1113,7 +1283,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Disadvantages**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1147,7 +1323,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Writes more data to cache than may ever be read (cache pollution).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1184,6 +1366,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-Behind (Write-Back) </p>
 <br>
 <br>
@@ -1201,7 +1386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-behind caches write to the cache immediately and asynchronously update the database. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1241,7 +1432,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class WriteBehind:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1281,6 +1478,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache = cache</p>
 <br>
 <br>
@@ -1301,7 +1501,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.database = database</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1341,7 +1547,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self._start_flusher()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1381,7 +1593,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Background task that flushes writes to database."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1421,7 +1639,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>while True:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1461,7 +1685,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>batch = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1501,7 +1731,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>try:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1541,7 +1777,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.write_queue.get(), timeout=1.0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1581,7 +1823,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>batch.append(item)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1621,7 +1869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>break</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1661,7 +1915,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self._flush_to_database(batch)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1701,6 +1961,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def update_user(self, user_id, data):</p>
 <br>
 <br>
@@ -1721,7 +1984,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Update cache immediately</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Update cache immediately</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1761,6 +2030,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache.set(f"user:{user_id}", user)</p>
 <br>
 <br>
@@ -1781,7 +2053,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. Queue database update</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Queue database update</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1821,7 +2099,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "update_user",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1861,7 +2145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"data": data</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1901,7 +2191,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Advantages**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1935,7 +2231,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Can batch database writes for efficiency.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1972,7 +2274,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Disadvantages**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2006,7 +2314,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Complex to implement correctly.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2043,6 +2357,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Refresh-Ahead </p>
 <br>
 <br>
@@ -2060,7 +2377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Refresh-ahead proactively refreshes the cache before data expires. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2100,6 +2423,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, cache, database, refresh_threshold=0.8):</p>
 <br>
 <br>
@@ -2120,7 +2446,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache = cache</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2160,7 +2492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.refresh_threshold = refresh_threshold # Refresh when 80% of TTL elapsed</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2200,7 +2538,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cached = self.cache.get(f"user:{user_id}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2240,7 +2584,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user = self.database.query("SELECT * FROM users WHERE id = ?", user_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2280,7 +2630,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2320,7 +2676,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ttl = self.cache.ttl(f"user:{user_id}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2360,7 +2722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Asynchronously refresh in background</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2400,7 +2768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return cached</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2440,7 +2814,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Background refresh task."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2480,7 +2860,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def refresh():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2520,7 +2906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if user:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2560,7 +2952,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>threading.Thread(target=refresh, daemon=True).start()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,6 +2995,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Least Recently Used (LRU) </p>
 <br>
 <br>
@@ -2614,7 +3015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Evicts the item that was accessed least recently. Good for workloads with temporal locality. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2654,7 +3061,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A is accessed least recently -> evict A</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2691,6 +3104,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Least Frequently Used (LFU) </p>
 <br>
 <br>
@@ -2708,7 +3124,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Evicts the item accessed least frequently. Good for workloads with skewed popularity. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2748,7 +3170,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>D is least frequently accessed -> evict D</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2785,7 +3213,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Time-To-Live (TTL) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2819,7 +3253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>First In, First Out (FIFO) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2853,7 +3293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Choosing an Eviction Policy </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2887,7 +3333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Distributed Caching with Redis </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2921,7 +3373,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Redis Cluster Setup </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2961,7 +3419,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>version: '3'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3001,7 +3465,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis-cluster:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3041,7 +3511,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>command: redis-cli --cluster create</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3081,6 +3557,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005</p>
 <br>
 <br>
@@ -3101,7 +3580,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-replicas 1</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--cluster-replicas 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3141,7 +3626,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "7000-7005:7000-7005"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "7000-7005:7000-7005"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3181,7 +3672,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import redis</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3718,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class RedisCache:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3261,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.client = redis.from_url(redis_url)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3301,7 +3810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Cache-aside with compute function."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3341,7 +3856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if cached is not None:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3381,7 +3902,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = compute_func()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3421,7 +3948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return value</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3461,7 +3994,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Batch cache get using pipeline."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3501,7 +4040,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for key in keys:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3541,7 +4086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = pipeline.execute()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3581,7 +4132,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>key: json.loads(val) if val else None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3621,7 +4178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3658,7 +4221,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For very large caches, shard across multiple Redis nodes. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3698,7 +4267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ShardedRedis:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3738,7 +4313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.nodes = nodes # List of Redis clients</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3778,7 +4359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Determine which node holds this key."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3818,7 +4405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self.nodes[hash_val % len(self.nodes)]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3858,7 +4451,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>node = self._get_node(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3898,7 +4497,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def set(self, key, value, ttl=300):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3938,7 +4543,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>node.setex(key, ttl, value)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3975,6 +4586,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Content Delivery Networks (CDNs) cache static and dynamic content at edge locations close to users. </p>
 <br>
 <br>
@@ -3992,7 +4606,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache Control Headers </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4032,7 +4652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>location /static/ {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4072,6 +4698,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>add_header Cache-Control "public, immutable";</p>
 <br>
 <br>
@@ -4092,7 +4721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4132,7 +4767,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Dynamic content: shorter cache</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4172,6 +4813,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>add_header Cache-Control "public, must-revalidate";</p>
 <br>
 <br>
@@ -4192,7 +4836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4232,7 +4882,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Private content: no CDN caching</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4272,7 +4928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4312,7 +4974,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>CloudFront: Invalidate specific paths</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4352,7 +5020,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--distribution-id E123456 \</p>
 <br>
 <br>
 <br>
@@ -4372,7 +5043,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths "/api/content/*" "/index.html"</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--paths "/api/content/*" "/index.html"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4412,7 +5089,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>curl -X POST https://api.fastly.com/service/SERVICE/purge \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4452,7 +5135,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-H "Surrogate-Key: product:1234" \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4492,7 +5181,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache Invalidation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4526,6 +5221,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Time-Based Invalidation (TTL) </p>
 <br>
 <br>
@@ -4543,7 +5241,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The simplest approach. Every cache entry has a TTL. Data is stale until the TTL expires. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4583,7 +5287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Always simple: no complex invalidation logic.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4623,6 +5333,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Event-Driven Invalidation </p>
 <br>
 <br>
@@ -4640,7 +5353,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When data changes, publish an invalidation event. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4680,7 +5399,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class EventDrivenCache:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4720,7 +5445,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache = cache</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4760,7 +5491,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Subscribe to invalidation events</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4800,7 +5537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def handle_invalidation(self, event):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4840,7 +5583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.cache.delete(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4880,6 +5629,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-Through Invalidation </p>
 <br>
 <br>
@@ -4897,7 +5649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Invalidate (or update) the cache as part of the write transaction. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4937,7 +5695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with transaction():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4977,7 +5741,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>db.execute("UPDATE products SET price = ? WHERE id = ?",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5017,7 +5787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Invalidate cache in same transaction if possible</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5057,7 +5833,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Publish invalidation for other cache nodes</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5097,7 +5879,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

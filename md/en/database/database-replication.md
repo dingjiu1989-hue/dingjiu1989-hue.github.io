@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/database-replication.html
   
 
 
+# Database Replication Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Replication Fundamentals 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Database replication copies data from one server to another for redundancy, read
   
   
   
+  
+  
+  
 
 
 Synchronous Replication 
 
+  
+  
+  
   
   
   
@@ -187,10 +222,16 @@ The primary waits for replicas to acknowledge writes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL synchronous replication
 
+  
+  
+  
   
   
   
@@ -233,10 +274,16 @@ synchronous_commit = on
   
   
   
+  
+  
+  
 
 
 synchronous_standby_names = '2 (standby1, standby2, standby3)'
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ SELECT application_name, state, sync_state, sync_priority
   
   
   
+  
+  
+  
 
 
 FROM pg_stat_replication;
 
+  
+  
+  
   
   
   
@@ -322,6 +375,9 @@ Synchronous replication guarantees no data loss but increases latency.
   
   
   
+  
+  
+  
 
 
 Asynchronous Replication 
@@ -342,10 +398,16 @@ Asynchronous Replication
   
   
   
+  
+  
+  
 
 
 The primary does not wait for replicas: 
 
+  
+  
+  
   
   
   
@@ -388,10 +450,16 @@ def check_replication_lag():
   
   
   
+  
+  
+  
 
 
 cur.execute("""
 
+  
+  
+  
   
   
   
@@ -434,10 +502,16 @@ SELECT client_addr, application_name,
   
   
   
+  
+  
+  
 
 
 pg_wal_lsn_diff(pg_current_wal_lsn(), replay_lsn) AS lag_bytes,
 
+  
+  
+  
   
   
   
@@ -480,10 +554,16 @@ EXTRACT(EPOCH FROM (now() - pg_last_xact_replay_timestamp())) AS lag_seconds
   
   
   
+  
+  
+  
 
 
 FROM pg_stat_replication;
 
+  
+  
+  
   
   
   
@@ -526,10 +606,16 @@ FROM pg_stat_replication;
   
   
   
+  
+  
+  
 
 
 for row in cur.fetchall():
 
+  
+  
+  
   
   
   
@@ -572,10 +658,16 @@ if row[3] > 60:
   
   
   
+  
+  
+  
 
 
 alert(f"Replication lag critical on {row[1]}")
 
+  
+  
+  
   
   
   
@@ -615,10 +707,16 @@ Conflict Resolution
   
   
   
+  
+  
+  
 
 
 Multi-primary replication requires conflict resolution: 
 
+  
+  
+  
   
   
   
@@ -661,10 +759,16 @@ class ConflictResolver:
   
   
   
+  
+  
+  
 
 
 strategies = {
 
+  
+  
+  
   
   
   
@@ -707,10 +811,16 @@ strategies = {
   
   
   
+  
+  
+  
 
 
 "majority_wins": lambda versions: Counter(versions).most_common(1)[0][0]
 
+  
+  
+  
   
   
   
@@ -753,10 +863,16 @@ strategies = {
   
   
   
+  
+  
+  
 
 
 Replication Topologies 
 
+  
+  
+  
   
   
   
@@ -793,10 +909,16 @@ Replication Topologies
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

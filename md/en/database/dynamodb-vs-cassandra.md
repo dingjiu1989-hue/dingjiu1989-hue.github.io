@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html
   
 
 
+# DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ DynamoDB and Cassandra are both distributed, horizontally scalable NoSQL databas
   
   
   
+  
+  
+  
 
 
 Data Model 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ DynamoDB
   
   
   
+  
+  
+  
 
 
 DynamoDB uses tables with items (rows) and attributes (columns). Each item must have a partition key and optionally a sort key: 
 
+  
+  
+  
   
   
   
@@ -230,10 +271,16 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
+  
+  
+  
 
 
 // Partition key: user_id (String)
 
+  
+  
+  
   
   
   
@@ -276,10 +323,16 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -322,10 +375,16 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
+  
+  
+  
 
 
 "created_at": 1717000000,
 
+  
+  
+  
   
   
   
@@ -368,10 +427,16 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
+  
+  
+  
 
 
 "name": "Alice",
 
+  
+  
+  
   
   
   
@@ -414,10 +479,16 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
+  
+  
+  
 
 
 "city": "New York",
 
+  
+  
+  
   
   
   
@@ -460,26 +531,6 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -487,6 +538,35 @@ DynamoDB uses tables with items (rows) and attributes (columns). Each item must 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -529,10 +609,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * The partition key determines which partition stores the item.
 
+  
+  
+  
   
   
   
@@ -569,6 +655,9 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * Query operations require the partition key; optional sort key conditions.
@@ -589,10 +678,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * Secondary indexes can be local (same partition key, different sort key) or global (different partition key).
 
+  
+  
+  
   
   
   
@@ -635,10 +730,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 import boto3
 
+  
+  
+  
   
   
   
@@ -681,6 +782,9 @@ client = boto3.client('dynamodb')
   
   
   
+  
+  
+  
 
 
 response = client.query(
@@ -704,10 +808,16 @@ response = client.query(
   
   
   
+  
+  
+  
 
 
 TableName='Users',
 
+  
+  
+  
   
   
   
@@ -750,10 +860,16 @@ KeyConditionExpression='user_id = :uid',
   
   
   
+  
+  
+  
 
 
 ExpressionAttributeValues={
 
+  
+  
+  
   
   
   
@@ -796,10 +912,16 @@ ExpressionAttributeValues={
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -842,6 +964,9 @@ ExpressionAttributeValues={
   
   
   
+  
+  
+  
 
 
 Cassandra 
@@ -862,10 +987,16 @@ Cassandra
   
   
   
+  
+  
+  
 
 
 Cassandra uses tables with rows and columns, but the data model is designed around query patterns. The PRIMARY KEY defines partitioning and clustering: 
 
+  
+  
+  
   
   
   
@@ -908,6 +1039,9 @@ CREATE TABLE users_by_email (
   
   
   
+  
+  
+  
 
 
 email TEXT PRIMARY KEY,
@@ -931,10 +1065,16 @@ email TEXT PRIMARY KEY,
   
   
   
+  
+  
+  
 
 
 user_id UUID,
 
+  
+  
+  
   
   
   
@@ -977,10 +1117,16 @@ name TEXT,
   
   
   
+  
+  
+  
 
 
 address TEXT
 
+  
+  
+  
   
   
   
@@ -1023,10 +1169,16 @@ address TEXT
   
   
   
+  
+  
+  
 
 
 CREATE TABLE orders_by_user (
 
+  
+  
+  
   
   
   
@@ -1069,10 +1221,16 @@ user_id UUID,
   
   
   
+  
+  
+  
 
 
 order_id UUID,
 
+  
+  
+  
   
   
   
@@ -1115,10 +1273,16 @@ total DECIMAL,
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMP,
 
+  
+  
+  
   
   
   
@@ -1161,10 +1325,16 @@ PRIMARY KEY (user_id, created_at, order_id)
   
   
   
+  
+  
+  
 
 
 ) WITH CLUSTERING ORDER BY (created_at DESC);
 
+  
+  
+  
   
   
   
@@ -1207,10 +1377,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * The first column in PRIMARY KEY is the partition key.
 
+  
+  
+  
   
   
   
@@ -1247,6 +1423,9 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * You model tables around your access patterns (query-first design).
@@ -1267,10 +1446,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 * Denormalization is expected and encouraged.
 
+  
+  
+  
   
   
   
@@ -1313,10 +1498,16 @@ Key design rules:
   
   
   
+  
+  
+  
 
 
 from cassandra.cluster import Cluster
 
+  
+  
+  
   
   
   
@@ -1359,10 +1550,16 @@ cluster = Cluster(['127.0.0.1'])
   
   
   
+  
+  
+  
 
 
 session = cluster.connect('mykeyspace')
 
+  
+  
+  
   
   
   
@@ -1405,10 +1602,16 @@ rows = session.execute(
   
   
   
+  
+  
+  
 
 
 "SELECT * FROM orders_by_user WHERE user_id = %s",
 
+  
+  
+  
   
   
   
@@ -1451,10 +1654,16 @@ rows = session.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1494,10 +1703,16 @@ Consistency
   
   
   
+  
+  
+  
 
 
 DynamoDB Consistency Levels 
 
+  
+  
+  
   
   
   
@@ -1534,10 +1749,16 @@ DynamoDB Consistency Levels
   
   
   
+  
+  
+  
 
 
 DynamoDB offers tunable consistency at the request level: 
 
+  
+  
+  
   
   
   
@@ -1580,10 +1801,16 @@ DynamoDB offers tunable consistency at the request level:
   
   
   
+  
+  
+  
 
 
 response = client.get_item(
 
+  
+  
+  
   
   
   
@@ -1626,10 +1853,16 @@ TableName='Users',
   
   
   
+  
+  
+  
 
 
 Key={'user_id': {'S': 'user_42'}},
 
+  
+  
+  
   
   
   
@@ -1672,10 +1905,16 @@ ConsistentRead=False
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1718,6 +1957,9 @@ ConsistentRead=False
   
   
   
+  
+  
+  
 
 
 response = client.get_item(
@@ -1741,10 +1983,16 @@ response = client.get_item(
   
   
   
+  
+  
+  
 
 
 TableName='Users',
 
+  
+  
+  
   
   
   
@@ -1787,10 +2035,16 @@ Key={'user_id': {'S': 'user_42'}},
   
   
   
+  
+  
+  
 
 
 ConsistentRead=True
 
+  
+  
+  
   
   
   
@@ -1833,10 +2087,16 @@ ConsistentRead=True
   
   
   
+  
+  
+  
 
 
 Cassandra Consistency Levels 
 
+  
+  
+  
   
   
   
@@ -1876,10 +2136,16 @@ Cassandra's consistency is tunable per query using the consistency level (CL):
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond
 
+  
+  
+  
   
   
   
@@ -1903,6 +2169,9 @@ Cassandra's consistency is tunable per query using the consistency level (CL):
 
 SELECT * FROM users WHERE email = 'alice@example.com'
 
+  
+  
+  
   
   
   
@@ -1945,10 +2214,16 @@ CONSISTENCY QUORUM;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee
 
+  
+  
+  
   
   
   
@@ -1972,6 +2247,9 @@ CONSISTENCY QUORUM;
 
 SELECT * FROM users WHERE email = 'alice@example.com'
 
+  
+  
+  
   
   
   
@@ -2014,10 +2292,16 @@ CONSISTENCY ONE;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest
 
+  
+  
+  
   
   
   
@@ -2041,6 +2325,9 @@ CONSISTENCY ONE;
 
 SELECT * FROM users WHERE email = 'alice@example.com'
 
+  
+  
+  
   
   
   
@@ -2083,10 +2370,16 @@ CONSISTENCY ALL;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter
 
+  
+  
+  
   
   
   
@@ -2129,10 +2422,16 @@ SELECT * FROM users WHERE email = 'alice@example.com'
   
   
   
+  
+  
+  
 
 
 CONSISTENCY LOCAL_QUORUM;
 
+  
+  
+  
   
   
   
@@ -2172,6 +2471,9 @@ Scaling
   
   
   
+  
+  
+  
 
 
 DynamoDB Scaling 
@@ -2192,10 +2494,16 @@ DynamoDB Scaling
   
   
   
+  
+  
+  
 
 
 DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: 
 
+  
+  
+  
   
   
   
@@ -2238,10 +2546,16 @@ DynamoDB scales vertically by provisioning read and write capacity units (RCUs a
   
   
   
+  
+  
+  
 
 
 client.update_table(
 
+  
+  
+  
   
   
   
@@ -2284,10 +2598,16 @@ TableName='Users',
   
   
   
+  
+  
+  
 
 
 ProvisionedThroughput={
 
+  
+  
+  
   
   
   
@@ -2330,10 +2650,16 @@ ProvisionedThroughput={
   
   
   
+  
+  
+  
 
 
 'WriteCapacityUnits': 100
 
+  
+  
+  
   
   
   
@@ -2376,10 +2702,16 @@ ProvisionedThroughput={
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2422,10 +2754,16 @@ ProvisionedThroughput={
   
   
   
+  
+  
+  
 
 
 # No capacity planning needed, but higher per-request cost
 
+  
+  
+  
   
   
   
@@ -2465,6 +2803,9 @@ DynamoDB partitions are invisible to users. The service automatically splits par
   
   
   
+  
+  
+  
 
 
 Cassandra Scaling 
@@ -2485,10 +2826,16 @@ Cassandra Scaling
   
   
   
+  
+  
+  
 
 
 Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: 
 
+  
+  
+  
   
   
   
@@ -2531,10 +2878,16 @@ Cassandra scales horizontally by adding nodes. Data is distributed using consist
   
   
   
+  
+  
+  
 
 
 num_tokens: 256
 
+  
+  
+  
   
   
   
@@ -2577,10 +2930,16 @@ initial_token:
   
   
   
+  
+  
+  
 
 
 replication_factor: 3
 
+  
+  
+  
   
   
   
@@ -2623,10 +2982,16 @@ Adding a node:
   
   
   
+  
+  
+  
 
 
 # Add node to cluster
 
+  
+  
+  
   
   
   
@@ -2669,10 +3034,16 @@ nodetool status
   
   
   
+  
+  
+  
 
 
 nodetool join
 
+  
+  
+  
   
   
   
@@ -2715,10 +3086,16 @@ nodetool join
   
   
   
+  
+  
+  
 
 
 nodetool rebuild
 
+  
+  
+  
   
   
   
@@ -2758,10 +3135,16 @@ Scaling is linear: doubling nodes doubles throughput. No partitioning limits; th
   
   
   
+  
+  
+  
 
 
 Cost Comparison 
 
+  
+  
+  
   
   
   
@@ -2798,10 +3181,16 @@ Cost Comparison
   
   
   
+  
+  
+  
 
 
 When to Choose Which 
 
+  
+  
+  
   
   
   
@@ -2841,10 +3230,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You are already in AWS and want managed, serverless operations.
 
+  
+  
+  
   
   
   
@@ -2881,6 +3276,9 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You need single-digit-millisecond latency at any scale.
@@ -2901,10 +3299,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You prioritize operations simplicity over cost optimization.
 
+  
+  
+  
   
   
   
@@ -2947,10 +3351,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You run on-premises or multi-cloud.
 
+  
+  
+  
   
   
   
@@ -2987,10 +3397,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You need custom compaction and repair strategies.
 
+  
+  
+  
   
   
   
@@ -3027,10 +3443,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * Your queries require complex clustering and ordering within partitions.
 
+  
+  
+  
   
   
   
@@ -3073,10 +3495,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * You need complex joins, aggregations, or ad-hoc queries.
 
+  
+  
+  
   
   
   
@@ -3113,10 +3541,16 @@ When to Choose Which
   
   
   
+  
+  
+  
 
 
 * Your data model has many-to-many relationships.
 
+  
+  
+  
   
   
   

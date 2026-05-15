@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox-reliab
   
 
 
+# Transactional Outbox Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The transactional outbox pattern solves a fundamental problem in event-driven microservices: how to reliably publish messages as part of a database transaction. When a service updates its database and publishes an event, these two operations must be atomic. If the database update succeeds but the message publish fails, the system is inconsistent. The outbox pattern uses a local database table as a temporary message store, ensuring reliable publication through the same transaction that updates business data. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The Dual-Write Problem
   
   
   
+  
+  
+  
 
 
 The dual-write problem occurs when a service must atomically update a database and publish a message. In a typical order service, placing an order involves inserting into the orders table and publishing an "OrderPlaced" event. If the database insert succeeds but the message publish fails, the event is lost. If the database insert fails but the message publishes, a phantom event is emitted. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Standard solutions like distributed transactions (2PC) are too heavyweight and n
   
   
   
+  
+  
+  
 
 
 How It Works 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ The service adds an outbox table to its database. When performing business opera
   
   
   
+  
+  
+  
 
 
 A separate process reads from the outbox table and publishes messages to the message broker. Once a message is successfully published, the process deletes or marks the outbox record as published. This two-step approach separates the atomic write from the potentially unreliable publish. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Polling Publisher
   
   
   
+  
+  
+  
 
 
 The polling publisher is the simplest outbox reader. A background process periodically queries the outbox table for unpublished messages. It publishes each message to the broker and marks it as published when successful. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ Polling is simple to implement but introduces latency (bounded by the poll inter
   
   
   
+  
+  
+  
 
 
 Polling also needs careful handling of message ordering. Queries should order by the outbox record ID to maintain the order in which messages were inserted. This ensures that consumers receive events in the correct order. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ Transaction Log Tailing
   
   
   
+  
+  
+  
 
 
 Transaction log tailing is a more sophisticated approach that reads from the database's transaction log (Write-Ahead Log or binary log) rather than the outbox table. Tools like Debezium and Maxwell capture database changes from the log and publish them to Kafka. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Transaction log tailing provides lower latency than polling because changes are 
   
   
   
+  
+  
+  
 
 
 The trade-off is operational complexity. Setting up and maintaining a transaction log reader requires expertise. Not all databases support this pattern, and configuration varies significantly between databases. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ Idempotent Message Publication
   
   
   
+  
+  
+  
 
 
 Message publication from the outbox should be idempotent. If the publisher crashes after publishing a message but before marking it as published, the message will be published again on restart. The consumer must handle duplicate messages. 
 
+  
+  
+  
   
   
   
@@ -464,10 +541,16 @@ Idempotency keys in messages allow consumers to detect and ignore duplicates. Th
   
   
   
+  
+  
+  
 
 
 Best Practices 
 
+  
+  
+  
   
   
   
@@ -504,6 +587,9 @@ The outbox table should include the message type, payload, creation timestamp, a
   
   
   
+  
+  
+  
 
 
 Monitor the outbox depth (number of unpublished messages) and publication latency. Growing outbox depth indicates a problem with the publisher. Old unpublished messages indicate the publisher has stalled. 
@@ -524,10 +610,16 @@ Monitor the outbox depth (number of unpublished messages) and publication latenc
   
   
   
+  
+  
+  
 
 
 Clean up published records regularly. A background job can delete records that have been published for more than a threshold period. Partition the outbox table by creation date to make cleanup efficient. 
 
+  
+  
+  
   
   
   

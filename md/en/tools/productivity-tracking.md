@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/productivity-tracking.html
   
 
 
+# Developer Productivity Tracking Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Why Track Productivity?
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Measuring coding activity provides insights into work patterns, helps identify d
   
   
   
+  
+  
+  
 
 
 ##  WakaTime
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ WakaTime is the most popular code time tracker with IDE plugins for VS Code, Jet
   
   
   
+  
+  
+  
 
 
 ##  CodeTime
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ CodeTime offers similar functionality with a focus on team metrics. Managers can
   
   
   
+  
+  
+  
 
 
 ##  ActivityWatch
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ ActivityWatch is an open-source alternative that runs locally. It tracks window 
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

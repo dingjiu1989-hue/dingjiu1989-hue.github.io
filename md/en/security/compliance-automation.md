@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/compliance-automation.html
   
 
 
+# Compliance Automation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Automate Compliance? 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Manual compliance is slow, error-prone, and unsustainable. Automation provides c
   
   
   
+  
+  
+  
 
 
 CIS Benchmark Scanning 
@@ -164,10 +196,16 @@ CIS Benchmark Scanning
   
   
   
+  
+  
+  
 
 
 Automate CIS benchmark checks across infrastructure: 
 
+  
+  
+  
   
   
   
@@ -210,6 +248,9 @@ Automate CIS benchmark checks across infrastructure:
   
   
   
+  
+  
+  
 
 
 benchmarks:
@@ -233,10 +274,16 @@ benchmarks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "CIS AWS Foundations Benchmark v3.0"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "CIS AWS Foundations Benchmark v3.0"
 
+  
+  
+  
   
   
   
@@ -279,6 +326,9 @@ scope: "account"
   
   
   
+  
+  
+  
 
 
 checks:
@@ -302,10 +352,16 @@ checks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "1.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "1.1"
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ title: "Avoid using root account"
   
   
   
+  
+  
+  
 
 
 command: "aws iam get-account-summary | jq '.SummaryMap.AccountAccessKeysPresent'"
 
+  
+  
+  
   
   
   
@@ -394,6 +456,9 @@ expected: "0"
   
   
   
+  
+  
+  
 
 
 severity: "critical"
@@ -417,10 +482,16 @@ severity: "critical"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "1.3"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "1.3"
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ title: "Ensure MFA for root account"
   
   
   
+  
+  
+  
 
 
 command: "aws iam get-account-summary | jq '.SummaryMap.AccountMFAEnabled'"
 
+  
+  
+  
   
   
   
@@ -509,6 +586,9 @@ expected: "1"
   
   
   
+  
+  
+  
 
 
 severity: "critical"
@@ -532,10 +612,16 @@ severity: "critical"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "2.1"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "2.1"
 
+  
+  
+  
   
   
   
@@ -578,10 +664,16 @@ title: "Enable CloudTrail in all regions"
   
   
   
+  
+  
+  
 
 
 command: "aws cloudtrail describe-trails --query 'trailList[*].IsMultiRegionTrail'"
 
+  
+  
+  
   
   
   
@@ -624,10 +716,16 @@ expected: "[true]"
   
   
   
+  
+  
+  
 
 
 severity: "high"
 
+  
+  
+  
   
   
   
@@ -670,10 +768,16 @@ severity: "high"
   
   
   
+  
+  
+  
 
 
 import subprocess
 
+  
+  
+  
   
   
   
@@ -716,10 +820,16 @@ import json
   
   
   
+  
+  
+  
 
 
 class CISChecker:
 
+  
+  
+  
   
   
   
@@ -762,10 +872,16 @@ def __init__(self, config):
   
   
   
+  
+  
+  
 
 
 self.checks = config["checks"]
 
+  
+  
+  
   
   
   
@@ -808,10 +924,16 @@ self.results = []
   
   
   
+  
+  
+  
 
 
 def run_checks(self):
 
+  
+  
+  
   
   
   
@@ -854,10 +976,16 @@ for check in self.checks:
   
   
   
+  
+  
+  
 
 
 result = self.run_single_check(check)
 
+  
+  
+  
   
   
   
@@ -900,10 +1028,16 @@ self.results.append(result)
   
   
   
+  
+  
+  
 
 
 return self.generate_report()
 
+  
+  
+  
   
   
   
@@ -946,10 +1080,16 @@ def run_single_check(self, check):
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -992,10 +1132,16 @@ output = subprocess.check_output(
   
   
   
+  
+  
+  
 
 
 check["command"], shell=True, text=True
 
+  
+  
+  
   
   
   
@@ -1038,10 +1184,16 @@ check["command"], shell=True, text=True
   
   
   
+  
+  
+  
 
 
 passed = output == check["expected"]
 
+  
+  
+  
   
   
   
@@ -1084,6 +1236,9 @@ return {
   
   
   
+  
+  
+  
 
 
 "id": check["id"],
@@ -1107,10 +1262,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "title": check["title"],
 
+  
+  
+  
   
   
   
@@ -1153,10 +1314,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "severity": check["severity"],
 
+  
+  
+  
   
   
   
@@ -1199,6 +1366,9 @@ return {
   
   
   
+  
+  
+  
 
 
 "expected": check["expected"]
@@ -1222,10 +1392,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1268,10 +1444,16 @@ except subprocess.CalledProcessError:
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -1314,10 +1496,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "title": check["title"],
 
+  
+  
+  
   
   
   
@@ -1360,10 +1548,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "severity": check["severity"],
 
+  
+  
+  
   
   
   
@@ -1406,10 +1600,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1452,10 +1652,16 @@ Automated Remediation
   
   
   
+  
+  
+  
 
 
 def auto_remediate(findings):
 
+  
+  
+  
   
   
   
@@ -1498,10 +1704,16 @@ remediations = {
   
   
   
+  
+  
+  
 
 
 "s3_public_access": lambda: boto3.client("s3control")
 
+  
+  
+  
   
   
   
@@ -1544,10 +1756,16 @@ remediations = {
   
   
   
+  
+  
+  
 
 
 AccountId=ACCOUNT_ID,
 
+  
+  
+  
   
   
   
@@ -1590,10 +1808,16 @@ PublicAccessBlockConfiguration={
   
   
   
+  
+  
+  
 
 
 "BlockPublicAcls": True,
 
+  
+  
+  
   
   
   
@@ -1636,10 +1860,16 @@ PublicAccessBlockConfiguration={
   
   
   
+  
+  
+  
 
 
 "BlockPublicPolicy": True,
 
+  
+  
+  
   
   
   
@@ -1682,6 +1912,9 @@ PublicAccessBlockConfiguration={
   
   
   
+  
+  
+  
 
 
 }
@@ -1705,10 +1938,16 @@ PublicAccessBlockConfiguration={
   
   
   
+  
+  
+  
 
 
 ),
 
+  
+  
+  
   
   
   
@@ -1751,10 +1990,16 @@ PublicAccessBlockConfiguration={
   
   
   
+  
+  
+  
 
 
 boto3.client("ec2").modify_volume(
 
+  
+  
+  
   
   
   
@@ -1797,10 +2042,16 @@ VolumeId=volume_id,
   
   
   
+  
+  
+  
 
 
 Encrypted=True
 
+  
+  
+  
   
   
   
@@ -1843,10 +2094,16 @@ Encrypted=True
   
   
   
+  
+  
+  
 
 
 "cloudtrail_disabled": lambda region:
 
+  
+  
+  
   
   
   
@@ -1889,10 +2146,16 @@ boto3.client("cloudtrail").create_trail(
   
   
   
+  
+  
+  
 
 
 Name="automated-compliance-trail",
 
+  
+  
+  
   
   
   
@@ -1935,10 +2198,16 @@ S3BucketName="compliance-logs-bucket",
   
   
   
+  
+  
+  
 
 
 IsMultiRegionTrail=True,
 
+  
+  
+  
   
   
   
@@ -1981,6 +2250,9 @@ EnableLogFileValidation=True
   
   
   
+  
+  
+  
 
 
 )
@@ -2004,10 +2276,16 @@ EnableLogFileValidation=True
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2050,10 +2328,16 @@ for finding in findings:
   
   
   
+  
+  
+  
 
 
 if finding["auto_remediable"] and finding["severity"] == "critical":
 
+  
+  
+  
   
   
   
@@ -2096,10 +2380,16 @@ action = remediations.get(finding["type"])
   
   
   
+  
+  
+  
 
 
 if action:
 
+  
+  
+  
   
   
   
@@ -2142,10 +2432,16 @@ action()
   
   
   
+  
+  
+  
 
 
 finding["remediated"] = True
 
+  
+  
+  
   
   
   
@@ -2185,10 +2481,16 @@ Compliance Reporting
   
   
   
+  
+  
+  
 
 
 Generate auditor-ready reports: 
 
+  
+  
+  
   
   
   
@@ -2231,10 +2533,16 @@ from jinja2 import Template
   
   
   
+  
+  
+  
 
 
 import markdown
 
+  
+  
+  
   
   
   
@@ -2277,10 +2585,16 @@ def generate_compliance_report(results, framework="CIS AWS v3.0"):
   
   
   
+  
+  
+  
 
 
 summary = {
 
+  
+  
+  
   
   
   
@@ -2323,10 +2637,16 @@ summary = {
   
   
   
+  
+  
+  
 
 
 "timestamp": datetime.utcnow().isoformat(),
 
+  
+  
+  
   
   
   
@@ -2369,10 +2689,16 @@ summary = {
   
   
   
+  
+  
+  
 
 
 "passed": sum(1 for r in results if r["passed"]),
 
+  
+  
+  
   
   
   
@@ -2415,10 +2741,16 @@ summary = {
   
   
   
+  
+  
+  
 
 
 "compliance_score": sum(1 for r in results if r["passed"]) / len(results) * 100
 
+  
+  
+  
   
   
   
@@ -2461,10 +2793,16 @@ summary = {
   
   
   
+  
+  
+  
 
 
 report_md = f"""
 
+  
+  
+  
   
   
   
@@ -2507,10 +2845,16 @@ report_md = f"""
   
   
   
+  
+  
+  
 
 
 **Date:** {summary['timestamp']}
 
+  
+  
+  
   
   
   
@@ -2553,6 +2897,9 @@ report_md = f"""
   
   
   
+  
+  
+  
 
 
 ##  Summary
@@ -2576,33 +2923,16 @@ report_md = f"""
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Total Checks: {summary['total_checks']}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Passed: {summary['passed']}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Total Checks: {summary['total_checks']}
 
+  
+  
+  
   
   
   
@@ -2624,8 +2954,37 @@ report_md = f"""
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Failed: {summary['failed']}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Passed: {summary['passed']}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Failed: {summary['failed']}
+
+  
+  
+  
   
   
   
@@ -2668,10 +3027,16 @@ report_md = f"""
   
   
   
+  
+  
+  
 
 
 """
 
+  
+  
+  
   
   
   
@@ -2714,10 +3079,16 @@ for result in results:
   
   
   
+  
+  
+  
 
 
 if not result["passed"]:
 
+  
+  
+  
   
   
   
@@ -2760,6 +3131,9 @@ report_md += f"""
   
   
   
+  
+  
+  
 
 
 ### {result['id']}: {result['title']}
@@ -2783,33 +3157,16 @@ report_md += f"""
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Severity:** {result['severity']}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Expected:** {result['expected']}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Severity:** {result['severity']}
 
+  
+  
+  
   
   
   
@@ -2831,8 +3188,37 @@ report_md += f"""
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Actual:** {result.get('actual', 'N/A')}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Expected:** {result['expected']}
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- **Actual:** {result.get('actual', 'N/A')}
+
+  
+  
+  
   
   
   
@@ -2875,10 +3261,16 @@ report_md += f"""
   
   
   
+  
+  
+  
 
 
 return markdown.markdown(report_md)
 
+  
+  
+  
   
   
   
@@ -2921,10 +3313,16 @@ Continuous Monitoring
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compliance monitoring dashboard
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compliance monitoring dashboard
 
+  
+  
+  
   
   
   
@@ -2967,10 +3365,16 @@ CREATE VIEW compliance_dashboard AS
   
   
   
+  
+  
+  
 
 
 SELECT 
 
+  
+  
+  
   
   
   
@@ -3013,10 +3417,16 @@ framework,
   
   
   
+  
+  
+  
 
 
 account_id,
 
+  
+  
+  
   
   
   
@@ -3059,10 +3469,16 @@ COUNT(*) as total_controls,
   
   
   
+  
+  
+  
 
 
 SUM(CASE WHEN status = 'passed' THEN 1 ELSE 0 END) as passed,
 
+  
+  
+  
   
   
   
@@ -3105,10 +3521,16 @@ SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
   
   
   
+  
+  
+  
 
 
 ROUND(AVG(CASE WHEN status = 'passed' THEN 100.0 ELSE 0.0 END), 1) as score,
 
+  
+  
+  
   
   
   
@@ -3151,10 +3573,16 @@ MAX(checked_at) as last_checked
   
   
   
+  
+  
+  
 
 
 FROM compliance_checks
 
+  
+  
+  
   
   
   
@@ -3197,6 +3625,9 @@ WHERE checked_at > NOW() - INTERVAL '24 hours'
   
   
   
+  
+  
+  
 
 
 GROUP BY framework, account_id;
@@ -3220,10 +3651,16 @@ GROUP BY framework, account_id;
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

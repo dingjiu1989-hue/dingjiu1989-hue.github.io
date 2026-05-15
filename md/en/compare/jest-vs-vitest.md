@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/compare/jest-vs-vitest.html
   
   
   
+  
+  
+  
+
+
+# Jest vs Vitest: Testing Framework Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Jest and Vitest are JavaScript testing frameworks with similar APIs but different architectures. Jest pioneered the "everything included" testing experience. Vitest leverages Vite for faster execution and better developer experience.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Jest and Vitest are JavaScript testing frameworks with similar APIs but differen
   
   
   
+  
+  
+  
 
 
 Jest runs tests in a Node.js environment with custom module resolution. It transforms files using its own transform pipeline, separate from your build configuration. This means Jest transforms modules again even if Vite or Webpack already did.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Vitest reuses Vite configuration (vite.config.ts). Transform, resolve, and plugi
   
   
   
+  
+  
+  
 
 
 ##  Performance
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Vitest is significantly faster than Jest in most scenarios. For large test suite
   
   
   
+  
+  
+  
 
 
 Vitest's watch mode is notably fast. Changed files and their dependent tests are re-run in milliseconds. Intelligent test filtering minimizes the number of tests re-executed during development.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Vitest's watch mode is notably fast. Changed files and their dependent tests are
   
   
   
+  
+  
+  
 
 
 Vitest is API-compatible with Jest. Most Jest tests work with Vitest without changes. Jest globals (describe, it, expect, jest.fn) are available. Vitest adds features like native TypeScript support, ES module handling, and Vite plugins.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Migration from Jest to Vitest is straightforward. Replace jest with vitest in pa
   
   
   
+  
+  
+  
 
 
 ##  Features
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Jest has a mature ecosystem of matchers, reporters, and integrations. Snapshot t
   
   
   
+  
+  
+  
 
 
 Vitest offers some features Jest lacks: built-in TypeScript support (no ts-jest needed), ESM-first module handling, workspace support for monorepos, and inline source maps for better stack traces.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Vitest offers some features Jest lacks: built-in TypeScript support (no ts-jest 
   
   
   
+  
+  
+  
 
 
 Use Vitest for Vite-based projects. The seamless integration and performance benefits are substantial. Use Jest for existing projects with complex Jest configurations or custom Jest environments. For new projects, start with Vitest—it offers a better developer experience with lower configuration overhead.
 
+  
+  
+  
   
   
   

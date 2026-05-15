@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/tool-use-patterns.html
   
 
 
+# Tool Use Patterns: Function Calling, Structured Tools, Multi-Step Reasoning
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Tool use, or function calling, enables LLMs to interact with external systems: q
   
   
   
+  
+  
+  
 
 
 ##  Defining Tools
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Every tool needs a clear schema that the LLM can understand and the application 
   
   
   
+  
+  
+  
 
 
 from openai import OpenAI
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ from pydantic import BaseModel
   
   
   
+  
+  
+  
 
 
 client = OpenAI()
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "function": {
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "description": "Search internal documents by keyword. Returns relevant snippets with metadata.",
 
+  
+  
+  
   
   
   
@@ -494,6 +562,9 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "type": "object",
@@ -520,10 +591,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "type": "string",
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "type": "integer",
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "minimum": 1,
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -832,6 +939,9 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "type": "object",
@@ -858,10 +968,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
   
   
   
@@ -910,6 +1026,9 @@ tools = [
   
   
   
+  
+  
+  
 
 
 "department": {"type": "string"},
@@ -936,29 +1055,6 @@ tools = [
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -988,10 +1084,45 @@ tools = [
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1040,29 +1171,6 @@ tools = [
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1070,6 +1178,38 @@ tools = [
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1096,6 +1236,9 @@ tools = [
 
 }
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ tools = [
   
   
   
+  
+  
+  
 
 
 Key principles: use descriptive parameter names with clear descriptions, set proper type constraints, and provide defaults for optional parameters. The LLM uses these descriptions to decide which tool to call and with what arguments.
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ Key principles: use descriptive parameter names with clear descriptions, set pro
   
   
   
+  
+  
+  
 
 
 The standard pattern is a loop: generate, check for tool calls, execute, and feed results back:
 
+  
+  
+  
   
   
   
@@ -1248,6 +1403,9 @@ def tool_use_loop(messages: list, tools: list, max_turns=10):
   
   
   
+  
+  
+  
 
 
 for turn in range(max_turns):
@@ -1274,10 +1432,16 @@ for turn in range(max_turns):
   
   
   
+  
+  
+  
 
 
 response = client.chat.completions.create(
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ model="gpt-4o",
   
   
   
+  
+  
+  
 
 
 messages=messages,
 
+  
+  
+  
   
   
   
@@ -1378,6 +1548,9 @@ tools=tools,
   
   
   
+  
+  
+  
 
 
 tool_choice="auto",
@@ -1404,10 +1577,16 @@ tool_choice="auto",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ message = response.choices[0].message
   
   
   
+  
+  
+  
 
 
 messages.append(message)
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ if not message.tool_calls:
   
   
   
+  
+  
+  
 
 
 return message.content
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ for tool_call in message.tool_calls:
   
   
   
+  
+  
+  
 
 
 result = execute_tool(tool_call.function.name, tool_call.function.arguments)
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ messages.append({
   
   
   
+  
+  
+  
 
 
 "tool_call_id": tool_call.id,
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ messages.append({
   
   
   
+  
+  
+  
 
 
 "content": str(result),
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ messages.append({
   
   
   
+  
+  
+  
 
 
 return "Max turns reached"
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ def execute_tool(name: str, args_json: str):
   
   
   
+  
+  
+  
 
 
 args = json.loads(args_json)
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ if name == "search_documents":
   
   
   
+  
+  
+  
 
 
 return search_documents(**args)
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ elif name == "calculate":
   
   
   
+  
+  
+  
 
 
 return calculate(**args)
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ raise ValueError(f"Unknown tool: {name}")
   
   
   
+  
+  
+  
 
 
 The LLM sees the tool result as new context and decides whether to call another tool or produce a final answer.
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ The LLM sees the tool result as new context and decides whether to call another 
   
   
   
+  
+  
+  
 
 
 Complex tasks require multiple tool calls where later calls depend on earlier results:
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ def research_workflow(topic: str):
   
   
   
+  
+  
+  
 
 
 messages = [{"role": "user", "content": f"Research {topic} and write a comprehensive summary."}]
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ messages = [{"role": "user", "content": f"Research {topic} and write a comprehen
   
   
   
+  
+  
+  
 
 
 response = client.chat.completions.create(
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"
   
   
   
+  
+  
+  
 
 
 # Step 2: Verify facts using a different source
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ model="gpt-4o", messages=messages, tools=research_tools, tool_choice="auto"
   
   
   
+  
+  
+  
 
 
 # Step 4: Generate the summary
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ return final_summary
   
   
   
+  
+  
+  
 
 
 ##  Structured Tools with Validation
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ Anthropic's tool use API supports structured tool definitions with JSON Schema a
   
   
   
+  
+  
+  
 
 
 import anthropic
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ client = anthropic.Anthropic()
   
   
   
+  
+  
+  
 
 
 response = client.messages.create(
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ model="claude-sonnet-4-20260512",
   
   
   
+  
+  
+  
 
 
 max_tokens=1024,
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 "description": "Get current weather for a location",
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 "type": "object",
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 "location": {"type": "string", "description": "City name"},
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ tools=[
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ messages=[{"role": "user", "content": "What is the weather in Tokyo?"}],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ for block in response.content:
   
   
   
+  
+  
+  
 
 
 if block.type == "tool_use":
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ print(f"Calling {block.name} with {block.input}")
   
   
   
+  
+  
+  
 
 
 ##  Error Handling in Tool Calls
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ Tools fail. Plan for timeouts, invalid arguments, and unexpected responses:
   
   
   
+  
+  
+  
 
 
 def safe_tool_execution(tool_call, timeout=10):
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ try:
   
   
   
+  
+  
+  
 
 
 with Timeout(timeout):
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ result = execute_tool(tool_call.function.name, tool_call.function.arguments)
   
   
   
+  
+  
+  
 
 
 return {"success": True, "result": result}
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ except TimeoutError:
   
   
   
+  
+  
+  
 
 
 return {"success": False, "error": "Tool execution timed out"}
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ except ValueError as e:
   
   
   
+  
+  
+  
 
 
 return {"success": False, "error": f"Invalid arguments: {e}"}
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 return {"success": False, "error": f"Unexpected error: {e}"}
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ When a tool fails, pass the error message back to the LLM so it can retry with c
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

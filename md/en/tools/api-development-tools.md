@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/api-development-tools.html
   
 
 
+# API Development Tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ API development tools are essential for designing, testing, and documenting REST
   
   
   
+  
+  
+  
 
 
 This article compares five API development tools: Postman, Insomnia, Bruno, Hoppscotch, and Swagger UI.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ This article compares five API development tools: Postman, Insomnia, Bruno, Hopp
   
   
   
+  
+  
+  
 
 
 Postman is the most widely used API development platform with over 20 million users. It provides a comprehensive feature set including request building, response inspection, environment management, collection runs, automated testing, API documentation, and monitoring.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Postman's collection runner executes API tests sequentially or with data files. 
   
   
   
+  
+  
+  
 
 
 pm.test("Status code is 200", function () {
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ pm.response.to.have.status(200);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ pm.test("Response time is acceptable", function () {
   
   
   
+  
+  
+  
 
 
 pm.expect(pm.response.responseTime).to.be.below(500);
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ pm.expect(pm.response.responseTime).to.be.below(500);
   
   
   
+  
+  
+  
 
 
 Postman workspaces enable team collaboration with shared collections, environments, mock servers, and monitors. The Postman API allows integrating API tests into CI/CD pipelines via Newman, the command-line collection runner.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Postman's primary drawbacks are its resource-heavy desktop application and the g
   
   
   
+  
+  
+  
 
 
 ##  Insomnia: Lightweight Alternative
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Insomnia, originally open-source and now owned by Kong, provides a streamlined A
   
   
   
+  
+  
+  
 
 
 Insomnia's environment management supports nested variables, secrets referencing, and environment inheritance. The plugin ecosystem adds Git sync, code generation, and custom exporters.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Insomnia's environment management supports nested variables, secrets referencing
   
   
   
+  
+  
+  
 
 
 "base_url": "https://api.example.com",
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ Insomnia's environment management supports nested variables, secrets referencing
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Insomnia's Insomnia Designer supports API design-first workflows using OpenAPI 3
   
   
   
+  
+  
+  
 
 
 The Inso CLI runs Insomnia tests in CI/CD pipelines. Insomnia Sync provides cloud-based collection sharing for team collaboration. The desktop app is noticeably lighter than Postman, providing faster startup and lower memory usage.
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ The Inso CLI runs Insomnia tests in CI/CD pipelines. Insomnia Sync provides clou
   
   
   
+  
+  
+  
 
 
 Bruno is a relatively new open-source API client that takes a unique approach: collections are stored as plain text files in a project repository. This enables Git-based version control for API collections, code reviews for API changes, and transparent diff of collection modifications.
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ my-api-collection/
   
   
   
+  
+  
+  
 
 
 request.bru
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ meta: { name: Get Users, method: GET, type: http, seq: 1 }
   
   
   
+  
+  
+  
 
 
 headers: { Content-Type: application/json }
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ body: none
   
   
   
+  
+  
+  
 
 
 script:
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ pre: []
   
   
   
+  
+  
+  
 
 
 post: []
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ Bruno supports environment variables, scripting (JavaScript), pre-request and po
   
   
   
+  
+  
+  
 
 
 Bruno is ideal for teams prioritizing data sovereignty, Git-based workflow, and API collection versioning. The trade-off is a smaller feature set compared to Postman and a rapidly evolving but less mature ecosystem.
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ Bruno is ideal for teams prioritizing data sovereignty, Git-based workflow, and 
   
   
   
+  
+  
+  
 
 
 Hoppscotch is an open-source, browser-based API development platform. Originally called Postwoman, it provides a lightweight interface for REST, GraphQL, WebSocket, SSE, and Socket.IO requests.
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ Hoppscotch runs entirely in the browser, requiring no installation. It uses serv
   
   
   
+  
+  
+  
 
 
 Hoppscotch supports collections, environment variables, history, and team collaboration through self-hosted instances. The desktop app (Hoppscotch Desktop) is available for offline use.
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ Hoppscotch's strengths are its zero-installation web interface and broad protoco
   
   
   
+  
+  
+  
 
 
 ##  Swagger UI: API Documentation and Testing
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ Swagger UI renders OpenAPI specifications as interactive API documentation. It d
   
   
   
+  
+  
+  
 
 
 Swagger UI is typically embedded in API services or documentation portals. The `swagger-ui` package serves the interface as static files or Docker containers:
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ docker run -p 80:8080 -e SWAGGER_JSON=/tmp/openapi.json -v $(pwd):/tmp swaggerap
   
   
   
+  
+  
+  
 
 
 Swagger UI focuses on API consumers rather than API developers. It is excellent for API documentation and exploratory testing but lacks the development features of dedicated API clients: environment management, scripting, test automation, and CI/CD integration.
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ Swagger UI focuses on API consumers rather than API developers. It is excellent 
   
   
   
+  
+  
+  
 
 
 | Tool | Platform | Protocol Support | Collaboration | CI/CD | Cost |
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ Swagger UI focuses on API consumers rather than API developers. It is excellent 
   
   
   
+  
+  
+  
 
 
 | Postman | Desktop + Web | REST, GraphQL, gRPC, WebSocket | Workspaces | Newman | Freemium |
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ Swagger UI focuses on API consumers rather than API developers. It is excellent 
   
   
   
+  
+  
+  
 
 
 | Bruno | Desktop | REST, GraphQL | Git-based | CLI | Free |
 
+  
+  
+  
   
   
   
@@ -1482,6 +1664,9 @@ Swagger UI focuses on API consumers rather than API developers. It is excellent 
   
   
   
+  
+  
+  
 
 
 | Swagger UI | Web | REST (OpenAPI) | Shared specs | No | Free |
@@ -1508,10 +1693,16 @@ Swagger UI focuses on API consumers rather than API developers. It is excellent 
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

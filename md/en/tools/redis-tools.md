@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/redis-tools.html
   
 
 
+# Redis Tools: RedisInsight, Redis CLI, Redis Commander
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Redis is one of the most widely used data stores for caching, session management
   
   
   
+  
+  
+  
 
 
 ##  Redis CLI
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ The command-line interface is the most fundamental Redis tool, shipped with ever
   
   
   
+  
+  
+  
 
 
 # Basic commands
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ redis-cli ping # Test connection
   
   
   
+  
+  
+  
 
 
 redis-cli info # Server info and statistics
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ redis-cli monitor # Real-time command monitoring
   
   
   
+  
+  
+  
 
 
 redis-cli --stat # Real-time statistics
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ redis-cli --stat # Real-time statistics
   
   
   
+  
+  
+  
 
 
 redis-cli keys "*" # List all keys (avoid in production!)
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ redis-cli --scan --pattern "session:*" # Safe key scanning
   
   
   
+  
+  
+  
 
 
 redis-cli dbsize # Number of keys in database
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ redis-cli dbsize # Number of keys in database
   
   
   
+  
+  
+  
 
 
 redis-cli type user:123
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ redis-cli get user:123
   
   
   
+  
+  
+  
 
 
 redis-cli hgetall user:123
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ redis-cli smembers "tags:article:456"
   
   
   
+  
+  
+  
 
 
 # Performance debugging
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ redis-cli --bigkeys # Find largest keys
   
   
   
+  
+  
+  
 
 
 redis-cli --hotkeys # Find hottest keys (Redis 7+)
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ redis-cli slowlog get 10 # Last 10 slow commands
   
   
   
+  
+  
+  
 
 
 redis-cli --latency # Connection latency test
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ redis-cli --rdb /tmp/dump.rdb # Generate RDB dump
   
   
   
+  
+  
+  
 
 
 # Cluster mode
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ redis-cli -c cluster nodes
   
   
   
+  
+  
+  
 
 
 redis-cli -c cluster info
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ redis-cli -c cluster info
   
   
   
+  
+  
+  
 
 
 redis-cli --tls --cacert ca.crt --cert client.crt --key client.key
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ redis-cli --tls --cacert ca.crt --cert client.crt --key client.key
   
   
   
+  
+  
+  
 
 
 # Load data from file
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ cat commands.txt | redis-cli --pipe
   
   
   
+  
+  
+  
 
 
 # Generate test data with inline scripting
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ redis-cli --eval script.lua key1 key2 , arg1 arg2
   
   
   
+  
+  
+  
 
 
 ##  RedisInsight
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 **Key features**:
 
+  
+  
+  
   
   
   
@@ -1115,10 +1255,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 * Tree view for structured key navigation
 
+  
+  
+  
   
   
   
@@ -1161,10 +1307,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 * Slow log visualization and analysis
 
+  
+  
+  
   
   
   
@@ -1207,10 +1359,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 * CLI built into the GUI
 
+  
+  
+  
   
   
   
@@ -1253,10 +1411,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 * Redis Stream management and TRIM operations
 
+  
+  
+  
   
   
   
@@ -1305,10 +1469,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 # Download from https://redis.com/redis-enterprise/redis-insight/
 
+  
+  
+  
   
   
   
@@ -1357,10 +1527,16 @@ Redis's official GUI tool for visualization and analysis:
   
   
   
+  
+  
+  
 
 
 docker run -d -p 5540:5540 redis/redisinsight:latest
 
+  
+  
+  
   
   
   
@@ -1409,10 +1585,16 @@ docker run -d -p 5540:5540 redis/redisinsight:latest
   
   
   
+  
+  
+  
 
 
 **Workbench** for advanced querying:
 
+  
+  
+  
   
   
   
@@ -1461,36 +1643,16 @@ docker run -d -p 5540:5540 redis/redisinsight:latest
   
   
   
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Multi-line queries with Ctrl+Enter
 
+  
+  
+  
   
   
   
@@ -1515,7 +1677,7 @@ docker run -d -p 5540:5540 redis/redisinsight:latest
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Query history with search
 
   
   
@@ -1539,10 +1701,45 @@ docker run -d -p 5540:5540 redis/redisinsight:latest
   
   
   
+  
+  
+  
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Result visualization (JSON, Table, Raw)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Command autocomplete
+
+  
+  
+  
   
   
   
@@ -1591,10 +1788,16 @@ docker run -d -p 5540:5540 redis/redisinsight:latest
   
   
   
+  
+  
+  
 
 
 MEMORY DOCTOR # Get memory optimization suggestions
 
+  
+  
+  
   
   
   
@@ -1643,10 +1846,16 @@ MEMORY USAGE user:123 # Memory used by a specific key
   
   
   
+  
+  
+  
 
 
 MEMORY STATS # Overall memory statistics
 
+  
+  
+  
   
   
   
@@ -1695,10 +1904,16 @@ MEMORY STATS # Overall memory statistics
   
   
   
+  
+  
+  
 
 
 SLOWLOG GET 20 # Most recent slow commands
 
+  
+  
+  
   
   
   
@@ -1747,10 +1962,16 @@ CLIENT LIST # Connected clients and their queries
   
   
   
+  
+  
+  
 
 
 INFO COMMANDSTATS # Command execution statistics
 
+  
+  
+  
   
   
   
@@ -1799,10 +2020,16 @@ INFO COMMANDSTATS # Command execution statistics
   
   
   
+  
+  
+  
 
 
 ##  Redis Commander
 
+  
+  
+  
   
   
   
@@ -1851,10 +2078,16 @@ A web-based Redis management tool built with Node.js:
   
   
   
+  
+  
+  
 
 
 # Install globally
 
+  
+  
+  
   
   
   
@@ -1903,10 +2136,16 @@ npm install -g redis-commander
   
   
   
+  
+  
+  
 
 
 # Start with default settings
 
+  
+  
+  
   
   
   
@@ -1955,10 +2194,16 @@ redis-commander
   
   
   
+  
+  
+  
 
 
 # With custom configuration
 
+  
+  
+  
   
   
   
@@ -2007,10 +2252,16 @@ redis-commander --redis-host redis.example.com --redis-port 6379
   
   
   
+  
+  
+  
 
 
 redis-commander --redis-password yourpassword
 
+  
+  
+  
   
   
   
@@ -2059,10 +2310,16 @@ redis-commander --redis-password yourpassword
   
   
   
+  
+  
+  
 
 
 docker run -d -p 8081:8081 rediscommander/redis-commander:latest
 
+  
+  
+  
   
   
   
@@ -2111,10 +2368,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 // Custom configuration
 
+  
+  
+  
   
   
   
@@ -2163,10 +2426,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 "redis": {
 
+  
+  
+  
   
   
   
@@ -2215,10 +2484,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 "port": 6379,
 
+  
+  
+  
   
   
   
@@ -2267,10 +2542,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 "db": 0
 
+  
+  
+  
   
   
   
@@ -2319,10 +2600,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 "server": {
 
+  
+  
+  
   
   
   
@@ -2371,6 +2658,9 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 "address": "0.0.0.0"
@@ -2397,29 +2687,6 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2427,6 +2694,38 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2475,10 +2774,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 * Tree-based key browser with auto-refresh
 
+  
+  
+  
   
   
   
@@ -2521,10 +2826,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 * Terminal/CLI panel
 
+  
+  
+  
   
   
   
@@ -2567,6 +2878,9 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 * Lightweight and simple UI
@@ -2590,10 +2904,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 * Connection to multiple Redis instances
 
+  
+  
+  
   
   
   
@@ -2642,10 +2962,16 @@ docker run -d -p 8081:8081 rediscommander/redis-commander:latest
   
   
   
+  
+  
+  
 
 
 # Install via gem
 
+  
+  
+  
   
   
   
@@ -2694,10 +3020,16 @@ gem install redis-stat
   
   
   
+  
+  
+  
 
 
 # Run monitoring dashboard
 
+  
+  
+  
   
   
   
@@ -2746,10 +3078,16 @@ redis-stat --server=6379 1 # 1 second refresh interval
   
   
   
+  
+  
+  
 
 
 # Run on headless server
 
+  
+  
+  
   
   
   
@@ -2798,10 +3136,16 @@ redis-stat --daemon --server=redis:6379 5
   
   
   
+  
+  
+  
 
 
 ##  Production Usage
 
+  
+  
+  
   
   
   
@@ -2850,10 +3194,16 @@ redis-stat --daemon --server=redis:6379 5
   
   
   
+  
+  
+  
 
 
 # Redis production health check script
 
+  
+  
+  
   
   
   
@@ -2902,10 +3252,16 @@ echo "=== Redis Health Check ==="
   
   
   
+  
+  
+  
 
 
 echo ""
 
+  
+  
+  
   
   
   
@@ -2954,10 +3310,16 @@ echo ""
   
   
   
+  
+  
+  
 
 
 echo "Ping: $(redis-cli ping)"
 
+  
+  
+  
   
   
   
@@ -3006,10 +3368,16 @@ echo "Ping: $(redis-cli ping)"
   
   
   
+  
+  
+  
 
 
 MEM=$(redis-cli info memory | grep "used_memory_human" | cut -d: -f2)
 
+  
+  
+  
   
   
   
@@ -3058,10 +3426,16 @@ MAXMEM=$(redis-cli info memory | grep "maxmemory_human" | cut -d: -f2)
   
   
   
+  
+  
+  
 
 
 echo "Memory: $MEM / $MAXMEM"
 
+  
+  
+  
   
   
   
@@ -3110,10 +3484,16 @@ echo "Memory: $MEM / $MAXMEM"
   
   
   
+  
+  
+  
 
 
 KEYS=$(redis-cli dbsize)
 
+  
+  
+  
   
   
   
@@ -3162,10 +3542,16 @@ echo "Total keys: $KEYS"
   
   
   
+  
+  
+  
 
 
 # Connected clients
 
+  
+  
+  
   
   
   
@@ -3214,10 +3600,16 @@ CLIENTS=$(redis-cli info clients | grep "connected_clients" | cut -d: -f2)
   
   
   
+  
+  
+  
 
 
 echo "Clients: $CLIENTS"
 
+  
+  
+  
   
   
   
@@ -3266,10 +3658,16 @@ echo "Clients: $CLIENTS"
   
   
   
+  
+  
+  
 
 
 OPS=$(redis-cli info stats | grep "instantaneous_ops_per_sec" | cut -d: -f2)
 
+  
+  
+  
   
   
   
@@ -3318,10 +3716,16 @@ echo "Operations/sec: $OPS"
   
   
   
+  
+  
+  
 
 
 # Hit rate
 
+  
+  
+  
   
   
   
@@ -3370,10 +3774,16 @@ HITS=$(redis-cli info stats | grep "keyspace_hits" | cut -d: -f2)
   
   
   
+  
+  
+  
 
 
 MISSES=$(redis-cli info stats | grep "keyspace_misses" | cut -d: -f2)
 
+  
+  
+  
   
   
   
@@ -3422,10 +3832,16 @@ if [ "$HITS" -gt 0 ] || [ "$MISSES" -gt 0 ]; then
   
   
   
+  
+  
+  
 
 
 RATE=$(echo "scale=2; $HITS / ($HITS + $MISSES) * 100" | bc)
 
+  
+  
+  
   
   
   
@@ -3474,10 +3890,16 @@ echo "Hit rate: ${RATE}%"
   
   
   
+  
+  
+  
 
 
 fi
 
+  
+  
+  
   
   
   
@@ -3526,10 +3948,16 @@ fi
   
   
   
+  
+  
+  
 
 
 | Tool | Type | Best For | Complexity |
 
+  
+  
+  
   
   
   
@@ -3578,10 +4006,16 @@ fi
   
   
   
+  
+  
+  
 
 
 | Redis CLI | CLI | Quick operations, scripting | Low |
 
+  
+  
+  
   
   
   
@@ -3630,10 +4064,16 @@ fi
   
   
   
+  
+  
+  
 
 
 | Redis Commander | Web GUI | Lightweight management | Low |
 
+  
+  
+  
   
   
   
@@ -3682,10 +4122,16 @@ fi
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -3731,10 +4177,16 @@ fi
   
   
   
+  
+  
+  
 
 
 * **Data exploration**: RedisInsight for browsing keys, visualizing data, and memory optimization.
 
+  
+  
+  
   
   
   
@@ -3777,6 +4229,9 @@ fi
   
   
   
+  
+  
+  
 
 
 * **Production monitoring**: redis-stat for real-time dashboards, RedisInsight for deep memory analysis.
@@ -3800,10 +4255,16 @@ fi
   
   
   
+  
+  
+  
 
 
 * **Performance debugging**: Slow log analysis in Redis CLI or RedisInsight, big keys analysis.
 
+  
+  
+  
   
   
   

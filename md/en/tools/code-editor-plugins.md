@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/code-editor-plugins.html
   
 
 
+# Code Editor Plugins: Must-Have Extensions for Productivity
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ The right set of editor extensions can transform your development workflow. The 
   
   
   
+  
+  
+  
 
 
 ##  AI Assistants
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 **VS Code:**
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 * **Codeium**: Free alternative with no usage limits. Supports 70+ languages.
 
+  
+  
+  
   
   
   
@@ -332,10 +382,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -384,10 +440,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 "*": true,
 
+  
+  
+  
   
   
   
@@ -436,10 +498,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 "markdown": false
 
+  
+  
+  
   
   
   
@@ -488,10 +556,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 "github.copilot.editor.enableAutoCompletions": true,
 
+  
+  
+  
   
   
   
@@ -540,10 +614,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -592,10 +672,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 * **JetBrains AI Assistant**: Deep IDE integration with project-aware context.
 
+  
+  
+  
   
   
   
@@ -638,10 +724,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 * **AWS CodeWhisperer**: Free, good for AWS-related development.
 
+  
+  
+  
   
   
   
@@ -690,10 +782,16 @@ AI coding assistants have become indispensable:
   
   
   
+  
+  
+  
 
 
 Extended beyond basic syntax highlighting:
 
+  
+  
+  
   
   
   
@@ -739,10 +837,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 * **Even Better TOML**: TOML file support with validation.
 
+  
+  
+  
   
   
   
@@ -785,10 +889,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 * **Biome**: Linter and formatter for JavaScript/TypeScript (replaces ESLint + Prettier).
 
+  
+  
+  
   
   
   
@@ -834,10 +944,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -886,10 +1002,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 "errorLens.fontStyleItalic": true,
 
+  
+  
+  
   
   
   
@@ -938,6 +1060,9 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 "errorLens.enabledDiagnosticLevels": ["error", "warning"]
@@ -964,10 +1089,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1016,10 +1147,16 @@ Extended beyond basic syntax highlighting:
   
   
   
+  
+  
+  
 
 
 Version control becomes seamless with these plugins:
 
+  
+  
+  
   
   
   
@@ -1065,10 +1202,16 @@ Version control becomes seamless with these plugins:
   
   
   
+  
+  
+  
 
 
 * **Git Graph**: Interactive git history visualization and branch management.
 
+  
+  
+  
   
   
   
@@ -1111,10 +1254,16 @@ Version control becomes seamless with these plugins:
   
   
   
+  
+  
+  
 
 
 * **Conventional Commits**: Standardized commit message format support.
 
+  
+  
+  
   
   
   
@@ -1163,10 +1312,16 @@ Version control becomes seamless with these plugins:
   
   
   
+  
+  
+  
 
 
 Run and debug tests without leaving your editor:
 
+  
+  
+  
   
   
   
@@ -1212,10 +1367,16 @@ Run and debug tests without leaving your editor:
   
   
   
+  
+  
+  
 
 
 * **Live Preview**: Debug frontend tests with real-time browser preview.
 
+  
+  
+  
   
   
   
@@ -1258,10 +1419,16 @@ Run and debug tests without leaving your editor:
   
   
   
+  
+  
+  
 
 
 * **Coverage Gutters**: Display test coverage highlights in the editor gutter.
 
+  
+  
+  
   
   
   
@@ -1310,10 +1477,16 @@ Run and debug tests without leaving your editor:
   
   
   
+  
+  
+  
 
 
 These plugins save time on daily tasks:
 
+  
+  
+  
   
   
   
@@ -1359,10 +1532,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 * **Path Intellisense**: Auto-complete file paths when importing modules.
 
+  
+  
+  
   
   
   
@@ -1405,10 +1584,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 * **Todo Tree**: Search and organize TODO, FIXME, and HACK comments.
 
+  
+  
+  
   
   
   
@@ -1451,10 +1636,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 * **Project Manager**: Switch between projects with saved window states.
 
+  
+  
+  
   
   
   
@@ -1503,10 +1694,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 "todotree.autoReload": true,
 
+  
+  
+  
   
   
   
@@ -1555,10 +1752,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 "todotree.highlightStyle": "badge"
 
+  
+  
+  
   
   
   
@@ -1607,10 +1810,16 @@ These plugins save time on daily tasks:
   
   
   
+  
+  
+  
 
 
 ##  Theme and Visual
 
+  
+  
+  
   
   
   
@@ -1659,10 +1868,16 @@ A pleasant visual environment reduces eye strain:
   
   
   
+  
+  
+  
 
 
 * **One Dark Pro**: Popular dark theme based on Atom's design.
 
+  
+  
+  
   
   
   
@@ -1705,10 +1920,16 @@ A pleasant visual environment reduces eye strain:
   
   
   
+  
+  
+  
 
 
 * **Material Icon Theme**: Clean file type icons for the explorer panel.
 
+  
+  
+  
   
   
   
@@ -1751,10 +1972,16 @@ A pleasant visual environment reduces eye strain:
   
   
   
+  
+  
+  
 
 
 * **Indent Rainbow**: Color-code indentation levels for easier reading.
 
+  
+  
+  
   
   
   
@@ -1803,10 +2030,16 @@ A pleasant visual environment reduces eye strain:
   
   
   
+  
+  
+  
 
 
 **Minimal setup** (performance focused):
 
+  
+  
+  
   
   
   
@@ -1855,10 +2088,16 @@ VS Code + GitLens + Error Lens + AI Assistant + Language-specific support
   
   
   
+  
+  
+  
 
 
 **Full productivity setup**:
 
+  
+  
+  
   
   
   
@@ -1907,6 +2146,9 @@ Add Todo Tree, Import Cost, Test Explorer, Project Manager, Bookmarks, Path Inte
   
   
   
+  
+  
+  
 
 
 **Never install**: Multiple large language extensions if you only use one language. Remove unused extensions quarterly. Each extension adds startup time and memory usage.
@@ -1933,10 +2175,16 @@ Add Todo Tree, Import Cost, Test Explorer, Project Manager, Bookmarks, Path Inte
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

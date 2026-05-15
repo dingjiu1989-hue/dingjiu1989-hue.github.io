@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-caching-deep.html
   
 
 
+# LLM Caching: Semantic Cache, Exact Match, TTL, Invalidation Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ LLM API calls are expensive, both in cost and latency. Caching previously genera
   
   
   
+  
+  
+  
 
 
 ##  Exact Match Cache
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ The simplest cache: identical inputs produce identical outputs:
   
   
   
+  
+  
+  
 
 
 import hashlib
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import json
   
   
   
+  
+  
+  
 
 
 from functools import lru_cache
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ class ExactMatchCache:
   
   
   
+  
+  
+  
 
 
 def __init__(self, ttl_seconds: int = 3600):
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ self.cache = {}
   
   
   
+  
+  
+  
 
 
 self.ttl = ttl_seconds
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ def _make_key(self, messages: list[dict], model: str, params: dict) -> str:
   
   
   
+  
+  
+  
 
 
 canonical = json.dumps({
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ canonical = json.dumps({
   
   
   
+  
+  
+  
 
 
 "model": model,
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ canonical = json.dumps({
   
   
   
+  
+  
+  
 
 
 "max_tokens": params.get("max_tokens"),
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ canonical = json.dumps({
   
   
   
+  
+  
+  
 
 
 return hashlib.sha256(canonical.encode()).hexdigest()
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ def get(self, messages: list[dict], model: str, params: dict) -> str | None:
   
   
   
+  
+  
+  
 
 
 key = self._make_key(messages, model, params)
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ if key in self.cache:
   
   
   
+  
+  
+  
 
 
 entry = self.cache[key]
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ if time.time() - entry["timestamp"] < self.ttl:
   
   
   
+  
+  
+  
 
 
 return entry["response"]
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ else:
   
   
   
+  
+  
+  
 
 
 del self.cache[key]
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ return None
   
   
   
+  
+  
+  
 
 
 def set(self, messages: list[dict], model: str, params: dict, response: str):
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ key = self._make_key(messages, model, params)
   
   
   
+  
+  
+  
 
 
 self.cache[key] = {"response": response, "timestamp": time.time()}
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ Exact match works well when identical questions recur: FAQs, repeated classifica
   
   
   
+  
+  
+  
 
 
 ##  Semantic Cache
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ Semantic caching returns cached responses for semantically equivalent questions:
   
   
   
+  
+  
+  
 
 
 import numpy as np
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ from sklearn.metrics.pairwise import cosine_similarity
   
   
   
+  
+  
+  
 
 
 class SemanticCache:
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ def __init__(self, embedding_fn, similarity_threshold: float = 0.92):
   
   
   
+  
+  
+  
 
 
 self.embedding = embedding_fn
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ self.threshold = similarity_threshold
   
   
   
+  
+  
+  
 
 
 self.cache_entries: list[dict] = []
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ def get(self, query: str) -> str | None:
   
   
   
+  
+  
+  
 
 
 query_emb = self.embedding(query)
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ for entry in self.cache_entries:
   
   
   
+  
+  
+  
 
 
 similarity = cosine_similarity([query_emb], [entry["embedding"]])[0][0]
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ if similarity >= self.threshold:
   
   
   
+  
+  
+  
 
 
 entry["access_count"] += 1
 
+  
+  
+  
   
   
   
@@ -1378,6 +1548,9 @@ entry["last_accessed"] = time.time()
   
   
   
+  
+  
+  
 
 
 return entry["response"]
@@ -1404,10 +1577,16 @@ return entry["response"]
   
   
   
+  
+  
+  
 
 
 return None
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ def set(self, query: str, response: str):
   
   
   
+  
+  
+  
 
 
 entry = {
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "embedding": self.embedding(query),
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "created_at": time.time(),
 
+  
+  
+  
   
   
   
@@ -1612,6 +1809,9 @@ entry = {
   
   
   
+  
+  
+  
 
 
 "last_accessed": time.time(),
@@ -1638,10 +1838,16 @@ entry = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ self.cache_entries.append(entry)
   
   
   
+  
+  
+  
 
 
 def evict_lru(self, max_entries: int = 10000):
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ if len(self.cache_entries) > max_entries:
   
   
   
+  
+  
+  
 
 
 self.cache_entries.sort(key=lambda e: e["last_accessed"])
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ self.cache_entries = self.cache_entries[-max_entries:]
   
   
   
+  
+  
+  
 
 
 The similarity threshold controls the precision-recall tradeoff. A threshold of 0.95 is safe but rarely matches. A threshold of 0.85 catches more queries but risks returning irrelevant cached responses. Test on your specific query distribution.
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ The similarity threshold controls the precision-recall tradeoff. A threshold of 
   
   
   
+  
+  
+  
 
 
 Combine both strategies for maximum coverage:
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ class TwoLevelLLMCache:
   
   
   
+  
+  
+  
 
 
 def __init__(self, embedding_fn):
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ self.exact = ExactMatchCache(ttl_seconds=7200)
   
   
   
+  
+  
+  
 
 
 self.semantic = SemanticCache(embedding_fn, similarity_threshold=0.92)
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ def get(self, messages: list[dict], model: str, params: dict) -> str | None:
   
   
   
+  
+  
+  
 
 
 # Try exact match first (fast, no embedding computation)
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ exact_result = self.exact.get(messages, model, params)
   
   
   
+  
+  
+  
 
 
 if exact_result:
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ return exact_result
   
   
   
+  
+  
+  
 
 
 # Try semantic match for the last user message
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ last_user_msg = self._get_last_user_message(messages)
   
   
   
+  
+  
+  
 
 
 if last_user_msg:
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ semantic_result = self.semantic.get(last_user_msg)
   
   
   
+  
+  
+  
 
 
 if semantic_result:
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ return semantic_result
   
   
   
+  
+  
+  
 
 
 return None
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ def set(self, messages: list[dict], model: str, params: dict, response: str):
   
   
   
+  
+  
+  
 
 
 self.exact.set(messages, model, params, response)
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ last_user_msg = self._get_last_user_message(messages)
   
   
   
+  
+  
+  
 
 
 if last_user_msg:
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ self.semantic.set(last_user_msg, response)
   
   
   
+  
+  
+  
 
 
 ##  TTL and Invalidation
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ Different cache entries need different expiration policies:
   
   
   
+  
+  
+  
 
 
 class TTLManager:
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 # Different TTLs for different content types
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ self.ttl_config = {
   
   
   
+  
+  
+  
 
 
 "classification": 86400 * 30, # 30 days (stable task)
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ self.ttl_config = {
   
   
   
+  
+  
+  
 
 
 "summarization": 3600, # 1 hour (content changes)
 
+  
+  
+  
   
   
   
@@ -2678,6 +2998,9 @@ self.ttl_config = {
   
   
   
+  
+  
+  
 
 
 "factual_qa": 86400, # 1 day (may become stale)
@@ -2704,10 +3027,16 @@ self.ttl_config = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ def get_ttl(self, task_type: str) -> int:
   
   
   
+  
+  
+  
 
 
 return self.ttl_config.get(task_type, 3600)
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ def invalidate_by_prefix(self, prefix: str):
   
   
   
+  
+  
+  
 
 
 """Invalidate cache entries matching a prefix pattern."""
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ def invalidate_by_prefix(self, prefix: str):
   
   
   
+  
+  
+  
 
 
 pass
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ def invalidate_all(self):
   
   
   
+  
+  
+  
 
 
 """Emergency invalidation."""
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ pass
   
   
   
+  
+  
+  
 
 
 ##  Cache-Aware Application Design
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ Structure your application to maximize cache hits:
   
   
   
+  
+  
+  
 
 
 class CacheAwareLLMClient:
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ def __init__(self, cache: TwoLevelLLMCache, llm_fn):
   
   
   
+  
+  
+  
 
 
 self.cache = cache
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ self.llm = llm_fn
   
   
   
+  
+  
+  
 
 
 async def generate(self, task_type: str, messages: list[dict], model: str, params: dict) -> str:
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ async def generate(self, task_type: str, messages: list[dict], model: str, param
   
   
   
+  
+  
+  
 
 
 cached = self.cache.get(messages, model, params)
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ if cached:
   
   
   
+  
+  
+  
 
 
 return cached
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ return cached
   
   
   
+  
+  
+  
 
 
 response = await self.llm(messages, model, params)
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ response = await self.llm(messages, model, params)
   
   
   
+  
+  
+  
 
 
 self.cache.set(messages, model, params, response)
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ return response
   
   
   
+  
+  
+  
 
 
 ##  Cache Hit Rate Optimization
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ class CacheAnalytics:
   
   
   
+  
+  
+  
 
 
 def track_hit_rate(self):
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ def track_hit_rate(self):
   
   
   
+  
+  
+  
 
 
 metrics = {
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ metrics = {
   
   
   
+  
+  
+  
 
 
 "semantic_hits": 0,
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ metrics = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ metrics = {
   
   
   
+  
+  
+  
 
 
 if metrics["semantic_hits"] > 0 and user_feedback_score < 0.8:
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ self.semantic.threshold += 0.02 # Be more conservative
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

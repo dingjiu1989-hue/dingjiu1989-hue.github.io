@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/ansible-automation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2595",
+      "wordCount": "2879",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/ansible-automation.html"},
-      "articleBody": "Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Introduction Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure. This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning. Playbooks: The Heart of Automation Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers hosts: webservers become: yes tasks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx apt: name: nginx state: present \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running service: name: nginx state: started enabled: yes Playbooks support conditionals with `when`, loops with `loop`, and error handling with `block`, `rescue`, and `always` \u2014 a pattern borrowed from programming languages. Handlers provide a mechanism to run tasks only when notified by changes, such as restarting a service after a configuration file change. Roles: Organizing Reusable Automation Roles are the recommended way to structure Ansible content. A role encapsulates tasks, handlers, variables, templates, and files into a reusable directory structure: roles/ nginx/ tasks/main.yml handlers/main.yml templates/nginx.conf.j2 vars/main.yml defaults/main.yml meta/main.yml Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. Using `ansible-galaxy role install` in conjunction with a `requirements.yml` file allows teams to pin role versions, similar to dependency management in other ecosystems. Inventory Management Ansible inventory defines the hosts and groups that playbooks target. Static inventories are simple INI or YAML files, but dynamic inventories are far more powerful in cloud environments. all: children: webservers: hosts: web1: ansible_host: 192.168.1.10 web2: ansible_host: 192.168.1.11 databases: hosts: db1: ansible_host: 192.168.1.20 Dynamic inventory scripts query cloud provider APIs (AWS EC2, GCP Compute, Azure VMs) or configuration management databases (CMDB) to generate inventory on the fly. AWS EC2 inventory supports filtering by tags, regions, and instance states. Ansible also supports inventory plugins, which are the modern replacement for legacy inventory scripts. Ansible Vault: Secrets Management Ansible Vault encrypts sensitive data such as passwords, API keys, and certificates. Vault supports encrypting individual variables within a playbook or entire files. The `ansible-vault` command-line tool provides encrypt, decrypt, rekey, and view operations. Vault IDs allow multiple passwords for different environments: `ansible-vault encrypt --vault-id prod@prompt secrets.yml`. This is crucial for teams managing separate development, staging, and production vault passwords. Idempotency in Ansible Idempotency means running the same playbook multiple times produces the same result without unintended side effects. Most Ansible modules are idempotent by design. The `apt` module, for example, only installs a package if it is not already present. The `copy` module only transfers a file if the source differs from the destination. Testing idempotency is a best practice. Tools like `molecule` allow running playbooks against Docker containers or VMs and verifying that the second run produces no changes. Ansible vs. Terraform While both tools are essential in modern infrastructure, they serve different purposes. Terraform is declarative and focused on infrastructure provisioning \u2014 creating, modifying, and destroying cloud resources such as VPCs, load balancers, and databases. Ansible is procedural and focused on configuration management \u2014 installing software, configuring services, and deploying applications. Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible). Conclusion Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/ansible-automation-playbooks-roles-inventory-and-vault-1cl6"
+      ],
+      "articleBody": "Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Ansible Automation: Playbooks, Roles, Inventory, and Vault Introduction Ansible has become one of the most widely adopted configuration management and automation tools in the DevOps ecosystem. Acquired by Red Hat in 2015, it stands out for its agentless architecture, YAML-based syntax, and push-based execution model. Unlike Puppet or Chef, which require agents installed on managed nodes, Ansible communicates over SSH or WinRM, making it trivial to get started with existing infrastructure. This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning. Playbooks: The Heart of Automation Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers hosts: webservers become: yes tasks: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx apt: name: nginx state: present \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running service: name: nginx state: started enabled: yes Playbooks support conditionals with `when`, loops with `loop`, and error handling with `block`, `rescue`, and `always` \u2014 a pattern borrowed from programming languages. Handlers provide a mechanism to run tasks only when notified by changes, such as restarting a service after a configuration file change. Roles: Organizing Reusable Automation Roles are the recommended way to structure Ansible content. A role encapsulates tasks, handlers, variables, templates, and files into a reusable directory structure: roles/ nginx/ tasks/main.yml handlers/main.yml templates/nginx.conf.j2 vars/main.yml defaults/main.yml meta/main.yml Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. Using `ansible-galaxy role install` in conjunction with a `requirements.yml` file allows teams to pin role versions, similar to dependency management in other ecosystems. Inventory Management Ansible inventory defines the hosts and groups that playbooks target. Static inventories are simple INI or YAML files, but dynamic inventories are far more powerful in cloud environments. all: children: webservers: hosts: web1: ansible_host: 192.168.1.10 web2: ansible_host: 192.168.1.11 databases: hosts: db1: ansible_host: 192.168.1.20 Dynamic inventory scripts query cloud provider APIs (AWS EC2, GCP Compute, Azure VMs) or configuration management databases (CMDB) to generate inventory on the fly. AWS EC2 inventory supports filtering by tags, regions, and instance states. Ansible also supports inventory plugins, which are the modern replacement for legacy inventory scripts. Ansible Vault: Secrets Management Ansible Vault encrypts sensitive data such as passwords, API keys, and certificates. Vault supports encrypting individual variables within a playbook or entire files. The `ansible-vault` command-line tool provides encrypt, decrypt, rekey, and view operations. Vault IDs allow multiple passwords for different environments: `ansible-vault encrypt --vault-id prod@prompt secrets.yml`. This is crucial for teams managing separate development, staging, and production vault passwords. Idempotency in Ansible Idempotency means running the same playbook multiple times produces the same result without unintended side effects. Most Ansible modules are idempotent by design. The `apt` module, for example, only installs a package if it is not already present. The `copy` module only transfers a file if the source differs from the destination. Testing idempotency is a best practice. Tools like `molecule` allow running playbooks against Docker containers or VMs and verifying that the second run produces no changes. Ansible vs. Terraform While both tools are essential in modern infrastructure, they serve different purposes. Terraform is declarative and focused on infrastructure provisioning \u2014 creating, modifying, and destroying cloud resources such as VPCs, load balancers, and databases. Ansible is procedural and focused on configuration management \u2014 installing software, configuring services, and deploying applications. Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible). Conclusion Ansible's simplicity and agentless architecture make it an excellent choice for configuration management and automation. Understanding playbooks, roles, dynamic inventory, and vault is essential for effective use. When combined with Terraform for provisioning, Ansible forms a complete infrastructure automation stack suitable for organizations of any size."
     }
     </script>
     <script type="application/ld+json">
@@ -199,7 +202,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Ansible Automation: Playbooks, Roles, Inventory, and Vault </h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction </h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -245,7 +280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -291,6 +332,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module.</p>
 <br>
 <br>
@@ -314,7 +358,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>become: yes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -406,7 +462,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,7 +514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: nginx</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -498,7 +566,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -544,7 +618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: nginx</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -590,7 +670,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>enabled: yes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -636,7 +722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Roles: Organizing Reusable Automation</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -682,7 +774,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>roles/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -728,7 +826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tasks/main.yml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -774,7 +878,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>templates/nginx.conf.j2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -820,7 +930,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>defaults/main.yml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -866,7 +982,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. Using `ansible-galaxy role install` in conjunction with a `requirements.yml` file allows teams to pin role versions, similar to dependency management in other ecosystems.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -912,7 +1034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Ansible inventory defines the hosts and groups that playbooks target. Static inventories are simple INI or YAML files, but dynamic inventories are far more powerful in cloud environments.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>children:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1004,7 +1138,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hosts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1050,7 +1190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ansible_host: 192.168.1.10</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1096,7 +1242,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ansible_host: 192.168.1.11</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1142,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hosts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1188,7 +1346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ansible_host: 192.168.1.20</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1234,7 +1398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Ansible Vault: Secrets Management</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,7 +1450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Vault IDs allow multiple passwords for different environments: `ansible-vault encrypt --vault-id prod@prompt secrets.yml`. This is crucial for teams managing separate development, staging, and production vault passwords.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1326,7 +1502,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Idempotency means running the same playbook multiple times produces the same result without unintended side effects. Most Ansible modules are idempotent by design. The `apt` module, for example, only installs a package if it is not already present. The `copy` module only transfers a file if the source differs from the destination.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1372,7 +1554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Ansible vs. Terraform</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1418,6 +1606,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible).</p>
 <br>
 <br>
@@ -1441,7 +1632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

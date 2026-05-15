@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/ai/fine-tuning-strategies.html
   
   
   
+  
+  
+  
+
+
+# LLM Fine-Tuning Strategies and Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Fine-tuning adapts a pre-trained language model to specific tasks or domains. Different fine-tuning approaches offer trade-offs between customization, cost, and performance.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Fine-tuning adapts a pre-trained language model to specific tasks or domains. Di
   
   
   
+  
+  
+  
 
 
 Full fine-tuning updates all model parameters on domain-specific data. This achieves the highest task performance but requires significant computational resources. Full fine-tuning of a 7B parameter model requires 4-8 GPUs with 80GB memory each.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Full fine-tuning is appropriate for domain adaptation (legal, medical, code) whe
   
   
   
+  
+  
+  
 
 
 ##  LoRA
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Low-Rank Adaptation (LoRA) freezes the original model weights and inserts traina
   
   
   
+  
+  
+  
 
 
 Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation), alpha (scaling factor, typically 2x the rank), target modules (attention projections for most tasks, MLP layers for deeper adaptation). Train multiple LoRA adapters for different tasks from the same base model.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Key hyperparameters: rank (r=8-64 for most tasks, higher for complex adaptation)
   
   
   
+  
+  
+  
 
 
 QLoRA combines 4-bit quantization with LoRA. It quantizes the base model to 4 bits (NF4 format) and trains LoRA adapters at full precision. This enables fine-tuning 65B models on a single 48GB GPU. QLoRA achieves performance within 1% of full fine-tuning on most benchmarks.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Double quantization reduces memory further by quantizing the quantization consta
   
   
   
+  
+  
+  
 
 
 ##  RLHF
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Reinforcement Learning from Human Feedback aligns models with human preferences.
   
   
   
+  
+  
+  
 
 
 RLHF improves helpfulness, reduces harmful outputs, and follows instructions more accurately. The quality of preference data matters more than quantity. DPO (Direct Preference Optimization) simplifies RLHF by treating alignment as a classification problem.
@@ -465,10 +530,16 @@ RLHF improves helpfulness, reduces harmful outputs, and follows instructions mor
   
   
   
+  
+  
+  
 
 
 ##  Data Preparation
 
+  
+  
+  
   
   
   

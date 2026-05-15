@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/soa-vs-microservices.html
   
 
 
+# SOA vs Microservices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Service-Oriented Architecture (SOA) and microservices share the fundamental principle of decomposing systems into independently deployable services, but they differ substantially in scope, granularity, governance, and infrastructure philosophy. Understanding these differences is critical for architects choosing between or integrating both approaches. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Granularity is the most visible distinction. SOA services tend to be coarse-grai
   
   
   
+  
+  
+  
 
 
 Enterprise Service Bus (ESB) is the architectural centerpiece of traditional SOA. The ESB provides message routing, protocol translation, message enhancement, and orchestration. It acts as a smart intermediary that mediates all service interactions. Microservices reject the centralized ESB in favor of a "smart endpoints, dumb pipes" approach. Communication uses lightweight protocols directly between services or through a message broker that handles only transport. The reasoning is that the ESB becomes a single point of failure, a scalability bottleneck, and a monolithic piece of middleware that itself needs to be maintained and scaled. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Governance models differ fundamentally. SOA typically employs centralized govern
   
   
   
+  
+  
+  
 
 
 Data management approaches diverge sharply. SOA often promotes enterprise-wide canonical data models and shared databases. Services interact through complex XML schemas representing standardized business documents. Microservices advocate database-per-service and bounded contexts, where each service owns its data exclusively and communicates through simple, service-specific APIs. No canonical data model exists across service boundaries. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Protocol choices reflect different eras. SOA was built on SOAP, WSDL, and WS-* s
   
   
   
+  
+  
+  
 
 
 Deployment infrastructure also differs. SOA services often ran on enterprise application servers with complex deployment procedures. Microservices assume containerized deployment with orchestration platforms like Kubernetes, enabling automated CI/CD, horizontal scaling, and self-healing. 
 
+  
+  
+  
   
   
   

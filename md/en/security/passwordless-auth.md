@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/passwordless-auth.html
   
 
 
+# Passwordless Authentication
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Passwordless Vision 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Passwords are the weakest link in authentication. Passwordless authentication el
   
   
   
+  
+  
+  
 
 
 WebAuthn and FIDO2 
@@ -164,10 +196,16 @@ WebAuthn and FIDO2
   
   
   
+  
+  
+  
 
 
 Web Authentication (WebAuthn) is a W3C standard for public-key credential authentication: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ Web Authentication (WebAuthn) is a W3C standard for public-key credential authen
   
   
   
+  
+  
+  
 
 
 async function registerPasskey() {
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ const credential = await navigator.credentials.create({
   
   
   
+  
+  
+  
 
 
 publicKey: {
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ challenge: new Uint8Array([/* server-generated challenge */]),
   
   
   
+  
+  
+  
 
 
 rp: {
 
+  
+  
+  
   
   
   
@@ -348,6 +404,9 @@ id: "example.com",
   
   
   
+  
+  
+  
 
 
 name: "Example Corp"
@@ -371,10 +430,16 @@ name: "Example Corp"
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -417,10 +482,16 @@ user: {
   
   
   
+  
+  
+  
 
 
 id: new TextEncoder().encode("user-123"),
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ name: "alice@example.com",
   
   
   
+  
+  
+  
 
 
 displayName: "Alice"
 
+  
+  
+  
   
   
   
@@ -509,10 +586,16 @@ displayName: "Alice"
   
   
   
+  
+  
+  
 
 
 pubKeyCredParams: [
 
+  
+  
+  
   
   
   
@@ -555,10 +638,16 @@ pubKeyCredParams: [
   
   
   
+  
+  
+  
 
 
 { type: "public-key", alg: -257 } // RS256
 
+  
+  
+  
   
   
   
@@ -601,10 +690,16 @@ pubKeyCredParams: [
   
   
   
+  
+  
+  
 
 
 authenticatorSelection: {
 
+  
+  
+  
   
   
   
@@ -647,10 +742,16 @@ authenticatorAttachment: "platform",
   
   
   
+  
+  
+  
 
 
 residentKey: "required",
 
+  
+  
+  
   
   
   
@@ -693,26 +794,6 @@ userVerification: "required"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -720,6 +801,35 @@ userVerification: "required"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -743,6 +853,9 @@ userVerification: "required"
 
 });
 
+  
+  
+  
   
   
   
@@ -785,10 +898,16 @@ userVerification: "required"
   
   
   
+  
+  
+  
 
 
 await fetch("/api/auth/passkey/register", {
 
+  
+  
+  
   
   
   
@@ -831,10 +950,16 @@ method: "POST",
   
   
   
+  
+  
+  
 
 
 body: JSON.stringify({
 
+  
+  
+  
   
   
   
@@ -877,10 +1002,16 @@ id: credential.id,
   
   
   
+  
+  
+  
 
 
 rawId: arrayBufferToBase64(credential.rawId),
 
+  
+  
+  
   
   
   
@@ -923,6 +1054,9 @@ type: credential.type,
   
   
   
+  
+  
+  
 
 
 response: {
@@ -946,10 +1080,16 @@ response: {
   
   
   
+  
+  
+  
 
 
 clientDataJSON: arrayBufferToBase64(credential.response.clientDataJSON),
 
+  
+  
+  
   
   
   
@@ -992,10 +1132,16 @@ attestationObject: arrayBufferToBase64(credential.response.attestationObject)
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1038,6 +1184,9 @@ attestationObject: arrayBufferToBase64(credential.response.attestationObject)
   
   
   
+  
+  
+  
 
 
 });
@@ -1061,10 +1210,16 @@ attestationObject: arrayBufferToBase64(credential.response.attestationObject)
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1107,10 +1262,16 @@ Server-Side Verification
   
   
   
+  
+  
+  
 
 
 from webauthn import generate_registration_options, verify_registration_response
 
+  
+  
+  
   
   
   
@@ -1153,10 +1314,16 @@ from webauthn.helpers.structs import RegistrationCredential
   
   
   
+  
+  
+  
 
 
 def start_registration(user):
 
+  
+  
+  
   
   
   
@@ -1199,10 +1366,16 @@ options = generate_registration_options(
   
   
   
+  
+  
+  
 
 
 rp_id="example.com",
 
+  
+  
+  
   
   
   
@@ -1245,10 +1418,16 @@ rp_name="Example Corp",
   
   
   
+  
+  
+  
 
 
 user_id=str(user.id).encode(),
 
+  
+  
+  
   
   
   
@@ -1291,6 +1470,9 @@ user_name=user.email,
   
   
   
+  
+  
+  
 
 
 user_display_name=user.name
@@ -1314,10 +1496,16 @@ user_display_name=user.name
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1360,10 +1548,16 @@ user_display_name=user.name
   
   
   
+  
+  
+  
 
 
 cache.set(f"webauthn:challenge:{user.id}", options.challenge, time=300)
 
+  
+  
+  
   
   
   
@@ -1406,10 +1600,16 @@ return options
   
   
   
+  
+  
+  
 
 
 def complete_registration(user, credential_data):
 
+  
+  
+  
   
   
   
@@ -1452,10 +1652,16 @@ credential = RegistrationCredential(
   
   
   
+  
+  
+  
 
 
 id=credential_data["id"],
 
+  
+  
+  
   
   
   
@@ -1498,10 +1704,16 @@ raw_id=credential_data["rawId"],
   
   
   
+  
+  
+  
 
 
 type=credential_data["type"],
 
+  
+  
+  
   
   
   
@@ -1544,10 +1756,16 @@ response={
   
   
   
+  
+  
+  
 
 
 "client_data_json": credential_data["response"]["clientDataJSON"],
 
+  
+  
+  
   
   
   
@@ -1590,6 +1808,9 @@ response={
   
   
   
+  
+  
+  
 
 
 }
@@ -1613,10 +1834,16 @@ response={
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1659,10 +1886,16 @@ verification = verify_registration_response(
   
   
   
+  
+  
+  
 
 
 credential=credential,
 
+  
+  
+  
   
   
   
@@ -1705,10 +1938,16 @@ expected_challenge=cache.get(f"webauthn:challenge:{user.id}"),
   
   
   
+  
+  
+  
 
 
 expected_rp_id="example.com",
 
+  
+  
+  
   
   
   
@@ -1751,10 +1990,16 @@ expected_origin="https://example.com"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1797,10 +2042,16 @@ expected_origin="https://example.com"
   
   
   
+  
+  
+  
 
 
 store_credential(user.id, verification.credential_id, verification.public_key)
 
+  
+  
+  
   
   
   
@@ -1843,10 +2094,16 @@ Authentication Flow
   
   
   
+  
+  
+  
 
 
 // Login with passkey
 
+  
+  
+  
   
   
   
@@ -1889,10 +2146,16 @@ async function authenticateWithPasskey() {
   
   
   
+  
+  
+  
 
 
 const credential = await navigator.credentials.get({
 
+  
+  
+  
   
   
   
@@ -1935,10 +2198,16 @@ publicKey: {
   
   
   
+  
+  
+  
 
 
 challenge: new Uint8Array([/* server challenge */]),
 
+  
+  
+  
   
   
   
@@ -1981,10 +2250,16 @@ rpId: "example.com",
   
   
   
+  
+  
+  
 
 
 userVerification: "required"
 
+  
+  
+  
   
   
   
@@ -2027,10 +2302,16 @@ userVerification: "required"
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2073,10 +2354,16 @@ const response = await fetch("/api/auth/passkey/authenticate", {
   
   
   
+  
+  
+  
 
 
 method: "POST",
 
+  
+  
+  
   
   
   
@@ -2119,10 +2406,16 @@ body: JSON.stringify({
   
   
   
+  
+  
+  
 
 
 id: credential.id,
 
+  
+  
+  
   
   
   
@@ -2165,10 +2458,16 @@ rawId: arrayBufferToBase64(credential.rawId),
   
   
   
+  
+  
+  
 
 
 type: credential.type,
 
+  
+  
+  
   
   
   
@@ -2211,10 +2510,16 @@ response: {
   
   
   
+  
+  
+  
 
 
 clientDataJSON: arrayBufferToBase64(credential.response.clientDataJSON),
 
+  
+  
+  
   
   
   
@@ -2257,10 +2562,16 @@ authenticatorData: arrayBufferToBase64(credential.response.authenticatorData),
   
   
   
+  
+  
+  
 
 
 signature: arrayBufferToBase64(credential.response.signature),
 
+  
+  
+  
   
   
   
@@ -2303,10 +2614,16 @@ userHandle: credential.response.userHandle
   
   
   
+  
+  
+  
 
 
 ? arrayBufferToBase64(credential.response.userHandle) 
 
+  
+  
+  
   
   
   
@@ -2349,10 +2666,16 @@ userHandle: credential.response.userHandle
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2395,10 +2718,16 @@ userHandle: credential.response.userHandle
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2441,10 +2770,16 @@ if (response.ok) window.location.href = "/dashboard";
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2484,10 +2819,16 @@ Magic Links
   
   
   
+  
+  
+  
 
 
 For devices without platform authenticators: 
 
+  
+  
+  
   
   
   
@@ -2530,10 +2871,16 @@ import secrets
   
   
   
+  
+  
+  
 
 
 from datetime import datetime, timedelta
 
+  
+  
+  
   
   
   
@@ -2576,10 +2923,16 @@ def send_magic_link(email):
   
   
   
+  
+  
+  
 
 
 token = secrets.token_urlsafe(32)
 
+  
+  
+  
   
   
   
@@ -2622,10 +2975,16 @@ expiry = datetime.utcnow() + timedelta(minutes=15)
   
   
   
+  
+  
+  
 
 
 # Store token
 
+  
+  
+  
   
   
   
@@ -2668,10 +3027,16 @@ cache.set(f"magic_link:{token}", email, time=900)
   
   
   
+  
+  
+  
 
 
 # Send email
 
+  
+  
+  
   
   
   
@@ -2714,10 +3079,16 @@ link = f"https://example.com/auth/magic?token={token}"
   
   
   
+  
+  
+  
 
 
 send_email(email, "Your login link", f"Click: {link}")
 
+  
+  
+  
   
   
   
@@ -2760,10 +3131,16 @@ def verify_magic_link(token):
   
   
   
+  
+  
+  
 
 
 email = cache.get(f"magic_link:{token}")
 
+  
+  
+  
   
   
   
@@ -2806,10 +3183,16 @@ if email:
   
   
   
+  
+  
+  
 
 
 cache.delete(f"magic_link:{token}")
 
+  
+  
+  
   
   
   
@@ -2852,6 +3235,9 @@ return create_session(email)
   
   
   
+  
+  
+  
 
 
 return None
@@ -2875,10 +3261,16 @@ return None
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

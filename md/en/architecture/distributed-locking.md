@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html
   
 
 
+# Distributed Locking Mechanisms
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Lease-based locking is the most common pattern. The lock has a time-to-live (TTL
   
   
   
+  
+  
+  
 
 
 Redis-based locking is popular for its simplicity and performance. SET NX EX implements a basic distributed lock atomically — set the key only if it does not exist, with an expiration. The Redlock algorithm extends this to multiple Redis nodes for fault tolerance. However, Redlock has been subject to debate. Martin Kleppmann's analysis identified scenarios where clock drift or process pauses (garbage collection) can violate mutual exclusion guarantees. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ ZooKeeper provides a stronger consistency model through its ZAB consensus protoc
   
   
   
+  
+  
+  
 
 
 The ZooKeeper approach handles process pauses correctly. If a lock holder experiences a long garbage collection pause, ZooKeeper will detect the heartbeat timeout and release the lock. Other processes can then acquire it. The original holder, upon resuming, will discover its lock is gone and can react accordingly. This eliminates the clock drift vulnerability inherent in Redis-based approaches. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Etcd locks follow a similar pattern to ZooKeeper. Etcd offers the concurrency pa
   
   
   
+  
+  
+  
 
 
 Fencing tokens address the fundamental problem with distributed locks: preventing stale lock holders from accessing the shared resource. A fencing token is a monotonically increasing number issued to the lock holder. The holder presents this token with each write request to the resource. The resource rejects writes with outdated tokens. Without fencing, a process that holds a stale lock (due to pause or partition) could corrupt data when it resumes and writes to the resource. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Implementing fencing requires the resource to check the token. For example, a da
   
   
   
+  
+  
+  
 
 
 The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. 
 
+  
+  
+  
   
   
   

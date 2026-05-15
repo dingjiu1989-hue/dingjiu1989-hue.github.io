@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/redis-vs-memcached.html
   
 
 
+# Redis vs Memcached: Caching Solution Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Redis and Memcached are the two most widely used in-memory data stores, but they
   
   
   
+  
+  
+  
 
 
 ##  Data Structure Support
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Redis and Memcached are the two most widely used in-memory data stores, but they
   
   
   
+  
+  
+  
 
 
 Redis supports a wide range of data structures beyond simple key-value pairs:
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import redis.asyncio as redis
   
   
   
+  
+  
+  
 
 
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ r = redis.Redis(host='localhost', port=6379, decode_responses=True)
   
   
   
+  
+  
+  
 
 
 await r.set('user:1000:name', 'Alice')
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ name = await r.get('user:1000:name')
   
   
   
+  
+  
+  
 
 
 # Lists (ordered collection, great for queues)
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ await r.lpush('notifications:queue', 'email_1', 'email_2')
   
   
   
+  
+  
+  
 
 
 notification = await r.brpop('notifications:queue', timeout=5)
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ notification = await r.brpop('notifications:queue', timeout=5)
   
   
   
+  
+  
+  
 
 
 await r.sadd('user:1000:roles', 'admin', 'editor', 'viewer')
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ await r.sadd('user:1001:roles', 'editor', 'viewer')
   
   
   
+  
+  
+  
 
 
 common_roles = await r.sinter('user:1000:roles', 'user:1001:roles')
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ common_roles = await r.sinter('user:1000:roles', 'user:1001:roles')
   
   
   
+  
+  
+  
 
 
 # Sorted Sets (leaderboards, rate limiting)
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ await r.zadd('leaderboard:weekly', {'user:1000': 1500, 'user:1001': 2300})
   
   
   
+  
+  
+  
 
 
 top_players = await r.zrevrange('leaderboard:weekly', 0, 9, withscores=True)
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ top_players = await r.zrevrange('leaderboard:weekly', 0, 9, withscores=True)
   
   
   
+  
+  
+  
 
 
 await r.hset('product:500', mapping={
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ await r.hset('product:500', mapping={
   
   
   
+  
+  
+  
 
 
 'price': 29.99,
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ await r.hset('product:500', mapping={
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ product = await r.hgetall('product:500')
   
   
   
+  
+  
+  
 
 
 # Bitmaps (analytics, feature flags)
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ await r.setbit('active:users:2026-05-12', user_id=1000, value=1)
   
   
   
+  
+  
+  
 
 
 daily_active = await r.bitcount('active:users:2026-05-12')
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ daily_active = await r.bitcount('active:users:2026-05-12')
   
   
   
+  
+  
+  
 
 
 await r.xadd('order:events', {'order_id': '123', 'status': 'created'})
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ events = await r.xread({'order:events': '0'}, count=10)
   
   
   
+  
+  
+  
 
 
 ### Memcached: Simple Key-Value
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ Memcached provides a minimal key-value API:
   
   
   
+  
+  
+  
 
 
 import pymemcache
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ client = pymemcache.Client(('localhost', 11211))
   
   
   
+  
+  
+  
 
 
 # Basic get/set
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ client.set('user:1000:profile', profile_data, expire=3600)
   
   
   
+  
+  
+  
 
 
 profile = client.get('user:1000:profile')
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ profile = client.get('user:1000:profile')
   
   
   
+  
+  
+  
 
 
 users = client.get_multi([
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ users = client.get_multi([
   
   
   
+  
+  
+  
 
 
 'user:1001:profile',
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ users = client.get_multi([
   
   
   
+  
+  
+  
 
 
 ])
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ users = client.get_multi([
   
   
   
+  
+  
+  
 
 
 client.add('lock:payment:123', 'locked', expire=30) # Only if not exists
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ client.replace('user:1000:profile', updated_profile) # Only if exists
   
   
   
+  
+  
+  
 
 
 client.append('log:buffer', 'new entry\n') # Append to existing value
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ client.prepend('log:buffer', 'header\n') # Prepend
   
   
   
+  
+  
+  
 
 
 # Increment/Decrement
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ client.set('counter:api:day', '0')
   
   
   
+  
+  
+  
 
 
 client.incr('counter:api:day', 1)
 
+  
+  
+  
   
   
   
@@ -1586,6 +1780,9 @@ client.incr('counter:api:day', 1)
   
   
   
+  
+  
+  
 
 
 | Feature | Redis | Memcached |
@@ -1612,10 +1809,16 @@ client.incr('counter:api:day', 1)
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ client.incr('counter:api:day', 1)
   
   
   
+  
+  
+  
 
 
 | Recovery | Automatic on restart | All data lost |
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ client.incr('counter:api:day', 1)
   
   
   
+  
+  
+  
 
 
 | Durability modes | fsync policies (always, every sec, no) | N/A |
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ Redis persistence configuration:
   
   
   
+  
+  
+  
 
 
 # redis.conf
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ Redis persistence configuration:
   
   
   
+  
+  
+  
 
 
 save 900 1 # Save if 1 key changed in 900 seconds
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ save 300 10 # Save if 10 keys changed in 300 seconds
   
   
   
+  
+  
+  
 
 
 save 60 10000 # Save if 10000 keys changed in 60 seconds
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ save 60 10000 # Save if 10000 keys changed in 60 seconds
   
   
   
+  
+  
+  
 
 
 appendonly yes
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ appendfsync everysec # fsync every second
   
   
   
+  
+  
+  
 
 
 auto-aof-rewrite-percentage 100
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ auto-aof-rewrite-min-size 64mb
   
   
   
+  
+  
+  
 
 
 # Hybrid persistence (Redis 7+)
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ aof-use-rdb-preamble yes # RDB prefix for faster loading
   
   
   
+  
+  
+  
 
 
 ##  Memory Efficiency and Eviction
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ aof-use-rdb-preamble yes # RDB prefix for faster loading
   
   
   
+  
+  
+  
 
 
 Memcached uses slab allocation to minimize fragmentation:
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ Memcached uses slab allocation to minimize fragmentation:
   
   
   
+  
+  
+  
 
 
 # Memory is divided into slabs of various chunk sizes
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ Memcached uses slab allocation to minimize fragmentation:
   
   
   
+  
+  
+  
 
 
 stats = client.stats()
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ stats = client.stats()
   
   
   
+  
+  
+  
 
 
 # STAT slab_reassign_evictions_nomem 0
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ stats = client.stats()
   
   
   
+  
+  
+  
 
 
 # STAT slab_reassign_busy_items 0
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ stats = client.stats()
   
   
   
+  
+  
+  
 
 
 client.set('key', 'value', expire=0, noreply=False)
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ client.set('key', 'value', expire=0, noreply=False)
   
   
   
+  
+  
+  
 
 
 # redis.conf eviction policies
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ maxmemory 2gb
   
   
   
+  
+  
+  
 
 
 maxmemory-policy allkeys-lru # Evict least recently used keys
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ maxmemory-policy allkeys-lru # Evict least recently used keys
   
   
   
+  
+  
+  
 
 
 # noeviction: Return errors on writes when memory full
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ maxmemory-policy allkeys-lru # Evict least recently used keys
   
   
   
+  
+  
+  
 
 
 # allkeys-lfu: Evict least frequently used
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ maxmemory-policy allkeys-lru # Evict least recently used keys
   
   
   
+  
+  
+  
 
 
 # volatile-lfu: Evict LFU among keys with TTL
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ maxmemory-policy allkeys-lru # Evict least recently used keys
   
   
   
+  
+  
+  
 
 
 # volatile-random: Evict random keys with TTL
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ maxmemory-policy allkeys-lru # Evict least recently used keys
   
   
   
+  
+  
+  
 
 
 Memory overhead comparison:
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ Memory overhead comparison:
   
   
   
+  
+  
+  
 
 
 # Example: 1M keys with 100-byte values
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ overhead_redis = 1_000_000 * (50 + 100) # ~150MB
   
   
   
+  
+  
+  
 
 
 # Memcached: ~56 bytes overhead per key + value size + slab fragmentation
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ overhead_redis = 1_000_000 * (50 + 100) # ~150MB
   
   
   
+  
+  
+  
 
 
 overhead_memcached = 1_000_000 * (56 + 100) # ~156MB + ~10% fragmentation
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ overhead_memcached = 1_000_000 * (56 + 100) # ~156MB + ~10% fragmentation
   
   
   
+  
+  
+  
 
 
 ### Redis Cluster
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ overhead_memcached = 1_000_000 * (56 + 100) # ~156MB + ~10% fragmentation
   
   
   
+  
+  
+  
 
 
 port 7000
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ cluster-enabled yes
   
   
   
+  
+  
+  
 
 
 cluster-config-file nodes.conf
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ cluster-node-timeout 5000
   
   
   
+  
+  
+  
 
 
 appendonly yes
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ appendonly yes
   
   
   
+  
+  
+  
 
 
 # Redis Cluster client
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ from redis.cluster import RedisCluster
   
   
   
+  
+  
+  
 
 
 rc = RedisCluster(
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ startup_nodes=[
   
   
   
+  
+  
+  
 
 
 {"host": "127.0.0.1", "port": "7000"},
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ startup_nodes=[
   
   
   
+  
+  
+  
 
 
 {"host": "127.0.0.1", "port": "7002"},
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ startup_nodes=[
   
   
   
+  
+  
+  
 
 
 decode_responses=True,
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ decode_responses=True,
   
   
   
+  
+  
+  
 
 
 # Automatic sharding: keys are distributed across 16384 slots
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ decode_responses=True,
   
   
   
+  
+  
+  
 
 
 await rc.set("user:1000:session", session_data)
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ await rc.get("user:1000:session")
   
   
   
+  
+  
+  
 
 
 # Cross-slot operations require tags
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ await rc.set("{users}:1000", "alice")
   
   
   
+  
+  
+  
 
 
 await rc.set("{users}:1001", "bob")
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ users = await rc.mget("{users}:1000", "{users}:1001")
   
   
   
+  
+  
+  
 
 
 ### Memcached: No Built-in Clustering
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ Memcached has no built-in clustering. Sharding is implemented at the client leve
   
   
   
+  
+  
+  
 
 
 from pymemcache.client.hash import HashClient
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ from pymemcache.client.hash import HashClient
   
   
   
+  
+  
+  
 
 
 client = HashClient([
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ client = HashClient([
   
   
   
+  
+  
+  
 
 
 ('memcached-2', 11211),
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ client = HashClient([
   
   
   
+  
+  
+  
 
 
 ], use_pooling=True)
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ client = HashClient([
   
   
   
+  
+  
+  
 
 
 client.set("key", "value")
 
+  
+  
+  
   
   
   
@@ -3952,10 +4419,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 ##  Use Case Comparison
 
+  
+  
+  
   
   
   
@@ -4004,10 +4477,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 | Session store | Excellent (built-in TTL, persistence) | Requires external persistence |
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 | Message queue | Built-in (lists, streams, pub/sub) | No support |
 
+  
+  
+  
   
   
   
@@ -4160,10 +4651,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 | Geospatial queries | Yes (GEO commands) | No |
 
+  
+  
+  
   
   
   
@@ -4212,10 +4709,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 | Time-series data | Yes (RedisTimeSeries module) | No |
 
+  
+  
+  
   
   
   
@@ -4264,10 +4767,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 * **Use Memcached** when you need a simple, fast, memory-only cache for database query results or computed data that can be regenerated. Memcached excels at its single purpose.
 
+  
+  
+  
   
   
   
@@ -4310,10 +4819,16 @@ result = client.get("key")
   
   
   
+  
+  
+  
 
 
 * **Use both** when you want a two-tier caching strategy: Memcached for hot cache (regenerable) and Redis for persistent cache (session, counter) and non-cache workloads.
 
+  
+  
+  
   
   
   

@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/schema-design.html
   
 
 
+# Schema Design Patterns: Normalization, Denormalization, Naming Conventions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Schema Design Patterns: Normalization, Denormalization, Naming Conventions 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Schema design is the foundation of application performance and maintainability. 
   
   
   
+  
+  
+  
 
 
 Normalization 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Normalization eliminates data redundancy through a series of normal forms. Most 
   
   
   
+  
+  
+  
 
 
 First Normal Form (1NF) 
 
+  
+  
+  
   
   
   
@@ -227,10 +268,16 @@ Each column contains atomic values. No repeating groups or arrays.
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 1NF: multi-valued column
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 1NF: multi-valued column
 
+  
+  
+  
   
   
   
@@ -273,10 +320,16 @@ CREATE TABLE orders (
   
   
   
+  
+  
+  
 
 
 id INTEGER PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -319,6 +372,9 @@ product_ids TEXT -- '1,2,3' as comma-separated values
   
   
   
+  
+  
+  
 
 
 );
@@ -342,10 +398,16 @@ product_ids TEXT -- '1,2,3' as comma-separated values
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 1NF compliant: separate rows per product
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 1NF compliant: separate rows per product
 
+  
+  
+  
   
   
   
@@ -369,6 +431,9 @@ product_ids TEXT -- '1,2,3' as comma-separated values
 
 CREATE TABLE order_items (
 
+  
+  
+  
   
   
   
@@ -411,10 +476,16 @@ order_id INTEGER REFERENCES orders(id),
   
   
   
+  
+  
+  
 
 
 product_id INTEGER REFERENCES products(id),
 
+  
+  
+  
   
   
   
@@ -457,10 +528,16 @@ quantity INTEGER NOT NULL,
   
   
   
+  
+  
+  
 
 
 PRIMARY KEY (order_id, product_id)
 
+  
+  
+  
   
   
   
@@ -503,10 +580,16 @@ PRIMARY KEY (order_id, product_id)
   
   
   
+  
+  
+  
 
 
 Second Normal Form (2NF) 
 
+  
+  
+  
   
   
   
@@ -546,10 +629,16 @@ Second Normal Form (2NF)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 2NF: product_name depends only on product_id, not on order_id
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 2NF: product_name depends only on product_id, not on order_id
 
+  
+  
+  
   
   
   
@@ -592,6 +681,9 @@ CREATE TABLE order_items (
   
   
   
+  
+  
+  
 
 
 order_id INTEGER,
@@ -615,10 +707,16 @@ order_id INTEGER,
   
   
   
+  
+  
+  
 
 
 product_id INTEGER,
 
+  
+  
+  
   
   
   
@@ -661,10 +759,16 @@ product_name TEXT, -- depends on product_id only
   
   
   
+  
+  
+  
 
 
 quantity INTEGER,
 
+  
+  
+  
   
   
   
@@ -707,6 +811,9 @@ PRIMARY KEY (order_id, product_id)
   
   
   
+  
+  
+  
 
 
 );
@@ -730,10 +837,16 @@ PRIMARY KEY (order_id, product_id)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 2NF compliant: product_name moved to products table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 2NF compliant: product_name moved to products table
 
+  
+  
+  
   
   
   
@@ -776,10 +889,16 @@ CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT);
   
   
   
+  
+  
+  
 
 
 Third Normal Form (3NF) 
 
+  
+  
+  
   
   
   
@@ -819,10 +938,16 @@ Third Normal Form (3NF)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 3NF: category_name depends on category_id, not on order_id
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Violates 3NF: category_name depends on category_id, not on order_id
 
+  
+  
+  
   
   
   
@@ -865,10 +990,16 @@ CREATE TABLE products (
   
   
   
+  
+  
+  
 
 
 id INTEGER PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -911,10 +1042,16 @@ name TEXT,
   
   
   
+  
+  
+  
 
 
 category_id INTEGER,
 
+  
+  
+  
   
   
   
@@ -957,6 +1094,9 @@ category_name TEXT -- transitively depends on category_id
   
   
   
+  
+  
+  
 
 
 );
@@ -980,10 +1120,16 @@ category_name TEXT -- transitively depends on category_id
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3NF compliant
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3NF compliant
 
+  
+  
+  
   
   
   
@@ -1026,10 +1172,16 @@ CREATE TABLE categories (id INTEGER PRIMARY KEY, name TEXT);
   
   
   
+  
+  
+  
 
 
 CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category_id INTEGER);
 
+  
+  
+  
   
   
   
@@ -1069,10 +1221,16 @@ Denormalization
   
   
   
+  
+  
+  
 
 
 Denormalization intentionally adds redundancy for performance. Use it judiciously. 
 
+  
+  
+  
   
   
   
@@ -1112,10 +1270,16 @@ Read-Optimized Denormalization
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Normalized form
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Normalized form
 
+  
+  
+  
   
   
   
@@ -1158,10 +1322,16 @@ SELECT COUNT(*) FROM orders WHERE user_id = 42;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Denormalized: add order_count to users table
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Denormalized: add order_count to users table
 
+  
+  
+  
   
   
   
@@ -1204,10 +1374,16 @@ ALTER TABLE users ADD COLUMN order_count INTEGER DEFAULT 0;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Keep it in sync (via trigger or application logic)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Keep it in sync (via trigger or application logic)
 
+  
+  
+  
   
   
   
@@ -1250,6 +1426,9 @@ UPDATE users SET order_count = order_count + 1 WHERE id = NEW.user_id;
   
   
   
+  
+  
+  
 
 
 Pre-Joined Tables 
@@ -1270,10 +1449,16 @@ Pre-Joined Tables
   
   
   
+  
+  
+  
 
 
 For read-heavy reporting, pre-join frequently accessed data: 
 
+  
+  
+  
   
   
   
@@ -1316,10 +1501,16 @@ CREATE TABLE order_summaries (
   
   
   
+  
+  
+  
 
 
 order_id INTEGER PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -1362,10 +1553,16 @@ user_email TEXT,
   
   
   
+  
+  
+  
 
 
 total NUMERIC,
 
+  
+  
+  
   
   
   
@@ -1408,10 +1605,16 @@ item_count INTEGER,
   
   
   
+  
+  
+  
 
 
 first_item_name TEXT,
 
+  
+  
+  
   
   
   
@@ -1454,6 +1657,9 @@ created_at TIMESTAMPTZ
   
   
   
+  
+  
+  
 
 
 );
@@ -1477,10 +1683,16 @@ created_at TIMESTAMPTZ
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Refresh periodically
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Refresh periodically
 
+  
+  
+  
   
   
   
@@ -1523,10 +1735,16 @@ INSERT INTO order_summaries
   
   
   
+  
+  
+  
 
 
 SELECT o.id, u.email, o.total, COUNT(oi.id),
 
+  
+  
+  
   
   
   
@@ -1569,10 +1787,16 @@ MIN(p.name), o.created_at
   
   
   
+  
+  
+  
 
 
 FROM orders o
 
+  
+  
+  
   
   
   
@@ -1615,10 +1839,16 @@ JOIN users u ON u.id = o.user_id
   
   
   
+  
+  
+  
 
 
 JOIN order_items oi ON oi.order_id = o.id
 
+  
+  
+  
   
   
   
@@ -1661,10 +1891,16 @@ JOIN products p ON p.id = oi.product_id
   
   
   
+  
+  
+  
 
 
 GROUP BY o.id, u.email, o.total, o.created_at
 
+  
+  
+  
   
   
   
@@ -1707,6 +1943,9 @@ ON CONFLICT (order_id) DO NOTHING;
   
   
   
+  
+  
+  
 
 
 Naming Conventions 
@@ -1727,10 +1966,16 @@ Naming Conventions
   
   
   
+  
+  
+  
 
 
 Consistent naming conventions reduce cognitive load and make schemas self-documenting. 
 
+  
+  
+  
   
   
   
@@ -1770,10 +2015,16 @@ Tables
   
   
   
+  
+  
+  
 
 
 * **Plural nouns**: `users`, `orders`, `products`, `order_items`
 
+  
+  
+  
   
   
   
@@ -1810,10 +2061,16 @@ Tables
   
   
   
+  
+  
+  
 
 
 * **Avoid reserved words**: Never name a table `user`, `order`, or `group` without quoting
 
+  
+  
+  
   
   
   
@@ -1856,10 +2113,16 @@ Columns
   
   
   
+  
+  
+  
 
 
 * **Primary keys**: `id` (singular, generic)
 
+  
+  
+  
   
   
   
@@ -1896,6 +2159,9 @@ Columns
   
   
   
+  
+  
+  
 
 
 * **Timestamps**: `created_at`, `updated_at`, `deleted_at`
@@ -1916,10 +2182,16 @@ Columns
   
   
   
+  
+  
+  
 
 
 * **Boolean flags**: `is_active`, `has_billing`, `email_verified`
 
+  
+  
+  
   
   
   
@@ -1962,10 +2234,16 @@ Indexes
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Naming convention: idx_{table}_{column(s)}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Naming convention: idx_{table}_{column(s)}
 
+  
+  
+  
   
   
   
@@ -2008,6 +2286,9 @@ CREATE INDEX idx_users_email ON users (email);
   
   
   
+  
+  
+  
 
 
 CREATE INDEX idx_orders_user_date ON orders (user_id, created_at);
@@ -2031,10 +2312,16 @@ CREATE INDEX idx_orders_user_date ON orders (user_id, created_at);
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Unique indexes: uq_{table}_{column(s)}
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Unique indexes: uq_{table}_{column(s)}
 
+  
+  
+  
   
   
   
@@ -2077,10 +2364,16 @@ CREATE UNIQUE INDEX uq_users_email ON users (email);
   
   
   
+  
+  
+  
 
 
 Timestamp Handling 
 
+  
+  
+  
   
   
   
@@ -2117,10 +2410,16 @@ Timestamps are a common source of bugs in schema design.
   
   
   
+  
+  
+  
 
 
 Always Use TIMESTAMPTZ 
 
+  
+  
+  
   
   
   
@@ -2163,10 +2462,16 @@ CREATE TABLE events (
   
   
   
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -2209,10 +2514,16 @@ occurred_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   
   
   
+  
+  
+  
 
 
 created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
+  
+  
+  
   
   
   
@@ -2255,10 +2566,16 @@ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2298,10 +2615,16 @@ updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
   
   
   
+  
+  
+  
 
 
 Automatic Updated At 
 
+  
+  
+  
   
   
   
@@ -2344,10 +2667,16 @@ CREATE OR REPLACE FUNCTION trigger_set_updated_at()
   
   
   
+  
+  
+  
 
 
 RETURNS TRIGGER AS $$
 
+  
+  
+  
   
   
   
@@ -2390,10 +2719,16 @@ BEGIN
   
   
   
+  
+  
+  
 
 
 NEW.updated_at = NOW();
 
+  
+  
+  
   
   
   
@@ -2436,10 +2771,16 @@ RETURN NEW;
   
   
   
+  
+  
+  
 
 
 END;
 
+  
+  
+  
   
   
   
@@ -2482,10 +2823,16 @@ $$ LANGUAGE plpgsql;
   
   
   
+  
+  
+  
 
 
 CREATE TRIGGER set_updated_at
 
+  
+  
+  
   
   
   
@@ -2528,10 +2875,16 @@ BEFORE UPDATE ON users
   
   
   
+  
+  
+  
 
 
 FOR EACH ROW
 
+  
+  
+  
   
   
   
@@ -2574,10 +2927,16 @@ EXECUTE FUNCTION trigger_set_updated_at();
   
   
   
+  
+  
+  
 
 
 Soft Deletes 
 
+  
+  
+  
   
   
   
@@ -2620,10 +2979,16 @@ ALTER TABLE users ADD COLUMN deleted_at TIMESTAMPTZ;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries must always filter:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Queries must always filter:
 
+  
+  
+  
   
   
   
@@ -2666,10 +3031,16 @@ SELECT * FROM users WHERE deleted_at IS NULL;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a partial index for active users
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a partial index for active users
 
+  
+  
+  
   
   
   
@@ -2712,10 +3083,16 @@ CREATE INDEX idx_users_active ON users (email) WHERE deleted_at IS NULL;
   
   
   
+  
+  
+  
 
 
 Schema Anti-Patterns 
 
+  
+  
+  
   
   
   
@@ -2755,10 +3132,16 @@ Entity-Value-Attribute (EAV)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anti-pattern: EAV makes queries painful
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anti-pattern: EAV makes queries painful
 
+  
+  
+  
   
   
   
@@ -2801,10 +3184,16 @@ CREATE TABLE product_attributes (
   
   
   
+  
+  
+  
 
 
 product_id INTEGER,
 
+  
+  
+  
   
   
   
@@ -2847,10 +3236,16 @@ attribute_name TEXT,
   
   
   
+  
+  
+  
 
 
 attribute_value TEXT,
 
+  
+  
+  
   
   
   
@@ -2893,10 +3288,16 @@ PRIMARY KEY (product_id, attribute_name)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2936,6 +3337,9 @@ EAV requires complex pivoting for every query. Use JSONB or add columns instead.
   
   
   
+  
+  
+  
 
 
 Polymorphic Associations 
@@ -2959,10 +3363,16 @@ Polymorphic Associations
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anti-pattern: polymorphic foreign key
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anti-pattern: polymorphic foreign key
 
+  
+  
+  
   
   
   
@@ -3005,10 +3415,16 @@ CREATE TABLE comments (
   
   
   
+  
+  
+  
 
 
 id BIGSERIAL PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -3051,10 +3467,16 @@ commentable_type TEXT, -- 'Post' or 'Video'
   
   
   
+  
+  
+  
 
 
 commentable_id INTEGER -- No foreign key constraint!
 
+  
+  
+  
   
   
   
@@ -3097,10 +3519,16 @@ commentable_id INTEGER -- No foreign key constraint!
   
   
   
+  
+  
+  
 
 
 Use separate join tables or inheritance patterns instead. 
 
+  
+  
+  
   
   
   
@@ -3140,10 +3568,16 @@ Oversized VARCHAR
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Bad: arbitrary limit
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Bad: arbitrary limit
 
+  
+  
+  
   
   
   
@@ -3186,10 +3620,16 @@ CREATE TABLE users (name VARCHAR(10));
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Better: use TEXT with application-level validation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Better: use TEXT with application-level validation
 
+  
+  
+  
   
   
   
@@ -3232,10 +3672,16 @@ CREATE TABLE users (name TEXT);
   
   
   
+  
+  
+  
 
 
 PostgreSQL treats `VARCHAR(n)` and `TEXT` identically internally, but arbitrary limits cause unnecessary application bugs. 
 
+  
+  
+  
   
   
   
@@ -3275,10 +3721,16 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] Primary key on every table (`BIGSERIAL` or `UUID`)
 
+  
+  
+  
   
   
   
@@ -3315,10 +3767,16 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] `created_at` and `updated_at` timestamps
 
+  
+  
+  
   
   
   
@@ -3355,10 +3813,16 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] Check constraints for domain validation
 
+  
+  
+  
   
   
   
@@ -3395,10 +3859,16 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] Consistent naming (plurals, `_id` suffix for FKs)
 
+  
+  
+  
   
   
   
@@ -3435,6 +3905,9 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] Indexes match query patterns (verified with EXPLAIN)
@@ -3455,10 +3928,16 @@ Practical Schema Checklist
   
   
   
+  
+  
+  
 
 
 * [ ] Appropriate normalization level (3NF typically, denormalize knowingly)
 
+  
+  
+  
   
   
   

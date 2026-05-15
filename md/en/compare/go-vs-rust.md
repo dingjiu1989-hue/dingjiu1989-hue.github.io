@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/compare/go-vs-rust.html
   
   
   
+  
+  
+  
+
+
+# Go vs Rust: Systems Programming Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Go and Rust are modern systems programming languages with different philosophies. Go prioritizes simplicity and developer productivity. Rust prioritizes memory safety and zero-cost abstractions. Both have found significant adoption in infrastructure, tooling, and backend development.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Go and Rust are modern systems programming languages with different philosophies
   
   
   
+  
+  
+  
 
 
 Go uses garbage collection. The Go garbage collector is sophisticated—typically pausing for under 500 microseconds—but it adds memory overhead and occasional latency spikes. Developers do not think about memory management day-to-day.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Rust uses ownership-based memory management. The borrow checker enforces memory 
   
   
   
+  
+  
+  
 
 
 ##  Concurrency
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Go's goroutines and channels are its standout feature. Goroutines are lightweigh
   
   
   
+  
+  
+  
 
 
 Rust's concurrency model is built on ownership. The type system prevents data races at compile time. Async/await in Rust provides performance-competitive concurrent I/O. The Tokio runtime is the standard for async networking.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Rust's concurrency model is built on ownership. The type system prevents data ra
   
   
   
+  
+  
+  
 
 
 Rust generally outperforms Go in CPU-bound workloads. Rust's zero-cost abstractions, lack of garbage collection, and LLVM backend produce faster binaries. Go excels in I/O-bound workloads where goroutines provide excellent throughput.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Rust binaries are smaller and use less memory than Go binaries. Go binaries incl
   
   
   
+  
+  
+  
 
 
 ##  Ecosystem
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Go has a strong standard library for networking and web development. The ecosyst
   
   
   
+  
+  
+  
 
 
 Rust's ecosystem is strongest in systems programming, CLI tools, and WebAssembly. Crates.io hosts packages for networking, parsing, CLI frameworks, and more. The compiler is strict, producing robust code.
@@ -465,10 +530,16 @@ Rust's ecosystem is strongest in systems programming, CLI tools, and WebAssembly
   
   
   
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
   
   
   

@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/clean-architecture.html
   
 
 
+# Clean Architecture Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Clean Architecture, introduced by Robert C. Martin, is an architectural philosophy that organizes code into concentric layers with strict dependency rules. The goal is to create systems that are independent of frameworks, testable, and independent of UI, database, and external agencies. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The Dependency Rule
   
   
   
+  
+  
+  
 
 
 The central principle of Clean Architecture is the Dependency Rule: source code dependencies can only point inward. Nothing in an inner circle can know anything about an outer circle. This means business rules (inner circles) never depend on frameworks, databases, or UI (outer circles). Dependencies cross boundaries through interfaces defined by the inner layer and implemented by the outer layer. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ This inversion of control is achieved through the Dependency Inversion Principle
   
   
   
+  
+  
+  
 
 
 Layer Structure 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Clean Architecture defines four concentric layers. The innermost is Enterprise B
   
   
   
+  
+  
+  
 
 
 The next layer is Application Business Rules, containing use cases. Use cases orchestrate the flow of data to and from entities, directing entities to execute business rules. They contain application-specific business logic. Use cases depend on entities but not on outer layers. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ The third layer is Interface Adapters, which convert data between the format mos
   
   
   
+  
+  
+  
 
 
 The outermost layer contains frameworks and drivers. The web framework, database driver, UI framework, and external service clients reside here. This layer is expected to change most frequently. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ Entities vs Use Cases
   
   
   
+  
+  
+  
 
 
 Entities represent core business concepts that would exist regardless of the application (e.g., a "Customer" in a banking system). Use cases represent specific application operations (e.g., "TransferMoney"). Use cases orchestrate entities but do not contain core business rule logic. In practice, entities often map to domain objects in Domain-Driven Design, and use cases map to application services or interactors. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ Data Flow
   
   
   
+  
+  
+  
 
 
 Data flows across layer boundaries through simple data structures. The inner layers define the data structures used for cross-boundary communication, often called Request Models and Response Models. They are simple objects with no dependencies, allowing them to cross layer boundaries without violating the dependency rule. 
 
+  
+  
+  
   
   
   
@@ -384,6 +449,9 @@ The controller receives input from the UI, creates a Request Model, and passes i
   
   
   
+  
+  
+  
 
 
 Practical Implementation 
@@ -404,10 +472,16 @@ Practical Implementation
   
   
   
+  
+  
+  
 
 
 Implementing Clean Architecture requires disciplined project structure. A common approach is to organize code by layer with clear package/module separation. Dependency injection frameworks (Spring, Guice, Dagger) wire the layers together at runtime. Testing is straightforward because inner layers have no framework dependencies—entities and use cases can be tested with plain unit tests. 
 
+  
+  
+  
   
   
   

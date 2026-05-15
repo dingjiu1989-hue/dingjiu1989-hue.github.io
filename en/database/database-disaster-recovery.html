@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-disaster-recovery.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3960",
+      "wordCount": "4512",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-disaster-recovery.html"},
-      "articleBody": "Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Disaster recovery (DR) ensures your database can survive catastrophic events: region outages, data corruption, accidental deletions, or ransomware attacks. Unlike high availability, which handles component failures, DR addresses large-scale disasters. RPO and RTO Two metrics define DR requirements: **Recovery Point Objective (RPO)**: The maximum acceptable data loss measured in time. An RPO of 1 hour means you can lose at most 1 hour of data. **Recovery Time Objective (RTO)**: The maximum acceptable downtime. An RTO of 4 hours means the database must be operational within 4 hours of the disaster. | Scenario | RPO | RTO | Strategy | |----------|-----|-----|----------| | Internal tool | 24 hours | 24 hours | Daily backups, restore | | E-commerce | 5 minutes | 1 hour | Cross-region replication | | Financial trading | 0 (zero loss) | 5 minutes | Synchronous replication + DR site | Cross-Region Replication PostgreSQL Logical Replication Across Regions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1) CREATE PUBLICATION dr_pub FOR ALL TABLES; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2) CREATE SUBSCRIPTION dr_sub CONNECTION 'host=primary-us-east-1.example.com port=5432 dbname=proddb' PUBLICATION dr_pub WITH (copy_data = true, connect = true, create_slot = true); Logical replication works across regions with asynchronous delivery. Monitor lag carefully: SELECT pg_size_pretty( pg_wal_lsn_diff( pg_current_wal_lsn(), replay_lsn ) ) AS replication_lag FROM pg_stat_replication WHERE application_name = 'dr_sub'; AWS RDS Cross-Region Read Replicas Create cross-region read replica aws rds create-db-instance-read-replica \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large Promote to standalone for DR aws rds promote-read-replica \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 Multi-Region with Patroni Patroni can manage clusters across regions with careful configuration: DR site configuration scope: myapp namespace: /service/ name: pg-dr-node-1 consul: host: dr-consul.service.consul:8500 Separate DCS for DR isolation tags: nofailover: true # DR site should not automatically become primary Backup-Based DR For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: Continuous WAL archiving to cross-region S3 bucket archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f' DR restore procedure pg_restore --dbname=proddb /backups/dr/latest_full.dump pg_receivewal --directory /backups/dr/wal Recovery Workflow #!/bin/bash Dr: restore to us-west-2 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target cat >> /var/lib/postgresql/dr/postgresql.conf restore_command = 'aws s3 cp s3://myapp-wal-dr/region/us-east-1/%f %p' recovery_target_time = '2026-05-12 10:00:00 UTC' recovery_target_action = promote EOF 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover pg_ctl start -D /var/lib/postgresql/dr 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity psql -c \"SELECT count(*) FROM critical_table;\" psql -c \"SELECT max(created_at) FROM orders;\" Backup Testing Backups are worthless until proven restorable. Regular testing is mandatory. Automated Restore Test #!/bin/bash Weekly restore test set -euo pipefail TEST_DIR=/tmp/dr_test_$(date +%Y%m%d) LOG_FILE=$TEST_DIR/restore.log mkdir -p $TEST_DIR echo \"=== DR Restore Test $(date) ===\" >> $LOG_FILE Full restore pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore >> $LOG_FILE 2>&1 Start database pg_ctl -D $TEST_DIR/data -l $TEST_DIR/pg.log start >> $LOG_FILE 2>&1 sleep 5 Verify echo \"Database size:\" psql -p 5433 -c \"SELECT pg_size_pretty(pg_database_size('proddb'));\" echo \"Row counts:\" psql -p 5433 -c \" SELECT 'users' as tbl, count(*) FROM users UNION ALL SELECT 'orders', count(*) FROM orders UNION ALL SELECT 'payments', count(*) FROM payments; \" echo \"Max dates (data freshness):\" psql -p 5433 -c \" SELECT 'users' as tbl, max(created_at) FROM users UNION ALL SELECT 'orders', max(created_at) FROM orders; \" Cleanup pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1 rm -rf $TEST_DIR echo \"=== Test Complete ===\" >> $LOG_FILE Schedule this via cron: 0 2 * * 0 /usr/local/bin/dr_restore_test.sh DR Plan Components A complete DR plan should document: * **Contact list**: Who to contact and escalation paths. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. Disaster Scenarios and Mitigations | Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time | Testing DR with Chaos Engineering Simulate region failure: block traffic to primary iptables -A INPUT -s dr-test-region -j DROP Trigger DR failover script ./dr_failover.sh --target us-west-2 Verify applications work from DR region curl -f https://dr-api.myapp.com/health Fail back ./dr_failback.sh --target us-east-1 Clean up iptables -D INPUT -s dr-test-region -j DROP Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope."
+      "articleBody": "Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Database Disaster Recovery: RPO, RTO, Cross-Region Replication Disaster recovery (DR) ensures your database can survive catastrophic events: region outages, data corruption, accidental deletions, or ransomware attacks. Unlike high availability, which handles component failures, DR addresses large-scale disasters. RPO and RTO Two metrics define DR requirements: **Recovery Point Objective (RPO)**: The maximum acceptable data loss measured in time. An RPO of 1 hour means you can lose at most 1 hour of data. **Recovery Time Objective (RTO)**: The maximum acceptable downtime. An RTO of 4 hours means the database must be operational within 4 hours of the disaster. | Scenario | RPO | RTO | Strategy | |----------|-----|-----|----------| | Internal tool | 24 hours | 24 hours | Daily backups, restore | | E-commerce | 5 minutes | 1 hour | Cross-region replication | | Financial trading | 0 (zero loss) | 5 minutes | Synchronous replication + DR site | Cross-Region Replication PostgreSQL Logical Replication Across Regions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1) CREATE PUBLICATION dr_pub FOR ALL TABLES; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2) CREATE SUBSCRIPTION dr_sub CONNECTION 'host=primary-us-east-1.example.com port=5432 dbname=proddb' PUBLICATION dr_pub WITH (copy_data = true, connect = true, create_slot = true); Logical replication works across regions with asynchronous delivery. Monitor lag carefully: SELECT pg_size_pretty( pg_wal_lsn_diff( pg_current_wal_lsn(), replay_lsn ) ) AS replication_lag FROM pg_stat_replication WHERE application_name = 'dr_sub'; AWS RDS Cross-Region Read Replicas Create cross-region read replica aws rds create-db-instance-read-replica \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large Promote to standalone for DR aws rds promote-read-replica \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 Multi-Region with Patroni Patroni can manage clusters across regions with careful configuration: DR site configuration scope: myapp namespace: /service/ name: pg-dr-node-1 consul: host: dr-consul.service.consul:8500 Separate DCS for DR isolation tags: nofailover: true # DR site should not automatically become primary Backup-Based DR For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: Continuous WAL archiving to cross-region S3 bucket archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f' DR restore procedure pg_restore --dbname=proddb /backups/dr/latest_full.dump pg_receivewal --directory /backups/dr/wal Recovery Workflow #!/bin/bash Dr: restore to us-west-2 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target cat >> /var/lib/postgresql/dr/postgresql.conf restore_command = 'aws s3 cp s3://myapp-wal-dr/region/us-east-1/%f %p' recovery_target_time = '2026-05-12 10:00:00 UTC' recovery_target_action = promote EOF 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover pg_ctl start -D /var/lib/postgresql/dr 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity psql -c \"SELECT count(*) FROM critical_table;\" psql -c \"SELECT max(created_at) FROM orders;\" Backup Testing Backups are worthless until proven restorable. Regular testing is mandatory. Automated Restore Test #!/bin/bash Weekly restore test set -euo pipefail TEST_DIR=/tmp/dr_test_$(date +%Y%m%d) LOG_FILE=$TEST_DIR/restore.log mkdir -p $TEST_DIR echo \"=== DR Restore Test $(date) ===\" >> $LOG_FILE Full restore pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore >> $LOG_FILE 2>&1 Start database pg_ctl -D $TEST_DIR/data -l $TEST_DIR/pg.log start >> $LOG_FILE 2>&1 sleep 5 Verify echo \"Database size:\" psql -p 5433 -c \"SELECT pg_size_pretty(pg_database_size('proddb'));\" echo \"Row counts:\" psql -p 5433 -c \" SELECT 'users' as tbl, count(*) FROM users UNION ALL SELECT 'orders', count(*) FROM orders UNION ALL SELECT 'payments', count(*) FROM payments; \" echo \"Max dates (data freshness):\" psql -p 5433 -c \" SELECT 'users' as tbl, max(created_at) FROM users UNION ALL SELECT 'orders', max(created_at) FROM orders; \" Cleanup pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1 rm -rf $TEST_DIR echo \"=== Test Complete ===\" >> $LOG_FILE Schedule this via cron: 0 2 * * 0 /usr/local/bin/dr_restore_test.sh DR Plan Components A complete DR plan should document: * **Contact list**: Who to contact and escalation paths. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. Disaster Scenarios and Mitigations | Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time | Testing DR with Chaos Engineering Simulate region failure: block traffic to primary iptables -A INPUT -s dr-test-region -j DROP Trigger DR failover script ./dr_failover.sh --target us-west-2 Verify applications work from DR region curl -f https://dr-api.myapp.com/health Fail back ./dr_failback.sh --target us-east-1 Clean up iptables -D INPUT -s dr-test-region -j DROP Run DR drills quarterly at minimum. Document every drill outcome and update the runbook with lessons learned. A DR plan that has never been tested is not a plan; it is a hope."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>Database Disaster Recovery: RPO, RTO, Cross-Region Replication</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database Disaster Recovery: RPO, RTO, Cross-Region Replication </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,7 +213,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RPO and RTO </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -221,7 +253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Recovery Point Objective (RPO)**: The maximum acceptable data loss measured in time. An RPO of 1 hour means you can lose at most 1 hour of data. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -255,6 +293,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Scenario | RPO | RTO | Strategy | |----------|-----|-----|----------| | Internal tool | 24 hours | 24 hours | Daily backups, restore | | E-commerce | 5 minutes | 1 hour | Cross-region replication | | Financial trading | 0 (zero loss) | 5 minutes | Synchronous replication + DR site | </p>
 <br>
 <br>
@@ -272,7 +313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cross-Region Replication </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -309,7 +356,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -349,7 +402,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -389,7 +448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CONNECTION 'host=primary-us-east-1.example.com port=5432 dbname=proddb'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +494,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WITH (copy_data = true, connect = true, create_slot = true);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -469,7 +540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT pg_size_pretty(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -509,7 +586,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pg_current_wal_lsn(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -549,7 +632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -589,7 +678,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM pg_stat_replication</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -629,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AWS RDS Cross-Region Read Replicas </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -669,6 +770,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws rds create-db-instance-read-replica \</p>
 <br>
 <br>
@@ -689,7 +793,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
 <br>
 <br>
 <br>
@@ -709,7 +816,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \</p>
 <br>
 <br>
 <br>
@@ -729,7 +839,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \</p>
 <br>
 <br>
 <br>
@@ -749,7 +862,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -789,6 +908,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws rds promote-read-replica \</p>
 <br>
 <br>
@@ -809,7 +931,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \</p>
 <br>
 <br>
 <br>
@@ -829,7 +954,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -866,7 +997,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Patroni can manage clusters across regions with careful configuration: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -906,7 +1043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scope: myapp</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -946,7 +1089,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: pg-dr-node-1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -986,7 +1135,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>host: dr-consul.service.consul:8500</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1026,7 +1181,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tags:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1066,6 +1227,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Backup-Based DR </p>
 <br>
 <br>
@@ -1083,7 +1247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1123,7 +1293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1163,7 +1339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pg_restore --dbname=proddb /backups/dr/latest_full.dump</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1203,6 +1385,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Recovery Workflow </p>
 <br>
 <br>
@@ -1223,7 +1408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>#!/bin/bash</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1263,7 +1454,13 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\. Restore latest full backup</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1303,7 +1500,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\. Set recovery target</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1343,7 +1546,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>restore_command = 'aws s3 cp s3://myapp-wal-dr/region/us-east-1/%f %p'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1383,7 +1592,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>recovery_target_action = promote</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1423,7 +1638,13 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\. Start and recover</h1>
+<br>
+<br>
+<br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1463,7 +1684,13 @@
 <br>
 <br>
 <br>
-<h1>4\\\\\\\\\\\\\\\\. Verify data integrity</h1>
+<br>
+<br>
+<br>
+<h1>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1503,7 +1730,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>psql -c "SELECT max(created_at) FROM orders;"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1540,6 +1773,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Backups are worthless until proven restorable. Regular testing is mandatory. </p>
 <br>
 <br>
@@ -1557,7 +1793,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Automated Restore Test </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Weekly restore test</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1637,7 +1885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TEST_DIR=/tmp/dr_test_$(date +%Y%m%d)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1677,7 +1931,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mkdir -p $TEST_DIR</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1717,7 +1977,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Full restore</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1757,7 +2023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Start database</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1797,7 +2069,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sleep 5</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1837,7 +2115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "Database size:"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1877,6 +2161,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "Row counts:"</p>
 <br>
 <br>
@@ -1897,7 +2184,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>psql -p 5433 -c "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1937,7 +2230,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UNION ALL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1977,7 +2276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UNION ALL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2017,7 +2322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2057,7 +2368,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>psql -p 5433 -c "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2097,7 +2414,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UNION ALL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2137,7 +2460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2177,7 +2506,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2217,7 +2552,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "=== Test Complete ===" >> $LOG_FILE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2257,7 +2598,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>0 2 * * 0 /usr/local/bin/dr_restore_test.sh</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2294,7 +2641,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A complete DR plan should document: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2331,7 +2684,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2365,6 +2724,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time | </p>
 <br>
 <br>
@@ -2382,7 +2744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Testing DR with Chaos Engineering </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2422,7 +2790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iptables -A INPUT -s dr-test-region -j DROP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2462,7 +2836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>./dr_failover.sh --target us-west-2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2502,7 +2882,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>curl -f https://dr-api.myapp.com/health</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2542,7 +2928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>./dr_failback.sh --target us-east-1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2582,7 +2974,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iptables -D INPUT -s dr-test-region -j DROP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

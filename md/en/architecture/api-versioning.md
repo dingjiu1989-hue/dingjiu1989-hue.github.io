@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-versioning.html
   
 
 
+# API Versioning Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 APIs evolve. New features are added, existing endpoints change, and eventually, breaking changes are unavoidable. API versioning is the practice of managing these changes without breaking existing clients. This article covers the major versioning strategies and when to use each. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The Core Challenge
   
   
   
+  
+  
+  
 
 
 Once an API is public, changing it is risky. A client might depend on the current response format, and changing it could break the client's application. Versioning gives clients a choice: stay on the old version or upgrade to the new one. 
 
+  
+  
+  
   
   
   
@@ -184,6 +219,9 @@ Ideally, changes are backward compatible -- adding fields, relaxing validation, 
   
   
   
+  
+  
+  
 
 
 URL Path Versioning 
@@ -204,10 +242,16 @@ URL Path Versioning
   
   
   
+  
+  
+  
 
 
 The most common and straightforward approach: 
 
+  
+  
+  
   
   
   
@@ -250,10 +294,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 /api/v2/users
 
+  
+  
+  
   
   
   
@@ -293,10 +343,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 * Extremely simple to implement and understand.
 
+  
+  
+  
   
   
   
@@ -333,10 +389,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 * Visible and explicit -- clients can see the version they are using.
 
+  
+  
+  
   
   
   
@@ -376,10 +438,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 **Cons:**
 
+  
+  
+  
   
   
   
@@ -416,10 +484,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 * Difficult to manage granular versioning (versioning one endpoint without versioning others).
 
+  
+  
+  
   
   
   
@@ -459,10 +533,16 @@ The most common and straightforward approach:
   
   
   
+  
+  
+  
 
 
 **Best for:** Public APIs where simplicity and discoverability are priorities. Used by Twitter, Stripe, and GitHub. 
 
+  
+  
+  
   
   
   
@@ -499,10 +579,16 @@ Query Parameter Versioning
   
   
   
+  
+  
+  
 
 
 Include the version as a query parameter: 
 
+  
+  
+  
   
   
   
@@ -545,10 +631,16 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 /api/users?version=2
 
+  
+  
+  
   
   
   
@@ -588,6 +680,9 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 * Keeps the URL structure clean.
@@ -608,10 +703,16 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 * The default (no version) can be the latest version.
 
+  
+  
+  
   
   
   
@@ -651,10 +752,16 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 **Cons:**
 
+  
+  
+  
   
   
   
@@ -691,6 +798,9 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 * Easily overlooked by developers.
@@ -711,10 +821,16 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 * Caching becomes more complex since the same URL with different query parameters may produce different responses.
 
+  
+  
+  
   
   
   
@@ -754,6 +870,9 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 **Best for:** Internal APIs or APIs where URL cleanliness is a priority over visibility. 
@@ -774,10 +893,16 @@ Include the version as a query parameter:
   
   
   
+  
+  
+  
 
 
 Header Versioning 
 
+  
+  
+  
   
   
   
@@ -817,10 +942,16 @@ Include the version in an HTTP header:
   
   
   
+  
+  
+  
 
 
 GET /api/users
 
+  
+  
+  
   
   
   
@@ -863,10 +994,16 @@ Accept: application/vnd.myapi.v1+json
   
   
   
+  
+  
+  
 
 
 Or a custom header: 
 
+  
+  
+  
   
   
   
@@ -909,10 +1046,16 @@ GET /api/users
   
   
   
+  
+  
+  
 
 
 X-API-Version: 1
 
+  
+  
+  
   
   
   
@@ -952,6 +1095,9 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 * Keeps URLs clean and RESTful.
@@ -972,10 +1118,16 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 * The resource is identified by URL, and the representation is negotiated via headers.
 
+  
+  
+  
   
   
   
@@ -1015,10 +1167,16 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 **Cons:**
 
+  
+  
+  
   
   
   
@@ -1055,6 +1213,9 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 * Harder to test and debug (need to set headers in tools like cURL).
@@ -1075,10 +1236,16 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 * More complex routing at the proxy level.
 
+  
+  
+  
   
   
   
@@ -1118,10 +1285,16 @@ X-API-Version: 1
   
   
   
+  
+  
+  
 
 
 **Best for:** REST purists who want to follow HTTP semantics strictly. Used by GitHub (in the past) and Twilio. 
 
+  
+  
+  
   
   
   
@@ -1158,10 +1331,16 @@ Choosing a Strategy
   
   
   
+  
+  
+  
 
 
 | Strategy | Visibility | Complexity | RESTful | Caching | Routing | |----------|------------|------------|---------|---------|---------| | URL Path | High | Low | Moderate | Simple | Simple | | Query Param | Medium | Low | Moderate | Complex | Complex | | Header | Low | Medium | High | Simple | Complex | 
 
+  
+  
+  
   
   
   
@@ -1201,6 +1380,9 @@ There is no universally correct choice. Consider your audience:
   
   
   
+  
+  
+  
 
 
 * For public APIs with a broad developer audience, URL path versioning is the safest bet. It is simple, visible, and well-understood.
@@ -1221,10 +1403,16 @@ There is no universally correct choice. Consider your audience:
   
   
   
+  
+  
+  
 
 
 * For internal APIs, any approach works. Query parameter versioning is the simplest to implement.
 
+  
+  
+  
   
   
   
@@ -1264,10 +1452,16 @@ There is no universally correct choice. Consider your audience:
   
   
   
+  
+  
+  
 
 
 Semantic Versioning for APIs 
 
+  
+  
+  
   
   
   
@@ -1307,6 +1501,9 @@ Apply semantic versioning principles to your API:
   
   
   
+  
+  
+  
 
 
 * **Major version** (v1, v2): Breaking changes that require client updates.
@@ -1327,10 +1524,16 @@ Apply semantic versioning principles to your API:
   
   
   
+  
+  
+  
 
 
 * **Minor version** (v1.1): Backward-compatible additions (new endpoints, new optional fields).
 
+  
+  
+  
   
   
   
@@ -1370,10 +1573,16 @@ Apply semantic versioning principles to your API:
   
   
   
+  
+  
+  
 
 
 In practice, most APIs only expose the major version and use minor/patch versions internally for documentation purposes. 
 
+  
+  
+  
   
   
   
@@ -1410,6 +1619,9 @@ Supporting Multiple Versions
   
   
   
+  
+  
+  
 
 
 When you support multiple API versions, you need a strategy for maintaining old versions: 
@@ -1430,10 +1642,16 @@ When you support multiple API versions, you need a strategy for maintaining old 
   
   
   
+  
+  
+  
 
 
 **Deprecation policy.** Announce deprecation well in advance. Give clients at least 6-12 months to migrate. Include deprecation warnings in response headers: 
 
+  
+  
+  
   
   
   
@@ -1476,10 +1694,16 @@ Sunset: Sat, 31 Dec 2026 23:59:59 GMT
   
   
   
+  
+  
+  
 
 
 Deprecation: true
 
+  
+  
+  
   
   
   
@@ -1519,10 +1743,16 @@ Deprecation: true
   
   
   
+  
+  
+  
 
 
 **Version sunset.** Actually retire old versions. Maintaining versions indefinitely is expensive. Be clear about your timeline and enforce it. 
 
+  
+  
+  
   
   
   
@@ -1559,6 +1789,9 @@ Implementation Patterns
   
   
   
+  
+  
+  
 
 
 **Code branching.** Maintain separate code for each version. Simple but leads to code duplication. Use only for small, stable APIs. 
@@ -1579,10 +1812,16 @@ Implementation Patterns
   
   
   
+  
+  
+  
 
 
 **Conditional logic.** Single codebase with version checks. More maintainable but can become complex: 
 
+  
+  
+  
   
   
   
@@ -1625,10 +1864,16 @@ if version == 1:
   
   
   
+  
+  
+  
 
 
 return serialize_v1(data)
 
+  
+  
+  
   
   
   
@@ -1671,10 +1916,16 @@ elif version == 2:
   
   
   
+  
+  
+  
 
 
 return serialize_v2(data)
 
+  
+  
+  
   
   
   
@@ -1717,10 +1968,16 @@ return serialize_v2(data)
   
   
   
+  
+  
+  
 
 
 if request_version == 1:
 
+  
+  
+  
   
   
   
@@ -1763,10 +2020,16 @@ response = transform_to_v1(handler.handle(request))
   
   
   
+  
+  
+  
 
 
 elif request_version == 2:
 
+  
+  
+  
   
   
   
@@ -1809,6 +2072,9 @@ response = transform_to_v2(handler.handle(request))
   
   
   
+  
+  
+  
 
 
 **Adapter layer.** Use the adapter pattern to translate between internal models and versioned API responses. The cleanest approach for complex APIs. 
@@ -1829,10 +2095,16 @@ response = transform_to_v2(handler.handle(request))
   
   
   
+  
+  
+  
 
 
 Avoiding Versioning Altogether 
 
+  
+  
+  
   
   
   
@@ -1872,10 +2144,16 @@ The best versioning strategy is not needing one. Design your API to be extensibl
   
   
   
+  
+  
+  
 
 
 * Include optional fields rather than creating new endpoints.
 
+  
+  
+  
   
   
   
@@ -1912,6 +2190,9 @@ The best versioning strategy is not needing one. Design your API to be extensibl
   
   
   
+  
+  
+  
 
 
 * Add new endpoints without modifying existing ones.
@@ -1932,10 +2213,16 @@ The best versioning strategy is not needing one. Design your API to be extensibl
   
   
   
+  
+  
+  
 
 
 * Return more data than clients need (clients can ignore extra fields).
 
+  
+  
+  
   
   
   
@@ -1975,6 +2262,9 @@ The best versioning strategy is not needing one. Design your API to be extensibl
   
   
   
+  
+  
+  
 
 
 GraphQL eliminates many versioning concerns by letting clients specify exactly what they need. 
@@ -1995,10 +2285,16 @@ GraphQL eliminates many versioning concerns by letting clients specify exactly w
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

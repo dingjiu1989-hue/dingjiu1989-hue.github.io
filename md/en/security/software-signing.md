@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/software-signing.html
   
 
 
+# Software Signing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Sign Software? 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Software signing verifies the origin and integrity of code. It ensures that arti
   
   
   
+  
+  
+  
 
 
 GPG Signing 
@@ -164,10 +196,16 @@ GPG Signing
   
   
   
+  
+  
+  
 
 
 Traditional signing with PGP/GPG: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ Traditional signing with PGP/GPG:
   
   
   
+  
+  
+  
 
 
 gpg --full-generate-key
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ gpg --armor --export "developer@example.com" > public.key
   
   
   
+  
+  
+  
 
 
 # Sign artifacts
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ gpg --armor --detach-sign myapp.tar.gz
   
   
   
+  
+  
+  
 
 
 gpg --verify myapp.tar.gz.asc myapp.tar.gz
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ gpg --verify myapp.tar.gz.asc myapp.tar.gz
   
   
   
+  
+  
+  
 
 
 git config commit.gpgsign true
 
+  
+  
+  
   
   
   
@@ -394,10 +456,16 @@ git config user.signingkey KEY_ID
   
   
   
+  
+  
+  
 
 
 git commit -S -m "Signed commit"
 
+  
+  
+  
   
   
   
@@ -440,10 +508,16 @@ git commit -S -m "Signed commit"
   
   
   
+  
+  
+  
 
 
 import gnupg
 
+  
+  
+  
   
   
   
@@ -486,10 +560,16 @@ def verify_signature(artifact, signature_file):
   
   
   
+  
+  
+  
 
 
 gpg = gnupg.GPG()
 
+  
+  
+  
   
   
   
@@ -532,10 +612,16 @@ with open(signature_file, "rb") as sf:
   
   
   
+  
+  
+  
 
 
 verified = gpg.verify_file(sf, artifact)
 
+  
+  
+  
   
   
   
@@ -578,10 +664,16 @@ if verified.valid:
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -624,10 +716,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "fingerprint": verified.fingerprint,
 
+  
+  
+  
   
   
   
@@ -670,6 +768,9 @@ return {
   
   
   
+  
+  
+  
 
 
 "timestamp": verified.timestamp
@@ -693,10 +794,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -739,6 +846,9 @@ return {"valid": False}
   
   
   
+  
+  
+  
 
 
 Sigstore and cosign 
@@ -759,10 +869,16 @@ Sigstore and cosign
   
   
   
+  
+  
+  
 
 
 Sigstore simplifies code signing with keyless options: 
 
+  
+  
+  
   
   
   
@@ -805,10 +921,16 @@ Sigstore simplifies code signing with keyless options:
   
   
   
+  
+  
+  
 
 
 cosign sign myregistry.io/myapp:latest
 
+  
+  
+  
   
   
   
@@ -851,6 +973,9 @@ cosign sign myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 cosign sign \
@@ -874,10 +999,16 @@ cosign sign \
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity-token $GITHUB_TOKEN \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--identity-token $GITHUB_TOKEN \
 
+  
+  
+  
   
   
   
@@ -920,10 +1051,16 @@ ghcr.io/myorg/myapp@sha256:abc123
   
   
   
+  
+  
+  
 
 
 # Verify
 
+  
+  
+  
   
   
   
@@ -966,33 +1103,42 @@ cosign verify \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-identity "developer@example.com" \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-oidc-issuer "https://github.com/login/oauth" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-identity "developer@example.com" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--certificate-oidc-issuer "https://github.com/login/oauth" \
+
+  
+  
+  
   
   
   
@@ -1035,10 +1181,16 @@ myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 # Cosign in CI pipeline
 
+  
+  
+  
   
   
   
@@ -1081,10 +1233,16 @@ jobs:
   
   
   
+  
+  
+  
 
 
 sign:
 
+  
+  
+  
   
   
   
@@ -1127,10 +1285,16 @@ runs-on: ubuntu-latest
   
   
   
+  
+  
+  
 
 
 permissions:
 
+  
+  
+  
   
   
   
@@ -1173,10 +1337,16 @@ id-token: write
   
   
   
+  
+  
+  
 
 
 packages: write
 
+  
+  
+  
   
   
   
@@ -1219,33 +1389,16 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: sigstore/cosign-installer@main
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
   
   
   
@@ -1267,8 +1420,37 @@ steps:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Sign container image
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: sigstore/cosign-installer@main
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Sign container image
+
+  
+  
+  
   
   
   
@@ -1292,6 +1474,9 @@ steps:
 
 run: |
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ cosign sign \
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes \
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ ghcr.io/${{ github.repository }}@${{ steps.push.outputs.digest }}
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Sign SBOM
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Sign SBOM
 
+  
+  
+  
   
   
   
@@ -1426,6 +1623,9 @@ run: |
   
   
   
+  
+  
+  
 
 
 cosign attest-blob sbom.json \
@@ -1449,33 +1649,16 @@ cosign attest-blob sbom.json \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.json \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.json \
 
+  
+  
+  
   
   
   
@@ -1497,8 +1680,37 @@ cosign attest-blob sbom.json \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--yes
+
+  
+  
+  
   
   
   
@@ -1538,10 +1750,16 @@ in-toto Attestations
   
   
   
+  
+  
+  
 
 
 in-toto provides end-to-end supply chain integrity: 
 
+  
+  
+  
   
   
   
@@ -1584,10 +1802,16 @@ in-toto provides end-to-end supply chain integrity:
   
   
   
+  
+  
+  
 
 
 from in_toto_attestation.v1 import Statement, Attestation
 
+  
+  
+  
   
   
   
@@ -1630,10 +1854,16 @@ def create_attestation(subject, predicate_type, predicate):
   
   
   
+  
+  
+  
 
 
 statement = Statement(
 
+  
+  
+  
   
   
   
@@ -1676,10 +1906,16 @@ type="https://in-toto.io/Statement/v1",
   
   
   
+  
+  
+  
 
 
 subject=[{
 
+  
+  
+  
   
   
   
@@ -1722,6 +1958,9 @@ subject=[{
   
   
   
+  
+  
+  
 
 
 "digest": subject["digest"]
@@ -1745,10 +1984,16 @@ subject=[{
   
   
   
+  
+  
+  
 
 
 }],
 
+  
+  
+  
   
   
   
@@ -1791,6 +2036,9 @@ predicate_type=predicate_type,
   
   
   
+  
+  
+  
 
 
 predicate=predicate
@@ -1814,10 +2062,16 @@ predicate=predicate
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1860,10 +2114,16 @@ return Attestation(
   
   
   
+  
+  
+  
 
 
 statement=statement,
 
+  
+  
+  
   
   
   
@@ -1906,10 +2166,16 @@ signatures=[{
   
   
   
+  
+  
+  
 
 
 "sig": sign_statement(statement),
 
+  
+  
+  
   
   
   
@@ -1952,6 +2218,9 @@ signatures=[{
   
   
   
+  
+  
+  
 
 
 }]
@@ -1975,10 +2244,16 @@ signatures=[{
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2021,10 +2296,16 @@ signatures=[{
   
   
   
+  
+  
+  
 
 
 provenance = create_attestation(
 
+  
+  
+  
   
   
   
@@ -2067,10 +2348,16 @@ subject={"name": "myapp", "digest": {"sha256": "abc..."}},
   
   
   
+  
+  
+  
 
 
 predicate_type="https://slsa.dev/provenance/v1",
 
+  
+  
+  
   
   
   
@@ -2113,10 +2400,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 "builder": {"id": "https://github.com/actions/runner"},
 
+  
+  
+  
   
   
   
@@ -2159,10 +2452,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 "materials": [{
 
+  
+  
+  
   
   
   
@@ -2205,10 +2504,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 "digest": {"sha1": "def..."}
 
+  
+  
+  
   
   
   
@@ -2251,10 +2556,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 "buildConfig": {
 
+  
+  
+  
   
   
   
@@ -2297,10 +2608,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 "command": "docker build -t myapp .",
 
+  
+  
+  
   
   
   
@@ -2343,6 +2660,9 @@ predicate={
   
   
   
+  
+  
+  
 
 
 }]
@@ -2366,26 +2686,6 @@ predicate={
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2393,6 +2693,35 @@ predicate={
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2435,10 +2764,16 @@ predicate={
   
   
   
+  
+  
+  
 
 
 Verification Policies 
 
+  
+  
+  
   
   
   
@@ -2481,10 +2816,16 @@ Verification Policies
   
   
   
+  
+  
+  
 
 
 verification_policy:
 
+  
+  
+  
   
   
   
@@ -2527,33 +2868,16 @@ container_images:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signature: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- allowed_signers:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signature: true
 
+  
+  
+  
   
   
   
@@ -2575,8 +2899,37 @@ container_images:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- identity: "*.github.com"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- allowed_signers:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- identity: "*.github.com"
+
+  
+  
+  
   
   
   
@@ -2619,33 +2972,16 @@ issuer: "https://token.actions.githubusercontent.com"
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_attestations:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- slsa_provenance
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_attestations:
 
+  
+  
+  
   
   
   
@@ -2667,8 +3003,37 @@ issuer: "https://token.actions.githubusercontent.com"
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vulnerability_scan
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- slsa_provenance
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vulnerability_scan
+
+  
+  
+  
   
   
   
@@ -2711,33 +3076,16 @@ packages:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_pgp_signature: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trusted_keys:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_pgp_signature: true
 
+  
+  
+  
   
   
   
@@ -2759,7 +3107,7 @@ packages:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fingerprint: "ABCD1234..."
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- trusted_keys:
 
   
   
@@ -2780,10 +3128,42 @@ packages:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fingerprint: "EFGH5678..."
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fingerprint: "ABCD1234..."
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fingerprint: "EFGH5678..."
+
+  
+  
+  
   
   
   
@@ -2826,33 +3206,42 @@ git_commits:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signed_commits: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- minimum_key_strength: 2048
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- require_signed_commits: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- minimum_key_strength: 2048
+
+  
+  
+  
   
   
   
@@ -2876,6 +3265,9 @@ git_commits:
 
 Conclusion 
 
+  
+  
+  
   
   
   

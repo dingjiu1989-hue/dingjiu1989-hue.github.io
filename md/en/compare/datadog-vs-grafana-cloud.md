@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/datadog-vs-grafana-cloud.html
   
 
 
+# Datadog vs Grafana Cloud: Monitoring, APM, Logs, Pricing, and Self-Hosted Options
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Datadog and Grafana Cloud are the two leading observability platforms. Both offer monitoring, APM, logging, and dashboards. But they differ dramatically in pricing philosophy, self-hosting options, and ease of use. Here is the comparison.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Datadog and Grafana Cloud are the two leading observability platforms. Both offe
   
   
   
+  
+  
+  
 
 
 Datadog is a fully managed, vertically integrated observability platform. It offers everything in one product with strong cross-product integration. Metrics, traces, and logs are correlated by default. The trade-off is cost and vendor lock-in.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Grafana Cloud is built around the open-source Grafana ecosystem. It uses Prometh
   
   
   
+  
+  
+  
 
 
 ##  Infrastructure Monitoring
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Datadog's infrastructure monitoring is best in class. The agent installation is 
   
   
   
+  
+  
+  
 
 
 Grafana Cloud uses the Prometheus agent or Grafana Agent for metric collection. Dashboards are customizable but require more setup to reach the same level of detail as Datadog's defaults. However, once configured, Grafana dashboards are more flexible and can display data from any source.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ For organizations already using Prometheus in-house, Grafana Cloud is a natural 
   
   
   
+  
+  
+  
 
 
 ##  APM
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Datadog APM is deeply integrated with the rest of the platform. Traces connect t
   
   
   
+  
+  
+  
 
 
 Grafana Cloud uses Grafana Tempo for traces. Tempo is a distributed tracing backend that works with OpenTelemetry. Setup requires more configuration than Datadog, but the OpenTelemetry integration means you are using an open standard rather than a proprietary agent.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Datadog APM is easier to set up and provides richer default views. Grafana Tempo
   
   
   
+  
+  
+  
 
 
 ##  Log Management
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Datadog Log Management is a full-featured log analytics platform. Ingestion, par
   
   
   
+  
+  
+  
 
 
 Grafana Cloud uses Loki for log aggregation. Loki is designed to be cost-effective by indexing metadata rather than the full log content. This makes Loki significantly cheaper than Datadog for high-volume logging, but query capabilities are more limited.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ If you need advanced log analytics and have the budget, Datadog is better. If yo
   
   
   
+  
+  
+  
 
 
 ##  Pricing
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Pricing is where the platforms diverge most dramatically. Datadog is expensive, 
   
   
   
+  
+  
+  
 
 
 Grafana Cloud is significantly cheaper. The free tier includes 10,000 metric series, 50 GB of logs, and 50 GB of traces per month. Paid plans start at $49 per month for 20,000 metric series. At the scale where Datadog costs thousands, Grafana Cloud costs hundreds.
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ The cost difference is the primary reason organizations switch from Datadog to G
   
   
   
+  
+  
+  
 
 
 ##  Self-Hosted Options
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Grafana Cloud's killer feature is the ability to self-host. You can run the enti
   
   
   
+  
+  
+  
 
 
 Datadog has no self-hosted option. You must use their cloud platform. This is fine for most teams but problematic for organizations with data residency requirements or air-gapped environments.
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ For regulated industries or cost-sensitive organizations, Grafana's self-hosting
   
   
   
+  
+  
+  
 
 
 ##  Migration Considerations
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ Datadog does not make it easy to export your data. Alert configurations, dashboa
   
   
   
+  
+  
+  
 
 
 Consider your future scale. Datadog costs grow linearly with infrastructure. Grafana Cloud costs grow more slowly. If you expect significant growth, Grafana Cloud's pricing model will save substantial money over time.
 
+  
+  
+  
   
   
   

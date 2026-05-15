@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/nginx-configuration.html
   
   
   
+  
+  
+  
+
+
+# Nginx Configuration: Performance and Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Nginx is the most popular web server and reverse proxy. Proper configuration balances performance, security, and resource usage.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Nginx is the most popular web server and reverse proxy. Proper configuration bal
   
   
   
+  
+  
+  
 
 
 Configure Nginx as a reverse proxy to backend applications. Use proxy_pass to forward requests. Set proxy_set_header to forward client connection details. Configure proxy_buffering for streaming applications.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ WebSocket proxying requires specific headers: Upgrade and Connection. FastCGI pr
   
   
   
+  
+  
+  
 
 
 ##  Load Balancing
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Nginx distributes traffic across backend servers. Load balancing methods include
   
   
   
+  
+  
+  
 
 
 Health checks monitor backend availability. Active checks (nginx plus) test endpoints periodically. Passive checks mark servers as failed after connection or timeout errors. max_fails and fail_timeout control failure detection.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Health checks monitor backend availability. Active checks (nginx plus) test endp
   
   
   
+  
+  
+  
 
 
 Nginx caching reduces backend load. proxy_cache_path defines the cache location and parameters. proxy_cache enables caching for specific locations. Cache keys based on request URI, query string, and headers.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Cache bypass headers (Cache-Control: no-cache) from the backend prevent caching 
   
   
   
+  
+  
+  
 
 
 ##  SSL/TLS
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Configure HTTPS with strong ciphers and protocols. Use TLS 1.2 and 1.3 only. Mod
   
   
   
+  
+  
+  
 
 
 OCSP stapling improves TLS performance. SSL session cache reduces handshake overhead. Use Let's Encrypt with Certbot for automated certificate management. Redirect HTTP to HTTPS in the server block.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ OCSP stapling improves TLS performance. SSL session cache reduces handshake over
   
   
   
+  
+  
+  
 
 
 Add security headers: X-Content-Type-Options: nosniff, X-Frame-Options: DENY, X-XSS-Protection: 0 (modern browsers handle XSS), Referrer-Policy: strict-origin-when-cross-origin, Permissions-Policy for feature control. Content-Security-Policy headers mitigate XSS and data injection attacks.
 
+  
+  
+  
   
   
   

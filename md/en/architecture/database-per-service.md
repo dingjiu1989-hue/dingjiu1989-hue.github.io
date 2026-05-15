@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/database-per-service.html
   
 
 
+# Database per Service Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The database per service pattern is a fundamental principle of microservice architecture: each service owns its data exclusively and no other service can directly access its database. This pattern ensures loose coupling between services, allowing them to evolve independently, choose appropriate storage technologies, and scale autonomously. However, it introduces significant challenges for queries that span multiple services. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Data Ownership
   
   
   
+  
+  
+  
 
 
 In the database per service pattern, each service has complete ownership of its data schema, storage technology, and access patterns. No other service can read or write to the database directly—all data access must go through the owning service's API. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ This ownership is essential for independent evolution. A service can change its 
   
   
   
+  
+  
+  
 
 
 Ownership also clarifies responsibility. When data issues arise, there is no ambiguity about which team owns the data. Data quality, consistency, and backup policies are the responsibility of the owning service. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Choosing Storage Technology
   
   
   
+  
+  
+  
 
 
 Database per service allows each service to choose the storage technology that best fits its needs. A product catalog service might use a document database for flexible product schemas. An analytics service might use a columnar store for efficient aggregations. A session store might use Redis for fast key-value access. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Polyglot persistence—using different database technologies for different servi
   
   
   
+  
+  
+  
 
 
 Queries Across Services 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ The most significant challenge with database per service is queries that need da
   
   
   
+  
+  
+  
 
 
 Several patterns address cross-service queries. API composition involves a service or gateway calling multiple services and combining results in memory. This is simple but can be slow and resource-intensive for complex queries. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ The CQRS pattern creates specialized query services that maintain pre-joined rea
   
   
   
+  
+  
+  
 
 
 The materialized view pattern creates dedicated read services that aggregate data from multiple sources. These services own the read model and keep it synchronized through event subscriptions. This is the most scalable approach for complex cross-service queries. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Transactions Across Services
   
   
   
+  
+  
+  
 
 
 Distributed transactions across services require the Saga pattern rather than traditional ACID transactions. The Saga pattern coordinates a series of local transactions with compensating actions. This ensures data consistency without requiring a shared database or distributed transaction coordinator. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ Performance implications of cross-service queries are significant. Each cross-se
   
   
   
+  
+  
+  
 
 
 Eventual Consistency 
 
+  
+  
+  
   
   
   
@@ -464,10 +541,16 @@ Database per service means that the system is eventually consistent. When data c
   
   
   
+  
+  
+  
 
 
 Strategies include displaying stale data with clear indicators, using optimistic UI updates, and designing workflows that tolerate temporary inconsistencies. The key is understanding which operations require strong consistency and which tolerate eventual consistency. 
 
+  
+  
+  
   
   
   
@@ -504,6 +587,9 @@ Practical Implementation
   
   
   
+  
+  
+  
 
 
 Organizations adopting database per service should start by identifying service boundaries that align with data ownership. Each service should own data that naturally belongs to its domain. Cross-service data should be analyzed to identify whether the service boundaries are correct or whether data synchronization is needed. 
@@ -524,10 +610,16 @@ Organizations adopting database per service should start by identifying service 
   
   
   
+  
+  
+  
 
 
 The pattern is most effective when combined with event-driven communication. Services publish events when their data changes, and other services consume events to update their cached or duplicated data. This reduces the need for synchronous cross-service queries. 
 
+  
+  
+  
   
   
   

@@ -1,7 +1,7 @@
 ---
 title: "Zustand vs Redux vs Jotai"
 description: "Compare Zustand, Redux, and Jotai for React state management — API design, boilerplate, performance, and which state manager fits your project."
-date: 2026-05-11
+date: 2026-05-15
 board: compare
 url: https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html
 ---
@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/zustand-vs-redux.html
   
 
 
+# Zustand vs Redux vs Jotai
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ React state management has evolved significantly. Redux, once the default choice
   
   
   
+  
+  
+  
 
 
 ##  Redux Toolkit
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Redux Toolkit (RTK) is Redux's modern incarnation, eliminating much of the boile
   
   
   
+  
+  
+  
 
 
 **Philosophy:** Single centralized store with predictable updates through reducers and actions.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
   
   
   
+  
+  
+  
 
 
 const counterSlice = createSlice({
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ name: "counter",
   
   
   
+  
+  
+  
 
 
 initialState: { value: 0 },
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ reducers: {
   
   
   
+  
+  
+  
 
 
 increment: (state) => { state.value += 1; },
 
+  
+  
+  
   
   
   
@@ -442,6 +504,9 @@ incrementBy: (state, action) => { state.value += action.payload; },
   
   
   
+  
+  
+  
 
 
 },
@@ -468,10 +533,16 @@ incrementBy: (state, action) => { state.value += action.payload; },
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ const store = configureStore({
   
   
   
+  
+  
+  
 
 
 reducer: { counter: counterSlice.reducer },
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ reducer: { counter: counterSlice.reducer },
   
   
   
+  
+  
+  
 
 
 export const { increment, incrementBy } = counterSlice.actions;
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ export type RootState = ReturnType;
   
   
   
+  
+  
+  
 
 
 // In component:
 
+  
+  
+  
   
   
   
@@ -676,6 +765,9 @@ function Counter() {
   
   
   
+  
+  
+  
 
 
 const count = useSelector((state: RootState) => state.counter.value);
@@ -702,10 +794,16 @@ const count = useSelector((state: RootState) => state.counter.value);
   
   
   
+  
+  
+  
 
 
 const dispatch = useDispatch();
 
+  
+  
+  
   
   
   
@@ -757,10 +855,16 @@ return (
   
   
   
+  
+  
+  
 
 
 {count}
 
+  
+  
+  
   
   
   
@@ -812,6 +916,9 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 );
@@ -838,10 +945,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -890,10 +1003,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * Mature ecosystem with middleware (Redux Thunk, Redux Saga)
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * TypeScript integration is excellent with RTK
 
+  
+  
+  
   
   
   
@@ -982,10 +1107,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * Well-documented for complex async flows
 
+  
+  
+  
   
   
   
@@ -1034,10 +1165,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * Conceptual overhead (actions, reducers, dispatch, selectors)
 
+  
+  
+  
   
   
   
@@ -1080,6 +1217,9 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * Selectors need memoization for performance
@@ -1103,10 +1243,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 * Centralized store can become a bottleneck in very large apps
 
+  
+  
+  
   
   
   
@@ -1155,10 +1301,16 @@ dispatch(increment())}>+1
   
   
   
+  
+  
+  
 
 
 Zustand provides a minimal store with React hooks, no providers needed.
 
+  
+  
+  
   
   
   
@@ -1207,10 +1359,16 @@ Zustand provides a minimal store with React hooks, no providers needed.
   
   
   
+  
+  
+  
 
 
 import { create } from "zustand";
 
+  
+  
+  
   
   
   
@@ -1259,10 +1417,16 @@ interface CounterState {
   
   
   
+  
+  
+  
 
 
 count: number;
 
+  
+  
+  
   
   
   
@@ -1311,10 +1475,16 @@ increment: () => void;
   
   
   
+  
+  
+  
 
 
 incrementBy: (amount: number) => void;
 
+  
+  
+  
   
   
   
@@ -1363,10 +1533,16 @@ incrementBy: (amount: number) => void;
   
   
   
+  
+  
+  
 
 
 const useCounterStore = create((set) => ({
 
+  
+  
+  
   
   
   
@@ -1415,10 +1591,16 @@ count: 0,
   
   
   
+  
+  
+  
 
 
 increment: () => set((state) => ({ count: state.count + 1 })),
 
+  
+  
+  
   
   
   
@@ -1467,10 +1649,16 @@ incrementBy: (amount) => set((state) => ({ count: state.count + amount })),
   
   
   
+  
+  
+  
 
 
 }));
 
+  
+  
+  
   
   
   
@@ -1519,10 +1707,16 @@ incrementBy: (amount) => set((state) => ({ count: state.count + amount })),
   
   
   
+  
+  
+  
 
 
 function Counter() {
 
+  
+  
+  
   
   
   
@@ -1571,6 +1765,9 @@ const count = useCounterStore((state) => state.count);
   
   
   
+  
+  
+  
 
 
 const increment = useCounterStore((state) => state.increment);
@@ -1597,10 +1794,16 @@ const increment = useCounterStore((state) => state.increment);
   
   
   
+  
+  
+  
 
 
 return (
 
+  
+  
+  
   
   
   
@@ -1652,10 +1855,16 @@ return (
   
   
   
+  
+  
+  
 
 
 +1
 
+  
+  
+  
   
   
   
@@ -1707,10 +1916,16 @@ return (
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1759,10 +1974,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Minimal boilerplate — create a store, use it
 
+  
+  
+  
   
   
   
@@ -1805,10 +2026,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Subscription-based rendering (only re-renders on accessed state)
 
+  
+  
+  
   
   
   
@@ -1851,6 +2078,9 @@ return (
   
   
   
+  
+  
+  
 
 
 * Tiny bundle size (~1KB)
@@ -1874,10 +2104,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Works outside React (vanilla JS stores)
 
+  
+  
+  
   
   
   
@@ -1926,10 +2162,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Fewer middleware options than Redux
 
+  
+  
+  
   
   
   
@@ -1972,6 +2214,9 @@ return (
   
   
   
+  
+  
+  
 
 
 * DevTools require additional setup
@@ -1995,10 +2240,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * No built-in data fetching or caching (unlike RTK Query or TanStack Query)
 
+  
+  
+  
   
   
   
@@ -2047,10 +2298,16 @@ return (
   
   
   
+  
+  
+  
 
 
 Jotai takes an atomic approach — each piece of state is an independent atom.
 
+  
+  
+  
   
   
   
@@ -2099,10 +2356,16 @@ Jotai takes an atomic approach — each piece of state is an independent atom.
   
   
   
+  
+  
+  
 
 
 import { atom, useAtom } from "jotai";
 
+  
+  
+  
   
   
   
@@ -2151,10 +2414,16 @@ import { atom, useAtom } from "jotai";
   
   
   
+  
+  
+  
 
 
 const countAtom = atom(0);
 
+  
+  
+  
   
   
   
@@ -2203,10 +2472,16 @@ const countAtom = atom(0);
   
   
   
+  
+  
+  
 
 
 const doubleCountAtom = atom((get) => get(countAtom) * 2);
 
+  
+  
+  
   
   
   
@@ -2255,10 +2530,16 @@ const doubleCountAtom = atom((get) => get(countAtom) * 2);
   
   
   
+  
+  
+  
 
 
 const userAtom = atom(async () => {
 
+  
+  
+  
   
   
   
@@ -2307,10 +2588,16 @@ const response = await fetch("/api/user");
   
   
   
+  
+  
+  
 
 
 return response.json();
 
+  
+  
+  
   
   
   
@@ -2359,10 +2646,16 @@ return response.json();
   
   
   
+  
+  
+  
 
 
 // In component
 
+  
+  
+  
   
   
   
@@ -2411,6 +2704,9 @@ function Counter() {
   
   
   
+  
+  
+  
 
 
 const [count, setCount] = useAtom(countAtom);
@@ -2437,10 +2733,16 @@ const [count, setCount] = useAtom(countAtom);
   
   
   
+  
+  
+  
 
 
 const [doubleCount] = useAtom(doubleCountAtom);
 
+  
+  
+  
   
   
   
@@ -2492,6 +2794,9 @@ return (
   
   
   
+  
+  
+  
 
 
 Count: {count}
@@ -2518,10 +2823,16 @@ Count: {count}
   
   
   
+  
+  
+  
 
 
 Double: {doubleCount}
 
+  
+  
+  
   
   
   
@@ -2573,10 +2884,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2625,10 +2942,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -2674,10 +2997,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * Built-in async atoms (no middleware for async)
 
+  
+  
+  
   
   
   
@@ -2720,6 +3049,9 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * Tiny bundle size (~3KB)
@@ -2743,10 +3075,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * No global store or Provider needed
 
+  
+  
+  
   
   
   
@@ -2795,10 +3133,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * Less mature ecosystem than Redux
 
+  
+  
+  
   
   
   
@@ -2841,6 +3185,9 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * Debugging can be harder with many small atoms
@@ -2864,10 +3211,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * SSR requires additional configuration
 
+  
+  
+  
   
   
   
@@ -2916,10 +3269,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | Aspect | Redux Toolkit | Zustand | Jotai |
 
+  
+  
+  
   
   
   
@@ -2968,10 +3327,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | Architecture | Centralized store | Multiple stores | Atomic atoms |
 
+  
+  
+  
   
   
   
@@ -3020,10 +3385,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | Bundle size | ~12KB | ~1KB | ~3KB |
 
+  
+  
+  
   
   
   
@@ -3072,10 +3443,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | DevTools | Built-in | Add-on | Add-on |
 
+  
+  
+  
   
   
   
@@ -3124,10 +3501,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | Async support | Thunks/Sagas | Native in store | Native atoms |
 
+  
+  
+  
   
   
   
@@ -3176,10 +3559,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 | Provider needed | Yes | No | No (optional) |
 
+  
+  
+  
   
   
   
@@ -3228,10 +3617,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 ##  When to Choose What
 
+  
+  
+  
   
   
   
@@ -3280,10 +3675,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You're building a large application with a big team
 
+  
+  
+  
   
   
   
@@ -3326,10 +3727,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You want RTK Query for data fetching and caching
 
+  
+  
+  
   
   
   
@@ -3372,10 +3779,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You need time-travel debugging and rich middleware
 
+  
+  
+  
   
   
   
@@ -3424,10 +3837,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You want minimal boilerplate and fast setup
 
+  
+  
+  
   
   
   
@@ -3470,10 +3889,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You're building a medium-sized application
 
+  
+  
+  
   
   
   
@@ -3516,10 +3941,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You need to access state outside React components
 
+  
+  
+  
   
   
   
@@ -3568,10 +3999,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You want React-idiomatic state (atoms = useState + useContext)
 
+  
+  
+  
   
   
   
@@ -3614,6 +4051,9 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You want built-in async support
@@ -3637,10 +4077,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * You're building an app with many small, independent state pieces
 
+  
+  
+  
   
   
   
@@ -3686,10 +4132,16 @@ setCount((c) => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

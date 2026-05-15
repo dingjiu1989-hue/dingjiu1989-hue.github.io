@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/nosql-databases-guide.html
   
 
 
+# NoSQL Databases Guide (MongoDB, DynamoDB, Firestore)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 What Are NoSQL Databases? 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ NoSQL databases are non-relational data stores designed for specific data models
   
   
   
+  
+  
+  
 
 
 NoSQL Database Types 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ NoSQL Database Types
   
   
   
+  
+  
+  
 
 
 MongoDB 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ MongoDB stores data as flexible JSON-like documents in collections. It is schema
   
   
   
+  
+  
+  
 
 
 Data Modeling 
 
+  
+  
+  
   
   
   
@@ -270,10 +317,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -316,10 +369,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 "username": "alice",
 
+  
+  
+  
   
   
   
@@ -362,10 +421,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 "profile": {
 
+  
+  
+  
   
   
   
@@ -408,10 +473,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 "avatar_url": "https://...",
 
+  
+  
+  
   
   
   
@@ -454,10 +525,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -500,10 +577,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -546,10 +629,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 "street": "123 Main St",
 
+  
+  
+  
   
   
   
@@ -592,10 +681,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -638,6 +733,9 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 "created_at": ISODate("2026-01-15T10:30:00Z")
@@ -661,10 +759,16 @@ Data Modeling
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -707,10 +811,16 @@ Query Examples
   
   
   
+  
+  
+  
 
 
 // Basic queries
 
+  
+  
+  
   
   
   
@@ -753,10 +863,16 @@ db.users.find({ email: "alice@example.com" })
   
   
   
+  
+  
+  
 
 
 db.users.find({ "addresses.city": "San Francisco" })
 
+  
+  
+  
   
   
   
@@ -799,10 +915,16 @@ db.users.find({ created_at: { $gte: ISODate("2026-01-01") } })
   
   
   
+  
+  
+  
 
 
 // Aggregation pipeline
 
+  
+  
+  
   
   
   
@@ -845,10 +967,16 @@ db.orders.aggregate([
   
   
   
+  
+  
+  
 
 
 { $match: { status: "completed" } },
 
+  
+  
+  
   
   
   
@@ -891,10 +1019,16 @@ db.orders.aggregate([
   
   
   
+  
+  
+  
 
 
 { $sort: { total: -1 } },
 
+  
+  
+  
   
   
   
@@ -937,10 +1071,16 @@ db.orders.aggregate([
   
   
   
+  
+  
+  
 
 
 ])
 
+  
+  
+  
   
   
   
@@ -983,10 +1123,16 @@ db.orders.aggregate([
   
   
   
+  
+  
+  
 
 
 db.users.createIndex({ email: 1 }, { unique: true })
 
+  
+  
+  
   
   
   
@@ -1029,10 +1175,16 @@ db.orders.createIndex({ customer_id: 1, created_at: -1 })
   
   
   
+  
+  
+  
 
 
 When to Use MongoDB 
 
+  
+  
+  
   
   
   
@@ -1072,6 +1224,9 @@ When to Use MongoDB
   
   
   
+  
+  
+  
 
 
 * Embedded data relationships (one-to-few)
@@ -1092,10 +1247,16 @@ When to Use MongoDB
   
   
   
+  
+  
+  
 
 
 * Rapid prototyping
 
+  
+  
+  
   
   
   
@@ -1135,10 +1296,16 @@ When to Use MongoDB
   
   
   
+  
+  
+  
 
 
 DynamoDB 
 
+  
+  
+  
   
   
   
@@ -1175,10 +1342,16 @@ DynamoDB is AWS's managed key-value and document database. It requires careful u
   
   
   
+  
+  
+  
 
 
 Table Design 
 
+  
+  
+  
   
   
   
@@ -1221,10 +1394,16 @@ Table Design
   
   
   
+  
+  
+  
 
 
 // Partition Key: PK (string)
 
+  
+  
+  
   
   
   
@@ -1267,10 +1446,16 @@ Table Design
   
   
   
+  
+  
+  
 
 
 // User entity
 
+  
+  
+  
   
   
   
@@ -1313,10 +1498,16 @@ Table Design
   
   
   
+  
+  
+  
 
 
 // Order entity (access pattern: all orders for a user)
 
+  
+  
+  
   
   
   
@@ -1359,10 +1550,16 @@ Table Design
   
   
   
+  
+  
+  
 
 
 { PK: "USER#alice", SK: "ORDER#2026-05-15#ORD002", amount: 250, status: "pending" }
 
+  
+  
+  
   
   
   
@@ -1405,10 +1602,16 @@ Table Design
   
   
   
+  
+  
+  
 
 
 { PK: "PROD#001", SK: "META", name: "Laptop", price: 1200 }
 
+  
+  
+  
   
   
   
@@ -1451,10 +1654,16 @@ Query Patterns
   
   
   
+  
+  
+  
 
 
 // AWS SDK v3
 
+  
+  
+  
   
   
   
@@ -1497,10 +1706,16 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
   
   
   
+  
+  
+  
 
 
 import { QueryCommand } from "@aws-sdk/lib-dynamodb";
 
+  
+  
+  
   
   
   
@@ -1543,10 +1758,16 @@ const client = new DynamoDBClient({ region: "us-east-1" });
   
   
   
+  
+  
+  
 
 
 // Get user with all related data (single query)
 
+  
+  
+  
   
   
   
@@ -1589,10 +1810,16 @@ const result = await client.send(new QueryCommand({
   
   
   
+  
+  
+  
 
 
 TableName: "AppTable",
 
+  
+  
+  
   
   
   
@@ -1635,10 +1862,16 @@ KeyConditionExpression: "PK = :pk",
   
   
   
+  
+  
+  
 
 
 ExpressionAttributeValues: {
 
+  
+  
+  
   
   
   
@@ -1681,6 +1914,9 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 }
@@ -1704,10 +1940,16 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 }));
 
+  
+  
+  
   
   
   
@@ -1750,10 +1992,16 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 const orders = await client.send(new QueryCommand({
 
+  
+  
+  
   
   
   
@@ -1796,10 +2044,16 @@ TableName: "AppTable",
   
   
   
+  
+  
+  
 
 
 KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
 
+  
+  
+  
   
   
   
@@ -1842,10 +2096,16 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 ":pk": "USER#alice",
 
+  
+  
+  
   
   
   
@@ -1888,10 +2148,16 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1934,10 +2200,16 @@ ExpressionAttributeValues: {
   
   
   
+  
+  
+  
 
 
 When to Use DynamoDB 
 
+  
+  
+  
   
   
   
@@ -1977,6 +2249,9 @@ When to Use DynamoDB
   
   
   
+  
+  
+  
 
 
 * Predictable access patterns
@@ -1997,10 +2272,16 @@ When to Use DynamoDB
   
   
   
+  
+  
+  
 
 
 * High-scale workloads (millions of requests/second)
 
+  
+  
+  
   
   
   
@@ -2040,10 +2321,16 @@ When to Use DynamoDB
   
   
   
+  
+  
+  
 
 
 Firestore 
 
+  
+  
+  
   
   
   
@@ -2080,10 +2367,16 @@ Firestore is Google Cloud's NoSQL document database with real-time synchronizati
   
   
   
+  
+  
+  
 
 
 Data Model 
 
+  
+  
+  
   
   
   
@@ -2126,10 +2419,16 @@ import firebase_admin
   
   
   
+  
+  
+  
 
 
 from firebase_admin import firestore
 
+  
+  
+  
   
   
   
@@ -2172,10 +2471,16 @@ db = firestore.client()
   
   
   
+  
+  
+  
 
 
 # Document reference
 
+  
+  
+  
   
   
   
@@ -2218,10 +2523,16 @@ user_ref = db.collection('users').document('alice')
   
   
   
+  
+  
+  
 
 
 user_ref.set({
 
+  
+  
+  
   
   
   
@@ -2264,10 +2575,16 @@ user_ref.set({
   
   
   
+  
+  
+  
 
 
 'name': 'Alice',
 
+  
+  
+  
   
   
   
@@ -2310,6 +2627,9 @@ user_ref.set({
   
   
   
+  
+  
+  
 
 
 'created_at': firestore.SERVER_TIMESTAMP
@@ -2333,10 +2653,16 @@ user_ref.set({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2379,10 +2705,16 @@ user_ref.set({
   
   
   
+  
+  
+  
 
 
 orders_ref = user_ref.collection('orders')
 
+  
+  
+  
   
   
   
@@ -2425,10 +2757,16 @@ orders_ref.add({
   
   
   
+  
+  
+  
 
 
 'product': 'Laptop',
 
+  
+  
+  
   
   
   
@@ -2471,10 +2809,16 @@ orders_ref.add({
   
   
   
+  
+  
+  
 
 
 'status': 'completed'
 
+  
+  
+  
   
   
   
@@ -2517,10 +2861,16 @@ orders_ref.add({
   
   
   
+  
+  
+  
 
 
 # Real-time listener
 
+  
+  
+  
   
   
   
@@ -2563,10 +2913,16 @@ def on_snapshot(doc_snapshot, changes, read_time):
   
   
   
+  
+  
+  
 
 
 for change in changes:
 
+  
+  
+  
   
   
   
@@ -2609,10 +2965,16 @@ print(f"Order changed: {change.document.id}")
   
   
   
+  
+  
+  
 
 
 user_ref.collection('orders').on_snapshot(on_snapshot)
 
+  
+  
+  
   
   
   
@@ -2655,6 +3017,9 @@ When to Use Firestore
   
   
   
+  
+  
+  
 
 
 * Real-time applications (chat, live updates)
@@ -2675,10 +3040,16 @@ When to Use Firestore
   
   
   
+  
+  
+  
 
 
 * Mobile backends (offline support)
 
+  
+  
+  
   
   
   
@@ -2718,10 +3089,16 @@ When to Use Firestore
   
   
   
+  
+  
+  
 
 
 Decision Matrix 
 
+  
+  
+  
   
   
   
@@ -2758,10 +3135,16 @@ Decision Matrix
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/linter-formatter.html
   
 
 
+# Linter and Formatter: ESLint, Prettier, Biome, Ruff
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Code quality tools have converged into two categories: linters (find bugs and en
   
   
   
+  
+  
+  
 
 
 ##  ESLint + Prettier
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ The established standard for JavaScript/TypeScript:
   
   
   
+  
+  
+  
 
 
 // eslint.config.js (flat config — v9+)
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import js from "@eslint/js";
   
   
   
+  
+  
+  
 
 
 import tseslint from "typescript-eslint";
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ import react from "eslint-plugin-react";
   
   
   
+  
+  
+  
 
 
 export default [
 
+  
+  
+  
   
   
   
@@ -390,6 +446,9 @@ js.configs.recommended,
   
   
   
+  
+  
+  
 
 
 ...tseslint.configs.recommended,
@@ -416,10 +475,16 @@ js.configs.recommended,
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ plugins: { react },
   
   
   
+  
+  
+  
 
 
 rules: {
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 "prefer-const": "error",
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -728,6 +823,9 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 // .prettierrc
@@ -754,10 +852,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 "trailingComma": "all",
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 "printWidth": 100,
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 "arrowParens": "always",
 
+  
+  
+  
   
   
   
@@ -962,6 +1084,9 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 }
@@ -988,10 +1113,16 @@ ignores: ["dist/**", "node_modules/**"],
   
   
   
+  
+  
+  
 
 
 # Check and fix
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ npx eslint src/
   
   
   
+  
+  
+  
 
 
 npx eslint src/ --fix
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ npx prettier --check src/
   
   
   
+  
+  
+  
 
 
 npx prettier --write src/
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ npx prettier --write src/
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Two separate tools require coordination. ESLint configuration can be verbose. Performance can be slow on large codebases. Running both adds build time.
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ npx prettier --write src/
   
   
   
+  
+  
+  
 
 
 A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "organizeImports": {
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "enabled": true,
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "recommended": true,
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "noBannedTypes": "error",
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "noUnusedVariables": "error",
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "noNonNullAssertion": "warn",
 
+  
+  
+  
   
   
   
@@ -1768,29 +1983,6 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1798,6 +1990,38 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "formatter": {
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "indentStyle": "space",
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "lineWidth": 100,
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "formatter": {
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 "semicolons": "always",
 
+  
+  
+  
   
   
   
@@ -2158,29 +2418,6 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2210,10 +2447,45 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ A Rust-based all-in-one linter and formatter for JS/TS/JSON/CSS:
   
   
   
+  
+  
+  
 
 
 biome check src/
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ biome check src/ --apply
   
   
   
+  
+  
+  
 
 
 biome format src/
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ biome ci src/ # CI mode (strict)
   
   
   
+  
+  
+  
 
 
 # Lint only
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ biome lint src/
   
   
   
+  
+  
+  
 
 
 # Organize imports
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ biome check --formatter-enabled=true --linter-enabled=true
   
   
   
+  
+  
+  
 
 
 **Speed**: 10-50x faster than ESLint + Prettier. A 10,000-file TypeScript project checks in ~2 seconds vs ~60 seconds for ESLint.
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ biome check --formatter-enabled=true --linter-enabled=true
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Smaller ecosystem (fewer community rules), newer (some edge cases not covered), migration effort from ESLint.
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ biome check --formatter-enabled=true --linter-enabled=true
   
   
   
+  
+  
+  
 
 
 A Rust-based linter and formatter for Python:
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ A Rust-based linter and formatter for Python:
   
   
   
+  
+  
+  
 
 
 [tool.ruff]
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ target-version = "py311"
   
   
   
+  
+  
+  
 
 
 line-length = 100
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ line-length = 100
   
   
   
+  
+  
+  
 
 
 select = [
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ select = [
   
   
   
+  
+  
+  
 
 
 "W", # pycodestyle warnings
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ select = [
   
   
   
+  
+  
+  
 
 
 "I", # isort
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ select = [
   
   
   
+  
+  
+  
 
 
 "UP", # pyupgrade
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ select = [
   
   
   
+  
+  
+  
 
 
 "SIM", # flake8-simplify
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ select = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ ignore = [
   
   
   
+  
+  
+  
 
 
 "E501", # Line too long (handled by formatter)
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ ignore = [
   
   
   
+  
+  
+  
 
 
 [tool.ruff.format]
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ quote-style = "double"
   
   
   
+  
+  
+  
 
 
 indent-style = "space"
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ skip-magic-trailing-comma = false
   
   
   
+  
+  
+  
 
 
 line-ending = "lf"
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ line-ending = "lf"
   
   
   
+  
+  
+  
 
 
 "__init__.py" = ["F401", "I001"]
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ line-ending = "lf"
   
   
   
+  
+  
+  
 
 
 # Check and fix
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ ruff check src/
   
   
   
+  
+  
+  
 
 
 ruff check src/ --fix
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ ruff format src/ # Format only
   
   
   
+  
+  
+  
 
 
 ruff check src/ --watch # Watch mode
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 **Strengths**: Drop-in replacement for Flake8, isort, pyupgrade, and many more. Extremely fast. Single configuration file. Active development with frequent releases.
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 |---------|------------------|-------|------|
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 | Language | JavaScript/TypeScript | JavaScript/TypeScript/CSS | Python |
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 | Speed (10K files) | ~60s | ~2s | ~1s |
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 | Plugin ecosystem | 1000s | Growing | Comprehensive |
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 | Migrate from | N/A | `biome migrate eslint` | `ruff migrate` |
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 * **New JS/TS projects**: Start with Biome for the best developer experience and speed.
 
+  
+  
+  
   
   
   
@@ -3868,10 +4326,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 * **Python projects**: Ruff is the clear winner. It replaces Flake8, isort, Black, pyupgrade, and pylint in a single tool.
 
+  
+  
+  
   
   
   
@@ -3914,10 +4378,16 @@ ruff check src/ --watch # Watch mode
   
   
   
+  
+  
+  
 
 
 * **Pre-commit hooks**: All tools support staged-file-only checks with `--staged` flag.
 
+  
+  
+  
   
   
   

@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/serverless-security.html
   
 
 
+# Serverless Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Serverless computing shifts operational responsibility to the cloud provider but
   
   
   
+  
+  
+  
 
 
 Function Permissions 
@@ -164,10 +196,16 @@ Function Permissions
   
   
   
+  
+  
+  
 
 
 Serverless functions operate under IAM roles that should follow least privilege. Overly permissive roles are the most common serverless security issue. 
 
+  
+  
+  
   
   
   
@@ -210,6 +248,9 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "Effect": "Allow",
@@ -233,10 +274,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "Action": [
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "sqs:DeleteMessage",
 
+  
+  
+  
   
   
   
@@ -325,10 +378,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -371,10 +430,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -417,6 +482,9 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 {
@@ -440,10 +508,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "Effect": "Allow",
 
+  
+  
+  
   
   
   
@@ -486,6 +560,9 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "Resource": "*"
@@ -509,10 +586,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -555,10 +638,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -601,10 +690,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "Action": [
 
+  
+  
+  
   
   
   
@@ -647,10 +742,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 "dynamodb:PutItem",
 
+  
+  
+  
   
   
   
@@ -693,10 +794,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -739,10 +846,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -785,10 +898,16 @@ Serverless functions operate under IAM roles that should follow least privilege.
   
   
   
+  
+  
+  
 
 
 import boto3
 
+  
+  
+  
   
   
   
@@ -831,10 +950,16 @@ import os
   
   
   
+  
+  
+  
 
 
 TABLE_NAME = os.environ['TABLE_NAME']
 
+  
+  
+  
   
   
   
@@ -877,10 +1002,16 @@ def handler(event, context):
   
   
   
+  
+  
+  
 
 
 # The function IAM role only has access to this specific table
 
+  
+  
+  
   
   
   
@@ -923,10 +1054,16 @@ dynamodb = boto3.resource('dynamodb')
   
   
   
+  
+  
+  
 
 
 table = dynamodb.Table(TABLE_NAME)
 
+  
+  
+  
   
   
   
@@ -969,10 +1106,16 @@ order_id = event['order_id']
   
   
   
+  
+  
+  
 
 
 response = table.get_item(Key={'id': order_id})
 
+  
+  
+  
   
   
   
@@ -1015,10 +1158,16 @@ return response['Item']
   
   
   
+  
+  
+  
 
 
 Event Validation 
 
+  
+  
+  
   
   
   
@@ -1058,10 +1207,16 @@ Serverless functions are triggered by events from various sources. Each event mu
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -1104,10 +1259,16 @@ import re
   
   
   
+  
+  
+  
 
 
 def validate_s3_event(event):
 
+  
+  
+  
   
   
   
@@ -1150,10 +1311,16 @@ def validate_s3_event(event):
   
   
   
+  
+  
+  
 
 
 required_keys = {'Records', 'eventVersion', 'eventSource'}
 
+  
+  
+  
   
   
   
@@ -1196,10 +1363,16 @@ if not all(key in event for key in required_keys):
   
   
   
+  
+  
+  
 
 
 raise ValueError("Invalid S3 event structure")
 
+  
+  
+  
   
   
   
@@ -1242,10 +1415,16 @@ for record in event['Records']:
   
   
   
+  
+  
+  
 
 
 # Validate S3 record structure
 
+  
+  
+  
   
   
   
@@ -1288,10 +1467,16 @@ s3 = record.get('s3', {})
   
   
   
+  
+  
+  
 
 
 bucket = s3.get('bucket', {})
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ obj = s3.get('object', {})
   
   
   
+  
+  
+  
 
 
 if not bucket.get('name') or not obj.get('key'):
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ raise ValueError("Invalid S3 record")
   
   
   
+  
+  
+  
 
 
 # Validate object key to prevent path traversal
 
+  
+  
+  
   
   
   
@@ -1426,10 +1623,16 @@ key = obj['key']
   
   
   
+  
+  
+  
 
 
 if '..' in key or key.startswith('/'):
 
+  
+  
+  
   
   
   
@@ -1472,10 +1675,16 @@ raise ValueError(f"Invalid object key: {key}")
   
   
   
+  
+  
+  
 
 
 # Check file extension whitelist
 
+  
+  
+  
   
   
   
@@ -1518,10 +1727,16 @@ allowed_extensions = {'.csv', '.json', '.parquet'}
   
   
   
+  
+  
+  
 
 
 if not any(key.endswith(ext) for ext in allowed_extensions):
 
+  
+  
+  
   
   
   
@@ -1564,10 +1779,16 @@ raise ValueError(f"Unsupported file type: {key}")
   
   
   
+  
+  
+  
 
 
 return True
 
+  
+  
+  
   
   
   
@@ -1610,10 +1831,16 @@ def validate_api_gateway_event(event):
   
   
   
+  
+  
+  
 
 
 """Validate API Gateway proxy event."""
 
+  
+  
+  
   
   
   
@@ -1656,10 +1883,16 @@ def validate_api_gateway_event(event):
   
   
   
+  
+  
+  
 
 
 allowed_methods = {'GET', 'POST', 'PUT', 'DELETE'}
 
+  
+  
+  
   
   
   
@@ -1702,10 +1935,16 @@ method = event.get('httpMethod')
   
   
   
+  
+  
+  
 
 
 if method not in allowed_methods:
 
+  
+  
+  
   
   
   
@@ -1748,10 +1987,16 @@ raise ValueError(f"Invalid HTTP method: {method}")
   
   
   
+  
+  
+  
 
 
 # Validate path parameters
 
+  
+  
+  
   
   
   
@@ -1794,10 +2039,16 @@ path = event.get('path', '')
   
   
   
+  
+  
+  
 
 
 if not re.match(r'^/[a-zA-Z0-9/_-]+$', path):
 
+  
+  
+  
   
   
   
@@ -1840,10 +2091,16 @@ raise ValueError(f"Invalid path: {path}")
   
   
   
+  
+  
+  
 
 
 # Validate query string parameters
 
+  
+  
+  
   
   
   
@@ -1886,10 +2143,16 @@ params = event.get('queryStringParameters') or {}
   
   
   
+  
+  
+  
 
 
 for key, value in params.items():
 
+  
+  
+  
   
   
   
@@ -1932,10 +2195,16 @@ if len(value) > 1000:
   
   
   
+  
+  
+  
 
 
 raise ValueError(f"Parameter {key} exceeds maximum length")
 
+  
+  
+  
   
   
   
@@ -1978,6 +2247,9 @@ return True
   
   
   
+  
+  
+  
 
 
 Cold Start Risks 
@@ -1998,10 +2270,16 @@ Cold Start Risks
   
   
   
+  
+  
+  
 
 
 Cold starts occur when a function is invoked after being idle. They create windows where code is freshly loaded, which can be exploited. 
 
+  
+  
+  
   
   
   
@@ -2044,10 +2322,16 @@ Cold starts occur when a function is invoked after being idle. They create windo
   
   
   
+  
+  
+  
 
 
 import importlib
 
+  
+  
+  
   
   
   
@@ -2090,6 +2374,9 @@ import sys
   
   
   
+  
+  
+  
 
 
 class ColdStartScanner:
@@ -2113,10 +2400,16 @@ class ColdStartScanner:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -2159,10 +2452,16 @@ self.known_vulnerable = self._load_vulnerability_db()
   
   
   
+  
+  
+  
 
 
 def scan_dependencies(self):
 
+  
+  
+  
   
   
   
@@ -2205,10 +2504,16 @@ def scan_dependencies(self):
   
   
   
+  
+  
+  
 
 
 vulnerabilities = []
 
+  
+  
+  
   
   
   
@@ -2251,10 +2556,16 @@ for module_name, module in sys.modules.items():
   
   
   
+  
+  
+  
 
 
 if hasattr(module, '__version__'):
 
+  
+  
+  
   
   
   
@@ -2297,10 +2608,16 @@ version = module.__version__
   
   
   
+  
+  
+  
 
 
 if module_name in self.known_vulnerable:
 
+  
+  
+  
   
   
   
@@ -2343,10 +2660,16 @@ vulns = self.known_vulnerable[module_name]
   
   
   
+  
+  
+  
 
 
 for vuln in vulns:
 
+  
+  
+  
   
   
   
@@ -2389,10 +2712,16 @@ if self._version_in_range(version, vuln['affected']):
   
   
   
+  
+  
+  
 
 
 vulnerabilities.append({
 
+  
+  
+  
   
   
   
@@ -2435,10 +2764,16 @@ vulnerabilities.append({
   
   
   
+  
+  
+  
 
 
 'version': version,
 
+  
+  
+  
   
   
   
@@ -2481,10 +2816,16 @@ vulnerabilities.append({
   
   
   
+  
+  
+  
 
 
 'severity': vuln['severity']
 
+  
+  
+  
   
   
   
@@ -2527,10 +2868,16 @@ vulnerabilities.append({
   
   
   
+  
+  
+  
 
 
 return vulnerabilities
 
+  
+  
+  
   
   
   
@@ -2573,10 +2920,16 @@ return vulnerabilities
   
   
   
+  
+  
+  
 
 
 # requirements.txt
 
+  
+  
+  
   
   
   
@@ -2619,10 +2972,16 @@ requests==2.31.0
   
   
   
+  
+  
+  
 
 
 pydantic==2.5.0
 
+  
+  
+  
   
   
   
@@ -2665,10 +3024,16 @@ cryptography==41.0.7
   
   
   
+  
+  
+  
 
 
 # npm package.json
 
+  
+  
+  
   
   
   
@@ -2711,10 +3076,16 @@ cryptography==41.0.7
   
   
   
+  
+  
+  
 
 
 "dependencies": {
 
+  
+  
+  
   
   
   
@@ -2757,6 +3128,9 @@ cryptography==41.0.7
   
   
   
+  
+  
+  
 
 
 "lodash": "4.17.21"
@@ -2780,10 +3154,16 @@ cryptography==41.0.7
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2826,6 +3206,9 @@ cryptography==41.0.7
   
   
   
+  
+  
+  
 
 
 "audit": "npm audit --audit-level=high"
@@ -2849,26 +3232,6 @@ cryptography==41.0.7
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2876,6 +3239,35 @@ cryptography==41.0.7
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2915,10 +3307,16 @@ Defense in Depth
   
   
   
+  
+  
+  
 
 
 Serverless security requires multiple layers, as there is no host-based security (no antivirus, no host IDS). 
 
+  
+  
+  
   
   
   
@@ -2961,10 +3359,16 @@ Serverless security requires multiple layers, as there is no host-based security
   
   
   
+  
+  
+  
 
 
 # Use request validation templates
 
+  
+  
+  
   
   
   
@@ -3007,10 +3411,16 @@ Serverless security requires multiple layers, as there is no host-based security
   
   
   
+  
+  
+  
 
 
 VALIDATION_SCHEMA = {
 
+  
+  
+  
   
   
   
@@ -3053,10 +3463,16 @@ VALIDATION_SCHEMA = {
   
   
   
+  
+  
+  
 
 
 "type": "object",
 
+  
+  
+  
   
   
   
@@ -3099,10 +3515,16 @@ VALIDATION_SCHEMA = {
   
   
   
+  
+  
+  
 
 
 "email": {"type": "string", "format": "email"},
 
+  
+  
+  
   
   
   
@@ -3145,10 +3567,16 @@ VALIDATION_SCHEMA = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3191,10 +3619,16 @@ VALIDATION_SCHEMA = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3237,10 +3671,16 @@ VALIDATION_SCHEMA = {
   
   
   
+  
+  
+  
 
 
 def process_order(event, context):
 
+  
+  
+  
   
   
   
@@ -3283,10 +3723,16 @@ def process_order(event, context):
   
   
   
+  
+  
+  
 
 
 required_fields = ['user_id', 'product_id', 'quantity']
 
+  
+  
+  
   
   
   
@@ -3329,10 +3775,16 @@ for field in required_fields:
   
   
   
+  
+  
+  
 
 
 if field not in event:
 
+  
+  
+  
   
   
   
@@ -3375,10 +3827,16 @@ return {'statusCode': 400, 'body': f'Missing field: {field}'}
   
   
   
+  
+  
+  
 
 
 # Validate data types and ranges
 
+  
+  
+  
   
   
   
@@ -3421,10 +3879,16 @@ if not isinstance(event['quantity'], int) or event['quantity'] < 1:
   
   
   
+  
+  
+  
 
 
 return {'statusCode': 400, 'body': 'Invalid quantity'}
 
+  
+  
+  
   
   
   
@@ -3467,10 +3931,16 @@ return {'statusCode': 400, 'body': 'Invalid quantity'}
   
   
   
+  
+  
+  
 
 
 # Each function should do ONE thing
 
+  
+  
+  
   
   
   
@@ -3513,10 +3983,16 @@ return process_payment(event)
   
   
   
+  
+  
+  
 
 
 # Defense layer 4: Encryption at rest and in transit
 
+  
+  
+  
   
   
   
@@ -3559,10 +4035,16 @@ from cryptography.fernet import Fernet
   
   
   
+  
+  
+  
 
 
 def encrypt_sensitive_data(data, key):
 
+  
+  
+  
   
   
   
@@ -3605,10 +4087,16 @@ f = Fernet(key)
   
   
   
+  
+  
+  
 
 
 return f.encrypt(data.encode())
 
+  
+  
+  
   
   
   
@@ -3651,10 +4139,16 @@ Monitoring and Logging
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -3697,10 +4191,16 @@ class ServerlessAuditLogger:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -3743,10 +4243,16 @@ self.logs = []
   
   
   
+  
+  
+  
 
 
 def log_invocation(self, event, context, response):
 
+  
+  
+  
   
   
   
@@ -3789,10 +4295,16 @@ def log_invocation(self, event, context, response):
   
   
   
+  
+  
+  
 
 
 log_entry = {
 
+  
+  
+  
   
   
   
@@ -3835,10 +4347,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 'aws_request_id': context.aws_request_id,
 
+  
+  
+  
   
   
   
@@ -3881,10 +4399,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 'event_source': event.get('Records', [{}])[0].get('eventSource', 'unknown'),
 
+  
+  
+  
   
   
   
@@ -3927,10 +4451,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 'timestamp': datetime.utcnow().isoformat()
 
+  
+  
+  
   
   
   
@@ -3973,10 +4503,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 # Don't log sensitive data
 
+  
+  
+  
   
   
   
@@ -4019,6 +4555,9 @@ self.logs.append(log_entry)
   
   
   
+  
+  
+  
 
 
 print(json.dumps(log_entry))
@@ -4042,10 +4581,16 @@ print(json.dumps(log_entry))
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/waf-deployment.html
   
 
 
+# WAF Deployment Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 WAF Overview 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ A Web Application Firewall (WAF) filters and monitors HTTP traffic between web a
   
   
   
+  
+  
+  
 
 
 Inline WAF Deployment 
@@ -164,10 +196,16 @@ Inline WAF Deployment
   
   
   
+  
+  
+  
 
 
 The WAF sits directly in the request path: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ The WAF sits directly in the request path:
   
   
   
+  
+  
+  
 
 
 SecRuleEngine On
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ SecRequestBodyAccess On
   
   
   
+  
+  
+  
 
 
 SecResponseBodyAccess On
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ SecResponseBodyAccess On
   
   
   
+  
+  
+  
 
 
 SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ SecRule REQUEST_COOKIES|REQUEST_COOKIES_NAMES|ARGS_NAMES|ARGS|XML:/* \
   
   
   
+  
+  
+  
 
 
 "id:'981173',\
 
+  
+  
+  
   
   
   
@@ -394,6 +456,9 @@ phase:2,\
   
   
   
+  
+  
+  
 
 
 deny,\
@@ -417,10 +482,16 @@ deny,\
   
   
   
+  
+  
+  
 
 
 status:403,\
 
+  
+  
+  
   
   
   
@@ -463,10 +534,16 @@ msg:'SQL Injection Attack'"
   
   
   
+  
+  
+  
 
 
 # XSS prevention
 
+  
+  
+  
   
   
   
@@ -509,10 +586,16 @@ SecRule ARGS "@detectXSS" \
   
   
   
+  
+  
+  
 
 
 "id:'958056',\
 
+  
+  
+  
   
   
   
@@ -555,10 +638,16 @@ phase:2,\
   
   
   
+  
+  
+  
 
 
 deny,\
 
+  
+  
+  
   
   
   
@@ -601,10 +690,16 @@ status:403,\
   
   
   
+  
+  
+  
 
 
 msg:'XSS Attack Detected'"
 
+  
+  
+  
   
   
   
@@ -644,10 +739,16 @@ Reverse Proxy WAF
   
   
   
+  
+  
+  
 
 
 Deploy WAF as a reverse proxy for centralized protection: 
 
+  
+  
+  
   
   
   
@@ -690,10 +791,16 @@ Deploy WAF as a reverse proxy for centralized protection:
   
   
   
+  
+  
+  
 
 
 server {
 
+  
+  
+  
   
   
   
@@ -736,10 +843,16 @@ listen 443 ssl;
   
   
   
+  
+  
+  
 
 
 server_name app.example.com;
 
+  
+  
+  
   
   
   
@@ -782,10 +895,16 @@ server_name app.example.com;
   
   
   
+  
+  
+  
 
 
 modsecurity on;
 
+  
+  
+  
   
   
   
@@ -828,10 +947,16 @@ modsecurity_rules_file /etc/nginx/modsec/main.conf;
   
   
   
+  
+  
+  
 
 
 location / {
 
+  
+  
+  
   
   
   
@@ -874,10 +999,16 @@ proxy_pass http://backend:8080;
   
   
   
+  
+  
+  
 
 
 proxy_set_header Host $host;
 
+  
+  
+  
   
   
   
@@ -920,6 +1051,9 @@ proxy_set_header X-Real-IP $remote_addr;
   
   
   
+  
+  
+  
 
 
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -943,26 +1077,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -970,6 +1084,35 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1012,10 +1155,16 @@ Cloud WAF (AWS WAF)
   
   
   
+  
+  
+  
 
 
 # AWS WAF with rate limiting and SQL injection protection
 
+  
+  
+  
   
   
   
@@ -1058,10 +1207,16 @@ resource "aws_wafv2_web_acl" "main" {
   
   
   
+  
+  
+  
 
 
 name = "main-waf"
 
+  
+  
+  
   
   
   
@@ -1104,10 +1259,16 @@ description = "Main WAF ACL"
   
   
   
+  
+  
+  
 
 
 scope = "REGIONAL"
 
+  
+  
+  
   
   
   
@@ -1150,10 +1311,16 @@ default_action {
   
   
   
+  
+  
+  
 
 
 allow {}
 
+  
+  
+  
   
   
   
@@ -1196,10 +1363,16 @@ allow {}
   
   
   
+  
+  
+  
 
 
 rule {
 
+  
+  
+  
   
   
   
@@ -1242,10 +1415,16 @@ name = "RateLimit"
   
   
   
+  
+  
+  
 
 
 priority = 1
 
+  
+  
+  
   
   
   
@@ -1288,10 +1467,16 @@ action {
   
   
   
+  
+  
+  
 
 
 block {}
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ block {}
   
   
   
+  
+  
+  
 
 
 statement {
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ rate_based_statement {
   
   
   
+  
+  
+  
 
 
 limit = 2000
 
+  
+  
+  
   
   
   
@@ -1426,26 +1623,6 @@ aggregate_key_type = "IP"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1453,6 +1630,35 @@ aggregate_key_type = "IP"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1495,10 +1701,16 @@ visibility_config {
   
   
   
+  
+  
+  
 
 
 cloudwatch_metrics_enabled = true
 
+  
+  
+  
   
   
   
@@ -1541,6 +1753,9 @@ metric_name = "RateLimit"
   
   
   
+  
+  
+  
 
 
 sampled_requests_enabled = true
@@ -1564,26 +1779,6 @@ sampled_requests_enabled = true
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1591,6 +1786,35 @@ sampled_requests_enabled = true
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1633,10 +1857,16 @@ rule {
   
   
   
+  
+  
+  
 
 
 name = "SQLInjection"
 
+  
+  
+  
   
   
   
@@ -1679,10 +1909,16 @@ priority = 2
   
   
   
+  
+  
+  
 
 
 action {
 
+  
+  
+  
   
   
   
@@ -1725,10 +1961,16 @@ block {}
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1771,10 +2013,16 @@ statement {
   
   
   
+  
+  
+  
 
 
 sql_injection_match_statement {
 
+  
+  
+  
   
   
   
@@ -1817,6 +2065,9 @@ field_to_match {
   
   
   
+  
+  
+  
 
 
 body {}
@@ -1840,10 +2091,16 @@ body {}
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1886,10 +2143,16 @@ text_transformation {
   
   
   
+  
+  
+  
 
 
 priority = 0
 
+  
+  
+  
   
   
   
@@ -1932,26 +2195,6 @@ type = "URL_DECODE"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1978,10 +2221,42 @@ type = "URL_DECODE"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2024,10 +2299,16 @@ visibility_config {
   
   
   
+  
+  
+  
 
 
 cloudwatch_metrics_enabled = true
 
+  
+  
+  
   
   
   
@@ -2070,6 +2351,9 @@ metric_name = "SQLInjection"
   
   
   
+  
+  
+  
 
 
 sampled_requests_enabled = true
@@ -2093,26 +2377,6 @@ sampled_requests_enabled = true
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2139,10 +2403,42 @@ sampled_requests_enabled = true
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2182,10 +2478,16 @@ API Protection
   
   
   
+  
+  
+  
 
 
 APIs require different WAF rules than web applications: 
 
+  
+  
+  
   
   
   
@@ -2228,10 +2530,16 @@ APIs require different WAF rules than web applications:
   
   
   
+  
+  
+  
 
 
 API_WAF_RULES = {
 
+  
+  
+  
   
   
   
@@ -2274,10 +2582,16 @@ API_WAF_RULES = {
   
   
   
+  
+  
+  
 
 
 "priority": 1,
 
+  
+  
+  
   
   
   
@@ -2320,10 +2634,16 @@ API_WAF_RULES = {
   
   
   
+  
+  
+  
 
 
 "action": "block",
 
+  
+  
+  
   
   
   
@@ -2366,10 +2686,16 @@ API_WAF_RULES = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2412,10 +2738,16 @@ API_WAF_RULES = {
   
   
   
+  
+  
+  
 
 
 "priority": 2,
 
+  
+  
+  
   
   
   
@@ -2458,10 +2790,16 @@ API_WAF_RULES = {
   
   
   
+  
+  
+  
 
 
 req.method in ["POST", "PUT", "PATCH"]
 
+  
+  
+  
   
   
   
@@ -2504,6 +2842,9 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
 ),
@@ -2527,10 +2868,16 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
 "action": "block",
 
+  
+  
+  
   
   
   
@@ -2573,10 +2920,16 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2619,6 +2972,9 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
 "priority": 3,
@@ -2642,10 +2998,16 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
-"match": lambda req: "../" in req.path or "..\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" in req.path,
+"match": lambda req: "../" in req.path or "..\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" in req.path,
 
+  
+  
+  
   
   
   
@@ -2688,6 +3050,9 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
+  
+  
+  
 
 
 "response": 403
@@ -2711,26 +3076,6 @@ and req.headers.get("Content-Type") != "application/json"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2738,6 +3083,35 @@ and req.headers.get("Content-Type") != "application/json"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2780,10 +3154,16 @@ WAF Logging and Monitoring
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Analyze blocked requests
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Analyze blocked requests
 
+  
+  
+  
   
   
   
@@ -2826,10 +3206,16 @@ SELECT country, COUNT(*) as blocked_count,
   
   
   
+  
+  
+  
 
 
 ARRAY_AGG(DISTINCT rule_id) as triggered_rules
 
+  
+  
+  
   
   
   
@@ -2872,10 +3258,16 @@ FROM waf_logs
   
   
   
+  
+  
+  
 
 
 WHERE action = 'BLOCK'
 
+  
+  
+  
   
   
   
@@ -2918,10 +3310,16 @@ AND timestamp > NOW() - INTERVAL '24 hours'
   
   
   
+  
+  
+  
 
 
 GROUP BY country
 
+  
+  
+  
   
   
   
@@ -2964,10 +3362,16 @@ ORDER BY blocked_count DESC;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- False positive analysis
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- False positive analysis
 
+  
+  
+  
   
   
   
@@ -3010,10 +3414,16 @@ SELECT rule_id, COUNT(*) as false_positives
   
   
   
+  
+  
+  
 
 
 FROM waf_logs
 
+  
+  
+  
   
   
   
@@ -3056,10 +3466,16 @@ WHERE action = 'BLOCK'
   
   
   
+  
+  
+  
 
 
 AND downstream_status = 200
 
+  
+  
+  
   
   
   
@@ -3102,10 +3518,16 @@ AND timestamp > NOW() - INTERVAL '7 days'
   
   
   
+  
+  
+  
 
 
 GROUP BY rule_id
 
+  
+  
+  
   
   
   
@@ -3148,10 +3570,16 @@ ORDER BY false_positives DESC;
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

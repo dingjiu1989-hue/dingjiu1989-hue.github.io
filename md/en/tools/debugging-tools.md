@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/debugging-tools.html
   
 
 
+# Debugging Tools: lldb, gdb, strace, ltrace, rr Reverse Debugging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Debugging is a core developer skill. Beyond print statements and basic breakpoin
   
   
   
+  
+  
+  
 
 
 ##  lldb (LLVM Debugger)
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ The modern debugger from the LLVM project, preferred for Clang-compiled code:
   
   
   
+  
+  
+  
 
 
 # Start debugging
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ lldb ./myapp
   
   
   
+  
+  
+  
 
 
 lldb -p 12345 # Attach to process
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 # Breakpoints
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) breakpoint set --file app.c --line 42
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) breakpoint set --func-regex ".*alloc.*"
 
+  
+  
+  
   
   
   
@@ -494,6 +562,9 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 > frame variable
@@ -520,10 +591,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 > continue
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 # Execution control
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) continue
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) step # Step into
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 # Variable inspection
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) frame variable --regex ".*error.*"
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) expression self->name
 
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 # Thread and backtrace
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) thread backtrace all
 
+  
+  
+  
   
   
   
@@ -988,10 +1113,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 # Watchpoints (break on data access)
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 (lldb) watchpoint set expression -- myPointer[5]
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ lldb -c core.dump ./myapp # Analyze core dump
   
   
   
+  
+  
+  
 
 
 The traditional Unix debugger:
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ The traditional Unix debugger:
   
   
   
+  
+  
+  
 
 
 gcc -g -O0 myapp.c -o myapp
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ gcc -g -O0 myapp.c -o myapp
   
   
   
+  
+  
+  
 
 
 gdb ./myapp
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ gdb -p 12345
   
   
   
+  
+  
+  
 
 
 gdb ./myapp core
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) break main
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) run arg1 arg2
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) info locals # Show local variables
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) display x # Auto-display every stop
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) x/20x ptr # Examine memory as hex
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 # Scripted debugging
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 (gdb) set logging on
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 > print x
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 > end
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
 gdb -tui ./myapp
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ gdb -tui ./myapp
   
   
   
+  
+  
+  
 
 
 Trace all system calls a program makes:
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ Trace all system calls a program makes:
   
   
   
+  
+  
+  
 
 
 strace -o trace.log ./myapp
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ strace -f ./myapp # Follow forks
   
   
   
+  
+  
+  
 
 
 # Common filters
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ strace -e open,read,write ./myapp # Specific syscalls
   
   
   
+  
+  
+  
 
 
 strace -e network ./myapp # Network-related calls
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ strace -e trace=file ./myapp # File operations
   
   
   
+  
+  
+  
 
 
 strace -e trace=process ./myapp # Process management
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ strace -e trace=signal ./myapp # Signal handling
   
   
   
+  
+  
+  
 
 
 # Performance analysis
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ strace -c ./myapp # Syscall count and time summary
   
   
   
+  
+  
+  
 
 
 strace -T ./myapp # Time spent in each syscall
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ strace -r ./myapp # Relative timestamps
   
   
   
+  
+  
+  
 
 
 # Useful patterns
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ strace -p 12345 -e write -s 1000 # See what a process writes
   
   
   
+  
+  
+  
 
 
 strace -f -e openat -p $(pgrep nginx) # File opens by nginx workers
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ strace -e read -s 10000 python3 app.py # Show read content
   
   
   
+  
+  
+  
 
 
 # PID tracking and timing
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ strace -fy -t -T -o trace.log -p 12345
   
   
   
+  
+  
+  
 
 
 **What to look for**: `ENOENT` (file not found), `EACCES` (permission denied), `ECONNREFUSED` (connection refused), slow syscalls (high `-T` values), unexpected file opens, excessive context switching.
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ strace -fy -t -T -o trace.log -p 12345
   
   
   
+  
+  
+  
 
 
 Trace library function calls:
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ Trace library function calls:
   
   
   
+  
+  
+  
 
 
 ltrace ./myapp
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ ltrace -o libcalls.log ./myapp
   
   
   
+  
+  
+  
 
 
 # Filter specific libraries
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ ltrace -e malloc+free ./myapp # Memory allocation calls
   
   
   
+  
+  
+  
 
 
 ltrace -e str* ./myapp # String functions
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ ltrace -e 'libc.*' ./myapp # All libc functions
   
   
   
+  
+  
+  
 
 
 # Count library calls
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ ltrace -c ./myapp
   
   
   
+  
+  
+  
 
 
 # With timing
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ ltrace -T ./myapp # Time per call
   
   
   
+  
+  
+  
 
 
 ltrace -S ./myapp # Show syscalls too
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ ltrace -S ./myapp # Show syscalls too
   
   
   
+  
+  
+  
 
 
 ltrace -n 2 ./myapp # Indent by call depth
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ ltrace -n 2 ./myapp # Indent by call depth
   
   
   
+  
+  
+  
 
 
 Record and replay debugging with reverse execution:
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ Record and replay debugging with reverse execution:
   
   
   
+  
+  
+  
 
 
 rr record ./myapp
 
+  
+  
+  
   
   
   
@@ -2912,6 +3259,9 @@ rr record -- ./myapp arg1 arg2
   
   
   
+  
+  
+  
 
 
 # Replay (deterministic)
@@ -2938,10 +3288,16 @@ rr record -- ./myapp arg1 arg2
   
   
   
+  
+  
+  
 
 
 rr replay
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ rr replay -p 12345
   
   
   
+  
+  
+  
 
 
 # Reverse debugging commands
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ rr replay -p 12345
   
   
   
+  
+  
+  
 
 
 (gdb) reverse-step # Step back
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ rr replay -p 12345
   
   
   
+  
+  
+  
 
 
 (gdb) reverse-finish # Go back to function entry
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ rr replay -p 12345
   
   
   
+  
+  
+  
 
 
 (gdb) watch -l myVar
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ rr replay -p 12345
   
   
   
+  
+  
+  
 
 
 # Go to specific event
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ rr replay -M 12345 # Replay to event number 12345
   
   
   
+  
+  
+  
 
 
 # Chaos mode (test concurrency)
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ rr record --chaos ./myapp # Randomize thread scheduling
   
   
   
+  
+  
+  
 
 
 **Key strength**: Debug intermittent bugs by recording once, then replaying infinitely. When you miss the bug, just restart replay and be more prepared. Chaos mode helps find concurrency bugs.
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ rr record --chaos ./myapp # Randomize thread scheduling
   
   
   
+  
+  
+  
 
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Program crashes — get a core dump
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Program crashes — get a core dump
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ ulimit -c unlimited
   
   
   
+  
+  
+  
 
 
 ./myapp
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ gdb ./myapp core
   
   
   
+  
+  
+  
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use strace to see what the program is doing
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use strace to see what the program is doing
 
+  
+  
+  
   
   
   
@@ -3510,6 +3926,9 @@ strace -f -o trace.log ./myapp
   
   
   
+  
+  
+  
 
 
 less trace.log # Look for error syscalls
@@ -3536,10 +3955,16 @@ less trace.log # Look for error syscalls
   
   
   
+  
+  
+  
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For tricky bugs, use rr
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. For tricky bugs, use rr
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ rr record ./myapp
   
   
   
+  
+  
+  
 
 
 rr replay
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ rr replay
   
   
   
+  
+  
+  
 
 
-# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Library call issues
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Library call issues
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 |------|----------|----------|----------------|
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 | gdb | Native debugging (GCC) | Low | High (many commands) |
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 | ltrace | Library call tracing | Medium | Low |
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -3949,10 +4416,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 * **File/permission issues**: strace is the fastest way to find "file not found" or "permission denied" problems.
 
+  
+  
+  
   
   
   
@@ -3995,6 +4468,9 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 * **Intermittent bugs**: rr is revolutionary — record once, replay infinitely with reverse execution.
@@ -4018,10 +4494,16 @@ ltrace -c ./myapp # Which library calls are most frequent?
   
   
   
+  
+  
+  
 
 
 * **Library comprehension**: ltrace shows which library functions are called and how often.
 
+  
+  
+  
   
   
   

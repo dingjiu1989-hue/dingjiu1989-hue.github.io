@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/kubernetes-pod-design.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "992",
+      "wordCount": "1071",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/tech/kubernetes-pod-design.html"},
-      "articleBody": "Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Pods are the smallest deployable units in Kubernetes. Effective pod design determines application reliability, resource efficiency, and operational simplicity. Init Containers Init containers run before application containers start. They handle setup tasks: database migrations, permission changes, configuration generation, and waiting for dependencies. Init containers run sequentially and must complete successfully before the app starts. Init containers use different images than the application. A migration init container uses a database migration tool image. The application container uses the runtime image. This separation keeps images focused. Container Probes Three probe types manage container lifecycle. Liveness probes check if the container is healthy\u2014restart if unhealthy. Readiness probes check if the container can serve traffic\u2014remove from Service endpoints if unready. Startup probes check if the application has started\u2014delay liveness checks during slow startup. Configure probes for your application's startup characteristics. A Java application might need a 60-second startup probe while a Go binary starts in milliseconds. Set failure thresholds appropriately for your recovery time. Resource Limits Always set resource requests and limits. Requests guarantee resources for scheduling. Limits prevent resource exhaustion. Set requests based on steady-state usage and limits at peak usage plus headroom. CPU limits throttle containers rather than terminating them. Memory limits cause OOM kills. Monitor container resource usage with metrics-server or Prometheus and adjust requests accordingly. Pod Lifecycle Pod lifecycle states: Pending (scheduling), Running (at least one container running), Succeeded (all containers exited with 0), Failed (containers exited with non-0), Unknown (node communication lost). Pod lifecycle hooks: PostStart (runs after container creation\u2014not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination\u2014use for graceful shutdown). PreStop hooks are blocking\u2014Kubernetes waits for completion or the terminationGracePeriodSeconds timeout. Pod Disruption Budgets PDBs limit voluntary disruptions. Specify minAvailable or maxUnavailable to protect application availability during node maintenance or cluster upgrades. Without PDBs, cluster operations can take down all replicas simultaneously."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/kubernetes-pod-design-patterns-and-best-practices-54aa"
+      ],
+      "articleBody": "Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Kubernetes Pod Design: Patterns and Best Practices Pods are the smallest deployable units in Kubernetes. Effective pod design determines application reliability, resource efficiency, and operational simplicity. Init Containers Init containers run before application containers start. They handle setup tasks: database migrations, permission changes, configuration generation, and waiting for dependencies. Init containers run sequentially and must complete successfully before the app starts. Init containers use different images than the application. A migration init container uses a database migration tool image. The application container uses the runtime image. This separation keeps images focused. Container Probes Three probe types manage container lifecycle. Liveness probes check if the container is healthy\u2014restart if unhealthy. Readiness probes check if the container can serve traffic\u2014remove from Service endpoints if unready. Startup probes check if the application has started\u2014delay liveness checks during slow startup. Configure probes for your application's startup characteristics. A Java application might need a 60-second startup probe while a Go binary starts in milliseconds. Set failure thresholds appropriately for your recovery time. Resource Limits Always set resource requests and limits. Requests guarantee resources for scheduling. Limits prevent resource exhaustion. Set requests based on steady-state usage and limits at peak usage plus headroom. CPU limits throttle containers rather than terminating them. Memory limits cause OOM kills. Monitor container resource usage with metrics-server or Prometheus and adjust requests accordingly. Pod Lifecycle Pod lifecycle states: Pending (scheduling), Running (at least one container running), Succeeded (all containers exited with 0), Failed (containers exited with non-0), Unknown (node communication lost). Pod lifecycle hooks: PostStart (runs after container creation\u2014not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination\u2014use for graceful shutdown). PreStop hooks are blocking\u2014Kubernetes waits for completion or the terminationGracePeriodSeconds timeout. Pod Disruption Budgets PDBs limit voluntary disruptions. Specify minAvailable or maxUnavailable to protect application availability during node maintenance or cluster upgrades. Without PDBs, cluster operations can take down all replicas simultaneously."
     }
     </script>
     <script type="application/ld+json">
@@ -173,7 +176,36 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Kubernetes Pod Design: Patterns and Best Practices</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Pods are the smallest deployable units in Kubernetes. Effective pod design determines application reliability, resource efficiency, and operational simplicity.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -219,7 +251,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Init containers run before application containers start. They handle setup tasks: database migrations, permission changes, configuration generation, and waiting for dependencies. Init containers run sequentially and must complete successfully before the app starts.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -265,7 +303,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Container Probes</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -311,7 +355,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Configure probes for your application's startup characteristics. A Java application might need a 60-second startup probe while a Go binary starts in milliseconds. Set failure thresholds appropriately for your recovery time.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -357,7 +407,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Always set resource requests and limits. Requests guarantee resources for scheduling. Limits prevent resource exhaustion. Set requests based on steady-state usage and limits at peak usage plus headroom.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +459,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Pod Lifecycle</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -449,6 +511,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pod lifecycle hooks: PostStart (runs after container creation—not guaranteed to run before ENTRYPOINT) and PreStop (runs before container termination—use for graceful shutdown). PreStop hooks are blocking—Kubernetes waits for completion or the terminationGracePeriodSeconds timeout.</p>
 <br>
 <br>
@@ -472,7 +537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Pod Disruption Budgets</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

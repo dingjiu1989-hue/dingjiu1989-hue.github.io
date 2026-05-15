@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/kafka-tools.html
   
 
 
+# Kafka Tools: AKHQ, Kafka UI, Kowl, Offset Explorer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Apache Kafka's distributed architecture makes it powerful but complex to manage.
   
   
   
+  
+  
+  
 
 
 ##  AKHQ (formerly KafkaHQ)
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ A comprehensive Kafka web UI with topic management, consumer group monitoring, a
   
   
   
+  
+  
+  
 
 
 # docker-compose.yml
 
+  
+  
+  
   
   
   
@@ -286,6 +330,9 @@ version: "3.8"
   
   
   
+  
+  
+  
 
 
 services:
@@ -312,10 +359,16 @@ services:
   
   
   
+  
+  
+  
 
 
 akhq:
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ image: tchiotludo/akhq:latest
   
   
   
+  
+  
+  
 
 
 environment:
 
+  
+  
+  
   
   
   
@@ -416,6 +475,9 @@ AKHQ_CONFIGURATION: |
   
   
   
+  
+  
+  
 
 
 akhq:
@@ -442,10 +504,16 @@ akhq:
   
   
   
+  
+  
+  
 
 
 connections:
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ local:
   
   
   
+  
+  
+  
 
 
 properties:
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ bootstrap.servers: "kafka:9092"
   
   
   
+  
+  
+  
 
 
 schema-registry:
 
+  
+  
+  
   
   
   
@@ -598,6 +678,9 @@ url: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 connect:
@@ -624,10 +707,16 @@ connect:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: connect
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: connect
 
+  
+  
+  
   
   
   
@@ -676,6 +765,9 @@ url: "http://kafka-connect:8083"
   
   
   
+  
+  
+  
 
 
 ports:
@@ -702,10 +794,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8080:8080"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8080:8080"
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kafka
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kafka
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
 * Topic browser with search and filter
 
+  
+  
+  
   
   
   
@@ -852,10 +962,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
 * Schema registry viewer (Avro, Protobuf, JSON Schema)
 
+  
+  
+  
   
   
   
@@ -898,10 +1014,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
 * Message producer (publish test messages)
 
+  
+  
+  
   
   
   
@@ -944,10 +1066,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
 * Node and broker monitoring
 
+  
+  
+  
   
   
   
@@ -996,10 +1124,16 @@ depends_on:
   
   
   
+  
+  
+  
 
 
 akhq:
 
+  
+  
+  
   
   
   
@@ -1048,10 +1182,16 @@ connections:
   
   
   
+  
+  
+  
 
 
 production:
 
+  
+  
+  
   
   
   
@@ -1100,10 +1240,16 @@ properties:
   
   
   
+  
+  
+  
 
 
 bootstrap.servers: "broker1:9092,broker2:9092,broker3:9092"
 
+  
+  
+  
   
   
   
@@ -1152,10 +1298,16 @@ security.protocol: SASL_SSL
   
   
   
+  
+  
+  
 
 
 sasl.mechanism: SCRAM-SHA-512
 
+  
+  
+  
   
   
   
@@ -1204,10 +1356,16 @@ sasl.jaas.config: "org.apache.kafka.common.security.scram.ScramLoginModule requi
   
   
   
+  
+  
+  
 
 
 schema-registry:
 
+  
+  
+  
   
   
   
@@ -1256,10 +1414,16 @@ url: "https://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 basic-auth-username: admin
 
+  
+  
+  
   
   
   
@@ -1308,10 +1472,16 @@ basic-auth-password: "${SECRET_SCHEMA_REGISTRY_PASSWORD}"
   
   
   
+  
+  
+  
 
 
 ##  Kafka UI (by Provectus)
 
+  
+  
+  
   
   
   
@@ -1360,6 +1530,9 @@ A lightweight, open-source Kafka web UI:
   
   
   
+  
+  
+  
 
 
 # docker-compose.yml
@@ -1386,10 +1559,16 @@ A lightweight, open-source Kafka web UI:
   
   
   
+  
+  
+  
 
 
 services:
 
+  
+  
+  
   
   
   
@@ -1438,10 +1617,16 @@ kafka-ui:
   
   
   
+  
+  
+  
 
 
 image: provectuslabs/kafka-ui:latest
 
+  
+  
+  
   
   
   
@@ -1490,10 +1675,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8081:8080"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8081:8080"
 
+  
+  
+  
   
   
   
@@ -1520,6 +1711,9 @@ ports:
 
 environment:
 
+  
+  
+  
   
   
   
@@ -1568,10 +1762,16 @@ KAFKA_CLUSTERS_0_NAME: local
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
 
+  
+  
+  
   
   
   
@@ -1620,10 +1820,16 @@ KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_0_KAFKACONNECT_0_NAME: connect
 
+  
+  
+  
   
   
   
@@ -1672,10 +1878,16 @@ KAFKA_CLUSTERS_0_KAFKACONNECT_0_ADDRESS: http://kafka-connect:8083
   
   
   
+  
+  
+  
 
 
 SERVER_PORT: 8080
 
+  
+  
+  
   
   
   
@@ -1724,10 +1936,16 @@ SERVER_PORT: 8080
   
   
   
+  
+  
+  
 
 
 * Dashboard with cluster overview and broker health
 
+  
+  
+  
   
   
   
@@ -1770,10 +1988,16 @@ SERVER_PORT: 8080
   
   
   
+  
+  
+  
 
 
 * Consumer groups with lag chart
 
+  
+  
+  
   
   
   
@@ -1816,10 +2040,16 @@ SERVER_PORT: 8080
   
   
   
+  
+  
+  
 
 
 * Kafka Connect management
 
+  
+  
+  
   
   
   
@@ -1862,10 +2092,16 @@ SERVER_PORT: 8080
   
   
   
+  
+  
+  
 
 
 * Dark and light themes
 
+  
+  
+  
   
   
   
@@ -1914,10 +2150,16 @@ SERVER_PORT: 8080
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_0_NAME: staging
 
+  
+  
+  
   
   
   
@@ -1966,10 +2208,16 @@ KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: staging-kafka:9092
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_SSL
 
+  
+  
+  
   
   
   
@@ -2018,10 +2266,16 @@ KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: SCRAM-SHA-512
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: "org.apache.kafka.common.security.scram.ScramLoginModule required username='user' password='pass';"
 
+  
+  
+  
   
   
   
@@ -2070,10 +2324,16 @@ KAFKA_CLUSTERS_1_NAME: production
   
   
   
+  
+  
+  
 
 
 KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092
 
+  
+  
+  
   
   
   
@@ -2122,10 +2382,16 @@ KAFKA_CLUSTERS_1_BOOTSTRAPSERVERS: prod-kafka:9092
   
   
   
+  
+  
+  
 
 
 Developer-friendly Kafka browser with a focus on data exploration:
 
+  
+  
+  
   
   
   
@@ -2174,10 +2440,16 @@ Developer-friendly Kafka browser with a focus on data exploration:
   
   
   
+  
+  
+  
 
 
 services:
 
+  
+  
+  
   
   
   
@@ -2226,10 +2498,16 @@ redpanda-console:
   
   
   
+  
+  
+  
 
 
 image: docker.redpanda.com/redpandadata/console:latest
 
+  
+  
+  
   
   
   
@@ -2278,10 +2556,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8082:8080"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "8082:8080"
 
+  
+  
+  
   
   
   
@@ -2330,10 +2614,16 @@ environment:
   
   
   
+  
+  
+  
 
 
 KAFKA_BROKERS: kafka:9092
 
+  
+  
+  
   
   
   
@@ -2382,10 +2672,16 @@ SCHEMA_REGISTRY_ENABLED: "true"
   
   
   
+  
+  
+  
 
 
 SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
 
+  
+  
+  
   
   
   
@@ -2434,10 +2730,16 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 * Fast message search and filtering with custom predicates
 
+  
+  
+  
   
   
   
@@ -2480,10 +2782,16 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 * Schema registry with compatibility checking
 
+  
+  
+  
   
   
   
@@ -2526,10 +2834,16 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 * Kafka Connect management
 
+  
+  
+  
   
   
   
@@ -2572,10 +2886,16 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 * Role-based access control
 
+  
+  
+  
   
   
   
@@ -2624,10 +2944,16 @@ SCHEMA_REGISTRY_URLS: "http://schema-registry:8081"
   
   
   
+  
+  
+  
 
 
 server:
 
+  
+  
+  
   
   
   
@@ -2676,10 +3002,16 @@ maskedFields:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "password"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "password"
 
+  
+  
+  
   
   
   
@@ -2728,10 +3060,16 @@ maskingStrategy: "redact"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "email"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "email"
 
+  
+  
+  
   
   
   
@@ -2780,10 +3118,16 @@ maskingStrategy: "hash"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "ssn"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- fieldName: "ssn"
 
+  
+  
+  
   
   
   
@@ -2832,10 +3176,16 @@ maskingStrategy: "hash_last_four"
   
   
   
+  
+  
+  
 
 
 # Message search predicate examples
 
+  
+  
+  
   
   
   
@@ -2884,10 +3234,16 @@ maskingStrategy: "hash_last_four"
   
   
   
+  
+  
+  
 
 
 # $.user.email == "test@example.com"
 
+  
+  
+  
   
   
   
@@ -2936,10 +3292,16 @@ maskingStrategy: "hash_last_four"
   
   
   
+  
+  
+  
 
 
 # $.status in ["pending", "processing"]
 
+  
+  
+  
   
   
   
@@ -2988,10 +3350,16 @@ maskingStrategy: "hash_last_four"
   
   
   
+  
+  
+  
 
 
 A desktop GUI application for Kafka (Windows/macOS/Linux):
 
+  
+  
+  
   
   
   
@@ -3040,10 +3408,16 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   
   
   
+  
+  
+  
 
 
 * Tree-based cluster browser
 
+  
+  
+  
   
   
   
@@ -3086,10 +3460,16 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   
   
   
+  
+  
+  
 
 
 * Consumer group offset management
 
+  
+  
+  
   
   
   
@@ -3132,10 +3512,16 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   
   
   
+  
+  
+  
 
 
 * Import/export topics
 
+  
+  
+  
   
   
   
@@ -3178,10 +3564,16 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   
   
   
+  
+  
+  
 
 
 * Time-based message search
 
+  
+  
+  
   
   
   
@@ -3230,10 +3622,16 @@ A desktop GUI application for Kafka (Windows/macOS/Linux):
   
   
   
+  
+  
+  
 
 
 The Kafka distribution includes essential CLI tools:
 
+  
+  
+  
   
   
   
@@ -3282,10 +3680,16 @@ The Kafka distribution includes essential CLI tools:
   
   
   
+  
+  
+  
 
 
 kafka-topics.sh --bootstrap-server localhost:9092 --list
 
+  
+  
+  
   
   
   
@@ -3334,10 +3738,16 @@ kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic orders
   
   
   
+  
+  
+  
 
 
 kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --partitions 6 --replication-factor 3 --config retention.ms=604800000
 
+  
+  
+  
   
   
   
@@ -3386,10 +3796,16 @@ kafka-topics.sh --bootstrap-server localhost:9092 --create --topic events --part
   
   
   
+  
+  
+  
 
 
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 
+  
+  
+  
   
   
   
@@ -3438,10 +3854,16 @@ kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group or
   
   
   
+  
+  
+  
 
 
 # Message inspection
 
+  
+  
+  
   
   
   
@@ -3490,10 +3912,16 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic orders --fro
   
   
   
+  
+  
+  
 
 
 # Performance testing
 
+  
+  
+  
   
   
   
@@ -3542,10 +3970,16 @@ kafka-producer-perf-test.sh --topic test --num-records 100000 --record-size 1024
   
   
   
+  
+  
+  
 
 
 kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages 50000
 
+  
+  
+  
   
   
   
@@ -3594,10 +4028,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 | Feature | AKHQ | Kafka UI | Kowl (Console) | Offset Explorer |
 
+  
+  
+  
   
   
   
@@ -3646,10 +4086,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 | Type | Web UI | Web UI | Web UI | Desktop |
 
+  
+  
+  
   
   
   
@@ -3698,10 +4144,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 | Schema registry | Yes | Yes | Yes | No |
 
+  
+  
+  
   
   
   
@@ -3750,10 +4202,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 | Data masking | No | No | Yes | No |
 
+  
+  
+  
   
   
   
@@ -3802,10 +4260,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 | Multi-cluster | Yes | Yes | Yes | Yes |
 
+  
+  
+  
   
   
   
@@ -3854,10 +4318,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 * **Full-featured management**: AKHQ for comprehensive cluster administration.
 
+  
+  
+  
   
   
   
@@ -3900,10 +4370,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 * **Message debugging**: Kowl (Redpanda Console) for powerful message search and filtering.
 
+  
+  
+  
   
   
   
@@ -3946,10 +4422,16 @@ kafka-consumer-perf-test.sh --broker-list localhost:9092 --topic test --messages
   
   
   
+  
+  
+  
 
 
 * **Scripting**: Kafka CLI tools for automation and CI/CD tasks.
 
+  
+  
+  
   
   
   

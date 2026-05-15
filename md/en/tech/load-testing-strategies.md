@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/load-testing-strategies.html
   
   
   
+  
+  
+  
+
+
+# Load Testing Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Load testing evaluates how a system behaves under expected and peak usage conditions. Different load testing strategies reveal different aspects of system behavior. This article examines the major testing patterns—ramp-up, steady state, spike, and soak testing—and provides guidance on selecting the right approach.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Load testing evaluates how a system behaves under expected and peak usage condit
   
   
   
+  
+  
+  
 
 
 Ramp-up testing gradually increases the load on a system while monitoring performance metrics. The goal is to understand how the system scales as load increases and to identify the point at which performance degrades.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ A typical ramp-up test starts at a low request rate and increases steadily over 
   
   
   
+  
+  
+  
 
 
 Ramp-up testing is essential for capacity planning. The results show the maximum throughput the system can handle before performance degrades. This information guides scaling decisions: when to add instances, increase resource allocation, or optimize bottlenecks.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Ramp-up testing is essential for capacity planning. The results show the maximum
   
   
   
+  
+  
+  
 
 
 Steady state testing maintains a constant load on the system over an extended period. The load level is typically set at the expected peak production load. The test duration ranges from 30 minutes to several hours.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ The purpose of steady state testing is to verify that the system maintains consi
   
   
   
+  
+  
+  
 
 
 Steady state test results should show stable response times and error rates throughout the test period. Increasing response times or growing error rates over time indicate resource exhaustion or memory leaks. The system should reach a steady state and maintain it for the test duration.
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Steady state test results should show stable response times and error rates thro
   
   
   
+  
+  
+  
 
 
 Spike testing suddenly increases the load on a system, often by 2-10x the normal level, in a very short period. The goal is to verify that the system can handle sudden traffic surges without failing.
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Spike tests simulate real-world events: a flash sale, a viral post, a product la
   
   
   
+  
+  
+  
 
 
 Autoscaling systems often fail during spike tests. The load increases faster than new instances can start, causing a period of overload. Spike test results inform autoscaling configuration: minimum and maximum instance counts, scaling cooldown periods, and buffer capacity.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Autoscaling systems often fail during spike tests. The load increases faster tha
   
   
   
+  
+  
+  
 
 
 Soak testing (also called endurance testing) runs a moderate load on the system for an extended period, typically 8-24 hours or longer. The goal is to verify that the system remains stable over time.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Soak tests reveal long-term issues that are not visible in short tests. Memory l
   
   
   
+  
+  
+  
 
 
 Soak test results should show consistent performance throughout the duration. A gradual increase in response times or resource usage indicates a leak or accumulation issue. The system should maintain the same performance at hour 20 as at hour 1.
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Soak test results should show consistent performance throughout the duration. A 
   
   
   
+  
+  
+  
 
 
 The choice of load testing tool depends on your requirements. k6 (JavaScript) offers excellent performance and modern features including built-in metrics and thresholds. Locust (Python) provides flexibility and a real-time web UI for interactive testing. Gatling (Scala) produces comprehensive HTML reports and supports complex scenario definitions.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Consider the tool's protocol support. Most tools support HTTP/HTTPS, but you may
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   
@@ -728,6 +823,9 @@ Always test against a non-production environment that mirrors production configu
   
   
   
+  
+  
+  
 
 
 Monitor both the system under test and the load generator. Load generators can become bottlenecks, especially for high-throughput tests. Multiple load generator instances may be needed for very high load levels.
@@ -754,10 +852,16 @@ Monitor both the system under test and the load generator. Load generators can b
   
   
   
+  
+  
+  
 
 
 Establish baseline metrics before optimization. A baseline provides a reference point for measuring improvement. Repeat tests multiple times to account for variance. Document test configurations, environment details, and data distributions for reproducibility.
 
+  
+  
+  
   
   
   

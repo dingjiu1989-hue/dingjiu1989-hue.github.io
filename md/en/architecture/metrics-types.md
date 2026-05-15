@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/metrics-types.html
   
 
 
+# Metrics Types and Monitoring Methodologies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Metrics provide the quantitative foundation for understanding system health, detecting anomalies, and driving alerts. The four primary metric types — counters, gauges, histograms, and summaries — each serve distinct purposes. Combined with monitoring methodologies like RED, USE, and the Four Golden Signals, they form a complete picture of system behavior and are essential for effective operations. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Counters are monotonically increasing values that only go up (or reset to zero o
   
   
   
+  
+  
+  
 
 
 Gauges represent a single numeric value that can go up or down arbitrarily. They measure current state: memory usage, CPU utilization, queue depth, active connections, number of goroutines. Gauges are instantaneous snapshots and should be sampled frequently enough to capture meaningful variation. Unlike counters, gauges are useful as absolute values — a memory gauge at 95% of available memory is actionable on its own. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Histograms sample observations and count them in configurable buckets. They meas
   
   
   
+  
+  
+  
 
 
 Summaries are similar to histograms but compute quantiles on the client side before exposing them as metric streams. This reduces storage costs because the aggregation system receives pre-computed quantiles rather than raw bucket counts. The trade-off is that summary quantiles cannot be aggregated across application instances — the p99 of all instances combined is not the average of each instance's p99. For global quantile accuracy, histograms should be used with a metrics system that supports accurate quantile aggregation. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ The RED method monitors services from a user perspective: Rate (requests per sec
   
   
   
+  
+  
+  
 
 
 The USE method monitors resources from an infrastructure perspective: Utilization (percentage of resource capacity), Saturation (amount of work the resource cannot service), and Errors (failure count). USE applies to infrastructure resources: CPU, memory, disk I/O, network bandwidth. A high-utilization CPU is working hard. A saturated CPU has queued work. An erroring CPU is failing instructions. USE is most useful for bottleneck analysis — identifying which resource is constraining performance. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ The Four Golden Signals, popularized by Google's SRE book, combine RED and USE c
   
   
   
+  
+  
+  
 
 
 Metric naming conventions maintain consistency across services. A hierarchical naming scheme is typical: service_name.metric_name.operation.result. For example: orders_service.request_count.create_order.total, orders_service.latency_seconds.create_order.p99. Units should be embedded in the name (seconds, bytes, count). Labels or tags add cardinality dimensions: status code, endpoint, version. Label cardinality must be bounded to prevent metrics system overload. 
 
+  
+  
+  
   
   
   

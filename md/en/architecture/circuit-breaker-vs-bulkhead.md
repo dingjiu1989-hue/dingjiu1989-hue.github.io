@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/circuit-breaker-vs-bulkhe
   
 
 
+# Circuit Breaker vs Bulkhead Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Circuit breaker and bulkhead are two fundamental resilience patterns from the stability arsenal, but they solve different problems and are most effective when used together. The circuit breaker protects downstream services from cascading failures by failing fast when a dependency is unhealthy. The bulkhead isolates failure by limiting the resources a failing component can consume. Understanding when and how to apply each is essential for building resilient distributed systems. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The circuit breaker pattern monitors calls to a dependency. When failures exceed
   
   
   
+  
+  
+  
 
 
 The three circuit breaker states serve distinct purposes. CLOSED: normal operation, calls proceed with failure counting. OPEN: failures exceed threshold, calls fail fast without invoking the dependency. HALF-OPEN: recovery attempt, limited calls allowed to test if the dependency has recovered. The transition thresholds and timeout durations must be configured per dependency — a critical database may have a higher failure threshold and shorter timeout than a non-critical analytics service. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ The bulkhead pattern isolates failures by partitioning system resources into poo
   
   
   
+  
+  
+  
 
 
 Thread pool bulkheads allocate a dedicated thread pool for each dependency. A failing dependency can exhaust its own pool but cannot affect other pools. The trade-off is thread overhead — each dependency pool has its own threads, which increases memory usage and context switching. Semaphore bulkheads are lighter — they just limit the number of concurrent calls without dedicating threads — but provide weaker isolation since blocked threads still share the common thread pool. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ The key difference between the two patterns: circuit breakers actively reject ca
   
   
   
+  
+  
+  
 
 
 When to use each: circuit breakers are the right choice when the downstream service is known to fail or degrade, recovery is expected, and failing fast is better than waiting. Bulkheads are the right choice when resource isolation is critical — when one dependency must not be allowed to consume resources needed by other parts of the system. In practice, both should be used. A bulkhead ensures a failing dependency does not exhaust threads, while a circuit breaker prevents repeated calls to that dependency once failure is confirmed. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Combined usage provides layered resilience. The bulkhead limits concurrent calls
   
   
   
+  
+  
+  
 
 
 Implementation considerations include metric collection for both patterns. Track circuit breaker state transitions (total, time in each state). Track bulkhead queue depth and rejection counts. Alert on circuit breaker trips (indicates a problem) and bulkhead queue saturation (indicates a load problem). Historical metrics of circuit breaker activity help identify recurring dependency failure patterns and inform threshold tuning. 
 
+  
+  
+  
   
   
   

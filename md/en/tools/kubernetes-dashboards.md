@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/kubernetes-dashboards.html
   
 
 
+# Kubernetes Dashboards: Lens, Octant, K9s, OpenLens, and Headlamp Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Managing Kubernetes clusters exclusively through kubectl is feasible but not eff
   
   
   
+  
+  
+  
 
 
 This article compares five popular Kubernetes UI tools: Lens, Octant, K9s, OpenLens, and Headlamp.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ This article compares five popular Kubernetes UI tools: Lens, Octant, K9s, OpenL
   
   
   
+  
+  
+  
 
 
 Lens was the most popular Kubernetes desktop IDE until the Mirantis acquisition introduced licensing changes. Lens provides a comprehensive desktop application with cluster management, real-time metrics, terminal access, and resource editing.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Multi-cluster management with kubeconfig import.
 
+  
+  
+  
   
   
   
@@ -332,10 +382,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Built-in terminal for pod exec access.
 
+  
+  
+  
   
   
   
@@ -378,6 +434,9 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Custom resource (CRD) support with YAML editing.
@@ -401,10 +460,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Extensions API for custom functionality.
 
+  
+  
+  
   
   
   
@@ -453,10 +518,16 @@ Lens' metrics require metrics-server or Prometheus installed on the cluster. Wit
   
   
   
+  
+  
+  
 
 
 The licensing change requires Lens Desktop IDEs to be associated with a Lens account for clusters of 10+ nodes or commercial use. This drove the community fork to OpenLens.
 
+  
+  
+  
   
   
   
@@ -505,10 +576,16 @@ The licensing change requires Lens Desktop IDEs to be associated with a Lens acc
   
   
   
+  
+  
+  
 
 
 OpenLens is a community-maintained fork of Lens created after Mirantis restricted the source code. It preserves Lens' features without account requirements or licensing restrictions.
 
+  
+  
+  
   
   
   
@@ -557,10 +634,16 @@ OpenLens is distributed through GitHub releases and can be built from source. It
   
   
   
+  
+  
+  
 
 
 The main risk is slower updates compared to Lens, as the OpenLens community must rebase changes from the upstream Lens codebase without access to the proprietary components.
 
+  
+  
+  
   
   
   
@@ -609,10 +692,16 @@ The main risk is slower updates compared to Lens, as the OpenLens community must
   
   
   
+  
+  
+  
 
 
 Octant, originally developed by VMware (now Broadcom), is an open-source Kubernetes dashboard focused on application-level insights. It runs as a web server and can be integrated into CI/CD pipelines.
 
+  
+  
+  
   
   
   
@@ -661,10 +750,16 @@ Octant's unique feature is resource navigation through linked views. Selecting a
   
   
   
+  
+  
+  
 
 
 octant --kubeconfig ~/.kube/config --namespace my-app
 
+  
+  
+  
   
   
   
@@ -713,10 +808,16 @@ Octant supports plugins written in any language. Plugin extensions add custom ta
   
   
   
+  
+  
+  
 
 
 Octant's web-based architecture makes it suitable for shared team dashboards. However, development pace has slowed since the Broadcom acquisition, and the community is concerned about the project's long-term viability.
 
+  
+  
+  
   
   
   
@@ -765,10 +866,16 @@ Octant's web-based architecture makes it suitable for shared team dashboards. Ho
   
   
   
+  
+  
+  
 
 
 K9s is a terminal-based Kubernetes UI that provides vim-like navigation and keyboard shortcuts. It is ideal for engineers who prefer the terminal over graphical interfaces.
 
+  
+  
+  
   
   
   
@@ -817,10 +924,16 @@ k9s --context prod --namespace default
   
   
   
+  
+  
+  
 
 
 K9s provides:
 
+  
+  
+  
   
   
   
@@ -866,10 +979,16 @@ K9s provides:
   
   
   
+  
+  
+  
 
 
 * Resource editing with vi/nano integration.
 
+  
+  
+  
   
   
   
@@ -912,10 +1031,16 @@ K9s provides:
   
   
   
+  
+  
+  
 
 
 * Resource scaling and rolling restart.
 
+  
+  
+  
   
   
   
@@ -958,6 +1083,9 @@ K9s provides:
   
   
   
+  
+  
+  
 
 
 * Pulse view showing cluster health at a glance.
@@ -981,10 +1109,16 @@ K9s provides:
   
   
   
+  
+  
+  
 
 
 * Custom resource definitions and aliases.
 
+  
+  
+  
   
   
   
@@ -1033,10 +1167,16 @@ K9s supports skins (themes) for customization and plugins for extensibility. The
   
   
   
+  
+  
+  
 
 
 For engineers comfortable with terminal workflows, K9s is often faster than any GUI dashboard. The trade-off is a steeper learning curve and no visual graph representation.
 
+  
+  
+  
   
   
   
@@ -1085,10 +1225,16 @@ For engineers comfortable with terminal workflows, K9s is often faster than any 
   
   
   
+  
+  
+  
 
 
 Headlamp is an open-source Kubernetes web UI from the team at Kinvolk (acquired by Microsoft). It runs as a desktop application or in-cluster web server.
 
+  
+  
+  
   
   
   
@@ -1137,10 +1283,16 @@ Headlamp's design emphasizes security and flexibility. Plugin extensions are loa
   
   
   
+  
+  
+  
 
 
 # Run as desktop app
 
+  
+  
+  
   
   
   
@@ -1189,10 +1341,16 @@ headlamp
   
   
   
+  
+  
+  
 
 
 # Run in cluster as web server
 
+  
+  
+  
   
   
   
@@ -1241,10 +1399,16 @@ kubectl apply -f https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/ku
   
   
   
+  
+  
+  
 
 
 Headlamp's clean, modern interface supports multi-cluster management, namespace filtering, resource search, and quick YAML editing. Its in-cluster deployment mode is ideal for shared team dashboards without desktop app requirements.
 
+  
+  
+  
   
   
   
@@ -1293,10 +1457,16 @@ Headlamp's clean, modern interface supports multi-cluster management, namespace 
   
   
   
+  
+  
+  
 
 
 | Tool | Platform | Extensible | Metrics | Best For |
 
+  
+  
+  
   
   
   
@@ -1345,10 +1515,16 @@ Headlamp's clean, modern interface supports multi-cluster management, namespace 
   
   
   
+  
+  
+  
 
 
 | Lens | Desktop | Extensions | Built-in | Full-featured desktop IDE |
 
+  
+  
+  
   
   
   
@@ -1397,10 +1573,16 @@ Headlamp's clean, modern interface supports multi-cluster management, namespace 
   
   
   
+  
+  
+  
 
 
 | Octant | Web | Plugins | Cluster-based | Application-level insights |
 
+  
+  
+  
   
   
   
@@ -1449,6 +1631,9 @@ Headlamp's clean, modern interface supports multi-cluster management, namespace 
   
   
   
+  
+  
+  
 
 
 | Headlamp | Desktop + Web | Plugins | Cluster-based | Customized web UI |
@@ -1475,10 +1660,16 @@ Headlamp's clean, modern interface supports multi-cluster management, namespace 
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/security/clickjacking-protection.html
   
   
   
+  
+  
+  
+
+
+# Clickjacking Protection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Clickjacking, also known as a UI redress attack, tricks users into clicking on s
   
   
   
+  
+  
+  
 
 
 How Clickjacking Works 
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ A clickjacking exploit involves three elements:
   
   
   
+  
+  
+  
 
 
 Click here for a free prize!
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ The user sees a game or prize button but actually clicks the bank's transfer con
   
   
   
+  
+  
+  
 
 
 X-Frame-Options 
 
+  
+  
+  
   
   
   
@@ -364,6 +417,9 @@ X-Frame-Options is a response header that controls whether a page can be display
   
   
   
+  
+  
+  
 
 
 # Deny all framing
@@ -390,10 +446,16 @@ X-Frame-Options is a response header that controls whether a page can be display
   
   
   
+  
+  
+  
 
 
 add_header X-Frame-Options "DENY" always;
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ add_header X-Frame-Options "DENY" always;
   
   
   
+  
+  
+  
 
 
 add_header X-Frame-Options "SAMEORIGIN" always;
 
+  
+  
+  
   
   
   
@@ -494,6 +562,9 @@ add_header X-Frame-Options "SAMEORIGIN" always;
   
   
   
+  
+  
+  
 
 
 from flask import Flask, make_response
@@ -520,10 +591,16 @@ from flask import Flask, make_response
   
   
   
+  
+  
+  
 
 
 app = Flask(__name__)
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ app = Flask(__name__)
   
   
   
+  
+  
+  
 
 
 def set_frame_options(response):
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ response.headers['X-Frame-Options'] = 'SAMEORIGIN'
   
   
   
+  
+  
+  
 
 
 return response
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ return response
   
   
   
+  
+  
+  
 
 
 @app.route('/admin/transfer')
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ def admin_transfer():
   
   
   
+  
+  
+  
 
 
 response = make_response(render_template('transfer.html'))
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ response.headers['X-Frame-Options'] = 'DENY'
   
   
   
+  
+  
+  
 
 
 return response
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ X-Frame-Options has three values: `DENY` (no framing ever), `SAMEORIGIN` (same-o
   
   
   
+  
+  
+  
 
 
 CSP frame-ancestors 
 
+  
+  
+  
   
   
   
@@ -884,6 +997,9 @@ Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options
   
   
   
+  
+  
+  
 
 
 # Allow only same-origin
@@ -910,10 +1026,16 @@ Content Security Policy's `frame-ancestors` directive supersedes X-Frame-Options
   
   
   
+  
+  
+  
 
 
 add_header Content-Security-Policy "frame-ancestors 'self'" always;
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ add_header Content-Security-Policy "frame-ancestors 'self'" always;
   
   
   
+  
+  
+  
 
 
 add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.example.com" always;
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ add_header Content-Security-Policy "frame-ancestors 'self' https://trusted-app.e
   
   
   
+  
+  
+  
 
 
 add_header Content-Security-Policy "frame-ancestors 'none'" always;
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
   
   
   
+  
+  
+  
 
 
 add_header Content-Security-Policy "frame-ancestors https://app1.example.com https://app2.example.com" always;
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ When both X-Frame-Options and CSP `frame-ancestors` are present, browsers honor 
   
   
   
+  
+  
+  
 
 
 # Python/Flask CSP middleware
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ from flask import Flask
   
   
   
+  
+  
+  
 
 
 from flask_talisman import Talisman
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ app = Flask(__name__)
   
   
   
+  
+  
+  
 
 
 Talisman(app, 
 
+  
+  
+  
   
   
   
@@ -1274,6 +1432,9 @@ content_security_policy={
   
   
   
+  
+  
+  
 
 
 'frame-ancestors': ["'self'", "https://dashboard.example.com"]
@@ -1300,10 +1461,16 @@ content_security_policy={
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ content_security_policy={
   
   
   
+  
+  
+  
 
 
 Framebusting JavaScript 
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ Client-side framebusting detects if the page is loaded in an iframe and breaks o
   
   
   
+  
+  
+  
 
 
 // Basic framebuster
 
+  
+  
+  
   
   
   
@@ -1456,6 +1635,9 @@ if (top !== self) {
   
   
   
+  
+  
+  
 
 
 top.location = self.location;
@@ -1482,10 +1664,16 @@ top.location = self.location;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ top.location = self.location;
   
   
   
+  
+  
+  
 
 
 if (top.location !== self.location) {
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ if (top.location !== self.location) {
   
   
   
+  
+  
+  
 
 
 try {
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ top.location.href = self.location.href;
   
   
   
+  
+  
+  
 
 
 } catch (e) {
 
+  
+  
+  
   
   
   
@@ -1690,6 +1896,9 @@ top.location.href = self.location.href;
   
   
   
+  
+  
+  
 
 
 top.location = self.location;
@@ -1716,29 +1925,6 @@ top.location = self.location;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1746,6 +1932,38 @@ top.location = self.location;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ top.location = self.location;
   
   
   
+  
+  
+  
 
 
 Framebusting limitations:
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ Framebusting limitations:
   
   
   
+  
+  
+  
 
 
 * `noopener` links bypass frame busters
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ Framebusting limitations:
   
   
   
+  
+  
+  
 
 
 Testing for Clickjacking Vulnerabilities 
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ Testing for Clickjacking Vulnerabilities
   
   
   
+  
+  
+  
 
 
 curl -I https://target-website.com/admin | grep -i "x-frame-options\|content-security-policy"
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ curl -I https://target-website.com/admin | grep -i "x-frame-options\|content-sec
   
   
   
+  
+  
+  
 
 
 curl -sI https://target-website.com | \
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ grep -E 'X-Frame-Options|frame-ancestors' || \
   
   
   
+  
+  
+  
 
 
 echo "NO PROTECTION DETECTED"
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ echo "NO PROTECTION DETECTED"
   
   
   
+  
+  
+  
 
 
 python3 -c "
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 urls = [
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ urls = [
   
   
   
+  
+  
+  
 
 
 'https://target.com/transfer',
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ urls = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ for url in urls:
   
   
   
+  
+  
+  
 
 
 resp = requests.get(url)
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ xfo = resp.headers.get('X-Frame-Options', 'MISSING')
   
   
   
+  
+  
+  
 
 
 csp = resp.headers.get('Content-Security-Policy', '')
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ fa = 'frame-ancestors' in csp or 'frame-ancestors' not in csp
   
   
   
+  
+  
+  
 
 
 if 'frame-ancestors' in csp:
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ print(f'[PROTECTED] {url}: CSP frame-ancestors')
   
   
   
+  
+  
+  
 
 
 elif xfo in ('DENY', 'SAMEORIGIN'):
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ print(f'[PROTECTED] {url}: X-Frame-Options: {xfo}')
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ print(f'[VULNERABLE] {url}: No framing protection')
   
   
   
+  
+  
+  
 
 
 "
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ Comprehensive Protection Strategy
   
   
   
+  
+  
+  
 
 
 # Nginx: full clickjacking protection
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ server {
   
   
   
+  
+  
+  
 
 
 # X-Frame-Options as fallback
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ add_header X-Frame-Options "SAMEORIGIN" always;
   
   
   
+  
+  
+  
 
 
 # CSP frame-ancestors as modern replacement
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ add_header Content-Security-Policy "frame-ancestors 'self'" always;
   
   
   
+  
+  
+  
 
 
 location /admin/ {
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ location /admin/ {
   
   
   
+  
+  
+  
 
 
 add_header X-Frame-Options "DENY" always;
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ location /api/ {
   
   
   
+  
+  
+  
 
 
 # APIs should never be framed
 
+  
+  
+  
   
   
   
@@ -2990,6 +3346,9 @@ add_header X-Frame-Options "DENY" always;
   
   
   
+  
+  
+  
 
 
 add_header Content-Security-Policy "frame-ancestors 'none'" always;
@@ -3016,29 +3375,6 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3046,6 +3382,38 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -3072,6 +3440,9 @@ add_header Content-Security-Policy "frame-ancestors 'none'" always;
 
 Conclusion 
 
+  
+  
+  
   
   
   

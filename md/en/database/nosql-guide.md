@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/nosql-guide.html
   
 
 
+# NoSQL Databases Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 NoSQL Database Types 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ NoSQL databases are non-relational stores designed for specific data models. Fou
   
   
   
+  
+  
+  
 
 
 Document Databases (MongoDB) 
@@ -164,10 +196,16 @@ Document Databases (MongoDB)
   
   
   
+  
+  
+  
 
 
 Store data as JSON-like documents. Flexible schema, nested data: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ db.users.insertOne({
   
   
   
+  
+  
+  
 
 
 name: "Alice",
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ email: "alice@example.com",
   
   
   
+  
+  
+  
 
 
 addresses: [{ city: "San Francisco" }]
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ addresses: [{ city: "San Francisco" }]
   
   
   
+  
+  
+  
 
 
 Best for: flexible schemas, embedded data, rapid prototyping. 
 
+  
+  
+  
   
   
   
@@ -342,10 +398,16 @@ Key-Value Stores (Redis, DynamoDB)
   
   
   
+  
+  
+  
 
 
 Simple key-value pairs for fast lookups: 
 
+  
+  
+  
   
   
   
@@ -388,10 +450,16 @@ cache.set("user:123", json.dumps(user_data))
   
   
   
+  
+  
+  
 
 
 user = json.loads(cache.get("user:123"))
 
+  
+  
+  
   
   
   
@@ -431,6 +499,9 @@ Best for: caching, session storage, simple lookups.
   
   
   
+  
+  
+  
 
 
 Wide-Column Stores (Cassandra, Bigtable) 
@@ -451,10 +522,16 @@ Wide-Column Stores (Cassandra, Bigtable)
   
   
   
+  
+  
+  
 
 
 Column-oriented with flexible schema per row key: 
 
+  
+  
+  
   
   
   
@@ -497,10 +574,16 @@ CREATE TABLE users (user_id UUID PRIMARY KEY, name TEXT, email TEXT);
   
   
   
+  
+  
+  
 
 
 Best for: time-series, write-heavy workloads, high scalability. 
 
+  
+  
+  
   
   
   
@@ -537,10 +620,16 @@ Graph Databases (Neo4j)
   
   
   
+  
+  
+  
 
 
 Nodes and edges representing entities and relationships: 
 
+  
+  
+  
   
   
   
@@ -583,10 +672,16 @@ MATCH (alice:Person)-[:FOLLOWS]->(friend)-[:PURCHASED]->(product)
   
   
   
+  
+  
+  
 
 
 RETURN product.name
 
+  
+  
+  
   
   
   
@@ -626,10 +721,16 @@ Best for: social networks, recommendations, fraud detection.
   
   
   
+  
+  
+  
 
 
 Choosing a NoSQL Database 
 
+  
+  
+  
   
   
   
@@ -666,10 +767,16 @@ Choosing a NoSQL Database
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

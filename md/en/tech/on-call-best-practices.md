@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/on-call-best-practices.html
   
   
   
+  
+  
+  
+
+
+# On-Call Best Practices: Rotation, Escalation, Runbooks, and Alert Fatigue Prevention
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Being on-call is one of the most stressful responsibilities in engineering opera
   
   
   
+  
+  
+  
 
 
 This article covers on-call rotation models, escalation policies, runbook creation, alert fatigue prevention, and tooling.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ This article covers on-call rotation models, escalation policies, runbook creati
   
   
   
+  
+  
+  
 
 
 The primary rotation models balance coverage, fairness, and expertise distribution.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ The weekly rotation is the most common: one engineer handles alerts for a full w
   
   
   
+  
+  
+  
 
 
 The daily rotation shifts responsibility every 24 hours, reducing individual burden. A primary handles daytime alerts, while a secondary covers overnight with the primary only called for SEV1 escalations. This works well for global teams in different time zones.
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ The follow-the-sun rotation passes responsibility across geographic regions. The
   
   
   
+  
+  
+  
 
 
 Pool sizing matters. The recommended minimum is four engineers per rotation. Fewer leads to burnout from frequent rotations. More than eight dilutes operational knowledge and increases time between rotations, reducing familiarity with current system state.
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ Pool sizing matters. The recommended minimum is four engineers per rotation. Few
   
   
   
+  
+  
+  
 
 
 Escalation policies ensure incidents are handled even when primary responders are unavailable. A typical policy has three levels:
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ Level 1 (Primary): The first responder for incoming alerts. Must acknowledge wit
   
   
   
+  
+  
+  
 
 
 Level 2 (Secondary): Receives alerts if the primary does not acknowledge within the timeout. The secondary also handles overflow during multiple simultaneous incidents.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ Level 3 (Engineering Manager): Escalated if both primary and secondary are unava
   
   
   
+  
+  
+  
 
 
 Escalation policies should be automatic, not manual. Incident management tools like PagerDuty, Opsgenie, or Grafana OnCall automatically escalate based on acknowledgment timeouts.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ Escalation policies should be automatic, not manual. Incident management tools l
   
   
   
+  
+  
+  
 
 
 Runbooks are step-by-step guides for handling common incidents. Every documented runbook reduces time-to-mitigation and lowers the cognitive load on the on-call engineer. A good runbook includes:
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Runbooks are step-by-step guides for handling common incidents. Every documented
   
   
   
+  
+  
+  
 
 
 * Severity guidance: When to escalate versus handle independently.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ Runbooks are step-by-step guides for handling common incidents. Every documented
   
   
   
+  
+  
+  
 
 
 * Mitigation steps: Concrete actions to reduce or eliminate impact.
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ Runbooks are step-by-step guides for handling common incidents. Every documented
   
   
   
+  
+  
+  
 
 
 * Verification: How to confirm the fix is working.
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ Runbooks are step-by-step guides for handling common incidents. Every documented
   
   
   
+  
+  
+  
 
 
 Runbooks should be version-controlled alongside application code in a `runbooks/` directory at the repository root. They should be tested periodically during game days or chaos engineering exercises.
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ Runbooks should be version-controlled alongside application code in a `runbooks/
   
   
   
+  
+  
+  
 
 
 Alert fatigue occurs when engineers receive too many alerts, causing them to ignore or dismiss notifications. The result is missed critical alerts and delayed incident response.
 
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ The key metric is the alert-to-incident conversion rate. If fewer than 10% of al
   
   
   
+  
+  
+  
 
 
 * Is the alert actionable? Can the engineer do something about it now?
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ The key metric is the alert-to-incident conversion rate. If fewer than 10% of al
   
   
   
+  
+  
+  
 
 
 * Is the alert accurate? Does it correlate with actual customer impact?
 
+  
+  
+  
   
   
   
@@ -988,10 +1113,16 @@ The key metric is the alert-to-incident conversion rate. If fewer than 10% of al
   
   
   
+  
+  
+  
 
 
 Tiered alerting routes different severity levels through different notification channels. Critical alerts page via phone call. Warning alerts send push notifications. Informational alerts go to Slack or email — during business hours only.
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ Tiered alerting routes different severity levels through different notification 
   
   
   
+  
+  
+  
 
 
 PagerDuty and Opsgenie are the established leaders for on-call scheduling, escalation, and notification. Grafana OnCall (now included with Grafana Cloud) provides integrated alerting and on-call management for organizations already using Grafana.
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ Key features to evaluate include:
   
   
   
+  
+  
+  
 
 
 * Calendar integration for scheduling and override management.
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ Key features to evaluate include:
   
   
   
+  
+  
+  
 
 
 * Support for multiple notification channels (phone, SMS, push, email).
 
+  
+  
+  
   
   
   
@@ -1196,10 +1345,16 @@ Key features to evaluate include:
   
   
   
+  
+  
+  
 
 
 * Vacation and swap management.
 
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ Key features to evaluate include:
   
   
   
+  
+  
+  
 
 
 Technical processes mean nothing without cultural support. Compensation for on-call responsibility acknowledges its impact. Time-off after incidents prevents burnout. Regular retrospection on on-call quality identifies improvement areas.
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ The best measure of on-call health is the team's willingness to participate. Whe
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

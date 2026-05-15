@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-id.html
   
 
 
+# Distributed ID Generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Distributed ID generation is a foundational infrastructure concern for any system that spans multiple databases or services. IDs must be unique across all nodes, generate quickly without coordination, and often carry useful properties like time-orderedness, compactness, or security. The choice of ID generation strategy affects database performance, sorting behavior, and system complexity. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ UUID v7 is the newest contender, standardized in RFC 9562. It generates time-ord
   
   
   
+  
+  
+  
 
 
 Snowflake IDs, popularized by Twitter (now X), provide compact 64-bit integer IDs. The typical bit layout includes a timestamp (41 bits, giving ~69 years of unique timestamps), a worker ID (10 bits, supporting up to 1024 nodes), and a sequence number (12 bits, allowing 4096 IDs per millisecond per worker). Snowflake IDs are monotonically increasing, sortable, and compact for storage and indexing. The downsides are dependence on clock synchronization — clock skew can produce duplicate or out-of-order IDs. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ ULIDs offer another compact alternative: a 128-bit identifier encoded as a 26-ch
   
   
   
+  
+  
+  
 
 
 Database sequences provide the simplest approach but create a coordination bottleneck. Auto-increment columns in relational databases guarantee uniqueness and ordering within a single database. Distributed sequences require coordination across databases, typically through a centralized sequence service. The HA sequence pattern uses a database table with configurable increments (step sizes) — each application instance reserves a range of IDs and caches them locally, reducing database round trips. 
 
+  
+  
+  
   
   
   
@@ -224,6 +265,9 @@ The HA approach works well: configure N application instances with step = N and 
   
   
   
+  
+  
+  
 
 
 K-ordered IDs represent a class of IDs that are approximately time-ordered within a bounded window of disorder. Snowflake variants fall into this category. The time component provides a global ordering approximation, while the node and sequence components allow for concurrent generation across nodes. Database indexes perform significantly better with k-ordered IDs than with random IDs because new insertions tend to land near the end of the index rather than at random positions. 
@@ -244,10 +288,16 @@ K-ordered IDs represent a class of IDs that are approximately time-ordered withi
   
   
   
+  
+  
+  
 
 
 Security considerations apply when IDs are exposed to clients. Sequential numeric IDs reveal the rate at which resources are created. Time-based IDs reveal the creation timestamp. In some contexts, unpredictable IDs are preferred to prevent enumeration attacks. UUID v4 provides randomness but poor index performance. A hybrid approach uses random IDs for external exposure and maps them to internally optimized IDs through a lookup table. 
 
+  
+  
+  
   
   
   

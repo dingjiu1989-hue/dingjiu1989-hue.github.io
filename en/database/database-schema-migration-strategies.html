@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-schema-migration-strategies.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1026",
+      "wordCount": "1107",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-schema-migration-strategies.html"},
-      "articleBody": "Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database schema changes in production require careful planning. Unlike application code, database changes are stateful\u2014they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation. Version Control for Schema Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database. Migration naming convention: use timestamps or sequential numbers: 20260512_create_orders_table.sql. Each migration should be additive when possible\u2014adding tables, columns, and indexes is easier to reverse than removing them. Migration Patterns Expand-migrate-contract is the standard pattern for zero-downtime migrations. Phase 1 (expand): add new columns, tables, and indexes without removing old ones. Deploy application code that writes to both old and new structures. Phase 2 (migrate): backfill new columns with data from old columns. Run data validation. Phase 3 (contract): remove old columns and tables after verifying new structures work. Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration\u2014add the new name, dual-write, backfill, then remove the old name. Rollback Planning Every migration needs a rollback script. Test rollbacks before production deployment\u2014they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration. Flyway supports undo migrations with naming convention. Liquibase supports rollback commands. Alembic can generate downgrade scripts. Test the complete forward-and-rollback cycle in a staging environment. Performance Considerations Large migrations lock tables. Adding a column with a default value locks the table in PostgreSQL\u2014it rewrites the table. Adding a CHECK or NOT NULL constraint requires a full table scan. Use pg_repack or pt-online-schema-change for zero-downtime schema changes on large tables. Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods. Production Checklist Review migration SQL for locking behavior. Check disk space\u2014ALTER TABLE can double table size temporarily. Run migration on a replica first. Have a rollback plan documented. Test on a staging database with production-scale data. Monitor query performance after migration. Set up rollback alerting."
+      "articleBody": "Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database Schema Migration: Version Control, Rollback, and Zero-Downtime Database schema changes in production require careful planning. Unlike application code, database changes are stateful\u2014they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation. Version Control for Schema Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database. Migration naming convention: use timestamps or sequential numbers: 20260512_create_orders_table.sql. Each migration should be additive when possible\u2014adding tables, columns, and indexes is easier to reverse than removing them. Migration Patterns Expand-migrate-contract is the standard pattern for zero-downtime migrations. Phase 1 (expand): add new columns, tables, and indexes without removing old ones. Deploy application code that writes to both old and new structures. Phase 2 (migrate): backfill new columns with data from old columns. Run data validation. Phase 3 (contract): remove old columns and tables after verifying new structures work. Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration\u2014add the new name, dual-write, backfill, then remove the old name. Rollback Planning Every migration needs a rollback script. Test rollbacks before production deployment\u2014they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration. Flyway supports undo migrations with naming convention. Liquibase supports rollback commands. Alembic can generate downgrade scripts. Test the complete forward-and-rollback cycle in a staging environment. Performance Considerations Large migrations lock tables. Adding a column with a default value locks the table in PostgreSQL\u2014it rewrites the table. Adding a CHECK or NOT NULL constraint requires a full table scan. Use pg_repack or pt-online-schema-change for zero-downtime schema changes on large tables. Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods. Production Checklist Review migration SQL for locking behavior. Check disk space\u2014ALTER TABLE can double table size temporarily. Run migration on a replica first. Have a rollback plan documented. Test on a staging database with production-scale data. Monitor query performance after migration. Set up rollback alerting."
     }
     </script>
     <script type="application/ld+json">
@@ -150,7 +150,33 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Database Schema Migration: Version Control, Rollback, and Zero-Downtime</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database schema changes in production require careful planning. Unlike application code, database changes are stateful—they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -190,7 +216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -230,7 +262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Migration Patterns</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -270,7 +308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration—add the new name, dual-write, backfill, then remove the old name.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -310,7 +354,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Every migration needs a rollback script. Test rollbacks before production deployment—they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +400,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Performance Considerations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -390,6 +446,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods.</p>
 <br>
 <br>
@@ -410,7 +469,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Production Checklist</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

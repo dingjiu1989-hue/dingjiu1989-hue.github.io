@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-driven-architecture
   
 
 
+# Event-Driven Architecture: Patterns and Practice
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Event-driven architecture (EDA) is a software architecture pattern where components communicate by producing and consuming events. Instead of direct service-to-service calls, services publish events about state changes, and interested services consume those events. This decoupling enables scalability, resilience, and real-time processing. This article covers the core patterns: event sourcing, pub/sub, event streaming, schema management, and consumer reliability. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Core Concepts
   
   
   
+  
+  
+  
 
 
 An event is a record of something that happened in the system. It is a fact: immutable, timestamped, and meaningful. 
 
+  
+  
+  
   
   
   
@@ -190,10 +225,16 @@ Event: OrderPlaced {
   
   
   
+  
+  
+  
 
 
 orderId: "ord-12345",
 
+  
+  
+  
   
   
   
@@ -236,10 +277,16 @@ customerId: "cus-678",
   
   
   
+  
+  
+  
 
 
 total: 99.99,
 
+  
+  
+  
   
   
   
@@ -282,6 +329,9 @@ items: [..., ..., ...],
   
   
   
+  
+  
+  
 
 
 timestamp: "2026-05-12T10:30:00Z"
@@ -305,10 +355,16 @@ timestamp: "2026-05-12T10:30:00Z"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -351,6 +407,9 @@ Events differ from commands and messages:
   
   
   
+  
+  
+  
 
 
 * **Command**: A request for something to happen (imperative). "Place this order."
@@ -371,10 +430,16 @@ Events differ from commands and messages:
   
   
   
+  
+  
+  
 
 
 * **Event**: A record that something happened (declarative). "Order was placed."
 
+  
+  
+  
   
   
   
@@ -414,10 +479,16 @@ Events differ from commands and messages:
   
   
   
+  
+  
+  
 
 
 Event Sourcing 
 
+  
+  
+  
   
   
   
@@ -454,10 +525,16 @@ Event sourcing stores the state of an application as a sequence of events. Inste
   
   
   
+  
+  
+  
 
 
 How Event Sourcing Works 
 
+  
+  
+  
   
   
   
@@ -500,10 +577,16 @@ class Account:
   
   
   
+  
+  
+  
 
 
 def __init__(self, account_id):
 
+  
+  
+  
   
   
   
@@ -546,6 +629,9 @@ self.account_id = account_id
   
   
   
+  
+  
+  
 
 
 self.balance = 0
@@ -569,10 +655,16 @@ self.balance = 0
   
   
   
+  
+  
+  
 
 
 self.version = 0
 
+  
+  
+  
   
   
   
@@ -615,10 +707,16 @@ def apply_event(self, event):
   
   
   
+  
+  
+  
 
 
 if event.type == "AccountOpened":
 
+  
+  
+  
   
   
   
@@ -661,10 +759,16 @@ self.owner = event.owner
   
   
   
+  
+  
+  
 
 
 elif event.type == "MoneyDeposited":
 
+  
+  
+  
   
   
   
@@ -707,10 +811,16 @@ self.balance += event.amount
   
   
   
+  
+  
+  
 
 
 elif event.type == "MoneyWithdrawn":
 
+  
+  
+  
   
   
   
@@ -753,10 +863,16 @@ self.balance -= event.amount
   
   
   
+  
+  
+  
 
 
 self.version += 1
 
+  
+  
+  
   
   
   
@@ -799,10 +915,16 @@ def rebuild_from_events(self, events):
   
   
   
+  
+  
+  
 
 
 self.balance = 0
 
+  
+  
+  
   
   
   
@@ -845,10 +967,16 @@ self.version = 0
   
   
   
+  
+  
+  
 
 
 for event in events:
 
+  
+  
+  
   
   
   
@@ -891,10 +1019,16 @@ self.apply_event(event)
   
   
   
+  
+  
+  
 
 
 class EventSourcedAccountService:
 
+  
+  
+  
   
   
   
@@ -937,10 +1071,16 @@ def __init__(self, event_store):
   
   
   
+  
+  
+  
 
 
 self.event_store = event_store
 
+  
+  
+  
   
   
   
@@ -983,10 +1123,16 @@ def deposit(self, account_id, amount):
   
   
   
+  
+  
+  
 
 
 # Rebuild current state
 
+  
+  
+  
   
   
   
@@ -1029,10 +1175,16 @@ events = self.event_store.get_events(account_id)
   
   
   
+  
+  
+  
 
 
 account = Account(account_id)
 
+  
+  
+  
   
   
   
@@ -1075,10 +1227,16 @@ account.rebuild_from_events(events)
   
   
   
+  
+  
+  
 
 
 # Validate business rules
 
+  
+  
+  
   
   
   
@@ -1121,10 +1279,16 @@ if amount <= 0:
   
   
   
+  
+  
+  
 
 
 raise ValueError("Amount must be positive")
 
+  
+  
+  
   
   
   
@@ -1167,10 +1331,16 @@ raise ValueError("Amount must be positive")
   
   
   
+  
+  
+  
 
 
 event = Event(
 
+  
+  
+  
   
   
   
@@ -1213,10 +1383,16 @@ aggregate_id=account_id,
   
   
   
+  
+  
+  
 
 
 type="MoneyDeposited",
 
+  
+  
+  
   
   
   
@@ -1259,6 +1435,9 @@ data={"amount": amount},
   
   
   
+  
+  
+  
 
 
 version=account.version + 1
@@ -1282,10 +1461,16 @@ version=account.version + 1
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1328,10 +1513,16 @@ self.event_store.append(event)
   
   
   
+  
+  
+  
 
 
 Benefits of Event Sourcing 
 
+  
+  
+  
   
   
   
@@ -1371,10 +1562,16 @@ Benefits of Event Sourcing
   
   
   
+  
+  
+  
 
 
 * **Temporal queries**: You can query the state at any point in time.
 
+  
+  
+  
   
   
   
@@ -1411,10 +1608,16 @@ Benefits of Event Sourcing
   
   
   
+  
+  
+  
 
 
 * **Event-driven projections**: Build multiple read models from the same events.
 
+  
+  
+  
   
   
   
@@ -1457,10 +1660,16 @@ When NOT to Use Event Sourcing
   
   
   
+  
+  
+  
 
 
 * Simple CRUD applications where audit trails are not needed.
 
+  
+  
+  
   
   
   
@@ -1497,10 +1706,16 @@ When NOT to Use Event Sourcing
   
   
   
+  
+  
+  
 
 
 * When the event store becomes a performance bottleneck for write-heavy workloads.
 
+  
+  
+  
   
   
   
@@ -1540,6 +1755,9 @@ When NOT to Use Event Sourcing
   
   
   
+  
+  
+  
 
 
 Pub/Sub Pattern 
@@ -1560,10 +1778,16 @@ Pub/Sub Pattern
   
   
   
+  
+  
+  
 
 
 Publish-subscribe is a messaging pattern where publishers emit events without knowing which subscribers will consume them. Subscribers express interest in certain event types and receive them asynchronously. 
 
+  
+  
+  
   
   
   
@@ -1606,10 +1830,16 @@ Publish-subscribe is a messaging pattern where publishers emit events without kn
   
   
   
+  
+  
+  
 
 
 import redis
 
+  
+  
+  
   
   
   
@@ -1652,10 +1882,16 @@ class EventPublisher:
   
   
   
+  
+  
+  
 
 
 def __init__(self, redis_client):
 
+  
+  
+  
   
   
   
@@ -1698,10 +1934,16 @@ self.redis = redis_client
   
   
   
+  
+  
+  
 
 
 def publish(self, channel, event):
 
+  
+  
+  
   
   
   
@@ -1744,10 +1986,16 @@ self.redis.publish(channel, event.to_json())
   
   
   
+  
+  
+  
 
 
 class EventSubscriber:
 
+  
+  
+  
   
   
   
@@ -1790,10 +2038,16 @@ def __init__(self, redis_client, channel):
   
   
   
+  
+  
+  
 
 
 self.pubsub = redis_client.pubsub()
 
+  
+  
+  
   
   
   
@@ -1836,10 +2090,16 @@ self.pubsub.subscribe(channel)
   
   
   
+  
+  
+  
 
 
 def start_listening(self):
 
+  
+  
+  
   
   
   
@@ -1882,10 +2142,16 @@ for message in self.pubsub.listen():
   
   
   
+  
+  
+  
 
 
 if message['type'] == 'message':
 
+  
+  
+  
   
   
   
@@ -1928,10 +2194,16 @@ self.handle_event(Event.from_json(message['data']))
   
   
   
+  
+  
+  
 
 
 def handle_event(self, event):
 
+  
+  
+  
   
   
   
@@ -1974,10 +2246,16 @@ raise NotImplementedError
   
   
   
+  
+  
+  
 
 
 When to Use Pub/Sub 
 
+  
+  
+  
   
   
   
@@ -2017,10 +2295,16 @@ When to Use Pub/Sub
   
   
   
+  
+  
+  
 
 
 * **Dynamic subscriptions**: Subscribers come and go without affecting publishers.
 
+  
+  
+  
   
   
   
@@ -2060,6 +2344,9 @@ When to Use Pub/Sub
   
   
   
+  
+  
+  
 
 
 Event Streaming with Kafka 
@@ -2080,10 +2367,16 @@ Event Streaming with Kafka
   
   
   
+  
+  
+  
 
 
 Apache Kafka is the dominant platform for event streaming at scale. It provides durable, ordered, and partitioned event storage. 
 
+  
+  
+  
   
   
   
@@ -2123,10 +2416,16 @@ Kafka Concepts
   
   
   
+  
+  
+  
 
 
 * **Topic**: A category of events (e.g., "orders", "payments").
 
+  
+  
+  
   
   
   
@@ -2163,10 +2462,16 @@ Kafka Concepts
   
   
   
+  
+  
+  
 
 
 * **Producer**: Publishes events to a topic partition.
 
+  
+  
+  
   
   
   
@@ -2203,10 +2508,16 @@ Kafka Concepts
   
   
   
+  
+  
+  
 
 
 * **Consumer group**: A set of consumers that cooperate to consume a topic. Each partition is consumed by exactly one consumer in the group.
 
+  
+  
+  
   
   
   
@@ -2249,10 +2560,16 @@ from kafka import KafkaProducer, KafkaConsumer
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -2295,6 +2612,9 @@ import json
   
   
   
+  
+  
+  
 
 
 producer = KafkaProducer(
@@ -2318,10 +2638,16 @@ producer = KafkaProducer(
   
   
   
+  
+  
+  
 
 
 bootstrap_servers=['localhost:9092'],
 
+  
+  
+  
   
   
   
@@ -2364,10 +2690,16 @@ value_serializer=lambda v: json.dumps(v).encode('utf-8')
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2410,6 +2742,9 @@ value_serializer=lambda v: json.dumps(v).encode('utf-8')
   
   
   
+  
+  
+  
 
 
 producer.send(
@@ -2433,10 +2768,16 @@ producer.send(
   
   
   
+  
+  
+  
 
 
 'orders',
 
+  
+  
+  
   
   
   
@@ -2479,10 +2820,16 @@ key=b'ord-12345', # Same key = same partition = ordered
   
   
   
+  
+  
+  
 
 
 value={
 
+  
+  
+  
   
   
   
@@ -2525,10 +2872,16 @@ value={
   
   
   
+  
+  
+  
 
 
 'order_id': 'ord-12345',
 
+  
+  
+  
   
   
   
@@ -2571,10 +2924,16 @@ value={
   
   
   
+  
+  
+  
 
 
 'total': 99.99,
 
+  
+  
+  
   
   
   
@@ -2617,6 +2976,9 @@ value={
   
   
   
+  
+  
+  
 
 
 }
@@ -2640,10 +3002,16 @@ value={
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2686,10 +3054,16 @@ producer.flush()
   
   
   
+  
+  
+  
 
 
 # Consumer
 
+  
+  
+  
   
   
   
@@ -2732,6 +3106,9 @@ consumer = KafkaConsumer(
   
   
   
+  
+  
+  
 
 
 'orders',
@@ -2755,10 +3132,16 @@ consumer = KafkaConsumer(
   
   
   
+  
+  
+  
 
 
 bootstrap_servers=['localhost:9092'],
 
+  
+  
+  
   
   
   
@@ -2801,10 +3184,16 @@ group_id='order-processor',
   
   
   
+  
+  
+  
 
 
 value_deserializer=lambda v: json.loads(v.decode('utf-8')),
 
+  
+  
+  
   
   
   
@@ -2847,10 +3236,16 @@ auto_offset_reset='earliest'
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2893,10 +3288,16 @@ for message in consumer:
   
   
   
+  
+  
+  
 
 
 event = message.value
 
+  
+  
+  
   
   
   
@@ -2939,10 +3340,16 @@ process_event(event)
   
   
   
+  
+  
+  
 
 
 # Offset is committed automatically or manually after processing
 
+  
+  
+  
   
   
   
@@ -2982,10 +3389,16 @@ Partition Assignment Strategy
   
   
   
+  
+  
+  
 
 
 Events with the same key go to the same partition, preserving order within that key's scope. Good partition keys evenly distribute load while preserving ordering within each entity. 
 
+  
+  
+  
   
   
   
@@ -3028,10 +3441,16 @@ Events with the same key go to the same partition, preserving order within that 
   
   
   
+  
+  
+  
 
 
 key = str(customer_id).encode()
 
+  
+  
+  
   
   
   
@@ -3074,10 +3493,16 @@ key = str(customer_id).encode()
   
   
   
+  
+  
+  
 
 
 key = str(order_date).encode()
 
+  
+  
+  
   
   
   
@@ -3117,10 +3542,16 @@ Event Schemas
   
   
   
+  
+  
+  
 
 
 Events are contracts between producers and consumers. Schema management ensures that changes are compatible and do not break consumers. 
 
+  
+  
+  
   
   
   
@@ -3157,10 +3588,16 @@ Schema Registry
   
   
   
+  
+  
+  
 
 
 A schema registry stores and validates event schemas. Producers and consumers retrieve schemas from the registry. 
 
+  
+  
+  
   
   
   
@@ -3203,6 +3640,9 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {
@@ -3226,10 +3666,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 "type": "record",
 
+  
+  
+  
   
   
   
@@ -3272,6 +3718,9 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 "namespace": "com.example.orders",
@@ -3295,10 +3744,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 "fields": [
 
+  
+  
+  
   
   
   
@@ -3341,10 +3796,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {"name": "customer_id", "type": "string"},
 
+  
+  
+  
   
   
   
@@ -3387,10 +3848,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {"name": "items", "type": {
 
+  
+  
+  
   
   
   
@@ -3433,10 +3900,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 "items": {
 
+  
+  
+  
   
   
   
@@ -3479,10 +3952,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 "name": "OrderItem",
 
+  
+  
+  
   
   
   
@@ -3525,10 +4004,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {"name": "product_id", "type": "string"},
 
+  
+  
+  
   
   
   
@@ -3571,10 +4056,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {"name": "price", "type": "double"}
 
+  
+  
+  
   
   
   
@@ -3617,10 +4108,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3663,10 +4160,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 {"name": "timestamp", "type": "string"}
 
+  
+  
+  
   
   
   
@@ -3709,10 +4212,16 @@ A schema registry stores and validates event schemas. Producers and consumers re
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3755,6 +4264,9 @@ Schema Evolution Rules
   
   
   
+  
+  
+  
 
 
 * **Backward compatible**: New schema can read data written with the old schema. Adding optional fields is backward compatible.
@@ -3775,10 +4287,16 @@ Schema Evolution Rules
   
   
   
+  
+  
+  
 
 
 * **Forward compatible**: Old schema can read data written with the new schema. Removing fields is forward compatible.
 
+  
+  
+  
   
   
   
@@ -3818,10 +4336,16 @@ Schema Evolution Rules
   
   
   
+  
+  
+  
 
 
 Rules:
 
+  
+  
+  
   
   
   
@@ -3858,6 +4382,9 @@ Rules:
   
   
   
+  
+  
+  
 
 
 * New fields should have defaults.
@@ -3878,10 +4405,16 @@ Rules:
   
   
   
+  
+  
+  
 
 
 * Do not rename fields.
 
+  
+  
+  
   
   
   
@@ -3921,10 +4454,16 @@ Rules:
   
   
   
+  
+  
+  
 
 
 Idempotent Consumers 
 
+  
+  
+  
   
   
   
@@ -3961,6 +4500,9 @@ In event-driven systems, events can be delivered more than once (at-least-once d
   
   
   
+  
+  
+  
 
 
 Idempotency Strategies 
@@ -3981,10 +4523,16 @@ Idempotency Strategies
   
   
   
+  
+  
+  
 
 
 **Idempotency key**: Track processed event IDs in a database table. 
 
+  
+  
+  
   
   
   
@@ -4027,10 +4575,16 @@ class IdempotentConsumer:
   
   
   
+  
+  
+  
 
 
 def __init__(self, db_connection):
 
+  
+  
+  
   
   
   
@@ -4073,10 +4627,16 @@ self.db = db_connection
   
   
   
+  
+  
+  
 
 
 def process_event(self, event):
 
+  
+  
+  
   
   
   
@@ -4119,10 +4679,16 @@ def process_event(self, event):
   
   
   
+  
+  
+  
 
 
 already_processed = self.db.execute(
 
+  
+  
+  
   
   
   
@@ -4165,6 +4731,9 @@ already_processed = self.db.execute(
   
   
   
+  
+  
+  
 
 
 (event.id,)
@@ -4188,10 +4757,16 @@ already_processed = self.db.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4234,10 +4809,16 @@ if already_processed:
   
   
   
+  
+  
+  
 
 
 log.info(f"Skipping already-processed event: {event.id}")
 
+  
+  
+  
   
   
   
@@ -4280,10 +4861,16 @@ return # Idempotent: skip
   
   
   
+  
+  
+  
 
 
 # Process event
 
+  
+  
+  
   
   
   
@@ -4326,10 +4913,16 @@ self.handle_event(event)
   
   
   
+  
+  
+  
 
 
 # Record as processed (in same transaction if possible)
 
+  
+  
+  
   
   
   
@@ -4372,10 +4965,16 @@ self.db.execute(
   
   
   
+  
+  
+  
 
 
 "INSERT INTO processed_events (event_id, processed_at) VALUES (?, ?)",
 
+  
+  
+  
   
   
   
@@ -4418,10 +5017,16 @@ self.db.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4464,10 +5069,16 @@ self.db.execute(
   
   
   
+  
+  
+  
 
 
 # Deterministic: setting status is idempotent
 
+  
+  
+  
   
   
   
@@ -4510,10 +5121,16 @@ def handle_order_shipped(event):
   
   
   
+  
+  
+  
 
 
 db.execute(
 
+  
+  
+  
   
   
   
@@ -4556,6 +5173,9 @@ db.execute(
   
   
   
+  
+  
+  
 
 
 ("shipped", event.order_id)
@@ -4579,10 +5199,16 @@ db.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4625,10 +5251,16 @@ db.execute(
   
   
   
+  
+  
+  
 
 
 **Compare-and-swap**: Only apply the event if the current state matches expectations. 
 
+  
+  
+  
   
   
   
@@ -4671,10 +5303,16 @@ def handle_payment_confirmed(event):
   
   
   
+  
+  
+  
 
 
 db.execute(
 
+  
+  
+  
   
   
   
@@ -4717,10 +5355,16 @@ db.execute(
   
   
   
+  
+  
+  
 
 
 WHERE order_id = ? AND status = 'pending'""",
 
+  
+  
+  
   
   
   
@@ -4763,10 +5407,16 @@ WHERE order_id = ? AND status = 'pending'""",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4809,10 +5459,16 @@ WHERE order_id = ? AND status = 'pending'""",
   
   
   
+  
+  
+  
 
 
 Exactly-Once Processing 
 
+  
+  
+  
   
   
   
@@ -4849,6 +5505,9 @@ Exactly-once processing is the holy grail of event-driven systems. It ensures ea
   
   
   
+  
+  
+  
 
 
 Kafka Exactly-Once Semantics 
@@ -4869,10 +5528,16 @@ Kafka Exactly-Once Semantics
   
   
   
+  
+  
+  
 
 
 Kafka supports exactly-once semantics (EOS) through transactional producers and consumers. 
 
+  
+  
+  
   
   
   
@@ -4915,10 +5580,16 @@ from kafka import KafkaProducer
   
   
   
+  
+  
+  
 
 
 # Transactional producer
 
+  
+  
+  
   
   
   
@@ -4961,10 +5632,16 @@ producer = KafkaProducer(
   
   
   
+  
+  
+  
 
 
 bootstrap_servers=['localhost:9092'],
 
+  
+  
+  
   
   
   
@@ -5007,10 +5684,16 @@ enable_idempotence=True,
   
   
   
+  
+  
+  
 
 
 transactional_id='order-processor'
 
+  
+  
+  
   
   
   
@@ -5053,6 +5736,9 @@ transactional_id='order-processor'
   
   
   
+  
+  
+  
 
 
 producer.init_transactions()
@@ -5076,10 +5762,16 @@ producer.init_transactions()
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -5122,10 +5814,16 @@ producer.begin_transaction()
   
   
   
+  
+  
+  
 
 
 # Read from source topic
 
+  
+  
+  
   
   
   
@@ -5168,10 +5866,16 @@ event = read_event()
   
   
   
+  
+  
+  
 
 
 # Process and produce to multiple topics
 
+  
+  
+  
   
   
   
@@ -5214,10 +5918,16 @@ producer.send('processed-orders', value=process(event))
   
   
   
+  
+  
+  
 
 
 producer.send('notifications', value=build_notification(event))
 
+  
+  
+  
   
   
   
@@ -5260,10 +5970,16 @@ producer.commit_transaction()
   
   
   
+  
+  
+  
 
 
 except Exception:
 
+  
+  
+  
   
   
   
@@ -5306,10 +6022,16 @@ producer.abort_transaction()
   
   
   
+  
+  
+  
 
 
 For idempotent end-to-end processing, combine Kafka transactions with a transactional-outbox pattern. 
 
+  
+  
+  
   
   
   
@@ -5346,6 +6068,9 @@ Common Patterns
   
   
   
+  
+  
+  
 
 
 Transactional Outbox 
@@ -5366,10 +6091,16 @@ Transactional Outbox
   
   
   
+  
+  
+  
 
 
 When a service needs to both write to its database and publish an event, use the outbox pattern to ensure atomicity: 
 
+  
+  
+  
   
   
   
@@ -5412,10 +6143,16 @@ When a service needs to both write to its database and publish an event, use the
   
   
   
+  
+  
+  
 
 
 def place_order(order_data):
 
+  
+  
+  
   
   
   
@@ -5458,10 +6195,16 @@ with transaction():
   
   
   
+  
+  
+  
 
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write to database
 
+  
+  
+  
   
   
   
@@ -5504,10 +6247,16 @@ order_id = db.insert("orders", order_data)
   
   
   
+  
+  
+  
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write event to outbox table (same database, same transaction)
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Write event to outbox table (same database, same transaction)
 
+  
+  
+  
   
   
   
@@ -5550,10 +6299,16 @@ db.insert("outbox", {
   
   
   
+  
+  
+  
 
 
 "event_type": "OrderPlaced",
 
+  
+  
+  
   
   
   
@@ -5596,10 +6351,16 @@ db.insert("outbox", {
   
   
   
+  
+  
+  
 
 
 "created_at": datetime.utcnow()
 
+  
+  
+  
   
   
   
@@ -5642,10 +6403,16 @@ db.insert("outbox", {
   
   
   
+  
+  
+  
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outbox relay picks up and publishes
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outbox relay picks up and publishes
 
+  
+  
+  
   
   
   
@@ -5688,6 +6455,9 @@ db.insert("outbox", {
   
   
   
+  
+  
+  
 
 
 Dead Letter Queue 
@@ -5708,10 +6478,16 @@ Dead Letter Queue
   
   
   
+  
+  
+  
 
 
 Events that cannot be processed after retries go to a dead letter queue (DLQ): 
 
+  
+  
+  
   
   
   
@@ -5754,6 +6530,9 @@ def process_with_dlq(raw_event_content, max_retries=3):
   
   
   
+  
+  
+  
 
 
 try:
@@ -5777,10 +6556,16 @@ try:
   
   
   
+  
+  
+  
 
 
 process(raw_event_content)
 
+  
+  
+  
   
   
   
@@ -5823,10 +6608,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 for attempt in range(max_retries):
 
+  
+  
+  
   
   
   
@@ -5869,10 +6660,16 @@ try:
   
   
   
+  
+  
+  
 
 
 process(raw_event_content)
 
+  
+  
+  
   
   
   
@@ -5915,10 +6712,16 @@ return
   
   
   
+  
+  
+  
 
 
 except Exception:
 
+  
+  
+  
   
   
   
@@ -5961,10 +6764,16 @@ if attempt < max_retries - 1:
   
   
   
+  
+  
+  
 
 
 time.sleep(2 ** attempt) # Exponential backoff
 
+  
+  
+  
   
   
   
@@ -6007,6 +6816,9 @@ time.sleep(2 ** attempt) # Exponential backoff
   
   
   
+  
+  
+  
 
 
 dlq.send(raw_event_content, error=str(e), original_topic="orders")
@@ -6030,10 +6842,16 @@ dlq.send(raw_event_content, error=str(e), original_topic="orders")
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

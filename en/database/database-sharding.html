@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-sharding.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1086",
+      "wordCount": "1215",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-sharding.html"},
-      "articleBody": "Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs What is Sharding? Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. Key-Based Sharding Hash the shard key to determine the target shard: class KeyBasedShardManager: def __init__(self, num_shards=4): self.num_shards = num_shards self.shards = [Shard(i) for i in range(num_shards)] def get_shard(self, shard_key): hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16) shard_id = hash_val % self.num_shards return self.shards[shard_id] Range-Based Sharding Partition by value ranges: CREATE TABLE orders ( id BIGSERIAL, order_date DATE, total DECIMAL(10,2), PRIMARY KEY (id, order_date) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2026_01 PARTITION OF orders FOR VALUES FROM ('2026-01-01') TO ('2026-02-01'); Directory-Based Sharding Use a lookup table for shard mapping: class DirectoryShardManager: def __init__(self): self.directory = {} def map_key_to_shard(self, shard_key, shard_id): self.directory[shard_key] = shard_id def get_shard(self, shard_key): return self.directory.get(shard_key) Rebalancing When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. Conclusion Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible."
+      "articleBody": "Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs Database Sharding: Strategies and Trade-offs What is Sharding? Sharding splits a database across multiple servers horizontally. Each shard holds a subset of data, allowing linear scalability. Key-Based Sharding Hash the shard key to determine the target shard: class KeyBasedShardManager: def __init__(self, num_shards=4): self.num_shards = num_shards self.shards = [Shard(i) for i in range(num_shards)] def get_shard(self, shard_key): hash_val = int(hashlib.sha256(str(shard_key).encode()).hexdigest(), 16) shard_id = hash_val % self.num_shards return self.shards[shard_id] Range-Based Sharding Partition by value ranges: CREATE TABLE orders ( id BIGSERIAL, order_date DATE, total DECIMAL(10,2), PRIMARY KEY (id, order_date) ) PARTITION BY RANGE (order_date); CREATE TABLE orders_2026_01 PARTITION OF orders FOR VALUES FROM ('2026-01-01') TO ('2026-02-01'); Directory-Based Sharding Use a lookup table for shard mapping: class DirectoryShardManager: def __init__(self): self.directory = {} def map_key_to_shard(self, shard_key, shard_id): self.directory[shard_key] = shard_id def get_shard(self, shard_key): return self.directory.get(shard_key) Rebalancing When adding or removing shards, data must be redistributed. Use consistent hashing to minimize data movement. Tools like Vitess and Citus automate this process. Conclusion Choose key-based sharding for even distribution, range-based for time-series data, and directory-based for maximum flexibility. Design shard keys carefully for even distribution. Plan for rebalancing from the start. Avoid cross-shard queries where possible."
     }
     </script>
     <script type="application/ld+json">
@@ -152,7 +152,33 @@
 <br>
 <br>
 <br>
+<h1>Database Sharding: Strategies and Trade-offs</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>What is Sharding? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -186,6 +212,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Key-Based Sharding </p>
 <br>
 <br>
@@ -203,7 +232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Hash the shard key to determine the target shard: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -243,7 +278,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, num_shards=4):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -283,6 +324,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.shards = [Shard(i) for i in range(num_shards)]</p>
 <br>
 <br>
@@ -303,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_shard(self, shard_key):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -343,7 +393,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>shard_id = hash_val % self.num_shards</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -383,6 +439,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Range-Based Sharding </p>
 <br>
 <br>
@@ -400,7 +459,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Partition by value ranges: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -440,7 +505,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id BIGSERIAL, order_date DATE, total DECIMAL(10,2),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -480,7 +551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) PARTITION BY RANGE (order_date);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -520,7 +597,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FOR VALUES FROM ('2026-01-01') TO ('2026-02-01');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -557,7 +640,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Use a lookup table for shard mapping: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -597,7 +686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -637,7 +732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def map_key_to_shard(self, shard_key, shard_id):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -677,7 +778,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_shard(self, shard_key):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -717,7 +824,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rebalancing </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -751,7 +864,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

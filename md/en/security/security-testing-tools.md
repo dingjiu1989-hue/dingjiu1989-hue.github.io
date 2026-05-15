@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/security/security-testing-tools.html
   
   
   
+  
+  
+  
+
+
+# Security Testing Tools: SAST, DAST, IAST, and RASP Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Application security testing identifies vulnerabilities in software. Different testing approaches find different types of issues and operate at different stages of the SDLC. A comprehensive security testing program uses multiple approaches.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Application security testing identifies vulnerabilities in software. Different t
   
   
   
+  
+  
+  
 
 
 SAST analyzes source code without executing it. It finds vulnerabilities early in development. SAST tools scan for injection flaws, buffer overflows, insecure cryptographic practices, and other code-level issues.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Tools: SonarQube, Checkmarx, Fortify, Semgrep. SonarQube is the most popular ope
   
   
   
+  
+  
+  
 
 
 ##  DAST (Dynamic Analysis)
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ DAST tests running applications by sending malicious inputs and observing respon
   
   
   
+  
+  
+  
 
 
 Tools: OWASP ZAP (open-source), Burp Suite (professional), Acunetix (commercial). OWASP ZAP provides automated scanning with CI/CD integration.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Tools: OWASP ZAP (open-source), Burp Suite (professional), Acunetix (commercial)
   
   
   
+  
+  
+  
 
 
 IAST instruments the application and analyzes code execution during testing. It combines SAST's code analysis with DAST's runtime context. IAST provides fewer false positives than SAST and deeper coverage than DAST.
 
+  
+  
+  
   
   
   
@@ -331,6 +384,9 @@ IAST instruments the application and analyzes code execution during testing. It 
   
   
   
+  
+  
+  
 
 
 RASP monitors application behavior at runtime and blocks attacks. It provides real-time protection without requiring code changes. RASP complements other testing approaches by protecting against unknown vulnerabilities.
@@ -354,10 +410,16 @@ RASP monitors application behavior at runtime and blocks attacks. It provides re
   
   
   
+  
+  
+  
 
 
 ##  Integration
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/micro-saas-stack.html
   
 
 
+# Micro-SaaS Tech Stack: Building Lean in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  The Micro-SaaS Tech Stack: Building Lean
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Choosing the right tech stack for a micro-SaaS is about maximizing developer pro
   
   
   
+  
+  
+  
 
 
 ### Hosting and Compute
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Start with a platform that abstracts infrastructure complexity. Vercel or Netlif
   
   
   
+  
+  
+  
 
 
 For serverless compute, Cloudflare Workers at $5/month for 10 million requests is the most cost-effective option. AWS Lambda remains viable but has a steeper learning curve. Avoid managing your own servers until you have paying customers.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ For serverless compute, Cloudflare Workers at $5/month for 10 million requests i
   
   
   
+  
+  
+  
 
 
 PostgreSQL is the default choice for micro-SaaS in 2026. Supabase provides a generous free tier: 500 MB database, 1 GB file storage, 50,000 monthly active users. Neon offers serverless PostgreSQL with instant branching and a free tier of 500 MB storage. PlanetScale (MySQL-compatible) provides free databases up to 1 GB.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ For caching and real-time features, Upstash offers serverless Redis with a free 
   
   
   
+  
+  
+  
 
 
 ### Authentication
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ NextAuth.js (now Auth.js) for Next.js applications provides built-in database se
   
   
   
+  
+  
+  
 
 
 ### Payment Processing
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Stripe remains the default choice for micro-SaaS payments. Stripe Checkout provi
   
   
   
+  
+  
+  
 
 
 ### Email Delivery
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Transactional email requires dedicated services. Resend provides 100 free emails
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

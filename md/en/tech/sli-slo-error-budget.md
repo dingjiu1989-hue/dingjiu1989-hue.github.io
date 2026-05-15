@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/sli-slo-error-budget.html
   
   
   
+  
+  
+  
+
+
+# SLI/SLO/Error Budgets: Defining SLIs, Setting SLOs, and Burn Rate Alerts
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Service Level Indicators (SLIs), Service Level Objectives (SLOs), and Error Budg
   
   
   
+  
+  
+  
 
 
 This article covers SLI definition, SLO setting methodology, error budget policies, and burn rate alert design.
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ This article covers SLI definition, SLO setting methodology, error budget polici
   
   
   
+  
+  
+  
 
 
 An SLI is a carefully chosen metric that measures a specific aspect of service reliability. Common SLI categories include availability (ratio of successful requests), latency (request duration), throughput (requests per second), and durability (data persistence).
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ Good SLIs are measurable from the customer's perspective. For a web service, the
   
   
   
+  
+  
+  
 
 
 SLIs should be captured as a ratio of good events to total events:
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ availability_sli = successful_requests / total_requests
   
   
   
+  
+  
+  
 
 
 latency_sli = fast_requests / total_requests
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ SLI definition requires choosing measurement windows and aggregation methods. A 
   
   
   
+  
+  
+  
 
 
 ##  Setting SLOs
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ An SLO sets a target value for an SLI over a defined period. Common targets are 
   
   
   
+  
+  
+  
 
 
 * 99.9% allows 8.76 hours of downtime per year.
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ An SLO sets a target value for an SLI over a defined period. Common targets are 
   
   
   
+  
+  
+  
 
 
 * 99.999% allows 5.26 minutes per year.
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ SLO targets should not be aspirational. A target that has never been met provide
   
   
   
+  
+  
+  
 
 
 Not all services need the same SLO. Critical user journeys (authentication, checkout, data access) should have higher SLOs than secondary features. Multi-tier SLOs — target (internal goal) and minimum (customer commitment) — provide a buffer between aspirational goals and contractual obligations.
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ Not all services need the same SLO. Critical user journeys (authentication, chec
   
   
   
+  
+  
+  
 
 
 The error budget is the allowed amount of unreliability within the SLO period. For a 99.9% SLO over 30 days, the error budget is 0.1% of total events — or approximately 43 minutes of downtime.
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ The error budget defines how much risk the team can take. When the budget is ful
   
   
   
+  
+  
+  
 
 
 Error budget policies encode these decisions in automated processes. A CI/CD pipeline gate checks error budget consumption before allowing a production deployment. This creates a direct feedback loop between reliability and feature velocity.
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ Error budget policies encode these decisions in automated processes. A CI/CD pip
   
   
   
+  
+  
+  
 
 
 Burn rate alerts detect excessive error budget consumption before the budget is exhausted. The burn rate is how fast the error budget is being consumed relative to the SLO period.
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ A burn rate of 1 means the budget will be fully consumed by the end of the perio
   
   
   
+  
+  
+  
 
 
 * Fast-burn alerts (burn rate >= 14 over 1 hour): Catches severe outages immediately. Pages the on-call engineer.
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ A burn rate of 1 means the budget will be fully consumed by the end of the perio
   
   
   
+  
+  
+  
 
 
 This approach ensures critical incidents are paged immediately while gradual issues are investigated before they exhaust the budget.
 
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ This approach ensures critical incidents are paged immediately while gradual iss
   
   
   
+  
+  
+  
 
 
 Prometheus and the slo-exporter pattern implement SLO monitoring effectively:
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ groups:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: slo-alerts
 
+  
+  
+  
   
   
   
@@ -988,10 +1113,16 @@ rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert: FastBurnRate
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ expr: |
   
   
   
+  
+  
+  
 
 
 (
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ expr: |
   
   
   
+  
+  
+  
 
 
 ) > 14 * (1 - 0.999)
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ for: 2m
   
   
   
+  
+  
+  
 
 
 labels:
 
+  
+  
+  
   
   
   
@@ -1196,6 +1345,9 @@ severity: critical
   
   
   
+  
+  
+  
 
 
 The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn rate threshold. This approach normalizes alerts across different SLO targets.
@@ -1222,10 +1374,16 @@ The burn rate alert multiplies the SLO error rate (1 - SLO target) by the burn r
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

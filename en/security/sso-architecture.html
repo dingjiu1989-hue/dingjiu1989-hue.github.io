@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sso-architecture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2538",
+      "wordCount": "2843",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sso-architecture.html"},
-      "articleBody": "SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Fundamentals Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue. SAML 2.0 Security Assertion Markup Language (SAML) is the mature standard for enterprise SSO: AssertionConsumerServiceURL=\"https://app.example.com/saml/acs\" Destination=\"https://idp.example.com/saml/sso\" IssueInstant=\"2026-05-12T10:00:00Z\"> https://app.example.com Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\"/> SAML response parsing from signxml import XMLVerifier import xml.etree.ElementTree as ET def parse_saml_response(response_xml): Verify the signature verified_data = XMLVerifier().verify(response_xml).signed_xml Extract attributes ns = {\"saml2\": \"urn:oasis:names:tc:SAML:2.0:assertion\"} root = ET.fromstring(verified_data) attributes = {} for attr in root.findall(\".//saml2:Attribute\", ns): name = attr.get(\"Name\") values = [v.text for v in attr.findall(\"saml2:AttributeValue\", ns)] attributes[name] = values return attributes OpenID Connect (OIDC) OIDC is the modern SSO protocol built on OAuth2: // OIDC client configuration const { Issuer } = require(\"openid-client\"); async function configureOIDC() { const issuer = await Issuer.discover(\"https://accounts.example.com\"); const client = new issuer.Client({ client_id: process.env.CLIENT_ID, client_secret: process.env.CLIENT_SECRET, redirect_uris: [\"https://app.example.com/callback\"], response_types: [\"code\"], token_endpoint_auth_method: \"client_secret_basic\" }); return client; } // Generate authentication URL async function login(req, res) { const client = await configureOIDC(); const authUrl = client.authorizationUrl({ scope: \"openid profile email\", state: crypto.randomBytes(16).toString(\"hex\"), nonce: crypto.randomBytes(16).toString(\"hex\") }); req.session.oidcState = state; res.redirect(authUrl); } Token Exchange Token exchange handler async def handle_callback(request): code = request.query_params[\"code\"] state = request.query_params[\"state\"] Verify state matches if state != request.session[\"oidc_state\"]: raise SecurityError(\"State mismatch - possible CSRF\") Exchange code for tokens token_response = await oidc_client.authorize_token(code) Validate ID token claims = await oidc_client.validate_id_token( token_response[\"id_token\"], nonce=request.session[\"oidc_nonce\"] ) return { \"access_token\": token_response[\"access_token\"], \"user\": claims } Session Management session_management: storage: type: redis ttl: 3600 # 1 hour extend_on_activity: true token_strategy: access_token_ttl: 15m refresh_token_ttl: 7d rotate_refresh: true logout: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- clear local session \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- call IdP logout endpoint (SLO) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- revoke all tokens for user IdP Integration Patterns | Protocol | Use Case | Complexity | Security | |----------|----------|------------|----------| | SAML | Enterprise, government | High | Strong | | OIDC | Modern web, mobile | Medium | Strong | | LDAP | Legacy applications | Low | Weak | Conclusion SSO centralizes authentication and improves both security and user experience. Choose SAML for enterprise integrations and OIDC for modern applications. Implement proper session management with short-lived tokens and single logout. Always validate state parameters and ID token signatures."
+      "articleBody": "SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Architecture SSO Fundamentals Single Sign-On (SSO) allows users to authenticate once and access multiple applications without re-entering credentials. It improves security by centralizing authentication and reducing password fatigue. SAML 2.0 Security Assertion Markup Language (SAML) is the mature standard for enterprise SSO: AssertionConsumerServiceURL=\"https://app.example.com/saml/acs\" Destination=\"https://idp.example.com/saml/sso\" IssueInstant=\"2026-05-12T10:00:00Z\"> https://app.example.com Format=\"urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress\"/> SAML response parsing from signxml import XMLVerifier import xml.etree.ElementTree as ET def parse_saml_response(response_xml): Verify the signature verified_data = XMLVerifier().verify(response_xml).signed_xml Extract attributes ns = {\"saml2\": \"urn:oasis:names:tc:SAML:2.0:assertion\"} root = ET.fromstring(verified_data) attributes = {} for attr in root.findall(\".//saml2:Attribute\", ns): name = attr.get(\"Name\") values = [v.text for v in attr.findall(\"saml2:AttributeValue\", ns)] attributes[name] = values return attributes OpenID Connect (OIDC) OIDC is the modern SSO protocol built on OAuth2: // OIDC client configuration const { Issuer } = require(\"openid-client\"); async function configureOIDC() { const issuer = await Issuer.discover(\"https://accounts.example.com\"); const client = new issuer.Client({ client_id: process.env.CLIENT_ID, client_secret: process.env.CLIENT_SECRET, redirect_uris: [\"https://app.example.com/callback\"], response_types: [\"code\"], token_endpoint_auth_method: \"client_secret_basic\" }); return client; } // Generate authentication URL async function login(req, res) { const client = await configureOIDC(); const authUrl = client.authorizationUrl({ scope: \"openid profile email\", state: crypto.randomBytes(16).toString(\"hex\"), nonce: crypto.randomBytes(16).toString(\"hex\") }); req.session.oidcState = state; res.redirect(authUrl); } Token Exchange Token exchange handler async def handle_callback(request): code = request.query_params[\"code\"] state = request.query_params[\"state\"] Verify state matches if state != request.session[\"oidc_state\"]: raise SecurityError(\"State mismatch - possible CSRF\") Exchange code for tokens token_response = await oidc_client.authorize_token(code) Validate ID token claims = await oidc_client.validate_id_token( token_response[\"id_token\"], nonce=request.session[\"oidc_nonce\"] ) return { \"access_token\": token_response[\"access_token\"], \"user\": claims } Session Management session_management: storage: type: redis ttl: 3600 # 1 hour extend_on_activity: true token_strategy: access_token_ttl: 15m refresh_token_ttl: 7d rotate_refresh: true logout: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- clear local session \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- call IdP logout endpoint (SLO) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- revoke all tokens for user IdP Integration Patterns | Protocol | Use Case | Complexity | Security | |----------|----------|------------|----------| | SAML | Enterprise, government | High | Strong | | OIDC | Modern web, mobile | Medium | Strong | | LDAP | Legacy applications | Low | Weak | Conclusion SSO centralizes authentication and improves both security and user experience. Choose SAML for enterprise integrations and OIDC for modern applications. Implement proper session management with short-lived tokens and single logout. Always validate state parameters and ID token signatures."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>SSO Architecture</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>SSO Fundamentals </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,6 +213,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SAML 2.0 </p>
 <br>
 <br>
@@ -204,7 +233,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Security Assertion Markup Language (SAML) is the mature standard for enterprise SSO: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -250,7 +285,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Destination="https://idp.example.com/saml/sso"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -290,7 +331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>https://app.example.com</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>SAML response parsing</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -376,7 +429,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import xml.etree.ElementTree as ET</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -416,7 +475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Verify the signature</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -456,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Extract attributes</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -496,7 +567,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>root = ET.fromstring(verified_data)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -536,7 +613,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for attr in root.findall(".//saml2:Attribute", ns):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -576,7 +659,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>values = [v.text for v in attr.findall("saml2:AttributeValue", ns)]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -616,7 +705,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return attributes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -653,7 +748,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>OIDC is the modern SSO protocol built on OAuth2: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -693,7 +794,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const { Issuer } = require("openid-client");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -733,7 +840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const issuer = await Issuer.discover("https://accounts.example.com");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -773,7 +886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client_id: process.env.CLIENT_ID,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -813,7 +932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redirect_uris: ["https://app.example.com/callback"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -853,6 +978,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token_endpoint_auth_method: "client_secret_basic"</p>
 <br>
 <br>
@@ -873,7 +1001,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -913,7 +1047,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -953,7 +1093,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async function login(req, res) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -993,7 +1139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const authUrl = client.authorizationUrl({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1033,7 +1185,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>state: crypto.randomBytes(16).toString("hex"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1073,7 +1231,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1113,6 +1277,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>res.redirect(authUrl);</p>
 <br>
 <br>
@@ -1133,7 +1300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1173,7 +1346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Token exchange handler</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1213,7 +1392,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>code = request.query_params["code"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1253,7 +1438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Verify state matches</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1293,7 +1484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise SecurityError("State mismatch - possible CSRF")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1333,7 +1530,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token_response = await oidc_client.authorize_token(code)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1373,7 +1576,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>claims = await oidc_client.validate_id_token(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1413,7 +1622,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nonce=request.session["oidc_nonce"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1453,7 +1668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1493,7 +1714,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"user": claims</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1533,7 +1760,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Session Management </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1573,7 +1806,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>storage:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1613,7 +1852,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ttl: 3600 # 1 hour</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1653,7 +1898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token_strategy:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1693,7 +1944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>refresh_token_ttl: 7d</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1733,6 +1990,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>logout:</p>
 <br>
 <br>
@@ -1753,7 +2013,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- clear local session</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- clear local session</p>
 <br>
 <br>
 <br>
@@ -1773,7 +2036,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- call IdP logout endpoint (SLO)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- call IdP logout endpoint (SLO)</p>
 <br>
 <br>
 <br>
@@ -1793,7 +2059,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- revoke all tokens for user</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- revoke all tokens for user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1830,6 +2102,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Protocol | Use Case | Complexity | Security | |----------|----------|------------|----------| | SAML | Enterprise, government | High | Strong | | OIDC | Modern web, mobile | Medium | Strong | | LDAP | Legacy applications | Low | Weak | </p>
 <br>
 <br>
@@ -1847,7 +2122,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

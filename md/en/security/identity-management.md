@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/identity-management.html
   
 
 
+# Identity and Access Management (IAM) Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Identity and Access Management (IAM) is the discipline of ensuring the right people have access to the right resources at the right time for the right reasons. Poor IAM is the leading cause of data breaches. This guide covers modern IAM concepts including SSO, SAML, OIDC, SCIM, just-in-time access, and access reviews.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Identity and Access Management (IAM) is the discipline of ensuring the right peo
   
   
   
+  
+  
+  
 
 
 SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It improves both security and user experience.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ SSO allows users to authenticate once and gain access to multiple applications w
   
   
   
+  
+  
+  
 
 
 An SSO system has three components:
 
+  
+  
+  
   
   
   
@@ -286,36 +330,45 @@ An SSO system has three components:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Service Provider (SP)**: The application the user wants to access.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **User Agent**: Typically a web browser.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Service Provider (SP)**: The application the user wants to access.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **User Agent**: Typically a web browser.
+
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ When a user accesses an SP, the SP redirects them to the IdP for authentication.
   
   
   
+  
+  
+  
 
 
 ### Benefits of SSO
 
+  
+  
+  
   
   
   
@@ -413,10 +472,16 @@ When a user accesses an SP, the SP redirects them to the IdP for authentication.
   
   
   
+  
+  
+  
 
 
 * Password policies (complexity, rotation) are enforced centrally.
 
+  
+  
+  
   
   
   
@@ -459,10 +524,16 @@ When a user accesses an SP, the SP redirects them to the IdP for authentication.
   
   
   
+  
+  
+  
 
 
 * Failed login attempts are tracked in one place.
 
+  
+  
+  
   
   
   
@@ -511,10 +582,16 @@ When a user accesses an SP, the SP redirects them to the IdP for authentication.
   
   
   
+  
+  
+  
 
 
 Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for exchanging authentication and authorization data between IdPs and SPs.
 
+  
+  
+  
   
   
   
@@ -563,6 +640,9 @@ Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for excha
   
   
   
+  
+  
+  
 
 
 * User attempts to access an SP resource.
@@ -589,36 +669,16 @@ Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for excha
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SP generates a SAML authentication request and redirects the user to the IdP.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. IdP authenticates the user (via password, MFA, or other method).
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SP generates a SAML authentication request and redirects the user to the IdP.
 
+  
+  
+  
   
   
   
@@ -643,34 +703,11 @@ Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for excha
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. IdP generates a SAML assertion containing user attributes (username, email, groups) and signs it with its private key.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. IdP authenticates the user (via password, MFA, or other method).
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. User is redirected back to the SP with the SAML assertion.
-
   
   
   
@@ -695,8 +732,69 @@ Security Assertion Markup Language (SAML) 2.0 is an XML-based protocol for excha
   
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SP validates the signature, extracts attributes, and creates a session.
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. IdP generates a SAML assertion containing user attributes (username, email, groups) and signs it with its private key.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. User is redirected back to the SP with the SAML assertion.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. SP validates the signature, extracts attributes, and creates a session.
+
+  
+  
+  
   
   
   
@@ -751,10 +849,16 @@ ID="_12345" IssueInstant="2026-05-12T10:00:00Z">
   
   
   
+  
+  
+  
 
 
 https://idp.example.com/metadata
 
+  
+  
+  
   
   
   
@@ -806,38 +910,6 @@ https://idp.example.com/metadata
   
   
   
-
-
-user@example.com
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -845,6 +917,47 @@ user@example.com
 
 user@example.com
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+user@example.com
+
+  
+  
+  
   
   
   
@@ -908,10 +1021,16 @@ engineering
   
   
   
+  
+  
+  
 
 
 SAML is widely used in enterprise environments for web application SSO. Its XML-based nature makes it verbose, but it remains the standard for many SaaS applications and federated identity scenarios.
 
+  
+  
+  
   
   
   
@@ -960,10 +1079,16 @@ SAML is widely used in enterprise environments for web application SSO. Its XML-
   
   
   
+  
+  
+  
 
 
 OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the preferred protocol for newer applications, particularly in cloud-native environments.
 
+  
+  
+  
   
   
   
@@ -1012,10 +1137,16 @@ OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the pr
   
   
   
+  
+  
+  
 
 
 * OIDC uses JSON (JWT tokens) rather than XML. Tokens are smaller and easier to parse.
 
+  
+  
+  
   
   
   
@@ -1058,6 +1189,9 @@ OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the pr
   
   
   
+  
+  
+  
 
 
 * OIDC provides the `id_token` (authentication) alongside the OAuth `access_token` (authorization).
@@ -1081,10 +1215,16 @@ OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the pr
   
   
   
+  
+  
+  
 
 
 * OIDC is the default for cloud provider IAM roles, Kubernetes authentication, and serverless applications.
 
+  
+  
+  
   
   
   
@@ -1133,10 +1273,16 @@ OIDC is a modern authentication protocol built on top of OAuth 2.0. It is the pr
   
   
   
+  
+  
+  
 
 
 # Python example: OIDC authentication request
 
+  
+  
+  
   
   
   
@@ -1185,10 +1331,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 # Step 1: Redirect user to IdP authorization endpoint
 
+  
+  
+  
   
   
   
@@ -1237,10 +1389,16 @@ auth_url = "https://idp.example.com/authorize"
   
   
   
+  
+  
+  
 
 
 params = {
 
+  
+  
+  
   
   
   
@@ -1289,6 +1447,9 @@ params = {
   
   
   
+  
+  
+  
 
 
 "client_id": "my-app",
@@ -1315,10 +1476,16 @@ params = {
   
   
   
+  
+  
+  
 
 
 "redirect_uri": "https://my-app.example.com/callback",
 
+  
+  
+  
   
   
   
@@ -1367,6 +1534,9 @@ params = {
   
   
   
+  
+  
+  
 
 
 "state": "random-state-value"
@@ -1393,10 +1563,16 @@ params = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1445,10 +1621,16 @@ params = {
   
   
   
+  
+  
+  
 
 
 # Step 2: Exchange authorization code for tokens
 
+  
+  
+  
   
   
   
@@ -1497,10 +1679,16 @@ token_url = "https://idp.example.com/token"
   
   
   
+  
+  
+  
 
 
 response = requests.post(token_url, data={
 
+  
+  
+  
   
   
   
@@ -1549,10 +1737,16 @@ response = requests.post(token_url, data={
   
   
   
+  
+  
+  
 
 
 "code": "authorization-code-from-callback",
 
+  
+  
+  
   
   
   
@@ -1601,10 +1795,16 @@ response = requests.post(token_url, data={
   
   
   
+  
+  
+  
 
 
 "client_id": "my-app",
 
+  
+  
+  
   
   
   
@@ -1653,10 +1853,16 @@ response = requests.post(token_url, data={
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -1705,10 +1911,16 @@ tokens = response.json()
   
   
   
+  
+  
+  
 
 
 # tokens contains: access_token, id_token, refresh_token
 
+  
+  
+  
   
   
   
@@ -1757,10 +1969,16 @@ tokens = response.json()
   
   
   
+  
+  
+  
 
 
 Cloud providers use OIDC for workload identity. A service running in AWS can get an OIDC token from the AWS metadata endpoint and use it to authenticate to external services.
 
+  
+  
+  
   
   
   
@@ -1809,10 +2027,16 @@ Cloud providers use OIDC for workload identity. A service running in AWS can get
   
   
   
+  
+  
+  
 
 
 name: Deploy
 
+  
+  
+  
   
   
   
@@ -1861,10 +2085,16 @@ permissions:
   
   
   
+  
+  
+  
 
 
 id-token: write
 
+  
+  
+  
   
   
   
@@ -1913,10 +2143,16 @@ contents: read
   
   
   
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
   
   
   
@@ -1965,10 +2201,16 @@ deploy:
   
   
   
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
   
   
   
@@ -2017,36 +2259,45 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: aws-actions/configure-aws-credentials@v4
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: aws-actions/configure-aws-credentials@v4
+
+  
+  
+  
   
   
   
@@ -2095,10 +2346,16 @@ with:
   
   
   
+  
+  
+  
 
 
 role-to-assume: arn:aws:iam::123456789:role/github-actions-role
 
+  
+  
+  
   
   
   
@@ -2147,10 +2404,16 @@ aws-region: us-east-1
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: aws s3 sync ./dist s3://my-bucket
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- run: aws s3 sync ./dist s3://my-bucket
 
+  
+  
+  
   
   
   
@@ -2199,10 +2462,16 @@ aws-region: us-east-1
   
   
   
+  
+  
+  
 
 
 System for Cross-domain Identity Management (SCIM) is a standard for automating user provisioning and deprovisioning between identity domains.
 
+  
+  
+  
   
   
   
@@ -2251,10 +2520,16 @@ System for Cross-domain Identity Management (SCIM) is a standard for automating 
   
   
   
+  
+  
+  
 
 
 SCIM exposes RESTful endpoints for creating, reading, updating, and deleting user accounts and groups. An IdP like Okta or Azure AD connects to an SCIM endpoint to synchronize users automatically.
 
+  
+  
+  
   
   
   
@@ -2303,10 +2578,16 @@ SCIM exposes RESTful endpoints for creating, reading, updating, and deleting use
   
   
   
+  
+  
+  
 
 
 POST /scim/v2/Users
 
+  
+  
+  
   
   
   
@@ -2355,10 +2636,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2407,10 +2694,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 "userName": "jdoe@example.com",
 
+  
+  
+  
   
   
   
@@ -2459,10 +2752,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 "givenName": "John",
 
+  
+  
+  
   
   
   
@@ -2511,10 +2810,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2563,10 +2868,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2615,10 +2926,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 "type": "work",
 
+  
+  
+  
   
   
   
@@ -2667,10 +2984,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2719,10 +3042,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 "active": true
 
+  
+  
+  
   
   
   
@@ -2771,10 +3100,16 @@ Content-Type: application/scim+json
   
   
   
+  
+  
+  
 
 
 SCIM ensures that when an employee leaves the company, their access is automatically revoked across all SCIM-integrated applications within minutes.
 
+  
+  
+  
   
   
   
@@ -2823,10 +3158,16 @@ SCIM ensures that when an employee leaves the company, their access is automatic
   
   
   
+  
+  
+  
 
 
 JIT access grants elevated permissions only when needed, for a limited duration. It replaces standing privileges that attackers can exploit.
 
+  
+  
+  
   
   
   
@@ -2875,10 +3216,16 @@ JIT access grants elevated permissions only when needed, for a limited duration.
   
   
   
+  
+  
+  
 
 
 JIT access typically requires:
 
+  
+  
+  
   
   
   
@@ -2927,36 +3274,16 @@ JIT access typically requires:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Approval from a manager or ticket system.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automatic expiration after the approved window.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Approval from a manager or ticket system.
 
+  
+  
+  
   
   
   
@@ -2981,8 +3308,40 @@ JIT access typically requires:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Full audit logging of the elevation.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Automatic expiration after the approved window.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Full audit logging of the elevation.
+
+  
+  
+  
   
   
   
@@ -3031,10 +3390,16 @@ JIT access typically requires:
   
   
   
+  
+  
+  
 
 
 def request_jit_access(resource, duration_minutes=60, reason=""):
 
+  
+  
+  
   
   
   
@@ -3083,10 +3448,16 @@ approval = submit_approval_request(
   
   
   
+  
+  
+  
 
 
 requester=get_current_user(),
 
+  
+  
+  
   
   
   
@@ -3135,10 +3506,16 @@ resource=resource,
   
   
   
+  
+  
+  
 
 
 reason=reason,
 
+  
+  
+  
   
   
   
@@ -3187,10 +3564,16 @@ approver=resource_manager
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3239,10 +3622,16 @@ if approval.status == "approved":
   
   
   
+  
+  
+  
 
 
 grant_temporary_role(
 
+  
+  
+  
   
   
   
@@ -3291,10 +3680,16 @@ user=get_current_user(),
   
   
   
+  
+  
+  
 
 
 role=f"admin-{resource}",
 
+  
+  
+  
   
   
   
@@ -3343,10 +3738,16 @@ ttl=duration_minutes
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3395,10 +3796,16 @@ return f"Access to {resource} granted until T+{duration_minutes}m"
   
   
   
+  
+  
+  
 
 
 raise PermissionError("Access request denied")
 
+  
+  
+  
   
   
   
@@ -3447,10 +3854,16 @@ JIT access is critical for protecting sensitive systems like production database
   
   
   
+  
+  
+  
 
 
 ##  Access Reviews
 
+  
+  
+  
   
   
   
@@ -3499,10 +3912,16 @@ Access reviews are periodic audits of who has access to what. They are required 
   
   
   
+  
+  
+  
 
 
 ### Best Practices
 
+  
+  
+  
   
   
   
@@ -3548,10 +3967,16 @@ Access reviews are periodic audits of who has access to what. They are required 
   
   
   
+  
+  
+  
 
 
 * Automate the review process using your IdP or dedicated tools.
 
+  
+  
+  
   
   
   
@@ -3594,10 +4019,16 @@ Access reviews are periodic audits of who has access to what. They are required 
   
   
   
+  
+  
+  
 
 
 * Review group memberships, not just individual permissions.
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ Access reviews are periodic audits of who has access to what. They are required 
   
   
   
+  
+  
+  
 
 
 * Document all review outcomes for audit purposes.
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ Access reviews are periodic audits of who has access to what. They are required 
   
   
   
+  
+  
+  
 
 
 def generate_access_review():
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ users = list_all_users()
   
   
   
+  
+  
+  
 
 
 report = []
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ for user in users:
   
   
   
+  
+  
+  
 
 
 if user.last_login < (now() - timedelta(days=90)):
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ report.append({
   
   
   
+  
+  
+  
 
 
 "user": user.email,
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ report.append({
   
   
   
+  
+  
+  
 
 
 "reason": "No login in 90 days",
 
+  
+  
+  
   
   
   
@@ -3952,10 +4419,16 @@ report.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -4004,10 +4477,16 @@ return report
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

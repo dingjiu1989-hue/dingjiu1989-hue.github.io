@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/tailwind-vs-bootstrap.html
   
 
 
+# Tailwind CSS vs Bootstrap
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Tailwind CSS and Bootstrap represent two fundamentally different philosophies fo
   
   
   
+  
+  
+  
 
 
 ##  Philosophy
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Tailwind CSS and Bootstrap represent two fundamentally different philosophies fo
   
   
   
+  
+  
+  
 
 
 Bootstrap's approach is "start with a button that looks like a button, customize as needed." It provides:
 
+  
+  
+  
   
   
   
@@ -283,6 +327,9 @@ Bootstrap's approach is "start with a button that looks like a button, customize
   
   
   
+  
+  
+  
 
 
 * A consistent design system out of the box
@@ -306,10 +353,16 @@ Bootstrap's approach is "start with a button that looks like a button, customize
   
   
   
+  
+  
+  
 
 
 * Responsive grid layout built in
 
+  
+  
+  
   
   
   
@@ -367,6 +420,9 @@ Bootstrap's approach is "start with a button that looks like a button, customize
   
   
   
+  
+  
+  
 
 
 ##### Card Title
@@ -393,10 +449,16 @@ Bootstrap's approach is "start with a button that looks like a button, customize
   
   
   
+  
+  
+  
 
 
 Some quick example text.
 
+  
+  
+  
   
   
   
@@ -451,10 +513,16 @@ Go somewhere
   
   
   
+  
+  
+  
 
 
 ### Tailwind CSS: The Utility-First Framework
 
+  
+  
+  
   
   
   
@@ -503,10 +571,16 @@ Tailwind's approach is "compose your design from primitive utility classes." It 
   
   
   
+  
+  
+  
 
 
 * Hundreds of single-purpose utility classes
 
+  
+  
+  
   
   
   
@@ -549,10 +623,16 @@ Tailwind's approach is "compose your design from primitive utility classes." It 
   
   
   
+  
+  
+  
 
 
 * No pre-built components (you build everything from utilities)
 
+  
+  
+  
   
   
   
@@ -610,6 +690,9 @@ Tailwind's approach is "compose your design from primitive utility classes." It 
   
   
   
+  
+  
+  
 
 
 ##### Card Title
@@ -636,10 +719,16 @@ Tailwind's approach is "compose your design from primitive utility classes." It 
   
   
   
+  
+  
+  
 
 
 Some quick example text.
 
+  
+  
+  
   
   
   
@@ -696,10 +785,16 @@ Go somewhere
   
   
   
+  
+  
+  
 
 
 ##  Customization
 
+  
+  
+  
   
   
   
@@ -748,10 +843,16 @@ Go somewhere
   
   
   
+  
+  
+  
 
 
 Bootstrap uses Sass variables for theming:
 
+  
+  
+  
   
   
   
@@ -800,10 +901,16 @@ Bootstrap uses Sass variables for theming:
   
   
   
+  
+  
+  
 
 
 $primary: #7c3aed;
 
+  
+  
+  
   
   
   
@@ -852,10 +959,16 @@ $font-family-base: 'Inter', sans-serif;
   
   
   
+  
+  
+  
 
 
 $border-radius: 0.5rem;
 
+  
+  
+  
   
   
   
@@ -904,10 +1017,16 @@ $border-radius: 0.5rem;
   
   
   
+  
+  
+  
 
 
 Customization requires Sass preprocessing and understanding Bootstrap's variable hierarchy. Deep customization (completely different component designs) often requires overriding substantial CSS.
 
+  
+  
+  
   
   
   
@@ -956,10 +1075,16 @@ Customization requires Sass preprocessing and understanding Bootstrap's variable
   
   
   
+  
+  
+  
 
 
 Tailwind uses a JavaScript config file:
 
+  
+  
+  
   
   
   
@@ -1008,10 +1133,16 @@ Tailwind uses a JavaScript config file:
   
   
   
+  
+  
+  
 
 
 module.exports = {
 
+  
+  
+  
   
   
   
@@ -1060,10 +1191,16 @@ theme: {
   
   
   
+  
+  
+  
 
 
 extend: {
 
+  
+  
+  
   
   
   
@@ -1112,10 +1249,16 @@ colors: {
   
   
   
+  
+  
+  
 
 
 brand: {
 
+  
+  
+  
   
   
   
@@ -1164,10 +1307,16 @@ brand: {
   
   
   
+  
+  
+  
 
 
 500: '#7c3aed',
 
+  
+  
+  
   
   
   
@@ -1216,6 +1365,9 @@ brand: {
   
   
   
+  
+  
+  
 
 
 }
@@ -1242,10 +1394,16 @@ brand: {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1294,10 +1452,16 @@ fontFamily: {
   
   
   
+  
+  
+  
 
 
 sans: ['Inter', 'sans-serif'],
 
+  
+  
+  
   
   
   
@@ -1346,10 +1510,16 @@ sans: ['Inter', 'sans-serif'],
   
   
   
+  
+  
+  
 
 
 borderRadius: {
 
+  
+  
+  
   
   
   
@@ -1398,29 +1568,6 @@ borderRadius: {
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1450,6 +1597,38 @@ borderRadius: {
   
   
   
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1476,10 +1655,16 @@ borderRadius: {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1528,10 +1713,16 @@ Tailwind's design token system makes it easy to create completely custom designs
   
   
   
+  
+  
+  
 
 
 ##  Development Speed
 
+  
+  
+  
   
   
   
@@ -1580,10 +1771,16 @@ Tailwind's design token system makes it easy to create completely custom designs
   
   
   
+  
+  
+  
 
 
 **Tailwind wins for production apps with custom designs.** Once you internalize the utility class system, you can build custom interfaces faster than writing custom CSS. The utility classes eliminate context-switching between HTML and CSS files.
 
+  
+  
+  
   
   
   
@@ -1632,6 +1829,9 @@ Tailwind's design token system makes it easy to create completely custom designs
   
   
   
+  
+  
+  
 
 
 * **Bootstrap full**: ~12KB compressed JavaScript + ~27KB CSS (compressed)
@@ -1655,10 +1855,16 @@ Tailwind's design token system makes it easy to create completely custom designs
   
   
   
+  
+  
+  
 
 
 * **Tailwind default**: ~15KB CSS (compressed) with purge — often smaller for actual projects since unused utilities are removed
 
+  
+  
+  
   
   
   
@@ -1707,10 +1913,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 ##  Ecosystem and Components
 
+  
+  
+  
   
   
   
@@ -1759,10 +1971,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 **Tailwind**: A growing ecosystem of component libraries (Tailwind UI, Flowbite, DaisyUI) that provide pre-built components built with Tailwind utilities. These are typically paid or require attribution.
 
+  
+  
+  
   
   
   
@@ -1811,10 +2029,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 **Bootstrap**: Easy to start — add the CSS file, copy HTML examples, done. The learning curve is about learning which classes to use for which components.
 
+  
+  
+  
   
   
   
@@ -1863,10 +2087,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 ##  When to Choose What
 
+  
+  
+  
   
   
   
@@ -1915,10 +2145,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * You need a working prototype fast
 
+  
+  
+  
   
   
   
@@ -1961,10 +2197,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * Your team prefers working with pre-built components
 
+  
+  
+  
   
   
   
@@ -2007,10 +2249,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * The site/app doesn't need a unique visual identity
 
+  
+  
+  
   
   
   
@@ -2059,10 +2307,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * You need a custom, branded design
 
+  
+  
+  
   
   
   
@@ -2105,10 +2359,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * You're building a design system from scratch
 
+  
+  
+  
   
   
   
@@ -2151,10 +2411,16 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 * You want the smallest possible CSS bundle
 
+  
+  
+  
   
   
   
@@ -2203,6 +2469,9 @@ Both are comparable in final bundle size when properly configured. Tailwind's JI
   
   
   
+  
+  
+  
 
 
 Bootstrap powers millions of websites, especially in the WordPress ecosystem and startup MVPs. Tailwind dominates modern SaaS applications, frontend-heavy apps built with React/Vue/Svelte, and projects where design matters.
@@ -2229,10 +2498,16 @@ Bootstrap powers millions of websites, especially in the WordPress ecosystem and
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

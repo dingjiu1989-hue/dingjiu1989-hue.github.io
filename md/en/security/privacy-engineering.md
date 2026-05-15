@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/privacy-engineering.html
   
 
 
+# Privacy Engineering
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Privacy engineering integrates data protection principles into system architectu
   
   
   
+  
+  
+  
 
 
 Privacy by Design 
@@ -164,10 +196,16 @@ Privacy by Design
   
   
   
+  
+  
+  
 
 
 Privacy by Design (PbD) is a framework developed by the Information and Privacy Commissioner of Ontario, articulated through seven foundational principles. 
 
+  
+  
+  
   
   
   
@@ -207,6 +245,9 @@ The Seven Principles
   
   
   
+  
+  
+  
 
 
 * **Proactive not Reactive**: Prevent privacy risks from occurring, not remediate after the fact
@@ -227,10 +268,16 @@ The Seven Principles
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy as Default**: Personal data is automatically protected without user action 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy Embedded into Design**: Privacy is integral to the system, not bolted on 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Full Functionality**: Privacy does not sacrifice functionality — positive-sum, not zero-sum 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **End-to-End Security**: Full lifecycle protection from collection to destruction 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Visibility and Transparency**: Processes are open, accountable, and auditable 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Respect for User Privacy**: User-centric design with strong defaults and clear notices 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy as Default**: Personal data is automatically protected without user action 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Privacy Embedded into Design**: Privacy is integral to the system, not bolted on 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Full Functionality**: Privacy does not sacrifice functionality — positive-sum, not zero-sum 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **End-to-End Security**: Full lifecycle protection from collection to destruction 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Visibility and Transparency**: Processes are open, accountable, and auditable 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Respect for User Privacy**: User-centric design with strong defaults and clear notices 
 
+  
+  
+  
   
   
   
@@ -273,10 +320,16 @@ The Seven Principles
   
   
   
+  
+  
+  
 
 
 class UserRegistrationService:
 
+  
+  
+  
   
   
   
@@ -319,10 +372,16 @@ def register_minimal(self, email, password):
   
   
   
+  
+  
+  
 
 
 """Collect only necessary data (Principle 3: Data Minimization)."""
 
+  
+  
+  
   
   
   
@@ -365,10 +424,16 @@ return User(
   
   
   
+  
+  
+  
 
 
 email=email,
 
+  
+  
+  
   
   
   
@@ -411,10 +476,16 @@ password_hash=self.hash_password(password),
   
   
   
+  
+  
+  
 
 
 # Don't collect: phone, address, birthday, etc.
 
+  
+  
+  
   
   
   
@@ -457,10 +528,16 @@ created_at=datetime.utcnow()
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -503,10 +580,16 @@ def set_default_privacy(self, user):
   
   
   
+  
+  
+  
 
 
 """Privacy as default: opt-in for data sharing (Principle 2)."""
 
+  
+  
+  
   
   
   
@@ -549,10 +632,16 @@ user.privacy_settings = PrivacySettings(
   
   
   
+  
+  
+  
 
 
 share_analytics=False, # Default: not shared
 
+  
+  
+  
   
   
   
@@ -595,10 +684,16 @@ share_profile=False, # Default: not shared
   
   
   
+  
+  
+  
 
 
 email_marketing=False, # Default: not subscribed
 
+  
+  
+  
   
   
   
@@ -641,10 +736,16 @@ data_retention_days=90 # Default: minimal retention
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -687,6 +788,9 @@ return user
   
   
   
+  
+  
+  
 
 
 Data Mapping 
@@ -707,10 +811,16 @@ Data Mapping
   
   
   
+  
+  
+  
 
 
 Data mapping identifies what personal data is collected, where it flows, how it is processed, and who has access. It is the foundation of any privacy program. 
 
+  
+  
+  
   
   
   
@@ -753,10 +863,16 @@ from dataclasses import dataclass
   
   
   
+  
+  
+  
 
 
 from enum import Enum
 
+  
+  
+  
   
   
   
@@ -799,10 +915,16 @@ from typing import List, Dict
   
   
   
+  
+  
+  
 
 
 class DataCategory(Enum):
 
+  
+  
+  
   
   
   
@@ -845,10 +967,16 @@ PERSONAL_IDENTIFIABLE = "PII"
   
   
   
+  
+  
+  
 
 
 FINANCIAL = "FINANCIAL"
 
+  
+  
+  
   
   
   
@@ -891,10 +1019,16 @@ HEALTH = "HEALTH"
   
   
   
+  
+  
+  
 
 
 BIOMETRIC = "BIOMETRIC"
 
+  
+  
+  
   
   
   
@@ -937,10 +1071,16 @@ BEHAVIORAL = "BEHAVIORAL"
   
   
   
+  
+  
+  
 
 
 LOCATION = "LOCATION"
 
+  
+  
+  
   
   
   
@@ -983,10 +1123,16 @@ COMMUNICATION = "COMMUNICATION"
   
   
   
+  
+  
+  
 
 
 class ProcessingPurpose(Enum):
 
+  
+  
+  
   
   
   
@@ -1029,10 +1175,16 @@ ACCOUNT_MGMT = "account_management"
   
   
   
+  
+  
+  
 
 
 ANALYTICS = "analytics"
 
+  
+  
+  
   
   
   
@@ -1075,10 +1227,16 @@ MARKETING = "marketing"
   
   
   
+  
+  
+  
 
 
 FRAUD_DETECTION = "fraud_detection"
 
+  
+  
+  
   
   
   
@@ -1121,10 +1279,16 @@ LEGAL_COMPLIANCE = "legal_compliance"
   
   
   
+  
+  
+  
 
 
 @dataclass
 
+  
+  
+  
   
   
   
@@ -1167,10 +1331,16 @@ class DataFlow:
   
   
   
+  
+  
+  
 
 
 source: str
 
+  
+  
+  
   
   
   
@@ -1213,10 +1383,16 @@ destination: str
   
   
   
+  
+  
+  
 
 
 data_elements: List[str]
 
+  
+  
+  
   
   
   
@@ -1259,10 +1435,16 @@ categories: List[DataCategory]
   
   
   
+  
+  
+  
 
 
 purposes: List[ProcessingPurpose]
 
+  
+  
+  
   
   
   
@@ -1305,10 +1487,16 @@ legal_basis: str
   
   
   
+  
+  
+  
 
 
 retention_days: int
 
+  
+  
+  
   
   
   
@@ -1351,10 +1539,16 @@ encryption: bool
   
   
   
+  
+  
+  
 
 
 third_party_sharing: bool
 
+  
+  
+  
   
   
   
@@ -1397,10 +1591,16 @@ class DataMapper:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -1443,10 +1643,16 @@ self.data_flows = []
   
   
   
+  
+  
+  
 
 
 def add_flow(self, flow: DataFlow):
 
+  
+  
+  
   
   
   
@@ -1489,10 +1695,16 @@ def add_flow(self, flow: DataFlow):
   
   
   
+  
+  
+  
 
 
 self.data_flows.append(flow)
 
+  
+  
+  
   
   
   
@@ -1535,10 +1747,16 @@ def generate_roda(self):
   
   
   
+  
+  
+  
 
 
 """Generate Record of Processing Activities (GDPR Art. 30)."""
 
+  
+  
+  
   
   
   
@@ -1581,10 +1799,16 @@ roda = []
   
   
   
+  
+  
+  
 
 
 for flow in self.data_flows:
 
+  
+  
+  
   
   
   
@@ -1627,10 +1851,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'purpose': [p.value for p in flow.purposes],
 
+  
+  
+  
   
   
   
@@ -1673,10 +1903,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'data_elements': flow.data_elements,
 
+  
+  
+  
   
   
   
@@ -1719,10 +1955,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'recipients': flow.destination,
 
+  
+  
+  
   
   
   
@@ -1765,10 +2007,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'retention_period': f"{flow.retention_days} days",
 
+  
+  
+  
   
   
   
@@ -1811,10 +2059,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'encryption_at_rest': flow.encryption,
 
+  
+  
+  
   
   
   
@@ -1857,10 +2111,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 'access_controls': 'role_based',
 
+  
+  
+  
   
   
   
@@ -1903,10 +2163,16 @@ roda.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -1949,6 +2215,9 @@ return roda
   
   
   
+  
+  
+  
 
 
 Privacy Impact Assessment (PIA) 
@@ -1969,10 +2238,16 @@ Privacy Impact Assessment (PIA)
   
   
   
+  
+  
+  
 
 
 A PIA systematically evaluates how a project or system affects individual privacy. 
 
+  
+  
+  
   
   
   
@@ -2015,10 +2290,16 @@ class PrivacyImpactAssessment:
   
   
   
+  
+  
+  
 
 
 def __init__(self, project_name, data_processor):
 
+  
+  
+  
   
   
   
@@ -2061,10 +2342,16 @@ self.project_name = project_name
   
   
   
+  
+  
+  
 
 
 self.processor = data_processor
 
+  
+  
+  
   
   
   
@@ -2107,10 +2394,16 @@ self.risks = []
   
   
   
+  
+  
+  
 
 
 self.mitigations = []
 
+  
+  
+  
   
   
   
@@ -2153,10 +2446,16 @@ def assess_data_collection(self, data_flow: DataFlow):
   
   
   
+  
+  
+  
 
 
 """Assess whether data collection is necessary and proportional."""
 
+  
+  
+  
   
   
   
@@ -2199,10 +2498,16 @@ findings = []
   
   
   
+  
+  
+  
 
 
 # Necessity check
 
+  
+  
+  
   
   
   
@@ -2245,10 +2550,16 @@ if DataCategory.LOCATION in data_flow.categories:
   
   
   
+  
+  
+  
 
 
 necessity = False
 
+  
+  
+  
   
   
   
@@ -2291,10 +2602,16 @@ for purpose in data_flow.purposes:
   
   
   
+  
+  
+  
 
 
 if purpose in (ProcessingPurpose.ACCOUNT_MGMT, 
 
+  
+  
+  
   
   
   
@@ -2337,10 +2654,16 @@ ProcessingPurpose.FRAUD_DETECTION):
   
   
   
+  
+  
+  
 
 
 necessity = True
 
+  
+  
+  
   
   
   
@@ -2383,6 +2706,9 @@ break
   
   
   
+  
+  
+  
 
 
 if not necessity:
@@ -2406,10 +2732,16 @@ if not necessity:
   
   
   
+  
+  
+  
 
 
 findings.append({
 
+  
+  
+  
   
   
   
@@ -2452,10 +2784,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 'severity': 'HIGH',
 
+  
+  
+  
   
   
   
@@ -2498,10 +2836,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2544,10 +2888,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 if len(data_flow.data_elements) > 10:
 
+  
+  
+  
   
   
   
@@ -2590,10 +2940,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 'risk': 'Excessive data collection',
 
+  
+  
+  
   
   
   
@@ -2636,10 +2992,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 'remediation': 'Review each data element for necessity'
 
+  
+  
+  
   
   
   
@@ -2682,10 +3044,16 @@ findings.append({
   
   
   
+  
+  
+  
 
 
 return findings
 
+  
+  
+  
   
   
   
@@ -2728,10 +3096,16 @@ def generate_report(self):
   
   
   
+  
+  
+  
 
 
 """Generate structured PIA report."""
 
+  
+  
+  
   
   
   
@@ -2774,10 +3148,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'project': self.project_name,
 
+  
+  
+  
   
   
   
@@ -2820,10 +3200,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'data_flows_analyzed': len(self.processor.data_flows),
 
+  
+  
+  
   
   
   
@@ -2866,10 +3252,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'mitigations_proposed': len(self.mitigations),
 
+  
+  
+  
   
   
   
@@ -2912,10 +3304,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'recommendation': self._get_recommendation(),
 
+  
+  
+  
   
   
   
@@ -2958,6 +3356,9 @@ return {
   
   
   
+  
+  
+  
 
 
 Consent Management 
@@ -2978,10 +3379,16 @@ Consent Management
   
   
   
+  
+  
+  
 
 
 Consent management systems track user consent preferences and enforce them across data processing activities. 
 
+  
+  
+  
   
   
   
@@ -3024,10 +3431,16 @@ class ConsentManager:
   
   
   
+  
+  
+  
 
 
 def __init__(self, storage_backend):
 
+  
+  
+  
   
   
   
@@ -3070,10 +3483,16 @@ self.storage = storage_backend
   
   
   
+  
+  
+  
 
 
 CONSENT_TYPES = {
 
+  
+  
+  
   
   
   
@@ -3116,10 +3535,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'required': True,
 
+  
+  
+  
   
   
   
@@ -3162,6 +3587,9 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'cookies': ['session', 'csrf']
@@ -3185,10 +3613,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3231,10 +3665,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'required': False,
 
+  
+  
+  
   
   
   
@@ -3277,6 +3717,9 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'cookies': ['_ga', '_gid']
@@ -3300,10 +3743,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3346,10 +3795,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'required': False,
 
+  
+  
+  
   
   
   
@@ -3392,10 +3847,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'cookies': ['_fbp', 'ads_prefs']
 
+  
+  
+  
   
   
   
@@ -3438,10 +3899,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'functional': {
 
+  
+  
+  
   
   
   
@@ -3484,10 +3951,16 @@ CONSENT_TYPES = {
   
   
   
+  
+  
+  
 
 
 'purpose': 'Enhanced features and preferences',
 
+  
+  
+  
   
   
   
@@ -3530,26 +4003,6 @@ CONSENT_TYPES = {
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3557,6 +4010,35 @@ CONSENT_TYPES = {
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -3599,10 +4081,16 @@ def record_consent(self, user_id, consent_preferences, ip_address):
   
   
   
+  
+  
+  
 
 
 """Record granular consent preferences."""
 
+  
+  
+  
   
   
   
@@ -3645,10 +4133,16 @@ consent_record = {
   
   
   
+  
+  
+  
 
 
 'user_id': user_id,
 
+  
+  
+  
   
   
   
@@ -3691,10 +4185,16 @@ consent_record = {
   
   
   
+  
+  
+  
 
 
 'preferences': consent_preferences,
 
+  
+  
+  
   
   
   
@@ -3737,10 +4237,16 @@ consent_record = {
   
   
   
+  
+  
+  
 
 
 'user_agent': request.user_agent,
 
+  
+  
+  
   
   
   
@@ -3783,10 +4289,16 @@ consent_record = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3829,10 +4341,16 @@ self.storage.store(f"consent:{user_id}", consent_record)
   
   
   
+  
+  
+  
 
 
 return consent_record
 
+  
+  
+  
   
   
   
@@ -3875,6 +4393,9 @@ def check_consent(self, user_id, consent_type):
   
   
   
+  
+  
+  
 
 
 """Check if user has granted specific consent."""
@@ -3898,10 +4419,16 @@ def check_consent(self, user_id, consent_type):
   
   
   
+  
+  
+  
 
 
 record = self.storage.retrieve(f"consent:{user_id}")
 
+  
+  
+  
   
   
   
@@ -3944,10 +4471,16 @@ if not record:
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -3990,10 +4523,16 @@ consent_config = self.CONSENT_TYPES.get(consent_type)
   
   
   
+  
+  
+  
 
 
 if consent_config and consent_config['required']:
 
+  
+  
+  
   
   
   
@@ -4036,10 +4575,16 @@ return True # Essential consent is always active
   
   
   
+  
+  
+  
 
 
 return record['preferences'].get(consent_type, False)
 
+  
+  
+  
   
   
   
@@ -4082,10 +4627,16 @@ def withdraw_consent(self, user_id, consent_type=None):
   
   
   
+  
+  
+  
 
 
 """Withdraw consent (specific type or all)."""
 
+  
+  
+  
   
   
   
@@ -4128,10 +4679,16 @@ record = self.storage.retrieve(f"consent:{user_id}")
   
   
   
+  
+  
+  
 
 
 if consent_type:
 
+  
+  
+  
   
   
   
@@ -4174,10 +4731,16 @@ record['preferences'][consent_type] = False
   
   
   
+  
+  
+  
 
 
 record['withdrawn_at'] = datetime.utcnow().isoformat()
 
+  
+  
+  
   
   
   
@@ -4220,10 +4783,16 @@ else:
   
   
   
+  
+  
+  
 
 
 for ctype in record['preferences']:
 
+  
+  
+  
   
   
   
@@ -4266,10 +4835,16 @@ record['preferences'][ctype] = False
   
   
   
+  
+  
+  
 
 
 record['all_withdrawn_at'] = datetime.utcnow().isoformat()
 
+  
+  
+  
   
   
   
@@ -4312,10 +4887,16 @@ self.storage.store(f"consent:{user_id}", record)
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

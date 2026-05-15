@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/pricing-experiments.html
   
 
 
+# SaaS Pricing Experiments: A/B Testing and Value Metrics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SaaS Pricing Experiments: Data-Driven Optimization
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Pricing is the highest-leverage lever in a SaaS business. A 1% price increase dr
   
   
   
+  
+  
+  
 
 
 ### Value Metrics
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ A value metric is how you charge customers in proportion to the value they recei
   
   
   
+  
+  
+  
 
 
 To find your value metric, analyze which usage dimension correlates most strongly with willingness to pay. Usage-based SaaS often outperforms flat-rate pricing because customers pay in proportion to value received. However, usage-based pricing introduces revenue unpredictability that may not suit early-stage startups.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ To find your value metric, analyze which usage dimension correlates most strongl
   
   
   
+  
+  
+  
 
 
 Before running experiments, conduct qualitative research. Customer interviews reveal willingness-to-pay ranges and feature valuation. Van Westendorp price sensitivity meter questions establish acceptable price ranges. Product-led pricing research (monitoring which features correlate with conversion) provides quantitative validation.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Conjoint analysis presents customers with feature/price combinations and reveals
   
   
   
+  
+  
+  
 
 
 ### A/B Testing Pricing
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Pricing A/B tests are challenging because you can't show different prices to the
   
   
   
+  
+  
+  
 
 
 The biggest risk is reputationally: users who see different prices will compare on social media. To mitigate this, test through landing pages rather than in-product pricing pages. Offer promotional pricing rather than different standard prices. Use grandfathered pricing for existing customers.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ The biggest risk is reputationally: users who see different prices will compare 
   
   
   
+  
+  
+  
 
 
 Psychologically informed pricing experiments reveal willingness to pay. The goldilocks effect means the middle option in a three-tier pricing page should be your target price — it anchors against the premium tier above it. Decoy pricing adds an intentionally unattractive option to make your target tier appear more valuable.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ For B2B SaaS, pricing confidence correlates with company size. Enterprise custom
   
   
   
+  
+  
+  
 
 
 ### Implementation Process
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ Set up your pricing experiment with feature flags: use LaunchDarkly or a simple 
   
   
   
+  
+  
+  
 
 
 Measure both conversion rate and long-term value. A pricing variant that increases signups by 10% but reduces LTV by 20% is a net negative. Track retention and upgrade behavior for each pricing cohort over 90 days to understand true revenue impact.
@@ -572,10 +649,16 @@ Measure both conversion rate and long-term value. A pricing variant that increas
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/microservices-communication.html
   
   
   
+  
+  
+  
+
+
+# Microservices Communication Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Microservices must communicate with each other to fulfill user requests. Choosing the right communication pattern is one of the most consequential architectural decisions. This guide covers the major patterns with their trade-offs and implementation strategies.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Microservices must communicate with each other to fulfill user requests. Choosin
   
   
   
+  
+  
+  
 
 
 The foundational decision is whether services communicate synchronously (blocking, request-response) or asynchronously (event-driven, fire-and-forget).
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ The foundational decision is whether services communicate synchronously (blockin
   
   
   
+  
+  
+  
 
 
 **Asynchronous patterns** decouple services and improve resilience. A service emits an event without knowing or caring which other services consume it. These suit high-volume, loosely coupled systems.
 
+  
+  
+  
   
   
   
@@ -312,10 +359,16 @@ The foundational decision is whether services communicate synchronously (blockin
   
   
   
+  
+  
+  
 
 
 The simplest approach -- services expose RESTful HTTP endpoints:
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ The simplest approach -- services expose RESTful HTTP endpoints:
   
   
   
+  
+  
+  
 
 
 import requests
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ def get_user_orders(user_id):
   
   
   
+  
+  
+  
 
 
 response = requests.get(
 
+  
+  
+  
   
   
   
@@ -468,6 +533,9 @@ f"http://order-service/api/users/{user_id}/orders",
   
   
   
+  
+  
+  
 
 
 timeout=5
@@ -494,10 +562,16 @@ timeout=5
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ response.raise_for_status()
   
   
   
+  
+  
+  
 
 
 return response.json()
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ return response.json()
   
   
   
+  
+  
+  
 
 
 **Cons**: Coupling (caller must know the callee's URL), latency (blocking), cascading failures (if order-service is down, this call fails).
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ return response.json()
   
   
   
+  
+  
+  
 
 
 ##  Pattern 2: gRPC
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ gRPC uses Protocol Buffers for efficient binary serialization:
   
   
   
+  
+  
+  
 
 
 service OrderService {
 
+  
+  
+  
   
   
   
@@ -754,6 +852,9 @@ rpc GetUserOrders (GetUserOrdersRequest) returns (GetUserOrdersResponse);
   
   
   
+  
+  
+  
 
 
 rpc StreamOrderUpdates (StreamRequest) returns (stream OrderUpdate);
@@ -780,10 +881,16 @@ rpc StreamOrderUpdates (StreamRequest) returns (stream OrderUpdate);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -832,6 +939,9 @@ message GetUserOrdersRequest {
   
   
   
+  
+  
+  
 
 
 string user_id = 1;
@@ -858,10 +968,16 @@ string user_id = 1;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ message GetUserOrdersResponse {
   
   
   
+  
+  
+  
 
 
 repeated Order orders = 1;
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ repeated Order orders = 1;
   
   
   
+  
+  
+  
 
 
 # Client code
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ async with grpc.aio.insecure_channel("order-service:50051") as channel:
   
   
   
+  
+  
+  
 
 
 stub = OrderServiceStub(channel)
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ response = await stub.GetUserOrders(user_id="123")
   
   
   
+  
+  
+  
 
 
 **Pros**: Fast (binary protocol), strongly typed (code generation), supports streaming, built-in load balancing.
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ response = await stub.GetUserOrders(user_id="123")
   
   
   
+  
+  
+  
 
 
 **Use when**: High throughput is required, services are within the same cluster, you need streaming capabilities.
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ response = await stub.GetUserOrders(user_id="123")
   
   
   
+  
+  
+  
 
 
 Use a message broker for asynchronous communication:
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ Use a message broker for asynchronous communication:
   
   
   
+  
+  
+  
 
 
 import pika
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ def publish_order_created(order):
   
   
   
+  
+  
+  
 
 
 connection = pika.BlockingConnection(
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ pika.ConnectionParameters('rabbitmq')
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ channel = connection.channel()
   
   
   
+  
+  
+  
 
 
 channel.exchange_declare(exchange='orders', exchange_type='topic')
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ channel.basic_publish(
   
   
   
+  
+  
+  
 
 
 exchange='orders',
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ routing_key='order.created',
   
   
   
+  
+  
+  
 
 
 body=json.dumps(order)
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ body=json.dumps(order)
   
   
   
+  
+  
+  
 
 
 connection.close()
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ connection.close()
   
   
   
+  
+  
+  
 
 
 def on_order_created(ch, method, properties, body):
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ order = json.loads(body)
   
   
   
+  
+  
+  
 
 
 send_email(order['user_email'], f"Order {order['id']} confirmed")
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ channel.basic_consume(queue='order_created', on_message_callback=on_order_create
   
   
   
+  
+  
+  
 
 
 **Pros**: Decoupling (services never call each other directly), buffering (queues handle load spikes), resilience (consumer failures don't affect producers).
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ channel.basic_consume(queue='order_created', on_message_callback=on_order_create
   
   
   
+  
+  
+  
 
 
 **Use when**: Services are fully independent, you need to handle traffic spikes, multiple services react to the same event.
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ channel.basic_consume(queue='order_created', on_message_callback=on_order_create
   
   
   
+  
+  
+  
 
 
 Event sourcing stores state changes as an append-only event log. CQRS separates read and write models:
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ Event sourcing stores state changes as an append-only event log. CQRS separates 
   
   
   
+  
+  
+  
 
 
 class OrderAggregate:
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ def __init__(self, order_id):
   
   
   
+  
+  
+  
 
 
 self.order_id = order_id
 
+  
+  
+  
   
   
   
@@ -1950,6 +2186,9 @@ self.changes = []
   
   
   
+  
+  
+  
 
 
 def create_order(self, user_id, items):
@@ -1976,10 +2215,16 @@ def create_order(self, user_id, items):
   
   
   
+  
+  
+  
 
 
 self.changes.append({
 
+  
+  
+  
   
   
   
@@ -2028,6 +2273,9 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 'data': {'order_id': self.order_id, 'user_id': user_id, 'items': items}
@@ -2054,10 +2302,16 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ def mark_shipped(self, tracking_id):
   
   
   
+  
+  
+  
 
 
 self.changes.append({
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 'data': {'order_id': self.order_id, 'tracking_id': tracking_id}
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 **Pros**: Complete audit trail, temporal queries (state at any point), natural fit for event-driven systems.
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 **Use when**: Audit requirements are strict, you need full event history, complex workflows benefit from event replay.
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ self.changes.append({
   
   
   
+  
+  
+  
 
 
 Sagas manage distributed transactions across services. Two approaches:
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ Sagas manage distributed transactions across services. Two approaches:
   
   
   
+  
+  
+  
 
 
 OrderCreated → PaymentService:processPayment → PaymentProcessed → InventoryService:reserveStock → StockReserved
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ If a step fails, compensating events roll back previous steps:
   
   
   
+  
+  
+  
 
 
 PaymentFailed → OrderService:cancelOrder
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ PaymentFailed → OrderService:cancelOrder
   
   
   
+  
+  
+  
 
 
 class OrderSagaManager:
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ async def handle_create_order(self, order):
   
   
   
+  
+  
+  
 
 
 payment = await self.payment_service.process(order.amount)
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ if not payment.success:
   
   
   
+  
+  
+  
 
 
 return self.fail_order(order.id, payment.error)
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ inventory = await self.inventory_service.reserve(order.items)
   
   
   
+  
+  
+  
 
 
 if not inventory.success:
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ await self.payment_service.refund(order.id) # Compensation
   
   
   
+  
+  
+  
 
 
 return self.fail_order(order.id, inventory.error)
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 **Consistency model**: Sagas provide eventual consistency, not ACID transactions. Use idempotent operations and retries.
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 | Pattern | Latency | Coupling | Resilience | Complexity |
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 | HTTP/REST | High | High | Low | Low |
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 | Message Queue | Medium | Low | High | Medium |
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 | Saga | Medium | Medium | Medium | High |
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ await self.shipping_service.schedule(order.id)
   
   
   
+  
+  
+  
 
 
 Start with HTTP/REST for simple services and migrate to gRPC when performance matters. Add message queues for cross-cutting concerns (notifications, audit, analytics). Use event sourcing only when you need an audit trail. Implement sagas for multi-service transactions.
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ Most systems use a mix: synchronous calls for reads and queries, asynchronous ev
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

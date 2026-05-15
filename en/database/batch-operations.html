@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/batch-operations.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4634",
+      "wordCount": "5223",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/batch-operations.html"},
-      "articleBody": "Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Loading or updating large volumes of data row-by-row is prohibitively slow. Batch operations reduce overhead by orders of magnitude. This article covers bulk insert techniques, PostgreSQL's COPY command, batch updates, and the art of choosing the right batch size. Row-by-Row is Slow Inserting one row at a time incurs overhead for each statement: * Parse SQL * Plan query * Execute plan * Commit (if auto-commit) * Network round trip SLOW: one round trip per row for row in dataset: cursor.execute(\"INSERT INTO users (email, name) VALUES (%s, %s)\", row) For 100,000 rows, that is 100,000 round trips. Batch operations reduce this to one. Bulk Insert with Multi-Row VALUES The simplest batch insert sends multiple rows in a single statement: INSERT INTO users (email, name) VALUES ('alice@example.com', 'Alice'), ('bob@example.com', 'Bob'), ('carol@example.com', 'Carol'); Using psycopg2 execute_values from psycopg2.extras import execute_values data = [ (\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\"), ... 1000 rows ] execute_values( cursor, \"INSERT INTO users (email, name) VALUES %s\", data, template=\"(%s, %s)\", page_size=1000 ) Using asyncpg import asyncpg executemany with prepared statement reuse await conn.executemany( \"INSERT INTO users (email, name) VALUES ($1, $2)\", [(\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\")] ) The COPY Command COPY is PostgreSQL's most efficient data loading mechanism. It streams data in a binary or text format directly into a table, bypassing the SQL layer: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From file COPY users (email, name) FROM '/path/to/users.csv' WITH (FORMAT CSV, HEADER true); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From standard input (via driver) COPY users (email, name) FROM STDIN WITH (FORMAT CSV); Python with COPY import io import csv buffer = io.StringIO() writer = csv.writer(buffer) writer.writerows([ (\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\"), ]) buffer.seek(0) cursor.copy_expert( \"COPY users (email, name) FROM STDIN WITH CSV\", buffer ) Performance Comparison | Method | Time for 1M rows | Network Rounds | |--------|-----------------|-----------------| | Row-by-row INSERT | ~120 seconds | 1,000,000 | | Batch INSERT (1000 rows) | ~8 seconds | 1,000 | | COPY (binary) | ~1.5 seconds | 1 | | COPY (CSV) | ~2 seconds | 1 | Batch Updates Updating rows in bulk follows a different pattern. Use a temporary table or unnest: Using UNNEST UPDATE users SET email = data.email FROM (SELECT UNNEST(%s) AS id, UNNEST(%s) AS email) AS data WHERE users.id = data.id; user_ids = [1, 2, 3, 4, 5] emails = [\"alice@new.com\", \"bob@new.com\", \"carol@new.com\", \"dave@new.com\", \"eve@new.com\"] cursor.execute(\"\"\" UPDATE users SET email = data.email FROM (SELECT UNNEST(%s::int[]) AS id, UNNEST(%s::text[]) AS email) AS data WHERE users.id = data.id \"\"\", (user_ids, emails)) Using a Temporary Table Create temp table cursor.execute(\"\"\" CREATE TEMP TABLE tmp_updates ( id INTEGER PRIMARY KEY, email TEXT, name TEXT ) ON COMMIT DROP \"\"\") COPY into temp table buffer = io.StringIO() writer = csv.writer(buffer) writer.writerows(update_data) buffer.seek(0) cursor.copy_expert(\"COPY tmp_updates FROM STDIN WITH CSV\", buffer) Join update cursor.execute(\"\"\" UPDATE users u SET email = t.email, name = t.name FROM tmp_updates t WHERE u.id = t.id \"\"\") Batch Size Tuning The optimal batch size depends on row width, network latency, and available memory. General Guidelines | Row Width | Recommended Batch Size | |-----------|----------------------| | Narrow (few columns) | 1000-5000 | | Medium (10-20 columns) | 500-2000 | | Wide (JSONB, TEXT, many columns) | 100-500 | Finding the Sweet Spot import time def benchmark_batch_size(cursor, data, batch_sizes): for batch_size in batch_sizes: start = time.time() for i in range(0, len(data), batch_size): batch = data[i:i+batch_size] execute_values( cursor, \"INSERT INTO users (email, name) VALUES %s\", batch, page_size=batch_size ) elapsed = time.time() - start print(f\"Batch size {batch_size}: {elapsed:.2f}s\") Typical results for narrow rows: Batch size 100: 3.2s Batch size 500: 1.8s Batch size 1000: 1.2s Batch size 5000: 1.5s # Diminishing returns begin Batch size 10000: 2.1s # Worse: memory pressure Error Handling All-or-Nothing (Transactional) try: conn = psycopg2.connect(dsn) cursor = conn.cursor() execute_values(cursor, \"INSERT INTO users (email) VALUES %s\", data) conn.commit() except Exception as e: conn.rollback() print(f\"Batch failed: {e}\") Savepoint per Batch for i, batch in enumerate(batches): try: cursor.execute(\"SAVEPOINT batch_sp\") execute_values(cursor, \"INSERT INTO users (email) VALUES %s\", batch) cursor.execute(\"RELEASE SAVEPOINT batch_sp\") except Exception as e: cursor.execute(\"ROLLBACK TO SAVEPOINT batch_sp\") print(f\"Batch {i} failed, skipping: {e}\") ON CONFLICT for Idempotent Loads INSERT INTO users (id, email, name) VALUES %s ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name; Best Practices * **Use COPY for initial loads** and bulk inserts where latency is acceptable. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use batch INSERTs (execute_values)** for operational bulk operations. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable triggers and indexes** temporarily for very large loads, then re-enable: ALTER TABLE users SET (autovacuum_enabled = false); ALTER TABLE users DISABLE TRIGGER ALL; DROP INDEX idx_users_email; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Perform batch load CREATE INDEX CONCURRENTLY idx_users_email ON users (email); ALTER TABLE users ENABLE TRIGGER ALL; ALTER TABLE users SET (autovacuum_enabled = true); 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Increase max_wal_size** for large batch operations to avoid excessive checkpoints. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use UNLOGGED tables** for staging (data lost on crash but much faster): CREATE UNLOGGED TABLE staging_users (LIKE users INCLUDING ALL); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Load into staging, then INSERT INTO users SELECT FROM staging Batch operations are essential for ETL pipelines, data migrations, and any workflow that moves large volumes of data. Measure your batch sizes, use COPY when possible, and always handle errors gracefully."
+      "articleBody": "Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Batch Operations: Bulk Insert, COPY, and Batch Size Tuning Loading or updating large volumes of data row-by-row is prohibitively slow. Batch operations reduce overhead by orders of magnitude. This article covers bulk insert techniques, PostgreSQL's COPY command, batch updates, and the art of choosing the right batch size. Row-by-Row is Slow Inserting one row at a time incurs overhead for each statement: * Parse SQL * Plan query * Execute plan * Commit (if auto-commit) * Network round trip SLOW: one round trip per row for row in dataset: cursor.execute(\"INSERT INTO users (email, name) VALUES (%s, %s)\", row) For 100,000 rows, that is 100,000 round trips. Batch operations reduce this to one. Bulk Insert with Multi-Row VALUES The simplest batch insert sends multiple rows in a single statement: INSERT INTO users (email, name) VALUES ('alice@example.com', 'Alice'), ('bob@example.com', 'Bob'), ('carol@example.com', 'Carol'); Using psycopg2 execute_values from psycopg2.extras import execute_values data = [ (\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\"), ... 1000 rows ] execute_values( cursor, \"INSERT INTO users (email, name) VALUES %s\", data, template=\"(%s, %s)\", page_size=1000 ) Using asyncpg import asyncpg executemany with prepared statement reuse await conn.executemany( \"INSERT INTO users (email, name) VALUES ($1, $2)\", [(\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\")] ) The COPY Command COPY is PostgreSQL's most efficient data loading mechanism. It streams data in a binary or text format directly into a table, bypassing the SQL layer: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From file COPY users (email, name) FROM '/path/to/users.csv' WITH (FORMAT CSV, HEADER true); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From standard input (via driver) COPY users (email, name) FROM STDIN WITH (FORMAT CSV); Python with COPY import io import csv buffer = io.StringIO() writer = csv.writer(buffer) writer.writerows([ (\"alice@example.com\", \"Alice\"), (\"bob@example.com\", \"Bob\"), ]) buffer.seek(0) cursor.copy_expert( \"COPY users (email, name) FROM STDIN WITH CSV\", buffer ) Performance Comparison | Method | Time for 1M rows | Network Rounds | |--------|-----------------|-----------------| | Row-by-row INSERT | ~120 seconds | 1,000,000 | | Batch INSERT (1000 rows) | ~8 seconds | 1,000 | | COPY (binary) | ~1.5 seconds | 1 | | COPY (CSV) | ~2 seconds | 1 | Batch Updates Updating rows in bulk follows a different pattern. Use a temporary table or unnest: Using UNNEST UPDATE users SET email = data.email FROM (SELECT UNNEST(%s) AS id, UNNEST(%s) AS email) AS data WHERE users.id = data.id; user_ids = [1, 2, 3, 4, 5] emails = [\"alice@new.com\", \"bob@new.com\", \"carol@new.com\", \"dave@new.com\", \"eve@new.com\"] cursor.execute(\"\"\" UPDATE users SET email = data.email FROM (SELECT UNNEST(%s::int[]) AS id, UNNEST(%s::text[]) AS email) AS data WHERE users.id = data.id \"\"\", (user_ids, emails)) Using a Temporary Table Create temp table cursor.execute(\"\"\" CREATE TEMP TABLE tmp_updates ( id INTEGER PRIMARY KEY, email TEXT, name TEXT ) ON COMMIT DROP \"\"\") COPY into temp table buffer = io.StringIO() writer = csv.writer(buffer) writer.writerows(update_data) buffer.seek(0) cursor.copy_expert(\"COPY tmp_updates FROM STDIN WITH CSV\", buffer) Join update cursor.execute(\"\"\" UPDATE users u SET email = t.email, name = t.name FROM tmp_updates t WHERE u.id = t.id \"\"\") Batch Size Tuning The optimal batch size depends on row width, network latency, and available memory. General Guidelines | Row Width | Recommended Batch Size | |-----------|----------------------| | Narrow (few columns) | 1000-5000 | | Medium (10-20 columns) | 500-2000 | | Wide (JSONB, TEXT, many columns) | 100-500 | Finding the Sweet Spot import time def benchmark_batch_size(cursor, data, batch_sizes): for batch_size in batch_sizes: start = time.time() for i in range(0, len(data), batch_size): batch = data[i:i+batch_size] execute_values( cursor, \"INSERT INTO users (email, name) VALUES %s\", batch, page_size=batch_size ) elapsed = time.time() - start print(f\"Batch size {batch_size}: {elapsed:.2f}s\") Typical results for narrow rows: Batch size 100: 3.2s Batch size 500: 1.8s Batch size 1000: 1.2s Batch size 5000: 1.5s # Diminishing returns begin Batch size 10000: 2.1s # Worse: memory pressure Error Handling All-or-Nothing (Transactional) try: conn = psycopg2.connect(dsn) cursor = conn.cursor() execute_values(cursor, \"INSERT INTO users (email) VALUES %s\", data) conn.commit() except Exception as e: conn.rollback() print(f\"Batch failed: {e}\") Savepoint per Batch for i, batch in enumerate(batches): try: cursor.execute(\"SAVEPOINT batch_sp\") execute_values(cursor, \"INSERT INTO users (email) VALUES %s\", batch) cursor.execute(\"RELEASE SAVEPOINT batch_sp\") except Exception as e: cursor.execute(\"ROLLBACK TO SAVEPOINT batch_sp\") print(f\"Batch {i} failed, skipping: {e}\") ON CONFLICT for Idempotent Loads INSERT INTO users (id, email, name) VALUES %s ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, name = EXCLUDED.name; Best Practices * **Use COPY for initial loads** and bulk inserts where latency is acceptable. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use batch INSERTs (execute_values)** for operational bulk operations. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable triggers and indexes** temporarily for very large loads, then re-enable: ALTER TABLE users SET (autovacuum_enabled = false); ALTER TABLE users DISABLE TRIGGER ALL; DROP INDEX idx_users_email; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Perform batch load CREATE INDEX CONCURRENTLY idx_users_email ON users (email); ALTER TABLE users ENABLE TRIGGER ALL; ALTER TABLE users SET (autovacuum_enabled = true); 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Increase max_wal_size** for large batch operations to avoid excessive checkpoints. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use UNLOGGED tables** for staging (data lost on crash but much faster): CREATE UNLOGGED TABLE staging_users (LIKE users INCLUDING ALL); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Load into staging, then INSERT INTO users SELECT FROM staging Batch operations are essential for ETL pipelines, data migrations, and any workflow that moves large volumes of data. Measure your batch sizes, use COPY when possible, and always handle errors gracefully."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Batch Operations: Bulk Insert, COPY, and Batch Size Tuning </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,7 +213,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Row-by-Row is Slow </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -224,7 +256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Parse SQL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -258,7 +296,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Execute plan</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -292,7 +336,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Network round trip</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -332,7 +382,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for row in dataset:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -372,7 +428,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For 100,000 rows, that is 100,000 round trips. Batch operations reduce this to one. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -406,7 +468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The simplest batch insert sends multiple rows in a single statement: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -446,7 +514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>('alice@example.com', 'Alice'),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -486,7 +560,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>('carol@example.com', 'Carol');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -526,7 +606,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from psycopg2.extras import execute_values</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -566,6 +652,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>("alice@example.com", "Alice"),</p>
 <br>
 <br>
@@ -586,7 +675,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>("bob@example.com", "Bob"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -626,7 +721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -666,6 +767,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor,</p>
 <br>
 <br>
@@ -686,7 +790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"INSERT INTO users (email, name) VALUES %s",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -726,7 +836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>template="(%s, %s)",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -766,7 +882,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -806,7 +928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import asyncpg</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -846,7 +974,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>await conn.executemany(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -886,7 +1020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>[("alice@example.com", "Alice"), ("bob@example.com", "Bob")]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -926,7 +1066,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The COPY Command </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -963,7 +1109,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From file</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From file</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1003,7 +1155,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From standard input (via driver)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- From standard input (via driver)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1043,7 +1201,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Python with COPY </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1083,7 +1247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import csv</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1123,7 +1293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>writer = csv.writer(buffer)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1163,7 +1339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>("alice@example.com", "Alice"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1203,6 +1385,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>])</p>
 <br>
 <br>
@@ -1223,7 +1408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>buffer.seek(0)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1263,7 +1454,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"COPY users (email, name) FROM STDIN WITH CSV",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1303,7 +1500,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1340,7 +1543,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Method | Time for 1M rows | Network Rounds | |--------|-----------------|-----------------| | Row-by-row INSERT | ~120 seconds | 1,000,000 | | Batch INSERT (1000 rows) | ~8 seconds | 1,000 | | COPY (binary) | ~1.5 seconds | 1 | | COPY (CSV) | ~2 seconds | 1 | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1374,7 +1583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Updating rows in bulk follows a different pattern. Use a temporary table or unnest: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1411,7 +1626,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>UPDATE users SET email = data.email</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1451,7 +1672,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE users.id = data.id;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1491,6 +1718,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>emails = ["alice@new.com", "bob@new.com", "carol@new.com", "dave@new.com", "eve@new.com"]</p>
 <br>
 <br>
@@ -1511,7 +1741,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1551,7 +1787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM (SELECT UNNEST(%s::int[]) AS id, UNNEST(%s::text[]) AS email) AS data</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1591,7 +1833,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""", (user_ids, emails))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1631,6 +1879,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Create temp table</h1>
 <br>
 <br>
@@ -1651,7 +1902,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1691,7 +1948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1731,7 +1994,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name TEXT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1771,7 +2040,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1811,7 +2086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>buffer = io.StringIO()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1851,7 +2132,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>writer.writerows(update_data)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1891,7 +2178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.copy_expert("COPY tmp_updates FROM STDIN WITH CSV", buffer)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1931,7 +2224,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1971,7 +2270,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SET email = t.email, name = t.name</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2011,7 +2316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE u.id = t.id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2051,7 +2362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch Size Tuning </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2085,7 +2402,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>General Guidelines </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2119,7 +2442,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Finding the Sweet Spot </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2159,7 +2488,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def benchmark_batch_size(cursor, data, batch_sizes):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2199,7 +2534,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>start = time.time()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2239,7 +2580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>batch = data[i:i+batch_size]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2279,7 +2626,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2319,7 +2672,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>batch,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2359,7 +2718,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2399,7 +2764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Batch size {batch_size}: {elapsed:.2f}s")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2439,7 +2810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch size 100: 3.2s</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2479,7 +2856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch size 1000: 1.2s</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2519,7 +2902,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Batch size 10000: 2.1s # Worse: memory pressure</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2556,6 +2945,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>All-or-Nothing (Transactional) </p>
 <br>
 <br>
@@ -2576,7 +2968,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>try:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2616,7 +3014,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor = conn.cursor()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2656,6 +3060,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>conn.commit()</p>
 <br>
 <br>
@@ -2676,7 +3083,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>except Exception as e:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2716,7 +3129,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Batch failed: {e}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2756,7 +3175,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for i, batch in enumerate(batches):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2796,7 +3221,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("SAVEPOINT batch_sp")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2836,7 +3267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("RELEASE SAVEPOINT batch_sp")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2876,7 +3313,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("ROLLBACK TO SAVEPOINT batch_sp")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2916,7 +3359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON CONFLICT for Idempotent Loads </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2956,7 +3405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON CONFLICT (id) DO UPDATE SET</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2996,7 +3451,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name = EXCLUDED.name;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3036,6 +3497,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Use COPY for initial loads** and bulk inserts where latency is acceptable.</p>
 <br>
 <br>
@@ -3053,7 +3517,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use batch INSERTs (execute_values)** for operational bulk operations. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable triggers and indexes** temporarily for very large loads, then re-enable: </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use batch INSERTs (execute_values)** for operational bulk operations. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable triggers and indexes** temporarily for very large loads, then re-enable: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3093,7 +3563,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ALTER TABLE users DISABLE TRIGGER ALL;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3133,7 +3609,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Perform batch load</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Perform batch load</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3173,7 +3655,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ALTER TABLE users ENABLE TRIGGER ALL;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3213,7 +3701,13 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Increase max_wal_size** for large batch operations to avoid excessive checkpoints. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use UNLOGGED tables** for staging (data lost on crash but much faster): </p>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Increase max_wal_size** for large batch operations to avoid excessive checkpoints. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use UNLOGGED tables** for staging (data lost on crash but much faster): </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3253,7 +3747,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Load into staging, then INSERT INTO users SELECT FROM staging</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Load into staging, then INSERT INTO users SELECT FROM staging</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

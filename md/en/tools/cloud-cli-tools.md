@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/cloud-cli-tools.html
   
 
 
+# Cloud CLI Tools: aws-cli, gcloud, az, s5cmd, Cloud Comparisons
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Cloud provider CLIs are essential for infrastructure management, automation, and
   
   
   
+  
+  
+  
 
 
 ##  AWS CLI
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ The most mature cloud CLI, now at version 2:
   
   
   
+  
+  
+  
 
 
 # Installation
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
   
   
   
+  
+  
+  
 
 
 sudo installer -pkg AWSCLIV2.pkg -target /
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ sudo installer -pkg AWSCLIV2.pkg -target /
   
   
   
+  
+  
+  
 
 
 brew install awscli
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ brew install awscli
   
   
   
+  
+  
+  
 
 
 aws configure
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ aws configure set region us-west-2
   
   
   
+  
+  
+  
 
 
 aws configure set cli_pager ""
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ aws configure set cli_pager ""
   
   
   
+  
+  
+  
 
 
 aws configure --profile production
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ aws s3 ls --profile production
   
   
   
+  
+  
+  
 
 
 export AWS_PROFILE=production
@@ -572,10 +649,16 @@ export AWS_PROFILE=production
   
   
   
+  
+  
+  
 
 
 # Common operations
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ aws s3 ls s3://my-bucket/ --recursive --human-readable
   
   
   
+  
+  
+  
 
 
 aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,InstanceType,State.Name]" --output table
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ aws s3 sync ./dist s3://my-website/ --delete --exact-timestamps
   
   
   
+  
+  
+  
 
 
 aws logs tail /aws/lambda/my-function --follow
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ aws ecs update-service --cluster prod --service api --force-new-deployment
   
   
   
+  
+  
+  
 
 
 # With JMESPath filtering
 
+  
+  
+  
   
   
   
@@ -780,36 +881,16 @@ aws ec2 describe-instances \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--filters "Name=instance-state-name,Values=running" \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query "Reservations[*].Instances[?Tags[?Key=='Environment' && Value=='production']].[InstanceId,PrivateIpAddress,InstanceType]" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--filters "Name=instance-state-name,Values=running" \
 
+  
+  
+  
   
   
   
@@ -834,8 +915,40 @@ aws ec2 describe-instances \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--query "Reservations[*].Instances[?Tags[?Key=='Environment' && Value=='production']].[InstanceId,PrivateIpAddress,InstanceType]" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--output json
+
+  
+  
+  
   
   
   
@@ -884,10 +997,16 @@ aws ec2 describe-instances \
   
   
   
+  
+  
+  
 
 
 # ~/.zshrc
 
+  
+  
+  
   
   
   
@@ -936,10 +1055,16 @@ alias awsp="export AWS_PROFILE=$(aws configure list-profiles | fzf)"
   
   
   
+  
+  
+  
 
 
 alias aws-whoami="aws sts get-caller-identity"
 
+  
+  
+  
   
   
   
@@ -988,10 +1113,16 @@ alias s3ls="aws s3 ls"
   
   
   
+  
+  
+  
 
 
 alias s3sync="aws s3 sync"
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ alias ec2ls="aws ec2 describe-instances --query 'Reservations[*].Instances[*].[I
   
   
   
+  
+  
+  
 
 
 alias logs-tail="aws logs tail --follow"
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ alias logs-tail="aws logs tail --follow"
   
   
   
+  
+  
+  
 
 
 # Installation
 
+  
+  
+  
   
   
   
@@ -1144,10 +1287,16 @@ brew install --cask google-cloud-sdk
   
   
   
+  
+  
+  
 
 
 # Or via curl
 
+  
+  
+  
   
   
   
@@ -1196,6 +1345,9 @@ curl https://sdk.cloud.google.com | bash
   
   
   
+  
+  
+  
 
 
 exec -l $SHELL
@@ -1222,10 +1374,16 @@ exec -l $SHELL
   
   
   
+  
+  
+  
 
 
 # Authentication
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ gcloud auth login
   
   
   
+  
+  
+  
 
 
 gcloud auth application-default login
 
+  
+  
+  
   
   
   
@@ -1326,6 +1490,9 @@ gcloud config set project my-project
   
   
   
+  
+  
+  
 
 
 gcloud config set compute/region us-central1
@@ -1352,10 +1519,16 @@ gcloud config set compute/region us-central1
   
   
   
+  
+  
+  
 
 
 # Common operations
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ gcloud compute instances list
   
   
   
+  
+  
+  
 
 
 gcloud container clusters get-credentials prod-cluster --region us-central1
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ gcloud builds submit --tag gcr.io/my-project/my-service
   
   
   
+  
+  
+  
 
 
 gcloud run deploy my-service --image gcr.io/my-project/my-service --platform managed
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ gcloud logging read "resource.type=cloud_run_revision AND severity>=ERROR" --lim
   
   
   
+  
+  
+  
 
 
 gcloud sql instances describe my-db
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ gcloud sql instances describe my-db
   
   
   
+  
+  
+  
 
 
 gcloud config configurations create dev
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ gcloud config configurations activate prod
   
   
   
+  
+  
+  
 
 
 gcloud config list
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ gcloud config list
   
   
   
+  
+  
+  
 
 
 # Installation
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ brew install azure-cli
   
   
   
+  
+  
+  
 
 
 # Authentication
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ az login
   
   
   
+  
+  
+  
 
 
 az account set --subscription "my-subscription"
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ az account set --subscription "my-subscription"
   
   
   
+  
+  
+  
 
 
 az vm list --output table
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ az aks get-credentials --resource-group my-rg --name my-cluster
   
   
   
+  
+  
+  
 
 
 az acr build --registry myregistry --image myapp:latest .
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ az webapp log tail --name my-app --resource-group my-rg
   
   
   
+  
+  
+  
 
 
 az sql db show --resource-group my-rg --server my-server --name my-db
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ az group list --query "[].{Name:name, Location:location}" --output table
   
   
   
+  
+  
+  
 
 
 # JMESPath queries
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ az vm list --query "[?tags.Environment=='production'].{Name:name, Size:hardwareP
   
   
   
+  
+  
+  
 
 
 ##  s5cmd
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ A high-performance S3 CLI written in Go:
   
   
   
+  
+  
+  
 
 
 # Installation
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ brew install s5cmd
   
   
   
+  
+  
+  
 
 
 # Configuration (reuses AWS CLI credentials)
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ brew install s5cmd
   
   
   
+  
+  
+  
 
 
 # Speed comparison
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ brew install s5cmd
   
   
   
+  
+  
+  
 
 
 time aws s3 cp --recursive s3://bucket/prefix/ ./local/ # ~60 seconds
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ time s5cmd cp "s3://bucket/prefix/*" ./local/ # ~8 seconds
   
   
   
+  
+  
+  
 
 
 # Operations
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ s5cmd ls s3://my-bucket/
   
   
   
+  
+  
+  
 
 
 s5cmd cp s3://bucket/key.gz ./
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ s5cmd mv s3://bucket/old-key s3://bucket/new-key
   
   
   
+  
+  
+  
 
 
 s5cmd rm s3://bucket/old-prefix/*
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ s5cmd rm s3://bucket/old-prefix/*
   
   
   
+  
+  
+  
 
 
 echo "s3://bucket/logs/2026-01-01.log" > files.txt
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ echo "s3://bucket/logs/2026-01-02.log" >> files.txt
   
   
   
+  
+  
+  
 
 
 s5cmd cp files.txt ./logs/
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ s5cmd cp files.txt ./logs/
   
   
   
+  
+  
+  
 
 
 s5cmd --numworkers 64 cp s3://large-bucket/* ./downloads/
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ s5cmd --numworkers 64 cp s3://large-bucket/* ./downloads/
   
   
   
+  
+  
+  
 
 
 s5cmd --dry-run cp s3://bucket/* ./local/
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ s5cmd --dry-run cp s3://bucket/* ./local/
   
   
   
+  
+  
+  
 
 
 # Cloud-specific environment management
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ s5cmd --dry-run cp s3://bucket/* ./local/
   
   
   
+  
+  
+  
 
 
 brew install aws-vault
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ aws-vault add prod
   
   
   
+  
+  
+  
 
 
 aws-vault exec prod -- aws s3 ls
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ aws-vault exec prod -- aws s3 ls
   
   
   
+  
+  
+  
 
 
 aws sso login --profile prod
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ export AWS_PROFILE=prod
   
   
   
+  
+  
+  
 
 
 # Cloud comparison commands
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ echo "=== AWS ==="
   
   
   
+  
+  
+  
 
 
 aws sts get-caller-identity
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ echo "=== GCP ==="
   
   
   
+  
+  
+  
 
 
 gcloud auth list
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ echo "=== Azure ==="
   
   
   
+  
+  
+  
 
 
 az account show
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 | Feature | aws-cli v2 | gcloud | az | s5cmd |
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 | Language | Python | Python | Python | Go |
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 | Server-side waiters | Yes | Yes | Yes | No |
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 | JMESPath | Built-in | Built-in | Built-in | No |
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 | File transfer | Sequential | Sequential | Sequential | Parallel |
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 * **AWS-focused**: aws-cli v2 for full API coverage with s5cmd for large S3 transfers.
 
+  
+  
+  
   
   
   
@@ -3374,10 +3775,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 * **Azure-focused**: az with its strong resource graph queries and role-based access.
 
+  
+  
+  
   
   
   
@@ -3420,10 +3827,16 @@ az account show
   
   
   
+  
+  
+  
 
 
 * **Credential management**: Use aws-vault or `gcloud auth application-default` for secure authentication.
 
+  
+  
+  
   
   
   

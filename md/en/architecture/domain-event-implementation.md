@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/domain-event-implementati
   
   
   
+  
+  
+  
+
+
+# Domain Event Implementation: Publishing, Handling, and Testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Domain events capture significant business occurrences within a domain-driven sy
   
   
   
+  
+  
+  
 
 
 Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Each event is an immutable object containing the data relevant to the occurrence
   
   
   
+  
+  
+  
 
 
 Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.
 
+  
+  
+  
   
   
   

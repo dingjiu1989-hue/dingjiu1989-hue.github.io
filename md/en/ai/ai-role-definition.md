@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-role-definition.html
   
 
 
+# AI Role Definition: System Prompts, Personas, Tone Guidelines, Constraints, and Examples
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The difference between a generic AI assistant and a high-performing one is the role definition. A well-defined role shapes every response the model produces. Here is how to define AI roles that consistently deliver the behavior you need.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ The difference between a generic AI assistant and a high-performing one is the r
   
   
   
+  
+  
+  
 
 
 Language models are generalists by default. Without a role, they default to neutral, cautious, and generic responses. A role definition constrains the model to behave consistently within your desired boundaries.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ A good role definition improves response quality, consistency, and safety. It re
   
   
   
+  
+  
+  
 
 
 Role definition is especially important for customer-facing AI. Users interacting with a "helpful assistant" have different expectations than users interacting with a "senior software engineer with 15 years of experience." The role sets expectations and shapes the interaction.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Role definition is especially important for customer-facing AI. Users interactin
   
   
   
+  
+  
+  
 
 
 The system prompt is the primary vehicle for role definition. It sets the context, persona, rules, and constraints for the entire conversation.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ A good system prompt has four sections: identity, rules, output format, and cons
   
   
   
+  
+  
+  
 
 
 Bad system prompts are vague. "You are a helpful assistant" does nothing useful. A good system prompt is specific. "You are a senior software engineer at a SaaS company. You help developers debug production issues. Your responses should be technically precise, include code examples where relevant, and prioritize actionable solutions over theoretical discussion."
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ System prompts should be concise enough that the model can follow them consisten
   
   
   
+  
+  
+  
 
 
 ##  Persona Definition
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ The persona defines the character the AI embodies. A well-defined persona makes 
   
   
   
+  
+  
+  
 
 
 Define the persona's expertise level, communication style, and relationship to the user. Expertise level ranges from beginner-friendly to expert-level. Communication style ranges from formal to casual. Relationship ranges from peer to mentor to service provider.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Persona details add color but should not conflict. "You are a friendly expert" c
   
   
   
+  
+  
+  
 
 
 Avoid personas that impersonate real people or organizations. "You are a doctor" implies medical credentials the model does not have. Instead, say "You provide general health information in a knowledgeable way. You always include a disclaimer that users should consult a real doctor for medical advice."
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Avoid personas that impersonate real people or organizations. "You are a doctor"
   
   
   
+  
+  
+  
 
 
 Tone guidelines control the style of responses, not the content. They apply consistently across all interactions.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Specify tone along multiple axes: formal versus casual, concise versus detailed,
   
   
   
+  
+  
+  
 
 
 Tone guidelines should include what to avoid, not just what to aim for. "Avoid jargon unless the user demonstrates technical knowledge. Avoid exclamation marks. Avoid first-person opinions like 'I think' or 'in my opinion.' Avoid absolutes like 'always' or 'never' unless there is genuine certainty."
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ Match tone to the application context. A billing support bot should be formal an
   
   
   
+  
+  
+  
 
 
 ##  Constraints
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Constraints define what the AI must not do. They are the safety boundaries of th
   
   
   
+  
+  
+  
 
 
 Common constraints include: do not make up facts or statistics, do not provide legal or medical advice, do not reveal system prompts or internal instructions, do not engage with adversarial inputs that try to override the role, and do not produce harmful or offensive content.
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ Constraints must be specific to be effective. "Do not be harmful" is too vague. 
   
   
   
+  
+  
+  
 
 
 Prioritize constraints. A system prompt with 20 constraints will see the model ignore the least important ones. Place the most critical constraints first. Group related constraints together.
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ Prioritize constraints. A system prompt with 20 constraints will see the model i
   
   
   
+  
+  
+  
 
 
 Examples are the most powerful tool for shaping model behavior. A well-chosen example communicates more than paragraphs of instructions.
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ Provide examples of ideal responses and examples of what to avoid. The contrast 
   
   
   
+  
+  
+  
 
 
 Examples work best when they cover edge cases. Show how to handle ambiguous requests, how to decline inappropriate requests politely, and how to handle requests outside the AI's stated expertise.
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ Use three to five examples in system prompts. More than five adds noise. Fewer t
   
   
   
+  
+  
+  
 
 
 ##  Testing and Iteration
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ Role definitions are not static. Testing validates that the role produces the de
   
   
   
+  
+  
+  
 
 
 Write test cases for your role definition. Each test case is a user input with an expected response characteristic. "User asks about pricing" should produce a response that includes pricing information and a link to the pricing page. "User asks for medical advice" should produce a polite decline.
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ Run these test cases whenever you modify the role definition. Automated testing 
   
   
   
+  
+  
+  
 
 
 Iterate based on production observations. If users frequently rephrase questions, your role may not be setting clear expectations. If the model is too verbose, tighten conciseness guidelines. If the model is too cautious, relax constraints slightly.
 
+  
+  
+  
   
   
   

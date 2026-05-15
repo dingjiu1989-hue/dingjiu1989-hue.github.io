@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/logging-tools.html
   
 
 
+# Logging Tools: ELK Stack vs Loki vs Splunk
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Centralized logging transforms noisy application output into a searchable, actio
   
   
   
+  
+  
+  
 
 
 ##  Architecture Comparison
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Centralized logging transforms noisy application output into a searchable, actio
   
   
   
+  
+  
+  
 
 
 Elasticsearch indexes every field in every log line, enabling rich full-text search at the cost of higher storage consumption:
 
+  
+  
+  
   
   
   
@@ -286,6 +330,9 @@ Elasticsearch indexes every field in every log line, enabling rich full-text sea
   
   
   
+  
+  
+  
 
 
 filebeat.inputs:
@@ -312,10 +359,16 @@ filebeat.inputs:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: container
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: container
 
+  
+  
+  
   
   
   
@@ -364,10 +417,16 @@ paths:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/lib/docker/containers/*/*.log
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/lib/docker/containers/*/*.log
 
+  
+  
+  
   
   
   
@@ -416,10 +475,16 @@ json.message_key: log
   
   
   
+  
+  
+  
 
 
 json.overwrite_keys: true
 
+  
+  
+  
   
   
   
@@ -468,6 +533,9 @@ json.add_error_key: true
   
   
   
+  
+  
+  
 
 
 processors:
@@ -494,10 +562,16 @@ processors:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- add_docker_metadata:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- add_docker_metadata:
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ host: "unix:///var/run/docker.sock"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dissect:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dissect:
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ tokenizer: "%{timestamp} %{level} %{logger} %{message}"
   
   
   
+  
+  
+  
 
 
 target_prefix: "parsed"
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ output.elasticsearch:
   
   
   
+  
+  
+  
 
 
 hosts: ["elasticsearch:9200"]
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
   
   
   
+  
+  
+  
 
 
 pipeline: "parse-logs"
 
+  
+  
+  
   
   
   
@@ -754,6 +852,9 @@ pipeline: "parse-logs"
   
   
   
+  
+  
+  
 
 
 PUT _ilm/policy/logs-30day
@@ -780,10 +881,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "phases": {
 
+  
+  
+  
   
   
   
@@ -884,6 +997,9 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "min_age": "0ms",
@@ -910,10 +1026,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "actions": {
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "set_priority": { "priority": 100 }
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "min_age": "3d",
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "shrink": { "number_of_shards": 1 },
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "delete": {
 
+  
+  
+  
   
   
   
@@ -1274,6 +1432,9 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 "actions": { "delete": {} }
@@ -1300,29 +1461,6 @@ PUT _ilm/policy/logs-30day
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1352,6 +1490,38 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -1378,10 +1548,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ PUT _ilm/policy/logs-30day
   
   
   
+  
+  
+  
 
 
 Loki indexes only metadata labels, leaving log content unindexed for dramatically lower storage costs:
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ Loki indexes only metadata labels, leaving log content unindexed for dramaticall
   
   
   
+  
+  
+  
 
 
 auth_enabled: false
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ server:
   
   
   
+  
+  
+  
 
 
 http_listen_port: 3100
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ common:
   
   
   
+  
+  
+  
 
 
 replication_factor: 1
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ ring:
   
   
   
+  
+  
+  
 
 
 kvstore:
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ store: inmemory
   
   
   
+  
+  
+  
 
 
 schema_config:
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ configs:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from: 2024-01-01
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from: 2024-01-01
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ store: tsdb
   
   
   
+  
+  
+  
 
 
 object_store: s3
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ schema: v13
   
   
   
+  
+  
+  
 
 
 index:
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ prefix: index_
   
   
   
+  
+  
+  
 
 
 period: 24h
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ storage_config:
   
   
   
+  
+  
+  
 
 
 tsdb_shipper:
 
+  
+  
+  
   
   
   
@@ -2002,6 +2244,9 @@ active_index_directory: /loki/tsdb-shipper-active
   
   
   
+  
+  
+  
 
 
 cache_location: /loki/tsdb-shipper-cache
@@ -2028,10 +2273,16 @@ cache_location: /loki/tsdb-shipper-cache
   
   
   
+  
+  
+  
 
 
 shared_store: s3
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ aws:
   
   
   
+  
+  
+  
 
 
 s3: s3://us-east-1/logs-bucket
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ s3forcepathstyle: false
   
   
   
+  
+  
+  
 
 
 limits_config:
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ retention_period: 30d
   
   
   
+  
+  
+  
 
 
 max_query_series: 10000
 
+  
+  
+  
   
   
   
@@ -2236,6 +2505,9 @@ ingestion_rate_mb: 10
   
   
   
+  
+  
+  
 
 
 ingestion_burst_size_mb: 20
@@ -2262,10 +2534,16 @@ ingestion_burst_size_mb: 20
   
   
   
+  
+  
+  
 
 
 compactor:
 
+  
+  
+  
   
   
   
@@ -2314,6 +2592,9 @@ working_directory: /loki/compactor
   
   
   
+  
+  
+  
 
 
 shared_store: s3
@@ -2340,10 +2621,16 @@ shared_store: s3
   
   
   
+  
+  
+  
 
 
 retention_enabled: true
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ retention_enabled: true
   
   
   
+  
+  
+  
 
 
 Splunk uses a proprietary indexer architecture with heavy indexing at ingest:
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ Splunk uses a proprietary indexer architecture with heavy indexing at ingest:
   
   
   
+  
+  
+  
 
 
 [monitor:///var/log/app/*.log]
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ disabled = false
   
   
   
+  
+  
+  
 
 
 index = production
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ sourcetype = applog
   
   
   
+  
+  
+  
 
 
 crcSalt = 
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ crcSalt =
   
   
   
+  
+  
+  
 
 
 [applog]
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ SHOULD_LINEMERGE = true
   
   
   
+  
+  
+  
 
 
 LINE_BREAKER = ([\r\n]+)
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ TRUNCATE = 20000
   
   
   
+  
+  
+  
 
 
 KV_MODE = json
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ REPORT-appfields = app-timestamp-extract, app-level-extract
   
   
   
+  
+  
+  
 
 
 # transforms.conf
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ REPORT-appfields = app-timestamp-extract, app-level-extract
   
   
   
+  
+  
+  
 
 
 REGEX = (\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ FORMAT = date::$1
   
   
   
+  
+  
+  
 
 
 [app-level-extract]
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ REGEX = "level":"(\w+)"
   
   
   
+  
+  
+  
 
 
 FORMAT = level::$1
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ FORMAT = level::$1
   
   
   
+  
+  
+  
 
 
 No matter which platform you choose, structured logging at the application level is essential:
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ package main
   
   
   
+  
+  
+  
 
 
 import (
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ import (
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ func main() {
   
   
   
+  
+  
+  
 
 
 logger, _ := zap.NewProduction(
 
+  
+  
+  
   
   
   
@@ -3172,6 +3549,9 @@ zap.WithCaller(true),
   
   
   
+  
+  
+  
 
 
 zap.AddStacktrace(zap.ErrorLevel),
@@ -3198,10 +3578,16 @@ zap.AddStacktrace(zap.ErrorLevel),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ defer logger.Sync()
   
   
   
+  
+  
+  
 
 
 orderID := "ord-12345"
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ amount := 99.50
   
   
   
+  
+  
+  
 
 
 // Structured log with context
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ logger.Info("processing payment",
   
   
   
+  
+  
+  
 
 
 zap.String("order_id", orderID),
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ zap.Float64("amount", amount),
   
   
   
+  
+  
+  
 
 
 zap.String("currency", "USD"),
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ zap.String("payment_method", "credit_card"),
   
   
   
+  
+  
+  
 
 
 zap.Duration("processing_time", 250*time.Millisecond),
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ zap.Duration("processing_time", 250*time.Millisecond),
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 "ts": "2026-05-12T10:30:00Z",
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 "msg": "processing payment",
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 "amount": 99.50,
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 "payment_method": "credit_card",
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ The same structured log renders differently across platforms:
   
   
   
+  
+  
+  
 
 
 ### ELK (Kibana Query Language)
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ service:payment AND level:ERROR
   
   
   
+  
+  
+  
 
 
 AND NOT message:"timeout retry"
 
+  
+  
+  
   
   
   
@@ -3978,10 +4448,16 @@ AND @timestamp >= "now-1h"
   
   
   
+  
+  
+  
 
 
 ### Loki (LogQL)
 
+  
+  
+  
   
   
   
@@ -4030,10 +4506,16 @@ AND @timestamp >= "now-1h"
   
   
   
+  
+  
+  
 
 
 |= "charge_failed"
 
+  
+  
+  
   
   
   
@@ -4082,10 +4564,16 @@ AND @timestamp >= "now-1h"
   
   
   
+  
+  
+  
 
 
 | duration > 5s
 
+  
+  
+  
   
   
   
@@ -4134,10 +4622,16 @@ AND @timestamp >= "now-1h"
   
   
   
+  
+  
+  
 
 
 | rate per second
 
+  
+  
+  
   
   
   
@@ -4186,10 +4680,16 @@ AND @timestamp >= "now-1h"
   
   
   
+  
+  
+  
 
 
 index=production sourcetype=applog
 
+  
+  
+  
   
   
   
@@ -4238,10 +4738,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 | rex field=message "order_id=(?\S+)"
 
+  
+  
+  
   
   
   
@@ -4290,10 +4796,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 | sort - count
 
+  
+  
+  
   
   
   
@@ -4342,10 +4854,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 ##  Indexing Strategies
 
+  
+  
+  
   
   
   
@@ -4394,10 +4912,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 |---|---|---|---|
 
+  
+  
+  
   
   
   
@@ -4446,10 +4970,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 | Storage ratio | 1:1.5 (raw to indexed) | 1:0.3 (minimal overhead) | 1:2+ (heavily optimized) |
 
+  
+  
+  
   
   
   
@@ -4498,10 +5028,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 | Full-text search | Excellent | Limited (filter + grep) | Excellent |
 
+  
+  
+  
   
   
   
@@ -4550,10 +5086,16 @@ service=payment level=ERROR
   
   
   
+  
+  
+  
 
 
 # Loki: retention via compactor
 
+  
+  
+  
   
   
   
@@ -4602,10 +5144,16 @@ compactor:
   
   
   
+  
+  
+  
 
 
 retention_enabled: true
 
+  
+  
+  
   
   
   
@@ -4654,10 +5202,16 @@ retention_rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: series
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: series
 
+  
+  
+  
   
   
   
@@ -4706,10 +5260,16 @@ selector:
   
   
   
+  
+  
+  
 
 
 match: '{service="payment"}'
 
+  
+  
+  
   
   
   
@@ -4758,6 +5318,9 @@ priority: 10
   
   
   
+  
+  
+  
 
 
 period: 90d # Payment logs retained longer
@@ -4784,10 +5347,16 @@ period: 90d # Payment logs retained longer
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- selector:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- selector:
 
+  
+  
+  
   
   
   
@@ -4836,10 +5405,16 @@ match: '{env="staging"}'
   
   
   
+  
+  
+  
 
 
 priority: 1
 
+  
+  
+  
   
   
   
@@ -4888,10 +5463,16 @@ period: 7d # Staging logs retained shorter
   
   
   
+  
+  
+  
 
 
 ##  Cost Comparison
 
+  
+  
+  
   
   
   
@@ -4940,10 +5521,16 @@ period: 7d # Staging logs retained shorter
   
   
   
+  
+  
+  
 
 
 |---|---|---|---|---|
 
+  
+  
+  
   
   
   
@@ -4992,10 +5579,16 @@ period: 7d # Staging logs retained shorter
   
   
   
+  
+  
+  
 
 
 | Compute | 3-5 nodes minimum | $500+/month base | 2 nodes minimum | $2,000+/GB/day |
 
+  
+  
+  
   
   
   
@@ -5044,10 +5637,16 @@ period: 7d # Staging logs retained shorter
   
   
   
+  
+  
+  
 
 
 Loki offers the lowest storage cost by far due to its S3-based object storage and label-only indexing. ELK provides the best query flexibility at moderate cost. Splunk delivers enterprise-grade reliability but at a premium that only makes sense for compliance-heavy industries.
 
+  
+  
+  
   
   
   
@@ -5096,10 +5695,16 @@ Loki offers the lowest storage cost by far due to its S3-based object storage an
   
   
   
+  
+  
+  
 
 
 * **ELK Stack**: Best for teams needing full-text search across all fields, complex aggregations, and existing Elasticsearch expertise.
 
+  
+  
+  
   
   
   
@@ -5142,10 +5747,16 @@ Loki offers the lowest storage cost by far due to its S3-based object storage an
   
   
   
+  
+  
+  
 
 
 * **Splunk**: Best for enterprises requiring compliance auditing, RBAC, and have budget for premium support.
 
+  
+  
+  
   
   
   

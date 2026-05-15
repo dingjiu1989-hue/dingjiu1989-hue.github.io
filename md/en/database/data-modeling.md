@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/database/data-modeling.html
   
 
 
+# Data Modeling Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Data Modeling Fundamentals 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Data modeling defines and organizes data structures to represent real-world enti
   
   
   
+  
+  
+  
 
 
 Entity-Relationship Diagrams 
@@ -164,10 +196,16 @@ Entity-Relationship Diagrams
   
   
   
+  
+  
+  
 
 
 ER diagrams map entities (nouns) and relationships (verbs). Key cardinalities: one-to-one, one-to-many, many-to-many. 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ Customer:
   
   
   
+  
+  
+  
 
 
 attributes: id, email, name, created_at
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ relationships: has_many Order
   
   
   
+  
+  
+  
 
 
 Order:
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ attributes: id, customer_id, status, total, created_at
   
   
   
+  
+  
+  
 
 
 relationships: belongs_to Customer, has_many OrderItem
 
+  
+  
+  
   
   
   
@@ -345,10 +401,16 @@ Normalization
   
   
   
+  
+  
+  
 
 
 Aim for third normal form (3NF) in transactional systems: 
 
+  
+  
+  
   
   
   
@@ -388,10 +450,16 @@ Aim for third normal form (3NF) in transactional systems:
   
   
   
+  
+  
+  
 
 
 * 2NF: Full PK dependency
 
+  
+  
+  
   
   
   
@@ -431,10 +499,16 @@ Aim for third normal form (3NF) in transactional systems:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3NF design
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- 3NF design
 
+  
+  
+  
   
   
   
@@ -477,10 +551,16 @@ CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT);
   
   
   
+  
+  
+  
 
 
 CREATE TABLE orders (id SERIAL PRIMARY KEY, customer_id INT REFERENCES customers(id));
 
+  
+  
+  
   
   
   
@@ -523,10 +603,16 @@ CREATE TABLE order_items (id SERIAL PRIMARY KEY, order_id INT REFERENCES orders(
   
   
   
+  
+  
+  
 
 
 Denormalization 
 
+  
+  
+  
   
   
   
@@ -563,6 +649,9 @@ Denormalize selectively for read performance. Common cases: reporting tables, ca
   
   
   
+  
+  
+  
 
 
 NoSQL Modeling 
@@ -583,10 +672,16 @@ NoSQL Modeling
   
   
   
+  
+  
+  
 
 
 Model for access patterns first: 
 
+  
+  
+  
   
   
   
@@ -629,10 +724,16 @@ Model for access patterns first:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -675,10 +776,16 @@ _id: "...",
   
   
   
+  
+  
+  
 
 
 customer: { id: "c123", name: "Alice" },
 
+  
+  
+  
   
   
   
@@ -721,6 +828,9 @@ items: [{ product_id: "p1", qty: 2 }]
   
   
   
+  
+  
+  
 
 
 }
@@ -744,10 +854,16 @@ items: [{ product_id: "p1", qty: 2 }]
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

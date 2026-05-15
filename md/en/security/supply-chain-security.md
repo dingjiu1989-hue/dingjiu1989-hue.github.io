@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/supply-chain-security.html
   
 
 
+# Supply Chain Security
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Software supply chain attacks target the processes and tools used to build, pack
   
   
   
+  
+  
+  
 
 
 Software Bill of Materials (SBOM) 
 
+  
+  
+  
   
   
   
@@ -187,10 +222,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -233,10 +274,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "bomFormat": "CycloneDX",
 
+  
+  
+  
   
   
   
@@ -279,10 +326,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
 
+  
+  
+  
   
   
   
@@ -325,10 +378,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "metadata": {
 
+  
+  
+  
   
   
   
@@ -371,10 +430,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "name": "my-application",
 
+  
+  
+  
   
   
   
@@ -417,10 +482,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "type": "application",
 
+  
+  
+  
   
   
   
@@ -463,6 +534,9 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "name": "ACME Corp"
@@ -486,26 +560,6 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -513,6 +567,35 @@ An SBOM is a machine-readable inventory of all components in a software artifact
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -536,6 +619,9 @@ An SBOM is a machine-readable inventory of all components in a software artifact
 
 },
 
+  
+  
+  
   
   
   
@@ -578,10 +664,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -624,10 +716,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "name": "lodash",
 
+  
+  
+  
   
   
   
@@ -670,10 +768,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "purl": "pkg:npm/lodash@4.17.21",
 
+  
+  
+  
   
   
   
@@ -716,10 +820,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -762,10 +872,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "type": "library", 
 
+  
+  
+  
   
   
   
@@ -808,10 +924,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "version": "4.18.2",
 
+  
+  
+  
   
   
   
@@ -854,10 +976,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -900,10 +1028,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 "vulnerabilities": []
 
+  
+  
+  
   
   
   
@@ -946,10 +1080,16 @@ An SBOM is a machine-readable inventory of all components in a software artifact
   
   
   
+  
+  
+  
 
 
 # Generate SPDX SBOM with syft
 
+  
+  
+  
   
   
   
@@ -992,10 +1132,16 @@ syft packages ./myapp:latest -o spdx-json > sbom.spdx.json
   
   
   
+  
+  
+  
 
 
 # Generate CycloneDX SBOM
 
+  
+  
+  
   
   
   
@@ -1038,10 +1184,16 @@ cyclonedx-bom -o bom.xml -t file
   
   
   
+  
+  
+  
 
 
 # Compare SBOMs for change detection
 
+  
+  
+  
   
   
   
@@ -1084,10 +1236,16 @@ diff <(jq '.components[].purl' bom-v1.json | sort) \
   
   
   
+  
+  
+  
 
 
 <(jq '.components[].purl' bom-v2.json | sort)
 
+  
+  
+  
   
   
   
@@ -1127,10 +1285,16 @@ Sigstore and Artifact Signing
   
   
   
+  
+  
+  
 
 
 Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. 
 
+  
+  
+  
   
   
   
@@ -1173,6 +1337,9 @@ Sigstore simplifies code signing and verification through ephemeral key material
   
   
   
+  
+  
+  
 
 
 cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \
@@ -1196,10 +1363,16 @@ cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring
   
   
   
+  
+  
+  
 
 
 myregistry.io/myapp:latest
 
+  
+  
+  
   
   
   
@@ -1242,10 +1415,16 @@ myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 cosign sign myregistry.io/myapp:latest
 
+  
+  
+  
   
   
   
@@ -1288,10 +1467,16 @@ cosign sign myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 cosign verify --key pubkey.pem myregistry.io/myapp:latest
 
+  
+  
+  
   
   
   
@@ -1334,10 +1519,16 @@ cosign verify --key pubkey.pem myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 cosign verify myregistry.io/myapp:latest
 
+  
+  
+  
   
   
   
@@ -1380,10 +1571,16 @@ cosign verify myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 cosign_policy:
 
+  
+  
+  
   
   
   
@@ -1426,10 +1623,16 @@ identity:
   
   
   
+  
+  
+  
 
 
 subject: "developer@acme.com"
 
+  
+  
+  
   
   
   
@@ -1472,6 +1675,9 @@ issuer: "https://accounts.google.com"
   
   
   
+  
+  
+  
 
 
 signatures:
@@ -1495,10 +1701,16 @@ signatures:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: "sha256:abc123..."
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: "sha256:abc123..."
 
+  
+  
+  
   
   
   
@@ -1541,10 +1753,16 @@ bundle: "sigstore-bundle.json"
   
   
   
+  
+  
+  
 
 
 Generating provenance with SLSA 
 
+  
+  
+  
   
   
   
@@ -1587,10 +1805,16 @@ Generating provenance with SLSA
   
   
   
+  
+  
+  
 
 
 gitsign --sign-commits HEAD
 
+  
+  
+  
   
   
   
@@ -1633,10 +1857,16 @@ gitsign --sign-commits HEAD
   
   
   
+  
+  
+  
 
 
 cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \
 
+  
+  
+  
   
   
   
@@ -1679,6 +1909,9 @@ myregistry.io/myapp:latest
   
   
   
+  
+  
+  
 
 
 in-toto: Framework for Supply Chain Integrity 
@@ -1699,10 +1932,16 @@ in-toto: Framework for Supply Chain Integrity
   
   
   
+  
+  
+  
 
 
 in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. 
 
+  
+  
+  
   
   
   
@@ -1745,10 +1984,16 @@ in-toto defines a framework to protect the integrity of the software supply chai
   
   
   
+  
+  
+  
 
 
 layout = Layout(
 
+  
+  
+  
   
   
   
@@ -1791,10 +2036,16 @@ keys={
   
   
   
+  
+  
+  
 
 
 'developer': load_key('developer.pub'),
 
+  
+  
+  
   
   
   
@@ -1837,10 +2088,16 @@ keys={
   
   
   
+  
+  
+  
 
 
 'tester': load_key('tester.pub'),
 
+  
+  
+  
   
   
   
@@ -1883,10 +2140,16 @@ keys={
   
   
   
+  
+  
+  
 
 
 steps=[
 
+  
+  
+  
   
   
   
@@ -1929,10 +2192,16 @@ Step(name='write-code',
   
   
   
+  
+  
+  
 
 
 materials=[MaterialRule('ALLOW', '*')],
 
+  
+  
+  
   
   
   
@@ -1975,10 +2244,16 @@ products=[ProductRule('ALLOW', 'src/**')],
   
   
   
+  
+  
+  
 
 
 pubkeys=['developer']),
 
+  
+  
+  
   
   
   
@@ -2021,10 +2296,16 @@ Step(name='build',
   
   
   
+  
+  
+  
 
 
 materials=[MaterialRule('MATCH', 'src/**', ['write-code'])],
 
+  
+  
+  
   
   
   
@@ -2067,10 +2348,16 @@ products=[ProductRule('ALLOW', 'build/**')],
   
   
   
+  
+  
+  
 
 
 pubkeys=['builder']),
 
+  
+  
+  
   
   
   
@@ -2113,10 +2400,16 @@ Step(name='test',
   
   
   
+  
+  
+  
 
 
 materials=[MaterialRule('MATCH', 'build/**', ['build'])],
 
+  
+  
+  
   
   
   
@@ -2159,10 +2452,16 @@ products=[ProductRule('ALLOW', '*')],
   
   
   
+  
+  
+  
 
 
 pubkeys=['tester']),
 
+  
+  
+  
   
   
   
@@ -2205,10 +2504,16 @@ Inspection(name='verify-signature',
   
   
   
+  
+  
+  
 
 
 expected_command=['gpg', '--verify', 'build/signed-artifact'])
 
+  
+  
+  
   
   
   
@@ -2251,10 +2556,16 @@ expected_command=['gpg', '--verify', 'build/signed-artifact'])
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2294,10 +2605,16 @@ Dependency Confusion
   
   
   
+  
+  
+  
 
 
 Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. 
 
+  
+  
+  
   
   
   
@@ -2340,10 +2657,16 @@ Dependency confusion attacks exploit package manager behaviors where internal pa
   
   
   
+  
+  
+  
 
 
 import requests
 
+  
+  
+  
   
   
   
@@ -2386,10 +2709,16 @@ def check_dependency_confusion(requirements_file):
   
   
   
+  
+  
+  
 
 
 vulnerable = []
 
+  
+  
+  
   
   
   
@@ -2432,10 +2761,16 @@ with open(requirements_file) as f:
   
   
   
+  
+  
+  
 
 
 for line in f:
 
+  
+  
+  
   
   
   
@@ -2478,10 +2813,16 @@ if '==' not in line:
   
   
   
+  
+  
+  
 
 
 continue
 
+  
+  
+  
   
   
   
@@ -2524,10 +2865,16 @@ pkg_name = line.split('=')[0].strip().lower()
   
   
   
+  
+  
+  
 
 
 # Check if package exists on PyPI
 
+  
+  
+  
   
   
   
@@ -2570,10 +2917,16 @@ resp = requests.get(f"https://pypi.org/pypi/{pkg_name}/json")
   
   
   
+  
+  
+  
 
 
 if resp.status_code == 200:
 
+  
+  
+  
   
   
   
@@ -2616,10 +2969,16 @@ vulnerable.append({
   
   
   
+  
+  
+  
 
 
 'package': pkg_name,
 
+  
+  
+  
   
   
   
@@ -2662,10 +3021,16 @@ vulnerable.append({
   
   
   
+  
+  
+  
 
 
 'mitigation': 'Scope pip to private index with --index-url'
 
+  
+  
+  
   
   
   
@@ -2708,10 +3073,16 @@ vulnerable.append({
   
   
   
+  
+  
+  
 
 
 return vulnerable
 
+  
+  
+  
   
   
   
@@ -2751,10 +3122,16 @@ SLSA Framework
   
   
   
+  
+  
+  
 
 
 Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") provides a security framework with four levels of increasing trust. 
 
+  
+  
+  
   
   
   
@@ -2797,10 +3174,16 @@ slsa_levels:
   
   
   
+  
+  
+  
 
 
 level_1:
 
+  
+  
+  
   
   
   
@@ -2843,6 +3226,9 @@ description: "Build process must be scripted and automated"
   
   
   
+  
+  
+  
 
 
 requirements:
@@ -2866,33 +3252,42 @@ requirements:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false
+
+  
+  
+  
   
   
   
@@ -2935,10 +3330,16 @@ level_2:
   
   
   
+  
+  
+  
 
 
 description: "Build service generates and signs provenance"
 
+  
+  
+  
   
   
   
@@ -2981,33 +3382,42 @@ requirements:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true
+
+  
+  
+  
   
   
   
@@ -3050,10 +3460,16 @@ level_3:
   
   
   
+  
+  
+  
 
 
 description: "Hardened build service resists tampering"
 
+  
+  
+  
   
   
   
@@ -3096,33 +3512,42 @@ requirements:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true
+
+  
+  
+  
   
   
   
@@ -3165,10 +3590,16 @@ level_4:
   
   
   
+  
+  
+  
 
 
 description: "Two-party review and hermetic builds"
 
+  
+  
+  
   
   
   
@@ -3211,33 +3642,42 @@ requirements:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true
+
+  
+  
+  
   
   
   
@@ -3261,6 +3701,9 @@ requirements:
 
 Conclusion 
 
+  
+  
+  
   
   
   

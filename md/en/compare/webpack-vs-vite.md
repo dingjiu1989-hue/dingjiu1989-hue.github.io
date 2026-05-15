@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/compare/webpack-vs-vite.html
   
   
   
+  
+  
+  
+
+
+# Webpack vs Vite: Build Tool Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Webpack and Vite represent different approaches to frontend building. Webpack pioneered the modern JavaScript bundler era. Vite, built on ES modules, offers dramatically faster development servers and simpler configuration.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Webpack and Vite represent different approaches to frontend building. Webpack pi
   
   
   
+  
+  
+  
 
 
 Webpack's development server bundles the entire application before serving it. For large projects, cold starts take 30-60 seconds. Hot Module Replacement (HMR) works but slows as the application grows. Updates can take seconds in large codebases.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Vite's development server serves files as native ES modules. It only transforms 
   
   
   
+  
+  
+  
 
 
 ##  Production Builds
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Webpack's production builds are mature and highly configurable. Code splitting, 
   
   
   
+  
+  
+  
 
 
 Vite uses Rollup for production builds. Rollup's tree shaking is excellent, producing smaller bundles than Webpack for many projects. Vite's build configuration is simpler but less flexible than Webpack's.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Vite uses Rollup for production builds. Rollup's tree shaking is excellent, prod
   
   
   
+  
+  
+  
 
 
 Webpack configuration is notoriously complex. A typical webpack.config.js is 50-200 lines for basic projects. Extending requires understanding loaders, plugins, rules, and resolve configuration.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Vite configuration is minimal. The default configuration works for most projects
   
   
   
+  
+  
+  
 
 
 ##  Plugin Ecosystem
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Webpack has the largest plugin ecosystem. Any build transformation imaginable ha
   
   
   
+  
+  
+  
 
 
 Vite plugins use the Rollup plugin interface with Vite-specific extensions. Plugin compatibility is increasing as the ecosystem matures. Most common build requirements have Vite plugins available.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Vite plugins use the Rollup plugin interface with Vite-specific extensions. Plug
   
   
   
+  
+  
+  
 
 
 Use Vite for new projects. The development experience is significantly better. HMR speed improves developer productivity. Production builds are competitive with Webpack. Use Webpack for existing projects with complex Webpack configurations, projects requiring module federation, or when specific Webpack plugins are essential.
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-testing-frameworks.html
   
 
 
+# AI Testing Frameworks: DeepEval, Ragas, LangSmith, CI Integration
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Testing AI applications is fundamentally different from testing traditional soft
   
   
   
+  
+  
+  
 
 
 ##  DeepEval
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ DeepEval is an open-source testing framework designed for LLM applications:
   
   
   
+  
+  
+  
 
 
 from deepeval import assert_test
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ from deepeval.metrics import (
   
   
   
+  
+  
+  
 
 
 HallucinationMetric,
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ AnswerRelevancyMetric,
   
   
   
+  
+  
+  
 
 
 ContextualPrecisionMetric,
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ FaithfulnessMetric,
   
   
   
+  
+  
+  
 
 
 BiasMetric,
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ ToxicityMetric,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -494,6 +562,9 @@ from deepeval.test_case import LLMTestCase
   
   
   
+  
+  
+  
 
 
 def test_rag_response_no_hallucination():
@@ -520,10 +591,16 @@ def test_rag_response_no_hallucination():
   
   
   
+  
+  
+  
 
 
 test_case = LLMTestCase(
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ input="What is the capital of France?",
   
   
   
+  
+  
+  
 
 
 actual_output="The capital of France is Paris, located in the Ile-de-France region.",
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ retrieval_context=["Paris is the capital and most populous city of France."],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ hallucination_metric = HallucinationMetric(threshold=0.3)
   
   
   
+  
+  
+  
 
 
 assert_test(test_case, [hallucination_metric])
 
+  
+  
+  
   
   
   
@@ -728,10 +823,16 @@ def test_response_relevancy():
   
   
   
+  
+  
+  
 
 
 test_case = LLMTestCase(
 
+  
+  
+  
   
   
   
@@ -780,10 +881,16 @@ input="Explain Kubernetes pods",
   
   
   
+  
+  
+  
 
 
 actual_output="Kubernetes is a container orchestration platform...",
 
+  
+  
+  
   
   
   
@@ -832,10 +939,16 @@ retrieval_context=[
   
   
   
+  
+  
+  
 
 
 "A pod is the smallest deployable unit in Kubernetes.",
 
+  
+  
+  
   
   
   
@@ -884,6 +997,9 @@ retrieval_context=[
   
   
   
+  
+  
+  
 
 
 ],
@@ -910,10 +1026,16 @@ retrieval_context=[
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ relevancy_metric = AnswerRelevancyMetric(threshold=0.7)
   
   
   
+  
+  
+  
 
 
 assert_test(test_case, [relevancy_metric])
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ assert_test(test_case, [relevancy_metric])
   
   
   
+  
+  
+  
 
 
 DeepEval supports 15+ evaluation metrics including hallucination detection, answer relevancy, faithfulness, contextual precision, bias detection, and toxicity scoring. Each metric returns a score (0-1) that can be compared against a configurable threshold.
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ DeepEval supports 15+ evaluation metrics including hallucination detection, answ
   
   
   
+  
+  
+  
 
 
 Ragas is specialized for evaluating RAG pipelines end-to-end:
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ from ragas import evaluate
   
   
   
+  
+  
+  
 
 
 from ragas.metrics import (
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ faithfulness,
   
   
   
+  
+  
+  
 
 
 answer_relevancy,
 
+  
+  
+  
   
   
   
@@ -1222,6 +1374,9 @@ context_precision,
   
   
   
+  
+  
+  
 
 
 context_recall,
@@ -1248,10 +1403,16 @@ context_recall,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ from datasets import Dataset
   
   
   
+  
+  
+  
 
 
 # Prepare evaluation dataset
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 "question": [
 
+  
+  
+  
   
   
   
@@ -1404,6 +1577,9 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 "How does load balancing work?",
@@ -1430,10 +1606,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 "A pod is the smallest deployable unit...",
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 ["Pods can contain one or more containers."],
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 "A pod is the smallest deployable unit in Kubernetes.",
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ test_data = Dataset.from_dict({
   
   
   
+  
+  
+  
 
 
 # Compute RAG metrics
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ result = evaluate(
   
   
   
+  
+  
+  
 
 
 test_data,
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ metrics=[
   
   
   
+  
+  
+  
 
 
 faithfulness,
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ answer_relevancy,
   
   
   
+  
+  
+  
 
 
 context_precision,
 
+  
+  
+  
   
   
   
@@ -2002,6 +2244,9 @@ context_recall,
   
   
   
+  
+  
+  
 
 
 ],
@@ -2028,10 +2273,16 @@ context_recall,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ print(result)
   
   
   
+  
+  
+  
 
 
 # {
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ print(result)
   
   
   
+  
+  
+  
 
 
 # "answer_relevancy": 0.88,
 
+  
+  
+  
   
   
   
@@ -2184,10 +2447,16 @@ print(result)
   
   
   
+  
+  
+  
 
 
 # "context_recall": 0.85
 
+  
+  
+  
   
   
   
@@ -2236,10 +2505,16 @@ print(result)
   
   
   
+  
+  
+  
 
 
 Ragas decomposes RAG quality into four independent metrics: faithfulness (is the answer grounded in context?), answer relevancy (does the answer address the question?), context precision (are retrieved documents relevant?), and context recall (are all relevant documents retrieved?).
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ Ragas decomposes RAG quality into four independent metrics: faithfulness (is the
   
   
   
+  
+  
+  
 
 
 LangSmith provides a hosted evaluation platform with tracing and annotation:
 
+  
+  
+  
   
   
   
@@ -2340,10 +2621,16 @@ from langsmith import Client, evaluate
   
   
   
+  
+  
+  
 
 
 from langsmith.schemas import Example, Run
 
+  
+  
+  
   
   
   
@@ -2392,10 +2679,16 @@ client = Client()
   
   
   
+  
+  
+  
 
 
 # Define a custom evaluator
 
+  
+  
+  
   
   
   
@@ -2444,10 +2737,16 @@ def answer_correctness(run: Run, example: Example) -> dict:
   
   
   
+  
+  
+  
 
 
 # Compare model output against expected output
 
+  
+  
+  
   
   
   
@@ -2496,10 +2795,16 @@ predicted = run.outputs.get("output", "")
   
   
   
+  
+  
+  
 
 
 expected = example.outputs.get("answer", "")
 
+  
+  
+  
   
   
   
@@ -2548,10 +2853,16 @@ expected = example.outputs.get("answer", "")
   
   
   
+  
+  
+  
 
 
 from langsmith.evaluation import evaluate as langsmith_eval
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ return {"score": compute_similarity(predicted, expected)}
   
   
   
+  
+  
+  
 
 
 # Run evaluation on a dataset
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ results = evaluate(
   
   
   
+  
+  
+  
 
 
 lambda inputs: my_llm_chain(inputs["question"]),
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ data="my-test-dataset",
   
   
   
+  
+  
+  
 
 
 evaluators=[answer_correctness],
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ experiment_prefix="rag-v2-eval",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ experiment_prefix="rag-v2-eval",
   
   
   
+  
+  
+  
 
 
 print(results)
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ LangSmith excels at trace-level evaluation. Every LLM call, retrieval step, and 
   
   
   
+  
+  
+  
 
 
 ##  CI Integration
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ Integrate AI tests into your CI pipeline to catch regressions automatically:
   
   
   
+  
+  
+  
 
 
 # .github/workflows/ai-tests.yml
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ name: AI Evaluation Tests
   
   
   
+  
+  
+  
 
 
 on:
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ push:
   
   
   
+  
+  
+  
 
 
 branches: [main]
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ pull_request:
   
   
   
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ evaluate:
   
   
   
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
   
   
   
@@ -3172,36 +3549,45 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/setup-python@v5
+
+  
+  
+  
   
   
   
@@ -3250,6 +3636,9 @@ with:
   
   
   
+  
+  
+  
 
 
 python-version: "3.11"
@@ -3276,10 +3665,16 @@ python-version: "3.11"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install dependencies
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ run: pip install deepeval ragas langsmith
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Run AI evaluation tests
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ env:
   
   
   
+  
+  
+  
 
 
 OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
   
   
   
+  
+  
+  
 
 
 run: |
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ deepeval test run tests/ai_evaluation.py
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Check quality gate
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ run: |
   
   
   
+  
+  
+  
 
 
 deepeval metrics --min-threshold 0.7
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ Set a quality gate that blocks merges when metrics fall below thresholds. This p
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

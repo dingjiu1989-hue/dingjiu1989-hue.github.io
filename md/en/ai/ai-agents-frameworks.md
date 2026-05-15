@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-agents-frameworks.html
   
 
 
+# AI Agent Frameworks Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ AI agents — systems that can independently plan, use tools, and execute multi-
   
   
   
+  
+  
+  
 
 
 ##  What Makes an AI Agent?
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
   
   
   
+  
+  
+  
 
 
 * **Planning**: Break down a goal into sub-steps
 
+  
+  
+  
   
   
   
@@ -280,10 +324,16 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
   
   
   
+  
+  
+  
 
 
 * **Tool use**: Call external functions, APIs, and databases
 
+  
+  
+  
   
   
   
@@ -326,10 +376,16 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
   
   
   
+  
+  
+  
 
 
 * **Self-reflection**: Evaluate outcomes and adjust plans
 
+  
+  
+  
   
   
   
@@ -378,10 +434,16 @@ Before comparing frameworks, it's important to define what we mean by "agent." A
   
   
   
+  
+  
+  
 
 
 ### LangGraph
 
+  
+  
+  
   
   
   
@@ -430,10 +492,16 @@ LangGraph, part of the LangChain ecosystem, models agent workflows as directed g
   
   
   
+  
+  
+  
 
 
 **Key features:**
 
+  
+  
+  
   
   
   
@@ -479,10 +547,16 @@ LangGraph, part of the LangChain ecosystem, models agent workflows as directed g
   
   
   
+  
+  
+  
 
 
 * Built-in persistence for state management across steps
 
+  
+  
+  
   
   
   
@@ -525,10 +599,16 @@ LangGraph, part of the LangChain ecosystem, models agent workflows as directed g
   
   
   
+  
+  
+  
 
 
 * Streaming of intermediate results
 
+  
+  
+  
   
   
   
@@ -577,10 +657,16 @@ LangGraph, part of the LangChain ecosystem, models agent workflows as directed g
   
   
   
+  
+  
+  
 
 
 from langgraph.graph import StateGraph, END
 
+  
+  
+  
   
   
   
@@ -629,10 +715,16 @@ from typing import TypedDict, List
   
   
   
+  
+  
+  
 
 
 class AgentState(TypedDict):
 
+  
+  
+  
   
   
   
@@ -681,10 +773,16 @@ messages: List[dict]
   
   
   
+  
+  
+  
 
 
 next_step: str
 
+  
+  
+  
   
   
   
@@ -733,10 +831,16 @@ def call_model(state):
   
   
   
+  
+  
+  
 
 
 response = llm.invoke(state["messages"])
 
+  
+  
+  
   
   
   
@@ -785,10 +889,16 @@ return {"messages": state["messages"] + [response]}
   
   
   
+  
+  
+  
 
 
 def execute_tool(state):
 
+  
+  
+  
   
   
   
@@ -837,10 +947,16 @@ tool_call = get_tool_call(state["messages"][-1])
   
   
   
+  
+  
+  
 
 
 result = execute_function(tool_call)
 
+  
+  
+  
   
   
   
@@ -889,10 +1005,16 @@ return {"messages": state["messages"] + [result]}
   
   
   
+  
+  
+  
 
 
 graph = StateGraph(AgentState)
 
+  
+  
+  
   
   
   
@@ -941,10 +1063,16 @@ graph.add_node("agent", call_model)
   
   
   
+  
+  
+  
 
 
 graph.add_node("tool", execute_tool)
 
+  
+  
+  
   
   
   
@@ -993,10 +1121,16 @@ graph.add_conditional_edges("agent", should_continue, {"continue": "tool", "end"
   
   
   
+  
+  
+  
 
 
 graph.set_entry_point("agent")
 
+  
+  
+  
   
   
   
@@ -1045,10 +1179,16 @@ graph.set_entry_point("agent")
   
   
   
+  
+  
+  
 
 
 ### CrewAI
 
+  
+  
+  
   
   
   
@@ -1097,10 +1237,16 @@ CrewAI focuses on multi-agent collaboration, where specialized agents work toget
   
   
   
+  
+  
+  
 
 
 **Key features:**
 
+  
+  
+  
   
   
   
@@ -1146,10 +1292,16 @@ CrewAI focuses on multi-agent collaboration, where specialized agents work toget
   
   
   
+  
+  
+  
 
 
 * Task assignment and delegation between agents
 
+  
+  
+  
   
   
   
@@ -1192,10 +1344,16 @@ CrewAI focuses on multi-agent collaboration, where specialized agents work toget
   
   
   
+  
+  
+  
 
 
 * Built-in tool library and custom tool support
 
+  
+  
+  
   
   
   
@@ -1244,10 +1402,16 @@ CrewAI focuses on multi-agent collaboration, where specialized agents work toget
   
   
   
+  
+  
+  
 
 
 from crewai import Agent, Task, Crew
 
+  
+  
+  
   
   
   
@@ -1296,10 +1460,16 @@ researcher = Agent(
   
   
   
+  
+  
+  
 
 
 role="Research Analyst",
 
+  
+  
+  
   
   
   
@@ -1348,10 +1518,16 @@ goal="Find comprehensive information on the topic",
   
   
   
+  
+  
+  
 
 
 backstory="Expert researcher with 15 years of experience",
 
+  
+  
+  
   
   
   
@@ -1400,10 +1576,16 @@ tools=[search_tool, web_scraper]
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1452,10 +1634,16 @@ writer = Agent(
   
   
   
+  
+  
+  
 
 
 role="Content Writer",
 
+  
+  
+  
   
   
   
@@ -1504,6 +1692,9 @@ goal="Synthesize research into clear, engaging content",
   
   
   
+  
+  
+  
 
 
 backstory="Award-winning technical writer",
@@ -1530,10 +1721,16 @@ backstory="Award-winning technical writer",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1582,10 +1779,16 @@ research_task = Task(
   
   
   
+  
+  
+  
 
 
 description="Research the latest developments in AI agents",
 
+  
+  
+  
   
   
   
@@ -1634,10 +1837,16 @@ agent=researcher
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1686,10 +1895,16 @@ write_task = Task(
   
   
   
+  
+  
+  
 
 
 description="Write a summary based on the research",
 
+  
+  
+  
   
   
   
@@ -1738,10 +1953,16 @@ agent=writer
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1790,10 +2011,16 @@ crew = Crew(agents=[researcher, writer], tasks=[research_task, write_task])
   
   
   
+  
+  
+  
 
 
 result = crew.kickoff()
 
+  
+  
+  
   
   
   
@@ -1842,10 +2069,16 @@ result = crew.kickoff()
   
   
   
+  
+  
+  
 
 
 ### AutoGen (Microsoft)
 
+  
+  
+  
   
   
   
@@ -1894,10 +2127,16 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
   
   
   
+  
+  
+  
 
 
 **Key features:**
 
+  
+  
+  
   
   
   
@@ -1943,10 +2182,16 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
   
   
   
+  
+  
+  
 
 
 * Nested chat and hierarchical conversations
 
+  
+  
+  
   
   
   
@@ -1989,10 +2234,16 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
   
   
   
+  
+  
+  
 
 
 * Strong support for human participation
 
+  
+  
+  
   
   
   
@@ -2041,10 +2292,16 @@ AutoGen, developed by Microsoft Research, enables multi-agent conversations with
   
   
   
+  
+  
+  
 
 
 ### OpenAI Assistants API
 
+  
+  
+  
   
   
   
@@ -2093,10 +2350,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 **Key features:**
 
+  
+  
+  
   
   
   
@@ -2142,10 +2405,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 * Built-in code interpreter, file search, and function calling
 
+  
+  
+  
   
   
   
@@ -2188,10 +2457,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 * Vector store integration for RAG
 
+  
+  
+  
   
   
   
@@ -2240,10 +2515,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 ##  Comparison Table
 
+  
+  
+  
   
   
   
@@ -2292,10 +2573,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 |---------|-----------|--------|---------|---------------|
 
+  
+  
+  
   
   
   
@@ -2344,10 +2631,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 | Multi-agent | Yes | Yes | Yes | Single agent |
 
+  
+  
+  
   
   
   
@@ -2396,10 +2689,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 | Human-in-loop | Excellent | Good | Good | Limited |
 
+  
+  
+  
   
   
   
@@ -2448,10 +2747,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 | Self-hosted | Yes | Yes | Yes | No |
 
+  
+  
+  
   
   
   
@@ -2500,10 +2805,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 ##  Choosing the Right Framework
 
+  
+  
+  
   
   
   
@@ -2549,10 +2860,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 * **CrewAI**: Choose when different agents need specialized roles and collaboration
 
+  
+  
+  
   
   
   
@@ -2595,10 +2912,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 * **Assistants API**: Choose for rapid prototyping and managed infrastructure
 
+  
+  
+  
   
   
   
@@ -2647,10 +2970,16 @@ OpenAI's managed agent platform handles infrastructure concerns like state manag
   
   
   
+  
+  
+  
 
 
 The agent framework landscape is evolving rapidly. Key trends to watch:
 
+  
+  
+  
   
   
   
@@ -2696,6 +3025,9 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
   
   
   
+  
+  
+  
 
 
 * **Observability**: Built-in tracing, logging, and debugging for agent decision-making
@@ -2719,10 +3051,16 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
   
   
   
+  
+  
+  
 
 
 * **Safety guardrails**: Automated checks for agent actions before execution
 
+  
+  
+  
   
   
   
@@ -2768,10 +3106,16 @@ The agent framework landscape is evolving rapidly. Key trends to watch:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/mcp-complete-guide.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "11970",
+      "wordCount": "13594",
       "keywords": "MCP, Model Context Protocol, AI, LLM, Tool Use, Function Calling, Anthropic, AI Integration",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/mcp-model-context-protocol-complete-guide-the-standard-connecting-ai-to-your-tools-33ep"
       ],
-      "articleBody": "MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools Every AI application needs to talk to external systems \u2014 databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable. MCP (Model Context Protocol) changes that. It's an open protocol that standardizes how AI models connect to external tools and data sources \u2014 one protocol, any LLM, any tool. What Is MCP? MCP is an open standard (originally developed by Anthropic) that defines how AI applications discover and call external tools. Think of it as **USB-C for AI integrations** \u2014 a universal connector that any MCP-compatible client can use to talk to any MCP-compatible server. \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 MCP Client \u2502\u25c4\u2500\u2500\u2500\u25ba\u2502 MCP Protocol \u2502\u25c4\u2500\u2500\u2500\u25ba\u2502 MCP Server \u2502 \u2502 (Claude, VS \u2502 \u2502 (JSON-RPC \u2502 \u2502 (DB connector, \u2502 \u2502 Code, Cursor) \u2502 \u2502 over stdio \u2502 \u2502 file system, \u2502 \u2502 \u2502 \u2502 or SSE) \u2502 \u2502 search, API) \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 **The key insight**: MCP decouples tool implementation from the AI client. A single MCP server written once works with Claude Desktop, VS Code extensions, Cursor, and any other MCP-compatible client. No more \"write this tool for LangChain, rewrite it for OpenAI, rewrite it for Claude.\" Architecture MCP has four core concepts: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application) The AI-powered application the user interacts with: Claude Desktop, VS Code, Cursor, a custom chat app. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client) A lightweight transport layer inside the host that manages connections to MCP servers. It speaks the MCP protocol over the wire. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server) A lightweight service that exposes resources and tools through MCP. Each server is focused on one domain: filesystem access, database queries, API integrations. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol The standard JSON-RPC message format that clients and servers use to communicate. Two transport modes: * **stdio**: Server runs as a subprocess, communication over stdin/stdout (simple, secure) * **SSE** (Server-Sent Events): Network-based, for remote servers Communication Flow User: \"Find all bugs assigned to me\" \u2502 \u25bc Host (Claude Desktop) \u2502 MCP Client asks servers for available tools \u25bc MCP Server (GitHub) \u2500\u2500\u2500\u25ba Returns: list_issues, get_repo, search_code \u2502 \u25bc LLM decides: call list_issues with assignee:me \u2502 \u25bc MCP Server executes GitHub API call \u2502 \u25bc Returns issue data to LLM \u2502 \u25bc Host shows: \"Found 3 bugs assigned to you:...\" MCP vs Alternatives | Feature | MCP | OpenAI Function Calling | LangChain Tools | Custom API | |---------|-----|------------------------|-----------------|------------| | **Standardized** | \u2705 Open standard | \u274c OpenAI-only | \u274c LangChain-only | \u274c Custom | | **Cross-client** | \u2705 Any MCP client | \u274c OpenAI API only | \u274c LangChain only | \u274c One app only | | **Tool discovery** | \u2705 Auto-discover tools | \u2705 Schema-based | \u2705 Defined in code | \u274c Hard-coded | | **Dynamic resources** | \u2705 Yes (file system, DB) | \u274c No | \u274c No | \u274c No | | **Security model** | \u2705 Host controls permissions | \u26a0\ufe0f Per-call | \u26a0\ufe0f Per-call | \u26a0\ufe0f Per-call | | **Async/long-running** | \u2705 Notifications, progress | \u274c Request-response only | \u274c Request-response only | \u26a0\ufe0f Depends | | **Ecosystem** | Growing fast | Mature but narrow | Good | None | | **Setup complexity** | Low | Low | Medium | High | Why MCP Wins **Before MCP**: Every AI tool integration was bespoke * VS Code extension for GitHub \u2190 custom code * Claude Desktop for database queries \u2190 one-off Python script * Cursor for file operations \u2190 built-in, not extensible * Custom chatbot for search \u2190 another custom tool **With MCP**: Write once, use everywhere * One GitHub MCP server works in Claude Desktop, VS Code, Cursor * One PostgreSQL MCP server works in any host * One filesystem MCP server works everywhere How to Build an MCP Server The MCP SDK (available for Python, TypeScript, Java, and Go) makes building a server trivial. Here's a complete example in Python: Python MCP Server server.py from mcp.server import Server from mcp.types import Tool, TextContent import httpx import json app = Server(\"weather-server\") @app.list_tools() async def list_tools() -> list[Tool]: return [ Tool( name=\"get_weather\", description=\"Get current weather for a city\", input_schema={ \"type\": \"object\", \"properties\": { \"city\": {\"type\": \"string\", \"description\": \"City name\"} }, \"required\": [\"city\"], }, ) ] @app.call_tool() async def call_tool(name: str, arguments: dict) -> list[TextContent]: if name == \"get_weather\": async with httpx.AsyncClient() as client: resp = await client.get( f\"https://api.openweathermap.org/data/2.5/weather\", params={\"q\": arguments[\"city\"], \"appid\": \"YOUR_KEY\"} ) data = resp.json() return [TextContent( type=\"text\", text=json.dumps(data[\"main\"], indent=2) )] raise ValueError(f\"Unknown tool: {name}\") if __name__ == \"__main__\": app.run(transport=\"stdio\") Running the Server // claude_desktop_config.json { \"mcpServers\": { \"weather\": { \"command\": \"python\", \"args\": [\"/path/to/server.py\"] } } } Now your weather tool works in Claude Desktop, VS Code (with Cline or Continue extension), Cursor, and any other MCP host \u2014 with zero changes. TypeScript MCP Server import { Server } from \"@modelcontextprotocol/sdk/server/index.js\"; import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"; const server = new Server( { name: \"github-server\", version: \"1.0.0\" }, { capabilities: { tools: {} } } ); server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [{ name: \"search_repos\", description: \"Search GitHub repositories\", inputSchema: { type: \"object\", properties: { query: { type: \"string\" } }, required: [\"query\"] } }] })); server.setRequestHandler(CallToolRequestSchema, async (request) => { const { name, arguments: args } = request.params; const response = await fetch( `https://api.github.com/search/repositories?q=${args.query}` ); const data = await response.json(); return { content: [{ type: \"text\", text: JSON.stringify(data.items.slice(0, 5)) }] }; }); const transport = new StdioServerTransport(); await server.connect(transport); MCP Resources: Beyond Tools MCP isn't just about calling tools \u2014 it also defines **resources** (data sources the server exposes). This is where MCP surpasses simple function calling. @app.list_resources() async def list_resources() -> list[Resource]: return [ Resource( uri=\"file:///logs/app.log\", name=\"Application Logs\", description=\"Live application log file\", mime_type=\"text/plain\", ), Resource( uri=\"postgres://users\", name=\"Users Table\", description=\"User database table schema and sample rows\", mime_type=\"application/json\", ), ] @app.read_resource() async def read_resource(uri: str) -> str: if uri == \"file:///logs/app.log\": return open(\"/var/log/app.log\").read()[-10000:] if uri.startswith(\"postgres://\"): Query schema dynamically return json.dumps(query_table_schema(uri)) raise ValueError(f\"Unknown resource: {uri}\") Resources give the AI client dynamic access to your data \u2014 it can read log files, query database schemas, browse file systems \u2014 all through the same protocol. MCP Prompts (Templates) MCP servers can also expose **prompt templates** \u2014 reusable instructions that guide how the LLM should behave when using your tools: @app.list_prompts() async def list_prompts() -> list[Prompt]: return [ Prompt( name=\"analyze_logs\", description=\"Analyze application logs for errors\", arguments=[{ \"name\": \"severity\", \"description\": \"Minimum log severity level\", \"required\": False, }], ) ] @app.get_prompt() async def get_prompt(name: str, arguments: dict) -> PromptMessage: severity = arguments.get(\"severity\", \"ERROR\") return PromptMessage( role=\"user\", content={ \"type\": \"text\", \"text\": f\"\"\"Read the application logs and: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Find all {severity} level entries 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Group them by component 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify patterns 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggest fixes Use the log resource and tools to investigate.\"\"\" } ) Production MCP Server Patterns 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials MCP servers should never hard-code credentials. Use environment variables or a config file: import os DB_URL = os.environ.get(\"MCP_DB_URL\", \"postgresql://localhost:5432\") API_KEY = os.environ.get(\"MCP_API_KEY\") app = Server(\"production-server\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting Protect external APIs from aggressive tool calls: import time from collections import defaultdict class RateLimiter: def __init__(self, max_calls: int, window: float): self.max_calls = max_calls self.window = window self.calls = defaultdict(list) def check(self, key: str = \"default\") -> bool: now = time.time() self.calls[key] = [t for t in self.calls[key] if now - t if len(self.calls[key]) >= self.max_calls: return False self.calls[key].append(now) return True 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching Avoid repeating expensive operations: from functools import lru_cache from datetime import datetime, timedelta cache = {} def cached(ttl_seconds: int = 300): def decorator(func): def wrapper(*args, **kwargs): key = str(args) + str(kwargs) if key in cache: result, timestamp = cache[key] if datetime.now() - timestamp return result result = func(*args, **kwargs) cache[key] = (result, datetime.now()) return result return wrapper return decorator 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging Every tool call should be traceable: import structlog logger = structlog.get_logger() In the call_tool handler logger.info(\"tool_call\", tool=name, arguments=arguments, duration_ms=elapsed_ms, success=True) MCP Ecosystem (2026) Popular MCP Servers | Server | Purpose | Official? | |--------|---------|-----------| | **Filesystem** | Read/write files, directory listing | \u2705 Anthropic | | **GitHub** | Issues, PRs, repos, search | \u2705 Anthropic | | **PostgreSQL** | Query databases, schema inspection | \u2705 Anthropic | | **Slack** | Messages, channels, search | \u2705 Anthropic | | **SQLite** | Local database operations | \u2705 Community | | **Docker** | Container management | \u2705 Community | | **Kubernetes** | Pod management, logs | \u2705 Community | | **Puppeteer** | Browser automation | \u2705 Community | | **Jira** | Issue tracking | \u2705 Community | | **Sentry** | Error monitoring | \u2705 Community | | **PagerDuty** | Incident management | \u2705 Community | | **Elasticsearch** | Search operations | \u2705 Community | MCP Client Hosts | Host | Type | MCP Support | |------|------|-------------| | **Claude Desktop** | Desktop app | \u2705 Full support | | **VS Code** (Cline) | IDE extension | \u2705 Full | | **VS Code** (Continue) | IDE extension | \u2705 Full | | **Cursor** | IDE | \u2705 Full | | **Windsurf** | IDE | \u2705 Full | | **Zed** | Editor | \u2705 Native | | **Sourcegraph Cody** | IDE extension | \u2705 Full | | **JetBrains** | IDE | \u2705 Via plugins | | **OpenAI** | API | \u274c (proprietary tools only) | | **Google Gemini** | API | \u274c (proprietary tools only) | When to Build vs Use Existing Build an MCP Server When: * You have a proprietary/internal tool or API * You need fine-grained access control * Your data requires special transformation * You want to combine multiple services into one server Use an Existing Server When: * Standard integrations (GitHub, PostgreSQL, Slack) * Well-known APIs with existing community servers * File system or database access patterns Security Considerations MCP's stdio transport is surprisingly secure \u2014 the server runs as a local subprocess with your permissions. But there are risks: * **Tool abuse**: A malicious prompt could make dangerous tool calls (DELETE FROM users). Mitigate by: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Read-only servers for exploration, separate write servers \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Parameter whitelists in tool handlers \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Confirmation prompts for destructive operations 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Resource leaks**: LLMs can read large files. Set size limits on resource responses: MAX_RESOURCE_SIZE = 100_000 # bytes 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Credentials in config**: The `claude_desktop_config.json` stores server launch commands. Never embed API keys \u2014 use environment variables. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tool sandboxing**: Consider Docker containers for untrusted MCP servers: { \"mcpServers\": { \"community-server\": { \"command\": \"docker\", \"args\": [ \"run\", \"--rm\", \"-i\", \"--network\", \"none\", \"community/mcp-server:latest\" ] } } } Real-World Architecture: AI-Powered Dev Environment Here's how a real production setup looks: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 VS Code (Host) \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Claude \u2502 \u2502 Cline \u2502 \u2502 Continue \u2502 \u2502 \u2502 \u2502 Desktop \u2502 \u2502 (VS Code)\u2502 \u2502 (VS Code) \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u25bc \u25bc \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 MCP Protocol (JSON-RPC) \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 GitHub \u2502 \u2502 Postgres \u2502 \u2502 Filesystem \u2502 \u2502 \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Docker \u2502 \u2502 Slack \u2502 \u2502 Jira \u2502 \u2502 \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Each server is independently runnable, testable, and replaceable. Add or remove capabilities by adding or removing MCP servers \u2014 no code changes needed. Getting Started * **Install Claude Desktop** \u2192 Add your first MCP server via config 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Try existing servers** \u2192 GitHub, Filesystem, SQLite (Anthropic's official servers) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Build your first server** \u2192 Use the Python SDK, ~50 lines of code 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add to VS Code** \u2192 Install Cline or Continue extension 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Go multi-host** \u2192 Same MCP server works across all clients The MCP ecosystem doubles roughly every quarter. What takes 50 lines today will be a one-line npm install by next quarter. The best time to build on top of it was last year \u2014 the second best time is now. Summary | Concept | What It Means | |---------|---------------| | **MCP** | Open protocol for AI-to-tool communication | | **Transport** | stdio (local) or SSE (remote) | | **Tools** | Functions the LLM can call | | **Resources** | Data sources the LLM can read | | **Prompts** | Templates for how to use tools | | **Host** | The app running the LLM | | **Server** | Exposes tools/resources via MCP | MCP is to AI integrations what HTTP is to web APIs \u2014 a universal standard that makes everything compose. Every new MCP-compatible tool and client increases the value of every other MCP component. The network effect is what makes it inevitable."
+      "articleBody": "MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools Every AI application needs to talk to external systems \u2014 databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable. MCP (Model Context Protocol) changes that. It's an open protocol that standardizes how AI models connect to external tools and data sources \u2014 one protocol, any LLM, any tool. What Is MCP? MCP is an open standard (originally developed by Anthropic) that defines how AI applications discover and call external tools. Think of it as **USB-C for AI integrations** \u2014 a universal connector that any MCP-compatible client can use to talk to any MCP-compatible server. \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 MCP Client \u2502\u25c4\u2500\u2500\u2500\u25ba\u2502 MCP Protocol \u2502\u25c4\u2500\u2500\u2500\u25ba\u2502 MCP Server \u2502 \u2502 (Claude, VS \u2502 \u2502 (JSON-RPC \u2502 \u2502 (DB connector, \u2502 \u2502 Code, Cursor) \u2502 \u2502 over stdio \u2502 \u2502 file system, \u2502 \u2502 \u2502 \u2502 or SSE) \u2502 \u2502 search, API) \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 **The key insight**: MCP decouples tool implementation from the AI client. A single MCP server written once works with Claude Desktop, VS Code extensions, Cursor, and any other MCP-compatible client. No more \"write this tool for LangChain, rewrite it for OpenAI, rewrite it for Claude.\" Architecture MCP has four core concepts: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application) The AI-powered application the user interacts with: Claude Desktop, VS Code, Cursor, a custom chat app. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client) A lightweight transport layer inside the host that manages connections to MCP servers. It speaks the MCP protocol over the wire. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server) A lightweight service that exposes resources and tools through MCP. Each server is focused on one domain: filesystem access, database queries, API integrations. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol The standard JSON-RPC message format that clients and servers use to communicate. Two transport modes: * **stdio**: Server runs as a subprocess, communication over stdin/stdout (simple, secure) * **SSE** (Server-Sent Events): Network-based, for remote servers Communication Flow User: \"Find all bugs assigned to me\" \u2502 \u25bc Host (Claude Desktop) \u2502 MCP Client asks servers for available tools \u25bc MCP Server (GitHub) \u2500\u2500\u2500\u25ba Returns: list_issues, get_repo, search_code \u2502 \u25bc LLM decides: call list_issues with assignee:me \u2502 \u25bc MCP Server executes GitHub API call \u2502 \u25bc Returns issue data to LLM \u2502 \u25bc Host shows: \"Found 3 bugs assigned to you:...\" MCP vs Alternatives | Feature | MCP | OpenAI Function Calling | LangChain Tools | Custom API | |---------|-----|------------------------|-----------------|------------| | **Standardized** | \u2705 Open standard | \u274c OpenAI-only | \u274c LangChain-only | \u274c Custom | | **Cross-client** | \u2705 Any MCP client | \u274c OpenAI API only | \u274c LangChain only | \u274c One app only | | **Tool discovery** | \u2705 Auto-discover tools | \u2705 Schema-based | \u2705 Defined in code | \u274c Hard-coded | | **Dynamic resources** | \u2705 Yes (file system, DB) | \u274c No | \u274c No | \u274c No | | **Security model** | \u2705 Host controls permissions | \u26a0\ufe0f Per-call | \u26a0\ufe0f Per-call | \u26a0\ufe0f Per-call | | **Async/long-running** | \u2705 Notifications, progress | \u274c Request-response only | \u274c Request-response only | \u26a0\ufe0f Depends | | **Ecosystem** | Growing fast | Mature but narrow | Good | None | | **Setup complexity** | Low | Low | Medium | High | Why MCP Wins **Before MCP**: Every AI tool integration was bespoke * VS Code extension for GitHub \u2190 custom code * Claude Desktop for database queries \u2190 one-off Python script * Cursor for file operations \u2190 built-in, not extensible * Custom chatbot for search \u2190 another custom tool **With MCP**: Write once, use everywhere * One GitHub MCP server works in Claude Desktop, VS Code, Cursor * One PostgreSQL MCP server works in any host * One filesystem MCP server works everywhere How to Build an MCP Server The MCP SDK (available for Python, TypeScript, Java, and Go) makes building a server trivial. Here's a complete example in Python: Python MCP Server server.py from mcp.server import Server from mcp.types import Tool, TextContent import httpx import json app = Server(\"weather-server\") @app.list_tools() async def list_tools() -> list[Tool]: return [ Tool( name=\"get_weather\", description=\"Get current weather for a city\", input_schema={ \"type\": \"object\", \"properties\": { \"city\": {\"type\": \"string\", \"description\": \"City name\"} }, \"required\": [\"city\"], }, ) ] @app.call_tool() async def call_tool(name: str, arguments: dict) -> list[TextContent]: if name == \"get_weather\": async with httpx.AsyncClient() as client: resp = await client.get( f\"https://api.openweathermap.org/data/2.5/weather\", params={\"q\": arguments[\"city\"], \"appid\": \"YOUR_KEY\"} ) data = resp.json() return [TextContent( type=\"text\", text=json.dumps(data[\"main\"], indent=2) )] raise ValueError(f\"Unknown tool: {name}\") if __name__ == \"__main__\": app.run(transport=\"stdio\") Running the Server // claude_desktop_config.json { \"mcpServers\": { \"weather\": { \"command\": \"python\", \"args\": [\"/path/to/server.py\"] } } } Now your weather tool works in Claude Desktop, VS Code (with Cline or Continue extension), Cursor, and any other MCP host \u2014 with zero changes. TypeScript MCP Server import { Server } from \"@modelcontextprotocol/sdk/server/index.js\"; import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"; const server = new Server( { name: \"github-server\", version: \"1.0.0\" }, { capabilities: { tools: {} } } ); server.setRequestHandler(ListToolsRequestSchema, async () => ({ tools: [{ name: \"search_repos\", description: \"Search GitHub repositories\", inputSchema: { type: \"object\", properties: { query: { type: \"string\" } }, required: [\"query\"] } }] })); server.setRequestHandler(CallToolRequestSchema, async (request) => { const { name, arguments: args } = request.params; const response = await fetch( `https://api.github.com/search/repositories?q=${args.query}` ); const data = await response.json(); return { content: [{ type: \"text\", text: JSON.stringify(data.items.slice(0, 5)) }] }; }); const transport = new StdioServerTransport(); await server.connect(transport); MCP Resources: Beyond Tools MCP isn't just about calling tools \u2014 it also defines **resources** (data sources the server exposes). This is where MCP surpasses simple function calling. @app.list_resources() async def list_resources() -> list[Resource]: return [ Resource( uri=\"file:///logs/app.log\", name=\"Application Logs\", description=\"Live application log file\", mime_type=\"text/plain\", ), Resource( uri=\"postgres://users\", name=\"Users Table\", description=\"User database table schema and sample rows\", mime_type=\"application/json\", ), ] @app.read_resource() async def read_resource(uri: str) -> str: if uri == \"file:///logs/app.log\": return open(\"/var/log/app.log\").read()[-10000:] if uri.startswith(\"postgres://\"): Query schema dynamically return json.dumps(query_table_schema(uri)) raise ValueError(f\"Unknown resource: {uri}\") Resources give the AI client dynamic access to your data \u2014 it can read log files, query database schemas, browse file systems \u2014 all through the same protocol. MCP Prompts (Templates) MCP servers can also expose **prompt templates** \u2014 reusable instructions that guide how the LLM should behave when using your tools: @app.list_prompts() async def list_prompts() -> list[Prompt]: return [ Prompt( name=\"analyze_logs\", description=\"Analyze application logs for errors\", arguments=[{ \"name\": \"severity\", \"description\": \"Minimum log severity level\", \"required\": False, }], ) ] @app.get_prompt() async def get_prompt(name: str, arguments: dict) -> PromptMessage: severity = arguments.get(\"severity\", \"ERROR\") return PromptMessage( role=\"user\", content={ \"type\": \"text\", \"text\": f\"\"\"Read the application logs and: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Find all {severity} level entries 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Group them by component 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify patterns 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggest fixes Use the log resource and tools to investigate.\"\"\" } ) Production MCP Server Patterns 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials MCP servers should never hard-code credentials. Use environment variables or a config file: import os DB_URL = os.environ.get(\"MCP_DB_URL\", \"postgresql://localhost:5432\") API_KEY = os.environ.get(\"MCP_API_KEY\") app = Server(\"production-server\") 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting Protect external APIs from aggressive tool calls: import time from collections import defaultdict class RateLimiter: def __init__(self, max_calls: int, window: float): self.max_calls = max_calls self.window = window self.calls = defaultdict(list) def check(self, key: str = \"default\") -> bool: now = time.time() self.calls[key] = [t for t in self.calls[key] if now - t if len(self.calls[key]) >= self.max_calls: return False self.calls[key].append(now) return True 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching Avoid repeating expensive operations: from functools import lru_cache from datetime import datetime, timedelta cache = {} def cached(ttl_seconds: int = 300): def decorator(func): def wrapper(*args, **kwargs): key = str(args) + str(kwargs) if key in cache: result, timestamp = cache[key] if datetime.now() - timestamp return result result = func(*args, **kwargs) cache[key] = (result, datetime.now()) return result return wrapper return decorator 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging Every tool call should be traceable: import structlog logger = structlog.get_logger() In the call_tool handler logger.info(\"tool_call\", tool=name, arguments=arguments, duration_ms=elapsed_ms, success=True) MCP Ecosystem (2026) Popular MCP Servers | Server | Purpose | Official? | |--------|---------|-----------| | **Filesystem** | Read/write files, directory listing | \u2705 Anthropic | | **GitHub** | Issues, PRs, repos, search | \u2705 Anthropic | | **PostgreSQL** | Query databases, schema inspection | \u2705 Anthropic | | **Slack** | Messages, channels, search | \u2705 Anthropic | | **SQLite** | Local database operations | \u2705 Community | | **Docker** | Container management | \u2705 Community | | **Kubernetes** | Pod management, logs | \u2705 Community | | **Puppeteer** | Browser automation | \u2705 Community | | **Jira** | Issue tracking | \u2705 Community | | **Sentry** | Error monitoring | \u2705 Community | | **PagerDuty** | Incident management | \u2705 Community | | **Elasticsearch** | Search operations | \u2705 Community | MCP Client Hosts | Host | Type | MCP Support | |------|------|-------------| | **Claude Desktop** | Desktop app | \u2705 Full support | | **VS Code** (Cline) | IDE extension | \u2705 Full | | **VS Code** (Continue) | IDE extension | \u2705 Full | | **Cursor** | IDE | \u2705 Full | | **Windsurf** | IDE | \u2705 Full | | **Zed** | Editor | \u2705 Native | | **Sourcegraph Cody** | IDE extension | \u2705 Full | | **JetBrains** | IDE | \u2705 Via plugins | | **OpenAI** | API | \u274c (proprietary tools only) | | **Google Gemini** | API | \u274c (proprietary tools only) | When to Build vs Use Existing Build an MCP Server When: * You have a proprietary/internal tool or API * You need fine-grained access control * Your data requires special transformation * You want to combine multiple services into one server Use an Existing Server When: * Standard integrations (GitHub, PostgreSQL, Slack) * Well-known APIs with existing community servers * File system or database access patterns Security Considerations MCP's stdio transport is surprisingly secure \u2014 the server runs as a local subprocess with your permissions. But there are risks: * **Tool abuse**: A malicious prompt could make dangerous tool calls (DELETE FROM users). Mitigate by: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Read-only servers for exploration, separate write servers \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Parameter whitelists in tool handlers \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Confirmation prompts for destructive operations 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Resource leaks**: LLMs can read large files. Set size limits on resource responses: MAX_RESOURCE_SIZE = 100_000 # bytes 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Credentials in config**: The `claude_desktop_config.json` stores server launch commands. Never embed API keys \u2014 use environment variables. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tool sandboxing**: Consider Docker containers for untrusted MCP servers: { \"mcpServers\": { \"community-server\": { \"command\": \"docker\", \"args\": [ \"run\", \"--rm\", \"-i\", \"--network\", \"none\", \"community/mcp-server:latest\" ] } } } Real-World Architecture: AI-Powered Dev Environment Here's how a real production setup looks: \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 VS Code (Host) \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Claude \u2502 \u2502 Cline \u2502 \u2502 Continue \u2502 \u2502 \u2502 \u2502 Desktop \u2502 \u2502 (VS Code)\u2502 \u2502 (VS Code) \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u2502 \u25bc \u25bc \u25bc \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 MCP Protocol (JSON-RPC) \u2502 \u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 GitHub \u2502 \u2502 Postgres \u2502 \u2502 Filesystem \u2502 \u2502 \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2502 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510 \u2502 \u2502 \u2502 Docker \u2502 \u2502 Slack \u2502 \u2502 Jira \u2502 \u2502 \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 Server \u2502 \u2502 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 \u2502 \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518 Each server is independently runnable, testable, and replaceable. Add or remove capabilities by adding or removing MCP servers \u2014 no code changes needed. Getting Started * **Install Claude Desktop** \u2192 Add your first MCP server via config 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Try existing servers** \u2192 GitHub, Filesystem, SQLite (Anthropic's official servers) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Build your first server** \u2192 Use the Python SDK, ~50 lines of code 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add to VS Code** \u2192 Install Cline or Continue extension 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Go multi-host** \u2192 Same MCP server works across all clients The MCP ecosystem doubles roughly every quarter. What takes 50 lines today will be a one-line npm install by next quarter. The best time to build on top of it was last year \u2014 the second best time is now. Summary | Concept | What It Means | |---------|---------------| | **MCP** | Open protocol for AI-to-tool communication | | **Transport** | stdio (local) or SSE (remote) | | **Tools** | Functions the LLM can call | | **Resources** | Data sources the LLM can read | | **Prompts** | Templates for how to use tools | | **Host** | The app running the LLM | | **Server** | Exposes tools/resources via MCP | MCP is to AI integrations what HTTP is to web APIs \u2014 a universal standard that makes everything compose. Every new MCP-compatible tool and client increases the value of every other MCP component. The network effect is what makes it inevitable."
     }
     </script>
     <script type="application/ld+json">
@@ -208,7 +208,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>MCP (Model Context Protocol) Complete Guide: The Standard Connecting AI to Your Tools</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Every AI application needs to talk to external systems — databases, APIs, file systems, search engines. Before 2025, every integration was custom: write a LangChain tool, build a custom function call, hack together a plugin. It was like the pre-USB era where every device had its own cable.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -254,7 +286,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  What Is MCP?</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -300,7 +338,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>┌─────────────────┐ ┌────────────────┐ ┌─────────────────┐</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -346,7 +390,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ (Claude, VS │ │ (JSON-RPC │ │ (DB connector, │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -392,7 +442,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ │ or SSE) │ │ search, API) │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -438,7 +494,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**The key insight**: MCP decouples tool implementation from the AI client. A single MCP server written once works with Claude Desktop, VS Code extensions, Cursor, and any other MCP-compatible client. No more "write this tool for LangChain, rewrite it for OpenAI, rewrite it for Claude."</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -484,6 +546,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MCP has four core concepts:</p>
 <br>
 <br>
@@ -507,7 +572,13 @@
 <br>
 <br>
 <br>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application)</h3>
+<br>
+<br>
+<br>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Host (Client Application)</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -553,7 +624,13 @@
 <br>
 <br>
 <br>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client)</h3>
+<br>
+<br>
+<br>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client (MCP Client)</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -599,7 +676,13 @@
 <br>
 <br>
 <br>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server)</h3>
+<br>
+<br>
+<br>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Server (MCP Server)</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -645,7 +728,13 @@
 <br>
 <br>
 <br>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol</h3>
+<br>
+<br>
+<br>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Protocol</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -691,6 +780,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **stdio**: Server runs as a subprocess, communication over stdin/stdout (simple, secure)</p>
 <br>
 <br>
@@ -711,7 +803,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **SSE** (Server-Sent Events): Network-based, for remote servers</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -757,7 +855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>User: "Find all bugs assigned to me"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -803,7 +907,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>▼</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -849,6 +959,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ MCP Client asks servers for available tools</p>
 <br>
 <br>
@@ -872,7 +985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>▼</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -918,6 +1037,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│</p>
 <br>
 <br>
@@ -941,7 +1063,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>▼</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -987,6 +1115,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│</p>
 <br>
 <br>
@@ -1010,7 +1141,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>▼</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1056,6 +1193,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│</p>
 <br>
 <br>
@@ -1079,7 +1219,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>▼</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1125,7 +1271,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1171,7 +1323,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Host shows: "Found 3 bugs assigned to you:..."</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1217,7 +1375,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | MCP | OpenAI Function Calling | LangChain Tools | Custom API |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1263,7 +1427,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Standardized** | ✅ Open standard | ❌ OpenAI-only | ❌ LangChain-only | ❌ Custom |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1309,7 +1479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Tool discovery** | ✅ Auto-discover tools | ✅ Schema-based | ✅ Defined in code | ❌ Hard-coded |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1355,7 +1531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Security model** | ✅ Host controls permissions | ⚠️ Per-call | ⚠️ Per-call | ⚠️ Per-call |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1401,7 +1583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Ecosystem** | Growing fast | Mature but narrow | Good | None |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1447,7 +1635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Why MCP Wins</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1493,7 +1687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* VS Code extension for GitHub ← custom code</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1533,6 +1733,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Cursor for file operations ← built-in, not extensible</p>
 <br>
 <br>
@@ -1553,7 +1756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Custom chatbot for search ← another custom tool</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1599,7 +1808,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* One GitHub MCP server works in Claude Desktop, VS Code, Cursor</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1639,7 +1854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* One filesystem MCP server works everywhere</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1685,7 +1906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The MCP SDK (available for Python, TypeScript, Java, and Go) makes building a server trivial. Here's a complete example in Python:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1731,7 +1958,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>server.py</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1777,7 +2010,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from mcp.types import Tool, TextContent</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1823,7 +2062,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1869,7 +2114,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@app.list_tools()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1915,7 +2166,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1961,7 +2218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name="get_weather",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2007,7 +2270,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>input_schema={</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2053,7 +2322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"properties": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2099,7 +2374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2145,7 +2426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2191,7 +2478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2237,7 +2530,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def call_tool(name: str, arguments: dict) -> list[TextContent]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2283,7 +2582,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async with httpx.AsyncClient() as client:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2329,7 +2634,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f"https://api.openweathermap.org/data/2.5/weather",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2375,7 +2686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2421,7 +2738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return [TextContent(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2467,7 +2790,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text=json.dumps(data["main"], indent=2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2513,7 +2842,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError(f"Unknown tool: {name}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2559,7 +2894,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.run(transport="stdio")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2605,7 +2946,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// claude_desktop_config.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2651,7 +2998,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"mcpServers": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2697,7 +3050,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"command": "python",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2743,26 +3102,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -2789,7 +3128,39 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2835,7 +3206,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>TypeScript MCP Server</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2881,7 +3258,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2927,7 +3310,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{ name: "github-server", version: "1.0.0" },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2973,7 +3362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3019,7 +3414,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tools: [{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3065,7 +3466,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description: "Search GitHub repositories",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3111,7 +3518,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>type: "object",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3157,7 +3570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query: { type: "string" }</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3203,6 +3622,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>required: ["query"]</p>
 <br>
 <br>
@@ -3226,7 +3648,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3272,7 +3700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}));</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3318,7 +3752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const { name, arguments: args } = request.params;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3364,7 +3804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>`https://api.github.com/search/repositories?q=${args.query}`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3410,7 +3856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const data = await response.json();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3456,7 +3908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>content: [{ type: "text", text: JSON.stringify(data.items.slice(0, 5)) }]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3502,7 +3960,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3548,7 +4012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>await server.connect(transport);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3594,7 +4064,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MCP isn't just about calling tools — it also defines **resources** (data sources the server exposes). This is where MCP surpasses simple function calling.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3640,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def list_resources() -> list[Resource]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3686,7 +4168,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Resource(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3732,7 +4220,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name="Application Logs",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3778,6 +4272,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mime_type="text/plain",</p>
 <br>
 <br>
@@ -3801,7 +4298,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3847,7 +4350,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>uri="postgres://users",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3893,7 +4402,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description="User database table schema and sample rows",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3939,6 +4454,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>),</p>
 <br>
 <br>
@@ -3962,7 +4480,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4008,7 +4532,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def read_resource(uri: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4054,7 +4584,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return open("/var/log/app.log").read()[-10000:]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4100,7 +4636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Query schema dynamically</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4146,7 +4688,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError(f"Unknown resource: {uri}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4192,7 +4740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  MCP Prompts (Templates)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4238,7 +4792,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@app.list_prompts()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4284,7 +4844,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4330,7 +4896,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name="analyze_logs",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4376,7 +4948,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>arguments=[{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4422,7 +5000,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"description": "Minimum log severity level",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4468,6 +5052,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}],</p>
 <br>
 <br>
@@ -4491,7 +5078,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4537,7 +5130,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@app.get_prompt()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4583,7 +5182,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>severity = arguments.get("severity", "ERROR")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4629,7 +5234,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>role="user",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4675,7 +5286,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "text",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4721,10 +5338,10 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Find all {severity} level entries</p>
 <br>
 <br>
 <br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Find all {severity} level entries</p>
 <br>
 <br>
 <br>
@@ -4744,13 +5361,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Group them by component</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Group them by component</p>
 <br>
 <br>
 <br>
@@ -4767,7 +5384,6 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify patterns</p>
 <br>
 <br>
 <br>
@@ -4777,6 +5393,7 @@
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify patterns</p>
 <br>
 <br>
 <br>
@@ -4790,7 +5407,22 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggest fixes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggest fixes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4836,7 +5468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4882,6 +5520,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Production MCP Server Patterns</h2>
 <br>
 <br>
@@ -4905,7 +5546,13 @@
 <br>
 <br>
 <br>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials</h3>
+<br>
+<br>
+<br>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Authentication and Credentials</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4951,7 +5598,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import os</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4997,7 +5650,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>API_KEY = os.environ.get("MCP_API_KEY")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5043,7 +5702,13 @@
 <br>
 <br>
 <br>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting</h3>
+<br>
+<br>
+<br>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Rate Limiting</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5089,7 +5754,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import time</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5135,7 +5806,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class RateLimiter:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5181,7 +5858,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.max_calls = max_calls</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5227,7 +5910,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.calls = defaultdict(list)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5273,7 +5962,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>now = time.time()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5319,7 +6014,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if len(self.calls[key]) >= self.max_calls:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5365,7 +6066,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.calls[key].append(now)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5411,7 +6118,13 @@
 <br>
 <br>
 <br>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching</h3>
+<br>
+<br>
+<br>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tool Result Caching</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5457,7 +6170,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from functools import lru_cache</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5503,7 +6222,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cache = {}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5549,7 +6274,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def decorator(func):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5595,7 +6326,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>key = str(args) + str(kwargs)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5641,7 +6378,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result, timestamp = cache[key]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5687,7 +6430,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return result</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5733,7 +6482,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cache[key] = (result, datetime.now())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5779,7 +6534,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return wrapper</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5825,7 +6586,13 @@
 <br>
 <br>
 <br>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging</h3>
+<br>
+<br>
+<br>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Structured Logging</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5871,7 +6638,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import structlog</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5917,7 +6690,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>In the call_tool handler</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5963,7 +6742,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>duration_ms=elapsed_ms, success=True)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6009,7 +6794,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Popular MCP Servers</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6055,7 +6846,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|--------|---------|-----------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6101,7 +6898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **GitHub** | Issues, PRs, repos, search | ✅ Anthropic |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6147,7 +6950,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Slack** | Messages, channels, search | ✅ Anthropic |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6193,7 +7002,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Docker** | Container management | ✅ Community |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6239,7 +7054,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Puppeteer** | Browser automation | ✅ Community |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6285,7 +7106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Sentry** | Error monitoring | ✅ Community |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6331,7 +7158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Elasticsearch** | Search operations | ✅ Community |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6377,7 +7210,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Host | Type | MCP Support |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6423,7 +7262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Claude Desktop** | Desktop app | ✅ Full support |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6469,7 +7314,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **VS Code** (Continue) | IDE extension | ✅ Full |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6515,7 +7366,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Windsurf** | IDE | ✅ Full |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6561,7 +7418,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Sourcegraph Cody** | IDE extension | ✅ Full |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6607,7 +7470,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **OpenAI** | API | ❌ (proprietary tools only) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6653,7 +7522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  When to Build vs Use Existing</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6699,7 +7574,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You have a proprietary/internal tool or API</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6739,6 +7620,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Your data requires special transformation</p>
 <br>
 <br>
@@ -6759,7 +7643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You want to combine multiple services into one server</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6805,7 +7695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Standard integrations (GitHub, PostgreSQL, Slack)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6845,7 +7741,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* File system or database access patterns</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6891,7 +7793,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MCP's stdio transport is surprisingly secure — the server runs as a local subprocess with your permissions. But there are risks:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6937,10 +7845,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Read-only servers for exploration, separate write servers</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Read-only servers for exploration, separate write servers</p>
 <br>
 <br>
 <br>
@@ -6960,13 +7868,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Parameter whitelists in tool handlers</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Parameter whitelists in tool handlers</p>
 <br>
 <br>
 <br>
@@ -6983,7 +7891,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Confirmation prompts for destructive operations</p>
 <br>
 <br>
 <br>
@@ -6993,6 +7900,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Confirmation prompts for destructive operations</p>
 <br>
 <br>
 <br>
@@ -7006,7 +7914,22 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Resource leaks**: LLMs can read large files. Set size limits on resource responses:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Resource leaks**: LLMs can read large files. Set size limits on resource responses:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7059,7 +7982,10 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Credentials in config**: The `claude_desktop_config.json` stores server launch commands. Never embed API keys — use environment variables.</p>
+<br>
+<br>
+<br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Credentials in config**: The `claude_desktop_config.json` stores server launch commands. Never embed API keys — use environment variables.</p>
 <br>
 <br>
 <br>
@@ -7082,7 +8008,13 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tool sandboxing**: Consider Docker containers for untrusted MCP servers:</p>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tool sandboxing**: Consider Docker containers for untrusted MCP servers:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7130,7 +8062,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"mcpServers": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7174,7 +8112,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"command": "docker",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7218,7 +8162,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"run", "--rm", "-i",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7262,7 +8212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"community/mcp-server:latest"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7306,25 +8262,6 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -7350,7 +8287,38 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7400,6 +8368,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Here's how a real production setup looks:</p>
 <br>
 <br>
@@ -7423,7 +8394,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>┌─────────────────────────────────────────────────┐</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7469,7 +8446,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ ┌──────────┐ ┌──────────┐ ┌───────────────┐ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7515,7 +8498,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ Desktop │ │ (VS Code)│ │ (VS Code) │ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7561,7 +8550,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ │ │ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7607,7 +8602,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7653,7 +8654,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>┌─────────────────────────────────────────────────┐</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7699,6 +8706,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>├─────────────────────────────────────────────────┤</p>
 <br>
 <br>
@@ -7722,7 +8732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ ┌──────────┐ ┌──────────┐ ┌───────────────┐ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7768,6 +8784,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ Server │ │ Server │ │ Server │ │</p>
 <br>
 <br>
@@ -7791,7 +8810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ └──────────┘ └──────────┘ └───────────────┘ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7837,7 +8862,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ │ Docker │ │ Slack │ │ Jira │ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7883,7 +8914,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>│ └──────────┘ └──────────┘ └───────────────┘ │</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7929,7 +8966,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Each server is independently runnable, testable, and replaceable. Add or remove capabilities by adding or removing MCP servers — no code changes needed.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -7975,6 +9018,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Install Claude Desktop** → Add your first MCP server via config</p>
 <br>
 <br>
@@ -7998,10 +9044,10 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Try existing servers** → GitHub, Filesystem, SQLite (Anthropic's official servers)</p>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Try existing servers** → GitHub, Filesystem, SQLite (Anthropic's official servers)</p>
 <br>
 <br>
 <br>
@@ -8021,13 +9067,13 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Build your first server** → Use the Python SDK, ~50 lines of code</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Build your first server** → Use the Python SDK, ~50 lines of code</p>
 <br>
 <br>
 <br>
@@ -8044,7 +9090,6 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add to VS Code** → Install Cline or Continue extension</p>
 <br>
 <br>
 <br>
@@ -8054,6 +9099,7 @@
 <br>
 <br>
 <br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add to VS Code** → Install Cline or Continue extension</p>
 <br>
 <br>
 <br>
@@ -8067,7 +9113,22 @@
 <br>
 <br>
 <br>
-<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Go multi-host** → Same MCP server works across all clients</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Go multi-host** → Same MCP server works across all clients</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8113,7 +9174,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Summary</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8159,7 +9226,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|---------------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8205,7 +9278,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Transport** | stdio (local) or SSE (remote) |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8251,7 +9330,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Resources** | Data sources the LLM can read |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -8297,6 +9382,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Host** | The app running the LLM |</p>
 <br>
 <br>
@@ -8320,7 +9408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| **Server** | Exposes tools/resources via MCP |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

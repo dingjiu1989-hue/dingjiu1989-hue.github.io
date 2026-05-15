@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/orchestration-patterns.ht
   
 
 
+# Orchestration Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Orchestration is an architectural pattern for coordinating distributed workflows using a central controller. Unlike choreography, where services coordinate through events, orchestration uses an explicit workflow engine or orchestrator service that tells each participant what to do and when. This centralized approach provides visibility, control, and error handling that are difficult to achieve with decentralized coordination. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Centralized Coordination
   
   
   
+  
+  
+  
 
 
 In an orchestrated workflow, an orchestrator service manages the entire process. It calls each participant service in sequence, handles responses, manages state, and decides the next step based on results. The orchestrator is the single place where the workflow logic lives. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ For example, an order fulfillment orchestrator would call the payment service, w
   
   
   
+  
+  
+  
 
 
 Workflow Engines 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Workflow engines provide a runtime for defining and executing orchestrated workf
   
   
   
+  
+  
+  
 
 
 Temporal has emerged as a leading workflow engine for microservice orchestration. It supports long-running workflows, automatic retries with configurable policies, and deterministic workflow replay. Workflow code is written in standard programming languages (Java, Go, Python, TypeScript), and Temporal ensures that the workflow logic executes reliably even through failures and restarts. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ State Machines
   
   
   
+  
+  
+  
 
 
 State machines are a natural model for orchestration. Each workflow instance starts in an initial state, transitions through states based on completed activities, and ends in a terminal state (success or failure). The state machine approach makes workflow logic explicit, testable, and visualizable. 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ AWS Step Functions uses a JSON-based state machine definition. Each state can be
   
   
   
+  
+  
+  
 
 
 Compensation Handling 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ One of the main advantages of orchestration is straightforward compensation hand
   
   
   
+  
+  
+  
 
 
 Temporal provides explicit compensation support through the Saga pattern and its `Workflow` API. When an activity fails, the orchestrator can execute compensating activities for all previously completed steps. The orchestrator also manages the compensation state, ensuring compensations are applied even if the orchestrator itself fails during compensation. 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Visibility and Debugging
   
   
   
+  
+  
+  
 
 
 Orchestration provides excellent workflow visibility. The orchestrator or workflow engine exposes the current state of each workflow instance, including which activities have completed, which are in progress, and where failures occurred. This eliminates the need to reconstruct workflow state from distributed event logs. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ Temporal provides a web UI for inspecting workflow instances, viewing execution 
   
   
   
+  
+  
+  
 
 
 When to Use Orchestration 
 
+  
+  
+  
   
   
   
@@ -464,10 +541,16 @@ Orchestration is appropriate for complex workflows with many conditional paths, 
   
   
   
+  
+  
+  
 
 
 The trade-off is coupling. The orchestrator must know about all participants and their APIs. Changes to participant services may require changes to the orchestrator. This coupling is acceptable when workflow complexity justifies the centralized control. 
 
+  
+  
+  
   
   
   

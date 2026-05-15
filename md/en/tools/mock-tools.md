@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/mock-tools.html
   
 
 
+# Mocking Tools: MSW, nock, sinon, WireMock — Service Virtualization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Mocking is essential for isolated testing. The right mocking strategy depends on
   
   
   
+  
+  
+  
 
 
 ##  MSW (Mock Service Worker)
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ MSW intercepts network requests at the service worker level, working in both bro
   
   
   
+  
+  
+  
 
 
 // mocks/handlers.ts
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import { http, HttpResponse } from "msw";
   
   
   
+  
+  
+  
 
 
 export const handlers = [
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ export const handlers = [
   
   
   
+  
+  
+  
 
 
 http.get("https://api.example.com/users", ({ request }) => {
 
+  
+  
+  
   
   
   
@@ -390,6 +446,9 @@ const url = new URL(request.url);
   
   
   
+  
+  
+  
 
 
 const page = url.searchParams.get("page") || "1";
@@ -416,10 +475,16 @@ const page = url.searchParams.get("page") || "1";
   
   
   
+  
+  
+  
 
 
 return HttpResponse.json({
 
+  
+  
+  
   
   
   
@@ -468,10 +533,16 @@ users: [
   
   
   
+  
+  
+  
 
 
 { id: 1, name: "Alice" },
 
+  
+  
+  
   
   
   
@@ -520,10 +591,16 @@ users: [
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ total: 50,
   
   
   
+  
+  
+  
 
 
 page: Number(page),
 
+  
+  
+  
   
   
   
@@ -624,10 +707,16 @@ page: Number(page),
   
   
   
+  
+  
+  
 
 
 }),
 
+  
+  
+  
   
   
   
@@ -676,10 +765,16 @@ page: Number(page),
   
   
   
+  
+  
+  
 
 
 http.post("https://api.example.com/users", async ({ request }) => {
 
+  
+  
+  
   
   
   
@@ -728,6 +823,9 @@ const body = await request.json();
   
   
   
+  
+  
+  
 
 
 if (!body.name) {
@@ -754,10 +852,16 @@ if (!body.name) {
   
   
   
+  
+  
+  
 
 
 return HttpResponse.json(
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 { status: 400 }
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 { id: 3, name: body.name },
 
+  
+  
+  
   
   
   
@@ -962,6 +1084,9 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 );
@@ -988,10 +1113,16 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 }),
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ return HttpResponse.json(
   
   
   
+  
+  
+  
 
 
 http.post("https://api.example.com/graphql", async ({ request }) => {
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ const { query } = await request.json();
   
   
   
+  
+  
+  
 
 
 if (query.includes("currentUser")) {
 
+  
+  
+  
   
   
   
@@ -1144,6 +1287,9 @@ return HttpResponse.json({
   
   
   
+  
+  
+  
 
 
 data: { currentUser: { id: 1, name: "Alice", role: "admin" } },
@@ -1170,10 +1316,16 @@ data: { currentUser: { id: 1, name: "Alice", role: "admin" } },
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ data: { currentUser: { id: 1, name: "Alice", role: "admin" } },
   
   
   
+  
+  
+  
 
 
 }),
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ data: { currentUser: { id: 1, name: "Alice", role: "admin" } },
   
   
   
+  
+  
+  
 
 
 // test setup
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ import { setupServer } from "msw/node";
   
   
   
+  
+  
+  
 
 
 import { handlers } from "./handlers";
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ const server = setupServer(...handlers);
   
   
   
+  
+  
+  
 
 
 beforeAll(() => server.listen());
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ afterEach(() => server.resetHandlers());
   
   
   
+  
+  
+  
 
 
 afterAll(() => server.close());
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ afterAll(() => server.close());
   
   
   
+  
+  
+  
 
 
 test("handles network error", async () => {
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ server.use(
   
   
   
+  
+  
+  
 
 
 http.get("https://api.example.com/users", () => {
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ return HttpResponse.error();
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -1638,6 +1838,9 @@ return HttpResponse.error();
   
   
   
+  
+  
+  
 
 
 // Test error handling logic
@@ -1664,10 +1867,16 @@ return HttpResponse.error();
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ return HttpResponse.error();
   
   
   
+  
+  
+  
 
 
 ##  nock
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ nock intercepts HTTP requests at the Node.js `http` module level:
   
   
   
+  
+  
+  
 
 
 const nock = require("nock");
 
+  
+  
+  
   
   
   
@@ -1820,6 +2041,9 @@ const nock = require("nock");
   
   
   
+  
+  
+  
 
 
 nock("https://api.example.com")
@@ -1846,10 +2070,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .get("/users")
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .reply(200, {
 
+  
+  
+  
   
   
   
@@ -1950,6 +2186,9 @@ users: [{ id: 1, name: "Alice" }],
   
   
   
+  
+  
+  
 
 
 total: 1,
@@ -1976,10 +2215,16 @@ total: 1,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ total: 1,
   
   
   
+  
+  
+  
 
 
 nock("https://api.example.com")
 
+  
+  
+  
   
   
   
@@ -2080,10 +2331,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .reply(201, (uri, requestBody) => {
 
+  
+  
+  
   
   
   
@@ -2132,10 +2389,16 @@ const body = JSON.parse(requestBody);
   
   
   
+  
+  
+  
 
 
 return { id: Date.now(), ...body, createdAt: new Date().toISOString() };
 
+  
+  
+  
   
   
   
@@ -2184,6 +2447,9 @@ return { id: Date.now(), ...body, createdAt: new Date().toISOString() };
   
   
   
+  
+  
+  
 
 
 // Mock multiple times with different responses
@@ -2210,10 +2476,16 @@ return { id: Date.now(), ...body, createdAt: new Date().toISOString() };
   
   
   
+  
+  
+  
 
 
 nock("https://api.example.com")
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .times(3)
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 // Persist mock for repeated calls
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .get("/health")
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .reply(200, { healthy: true });
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 const scope = nock("https://api.example.com")
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ const scope = nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 .reply(200, []);
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ const scope = nock("https://api.example.com")
   
   
   
+  
+  
+  
 
 
 expect(scope.isDone()).toBe(true);
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ nock.cleanAll();
   
   
   
+  
+  
+  
 
 
 **Strengths**: Fine-grained request matching, supports regex URL matching, response templating, scope isolation.
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ nock.cleanAll();
   
   
   
+  
+  
+  
 
 
 ##  Sinon
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ Sinon provides standalone test doubles (spies, stubs, mocks):
   
   
   
+  
+  
+  
 
 
 const sinon = require("sinon");
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ const sinon = require("sinon");
   
   
   
+  
+  
+  
 
 
 const spy = sinon.spy();
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ spy("hello", "world");
   
   
   
+  
+  
+  
 
 
 console.log(spy.calledOnce); // true
 
+  
+  
+  
   
   
   
@@ -2886,10 +3230,16 @@ console.log(spy.args[0]); // ["hello", "world"]
   
   
   
+  
+  
+  
 
 
 // Stub: replace function behavior
 
+  
+  
+  
   
   
   
@@ -2938,10 +3288,16 @@ const stub = sinon.stub();
   
   
   
+  
+  
+  
 
 
 stub.returns(42);
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ stub.withArgs("special").returns(100);
   
   
   
+  
+  
+  
 
 
 console.log(stub("anything")); // 42
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ console.log(stub("special")); // 100
   
   
   
+  
+  
+  
 
 
 // Stub an object method
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ const api = { fetch: async (url) => ({ data: [] }) };
   
   
   
+  
+  
+  
 
 
 const fetchStub = sinon.stub(api, "fetch");
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ fetchStub.resolves({ data: [{ id: 1 }] });
   
   
   
+  
+  
+  
 
 
 fetchStub.rejects(new Error("Network error"));
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ fetchStub.rejects(new Error("Network error"));
   
   
   
+  
+  
+  
 
 
 fetchStub.restore();
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ fetchStub.restore();
   
   
   
+  
+  
+  
 
 
 const clock = sinon.useFakeTimers();
 
+  
+  
+  
   
   
   
@@ -3302,10 +3694,16 @@ let callback = sinon.spy();
   
   
   
+  
+  
+  
 
 
 setTimeout(callback, 1000);
 
+  
+  
+  
   
   
   
@@ -3354,10 +3752,16 @@ clock.tick(1000);
   
   
   
+  
+  
+  
 
 
 expect(callback.calledOnce).toBe(true);
 
+  
+  
+  
   
   
   
@@ -3406,10 +3810,16 @@ clock.restore();
   
   
   
+  
+  
+  
 
 
 **Strengths**: Rich assertion API, fake timers, standalone (framework-agnostic), excellent for module-level mocking.
 
+  
+  
+  
   
   
   
@@ -3458,10 +3868,16 @@ clock.restore();
   
   
   
+  
+  
+  
 
 
 WireMock runs as a standalone HTTP server, perfect for integration tests:
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ WireMock runs as a standalone HTTP server, perfect for integration tests:
   
   
   
+  
+  
+  
 
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
   
   
   
+  
+  
+  
 
 
 WireMockServer wireMockServer = new WireMockServer(8089);
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ wireMockServer.start();
   
   
   
+  
+  
+  
 
 
 // Stub a GET endpoint
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ stubFor(get(urlEqualTo("/api/users/1"))
   
   
   
+  
+  
+  
 
 
 .willReturn(aResponse()
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ stubFor(get(urlEqualTo("/api/users/1"))
   
   
   
+  
+  
+  
 
 
 .withHeader("Content-Type", "application/json")
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ stubFor(get(urlEqualTo("/api/users/1"))
   
   
   
+  
+  
+  
 
 
 // Stub with response templating
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ stubFor(post(urlEqualTo("/api/users"))
   
   
   
+  
+  
+  
 
 
 .willReturn(aResponse()
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ stubFor(post(urlEqualTo("/api/users"))
   
   
   
+  
+  
+  
 
 
 .withBody("{{request.body}}")
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ stubFor(post(urlEqualTo("/api/users"))
   
   
   
+  
+  
+  
 
 
 // Verify request was made
 
+  
+  
+  
   
   
   
@@ -3978,10 +4448,16 @@ verify(getRequestedFor(urlPathEqualTo("/api/users/1"))
   
   
   
+  
+  
+  
 
 
 .withHeader("Authorization", containing("Bearer")));
 
+  
+  
+  
   
   
   
@@ -4030,10 +4506,16 @@ verify(getRequestedFor(urlPathEqualTo("/api/users/1"))
   
   
   
+  
+  
+  
 
 
 java -jar wiremock-standalone.jar --port 8089 --verbose
 
+  
+  
+  
   
   
   
@@ -4082,10 +4564,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 # __files/response.json contains the response body
 
+  
+  
+  
   
   
   
@@ -4134,10 +4622,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 | Feature | MSW | nock | Sinon | WireMock |
 
+  
+  
+  
   
   
   
@@ -4186,10 +4680,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 | Level | Network (SW) | Network (http) | Function | HTTP server |
 
+  
+  
+  
   
   
   
@@ -4238,10 +4738,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 | Node.js | Yes | Yes | Yes | Yes |
 
+  
+  
+  
   
   
   
@@ -4290,10 +4796,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 | Setup complexity | Medium | Low | Low | Medium |
 
+  
+  
+  
   
   
   
@@ -4342,10 +4854,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -4391,10 +4909,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 * **Backend HTTP mocking**: nock for simple cases, WireMock for complex integration tests.
 
+  
+  
+  
   
   
   
@@ -4437,10 +4961,16 @@ java -jar wiremock-standalone.jar --port 8089 --verbose
   
   
   
+  
+  
+  
 
 
 * **Integration/E2E tests**: WireMock as a standalone HTTP server for contract testing.
 
+  
+  
+  
   
   
   

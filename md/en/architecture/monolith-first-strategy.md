@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/monolith-first-strategy.h
   
 
 
+# Monolith-First Strategy
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The monolith-first strategy advocates starting new systems as a well-structured monolith rather than diving directly into microservices. This approach recognizes that early in a product's lifecycle, the primary risk is product-market fit, not scaling. Premature microservice decomposition introduces accidental complexity — distributed transaction management, network latency, service discovery, and operational overhead — before the domain boundaries are understood. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The decision to start monolithic does not mean abandoning SOA principles. A modu
   
   
   
+  
+  
+  
 
 
 Extraction patterns follow a consistent playbook. When a module demonstrates independent scaling requirements, different release cadences, or needs to be owned by a separate team, it becomes a candidate for extraction. The strangler fig pattern is the canonical approach: place a facade in front of the monolith, route new requests for the extracted service directly, and gradually migrate existing traffic. This allows continuous delivery throughout the migration without big-bang cutovers. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Common extraction triggers include modules with divergent data access patterns, 
   
   
   
+  
+  
+  
 
 
 Data extraction is the most complex aspect. The database-per-service pattern requires splitting a unified schema into bounded contexts. A practical approach is to start with logical schema separation within the same database, introduce read replicas or API-based data access for dependent services, and eventually migrate to independent databases. The expand-contract pattern for database migrations allows backward-compatible schema changes that enable gradual migration without downtime. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ The monolith-first approach also mitigates the "distributed monolith" anti-patte
   
   
   
+  
+  
+  
 
 
 Organizational alignment is critical. Conway's Law dictates that system architecture mirrors communication structures. Teams should own modules that align with their expertise and operational responsibilities before extraction. Once extracted, each service should be owned by exactly one team with full autonomy over its deployment and data. 
 
+  
+  
+  
   
   
   

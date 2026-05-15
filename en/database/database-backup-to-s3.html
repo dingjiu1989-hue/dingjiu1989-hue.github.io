@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-backup-to-s3.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1002",
+      "wordCount": "1086",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-backup-to-s3.html"},
-      "articleBody": "Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention. Backup Types Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate\u2014typically daily for most databases. Incremental backups capture only data changed since the last full or incremental backup. They are faster and smaller but require the full backup chain for restoration. Recommended interval is minutes to hours. Transaction log backups capture every write operation. They enable point-in-time recovery to any moment. Log backup frequency determines recovery point objective (RPO)\u2014every minute provides a 1-minute RPO. Object Storage Backup Tools WAL-G is the most popular tool for PostgreSQL backups to object storage. It supports full backups, incremental backups, and WAL archiving. WAL-G compresses, encrypts, and uploads backups efficiently. Percona XtraBackup handles MySQL backups with object storage support. It performs hot backups without locking and can stream to S3-compatible storage. MongoDB Atlas and AWS RDS provide built-in backup to S3 with configurable retention. Managed databases typically include automated backup management. Point-in-Time Recovery Point-in-Time Recovery (PITR) restores a database to any moment within the retention period. For PostgreSQL, this requires a base backup plus all WAL segments from the backup time to the target time. PITR restore time depends on the amount of WAL to replay. Pre-warming the buffer pool improves restore performance. Test PITR regularly to verify it works and to measure restore time. Retention Policies Use lifecycle policies to automate backup retention. Keep daily backups for 30 days, weekly for 3 months, monthly for a year, and yearly for compliance requirements. Store older backups in cheaper storage tiers (S3 Glacier, GCS Archive). Encryption Encrypt backups before uploading. Use server-side encryption (SSE-S3) or client-side encryption with your own keys. The backup encryption key must be stored separately from the backup\u2014losing the key means losing the backup. Testing Backups A backup is only as good as its restoration. Test full restoration regularly\u2014at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates."
+      "articleBody": "Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Database Backup Strategies to Object Storage Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention. Backup Types Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate\u2014typically daily for most databases. Incremental backups capture only data changed since the last full or incremental backup. They are faster and smaller but require the full backup chain for restoration. Recommended interval is minutes to hours. Transaction log backups capture every write operation. They enable point-in-time recovery to any moment. Log backup frequency determines recovery point objective (RPO)\u2014every minute provides a 1-minute RPO. Object Storage Backup Tools WAL-G is the most popular tool for PostgreSQL backups to object storage. It supports full backups, incremental backups, and WAL archiving. WAL-G compresses, encrypts, and uploads backups efficiently. Percona XtraBackup handles MySQL backups with object storage support. It performs hot backups without locking and can stream to S3-compatible storage. MongoDB Atlas and AWS RDS provide built-in backup to S3 with configurable retention. Managed databases typically include automated backup management. Point-in-Time Recovery Point-in-Time Recovery (PITR) restores a database to any moment within the retention period. For PostgreSQL, this requires a base backup plus all WAL segments from the backup time to the target time. PITR restore time depends on the amount of WAL to replay. Pre-warming the buffer pool improves restore performance. Test PITR regularly to verify it works and to measure restore time. Retention Policies Use lifecycle policies to automate backup retention. Keep daily backups for 30 days, weekly for 3 months, monthly for a year, and yearly for compliance requirements. Store older backups in cheaper storage tiers (S3 Glacier, GCS Archive). Encryption Encrypt backups before uploading. Use server-side encryption (SSE-S3) or client-side encryption with your own keys. The backup encryption key must be stored separately from the backup\u2014losing the key means losing the backup. Testing Backups A backup is only as good as its restoration. Test full restoration regularly\u2014at least monthly for production databases. Measure restore time and document the procedure. Automate restore testing with infrastructure-as-code templates."
     }
     </script>
     <script type="application/ld+json">
@@ -150,7 +150,33 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Database Backup Strategies to Object Storage</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Backing up databases to object storage (S3, GCS, Azure Blob) provides durable, cost-effective, and scalable backup storage. Object storage's built-in replication and lifecycle management simplify backup retention.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -190,7 +216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Full backups capture the entire database. They are the foundation of any backup strategy but are slow and space-intensive for large databases. Frequency depends on data change rate—typically daily for most databases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -230,7 +262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transaction log backups capture every write operation. They enable point-in-time recovery to any moment. Log backup frequency determines recovery point objective (RPO)—every minute provides a 1-minute RPO.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -270,7 +308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WAL-G is the most popular tool for PostgreSQL backups to object storage. It supports full backups, incremental backups, and WAL archiving. WAL-G compresses, encrypts, and uploads backups efficiently.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -310,7 +354,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MongoDB Atlas and AWS RDS provide built-in backup to S3 with configurable retention. Managed databases typically include automated backup management.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -350,7 +400,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Point-in-Time Recovery (PITR) restores a database to any moment within the retention period. For PostgreSQL, this requires a base backup plus all WAL segments from the backup time to the target time.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -390,7 +446,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Retention Policies</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -430,7 +492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Encryption</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -470,7 +538,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Testing Backups</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

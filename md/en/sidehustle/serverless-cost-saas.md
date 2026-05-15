@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/serverless-cost-saas.html
   
 
 
+# Serverless Cost Optimization: Lambda, DynamoDB, API Gateway Savings
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Serverless Cost Optimization for SaaS
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Serverless architectures enable rapid development and automatic scaling, but cos
   
   
   
+  
+  
+  
 
 
 ### AWS Lambda Cost Optimization
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Lambda costs are driven by invocation count, execution duration, and memory allo
   
   
   
+  
+  
+  
 
 
 Use AWS Lambda Power Tuning to find the optimal memory setting. This tool tests your function across memory configurations and identifies the cost-performance sweet spot. For I/O-bound functions, the optimal memory may be lower (waiting on network responses). For compute-bound functions, higher memory reduces duration and total cost.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Provisioned concurrency (paying for pre-warmed instances) should be used sparing
   
   
   
+  
+  
+  
 
 
 Reduce function invocation count by consolidating operations. Instead of separate Lambda functions for user creation, notification, and analytics logging, use a single function or fan-out pattern with SQS. Each Lambda invocation has a minimum 100ms billing duration — many short-lived invocations waste cost.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Reduce function invocation count by consolidating operations. Instead of separat
   
   
   
+  
+  
+  
 
 
 DynamoDB charges for read/write capacity and storage. On-demand capacity mode (auto-scaling) is convenient but costs 2-3x more than provisioned capacity for predictable workloads. For early-stage SaaS, provisioned capacity with auto-scaling saves significantly.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Optimize data access patterns to minimize read capacity. Use sparse indexes (GSI
   
   
   
+  
+  
+  
 
 
 DAX (DynamoDB Accelerator) caching reduces read load but adds $0.12-0.24/hour per node. Enable DAX only when read traffic exceeds provisioned capacity regularly. For most early-stage SaaS, application-level caching (Redis or in-memory) is more cost-effective.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ DAX (DynamoDB Accelerator) caching reduces read load but adds $0.12-0.24/hour pe
   
   
   
+  
+  
+  
 
 
 API Gateway REST API pricing includes request charges ($3.50 per million for REST, $1.00 per million for HTTP) and data transfer out. For high-volume APIs, HTTP API (simpler, cheaper) should replace REST API unless features like API keys or usage plans are needed.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Reduce API Gateway costs through caching. Enable API Gateway caching at $0.02-0.
   
   
   
+  
+  
+  
 
 
 Compress API responses to reduce data transfer costs. Enable Gzip/Brotli compression on responses. For JSON APIs, compression reduces payload size by 60-80%, directly reducing data transfer charges from API Gateway and CloudFront (or other CDN).
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Compress API responses to reduce data transfer costs. Enable Gzip/Brotli compres
   
   
   
+  
+  
+  
 
 
 Set up AWS Budgets with alerts before costs exceed thresholds. Configure budget alerts at 50%, 80%, and 100% of monthly budget. AWS Cost Explorer identifies cost drivers and trends. Tag Lambda functions and API Gateway stages for cost attribution.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Use Lambda function URLs (public HTTP endpoints) instead of API Gateway for simp
   
   
   
+  
+  
+  
 
 
 ### Cost-Saving Architecture Patterns
 
+  
+  
+  
   
   
   
@@ -650,6 +736,9 @@ Batch processing reduces Lambda invocations. Instead of processing each event in
   
   
   
+  
+  
+  
 
 
 Cold start vs. cost tradeoff: for latency-tolerant workloads, accept cold starts. For user-facing APIs, consider using dedicated compute (EC2 or Lightsail) at the $5-10/month range if Lambda costs exceed comparable dedicated hosting.
@@ -676,10 +765,16 @@ Cold start vs. cost tradeoff: for latency-tolerant workloads, accept cold starts
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

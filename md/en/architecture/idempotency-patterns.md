@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/idempotency-patterns.html
   
 
 
+# Idempotency Patterns in Distributed Systems
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Idempotency is the property that applying an operation multiple times produces the same result as applying it once. In distributed systems, networks are unreliable, services fail and restart, and clients naturally retry. Idempotency turns unreliable infrastructure into reliable semantics — it allows safe retries without data corruption or duplicate side effects. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The idempotency key pattern is the foundation. The client generates a unique key
   
   
   
+  
+  
+  
 
 
 Implementation requires an idempotency store. This is typically a database table or Redis cache with the key as the primary key. When a request arrives, the server checks the idempotency store. If the key exists and the operation completed, return the cached response. If the key exists and the operation is in progress, wait or return a conflict. If the key does not exist, execute the operation and store the result. The key must be created atomically — a unique constraint prevents two requests with the same key from executing simultaneously. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ The idempotency key lifecycle requires careful management. The key is created at
   
   
   
+  
+  
+  
 
 
 At-least-once delivery guarantees that a message is delivered one or more times. The consumer handles duplicates through idempotent processing. This is the pragmatic baseline for most messaging systems — achieving exactly-once end-to-end is extremely difficult, so systems layer idempotency on top of at-least-once delivery to provide the same guarantees. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Exactly-once semantics combine at-least-once delivery with idempotent processing
   
   
   
+  
+  
+  
 
 
 Deduplication is a closely related pattern for event processing. When a consumer receives an event, it checks a deduplication table (event_id processed, timestamp). If the event ID already exists, it skips processing. The deduplication table should have a unique constraint on event_id, and the check-and-insert should be atomic. Deduplication windows must be longer than the maximum expected redelivery interval. A 24-hour deduplication window is common. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ State-based idempotency offers an alternative to key-based deduplication. Instea
   
   
   
+  
+  
+  
 
 
 Uniqueness constraints are the most reliable idempotency mechanism. A database unique constraint on business keys (order ID, payment reference) guarantees that duplicate operations fail atomically at the database level. This is the foundation of idempotent inserts. The constraint handles concurrent requests correctly — only the first insert succeeds, and subsequent attempts fail with a unique constraint violation that the application can handle gracefully. 
 
+  
+  
+  
   
   
   

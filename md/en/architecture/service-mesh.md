@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh.html
   
 
 
+# Service Mesh Patterns: Istio and Linkerd
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 A service mesh is a dedicated infrastructure layer for handling service-to-service communication. It manages traffic routing, security, observability, and resilience without requiring changes to application code. This article covers the core patterns of service meshes, how Istio and Linkerd implement them, and guidance on when a service mesh adds value. 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ What is a Service Mesh?
   
   
   
+  
+  
+  
 
 
 In a traditional architecture, each service handles network communication directly. This leads to duplicated logic for retries, timeouts, load balancing, TLS, and tracing across every service. 
@@ -164,10 +196,16 @@ In a traditional architecture, each service handles network communication direct
   
   
   
+  
+  
+  
 
 
 A service mesh extracts these concerns into a separate infrastructure layer. Each service gets a sidecar proxy that intercepts all network traffic. The proxies form a mesh that manages all service-to-service communication. 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ A service mesh extracts these concerns into a separate infrastructure layer. Eac
   
   
   
+  
+  
+  
 
 
 | |
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ Control Plane Control Plane
   
   
   
+  
+  
+  
 
 
 | |
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ Control Plane Control Plane
   
   
   
+  
+  
+  
 
 
 The mesh has two components: 
 
+  
+  
+  
   
   
   
@@ -345,10 +401,16 @@ The mesh has two components:
   
   
   
+  
+  
+  
 
 
 * **Control plane**: The management component that configures proxies, distributes certificates, and collects telemetry.
 
+  
+  
+  
   
   
   
@@ -388,10 +450,16 @@ Sidecar Proxy Pattern
   
   
   
+  
+  
+  
 
 
 The sidecar proxy is the foundation of service mesh. It runs as a separate container in the same pod as the application. 
 
+  
+  
+  
   
   
   
@@ -434,10 +502,16 @@ The sidecar proxy is the foundation of service mesh. It runs as a separate conta
   
   
   
+  
+  
+  
 
 
 apiVersion: v1
 
+  
+  
+  
   
   
   
@@ -480,10 +554,16 @@ kind: Pod
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -526,6 +606,9 @@ annotations:
   
   
   
+  
+  
+  
 
 
 sidecar.istio.io/inject: "true"
@@ -549,10 +632,16 @@ sidecar.istio.io/inject: "true"
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -595,10 +684,16 @@ containers:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app # Application container
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: my-app # Application container
 
+  
+  
+  
   
   
   
@@ -641,6 +736,9 @@ image: my-app:latest
   
   
   
+  
+  
+  
 
 
 ports:
@@ -664,33 +762,42 @@ ports:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 8080
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: istio-proxy # Sidecar proxy (injected automatically)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 8080
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: istio-proxy # Sidecar proxy (injected automatically)
+
+  
+  
+  
   
   
   
@@ -733,6 +840,9 @@ image: istio/proxyv2:1.20
   
   
   
+  
+  
+  
 
 
 args:
@@ -756,33 +866,16 @@ args:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- proxy
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sidecar
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- proxy
 
+  
+  
+  
   
   
   
@@ -804,7 +897,7 @@ args:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- --domain
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sidecar
 
   
   
@@ -825,10 +918,42 @@ args:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $(POD_NAMESPACE).svc.cluster.local
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- --domain
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- $(POD_NAMESPACE).svc.cluster.local
+
+  
+  
+  
   
   
   
@@ -871,6 +996,9 @@ What the Sidecar Does
   
   
   
+  
+  
+  
 
 
 * **Intercepts all inbound and outbound traffic** using iptables rules.
@@ -891,10 +1019,16 @@ What the Sidecar Does
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Applies traffic policies**: routing rules, load balancing, retries, timeouts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enforces security**: mutual TLS, authentication policies, authorization policies. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Collects telemetry**: metrics, logs, distributed traces. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reports health**: connection status, circuit breaker state. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Applies traffic policies**: routing rules, load balancing, retries, timeouts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enforces security**: mutual TLS, authentication policies, authorization policies. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Collects telemetry**: metrics, logs, distributed traces. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reports health**: connection status, circuit breaker state. 
 
+  
+  
+  
   
   
   
@@ -931,6 +1065,9 @@ Traffic Management
   
   
   
+  
+  
+  
 
 
 Service meshes provide fine-grained traffic control beyond simple round-robin load balancing. 
@@ -951,10 +1088,16 @@ Service meshes provide fine-grained traffic control beyond simple round-robin lo
   
   
   
+  
+  
+  
 
 
 Virtual Services and Destination Rules (Istio) 
 
+  
+  
+  
   
   
   
@@ -997,10 +1140,16 @@ Virtual Services and Destination Rules (Istio)
   
   
   
+  
+  
+  
 
 
 apiVersion: networking.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -1043,10 +1192,16 @@ kind: VirtualService
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -1089,10 +1244,16 @@ name: reviews
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1135,10 +1296,16 @@ hosts:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- reviews
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- reviews
 
+  
+  
+  
   
   
   
@@ -1181,33 +1348,42 @@ http:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- headers:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- headers:
+
+  
+  
+  
   
   
   
@@ -1250,10 +1426,16 @@ end-user:
   
   
   
+  
+  
+  
 
 
 exact: "test-user"
 
+  
+  
+  
   
   
   
@@ -1296,10 +1478,16 @@ route:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
 
+  
+  
+  
   
   
   
@@ -1323,6 +1511,9 @@ route:
 
 host: reviews
 
+  
+  
+  
   
   
   
@@ -1365,33 +1556,42 @@ subset: v2 # Route test-user to v2
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- route:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- route:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+
+  
+  
+  
   
   
   
@@ -1415,6 +1615,9 @@ subset: v2 # Route test-user to v2
 
 host: reviews
 
+  
+  
+  
   
   
   
@@ -1457,10 +1660,16 @@ subset: v1 # Everyone else goes to v1
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
   
   
   
@@ -1503,10 +1712,16 @@ subset: v1 # Everyone else goes to v1
   
   
   
+  
+  
+  
 
 
 apiVersion: networking.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -1549,10 +1764,16 @@ kind: DestinationRule
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -1595,10 +1816,16 @@ name: reviews-destination
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1641,6 +1868,9 @@ host: reviews
   
   
   
+  
+  
+  
 
 
 subsets:
@@ -1664,10 +1894,16 @@ subsets:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: v1
 
+  
+  
+  
   
   
   
@@ -1691,6 +1927,9 @@ subsets:
 
 labels:
 
+  
+  
+  
   
   
   
@@ -1733,10 +1972,16 @@ version: v1
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: v2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: v2
 
+  
+  
+  
   
   
   
@@ -1779,10 +2024,16 @@ labels:
   
   
   
+  
+  
+  
 
 
 version: v2
 
+  
+  
+  
   
   
   
@@ -1825,10 +2076,16 @@ trafficPolicy:
   
   
   
+  
+  
+  
 
 
 loadBalancer:
 
+  
+  
+  
   
   
   
@@ -1871,10 +2128,16 @@ simple: ROUND_ROBIN
   
   
   
+  
+  
+  
 
 
 connectionPool:
 
+  
+  
+  
   
   
   
@@ -1917,6 +2180,9 @@ tcp:
   
   
   
+  
+  
+  
 
 
 maxConnections: 100
@@ -1940,10 +2206,16 @@ maxConnections: 100
   
   
   
+  
+  
+  
 
 
 http:
 
+  
+  
+  
   
   
   
@@ -1986,10 +2258,16 @@ http1MaxPendingRequests: 10
   
   
   
+  
+  
+  
 
 
 maxRequestsPerConnection: 10
 
+  
+  
+  
   
   
   
@@ -2032,10 +2310,16 @@ Traffic Splitting (Canary Deployments)
   
   
   
+  
+  
+  
 
 
 # Canary deployment: 10% traffic to new version
 
+  
+  
+  
   
   
   
@@ -2078,6 +2362,9 @@ apiVersion: networking.istio.io/v1beta1
   
   
   
+  
+  
+  
 
 
 kind: VirtualService
@@ -2101,10 +2388,16 @@ kind: VirtualService
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -2147,10 +2440,16 @@ name: productpage
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -2193,10 +2492,16 @@ hosts:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- productpage
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- productpage
 
+  
+  
+  
   
   
   
@@ -2239,33 +2544,42 @@ http:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- route:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- route:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+
+  
+  
+  
   
   
   
@@ -2289,6 +2603,9 @@ http:
 
 host: productpage
 
+  
+  
+  
   
   
   
@@ -2331,6 +2648,9 @@ subset: v2
   
   
   
+  
+  
+  
 
 
 weight: 10
@@ -2354,10 +2674,16 @@ weight: 10
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
 
+  
+  
+  
   
   
   
@@ -2400,10 +2726,16 @@ host: productpage
   
   
   
+  
+  
+  
 
 
 subset: v1
 
+  
+  
+  
   
   
   
@@ -2446,10 +2778,16 @@ weight: 90
   
   
   
+  
+  
+  
 
 
 Linkerd uses a similar approach with TrafficSplit: 
 
+  
+  
+  
   
   
   
@@ -2492,10 +2830,16 @@ Linkerd uses a similar approach with TrafficSplit:
   
   
   
+  
+  
+  
 
 
 apiVersion: split.smi-spec.io/v1alpha2
 
+  
+  
+  
   
   
   
@@ -2538,10 +2882,16 @@ kind: TrafficSplit
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -2584,10 +2934,16 @@ name: productpage-split
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -2630,6 +2986,9 @@ service: productpage
   
   
   
+  
+  
+  
 
 
 backends:
@@ -2653,10 +3012,16 @@ backends:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service: productpage-v1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service: productpage-v1
 
+  
+  
+  
   
   
   
@@ -2699,10 +3064,16 @@ weight: 900m
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service: productpage-v2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- service: productpage-v2
 
+  
+  
+  
   
   
   
@@ -2745,10 +3116,16 @@ weight: 100m
   
   
   
+  
+  
+  
 
 
 Timeouts and Retries 
 
+  
+  
+  
   
   
   
@@ -2791,10 +3168,16 @@ Timeouts and Retries
   
   
   
+  
+  
+  
 
 
 apiVersion: networking.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -2837,10 +3220,16 @@ kind: VirtualService
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -2883,10 +3272,16 @@ name: ratings
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -2929,10 +3324,16 @@ hosts:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ratings
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- ratings
 
+  
+  
+  
   
   
   
@@ -2975,10 +3376,16 @@ http:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- timeout: 5s
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- timeout: 5s
 
+  
+  
+  
   
   
   
@@ -3021,10 +3428,16 @@ retries:
   
   
   
+  
+  
+  
 
 
 attempts: 3
 
+  
+  
+  
   
   
   
@@ -3067,10 +3480,16 @@ perTryTimeout: 2s
   
   
   
+  
+  
+  
 
 
 retryOn: gateway-error,connect-failure,refused-stream
 
+  
+  
+  
   
   
   
@@ -3113,10 +3532,16 @@ route:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- destination:
 
+  
+  
+  
   
   
   
@@ -3159,10 +3584,16 @@ host: ratings
   
   
   
+  
+  
+  
 
 
 Mutual TLS (mTLS) 
 
+  
+  
+  
   
   
   
@@ -3199,10 +3630,16 @@ Service meshes provide automatic mutual TLS between services without application
   
   
   
+  
+  
+  
 
 
 Istio mTLS modes 
 
+  
+  
+  
   
   
   
@@ -3245,10 +3682,16 @@ Istio mTLS modes
   
   
   
+  
+  
+  
 
 
 apiVersion: security.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -3291,10 +3734,16 @@ kind: PeerAuthentication
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -3337,10 +3786,16 @@ name: default
   
   
   
+  
+  
+  
 
 
 namespace: istio-system
 
+  
+  
+  
   
   
   
@@ -3383,10 +3838,16 @@ spec:
   
   
   
+  
+  
+  
 
 
 mtls:
 
+  
+  
+  
   
   
   
@@ -3429,10 +3890,16 @@ mode: STRICT
   
   
   
+  
+  
+  
 
 
 # PERMISSIVE: Accept both mTLS and plaintext (migration mode)
 
+  
+  
+  
   
   
   
@@ -3475,6 +3942,9 @@ apiVersion: security.istio.io/v1beta1
   
   
   
+  
+  
+  
 
 
 kind: PeerAuthentication
@@ -3498,10 +3968,16 @@ kind: PeerAuthentication
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -3544,10 +4020,16 @@ name: default
   
   
   
+  
+  
+  
 
 
 namespace: istio-system
 
+  
+  
+  
   
   
   
@@ -3590,10 +4072,16 @@ spec:
   
   
   
+  
+  
+  
 
 
 mtls:
 
+  
+  
+  
   
   
   
@@ -3636,6 +4124,9 @@ mode: PERMISSIVE
   
   
   
+  
+  
+  
 
 
 # DISABLE: Disable mTLS for specific workloads
@@ -3659,10 +4150,16 @@ mode: PERMISSIVE
   
   
   
+  
+  
+  
 
 
 apiVersion: security.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -3705,10 +4202,16 @@ kind: PeerAuthentication
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -3751,10 +4254,16 @@ name: legacy-service
   
   
   
+  
+  
+  
 
 
 namespace: legacy
 
+  
+  
+  
   
   
   
@@ -3797,6 +4306,9 @@ spec:
   
   
   
+  
+  
+  
 
 
 selector:
@@ -3820,10 +4332,16 @@ selector:
   
   
   
+  
+  
+  
 
 
 matchLabels:
 
+  
+  
+  
   
   
   
@@ -3866,10 +4384,16 @@ app: legacy-app
   
   
   
+  
+  
+  
 
 
 mtls:
 
+  
+  
+  
   
   
   
@@ -3912,6 +4436,9 @@ mode: DISABLE
   
   
   
+  
+  
+  
 
 
 Linkerd mTLS 
@@ -3932,10 +4459,16 @@ Linkerd mTLS
   
   
   
+  
+  
+  
 
 
 Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certificate rotation with automatic renewal. 
 
+  
+  
+  
   
   
   
@@ -3978,10 +4511,16 @@ Linkerd automatically enables mTLS between meshed pods. It uses a 24-hour certif
   
   
   
+  
+  
+  
 
 
 linkerd viz stat deploy --from deploy
 
+  
+  
+  
   
   
   
@@ -4024,10 +4563,16 @@ linkerd viz stat deploy --from deploy
   
   
   
+  
+  
+  
 
 
 mTLS benefits:
 
+  
+  
+  
   
   
   
@@ -4064,10 +4609,16 @@ mTLS benefits:
   
   
   
+  
+  
+  
 
 
 * Automatic certificate rotation.
 
+  
+  
+  
   
   
   
@@ -4107,10 +4658,16 @@ mTLS benefits:
   
   
   
+  
+  
+  
 
 
 Observability 
 
+  
+  
+  
   
   
   
@@ -4147,10 +4704,16 @@ Service meshes provide rich observability without code instrumentation.
   
   
   
+  
+  
+  
 
 
 Metrics 
 
+  
+  
+  
   
   
   
@@ -4193,10 +4756,16 @@ Metrics
   
   
   
+  
+  
+  
 
 
 apiVersion: telemetry.istio.io/v1alpha1
 
+  
+  
+  
   
   
   
@@ -4239,6 +4808,9 @@ kind: Telemetry
   
   
   
+  
+  
+  
 
 
 metadata:
@@ -4262,10 +4834,16 @@ metadata:
   
   
   
+  
+  
+  
 
 
 name: mesh-default
 
+  
+  
+  
   
   
   
@@ -4308,10 +4886,16 @@ namespace: istio-system
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -4354,33 +4938,42 @@ metrics:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- overrides:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- overrides:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- match:
+
+  
+  
+  
   
   
   
@@ -4423,10 +5016,16 @@ metric: ALL_METRICS
   
   
   
+  
+  
+  
 
 
 mode: REPORT
 
+  
+  
+  
   
   
   
@@ -4466,10 +5065,16 @@ Istio exports standard metrics:
   
   
   
+  
+  
+  
 
 
 * `istio_requests_total`: Total requests (by source, dest, response code).
 
+  
+  
+  
   
   
   
@@ -4506,10 +5111,16 @@ Istio exports standard metrics:
   
   
   
+  
+  
+  
 
 
 * `istio_request_bytes`: Request sizes.
 
+  
+  
+  
   
   
   
@@ -4546,10 +5157,16 @@ Istio exports standard metrics:
   
   
   
+  
+  
+  
 
 
 * `istio_tcp_sent_bytes_total`: TCP throughput.
 
+  
+  
+  
   
   
   
@@ -4592,10 +5209,16 @@ Distributed Tracing
   
   
   
+  
+  
+  
 
 
 # Istio: Enable tracing with Zipkin, Jaeger, or OpenTelemetry
 
+  
+  
+  
   
   
   
@@ -4638,6 +5261,9 @@ apiVersion: telemetry.istio.io/v1alpha1
   
   
   
+  
+  
+  
 
 
 kind: Telemetry
@@ -4661,10 +5287,16 @@ kind: Telemetry
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -4707,10 +5339,16 @@ name: mesh-default
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -4753,33 +5391,42 @@ tracing:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- providers:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-tracing
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- providers:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: otel-tracing
+
+  
+  
+  
   
   
   
@@ -4822,10 +5469,16 @@ randomSamplingPercentage: 10
   
   
   
+  
+  
+  
 
 
 Tracing headers (b3, x-request-id) are propagated automatically by the sidecar. Services that forward the tracing headers receive full distributed trace visibility without adding any tracing SDK. 
 
+  
+  
+  
   
   
   
@@ -4862,10 +5515,16 @@ Authorization Policies
   
   
   
+  
+  
+  
 
 
 Service meshes enforce authorization at the network level. Policies specify which services can communicate. 
 
+  
+  
+  
   
   
   
@@ -4908,10 +5567,16 @@ Service meshes enforce authorization at the network level. Policies specify whic
   
   
   
+  
+  
+  
 
 
 apiVersion: security.istio.io/v1beta1
 
+  
+  
+  
   
   
   
@@ -4954,10 +5619,16 @@ kind: AuthorizationPolicy
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -5000,10 +5671,16 @@ name: payment-service-policy
   
   
   
+  
+  
+  
 
 
 namespace: prod
 
+  
+  
+  
   
   
   
@@ -5046,10 +5723,16 @@ spec:
   
   
   
+  
+  
+  
 
 
 selector:
 
+  
+  
+  
   
   
   
@@ -5092,10 +5775,16 @@ matchLabels:
   
   
   
+  
+  
+  
 
 
 app: payment-service
 
+  
+  
+  
   
   
   
@@ -5138,6 +5827,9 @@ action: ALLOW
   
   
   
+  
+  
+  
 
 
 rules:
@@ -5161,33 +5853,42 @@ rules:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+
+  
+  
+  
   
   
   
@@ -5230,6 +5931,9 @@ principals: ["cluster.local/ns/prod/sa/order-service"]
   
   
   
+  
+  
+  
 
 
 to:
@@ -5253,10 +5957,16 @@ to:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- operation:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- operation:
 
+  
+  
+  
   
   
   
@@ -5299,6 +6009,9 @@ methods: ["POST", "GET", "PUT"]
   
   
   
+  
+  
+  
 
 
 paths: ["/api/v1/*"]
@@ -5322,33 +6035,42 @@ paths: ["/api/v1/*"]
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+
+  
+  
+  
   
   
   
@@ -5391,6 +6113,9 @@ principals: ["cluster.local/ns/prod/sa/admin-service"]
   
   
   
+  
+  
+  
 
 
 to:
@@ -5414,10 +6139,16 @@ to:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- operation:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- operation:
 
+  
+  
+  
   
   
   
@@ -5460,6 +6191,9 @@ methods: ["*"]
   
   
   
+  
+  
+  
 
 
 paths: ["*"]
@@ -5483,10 +6217,16 @@ paths: ["*"]
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
   
   
   
@@ -5529,10 +6269,16 @@ apiVersion: security.istio.io/v1beta1
   
   
   
+  
+  
+  
 
 
 kind: AuthorizationPolicy
 
+  
+  
+  
   
   
   
@@ -5575,10 +6321,16 @@ metadata:
   
   
   
+  
+  
+  
 
 
 name: payment-service-deny
 
+  
+  
+  
   
   
   
@@ -5621,10 +6373,16 @@ namespace: prod
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -5667,10 +6425,16 @@ selector:
   
   
   
+  
+  
+  
 
 
 matchLabels:
 
+  
+  
+  
   
   
   
@@ -5713,10 +6477,16 @@ app: payment-service
   
   
   
+  
+  
+  
 
 
 action: DENY
 
+  
+  
+  
   
   
   
@@ -5759,33 +6529,42 @@ rules:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- source:
+
+  
+  
+  
   
   
   
@@ -5828,10 +6607,16 @@ notPrincipals: [
   
   
   
+  
+  
+  
 
 
 "cluster.local/ns/prod/sa/order-service",
 
+  
+  
+  
   
   
   
@@ -5874,10 +6659,16 @@ notPrincipals: [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -5917,10 +6708,16 @@ When to Use a Service Mesh
   
   
   
+  
+  
+  
 
 
 Service Mesh Adds Value When 
 
+  
+  
+  
   
   
   
@@ -5960,10 +6757,16 @@ Service Mesh Adds Value When
   
   
   
+  
+  
+  
 
 
 * **Multiple protocols** (HTTP, gRPC, TCP) managed consistently.
 
+  
+  
+  
   
   
   
@@ -6000,10 +6803,16 @@ Service Mesh Adds Value When
   
   
   
+  
+  
+  
 
 
 * **Advanced traffic management** needed (canary, blue-green, A/B testing).
 
+  
+  
+  
   
   
   
@@ -6040,10 +6849,16 @@ Service Mesh Adds Value When
   
   
   
+  
+  
+  
 
 
 * **Large platform team** available to operate the mesh.
 
+  
+  
+  
   
   
   
@@ -6086,10 +6901,16 @@ Service Mesh is Overkill When
   
   
   
+  
+  
+  
 
 
 * **Few services** (under 10). The operational overhead outweighs the benefits.
 
+  
+  
+  
   
   
   
@@ -6126,6 +6947,9 @@ Service Mesh is Overkill When
   
   
   
+  
+  
+  
 
 
 * **Simple deployment**. If round-robin DNS is sufficient, a mesh is unnecessary.
@@ -6146,10 +6970,16 @@ Service Mesh is Overkill When
   
   
   
+  
+  
+  
 
 
 * **No mTLS requirement**. If all services are in the same network boundary.
 
+  
+  
+  
   
   
   
@@ -6189,10 +7019,16 @@ Service Mesh is Overkill When
   
   
   
+  
+  
+  
 
 
 Istio vs Linkerd 
 
+  
+  
+  
   
   
   
@@ -6229,10 +7065,16 @@ Istio vs Linkerd
   
   
   
+  
+  
+  
 
 
 Choose Istio if you need extensive configuration and are willing to invest in learning. Choose Linkerd if you want a simpler, lighter-weight mesh with less operational overhead. 
 
+  
+  
+  
   
   
   
@@ -6272,6 +7114,9 @@ Migration Strategy
   
   
   
+  
+  
+  
 
 
 * **Install the control plane** in a namespace separate from applications.
@@ -6292,10 +7137,16 @@ Migration Strategy
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Start with PERMISSIVE mTLS** to avoid breaking existing plaintext connections. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Inject sidecars gradually**: Use namespace-level injection opt-in, not global. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add observability first**: Use the mesh to gain visibility into traffic patterns. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enable traffic management**: Start with canary deployments, then add retries and timeouts. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enable STRICT mTLS**: After verifying all traffic can use mTLS. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Implement authorization**: Add mesh-level authorization policies last. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Start with PERMISSIVE mTLS** to avoid breaking existing plaintext connections. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Inject sidecars gradually**: Use namespace-level injection opt-in, not global. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Add observability first**: Use the mesh to gain visibility into traffic patterns. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enable traffic management**: Start with canary deployments, then add retries and timeouts. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Enable STRICT mTLS**: After verifying all traffic can use mTLS. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Implement authorization**: Add mesh-level authorization policies last. 
 
+  
+  
+  
   
   
   
@@ -6316,6 +7167,9 @@ Migration Strategy
 
 Conclusion 
 
+  
+  
+  
   
   
   

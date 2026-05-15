@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/output-encoding.html
   
 
 
+# Output Encoding
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 # Output Encoding: Cross-Site Scripting (XSS) Prevention Guide
 
+  
+  
+  
   
   
   
@@ -156,10 +185,16 @@ Output encoding is the strongest defense against Cross-Site Scripting (XSS). It 
   
   
   
+  
+  
+  
 
 
 ##  Why Encoding Matters
 
+  
+  
+  
   
   
   
@@ -208,6 +243,9 @@ XSS happens when user-controlled data is inserted into a web page without proper
   
   
   
+  
+  
+  
 
 
 Encoding must be context-aware. The same data needs different encoding depending on where it appears: HTML body, HTML attribute, JavaScript string, URL parameter, or CSS. Using the wrong encoder for the context leaves an opening for attackers.
@@ -234,10 +272,16 @@ Encoding must be context-aware. The same data needs different encoding depending
   
   
   
+  
+  
+  
 
 
 ##  HTML Body Context
 
+  
+  
+  
   
   
   
@@ -287,10 +331,16 @@ Data inserted between HTML tags needs HTML entity encoding. The critical charact
   
   
   
+  
+  
+  
 
 
 import html
 
+  
+  
+  
   
   
   
@@ -333,10 +383,16 @@ safe_output = html.escape(user_input)
   
   
   
+  
+  
+  
 
 
 # "" becomes ""
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Template engines like Jinja2, ERB, and Thymeleaf auto-escape by default. This ha
   
   
   
+  
+  
+  
 
 
 ##  HTML Attribute Context
 
+  
+  
+  
   
   
   
@@ -440,10 +502,16 @@ Attribute encoding is stricter than body encoding. In addition to the standard e
   
   
   
+  
+  
+  
 
 
 def encode_html_attribute(value):
 
+  
+  
+  
   
   
   
@@ -486,10 +554,16 @@ value = value.replace('&', '&')
   
   
   
+  
+  
+  
 
 
 value = value.replace('"', '"')
 
+  
+  
+  
   
   
   
@@ -532,10 +606,16 @@ value = value.replace("'", ''')
   
   
   
+  
+  
+  
 
 
 value = value.replace('<', '<')
 
+  
+  
+  
   
   
   
@@ -578,10 +658,16 @@ value = value.replace('>', '>')
   
   
   
+  
+  
+  
 
 
 value = value.replace('/', '/')
 
+  
+  
+  
   
   
   
@@ -624,10 +710,16 @@ value = value.replace('`', '`')
   
   
   
+  
+  
+  
 
 
 return value
 
+  
+  
+  
   
   
   
@@ -678,10 +770,16 @@ Always quote HTML attributes. Never construct HTML by concatenating strings — 
   
   
   
+  
+  
+  
 
 
 ##  JavaScript Context
 
+  
+  
+  
   
   
   

@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/monorepo-vs-multirepo.html
   
   
   
+  
+  
+  
+
+
+# Monorepo vs Multirepo: Repository Strategy Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The monorepo vs multirepo decision affects developer workflow, CI/CD efficiency, and team autonomy. Both approaches have strong advocates and proven implementations.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ The monorepo vs multirepo decision affects developer workflow, CI/CD efficiency,
   
   
   
+  
+  
+  
 
 
 A monorepo stores all projects, libraries, and services in a single repository. Google, Meta, and Microsoft use monorepos. Single versioning eliminates dependency version conflicts. Shared tooling and standards reduce configuration overhead. Cross-project refactoring is easier. CI/CD requires selective execution to avoid running all tests for every change.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Tools: Bazel, Nx, Turborepo, Rush, Lerna. These tools enable incremental builds,
   
   
   
+  
+  
+  
 
 
 ##  Multirepo
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Each project or service has its own repository. Teams have autonomy over their t
   
   
   
+  
+  
+  
 
 
 ##  CI/CD Considerations
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Monorepos need smart CI/CD to only build changed projects. Multirepos need cross
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

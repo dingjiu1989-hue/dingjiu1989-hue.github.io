@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-content-generation.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "3266",
+      "wordCount": "3796",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/ai-content-generation.html"},
-      "articleBody": "AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows Introduction AI content generation has moved beyond simple blog post generators to sophisticated production workflows that match or exceed human quality at a fraction of the cost. The key insight is that great AI-generated content comes not from a single prompt, but from a well-designed multi-stage pipeline with quality gates, human review, and continuous improvement. Workflow Architecture A production content generation system typically has five stages: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning Before generating a single word, the system gathers context: * **Topic analysis**: What has already been written on this topic? What angles are underserved? * **Keyword research**: What search terms drive traffic to this subject? * **Audience definition**: Who is the content for? What is their knowledge level? * **Content brief creation**: A structured brief that guides all subsequent stages The content brief is the most important output of this stage. It defines: * Target word count and format * Topics to cover and topics to exclude * Desired tone and voice * Competitor URLs for reference * Target keywords with search intent * Call-to-action requirements 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation The outline stage creates a structured skeleton: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers) Generate multiple outline candidates and select the best one before proceeding. This prevents investing effort in a flawed structure. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation With the outline approved, generate each section independently: **Sequential generation**: Write one section at a time, providing the previous section as context. This maintains narrative flow but can produce repetitive transitions. **Parallel generation**: Generate all sections simultaneously with consistent instructions. This is faster but may lack coherence between sections. **Hybrid approach**: Generate the introduction and conclusion together, then each body section independently, then stitch with transition sentences: def generate_article(brief, outline, model): intro = generate_section(\"introduction\", brief, outline, model) sections = {} for section in outline[\"body_sections\"]: sections[section[\"id\"]] = generate_section( section, brief, {\"intro\": intro}, model ) conclusion = generate_section( \"conclusion\", brief, {\"intro\": intro, \"sections\": sections}, model ) return assemble_article(intro, sections, conclusion) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control Generation is not the end \u2014 it's where quality control begins: * **Factual accuracy check**: Pass each factual claim through a verification prompt * **Internal consistency**: Ensure the article doesn't contradict itself * **Tone and voice compliance**: Check against the defined brand guidelines * **Readability scoring**: Flesch-Kincaid, sentence length distribution * **Keyword density**: Verify target keywords appear naturally * **Plagiarism check**: Compare against existing content Automated quality checks catch about 80% of issues. Remaining issues require human review at the final stage. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish Human reviewers focus on what AI cannot: * Creative flair and unique perspective * Cultural sensitivity and brand alignment * Logical flow and argument strength * Original insights beyond synthesized knowledge Build clear review guidelines and provide side-by-side comparison with the brief. Track reviewer time and error rates to optimize the process. Multi-Modal Generation Modern workflows generate supporting assets alongside text: * **Featured images**: DALL-E or Stable Diffusion for article headers * **Diagrams and charts**: Mermaid.js or custom graphics from text descriptions * **Social media snippets**: Pre-written posts for LinkedIn, Twitter/X, and newsletters * **Meta descriptions and SEO tags**: Auto-generated from article content Scaling Considerations **Cost optimization**: Each stage of the pipeline consumes tokens. Budgeting: | Stage | Token Cost (per 1000 words output) | |-------|-----------------------------------| | Research and brief | ~15K tokens | | Outline generation | ~5K tokens | | Draft generation | ~30K tokens | | Quality control | ~20K tokens | | Total | ~70K tokens per article | **Batch processing**: Generate articles in batches to benefit from prompt caching and reduce per-article costs by 30-40%. **Human scale**: One reviewer can handle 10-20 AI-generated articles per day, depending on quality requirements and article complexity. Conclusion Production AI content generation requires a structured, multi-stage workflow with clear quality gates. The best results come from combining AI's speed and consistency with human judgment at key decision points. Start with a simple pipeline, measure output quality, and add sophistication based on data. The goal is not to replace writers but to amplify their productivity by handling research, structure, and first drafts, letting them focus on what humans do best."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/ai-content-generation-workflows-1obb"
+      ],
+      "articleBody": "AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows AI Content Generation Workflows Introduction AI content generation has moved beyond simple blog post generators to sophisticated production workflows that match or exceed human quality at a fraction of the cost. The key insight is that great AI-generated content comes not from a single prompt, but from a well-designed multi-stage pipeline with quality gates, human review, and continuous improvement. Workflow Architecture A production content generation system typically has five stages: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning Before generating a single word, the system gathers context: * **Topic analysis**: What has already been written on this topic? What angles are underserved? * **Keyword research**: What search terms drive traffic to this subject? * **Audience definition**: Who is the content for? What is their knowledge level? * **Content brief creation**: A structured brief that guides all subsequent stages The content brief is the most important output of this stage. It defines: * Target word count and format * Topics to cover and topics to exclude * Desired tone and voice * Competitor URLs for reference * Target keywords with search intent * Call-to-action requirements 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation The outline stage creates a structured skeleton: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers) Generate multiple outline candidates and select the best one before proceeding. This prevents investing effort in a flawed structure. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation With the outline approved, generate each section independently: **Sequential generation**: Write one section at a time, providing the previous section as context. This maintains narrative flow but can produce repetitive transitions. **Parallel generation**: Generate all sections simultaneously with consistent instructions. This is faster but may lack coherence between sections. **Hybrid approach**: Generate the introduction and conclusion together, then each body section independently, then stitch with transition sentences: def generate_article(brief, outline, model): intro = generate_section(\"introduction\", brief, outline, model) sections = {} for section in outline[\"body_sections\"]: sections[section[\"id\"]] = generate_section( section, brief, {\"intro\": intro}, model ) conclusion = generate_section( \"conclusion\", brief, {\"intro\": intro, \"sections\": sections}, model ) return assemble_article(intro, sections, conclusion) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control Generation is not the end \u2014 it's where quality control begins: * **Factual accuracy check**: Pass each factual claim through a verification prompt * **Internal consistency**: Ensure the article doesn't contradict itself * **Tone and voice compliance**: Check against the defined brand guidelines * **Readability scoring**: Flesch-Kincaid, sentence length distribution * **Keyword density**: Verify target keywords appear naturally * **Plagiarism check**: Compare against existing content Automated quality checks catch about 80% of issues. Remaining issues require human review at the final stage. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish Human reviewers focus on what AI cannot: * Creative flair and unique perspective * Cultural sensitivity and brand alignment * Logical flow and argument strength * Original insights beyond synthesized knowledge Build clear review guidelines and provide side-by-side comparison with the brief. Track reviewer time and error rates to optimize the process. Multi-Modal Generation Modern workflows generate supporting assets alongside text: * **Featured images**: DALL-E or Stable Diffusion for article headers * **Diagrams and charts**: Mermaid.js or custom graphics from text descriptions * **Social media snippets**: Pre-written posts for LinkedIn, Twitter/X, and newsletters * **Meta descriptions and SEO tags**: Auto-generated from article content Scaling Considerations **Cost optimization**: Each stage of the pipeline consumes tokens. Budgeting: | Stage | Token Cost (per 1000 words output) | |-------|-----------------------------------| | Research and brief | ~15K tokens | | Outline generation | ~5K tokens | | Draft generation | ~30K tokens | | Quality control | ~20K tokens | | Total | ~70K tokens per article | **Batch processing**: Generate articles in batches to benefit from prompt caching and reduce per-article costs by 30-40%. **Human scale**: One reviewer can handle 10-20 AI-generated articles per day, depending on quality requirements and article complexity. Conclusion Production AI content generation requires a structured, multi-stage workflow with clear quality gates. The best results come from combining AI's speed and consistency with human judgment at key decision points. Start with a simple pipeline, measure output quality, and add sophistication based on data. The goal is not to replace writers but to amplify their productivity by handling research, structure, and first drafts, letting them focus on what humans do best."
     }
     </script>
     <script type="application/ld+json">
@@ -175,7 +178,36 @@
 <br>
 <br>
 <br>
+<h1>AI Content Generation Workflows</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -221,7 +253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Workflow Architecture</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -267,7 +305,13 @@
 <br>
 <br>
 <br>
-<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning</h3>
+<br>
+<br>
+<br>
+<h3>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -313,7 +357,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Topic analysis**: What has already been written on this topic? What angles are underserved?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -353,6 +403,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Audience definition**: Who is the content for? What is their knowledge level?</p>
 <br>
 <br>
@@ -373,7 +426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Content brief creation**: A structured brief that guides all subsequent stages</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -419,7 +478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Target word count and format</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -459,7 +524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Desired tone and voice</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -499,7 +570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Target keywords with search intent</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -542,7 +619,13 @@
 <br>
 <br>
 <br>
-<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation</h3>
+<br>
+<br>
+<br>
+<h3>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -588,10 +671,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword)</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword)</p>
 <br>
 <br>
 <br>
@@ -611,13 +694,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition)</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition)</p>
 <br>
 <br>
 <br>
@@ -634,7 +717,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background)</p>
 <br>
 <br>
 <br>
@@ -644,6 +726,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background)</p>
 <br>
 <br>
 <br>
@@ -657,7 +740,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a</p>
 <br>
 <br>
 <br>
@@ -670,6 +752,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a</p>
 <br>
 <br>
 <br>
@@ -680,7 +763,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b</p>
 <br>
 <br>
 <br>
@@ -696,6 +778,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b</p>
 <br>
 <br>
 <br>
@@ -703,7 +786,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content)</p>
 <br>
 <br>
 <br>
@@ -722,11 +804,11 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content)</p>
 <br>
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example)</p>
 <br>
 <br>
 <br>
@@ -748,8 +830,8 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example)</p>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation)</p>
 <br>
 <br>
 <br>
@@ -772,9 +854,9 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion</p>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation)</p>
 <br>
 <br>
 <br>
@@ -795,7 +877,41 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -841,7 +957,13 @@
 <br>
 <br>
 <br>
-<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation</h3>
+<br>
+<br>
+<br>
+<h3>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -887,7 +1009,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Sequential generation**: Write one section at a time, providing the previous section as context. This maintains narrative flow but can produce repetitive transitions.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -933,7 +1061,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Hybrid approach**: Generate the introduction and conclusion together, then each body section independently, then stitch with transition sentences:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -979,7 +1113,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>intro = generate_section("introduction", brief, outline, model)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1025,7 +1165,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for section in outline["body_sections"]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1071,6 +1217,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>section, brief, {"intro": intro}, model</p>
 <br>
 <br>
@@ -1094,7 +1243,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1140,7 +1295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"conclusion", brief, {"intro": intro, "sections": sections}, model</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1186,6 +1347,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return assemble_article(intro, sections, conclusion)</p>
 <br>
 <br>
@@ -1209,7 +1373,13 @@
 <br>
 <br>
 <br>
-<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control</h3>
+<br>
+<br>
+<br>
+<h3>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1255,7 +1425,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Factual accuracy check**: Pass each factual claim through a verification prompt</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1295,7 +1471,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Tone and voice compliance**: Check against the defined brand guidelines</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1335,6 +1517,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Keyword density**: Verify target keywords appear naturally</p>
 <br>
 <br>
@@ -1355,7 +1540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Plagiarism check**: Compare against existing content</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1401,7 +1592,13 @@
 <br>
 <br>
 <br>
-<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish</h3>
+<br>
+<br>
+<br>
+<h3>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1447,7 +1644,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Creative flair and unique perspective</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1487,6 +1690,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Logical flow and argument strength</p>
 <br>
 <br>
@@ -1507,7 +1713,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Original insights beyond synthesized knowledge</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1553,7 +1765,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Multi-Modal Generation</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1599,7 +1817,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Featured images**: DALL-E or Stable Diffusion for article headers</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1639,6 +1863,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Social media snippets**: Pre-written posts for LinkedIn, Twitter/X, and newsletters</p>
 <br>
 <br>
@@ -1659,7 +1886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Meta descriptions and SEO tags**: Auto-generated from article content</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1705,7 +1938,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cost optimization**: Each stage of the pipeline consumes tokens. Budgeting:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1751,7 +1990,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|-------|-----------------------------------|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1797,7 +2042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Outline generation | ~5K tokens |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1843,7 +2094,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Quality control | ~20K tokens |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1889,7 +2146,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Batch processing**: Generate articles in batches to benefit from prompt caching and reduce per-article costs by 30-40%.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1935,7 +2198,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

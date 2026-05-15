@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/observability-three-pilla
   
 
 
+# Observability: Logs, Metrics, and Traces
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Observability is the ability to understand a system's internal state from its external outputs. The three pillars — logs, metrics, and traces — each provide different perspectives. Logs describe discrete events. Metrics provide aggregate measurements. Traces follow requests across service boundaries. Effective observability requires combining all three and correlating them to answer questions about system behavior, especially during incidents. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Logs are timestamped records of discrete events. They are the most detailed pill
   
   
   
+  
+  
+  
 
 
 Metrics are numeric aggregations over time. They are the most efficient storage representation — a single metric stream consumes bytes rather than kilobytes per event. Metrics are ideal for dashboards, alerting, and trend analysis. Common metric types include counters (total requests), gauges (current memory usage), histograms (request latency distribution), and summaries (quantile approximations). Metrics inherently lose individual event detail — you know the 99th percentile latency but not which specific request was slow. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Traces follow a single request through the distributed system. A trace is compos
   
   
   
+  
+  
+  
 
 
 Correlation between pillars is the goal. A trace ID should appear in log entries (structured logging), metric labels, and trace spans. When investigating an issue: a latency spike in metrics triggers an alert, the associated trace ID links to specific traces showing which service caused the delay, and logs at the trace context level reveal the error or slow operation. Without correlation, each pillar is a silo that provides incomplete information. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Cardinality is the primary scalability challenge. High-cardinality dimensions �
   
   
   
+  
+  
+  
 
 
 Sampling strategies manage the trace volume problem. Head-based sampling (decide at the root span) is simple but may miss errors that occur rarely. Tail-based sampling (decide after all spans arrive) allows intelligent selection — sample all errors, sample a percentage of successful traces, and ensure critical traces (high-value customers, specific endpoints) are always sampled. Adaptive sampling adjusts the sampling rate based on traffic volume, maintaining a consistent trace storage budget. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Storage costs drive architectural decisions. Logs are the most expensive per eve
   
   
   
+  
+  
+  
 
 
 The OpenTelemetry project is converging the three pillars. OTel provides a unified API for generating signals, with exporters that send data to any backend. Logs, metrics, and traces share instrumentation context including trace IDs and resource attributes. This unification dramatically improves correlation — with OTel, the three pillars are generated from the same instrumentation and carry the same context, making cross-pillar analysis natural rather than bolted on. 
 
+  
+  
+  
   
   
   

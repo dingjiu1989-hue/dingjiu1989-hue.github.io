@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/tech/python-package-management.html
   
   
   
+  
+  
+  
+
+
+# Python Package Management: pip, Poetry, uv, Conda
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Python package management has evolved significantly. The ecosystem now offers multiple tools competing for the role of standard package and project manager.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Python package management has evolved significantly. The ecosystem now offers mu
   
   
   
+  
+  
+  
 
 
 pip is Python's default package installer. requirements.txt lists dependencies with optional version constraints. pip installs packages from PyPI into the current environment. It is simple and universal—every Python environment has pip.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ pip's limitations include no dependency resolution (it installs the latest compa
   
   
   
+  
+  
+  
 
 
 ##  Poetry
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Poetry is a modern dependency manager with deterministic resolution. pyproject.t
   
   
   
+  
+  
+  
 
 
 Poetry manages virtual environments automatically—poetry install creates and activates environments. poetry add installs and adds dependencies in one step. Poetry builds and publishes packages to PyPI with poetry build and poetry publish.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Poetry manages virtual environments automatically—poetry install creates and a
   
   
   
+  
+  
+  
 
 
 uv is a Rust-based pip and Poetry replacement that is 10-100x faster than pip. It supports pip-compatible commands (uv pip install) and Poetry-compatible project management (uv sync, uv add). uv resolves dependencies in milliseconds.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ uv's speed advantage comes from Rust implementation, aggressive caching, and par
   
   
   
+  
+  
+  
 
 
 ##  Conda
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Conda is a cross-platform package manager for Python and non-Python dependencies
   
   
   
+  
+  
+  
 
 
 Miniconda is the minimal installer. Mamba is a faster Conda alternative with the same commands. Conda-lock provides reproducible environments. Conda environments are heavy—each environment is a full directory of packages.
@@ -465,10 +530,16 @@ Miniconda is the minimal installer. Mamba is a faster Conda alternative with the
   
   
   
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
   
   
   

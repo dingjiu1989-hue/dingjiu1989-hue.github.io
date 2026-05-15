@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/multimodal-ai.html
   
 
 
+# Multimodal AI Applications in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Multimodal AI models that understand and generate across text, images, audio, an
   
   
   
+  
+  
+  
 
 
 ##  Vision-Language Models
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Modern vision-language models (VLMs) accept images and text together in a single
   
   
   
+  
+  
+  
 
 
 from anthropic import Anthropic
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ client = Anthropic(api_key="sk-...")
   
   
   
+  
+  
+  
 
 
 # Analyze an image with text instructions
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ response = client.messages.create(
   
   
   
+  
+  
+  
 
 
 model="claude-sonnet-4-20260512",
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ max_tokens=1024,
   
   
   
+  
+  
+  
 
 
 messages=[{
 
+  
+  
+  
   
   
   
@@ -442,6 +504,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "content": [
@@ -468,10 +533,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -520,6 +591,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "source": {
@@ -546,10 +620,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "base64",
 
+  
+  
+  
   
   
   
@@ -598,6 +678,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "data": screenshot_b64,
@@ -624,29 +707,6 @@ messages=[{
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -654,6 +714,38 @@ messages=[{
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "text",
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "Analyze this UI screenshot. Identify: "
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "2. Accessibility issues "
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "4. Error handling patterns "
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -962,6 +1084,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 }],
@@ -988,10 +1113,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1040,10 +1171,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 analysis = response.content[0].text
 
+  
+  
+  
   
   
   
@@ -1092,10 +1229,16 @@ analysis = response.content[0].text
   
   
   
+  
+  
+  
 
 
 Extract structured data from complex documents:
 
+  
+  
+  
   
   
   
@@ -1144,6 +1287,9 @@ async def process_invoice(invoice_path: str) -> dict:
   
   
   
+  
+  
+  
 
 
 """Extract structured data from invoice images/PDFs."""
@@ -1170,10 +1316,16 @@ async def process_invoice(invoice_path: str) -> dict:
   
   
   
+  
+  
+  
 
 
 import base64
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ with open(invoice_path, "rb") as f:
   
   
   
+  
+  
+  
 
 
 image_data = base64.b64encode(f.read()).decode("utf-8")
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ response = client.messages.create(
   
   
   
+  
+  
+  
 
 
 model="claude-sonnet-4-20260512",
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ max_tokens=2048,
   
   
   
+  
+  
+  
 
 
 messages=[{
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "content": [
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "base64",
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "data": image_data,
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 {"type": "text", "text": """
 
+  
+  
+  
   
   
   
@@ -1586,36 +1780,16 @@ Extract the following fields from this invoice as JSON:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number
 
+  
+  
+  
   
   
   
@@ -1640,34 +1814,11 @@ Extract the following fields from this invoice as JSON:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date
-
   
   
   
@@ -1692,34 +1843,11 @@ Extract the following fields from this invoice as JSON:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total})
-
   
   
   
@@ -1744,34 +1872,11 @@ Extract the following fields from this invoice as JSON:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount
-
   
   
   
@@ -1796,7 +1901,7 @@ Extract the following fields from this invoice as JSON:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date
 
   
   
@@ -1820,10 +1925,132 @@ Extract the following fields from this invoice as JSON:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total})
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency
+
+  
+  
+  
   
   
   
@@ -1872,6 +2099,9 @@ Extract the following fields from this invoice as JSON:
   
   
   
+  
+  
+  
 
 
 ],
@@ -1898,10 +2128,16 @@ Extract the following fields from this invoice as JSON:
   
   
   
+  
+  
+  
 
 
 }],
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ response_format={"type": "json_object"},
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ return json.loads(response.content[0].text)
   
   
   
+  
+  
+  
 
 
 ##  Speech-to-Text and Audio Understanding
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ Multimodal models now handle audio directly without separate ASR pipelines:
   
   
   
+  
+  
+  
 
 
 import asyncio
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ async def analyze_call_recording(audio_path: str) -> dict:
   
   
   
+  
+  
+  
 
 
 """Analyze a customer support call recording."""
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ import base64
   
   
   
+  
+  
+  
 
 
 with open(audio_path, "rb") as f:
 
+  
+  
+  
   
   
   
@@ -2210,6 +2476,9 @@ audio_data = base64.b64encode(f.read()).decode("utf-8")
   
   
   
+  
+  
+  
 
 
 response = client.messages.create(
@@ -2236,10 +2505,16 @@ response = client.messages.create(
   
   
   
+  
+  
+  
 
 
 model="claude-sonnet-4-20260512",
 
+  
+  
+  
   
   
   
@@ -2288,10 +2563,16 @@ max_tokens=2048,
   
   
   
+  
+  
+  
 
 
 messages=[{
 
+  
+  
+  
   
   
   
@@ -2340,6 +2621,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "content": [
@@ -2366,10 +2650,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2418,6 +2708,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "source": {
@@ -2444,10 +2737,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "base64",
 
+  
+  
+  
   
   
   
@@ -2496,6 +2795,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "data": audio_data,
@@ -2522,29 +2824,6 @@ messages=[{
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2552,6 +2831,38 @@ messages=[{
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "text",
 
+  
+  
+  
   
   
   
@@ -2652,6 +2969,9 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 Analyze this customer support call:
@@ -2678,36 +2998,16 @@ Analyze this customer support call:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation
 
+  
+  
+  
   
   
   
@@ -2732,34 +3032,11 @@ Analyze this customer support call:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial)
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent)
-
   
   
   
@@ -2784,7 +3061,7 @@ Analyze this customer support call:
   
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?)
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial)
 
   
   
@@ -2808,10 +3085,74 @@ Analyze this customer support call:
   
   
   
+  
+  
+  
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements
+
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ Analyze this customer support call:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2912,6 +3259,9 @@ Analyze this customer support call:
   
   
   
+  
+  
+  
 
 
 }],
@@ -2938,10 +3288,16 @@ Analyze this customer support call:
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ return parse_analysis(response.content[0].text)
   
   
   
+  
+  
+  
 
 
 ##  Multimodal RAG
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images
   
   
   
+  
+  
+  
 
 
 import chromadb
 
+  
+  
+  
   
   
   
@@ -3094,10 +3462,16 @@ from sentence_transformers import SentenceTransformer
   
   
   
+  
+  
+  
 
 
 import numpy as np
 
+  
+  
+  
   
   
   
@@ -3146,10 +3520,16 @@ class MultimodalRAG:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -3198,10 +3578,16 @@ self.text_encoder = SentenceTransformer("all-MiniLM-L6-v2")
   
   
   
+  
+  
+  
 
 
 self.image_encoder = SentenceTransformer(
 
+  
+  
+  
   
   
   
@@ -3250,10 +3636,16 @@ self.image_encoder = SentenceTransformer(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3302,6 +3694,9 @@ self.collection = chromadb.Client().create_collection(
   
   
   
+  
+  
+  
 
 
 "multimodal_knowledge_base"
@@ -3328,10 +3723,16 @@ self.collection = chromadb.Client().create_collection(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ def index_document(
   
   
   
+  
+  
+  
 
 
 self,
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ doc_id: str,
   
   
   
+  
+  
+  
 
 
 text: str,
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ images: List[np.ndarray],
   
   
   
+  
+  
+  
 
 
 tables: List[dict],
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ tables: List[dict],
   
   
   
+  
+  
+  
 
 
 embeddings = []
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ embeddings = []
   
   
   
+  
+  
+  
 
 
 text_chunks = self._chunk_text(text)
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ text_embeddings = self.text_encoder.encode(text_chunks)
   
   
   
+  
+  
+  
 
 
 embeddings.extend(text_embeddings)
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ embeddings.extend(text_embeddings)
   
   
   
+  
+  
+  
 
 
 for img in images:
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ img_embedding = self.image_encoder.encode(img)
   
   
   
+  
+  
+  
 
 
 embeddings.append(img_embedding)
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ embeddings.append(img_embedding)
   
   
   
+  
+  
+  
 
 
 self.collection.add(
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ embeddings=embeddings,
   
   
   
+  
+  
+  
 
 
 ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ metadatas=[
   
   
   
+  
+  
+  
 
 
 {"modality": "text", "doc_id": doc_id},
 
+  
+  
+  
   
   
   
@@ -3952,10 +4419,16 @@ metadatas=[
   
   
   
+  
+  
+  
 
 
 for _ in images],
 
+  
+  
+  
   
   
   
@@ -4004,10 +4477,16 @@ for _ in images],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ def query(self, question: str, top_k: int = 5) -> List[dict]:
   
   
   
+  
+  
+  
 
 
 # Encode query
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ query_embedding = self.text_encoder.encode(question)
   
   
   
+  
+  
+  
 
 
 # Retrieve across all modalities
 
+  
+  
+  
   
   
   
@@ -4160,10 +4651,16 @@ results = self.collection.query(
   
   
   
+  
+  
+  
 
 
 query_embeddings=[query_embedding],
 
+  
+  
+  
   
   
   
@@ -4212,10 +4709,16 @@ n_results=top_k,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4264,10 +4767,16 @@ return results
   
   
   
+  
+  
+  
 
 
 ##  Audio Transcription and Analysis Pipeline
 
+  
+  
+  
   
   
   
@@ -4316,10 +4825,16 @@ For production audio processing, combine streaming with multimodal analysis:
   
   
   
+  
+  
+  
 
 
 class AudioProcessingPipeline:
 
+  
+  
+  
   
   
   
@@ -4368,10 +4883,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 self.buffer_duration = 300 # 5-minute chunks
 
+  
+  
+  
   
   
   
@@ -4420,10 +4941,16 @@ self.overlap = 30 # 30-second overlap for continuity
   
   
   
+  
+  
+  
 
 
 async def process_stream(self, audio_stream: AsyncGenerator[bytes]):
 
+  
+  
+  
   
   
   
@@ -4472,10 +4999,16 @@ buffer = []
   
   
   
+  
+  
+  
 
 
 buffer_duration = 0
 
+  
+  
+  
   
   
   
@@ -4524,10 +5057,16 @@ async for chunk in audio_stream:
   
   
   
+  
+  
+  
 
 
 buffer.append(chunk)
 
+  
+  
+  
   
   
   
@@ -4576,10 +5115,16 @@ buffer_duration += self._chunk_duration(chunk)
   
   
   
+  
+  
+  
 
 
 if buffer_duration >= self.buffer_duration:
 
+  
+  
+  
   
   
   
@@ -4628,10 +5173,16 @@ if buffer_duration >= self.buffer_duration:
   
   
   
+  
+  
+  
 
 
 segment = b"".join(buffer)
 
+  
+  
+  
   
   
   
@@ -4680,10 +5231,16 @@ segment = b"".join(buffer)
   
   
   
+  
+  
+  
 
 
 result = await self._analyze_segment(segment)
 
+  
+  
+  
   
   
   
@@ -4732,10 +5289,16 @@ result = await self._analyze_segment(segment)
   
   
   
+  
+  
+  
 
 
 actions = self._extract_actions(result)
 
+  
+  
+  
   
   
   
@@ -4784,10 +5347,16 @@ if actions:
   
   
   
+  
+  
+  
 
 
 await self._route_actions(actions)
 
+  
+  
+  
   
   
   
@@ -4836,10 +5405,16 @@ await self._route_actions(actions)
   
   
   
+  
+  
+  
 
 
 overlap_bytes = int(
 
+  
+  
+  
   
   
   
@@ -4888,10 +5463,16 @@ len(segment) * (self.overlap / buffer_duration)
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4940,10 +5521,16 @@ buffer = [segment[-overlap_bytes:]]
   
   
   
+  
+  
+  
 
 
 buffer_duration = self.overlap
 
+  
+  
+  
   
   
   
@@ -4992,10 +5579,16 @@ async def _analyze_segment(self, audio_bytes: bytes) -> dict:
   
   
   
+  
+  
+  
 
 
 response = client.messages.create(
 
+  
+  
+  
   
   
   
@@ -5044,10 +5637,16 @@ model="claude-sonnet-4-20260512",
   
   
   
+  
+  
+  
 
 
 messages=[{
 
+  
+  
+  
   
   
   
@@ -5096,10 +5695,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "content": [
 
+  
+  
+  
   
   
   
@@ -5148,10 +5753,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "type": "base64",
 
+  
+  
+  
   
   
   
@@ -5200,10 +5811,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 "data": base64.b64encode(audio_bytes).decode(),
 
+  
+  
+  
   
   
   
@@ -5252,10 +5869,16 @@ messages=[{
   
   
   
+  
+  
+  
 
 
 {"type": "text", "text": """
 
+  
+  
+  
   
   
   
@@ -5304,36 +5927,16 @@ Transcribe and analyze this audio segment:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization
 
+  
+  
+  
   
   
   
@@ -5358,34 +5961,11 @@ Transcribe and analyze this audio segment:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend
-
   
   
   
@@ -5410,8 +5990,69 @@ Transcribe and analyze this audio segment:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention
+
+  
+  
+  
   
   
   
@@ -5460,10 +6101,16 @@ Transcribe and analyze this audio segment:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -5512,10 +6159,16 @@ Transcribe and analyze this audio segment:
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -5564,10 +6217,16 @@ return response
   
   
   
+  
+  
+  
 
 
 ##  Use Cases and Limitations
 
+  
+  
+  
   
   
   
@@ -5616,10 +6275,16 @@ return response
   
   
   
+  
+  
+  
 
 
 |---|---|---|
 
+  
+  
+  
   
   
   
@@ -5668,10 +6333,16 @@ return response
   
   
   
+  
+  
+  
 
 
 | UI testing | Visual regression + semantic understanding | Dynamic content handling |
 
+  
+  
+  
   
   
   
@@ -5720,10 +6391,16 @@ return response
   
   
   
+  
+  
+  
 
 
 | Accessibility | Generate alt text, describe scenes | Real-time video processing latency |
 
+  
+  
+  
   
   
   
@@ -5772,10 +6449,16 @@ return response
   
   
   
+  
+  
+  
 
 
 | Video understanding | Summarize meetings, detect events | Long video context limits |
 
+  
+  
+  
   
   
   
@@ -5824,10 +6507,16 @@ return response
   
   
   
+  
+  
+  
 
 
 # Multimodal model selection criteria
 
+  
+  
+  
   
   
   
@@ -5876,10 +6565,16 @@ selection:
   
   
   
+  
+  
+  
 
 
 latency:
 
+  
+  
+  
   
   
   
@@ -5928,10 +6623,16 @@ text_only: "< 500ms"
   
   
   
+  
+  
+  
 
 
 text+image: "< 2s"
 
+  
+  
+  
   
   
   
@@ -5980,10 +6681,16 @@ audio_input: "< 5s"
   
   
   
+  
+  
+  
 
 
 video_analysis: "< 30s (batch)"
 
+  
+  
+  
   
   
   
@@ -6032,10 +6739,16 @@ cost:
   
   
   
+  
+  
+  
 
 
 text: "Baseline"
 
+  
+  
+  
   
   
   
@@ -6084,10 +6797,16 @@ text+image: "3-5x text cost"
   
   
   
+  
+  
+  
 
 
 audio: "5-10x text cost (per minute)"
 
+  
+  
+  
   
   
   
@@ -6136,10 +6855,16 @@ video: "10-20x text cost (per minute)"
   
   
   
+  
+  
+  
 
 
 context_window:
 
+  
+  
+  
   
   
   
@@ -6188,10 +6913,16 @@ text: "200K tokens"
   
   
   
+  
+  
+  
 
 
 text+image: "~100 images or 1 hour audio"
 
+  
+  
+  
   
   
   
@@ -6240,10 +6971,16 @@ video: "Limited by token count (~10-15 min)"
   
   
   
+  
+  
+  
 
 
 accuracy:
 
+  
+  
+  
   
   
   
@@ -6292,6 +7029,9 @@ OCR: ">99% on printed, >90% on handwriting"
   
   
   
+  
+  
+  
 
 
 scene_description: "Good on common scenes, poor on niche domains"
@@ -6318,10 +7058,16 @@ scene_description: "Good on common scenes, poor on niche domains"
   
   
   
+  
+  
+  
 
 
 audio_transcription: ">95% WER on clean speech, >80% on accented"
 
+  
+  
+  
   
   
   

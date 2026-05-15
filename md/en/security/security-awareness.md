@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/security-awareness.html
   
 
 
+# Security Awareness Training
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Security Awareness Matters 
 
+  
+  
+  
   
   
   
@@ -144,6 +173,9 @@ Human error remains the leading cause of security breaches. A well-designed secu
   
   
   
+  
+  
+  
 
 
 Phishing Simulations 
@@ -164,10 +196,16 @@ Phishing Simulations
   
   
   
+  
+  
+  
 
 
 Phishing simulations test employee vigilance in a controlled environment. A robust simulation platform should support: 
 
+  
+  
+  
   
   
   
@@ -210,10 +248,16 @@ import smtplib
   
   
   
+  
+  
+  
 
 
 from email.mime.text import MIMEText
 
+  
+  
+  
   
   
   
@@ -256,10 +300,16 @@ def send_simulation_email(target, template, tracking_id):
   
   
   
+  
+  
+  
 
 
 msg = MIMEText(template["body"])
 
+  
+  
+  
   
   
   
@@ -302,10 +352,16 @@ msg["Subject"] = template["subject"]
   
   
   
+  
+  
+  
 
 
 msg["From"] = template["from_address"]
 
+  
+  
+  
   
   
   
@@ -348,10 +404,16 @@ msg["From"] = template["from_address"]
   
   
   
+  
+  
+  
 
 
 tracking_url = f"https://sim.local/track/{tracking_id}"
 
+  
+  
+  
   
   
   
@@ -394,10 +456,16 @@ msg.add_header("X-Sim-ID", tracking_id)
   
   
   
+  
+  
+  
 
 
 with smtplib.SMTP("localhost", 1025) as server:
 
+  
+  
+  
   
   
   
@@ -440,10 +508,16 @@ server.send_message(msg)
   
   
   
+  
+  
+  
 
 
 Key metrics to track:
 
+  
+  
+  
   
   
   
@@ -480,10 +554,16 @@ Key metrics to track:
   
   
   
+  
+  
+  
 
 
 * Report rate (users reporting suspicious emails)
 
+  
+  
+  
   
   
   
@@ -523,10 +603,16 @@ Key metrics to track:
   
   
   
+  
+  
+  
 
 
 Gamification Strategies 
 
+  
+  
+  
   
   
   
@@ -566,10 +652,16 @@ Gamification increases engagement and retention. Effective approaches include:
   
   
   
+  
+  
+  
 
 
 * **Leaderboards**: Display department-level scores
 
+  
+  
+  
   
   
   
@@ -606,10 +698,16 @@ Gamification increases engagement and retention. Effective approaches include:
   
   
   
+  
+  
+  
 
 
 * **Challenges**: Monthly security puzzles with rewards
 
+  
+  
+  
   
   
   
@@ -652,10 +750,16 @@ Gamification increases engagement and retention. Effective approaches include:
   
   
   
+  
+  
+  
 
 
 const badges = {
 
+  
+  
+  
   
   
   
@@ -698,10 +802,16 @@ phishingSentinel: { name: "Phishing Sentinel", threshold: 10 },
   
   
   
+  
+  
+  
 
 
 reportMaster: { name: "Report Master", threshold: 50 },
 
+  
+  
+  
   
   
   
@@ -744,10 +854,16 @@ zeroClickHero: { name: "Zero-Click Hero", threshold: 5 }
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -790,10 +906,16 @@ function checkBadges(user) {
   
   
   
+  
+  
+  
 
 
 const earned = [];
 
+  
+  
+  
   
   
   
@@ -836,6 +958,9 @@ if (user.phishingReports >= badges.phishingSentinel.threshold) {
   
   
   
+  
+  
+  
 
 
 earned.push(badges.phishingSentinel);
@@ -859,10 +984,16 @@ earned.push(badges.phishingSentinel);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -905,10 +1036,16 @@ return earned;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -948,10 +1085,16 @@ Measuring Effectiveness
   
   
   
+  
+  
+  
 
 
 Define KPIs that go beyond completion rates: 
 
+  
+  
+  
   
   
   
@@ -991,10 +1134,16 @@ Define KPIs that go beyond completion rates:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Repeat offender rate**: Users who click multiple times 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reporting accuracy**: Ratio of genuine phishing reports vs false positives 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Behavior change retention**: Re-test scores after 3 and 6 months 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Repeat offender rate**: Users who click multiple times 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reporting accuracy**: Ratio of genuine phishing reports vs false positives 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Behavior change retention**: Re-test scores after 3 and 6 months 
 
+  
+  
+  
   
   
   
@@ -1031,10 +1180,16 @@ Training Content Structure
   
   
   
+  
+  
+  
 
 
 Organize content into tiers: 
 
+  
+  
+  
   
   
   
@@ -1071,6 +1226,9 @@ Organize content into tiers:
   
   
   
+  
+  
+  
 
 
 Automated Remediation 
@@ -1091,10 +1249,16 @@ Automated Remediation
   
   
   
+  
+  
+  
 
 
 When users fail simulations, trigger automated training: 
 
+  
+  
+  
   
   
   
@@ -1137,6 +1301,9 @@ When users fail simulations, trigger automated training:
   
   
   
+  
+  
+  
 
 
 on_phishing_click:
@@ -1160,10 +1327,16 @@ on_phishing_click:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: block_sender
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: block_sender
 
+  
+  
+  
   
   
   
@@ -1206,10 +1379,16 @@ duration: 1h
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: assign_training
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: assign_training
 
+  
+  
+  
   
   
   
@@ -1252,6 +1431,9 @@ module: phishing_101
   
   
   
+  
+  
+  
 
 
 deadline: 24h
@@ -1275,10 +1457,16 @@ deadline: 24h
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: notify_manager
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: notify_manager
 
+  
+  
+  
   
   
   
@@ -1321,6 +1509,9 @@ severity: low
   
   
   
+  
+  
+  
 
 
 if_repeat_offender:
@@ -1344,33 +1535,42 @@ if_repeat_offender:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: escalate
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: restrict_email_access
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: escalate
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- action: restrict_email_access
+
+  
+  
+  
   
   
   
@@ -1394,6 +1594,9 @@ if_repeat_offender:
 
 Conclusion 
 
+  
+  
+  
   
   
   

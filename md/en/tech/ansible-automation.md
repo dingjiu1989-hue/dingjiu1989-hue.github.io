@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/ansible-automation.html
   
   
   
+  
+  
+  
+
+
+# Ansible Automation: Playbooks, Roles, Inventory, and Vault 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction 
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ Ansible has become one of the most widely adopted configuration management and a
   
   
   
+  
+  
+  
 
 
 This article provides a technical deep dive into Ansible's core components: playbooks, roles, inventory management, Ansible Vault, idempotency, and a comparison with Terraform for infrastructure provisioning.
 
+  
+  
+  
   
   
   
@@ -260,6 +301,9 @@ This article provides a technical deep dive into Ansible's core components: play
   
   
   
+  
+  
+  
 
 
 Ansible Playbooks are YAML files that define automation workflows. A playbook contains one or more plays, each targeting a group of hosts and defining a set of tasks to execute. Tasks are executed sequentially, and each task calls an Ansible module.
@@ -286,10 +330,16 @@ Ansible Playbooks are YAML files that define automation workflows. A playbook co
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Configure web servers
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ hosts: webservers
   
   
   
+  
+  
+  
 
 
 become: yes
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ tasks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Install Nginx
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ apt:
   
   
   
+  
+  
+  
 
 
 name: nginx
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ state: present
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Ensure Nginx is running
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ service:
   
   
   
+  
+  
+  
 
 
 name: nginx
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ state: started
   
   
   
+  
+  
+  
 
 
 enabled: yes
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ Playbooks support conditionals with `when`, loops with `loop`, and error handlin
   
   
   
+  
+  
+  
 
 
 ##  Roles: Organizing Reusable Automation
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Roles are the recommended way to structure Ansible content. A role encapsulates 
   
   
   
+  
+  
+  
 
 
 roles/
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ nginx/
   
   
   
+  
+  
+  
 
 
 tasks/main.yml
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ handlers/main.yml
   
   
   
+  
+  
+  
 
 
 templates/nginx.conf.j2
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ vars/main.yml
   
   
   
+  
+  
+  
 
 
 defaults/main.yml
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ meta/main.yml
   
   
   
+  
+  
+  
 
 
 Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. Using `ansible-galaxy role install` in conjunction with a `requirements.yml` file allows teams to pin role versions, similar to dependency management in other ecosystems.
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ Roles can be shared via Ansible Galaxy, the community hub for pre-built roles. U
   
   
   
+  
+  
+  
 
 
 Ansible inventory defines the hosts and groups that playbooks target. Static inventories are simple INI or YAML files, but dynamic inventories are far more powerful in cloud environments.
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ all:
   
   
   
+  
+  
+  
 
 
 children:
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ webservers:
   
   
   
+  
+  
+  
 
 
 hosts:
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ web1:
   
   
   
+  
+  
+  
 
 
 ansible_host: 192.168.1.10
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ web2:
   
   
   
+  
+  
+  
 
 
 ansible_host: 192.168.1.11
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ databases:
   
   
   
+  
+  
+  
 
 
 hosts:
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ db1:
   
   
   
+  
+  
+  
 
 
 ansible_host: 192.168.1.20
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ Dynamic inventory scripts query cloud provider APIs (AWS EC2, GCP Compute, Azure
   
   
   
+  
+  
+  
 
 
 ##  Ansible Vault: Secrets Management
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ Ansible Vault encrypts sensitive data such as passwords, API keys, and certifica
   
   
   
+  
+  
+  
 
 
 Vault IDs allow multiple passwords for different environments: `ansible-vault encrypt --vault-id prod@prompt secrets.yml`. This is crucial for teams managing separate development, staging, and production vault passwords.
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ Vault IDs allow multiple passwords for different environments: `ansible-vault en
   
   
   
+  
+  
+  
 
 
 Idempotency means running the same playbook multiple times produces the same result without unintended side effects. Most Ansible modules are idempotent by design. The `apt` module, for example, only installs a package if it is not already present. The `copy` module only transfers a file if the source differs from the destination.
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ Testing idempotency is a best practice. Tools like `molecule` allow running play
   
   
   
+  
+  
+  
 
 
 ##  Ansible vs. Terraform
 
+  
+  
+  
   
   
   
@@ -1534,6 +1722,9 @@ While both tools are essential in modern infrastructure, they serve different pu
   
   
   
+  
+  
+  
 
 
 Many teams use Terraform to provision infrastructure and Ansible to configure it. For example, Terraform creates EC2 instances and security groups, and the Terraform inventory plugin passes those instances to Ansible for configuration. When both tools cover the same use case, choose based on whether you need state management (choose Terraform) or agentless configuration (choose Ansible).
@@ -1560,10 +1751,16 @@ Many teams use Terraform to provision infrastructure and Ansible to configure it
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

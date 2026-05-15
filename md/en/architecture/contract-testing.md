@@ -101,10 +101,39 @@ url: https://dingjiu1989-hue.github.io/en/architecture/contract-testing.html
   
   
   
+  
+  
+  
+
+
+# Contract Testing for Microservices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Contract testing verifies that a service provider meets the expectations of its consumers without running the full system. Each consumer defines the contract—specific API behavior it depends on. The provider validates against all consumer contracts in its CI pipeline.
 
+  
+  
+  
   
   
   
@@ -147,10 +176,16 @@ Contract testing verifies that a service provider meets the expectations of its 
   
   
   
+  
+  
+  
 
 
 End-to-end testing is slow, brittle, and expensive for microservices. Deploying a full test environment with every service is impractical at scale. Contract testing provides rapid feedback with minimal infrastructure. A provider can verify contract compatibility in seconds, not hours.
 
+  
+  
+  
   
   
   
@@ -193,10 +228,16 @@ Contract testing catches breaking changes before deployment. If a provider chang
   
   
   
+  
+  
+  
 
 
 ##  Consumer Tests
 
+  
+  
+  
   
   
   
@@ -239,10 +280,16 @@ Consumer tests define how the consumer uses the provider's API. A consumer test 
   
   
   
+  
+  
+  
 
 
 Consumer tests use Pact's mock provider. The mock returns realistic responses, allowing the consumer to validate its own API usage without the real provider running.
 
+  
+  
+  
   
   
   
@@ -285,10 +332,16 @@ Consumer tests use Pact's mock provider. The mock returns realistic responses, a
   
   
   
+  
+  
+  
 
 
 Provider tests verify that the real provider API satisfies all consumer contracts. The provider loads contract files from consumers and runs Pact verification against its actual API. Each endpoint, parameter, and response field specified in the contract is checked against the provider's actual behavior.
 
+  
+  
+  
   
   
   
@@ -331,10 +384,16 @@ Provider verification runs in CI, typically before deployment. A failed verifica
   
   
   
+  
+  
+  
 
 
 ##  CI Integration
 
+  
+  
+  
   
   
   
@@ -377,6 +436,9 @@ Publish consumer contract files to a Pact Broker after the consumer's CI passes.
   
   
   
+  
+  
+  
 
 
 The can-i-deploy tool checks whether a provider version is compatible with the version of each consumer that will consume it. This prevents incompatible deployments.
@@ -400,10 +462,16 @@ The can-i-deploy tool checks whether a provider version is compatible with the v
   
   
   
+  
+  
+  
 
 
 ##  Adoption
 
+  
+  
+  
   
   
   

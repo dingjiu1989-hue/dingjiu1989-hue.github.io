@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-content-generation.html
   
 
 
+# AI Content Generation Workflows
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ AI content generation has moved beyond simple blog post generators to sophistica
   
   
   
+  
+  
+  
 
 
 ##  Workflow Architecture
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ A production content generation system typically has five stages:
   
   
   
+  
+  
+  
 
 
-### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning
+### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Research and Planning
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Before generating a single word, the system gathers context:
   
   
   
+  
+  
+  
 
 
 * **Topic analysis**: What has already been written on this topic? What angles are underserved?
 
+  
+  
+  
   
   
   
@@ -332,6 +382,9 @@ Before generating a single word, the system gathers context:
   
   
   
+  
+  
+  
 
 
 * **Audience definition**: Who is the content for? What is their knowledge level?
@@ -355,10 +408,16 @@ Before generating a single word, the system gathers context:
   
   
   
+  
+  
+  
 
 
 * **Content brief creation**: A structured brief that guides all subsequent stages
 
+  
+  
+  
   
   
   
@@ -407,10 +466,16 @@ The content brief is the most important output of this stage. It defines:
   
   
   
+  
+  
+  
 
 
 * Target word count and format
 
+  
+  
+  
   
   
   
@@ -453,10 +518,16 @@ The content brief is the most important output of this stage. It defines:
   
   
   
+  
+  
+  
 
 
 * Desired tone and voice
 
+  
+  
+  
   
   
   
@@ -499,10 +570,16 @@ The content brief is the most important output of this stage. It defines:
   
   
   
+  
+  
+  
 
 
 * Target keywords with search intent
 
+  
+  
+  
   
   
   
@@ -548,10 +625,16 @@ The content brief is the most important output of this stage. It defines:
   
   
   
+  
+  
+  
 
 
-### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation
+### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Outline Generation
 
+  
+  
+  
   
   
   
@@ -600,36 +683,16 @@ The outline stage creates a structured skeleton:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H1: Main Title (includes primary keyword)
 
+  
+  
+  
   
   
   
@@ -654,34 +717,11 @@ The outline stage creates a structured skeleton:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Introduction (hooks reader, states value proposition)
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a
-
   
   
   
@@ -706,34 +746,11 @@ The outline stage creates a structured skeleton:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 1 (context and background)
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content)
-
   
   
   
@@ -758,34 +775,11 @@ The outline stage creates a structured skeleton:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1a
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation)
-
   
   
   
@@ -810,7 +804,7 @@ The outline stage creates a structured skeleton:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 1b
 
   
   
@@ -834,10 +828,132 @@ The outline stage creates a structured skeleton:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Section 2 (core content)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2a (with practical example)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H3: Subtopic 2b (with data/citation)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: Conclusion
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- H2: FAQ (3-5 questions with answers)
+
+  
+  
+  
   
   
   
@@ -886,10 +1002,16 @@ Generate multiple outline candidates and select the best one before proceeding. 
   
   
   
+  
+  
+  
 
 
-### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation
+### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Draft Generation
 
+  
+  
+  
   
   
   
@@ -938,10 +1060,16 @@ With the outline approved, generate each section independently:
   
   
   
+  
+  
+  
 
 
 **Sequential generation**: Write one section at a time, providing the previous section as context. This maintains narrative flow but can produce repetitive transitions.
 
+  
+  
+  
   
   
   
@@ -990,10 +1118,16 @@ With the outline approved, generate each section independently:
   
   
   
+  
+  
+  
 
 
 **Hybrid approach**: Generate the introduction and conclusion together, then each body section independently, then stitch with transition sentences:
 
+  
+  
+  
   
   
   
@@ -1042,10 +1176,16 @@ def generate_article(brief, outline, model):
   
   
   
+  
+  
+  
 
 
 intro = generate_section("introduction", brief, outline, model)
 
+  
+  
+  
   
   
   
@@ -1094,10 +1234,16 @@ sections = {}
   
   
   
+  
+  
+  
 
 
 for section in outline["body_sections"]:
 
+  
+  
+  
   
   
   
@@ -1146,6 +1292,9 @@ sections[section["id"]] = generate_section(
   
   
   
+  
+  
+  
 
 
 section, brief, {"intro": intro}, model
@@ -1172,10 +1321,16 @@ section, brief, {"intro": intro}, model
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1224,10 +1379,16 @@ conclusion = generate_section(
   
   
   
+  
+  
+  
 
 
 "conclusion", brief, {"intro": intro, "sections": sections}, model
 
+  
+  
+  
   
   
   
@@ -1276,6 +1437,9 @@ conclusion = generate_section(
   
   
   
+  
+  
+  
 
 
 return assemble_article(intro, sections, conclusion)
@@ -1302,10 +1466,16 @@ return assemble_article(intro, sections, conclusion)
   
   
   
+  
+  
+  
 
 
-### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control
+### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Quality Control
 
+  
+  
+  
   
   
   
@@ -1354,10 +1524,16 @@ Generation is not the end — it's where quality control begins:
   
   
   
+  
+  
+  
 
 
 * **Factual accuracy check**: Pass each factual claim through a verification prompt
 
+  
+  
+  
   
   
   
@@ -1400,10 +1576,16 @@ Generation is not the end — it's where quality control begins:
   
   
   
+  
+  
+  
 
 
 * **Tone and voice compliance**: Check against the defined brand guidelines
 
+  
+  
+  
   
   
   
@@ -1446,6 +1628,9 @@ Generation is not the end — it's where quality control begins:
   
   
   
+  
+  
+  
 
 
 * **Keyword density**: Verify target keywords appear naturally
@@ -1469,10 +1654,16 @@ Generation is not the end — it's where quality control begins:
   
   
   
+  
+  
+  
 
 
 * **Plagiarism check**: Compare against existing content
 
+  
+  
+  
   
   
   
@@ -1521,10 +1712,16 @@ Automated quality checks catch about 80% of issues. Remaining issues require hum
   
   
   
+  
+  
+  
 
 
-### 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish
+### 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Human Review and Polish
 
+  
+  
+  
   
   
   
@@ -1573,10 +1770,16 @@ Human reviewers focus on what AI cannot:
   
   
   
+  
+  
+  
 
 
 * Creative flair and unique perspective
 
+  
+  
+  
   
   
   
@@ -1619,6 +1822,9 @@ Human reviewers focus on what AI cannot:
   
   
   
+  
+  
+  
 
 
 * Logical flow and argument strength
@@ -1642,10 +1848,16 @@ Human reviewers focus on what AI cannot:
   
   
   
+  
+  
+  
 
 
 * Original insights beyond synthesized knowledge
 
+  
+  
+  
   
   
   
@@ -1694,10 +1906,16 @@ Build clear review guidelines and provide side-by-side comparison with the brief
   
   
   
+  
+  
+  
 
 
 ##  Multi-Modal Generation
 
+  
+  
+  
   
   
   
@@ -1746,10 +1964,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 * **Featured images**: DALL-E or Stable Diffusion for article headers
 
+  
+  
+  
   
   
   
@@ -1792,6 +2016,9 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 * **Social media snippets**: Pre-written posts for LinkedIn, Twitter/X, and newsletters
@@ -1815,10 +2042,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 * **Meta descriptions and SEO tags**: Auto-generated from article content
 
+  
+  
+  
   
   
   
@@ -1867,10 +2100,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 **Cost optimization**: Each stage of the pipeline consumes tokens. Budgeting:
 
+  
+  
+  
   
   
   
@@ -1919,10 +2158,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 |-------|-----------------------------------|
 
+  
+  
+  
   
   
   
@@ -1971,10 +2216,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 | Outline generation | ~5K tokens |
 
+  
+  
+  
   
   
   
@@ -2023,10 +2274,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 | Quality control | ~20K tokens |
 
+  
+  
+  
   
   
   
@@ -2075,10 +2332,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 **Batch processing**: Generate articles in batches to benefit from prompt caching and reduce per-article costs by 30-40%.
 
+  
+  
+  
   
   
   
@@ -2127,10 +2390,16 @@ Modern workflows generate supporting assets alongside text:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

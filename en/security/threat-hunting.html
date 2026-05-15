@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/threat-hunting.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "2982",
+      "wordCount": "3461",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/threat-hunting.html"},
-      "articleBody": "Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Introduction Threat hunting is the proactive search for malicious activity that evades existing security controls. Unlike automated detection, hunting is hypothesis-driven and iterative. It assumes that adversaries are already inside the network and seeks to find them before they achieve their objectives. The Hunting Maturity Model The Hunting Maturity Model (HMM) describes an organization's hunting capability across five levels: * **HMM0 \u2014 Initial**: Relies on automated alerts only; no proactive hunting * **HMM1 \u2014 Minimal**: IOC-based hunting using threat intelligence feeds * **HMM2 \u2014 Procedural**: Hunting follows documented procedures * **HMM3 \u2014 Innovative**: Creates novel data analysis techniques * **HMM4 \u2014 Leading**: Automates hunting at scale Hypothesis-Driven Hunting The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. Hypothesis: An adversary is using PowerShell for C2 communication Test: Find PowerShell processes making outbound connections def hunt_powershell_c2(time_window_hours=72): query = f\"\"\" SELECT p.pid, p.command_line, p.start_time, u.username, h.dest_ip, h.dest_port FROM processes p JOIN users u ON p.user_id = u.id JOIN network_connections h ON p.pid = h.pid WHERE p.name = 'powershell.exe' AND h.remote_port IN (80, 443, 8080) AND p.start_time > NOW() - INTERVAL '{time_window_hours} hours' AND p.command_line NOT LIKE '%WindowsPowerShell%' \"\"\" results = execute_hunt(query) for row in results: if suspicious_patterns.match(row.command_line): yield HuntingFinding( hypothesis=\"PowerShell C2\", evidence=row, severity=\"high\" ) MITRE ATT&CK; Mapping The MITRE ATT&CK; framework provides a common taxonomy for adversary behavior. Mapping hunts to ATT&CK; techniques ensures comprehensive coverage. hunt: name: \"DLL Search Order Hijacking\" technique_id: T1574.001 tactic: Persistence, Privilege Escalation data_sources: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Windows Event ID 4688 (Process Creation) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sysmon Event ID 7 (Image Loaded) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- File creation events in system directories hypothesis: \"Adversary places malicious DLL in search path before legitimate application loads\" query: platform: kql text: > Sysmon | where EventID == 7 | where ImageLoaded contains \"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" or ImageLoaded contains \"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" | where ImageLoaded endswith \".dll\" | join kind=inner ( Sysmon | where EventID == 1 ) on ProcessGuid Data Sources for Hunting Effective hunting requires rich telemetry. The best sources include: * **Process creation logs** (Event ID 4688 / Sysmon Event ID 1) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) C:\\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* Hunting Tools Velociraptor: collect process listing across fleet velociraptor --config client.config.yaml \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json > scheduled_tasks.json Zeek: analyze DNS logs for DGA patterns zeek-cut dns.query grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \\ awk '{len=length($1)} len>20 {print $1, len}' | \\ sort | uniq -c | sort -rn | head -20 KQL: hunting in Microsoft 365 Defender DeviceProcessEvents | where Timestamp > ago(7d) | where ProcessVersionInfoProductName == \"PsExec\" | where ProcessCommandLine contains \"-s\" | summarize LatestProcess=arg_max(Timestamp, *) by DeviceName | project DeviceName, AccountName, ProcessCommandLine, Timestamp Data Analysis Techniques Stack counting for anomaly detection def stack_count(events, field, top_n=10): \"\"\"Identify unusually frequent values.\"\"\" counts = Counter(getattr(e, field) for e in events) total = sum(counts.values()) for value, count in counts.most_common(top_n): ratio = count / total baseline = expected_ratio.get(field, value, 0.01) if ratio > baseline * 3: # 3x expected baseline yield Anomaly(field, value, ratio, baseline) Conclusion Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules."
+      "articleBody": "Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Threat Hunting Introduction Threat hunting is the proactive search for malicious activity that evades existing security controls. Unlike automated detection, hunting is hypothesis-driven and iterative. It assumes that adversaries are already inside the network and seeks to find them before they achieve their objectives. The Hunting Maturity Model The Hunting Maturity Model (HMM) describes an organization's hunting capability across five levels: * **HMM0 \u2014 Initial**: Relies on automated alerts only; no proactive hunting * **HMM1 \u2014 Minimal**: IOC-based hunting using threat intelligence feeds * **HMM2 \u2014 Procedural**: Hunting follows documented procedures * **HMM3 \u2014 Innovative**: Creates novel data analysis techniques * **HMM4 \u2014 Leading**: Automates hunting at scale Hypothesis-Driven Hunting The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. Hypothesis: An adversary is using PowerShell for C2 communication Test: Find PowerShell processes making outbound connections def hunt_powershell_c2(time_window_hours=72): query = f\"\"\" SELECT p.pid, p.command_line, p.start_time, u.username, h.dest_ip, h.dest_port FROM processes p JOIN users u ON p.user_id = u.id JOIN network_connections h ON p.pid = h.pid WHERE p.name = 'powershell.exe' AND h.remote_port IN (80, 443, 8080) AND p.start_time > NOW() - INTERVAL '{time_window_hours} hours' AND p.command_line NOT LIKE '%WindowsPowerShell%' \"\"\" results = execute_hunt(query) for row in results: if suspicious_patterns.match(row.command_line): yield HuntingFinding( hypothesis=\"PowerShell C2\", evidence=row, severity=\"high\" ) MITRE ATT&CK; Mapping The MITRE ATT&CK; framework provides a common taxonomy for adversary behavior. Mapping hunts to ATT&CK; techniques ensures comprehensive coverage. hunt: name: \"DLL Search Order Hijacking\" technique_id: T1574.001 tactic: Persistence, Privilege Escalation data_sources: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Windows Event ID 4688 (Process Creation) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sysmon Event ID 7 (Image Loaded) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- File creation events in system directories hypothesis: \"Adversary places malicious DLL in search path before legitimate application loads\" query: platform: kql text: > Sysmon | where EventID == 7 | where ImageLoaded contains \"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" or ImageLoaded contains \"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" | where ImageLoaded endswith \".dll\" | join kind=inner ( Sysmon | where EventID == 1 ) on ProcessGuid Data Sources for Hunting Effective hunting requires rich telemetry. The best sources include: * **Process creation logs** (Event ID 4688 / Sysmon Event ID 1) 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) C:\\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\* Hunting Tools Velociraptor: collect process listing across fleet velociraptor --config client.config.yaml \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json > scheduled_tasks.json Zeek: analyze DNS logs for DGA patterns zeek-cut dns.query grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \\ awk '{len=length($1)} len>20 {print $1, len}' | \\ sort | uniq -c | sort -rn | head -20 KQL: hunting in Microsoft 365 Defender DeviceProcessEvents | where Timestamp > ago(7d) | where ProcessVersionInfoProductName == \"PsExec\" | where ProcessCommandLine contains \"-s\" | summarize LatestProcess=arg_max(Timestamp, *) by DeviceName | project DeviceName, AccountName, ProcessCommandLine, Timestamp Data Analysis Techniques Stack counting for anomaly detection def stack_count(events, field, top_n=10): \"\"\"Identify unusually frequent values.\"\"\" counts = Counter(getattr(e, field) for e in events) total = sum(counts.values()) for value, count in counts.most_common(top_n): ratio = count / total baseline = expected_ratio.get(field, value, 0.01) if ratio > baseline * 3: # 3x expected baseline yield Anomaly(field, value, ratio, baseline) Conclusion Threat hunting transforms security operations from reactive to proactive. Start with structured hypotheses based on threat intelligence, map hunts to MITRE ATT&CK; techniques, ensure comprehensive data collection, and iterate based on findings. Mature hunting programs progressively automate successful hunt patterns into detection rules."
     }
     </script>
     <script type="application/ld+json">
@@ -153,7 +153,33 @@
 <br>
 <br>
 <br>
+<h1>Threat Hunting</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Introduction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -187,7 +213,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The Hunting Maturity Model </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -224,7 +256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **HMM0 — Initial**: Relies on automated alerts only; no proactive hunting</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -258,6 +296,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **HMM2 — Procedural**: Hunting follows documented procedures</p>
 <br>
 <br>
@@ -275,7 +316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **HMM3 — Innovative**: Creates novel data analysis techniques</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -312,6 +359,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Hypothesis-Driven Hunting </p>
 <br>
 <br>
@@ -329,7 +379,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The hypothesis is the foundation of every hunt. It should be testable, specific, and grounded in threat intelligence or risk assessment. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -369,7 +425,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Test: Find PowerShell processes making outbound connections</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -409,7 +471,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query = f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -449,7 +517,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>u.username, h.dest_ip, h.dest_port</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -489,7 +563,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JOIN users u ON p.user_id = u.id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -529,7 +609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE p.name = 'powershell.exe'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +655,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AND p.start_time > NOW() - INTERVAL '{time_window_hours} hours'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -609,7 +701,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -649,7 +747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for row in results:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -689,7 +793,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>yield HuntingFinding(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -729,7 +839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>evidence=row,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -769,7 +885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -806,7 +928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The MITRE ATT&CK; framework provides a common taxonomy for adversary behavior. Mapping hunts to ATT&CK; techniques ensures comprehensive coverage. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -846,7 +974,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: "DLL Search Order Hijacking"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -886,7 +1020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tactic: Persistence, Privilege Escalation</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -926,7 +1066,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Windows Event ID 4688 (Process Creation)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Windows Event ID 4688 (Process Creation)</p>
 <br>
 <br>
 <br>
@@ -946,7 +1089,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sysmon Event ID 7 (Image Loaded)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sysmon Event ID 7 (Image Loaded)</p>
 <br>
 <br>
 <br>
@@ -966,7 +1112,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- File creation events in system directories</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- File creation events in system directories</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1006,7 +1158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1046,7 +1204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text: ></p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1086,6 +1250,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| where EventID == 7</p>
 <br>
 <br>
@@ -1106,7 +1273,10 @@
 <br>
 <br>
 <br>
-<p>| where ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" </p>
+<br>
+<br>
+<br>
+<p>| where ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Temp\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" </p>
 <br>
 <br>
 <br>
@@ -1126,7 +1296,13 @@
 <br>
 <br>
 <br>
-<p>or ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"</p>
+<br>
+<br>
+<br>
+<p>or ImageLoaded contains "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1166,7 +1342,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| join kind=inner (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1206,7 +1388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) on ProcessGuid</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1243,7 +1431,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Effective hunting requires rich telemetry. The best sources include: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,7 +1474,10 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Network connections** (Sysmon Event ID 3, NetFlow, Zeek logs) 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DNS queries** (Zeek DNS, Windows DNS client logs) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **File system changes** (Sysmon Event ID 11) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Registry modifications** (Sysmon Event ID 12-14) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **PowerShell operational logs** (Event ID 4103, 4104) </p>
 <br>
 <br>
 <br>
@@ -1330,7 +1527,13 @@
 <br>
 <br>
 <br>
-<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*</p>
+<br>
+<br>
+<br>
+<p>C:\Windows\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1388,7 +1591,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Velociraptor: collect process listing across fleet</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1428,7 +1637,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler </p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--artifacts Windows.System.TaskScheduler </p>
 <br>
 <br>
 <br>
@@ -1448,7 +1660,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json > scheduled_tasks.json</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--format json > scheduled_tasks.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1488,6 +1706,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>zeek-cut dns.query < dns.log | \</p>
 <br>
 <br>
@@ -1508,7 +1729,13 @@
 <br>
 <br>
 <br>
-<p>grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \</p>
+<br>
+<br>
+<br>
+<p>grep -v '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.$' | \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1548,7 +1775,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sort | uniq -c | sort -rn | head -20</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1588,7 +1821,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DeviceProcessEvents</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1628,7 +1867,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| where ProcessVersionInfoProductName == "PsExec"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1668,7 +1913,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| summarize LatestProcess=arg_max(Timestamp, *) by DeviceName</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1708,7 +1959,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Data Analysis Techniques </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1748,7 +2005,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def stack_count(events, field, top_n=10):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1788,7 +2051,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>counts = Counter(getattr(e, field) for e in events)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1828,7 +2097,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for value, count in counts.most_common(top_n):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1868,7 +2143,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>baseline = expected_ratio.get(field, value, 0.01)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1908,6 +2189,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>yield Anomaly(field, value, ratio, baseline)</p>
 <br>
 <br>
@@ -1928,7 +2212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/indie-hackers-tools.html
   
 
 
+# Indie Hacker Tool Stack: Hosting, Analytics, Email, Payments, and Monitoring
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Every indie hacker faces the same dilemma: which tools to use and which to skip. Paying for too many tools drains runway. Using free tiers everywhere creates a maintenance mess. Here is the pragmatic indie hacker stack optimized for solo founders.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Every indie hacker faces the same dilemma: which tools to use and which to skip.
   
   
   
+  
+  
+  
 
 
 Vercel is the default choice for Next.js applications. The free tier includes 100 GB bandwidth and 100 GB-hours of serverless execution per month. For most early-stage SaaS products, this is sufficient through the first thousand users.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ For backend APIs, consider Railway or Fly.io. Railway offers generous free credi
   
   
   
+  
+  
+  
 
 
 Database hosting matters. Supabase offers a free tier with 500 MB database storage. Neon offers serverless Postgres with a generous free tier. Both scale gradually as you grow.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Do not waste money on dedicated servers or Kubernetes before you have paying cus
   
   
   
+  
+  
+  
 
 
 ##  Analytics
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Google Analytics is free but increasingly hostile to independent publishers. Swi
   
   
   
+  
+  
+  
 
 
 For product analytics, PostHog is the best choice for indie hackers. Self-host the open-source version for zero ongoing cost, or use the cloud version with a generous free tier.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Console Ninja and Sentry provide error tracking. Sentry's free tier includes 5,0
   
   
   
+  
+  
+  
 
 
 ##  Email
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Email is the most painful part of the indie stack. Self-hosting email is a recip
   
   
   
+  
+  
+  
 
 
 Resend offers a generous free tier of 100 emails per day with good deliverability. SendGrid offers 100 emails per day free forever. For transactional emails, both work well.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ For marketing emails and newsletters, convert kit or Buttondown offer affordable
   
   
   
+  
+  
+  
 
 
 Set up email authentication SPF, DKIM, and DMARC records regardless of which provider you use. Without these, your emails land in spam folders.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ Set up email authentication SPF, DKIM, and DMARC records regardless of which pro
   
   
   
+  
+  
+  
 
 
 Stripe is the obvious choice for processing payments. The API is excellent, the documentation is thorough, and the developer experience is best in class. For subscription billing, use Stripe Billing or Stripe Checkout.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Lemon Squeezy is an alternative that handles tax compliance as a merchant of rec
   
   
   
+  
+  
+  
 
 
 For invoicing, Stripe Invoices handles most needs. For accounting integration, consider Xero or QuickBooks once you have significant transaction volume.
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ For invoicing, Stripe Invoices handles most needs. For accounting integration, c
   
   
   
+  
+  
+  
 
 
 Uptime monitoring matters even for side projects. HetrixTools offers free monitoring of five uptime monitors. Better Uptime starts at $12 per month with status pages and incident management.
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ For application performance monitoring, Sentry handles error tracking. For serve
   
   
   
+  
+  
+  
 
 
 Set up a simple health check endpoint that tests database connectivity, API responsiveness, and background job completion. Monitor this endpoint from an external service.
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ Set up a simple health check endpoint that tests database connectivity, API resp
   
   
   
+  
+  
+  
 
 
 Linear for issue tracking. It is fast, keyboard-driven, and designed for small teams. The free tier covers solo developers well.
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ Notion for documentation. Keep architecture decisions, runbooks, and customer no
   
   
   
+  
+  
+  
 
 
 Arc or Chrome for development. Both have developer-friendly features. The tool matters less than consistent organization of bookmarks and tabs.
 
+  
+  
+  
   
   
   
@@ -858,6 +968,9 @@ Arc or Chrome for development. Both have developer-friendly features. The tool m
   
   
   
+  
+  
+  
 
 
 The enemy of the indie hacker is monthly subscription accumulation. Review your tool stack quarterly. Cancel anything you have not used in 30 days. Replace paid tools with free alternatives where possible.
@@ -884,10 +997,16 @@ The enemy of the indie hacker is monthly subscription accumulation. Review your 
   
   
   
+  
+  
+  
 
 
 Remember that your time is more valuable than tool costs. Pay for tools that save you significant time. Skip tools that only provide marginal benefit. A $20 per month tool that saves two hours per month is a bargain. A free tool that costs you an hour per week is expensive.
 
+  
+  
+  
   
   
   

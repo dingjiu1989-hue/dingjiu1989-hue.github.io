@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/event-notification-vs-event-carrying.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "587",
+      "wordCount": "645",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/event-notification-vs-event-carrying.html"},
-      "articleBody": "Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy. Event Notification The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling\u2014consumers know only that something changed. The publisher's API remains the source of truth. Drawbacks: each consumer must make additional API calls. This increases latency and reduces availability. If the publisher is down during event processing, consumers cannot get the full picture. Event-Carried State Transfer The publisher includes all relevant data in the event. Consumers can process events without querying the publisher. This reduces latency and increases resilience\u2014consumers have the data they need even if the publisher is unavailable. Trade-offs: data duplication increases storage requirements. Consumers may have stale data if the publisher changes its data model. The event schema becomes a public contract between publisher and consumers. Choosing Use event notification when the consumer always needs fresh data or the event's context is minimal. Use event-carried state transfer when consumers need data immediately or the publisher's API availability cannot be guaranteed."
+      "articleBody": "Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event Notification vs Event-Carried State Transfer Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy. Event Notification The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling\u2014consumers know only that something changed. The publisher's API remains the source of truth. Drawbacks: each consumer must make additional API calls. This increases latency and reduces availability. If the publisher is down during event processing, consumers cannot get the full picture. Event-Carried State Transfer The publisher includes all relevant data in the event. Consumers can process events without querying the publisher. This reduces latency and increases resilience\u2014consumers have the data they need even if the publisher is unavailable. Trade-offs: data duplication increases storage requirements. Consumers may have stale data if the publisher changes its data model. The event schema becomes a public contract between publisher and consumers. Choosing Use event notification when the consumer always needs fresh data or the event's context is minimal. Use event-carried state transfer when consumers need data immediately or the publisher's API availability cannot be guaranteed."
     }
     </script>
     <script type="application/ld+json">
@@ -150,7 +150,33 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Event Notification vs Event-Carried State Transfer</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Event notification and event-carried state transfer are two patterns for communicating state changes between microservices. The choice affects coupling, data consistency, and service autonomy.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -190,7 +216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The publisher sends only a reference to the changed entity. Consumers must query the publisher's API for details. This minimizes coupling—consumers know only that something changed. The publisher's API remains the source of truth.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -230,7 +262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Event-Carried State Transfer</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -270,6 +308,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Trade-offs: data duplication increases storage requirements. Consumers may have stale data if the publisher changes its data model. The event schema becomes a public contract between publisher and consumers.</p>
 <br>
 <br>
@@ -290,7 +331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Choosing</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tools/ai-cli-tools-guide.html
   
   
   
+  
+  
+  
+
+
+# Building AI-Powered CLI Tools: A Complete Guide for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The terminal is having a renaissance. Developers spend hours in it every day — and LLMs have turned it from a read-only window into something that can understand, generate, and transform code and text. An AI-powered CLI tool isn't just an API wrapper with a flag parser. It's a new kind of interface: one where the computer can *interpret intent, reason about context, and take action*.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ This guide covers how to build these tools end-to-end: architecture patterns, Py
   
   
   
+  
+  
+  
 
 
 ##  Why AI CLI Tools Are Different
 
+  
+  
+  
   
   
   
@@ -260,10 +301,16 @@ A traditional CLI tool maps flags to function calls. An AI CLI tool does somethi
   
   
   
+  
+  
+  
 
 
 * **It interprets natural language.** `tldr docker-compose` searches a cheat sheet. `gpt "explain docker-compose networking"` understands intent.
 
+  
+  
+  
   
   
   
@@ -306,6 +353,9 @@ A traditional CLI tool maps flags to function calls. An AI CLI tool does somethi
   
   
   
+  
+  
+  
 
 
 * **It can take multi-step actions.** Not just "output text" but "read files, plan, execute, verify."
@@ -329,10 +379,16 @@ A traditional CLI tool maps flags to function calls. An AI CLI tool does somethi
   
   
   
+  
+  
+  
 
 
 * **It streams reasoning.** Users see the model think, which builds trust and lets them cancel early.
 
+  
+  
+  
   
   
   
@@ -381,10 +437,16 @@ The architecture looks like this:
   
   
   
+  
+  
+  
 
 
 User Input (args, stdin, interactive) → CLI Framework (Click/Commander)
 
+  
+  
+  
   
   
   
@@ -433,10 +495,16 @@ User Input (args, stdin, interactive) → CLI Framework (Click/Commander)
   
   
   
+  
+  
+  
 
 
 → LLM SDK (OpenAI/Anthropic/Claude)
 
+  
+  
+  
   
   
   
@@ -485,10 +553,16 @@ User Input (args, stdin, interactive) → CLI Framework (Click/Commander)
   
   
   
+  
+  
+  
 
 
 The CLI framework handles input parsing and help text. The orchestrator constructs prompts, manages conversation history, and decides when to call tools. The LLM SDK is a thin wrapper — the real work is in prompt engineering and tool orchestration.
 
+  
+  
+  
   
   
   
@@ -537,10 +611,16 @@ The CLI framework handles input parsing and help text. The orchestrator construc
   
   
   
+  
+  
+  
 
 
 Every AI CLI tool shares these layers:
 
+  
+  
+  
   
   
   
@@ -589,10 +669,16 @@ Every AI CLI tool shares these layers:
   
   
   
+  
+  
+  
 
 
 **Context Layer.** Gathers information the model needs: file contents, git diff output, directory listings, environment variables, previous conversation turns.
 
+  
+  
+  
   
   
   
@@ -641,10 +727,16 @@ Every AI CLI tool shares these layers:
   
   
   
+  
+  
+  
 
 
 **Output Layer.** Streams tokens to stdout, formats structured output (JSON, markdown), and handles errors gracefully.
 
+  
+  
+  
   
   
   
@@ -693,10 +785,16 @@ The key design decision is **stateless vs. stateful**. Stateless tools (one ques
   
   
   
+  
+  
+  
 
 
 ##  Python: Click + LLM SDK
 
+  
+  
+  
   
   
   
@@ -745,10 +843,16 @@ Python is the most popular language for CLI tools, and [Click](https://click.pal
   
   
   
+  
+  
+  
 
 
 import click
 
+  
+  
+  
   
   
   
@@ -797,6 +901,9 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI()
@@ -823,10 +930,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 @click.command()
 
+  
+  
+  
   
   
   
@@ -875,10 +988,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 @click.option("--model", default="gpt-4o", help="Model to use")
 
+  
+  
+  
   
   
   
@@ -927,10 +1046,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 def ask(prompt, model, system):
 
+  
+  
+  
   
   
   
@@ -979,10 +1104,16 @@ def ask(prompt, model, system):
   
   
   
+  
+  
+  
 
 
 if not prompt and not click.get_text_stream("stdin").isatty():
 
+  
+  
+  
   
   
   
@@ -1031,10 +1162,16 @@ prompt = click.get_text_stream("stdin").read().strip()
   
   
   
+  
+  
+  
 
 
 if not prompt:
 
+  
+  
+  
   
   
   
@@ -1083,10 +1220,16 @@ click.echo("Usage: ask PROMPT or pipe input")
   
   
   
+  
+  
+  
 
 
 return
 
+  
+  
+  
   
   
   
@@ -1135,10 +1278,16 @@ stream = client.chat.completions.create(
   
   
   
+  
+  
+  
 
 
 model=model,
 
+  
+  
+  
   
   
   
@@ -1187,10 +1336,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 {"role": "system", "content": system},
 
+  
+  
+  
   
   
   
@@ -1239,10 +1394,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1291,10 +1452,16 @@ stream=True,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1343,10 +1510,16 @@ for chunk in stream:
   
   
   
+  
+  
+  
 
 
 content = chunk.choices[0].delta.content or ""
 
+  
+  
+  
   
   
   
@@ -1395,6 +1568,9 @@ click.echo(content, nl=False)
   
   
   
+  
+  
+  
 
 
 click.echo()
@@ -1421,10 +1597,16 @@ click.echo()
   
   
   
+  
+  
+  
 
 
 if __name__ == "__main__":
 
+  
+  
+  
   
   
   
@@ -1473,10 +1655,16 @@ ask()
   
   
   
+  
+  
+  
 
 
 This tool accepts input as an argument or via stdin pipe, streams the response character by character, and uses Click's built-in help formatting. The streaming loop is the critical difference from a non-AI CLI — users expect to see output appear incrementally, not wait for a full response.
 
+  
+  
+  
   
   
   
@@ -1525,10 +1713,16 @@ For a richer experience with [Typer](https://typer.tiangolo.com/) (Click with ty
   
   
   
+  
+  
+  
 
 
 import typer
 
+  
+  
+  
   
   
   
@@ -1577,10 +1771,16 @@ from rich.console import Console
   
   
   
+  
+  
+  
 
 
 from rich.live import Live
 
+  
+  
+  
   
   
   
@@ -1629,10 +1829,16 @@ from rich.markdown import Markdown
   
   
   
+  
+  
+  
 
 
 from anthropic import Anthropic
 
+  
+  
+  
   
   
   
@@ -1681,6 +1887,9 @@ app = typer.Typer()
   
   
   
+  
+  
+  
 
 
 console = Console()
@@ -1707,10 +1916,16 @@ console = Console()
   
   
   
+  
+  
+  
 
 
 client = Anthropic()
 
+  
+  
+  
   
   
   
@@ -1759,10 +1974,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 def chat(
 
+  
+  
+  
   
   
   
@@ -1811,10 +2032,16 @@ prompt: str = typer.Argument(None, help="Your question"),
   
   
   
+  
+  
+  
 
 
 model: str = "claude-sonnet-4-20250514",
 
+  
+  
+  
   
   
   
@@ -1863,10 +2090,16 @@ model: str = "claude-sonnet-4-20250514",
   
   
   
+  
+  
+  
 
 
 """Chat with Claude from the terminal."""
 
+  
+  
+  
   
   
   
@@ -1915,10 +2148,16 @@ if not prompt:
   
   
   
+  
+  
+  
 
 
 import sys
 
+  
+  
+  
   
   
   
@@ -1967,10 +2206,16 @@ prompt = sys.stdin.read().strip()
   
   
   
+  
+  
+  
 
 
 with client.messages.stream(
 
+  
+  
+  
   
   
   
@@ -2019,10 +2264,16 @@ model=model,
   
   
   
+  
+  
+  
 
 
 max_tokens=4096,
 
+  
+  
+  
   
   
   
@@ -2071,10 +2322,16 @@ messages=[{"role": "user", "content": prompt}],
   
   
   
+  
+  
+  
 
 
 ) as stream:
 
+  
+  
+  
   
   
   
@@ -2123,6 +2380,9 @@ with Live(refresh_per_second=15) as live:
   
   
   
+  
+  
+  
 
 
 collected = ""
@@ -2149,10 +2409,16 @@ collected = ""
   
   
   
+  
+  
+  
 
 
 for text in stream.text_stream:
 
+  
+  
+  
   
   
   
@@ -2201,6 +2467,9 @@ collected += text
   
   
   
+  
+  
+  
 
 
 live.update(Markdown(collected))
@@ -2227,10 +2496,16 @@ live.update(Markdown(collected))
   
   
   
+  
+  
+  
 
 
 if __name__ == "__main__":
 
+  
+  
+  
   
   
   
@@ -2279,10 +2554,16 @@ app()
   
   
   
+  
+  
+  
 
 
 Rich's `Live` display with Markdown rendering makes the terminal feel like a chat UI. The `stream.text_stream` pattern gives you tokens as they arrive.
 
+  
+  
+  
   
   
   
@@ -2331,10 +2612,16 @@ Rich's `Live` display with Markdown rendering makes the terminal feel like a cha
   
   
   
+  
+  
+  
 
 
 In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the standard CLI framework. [LangChain](https://js.langchain.com/) adds LLM orchestration, or you can use the SDK directly.
 
+  
+  
+  
   
   
   
@@ -2383,10 +2670,16 @@ In the Node.js ecosystem, [Commander](https://github.com/tj/commander.js) is the
   
   
   
+  
+  
+  
 
 
 import { Command } from 'commander';
 
+  
+  
+  
   
   
   
@@ -2435,6 +2728,9 @@ import Anthropic from '@anthropic-ai/sdk';
   
   
   
+  
+  
+  
 
 
 const client = new Anthropic();
@@ -2461,10 +2757,16 @@ const client = new Anthropic();
   
   
   
+  
+  
+  
 
 
 const program = new Command()
 
+  
+  
+  
   
   
   
@@ -2513,10 +2815,16 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 .description('Ask Claude a question')
 
+  
+  
+  
   
   
   
@@ -2565,10 +2873,16 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 .option('-m, --model ', 'Model to use', 'claude-sonnet-4-20250514')
 
+  
+  
+  
   
   
   
@@ -2617,6 +2931,9 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 .action(async (prompt, options) => {
@@ -2643,10 +2960,16 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 if (!prompt) {
 
+  
+  
+  
   
   
   
@@ -2695,6 +3018,9 @@ const stdin = process.stdin.read();
   
   
   
+  
+  
+  
 
 
 prompt = stdin?.toString().trim();
@@ -2721,10 +3047,16 @@ prompt = stdin?.toString().trim();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2773,10 +3105,16 @@ if (!prompt) {
   
   
   
+  
+  
+  
 
 
 console.error('Usage: ask PROMPT or pipe input');
 
+  
+  
+  
   
   
   
@@ -2825,10 +3163,16 @@ process.exit(1);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2877,10 +3221,16 @@ const stream = await client.messages.stream({
   
   
   
+  
+  
+  
 
 
 model: options.model,
 
+  
+  
+  
   
   
   
@@ -2929,10 +3279,16 @@ max_tokens: 4096,
   
   
   
+  
+  
+  
 
 
 system: options.system,
 
+  
+  
+  
   
   
   
@@ -2981,10 +3337,16 @@ messages: [{ role: 'user', content: prompt }],
   
   
   
+  
+  
+  
 
 
 }).on('text', (text) => process.stdout.write(text));
 
+  
+  
+  
   
   
   
@@ -3033,6 +3395,9 @@ console.log();
   
   
   
+  
+  
+  
 
 
 });
@@ -3059,10 +3424,16 @@ console.log();
   
   
   
+  
+  
+  
 
 
 program.parse();
 
+  
+  
+  
   
   
   
@@ -3111,10 +3482,16 @@ The `@anthropic-ai/sdk` Node.js streaming API emits `text` events. Write each ch
   
   
   
+  
+  
+  
 
 
 import { Command } from 'commander';
 
+  
+  
+  
   
   
   
@@ -3163,10 +3540,16 @@ import { ChatOpenAI } from '@langchain/openai';
   
   
   
+  
+  
+  
 
 
 import { StringOutputParser } from '@langchain/core/output_parsers';
 
+  
+  
+  
   
   
   
@@ -3215,10 +3598,16 @@ import { ChatPromptTemplate } from '@langchain/core/prompts';
   
   
   
+  
+  
+  
 
 
 const model = new ChatOpenAI({ model: 'gpt-4o', streaming: true });
 
+  
+  
+  
   
   
   
@@ -3267,10 +3656,16 @@ const parser = new StringOutputParser();
   
   
   
+  
+  
+  
 
 
 const prompt = ChatPromptTemplate.fromMessages([
 
+  
+  
+  
   
   
   
@@ -3319,10 +3714,16 @@ const prompt = ChatPromptTemplate.fromMessages([
   
   
   
+  
+  
+  
 
 
 ['user', 'Explain {topic} in one paragraph.'],
 
+  
+  
+  
   
   
   
@@ -3371,10 +3772,16 @@ const prompt = ChatPromptTemplate.fromMessages([
   
   
   
+  
+  
+  
 
 
 const chain = prompt.pipe(model).pipe(parser);
 
+  
+  
+  
   
   
   
@@ -3423,10 +3830,16 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 .argument('')
 
+  
+  
+  
   
   
   
@@ -3475,10 +3888,16 @@ const program = new Command()
   
   
   
+  
+  
+  
 
 
 const stream = await chain.stream({ topic });
 
+  
+  
+  
   
   
   
@@ -3527,6 +3946,9 @@ for await (const chunk of stream) {
   
   
   
+  
+  
+  
 
 
 process.stdout.write(chunk);
@@ -3553,10 +3975,16 @@ process.stdout.write(chunk);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3605,10 +4033,16 @@ console.log();
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -3657,10 +4091,16 @@ program.parse();
   
   
   
+  
+  
+  
 
 
 LangChain shines when you need tool-calling agents (reading files, running commands, browsing the web). The chain abstraction keeps the orchestration readable.
 
+  
+  
+  
   
   
   
@@ -3709,10 +4149,16 @@ LangChain shines when you need tool-calling agents (reading files, running comma
   
   
   
+  
+  
+  
 
 
 Streaming is table stakes. Users won't wait 10 seconds for a full response. Here's the pattern that works across languages:
 
+  
+  
+  
   
   
   
@@ -3761,36 +4207,16 @@ Streaming is table stakes. Users won't wait 10 seconds for a full response. Here
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Write each token** to stdout as it arrives — no buffering.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Write each token** to stdout as it arrives — no buffering.
 
+  
+  
+  
   
   
   
@@ -3815,8 +4241,40 @@ Streaming is table stakes. Users won't wait 10 seconds for a full response. Here
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Handle backpressure.** If the terminal is slow, don't drop tokens; let the OS buffer.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Support Ctrl+C.** Trap SIGINT to print a clean exit, not a traceback.
+
+  
+  
+  
   
   
   
@@ -3865,10 +4323,16 @@ In Python with Click:
   
   
   
+  
+  
+  
 
 
 import signal
 
+  
+  
+  
   
   
   
@@ -3917,10 +4381,16 @@ import sys
   
   
   
+  
+  
+  
 
 
 def handle_interrupt(sig, frame):
 
+  
+  
+  
   
   
   
@@ -3969,10 +4439,16 @@ click.echo("\n[Interrupted]", err=True)
   
   
   
+  
+  
+  
 
 
 sys.exit(130)
 
+  
+  
+  
   
   
   
@@ -4021,10 +4497,16 @@ signal.signal(signal.SIGINT, handle_interrupt)
   
   
   
+  
+  
+  
 
 
 In Node.js with Commander:
 
+  
+  
+  
   
   
   
@@ -4073,10 +4555,16 @@ process.on('SIGINT', () => {
   
   
   
+  
+  
+  
 
 
 console.error('\n[Interrupted]');
 
+  
+  
+  
   
   
   
@@ -4125,10 +4613,16 @@ process.exit(130);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -4177,10 +4671,16 @@ Rich formatting (Markdown, syntax highlighting) makes streaming output readable.
   
   
   
+  
+  
+  
 
 
 ##  Pattern: Interactive Multi-Step Tools
 
+  
+  
+  
   
   
   
@@ -4229,10 +4729,16 @@ Not every tool is a single query. Interactive tools maintain state across turns.
   
   
   
+  
+  
+  
 
 
 import click
 
+  
+  
+  
   
   
   
@@ -4281,6 +4787,9 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI()
@@ -4307,10 +4816,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 @click.command()
 
+  
+  
+  
   
   
   
@@ -4359,10 +4874,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 def chat(model):
 
+  
+  
+  
   
   
   
@@ -4411,10 +4932,16 @@ def chat(model):
   
   
   
+  
+  
+  
 
 
 click.echo("Chat session started. Type /exit to quit.", err=True)
 
+  
+  
+  
   
   
   
@@ -4463,10 +4990,16 @@ messages = [{"role": "system", "content": "You are a helpful assistant."}]
   
   
   
+  
+  
+  
 
 
 while True:
 
+  
+  
+  
   
   
   
@@ -4515,6 +5048,9 @@ user_input = click.prompt("You", prompt_suffix="> ")
   
   
   
+  
+  
+  
 
 
 if user_input.strip() == "/exit":
@@ -4541,10 +5077,16 @@ if user_input.strip() == "/exit":
   
   
   
+  
+  
+  
 
 
 break
 
+  
+  
+  
   
   
   
@@ -4593,10 +5135,16 @@ messages.append({"role": "user", "content": user_input})
   
   
   
+  
+  
+  
 
 
 stream = client.chat.completions.create(
 
+  
+  
+  
   
   
   
@@ -4645,10 +5193,16 @@ model=model, messages=messages, stream=True
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4697,10 +5251,16 @@ click.echo("AI: ", nl=False)
   
   
   
+  
+  
+  
 
 
 collected = ""
 
+  
+  
+  
   
   
   
@@ -4749,10 +5309,16 @@ for chunk in stream:
   
   
   
+  
+  
+  
 
 
 content = chunk.choices[0].delta.content or ""
 
+  
+  
+  
   
   
   
@@ -4801,6 +5367,9 @@ collected += content
   
   
   
+  
+  
+  
 
 
 click.echo(content, nl=False)
@@ -4827,10 +5396,16 @@ click.echo(content, nl=False)
   
   
   
+  
+  
+  
 
 
 click.echo()
 
+  
+  
+  
   
   
   
@@ -4879,10 +5454,16 @@ messages.append({"role": "assistant", "content": collected})
   
   
   
+  
+  
+  
 
 
 For **tool-using agents**, the pattern extends to a loop: the model requests a tool call, your code executes it and feeds the result back, the model continues:
 
+  
+  
+  
   
   
   
@@ -4931,10 +5512,16 @@ while True:
   
   
   
+  
+  
+  
 
 
 response = client.responses.create(
 
+  
+  
+  
   
   
   
@@ -4983,10 +5570,16 @@ model="gpt-4o",
   
   
   
+  
+  
+  
 
 
 input=messages,
 
+  
+  
+  
   
   
   
@@ -5035,10 +5628,16 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 "type": "function",
 
+  
+  
+  
   
   
   
@@ -5087,10 +5686,16 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 "name": "read_file",
 
+  
+  
+  
   
   
   
@@ -5139,10 +5744,16 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 "parameters": {
 
+  
+  
+  
   
   
   
@@ -5191,10 +5802,16 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 "properties": {
 
+  
+  
+  
   
   
   
@@ -5243,29 +5860,6 @@ tools=[{
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -5295,10 +5889,45 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -5347,10 +5976,16 @@ tools=[{
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -5399,10 +6034,16 @@ if response.output[0].type == "function_call":
   
   
   
+  
+  
+  
 
 
 fn = response.output[0]
 
+  
+  
+  
   
   
   
@@ -5451,6 +6092,9 @@ result = execute_tool(fn.name, json.loads(fn.arguments))
   
   
   
+  
+  
+  
 
 
 messages.append({"role": "tool", "content": str(result), "tool_call_id": fn.id})
@@ -5477,10 +6121,16 @@ messages.append({"role": "tool", "content": str(result), "tool_call_id": fn.id})
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -5529,10 +6179,16 @@ click.echo(response.output_text)
   
   
   
+  
+  
+  
 
 
 break
 
+  
+  
+  
   
   
   
@@ -5581,10 +6237,16 @@ This is the same pattern powering Claude Code and similar AI coding agents. The 
   
   
   
+  
+  
+  
 
 
 ##  Pattern: File-Aware Tools
 
+  
+  
+  
   
   
   
@@ -5633,10 +6295,16 @@ File-aware tools read the user's working directory before generating responses. 
   
   
   
+  
+  
+  
 
 
 import os
 
+  
+  
+  
   
   
   
@@ -5685,10 +6353,16 @@ import click
   
   
   
+  
+  
+  
 
 
 from anthropic import Anthropic
 
+  
+  
+  
   
   
   
@@ -5737,10 +6411,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.command()
 
+  
+  
+  
   
   
   
@@ -5789,10 +6469,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.option("--recursive/--no-recursive", default=True)
 
+  
+  
+  
   
   
   
@@ -5841,10 +6527,16 @@ def analyze(files, recursive):
   
   
   
+  
+  
+  
 
 
 """Analyze files with AI assistance."""
 
+  
+  
+  
   
   
   
@@ -5893,10 +6585,16 @@ contents = []
   
   
   
+  
+  
+  
 
 
 for f in files:
 
+  
+  
+  
   
   
   
@@ -5945,10 +6643,16 @@ if os.path.isfile(f):
   
   
   
+  
+  
+  
 
 
 with open(f) as fh:
 
+  
+  
+  
   
   
   
@@ -5997,10 +6701,16 @@ contents.append(f"### {f}\n\n```\n{fh.read()}\n```")
   
   
   
+  
+  
+  
 
 
 elif os.path.isdir(f) and recursive:
 
+  
+  
+  
   
   
   
@@ -6049,10 +6759,16 @@ for root, _, filenames in os.walk(f):
   
   
   
+  
+  
+  
 
 
 for fn in filenames:
 
+  
+  
+  
   
   
   
@@ -6101,10 +6817,16 @@ path = os.path.join(root, fn)
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -6153,10 +6875,16 @@ with open(path) as fh:
   
   
   
+  
+  
+  
 
 
 contents.append(f"### {path}\n\n```\n{fh.read()}\n```")
 
+  
+  
+  
   
   
   
@@ -6205,10 +6933,16 @@ except Exception:
   
   
   
+  
+  
+  
 
 
 pass
 
+  
+  
+  
   
   
   
@@ -6257,6 +6991,9 @@ context = "\n\n".join(contents[:20]) # limit context size
   
   
   
+  
+  
+  
 
 
 prompt = f"The user wants to understand these files:\n\n{context}"
@@ -6283,10 +7020,16 @@ prompt = f"The user wants to understand these files:\n\n{context}"
   
   
   
+  
+  
+  
 
 
 with client.messages.stream(
 
+  
+  
+  
   
   
   
@@ -6335,10 +7078,16 @@ model="claude-sonnet-4-20250514",
   
   
   
+  
+  
+  
 
 
 max_tokens=4096,
 
+  
+  
+  
   
   
   
@@ -6387,10 +7136,16 @@ messages=[{"role": "user", "content": prompt}],
   
   
   
+  
+  
+  
 
 
 ) as stream:
 
+  
+  
+  
   
   
   
@@ -6439,6 +7194,9 @@ for text in stream.text_stream:
   
   
   
+  
+  
+  
 
 
 click.echo(text, nl=False)
@@ -6465,10 +7223,16 @@ click.echo(text, nl=False)
   
   
   
+  
+  
+  
 
 
 click.echo()
 
+  
+  
+  
   
   
   
@@ -6517,10 +7281,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 * **Token counting.** Use `tiktoken` (Python) or `gpt-tokenizer` (Node.js) to count tokens before sending. Truncate when approaching the model's limit.
 
+  
+  
+  
   
   
   
@@ -6563,6 +7333,9 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 * **Smart filtering.** Skip binary files, node_modules, .git, and other non-text directories automatically.
@@ -6586,10 +7359,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 * **Chunking.** For large files, send only relevant sections (first 50 lines, function signatures, recent git changes).
 
+  
+  
+  
   
   
   
@@ -6638,10 +7417,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 | Feature | Click | Typer | Commander | Clack |
 
+  
+  
+  
   
   
   
@@ -6690,10 +7475,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 | **Language** | Python | Python | Node.js | Node.js |
 
+  
+  
+  
   
   
   
@@ -6742,10 +7533,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 | **Help text** | Auto (good) | Auto (excellent) | Auto | Auto |
 
+  
+  
+  
   
   
   
@@ -6794,10 +7591,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 | **Interactive prompts** | Yes (click.prompt) | Yes | Manual | Rich (native) |
 
+  
+  
+  
   
   
   
@@ -6846,10 +7649,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 | **Spinner/progress** | No | Rich integration | No | Built-in spinners |
 
+  
+  
+  
   
   
   
@@ -6898,10 +7707,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 **Click** is the battle-tested Python standard. It handles argument parsing, help text formatting, subcommands, and shell completion. The decorator API is clean and composable.
 
+  
+  
+  
   
   
   
@@ -6950,10 +7765,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 **Commander** is Click's Node.js equivalent. It's minimal, widely used, and easy to extend. You handle streaming and spinners yourself.
 
+  
+  
+  
   
   
   
@@ -7002,10 +7823,16 @@ The key challenge is **context window management**. You can't dump every file in
   
   
   
+  
+  
+  
 
 
 For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js) are the most productive combinations.
 
+  
+  
+  
   
   
   
@@ -7054,10 +7881,16 @@ For AI CLI tools, Typer + Rich (Python) or Commander + `@clack/prompt` (Node.js)
   
   
   
+  
+  
+  
 
 
 This tool runs `git diff` against the staging area, sends the diff to an LLM for review, and outputs structured feedback.
 
+  
+  
+  
   
   
   
@@ -7106,10 +7939,16 @@ This tool runs `git diff` against the staging area, sends the diff to an LLM for
   
   
   
+  
+  
+  
 
 
 import subprocess
 
+  
+  
+  
   
   
   
@@ -7158,10 +7997,16 @@ import click
   
   
   
+  
+  
+  
 
 
 from anthropic import Anthropic
 
+  
+  
+  
   
   
   
@@ -7210,10 +8055,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.command()
 
+  
+  
+  
   
   
   
@@ -7262,10 +8113,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.option("--model", default="claude-sonnet-4-20250514")
 
+  
+  
+  
   
   
   
@@ -7314,10 +8171,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 def review(diff, model, output):
 
+  
+  
+  
   
   
   
@@ -7366,10 +8229,16 @@ def review(diff, model, output):
   
   
   
+  
+  
+  
 
 
 # Get git diff
 
+  
+  
+  
   
   
   
@@ -7418,10 +8287,16 @@ cmd = ["git", "diff", "--cached"]
   
   
   
+  
+  
+  
 
 
 if diff:
 
+  
+  
+  
   
   
   
@@ -7470,6 +8345,9 @@ cmd = ["git", "diff"]
   
   
   
+  
+  
+  
 
 
 result = subprocess.run(cmd, capture_output=True, text=True)
@@ -7496,10 +8374,16 @@ result = subprocess.run(cmd, capture_output=True, text=True)
   
   
   
+  
+  
+  
 
 
 if not result.stdout.strip():
 
+  
+  
+  
   
   
   
@@ -7548,10 +8432,16 @@ click.echo("No changes to review.", err=True)
   
   
   
+  
+  
+  
 
 
 raise click.Abort()
 
+  
+  
+  
   
   
   
@@ -7600,10 +8490,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 lines = result.stdout.count("\n")
 
+  
+  
+  
   
   
   
@@ -7652,10 +8548,16 @@ if lines > 2000:
   
   
   
+  
+  
+  
 
 
 click.echo(f"Diff is {lines} lines, will review first 2000.", err=True)
 
+  
+  
+  
   
   
   
@@ -7704,10 +8606,16 @@ system = """You are a senior code reviewer. Review the git diff below.
   
   
   
+  
+  
+  
 
 
 Focus on: logic errors, security issues, performance problems, style violations.
 
+  
+  
+  
   
   
   
@@ -7756,10 +8664,16 @@ For each issue, include: file, line, severity (critical/warning/nit), and sugges
   
   
   
+  
+  
+  
 
 
 Output in the format requested."""
 
+  
+  
+  
   
   
   
@@ -7808,10 +8722,16 @@ prompt = f"Review this git diff:\n\n```diff\n{result.stdout[:50000]}\n```"
   
   
   
+  
+  
+  
 
 
 if output == "json":
 
+  
+  
+  
   
   
   
@@ -7860,10 +8780,16 @@ response = client.messages.create(
   
   
   
+  
+  
+  
 
 
 model=model,
 
+  
+  
+  
   
   
   
@@ -7912,10 +8838,16 @@ max_tokens=4096,
   
   
   
+  
+  
+  
 
 
 system=system,
 
+  
+  
+  
   
   
   
@@ -7964,10 +8896,16 @@ messages=[{"role": "user", "content": prompt + "\n\nRespond in JSON format."}],
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -8016,10 +8954,16 @@ print(response.content[0].text)
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -8068,10 +9012,16 @@ with client.messages.stream(
   
   
   
+  
+  
+  
 
 
 model=model, max_tokens=4096, system=system,
 
+  
+  
+  
   
   
   
@@ -8120,10 +9070,16 @@ messages=[{"role": "user", "content": prompt}],
   
   
   
+  
+  
+  
 
 
 ) as stream:
 
+  
+  
+  
   
   
   
@@ -8172,10 +9128,16 @@ for text in stream.text_stream:
   
   
   
+  
+  
+  
 
 
 click.echo(text, nl=False)
 
+  
+  
+  
   
   
   
@@ -8224,10 +9186,16 @@ click.echo()
   
   
   
+  
+  
+  
 
 
 if __name__ == "__main__":
 
+  
+  
+  
   
   
   
@@ -8276,10 +9244,16 @@ review()
   
   
   
+  
+  
+  
 
 
 The code review tool is a good example of the **file-aware + git-aware** pattern. It captures context (the diff) without needing file I/O itself. The key design choices:
 
+  
+  
+  
   
   
   
@@ -8325,10 +9299,16 @@ The code review tool is a good example of the **file-aware + git-aware** pattern
   
   
   
+  
+  
+  
 
 
 * **Size limits** — warns if the diff is too large.
 
+  
+  
+  
   
   
   
@@ -8371,10 +9351,16 @@ The code review tool is a good example of the **file-aware + git-aware** pattern
   
   
   
+  
+  
+  
 
 
 * **Streaming** for interactive use, full response for JSON mode.
 
+  
+  
+  
   
   
   
@@ -8423,10 +9409,16 @@ The code review tool is a good example of the **file-aware + git-aware** pattern
   
   
   
+  
+  
+  
 
 
 This is the most common AI CLI tool in the wild. It reads staged changes and generates a conventional commit message.
 
+  
+  
+  
   
   
   
@@ -8475,10 +9467,16 @@ This is the most common AI CLI tool in the wild. It reads staged changes and gen
   
   
   
+  
+  
+  
 
 
 import subprocess
 
+  
+  
+  
   
   
   
@@ -8527,10 +9525,16 @@ import json
   
   
   
+  
+  
+  
 
 
 import click
 
+  
+  
+  
   
   
   
@@ -8579,10 +9583,16 @@ from anthropic import Anthropic
   
   
   
+  
+  
+  
 
 
 client = Anthropic()
 
+  
+  
+  
   
   
   
@@ -8631,10 +9641,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.option("--model", default="claude-sonnet-4-20250514")
 
+  
+  
+  
   
   
   
@@ -8683,10 +9699,16 @@ client = Anthropic()
   
   
   
+  
+  
+  
 
 
 @click.option("--scope", help="Commit scope")
 
+  
+  
+  
   
   
   
@@ -8735,10 +9757,16 @@ def commit(model, commit_type, scope):
   
   
   
+  
+  
+  
 
 
 """Generate a commit message from staged changes."""
 
+  
+  
+  
   
   
   
@@ -8787,10 +9815,16 @@ result = subprocess.run(
   
   
   
+  
+  
+  
 
 
 ["git", "diff", "--cached"],
 
+  
+  
+  
   
   
   
@@ -8839,10 +9873,16 @@ capture_output=True, text=True
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -8891,10 +9931,16 @@ if not result.stdout.strip():
   
   
   
+  
+  
+  
 
 
 click.echo("No staged changes. Stage files with `git add` first.", err=True)
 
+  
+  
+  
   
   
   
@@ -8943,10 +9989,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 prompt = f"""Generate a conventional commit message for this diff.
 
+  
+  
+  
   
   
   
@@ -8998,6 +10050,9 @@ Format: {commit_type or ''}({scope or ''}):
   
   
   
+  
+  
+  
 
 
 Rules:
@@ -9024,36 +10079,16 @@ Rules:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- First line max 72 characters
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use imperative mood
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- First line max 72 characters
 
+  
+  
+  
   
   
   
@@ -9078,7 +10113,7 @@ Rules:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Body wraps at 72 characters
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use imperative mood
 
   
   
@@ -9102,10 +10137,45 @@ Rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Focus on WHAT and WHY, not HOW
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Body wraps at 72 characters
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Focus on WHAT and WHY, not HOW
+
+  
+  
+  
   
   
   
@@ -9154,10 +10224,16 @@ Diff:
   
   
   
+  
+  
+  
 
 
 {result.stdout[:20000]}
 
+  
+  
+  
   
   
   
@@ -9206,10 +10282,16 @@ with client.messages.stream(
   
   
   
+  
+  
+  
 
 
 model=model,
 
+  
+  
+  
   
   
   
@@ -9258,10 +10340,16 @@ max_tokens=500,
   
   
   
+  
+  
+  
 
 
 system="You generate concise, structured git commit messages.",
 
+  
+  
+  
   
   
   
@@ -9310,10 +10398,16 @@ messages=[{"role": "user", "content": prompt}],
   
   
   
+  
+  
+  
 
 
 ) as stream:
 
+  
+  
+  
   
   
   
@@ -9362,10 +10456,16 @@ for text in stream.text_stream:
   
   
   
+  
+  
+  
 
 
 click.echo(text, nl=False)
 
+  
+  
+  
   
   
   
@@ -9414,10 +10514,16 @@ click.echo("\n")
   
   
   
+  
+  
+  
 
 
 Extended versions of this tool:
 
+  
+  
+  
   
   
   
@@ -9463,10 +10569,16 @@ Extended versions of this tool:
   
   
   
+  
+  
+  
 
 
 * **Multiple suggestions** — generate 3 options, let the user pick.
 
+  
+  
+  
   
   
   
@@ -9509,10 +10621,16 @@ Extended versions of this tool:
   
   
   
+  
+  
+  
 
 
 * **AI commit body generation** — expand the body with detailed reasoning.
 
+  
+  
+  
   
   
   
@@ -9561,10 +10679,16 @@ Extended versions of this tool:
   
   
   
+  
+  
+  
 
 
 LLM calls fail in ways normal API calls don't. Your CLI must handle:
 
+  
+  
+  
   
   
   
@@ -9613,10 +10737,16 @@ LLM calls fail in ways normal API calls don't. Your CLI must handle:
   
   
   
+  
+  
+  
 
 
 import time
 
+  
+  
+  
   
   
   
@@ -9665,10 +10795,16 @@ import random
   
   
   
+  
+  
+  
 
 
 def call_with_retry(client, max_retries=3, **kwargs):
 
+  
+  
+  
   
   
   
@@ -9717,10 +10853,16 @@ for attempt in range(max_retries):
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -9769,10 +10911,16 @@ return client.messages.create(**kwargs)
   
   
   
+  
+  
+  
 
 
 except Exception as e:
 
+  
+  
+  
   
   
   
@@ -9821,10 +10969,16 @@ if "429" in str(e) and attempt < max_retries - 1:
   
   
   
+  
+  
+  
 
 
 sleep = (2 ** attempt) + random.random()
 
+  
+  
+  
   
   
   
@@ -9873,6 +11027,9 @@ click.echo(f"Rate limited, retrying in {sleep:.0f}s...", err=True)
   
   
   
+  
+  
+  
 
 
 time.sleep(sleep)
@@ -9899,10 +11056,16 @@ time.sleep(sleep)
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -9951,10 +11114,16 @@ raise
   
   
   
+  
+  
+  
 
 
 **Context overflow.** The prompt exceeds the model's context window. Pre-count tokens and truncate:
 
+  
+  
+  
   
   
   
@@ -10003,10 +11172,16 @@ import tiktoken
   
   
   
+  
+  
+  
 
 
 def truncate(text, model="claude-sonnet-4-20250514", max_tokens=80000):
 
+  
+  
+  
   
   
   
@@ -10055,10 +11230,16 @@ enc = tiktoken.encoding_for_model("gpt-4") # approximates well enough
   
   
   
+  
+  
+  
 
 
 tokens = enc.encode(text)
 
+  
+  
+  
   
   
   
@@ -10107,10 +11288,16 @@ if len(tokens) > max_tokens:
   
   
   
+  
+  
+  
 
 
 click.echo(f"Truncating {len(tokens)} tokens to {max_tokens}", err=True)
 
+  
+  
+  
   
   
   
@@ -10159,10 +11346,16 @@ return enc.decode(tokens[:max_tokens])
   
   
   
+  
+  
+  
 
 
 return text
 
+  
+  
+  
   
   
   
@@ -10211,10 +11404,16 @@ return text
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -10263,10 +11462,16 @@ response = client.messages.create(...)
   
   
   
+  
+  
+  
 
 
 except ConnectionError:
 
+  
+  
+  
   
   
   
@@ -10315,6 +11520,9 @@ click.echo("Error: Cannot reach the API. Check your internet connection.", err=T
   
   
   
+  
+  
+  
 
 
 raise click.Abort()
@@ -10341,10 +11549,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 except Exception as e:
 
+  
+  
+  
   
   
   
@@ -10393,10 +11607,16 @@ click.echo(f"API error: {e}", err=True)
   
   
   
+  
+  
+  
 
 
 raise click.Abort()
 
+  
+  
+  
   
   
   
@@ -10445,10 +11665,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 @click.command()
 
+  
+  
+  
   
   
   
@@ -10497,10 +11723,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 def tool(json_output):
 
+  
+  
+  
   
   
   
@@ -10549,10 +11781,16 @@ try:
   
   
   
+  
+  
+  
 
 
 # ...
 
+  
+  
+  
   
   
   
@@ -10601,10 +11839,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 if json_output:
 
+  
+  
+  
   
   
   
@@ -10653,10 +11897,16 @@ click.echo(json.dumps({"error": str(e), "success": False}))
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -10705,10 +11955,16 @@ click.echo(f"Error: {e}", err=True)
   
   
   
+  
+  
+  
 
 
 raise click.Abort()
 
+  
+  
+  
   
   
   
@@ -10757,10 +12013,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 ### PyPI (Python)
 
+  
+  
+  
   
   
   
@@ -10809,10 +12071,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 [build-system]
 
+  
+  
+  
   
   
   
@@ -10861,10 +12129,16 @@ requires = ["setuptools", "wheel"]
   
   
   
+  
+  
+  
 
 
 build-backend = "setuptools.build_meta"
 
+  
+  
+  
   
   
   
@@ -10913,10 +12187,16 @@ build-backend = "setuptools.build_meta"
   
   
   
+  
+  
+  
 
 
 name = "my-ai-tool"
 
+  
+  
+  
   
   
   
@@ -10965,10 +12245,16 @@ version = "0.1.0"
   
   
   
+  
+  
+  
 
 
 dependencies = [
 
+  
+  
+  
   
   
   
@@ -11017,10 +12303,16 @@ dependencies = [
   
   
   
+  
+  
+  
 
 
 "anthropic>=0.30.0",
 
+  
+  
+  
   
   
   
@@ -11069,10 +12361,16 @@ dependencies = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -11121,10 +12419,16 @@ dependencies = [
   
   
   
+  
+  
+  
 
 
 my-ai-tool = "my_ai_tool.cli:main"
 
+  
+  
+  
   
   
   
@@ -11173,10 +12477,16 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
+  
+  
+  
 
 
 ### npm (Node.js)
 
+  
+  
+  
   
   
   
@@ -11225,10 +12535,16 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
+  
+  
+  
 
 
 "name": "my-ai-tool",
 
+  
+  
+  
   
   
   
@@ -11277,10 +12593,16 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
+  
+  
+  
 
 
 "bin": {
 
+  
+  
+  
   
   
   
@@ -11329,10 +12651,16 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -11381,10 +12709,16 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
+  
+  
+  
 
 
 "commander": "^12.0.0",
 
+  
+  
+  
   
   
   
@@ -11433,29 +12767,6 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -11463,6 +12774,38 @@ Install with `pip install my-ai-tool` or publish with `flit publish`.
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -11511,10 +12854,16 @@ Publish with `npm publish`.
   
   
   
+  
+  
+  
 
 
 ### Homebrew (macOS/Linux)
 
+  
+  
+  
   
   
   
@@ -11563,10 +12912,16 @@ For a Go or compiled binary, a Homebrew tap is the standard distribution channel
   
   
   
+  
+  
+  
 
 
 class MyAiTool < Formula
 
+  
+  
+  
   
   
   
@@ -11615,10 +12970,16 @@ desc "AI-powered CLI tool"
   
   
   
+  
+  
+  
 
 
 homepage "https://github.com/you/my-ai-tool"
 
+  
+  
+  
   
   
   
@@ -11667,10 +13028,16 @@ url "https://github.com/you/my-ai-tool/archive/v0.1.0.tar.gz"
   
   
   
+  
+  
+  
 
 
 sha256 "..."
 
+  
+  
+  
   
   
   
@@ -11719,10 +13086,16 @@ depends_on "python@3.12"
   
   
   
+  
+  
+  
 
 
 def install
 
+  
+  
+  
   
   
   
@@ -11771,29 +13144,6 @@ bin.install "my-ai-tool"
   
   
   
-
-
-end
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -11801,6 +13151,38 @@ end
 
 end
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+end
+
+  
+  
+  
   
   
   
@@ -11849,10 +13231,16 @@ For interpreted languages (Python, Node.js), PyPI and npm are better distributio
   
   
   
+  
+  
+  
 
 
 ### Environment and Configuration
 
+  
+  
+  
   
   
   
@@ -11901,10 +13289,16 @@ AI CLI tools need API keys. Best practices:
   
   
   
+  
+  
+  
 
 
 * **Read `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`** from environment variables by default.
 
+  
+  
+  
   
   
   
@@ -11947,6 +13341,9 @@ AI CLI tools need API keys. Best practices:
   
   
   
+  
+  
+  
 
 
 * **Store preferences** in `~/.config/my-tool/config.toml`.
@@ -11970,10 +13367,16 @@ AI CLI tools need API keys. Best practices:
   
   
   
+  
+  
+  
 
 
 * **Never hardcode keys** — not even for testing. Use environment variables in CI too.
 
+  
+  
+  
   
   
   
@@ -12022,10 +13425,16 @@ import os
   
   
   
+  
+  
+  
 
 
 from dotenv import load_dotenv
 
+  
+  
+  
   
   
   
@@ -12074,10 +13483,16 @@ load_dotenv() # load .env file
   
   
   
+  
+  
+  
 
 
 api_key = os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("OPENAI_API_KEY")
 
+  
+  
+  
   
   
   
@@ -12126,10 +13541,16 @@ if not api_key:
   
   
   
+  
+  
+  
 
 
 click.echo("Error: Set ANTHROPIC_API_KEY or OPENAI_API_KEY", err=True)
 
+  
+  
+  
   
   
   
@@ -12178,10 +13599,16 @@ raise click.Abort()
   
   
   
+  
+  
+  
 
 
 ##  Putting It All Together: Architecture Checklist
 
+  
+  
+  
   
   
   
@@ -12230,6 +13657,9 @@ When designing a new AI CLI tool, run through these questions:
   
   
   
+  
+  
+  
 
 
 * **Input:** Arguments, flags, stdin, or interactive? What's the primary interface?
@@ -12256,36 +13686,16 @@ When designing a new AI CLI tool, run through these questions:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Context:** What files, commands, or environment state does the model need to see?
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Stateless or stateful?** A single Q&A;, or a session with history and state?
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Context:** What files, commands, or environment state does the model need to see?
 
+  
+  
+  
   
   
   
@@ -12310,34 +13720,11 @@ When designing a new AI CLI tool, run through these questions:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Streaming:** Are you writing tokens to stdout as they arrive?
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Stateless or stateful?** A single Q&A;, or a session with history and state?
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tools:** Can the model read files, run commands, make API calls, or edit files?
-
   
   
   
@@ -12362,34 +13749,11 @@ When designing a new AI CLI tool, run through these questions:
   
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Error recovery:** What happens on 429, context overflow, or network failure?
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Streaming:** Are you writing tokens to stdout as they arrive?
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Output format:** Plain text, markdown, JSON, or structured data for piping?
-
   
   
   
@@ -12414,8 +13778,98 @@ When designing a new AI CLI tool, run through these questions:
   
 
 
-8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Distribution:** PyPI, npm, Homebrew, or a single binary?
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Tools:** Can the model read files, run commands, make API calls, or edit files?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Error recovery:** What happens on 429, context overflow, or network failure?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Output format:** Plain text, markdown, JSON, or structured data for piping?
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Distribution:** PyPI, npm, Homebrew, or a single binary?
+
+  
+  
+  
   
   
   
@@ -12464,10 +13918,16 @@ The answers define your architecture. A simple "explain this error" tool needs o
   
   
   
+  
+  
+  
 
 
 ##  Beyond Simple Wrappers
 
+  
+  
+  
   
   
   
@@ -12516,10 +13976,16 @@ The tools described here are the foundation. The next generation of AI CLI tools
   
   
   
+  
+  
+  
 
 
 * **Watch files and react** (like `entr` or `watchexec`, but with AI analysis).
 
+  
+  
+  
   
   
   
@@ -12562,6 +14028,9 @@ The tools described here are the foundation. The next generation of AI CLI tools
   
   
   
+  
+  
+  
 
 
 * **Collaborate** — multiple users share an AI CLI session.
@@ -12585,10 +14054,16 @@ The tools described here are the foundation. The next generation of AI CLI tools
   
   
   
+  
+  
+  
 
 
 * **Cache aggressively** — prompt caching cuts latency 2-3x and cost in half.
 
+  
+  
+  
   
   
   
@@ -12634,10 +14109,16 @@ The tools described here are the foundation. The next generation of AI CLI tools
   
   
   
+  
+  
+  
 
 
 The pattern is always the same: CLI framework handles input, LLM SDK handles generation, your orchestration code connects them. Get the streaming right, handle errors gracefully, and you have a tool that feels like magic in the terminal.
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/kubernetes-vs-nomad.html
   
 
 
+# Kubernetes vs Nomad: Container Orchestration Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Kubernetes vs Nomad: Orchestration for Different Scales
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Container orchestration has become synonymous with Kubernetes, but HashiCorp Nom
   
   
   
+  
+  
+  
 
 
 ### Architectural Complexity
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Kubernetes is a comprehensive platform encompassing scheduling, service discover
   
   
   
+  
+  
+  
 
 
 Nomad is a focused scheduler that handles workload placement across a cluster. It does not include built-in service mesh, secrets management, or storage orchestration — those are provided by other HashiCorp tools (Consul, Vault) or external solutions. A Nomad job specification is typically 50-100 lines of HCL, compared to hundreds of lines of YAML for equivalent Kubernetes resources.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Nomad is a focused scheduler that handles workload placement across a cluster. I
   
   
   
+  
+  
+  
 
 
 Kubernetes exclusively schedules containerized workloads (with limited Windows support via CSI). Its scheduler considers resource requests, limits, affinity rules, taints, tolerations, and topology spread constraints. Custom schedulers and extended resources allow specialized scheduling policies.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Nomad supports containers (Docker, Podman), raw executables, Java JARs, and QEMU
   
   
   
+  
+  
+  
 
 
 ### Ecosystem and Extensibility
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Kubernetes offers unmatched extensibility: Custom Resource Definitions (CRDs), a
   
   
   
+  
+  
+  
 
 
 Nomad interacts with Consul for service discovery and Vault for secrets. Its ecosystem is smaller but more curated. Nomad integrates with Terraform for infrastructure provisioning and Packer for image building — the familiar HashiCorp workflow.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Nomad interacts with Consul for service discovery and Vault for secrets. Its eco
   
   
   
+  
+  
+  
 
 
 Kubernetes clusters demand significant expertise. Upgrades require careful coordination of control plane and node updates, with etcd migration being particularly sensitive. Troubleshooting involves tracing requests through multiple abstraction layers. Managed services (EKS, GKE, AKS) reduce but do not eliminate this complexity.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Nomad clusters are notably simpler to operate. A single binary runs on each node
   
   
   
+  
+  
+  
 
 
 ### When to Choose Each
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ Choose Kubernetes when building on a multi-cloud strategy, needing extensive eco
   
   
   
+  
+  
+  
 
 
 Choose Nomad when prioritizing operational simplicity, running mixed workload types (containers and non-containers), managing small to medium clusters, or preferring the HashiCorp toolchain.
@@ -572,10 +649,16 @@ Choose Nomad when prioritizing operational simplicity, running mixed workload ty
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-embeddings-explained.html
   
 
 
+# AI Embeddings Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Embeddings are the foundation of modern AI applications — powering semantic se
   
   
   
+  
+  
+  
 
 
 ##  What Are Embeddings?
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ An embedding is a numerical representation of data — typically a list of float
   
   
   
+  
+  
+  
 
 
 For example, the embeddings for "king" and "queen" would be closer to each other than to "bicycle." More importantly, embeddings capture analogical relationships: the vector operation `king - man + woman` produces a vector close to `queen`.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Modern embedding models produce vectors with 384 to 3072 dimensions. The trade-o
   
   
   
+  
+  
+  
 
 
 ##  How Embeddings Are Generated
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Embedding models are trained using contrastive learning. The model learns to pul
   
   
   
+  
+  
+  
 
 
 **The training signal is typically:**
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Embedding models are trained using contrastive learning. The model learns to pul
   
   
   
+  
+  
+  
 
 
 * **If two texts are dissimilar**: maximize the distance
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ The most common loss function is **contrastive loss** or **InfoNCE loss**, which
   
   
   
+  
+  
+  
 
 
 ##  Popular Embedding Models
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ The most common loss function is **contrastive loss** or **InfoNCE loss**, which
   
   
   
+  
+  
+  
 
 
 |-------|-----------|----------|------|
 
+  
+  
+  
   
   
   
@@ -543,10 +617,16 @@ The most common loss function is **contrastive loss** or **InfoNCE loss**, which
   
   
   
+  
+  
+  
 
 
 | text-embedding-3-large | 256-3072 | High accuracy | API |
 
+  
+  
+  
   
   
   
@@ -595,10 +675,16 @@ The most common loss function is **contrastive loss** or **InfoNCE loss**, which
   
   
   
+  
+  
+  
 
 
 | sentence-transformers/all-MiniLM-L6-v2 | 384 | Speed-critical apps | 80 MB |
 
+  
+  
+  
   
   
   
@@ -647,10 +733,16 @@ The most common loss function is **contrastive loss** or **InfoNCE loss**, which
   
   
   
+  
+  
+  
 
 
 For production RAG systems, `bge-large-en-v1.5` offers an excellent balance of quality and speed. For mobile or latency-sensitive applications, `all-MiniLM-L6-v2` is the standard choice.
 
+  
+  
+  
   
   
   
@@ -699,10 +791,16 @@ For production RAG systems, `bge-large-en-v1.5` offers an excellent balance of q
   
   
   
+  
+  
+  
 
 
 ### Generating Embeddings
 
+  
+  
+  
   
   
   
@@ -751,10 +849,16 @@ from sentence_transformers import SentenceTransformer
   
   
   
+  
+  
+  
 
 
 model = SentenceTransformer("BAAI/bge-large-en-v1.5")
 
+  
+  
+  
   
   
   
@@ -803,10 +907,16 @@ documents = [
   
   
   
+  
+  
+  
 
 
 "Embeddings represent text as dense vectors.",
 
+  
+  
+  
   
   
   
@@ -855,10 +965,16 @@ documents = [
   
   
   
+  
+  
+  
 
 
 "Vector databases store and index embeddings for fast retrieval."
 
+  
+  
+  
   
   
   
@@ -907,10 +1023,16 @@ documents = [
   
   
   
+  
+  
+  
 
 
 embeddings = model.encode(documents, normalize_embeddings=True)
 
+  
+  
+  
   
   
   
@@ -959,10 +1081,16 @@ print(f"Shape: {embeddings.shape}") # (3, 1024)
   
   
   
+  
+  
+  
 
 
 ### Measuring Similarity
 
+  
+  
+  
   
   
   
@@ -1011,10 +1139,16 @@ Cosine similarity is the standard metric for comparing embeddings:
   
   
   
+  
+  
+  
 
 
 import numpy as np
 
+  
+  
+  
   
   
   
@@ -1063,10 +1197,16 @@ def cosine_similarity(a, b):
   
   
   
+  
+  
+  
 
 
 return np.dot(a, b) # For normalized vectors, dot = cosine
 
+  
+  
+  
   
   
   
@@ -1115,10 +1255,16 @@ query_embedding = model.encode("How do vectors represent meaning?", normalize_em
   
   
   
+  
+  
+  
 
 
 scores = [cosine_similarity(query_embedding, doc_emb) for doc_emb in embeddings]
 
+  
+  
+  
   
   
   
@@ -1167,10 +1313,16 @@ When using normalized embeddings, dot product and cosine similarity are identica
   
   
   
+  
+  
+  
 
 
 ### Dimensionality Reduction
 
+  
+  
+  
   
   
   
@@ -1219,10 +1371,16 @@ For visualization, reduce embeddings to 2D or 3D using UMAP or t-SNE:
   
   
   
+  
+  
+  
 
 
 import umap
 
+  
+  
+  
   
   
   
@@ -1271,10 +1429,16 @@ reducer = umap.UMAP(n_components=2, random_state=42)
   
   
   
+  
+  
+  
 
 
 embeddings_2d = reducer.fit_transform(embeddings)
 
+  
+  
+  
   
   
   
@@ -1323,10 +1487,16 @@ UMAP preserves more global structure than t-SNE and is significantly faster for 
   
   
   
+  
+  
+  
 
 
 ##  Advanced Techniques
 
+  
+  
+  
   
   
   
@@ -1375,10 +1545,16 @@ UMAP preserves more global structure than t-SNE and is significantly faster for 
   
   
   
+  
+  
+  
 
 
 Some models can produce different embeddings for different tasks by prepending task-specific prefixes. For example, `bge` models use:
 
+  
+  
+  
   
   
   
@@ -1424,10 +1600,16 @@ Some models can produce different embeddings for different tasks by prepending t
   
   
   
+  
+  
+  
 
 
 * No prefix for document encoding
 
+  
+  
+  
   
   
   
@@ -1476,10 +1658,16 @@ This simple technique improves retrieval accuracy by 2-5% in production systems.
   
   
   
+  
+  
+  
 
 
 ### Matryoshka Embeddings
 
+  
+  
+  
   
   
   
@@ -1528,10 +1716,16 @@ Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vect
   
   
   
+  
+  
+  
 
 
 ##  Common Pitfalls
 
+  
+  
+  
   
   
   
@@ -1580,36 +1774,16 @@ Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vect
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using raw cosine similarity with unnormalized vectors**: Results are dominated by vector magnitude
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring domain mismatch**: Embedding models trained on general web text may perform poorly on medical or legal text
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using raw cosine similarity with unnormalized vectors**: Results are dominated by vector magnitude
 
+  
+  
+  
   
   
   
@@ -1634,8 +1808,40 @@ Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vect
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Fixed chunk sizes in RAG**: Large chunks dilute meaning; small chunks lose context
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring domain mismatch**: Embedding models trained on general web text may perform poorly on medical or legal text
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Fixed chunk sizes in RAG**: Large chunks dilute meaning; small chunks lose context
+
+  
+  
+  
   
   
   
@@ -1662,6 +1868,9 @@ Matryoshka embedding models (like OpenAI's text-embedding-3 series) produce vect
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

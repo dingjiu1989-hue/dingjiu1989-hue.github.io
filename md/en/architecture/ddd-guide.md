@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/ddd-guide.html
   
 
 
+# Domain-Driven Design Fundamentals
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Domain-Driven Design (DDD) is a software development approach introduced by Eric Evans in his seminal 2003 book. It emphasizes building software that reflects a deep understanding of the business domain, using a shared language between developers and domain experts. This article covers the fundamental concepts of DDD and how to apply them in practice. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Ubiquitous Language
   
   
   
+  
+  
+  
 
 
 The cornerstone of DDD is the ubiquitous language -- a common vocabulary shared by developers, domain experts, product managers, and other stakeholders. This language is used in code, documentation, conversations, and specifications. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ If the business calls it "Order Cancellation," then your code should have a `Ord
   
   
   
+  
+  
+  
 
 
 To build a ubiquitous language:
 
+  
+  
+  
   
   
   
@@ -224,6 +265,9 @@ To build a ubiquitous language:
   
   
   
+  
+  
+  
 
 
 * Use those same terms in your code.
@@ -244,10 +288,16 @@ To build a ubiquitous language:
   
   
   
+  
+  
+  
 
 
 * When a term causes confusion, refine it together with the domain experts.
 
+  
+  
+  
   
   
   
@@ -287,10 +337,16 @@ To build a ubiquitous language:
   
   
   
+  
+  
+  
 
 
 Bounded Contexts 
 
+  
+  
+  
   
   
   
@@ -327,10 +383,16 @@ A bounded context is a boundary within which a particular domain model applies. 
   
   
   
+  
+  
+  
 
 
 In an e-commerce system:
 
+  
+  
+  
   
   
   
@@ -367,10 +429,16 @@ In an e-commerce system:
   
   
   
+  
+  
+  
 
 
 * The **Shipping** context has a `Product` with weight and dimensions.
 
+  
+  
+  
   
   
   
@@ -410,10 +478,16 @@ In an e-commerce system:
   
   
   
+  
+  
+  
 
 
 Each bounded context has its own domain model, its own database, and potentially its own team. The boundaries are explicit, and communication between contexts happens through well-defined integration points. 
 
+  
+  
+  
   
   
   
@@ -450,6 +524,9 @@ Identifying bounded contexts is one of the hardest parts of DDD. Look for:
   
   
   
+  
+  
+  
 
 
 * Different teams responsible for different parts of the system.
@@ -470,10 +547,16 @@ Identifying bounded contexts is one of the hardest parts of DDD. Look for:
   
   
   
+  
+  
+  
 
 
 * Different lifecycle or persistence requirements.
 
+  
+  
+  
   
   
   
@@ -513,6 +596,9 @@ Identifying bounded contexts is one of the hardest parts of DDD. Look for:
   
   
   
+  
+  
+  
 
 
 Entities and Value Objects 
@@ -533,10 +619,16 @@ Entities and Value Objects
   
   
   
+  
+  
+  
 
 
 **Entities** are objects with a distinct identity that persists over time. Two entities with the same attributes are still different if they have different identities. A `User` is an entity because user 123 is different from user 456. 
 
+  
+  
+  
   
   
   
@@ -579,10 +671,16 @@ public class User {
   
   
   
+  
+  
+  
 
 
 private UserId id; // Identity matters
 
+  
+  
+  
   
   
   
@@ -625,6 +723,9 @@ private String name;
   
   
   
+  
+  
+  
 
 
 private Email email;
@@ -648,10 +749,16 @@ private Email email;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -694,10 +801,16 @@ private Email email;
   
   
   
+  
+  
+  
 
 
 public class Address {
 
+  
+  
+  
   
   
   
@@ -740,10 +853,16 @@ private String street;
   
   
   
+  
+  
+  
 
 
 private String city;
 
+  
+  
+  
   
   
   
@@ -786,10 +905,16 @@ private String zipCode;
   
   
   
+  
+  
+  
 
 
 // No identity field -- equality is based on all attributes
 
+  
+  
+  
   
   
   
@@ -832,10 +957,16 @@ private String zipCode;
   
   
   
+  
+  
+  
 
 
 Value objects should be immutable. Prefer value objects over primitives. A `Email` value object is better than a `String` because it encapsulates validation, formatting, and behavior. 
 
+  
+  
+  
   
   
   
@@ -872,10 +1003,16 @@ Aggregates
   
   
   
+  
+  
+  
 
 
 An aggregate is a cluster of domain objects treated as a single unit. Each aggregate has a root entity (the aggregate root) that is the only entry point for external access. 
 
+  
+  
+  
   
   
   
@@ -912,10 +1049,16 @@ Consider an `Order` aggregate:
   
   
   
+  
+  
+  
 
 
 * Aggregate root: `Order`
 
+  
+  
+  
   
   
   
@@ -952,10 +1095,16 @@ Consider an `Order` aggregate:
   
   
   
+  
+  
+  
 
 
 * Contained value objects: `Money`, `OrderStatus`
 
+  
+  
+  
   
   
   
@@ -998,10 +1147,16 @@ External objects can only reference the aggregate root. All operations on the ag
   
   
   
+  
+  
+  
 
 
 public class Order {
 
+  
+  
+  
   
   
   
@@ -1044,10 +1199,16 @@ private List items;
   
   
   
+  
+  
+  
 
 
 public void addItem(Product product, int quantity) {
 
+  
+  
+  
   
   
   
@@ -1090,6 +1251,9 @@ if (items.size() >= MAX_ITEMS) {
   
   
   
+  
+  
+  
 
 
 throw new DomainException("Order cannot have more than " + MAX_ITEMS + " items");
@@ -1113,10 +1277,16 @@ throw new DomainException("Order cannot have more than " + MAX_ITEMS + " items")
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1159,26 +1329,6 @@ items.add(new OrderLineItem(product, quantity));
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1186,6 +1336,35 @@ items.add(new OrderLineItem(product, quantity));
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1225,10 +1404,16 @@ Domain Events
   
   
   
+  
+  
+  
 
 
 Domain events capture something important that happened in the domain. They are named in the past tense and represent facts: 
 
+  
+  
+  
   
   
   
@@ -1271,10 +1456,16 @@ public class OrderPlacedEvent {
   
   
   
+  
+  
+  
 
 
 private OrderId orderId;
 
+  
+  
+  
   
   
   
@@ -1317,10 +1508,16 @@ private CustomerId customerId;
   
   
   
+  
+  
+  
 
 
 private Money total;
 
+  
+  
+  
   
   
   
@@ -1363,10 +1560,16 @@ private Instant occurredAt;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1406,6 +1609,9 @@ Domain events are published from aggregates when something significant occurs. O
   
   
   
+  
+  
+  
 
 
 Repositories and Services 
@@ -1426,10 +1632,16 @@ Repositories and Services
   
   
   
+  
+  
+  
 
 
 **Repositories** provide a collection-like interface for retrieving and storing aggregates. Each aggregate root typically has a repository: 
 
+  
+  
+  
   
   
   
@@ -1472,10 +1684,16 @@ public interface OrderRepository {
   
   
   
+  
+  
+  
 
 
 Order findById(OrderId id);
 
+  
+  
+  
   
   
   
@@ -1518,10 +1736,16 @@ void save(Order order);
   
   
   
+  
+  
+  
 
 
 void delete(OrderId id);
 
+  
+  
+  
   
   
   
@@ -1564,6 +1788,9 @@ void delete(OrderId id);
   
   
   
+  
+  
+  
 
 
 **Domain services** hold domain logic that does not naturally fit within an entity or value object. They operate on multiple aggregates or coordinate complex business rules. Domain services are named after business activities: `PricingService`, `FraudDetectionService`. 
@@ -1584,10 +1811,16 @@ void delete(OrderId id);
   
   
   
+  
+  
+  
 
 
 Strategic Design 
 
+  
+  
+  
   
   
   
@@ -1627,10 +1860,16 @@ Beyond tactical patterns, DDD includes strategic design tools:
   
   
   
+  
+  
+  
 
 
 * **Context Mapping**: Documenting relationships between bounded contexts (partnership, customer-supplier, conformist, etc.).
 
+  
+  
+  
   
   
   
@@ -1667,10 +1906,16 @@ Beyond tactical patterns, DDD includes strategic design tools:
   
   
   
+  
+  
+  
 
 
 * **Generic Subdomains**: Using off-the-shelf solutions for non-core functionality (authentication, payments).
 
+  
+  
+  
   
   
   
@@ -1710,10 +1955,16 @@ Beyond tactical patterns, DDD includes strategic design tools:
   
   
   
+  
+  
+  
 
 
 Getting Started with DDD 
 
+  
+  
+  
   
   
   
@@ -1750,6 +2001,9 @@ Start small. Pick one bounded context and implement it using DDD tactical patter
   
   
   
+  
+  
+  
 
 
 Avoid over-engineering. Not every class needs to be a domain entity, not every concept needs an aggregate. DDD is a tool for managing complexity, not for adding it. 
@@ -1770,10 +2024,16 @@ Avoid over-engineering. Not every class needs to be a domain entity, not every c
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/agent-memory-systems.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "6189",
+      "wordCount": "6800",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/ai/agent-memory-systems.html"},
-      "articleBody": "Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Introduction Memory is what separates stateless LLM calls from true autonomous agents. Without memory, an agent cannot learn from past interactions, maintain context across sessions, or build a model of the world. Drawing from cognitive science, agent memory can be structured into four types: short-term (working memory), long-term (persistent storage), episodic (specific experiences), and semantic (general knowledge). Short-Term Memory (Working Memory) Short-term memory holds the current conversation context and immediate state: from collections import deque from typing import Any class ShortTermMemory: def __init__(self, max_tokens: int = 4096, max_messages: int = 50): self.messages: deque[dict] = deque(maxlen=max_messages) self.max_tokens = max_tokens self.current_tokens = 0 def add(self, role: str, content: str): message = {\"role\": role, \"content\": content} estimated_tokens = len(content.split()) * 1.3 Evict oldest messages when over token limit while self.current_tokens + estimated_tokens > self.max_tokens: removed = self.messages.popleft() self.current_tokens -= len(removed[\"content\"].split()) * 1.3 self.messages.append(message) self.current_tokens += estimated_tokens def get_context(self) -> list[dict]: return list(self.messages) def summarize_and_compress(self, llm_fn) -> str: \"\"\"When context is full, summarize old messages to make room.\"\"\" if len(self.messages) > 30: old_messages = list(self.messages)[:-20] summary = llm_fn(f\"Summarize these conversation messages: {old_messages}\") self.messages = deque(list(self.messages)[-20:], maxlen=50) return summary return \"\" Long-Term Memory Long-term memory persists across sessions and is typically backed by a vector store: import uuid from datetime import datetime import numpy as np class LongTermMemory: def __init__(self, vector_store, embedding_fn): self.vector_store = vector_store self.embedding_fn = embedding_fn self.collection = \"agent_memory\" def remember(self, content: str, importance: float = 0.5, metadata: dict = None): \"\"\"Store a memory with importance score for selective recall.\"\"\" memory_id = str(uuid.uuid4()) embedding = self.embedding_fn(content) self.vector_store.add( ids=[memory_id], embeddings=[embedding], metadatas=[{ \"content\": content, \"importance\": importance, \"timestamp\": datetime.now().isoformat(), **(metadata or {}), }], ) return memory_id def recall(self, query: str, k: int = 5, min_importance: float = 0.0) -> list[dict]: \"\"\"Retrieve the most relevant memories.\"\"\" query_emb = self.embedding_fn(query) results = self.vector_store.query( query_embeddings=[query_emb], n_results=k, where={\"importance\": {\"$gte\": min_importance}}, ) memories = [] for i, mem_id in enumerate(results[\"ids\"][0]): metadata = results[\"metadatas\"][0][i] memories.append({ \"id\": mem_id, \"content\": metadata[\"content\"], \"importance\": metadata[\"importance\"], \"timestamp\": metadata[\"timestamp\"], \"distance\": results[\"distances\"][0][i], }) return memories def forget(self, memory_id: str): \"\"\"Delete a specific memory.\"\"\" self.vector_store.delete(ids=[memory_id]) def consolidate(self, llm_fn): \"\"\"Periodically merge similar memories.\"\"\" all_memories = self.vector_store.get() Group similar memories and create consolidated summaries This runs as a background task Episodic Memory Episodic memory stores specific experiences: what happened, when, and what the outcome was: @dataclass class Episode: id: str timestamp: datetime task: str action_sequence: list[dict] outcome: str reward: float context: dict class EpisodicMemory: def __init__(self, storage_backend): self.storage = storage_backend def record_episode(self, task: str, actions: list, outcome: str, reward: float): episode = Episode( id=str(uuid.uuid4()), timestamp=datetime.now(), task=task, action_sequence=actions, outcome=outcome, reward=reward, context={}, ) self.storage.save(f\"episode_{episode.id}\", episode.__dict__) return episode.id def retrieve_similar_episodes(self, task: str, k: int = 3) -> list[Episode]: \"\"\"Find past episodes similar to the current task.\"\"\" all_episodes = self.storage.load_all(\"episode_*\") scored = [] for ep in all_episodes: similarity = self._task_similarity(task, ep[\"task\"]) scored.append((ep, similarity)) scored.sort(key=lambda x: x[1], reverse=True) return [Episode(**ep) for ep, _ in scored[:k]] def _task_similarity(self, task_a: str, task_b: str) -> float: \"\"\"Compute similarity between two task descriptions.\"\"\" emb_a = embedding_fn(task_a) emb_b = embedding_fn(task_b) return cosine_similarity(emb_a, emb_b) Semantic Memory Semantic memory stores factual knowledge extracted from experiences: class SemanticMemory: def __init__(self): self.facts: dict[str, list[dict]] = {} self.confidence_threshold = 0.7 def add_fact(self, subject: str, predicate: str, object_: str, confidence: float): if subject not in self.facts: self.facts[subject] = [] self.facts[subject].append({ \"predicate\": predicate, \"object\": object_, \"confidence\": confidence, \"timestamp\": datetime.now(), }) def query_fact(self, subject: str, predicate: str = None) -> list[str]: if subject not in self.facts: return [] results = [] for fact in self.facts[subject]: if predicate is None or fact[\"predicate\"] == predicate: if fact[\"confidence\"] >= self.confidence_threshold: results.append(fact[\"object\"]) return results def extract_facts_from_experience(self, episode: Episode, llm_fn): \"\"\"Extract general knowledge from a specific experience.\"\"\" extraction = llm_fn(f\"\"\" Extract factual statements from this experience. Output as JSON array of {{\"subject\", \"predicate\", \"object\"}}. Task: {episode.task} Outcome: {episode.outcome} \"\"\") facts = json.loads(extraction) for fact in facts: self.add_fact(fact[\"subject\"], fact[\"predicate\"], fact[\"object\"], confidence=0.5) Integrated Agent Memory Bring all four types together in a unified memory system: class AgentMemory: def __init__(self, short_term_capacity=4096, long_term_store=None): self.short_term = ShortTermMemory(max_tokens=short_term_capacity) self.long_term = LongTermMemory(long_term_store[\"vector_db\"], long_term_store[\"embed_fn\"]) self.episodic = EpisodicMemory(long_term_store[\"kv_store\"]) self.semantic = SemanticMemory() def build_prompt_context(self, query: str) -> str: context_parts = [] Recent conversation context_parts.append(\"=== Recent Context ===\\n\") context_parts.extend(self.short_term.get_context()) Relevant long-term memories memories = self.long_term.recall(query, k=3) if memories: context_parts.append(\"\\n=== Related Memories ===\\n\") context_parts.extend([m[\"content\"] for m in memories]) Similar past episodes episodes = self.episodic.retrieve_similar_episodes(query, k=2) if episodes: context_parts.append(\"\\n=== Similar Past Experiences ===\\n\") for ep in episodes: context_parts.append(f\"Task: {ep.task}, Outcome: {ep.outcome}\") Relevant semantic facts entities = extract_entities(query) for entity in entities: facts = self.semantic.query_fact(entity) if facts: context_parts.append(f\"\\n=== Facts about {entity} ===\\n\") context_parts.extend(facts) return \"\\n\".join(context_parts) Conclusion Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/agent-memory-systems-short-term-long-term-episodic-semantic-memory-3pd2"
+      ],
+      "articleBody": "Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory Introduction Memory is what separates stateless LLM calls from true autonomous agents. Without memory, an agent cannot learn from past interactions, maintain context across sessions, or build a model of the world. Drawing from cognitive science, agent memory can be structured into four types: short-term (working memory), long-term (persistent storage), episodic (specific experiences), and semantic (general knowledge). Short-Term Memory (Working Memory) Short-term memory holds the current conversation context and immediate state: from collections import deque from typing import Any class ShortTermMemory: def __init__(self, max_tokens: int = 4096, max_messages: int = 50): self.messages: deque[dict] = deque(maxlen=max_messages) self.max_tokens = max_tokens self.current_tokens = 0 def add(self, role: str, content: str): message = {\"role\": role, \"content\": content} estimated_tokens = len(content.split()) * 1.3 Evict oldest messages when over token limit while self.current_tokens + estimated_tokens > self.max_tokens: removed = self.messages.popleft() self.current_tokens -= len(removed[\"content\"].split()) * 1.3 self.messages.append(message) self.current_tokens += estimated_tokens def get_context(self) -> list[dict]: return list(self.messages) def summarize_and_compress(self, llm_fn) -> str: \"\"\"When context is full, summarize old messages to make room.\"\"\" if len(self.messages) > 30: old_messages = list(self.messages)[:-20] summary = llm_fn(f\"Summarize these conversation messages: {old_messages}\") self.messages = deque(list(self.messages)[-20:], maxlen=50) return summary return \"\" Long-Term Memory Long-term memory persists across sessions and is typically backed by a vector store: import uuid from datetime import datetime import numpy as np class LongTermMemory: def __init__(self, vector_store, embedding_fn): self.vector_store = vector_store self.embedding_fn = embedding_fn self.collection = \"agent_memory\" def remember(self, content: str, importance: float = 0.5, metadata: dict = None): \"\"\"Store a memory with importance score for selective recall.\"\"\" memory_id = str(uuid.uuid4()) embedding = self.embedding_fn(content) self.vector_store.add( ids=[memory_id], embeddings=[embedding], metadatas=[{ \"content\": content, \"importance\": importance, \"timestamp\": datetime.now().isoformat(), **(metadata or {}), }], ) return memory_id def recall(self, query: str, k: int = 5, min_importance: float = 0.0) -> list[dict]: \"\"\"Retrieve the most relevant memories.\"\"\" query_emb = self.embedding_fn(query) results = self.vector_store.query( query_embeddings=[query_emb], n_results=k, where={\"importance\": {\"$gte\": min_importance}}, ) memories = [] for i, mem_id in enumerate(results[\"ids\"][0]): metadata = results[\"metadatas\"][0][i] memories.append({ \"id\": mem_id, \"content\": metadata[\"content\"], \"importance\": metadata[\"importance\"], \"timestamp\": metadata[\"timestamp\"], \"distance\": results[\"distances\"][0][i], }) return memories def forget(self, memory_id: str): \"\"\"Delete a specific memory.\"\"\" self.vector_store.delete(ids=[memory_id]) def consolidate(self, llm_fn): \"\"\"Periodically merge similar memories.\"\"\" all_memories = self.vector_store.get() Group similar memories and create consolidated summaries This runs as a background task Episodic Memory Episodic memory stores specific experiences: what happened, when, and what the outcome was: @dataclass class Episode: id: str timestamp: datetime task: str action_sequence: list[dict] outcome: str reward: float context: dict class EpisodicMemory: def __init__(self, storage_backend): self.storage = storage_backend def record_episode(self, task: str, actions: list, outcome: str, reward: float): episode = Episode( id=str(uuid.uuid4()), timestamp=datetime.now(), task=task, action_sequence=actions, outcome=outcome, reward=reward, context={}, ) self.storage.save(f\"episode_{episode.id}\", episode.__dict__) return episode.id def retrieve_similar_episodes(self, task: str, k: int = 3) -> list[Episode]: \"\"\"Find past episodes similar to the current task.\"\"\" all_episodes = self.storage.load_all(\"episode_*\") scored = [] for ep in all_episodes: similarity = self._task_similarity(task, ep[\"task\"]) scored.append((ep, similarity)) scored.sort(key=lambda x: x[1], reverse=True) return [Episode(**ep) for ep, _ in scored[:k]] def _task_similarity(self, task_a: str, task_b: str) -> float: \"\"\"Compute similarity between two task descriptions.\"\"\" emb_a = embedding_fn(task_a) emb_b = embedding_fn(task_b) return cosine_similarity(emb_a, emb_b) Semantic Memory Semantic memory stores factual knowledge extracted from experiences: class SemanticMemory: def __init__(self): self.facts: dict[str, list[dict]] = {} self.confidence_threshold = 0.7 def add_fact(self, subject: str, predicate: str, object_: str, confidence: float): if subject not in self.facts: self.facts[subject] = [] self.facts[subject].append({ \"predicate\": predicate, \"object\": object_, \"confidence\": confidence, \"timestamp\": datetime.now(), }) def query_fact(self, subject: str, predicate: str = None) -> list[str]: if subject not in self.facts: return [] results = [] for fact in self.facts[subject]: if predicate is None or fact[\"predicate\"] == predicate: if fact[\"confidence\"] >= self.confidence_threshold: results.append(fact[\"object\"]) return results def extract_facts_from_experience(self, episode: Episode, llm_fn): \"\"\"Extract general knowledge from a specific experience.\"\"\" extraction = llm_fn(f\"\"\" Extract factual statements from this experience. Output as JSON array of {{\"subject\", \"predicate\", \"object\"}}. Task: {episode.task} Outcome: {episode.outcome} \"\"\") facts = json.loads(extraction) for fact in facts: self.add_fact(fact[\"subject\"], fact[\"predicate\"], fact[\"object\"], confidence=0.5) Integrated Agent Memory Bring all four types together in a unified memory system: class AgentMemory: def __init__(self, short_term_capacity=4096, long_term_store=None): self.short_term = ShortTermMemory(max_tokens=short_term_capacity) self.long_term = LongTermMemory(long_term_store[\"vector_db\"], long_term_store[\"embed_fn\"]) self.episodic = EpisodicMemory(long_term_store[\"kv_store\"]) self.semantic = SemanticMemory() def build_prompt_context(self, query: str) -> str: context_parts = [] Recent conversation context_parts.append(\"=== Recent Context ===\\n\") context_parts.extend(self.short_term.get_context()) Relevant long-term memories memories = self.long_term.recall(query, k=3) if memories: context_parts.append(\"\\n=== Related Memories ===\\n\") context_parts.extend([m[\"content\"] for m in memories]) Similar past episodes episodes = self.episodic.retrieve_similar_episodes(query, k=2) if episodes: context_parts.append(\"\\n=== Similar Past Experiences ===\\n\") for ep in episodes: context_parts.append(f\"Task: {ep.task}, Outcome: {ep.outcome}\") Relevant semantic facts entities = extract_entities(query) for entity in entities: facts = self.semantic.query_fact(entity) if facts: context_parts.append(f\"\\n=== Facts about {entity} ===\\n\") context_parts.extend(facts) return \"\\n\".join(context_parts) Conclusion Agent memory systems mirror human cognitive architecture. Short-term memory maintains immediate conversation context with token-aware eviction. Long-term memory persistently stores important information with vector-based retrieval. Episodic memory records specific experiences for future reference. Semantic memory extracts and stores general knowledge from experiences. An integrated memory system combines all four types, giving agents both the immediate context and the accumulated wisdom needed for complex, long-running tasks."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Agent Memory Systems: Short-Term, Long-Term, Episodic, Semantic Memory</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -222,7 +254,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Short-Term Memory (Working Memory)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -268,7 +306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from collections import deque</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -314,7 +358,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ShortTermMemory:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.messages: deque[dict] = deque(maxlen=max_messages)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -406,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.current_tokens = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -452,7 +514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>message = {"role": role, "content": content}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -498,7 +566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Evict oldest messages when over token limit</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -544,7 +618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>removed = self.messages.popleft()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -590,7 +670,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.messages.append(message)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -636,7 +722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_context(self) -> list[dict]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -682,7 +774,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def summarize_and_compress(self, llm_fn) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -728,7 +826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if len(self.messages) > 30:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -774,7 +878,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>summary = llm_fn(f"Summarize these conversation messages: {old_messages}")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -820,7 +930,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return summary</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -866,7 +982,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Long-Term Memory</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -912,7 +1034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import uuid</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import numpy as np</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1004,7 +1138,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, vector_store, embedding_fn):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1050,7 +1190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.embedding_fn = embedding_fn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1096,7 +1242,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def remember(self, content: str, importance: float = 0.5, metadata: dict = None):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1142,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>memory_id = str(uuid.uuid4())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1188,7 +1346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.vector_store.add(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1234,7 +1398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>embeddings=[embedding],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1280,7 +1450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": content,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1326,7 +1502,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"timestamp": datetime.now().isoformat(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1372,6 +1554,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}],</p>
 <br>
 <br>
@@ -1395,7 +1580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1441,7 +1632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def recall(self, query: str, k: int = 5, min_importance: float = 0.0) -> list[dict]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1487,7 +1684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query_emb = self.embedding_fn(query)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1533,7 +1736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query_embeddings=[query_emb],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1579,6 +1788,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>where={"importance": {"$gte": min_importance}},</p>
 <br>
 <br>
@@ -1602,7 +1814,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1648,7 +1866,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for i, mem_id in enumerate(results["ids"][0]):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1694,7 +1918,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>memories.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1740,7 +1970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": metadata["content"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1786,7 +2022,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"timestamp": metadata["timestamp"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1832,7 +2074,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1878,7 +2126,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def forget(self, memory_id: str):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1924,7 +2178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.vector_store.delete(ids=[memory_id])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1970,7 +2230,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Periodically merge similar memories."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2016,7 +2282,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Group similar memories and create consolidated summaries</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2062,7 +2334,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Episodic Memory</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2108,7 +2386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@dataclass</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2154,7 +2438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id: str</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2200,7 +2490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>task: str</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2246,7 +2542,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>outcome: str</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2292,7 +2594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context: dict</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2338,7 +2646,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, storage_backend):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2384,7 +2698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def record_episode(self, task: str, actions: list, outcome: str, reward: float):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2430,7 +2750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id=str(uuid.uuid4()),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2476,7 +2802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>task=task,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2522,7 +2854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>outcome=outcome,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2568,7 +2906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context={},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2614,7 +2958,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.storage.save(f"episode_{episode.id}", episode.__dict__)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2660,7 +3010,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def retrieve_similar_episodes(self, task: str, k: int = 3) -> list[Episode]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2706,7 +3062,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_episodes = self.storage.load_all("episode_*")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2752,7 +3114,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for ep in all_episodes:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2798,7 +3166,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scored.append((ep, similarity))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2844,7 +3218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return [Episode(**ep) for ep, _ in scored[:k]]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2890,7 +3270,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Compute similarity between two task descriptions."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2936,7 +3322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>emb_b = embedding_fn(task_b)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2982,7 +3374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Semantic Memory</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3028,7 +3426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class SemanticMemory:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3074,7 +3478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.facts: dict[str, list[dict]] = {}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3120,6 +3530,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def add_fact(self, subject: str, predicate: str, object_: str, confidence: float):</p>
 <br>
 <br>
@@ -3143,7 +3556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if subject not in self.facts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3189,7 +3608,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.facts[subject].append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3235,7 +3660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"object": object_,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3281,7 +3712,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"timestamp": datetime.now(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3327,7 +3764,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def query_fact(self, subject: str, predicate: str = None) -> list[str]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3373,7 +3816,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3419,7 +3868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for fact in self.facts[subject]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3465,7 +3920,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if fact["confidence"] >= self.confidence_threshold:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3511,7 +3972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3557,7 +4024,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Extract general knowledge from a specific experience."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3603,7 +4076,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Extract factual statements from this experience.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3649,7 +4128,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Task: {episode.task}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3695,7 +4180,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3741,7 +4232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for fact in facts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3787,7 +4284,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Integrated Agent Memory</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3833,7 +4336,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class AgentMemory:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3879,7 +4388,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.short_term = ShortTermMemory(max_tokens=short_term_capacity)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3925,7 +4440,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.episodic = EpisodicMemory(long_term_store["kv_store"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3971,7 +4492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def build_prompt_context(self, query: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4017,7 +4544,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Recent conversation</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4063,7 +4596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_parts.extend(self.short_term.get_context())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4109,7 +4648,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>memories = self.long_term.recall(query, k=3)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4155,7 +4700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_parts.append("\n=== Related Memories ===\n")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4201,7 +4752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Similar past episodes</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4247,7 +4804,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if episodes:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4293,7 +4856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for ep in episodes:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4339,7 +4908,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Relevant semantic facts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4385,7 +4960,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for entity in entities:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4431,7 +5012,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if facts:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4477,7 +5064,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_parts.extend(facts)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4523,7 +5116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

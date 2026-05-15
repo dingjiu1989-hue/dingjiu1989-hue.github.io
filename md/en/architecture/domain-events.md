@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/domain-events.html
   
 
 
+# Domain Events: Design and Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Domain events capture significant state changes within a bounded context. They are a tactical pattern from Domain-Driven Design that enables loose coupling between domain aggregates while maintaining consistency boundaries. A domain event represents something that happened in the past and is meaningful to domain experts: OrderSubmitted, PaymentReceived, InventoryDepleted. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Designing domain events requires careful consideration of what information to in
   
   
   
+  
+  
+  
 
 
 The publishing lifecycle has distinct phases. First, the domain event is raised within the aggregate during a command execution. The aggregate appends the event to a collection of unpublished events. When the repository saves the aggregate, it persists both the aggregate state and publishes the events. This atomicity is critical — publishing events must be transactional with the state change to prevent inconsistencies between what the system recorded and what other services learned. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ In-process domain event handling occurs within the same transaction. Event handl
   
   
   
+  
+  
+  
 
 
 Out-of-process handlers receive domain events through a message broker or event bus. These handlers are appropriate for cross-service coordination, long-running workflows, or side effects where eventual consistency is acceptable. The distribution boundary is key — events that cross bounded contexts should be published to a message broker, while events consumed within the same context can be handled in-process. 
 
+  
+  
+  
   
   
   
@@ -224,6 +265,9 @@ Idempotency is non-negotiable for domain event handlers. The same event may be d
   
   
   
+  
+  
+  
 
 
 The transactional outbox pattern solves the dual-write problem: updating the database and publishing an event must be atomic. Writing both the aggregate change and the event to the database in a single transaction ensures consistency. A separate process reads unpublished events from the outbox table and publishes them to the message broker. After successful publication, it marks the events as published or deletes them. This guarantees at-least-once delivery without distributed transactions. 
@@ -244,10 +288,16 @@ The transactional outbox pattern solves the dual-write problem: updating the dat
   
   
   
+  
+  
+  
 
 
 Event versioning addresses schema evolution. Domain events are persistent contracts that may be consumed by services running different versions. Strategies include keeping past event classes in the codebase, using a schema registry with compatibility checks, and designing events with optional fields and sensible defaults. Forward compatibility — where new consumers can read old events and vice versa — requires disciplined schema evolution. 
 
+  
+  
+  
   
   
   

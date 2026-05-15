@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/compare/vector-databases-2026-complete
   
   
   
+  
+  
+  
+
+
+# Vector Databases in 2026: Pinecone vs Chroma vs Weaviate vs Qdrant — Complete Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Vector databases have become essential infrastructure for AI applications — from RAG (Retrieval-Augmented Generation) to semantic search to recommendation systems. If you're building LLM-powered apps in 2026, you'll almost certainly need one.
 
+  
+  
+  
   
   
   
@@ -208,10 +243,16 @@ This guide covers what vector databases are, how they work under the hood, and a
   
   
   
+  
+  
+  
 
 
 ##  What Is a Vector Database?
 
+  
+  
+  
   
   
   
@@ -260,6 +301,9 @@ A vector database stores and indexes high-dimensional vectors (arrays of floats)
   
   
   
+  
+  
+  
 
 
 User query: "How do I deploy a microservice?"
@@ -286,10 +330,16 @@ User query: "How do I deploy a microservice?"
   
   
   
+  
+  
+  
 
 
 ↓
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Embedding model → [0.23, 0.87, -0.12, 0.45, ...]
   
   
   
+  
+  
+  
 
 
 ↓
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Vector DB finds nearest neighbors
   
   
   
+  
+  
+  
 
 
 ↓
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Returns: "Kubernetes deployment guide" (cosine sim: 0.94)
   
   
   
+  
+  
+  
 
 
 "Docker compose tutorial" (cosine sim: 0.89)
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 ##  Why You Need One in 2026
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 |----------|-----------------|----------------|
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | Semantic product search | "Waterproof shoes" → no "rain boots" | Embeddings understand meaning |
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | Anomaly detection | Fixed thresholds | Finds unusual patterns in embedding space |
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 ##  How Vector Search Works
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | Algorithm | Speed | Accuracy | Build Time | Memory |
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **HNSW** (Hierarchical Navigable Small World) | ⚡ Fastest | 🎯 Excellent | 🐌 Slow | 📈 High |
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **IVF + PQ** (Product Quantization) | ⚡ Fast | 👌 OK | ⚡ Fast | 📉 Very low |
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 **Rule of thumb**: Use HNSW for production (best accuracy-speed tradeoff). Use IVF for large datasets (>10M vectors) where memory matters. Use PQ when you need to fit in RAM at all costs.
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | Metric | When to Use |
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **Cosine similarity** | Text embeddings (most common — normalized vectors) |
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **Dot product** | Recommendation systems, dense passage retrieval |
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 ##  The Contenders
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 |---------|----------|--------|----------|--------|-------|----------|
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **Open source** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **Self-host** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ (in Postgres) |
 
+  
+  
+  
   
   
   
@@ -1326,6 +1490,9 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 | **Pricing** | ~$0.10/M vectors/mo | Free | ~$25/mo start | ~$25/mo start | ~$0.07/hr | Free (in Postgres) |
@@ -1352,10 +1519,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
-### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone
+### 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Pinecone
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ The key operation is **ANN (Approximate Nearest Neighbor)** search — finding t
   
   
   
+  
+  
+  
 
 
 Pinecone is the market leader and the most mature managed vector database. It handles sharding, replication, and scaling automatically. You don't think about infrastructure.
 
+  
+  
+  
   
   
   
@@ -1456,10 +1635,16 @@ import pinecone
   
   
   
+  
+  
+  
 
 
 pc = pinecone.Pinecone(api_key="pc-...")
 
+  
+  
+  
   
   
   
@@ -1508,10 +1693,16 @@ index = pc.Index("my-index")
   
   
   
+  
+  
+  
 
 
 # Upsert vectors
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ index.upsert(vectors=[
   
   
   
+  
+  
+  
 
 
 ("id1", [0.1, 0.2, ...], {"text": "Hello world"}),
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ index.upsert(vectors=[
   
   
   
+  
+  
+  
 
 
 ])
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ index.upsert(vectors=[
   
   
   
+  
+  
+  
 
 
 results = index.query(
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ vector=[0.15, 0.25, ...],
   
   
   
+  
+  
+  
 
 
 top_k=5,
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ include_metadata=True
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ include_metadata=True
   
   
   
+  
+  
+  
 
 
 **Cons:** $$$ at scale, vendor lock-in (proprietary), no offline/local use, no control over internals.
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ include_metadata=True
   
   
   
+  
+  
+  
 
 
-### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma
+### 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Chroma
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ include_metadata=True
   
   
   
+  
+  
+  
 
 
 Chroma is the simplest vector database to get started with. It runs in-process (like SQLite for vectors) and requires zero configuration.
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ import chromadb
   
   
   
+  
+  
+  
 
 
 client = chromadb.Client()
 
+  
+  
+  
   
   
   
@@ -2028,10 +2273,16 @@ collection = client.create_collection("my-collection")
   
   
   
+  
+  
+  
 
 
 collection.add(
 
+  
+  
+  
   
   
   
@@ -2080,6 +2331,9 @@ documents=["Hello world", "Goodbye world"],
   
   
   
+  
+  
+  
 
 
 ids=["id1", "id2"]
@@ -2106,10 +2360,16 @@ ids=["id1", "id2"]
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ results = collection.query(
   
   
   
+  
+  
+  
 
 
 query_texts=["greeting"],
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ n_results=5
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ n_results=5
   
   
   
+  
+  
+  
 
 
 **Cons:** Not designed for production at scale (single-node, limited replication), limited query features (no hybrid search), slower at scale.
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ n_results=5
   
   
   
+  
+  
+  
 
 
-### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate
+### 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Weaviate
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ n_results=5
   
   
   
+  
+  
+  
 
 
 Weaviate is the most feature-complete option: it combines vector search with keyword (BM25) search, has built-in modules for embedding generation, and supports GraphQL.
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ import weaviate
   
   
   
+  
+  
+  
 
 
 client = weaviate.connect_to_local()
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ client = weaviate.connect_to_local()
   
   
   
+  
+  
+  
 
 
 client.collections.create(
 
+  
+  
+  
   
   
   
@@ -2522,6 +2824,9 @@ name="Document",
   
   
   
+  
+  
+  
 
 
 vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai()
@@ -2548,10 +2853,16 @@ vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai()
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ vectorizer_config=weaviate.config.Configure.Vectorizer.text2vec_openai()
   
   
   
+  
+  
+  
 
 
 collection = client.collections.get("Document")
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ collection.insert({
   
   
   
+  
+  
+  
 
 
 "title": "Hello world",
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ collection.insert({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ collection.insert({
   
   
   
+  
+  
+  
 
 
 response = collection.query.hybrid(
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ query="test document",
   
   
   
+  
+  
+  
 
 
 alpha=0.5, # balance between vector and keyword
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ limit=5
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ limit=5
   
   
   
+  
+  
+  
 
 
 **Cons:** More complex to operate, heavier resource footprint, smaller community than Milvus/Qdrant.
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ limit=5
   
   
   
+  
+  
+  
 
 
-### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant
+### 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Qdrant
 
+  
+  
+  
   
   
   
@@ -3016,6 +3375,9 @@ limit=5
   
   
   
+  
+  
+  
 
 
 Qdrant is written in Rust and optimized for low-latency, high-throughput scenarios. It has a clean REST API and gRPC support.
@@ -3042,10 +3404,16 @@ Qdrant is written in Rust and optimized for low-latency, high-throughput scenari
   
   
   
+  
+  
+  
 
 
 from qdrant_client import QdrantClient
 
+  
+  
+  
   
   
   
@@ -3094,6 +3462,9 @@ client = QdrantClient(url="http://localhost:6333")
   
   
   
+  
+  
+  
 
 
 client.create_collection(
@@ -3120,10 +3491,16 @@ client.create_collection(
   
   
   
+  
+  
+  
 
 
 collection_name="my-collection",
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ vectors_config=VectorParams(size=768, distance=Distance.COSINE),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ client.upsert(
   
   
   
+  
+  
+  
 
 
 collection_name="my-collection",
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ points=[
   
   
   
+  
+  
+  
 
 
 PointStruct(id=1, vector=[0.1, 0.2, ...], payload={"text": "Hello"}),
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ PointStruct(id=1, vector=[0.1, 0.2, ...], payload={"text": "Hello"}),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ client.search(
   
   
   
+  
+  
+  
 
 
 collection_name="my-collection",
 
+  
+  
+  
   
   
   
@@ -3432,6 +3839,9 @@ query_vector=[0.15, 0.25, ...],
   
   
   
+  
+  
+  
 
 
 limit=5,
@@ -3458,10 +3868,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3510,10 +3926,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 **Cons:** Smaller ecosystem, less mature managed service (recent), fewer integrations.
 
+  
+  
+  
   
   
   
@@ -3562,10 +3984,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
-### 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus
+### 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Milvus
 
+  
+  
+  
   
   
   
@@ -3614,10 +4042,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 Milvus is designed for horizontal scaling from the ground up. It uses a cloud-native architecture with separate storage and compute layers.
 
+  
+  
+  
   
   
   
@@ -3666,10 +4100,16 @@ from pymilvus import connections, Collection, FieldSchema, CollectionSchema
   
   
   
+  
+  
+  
 
 
 connections.connect("default", host="localhost", port="19530")
 
+  
+  
+  
   
   
   
@@ -3718,10 +4158,16 @@ schema = CollectionSchema([
   
   
   
+  
+  
+  
 
 
 FieldSchema("id", dtype=DataType.INT64, is_primary=True),
 
+  
+  
+  
   
   
   
@@ -3770,10 +4216,16 @@ FieldSchema("embedding", dtype=DataType.FLOAT_VECTOR, dim=768),
   
   
   
+  
+  
+  
 
 
 ])
 
+  
+  
+  
   
   
   
@@ -3822,10 +4274,16 @@ collection = Collection("my-collection", schema)
   
   
   
+  
+  
+  
 
 
 index_params = {"index_type": "IVF_FLAT", "params": {"nlist": 1024}, "metric_type": "L2"}
 
+  
+  
+  
   
   
   
@@ -3874,10 +4332,16 @@ collection.create_index("embedding", index_params)
   
   
   
+  
+  
+  
 
 
 results = collection.search(
 
+  
+  
+  
   
   
   
@@ -3926,10 +4390,16 @@ data=[[0.1, 0.2, ...]],
   
   
   
+  
+  
+  
 
 
 anns_field="embedding",
 
+  
+  
+  
   
   
   
@@ -3978,6 +4448,9 @@ param={"nprobe": 10},
   
   
   
+  
+  
+  
 
 
 limit=5,
@@ -4004,10 +4477,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 **Cons:** Complex to deploy and operate (requires Kafka, etcd, MinIO), most complex API, overkill for small-medium needs.
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
-### 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector
+### 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. pgvector
 
+  
+  
+  
   
   
   
@@ -4160,10 +4651,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 pgvector adds vector similarity search as a PostgreSQL extension. It's not a separate database — it's a new index type in your existing Postgres instance.
 
+  
+  
+  
   
   
   
@@ -4212,10 +4709,16 @@ CREATE EXTENSION vector;
   
   
   
+  
+  
+  
 
 
 CREATE TABLE documents (
 
+  
+  
+  
   
   
   
@@ -4264,10 +4767,16 @@ id SERIAL PRIMARY KEY,
   
   
   
+  
+  
+  
 
 
 content TEXT,
 
+  
+  
+  
   
   
   
@@ -4316,10 +4825,16 @@ embedding vector(768)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -4368,10 +4883,16 @@ CREATE INDEX ON documents USING hnsw (embedding vector_cosine_ops);
   
   
   
+  
+  
+  
 
 
 SELECT content, 1 - (embedding <=> '[0.1, 0.2, ...]') AS similarity
 
+  
+  
+  
   
   
   
@@ -4420,10 +4941,16 @@ FROM documents
   
   
   
+  
+  
+  
 
 
 ORDER BY embedding <=> '[0.1, 0.2, ...]'
 
+  
+  
+  
   
   
   
@@ -4472,10 +4999,16 @@ LIMIT 5;
   
   
   
+  
+  
+  
 
 
 import psycopg2
 
+  
+  
+  
   
   
   
@@ -4524,10 +5057,16 @@ conn = psycopg2.connect("dbname=postgres")
   
   
   
+  
+  
+  
 
 
 cur = conn.cursor()
 
+  
+  
+  
   
   
   
@@ -4576,10 +5115,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 "SELECT content FROM documents ORDER BY embedding <=> %s LIMIT 5",
 
+  
+  
+  
   
   
   
@@ -4628,10 +5173,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -4680,10 +5231,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 **Cons:** No hybrid search out of the box (use pg_bm25 extension), limited to single-node, slower than dedicated vector DBs at scale, fewer tuning options.
 
+  
+  
+  
   
   
   
@@ -4732,10 +5289,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 ##  Performance Benchmarks
 
+  
+  
+  
   
   
   
@@ -4784,10 +5347,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 | Database | Query Latency (p50) | Query Latency (p99) | QPS | Recall@10 | Memory (1M vecs) |
 
+  
+  
+  
   
   
   
@@ -4836,10 +5405,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 | **Qdrant** | 2ms | 8ms | 18,000 | 0.98 | 1.2 GB |
 
+  
+  
+  
   
   
   
@@ -4888,10 +5463,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 | **Milvus** (CPU) | 5ms | 20ms | 10,000 | 0.99 | 1.5 GB |
 
+  
+  
+  
   
   
   
@@ -4940,10 +5521,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 | **Weaviate** | 6ms | 25ms | 7,000 | 0.96 | 1.8 GB |
 
+  
+  
+  
   
   
   
@@ -4992,10 +5579,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 | **Chroma** | 15ms | 50ms | 2,000 | 0.93 | 2.0 GB |
 
+  
+  
+  
   
   
   
@@ -5044,10 +5637,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 *Pinecone uses their own proprietary index — memory is managed server-side.
 
+  
+  
+  
   
   
   
@@ -5096,10 +5695,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 ##  When to Use What
 
+  
+  
+  
   
   
   
@@ -5148,10 +5753,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You don't want to manage infrastructure
 
+  
+  
+  
   
   
   
@@ -5194,6 +5805,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * Your team has no DevOps experience
@@ -5217,10 +5831,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * Budget is not the primary concern
 
+  
+  
+  
   
   
   
@@ -5269,10 +5889,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You're prototyping or building a demo
 
+  
+  
+  
   
   
   
@@ -5315,6 +5941,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You're building for edge/browser deployment
@@ -5338,10 +5967,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You're in a Jupyter notebook exploring data
 
+  
+  
+  
   
   
   
@@ -5390,10 +6025,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You need hybrid search (vector + keyword)
 
+  
+  
+  
   
   
   
@@ -5436,6 +6077,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You like GraphQL
@@ -5459,10 +6103,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You need multi-tenancy built in
 
+  
+  
+  
   
   
   
@@ -5511,10 +6161,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * Performance is your top priority
 
+  
+  
+  
   
   
   
@@ -5557,6 +6213,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You want to minimize infrastructure cost
@@ -5580,10 +6239,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You're building real-time recommendation systems
 
+  
+  
+  
   
   
   
@@ -5632,10 +6297,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You have more than 10M vectors
 
+  
+  
+  
   
   
   
@@ -5678,6 +6349,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You're building enterprise-scale infrastructure
@@ -5701,10 +6375,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You need to scale to billions of vectors
 
+  
+  
+  
   
   
   
@@ -5753,10 +6433,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You already use PostgreSQL
 
+  
+  
+  
   
   
   
@@ -5799,6 +6485,9 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * You want atomic vector + relational data updates
@@ -5822,10 +6511,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 * Your dataset is under 1M vectors
 
+  
+  
+  
   
   
   
@@ -5874,10 +6569,16 @@ Numbers based on 1M vectors with 768 dimensions (OpenAI text-embedding-3-large),
   
   
   
+  
+  
+  
 
 
 When moving to production with any vector database:
 
+  
+  
+  
   
   
   
@@ -5926,36 +6627,16 @@ When moving to production with any vector database:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** — benchmark with your actual data size, not a sample. Index build time scales O(n log n).
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** — some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Test at scale** — benchmark with your actual data size, not a sample. Index build time scales O(n log n).
 
+  
+  
+  
   
   
   
@@ -5980,34 +6661,11 @@ When moving to production with any vector database:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** — HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Plan for re-indexing** — some index types (especially HNSW) are expensive to update. Batch inserts vs streaming matters.
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** — vector databases are stateful. Know your backup mechanism before you need it.
-
   
   
   
@@ -6032,8 +6690,69 @@ When moving to production with any vector database:
   
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** — managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors.
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Size your memory** — HNSW typically needs 1.2-2x the raw vector size in RAM. Quantization (PQ) can reduce this 4-8x.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Backup strategy** — vector databases are stateful. Know your backup mechanism before you need it.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Cost model** — managed services look cheap until you have millions of vectors with replication. Self-hosting Qdrant on a $40/mo VPS handles 5M+ vectors.
+
+  
+  
+  
   
   
   
@@ -6082,10 +6801,16 @@ When moving to production with any vector database:
   
   
   
+  
+  
+  
 
 
 Here's how a production RAG system looks with Qdrant + FastAPI:
 
+  
+  
+  
   
   
   
@@ -6134,10 +6859,16 @@ from fastapi import FastAPI
   
   
   
+  
+  
+  
 
 
 from sentence_transformers import SentenceTransformer
 
+  
+  
+  
   
   
   
@@ -6186,10 +6917,16 @@ from qdrant_client import QdrantClient
   
   
   
+  
+  
+  
 
 
 from openai import OpenAI
 
+  
+  
+  
   
   
   
@@ -6238,10 +6975,16 @@ app = FastAPI()
   
   
   
+  
+  
+  
 
 
 encoder = SentenceTransformer("all-MiniLM-L6-v2")
 
+  
+  
+  
   
   
   
@@ -6290,10 +7033,16 @@ qdrant = QdrantClient(host="localhost", port=6333)
   
   
   
+  
+  
+  
 
 
 llm = OpenAI()
 
+  
+  
+  
   
   
   
@@ -6342,10 +7091,16 @@ COLLECTION = "knowledge-base"
   
   
   
+  
+  
+  
 
 
 @app.post("/ask")
 
+  
+  
+  
   
   
   
@@ -6394,10 +7149,16 @@ def ask(question: str):
   
   
   
+  
+  
+  
 
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Embed the question
 
+  
+  
+  
   
   
   
@@ -6446,10 +7207,16 @@ vector = encoder.encode(question).tolist()
   
   
   
+  
+  
+  
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Retrieve relevant context
 
+  
+  
+  
   
   
   
@@ -6498,10 +7265,16 @@ results = qdrant.search(
   
   
   
+  
+  
+  
 
 
 collection_name=COLLECTION,
 
+  
+  
+  
   
   
   
@@ -6550,6 +7323,9 @@ query_vector=vector,
   
   
   
+  
+  
+  
 
 
 limit=5,
@@ -6576,10 +7352,16 @@ limit=5,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -6628,10 +7410,16 @@ context = "\n".join(r.payload["text"] for r in results)
   
   
   
+  
+  
+  
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate answer with context
 
+  
+  
+  
   
   
   
@@ -6680,10 +7468,16 @@ response = llm.chat.completions.create(
   
   
   
+  
+  
+  
 
 
 model="claude-sonnet-4-6",
 
+  
+  
+  
   
   
   
@@ -6732,10 +7526,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 {"role": "system", "content": f"Answer using this context:\n{context}"},
 
+  
+  
+  
   
   
   
@@ -6784,10 +7584,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -6836,10 +7642,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 return {"answer": response.choices[0].message.content}
 
+  
+  
+  
   
   
   
@@ -6888,10 +7700,16 @@ return {"answer": response.choices[0].message.content}
   
   
   
+  
+  
+  
 
 
 Starting a new project?
 
+  
+  
+  
   
   
   
@@ -6940,10 +7758,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ └── Yes → pgvector (keep it simple)
 
+  
+  
+  
   
   
   
@@ -6992,10 +7816,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ └── Chroma (quickest prototype)
 
+  
+  
+  
   
   
   
@@ -7044,10 +7874,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 ├── Building for production?
 
+  
+  
+  
   
   
   
@@ -7096,10 +7932,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ │ └── Pinecone (fastest time-to-production)
 
+  
+  
+  
   
   
   
@@ -7148,10 +7990,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ │ └── Weaviate (best hybrid out of box)
 
+  
+  
+  
   
   
   
@@ -7200,10 +8048,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ │ └── Qdrant (fastest, lowest cost/query)
 
+  
+  
+  
   
   
   
@@ -7252,10 +8106,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 │ └── Milvus (true horizontal scaling)
 
+  
+  
+  
   
   
   
@@ -7304,10 +8164,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 └── Milvus (mature, GPU, 100B+ vectors)
 
+  
+  
+  
   
   
   
@@ -7356,10 +8222,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 | If you want… | Pick this |
 
+  
+  
+  
   
   
   
@@ -7408,10 +8280,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 | Ship fast, zero ops | **Pinecone** |
 
+  
+  
+  
   
   
   
@@ -7460,10 +8338,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 | Full-featured, hybrid search | **Weaviate** |
 
+  
+  
+  
   
   
   
@@ -7512,6 +8396,9 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 | Enterprise scale | **Milvus** |
@@ -7538,10 +8425,16 @@ Starting a new project?
   
   
   
+  
+  
+  
 
 
 | No new infra (Postgres) | **pgvector** |
 
+  
+  
+  
   
   
   

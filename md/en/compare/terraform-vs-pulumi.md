@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/terraform-vs-pulumi.html
   
 
 
+# Terraform vs Pulumi: Infrastructure as Code Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Terraform vs Pulumi: IaC Approaches Compared
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Infrastructure as Code has evolved significantly, with Terraform and Pulumi repr
   
   
   
+  
+  
+  
 
 
 ### Language and Expressiveness
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Terraform uses HCL (HashiCorp Configuration Language), a declarative DSL designe
   
   
   
+  
+  
+  
 
 
 Pulumi supports TypeScript, Python, Go, C#, Java, and YAML. This unlocks the full expressiveness of these languages: for loops, conditionals, classes, type checking, and package management. A multi-region deployment that requires 50 lines of HCL with modules might be 15 lines of TypeScript using standard language features. Real-time error checking via IDE autocompletion is a significant developer experience advantage.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Pulumi supports TypeScript, Python, Go, C#, Java, and YAML. This unlocks the ful
   
   
   
+  
+  
+  
 
 
 Both tools use state files to track infrastructure. Terraform's state is more rigid: state format changes between versions can require migration tooling. Remote state backends include S3, Terraform Cloud, and Consul. State locking via DynamoDB or Terraform Cloud prevents concurrent modifications.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Pulumi's state management is cloud-native: state is stored in Pulumi Cloud (or s
   
   
   
+  
+  
+  
 
 
 ### Multi-Cloud and Provider Ecosystem
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Both tools support AWS, Azure, GCP, Kubernetes, and hundreds of providers. Terra
   
   
   
+  
+  
+  
 
 
 Pulumi providers are typically wrappers around the same provider APIs that Terraform uses, but packaged as native SDKs in each language. Pulumi's CrossCode technology enables creating cross-cloud abstractions more naturally. For example, a component that provisions resources across AWS and GCP can be authored as a single TypeScript class with proper encapsulation.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ Pulumi providers are typically wrappers around the same provider APIs that Terra
   
   
   
+  
+  
+  
 
 
 Terraform's automation is well-established with CLI commands, the Terraform Cloud API, and community tooling like Terragrunt and Terraspace. Terraform Cloud provides workspaces, run triggers, policy enforcement (Sentinel), and cost estimation.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Pulumi offers built-in automation API — the ability to deploy infrastructure p
   
   
   
+  
+  
+  
 
 
 ### When to Choose Each
 
+  
+  
+  
   
   
   
@@ -546,6 +620,9 @@ Choose Terraform when team familiarity with HCL is established, operating in hig
   
   
   
+  
+  
+  
 
 
 Choose Pulumi when prioritizing developer productivity via real programming languages, needing strong typing and IDE support, building cross-cloud abstractions, or wanting programmable deployment workflows via Automation API.
@@ -572,10 +649,16 @@ Choose Pulumi when prioritizing developer productivity via real programming lang
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

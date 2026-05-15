@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/security-engineer-interview.h
   
 
 
+# Security Engineer Interview
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Interview Structure 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Security engineer interviews typically cover: security fundamentals, hands-on ex
   
   
   
+  
+  
+  
 
 
 Core Knowledge Topics 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Cryptography
   
   
   
+  
+  
+  
 
 
 Understand encryption algorithms and their properties: 
 
+  
+  
+  
   
   
   
@@ -230,10 +271,16 @@ Understand encryption algorithms and their properties:
   
   
   
+  
+  
+  
 
 
 import hashlib
 
+  
+  
+  
   
   
   
@@ -276,10 +323,16 @@ import os
   
   
   
+  
+  
+  
 
 
 def hash_password(password):
 
+  
+  
+  
   
   
   
@@ -322,10 +375,16 @@ def hash_password(password):
   
   
   
+  
+  
+  
 
 
 import bcrypt
 
+  
+  
+  
   
   
   
@@ -368,10 +427,16 @@ salt = bcrypt.gensalt(rounds=12)
   
   
   
+  
+  
+  
 
 
 return bcrypt.hashpw(password.encode(), salt)
 
+  
+  
+  
   
   
   
@@ -414,10 +479,16 @@ return bcrypt.hashpw(password.encode(), salt)
   
   
   
+  
+  
+  
 
 
 # Answer: SHA-256 is fast, making brute-force feasible.
 
+  
+  
+  
   
   
   
@@ -460,10 +531,16 @@ return bcrypt.hashpw(password.encode(), salt)
   
   
   
+  
+  
+  
 
 
 # Follow-up: What about MD5?
 
+  
+  
+  
   
   
   
@@ -506,10 +583,16 @@ return bcrypt.hashpw(password.encode(), salt)
   
   
   
+  
+  
+  
 
 
 Network Security 
 
+  
+  
+  
   
   
   
@@ -552,10 +635,16 @@ Network Security
   
   
   
+  
+  
+  
 
 
 import socket
 
+  
+  
+  
   
   
   
@@ -598,10 +687,16 @@ def scan_port(host, port, timeout=1):
   
   
   
+  
+  
+  
 
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+  
+  
+  
   
   
   
@@ -644,10 +739,16 @@ sock.settimeout(timeout)
   
   
   
+  
+  
+  
 
 
 result = sock.connect_ex((host, port))
 
+  
+  
+  
   
   
   
@@ -690,10 +791,16 @@ sock.close()
   
   
   
+  
+  
+  
 
 
 return result == 0
 
+  
+  
+  
   
   
   
@@ -736,10 +843,16 @@ return result == 0
   
   
   
+  
+  
+  
 
 
 # Answer: Use SYN scan (stealth scan), randomize port order,
 
+  
+  
+  
   
   
   
@@ -782,6 +895,9 @@ return result == 0
   
   
   
+  
+  
+  
 
 
 System Design Questions 
@@ -802,10 +918,16 @@ System Design Questions
   
   
   
+  
+  
+  
 
 
 Design a Secure Authentication System 
 
+  
+  
+  
   
   
   
@@ -848,10 +970,16 @@ Design a Secure Authentication System
   
   
   
+  
+  
+  
 
 
 class SecureAuthSystem:
 
+  
+  
+  
   
   
   
@@ -894,10 +1022,16 @@ components = [
   
   
   
+  
+  
+  
 
 
 "Rate limiter (token bucket per IP)",
 
+  
+  
+  
   
   
   
@@ -940,10 +1074,16 @@ components = [
   
   
   
+  
+  
+  
 
 
 "MFA enforcement (TOTP preferred)",
 
+  
+  
+  
   
   
   
@@ -986,10 +1126,16 @@ components = [
   
   
   
+  
+  
+  
 
 
 "Anomaly detection (new device/location)",
 
+  
+  
+  
   
   
   
@@ -1032,10 +1178,16 @@ components = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -1078,10 +1230,16 @@ def login_flow(self):
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -1124,10 +1282,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "2": "Check rate limits",
 
+  
+  
+  
   
   
   
@@ -1170,10 +1334,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "4": "Check for suspicious context",
 
+  
+  
+  
   
   
   
@@ -1216,10 +1386,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "6": "Log authentication event"
 
+  
+  
+  
   
   
   
@@ -1262,10 +1438,16 @@ return {
   
   
   
+  
+  
+  
 
 
 Design a Secrets Management System 
 
+  
+  
+  
   
   
   
@@ -1308,33 +1490,16 @@ Requirements:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store secrets encrypted at rest (AES-256-GCM)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Access control (RBAC)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store secrets encrypted at rest (AES-256-GCM)
 
+  
+  
+  
   
   
   
@@ -1356,31 +1521,11 @@ Requirements:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Audit logging
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Access control (RBAC)
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Automatic rotation
-
   
   
   
@@ -1402,8 +1547,63 @@ Requirements:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- High availability
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Audit logging
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Automatic rotation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- High availability
+
+  
+  
+  
   
   
   
@@ -1446,33 +1646,16 @@ Data flow:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client request -> API Gateway -> Auth check
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Auth check -> JWT validation -> Permission check
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Client request -> API Gateway -> Auth check
 
+  
+  
+  
   
   
   
@@ -1494,7 +1677,7 @@ Data flow:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Permission check -> Key hierarchy -> Decrypt secret
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Auth check -> JWT validation -> Permission check
 
   
   
@@ -1515,10 +1698,42 @@ Data flow:
   
   
   
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return secret (with audit log)
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Permission check -> Key hierarchy -> Decrypt secret
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return secret (with audit log)
+
+  
+  
+  
   
   
   
@@ -1561,33 +1776,16 @@ Key hierarchy:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Master key (HSM/KMS)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Database encryption keys
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Master key (HSM/KMS)
 
+  
+  
+  
   
   
   
@@ -1609,8 +1807,37 @@ Key hierarchy:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Secret encryption keys
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Database encryption keys
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Secret encryption keys
+
+  
+  
+  
   
   
   
@@ -1653,10 +1880,16 @@ Practical Exercise
   
   
   
+  
+  
+  
 
 
 # Exercise: Security incident investigation
 
+  
+  
+  
   
   
   
@@ -1699,10 +1932,16 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
 {"time": "10:00", "user": "alice", "event": "login", "ip": "192.168.1.1"},
 
+  
+  
+  
   
   
   
@@ -1745,10 +1984,16 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
 {"time": "10:02", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},
 
+  
+  
+  
   
   
   
@@ -1791,10 +2036,16 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
 {"time": "10:04", "user": "alice", "event": "login_failed", "ip": "10.0.0.5"},
 
+  
+  
+  
   
   
   
@@ -1837,10 +2088,16 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
 {"time": "10:06", "user": "alice", "event": "export_data", "ip": "10.0.0.5"},
 
+  
+  
+  
   
   
   
@@ -1883,10 +2140,16 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -1929,33 +2192,16 @@ incident_logs = [
   
   
   
-
-
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What indicators of compromise do you see?
 
+  
+  
+  
   
   
   
@@ -1977,7 +2223,7 @@ incident_logs = [
   
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What is the likely attack vector?
 
   
   
@@ -1998,10 +2244,42 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
-# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What immediate containment actions?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. What forensic data would you collect?
+
+  
+  
+  
   
   
   
@@ -2044,33 +2322,16 @@ incident_logs = [
   
   
   
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- IP change: 192.168.1.1 (corp) -> 10.0.0.5 (internal)
 
+  
+  
+  
   
   
   
@@ -2092,7 +2353,7 @@ incident_logs = [
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Brute force pattern: 4 failed logins
 
   
   
@@ -2113,10 +2374,42 @@ incident_logs = [
   
   
   
+  
+  
+  
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -> account takeover -> data exfiltration
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Suspicious actions after login: data export + log deletion
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Likely: credential stuffing -> account takeover -> data exfiltration
+
+  
+  
+  
   
   
   
@@ -2156,10 +2449,16 @@ Behavioral Questions
   
   
   
+  
+  
+  
 
 
 Be prepared to discuss: 
 
+  
+  
+  
   
   
   
@@ -2199,10 +2498,16 @@ Be prepared to discuss:
   
   
   
+  
+  
+  
 
 
 * How you convinced developers to fix security issues
 
+  
+  
+  
   
   
   
@@ -2239,10 +2544,16 @@ Be prepared to discuss:
   
   
   
+  
+  
+  
 
 
 * How you stay current with security research
 
+  
+  
+  
   
   
   
@@ -2282,10 +2593,16 @@ Be prepared to discuss:
   
   
   
+  
+  
+  
 
 
 Resources for Preparation 
 
+  
+  
+  
   
   
   

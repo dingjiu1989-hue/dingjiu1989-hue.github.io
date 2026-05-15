@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/postgresql-vs-mysql-2026.html
   
 
 
+# PostgreSQL vs MySQL 2026: Relational Database Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  PostgreSQL vs MySQL 2026: The State of Relational Databases
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ The PostgreSQL vs MySQL debate has evolved significantly by 2026. Both databases
   
   
   
+  
+  
+  
 
 
 ### Feature Evolution
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ PostgreSQL 18 introduces native columnar storage via pg_analytics, closing the g
   
   
   
+  
+  
+  
 
 
 MySQL 9.0 brings JavaScript stored procedures via GraalVM, improved JSON functionality with JSON_TABLE and JSON_SCHEMA_VALID support, and encrypted system tablespaces. InnoDB continues to receive performance optimizations for high-concurrency OLTP workloads. HeatWave, MySQL's integrated in-memory query accelerator, provides columnar analytics directly on MySQL data.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ MySQL 9.0 brings JavaScript stored procedures via GraalVM, improved JSON functio
   
   
   
+  
+  
+  
 
 
 MySQL maintains an edge in pure read-heavy OLTP workloads. Single-table point lookups using the primary key consistently outperform PostgreSQL by 10-20% in benchmarks. Write-heavy workloads show similar MySQL advantages, particularly under high concurrency with InnoDB's buffer pool optimizations.
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 ### Developer-Friendly Features
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * Full JSON/JSONB support with GIN indexing
 
+  
+  
+  
   
   
   
@@ -436,10 +498,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * Native array, hstore, and range types
 
+  
+  
+  
   
   
   
@@ -482,6 +550,9 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * Advisory locks for application-level coordination
@@ -505,10 +576,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * EXTENSION ecosystem (PostGIS, pgvector, TimescaleDB)
 
+  
+  
+  
   
   
   
@@ -557,10 +634,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * Simpler replication: GTID-based and group replication
 
+  
+  
+  
   
   
   
@@ -603,10 +686,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * Document Store for hybrid SQL/NoSQL workloads
 
+  
+  
+  
   
   
   
@@ -649,10 +738,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 * InnoDB Cluster for high availability
 
+  
+  
+  
   
   
   
@@ -701,10 +796,16 @@ PostgreSQL excels at complex queries involving multiple joins, window functions,
   
   
   
+  
+  
+  
 
 
 PostgreSQL dominates in modern application stacks. Supabase, Neon, and Crunchy Bridge provide serverless and managed options with generous free tiers. The pgvector extension makes PostgreSQL a leading vector database solution for AI applications.
 
+  
+  
+  
   
   
   
@@ -753,10 +854,16 @@ MySQL, via the MariaDB fork and MySQL HeatWave, maintains dominance in tradition
   
   
   
+  
+  
+  
 
 
 ### Operational Considerations
 
+  
+  
+  
   
   
   
@@ -805,10 +912,16 @@ PostgreSQL's streaming replication and WAL archiving provide robust point-in-tim
   
   
   
+  
+  
+  
 
 
 MySQL's InnoDB Cluster with Group Replication offers automated failover with multi-primary capabilities. MySQL Shell's AdminAPI simplifies cluster management significantly compared to PostgreSQL's more manual approaches.
 
+  
+  
+  
   
   
   
@@ -857,10 +970,16 @@ MySQL's InnoDB Cluster with Group Replication offers automated failover with mul
   
   
   
+  
+  
+  
 
 
 Choose PostgreSQL for complex queries, advanced data types, JSON operations, geospatial applications via PostGIS, AI/vector workloads, and when you need extensibility without sacrificing ACID compliance.
 
+  
+  
+  
   
   
   
@@ -909,10 +1028,16 @@ Choose MySQL for high-throughput OLTP, read-heavy web applications, WordPress-ba
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

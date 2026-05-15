@@ -39,14 +39,14 @@
       "headline": "Database Security Hardening Guide",
       "description": "Database security best practices: encryption at rest and in transit, row-level security, audit logging, network isolation, and secret rotation.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png",
-      "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "6663",
+      "datePublished": "2026-05-15",
+      "dateModified": "2026-05-15",
+      "wordCount": "7527",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-security-best-practices.html"},
-      "articleBody": "Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. Encryption at Rest Encryption at rest protects data stored on disk. If an attacker gains access to the underlying storage, encrypted data remains unreadable without the encryption key. Transparent Data Encryption (TDE) TDE encrypts database files automatically. The database engine handles encryption and decryption transparently. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Enable TDE with pg_tde extension CREATE EXTENSION pg_tde; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create an encrypted table CREATE TABLE customers ( id SERIAL PRIMARY KEY, name TEXT, email TEXT, ssn TEXT ) USING tde; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Enable InnoDB tablespace encryption CREATE TABLE orders ( order_id INT PRIMARY KEY, customer_id INT, amount DECIMAL(10,2) ) ENCRYPTION='Y'; Application-Level Encryption For maximum protection, encrypt sensitive columns at the application level. The database never sees the plaintext. Application-level encryption with AWS KMS import boto3 from cryptography.fernet import Fernet def encrypt_column(plaintext, kms_key_id): Generate a data key from KMS kms = boto3.client('kms') response = kms.generate_data_key( KeyId=kms_key_id, KeySpec='AES_256' ) data_key = response['Plaintext'] encrypted_key = response['CiphertextBlob'] Encrypt the data with the data key f = Fernet(base64.urlsafe_b64encode(data_key)) ciphertext = f.encrypt(plaintext.encode()) return ciphertext, encrypted_key def decrypt_column(ciphertext, encrypted_key): kms = boto3.client('kms') response = kms.decrypt(CiphertextBlob=encrypted_key) data_key = response['Plaintext'] f = Fernet(base64.urlsafe_b64encode(data_key)) return f.decrypt(ciphertext).decode() Key Management for Encryption at Rest * Use a dedicated key management service (AWS KMS, Azure Key Vault, GCP Cloud KMS). * Separate encryption keys by environment (dev, staging, production). * Enable automatic key rotation (yearly or more frequently). * Implement key access auditing to detect unauthorized use. Encryption in Transit Encryption in transit protects data as it travels between the database and clients. TLS Configuration \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Require TLS for all connections \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf ssl = on ssl_cert_file = '/etc/ssl/certs/server.crt' ssl_key_file = '/etc/ssl/private/server.key' ssl_ca_file = '/etc/ssl/certs/ca.crt' \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In pg_hba.conf Require TLS for all connections hostssl all all 0.0.0.0/0 md5 MySQL: Require TLS [mysqld] require_secure_transport = ON ssl_ca = /etc/ssl/certs/ca.pem ssl_cert = /etc/ssl/certs/server-cert.pem ssl_key = /etc/ssl/private/server-key.pem **Best practices**: * Enforce TLS for all database connections. * Use TLS 1.2 or 1.3. Disable older versions. * Validate certificates on both client and server. * Rotate certificates before expiry. * Use client certificates for mutual TLS authentication. Row-Level Security (RLS) RLS restricts which rows a user can access based on a policy. It implements multi-tenancy and data isolation at the database level. PostgreSQL Row-Level Security \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a table with RLS CREATE TABLE orders ( order_id SERIAL PRIMARY KEY, tenant_id INT NOT NULL, customer_name TEXT, amount DECIMAL(10,2) ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable RLS on the table ALTER TABLE orders ENABLE ROW LEVEL SECURITY; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a policy: users can only see their tenant's orders CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::INT); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to the table GRANT SELECT, INSERT ON orders TO app_user; Row-Level Security in Other Databases \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server: Row-level security with security predicates CREATE FUNCTION dbo.tenantAccessPredicate(@tenant_id INT) RETURNS TABLE WITH SCHEMABINDING AS RETURN SELECT 1 AS access_result WHERE @tenant_id = CAST(SESSION_CONTEXT(N'tenant_id') AS INT); CREATE SECURITY POLICY dbo.tenantSecurityPolicy ADD FILTER PREDICATE dbo.tenantAccessPredicate(tenant_id) ON dbo.orders; RLS ensures that even if a query accesses rows it should not, the database engine filters them out automatically. Audit Logging Audit logging records database activity for security analysis and compliance. What to Log * All DDL statements (CREATE, ALTER, DROP). * Failed login attempts. * Privilege changes (GRANT, REVOKE). * Access to sensitive tables or columns. * Data export operations. * Schema changes. PostgreSQL Audit with pgaudit \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install pgaudit extension CREATE EXTENSION pgaudit; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure audit logging in postgresql.conf shared_preload_libraries = 'pgaudit' pgaudit.log = 'write,ddl,role,function' pgaudit.log_level = 'notice' pgaudit.log_relation = on pgaudit.log_statement_once = off MySQL Audit Log \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL Enterprise Audit INSTALL PLUGIN audit_log SONAME 'audit_log.so'; SET GLOBAL audit_log_policy = 'ALL'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query audit logs SELECT * FROM mysql.audit_log_table WHERE timestamp >= NOW() - INTERVAL 1 HOUR AND status = 0 -- Failed operations ORDER BY timestamp DESC; Centralized Audit Log Collection Forward database audit logs to a SIEM for analysis and alerting. Filebeat configuration for shipping database audit logs filebeat.inputs: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log paths: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/postgresql/pgaudit.log fields: service: postgresql environment: production output.elasticsearch: hosts: [\"https://elasticsearch.example.com:9200\"] Network Isolation Network isolation limits which systems can reach the database. VPC and Subnet Design Place databases in private subnets with no direct internet access. Only application servers in the same VPC should connect. Terraform: Database in private subnet resource \"aws_subnet\" \"db_private\" { vpc_id = aws_vpc.main.id cidr_block = \"10.0.3.0/24\" tags = { Name = \"db-private\" Tier = \"database\" } } resource \"aws_security_group\" \"db\" { name_prefix = \"db-sg-\" vpc_id = aws_vpc.main.id ingress { from_port = 5432 to_port = 5432 protocol = \"tcp\" security_groups = [aws_security_group.app.id] description = \"PostgreSQL from app servers\" } egress { from_port = 0 to_port = 0 protocol = \"-1\" cidr_blocks = [\"0.0.0.0/0\"] } } Database Firewall Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Restrict listen address \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf listen_addresses = '10.0.1.0,10.0.2.0' Least Privilege Access Apply the principle of least privilege to database access. Separate Roles by Function \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create separate roles for different access patterns CREATE ROLE read_only; CREATE ROLE read_write; CREATE ROLE admin; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant minimal permissions GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only; GRANT INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO read_write; GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant roles to users GRANT read_only TO reporting_user; GRANT read_write TO app_user; GRANT admin TO dba_team; Application Users vs Admin Users * Application connections use a dedicated role with only the permissions needed for the application. * Admin access uses separate accounts with MFA and is only available through a bastion host or VPN. * Application users should never have DDL permissions. Secret Rotation Database credentials need regular rotation. Compromised credentials that are never rotated become permanent backdoors. Automated Rotation with HashiCorp Vault Vault database secrets engine configuration path \"database/creds/my-app\" { capabilities = [\"read\"] } Dynamic database credentials with Vault import hvac client = hvac.Client(url='https://vault.example.com') client.auth.approle('my-role-id', 'my-secret-id') Get short-lived database credentials creds = client.secrets.database.generate_credentials( name='my-app' ) db_user = creds['data']['username'] # v-token-myapp-a1b2c3... db_pass = creds['data']['password'] # random password These credentials expire in 1 hour **Rotation frequency**: * Application credentials: Every 24-48 hours (dynamic). * Admin credentials: Every 90 days. * Service account credentials: Every 30 days. * Encryption keys: Annually. Security Hardening Checklist * [ ] Encryption at rest enabled for all databases. * [ ] TLS 1.2+ enforced for all connections. * [ ] Network isolation: databases in private subnets. * [ ] Row-level security configured for multi-tenant tables. * [ ] Audit logging enabled and forwarded to SIEM. * [ ] Least privilege roles applied for all access patterns. * [ ] Secret rotation automated via Vault or equivalent. * [ ] Regular vulnerability scanning of database instances. * [ ] Database software updated with latest patches. * [ ] Default admin accounts disabled or renamed. * [ ] Unused extensions and features removed. * [ ] Connection limits set per user to prevent resource exhaustion. Conclusion Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure."
+      "articleBody": "Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database Security Hardening Guide Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. Encryption at Rest Encryption at rest protects data stored on disk. If an attacker gains access to the underlying storage, encrypted data remains unreadable without the encryption key. Transparent Data Encryption (TDE) TDE encrypts database files automatically. The database engine handles encryption and decryption transparently. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Enable TDE with pg_tde extension CREATE EXTENSION pg_tde; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create an encrypted table CREATE TABLE customers ( id SERIAL PRIMARY KEY, name TEXT, email TEXT, ssn TEXT ) USING tde; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Enable InnoDB tablespace encryption CREATE TABLE orders ( order_id INT PRIMARY KEY, customer_id INT, amount DECIMAL(10,2) ) ENCRYPTION='Y'; Application-Level Encryption For maximum protection, encrypt sensitive columns at the application level. The database never sees the plaintext. Application-level encryption with AWS KMS import boto3 from cryptography.fernet import Fernet def encrypt_column(plaintext, kms_key_id): Generate a data key from KMS kms = boto3.client('kms') response = kms.generate_data_key( KeyId=kms_key_id, KeySpec='AES_256' ) data_key = response['Plaintext'] encrypted_key = response['CiphertextBlob'] Encrypt the data with the data key f = Fernet(base64.urlsafe_b64encode(data_key)) ciphertext = f.encrypt(plaintext.encode()) return ciphertext, encrypted_key def decrypt_column(ciphertext, encrypted_key): kms = boto3.client('kms') response = kms.decrypt(CiphertextBlob=encrypted_key) data_key = response['Plaintext'] f = Fernet(base64.urlsafe_b64encode(data_key)) return f.decrypt(ciphertext).decode() Key Management for Encryption at Rest * Use a dedicated key management service (AWS KMS, Azure Key Vault, GCP Cloud KMS). * Separate encryption keys by environment (dev, staging, production). * Enable automatic key rotation (yearly or more frequently). * Implement key access auditing to detect unauthorized use. Encryption in Transit Encryption in transit protects data as it travels between the database and clients. TLS Configuration \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Require TLS for all connections \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf ssl = on ssl_cert_file = '/etc/ssl/certs/server.crt' ssl_key_file = '/etc/ssl/private/server.key' ssl_ca_file = '/etc/ssl/certs/ca.crt' \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In pg_hba.conf Require TLS for all connections hostssl all all 0.0.0.0/0 md5 MySQL: Require TLS [mysqld] require_secure_transport = ON ssl_ca = /etc/ssl/certs/ca.pem ssl_cert = /etc/ssl/certs/server-cert.pem ssl_key = /etc/ssl/private/server-key.pem **Best practices**: * Enforce TLS for all database connections. * Use TLS 1.2 or 1.3. Disable older versions. * Validate certificates on both client and server. * Rotate certificates before expiry. * Use client certificates for mutual TLS authentication. Row-Level Security (RLS) RLS restricts which rows a user can access based on a policy. It implements multi-tenancy and data isolation at the database level. PostgreSQL Row-Level Security \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a table with RLS CREATE TABLE orders ( order_id SERIAL PRIMARY KEY, tenant_id INT NOT NULL, customer_name TEXT, amount DECIMAL(10,2) ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable RLS on the table ALTER TABLE orders ENABLE ROW LEVEL SECURITY; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a policy: users can only see their tenant's orders CREATE POLICY tenant_isolation ON orders USING (tenant_id = current_setting('app.tenant_id')::INT); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to the table GRANT SELECT, INSERT ON orders TO app_user; Row-Level Security in Other Databases \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server: Row-level security with security predicates CREATE FUNCTION dbo.tenantAccessPredicate(@tenant_id INT) RETURNS TABLE WITH SCHEMABINDING AS RETURN SELECT 1 AS access_result WHERE @tenant_id = CAST(SESSION_CONTEXT(N'tenant_id') AS INT); CREATE SECURITY POLICY dbo.tenantSecurityPolicy ADD FILTER PREDICATE dbo.tenantAccessPredicate(tenant_id) ON dbo.orders; RLS ensures that even if a query accesses rows it should not, the database engine filters them out automatically. Audit Logging Audit logging records database activity for security analysis and compliance. What to Log * All DDL statements (CREATE, ALTER, DROP). * Failed login attempts. * Privilege changes (GRANT, REVOKE). * Access to sensitive tables or columns. * Data export operations. * Schema changes. PostgreSQL Audit with pgaudit \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install pgaudit extension CREATE EXTENSION pgaudit; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure audit logging in postgresql.conf shared_preload_libraries = 'pgaudit' pgaudit.log = 'write,ddl,role,function' pgaudit.log_level = 'notice' pgaudit.log_relation = on pgaudit.log_statement_once = off MySQL Audit Log \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL Enterprise Audit INSTALL PLUGIN audit_log SONAME 'audit_log.so'; SET GLOBAL audit_log_policy = 'ALL'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query audit logs SELECT * FROM mysql.audit_log_table WHERE timestamp >= NOW() - INTERVAL 1 HOUR AND status = 0 -- Failed operations ORDER BY timestamp DESC; Centralized Audit Log Collection Forward database audit logs to a SIEM for analysis and alerting. Filebeat configuration for shipping database audit logs filebeat.inputs: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log paths: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/postgresql/pgaudit.log fields: service: postgresql environment: production output.elasticsearch: hosts: [\"https://elasticsearch.example.com:9200\"] Network Isolation Network isolation limits which systems can reach the database. VPC and Subnet Design Place databases in private subnets with no direct internet access. Only application servers in the same VPC should connect. Terraform: Database in private subnet resource \"aws_subnet\" \"db_private\" { vpc_id = aws_vpc.main.id cidr_block = \"10.0.3.0/24\" tags = { Name = \"db-private\" Tier = \"database\" } } resource \"aws_security_group\" \"db\" { name_prefix = \"db-sg-\" vpc_id = aws_vpc.main.id ingress { from_port = 5432 to_port = 5432 protocol = \"tcp\" security_groups = [aws_security_group.app.id] description = \"PostgreSQL from app servers\" } egress { from_port = 0 to_port = 0 protocol = \"-1\" cidr_blocks = [\"0.0.0.0/0\"] } } Database Firewall Rules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Restrict listen address \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf listen_addresses = '10.0.1.0,10.0.2.0' Least Privilege Access Apply the principle of least privilege to database access. Separate Roles by Function \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create separate roles for different access patterns CREATE ROLE read_only; CREATE ROLE read_write; CREATE ROLE admin; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant minimal permissions GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only; GRANT INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO read_write; GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant roles to users GRANT read_only TO reporting_user; GRANT read_write TO app_user; GRANT admin TO dba_team; Application Users vs Admin Users * Application connections use a dedicated role with only the permissions needed for the application. * Admin access uses separate accounts with MFA and is only available through a bastion host or VPN. * Application users should never have DDL permissions. Secret Rotation Database credentials need regular rotation. Compromised credentials that are never rotated become permanent backdoors. Automated Rotation with HashiCorp Vault Vault database secrets engine configuration path \"database/creds/my-app\" { capabilities = [\"read\"] } Dynamic database credentials with Vault import hvac client = hvac.Client(url='https://vault.example.com') client.auth.approle('my-role-id', 'my-secret-id') Get short-lived database credentials creds = client.secrets.database.generate_credentials( name='my-app' ) db_user = creds['data']['username'] # v-token-myapp-a1b2c3... db_pass = creds['data']['password'] # random password These credentials expire in 1 hour **Rotation frequency**: * Application credentials: Every 24-48 hours (dynamic). * Admin credentials: Every 90 days. * Service account credentials: Every 30 days. * Encryption keys: Annually. Security Hardening Checklist * [ ] Encryption at rest enabled for all databases. * [ ] TLS 1.2+ enforced for all connections. * [ ] Network isolation: databases in private subnets. * [ ] Row-level security configured for multi-tenant tables. * [ ] Audit logging enabled and forwarded to SIEM. * [ ] Least privilege roles applied for all access patterns. * [ ] Secret rotation automated via Vault or equivalent. * [ ] Regular vulnerability scanning of database instances. * [ ] Database software updated with latest patches. * [ ] Default admin accounts disabled or renamed. * [ ] Unused extensions and features removed. * [ ] Connection limits set per user to prevent resource exhaustion. Conclusion Database security requires defense in depth. Encrypt data at rest and in transit. Isolate databases on private networks. Implement row-level security and audit logging. Follow least privilege for database roles. Automate secret rotation. A well-secured database makes it significantly harder for attackers to exfiltrate sensitive data, even if they breach other parts of the infrastructure."
     }
     </script>
     <script type="application/ld+json">
@@ -73,7 +73,7 @@
       <div class="article-tags">        <span class="tag-cat">Database</span>
         <span class="tag-cat">SQL</span></div>
       <h1 class="article-title">Database Security Hardening Guide</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/database/database-security-best-practices.png" alt="Database Security Hardening Guide" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Database Security Hardening Guide</h1>
 <br>
@@ -152,7 +152,33 @@
 <br>
 <br>
 <br>
+<h1>Database Security Hardening Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database security is a critical component of any organization's security posture. Databases store the most valuable data: customer records, financial data, intellectual property, and credentials. This guide covers the key security practices including encryption, access control, network isolation, and secret management. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -186,6 +212,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encryption at rest protects data stored on disk. If an attacker gains access to the underlying storage, encrypted data remains unreadable without the encryption key. </p>
 <br>
 <br>
@@ -203,7 +232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transparent Data Encryption (TDE) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -240,7 +275,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Enable TDE with pg_tde extension</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Enable TDE with pg_tde extension</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -280,7 +321,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create an encrypted table</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create an encrypted table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -320,7 +367,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id SERIAL PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +413,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email TEXT,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -400,6 +459,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) USING tde;</p>
 <br>
 <br>
@@ -420,7 +482,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Enable InnoDB tablespace encryption</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL: Enable InnoDB tablespace encryption</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -441,6 +509,9 @@
 <br>
 <br>
 <p>CREATE TABLE orders (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -480,6 +551,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>customer_id INT,</p>
 <br>
 <br>
@@ -500,7 +574,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>amount DECIMAL(10,2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -540,6 +620,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application-Level Encryption </p>
 <br>
 <br>
@@ -557,7 +640,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For maximum protection, encrypt sensitive columns at the application level. The database never sees the plaintext. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -597,7 +686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import boto3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -637,7 +732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def encrypt_column(plaintext, kms_key_id):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -677,7 +778,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kms = boto3.client('kms')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -717,7 +824,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>KeyId=kms_key_id,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -757,6 +870,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
 <br>
 <br>
@@ -777,7 +893,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data_key = response['Plaintext']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -817,6 +939,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Encrypt the data with the data key</h1>
 <br>
 <br>
@@ -837,7 +962,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f = Fernet(base64.urlsafe_b64encode(data_key))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -877,7 +1008,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return ciphertext, encrypted_key</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -917,7 +1054,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kms = boto3.client('kms')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -957,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data_key = response['Plaintext']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -997,7 +1146,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return f.decrypt(ciphertext).decode()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1037,7 +1192,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Use a dedicated key management service (AWS KMS, Azure Key Vault, GCP Cloud KMS).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1071,7 +1232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Enable automatic key rotation (yearly or more frequently).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1108,6 +1275,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encryption in Transit </p>
 <br>
 <br>
@@ -1125,7 +1295,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encryption in transit protects data as it travels between the database and clients. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1162,7 +1338,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Require TLS for all connections</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Require TLS for all connections</p>
 <br>
 <br>
 <br>
@@ -1182,7 +1361,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1222,7 +1407,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssl_cert_file = '/etc/ssl/certs/server.crt'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1262,6 +1453,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssl_ca_file = '/etc/ssl/certs/ca.crt'</p>
 <br>
 <br>
@@ -1282,7 +1476,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In pg_hba.conf</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In pg_hba.conf</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1322,7 +1522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hostssl all all 0.0.0.0/0 md5</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1362,7 +1568,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>[mysqld]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1402,7 +1614,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssl_ca = /etc/ssl/certs/ca.pem</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1442,7 +1660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssl_key = /etc/ssl/private/server-key.pem</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1479,7 +1703,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Enforce TLS for all database connections.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1513,6 +1743,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Validate certificates on both client and server.</p>
 <br>
 <br>
@@ -1530,7 +1763,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Rotate certificates before expiry.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1567,6 +1806,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Row-Level Security (RLS) </p>
 <br>
 <br>
@@ -1584,7 +1826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RLS restricts which rows a user can access based on a policy. It implements multi-tenancy and data isolation at the database level. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1621,7 +1869,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a table with RLS</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a table with RLS</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1661,7 +1915,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>order_id SERIAL PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1701,7 +1961,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>customer_name TEXT,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1741,6 +2007,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
 <br>
 <br>
@@ -1761,7 +2030,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable RLS on the table</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Enable RLS on the table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1801,7 +2076,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a policy: users can only see their tenant's orders</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a policy: users can only see their tenant's orders</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1841,6 +2122,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>USING (tenant_id = current_setting('app.tenant_id')::INT);</p>
 <br>
 <br>
@@ -1861,7 +2145,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to the table</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to the table</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1901,6 +2191,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Row-Level Security in Other Databases </p>
 <br>
 <br>
@@ -1921,7 +2214,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server: Row-level security with security predicates</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server: Row-level security with security predicates</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1961,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURNS TABLE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AS</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2041,7 +2352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE @tenant_id = CAST(SESSION_CONTEXT(N'tenant_id') AS INT);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2081,7 +2398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ADD FILTER PREDICATE dbo.tenantAccessPredicate(tenant_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2121,7 +2444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RLS ensures that even if a query accesses rows it should not, the database engine filters them out automatically. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2155,7 +2484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Audit logging records database activity for security analysis and compliance. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2192,7 +2527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* All DDL statements (CREATE, ALTER, DROP).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2226,7 +2567,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Privilege changes (GRANT, REVOKE).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2260,6 +2607,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Data export operations.</p>
 <br>
 <br>
@@ -2277,7 +2627,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Schema changes.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2317,7 +2673,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install pgaudit extension</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Install pgaudit extension</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2357,7 +2719,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure audit logging in postgresql.conf</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Configure audit logging in postgresql.conf</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2397,7 +2765,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pgaudit.log = 'write,ddl,role,function'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2437,7 +2811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pgaudit.log_relation = on</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2477,6 +2857,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MySQL Audit Log </p>
 <br>
 <br>
@@ -2497,7 +2880,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL Enterprise Audit</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- MySQL Enterprise Audit</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2537,6 +2926,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SET GLOBAL audit_log_policy = 'ALL';</p>
 <br>
 <br>
@@ -2557,7 +2949,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query audit logs</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query audit logs</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,7 +2995,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE timestamp >= NOW() - INTERVAL 1 HOUR</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2637,7 +3041,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ORDER BY timestamp DESC;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2674,7 +3084,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Forward database audit logs to a SIEM for analysis and alerting. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2714,6 +3130,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>filebeat.inputs:</p>
 <br>
 <br>
@@ -2734,7 +3153,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: log</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2774,7 +3199,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/postgresql/pgaudit.log</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/postgresql/pgaudit.log</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2814,7 +3245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>service: postgresql</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2854,7 +3291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>output.elasticsearch:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2894,7 +3337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Network Isolation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2928,6 +3377,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>VPC and Subnet Design </p>
 <br>
 <br>
@@ -2945,7 +3397,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Place databases in private subnets with no direct internet access. Only application servers in the same VPC should connect. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2985,6 +3443,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_subnet" "db_private" {</p>
 <br>
 <br>
@@ -3005,7 +3466,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vpc_id = aws_vpc.main.id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3045,7 +3512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tags = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3085,6 +3558,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Tier = "database"</p>
 <br>
 <br>
@@ -3105,27 +3581,36 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3165,7 +3650,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name_prefix = "db-sg-"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3205,7 +3696,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ingress {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3245,7 +3742,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>to_port = 5432</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3285,7 +3788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>security_groups = [aws_security_group.app.id]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3325,7 +3834,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3365,7 +3880,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from_port = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3405,7 +3926,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>protocol = "-1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3445,27 +3972,36 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3505,7 +4041,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Restrict listen address</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: Restrict listen address</p>
 <br>
 <br>
 <br>
@@ -3525,7 +4064,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- In postgresql.conf</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3565,6 +4110,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Least Privilege Access </p>
 <br>
 <br>
@@ -3582,7 +4130,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Apply the principle of least privilege to database access. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3619,7 +4173,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create separate roles for different access patterns</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create separate roles for different access patterns</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3659,7 +4219,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE ROLE read_write;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3699,7 +4265,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant minimal permissions</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant minimal permissions</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3739,7 +4311,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GRANT INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO read_write;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3779,7 +4357,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant roles to users</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant roles to users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3819,7 +4403,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GRANT read_write TO app_user;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3859,7 +4449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application Users vs Admin Users </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3896,7 +4492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Admin access uses separate accounts with MFA and is only available through a bastion host or VPN.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3933,7 +4535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Secret Rotation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3967,7 +4575,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Automated Rotation with HashiCorp Vault </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4007,7 +4621,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path "database/creds/my-app" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4047,7 +4667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4087,7 +4713,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import hvac</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4127,7 +4759,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client.auth.approle('my-role-id', 'my-secret-id')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4167,7 +4805,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>creds = client.secrets.database.generate_credentials(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4207,7 +4851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4247,7 +4897,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>db_pass = creds['data']['password'] # random password</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4287,7 +4943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Rotation frequency**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4321,7 +4983,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Admin credentials: Every 90 days.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4355,7 +5023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Encryption keys: Annually.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4395,7 +5069,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Encryption at rest enabled for all databases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4429,7 +5109,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Network isolation: databases in private subnets.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4463,7 +5149,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Audit logging enabled and forwarded to SIEM.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4497,7 +5189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Secret rotation automated via Vault or equivalent.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4531,7 +5229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Database software updated with latest patches.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4565,7 +5269,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* [ ] Unused extensions and features removed.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4602,7 +5312,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-data-privacy.html
   
 
 
+# AI Data Privacy: PII Detection, Data Anonymization, Local Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ AI applications process vast amounts of data, much of it containing personally i
   
   
   
+  
+  
+  
 
 
 ##  PII Detection
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Automated detection identifies sensitive data before it reaches an LLM API:
   
   
   
+  
+  
+  
 
 
 import re
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import spacy
   
   
   
+  
+  
+  
 
 
 from presidio_analyzer import AnalyzerEngine
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ from presidio_anonymizer import AnonymizerEngine
   
   
   
+  
+  
+  
 
 
 # Initialize Presidio analyzers
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ nlp = spacy.load("en_core_web_lg")
   
   
   
+  
+  
+  
 
 
 analyzer = AnalyzerEngine()
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ anonymizer = AnonymizerEngine()
   
   
   
+  
+  
+  
 
 
 def detect_pii(text: str) -> list[dict]:
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ results = analyzer.analyze(
   
   
   
+  
+  
+  
 
 
 text=text,
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ entities=[
   
   
   
+  
+  
+  
 
 
 "PHONE_NUMBER", "EMAIL_ADDRESS",
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ entities=[
   
   
   
+  
+  
+  
 
 
 "LOCATION", "DATE_TIME", "NRP",
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ entities=[
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ language="en",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ return [
   
   
   
+  
+  
+  
 
 
 {"entity": r.entity_type, "start": r.start, "end": r.end,
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ return [
   
   
   
+  
+  
+  
 
 
 for r in results
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ for r in results
   
   
   
+  
+  
+  
 
 
 def redact_pii(text: str) -> str:
 
+  
+  
+  
   
   
   
@@ -910,10 +1026,16 @@ analyzer_results = analyzer.analyze(text=text, language="en")
   
   
   
+  
+  
+  
 
 
 return anonymizer.anonymize(text=text, analyzer_results=analyzer_results).text
 
+  
+  
+  
   
   
   
@@ -962,10 +1084,16 @@ Presidio combines pattern-based detection (regex for credit cards, SSNs, phone n
   
   
   
+  
+  
+  
 
 
 ##  Data Anonymization
 
+  
+  
+  
   
   
   
@@ -1014,10 +1142,16 @@ For training data or analytics, full removal may be too destructive. Anonymizati
   
   
   
+  
+  
+  
 
 
 from faker import Faker
 
+  
+  
+  
   
   
   
@@ -1066,10 +1200,16 @@ import hashlib
   
   
   
+  
+  
+  
 
 
 fake = Faker()
 
+  
+  
+  
   
   
   
@@ -1118,10 +1258,16 @@ class DataAnonymizer:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -1170,10 +1316,16 @@ self.mapping_cache = {}
   
   
   
+  
+  
+  
 
 
 def anonymize_record(self, record: dict, pii_fields: list[str]) -> dict:
 
+  
+  
+  
   
   
   
@@ -1222,10 +1374,16 @@ anonymized = record.copy()
   
   
   
+  
+  
+  
 
 
 for field in pii_fields:
 
+  
+  
+  
   
   
   
@@ -1274,10 +1432,16 @@ if field in anonymized and anonymized[field]:
   
   
   
+  
+  
+  
 
 
 anonymized[field] = self._replace_value(field, anonymized[field])
 
+  
+  
+  
   
   
   
@@ -1326,10 +1490,16 @@ return anonymized
   
   
   
+  
+  
+  
 
 
 def _replace_value(self, field: str, value: str) -> str:
 
+  
+  
+  
   
   
   
@@ -1378,10 +1548,16 @@ if field == "email":
   
   
   
+  
+  
+  
 
 
 return fake.email()
 
+  
+  
+  
   
   
   
@@ -1430,10 +1606,16 @@ elif field == "phone":
   
   
   
+  
+  
+  
 
 
 return fake.phone_number()
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ elif field == "name":
   
   
   
+  
+  
+  
 
 
 return fake.name()
 
+  
+  
+  
   
   
   
@@ -1534,10 +1722,16 @@ elif field == "address":
   
   
   
+  
+  
+  
 
 
 return fake.address()
 
+  
+  
+  
   
   
   
@@ -1586,10 +1780,16 @@ elif field == "ssn":
   
   
   
+  
+  
+  
 
 
 return fake.ssn()
 
+  
+  
+  
   
   
   
@@ -1638,10 +1838,16 @@ else:
   
   
   
+  
+  
+  
 
 
 # Tokenization: stable pseudonym via hashing
 
+  
+  
+  
   
   
   
@@ -1690,10 +1896,16 @@ hashed = hashlib.sha256(value.encode()).hexdigest()[:16]
   
   
   
+  
+  
+  
 
 
 return f"USER_{hashed}"
 
+  
+  
+  
   
   
   
@@ -1742,10 +1954,16 @@ return f"USER_{hashed}"
   
   
   
+  
+  
+  
 
 
 def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float:
 
+  
+  
+  
   
   
   
@@ -1794,10 +2012,16 @@ def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float:
   
   
   
+  
+  
+  
 
 
 Lower epsilon = more privacy, less accuracy."""
 
+  
+  
+  
   
   
   
@@ -1846,10 +2070,16 @@ import numpy as np
   
   
   
+  
+  
+  
 
 
 scale = 1.0 / epsilon
 
+  
+  
+  
   
   
   
@@ -1898,10 +2128,16 @@ noise = np.random.laplace(0, scale)
   
   
   
+  
+  
+  
 
 
 return true_value + noise
 
+  
+  
+  
   
   
   
@@ -1950,10 +2186,16 @@ return true_value + noise
   
   
   
+  
+  
+  
 
 
 | Technique | Privacy Level | Utility | Use Case |
 
+  
+  
+  
   
   
   
@@ -2002,10 +2244,16 @@ return true_value + noise
   
   
   
+  
+  
+  
 
 
 | Removal | High | Low | Irreversible redaction |
 
+  
+  
+  
   
   
   
@@ -2054,10 +2302,16 @@ return true_value + noise
   
   
   
+  
+  
+  
 
 
 | Pseudonymization | Medium | High | Replace with fake equivalent |
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ return true_value + noise
   
   
   
+  
+  
+  
 
 
 | Differential Privacy | High | Medium | Statistical queries |
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ return true_value + noise
   
   
   
+  
+  
+  
 
 
 ##  Local Processing
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ For maximum privacy, process sensitive data locally without sending it to extern
   
   
   
+  
+  
+  
 
 
 from transformers import pipeline
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ class LocalTextProcessor:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 self.classifier = pipeline(
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ self.classifier = pipeline(
   
   
   
+  
+  
+  
 
 
 model="distilbert-base-uncased-finetuned-sst-2-english",
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ device=-1, # CPU
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ self.ner = pipeline(
   
   
   
+  
+  
+  
 
 
 "ner",
 
+  
+  
+  
   
   
   
@@ -2522,6 +2824,9 @@ model="dslim/bert-base-NER",
   
   
   
+  
+  
+  
 
 
 device=-1,
@@ -2548,10 +2853,16 @@ device=-1,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2600,10 +2911,16 @@ self.summarizer = pipeline(
   
   
   
+  
+  
+  
 
 
 "summarization",
 
+  
+  
+  
   
   
   
@@ -2652,10 +2969,16 @@ model="facebook/bart-large-cnn",
   
   
   
+  
+  
+  
 
 
 device=-1,
 
+  
+  
+  
   
   
   
@@ -2704,10 +3027,16 @@ device=-1,
   
   
   
+  
+  
+  
 
 
 def process_sensitive_data(self, text: str, task: str) -> dict:
 
+  
+  
+  
   
   
   
@@ -2756,10 +3085,16 @@ def process_sensitive_data(self, text: str, task: str) -> dict:
   
   
   
+  
+  
+  
 
 
 if task == "classify":
 
+  
+  
+  
   
   
   
@@ -2808,10 +3143,16 @@ return {"label": self.classifier(text)[0]["label"]}
   
   
   
+  
+  
+  
 
 
 elif task == "extract_entities":
 
+  
+  
+  
   
   
   
@@ -2860,10 +3201,16 @@ return {"entities": self.ner(text)}
   
   
   
+  
+  
+  
 
 
 elif task == "summarize":
 
+  
+  
+  
   
   
   
@@ -2912,10 +3259,16 @@ return {"summary": self.summarizer(text, max_length=130, min_length=30)[0]["summ
   
   
   
+  
+  
+  
 
 
 ### Hybrid Approach
 
+  
+  
+  
   
   
   
@@ -2964,10 +3317,16 @@ For complex tasks requiring powerful LLMs, strip PII before sending, then re-int
   
   
   
+  
+  
+  
 
 
 def safe_llm_call(user_text: str) -> str:
 
+  
+  
+  
   
   
   
@@ -3016,10 +3375,16 @@ def safe_llm_call(user_text: str) -> str:
   
   
   
+  
+  
+  
 
 
 pii_entities = detect_pii(user_text)
 
+  
+  
+  
   
   
   
@@ -3068,10 +3433,16 @@ redacted_text = redact_pii(user_text)
   
   
   
+  
+  
+  
 
 
 # Store PII mapping for later restoration
 
+  
+  
+  
   
   
   
@@ -3120,10 +3491,16 @@ pii_map = {
   
   
   
+  
+  
+  
 
 
 entity["text"]: f"[{entity['entity']}_{i}]"
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ for i, entity in enumerate(pii_entities)
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ for i, entity in enumerate(pii_entities)
   
   
   
+  
+  
+  
 
 
 safe_prompt = f"Process this text: {redacted_text}"
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ response = call_llm(safe_prompt)
   
   
   
+  
+  
+  
 
 
 # Step 3: The response should use placeholders, not real data
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ response = call_llm(safe_prompt)
   
   
   
+  
+  
+  
 
 
 return response
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ return response
   
   
   
+  
+  
+  
 
 
 def process_and_restore(user_text: str, context: dict) -> str:
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ redacted, pii_map = redact_with_map(user_text)
   
   
   
+  
+  
+  
 
 
 result = call_llm(f"Based on this data: {redacted}, generate a response.")
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ result = call_llm(f"Based on this data: {redacted}, generate a response.")
   
   
   
+  
+  
+  
 
 
 return result
 
+  
+  
+  
   
   
   
@@ -3536,6 +3955,9 @@ return result
   
   
   
+  
+  
+  
 
 
 data_privacy_audit:
@@ -3562,36 +3984,16 @@ data_privacy_audit:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing:
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing:
 
+  
+  
+  
   
   
   
@@ -3616,34 +4018,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values)
-
   
   
   
@@ -3668,34 +4047,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls
-
   
   
   
@@ -3720,34 +4076,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values)
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits
-
   
   
   
@@ -3772,34 +4105,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit:
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest
-
   
   
   
@@ -3824,34 +4134,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules
-
   
   
   
@@ -3876,34 +4163,11 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests
-
   
   
   
@@ -3928,7 +4192,7 @@ data_privacy_audit:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits
 
   
   
@@ -3952,10 +4216,219 @@ data_privacy_audit:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage:
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights:
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits
+
+  
+  
+  
   
   
   
@@ -3982,6 +4455,9 @@ data_privacy_audit:
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/domain-event-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "474",
+      "wordCount": "526",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/domain-event-implementation.html"},
-      "articleBody": "Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain events capture significant business occurrences within a domain-driven system. When a domain expert says \"when the order is shipped, send an invoice,\" the \"order shipped\" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated. Event Definition Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable\u2014consumers depend on it. Publishing Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store. Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker."
+      "articleBody": "Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain Event Implementation: Publishing, Handling, and Testing Domain events capture significant business occurrences within a domain-driven system. When a domain expert says \"when the order is shipped, send an invoice,\" the \"order shipped\" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated. Event Definition Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable\u2014consumers depend on it. Publishing Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store. Transactional outbox ensures events are published reliably. The outbox stores events in the same database transaction as the state change. A separate process reads the outbox and publishes events to the message broker."
     }
     </script>
     <script type="application/ld+json">
@@ -150,7 +150,33 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Domain Event Implementation: Publishing, Handling, and Testing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Domain events capture significant business occurrences within a domain-driven system. When a domain expert says "when the order is shipped, send an invoice," the "order shipped" is a domain event. Events are named in the past tense: OrderShipped, PaymentReceived, InvoiceGenerated.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -190,7 +216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Each event is an immutable object containing the data relevant to the occurrence. Events include a unique identifier, a timestamp, and the business data. Event names come from the ubiquitous language. The structure should be kept stable—consumers depend on it.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -230,7 +262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Events are published from the domain layer when an aggregate changes state. The aggregate returns events after command execution. The application layer collects and publishes these events to a message bus or event store.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

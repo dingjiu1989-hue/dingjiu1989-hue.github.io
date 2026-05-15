@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/tools/testing-frameworks.html
   
 
 
+# Testing Frameworks: Vitest, Jest, Playwright, Cypress, pytest
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Testing frameworks have evolved significantly. Vitest has become the dominant ch
   
   
   
+  
+  
+  
 
 
 ##  Vitest
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Vitest is the modern JavaScript test runner, native ESM, and Vite-integrated:
   
   
   
+  
+  
+  
 
 
 // vitest.config.ts
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ import { defineConfig } from "vitest/config";
   
   
   
+  
+  
+  
 
 
 export default defineConfig({
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ test: {
   
   
   
+  
+  
+  
 
 
 globals: true,
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ environment: "jsdom",
   
   
   
+  
+  
+  
 
 
 setupFiles: ["./test/setup.ts"],
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ coverage: {
   
   
   
+  
+  
+  
 
 
 provider: "v8",
 
+  
+  
+  
   
   
   
@@ -494,6 +562,9 @@ reporter: ["text", "json", "html"],
   
   
   
+  
+  
+  
 
 
 exclude: ["src/types/**"],
@@ -520,10 +591,16 @@ exclude: ["src/types/**"],
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -572,10 +649,16 @@ include: ["src/**/*.{test,spec}.{ts,tsx}"],
   
   
   
+  
+  
+  
 
 
 mockReset: true,
 
+  
+  
+  
   
   
   
@@ -624,6 +707,9 @@ testTimeout: 10000,
   
   
   
+  
+  
+  
 
 
 },
@@ -650,10 +736,16 @@ testTimeout: 10000,
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ testTimeout: 10000,
   
   
   
+  
+  
+  
 
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ import { increment, decrement } from "./counter";
   
   
   
+  
+  
+  
 
 
 // Mock a module
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ vi.mock("./api", () => ({
   
   
   
+  
+  
+  
 
 
 fetchCount: vi.fn().mockResolvedValue(42),
 
+  
+  
+  
   
   
   
@@ -858,10 +968,16 @@ fetchCount: vi.fn().mockResolvedValue(42),
   
   
   
+  
+  
+  
 
 
 describe("counter", () => {
 
+  
+  
+  
   
   
   
@@ -910,6 +1026,9 @@ beforeEach(() => {
   
   
   
+  
+  
+  
 
 
 vi.clearAllMocks();
@@ -936,10 +1055,16 @@ vi.clearAllMocks();
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -988,6 +1113,9 @@ it("increments correctly", () => {
   
   
   
+  
+  
+  
 
 
 expect(increment(5)).toBe(6);
@@ -1014,10 +1142,16 @@ expect(increment(5)).toBe(6);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1066,6 +1200,9 @@ it("decrements correctly", () => {
   
   
   
+  
+  
+  
 
 
 expect(decrement(5)).toBe(4);
@@ -1092,10 +1229,16 @@ expect(decrement(5)).toBe(4);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1144,6 +1287,9 @@ it("handles edge cases", () => {
   
   
   
+  
+  
+  
 
 
 expect(increment(Infinity)).toBe(Infinity);
@@ -1170,29 +1316,6 @@ expect(increment(Infinity)).toBe(Infinity);
   
   
   
-
-
-});
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1200,6 +1323,38 @@ expect(increment(Infinity)).toBe(Infinity);
 
 });
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+});
+
+  
+  
+  
   
   
   
@@ -1248,10 +1403,16 @@ expect(increment(Infinity)).toBe(Infinity);
   
   
   
+  
+  
+  
 
 
 ##  Jest
 
+  
+  
+  
   
   
   
@@ -1300,10 +1461,16 @@ The established standard, still widely used in older projects:
   
   
   
+  
+  
+  
 
 
 // jest.config.js
 
+  
+  
+  
   
   
   
@@ -1352,10 +1519,16 @@ module.exports = {
   
   
   
+  
+  
+  
 
 
 testEnvironment: "jsdom",
 
+  
+  
+  
   
   
   
@@ -1404,10 +1577,16 @@ transform: {
   
   
   
+  
+  
+  
 
 
-"^.+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.tsx?$": "ts-jest",
+"^.+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.tsx?$": "ts-jest",
 
+  
+  
+  
   
   
   
@@ -1434,6 +1613,9 @@ transform: {
 
 },
 
+  
+  
+  
   
   
   
@@ -1482,10 +1664,16 @@ moduleNameMapper: {
   
   
   
+  
+  
+  
 
 
-"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(css|less)$": "/__mocks__/styleMock.js",
+"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(css|less)$": "/__mocks__/styleMock.js",
 
+  
+  
+  
   
   
   
@@ -1512,6 +1700,9 @@ moduleNameMapper: {
 
 },
 
+  
+  
+  
   
   
   
@@ -1560,10 +1751,16 @@ setupFilesAfterSetup: ["./jest.setup.js"],
   
   
   
+  
+  
+  
 
 
 collectCoverageFrom: ["src/**/*.{ts,tsx}"],
 
+  
+  
+  
   
   
   
@@ -1612,10 +1809,16 @@ collectCoverageFrom: ["src/**/*.{ts,tsx}"],
   
   
   
+  
+  
+  
 
 
 **Strengths**: Mature ecosystem, extensive documentation, stable API.
 
+  
+  
+  
   
   
   
@@ -1664,10 +1867,16 @@ collectCoverageFrom: ["src/**/*.{ts,tsx}"],
   
   
   
+  
+  
+  
 
 
 ##  Playwright
 
+  
+  
+  
   
   
   
@@ -1716,10 +1925,16 @@ The leading browser testing framework by Microsoft:
   
   
   
+  
+  
+  
 
 
 // playwright.config.ts
 
+  
+  
+  
   
   
   
@@ -1768,10 +1983,16 @@ import { defineConfig } from "@playwright/test";
   
   
   
+  
+  
+  
 
 
 export default defineConfig({
 
+  
+  
+  
   
   
   
@@ -1820,10 +2041,16 @@ testDir: "./e2e",
   
   
   
+  
+  
+  
 
 
 fullyParallel: true,
 
+  
+  
+  
   
   
   
@@ -1872,10 +2099,16 @@ retries: 2,
   
   
   
+  
+  
+  
 
 
 workers: 4,
 
+  
+  
+  
   
   
   
@@ -1924,10 +2157,16 @@ reporter: [["html"], ["list"]],
   
   
   
+  
+  
+  
 
 
 use: {
 
+  
+  
+  
   
   
   
@@ -1976,10 +2215,16 @@ baseURL: "http://localhost:3000",
   
   
   
+  
+  
+  
 
 
 trace: "on-first-retry",
 
+  
+  
+  
   
   
   
@@ -2028,6 +2273,9 @@ screenshot: "only-on-failure",
   
   
   
+  
+  
+  
 
 
 video: "retain-on-failure",
@@ -2054,10 +2302,16 @@ video: "retain-on-failure",
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2106,10 +2360,16 @@ projects: [
   
   
   
+  
+  
+  
 
 
 { name: "chromium", use: { browserName: "chromium" } },
 
+  
+  
+  
   
   
   
@@ -2158,10 +2418,16 @@ projects: [
   
   
   
+  
+  
+  
 
 
 { name: "webkit", use: { browserName: "webkit" } },
 
+  
+  
+  
   
   
   
@@ -2210,10 +2476,16 @@ projects: [
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2262,10 +2534,16 @@ projects: [
   
   
   
+  
+  
+  
 
 
 import { test, expect } from "@playwright/test";
 
+  
+  
+  
   
   
   
@@ -2314,10 +2592,16 @@ test("user can log in", async ({ page }) => {
   
   
   
+  
+  
+  
 
 
 await page.goto("/login");
 
+  
+  
+  
   
   
   
@@ -2366,10 +2650,16 @@ await page.fill("#email", "user@example.com");
   
   
   
+  
+  
+  
 
 
 await page.fill("#password", "password123");
 
+  
+  
+  
   
   
   
@@ -2418,10 +2708,16 @@ await page.click("button[type='submit']");
   
   
   
+  
+  
+  
 
 
 await expect(page.locator(".welcome")).toHaveText("Welcome back!");
 
+  
+  
+  
   
   
   
@@ -2470,10 +2766,16 @@ await expect(page).toHaveURL("/dashboard");
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2522,10 +2824,16 @@ await expect(page).toHaveURL("/dashboard");
   
   
   
+  
+  
+  
 
 
 ##  Cypress
 
+  
+  
+  
   
   
   
@@ -2574,10 +2882,16 @@ An alternative browser testing framework with a unique architecture:
   
   
   
+  
+  
+  
 
 
 // cypress.config.js
 
+  
+  
+  
   
   
   
@@ -2626,10 +2940,16 @@ const { defineConfig } = require("cypress");
   
   
   
+  
+  
+  
 
 
 module.exports = defineConfig({
 
+  
+  
+  
   
   
   
@@ -2678,10 +2998,16 @@ e2e: {
   
   
   
+  
+  
+  
 
 
 baseUrl: "http://localhost:3000",
 
+  
+  
+  
   
   
   
@@ -2730,10 +3056,16 @@ specPattern: "cypress/e2e/**/*.cy.js",
   
   
   
+  
+  
+  
 
 
 video: false,
 
+  
+  
+  
   
   
   
@@ -2782,10 +3114,16 @@ screenshotOnRunFailure: true,
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2834,10 +3172,16 @@ component: {
   
   
   
+  
+  
+  
 
 
 devServer: {
 
+  
+  
+  
   
   
   
@@ -2886,6 +3230,9 @@ framework: "react",
   
   
   
+  
+  
+  
 
 
 bundler: "vite",
@@ -2912,29 +3259,6 @@ bundler: "vite",
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2942,6 +3266,38 @@ bundler: "vite",
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -2990,10 +3346,16 @@ bundler: "vite",
   
   
   
+  
+  
+  
 
 
 **Strengths**: Excellent debugging with time-travel, real-time reloading, great documentation, network stubbing.
 
+  
+  
+  
   
   
   
@@ -3042,10 +3404,16 @@ bundler: "vite",
   
   
   
+  
+  
+  
 
 
 ##  pytest
 
+  
+  
+  
   
   
   
@@ -3094,6 +3462,9 @@ The standard Python testing framework:
   
   
   
+  
+  
+  
 
 
 # conftest.py
@@ -3120,10 +3491,16 @@ The standard Python testing framework:
   
   
   
+  
+  
+  
 
 
 import pytest
 
+  
+  
+  
   
   
   
@@ -3172,10 +3549,16 @@ import pytest_asyncio
   
   
   
+  
+  
+  
 
 
 @pytest.fixture
 
+  
+  
+  
   
   
   
@@ -3224,10 +3607,16 @@ def database():
   
   
   
+  
+  
+  
 
 
 db = create_test_database()
 
+  
+  
+  
   
   
   
@@ -3276,10 +3665,16 @@ yield db
   
   
   
+  
+  
+  
 
 
 cleanup_database(db)
 
+  
+  
+  
   
   
   
@@ -3328,10 +3723,16 @@ cleanup_database(db)
   
   
   
+  
+  
+  
 
 
 async def async_client():
 
+  
+  
+  
   
   
   
@@ -3380,10 +3781,16 @@ client = await create_async_client()
   
   
   
+  
+  
+  
 
 
 yield client
 
+  
+  
+  
   
   
   
@@ -3432,10 +3839,16 @@ await client.close()
   
   
   
+  
+  
+  
 
 
 # test_api.py
 
+  
+  
+  
   
   
   
@@ -3484,10 +3897,16 @@ import pytest
   
   
   
+  
+  
+  
 
 
 from httpx import AsyncClient
 
+  
+  
+  
   
   
   
@@ -3536,10 +3955,16 @@ class TestUserAPI:
   
   
   
+  
+  
+  
 
 
 @pytest.mark.asyncio
 
+  
+  
+  
   
   
   
@@ -3588,10 +4013,16 @@ async def test_create_user(self, async_client):
   
   
   
+  
+  
+  
 
 
 response = await async_client.post("/users", json={
 
+  
+  
+  
   
   
   
@@ -3640,10 +4071,16 @@ response = await async_client.post("/users", json={
   
   
   
+  
+  
+  
 
 
 "email": "alice@example.com",
 
+  
+  
+  
   
   
   
@@ -3692,10 +4129,16 @@ response = await async_client.post("/users", json={
   
   
   
+  
+  
+  
 
 
 assert response.status_code == 201
 
+  
+  
+  
   
   
   
@@ -3744,10 +4187,16 @@ assert response.json()["name"] == "Alice"
   
   
   
+  
+  
+  
 
 
 @pytest.mark.parametrize("email,expected", [
 
+  
+  
+  
   
   
   
@@ -3796,10 +4245,16 @@ assert response.json()["name"] == "Alice"
   
   
   
+  
+  
+  
 
 
 ("", 422),
 
+  
+  
+  
   
   
   
@@ -3848,10 +4303,16 @@ assert response.json()["name"] == "Alice"
   
   
   
+  
+  
+  
 
 
 ])
 
+  
+  
+  
   
   
   
@@ -3900,10 +4361,16 @@ async def test_email_validation(self, async_client, email, expected):
   
   
   
+  
+  
+  
 
 
 response = await async_client.post("/users", json={"email": email})
 
+  
+  
+  
   
   
   
@@ -3952,10 +4419,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
   
   
   
@@ -4004,10 +4477,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 |---------|--------|------|-----------|---------|--------|
 
+  
+  
+  
   
   
   
@@ -4056,10 +4535,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 | Speed | Fast | Moderate | Fast | Moderate | Fast |
 
+  
+  
+  
   
   
   
@@ -4108,10 +4593,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 | Configuration | Simple | Moderate | Simple | Simple | Simple |
 
+  
+  
+  
   
   
   
@@ -4160,10 +4651,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -4209,10 +4706,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 * **Existing Jest projects**: Not urgent to migrate, but consider Vitest for new test files.
 
+  
+  
+  
   
   
   
@@ -4255,6 +4758,9 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 * **Component testing**: Playwright or Vitest (with JSDOM).
@@ -4278,10 +4784,16 @@ assert response.status_code == expected
   
   
   
+  
+  
+  
 
 
 * **Python testing**: pytest with pytest-asyncio for async code.
 
+  
+  
+  
   
   
   

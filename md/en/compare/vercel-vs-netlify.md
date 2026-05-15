@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/compare/vercel-vs-netlify.html
   
 
 
+# Vercel vs Netlify: Hosting Comparison, Serverless Functions, Edge, Pricing, and DX
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Vercel and Netlify are the two dominant platforms for frontend deployment. Both offer Git-based deployment, serverless functions, edge computing, and generous free tiers. But they have different strengths that matter depending on your stack and scale.
 
+  
+  
+  
   
   
   
@@ -182,10 +214,16 @@ Vercel and Netlify are the two dominant platforms for frontend deployment. Both 
   
   
   
+  
+  
+  
 
 
 Both platforms offer automatic deployment from GitHub, GitLab, or Bitbucket. Push to a branch, and the platform builds and deploys automatically. Preview deployments for pull requests are standard on both.
 
+  
+  
+  
   
   
   
@@ -234,10 +272,16 @@ Vercel's deployment is optimized for Next.js. It detects the framework automatic
   
   
   
+  
+  
+  
 
 
 Netlify's deployment is framework-agnostic. It works well with any static site generator or frontend framework. Netlify's build pipeline is slightly more configurable with environment variables, build hooks, and deploy contexts available from the UI.
 
+  
+  
+  
   
   
   
@@ -286,10 +330,16 @@ Both support deploy previews, rollbacks, and branch-based deployments. The exper
   
   
   
+  
+  
+  
 
 
 ##  Serverless Functions
 
+  
+  
+  
   
   
   
@@ -338,10 +388,16 @@ Vercel and Netlify both offer serverless functions, but they work differently.
   
   
   
+  
+  
+  
 
 
 Vercel functions run on AWS Lambda under the hood. They support Node.js, Python, Go, Ruby, and Rust. The cold start time is around 50-200ms for Node.js. Vercel functions have a 10-second execution timeout on the free tier and 60 seconds on paid plans.
 
+  
+  
+  
   
   
   
@@ -390,10 +446,16 @@ Netlify functions also run on AWS Lambda. They support Node.js and Go natively, 
   
   
   
+  
+  
+  
 
 
 The key difference is in the developer experience. Vercel functions use the `api/` directory, the same convention as Next.js API routes. Netlify functions use `netlify/functions/` and require a slightly different setup. Vercel's integration feels more natural if you are already in the Next.js ecosystem.
 
+  
+  
+  
   
   
   
@@ -442,10 +504,16 @@ The key difference is in the developer experience. Vercel functions use the `api
   
   
   
+  
+  
+  
 
 
 Vercel Edge Functions run on Vercel's Edge Network using the Web Standards API. They have a 1-50ms cold start and run in over 100 locations worldwide. Edge Functions are ideal for authentication checks, A/B testing, geolocation-based redirects, and personalization.
 
+  
+  
+  
   
   
   
@@ -494,10 +562,16 @@ Netlify Edge Functions also run at the edge, based on Deno. They provide similar
   
   
   
+  
+  
+  
 
 
 The edge computing capabilities are comparable. Vercel Edge Functions use JavaScript only. Netlify Edge Functions also use JavaScript but leverage the Deno runtime, which has broader API compatibility.
 
+  
+  
+  
   
   
   
@@ -546,10 +620,16 @@ The edge computing capabilities are comparable. Vercel Edge Functions use JavaSc
   
   
   
+  
+  
+  
 
 
 Both platforms offer generous free tiers. Vercel's free tier includes 100 GB bandwidth, 100 GB-hours of serverless execution, and 1 million edge function invocations per month. Netlify's free tier includes 100 GB bandwidth, 125,000 serverless function invocations, and 2 million edge function invocations.
 
+  
+  
+  
   
   
   
@@ -598,10 +678,16 @@ Vercel's Pro plan is $20 per month per user. Netlify's Pro plan is $19 per month
   
   
   
+  
+  
+  
 
 
 At scale, costs diverge. Vercel charges for bandwidth overage at $0.10 per GB for North America and more for other regions. Netlify charges $0.25 per GB for bandwidth overage. Vercel's function execution pricing is also more favorable at high volume.
 
+  
+  
+  
   
   
   
@@ -650,10 +736,16 @@ For high-traffic applications, Vercel tends to be more cost-effective. For low-t
   
   
   
+  
+  
+  
 
 
 ##  Developer Experience
 
+  
+  
+  
   
   
   
@@ -702,10 +794,16 @@ Vercel's DX is tightly integrated with Next.js. The Vercel CLI, dashboard, and a
   
   
   
+  
+  
+  
 
 
 Netlify's DX is more framework-agnostic. The Netlify CLI is powerful, the dashboard is clean, and integrations cover most common tools. Netlify's form handling and split testing features are unique strengths.
 
+  
+  
+  
   
   
   
@@ -754,10 +852,16 @@ Both platforms offer excellent developer experience. The choice often comes down
   
   
   
+  
+  
+  
 
 
 ##  Migration Considerations
 
+  
+  
+  
   
   
   
@@ -806,10 +910,16 @@ Migrating between platforms is straightforward for static sites. For application
   
   
   
+  
+  
+  
 
 
 Consider your long-term stack before choosing. If you are committed to Next.js, Vercel is the natural choice. If you value framework flexibility or use Astro, Hugo, or Eleventy, Netlify provides a more neutral platform.
 
+  
+  
+  
   
   
   

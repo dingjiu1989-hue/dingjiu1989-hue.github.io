@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-pattern.html
   
 
 
+# Saga Pattern for Distributed Transactions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Saga pattern manages distributed transactions across multiple services without requiring two-phase commit. Instead of a single, atomic distributed transaction, a saga breaks the operation into a series of local transactions, each with a compensating action that can undo its effects if a subsequent step fails. This article examines the two saga implementation approaches, compensation design, and monitoring strategies. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ The Need for Sagas
   
   
   
+  
+  
+  
 
 
 In a microservice architecture, a single business operation often spans multiple services. An order placement might involve the order service, payment service, inventory service, and shipping service. Each service has its own database, so traditional database transactions cannot span all of them. 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Without distributed transaction coordination, a partial failure leaves the syste
   
   
   
+  
+  
+  
 
 
 Choreography-Based Saga 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ In choreography-based sagas, each service performs its local transaction and emi
   
   
   
+  
+  
+  
 
 
 Choreography sagas are loosely coupled. Services do not need to know about a saga coordinator. However, the saga logic is distributed across services, making it harder to understand the complete workflow. Monitoring requires reconstructing the saga state from multiple event streams. 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Choreography works best for simple sagas with few participants and straightforwa
   
   
   
+  
+  
+  
 
 
 Orchestration-Based Saga 
 
+  
+  
+  
   
   
   
@@ -304,10 +357,16 @@ In orchestration-based sagas, a saga orchestrator (or coordinator) controls the 
   
   
   
+  
+  
+  
 
 
 Orchestration provides better visibility and control. The orchestrator's state explicitly shows where each saga instance is in the workflow. Error handling and compensation are centralized, making the saga easier to reason about and test. Temporal, AWS Step Functions, and Camunda are common orchestration platforms. 
 
+  
+  
+  
   
   
   
@@ -344,10 +403,16 @@ The trade-off is coupling. The orchestrator must know about all participants and
   
   
   
+  
+  
+  
 
 
 Compensation Design 
 
+  
+  
+  
   
   
   
@@ -384,10 +449,16 @@ Compensation is the heart of the Saga pattern. Each step in a saga must have a c
   
   
   
+  
+  
+  
 
 
 Compensation differs from rollback in traditional transactions. A rollback restores the exact prior state. A compensation applies a new business transaction to reverse the effect. For example, if the payment step debited $50, the compensation credits $50 back. If interest has accrued, the compensation amount may differ. 
 
+  
+  
+  
   
   
   
@@ -424,10 +495,16 @@ Compensations may themselves fail. Saga implementations should have retry logic 
   
   
   
+  
+  
+  
 
 
 Monitoring Sagas 
 
+  
+  
+  
   
   
   
@@ -464,10 +541,16 @@ Monitoring sagas requires tracking each saga instance's current step, the time s
   
   
   
+  
+  
+  
 
 
 Alerting should fire when sagas remain in a non-terminal state beyond a threshold, when compensation rates exceed normal levels, or when specific steps consistently fail. Operational dashboards show the current state of all in-flight sagas and recent failures. 
 
+  
+  
+  
   
   
   
@@ -504,10 +587,16 @@ Implementation Best Practices
   
   
   
+  
+  
+  
 
 
 Each saga step should be idempotent—processing the same command twice should have the same effect. This allows safe retries when responses are lost. Commands should include an idempotency key that the participant uses to detect duplicates. 
 
+  
+  
+  
   
   
   
@@ -544,10 +633,16 @@ Saga orchestrators should persist their state to survive failures. If the orches
   
   
   
+  
+  
+  
 
 
 Saga timeouts should prevent steps from waiting indefinitely. Each step should have a timeout, and the orchestrator should handle timeout failures by initiating compensation. The overall saga should have a maximum duration to detect stalled instances. 
 
+  
+  
+  
   
   
   

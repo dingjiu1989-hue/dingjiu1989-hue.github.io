@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/architecture/retry-backoff.html
   
 
 
+# Retry and Backoff Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 In distributed systems, failures are inevitable. Networks drop packets, services restart, databases time out. Retry and backoff strategies are essential for building systems that gracefully handle transient failures without overwhelming downstream services. 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ When to Retry
   
   
   
+  
+  
+  
 
 
 Not all failures deserve a retry. Distinguish between transient and permanent failures: 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Not all failures deserve a retry. Distinguish between transient and permanent fa
   
   
   
+  
+  
+  
 
 
 **Permanent failures** (do not retry): 400 Bad Request, 401 Unauthorized, 404 Not Found, 403 Forbidden. Retrying these will never succeed and wastes resources. 
 
+  
+  
+  
   
   
   
@@ -224,10 +265,16 @@ Always inspect the error type or status code before deciding to retry.
   
   
   
+  
+  
+  
 
 
 Idempotency Is Required 
 
+  
+  
+  
   
   
   
@@ -264,10 +311,16 @@ Never retry an operation unless it is idempotent. If a request succeeds on the s
   
   
   
+  
+  
+  
 
 
 The solution is idempotency keys. Clients generate a unique key for each operation and include it in the request header: 
 
+  
+  
+  
   
   
   
@@ -310,10 +363,16 @@ POST /payments
   
   
   
+  
+  
+  
 
 
 Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
 
+  
+  
+  
   
   
   
@@ -356,10 +415,16 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
   
   
   
+  
+  
+  
 
 
 "amount": 1000,
 
+  
+  
+  
   
   
   
@@ -402,10 +467,16 @@ Idempotency-Key: 550e8400-e29b-41d4-a716-446655440000
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -445,10 +516,16 @@ The server stores the result keyed by the idempotency key. If the same key is re
   
   
   
+  
+  
+  
 
 
 Fixed Retry 
 
+  
+  
+  
   
   
   
@@ -488,10 +565,16 @@ The simplest strategy: wait N seconds between each retry, up to a maximum number
   
   
   
+  
+  
+  
 
 
 max_retries = 3
 
+  
+  
+  
   
   
   
@@ -534,10 +617,16 @@ delay = 1 # second
   
   
   
+  
+  
+  
 
 
 for attempt in range(max_retries):
 
+  
+  
+  
   
   
   
@@ -580,10 +669,16 @@ try:
   
   
   
+  
+  
+  
 
 
 return make_request()
 
+  
+  
+  
   
   
   
@@ -626,10 +721,16 @@ except TransientError:
   
   
   
+  
+  
+  
 
 
 if attempt == max_retries - 1:
 
+  
+  
+  
   
   
   
@@ -672,10 +773,16 @@ raise
   
   
   
+  
+  
+  
 
 
 time.sleep(delay)
 
+  
+  
+  
   
   
   
@@ -715,6 +822,9 @@ time.sleep(delay)
   
   
   
+  
+  
+  
 
 
 Exponential Backoff 
@@ -735,10 +845,16 @@ Exponential Backoff
   
   
   
+  
+  
+  
 
 
 Increase the delay exponentially between each retry. If the first retry waits 1 second, the second waits 2, the third waits 4, then 8, 16, and so on. 
 
+  
+  
+  
   
   
   
@@ -781,10 +897,16 @@ max_retries = 5
   
   
   
+  
+  
+  
 
 
 base_delay = 1
 
+  
+  
+  
   
   
   
@@ -827,10 +949,16 @@ for attempt in range(max_retries):
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -873,10 +1001,16 @@ return make_request()
   
   
   
+  
+  
+  
 
 
 except TransientError:
 
+  
+  
+  
   
   
   
@@ -919,10 +1053,16 @@ if attempt == max_retries - 1:
   
   
   
+  
+  
+  
 
 
 raise
 
+  
+  
+  
   
   
   
@@ -965,10 +1105,16 @@ delay = base_delay * (2 ** attempt)
   
   
   
+  
+  
+  
 
 
 time.sleep(delay)
 
+  
+  
+  
   
   
   
@@ -1008,10 +1154,16 @@ time.sleep(delay)
   
   
   
+  
+  
+  
 
 
 **Cons:** The delays compound quickly. After 6 attempts with base 1, the delay is 64 seconds. This may be too slow for latency-sensitive applications. 
 
+  
+  
+  
   
   
   
@@ -1048,10 +1200,16 @@ Exponential Backoff with Jitter
   
   
   
+  
+  
+  
 
 
 Jitter adds randomness to the delay, preventing the thundering herd problem when many clients retry simultaneously. Without jitter, all clients retry at exactly the same time, recreating the original load spike. 
 
+  
+  
+  
   
   
   
@@ -1088,10 +1246,16 @@ There are several jitter strategies:
   
   
   
+  
+  
+  
 
 
 **Full jitter:**
 
+  
+  
+  
   
   
   
@@ -1134,10 +1298,16 @@ delay = random.uniform(0, base_delay * (2 ** attempt))
   
   
   
+  
+  
+  
 
 
 **Equal jitter:**
 
+  
+  
+  
   
   
   
@@ -1180,10 +1350,16 @@ half = base_delay * (2 ** attempt) / 2
   
   
   
+  
+  
+  
 
 
 delay = half + random.uniform(0, half)
 
+  
+  
+  
   
   
   
@@ -1226,10 +1402,16 @@ delay = half + random.uniform(0, half)
   
   
   
+  
+  
+  
 
 
 delay = min(cap, random.uniform(base_delay, delay * 3))
 
+  
+  
+  
   
   
   
@@ -1269,10 +1451,16 @@ Full jitter is the most common and works well for most scenarios. The randomness
   
   
   
+  
+  
+  
 
 
 Circuit Breaker Integration 
 
+  
+  
+  
   
   
   
@@ -1309,10 +1497,16 @@ Retry and circuit breaker patterns are complementary. The circuit breaker preven
   
   
   
+  
+  
+  
 
 
 A typical integration:
 
+  
+  
+  
   
   
   
@@ -1349,10 +1543,16 @@ A typical integration:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Multiple failures -> Circuit breaker opens, all requests fail fast. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. After cooldown -> Circuit breaker half-opens, allows a probe request. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Probe succeeds -> Circuit breaker closes, normal operation resumes. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Multiple failures -> Circuit breaker opens, all requests fail fast. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. After cooldown -> Circuit breaker half-opens, allows a probe request. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Probe succeeds -> Circuit breaker closes, normal operation resumes. 
 
+  
+  
+  
   
   
   
@@ -1389,10 +1589,16 @@ Maximum Retries and Timeouts
   
   
   
+  
+  
+  
 
 
 Set a maximum number of retries and a maximum total time budget. A request that has been retried for 5 minutes should probably fail fast and return an error to the user. 
 
+  
+  
+  
   
   
   
@@ -1435,10 +1641,16 @@ max_retries = 3
   
   
   
+  
+  
+  
 
 
 timeout = 30 # seconds total
 
+  
+  
+  
   
   
   
@@ -1481,10 +1693,16 @@ start = time.now()
   
   
   
+  
+  
+  
 
 
 for attempt in range(max_retries):
 
+  
+  
+  
   
   
   
@@ -1527,10 +1745,16 @@ try:
   
   
   
+  
+  
+  
 
 
 if time.now() - start > timeout:
 
+  
+  
+  
   
   
   
@@ -1573,10 +1797,16 @@ raise TimeoutError()
   
   
   
+  
+  
+  
 
 
 return make_request(timeout=5)
 
+  
+  
+  
   
   
   
@@ -1619,10 +1849,16 @@ except TransientError:
   
   
   
+  
+  
+  
 
 
 if attempt == max_retries - 1:
 
+  
+  
+  
   
   
   
@@ -1665,6 +1901,9 @@ raise
   
   
   
+  
+  
+  
 
 
 Retry-After Header 
@@ -1685,10 +1924,16 @@ Retry-After Header
   
   
   
+  
+  
+  
 
 
 When a server returns `429 Too Many Requests` or `503 Service Unavailable`, it should include a `Retry-After` header. The client should respect this header and wait the specified duration before retrying. This allows the server to communicate its preferred retry timing. 
 
+  
+  
+  
   
   
   
@@ -1731,10 +1976,16 @@ delay = response.headers.get('Retry-After', default_delay)
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

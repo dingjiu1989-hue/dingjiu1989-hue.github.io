@@ -106,8 +106,37 @@ url: https://dingjiu1989-hue.github.io/en/security/security-metrics.html
   
 
 
+# Security Metrics and Reporting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
   
   
   
@@ -144,10 +173,16 @@ Security metrics translate technical security operations into business-relevant 
   
   
   
+  
+  
+  
 
 
 KPIs vs KRIs 
 
+  
+  
+  
   
   
   
@@ -184,10 +219,16 @@ Key Performance Indicators (KPIs)
   
   
   
+  
+  
+  
 
 
 KPIs measure the efficiency and effectiveness of security operations. 
 
+  
+  
+  
   
   
   
@@ -230,10 +271,16 @@ class SecurityKPI:
   
   
   
+  
+  
+  
 
 
 def __init__(self):
 
+  
+  
+  
   
   
   
@@ -276,10 +323,16 @@ self.metrics = {}
   
   
   
+  
+  
+  
 
 
 def calculate_mttd(self, detection_times):
 
+  
+  
+  
   
   
   
@@ -322,6 +375,9 @@ def calculate_mttd(self, detection_times):
   
   
   
+  
+  
+  
 
 
 if not detection_times:
@@ -345,10 +401,16 @@ if not detection_times:
   
   
   
+  
+  
+  
 
 
 return None
 
+  
+  
+  
   
   
   
@@ -391,10 +453,16 @@ return sum(detection_times) / len(detection_times)
   
   
   
+  
+  
+  
 
 
 def calculate_mttr(self, response_times):
 
+  
+  
+  
   
   
   
@@ -437,10 +505,16 @@ def calculate_mttr(self, response_times):
   
   
   
+  
+  
+  
 
 
 if not response_times:
 
+  
+  
+  
   
   
   
@@ -483,10 +557,16 @@ return None
   
   
   
+  
+  
+  
 
 
 return sum(response_times) / len(response_times)
 
+  
+  
+  
   
   
   
@@ -529,10 +609,16 @@ def calculate_coverage_rate(self, monitored_assets, total_assets):
   
   
   
+  
+  
+  
 
 
 """Percentage of assets under monitoring."""
 
+  
+  
+  
   
   
   
@@ -575,10 +661,16 @@ if total_assets == 0:
   
   
   
+  
+  
+  
 
 
 return 0
 
+  
+  
+  
   
   
   
@@ -621,10 +713,16 @@ return (monitored_assets / total_assets) * 100
   
   
   
+  
+  
+  
 
 
 def calculate_patch_compliance(self, patched_systems, vulnerable_systems):
 
+  
+  
+  
   
   
   
@@ -667,10 +765,16 @@ def calculate_patch_compliance(self, patched_systems, vulnerable_systems):
   
   
   
+  
+  
+  
 
 
 total = patched_systems + vulnerable_systems
 
+  
+  
+  
   
   
   
@@ -713,10 +817,16 @@ if total == 0:
   
   
   
+  
+  
+  
 
 
 return 100
 
+  
+  
+  
   
   
   
@@ -759,6 +869,9 @@ return (patched_systems / total) * 100
   
   
   
+  
+  
+  
 
 
 Key Risk Indicators (KRIs) 
@@ -779,10 +892,16 @@ Key Risk Indicators (KRIs)
   
   
   
+  
+  
+  
 
 
 KRIs measure the level of security risk exposure. 
 
+  
+  
+  
   
   
   
@@ -825,10 +944,16 @@ class SecurityKRI:
   
   
   
+  
+  
+  
 
 
 def calculate_vulnerability_risk_score(self, vulnerabilities):
 
+  
+  
+  
   
   
   
@@ -871,10 +996,16 @@ def calculate_vulnerability_risk_score(self, vulnerabilities):
   
   
   
+  
+  
+  
 
 
 total_risk = 0
 
+  
+  
+  
   
   
   
@@ -917,10 +1048,16 @@ for vuln in vulnerabilities:
   
   
   
+  
+  
+  
 
 
 # CVSS score * asset criticality multiplier
 
+  
+  
+  
   
   
   
@@ -963,10 +1100,16 @@ risk = vuln['cvss'] * (vuln['asset_criticality'] / 5)
   
   
   
+  
+  
+  
 
 
 # Exploit availability multiplier
 
+  
+  
+  
   
   
   
@@ -1009,10 +1152,16 @@ if vuln.get('exploit_available'):
   
   
   
+  
+  
+  
 
 
 risk *= 1.5
 
+  
+  
+  
   
   
   
@@ -1055,10 +1204,16 @@ if vuln.get('in_wild'):
   
   
   
+  
+  
+  
 
 
 risk *= 2.0
 
+  
+  
+  
   
   
   
@@ -1101,10 +1256,16 @@ total_risk += risk
   
   
   
+  
+  
+  
 
 
 return total_risk
 
+  
+  
+  
   
   
   
@@ -1147,10 +1308,16 @@ def calculate_mean_time_to_patch(self, patch_times):
   
   
   
+  
+  
+  
 
 
 """Average time to apply security patches by severity."""
 
+  
+  
+  
   
   
   
@@ -1193,10 +1360,16 @@ categories = {'critical': [], 'high': [], 'medium': [], 'low': []}
   
   
   
+  
+  
+  
 
 
 for patch in patch_times:
 
+  
+  
+  
   
   
   
@@ -1239,10 +1412,16 @@ categories[patch['severity']].append(patch['hours_to_patch'])
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -1285,10 +1464,16 @@ severity: sum(times) / len(times) if times else 0
   
   
   
+  
+  
+  
 
 
 for severity, times in categories.items()
 
+  
+  
+  
   
   
   
@@ -1331,10 +1516,16 @@ for severity, times in categories.items()
   
   
   
+  
+  
+  
 
 
 Dashboard Design 
 
+  
+  
+  
   
   
   
@@ -1371,10 +1562,16 @@ Effective dashboards present the right information at the right level of detail 
   
   
   
+  
+  
+  
 
 
 Executive Dashboard 
 
+  
+  
+  
   
   
   
@@ -1417,6 +1614,9 @@ def generate_executive_dashboard(metrics):
   
   
   
+  
+  
+  
 
 
 """Board-level dashboard — strategic, summary, trend-focused."""
@@ -1440,10 +1640,16 @@ def generate_executive_dashboard(metrics):
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -1486,10 +1692,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'risk_trend': metrics['risk_trend'], # improving/stable/declining
 
+  
+  
+  
   
   
   
@@ -1532,10 +1744,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'total': metrics['incident_count'],
 
+  
+  
+  
   
   
   
@@ -1578,6 +1796,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'trend': metrics['incident_trend']
@@ -1601,10 +1822,16 @@ return {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1647,10 +1874,16 @@ return {
   
   
   
+  
+  
+  
 
 
 {'risk': 'Unpatched critical vulnerabilities', 
 
+  
+  
+  
   
   
   
@@ -1693,10 +1926,16 @@ return {
   
   
   
+  
+  
+  
 
 
 {'risk': 'Cloud misconfigurations',
 
+  
+  
+  
   
   
   
@@ -1739,10 +1978,16 @@ return {
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1785,10 +2030,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'soc2': 'compliant',
 
+  
+  
+  
   
   
   
@@ -1831,6 +2082,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'hipaa': 'in_progress'
@@ -1854,10 +2108,16 @@ return {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1900,10 +2160,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'allocated': 2500000,
 
+  
+  
+  
   
   
   
@@ -1946,6 +2212,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'remaining': 650000
@@ -1969,26 +2238,6 @@ return {
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1996,6 +2245,35 @@ return {
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2038,10 +2316,16 @@ Operational Dashboard
   
   
   
+  
+  
+  
 
 
 def generate_operational_dashboard(soc_metrics):
 
+  
+  
+  
   
   
   
@@ -2084,10 +2368,16 @@ def generate_operational_dashboard(soc_metrics):
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -2130,10 +2420,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'today': 847,
 
+  
+  
+  
   
   
   
@@ -2176,10 +2472,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'by_severity': {
 
+  
+  
+  
   
   
   
@@ -2222,10 +2524,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'high': 27,
 
+  
+  
+  
   
   
   
@@ -2268,10 +2576,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'low': 672
 
+  
+  
+  
   
   
   
@@ -2314,10 +2628,16 @@ return {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2360,10 +2680,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'mttd': '45 minutes',
 
+  
+  
+  
   
   
   
@@ -2406,6 +2732,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'triage_time': '8 minutes'
@@ -2429,10 +2758,16 @@ return {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2475,10 +2810,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'unassigned': 23,
 
+  
+  
+  
   
   
   
@@ -2521,10 +2862,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'escalated': 12
 
+  
+  
+  
   
   
   
@@ -2567,10 +2914,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'false_positive_rate': '28%',
 
+  
+  
+  
   
   
   
@@ -2613,10 +2966,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'endpoints': '98.5%',
 
+  
+  
+  
   
   
   
@@ -2659,6 +3018,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'cloud_accounts': '95%'
@@ -2682,26 +3044,6 @@ return {
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2709,6 +3051,35 @@ return {
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2751,10 +3122,16 @@ Board Reporting Framework
   
   
   
+  
+  
+  
 
 
 quarterly_board_report:
 
+  
+  
+  
   
   
   
@@ -2797,10 +3174,16 @@ sections:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Executive Summary"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Executive Summary"
 
+  
+  
+  
   
   
   
@@ -2843,33 +3226,16 @@ content:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Security posture improved from 72 to 78 (target: 80)"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Zero critical incidents this quarter"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Security posture improved from 72 to 78 (target: 80)"
 
+  
+  
+  
   
   
   
@@ -2891,7 +3257,7 @@ content:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Three compliance audits passed"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Zero critical incidents this quarter"
 
   
   
@@ -2912,10 +3278,42 @@ content:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Incident Summary"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Three compliance audits passed"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Incident Summary"
+
+  
+  
+  
   
   
   
@@ -2958,10 +3356,16 @@ metrics:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Total Incidents"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Total Incidents"
 
+  
+  
+  
   
   
   
@@ -3004,6 +3408,9 @@ value: 12
   
   
   
+  
+  
+  
 
 
 trend: "decreasing"
@@ -3027,10 +3434,16 @@ trend: "decreasing"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Mean Time to Detect"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Mean Time to Detect"
 
+  
+  
+  
   
   
   
@@ -3073,10 +3486,16 @@ value: "45 min"
   
   
   
+  
+  
+  
 
 
 target: "< 60 min"
 
+  
+  
+  
   
   
   
@@ -3119,10 +3538,16 @@ status: "on_track"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Mean Time to Respond"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Mean Time to Respond"
 
+  
+  
+  
   
   
   
@@ -3165,10 +3590,16 @@ value: "3.2 hrs"
   
   
   
+  
+  
+  
 
 
 target: "< 4 hrs"
 
+  
+  
+  
   
   
   
@@ -3211,10 +3642,16 @@ status: "on_track"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Phishing Click Rate"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "Phishing Click Rate"
 
+  
+  
+  
   
   
   
@@ -3257,10 +3694,16 @@ value: "4.2%"
   
   
   
+  
+  
+  
 
 
 target: "< 5%"
 
+  
+  
+  
   
   
   
@@ -3303,10 +3746,16 @@ status: "on_track"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Risk Profile"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Risk Profile"
 
+  
+  
+  
   
   
   
@@ -3349,10 +3798,16 @@ risks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "R-001"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- id: "R-001"
 
+  
+  
+  
   
   
   
@@ -3395,10 +3850,16 @@ description: "Third-party vendor access to production"
   
   
   
+  
+  
+  
 
 
 likelihood: "medium"
 
+  
+  
+  
   
   
   
@@ -3441,10 +3902,16 @@ impact: "high"
   
   
   
+  
+  
+  
 
 
 mitigation: "Vendor access review in progress"
 
+  
+  
+  
   
   
   
@@ -3487,10 +3954,16 @@ target_date: "2026-07-01"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Compliance Status"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Compliance Status"
 
+  
+  
+  
   
   
   
@@ -3533,10 +4006,16 @@ frameworks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "SOC 2 Type II"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "SOC 2 Type II"
 
+  
+  
+  
   
   
   
@@ -3560,6 +4039,9 @@ frameworks:
 
 status: "compliant"
 
+  
+  
+  
   
   
   
@@ -3602,10 +4084,16 @@ last_audit: "2026-03-15"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "PCI DSS 4.0"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "PCI DSS 4.0"
 
+  
+  
+  
   
   
   
@@ -3648,6 +4136,9 @@ status: "compliant"
   
   
   
+  
+  
+  
 
 
 last_audit: "2026-02-28"
@@ -3671,10 +4162,16 @@ last_audit: "2026-02-28"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "ISO 27001"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: "ISO 27001"
 
+  
+  
+  
   
   
   
@@ -3717,6 +4214,9 @@ status: "in_progress"
   
   
   
+  
+  
+  
 
 
 target: "2026-09-01"
@@ -3740,10 +4240,16 @@ target: "2026-09-01"
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Resource Allocation"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- title: "Resource Allocation"
 
+  
+  
+  
   
   
   
@@ -3786,10 +4292,16 @@ budget:
   
   
   
+  
+  
+  
 
 
 allocated: "$2.5M"
 
+  
+  
+  
   
   
   
@@ -3832,6 +4344,9 @@ spent: "$1.85M (74%)"
   
   
   
+  
+  
+  
 
 
 key_investments:
@@ -3855,33 +4370,16 @@ key_investments:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "EDR platform upgrade: $450K"
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Security awareness training: $85K"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "EDR platform upgrade: $450K"
 
+  
+  
+  
   
   
   
@@ -3903,8 +4401,37 @@ key_investments:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Penetration testing: $120K"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Security awareness training: $85K"
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "Penetration testing: $120K"
+
+  
+  
+  
   
   
   
@@ -3947,10 +4474,16 @@ Security Scorecards
   
   
   
+  
+  
+  
 
 
 def generate_team_scorecard(metrics):
 
+  
+  
+  
   
   
   
@@ -3993,10 +4526,16 @@ def generate_team_scorecard(metrics):
   
   
   
+  
+  
+  
 
 
 thresholds = {
 
+  
+  
+  
   
   
   
@@ -4039,10 +4578,16 @@ thresholds = {
   
   
   
+  
+  
+  
 
 
 'coverage': {'good': 98, 'acceptable': 90},
 
+  
+  
+  
   
   
   
@@ -4085,10 +4630,16 @@ thresholds = {
   
   
   
+  
+  
+  
 
 
 'mttd_minutes': {'good': 30, 'acceptable': 60},
 
+  
+  
+  
   
   
   
@@ -4131,10 +4682,16 @@ thresholds = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4177,10 +4734,16 @@ scorecard = {}
   
   
   
+  
+  
+  
 
 
 for metric, value in metrics.items():
 
+  
+  
+  
   
   
   
@@ -4223,10 +4786,16 @@ if metric not in thresholds:
   
   
   
+  
+  
+  
 
 
 continue
 
+  
+  
+  
   
   
   
@@ -4269,10 +4838,16 @@ threshold = thresholds[metric]
   
   
   
+  
+  
+  
 
 
 if value >= threshold['good']:
 
+  
+  
+  
   
   
   
@@ -4315,10 +4890,16 @@ scorecard[metric] = 'GREEN'
   
   
   
+  
+  
+  
 
 
 elif value >= threshold['acceptable']:
 
+  
+  
+  
   
   
   
@@ -4361,10 +4942,16 @@ scorecard[metric] = 'YELLOW'
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -4407,10 +4994,16 @@ scorecard[metric] = 'RED'
   
   
   
+  
+  
+  
 
 
 return scorecard
 
+  
+  
+  
   
   
   
@@ -4453,10 +5046,16 @@ Industry Benchmarks
   
   
   
+  
+  
+  
 
 
 industry_benchmarks:
 
+  
+  
+  
   
   
   
@@ -4499,10 +5098,16 @@ mttd:
   
   
   
+  
+  
+  
 
 
 top_performer: "< 1 hour"
 
+  
+  
+  
   
   
   
@@ -4545,10 +5150,16 @@ average: "24-48 hours"
   
   
   
+  
+  
+  
 
 
 below_average: "> 1 week"
 
+  
+  
+  
   
   
   
@@ -4591,10 +5202,16 @@ mttr:
   
   
   
+  
+  
+  
 
 
 top_performer: "< 2 hours"
 
+  
+  
+  
   
   
   
@@ -4637,10 +5254,16 @@ average: "4-8 hours"
   
   
   
+  
+  
+  
 
 
 below_average: "> 24 hours"
 
+  
+  
+  
   
   
   
@@ -4683,10 +5306,16 @@ vulnerability_remediation:
   
   
   
+  
+  
+  
 
 
 critical: "15 days (top), 30 days (average)"
 
+  
+  
+  
   
   
   
@@ -4729,10 +5358,16 @@ high: "30 days (top), 60 days (average)"
   
   
   
+  
+  
+  
 
 
 security_spend:
 
+  
+  
+  
   
   
   
@@ -4775,6 +5410,9 @@ as_percentage_of_it: "5-10% (recommended)"
   
   
   
+  
+  
+  
 
 
 per_employee: "$1,500-2,500 (enterprise)"
@@ -4798,10 +5436,16 @@ per_employee: "$1,500-2,500 (enterprise)"
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   
