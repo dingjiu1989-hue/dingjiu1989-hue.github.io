@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-chaining-patterns.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "5097",
+      "wordCount": "5642",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/llm-chaining-and-pipeline-patterns-54jk"
       ],
-      "articleBody": "LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns Introduction Single LLM calls are rarely sufficient for complex tasks. Chaining \u2014 connecting multiple LLM calls in a pipeline \u2014 enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems. Why Chain? A single LLM call has limitations: * **Attention dilution**: Long, complex prompts dilute attention across too many requirements * **Error compounding**: A single ambiguous instruction can produce incorrect output * **Token waste**: Including all context and instructions in one call is inefficient * **Debugging difficulty**: When output is wrong, isolating which instruction caused the problem is hard Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria. Core Patterns Sequential Chain The simplest pattern: output of step N becomes input to step N+1. **Use case**: Multi-stage content processing Raw text \u2192 Extract key facts \u2192 Verify facts \u2192 Format output def sequential_chain(text): facts = extract_facts(text) verified = verify_facts(facts) formatted = format_output(verified) return formatted def extract_facts(text): return call_llm(\"Extract all factual claims from this text:\", text) def verify_facts(claims): return call_llm(\"Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:\", claims) def format_output(verified): return call_llm(\"Format the verified claims as a clean bullet list:\", verified) Map-Reduce Chain Process multiple items independently, then combine results. **Use case**: Summarizing many documents, analyzing multiple customer reviews def map_reduce(items, map_prompt, reduce_prompt): Map: process each item independently intermediate = [] for item in items: result = call_llm(map_prompt, item) intermediate.append(result) Reduce: combine all intermediate results combined = \"\\n---\\n\".join(intermediate) final = call_llm(reduce_prompt, combined) return final Example: summarize 50 customer reviews reviews = load_reviews() map_prompt = \"Summarize this customer review in one sentence, focusing on sentiment and key points:\" reduce_prompt = \"Combine these review summaries into an overall analysis with common themes:\" analysis = map_reduce(reviews, map_prompt, reduce_prompt) Parallel Processing Run multiple independent chains simultaneously, then merge results. **Use case**: Generating different sections of a document simultaneously import asyncio async def parallel_chain(topic): intro, specs, pricing, conclusion = await asyncio.gather( generate_intro(topic), generate_specs(topic), generate_pricing(topic), generate_conclusion(topic) ) return assemble_document(intro, specs, pricing, conclusion) Parallel processing reduces wall-clock time significantly when chains are independent. Routing Chain Route input to different sub-chains based on classification. **Use case**: Customer support ticket routing def routing_chain(query): First, classify the query type category = classify_query(query) Route to specialized handler if category == \"billing\": return billing_chain(query) elif category == \"technical\": return technical_support_chain(query) elif category == \"account\": return account_management_chain(query) else: return general_inquiry_chain(query) def classify_query(query): categories = call_llm(\"\"\" Classify this customer query into one of: billing, technical, account, general Respond with only the category name. \"\"\", query) return categories.strip().lower() Branching Chain Pursue multiple investigation paths from a single input, then synthesize. **Use case**: Research and analysis Query \u251c\u2192 Factual research chain (what are the known facts?) \u251c\u2192 Analysis chain (what does this mean?) \u251c\u2192 Stakeholder chain (who is affected?) \u2514\u2192 Timeline chain (when did events occur?) \u2514\u2192 Synthesis: combine all branches into comprehensive report Validation Chain Add verification steps between generation steps to catch errors early. def generate_with_validation(topic): draft = generate_draft(topic) Validation gate issues = validate_draft(draft) if issues: draft = revise_draft(draft, issues) Re-validate issues = validate_draft(draft) if not issues: return draft If still has issues after revision, flag for human review return {\"draft\": draft, \"issues\": issues, \"needs_review\": True} def validate_draft(draft): return call_llm(\"\"\" Check this draft for: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Factual accuracy 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Internal consistency 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tone appropriateness 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness List any issues found. If none, respond with \"NO ISSUES\". \"\"\", draft) Advanced Patterns Recursive Chain Apply the same chain repeatedly until a condition is met: def recursive_refine(text, max_iterations=5): for i in range(max_iterations): improved = call_llm(\"Improve this text: make it clearer and more concise:\", text) quality_score = evaluate_quality(improved) if quality_score >= 0.9: return improved text = improved return text Feedback Loop Chain Use the model's own output to identify and correct its mistakes: def self_correcting_generation(task): output = generate(task) critique = call_llm(\"Critique this output. What's wrong or missing?\", output) if \"nothing wrong\" in critique.lower(): return output revision = call_llm(f\"Revise this output based on this feedback: {critique}\", output) return revision Production Considerations **Error handling**: Each chain step should have a timeout, retry logic, and fallback behavior. **Observability**: Log inputs, outputs, latency, and token usage at each chain step. This is essential for debugging and cost optimization. **Caching**: Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls. **Human escalation**: Design chains so that when confidence is low or validation fails, the task escalates to a human operator. Conclusion LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria."
+      "articleBody": "LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns LLM Chaining and Pipeline Patterns Introduction Single LLM calls are rarely sufficient for complex tasks. Chaining \u2014 connecting multiple LLM calls in a pipeline \u2014 enables sophisticated workflows where each step builds on or refines the output of the previous one. This guide covers the essential chaining patterns used in production AI systems. Why Chain? A single LLM call has limitations: * **Attention dilution**: Long, complex prompts dilute attention across too many requirements * **Error compounding**: A single ambiguous instruction can produce incorrect output * **Token waste**: Including all context and instructions in one call is inefficient * **Debugging difficulty**: When output is wrong, isolating which instruction caused the problem is hard Chaining addresses these by decomposing complex tasks into focused steps, each with a clear objective and validation criteria. Core Patterns Sequential Chain The simplest pattern: output of step N becomes input to step N+1. **Use case**: Multi-stage content processing Raw text \u2192 Extract key facts \u2192 Verify facts \u2192 Format output def sequential_chain(text): facts = extract_facts(text) verified = verify_facts(facts) formatted = format_output(verified) return formatted def extract_facts(text): return call_llm(\"Extract all factual claims from this text:\", text) def verify_facts(claims): return call_llm(\"Verify each claim. Mark as VERIFIED, QUESTIONABLE, or FALSE:\", claims) def format_output(verified): return call_llm(\"Format the verified claims as a clean bullet list:\", verified) Map-Reduce Chain Process multiple items independently, then combine results. **Use case**: Summarizing many documents, analyzing multiple customer reviews def map_reduce(items, map_prompt, reduce_prompt): Map: process each item independently intermediate = [] for item in items: result = call_llm(map_prompt, item) intermediate.append(result) Reduce: combine all intermediate results combined = \"\\n---\\n\".join(intermediate) final = call_llm(reduce_prompt, combined) return final Example: summarize 50 customer reviews reviews = load_reviews() map_prompt = \"Summarize this customer review in one sentence, focusing on sentiment and key points:\" reduce_prompt = \"Combine these review summaries into an overall analysis with common themes:\" analysis = map_reduce(reviews, map_prompt, reduce_prompt) Parallel Processing Run multiple independent chains simultaneously, then merge results. **Use case**: Generating different sections of a document simultaneously import asyncio async def parallel_chain(topic): intro, specs, pricing, conclusion = await asyncio.gather( generate_intro(topic), generate_specs(topic), generate_pricing(topic), generate_conclusion(topic) ) return assemble_document(intro, specs, pricing, conclusion) Parallel processing reduces wall-clock time significantly when chains are independent. Routing Chain Route input to different sub-chains based on classification. **Use case**: Customer support ticket routing def routing_chain(query): First, classify the query type category = classify_query(query) Route to specialized handler if category == \"billing\": return billing_chain(query) elif category == \"technical\": return technical_support_chain(query) elif category == \"account\": return account_management_chain(query) else: return general_inquiry_chain(query) def classify_query(query): categories = call_llm(\"\"\" Classify this customer query into one of: billing, technical, account, general Respond with only the category name. \"\"\", query) return categories.strip().lower() Branching Chain Pursue multiple investigation paths from a single input, then synthesize. **Use case**: Research and analysis Query \u251c\u2192 Factual research chain (what are the known facts?) \u251c\u2192 Analysis chain (what does this mean?) \u251c\u2192 Stakeholder chain (who is affected?) \u2514\u2192 Timeline chain (when did events occur?) \u2514\u2192 Synthesis: combine all branches into comprehensive report Validation Chain Add verification steps between generation steps to catch errors early. def generate_with_validation(topic): draft = generate_draft(topic) Validation gate issues = validate_draft(draft) if issues: draft = revise_draft(draft, issues) Re-validate issues = validate_draft(draft) if not issues: return draft If still has issues after revision, flag for human review return {\"draft\": draft, \"issues\": issues, \"needs_review\": True} def validate_draft(draft): return call_llm(\"\"\" Check this draft for: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Factual accuracy 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Internal consistency 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tone appropriateness 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness List any issues found. If none, respond with \"NO ISSUES\". \"\"\", draft) Advanced Patterns Recursive Chain Apply the same chain repeatedly until a condition is met: def recursive_refine(text, max_iterations=5): for i in range(max_iterations): improved = call_llm(\"Improve this text: make it clearer and more concise:\", text) quality_score = evaluate_quality(improved) if quality_score >= 0.9: return improved text = improved return text Feedback Loop Chain Use the model's own output to identify and correct its mistakes: def self_correcting_generation(task): output = generate(task) critique = call_llm(\"Critique this output. What's wrong or missing?\", output) if \"nothing wrong\" in critique.lower(): return output revision = call_llm(f\"Revise this output based on this feedback: {critique}\", output) return revision Production Considerations **Error handling**: Each chain step should have a timeout, retry logic, and fallback behavior. **Observability**: Log inputs, outputs, latency, and token usage at each chain step. This is essential for debugging and cost optimization. **Caching**: Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls. **Human escalation**: Design chains so that when confidence is low or validation fails, the task escalates to a human operator. Conclusion LLM chaining transforms unreliable single-shot generation into reliable multi-step pipelines. Start with sequential chains for simple transformations, add map-reduce for batch processing, and incorporate routing and branching for complex workflows. The key principle: each step should do one thing well, with clear inputs, outputs, and validation criteria."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>LLM Chaining and Pipeline Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Why Chain?</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -308,7 +346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Attention dilution**: Long, complex prompts dilute attention across too many requirements</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -354,6 +398,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Token waste**: Including all context and instructions in one call is inefficient</p>
 <br>
 <br>
@@ -377,7 +424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Debugging difficulty**: When output is wrong, isolating which instruction caused the problem is hard</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -429,7 +482,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Core Patterns</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -481,7 +540,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The simplest pattern: output of step N becomes input to step N+1.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -533,7 +598,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Raw text → Extract key facts → Verify facts → Format output</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -585,7 +656,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>facts = extract_facts(text)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -637,7 +714,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>formatted = format_output(verified)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -689,7 +772,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def extract_facts(text):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -741,7 +830,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def verify_facts(claims):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -793,7 +888,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def format_output(verified):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -845,7 +946,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Map-Reduce Chain</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -897,7 +1004,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Use case**: Summarizing many documents, analyzing multiple customer reviews</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -949,7 +1062,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Map: process each item independently</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1001,7 +1120,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for item in items:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1053,7 +1178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>intermediate.append(result)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1105,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>combined = "\n---\n".join(intermediate)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1157,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return final</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1209,7 +1352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>reviews = load_reviews()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1261,7 +1410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>reduce_prompt = "Combine these review summaries into an overall analysis with common themes:"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1313,7 +1468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Parallel Processing</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1526,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Use case**: Generating different sections of a document simultaneously</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1417,7 +1584,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def parallel_chain(topic):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1469,7 +1642,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>generate_intro(topic),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1521,7 +1700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>generate_pricing(topic),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1573,7 +1758,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1625,7 +1816,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Parallel processing reduces wall-clock time significantly when chains are independent.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1677,7 +1874,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Route input to different sub-chains based on classification.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1729,7 +1932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def routing_chain(query):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1781,7 +1990,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>category = classify_query(query)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1833,7 +2048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if category == "billing":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1885,7 +2106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif category == "technical":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1937,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif category == "account":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1989,7 +2222,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2041,7 +2280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def classify_query(query):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2338,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Classify this customer query into one of: billing, technical, account, general</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2145,7 +2396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""", query)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2197,7 +2454,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Branching Chain</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2249,7 +2512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Use case**: Research and analysis</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2301,7 +2570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>├→ Factual research chain (what are the known facts?)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2353,7 +2628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>├→ Stakeholder chain (who is affected?)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2405,7 +2686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>└→ Synthesis: combine all branches into comprehensive report</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2457,7 +2744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Add verification steps between generation steps to catch errors early.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2509,7 +2802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>draft = generate_draft(topic)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2561,7 +2860,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>issues = validate_draft(draft)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2613,7 +2918,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>draft = revise_draft(draft, issues)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2665,7 +2976,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>issues = validate_draft(draft)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2717,7 +3034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return draft</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2769,7 +3092,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {"draft": draft, "issues": issues, "needs_review": True}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2821,7 +3150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return call_llm("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,10 +3208,10 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Factual accuracy</p>
 <br>
 <br>
 <br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Factual accuracy</p>
 <br>
 <br>
 <br>
@@ -2899,13 +3234,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Internal consistency</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Internal consistency</p>
 <br>
 <br>
 <br>
@@ -2925,7 +3260,6 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tone appropriateness</p>
 <br>
 <br>
 <br>
@@ -2935,6 +3269,7 @@
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Tone appropriateness</p>
 <br>
 <br>
 <br>
@@ -2951,7 +3286,22 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3003,7 +3353,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>""", draft)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3055,7 +3411,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Recursive Chain</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3107,7 +3469,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def recursive_refine(text, max_iterations=5):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3159,7 +3527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>improved = call_llm("Improve this text: make it clearer and more concise:", text)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3211,7 +3585,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if quality_score >= 0.9:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3263,7 +3643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text = improved</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3315,7 +3701,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Feedback Loop Chain</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3367,7 +3759,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def self_correcting_generation(task):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3419,7 +3817,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>critique = call_llm("Critique this output. What's wrong or missing?", output)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3471,7 +3875,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return output</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3523,7 +3933,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return revision</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3575,7 +3991,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Error handling**: Each chain step should have a timeout, retry logic, and fallback behavior.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3627,7 +4049,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Caching**: Cache results of deterministic chain steps (classification, extraction) to avoid redundant LLM calls.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3679,7 +4107,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3717,9 +4151,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

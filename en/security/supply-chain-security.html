@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/supply-chain-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4556",
+      "wordCount": "5119",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/supply-chain-security.html"},
-      "articleBody": "Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Introduction Software supply chain attacks target the processes and tools used to build, package, and distribute software. High-profile incidents like SolarWinds and Codecov demonstrated that compromising a single trusted vendor can cascade into thousands of downstream victims. Defending the supply chain requires verifiable integrity, provenance, and policy enforcement at every stage. Software Bill of Materials (SBOM) An SBOM is a machine-readable inventory of all components in a software artifact. It enables consumers to quickly identify exposure when a vulnerability is disclosed. { \"$schema\": \"http://cyclonedx.org/schema/bom-1.5.schema.json\", \"bomFormat\": \"CycloneDX\", \"specVersion\": \"1.5\", \"serialNumber\": \"urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79\", \"version\": 1, \"metadata\": { \"component\": { \"name\": \"my-application\", \"version\": \"1.2.3\", \"type\": \"application\", \"supplier\": { \"name\": \"ACME Corp\" } } }, \"components\": [ { \"type\": \"library\", \"name\": \"lodash\", \"version\": \"4.17.21\", \"purl\": \"pkg:npm/lodash@4.17.21\", \"licenses\": [{\"license\": {\"id\": \"MIT\"}}] }, { \"type\": \"library\", \"name\": \"express\", \"version\": \"4.18.2\", \"purl\": \"pkg:npm/express@4.18.2\" } ], \"vulnerabilities\": [] } Generate SPDX SBOM with syft syft packages ./myapp:latest -o spdx-json > sbom.spdx.json Generate CycloneDX SBOM cyclonedx-bom -o bom.xml -t file Compare SBOMs for change detection diff Sigstore and Artifact Signing Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. Sign a container image with cosign cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \\ myregistry.io/myapp:latest Keyless signing (OIDC-based) cosign sign myregistry.io/myapp:latest Verify a signed image cosign verify --key pubkey.pem myregistry.io/myapp:latest Verify keyless signature cosign verify myregistry.io/myapp:latest Cosign keyless verification policy cosign_policy: identity: subject: \"developer@acme.com\" issuer: \"https://accounts.google.com\" signatures: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: \"sha256:abc123...\" bundle: \"sigstore-bundle.json\" Generating provenance with SLSA Generate SLSA provenance for a build gitsign --sign-commits HEAD Attest provenance cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \\ myregistry.io/myapp:latest in-toto: Framework for Supply Chain Integrity in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. in-toto layout definition layout = Layout( keys={ 'developer': load_key('developer.pub'), 'builder': load_key('builder.pub'), 'tester': load_key('tester.pub'), }, steps=[ Step(name='write-code', materials=[MaterialRule('ALLOW', '*')], products=[ProductRule('ALLOW', 'src/**')], pubkeys=['developer']), Step(name='build', materials=[MaterialRule('MATCH', 'src/**', ['write-code'])], products=[ProductRule('ALLOW', 'build/**')], pubkeys=['builder']), Step(name='test', materials=[MaterialRule('MATCH', 'build/**', ['build'])], products=[ProductRule('ALLOW', '*')], pubkeys=['tester']), Inspection(name='verify-signature', expected_command=['gpg', '--verify', 'build/signed-artifact']) ] ) Dependency Confusion Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. Detect potential dependency confusion import requests def check_dependency_confusion(requirements_file): vulnerable = [] with open(requirements_file) as f: for line in f: if '==' not in line: continue pkg_name = line.split('=')[0].strip().lower() Check if package exists on PyPI resp = requests.get(f\"https://pypi.org/pypi/{pkg_name}/json\") if resp.status_code == 200: vulnerable.append({ 'package': pkg_name, 'risk': 'Package exists on public registry', 'mitigation': 'Scope pip to private index with --index-url' }) return vulnerable SLSA Framework Supply-chain Levels for Software Artifacts (SLSA, pronounced \"salsa\") provides a security framework with four levels of increasing trust. slsa_levels: level_1: description: \"Build process must be scripted and automated\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false level_2: description: \"Build service generates and signs provenance\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true level_3: description: \"Hardened build service resists tampering\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true level_4: description: \"Two-party review and hermetic builds\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true Conclusion Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/supply-chain-security-5b2l"
+      ],
+      "articleBody": "Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Supply Chain Security Introduction Software supply chain attacks target the processes and tools used to build, package, and distribute software. High-profile incidents like SolarWinds and Codecov demonstrated that compromising a single trusted vendor can cascade into thousands of downstream victims. Defending the supply chain requires verifiable integrity, provenance, and policy enforcement at every stage. Software Bill of Materials (SBOM) An SBOM is a machine-readable inventory of all components in a software artifact. It enables consumers to quickly identify exposure when a vulnerability is disclosed. { \"$schema\": \"http://cyclonedx.org/schema/bom-1.5.schema.json\", \"bomFormat\": \"CycloneDX\", \"specVersion\": \"1.5\", \"serialNumber\": \"urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79\", \"version\": 1, \"metadata\": { \"component\": { \"name\": \"my-application\", \"version\": \"1.2.3\", \"type\": \"application\", \"supplier\": { \"name\": \"ACME Corp\" } } }, \"components\": [ { \"type\": \"library\", \"name\": \"lodash\", \"version\": \"4.17.21\", \"purl\": \"pkg:npm/lodash@4.17.21\", \"licenses\": [{\"license\": {\"id\": \"MIT\"}}] }, { \"type\": \"library\", \"name\": \"express\", \"version\": \"4.18.2\", \"purl\": \"pkg:npm/express@4.18.2\" } ], \"vulnerabilities\": [] } Generate SPDX SBOM with syft syft packages ./myapp:latest -o spdx-json > sbom.spdx.json Generate CycloneDX SBOM cyclonedx-bom -o bom.xml -t file Compare SBOMs for change detection diff Sigstore and Artifact Signing Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. Sign a container image with cosign cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \\ myregistry.io/myapp:latest Keyless signing (OIDC-based) cosign sign myregistry.io/myapp:latest Verify a signed image cosign verify --key pubkey.pem myregistry.io/myapp:latest Verify keyless signature cosign verify myregistry.io/myapp:latest Cosign keyless verification policy cosign_policy: identity: subject: \"developer@acme.com\" issuer: \"https://accounts.google.com\" signatures: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: \"sha256:abc123...\" bundle: \"sigstore-bundle.json\" Generating provenance with SLSA Generate SLSA provenance for a build gitsign --sign-commits HEAD Attest provenance cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \\ myregistry.io/myapp:latest in-toto: Framework for Supply Chain Integrity in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. in-toto layout definition layout = Layout( keys={ 'developer': load_key('developer.pub'), 'builder': load_key('builder.pub'), 'tester': load_key('tester.pub'), }, steps=[ Step(name='write-code', materials=[MaterialRule('ALLOW', '*')], products=[ProductRule('ALLOW', 'src/**')], pubkeys=['developer']), Step(name='build', materials=[MaterialRule('MATCH', 'src/**', ['write-code'])], products=[ProductRule('ALLOW', 'build/**')], pubkeys=['builder']), Step(name='test', materials=[MaterialRule('MATCH', 'build/**', ['build'])], products=[ProductRule('ALLOW', '*')], pubkeys=['tester']), Inspection(name='verify-signature', expected_command=['gpg', '--verify', 'build/signed-artifact']) ] ) Dependency Confusion Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. Detect potential dependency confusion import requests def check_dependency_confusion(requirements_file): vulnerable = [] with open(requirements_file) as f: for line in f: if '==' not in line: continue pkg_name = line.split('=')[0].strip().lower() Check if package exists on PyPI resp = requests.get(f\"https://pypi.org/pypi/{pkg_name}/json\") if resp.status_code == 200: vulnerable.append({ 'package': pkg_name, 'risk': 'Package exists on public registry', 'mitigation': 'Scope pip to private index with --index-url' }) return vulnerable SLSA Framework Supply-chain Levels for Software Artifacts (SLSA, pronounced \"salsa\") provides a security framework with four levels of increasing trust. slsa_levels: level_1: description: \"Build process must be scripted and automated\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false level_2: description: \"Build service generates and signs provenance\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true level_3: description: \"Hardened build service resists tampering\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true level_4: description: \"Two-party review and hermetic builds\" requirements: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true Conclusion Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Supply Chain Security</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Introduction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +248,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Software Bill of Materials (SBOM) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -259,7 +297,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -305,7 +349,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"bomFormat": "CycloneDX",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,7 +401,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -397,7 +453,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"metadata": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,7 +505,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": "my-application",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -489,7 +557,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "application",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -535,6 +609,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": "ACME Corp"</p>
 <br>
 <br>
@@ -558,30 +635,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -605,6 +691,9 @@
 <br>
 <br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -650,7 +739,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -696,7 +791,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": "lodash",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -742,7 +843,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"purl": "pkg:npm/lodash@4.17.21",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +895,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -834,7 +947,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "library", </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -880,7 +999,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"version": "4.18.2",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -926,7 +1051,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -972,7 +1103,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"vulnerabilities": []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1018,7 +1155,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Generate SPDX SBOM with syft</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1064,7 +1207,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Generate CycloneDX SBOM</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1110,7 +1259,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Compare SBOMs for change detection</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1156,7 +1311,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p><(jq '.components[].purl' bom-v2.json | sort)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1199,7 +1360,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sigstore simplifies code signing and verification through ephemeral key material and transparency logs. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1245,6 +1412,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign sign --key gcpkms://projects/my-project/locations/global/keyRings/my-ring/cryptoKeys/my-key/my-version \</p>
 <br>
 <br>
@@ -1268,7 +1438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1314,7 +1490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign sign myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1360,7 +1542,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign verify --key pubkey.pem myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1406,7 +1594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign verify myregistry.io/myapp:latest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1646,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign_policy:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1498,7 +1698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>subject: "developer@acme.com"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1544,6 +1750,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>signatures:</p>
 <br>
 <br>
@@ -1567,7 +1776,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: "sha256:abc123..."</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- hash: "sha256:abc123..."</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1613,7 +1828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Generating provenance with SLSA </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1659,7 +1880,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>gitsign --sign-commits HEAD</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1705,7 +1932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign attest --predicate slsa-provenance.json --type slsa.dev/provenance/v1 \</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1751,6 +1984,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>in-toto: Framework for Supply Chain Integrity </p>
 <br>
 <br>
@@ -1771,7 +2007,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>in-toto defines a framework to protect the integrity of the software supply chain by verifying that each step in the build and release pipeline was performed by authorized actors. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1817,7 +2059,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>layout = Layout(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1863,7 +2111,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'developer': load_key('developer.pub'),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1909,7 +2163,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'tester': load_key('tester.pub'),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1955,7 +2215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>steps=[</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>materials=[MaterialRule('ALLOW', '*')],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2047,7 +2319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pubkeys=['developer']),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>materials=[MaterialRule('MATCH', 'src/**', ['write-code'])],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2139,7 +2423,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pubkeys=['builder']),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2185,7 +2475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>materials=[MaterialRule('MATCH', 'build/**', ['build'])],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2231,7 +2527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pubkeys=['tester']),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2277,7 +2579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expected_command=['gpg', '--verify', 'build/signed-artifact'])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2323,7 +2631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2366,7 +2680,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dependency confusion attacks exploit package manager behaviors where internal package names are also available in public registries. If a package manager prefers higher version numbers or public registries over private ones, attackers can publish malicious packages with the same name. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2412,7 +2732,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import requests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2458,7 +2784,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vulnerable = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2504,7 +2836,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for line in f:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2550,7 +2888,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>continue</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2596,7 +2940,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check if package exists on PyPI</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2642,7 +2992,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if resp.status_code == 200:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2688,7 +3044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'package': pkg_name,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2734,7 +3096,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'mitigation': 'Scope pip to private index with --index-url'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2780,7 +3148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return vulnerable</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2823,7 +3197,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Supply-chain Levels for Software Artifacts (SLSA, pronounced "salsa") provides a security framework with four levels of increasing trust. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2869,7 +3249,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>level_1:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2915,6 +3301,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>requirements:</p>
 <br>
 <br>
@@ -2938,7 +3327,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_exists: true</p>
 <br>
 <br>
 <br>
@@ -2961,7 +3353,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: false</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3007,7 +3405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description: "Build service generates and signs provenance"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3053,7 +3457,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_authentic: true</p>
 <br>
 <br>
 <br>
@@ -3076,7 +3483,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_generated_by_build_service: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3122,7 +3535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description: "Hardened build service resists tampering"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3168,7 +3587,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_service_hardened: true</p>
 <br>
 <br>
 <br>
@@ -3191,7 +3613,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_non_falsifiable: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3237,7 +3665,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description: "Two-party review and hermetic builds"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3283,7 +3717,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- build_hermetic: true</p>
 <br>
 <br>
 <br>
@@ -3306,7 +3743,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- provenance_has_reproducible_info: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3349,6 +3792,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Supply chain security is no longer optional. Generate SBOMs for all artifacts, sign them with Sigstore, define in-toto layouts for pipeline integrity, protect against dependency confusion with scoped registries, and target SLSA Level 3+ for critical builds. Build verification into your deployment pipeline so that unsigned or unverified artifacts are automatically rejected.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3362,8 +3808,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

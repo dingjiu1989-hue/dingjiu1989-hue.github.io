@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/materialized-views.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1710",
+      "wordCount": "1946",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/materialized-views.html"},
-      "articleBody": "Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views What are Materialized Views? Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed. Creating Materialized Views \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: materialized view for daily sales CREATE MATERIALIZED VIEW daily_sales_summary AS SELECT d.date, p.category, COUNT(*) as sale_count, SUM(s.amount) as total_sales FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id JOIN dim_product p ON s.product_id = p.product_id GROUP BY d.date, p.category; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index for faster queries CREATE INDEX idx_daily_sales_date ON daily_sales_summary(date); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query is much faster than the original SELECT * FROM daily_sales_summary WHERE date >= '2026-01-01'; Refresh Strategies Complete Refresh Rebuilds the entire view: REFRESH MATERIALIZED VIEW daily_sales_summary; Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes. Concurrent Refresh Creates a new version and swaps atomically. No lock but requires a unique index: CREATE UNIQUE INDEX idx_daily_sales_pk ON daily_sales_summary(date, category); REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary; Incremental Refresh Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases. Use Cases | Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot | Performance Considerations \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compare query performance EXPLAIN ANALYZE SELECT date, SUM(total_sales) FROM daily_sales_summary WHERE date >= '2026-01-01' GROUP BY date; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- vs the base query (much slower) EXPLAIN ANALYZE SELECT d.date, SUM(s.amount) FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id WHERE d.date >= '2026-01-01' GROUP BY d.date; Conclusion Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views."
+      "articleBody": "Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views Materialized Views What are Materialized Views? Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed. Creating Materialized Views \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: materialized view for daily sales CREATE MATERIALIZED VIEW daily_sales_summary AS SELECT d.date, p.category, COUNT(*) as sale_count, SUM(s.amount) as total_sales FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id JOIN dim_product p ON s.product_id = p.product_id GROUP BY d.date, p.category; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index for faster queries CREATE INDEX idx_daily_sales_date ON daily_sales_summary(date); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query is much faster than the original SELECT * FROM daily_sales_summary WHERE date >= '2026-01-01'; Refresh Strategies Complete Refresh Rebuilds the entire view: REFRESH MATERIALIZED VIEW daily_sales_summary; Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes. Concurrent Refresh Creates a new version and swaps atomically. No lock but requires a unique index: CREATE UNIQUE INDEX idx_daily_sales_pk ON daily_sales_summary(date, category); REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary; Incremental Refresh Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases. Use Cases | Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot | Performance Considerations \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compare query performance EXPLAIN ANALYZE SELECT date, SUM(total_sales) FROM daily_sales_summary WHERE date >= '2026-01-01' GROUP BY date; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- vs the base query (much slower) EXPLAIN ANALYZE SELECT d.date, SUM(s.amount) FROM fact_sales s JOIN dim_date d ON s.date_id = d.date_id WHERE d.date >= '2026-01-01' GROUP BY d.date; Conclusion Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views."
     }
     </script>
     <script type="application/ld+json">
@@ -176,6 +176,32 @@
 <br>
 <br>
 <br>
+<h1>Materialized Views</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>What are Materialized Views? </p>
 <br>
 <br>
@@ -196,7 +222,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Materialized views pre-compute and store query results. Unlike regular views, they persist data on disk, trading storage for query speed. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -239,7 +271,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: materialized view for daily sales</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL: materialized view for daily sales</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -285,7 +323,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -331,7 +375,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>p.category,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -377,7 +427,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SUM(s.amount) as total_sales</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -423,7 +479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JOIN dim_date d ON s.date_id = d.date_id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -469,6 +531,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY d.date, p.category;</p>
 <br>
 <br>
@@ -492,7 +557,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index for faster queries</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index for faster queries</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -538,7 +609,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query is much faster than the original</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query is much faster than the original</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -584,7 +661,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE date >= '2026-01-01';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -627,6 +710,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Complete Refresh </p>
 <br>
 <br>
@@ -647,7 +733,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rebuilds the entire view: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -693,7 +785,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Simple but locks the view during refresh. Best for small datasets or low-frequency refreshes. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -733,7 +831,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Creates a new version and swaps atomically. No lock but requires a unique index: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -779,7 +883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -822,7 +932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Only processes changed data. Not natively supported in PostgreSQL but available in specialized databases. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -862,7 +978,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Use Case | Refresh Frequency | Benefit | |----------|------------------|---------| | Dashboards | Hourly | Sub-second queries | | Aggregations | Daily | Avoid full table scans | | Pre-joined data | On-demand | Eliminate expensive joins | | Reporting | Nightly | Consistent snapshot | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -905,7 +1027,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compare query performance</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Compare query performance</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -929,6 +1057,9 @@
 <br>
 <br>
 <p>EXPLAIN ANALYZE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -974,7 +1105,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM daily_sales_summary</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1020,6 +1157,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY date;</p>
 <br>
 <br>
@@ -1043,7 +1183,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- vs the base query (much slower)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- vs the base query (much slower)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1089,7 +1235,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT d.date, SUM(s.amount)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1135,7 +1287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JOIN dim_date d ON s.date_id = d.date_id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1181,7 +1339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY d.date;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1224,6 +1388,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Materialized views are essential for dashboard and reporting performance. Use concurrent refresh to avoid locks. Add indexes on frequently filtered columns. Choose refresh strategy based on freshness requirements. Monitor storage overhead for large views.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -1237,8 +1404,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

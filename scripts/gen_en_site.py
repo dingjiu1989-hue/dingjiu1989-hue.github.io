@@ -13498,8 +13498,6 @@ def make_article_html(art, board_id, board_name, all_posts):
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid">{related_html}</div>
-      <noscript><div class="related-grid">{related_html}</div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     {tools_html}
   </div>

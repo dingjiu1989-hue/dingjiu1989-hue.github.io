@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/note-taking-tools.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4321",
+      "wordCount": "4753",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/developer-note-taking-tools-2mdb"
       ],
-      "articleBody": "Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developers have unique note-taking requirements: code snippets with syntax highlighting, technical diagrams, system design notes, and integration with development workflows. This guide evaluates the best tools for developer knowledge management. Requirements for Developer Notes A developer note-taking tool should support: * Code blocks with syntax highlighting across languages. * Markdown as a primary format (for portability and Git versioning). * Search across notes (full-text and tag-based). * Internal linking between notes (bi-directional). * Extensibility (APIs, plugins, or custom scripts). Obsidian Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem. **Key Developer Features:** * Vim keybindings built-in. * Code blocks with syntax highlighting for 100+ languages. * Mermaid diagram support (flowcharts, sequence diagrams, Gantt). * Dataview plugin (query notes like a database). * Git plugin for version control of your notes. * Graph view for visualizing note connections. API Design Notes Endpoints \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details Database Schema CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) UNIQUE ); Architecture graph LR Client --> API API --> DB[(Database)] API --> Cache[(Redis)] **Use for**: Technical diary, project documentation, system design notes. Logseq Logseq is an open-source knowledge management tool using an outliner paradigm. Notes are structured as hierarchical blocks. **Key Developer Features:** * Logbook for tracking work sessions. * Block-level referencing (reference specific code snippets). * PDF annotation for research papers. * Task management with priorities. * Git-based sync. **Use for**: Daily standup notes, meeting minutes, research notes. Notion Notion is the most versatile workspace tool, combining notes, databases, wikis, and project management. **Key Developer Features:** * Databases with custom properties (for bug tracking, feature requests). * Code blocks with copy button. * API for programmatic access (create pages, update databases). * Sprint planning templates. * Documentation wikis with sidebar navigation. **Use for**: Team wikis, sprint planning, product documentation. **Cons**: No local storage (cloud-only), no Vim mode, can be slow with large databases. Dendron Dendron is a VS Code extension that provides hierarchical note-taking. It treats notes like a file system with lookup-based navigation. **Key Developer Features:** * Fully integrated into VS Code (editor, keybindings, extensions). * Hierarchy-based lookup (like navigating a filesystem). * Schema support (define note structure by hierarchy). * First-class Git integration. * Completely local and open source. Dendron hierarchy dev.python.fastapi.setup dev.python.fastapi.authentication dev.docker.compose.production dev.aws.s3.bucket-policies **Use for**: Structured technical reference, API documentation, system design reference. Boost Note Boost Note is an open-source Markdown editor designed for developers, with a focus on code snippets and team collaboration. **Key Developer Features:** * Multi-folder support. * Snippet management with tags. * Team workspace. * Markdown with code highlighting. * Dark theme. Comparison Table | Feature | Obsidian | Logseq | Notion | Dendron | Boost Note | |---------|----------|--------|--------|---------|------------| | Local storage | Yes (plain MD) | Yes | No | Yes | Yes | | Vim mode | Built-in | Built-in | No | Via VS Code | No | | Code blocks | Excellent | Excellent | Good | Excellent | Good | | Bi-directional links | Yes | Yes | Limited | Yes | No | | Graph view | Yes | Yes | No | No | No | | Team collaboration | Paid | Git-based | Built-in | Git-based | Built-in | | Open source | No | Yes | No | Yes | Yes | | Price | Free (sync paid) | Free | Free (team paid) | Free | Free | Workflow Integration Git-Based Note Backups For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git repository: Create a notes repository mkdir ~/notes && cd ~/notes git init git remote add origin https://github.com/you/notes.git Sync daily git add -A git commit -m \"Daily notes backup: $(date +%Y-%m-%d)\" git push Automate with a cron job or Obsidian's Git plugin. CLI Note Taking For quick terminal notes: Using a simple shell function function note() { echo \"## $(date '+%Y-%m-%d %H:%M')\" >> ~/notes/scratchpad.md echo \"$@\" >> ~/notes/scratchpad.md echo \"\" >> ~/notes/scratchpad.md } Usage note \"Remember to check the RDS backup schedule\" Knowledge Base from Code Comments Some developers integrate notes with their codebase. Jupyter Notebooks combine code with narrative text. Tools like `jupytext` convert between .ipynb and .md formats. Recommendations * **Individual developer**: Obsidian for comprehensive knowledge management. * **VS Code users**: Dendron for seamless editor integration. * **Team wikis**: Notion for collaborative documentation. * **Research and journaling**: Logseq for block-level citations. * **Quick snippets**: Boost Note for organized code snippets. Summary Developer note-taking has evolved from plain text files to rich knowledge management systems. Obsidian offers the best balance of local-first control, Markdown-native format, and powerful linking. Notion excels for team collaboration. Dendron provides the tightest VS Code integration. The common thread is Markdown -- choose a tool that stores notes in plain Markdown so you are never locked into a proprietary format and can always version control your knowledge base."
+      "articleBody": "Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developer Note Taking Tools Developers have unique note-taking requirements: code snippets with syntax highlighting, technical diagrams, system design notes, and integration with development workflows. This guide evaluates the best tools for developer knowledge management. Requirements for Developer Notes A developer note-taking tool should support: * Code blocks with syntax highlighting across languages. * Markdown as a primary format (for portability and Git versioning). * Search across notes (full-text and tag-based). * Internal linking between notes (bi-directional). * Extensibility (APIs, plugins, or custom scripts). Obsidian Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem. **Key Developer Features:** * Vim keybindings built-in. * Code blocks with syntax highlighting for 100+ languages. * Mermaid diagram support (flowcharts, sequence diagrams, Gantt). * Dataview plugin (query notes like a database). * Git plugin for version control of your notes. * Graph view for visualizing note connections. API Design Notes Endpoints \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details Database Schema CREATE TABLE users ( id UUID PRIMARY KEY, email VARCHAR(255) UNIQUE ); Architecture graph LR Client --> API API --> DB[(Database)] API --> Cache[(Redis)] **Use for**: Technical diary, project documentation, system design notes. Logseq Logseq is an open-source knowledge management tool using an outliner paradigm. Notes are structured as hierarchical blocks. **Key Developer Features:** * Logbook for tracking work sessions. * Block-level referencing (reference specific code snippets). * PDF annotation for research papers. * Task management with priorities. * Git-based sync. **Use for**: Daily standup notes, meeting minutes, research notes. Notion Notion is the most versatile workspace tool, combining notes, databases, wikis, and project management. **Key Developer Features:** * Databases with custom properties (for bug tracking, feature requests). * Code blocks with copy button. * API for programmatic access (create pages, update databases). * Sprint planning templates. * Documentation wikis with sidebar navigation. **Use for**: Team wikis, sprint planning, product documentation. **Cons**: No local storage (cloud-only), no Vim mode, can be slow with large databases. Dendron Dendron is a VS Code extension that provides hierarchical note-taking. It treats notes like a file system with lookup-based navigation. **Key Developer Features:** * Fully integrated into VS Code (editor, keybindings, extensions). * Hierarchy-based lookup (like navigating a filesystem). * Schema support (define note structure by hierarchy). * First-class Git integration. * Completely local and open source. Dendron hierarchy dev.python.fastapi.setup dev.python.fastapi.authentication dev.docker.compose.production dev.aws.s3.bucket-policies **Use for**: Structured technical reference, API documentation, system design reference. Boost Note Boost Note is an open-source Markdown editor designed for developers, with a focus on code snippets and team collaboration. **Key Developer Features:** * Multi-folder support. * Snippet management with tags. * Team workspace. * Markdown with code highlighting. * Dark theme. Comparison Table | Feature | Obsidian | Logseq | Notion | Dendron | Boost Note | |---------|----------|--------|--------|---------|------------| | Local storage | Yes (plain MD) | Yes | No | Yes | Yes | | Vim mode | Built-in | Built-in | No | Via VS Code | No | | Code blocks | Excellent | Excellent | Good | Excellent | Good | | Bi-directional links | Yes | Yes | Limited | Yes | No | | Graph view | Yes | Yes | No | No | No | | Team collaboration | Paid | Git-based | Built-in | Git-based | Built-in | | Open source | No | Yes | No | Yes | Yes | | Price | Free (sync paid) | Free | Free (team paid) | Free | Free | Workflow Integration Git-Based Note Backups For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git repository: Create a notes repository mkdir ~/notes && cd ~/notes git init git remote add origin https://github.com/you/notes.git Sync daily git add -A git commit -m \"Daily notes backup: $(date +%Y-%m-%d)\" git push Automate with a cron job or Obsidian's Git plugin. CLI Note Taking For quick terminal notes: Using a simple shell function function note() { echo \"## $(date '+%Y-%m-%d %H:%M')\" >> ~/notes/scratchpad.md echo \"$@\" >> ~/notes/scratchpad.md echo \"\" >> ~/notes/scratchpad.md } Usage note \"Remember to check the RDS backup schedule\" Knowledge Base from Code Comments Some developers integrate notes with their codebase. Jupyter Notebooks combine code with narrative text. Tools like `jupytext` convert between .ipynb and .md formats. Recommendations * **Individual developer**: Obsidian for comprehensive knowledge management. * **VS Code users**: Dendron for seamless editor integration. * **Team wikis**: Notion for collaborative documentation. * **Research and journaling**: Logseq for block-level citations. * **Quick snippets**: Boost Note for organized code snippets. Summary Developer note-taking has evolved from plain text files to rich knowledge management systems. Obsidian offers the best balance of local-first control, Markdown-native format, and powerful linking. Notion excels for team collaboration. Dendron provides the tightest VS Code integration. The common thread is Markdown -- choose a tool that stores notes in plain Markdown so you are never locked into a proprietary format and can always version control your knowledge base."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>Developer Note Taking Tools</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Developers have unique note-taking requirements: code snippets with syntax highlighting, technical diagrams, system design notes, and integration with development workflows. This guide evaluates the best tools for developer knowledge management.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A developer note-taking tool should support:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -305,7 +343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Markdown as a primary format (for portability and Git versioning).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,6 +395,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Internal linking between notes (bi-directional).</p>
 <br>
 <br>
@@ -374,7 +421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Extensibility (APIs, plugins, or custom scripts).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -426,7 +479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -478,7 +537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Vim keybindings built-in.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -524,7 +589,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Mermaid diagram support (flowcharts, sequence diagrams, Gantt).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -570,6 +641,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Git plugin for version control of your notes.</p>
 <br>
 <br>
@@ -593,7 +667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Graph view for visualizing note connections.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -645,6 +725,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Endpoints</h2>
 <br>
 <br>
@@ -671,7 +754,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user</p>
 <br>
 <br>
 <br>
@@ -697,7 +783,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -749,7 +841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE users (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -801,7 +899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email VARCHAR(255) UNIQUE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -853,7 +957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Architecture</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -905,7 +1015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Client --> API</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -957,7 +1073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>API --> Cache[(Redis)]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1009,7 +1131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Logseq</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1061,7 +1189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key Developer Features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1110,7 +1244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Block-level referencing (reference specific code snippets).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1156,6 +1296,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Task management with priorities.</p>
 <br>
 <br>
@@ -1179,7 +1322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Git-based sync.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1231,7 +1380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Notion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1283,7 +1438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key Developer Features:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1332,7 +1493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Code blocks with copy button.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1378,6 +1545,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Sprint planning templates.</p>
 <br>
 <br>
@@ -1401,7 +1571,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Documentation wikis with sidebar navigation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1453,7 +1629,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons**: No local storage (cloud-only), no Vim mode, can be slow with large databases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1505,7 +1687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dendron is a VS Code extension that provides hierarchical note-taking. It treats notes like a file system with lookup-based navigation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1557,7 +1745,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Fully integrated into VS Code (editor, keybindings, extensions).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1603,7 +1797,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Schema support (define note structure by hierarchy).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1649,7 +1849,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Completely local and open source.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1701,7 +1907,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dev.python.fastapi.setup</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1753,7 +1965,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dev.docker.compose.production</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1805,7 +2023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Use for**: Structured technical reference, API documentation, system design reference.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1857,7 +2081,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Boost Note is an open-source Markdown editor designed for developers, with a focus on code snippets and team collaboration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1909,7 +2139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Multi-folder support.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1955,7 +2191,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Team workspace.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2243,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Dark theme.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2053,7 +2301,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Feature | Obsidian | Logseq | Notion | Dendron | Boost Note |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2105,7 +2359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Local storage | Yes (plain MD) | Yes | No | Yes | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2157,7 +2417,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Code blocks | Excellent | Excellent | Good | Excellent | Good |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2209,7 +2475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Graph view | Yes | Yes | No | No | No |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2261,7 +2533,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Open source | No | Yes | No | Yes | Yes |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2313,7 +2591,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Workflow Integration</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2365,7 +2649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git repository:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2417,7 +2707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mkdir ~/notes && cd ~/notes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2469,7 +2765,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>git remote add origin https://github.com/you/notes.git</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2521,7 +2823,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>git add -A</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2573,7 +2881,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>git push</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2625,7 +2939,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>CLI Note Taking</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2677,7 +2997,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Using a simple shell function</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2729,7 +3055,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "## $(date '+%Y-%m-%d %H:%M')" >> ~/notes/scratchpad.md</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2781,7 +3113,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>echo "" >> ~/notes/scratchpad.md</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2833,7 +3171,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Usage</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2885,7 +3229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Knowledge Base from Code Comments</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2937,7 +3287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Recommendations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2986,7 +3342,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **VS Code users**: Dendron for seamless editor integration.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3032,6 +3394,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Research and journaling**: Logseq for block-level citations.</p>
 <br>
 <br>
@@ -3055,7 +3420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Quick snippets**: Boost Note for organized code snippets.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3107,6 +3478,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Developer note-taking has evolved from plain text files to rich knowledge management systems. Obsidian offers the best balance of local-first control, Markdown-native format, and powerful linking. Notion excels for team collaboration. Dendron provides the tightest VS Code integration. The common thread is Markdown -- choose a tool that stores notes in plain Markdown so you are never locked into a proprietary format and can always version control your knowledge base.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3120,8 +3494,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
-      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

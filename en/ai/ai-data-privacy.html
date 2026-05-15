@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-data-privacy.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5809",
+      "wordCount": "6710",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/ai-data-privacy-pii-detection-data-anonymization-local-processing-2373"
       ],
-      "articleBody": "AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing Introduction AI applications process vast amounts of data, much of it containing personally identifiable information (PII). Sending raw PII to LLM APIs creates compliance risks under GDPR, CCPA, and other regulations. This article covers practical techniques for detecting and redacting PII, anonymizing training data, and processing sensitive information locally. PII Detection Automated detection identifies sensitive data before it reaches an LLM API: import re import spacy from presidio_analyzer import AnalyzerEngine from presidio_anonymizer import AnonymizerEngine Initialize Presidio analyzers nlp = spacy.load(\"en_core_web_lg\") analyzer = AnalyzerEngine() anonymizer = AnonymizerEngine() def detect_pii(text: str) -> list[dict]: results = analyzer.analyze( text=text, entities=[ \"PHONE_NUMBER\", \"EMAIL_ADDRESS\", \"CREDIT_CARD\", \"SSN\", \"PERSON\", \"LOCATION\", \"DATE_TIME\", \"NRP\", \"US_BANK_NUMBER\", \"IP_ADDRESS\", ], language=\"en\", ) return [ {\"entity\": r.entity_type, \"start\": r.start, \"end\": r.end, \"score\": r.score, \"text\": text[r.start:r.end]} for r in results ] def redact_pii(text: str) -> str: analyzer_results = analyzer.analyze(text=text, language=\"en\") return anonymizer.anonymize(text=text, analyzer_results=analyzer_results).text Presidio combines pattern-based detection (regex for credit cards, SSNs, phone numbers) with NLP-based detection (spaCy for person names, locations, organizations). This dual approach catches both structured and unstructured PII. Data Anonymization For training data or analytics, full removal may be too destructive. Anonymization preserves utility while protecting privacy: from faker import Faker import hashlib fake = Faker() class DataAnonymizer: def __init__(self): self.mapping_cache = {} def anonymize_record(self, record: dict, pii_fields: list[str]) -> dict: anonymized = record.copy() for field in pii_fields: if field in anonymized and anonymized[field]: anonymized[field] = self._replace_value(field, anonymized[field]) return anonymized def _replace_value(self, field: str, value: str) -> str: if field == \"email\": return fake.email() elif field == \"phone\": return fake.phone_number() elif field == \"name\": return fake.name() elif field == \"address\": return fake.address() elif field == \"ssn\": return fake.ssn() else: Tokenization: stable pseudonym via hashing hashed = hashlib.sha256(value.encode()).hexdigest()[:16] return f\"USER_{hashed}\" Differential privacy: add calibrated noise def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float: \"\"\"Add Laplace noise for differential privacy. Lower epsilon = more privacy, less accuracy.\"\"\" import numpy as np scale = 1.0 / epsilon noise = np.random.laplace(0, scale) return true_value + noise Anonymization Strategies | Technique | Privacy Level | Utility | Use Case | |-----------|--------------|---------|----------| | Removal | High | Low | Irreversible redaction | | Masking | Medium | Medium | Partial visibility (e.g. \"****-1234\") | | Pseudonymization | Medium | High | Replace with fake equivalent | | Generalization | Medium | Medium | ZIP 94301 -> 9430x | | Differential Privacy | High | Medium | Statistical queries | | Tokenization | High | High | Deterministic replacement | Local Processing For maximum privacy, process sensitive data locally without sending it to external APIs: from transformers import pipeline class LocalTextProcessor: def __init__(self): Load small models for local inference self.classifier = pipeline( \"text-classification\", model=\"distilbert-base-uncased-finetuned-sst-2-english\", device=-1, # CPU ) self.ner = pipeline( \"ner\", model=\"dslim/bert-base-NER\", device=-1, ) self.summarizer = pipeline( \"summarization\", model=\"facebook/bart-large-cnn\", device=-1, ) def process_sensitive_data(self, text: str, task: str) -> dict: All processing happens locally; nothing leaves this machine if task == \"classify\": return {\"label\": self.classifier(text)[0][\"label\"]} elif task == \"extract_entities\": return {\"entities\": self.ner(text)} elif task == \"summarize\": return {\"summary\": self.summarizer(text, max_length=130, min_length=30)[0][\"summary_text\"]} Hybrid Approach For complex tasks requiring powerful LLMs, strip PII before sending, then re-integrate after: def safe_llm_call(user_text: str) -> str: Step 1: Detect and redact PII pii_entities = detect_pii(user_text) redacted_text = redact_pii(user_text) Store PII mapping for later restoration pii_map = { entity[\"text\"]: f\"[{entity['entity']}_{i}]\" for i, entity in enumerate(pii_entities) } Step 2: Send redacted text to LLM safe_prompt = f\"Process this text: {redacted_text}\" response = call_llm(safe_prompt) Step 3: The response should use placeholders, not real data No restoration needed if the LLM just processes the structure return response For cases where PII must be restored: def process_and_restore(user_text: str, context: dict) -> str: redacted, pii_map = redact_with_map(user_text) result = call_llm(f\"Based on this data: {redacted}, generate a response.\") The LLM response should reference PII generically return result Compliance Checklist data_privacy_audit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits Conclusion AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves."
+      "articleBody": "AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing AI Data Privacy: PII Detection, Data Anonymization, Local Processing Introduction AI applications process vast amounts of data, much of it containing personally identifiable information (PII). Sending raw PII to LLM APIs creates compliance risks under GDPR, CCPA, and other regulations. This article covers practical techniques for detecting and redacting PII, anonymizing training data, and processing sensitive information locally. PII Detection Automated detection identifies sensitive data before it reaches an LLM API: import re import spacy from presidio_analyzer import AnalyzerEngine from presidio_anonymizer import AnonymizerEngine Initialize Presidio analyzers nlp = spacy.load(\"en_core_web_lg\") analyzer = AnalyzerEngine() anonymizer = AnonymizerEngine() def detect_pii(text: str) -> list[dict]: results = analyzer.analyze( text=text, entities=[ \"PHONE_NUMBER\", \"EMAIL_ADDRESS\", \"CREDIT_CARD\", \"SSN\", \"PERSON\", \"LOCATION\", \"DATE_TIME\", \"NRP\", \"US_BANK_NUMBER\", \"IP_ADDRESS\", ], language=\"en\", ) return [ {\"entity\": r.entity_type, \"start\": r.start, \"end\": r.end, \"score\": r.score, \"text\": text[r.start:r.end]} for r in results ] def redact_pii(text: str) -> str: analyzer_results = analyzer.analyze(text=text, language=\"en\") return anonymizer.anonymize(text=text, analyzer_results=analyzer_results).text Presidio combines pattern-based detection (regex for credit cards, SSNs, phone numbers) with NLP-based detection (spaCy for person names, locations, organizations). This dual approach catches both structured and unstructured PII. Data Anonymization For training data or analytics, full removal may be too destructive. Anonymization preserves utility while protecting privacy: from faker import Faker import hashlib fake = Faker() class DataAnonymizer: def __init__(self): self.mapping_cache = {} def anonymize_record(self, record: dict, pii_fields: list[str]) -> dict: anonymized = record.copy() for field in pii_fields: if field in anonymized and anonymized[field]: anonymized[field] = self._replace_value(field, anonymized[field]) return anonymized def _replace_value(self, field: str, value: str) -> str: if field == \"email\": return fake.email() elif field == \"phone\": return fake.phone_number() elif field == \"name\": return fake.name() elif field == \"address\": return fake.address() elif field == \"ssn\": return fake.ssn() else: Tokenization: stable pseudonym via hashing hashed = hashlib.sha256(value.encode()).hexdigest()[:16] return f\"USER_{hashed}\" Differential privacy: add calibrated noise def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float: \"\"\"Add Laplace noise for differential privacy. Lower epsilon = more privacy, less accuracy.\"\"\" import numpy as np scale = 1.0 / epsilon noise = np.random.laplace(0, scale) return true_value + noise Anonymization Strategies | Technique | Privacy Level | Utility | Use Case | |-----------|--------------|---------|----------| | Removal | High | Low | Irreversible redaction | | Masking | Medium | Medium | Partial visibility (e.g. \"****-1234\") | | Pseudonymization | Medium | High | Replace with fake equivalent | | Generalization | Medium | Medium | ZIP 94301 -> 9430x | | Differential Privacy | High | Medium | Statistical queries | | Tokenization | High | High | Deterministic replacement | Local Processing For maximum privacy, process sensitive data locally without sending it to external APIs: from transformers import pipeline class LocalTextProcessor: def __init__(self): Load small models for local inference self.classifier = pipeline( \"text-classification\", model=\"distilbert-base-uncased-finetuned-sst-2-english\", device=-1, # CPU ) self.ner = pipeline( \"ner\", model=\"dslim/bert-base-NER\", device=-1, ) self.summarizer = pipeline( \"summarization\", model=\"facebook/bart-large-cnn\", device=-1, ) def process_sensitive_data(self, text: str, task: str) -> dict: All processing happens locally; nothing leaves this machine if task == \"classify\": return {\"label\": self.classifier(text)[0][\"label\"]} elif task == \"extract_entities\": return {\"entities\": self.ner(text)} elif task == \"summarize\": return {\"summary\": self.summarizer(text, max_length=130, min_length=30)[0][\"summary_text\"]} Hybrid Approach For complex tasks requiring powerful LLMs, strip PII before sending, then re-integrate after: def safe_llm_call(user_text: str) -> str: Step 1: Detect and redact PII pii_entities = detect_pii(user_text) redacted_text = redact_pii(user_text) Store PII mapping for later restoration pii_map = { entity[\"text\"]: f\"[{entity['entity']}_{i}]\" for i, entity in enumerate(pii_entities) } Step 2: Send redacted text to LLM safe_prompt = f\"Process this text: {redacted_text}\" response = call_llm(safe_prompt) Step 3: The response should use placeholders, not real data No restoration needed if the LLM just processes the structure return response For cases where PII must be restored: def process_and_restore(user_text: str, context: dict) -> str: redacted, pii_map = redact_with_map(user_text) result = call_llm(f\"Based on this data: {redacted}, generate a response.\") The LLM response should reference PII generically return result Compliance Checklist data_privacy_audit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits Conclusion AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves."
     }
     </script>
     <script type="application/ld+json">
@@ -205,7 +205,39 @@
 <br>
 <br>
 <br>
+<h1>AI Data Privacy: PII Detection, Data Anonymization, Local Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -257,7 +289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  PII Detection</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -309,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import re</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -361,7 +405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from presidio_analyzer import AnalyzerEngine</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -413,7 +463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Initialize Presidio analyzers</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>analyzer = AnalyzerEngine()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -517,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def detect_pii(text: str) -> list[dict]:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text=text,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -621,7 +695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"PHONE_NUMBER", "EMAIL_ADDRESS",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,7 +753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"LOCATION", "DATE_TIME", "NRP",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -725,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -777,7 +869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -829,7 +927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"entity": r.entity_type, "start": r.start, "end": r.end,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -881,7 +985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for r in results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -933,7 +1043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def redact_pii(text: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -985,7 +1101,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return anonymizer.anonymize(text=text, analyzer_results=analyzer_results).text</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1037,7 +1159,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Data Anonymization</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1089,7 +1217,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from faker import Faker</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1141,7 +1275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>fake = Faker()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1193,7 +1333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1245,7 +1391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def anonymize_record(self, record: dict, pii_fields: list[str]) -> dict:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1297,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for field in pii_fields:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1349,7 +1507,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>anonymized[field] = self._replace_value(field, anonymized[field])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1401,7 +1565,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def _replace_value(self, field: str, value: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1453,7 +1623,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fake.email()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1505,7 +1681,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fake.phone_number()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1557,7 +1739,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fake.name()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1609,7 +1797,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fake.address()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1661,7 +1855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return fake.ssn()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1713,7 +1913,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Tokenization: stable pseudonym via hashing</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1765,7 +1971,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return f"USER_{hashed}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1817,7 +2029,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def add_laplace_noise(true_value: float, epsilon: float = 1.0) -> float:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1869,7 +2087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Lower epsilon = more privacy, less accuracy."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1921,7 +2145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scale = 1.0 / epsilon</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1973,7 +2203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return true_value + noise</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2025,7 +2261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Technique | Privacy Level | Utility | Use Case |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2077,7 +2319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Removal | High | Low | Irreversible redaction |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2129,7 +2377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Pseudonymization | Medium | High | Replace with fake equivalent |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2181,7 +2435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Differential Privacy | High | Medium | Statistical queries |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2233,7 +2493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Local Processing</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2285,7 +2551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from transformers import pipeline</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2337,7 +2609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,7 +2667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.classifier = pipeline(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2441,7 +2725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="distilbert-base-uncased-finetuned-sst-2-english",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2493,7 +2783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2545,7 +2841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"ner",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,6 +2899,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>device=-1,</p>
 <br>
 <br>
@@ -2623,7 +2928,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2675,7 +2986,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"summarization",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2727,7 +3044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>device=-1,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2779,7 +3102,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def process_sensitive_data(self, text: str, task: str) -> dict:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2831,7 +3160,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if task == "classify":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2883,7 +3218,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif task == "extract_entities":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2935,7 +3276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif task == "summarize":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2987,7 +3334,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Hybrid Approach</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3039,7 +3392,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def safe_llm_call(user_text: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3091,7 +3450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pii_entities = detect_pii(user_text)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3143,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Store PII mapping for later restoration</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3195,7 +3566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>entity["text"]: f"[{entity['entity']}_{i}]"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3247,7 +3624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3299,7 +3682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>safe_prompt = f"Process this text: {redacted_text}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3351,7 +3740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Step 3: The response should use placeholders, not real data</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3403,7 +3798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return response</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3455,7 +3856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def process_and_restore(user_text: str, context: dict) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3507,7 +3914,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = call_llm(f"Based on this data: {redacted}, generate a response.")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3559,7 +3972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return result</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3611,6 +4030,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data_privacy_audit:</p>
 <br>
 <br>
@@ -3637,10 +4059,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing:</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pre_processing:</p>
 <br>
 <br>
 <br>
@@ -3663,13 +4085,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Scan all inputs for PII before API calls</p>
 <br>
 <br>
 <br>
@@ -3689,7 +4111,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction</p>
 <br>
 <br>
 <br>
@@ -3699,6 +4120,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic redaction</p>
 <br>
 <br>
 <br>
@@ -3715,7 +4137,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values)</p>
 <br>
 <br>
 <br>
@@ -3728,6 +4149,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all detected PII types (not values)</p>
 <br>
 <br>
 <br>
@@ -3741,7 +4163,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit:</p>
 <br>
 <br>
 <br>
@@ -3757,6 +4178,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- in_transit:</p>
 <br>
 <br>
 <br>
@@ -3767,7 +4189,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls</p>
 <br>
 <br>
 <br>
@@ -3786,6 +4207,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use TLS 1.3 for all API calls</p>
 <br>
 <br>
 <br>
@@ -3793,7 +4215,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads</p>
 <br>
 <br>
 <br>
@@ -3815,11 +4236,11 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never log raw API payloads</p>
 <br>
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits</p>
 <br>
 <br>
 <br>
@@ -3844,8 +4265,8 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement data retention limits</p>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage:</p>
 <br>
 <br>
 <br>
@@ -3871,9 +4292,9 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest</p>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- storage:</p>
 <br>
 <br>
 <br>
@@ -3897,12 +4318,12 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs</p>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Encrypt all stored data at rest</p>
 <br>
 <br>
 <br>
@@ -3923,7 +4344,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules</p>
 <br>
 <br>
 <br>
@@ -3932,6 +4352,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Never store raw PII in logs</p>
 <br>
 <br>
 <br>
@@ -3949,7 +4370,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights:</p>
 <br>
 <br>
 <br>
@@ -3961,6 +4381,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement automatic purging schedules</p>
 <br>
 <br>
 <br>
@@ -3975,7 +4396,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests</p>
 <br>
 <br>
 <br>
@@ -3990,6 +4410,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- user_rights:</p>
 <br>
 <br>
 <br>
@@ -4001,7 +4422,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports</p>
 <br>
 <br>
 <br>
@@ -4019,6 +4439,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Support data deletion requests</p>
 <br>
 <br>
 <br>
@@ -4027,7 +4448,59 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Provide data portability exports</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Maintain processing records for audits</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4079,6 +4552,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AI data privacy requires proactive protection rather than reactive compliance. Detect and redact PII before any external API call. Use local models for sensitive processing when possible. Implement a hybrid approach for complex tasks: strip PII before cloud LLM inference, and never log raw user data. Regular privacy audits ensure that your protection measures stay effective as your application evolves.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -4091,9 +4567,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

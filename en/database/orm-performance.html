@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/orm-performance.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1807",
+      "wordCount": "1993",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/orm-performance.html"},
-      "articleBody": "ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance Challenges Object-Relational Mappers (ORMs) simplify database access but introduce performance pitfalls. Understanding these issues is essential for production applications. The N+1 Query Problem The most common ORM performance issue: N+1: One query for users, then N queries for orders users = User.query.all() for user in users: orders = user.orders # Triggers a query per user! print(len(orders)) **Fix**: Use eager loading: Solution: 2 queries total users = User.query.options(joinedload(User.orders)).all() for user in users: orders = user.orders # Already loaded print(len(orders)) Lazy Loading Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1: SQLAlchemy: configure relationship loading class User(Base): __tablename__ = 'users' id = Column(Integer, primary_key=True) orders = relationship(\"Order\", lazy=\"selectin\") # Eager load | Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters | Query Optimization BAD: Fetch all columns when only one is needed users = session.query(User).all() emails = [u.email for u in users] GOOD: Fetch only needed columns emails = session.query(User.email).all() BAD: Loading entire objects users = User.query.filter(User.status == 'active').all() for u in users: u.last_login = datetime.utcnow() GOOD: Bulk update User.query.filter(User.status == 'active').update( {\"last_login\": datetime.utcnow()} ) Understanding Generated SQL Always check the SQL your ORM generates: SQLAlchemy: see the query query = session.query(User).filter(User.email == 'alice@example.com') print(str(query)) SELECT users.id, users.email, users.name FROM users WHERE users.email = ? Batch Operations BAD: Individual inserts for user in users: session.add(user) session.commit() # N individual INSERTs GOOD: Bulk insert session.bulk_insert_mappings(User, [u.__dict__ for u in users]) session.commit() # Single batch INSERT Conclusion Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box."
+      "articleBody": "ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance ORM Performance Challenges Object-Relational Mappers (ORMs) simplify database access but introduce performance pitfalls. Understanding these issues is essential for production applications. The N+1 Query Problem The most common ORM performance issue: N+1: One query for users, then N queries for orders users = User.query.all() for user in users: orders = user.orders # Triggers a query per user! print(len(orders)) **Fix**: Use eager loading: Solution: 2 queries total users = User.query.options(joinedload(User.orders)).all() for user in users: orders = user.orders # Already loaded print(len(orders)) Lazy Loading Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1: SQLAlchemy: configure relationship loading class User(Base): __tablename__ = 'users' id = Column(Integer, primary_key=True) orders = relationship(\"Order\", lazy=\"selectin\") # Eager load | Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters | Query Optimization BAD: Fetch all columns when only one is needed users = session.query(User).all() emails = [u.email for u in users] GOOD: Fetch only needed columns emails = session.query(User.email).all() BAD: Loading entire objects users = User.query.filter(User.status == 'active').all() for u in users: u.last_login = datetime.utcnow() GOOD: Bulk update User.query.filter(User.status == 'active').update( {\"last_login\": datetime.utcnow()} ) Understanding Generated SQL Always check the SQL your ORM generates: SQLAlchemy: see the query query = session.query(User).filter(User.email == 'alice@example.com') print(str(query)) SELECT users.id, users.email, users.name FROM users WHERE users.email = ? Batch Operations BAD: Individual inserts for user in users: session.add(user) session.commit() # N individual INSERTs GOOD: Bulk insert session.bulk_insert_mappings(User, [u.__dict__ for u in users]) session.commit() # Single batch INSERT Conclusion Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>ORM Performance</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>ORM Performance Challenges </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The N+1 Query Problem </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The most common ORM performance issue: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,6 +320,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>users = User.query.all()</p>
 <br>
 <br>
@@ -305,7 +346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for user in users:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,7 +398,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(len(orders))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -397,7 +450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Solution: 2 queries total</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,7 +502,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for user in users:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -489,7 +554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(len(orders))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -532,7 +603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Lazy loading defers data loading until accessed. It reduces initial query cost but can cause N+1: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -578,7 +655,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class User(Base):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -624,7 +707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id = Column(Integer, primary_key=True)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -670,6 +759,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Loading Strategy | Queries | Memory | When to Use | |-----------------|---------|--------|-------------| | Lazy | 1 + N | Low | Rarely accessed | | Joined | 1 join | High | Always needed | | Selectin | 1 + 1 | Medium | Lists of related | | Subquery | 1 + 1 | Medium | Complex filters | </p>
 <br>
 <br>
@@ -690,7 +782,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Query Optimization </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -736,7 +834,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>users = session.query(User).all()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -782,7 +886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>GOOD: Fetch only needed columns</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -828,7 +938,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>BAD: Loading entire objects</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -874,7 +990,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for u in users:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -920,7 +1042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>GOOD: Bulk update</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -966,7 +1094,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"last_login": datetime.utcnow()}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1012,6 +1146,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Understanding Generated SQL </p>
 <br>
 <br>
@@ -1032,7 +1169,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Always check the SQL your ORM generates: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1078,7 +1221,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query = session.query(User).filter(User.email == 'alice@example.com')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1124,7 +1273,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>SELECT users.id, users.email, users.name FROM users WHERE users.email = ?</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1170,7 +1325,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>BAD: Individual inserts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1216,7 +1377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>session.add(user)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1262,7 +1429,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>GOOD: Bulk insert</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1308,7 +1481,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>session.commit() # Single batch INSERT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1351,6 +1530,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Profile your ORM queries in production. Fix N+1 with eager loading. Select only needed columns. Use bulk operations for batch processing. Monitor the SQL your ORM generates. The ORM is a tool, not a magic black box.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -1364,8 +1546,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

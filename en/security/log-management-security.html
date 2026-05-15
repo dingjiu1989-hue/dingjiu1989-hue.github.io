@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/log-management-security.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "5542",
+      "wordCount": "6132",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/security-log-management-4inc"
       ],
-      "articleBody": "Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Why Log Management Matters for Security Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible. What to Log Authentication Events | Event | Severity | Details to Log | |-------|----------|----------------| | Successful login | Info | User, IP, timestamp, user agent | | Failed login | Warning | Username, IP, timestamp, reason | | Password reset | Info | User, IP, timestamp, method | | Account lockout | High | User, IP, duration | | MFA success/failure | Medium | User, method, IP | | Privilege escalation | Critical | User, from_role, to_role | Data Access Events | Event | Severity | Details to Log | |-------|----------|----------------| | Data export | High | User, records count, destination | | Sensitive data read | Medium | User, resource, action | | Bulk query | High | User, query pattern, result count | | Schema change | Critical | User, object, DDL statement | System Events * Service start/stop * Configuration changes * Permission modifications * Failed access attempts to restricted resources * Certificate expiry warnings * Rate limit triggers Log Structure Use a consistent, structured format for all logs. JSON is the standard for security logs: { \"timestamp\": \"2026-05-11T14:23:45.123Z\", \"event_id\": \"evt_2k3j4h5g6f\", \"category\": \"authentication\", \"action\": \"login_failed\", \"severity\": \"warning\", \"message\": \"Failed login attempt\", \"source\": { \"ip\": \"203.0.113.42\", \"user_agent\": \"Mozilla/5.0 ...\", \"country\": \"US\" }, \"actor\": { \"user_id\": \"user_abc123\", \"username\": \"john.doe\", \"session_id\": \"sess_xyz789\" }, \"outcome\": { \"status\": \"failure\", \"reason\": \"invalid_password\", \"attempt_number\": 3 }, \"context\": { \"application\": \"web-app\", \"environment\": \"production\", \"version\": \"2.4.1\" } } Centralized Log Aggregation Distribute log collection agents and centralize storage: Filebeat configuration filebeat.inputs: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream id: app-logs paths: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log json.keys_under_root: true json.overwrite_keys: true filebeat.config.modules: path: ${path.config}/modules.d/*.yml reload.enabled: true output.elasticsearch: hosts: [\"https://elasticsearch.internal:9200\"] username: ${ES_USERNAME} password: ${ES_PASSWORD} ssl.verification_mode: certificate SIEM Integration A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: Example: Custom SIEM rule for brute force detection from datetime import datetime, timedelta class BruteForceDetector: def __init__(self, redis_client): self.redis = redis_client self.threshold = 5 # failed attempts self.window = 300 # 5 minutes def process_login_event(self, event): key = f\"brute:{event['source']['ip']}:{event['actor']['username']}\" if event['outcome']['status'] == 'failure': count = self.redis.incr(key) if count == 1: self.redis.expire(key, self.window) if count >= self.threshold: self.trigger_alert({ \"type\": \"brute_force_detected\", \"ip\": event['source']['ip'], \"username\": event['actor']['username'], \"attempts\": count, \"window_seconds\": self.window }) return True return False Log Retention Policies | Log Type | Retention (Hot) | Retention (Cold) | Compliance | |----------|-----------------|------------------|------------| | Application logs | 30 days | 1 year | SOC 2 | | Authentication logs | 90 days | 2 years | SOC 2, GDPR | | Audit trail | 1 year | 7 years | SOX, HIPAA | | Network logs | 30 days | 1 year | PCI DSS | | System logs | 30 days | 1 year | General | Protecting Log Integrity Logs must be tamper-proof to serve as evidence: import hashlib import hmac class SecureLogger: def __init__(self, secret_key): self.secret_key = secret_key self.previous_hash = self.load_last_hash() def secure_log(self, event): Add chained hash for tamper detection event['_prev_hash'] = self.previous_hash event['_timestamp'] = datetime.utcnow().isoformat() Create HMAC signature payload = json.dumps(event, sort_keys=True) signature = hmac.new( self.secret_key.encode(), payload.encode(), hashlib.sha256 ).hexdigest() event['_signature'] = signature self.previous_hash = signature Write to append-only log with open('/var/log/secure/audit.log', 'a') as f: f.write(json.dumps(event) + '\\n') def verify_chain(self): \"\"\"Verify the integrity of the entire log chain.\"\"\" previous_hash = \"\" with open('/var/log/secure/audit.log', 'r') as f: for line in f: event = json.loads(line) expected_sig = hmac.new( self.secret_key.encode(), json.dumps({ **_prev_clean(event), '_prev_hash': previous_hash }, sort_keys=True).encode(), hashlib.sha256 ).hexdigest() if event['_signature'] != expected_sig: return False, f\"Tampered log entry: {event['_timestamp']}\" previous_hash = event['_signature'] return True, \"Log chain intact\" PII and Sensitive Data Redaction Never log sensitive data: import re SENSITIVE_PATTERNS = { 'password': r'\"password\"\\s*:\\s*\"[^\"]*\"', 'credit_card': r'\\b(?:\\d[ -]*?){13,16}\\b', 'ssn': r'\\b\\d{3}-\\d{2}-\\d{4}\\b', 'access_token': r'\"access_token\"\\s*:\\s*\"[^\"]*\"', 'api_key': r'[A-Za-z0-9]{32,}', } def redact_sensitive_data(log_entry): entry = json.dumps(log_entry) for name, pattern in SENSITIVE_PATTERNS.items(): entry = re.sub(pattern, f'\"[{name}_REDACTED]\"', entry) return json.loads(entry) Alerting Strategy Define severity levels and corresponding response actions: | Severity | Examples | Response Time | Notification | |----------|----------|---------------|--------------| | Critical | Data breach, service compromise | 5 minutes | PagerDuty + SMS | | High | Brute force, privilege escalation | 15 minutes | Slack + Email | | Medium | Failed logins, policy violations | 1 hour | Email | | Low | Rate limit triggers, config changes | 24 hours | Dashboard | Summary Implement structured JSON logging for all security-relevant events, centralize logs with tools like the ELK stack, integrate with a SIEM for correlation and alerting, enforce retention policies based on compliance requirements, protect log integrity with chained HMAC signatures, and redact sensitive data before storage. Regular log review and monitoring should be a scheduled operational activity, not an afterthought during incident response."
+      "articleBody": "Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Security Log Management Why Log Management Matters for Security Logs are the definitive record of what happened in your system. When a security incident occurs, logs provide the evidence needed to determine the attack vector, scope of compromise, and affected data. Without proper log management, incident response becomes guesswork, and forensic analysis is impossible. What to Log Authentication Events | Event | Severity | Details to Log | |-------|----------|----------------| | Successful login | Info | User, IP, timestamp, user agent | | Failed login | Warning | Username, IP, timestamp, reason | | Password reset | Info | User, IP, timestamp, method | | Account lockout | High | User, IP, duration | | MFA success/failure | Medium | User, method, IP | | Privilege escalation | Critical | User, from_role, to_role | Data Access Events | Event | Severity | Details to Log | |-------|----------|----------------| | Data export | High | User, records count, destination | | Sensitive data read | Medium | User, resource, action | | Bulk query | High | User, query pattern, result count | | Schema change | Critical | User, object, DDL statement | System Events * Service start/stop * Configuration changes * Permission modifications * Failed access attempts to restricted resources * Certificate expiry warnings * Rate limit triggers Log Structure Use a consistent, structured format for all logs. JSON is the standard for security logs: { \"timestamp\": \"2026-05-11T14:23:45.123Z\", \"event_id\": \"evt_2k3j4h5g6f\", \"category\": \"authentication\", \"action\": \"login_failed\", \"severity\": \"warning\", \"message\": \"Failed login attempt\", \"source\": { \"ip\": \"203.0.113.42\", \"user_agent\": \"Mozilla/5.0 ...\", \"country\": \"US\" }, \"actor\": { \"user_id\": \"user_abc123\", \"username\": \"john.doe\", \"session_id\": \"sess_xyz789\" }, \"outcome\": { \"status\": \"failure\", \"reason\": \"invalid_password\", \"attempt_number\": 3 }, \"context\": { \"application\": \"web-app\", \"environment\": \"production\", \"version\": \"2.4.1\" } } Centralized Log Aggregation Distribute log collection agents and centralize storage: Filebeat configuration filebeat.inputs: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream id: app-logs paths: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log json.keys_under_root: true json.overwrite_keys: true filebeat.config.modules: path: ${path.config}/modules.d/*.yml reload.enabled: true output.elasticsearch: hosts: [\"https://elasticsearch.internal:9200\"] username: ${ES_USERNAME} password: ${ES_PASSWORD} ssl.verification_mode: certificate SIEM Integration A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: Example: Custom SIEM rule for brute force detection from datetime import datetime, timedelta class BruteForceDetector: def __init__(self, redis_client): self.redis = redis_client self.threshold = 5 # failed attempts self.window = 300 # 5 minutes def process_login_event(self, event): key = f\"brute:{event['source']['ip']}:{event['actor']['username']}\" if event['outcome']['status'] == 'failure': count = self.redis.incr(key) if count == 1: self.redis.expire(key, self.window) if count >= self.threshold: self.trigger_alert({ \"type\": \"brute_force_detected\", \"ip\": event['source']['ip'], \"username\": event['actor']['username'], \"attempts\": count, \"window_seconds\": self.window }) return True return False Log Retention Policies | Log Type | Retention (Hot) | Retention (Cold) | Compliance | |----------|-----------------|------------------|------------| | Application logs | 30 days | 1 year | SOC 2 | | Authentication logs | 90 days | 2 years | SOC 2, GDPR | | Audit trail | 1 year | 7 years | SOX, HIPAA | | Network logs | 30 days | 1 year | PCI DSS | | System logs | 30 days | 1 year | General | Protecting Log Integrity Logs must be tamper-proof to serve as evidence: import hashlib import hmac class SecureLogger: def __init__(self, secret_key): self.secret_key = secret_key self.previous_hash = self.load_last_hash() def secure_log(self, event): Add chained hash for tamper detection event['_prev_hash'] = self.previous_hash event['_timestamp'] = datetime.utcnow().isoformat() Create HMAC signature payload = json.dumps(event, sort_keys=True) signature = hmac.new( self.secret_key.encode(), payload.encode(), hashlib.sha256 ).hexdigest() event['_signature'] = signature self.previous_hash = signature Write to append-only log with open('/var/log/secure/audit.log', 'a') as f: f.write(json.dumps(event) + '\\n') def verify_chain(self): \"\"\"Verify the integrity of the entire log chain.\"\"\" previous_hash = \"\" with open('/var/log/secure/audit.log', 'r') as f: for line in f: event = json.loads(line) expected_sig = hmac.new( self.secret_key.encode(), json.dumps({ **_prev_clean(event), '_prev_hash': previous_hash }, sort_keys=True).encode(), hashlib.sha256 ).hexdigest() if event['_signature'] != expected_sig: return False, f\"Tampered log entry: {event['_timestamp']}\" previous_hash = event['_signature'] return True, \"Log chain intact\" PII and Sensitive Data Redaction Never log sensitive data: import re SENSITIVE_PATTERNS = { 'password': r'\"password\"\\s*:\\s*\"[^\"]*\"', 'credit_card': r'\\b(?:\\d[ -]*?){13,16}\\b', 'ssn': r'\\b\\d{3}-\\d{2}-\\d{4}\\b', 'access_token': r'\"access_token\"\\s*:\\s*\"[^\"]*\"', 'api_key': r'[A-Za-z0-9]{32,}', } def redact_sensitive_data(log_entry): entry = json.dumps(log_entry) for name, pattern in SENSITIVE_PATTERNS.items(): entry = re.sub(pattern, f'\"[{name}_REDACTED]\"', entry) return json.loads(entry) Alerting Strategy Define severity levels and corresponding response actions: | Severity | Examples | Response Time | Notification | |----------|----------|---------------|--------------| | Critical | Data breach, service compromise | 5 minutes | PagerDuty + SMS | | High | Brute force, privilege escalation | 15 minutes | Slack + Email | | Medium | Failed logins, policy violations | 1 hour | Email | | Low | Rate limit triggers, config changes | 24 hours | Dashboard | Summary Implement structured JSON logging for all security-relevant events, centralize logs with tools like the ELK stack, integrate with a SIEM for correlation and alerting, enforce retention policies based on compliance requirements, protect log integrity with chained HMAC signatures, and redact sensitive data before storage. Regular log review and monitoring should be a scheduled operational activity, not an afterthought during incident response."
     }
     </script>
     <script type="application/ld+json">
@@ -230,7 +230,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Security Log Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Log Management Matters for Security </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +317,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>What to Log </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -334,7 +375,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Event | Severity | Details to Log | |-------|----------|----------------| | Successful login | Info | User, IP, timestamp, user agent | | Failed login | Warning | Username, IP, timestamp, reason | | Password reset | Info | User, IP, timestamp, method | | Account lockout | High | User, IP, duration | | MFA success/failure | Medium | User, method, IP | | Privilege escalation | Critical | User, from_role, to_role | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -386,7 +433,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Event | Severity | Details to Log | |-------|----------|----------------| | Data export | High | User, records count, destination | | Sensitive data read | Medium | User, resource, action | | Bulk query | High | User, query pattern, result count | | Schema change | Critical | User, object, DDL statement | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -438,7 +491,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Service start/stop</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -490,7 +549,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Permission modifications</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -542,7 +607,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Certificate expiry warnings</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -594,7 +665,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Log Structure </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -646,7 +723,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -698,7 +781,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"event_id": "evt_2k3j4h5g6f",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -750,7 +839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"action": "login_failed",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -802,7 +897,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"message": "Failed login attempt",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -854,7 +955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"ip": "203.0.113.42",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -906,6 +1013,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"country": "US"</p>
 <br>
 <br>
@@ -932,7 +1042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -984,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"user_id": "user_abc123",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1036,6 +1158,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"session_id": "sess_xyz789"</p>
 <br>
 <br>
@@ -1062,7 +1187,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1114,7 +1245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"status": "failure",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1166,7 +1303,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"attempt_number": 3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1218,7 +1361,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"context": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1270,7 +1419,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"environment": "production",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1322,33 +1477,42 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1400,7 +1564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Distribute log collection agents and centralize storage: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,6 +1622,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>filebeat.inputs:</p>
 <br>
 <br>
@@ -1478,7 +1651,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- type: filestream</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1530,6 +1709,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>paths:</p>
 <br>
 <br>
@@ -1556,7 +1738,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- /var/log/app/*.log</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1608,7 +1796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>json.overwrite_keys: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1660,7 +1854,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path: ${path.config}/modules.d/*.yml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1712,7 +1912,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>output.elasticsearch:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1764,7 +1970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>username: ${ES_USERNAME}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1816,7 +2028,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ssl.verification_mode: certificate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1868,7 +2086,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A Security Information and Event Management (SIEM) system correlates logs from multiple sources to detect attacks: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1920,7 +2144,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime, timedelta</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1972,7 +2202,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, redis_client):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2024,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.threshold = 5 # failed attempts</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2076,7 +2318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def process_login_event(self, event):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2128,7 +2376,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if event['outcome']['status'] == 'failure':</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2180,7 +2434,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if count == 1:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2232,7 +2492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if count >= self.threshold:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2284,7 +2550,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "brute_force_detected",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2336,7 +2608,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"username": event['actor']['username'],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2388,7 +2666,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"window_seconds": self.window</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2440,7 +2724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return True</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2492,7 +2782,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Log Retention Policies </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2544,7 +2840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Protecting Log Integrity </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2596,7 +2898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import hashlib</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2648,7 +2956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class SecureLogger:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2700,7 +3014,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.secret_key = secret_key</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2752,7 +3072,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def secure_log(self, event):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2804,7 +3130,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>event['_prev_hash'] = self.previous_hash</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2856,7 +3188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Create HMAC signature</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2908,6 +3246,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>signature = hmac.new(</p>
 <br>
 <br>
@@ -2934,7 +3275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.secret_key.encode(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2986,6 +3333,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hashlib.sha256</p>
 <br>
 <br>
@@ -3012,7 +3362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>).hexdigest()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3064,7 +3420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.previous_hash = signature</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3116,7 +3478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with open('/var/log/secure/audit.log', 'a') as f:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3168,7 +3536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def verify_chain(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3220,7 +3594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>previous_hash = ""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3272,7 +3652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for line in f:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3324,7 +3710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>expected_sig = hmac.new(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3376,7 +3768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>json.dumps({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3428,7 +3826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'_prev_hash': previous_hash</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3480,7 +3884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hashlib.sha256</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3532,7 +3942,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if event['_signature'] != expected_sig:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3584,7 +4000,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>previous_hash = event['_signature']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3636,7 +4058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PII and Sensitive Data Redaction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3688,7 +4116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import re</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3740,7 +4174,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'password': r'"password"\s*:\s*"[^"]*"',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3792,7 +4232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'ssn': r'\b\d{3}-\d{2}-\d{4}\b',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3844,7 +4290,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'api_key': r'[A-Za-z0-9]{32,}',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3896,7 +4348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def redact_sensitive_data(log_entry):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3948,7 +4406,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for name, pattern in SENSITIVE_PATTERNS.items():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4000,7 +4464,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(entry)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4052,7 +4522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Define severity levels and corresponding response actions: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4104,7 +4580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4143,8 +4625,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

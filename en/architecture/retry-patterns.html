@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/retry-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1368",
+      "wordCount": "1452",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/retry-patterns.html"},
-      "articleBody": "Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. Exponential Backoff Exponential backoff is the most basic retry strategy. After a failure, the system waits an increasing amount of time before each subsequent retry. The wait time typically doubles with each attempt: 100ms, 200ms, 400ms, 800ms, and so on, up to a maximum delay. This prevents the retry storm problem, where many clients retry simultaneously and overwhelm an already-stressed service. The formula is straightforward: `delay = base_delay * (2 ^ attempt)`. Most implementations also cap the maximum delay to prevent excessively long waits. Common base delays range from 50ms to 500ms, with maximum delays typically between 10 and 60 seconds. The Importance of Jitter Pure exponential backoff can cause a phenomenon called thundering herd. When a service recovers after an outage, all clients may retry at exactly the same interval, creating a synchronous wave of requests that can overwhelm the service again. Jitter adds randomness to the delay calculation, spreading retry attempts across time. The most effective jitter strategy is \"full jitter\": `delay = random_between(0, min(cap, base * 2 ^ attempt))`. This spreads retries evenly across the interval window. Amazon's AWS SDKs and Google's client libraries use variants of this approach. Full jitter dramatically reduces the probability of synchronized retries. Retry Budgets Not all failures justify retries. A retry budget limits the total number of retries a service will attempt within a time window. When the budget is exhausted, further retries are rejected immediately, and the error propagates to the caller. Retry budgets prevent a cascade of retries from amplifying an outage. A common implementation tracks retry attempts as a fraction of total requests. If retries exceed, say, 20% of requests in a one-minute window, additional retries are blocked. This protects both the calling service (from wasting resources on likely-to-fail requests) and the downstream service (from receiving excessive retry traffic). Circuit Breaker Integration Retries and circuit breakers are complementary patterns with a critical interaction. A circuit breaker should open when retries consistently fail, preventing further retries until the downstream service has time to recover. Without this integration, retries can prevent a circuit breaker from opening by absorbing failures that would otherwise trigger the breaker. The typical pattern is: retry within the circuit breaker's closed state. If retries continue to fail, the circuit breaker opens and subsequent requests fail fast without attempting retries. After the circuit breaker's timeout period, it transitions to half-open, allowing limited retries to test recovery. Idempotency and Retries A fundamental requirement for safe retries is idempotency. If the first request succeeded but the response was lost, a retry will execute the operation again. Idempotent operations are essential. Idempotency keys, idempotent PUT operations, and database upserts are common techniques. Configuration Best Practices Retry policies should be configurable per dependency. A critical database query might justify more aggressive retries than a non-essential analytics call. Monitor retry rates, success rates, and latency impact. If retries account for a significant portion of traffic, investigate the root cause rather than tuning retry parameters. Modern resilience libraries like Resilience4j, Polly (.NET), and Tenacity (Python) provide composable retry, circuit breaker, and bulkhead decorators with built-in metrics. Using these libraries standardizes retry behavior across services and provides consistent observability. Retries are a powerful tool, but they are not a substitute for addressing underlying reliability issues. Used judiciously with backoff, jitter, budgets, and circuit breakers, they make distributed systems gracefully resilient to transient failures."
+      "articleBody": "Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry Patterns Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. Exponential Backoff Exponential backoff is the most basic retry strategy. After a failure, the system waits an increasing amount of time before each subsequent retry. The wait time typically doubles with each attempt: 100ms, 200ms, 400ms, 800ms, and so on, up to a maximum delay. This prevents the retry storm problem, where many clients retry simultaneously and overwhelm an already-stressed service. The formula is straightforward: `delay = base_delay * (2 ^ attempt)`. Most implementations also cap the maximum delay to prevent excessively long waits. Common base delays range from 50ms to 500ms, with maximum delays typically between 10 and 60 seconds. The Importance of Jitter Pure exponential backoff can cause a phenomenon called thundering herd. When a service recovers after an outage, all clients may retry at exactly the same interval, creating a synchronous wave of requests that can overwhelm the service again. Jitter adds randomness to the delay calculation, spreading retry attempts across time. The most effective jitter strategy is \"full jitter\": `delay = random_between(0, min(cap, base * 2 ^ attempt))`. This spreads retries evenly across the interval window. Amazon's AWS SDKs and Google's client libraries use variants of this approach. Full jitter dramatically reduces the probability of synchronized retries. Retry Budgets Not all failures justify retries. A retry budget limits the total number of retries a service will attempt within a time window. When the budget is exhausted, further retries are rejected immediately, and the error propagates to the caller. Retry budgets prevent a cascade of retries from amplifying an outage. A common implementation tracks retry attempts as a fraction of total requests. If retries exceed, say, 20% of requests in a one-minute window, additional retries are blocked. This protects both the calling service (from wasting resources on likely-to-fail requests) and the downstream service (from receiving excessive retry traffic). Circuit Breaker Integration Retries and circuit breakers are complementary patterns with a critical interaction. A circuit breaker should open when retries consistently fail, preventing further retries until the downstream service has time to recover. Without this integration, retries can prevent a circuit breaker from opening by absorbing failures that would otherwise trigger the breaker. The typical pattern is: retry within the circuit breaker's closed state. If retries continue to fail, the circuit breaker opens and subsequent requests fail fast without attempting retries. After the circuit breaker's timeout period, it transitions to half-open, allowing limited retries to test recovery. Idempotency and Retries A fundamental requirement for safe retries is idempotency. If the first request succeeded but the response was lost, a retry will execute the operation again. Idempotent operations are essential. Idempotency keys, idempotent PUT operations, and database upserts are common techniques. Configuration Best Practices Retry policies should be configurable per dependency. A critical database query might justify more aggressive retries than a non-essential analytics call. Monitor retry rates, success rates, and latency impact. If retries account for a significant portion of traffic, investigate the root cause rather than tuning retry parameters. Modern resilience libraries like Resilience4j, Polly (.NET), and Tenacity (Python) provide composable retry, circuit breaker, and bulkhead decorators with built-in metrics. Using these libraries standardizes retry behavior across services and provides consistent observability. Retries are a powerful tool, but they are not a substitute for addressing underlying reliability issues. Used judiciously with backoff, jitter, budgets, and circuit breakers, they make distributed systems gracefully resilient to transient failures."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Retry Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Retry patterns are fundamental to building resilient distributed systems. Network failures, transient service unavailability, and resource contention are inevitable in any distributed architecture. A well-designed retry mechanism can gracefully handle these failures without overwhelming downstream services or degrading user experience. This article covers exponential backoff, jitter, retry budgets, and integration with circuit breakers. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Exponential backoff is the most basic retry strategy. After a failure, the system waits an increasing amount of time before each subsequent retry. The wait time typically doubles with each attempt: 100ms, 200ms, 400ms, 800ms, and so on, up to a maximum delay. This prevents the retry storm problem, where many clients retry simultaneously and overwhelm an already-stressed service. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The Importance of Jitter </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -296,7 +337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The most effective jitter strategy is "full jitter": `delay = random_between(0, min(cap, base * 2 ^ attempt))`. This spreads retries evenly across the interval window. Amazon's AWS SDKs and Google's client libraries use variants of this approach. Full jitter dramatically reduces the probability of synchronized retries. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Not all failures justify retries. A retry budget limits the total number of retries a service will attempt within a time window. When the budget is exhausted, further retries are rejected immediately, and the error propagates to the caller. Retry budgets prevent a cascade of retries from amplifying an outage. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -376,7 +429,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Circuit Breaker Integration </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -416,7 +475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The typical pattern is: retry within the circuit breaker's closed state. If retries continue to fail, the circuit breaker opens and subsequent requests fail fast without attempting retries. After the circuit breaker's timeout period, it transitions to half-open, allowing limited retries to test recovery. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -456,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A fundamental requirement for safe retries is idempotency. If the first request succeeded but the response was lost, a retry will execute the operation again. Idempotent operations are essential. Idempotency keys, idempotent PUT operations, and database upserts are common techniques. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -496,7 +567,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Retry policies should be configurable per dependency. A critical database query might justify more aggressive retries than a non-essential analytics call. Monitor retry rates, success rates, and latency impact. If retries account for a significant portion of traffic, investigate the root cause rather than tuning retry parameters. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -536,6 +613,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Retries are a powerful tool, but they are not a substitute for addressing underlying reliability issues. Used judiciously with backoff, jitter, budgets, and circuit breakers, they make distributed systems gracefully resilient to transient failures.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -549,8 +629,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
-      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

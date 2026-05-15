@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/kubernetes-security.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4397",
+      "wordCount": "5087",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/kubernetes-security.html"},
-      "articleBody": "Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Challenges Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection. RBAC Configuration Implement least-privilege RBAC: apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata: namespace: development name: pod-reader rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [\"\"] resources: [\"pods\", \"pods/log\"] verbs: [\"get\", \"watch\", \"list\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- apiVersion: rbac.authorization.k8s.io/v1 kind: RoleBinding metadata: namespace: development name: read-pods subjects: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount name: developer-sa namespace: development roleRef: kind: Role name: pod-reader apiGroup: rbac.authorization.k8s.io ClusterRole for cluster-wide resources: apiVersion: rbac.authorization.k8s.io/v1 kind: ClusterRole metadata: name: metrics-reader rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: [\"/metrics\"] verbs: [\"get\"] Pod Security Standards Enforce Pod Security Standards with admission controllers: Pod Security Admission apiVersion: pods-security.admission.config.k8s.io/v1 kind: PodSecurityConfiguration defaults: enforce: \"restricted\" enforce-version: \"latest\" audit: \"restricted\" audit-version: \"latest\" warn: \"restricted\" warn-version: \"latest\" exemptions: namespaces: [\"kube-system\", \"kube-public\"] Pod Security Standards - Restricted level apiVersion: v1 kind: Pod metadata: name: secure-pod labels: pod-security.kubernetes.io/enforce: restricted spec: securityContext: runAsNonRoot: true seccompProfile: type: RuntimeDefault containers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app image: myapp:latest securityContext: allowPrivilegeEscalation: false capabilities: drop: [\"ALL\"] readOnlyRootFilesystem: true runAsNonRoot: true runAsUser: 1000 Network Policies Isolate workloads with network policies: apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-network-policy namespace: production spec: podSelector: matchLabels: app: api policyTypes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress ingress: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector: matchLabels: name: frontend ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP port: 8080 egress: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector: matchLabels: app: database ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP port: 5432 Audit Logging Enable and monitor audit logs: audit-policy.yaml apiVersion: audit.k8s.io/v1 kind: Policy rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse users: [\"system:admin\"] resources: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: \"\" resources: [\"secrets\", \"configmaps\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata verbs: [\"create\", \"delete\", \"patch\", \"update\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None users: [\"system:kube-proxy\"] verbs: [\"watch\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None requestSources: [\"controller\"] Audit log analyzer import json from collections import Counter def analyze_audit_logs(log_lines): suspicious_activities = [] for line in log_lines: event = json.loads(line) Detect secret access patterns if event.get(\"objectRef\", {}).get(\"resource\") == \"secrets\": if event.get(\"verb\") in [\"get\", \"list\"]: suspicious_activities.append({ \"type\": \"secret_access\", \"user\": event.get(\"user\", {}).get(\"username\"), \"count\": 1 }) Detect RBAC changes if event.get(\"objectRef\", {}).get(\"apiGroup\") == \"rbac.authorization.k8s.io\": suspicious_activities.append({ \"type\": \"rbac_change\", \"user\": event.get(\"user\", {}).get(\"username\"), \"verb\": event.get(\"verb\") }) return Counter(str(a) for a in suspicious_activities) Conclusion Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns."
+      "articleBody": "Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Kubernetes Security Challenges Kubernetes introduces a large attack surface: the API server, etcd, kubelets, and container runtime all need protection. RBAC Configuration Implement least-privilege RBAC: apiVersion: rbac.authorization.k8s.io/v1 kind: Role metadata: namespace: development name: pod-reader rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [\"\"] resources: [\"pods\", \"pods/log\"] verbs: [\"get\", \"watch\", \"list\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--- apiVersion: rbac.authorization.k8s.io/v1 kind: RoleBinding metadata: namespace: development name: read-pods subjects: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount name: developer-sa namespace: development roleRef: kind: Role name: pod-reader apiGroup: rbac.authorization.k8s.io ClusterRole for cluster-wide resources: apiVersion: rbac.authorization.k8s.io/v1 kind: ClusterRole metadata: name: metrics-reader rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: [\"/metrics\"] verbs: [\"get\"] Pod Security Standards Enforce Pod Security Standards with admission controllers: Pod Security Admission apiVersion: pods-security.admission.config.k8s.io/v1 kind: PodSecurityConfiguration defaults: enforce: \"restricted\" enforce-version: \"latest\" audit: \"restricted\" audit-version: \"latest\" warn: \"restricted\" warn-version: \"latest\" exemptions: namespaces: [\"kube-system\", \"kube-public\"] Pod Security Standards - Restricted level apiVersion: v1 kind: Pod metadata: name: secure-pod labels: pod-security.kubernetes.io/enforce: restricted spec: securityContext: runAsNonRoot: true seccompProfile: type: RuntimeDefault containers: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app image: myapp:latest securityContext: allowPrivilegeEscalation: false capabilities: drop: [\"ALL\"] readOnlyRootFilesystem: true runAsNonRoot: true runAsUser: 1000 Network Policies Isolate workloads with network policies: apiVersion: networking.k8s.io/v1 kind: NetworkPolicy metadata: name: api-network-policy namespace: production spec: podSelector: matchLabels: app: api policyTypes: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress ingress: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector: matchLabels: name: frontend ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP port: 8080 egress: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector: matchLabels: app: database ports: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP port: 5432 Audit Logging Enable and monitor audit logs: audit-policy.yaml apiVersion: audit.k8s.io/v1 kind: Policy rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse users: [\"system:admin\"] resources: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: \"\" resources: [\"secrets\", \"configmaps\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata verbs: [\"create\", \"delete\", \"patch\", \"update\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None users: [\"system:kube-proxy\"] verbs: [\"watch\"] \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None requestSources: [\"controller\"] Audit log analyzer import json from collections import Counter def analyze_audit_logs(log_lines): suspicious_activities = [] for line in log_lines: event = json.loads(line) Detect secret access patterns if event.get(\"objectRef\", {}).get(\"resource\") == \"secrets\": if event.get(\"verb\") in [\"get\", \"list\"]: suspicious_activities.append({ \"type\": \"secret_access\", \"user\": event.get(\"user\", {}).get(\"username\"), \"count\": 1 }) Detect RBAC changes if event.get(\"objectRef\", {}).get(\"apiGroup\") == \"rbac.authorization.k8s.io\": suspicious_activities.append({ \"type\": \"rbac_change\", \"user\": event.get(\"user\", {}).get(\"username\"), \"verb\": event.get(\"verb\") }) return Counter(str(a) for a in suspicious_activities) Conclusion Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Kubernetes Security</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Kubernetes Security Challenges </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RBAC Configuration </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Implement least-privilege RBAC: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kind: Role</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>namespace: development</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,6 +424,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rules:</p>
 <br>
 <br>
@@ -397,7 +450,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [""]</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- apiGroups: [""]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,6 +502,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>verbs: ["get", "watch", "list"]</p>
 <br>
 <br>
@@ -466,7 +528,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -490,6 +558,9 @@
 <br>
 <br>
 <p>apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -535,6 +606,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>metadata:</p>
 <br>
 <br>
@@ -558,7 +632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>namespace: development</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -604,6 +684,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>subjects:</p>
 <br>
 <br>
@@ -627,7 +710,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kind: ServiceAccount</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,7 +762,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>namespace: development</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -719,7 +814,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kind: Role</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -765,7 +866,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiGroup: rbac.authorization.k8s.io</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -811,7 +918,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: rbac.authorization.k8s.io/v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -857,7 +970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>metadata:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -903,6 +1022,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rules:</p>
 <br>
 <br>
@@ -926,7 +1048,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: ["/metrics"]</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- nonResourceURLs: ["/metrics"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -972,6 +1100,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pod Security Standards </p>
 <br>
 <br>
@@ -992,7 +1123,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Enforce Pod Security Standards with admission controllers: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1038,7 +1175,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: pods-security.admission.config.k8s.io/v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1084,7 +1227,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>defaults:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1130,7 +1279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>enforce-version: "latest"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1176,7 +1331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>audit-version: "latest"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1222,7 +1383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>warn-version: "latest"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1268,7 +1435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>namespaces: ["kube-system", "kube-public"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1314,7 +1487,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1360,7 +1539,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>metadata:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1406,7 +1591,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>labels:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spec:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1498,7 +1695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>runAsNonRoot: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1544,7 +1747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>type: RuntimeDefault</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1590,7 +1799,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: app</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1636,7 +1851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>securityContext:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1682,7 +1903,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>capabilities:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1728,7 +1955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>readOnlyRootFilesystem: true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1774,7 +2007,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>runAsUser: 1000</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1817,7 +2056,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Isolate workloads with network policies: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1863,7 +2108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kind: NetworkPolicy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1909,7 +2160,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name: api-network-policy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1955,7 +2212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>spec:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2264,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>matchLabels:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2047,6 +2316,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>policyTypes:</p>
 <br>
 <br>
@@ -2070,7 +2342,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Ingress</p>
 <br>
 <br>
 <br>
@@ -2093,7 +2368,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Egress</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2139,7 +2420,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- from:</p>
 <br>
 <br>
 <br>
@@ -2162,7 +2446,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- namespaceSelector:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2186,6 +2476,9 @@
 <br>
 <br>
 <p>matchLabels:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2231,6 +2524,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ports:</p>
 <br>
 <br>
@@ -2254,7 +2550,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2300,6 +2602,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>egress:</p>
 <br>
 <br>
@@ -2323,7 +2628,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- to:</p>
 <br>
 <br>
 <br>
@@ -2346,7 +2654,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- podSelector:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2392,7 +2706,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app: database</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,7 +2758,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- protocol: TCP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2484,6 +2810,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Audit Logging </p>
 <br>
 <br>
@@ -2504,7 +2833,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Enable and monitor audit logs: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2550,7 +2885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>apiVersion: audit.k8s.io/v1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2596,6 +2937,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rules:</p>
 <br>
 <br>
@@ -2619,7 +2963,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: RequestResponse</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2665,6 +3015,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resources:</p>
 <br>
 <br>
@@ -2688,7 +3041,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: ""</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- group: ""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2734,7 +3093,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: Metadata</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2780,7 +3145,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2826,6 +3197,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>verbs: ["watch"]</p>
 <br>
 <br>
@@ -2849,7 +3223,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- level: None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2895,7 +3275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Audit log analyzer</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2941,7 +3327,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from collections import Counter</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2987,7 +3379,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>suspicious_activities = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3033,7 +3431,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>event = json.loads(line)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3079,7 +3483,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if event.get("objectRef", {}).get("resource") == "secrets":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3125,7 +3535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>suspicious_activities.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3171,7 +3587,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"user": event.get("user", {}).get("username"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3217,7 +3639,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3263,7 +3691,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if event.get("objectRef", {}).get("apiGroup") == "rbac.authorization.k8s.io":</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3309,7 +3743,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "rbac_change",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3355,7 +3795,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"verb": event.get("verb")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3401,7 +3847,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return Counter(str(a) for a in suspicious_activities)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3444,6 +3896,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Kubernetes security requires a layered approach. Lock down RBAC with least privilege, enforce Pod Security Standards, isolate workloads with network policies, and enable comprehensive audit logging. Use admission controllers to enforce policies at deploy time. Monitor audit logs for suspicious activity patterns.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3457,8 +3912,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/redis-caching-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1308",
+      "wordCount": "1447",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/redis-caching-patterns.html"},
-      "articleBody": "Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis as Cache Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types. Cache-Aside Pattern Application checks cache first, falls back to database: def get_user(user_id): cache_key = f\"user:{user_id}\" cached = redis.get(cache_key) if cached: return json.loads(cached) user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: redis.setex(cache_key, 3600, json.dumps(user)) return user Read-Through Cache sits between app and database, auto-loading on miss. Logic is in the cache layer, not the application. Write-Through Data written to cache first, then database: def update_user(user_id, data): cache_key = f\"user:{user_id}\" redis.setex(cache_key, 3600, json.dumps(data)) db.execute(\"UPDATE users SET name = %s WHERE id = %s\", [data['name'], user_id]) Write-Behind Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails. Invalidation Strategies | Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches | Rate Limiting with Sorted Sets def is_rate_limited(user_id, max_requests=100, window=60): key = f\"ratelimit:{user_id}\" now = time.time() redis.zremrangebyscore(key, 0, now - window) if redis.zcard(key) >= max_requests: return True redis.zadd(key, {now: now}) redis.expire(key, window) return False Conclusion Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance."
+      "articleBody": "Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis Caching Patterns Redis as Cache Redis is an in-memory data store that excels as a cache due to sub-millisecond latency and rich data types. Cache-Aside Pattern Application checks cache first, falls back to database: def get_user(user_id): cache_key = f\"user:{user_id}\" cached = redis.get(cache_key) if cached: return json.loads(cached) user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: redis.setex(cache_key, 3600, json.dumps(user)) return user Read-Through Cache sits between app and database, auto-loading on miss. Logic is in the cache layer, not the application. Write-Through Data written to cache first, then database: def update_user(user_id, data): cache_key = f\"user:{user_id}\" redis.setex(cache_key, 3600, json.dumps(data)) db.execute(\"UPDATE users SET name = %s WHERE id = %s\", [data['name'], user_id]) Write-Behind Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails. Invalidation Strategies | Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches | Rate Limiting with Sorted Sets def is_rate_limited(user_id, max_requests=100, window=60): key = f\"ratelimit:{user_id}\" now = time.time() redis.zremrangebyscore(key, 0, now - window) if redis.zcard(key) >= max_requests: return True redis.zadd(key, {now: now}) redis.expire(key, window) return False Conclusion Use cache-aside as the default pattern. Always set TTLs to prevent memory exhaustion. Monitor cache hit rates. Implement mutex locking for stampede prevention. Pipeline batch operations for performance."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Redis Caching Patterns</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Redis as Cache </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache-Aside Pattern </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application checks cache first, falls back to database: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cache_key = f"user:{user_id}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if cached:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user = db.query("SELECT * FROM users WHERE id = %s", [user_id])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -420,7 +476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis.setex(cache_key, 3600, json.dumps(user))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +528,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Read-Through </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -506,6 +574,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write-Through </p>
 <br>
 <br>
@@ -526,7 +597,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Data written to cache first, then database: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -572,7 +649,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cache_key = f"user:{user_id}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -618,7 +701,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>db.execute("UPDATE users SET name = %s WHERE id = %s", [data['name'], user_id])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -661,7 +750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Write to cache immediately, batch database writes asynchronously. Fastest writes but risk of data loss if cache fails. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -701,6 +796,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Strategy | Approach | Best For | |----------|----------|----------| | TTL | Auto-expire | Most cases | | Key deletion | Delete on update | Write-through | | Versioned | Include version in key | Schema changes | | Pub/sub | Notify all instances | Distributed caches | </p>
 <br>
 <br>
@@ -721,7 +819,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rate Limiting with Sorted Sets </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -767,7 +871,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>key = f"ratelimit:{user_id}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -813,7 +923,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis.zremrangebyscore(key, 0, now - window)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -859,7 +975,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return True</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -905,7 +1027,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis.expire(key, window)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -951,7 +1079,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -984,8 +1118,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

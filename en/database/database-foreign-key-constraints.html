@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-foreign-key-constraints.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "700",
+      "wordCount": "765",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html"},
-      "articleBody": "Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone. Referential Actions ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains. ON DELETE SET NULL sets the foreign key column to NULL when the parent is deleted. Use when the relationship is optional and child rows should survive parent deletion. ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default\u2014it prevents accidental data loss. Performance Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations. Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does. Practical Guidelines Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations."
+      "articleBody": "Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone. Referential Actions ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains. ON DELETE SET NULL sets the foreign key column to NULL when the parent is deleted. Use when the relationship is optional and child rows should survive parent deletion. ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default\u2014it prevents accidental data loss. Performance Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations. Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does. Practical Guidelines Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations."
     }
     </script>
     <script type="application/ld+json">
@@ -173,7 +173,36 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Foreign Key Constraints: Referential Integrity in Practice</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -219,7 +248,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -265,7 +300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default—it prevents accidental data loss.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -311,7 +352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -357,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Practical Guidelines</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -393,8 +446,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

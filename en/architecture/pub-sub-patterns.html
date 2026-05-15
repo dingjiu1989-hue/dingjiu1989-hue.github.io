@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/pub-sub-patterns.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "864",
+      "wordCount": "936",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/pub-sub-patterns.html"},
-      "articleBody": "Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously. Core Concepts A pub-sub system has three components: publishers that produce events, a message broker that routes events, and subscribers that consume events. Events are categorized into topics or channels. Subscribers register interest in specific topics and receive all events published to those topics. Message Brokers Apache Kafka is the most popular pub-sub system for high-throughput event streaming. Topics are partitioned for parallelism, and consumers organize into consumer groups for load-balanced consumption. Kafka retains events even after consumption, enabling replay and reprocessing. Redis Pub-Sub is lightweight but does not persist messages. If a subscriber is offline, messages are lost. This is suitable for real-time notifications where message loss is acceptable. Google Pub-Sub and AWS SNS provide managed pub-sub services with automatic scaling, dead letter queues, and exactly-once delivery guarantees. At-Least-Once vs Exactly-Once Most pub-sub systems provide at-least-once delivery. Subscribers must handle duplicate events through idempotent processing. Exactly-once delivery requires coordination between the broker, producer, and consumer\u2014achievable with Kafka exactly-once semantics but with performance overhead. Pattern Variations Topic-based pub-sub routes events by topic name. Content-based pub-sub routes events based on message content evaluation. Hybrid systems combine both approaches for flexible routing. Best Practices Design event schemas for backward compatibility. Use schema registries to manage schema evolution. Monitor subscription lag to detect consumer issues. Implement circuit breakers to handle slow consumers gracefully. Test subscriber failure scenarios to ensure system resilience."
+      "articleBody": "Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication Pub-Sub Patterns: Event-Driven Communication The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously. Core Concepts A pub-sub system has three components: publishers that produce events, a message broker that routes events, and subscribers that consume events. Events are categorized into topics or channels. Subscribers register interest in specific topics and receive all events published to those topics. Message Brokers Apache Kafka is the most popular pub-sub system for high-throughput event streaming. Topics are partitioned for parallelism, and consumers organize into consumer groups for load-balanced consumption. Kafka retains events even after consumption, enabling replay and reprocessing. Redis Pub-Sub is lightweight but does not persist messages. If a subscriber is offline, messages are lost. This is suitable for real-time notifications where message loss is acceptable. Google Pub-Sub and AWS SNS provide managed pub-sub services with automatic scaling, dead letter queues, and exactly-once delivery guarantees. At-Least-Once vs Exactly-Once Most pub-sub systems provide at-least-once delivery. Subscribers must handle duplicate events through idempotent processing. Exactly-once delivery requires coordination between the broker, producer, and consumer\u2014achievable with Kafka exactly-once semantics but with performance overhead. Pattern Variations Topic-based pub-sub routes events by topic name. Content-based pub-sub routes events based on message content evaluation. Hybrid systems combine both approaches for flexible routing. Best Practices Design event schemas for backward compatibility. Use schema registries to manage schema evolution. Monitor subscription lag to detect consumer issues. Implement circuit breakers to handle slow consumers gracefully. Test subscriber failure scenarios to ensure system resilience."
     }
     </script>
     <script type="application/ld+json">
@@ -173,7 +173,36 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Pub-Sub Patterns: Event-Driven Communication</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The publish-subscribe (pub-sub) pattern enables one-to-many communication between services without direct coupling. Publishers emit events without knowing which subscribers will receive them. Subscribers express interest in certain events and receive them asynchronously.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -219,7 +248,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A pub-sub system has three components: publishers that produce events, a message broker that routes events, and subscribers that consume events. Events are categorized into topics or channels. Subscribers register interest in specific topics and receive all events published to those topics.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -265,7 +300,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Apache Kafka is the most popular pub-sub system for high-throughput event streaming. Topics are partitioned for parallelism, and consumers organize into consumer groups for load-balanced consumption. Kafka retains events even after consumption, enabling replay and reprocessing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -311,7 +352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Google Pub-Sub and AWS SNS provide managed pub-sub services with automatic scaling, dead letter queues, and exactly-once delivery guarantees.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -357,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Most pub-sub systems provide at-least-once delivery. Subscribers must handle duplicate events through idempotent processing. Exactly-once delivery requires coordination between the broker, producer, and consumer—achievable with Kafka exactly-once semantics but with performance overhead.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -403,7 +456,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Topic-based pub-sub routes events by topic name. Content-based pub-sub routes events based on message content evaluation. Hybrid systems combine both approaches for flexible routing.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -449,6 +508,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Design event schemas for backward compatibility. Use schema registries to manage schema evolution. Monitor subscription lag to detect consumer issues. Implement circuit breakers to handle slow consumers gracefully. Test subscriber failure scenarios to ensure system resilience.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -462,8 +524,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
-      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

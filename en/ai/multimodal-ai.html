@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multimodal-ai.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "8526",
+      "wordCount": "9817",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/multimodal-ai-applications-in-2026-41kp"
       ],
-      "articleBody": "Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Introduction Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications. Vision-Language Models Modern vision-language models (VLMs) accept images and text together in a single context window: from anthropic import Anthropic client = Anthropic(api_key=\"sk-...\") Analyze an image with text instructions response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"image/png\", \"data\": screenshot_b64, }, }, { \"type\": \"text\", \"text\": ( \"Analyze this UI screenshot. Identify: \" \"1. All interactive elements \" \"2. Accessibility issues \" \"3. Loading states \" \"4. Error handling patterns \" ), }, ], }], ) The model \"sees\" the image and processes it jointly with text analysis = response.content[0].text Document AI and OCR Extract structured data from complex documents: async def process_invoice(invoice_path: str) -> dict: \"\"\"Extract structured data from invoice images/PDFs.\"\"\" import base64 with open(invoice_path, \"rb\") as f: image_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": image_data, }}, {\"type\": \"text\", \"text\": \"\"\" Extract the following fields from this invoice as JSON: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total}) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency \"\"\"}, ], }], response_format={\"type\": \"json_object\"}, ) return json.loads(response.content[0].text) Speech-to-Text and Audio Understanding Multimodal models now handle audio directly without separate ASR pipelines: import asyncio async def analyze_call_recording(audio_path: str) -> dict: \"\"\"Analyze a customer support call recording.\"\"\" import base64 with open(audio_path, \"rb\") as f: audio_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/mp3\", \"data\": audio_data, }, }, { \"type\": \"text\", \"text\": \"\"\" Analyze this customer support call: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements \"\"\", }, ], }], ) return parse_analysis(response.content[0].text) Multimodal RAG Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables: import chromadb from sentence_transformers import SentenceTransformer import numpy as np class MultimodalRAG: def __init__(self): self.text_encoder = SentenceTransformer(\"all-MiniLM-L6-v2\") self.image_encoder = SentenceTransformer( \"clip-ViT-B-32-multilingual-v1\" ) self.collection = chromadb.Client().create_collection( \"multimodal_knowledge_base\" ) def index_document( self, doc_id: str, text: str, images: List[np.ndarray], tables: List[dict], ): embeddings = [] Index text chunks text_chunks = self._chunk_text(text) text_embeddings = self.text_encoder.encode(text_chunks) embeddings.extend(text_embeddings) Index images for img in images: img_embedding = self.image_encoder.encode(img) embeddings.append(img_embedding) Index with metadata about modality self.collection.add( embeddings=embeddings, ids=[f\"{doc_id}_{i}\" for i in range(len(embeddings))], metadatas=[ {\"modality\": \"text\", \"doc_id\": doc_id}, *[{\"modality\": \"image\", \"doc_id\": doc_id} for _ in images], ], ) def query(self, question: str, top_k: int = 5) -> List[dict]: Encode query query_embedding = self.text_encoder.encode(question) Retrieve across all modalities results = self.collection.query( query_embeddings=[query_embedding], n_results=top_k, ) return results Audio Transcription and Analysis Pipeline For production audio processing, combine streaming with multimodal analysis: class AudioProcessingPipeline: def __init__(self): self.buffer_duration = 300 # 5-minute chunks self.overlap = 30 # 30-second overlap for continuity async def process_stream(self, audio_stream: AsyncGenerator[bytes]): buffer = [] buffer_duration = 0 async for chunk in audio_stream: buffer.append(chunk) buffer_duration += self._chunk_duration(chunk) if buffer_duration >= self.buffer_duration: Process buffer segment = b\"\".join(buffer) Real-time transcription + analysis result = await self._analyze_segment(segment) Extract action items, sentiment, entities actions = self._extract_actions(result) if actions: await self._route_actions(actions) Keep overlap for continuity overlap_bytes = int( len(segment) * (self.overlap / buffer_duration) ) buffer = [segment[-overlap_bytes:]] buffer_duration = self.overlap async def _analyze_segment(self, audio_bytes: bytes) -> dict: response = client.messages.create( model=\"claude-sonnet-4-20260512\", messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/wav\", \"data\": base64.b64encode(audio_bytes).decode(), }}, {\"type\": \"text\", \"text\": \"\"\" Transcribe and analyze this audio segment: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention \"\"\"}, ], }], ) return response Use Cases and Limitations | Use Case | Capability | Current Limitations | |---|---|---| | Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy | | UI testing | Visual regression + semantic understanding | Dynamic content handling | | Content moderation | Analyze text + images together | Cultural context subtlety | | Accessibility | Generate alt text, describe scenes | Real-time video processing latency | | Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk | | Video understanding | Summarize meetings, detect events | Long video context limits | Production Considerations Multimodal model selection criteria selection: latency: text_only: \" text+image: \" audio_input: \" video_analysis: \" cost: text: \"Baseline\" text+image: \"3-5x text cost\" audio: \"5-10x text cost (per minute)\" video: \"10-20x text cost (per minute)\" context_window: text: \"200K tokens\" text+image: \"~100 images or 1 hour audio\" video: \"Limited by token count (~10-15 min)\" accuracy: OCR: \">99% on printed, >90% on handwriting\" scene_description: \"Good on common scenes, poor on niche domains\" audio_transcription: \">95% WER on clean speech, >80% on accented\" Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines."
+      "articleBody": "Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Multimodal AI Applications in 2026 Introduction Multimodal AI models that understand and generate across text, images, audio, and video have moved from research papers to production APIs. By 2026, models like GPT-4o, Claude 3.5 Sonnet, Gemini 2.0, and open-source alternatives support native multimodal inputs, enabling applications that were impractical with separate unimodal pipelines. This article covers current capabilities, architectures, and production patterns for multimodal AI applications. Vision-Language Models Modern vision-language models (VLMs) accept images and text together in a single context window: from anthropic import Anthropic client = Anthropic(api_key=\"sk-...\") Analyze an image with text instructions response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=1024, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"image/png\", \"data\": screenshot_b64, }, }, { \"type\": \"text\", \"text\": ( \"Analyze this UI screenshot. Identify: \" \"1. All interactive elements \" \"2. Accessibility issues \" \"3. Loading states \" \"4. Error handling patterns \" ), }, ], }], ) The model \"sees\" the image and processes it jointly with text analysis = response.content[0].text Document AI and OCR Extract structured data from complex documents: async def process_invoice(invoice_path: str) -> dict: \"\"\"Extract structured data from invoice images/PDFs.\"\"\" import base64 with open(invoice_path, \"rb\") as f: image_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"image\", \"source\": { \"type\": \"base64\", \"media_type\": \"application/pdf\", \"data\": image_data, }}, {\"type\": \"text\", \"text\": \"\"\" Extract the following fields from this invoice as JSON: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total}) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency \"\"\"}, ], }], response_format={\"type\": \"json_object\"}, ) return json.loads(response.content[0].text) Speech-to-Text and Audio Understanding Multimodal models now handle audio directly without separate ASR pipelines: import asyncio async def analyze_call_recording(audio_path: str) -> dict: \"\"\"Analyze a customer support call recording.\"\"\" import base64 with open(audio_path, \"rb\") as f: audio_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.messages.create( model=\"claude-sonnet-4-20260512\", max_tokens=2048, messages=[{ \"role\": \"user\", \"content\": [ { \"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/mp3\", \"data\": audio_data, }, }, { \"type\": \"text\", \"text\": \"\"\" Analyze this customer support call: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial) 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent) 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?) 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements \"\"\", }, ], }], ) return parse_analysis(response.content[0].text) Multimodal RAG Traditional RAG is text-only. Multimodal RAG retrieves and reasons across images, diagrams, and tables: import chromadb from sentence_transformers import SentenceTransformer import numpy as np class MultimodalRAG: def __init__(self): self.text_encoder = SentenceTransformer(\"all-MiniLM-L6-v2\") self.image_encoder = SentenceTransformer( \"clip-ViT-B-32-multilingual-v1\" ) self.collection = chromadb.Client().create_collection( \"multimodal_knowledge_base\" ) def index_document( self, doc_id: str, text: str, images: List[np.ndarray], tables: List[dict], ): embeddings = [] Index text chunks text_chunks = self._chunk_text(text) text_embeddings = self.text_encoder.encode(text_chunks) embeddings.extend(text_embeddings) Index images for img in images: img_embedding = self.image_encoder.encode(img) embeddings.append(img_embedding) Index with metadata about modality self.collection.add( embeddings=embeddings, ids=[f\"{doc_id}_{i}\" for i in range(len(embeddings))], metadatas=[ {\"modality\": \"text\", \"doc_id\": doc_id}, *[{\"modality\": \"image\", \"doc_id\": doc_id} for _ in images], ], ) def query(self, question: str, top_k: int = 5) -> List[dict]: Encode query query_embedding = self.text_encoder.encode(question) Retrieve across all modalities results = self.collection.query( query_embeddings=[query_embedding], n_results=top_k, ) return results Audio Transcription and Analysis Pipeline For production audio processing, combine streaming with multimodal analysis: class AudioProcessingPipeline: def __init__(self): self.buffer_duration = 300 # 5-minute chunks self.overlap = 30 # 30-second overlap for continuity async def process_stream(self, audio_stream: AsyncGenerator[bytes]): buffer = [] buffer_duration = 0 async for chunk in audio_stream: buffer.append(chunk) buffer_duration += self._chunk_duration(chunk) if buffer_duration >= self.buffer_duration: Process buffer segment = b\"\".join(buffer) Real-time transcription + analysis result = await self._analyze_segment(segment) Extract action items, sentiment, entities actions = self._extract_actions(result) if actions: await self._route_actions(actions) Keep overlap for continuity overlap_bytes = int( len(segment) * (self.overlap / buffer_duration) ) buffer = [segment[-overlap_bytes:]] buffer_duration = self.overlap async def _analyze_segment(self, audio_bytes: bytes) -> dict: response = client.messages.create( model=\"claude-sonnet-4-20260512\", messages=[{ \"role\": \"user\", \"content\": [ {\"type\": \"audio\", \"source\": { \"type\": \"base64\", \"media_type\": \"audio/wav\", \"data\": base64.b64encode(audio_bytes).decode(), }}, {\"type\": \"text\", \"text\": \"\"\" Transcribe and analyze this audio segment: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention \"\"\"}, ], }], ) return response Use Cases and Limitations | Use Case | Capability | Current Limitations | |---|---|---| | Document processing | Extract data from receipts, invoices, forms | Handwriting recognition accuracy | | UI testing | Visual regression + semantic understanding | Dynamic content handling | | Content moderation | Analyze text + images together | Cultural context subtlety | | Accessibility | Generate alt text, describe scenes | Real-time video processing latency | | Medical imaging | Analyze X-rays, MRIs with clinical notes | Regulatory approval, hallucination risk | | Video understanding | Summarize meetings, detect events | Long video context limits | Production Considerations Multimodal model selection criteria selection: latency: text_only: \" text+image: \" audio_input: \" video_analysis: \" cost: text: \"Baseline\" text+image: \"3-5x text cost\" audio: \"5-10x text cost (per minute)\" video: \"10-20x text cost (per minute)\" context_window: text: \"200K tokens\" text+image: \"~100 images or 1 hour audio\" video: \"Limited by token count (~10-15 min)\" accuracy: OCR: \">99% on printed, >90% on handwriting\" scene_description: \"Good on common scenes, poor on niche domains\" audio_transcription: \">95% WER on clean speech, >80% on accented\" Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>Multimodal AI Applications in 2026</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Vision-Language Models</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -308,7 +346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from anthropic import Anthropic</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Analyze an image with text instructions</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -412,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -464,7 +520,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages=[{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -516,6 +578,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": [</p>
 <br>
 <br>
@@ -542,7 +607,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -594,6 +665,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"source": {</p>
 <br>
 <br>
@@ -620,7 +694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "base64",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -672,6 +752,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"data": screenshot_b64,</p>
 <br>
 <br>
@@ -698,33 +781,42 @@
 <br>
 <br>
 <br>
-<p>},</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -776,7 +868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "text",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -828,7 +926,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Analyze this UI screenshot. Identify: "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -880,7 +984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"2. Accessibility issues "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -932,7 +1042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"4. Error handling patterns "</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -984,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1036,6 +1158,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}],</p>
 <br>
 <br>
@@ -1062,7 +1187,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1114,7 +1245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>analysis = response.content[0].text</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1166,7 +1303,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Extract structured data from complex documents:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1218,6 +1361,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Extract structured data from invoice images/PDFs."""</p>
 <br>
 <br>
@@ -1244,7 +1390,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import base64</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1296,7 +1448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>image_data = base64.b64encode(f.read()).decode("utf-8")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1348,7 +1506,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1400,7 +1564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages=[{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1622,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1504,7 +1680,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "base64",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1556,7 +1738,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"data": image_data,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1608,7 +1796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"type": "text", "text": """</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1660,10 +1854,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_number</p>
 <br>
 <br>
 <br>
@@ -1686,13 +1880,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_name</p>
 <br>
 <br>
 <br>
@@ -1712,7 +1906,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address</p>
 <br>
 <br>
 <br>
@@ -1722,6 +1915,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- vendor_address</p>
 <br>
 <br>
 <br>
@@ -1738,7 +1932,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date</p>
 <br>
 <br>
 <br>
@@ -1751,6 +1944,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- invoice_date</p>
 <br>
 <br>
 <br>
@@ -1764,7 +1958,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date</p>
 <br>
 <br>
 <br>
@@ -1780,6 +1973,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- due_date</p>
 <br>
 <br>
 <br>
@@ -1790,7 +1984,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total})</p>
 <br>
 <br>
 <br>
@@ -1809,6 +2002,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- line_items (array of {description, quantity, unit_price, total})</p>
 <br>
 <br>
 <br>
@@ -1816,7 +2010,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal</p>
 <br>
 <br>
 <br>
@@ -1838,11 +2031,11 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- subtotal</p>
 <br>
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount</p>
 <br>
 <br>
 <br>
@@ -1867,8 +2060,8 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tax_amount</p>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount</p>
 <br>
 <br>
 <br>
@@ -1894,7 +2087,41 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency</p>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- total_amount</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- currency</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1946,6 +2173,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
 <br>
 <br>
@@ -1972,7 +2202,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2024,7 +2260,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2076,7 +2318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Speech-to-Text and Audio Understanding</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2128,7 +2376,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import asyncio</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2180,7 +2434,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Analyze a customer support call recording."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2232,7 +2492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with open(audio_path, "rb") as f:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2284,6 +2550,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = client.messages.create(</p>
 <br>
 <br>
@@ -2310,7 +2579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="claude-sonnet-4-20260512",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2362,7 +2637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages=[{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2414,6 +2695,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": [</p>
 <br>
 <br>
@@ -2440,7 +2724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2492,6 +2782,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"source": {</p>
 <br>
 <br>
@@ -2518,7 +2811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "base64",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2570,6 +2869,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"data": audio_data,</p>
 <br>
 <br>
@@ -2596,33 +2898,42 @@
 <br>
 <br>
 <br>
-<p>},</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>},</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2674,7 +2985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "text",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2726,6 +3043,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Analyze this customer support call:</p>
 <br>
 <br>
@@ -2752,10 +3072,10 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation</p>
 <br>
 <br>
 <br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Transcribe the conversation</p>
 <br>
 <br>
 <br>
@@ -2778,13 +3098,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Identify the customer's issue</p>
 <br>
 <br>
 <br>
@@ -2804,7 +3124,6 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial)</p>
 <br>
 <br>
 <br>
@@ -2814,6 +3133,7 @@
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Was the issue resolved? (yes/no/partial)</p>
 <br>
 <br>
 <br>
@@ -2830,7 +3150,6 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent)</p>
 <br>
 <br>
 <br>
@@ -2843,6 +3162,7 @@
 <br>
 <br>
 <br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Sentiment analysis (customer + agent)</p>
 <br>
 <br>
 <br>
@@ -2856,7 +3176,6 @@
 <br>
 <br>
 <br>
-<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?)</p>
 <br>
 <br>
 <br>
@@ -2872,6 +3191,7 @@
 <br>
 <br>
 <br>
+<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compliance issues (did agent disclose required info?)</p>
 <br>
 <br>
 <br>
@@ -2882,7 +3202,28 @@
 <br>
 <br>
 <br>
-<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Suggested improvements</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2934,7 +3275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2986,6 +3333,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}],</p>
 <br>
 <br>
@@ -3012,7 +3362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3064,7 +3420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Multimodal RAG</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3116,7 +3478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import chromadb</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3168,7 +3536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import numpy as np</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3220,7 +3594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3272,7 +3652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.image_encoder = SentenceTransformer(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3324,7 +3710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3376,6 +3768,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"multimodal_knowledge_base"</p>
 <br>
 <br>
@@ -3402,7 +3797,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3454,7 +3855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3506,7 +3913,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text: str,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3558,7 +3971,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tables: List[dict],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3610,7 +4029,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>embeddings = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3662,7 +4087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text_chunks = self._chunk_text(text)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3714,7 +4145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>embeddings.extend(text_embeddings)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3766,7 +4203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for img in images:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3818,7 +4261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>embeddings.append(img_embedding)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3870,7 +4319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.collection.add(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3922,7 +4377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ids=[f"{doc_id}_{i}" for i in range(len(embeddings))],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3974,7 +4435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"modality": "text", "doc_id": doc_id},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4026,7 +4493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for _ in images],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4078,7 +4551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4130,7 +4609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Encode query</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4182,7 +4667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Retrieve across all modalities</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4234,7 +4725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query_embeddings=[query_embedding],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4286,7 +4783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4338,7 +4841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Audio Transcription and Analysis Pipeline</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4390,7 +4899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class AudioProcessingPipeline:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4442,7 +4957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.buffer_duration = 300 # 5-minute chunks</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4494,7 +5015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def process_stream(self, audio_stream: AsyncGenerator[bytes]):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4546,7 +5073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>buffer_duration = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4598,7 +5131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>buffer.append(chunk)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4650,7 +5189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if buffer_duration >= self.buffer_duration:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4702,7 +5247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>segment = b"".join(buffer)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4754,7 +5305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = await self._analyze_segment(segment)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4806,7 +5363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actions = self._extract_actions(result)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4858,7 +5421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>await self._route_actions(actions)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4910,7 +5479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>overlap_bytes = int(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4962,7 +5537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5014,7 +5595,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>buffer_duration = self.overlap</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5066,7 +5653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = client.messages.create(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5118,7 +5711,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>messages=[{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5170,7 +5769,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5222,7 +5827,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "base64",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5274,7 +5885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"data": base64.b64encode(audio_bytes).decode(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5326,7 +5943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"type": "text", "text": """</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5378,10 +6001,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Full transcript with speaker diarization</p>
 <br>
 <br>
 <br>
@@ -5404,13 +6027,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Key action items</p>
 <br>
 <br>
 <br>
@@ -5430,7 +6053,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made</p>
 <br>
 <br>
 <br>
@@ -5440,6 +6062,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Decisions made</p>
 <br>
 <br>
 <br>
@@ -5456,7 +6079,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend</p>
 <br>
 <br>
 <br>
@@ -5469,6 +6091,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Sentiment trend</p>
 <br>
 <br>
 <br>
@@ -5482,7 +6105,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Urgent issues requiring immediate attention</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5534,7 +6175,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5586,7 +6233,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5638,7 +6291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Use Cases and Limitations</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5690,7 +6349,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---|---|---|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5742,7 +6407,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| UI testing | Visual regression + semantic understanding | Dynamic content handling |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5794,7 +6465,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Accessibility | Generate alt text, describe scenes | Real-time video processing latency |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5846,7 +6523,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Video understanding | Summarize meetings, detect events | Long video context limits |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5898,7 +6581,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Multimodal model selection criteria</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5950,7 +6639,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>latency:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6002,7 +6697,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text+image: "< 2s"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6054,7 +6755,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>video_analysis: "< 30s (batch)"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6106,7 +6813,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text: "Baseline"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6158,7 +6871,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>audio: "5-10x text cost (per minute)"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6210,7 +6929,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_window:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6262,7 +6987,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text+image: "~100 images or 1 hour audio"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6314,7 +7045,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>accuracy:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6366,7 +7103,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scene_description: "Good on common scenes, poor on niche domains"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -6418,6 +7161,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Multimodal AI is rapidly maturing but still requires careful evaluation for each use case. Start with well-scoped document processing or image analysis tasks before expanding to real-time audio or video pipelines.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -6430,9 +7176,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/secure-configuration.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4817",
+      "wordCount": "5442",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/secure-configuration.html"},
-      "articleBody": "Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Introduction Configuration drift \u2014 when actual system configuration diverges from the intended secure baseline \u2014 is a leading cause of security incidents. Secure configuration management ensures that systems remain in a known, compliant state throughout their lifecycle. This requires automation at every stage: validation at build time, enforcement at deploy time, and detection at runtime. Infrastructure as Code Scanning IaC scanning catches misconfigurations before they reach production. Checkov: scan Terraform for security issues checkov -d terraform/environments/production tfsec: Terraform security scanner tfsec terraform/environments/production --config-file tfsec.yaml kics: Keep Infrastructure as Code Secure kics scan -p kubernetes/deployments --output-path kics-report.json checkov policy: S3 bucket must have encryption enabled resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" This will fail checkov check CKV_AWS_21 Missing: server_side_encryption_configuration } Custom Checkov policy from checkov.common.models.enums import CheckResult from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck class S3EncryptionCheck(BaseResourceCheck): def __init__(self): name = \"Ensure S3 bucket has encryption enabled\" id = \"CKV_CUSTOM_001\" supported_resources = ['aws_s3_bucket'] super().__init__(name=name, id=id, supported_resources=supported_resources) def scan_resource_conf(self, conf): if 'server_side_encryption_configuration' in conf: return CheckResult.PASSED return CheckResult.FAILED Drift Detection Drift detection identifies when live infrastructure differs from the declared configuration. Terraform plan detects drift terraform plan -refresh-only # Check for manual changes Terraform drift detection with AWS Config resource \"aws_config_config_rule\" \"s3_bucket_ssl\" { name = \"s3-bucket-ssl-requests-only\" source { owner = \"AWS\" source_identifier = \"S3_BUCKET_SSL_REQUESTS_ONLY\" } } Continuous drift monitoring 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes #!/bin/bash drift_detection.sh BASELINE_DIR=\"/config/baselines\" REPORT_DIR=\"/config/reports\" for env in production staging; do cd terraform/environments/$env terraform plan -refresh-only -out=plan.tfplan 2>&1 | \\ grep -E \"changed|destroyed|added\" > /tmp/drift.txt if [ -s /tmp/drift.txt ]; then Send alert ./send_alert.sh \"Drift detected in $env environment\" cp /tmp/drift.txt \"$REPORT_DIR/${env}_drift_$(date +%Y%m%d).txt\" fi done Configuration Validation Pipeline CI/CD configuration validation stage stages: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy validate: stage: validate script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate scan: stage: scan script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . -o json > checkov-report.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- conftest test . --policy policies/ artifacts: reports: checkov: checkov-report.json tfsec: tfsec-report.sarif deploy: stage: deploy script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply -auto-approve only: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main when: manual Configuration Validation with Conftest Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). conftest policy for Kubernetes package main deny[msg] { input.kind == \"Deployment\" not input.spec.template.spec.containers[_].securityContext.runAsNonRoot msg = \"Containers must run as non-root\" } deny[msg] { input.kind == \"Deployment\" input.spec.template.spec.containers[_].securityContext.privileged == true msg = \"Privileged containers are not allowed\" } deny[msg] { input.kind == \"Service\" input.spec.type == \"LoadBalancer\" msg = \"LoadBalancer services are not allowed\" } deny[msg] { input.kind == \"Pod\" not input.spec.containers[_].resources.limits.memory msg = \"Memory limits are required\" } Run conftest policies conftest test deployment.yaml --policy conftest/policies/ Policy as Code with OPA OPA policy for Terraform package terraform deny[msg] { resource := input.resource.aws_security_group[_] rule := resource.ingress[_] rule.from_port == 22 rule.cidr_blocks[_] == \"0.0.0.0/0\" msg = sprintf(\"Security group %v allows SSH from anywhere\", [resource.name]) } deny[msg] { resource := input.resource.aws_s3_bucket[_] resource.acl == \"public-read\" || resource.acl == \"public-read-write\" msg = sprintf(\"S3 bucket %v has public ACL\", [resource.name]) } Secrets in Configuration Never hardcode secrets in configuration. Use a secrets manager. BAD: Hardcoded secret resource \"aws_db_instance\" \"database\" { username = \"admin\" password = \"P@ssw0rd123!\" # NEVER hardcode } GOOD: Secrets Manager reference data \"aws_secretsmanager_secret_version\" \"db_creds\" { secret_id = \"production/database/credentials\" } resource \"aws_db_instance\" \"database\" { username = jsondecode( data.aws_secretsmanager_secret_version.db_creds.secret_string )[\"username\"] password = jsondecode( data.aws_secretsmanager_secret_version.db_creds.secret_string )[\"password\"] } Conclusion Secure configuration management requires automation at every stage: scan IaC before deployment, validate against policy as code, detect drift continuously, and never embed secrets in configuration. Shift security left by validating configuration at build time rather than discovering issues in production. Use tools like Checkov, tfsec, conftest, and OPA to enforce your security baseline automatically."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/secure-configuration-management-3hon"
+      ],
+      "articleBody": "Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Secure Configuration Management Introduction Configuration drift \u2014 when actual system configuration diverges from the intended secure baseline \u2014 is a leading cause of security incidents. Secure configuration management ensures that systems remain in a known, compliant state throughout their lifecycle. This requires automation at every stage: validation at build time, enforcement at deploy time, and detection at runtime. Infrastructure as Code Scanning IaC scanning catches misconfigurations before they reach production. Checkov: scan Terraform for security issues checkov -d terraform/environments/production tfsec: Terraform security scanner tfsec terraform/environments/production --config-file tfsec.yaml kics: Keep Infrastructure as Code Secure kics scan -p kubernetes/deployments --output-path kics-report.json checkov policy: S3 bucket must have encryption enabled resource \"aws_s3_bucket\" \"data\" { bucket = \"my-data-bucket\" This will fail checkov check CKV_AWS_21 Missing: server_side_encryption_configuration } Custom Checkov policy from checkov.common.models.enums import CheckResult from checkov.terraform.checks.resource.base_resource_check import BaseResourceCheck class S3EncryptionCheck(BaseResourceCheck): def __init__(self): name = \"Ensure S3 bucket has encryption enabled\" id = \"CKV_CUSTOM_001\" supported_resources = ['aws_s3_bucket'] super().__init__(name=name, id=id, supported_resources=supported_resources) def scan_resource_conf(self, conf): if 'server_side_encryption_configuration' in conf: return CheckResult.PASSED return CheckResult.FAILED Drift Detection Drift detection identifies when live infrastructure differs from the declared configuration. Terraform plan detects drift terraform plan -refresh-only # Check for manual changes Terraform drift detection with AWS Config resource \"aws_config_config_rule\" \"s3_bucket_ssl\" { name = \"s3-bucket-ssl-requests-only\" source { owner = \"AWS\" source_identifier = \"S3_BUCKET_SSL_REQUESTS_ONLY\" } } Continuous drift monitoring 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes #!/bin/bash drift_detection.sh BASELINE_DIR=\"/config/baselines\" REPORT_DIR=\"/config/reports\" for env in production staging; do cd terraform/environments/$env terraform plan -refresh-only -out=plan.tfplan 2>&1 | \\ grep -E \"changed|destroyed|added\" > /tmp/drift.txt if [ -s /tmp/drift.txt ]; then Send alert ./send_alert.sh \"Drift detected in $env environment\" cp /tmp/drift.txt \"$REPORT_DIR/${env}_drift_$(date +%Y%m%d).txt\" fi done Configuration Validation Pipeline CI/CD configuration validation stage stages: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy validate: stage: validate script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate scan: stage: scan script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . -o json > checkov-report.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- conftest test . --policy policies/ artifacts: reports: checkov: checkov-report.json tfsec: tfsec-report.sarif deploy: stage: deploy script: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply -auto-approve only: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main when: manual Configuration Validation with Conftest Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). conftest policy for Kubernetes package main deny[msg] { input.kind == \"Deployment\" not input.spec.template.spec.containers[_].securityContext.runAsNonRoot msg = \"Containers must run as non-root\" } deny[msg] { input.kind == \"Deployment\" input.spec.template.spec.containers[_].securityContext.privileged == true msg = \"Privileged containers are not allowed\" } deny[msg] { input.kind == \"Service\" input.spec.type == \"LoadBalancer\" msg = \"LoadBalancer services are not allowed\" } deny[msg] { input.kind == \"Pod\" not input.spec.containers[_].resources.limits.memory msg = \"Memory limits are required\" } Run conftest policies conftest test deployment.yaml --policy conftest/policies/ Policy as Code with OPA OPA policy for Terraform package terraform deny[msg] { resource := input.resource.aws_security_group[_] rule := resource.ingress[_] rule.from_port == 22 rule.cidr_blocks[_] == \"0.0.0.0/0\" msg = sprintf(\"Security group %v allows SSH from anywhere\", [resource.name]) } deny[msg] { resource := input.resource.aws_s3_bucket[_] resource.acl == \"public-read\" || resource.acl == \"public-read-write\" msg = sprintf(\"S3 bucket %v has public ACL\", [resource.name]) } Secrets in Configuration Never hardcode secrets in configuration. Use a secrets manager. BAD: Hardcoded secret resource \"aws_db_instance\" \"database\" { username = \"admin\" password = \"P@ssw0rd123!\" # NEVER hardcode } GOOD: Secrets Manager reference data \"aws_secretsmanager_secret_version\" \"db_creds\" { secret_id = \"production/database/credentials\" } resource \"aws_db_instance\" \"database\" { username = jsondecode( data.aws_secretsmanager_secret_version.db_creds.secret_string )[\"username\"] password = jsondecode( data.aws_secretsmanager_secret_version.db_creds.secret_string )[\"password\"] } Conclusion Secure configuration management requires automation at every stage: scan IaC before deployment, validate against policy as code, detect drift continuously, and never embed secrets in configuration. Shift security left by validating configuration at build time rather than discovering issues in production. Use tools like Checkov, tfsec, conftest, and OPA to enforce your security baseline automatically."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Secure Configuration Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Introduction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +248,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Infrastructure as Code Scanning </p>
 <br>
 <br>
@@ -236,7 +271,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>IaC scanning catches misconfigurations before they reach production. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +323,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>checkov -d terraform/environments/production</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +375,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tfsec terraform/environments/production --config-file tfsec.yaml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +427,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>kics scan -p kubernetes/deployments --output-path kics-report.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -420,7 +479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_s3_bucket" "data" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +531,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>This will fail checkov check CKV_AWS_21</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -512,7 +583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -558,7 +635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from checkov.common.models.enums import CheckResult</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -604,7 +687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class S3EncryptionCheck(BaseResourceCheck):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -650,7 +739,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>name = "Ensure S3 bucket has encryption enabled"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -696,7 +791,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>supported_resources = ['aws_s3_bucket']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -742,7 +843,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def scan_resource_conf(self, conf):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +895,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return CheckResult.PASSED</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -834,6 +947,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Drift Detection </p>
 <br>
 <br>
@@ -854,7 +970,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Drift detection identifies when live infrastructure differs from the declared configuration. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -900,7 +1022,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>terraform plan -refresh-only # Check for manual changes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -946,7 +1074,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_config_config_rule" "s3_bucket_ssl" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -992,7 +1126,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>source {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1038,6 +1178,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"</p>
 <br>
 <br>
@@ -1061,30 +1204,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1130,7 +1282,10 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily</h1>
+<br>
+<br>
+<br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Schedule terraform plan to run daily</h1>
 <br>
 <br>
 <br>
@@ -1153,7 +1308,10 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline</h1>
+<br>
+<br>
+<br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Compare output with baseline</h1>
 <br>
 <br>
 <br>
@@ -1176,7 +1334,13 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes</h1>
+<br>
+<br>
+<br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Alert on unexpected changes</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1222,7 +1386,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>drift_detection.sh</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1268,7 +1438,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>REPORT_DIR="/config/reports"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1314,7 +1490,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cd terraform/environments/$env</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1360,7 +1542,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>grep -E "changed|destroyed|added" > /tmp/drift.txt</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1406,7 +1594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Send alert</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1452,7 +1646,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cp /tmp/drift.txt "$REPORT_DIR/${env}_drift_$(date +%Y%m%d).txt"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1498,7 +1698,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>done</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1544,7 +1750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>CI/CD configuration validation stage</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1590,7 +1802,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validate</p>
 <br>
 <br>
 <br>
@@ -1613,7 +1828,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- scan</p>
 <br>
 <br>
 <br>
@@ -1636,7 +1854,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- deploy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1682,7 +1906,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stage: validate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1728,7 +1958,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform fmt -check</p>
 <br>
 <br>
 <br>
@@ -1751,7 +1984,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform validate</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1797,7 +2036,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stage: scan</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1843,7 +2088,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . -o json > checkov-report.json</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- checkov -d . -o json > checkov-report.json</p>
 <br>
 <br>
 <br>
@@ -1866,7 +2114,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- tfsec . --format sarif > tfsec-report.sarif</p>
 <br>
 <br>
 <br>
@@ -1889,7 +2140,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- conftest test . --policy policies/</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- conftest test . --policy policies/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1935,7 +2192,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>reports:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1981,7 +2244,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tfsec: tfsec-report.sarif</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2027,7 +2296,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stage: deploy</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2073,7 +2348,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply -auto-approve</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- terraform apply -auto-approve</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2119,7 +2400,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- main</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2165,6 +2452,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Configuration Validation with Conftest </p>
 <br>
 <br>
@@ -2185,7 +2475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conftest applies policy-as-code to configuration files using Open Policy Agent (OPA). </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2231,7 +2527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>package main</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2277,7 +2579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>input.kind == "Deployment"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2323,7 +2631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>msg = "Containers must run as non-root"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2369,7 +2683,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deny[msg] {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2415,7 +2735,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>input.spec.template.spec.containers[_].securityContext.privileged == true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2461,6 +2787,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -2484,7 +2813,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deny[msg] {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2530,7 +2865,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>input.spec.type == "LoadBalancer"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2576,6 +2917,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -2599,7 +2943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deny[msg] {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2645,7 +2995,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>not input.spec.containers[_].resources.limits.memory</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2691,7 +3047,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2737,7 +3099,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>conftest test deployment.yaml --policy conftest/policies/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2783,7 +3151,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>OPA policy for Terraform</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2829,7 +3203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deny[msg] {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2875,7 +3255,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rule := resource.ingress[_]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2921,7 +3307,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>rule.cidr_blocks[_] == "0.0.0.0/0"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2967,7 +3359,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3013,7 +3411,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource := input.resource.aws_s3_bucket[_]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3059,7 +3463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>msg = sprintf("S3 bucket %v has public ACL", [resource.name])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,6 +3515,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Secrets in Configuration </p>
 <br>
 <br>
@@ -3125,7 +3538,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Never hardcode secrets in configuration. Use a secrets manager. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3171,7 +3590,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_db_instance" "database" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3217,6 +3642,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>password = "P@ssw0rd123!" # NEVER hardcode</p>
 <br>
 <br>
@@ -3240,7 +3668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3286,7 +3720,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data "aws_secretsmanager_secret_version" "db_creds" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3332,7 +3772,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3378,6 +3824,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>username = jsondecode(</p>
 <br>
 <br>
@@ -3401,7 +3850,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>data.aws_secretsmanager_secret_version.db_creds.secret_string</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3447,7 +3902,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>password = jsondecode(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3493,7 +3954,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)["password"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3539,7 +4006,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3572,8 +4045,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

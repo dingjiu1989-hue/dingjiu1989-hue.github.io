@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/multi-modal-rag.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5442",
+      "wordCount": "5977",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/multi-modal-rag-images-tables-documents-chunking-and-retrieval-52i4"
       ],
-      "articleBody": "Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Introduction Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like \"What does the Q3 revenue chart show?\" or \"What values are in the configuration table?\" This article covers the architectures and techniques for building multi-modal RAG. Strategies for Multi-Modal RAG There are three main approaches to handling non-text content: Strategy 1: Convert everything to text (simplest) Strategy 2: Embed images alongside text (moderate) Strategy 3: Multi-modal retrieval with specialized models (most powerful) Strategy 1: Text Conversion Convert images and tables to text using vision models or OCR: from openai import OpenAI import base64 client = OpenAI() def describe_image(image_path: str) -> str: with open(image_path, \"rb\") as f: image_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.chat.completions.create( model=\"gpt-4o\", messages=[ { \"role\": \"user\", \"content\": [ {\"type\": \"text\", \"text\": \"Describe this image in detail, including all text, data points, and visual elements.\"}, {\"type\": \"image_url\", \"image_url\": {\"url\": f\"data:image/png;base64,{image_data}\"}}, ], } ], max_tokens=1024, ) return response.choices[0].message.content def convert_table_to_text(table_data: list[list[str]]) -> str: \"\"\"Convert a parsed table to searchable text.\"\"\" headers = table_data[0] rows = table_data[1:] text_parts = [] for row in rows: row_desc = \", \".join(f\"{headers[i]}: {cell}\" for i, cell in enumerate(row)) text_parts.append(row_desc) return \"\\n\".join(text_parts) Strategy 2: Multi-Vector Retriever Store both text representations and visual embeddings: from langchain.retrievers.multi_vector import MultiVectorRetriever from langchain.storage import InMemoryStore from langchain.vectorstores import Chroma from langchain.embeddings import OpenAIEmbeddings from langchain.schema.document import Document Store text summaries alongside raw elements vectorstore = Chroma( collection_name=\"multi_modal_docs\", embedding_function=OpenAIEmbeddings(), ) store = InMemoryStore() retriever = MultiVectorRetriever( vectorstore=vectorstore, docstore=store, id_key=\"doc_id\", ) For each document element (text, image, table): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id doc_id = \"doc_001_image_03\" summary = \"Revenue chart showing Q1-Q4 2025: Q1=$1.2M, Q2=$1.5M, Q3=$1.8M, Q4=$2.1M\" original = Document( page_content=\"[IMAGE: revenue_chart_2025.png]\", metadata={\"type\": \"image\", \"path\": \"revenue_chart_2025.png\", \"doc_id\": doc_id}, ) retriever.vectorstore.add_documents([Document(page_content=summary, metadata={\"doc_id\": doc_id})]) retriever.docstore.mset([(doc_id, original)]) Strategy 3: Multi-Modal Embeddings Use embedding models that handle both text and images in a shared space: from sentence_transformers import SentenceTransformer import torch from PIL import Image class MultiModalEmbedder: def __init__(self, model_name=\"clip-ViT-B-32\"): self.model = SentenceTransformer(model_name) def embed_text(self, text: str) -> list[float]: return self.model.encode(text).tolist() def embed_image(self, image_path: str) -> list[float]: image = Image.open(image_path) return self.model.encode(image).tolist() def search_by_text(self, query: str, image_embeddings: list, top_k: int = 5): query_emb = self.embed_text(query) scores = torch.cosine_similarity( torch.tensor(query_emb).unsqueeze(0), torch.tensor(image_embeddings), ) top_indices = scores.topk(top_k).indices.tolist() return top_indices, scores[top_indices].tolist() Chunking Strategies for Multi-Modal Data Each content type needs a different chunking approach: class MultiModalChunker: def chunk_pdf(self, pdf_path: str) -> list[dict]: \"\"\"Extract and chunk text, images, and tables from a PDF.\"\"\" import fitz # PyMuPDF doc = fitz.open(pdf_path) chunks = [] for page_num, page in enumerate(doc): Extract text blocks blocks = page.get_text(\"dict\")[\"blocks\"] for block in blocks: if block[\"type\"] == 0: # Text text = block[\"lines\"][0][\"spans\"][0][\"text\"] chunks.append({ \"type\": \"text\", \"content\": text, \"page\": page_num, \"bbox\": block[\"bbox\"], }) elif block[\"type\"] == 1: # Image image = block[\"image\"] chunks.append({ \"type\": \"image\", \"content\": f\"[IMAGE: page_{page_num}_block_{block['number']}]\", \"page\": page_num, \"image_data\": image, \"bbox\": block[\"bbox\"], }) return chunks def chunk_table(self, table_df) -> dict: \"\"\"Convert table to searchable format.\"\"\" summary = f\"Table with {len(table_df)} rows and {len(table_df.columns)} columns: {', '.join(table_df.columns)}\" text_representation = table_df.to_markdown() return { \"type\": \"table\", \"summary\": summary, \"content\": text_representation, \"metadata\": {\"columns\": list(table_df.columns), \"rows\": len(table_df)}, } Retrieval and Fusion Query across all content types and fuse the results: def multi_modal_retrieve(query: str, text_index, image_index, table_index, top_k: int = 3): text_results = text_index.similarity_search(query, k=top_k) image_results = search_images(query, image_index, top_k) table_results = search_tables(query, table_index, top_k) Fuse results with type-aware scoring all_results = [] for doc in text_results: all_results.append({\"content\": doc.page_content, \"type\": \"text\", \"score\": 1.0}) for img in image_results: all_results.append({\"content\": img[\"description\"], \"type\": \"image\", \"path\": img[\"path\"], \"score\": 0.9}) for tbl in table_results: all_results.append({\"content\": tbl[\"summary\"], \"type\": \"table\", \"data\": tbl[\"content\"], \"score\": 0.9}) all_results.sort(key=lambda x: x[\"score\"], reverse=True) return all_results[:top_k * 2] Conclusion Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality."
+      "articleBody": "Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Multi-Modal RAG: Images, Tables, Documents \u2014 Chunking and Retrieval Introduction Real-world documents contain more than text: images, charts, tables, and diagrams carry critical information that text-only RAG systems cannot access. Multi-modal RAG extends retrieval to include visual content, enabling questions like \"What does the Q3 revenue chart show?\" or \"What values are in the configuration table?\" This article covers the architectures and techniques for building multi-modal RAG. Strategies for Multi-Modal RAG There are three main approaches to handling non-text content: Strategy 1: Convert everything to text (simplest) Strategy 2: Embed images alongside text (moderate) Strategy 3: Multi-modal retrieval with specialized models (most powerful) Strategy 1: Text Conversion Convert images and tables to text using vision models or OCR: from openai import OpenAI import base64 client = OpenAI() def describe_image(image_path: str) -> str: with open(image_path, \"rb\") as f: image_data = base64.b64encode(f.read()).decode(\"utf-8\") response = client.chat.completions.create( model=\"gpt-4o\", messages=[ { \"role\": \"user\", \"content\": [ {\"type\": \"text\", \"text\": \"Describe this image in detail, including all text, data points, and visual elements.\"}, {\"type\": \"image_url\", \"image_url\": {\"url\": f\"data:image/png;base64,{image_data}\"}}, ], } ], max_tokens=1024, ) return response.choices[0].message.content def convert_table_to_text(table_data: list[list[str]]) -> str: \"\"\"Convert a parsed table to searchable text.\"\"\" headers = table_data[0] rows = table_data[1:] text_parts = [] for row in rows: row_desc = \", \".join(f\"{headers[i]}: {cell}\" for i, cell in enumerate(row)) text_parts.append(row_desc) return \"\\n\".join(text_parts) Strategy 2: Multi-Vector Retriever Store both text representations and visual embeddings: from langchain.retrievers.multi_vector import MultiVectorRetriever from langchain.storage import InMemoryStore from langchain.vectorstores import Chroma from langchain.embeddings import OpenAIEmbeddings from langchain.schema.document import Document Store text summaries alongside raw elements vectorstore = Chroma( collection_name=\"multi_modal_docs\", embedding_function=OpenAIEmbeddings(), ) store = InMemoryStore() retriever = MultiVectorRetriever( vectorstore=vectorstore, docstore=store, id_key=\"doc_id\", ) For each document element (text, image, table): 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id doc_id = \"doc_001_image_03\" summary = \"Revenue chart showing Q1-Q4 2025: Q1=$1.2M, Q2=$1.5M, Q3=$1.8M, Q4=$2.1M\" original = Document( page_content=\"[IMAGE: revenue_chart_2025.png]\", metadata={\"type\": \"image\", \"path\": \"revenue_chart_2025.png\", \"doc_id\": doc_id}, ) retriever.vectorstore.add_documents([Document(page_content=summary, metadata={\"doc_id\": doc_id})]) retriever.docstore.mset([(doc_id, original)]) Strategy 3: Multi-Modal Embeddings Use embedding models that handle both text and images in a shared space: from sentence_transformers import SentenceTransformer import torch from PIL import Image class MultiModalEmbedder: def __init__(self, model_name=\"clip-ViT-B-32\"): self.model = SentenceTransformer(model_name) def embed_text(self, text: str) -> list[float]: return self.model.encode(text).tolist() def embed_image(self, image_path: str) -> list[float]: image = Image.open(image_path) return self.model.encode(image).tolist() def search_by_text(self, query: str, image_embeddings: list, top_k: int = 5): query_emb = self.embed_text(query) scores = torch.cosine_similarity( torch.tensor(query_emb).unsqueeze(0), torch.tensor(image_embeddings), ) top_indices = scores.topk(top_k).indices.tolist() return top_indices, scores[top_indices].tolist() Chunking Strategies for Multi-Modal Data Each content type needs a different chunking approach: class MultiModalChunker: def chunk_pdf(self, pdf_path: str) -> list[dict]: \"\"\"Extract and chunk text, images, and tables from a PDF.\"\"\" import fitz # PyMuPDF doc = fitz.open(pdf_path) chunks = [] for page_num, page in enumerate(doc): Extract text blocks blocks = page.get_text(\"dict\")[\"blocks\"] for block in blocks: if block[\"type\"] == 0: # Text text = block[\"lines\"][0][\"spans\"][0][\"text\"] chunks.append({ \"type\": \"text\", \"content\": text, \"page\": page_num, \"bbox\": block[\"bbox\"], }) elif block[\"type\"] == 1: # Image image = block[\"image\"] chunks.append({ \"type\": \"image\", \"content\": f\"[IMAGE: page_{page_num}_block_{block['number']}]\", \"page\": page_num, \"image_data\": image, \"bbox\": block[\"bbox\"], }) return chunks def chunk_table(self, table_df) -> dict: \"\"\"Convert table to searchable format.\"\"\" summary = f\"Table with {len(table_df)} rows and {len(table_df.columns)} columns: {', '.join(table_df.columns)}\" text_representation = table_df.to_markdown() return { \"type\": \"table\", \"summary\": summary, \"content\": text_representation, \"metadata\": {\"columns\": list(table_df.columns), \"rows\": len(table_df)}, } Retrieval and Fusion Query across all content types and fuse the results: def multi_modal_retrieve(query: str, text_index, image_index, table_index, top_k: int = 3): text_results = text_index.similarity_search(query, k=top_k) image_results = search_images(query, image_index, top_k) table_results = search_tables(query, table_index, top_k) Fuse results with type-aware scoring all_results = [] for doc in text_results: all_results.append({\"content\": doc.page_content, \"type\": \"text\", \"score\": 1.0}) for img in image_results: all_results.append({\"content\": img[\"description\"], \"type\": \"image\", \"path\": img[\"path\"], \"score\": 0.9}) for tbl in table_results: all_results.append({\"content\": tbl[\"summary\"], \"type\": \"table\", \"data\": tbl[\"content\"], \"score\": 0.9}) all_results.sort(key=lambda x: x[\"score\"], reverse=True) return all_results[:top_k * 2] Conclusion Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality."
     }
     </script>
     <script type="application/ld+json">
@@ -205,7 +205,39 @@
 <br>
 <br>
 <br>
+<h1>Multi-Modal RAG: Images, Tables, Documents — Chunking and Retrieval</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -257,7 +289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Strategies for Multi-Modal RAG</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -309,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Strategy 1: Convert everything to text (simplest)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -361,7 +405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Strategy 3: Multi-modal retrieval with specialized models (most powerful)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -413,7 +463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Convert images and tables to text using vision models or OCR:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import base64</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -517,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def describe_image(image_path: str) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>image_data = base64.b64encode(f.read()).decode("utf-8")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -621,7 +695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>model="gpt-4o",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,7 +753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -725,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -777,6 +869,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"type": "image_url", "image_url": {"url": f"data:image/png;base64,{image_data}"}},</p>
 <br>
 <br>
@@ -803,7 +898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -855,7 +956,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -907,7 +1014,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,7 +1072,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def convert_table_to_text(table_data: list[list[str]]) -> str:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1011,7 +1130,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers = table_data[0]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1063,7 +1188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text_parts = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1115,7 +1246,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>row_desc = ", ".join(f"{headers[i]}: {cell}" for i, cell in enumerate(row))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1167,7 +1304,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "\n".join(text_parts)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,7 +1362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Store both text representations and visual embeddings:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1271,7 +1420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from langchain.storage import InMemoryStore</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1323,7 +1478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from langchain.embeddings import OpenAIEmbeddings</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1375,7 +1536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Store text summaries alongside raw elements</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1427,7 +1594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>collection_name="multi_modal_docs",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1479,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1531,7 +1710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>retriever = MultiVectorRetriever(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1583,7 +1768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>docstore=store,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1635,7 +1826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1687,10 +1884,10 @@
 <br>
 <br>
 <br>
-<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</h1>
 <br>
 <br>
 <br>
+<h1>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Generate a text summary</h1>
 <br>
 <br>
 <br>
@@ -1713,13 +1910,13 @@
 <br>
 <br>
 <br>
-<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</h1>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<h1>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the summary in the vector store</h1>
 <br>
 <br>
 <br>
@@ -1739,7 +1936,6 @@
 <br>
 <br>
 <br>
-<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</h1>
 <br>
 <br>
 <br>
@@ -1749,6 +1945,7 @@
 <br>
 <br>
 <br>
+<h1>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Store the original element in the doc store</h1>
 <br>
 <br>
 <br>
@@ -1765,7 +1962,22 @@
 <br>
 <br>
 <br>
-<h1>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Link them with a shared doc_id</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1817,7 +2029,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>summary = "Revenue chart showing Q1-Q4 2025: Q1=$1.2M, Q2=$1.5M, Q3=$1.8M, Q4=$2.1M"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1869,7 +2087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>page_content="[IMAGE: revenue_chart_2025.png]",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1921,7 +2145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1973,7 +2203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>retriever.docstore.mset([(doc_id, original)])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2025,7 +2261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Use embedding models that handle both text and images in a shared space:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2077,7 +2319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import torch</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2129,7 +2377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class MultiModalEmbedder:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2181,7 +2435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.model = SentenceTransformer(model_name)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2233,7 +2493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self.model.encode(text).tolist()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2285,7 +2551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>image = Image.open(image_path)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2337,7 +2609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def search_by_text(self, query: str, image_embeddings: list, top_k: int = 5):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,7 +2667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scores = torch.cosine_similarity(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2441,7 +2725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>torch.tensor(image_embeddings),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2493,7 +2783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>top_indices = scores.topk(top_k).indices.tolist()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2545,7 +2841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Chunking Strategies for Multi-Modal Data</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,7 +2899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class MultiModalChunker:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2649,7 +2957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Extract and chunk text, images, and tables from a PDF."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2701,7 +3015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>doc = fitz.open(pdf_path)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2753,7 +3073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for page_num, page in enumerate(doc):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2805,7 +3131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>blocks = page.get_text("dict")["blocks"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2857,7 +3189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if block["type"] == 0: # Text</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2909,7 +3247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>chunks.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2961,7 +3305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": text,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3013,6 +3363,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"bbox": block["bbox"],</p>
 <br>
 <br>
@@ -3039,7 +3392,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3091,7 +3450,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>image = block["image"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3143,7 +3508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "image",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3195,7 +3566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"page": page_num,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3247,7 +3624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"bbox": block["bbox"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3299,7 +3682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return chunks</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3351,7 +3740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Convert table to searchable format."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3403,7 +3798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text_representation = table_df.to_markdown()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3455,7 +3856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "table",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3507,7 +3914,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"content": text_representation,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3559,7 +3972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3611,7 +4030,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Query across all content types and fuse the results:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3663,7 +4088,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>text_results = text_index.similarity_search(query, k=top_k)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3715,7 +4146,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>table_results = search_tables(query, table_index, top_k)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3767,7 +4204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_results = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3819,7 +4262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_results.append({"content": doc.page_content, "type": "text", "score": 1.0})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3871,7 +4320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_results.append({"content": img["description"], "type": "image", "path": img["path"], "score": 0.9})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3923,7 +4378,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_results.append({"content": tbl["summary"], "type": "table", "data": tbl["content"], "score": 0.9})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3975,7 +4436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return all_results[:top_k * 2]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4027,6 +4494,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Multi-modal RAG extends retrieval to images, tables, and other visual content. The simplest approach converts non-text content to text descriptions using vision models. More sophisticated approaches use multi-vector retrievers or shared embedding spaces like CLIP. Choose your strategy based on the complexity of your visual content and the precision required for retrieval. Always evaluate retrieval quality separately for each modality.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -4039,9 +4509,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

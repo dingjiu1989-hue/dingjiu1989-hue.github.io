@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/soc2-technical.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4641",
+      "wordCount": "5371",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/soc2-technical.html"},
-      "articleBody": "SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Overview SOC 2 audits trust service criteria: Security, Availability, Processing Integrity, Confidentiality, and Privacy. Technical controls are essential for meeting these criteria. Logging and Monitoring Comprehensive logging is the foundation of SOC 2: import structlog from datetime import datetime class SOC2Logger: def __init__(self): self.logger = structlog.get_logger() self.required_fields = [ \"timestamp\", \"user_id\", \"action\", \"resource\", \"source_ip\", \"outcome\", \"correlation_id\" ] def log_access(self, user_id, action, resource, outcome, metadata=None): log_entry = { \"timestamp\": datetime.utcnow().isoformat(), \"user_id\": user_id, \"action\": action, \"resource\": resource, \"source_ip\": metadata.get(\"ip\", \"unknown\"), \"outcome\": outcome, \"correlation_id\": metadata.get(\"correlation_id\", str(uuid.uuid4())), \"user_agent\": metadata.get(\"user_agent\"), \"geo_location\": metadata.get(\"geo\"), \"auth_method\": metadata.get(\"auth_method\") } self.logger.info(\"access_log\", **log_entry) self.store_immutable(log_entry) return log_entry def store_immutable(self, log_entry): \"\"\"Store logs in immutable storage for audit\"\"\" Write to append-only log with open(\"/var/log/soc2/access.log\", \"a\") as f: f.write(json.dumps(log_entry) + \"\\n\") Also send to SIEM self.send_to_siem(log_entry) Access Review Automation Automate periodic access reviews: class AccessReviewAutomation: def __init__(self, identity_provider): self.idp = identity_provider self.reviewers = { \"engineering\": \"eng-manager@example.com\", \"sales\": \"sales-director@example.com\", \"finance\": \"cfo@example.com\" } def generate_review(self, department): users = self.idp.get_users_by_department(department) review = { \"department\": department, \"review_date\": datetime.utcnow().isoformat(), \"reviewer\": self.reviewers[department], \"users\": [] } for user in users: review[\"users\"].append({ \"name\": user[\"name\"], \"email\": user[\"email\"], \"roles\": user[\"roles\"], \"last_login\": user[\"last_login\"], \"access_keys_count\": user.get(\"access_keys\", 0), \"days_since_last_access\": ( datetime.utcnow() - user[\"last_login\"] ).days if user[\"last_login\"] else None }) return review def auto_disable_inactive(self, days_threshold=90): cutoff = datetime.utcnow() - timedelta(days=days_threshold) disabled = [] for user in self.idp.get_all_users(): if user.get(\"last_login\", datetime.min) self.idp.disable_user(user[\"email\"]) disabled.append(user[\"email\"]) return disabled Change Management Track and approve all infrastructure changes: change-management-pipeline.yaml change_management: required_for: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- code_deployments \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configuration_changes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- access_policy_changes workflow: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- request: fields: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_description \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_assessment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollback_plan \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_completed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- review: required_approvals: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technical_reviewer \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_reviewer auto_approve: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk: low \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- owner: same_team \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- implementation: window: business_hours blackout_periods: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- end_of_month \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- holiday_season require_change_window: high_risk \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- verification: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events Change management API class ChangeManager: def __init__(self): self.changes = [] def create_change(self, request): change = { \"id\": str(uuid.uuid4()), \"description\": request[\"description\"], \"risk\": request.get(\"risk\", \"medium\"), \"requester\": request[\"requester\"], \"status\": \"pending_review\", \"created_at\": datetime.utcnow().isoformat(), \"approvals\": [], \"rollback_plan\": request[\"rollback_plan\"] } self.changes.append(change) self.notify_reviewers(change) return change def approve_change(self, change_id, reviewer, decision, comments): change = self.find_change(change_id) change[\"approvals\"].append({ \"reviewer\": reviewer, \"decision\": decision, \"comments\": comments, \"timestamp\": datetime.utcnow().isoformat() }) if decision == \"approved\": change[\"status\"] = \"approved\" self.schedule_implementation(change) else: change[\"status\"] = \"rejected\" def post_implementation_review(self, change_id): change = self.find_change(change_id) change[\"status\"] = \"completed\" change[\"completed_at\"] = datetime.utcnow().isoformat() Conclusion SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden."
+      "articleBody": "SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Technical Controls SOC 2 Overview SOC 2 audits trust service criteria: Security, Availability, Processing Integrity, Confidentiality, and Privacy. Technical controls are essential for meeting these criteria. Logging and Monitoring Comprehensive logging is the foundation of SOC 2: import structlog from datetime import datetime class SOC2Logger: def __init__(self): self.logger = structlog.get_logger() self.required_fields = [ \"timestamp\", \"user_id\", \"action\", \"resource\", \"source_ip\", \"outcome\", \"correlation_id\" ] def log_access(self, user_id, action, resource, outcome, metadata=None): log_entry = { \"timestamp\": datetime.utcnow().isoformat(), \"user_id\": user_id, \"action\": action, \"resource\": resource, \"source_ip\": metadata.get(\"ip\", \"unknown\"), \"outcome\": outcome, \"correlation_id\": metadata.get(\"correlation_id\", str(uuid.uuid4())), \"user_agent\": metadata.get(\"user_agent\"), \"geo_location\": metadata.get(\"geo\"), \"auth_method\": metadata.get(\"auth_method\") } self.logger.info(\"access_log\", **log_entry) self.store_immutable(log_entry) return log_entry def store_immutable(self, log_entry): \"\"\"Store logs in immutable storage for audit\"\"\" Write to append-only log with open(\"/var/log/soc2/access.log\", \"a\") as f: f.write(json.dumps(log_entry) + \"\\n\") Also send to SIEM self.send_to_siem(log_entry) Access Review Automation Automate periodic access reviews: class AccessReviewAutomation: def __init__(self, identity_provider): self.idp = identity_provider self.reviewers = { \"engineering\": \"eng-manager@example.com\", \"sales\": \"sales-director@example.com\", \"finance\": \"cfo@example.com\" } def generate_review(self, department): users = self.idp.get_users_by_department(department) review = { \"department\": department, \"review_date\": datetime.utcnow().isoformat(), \"reviewer\": self.reviewers[department], \"users\": [] } for user in users: review[\"users\"].append({ \"name\": user[\"name\"], \"email\": user[\"email\"], \"roles\": user[\"roles\"], \"last_login\": user[\"last_login\"], \"access_keys_count\": user.get(\"access_keys\", 0), \"days_since_last_access\": ( datetime.utcnow() - user[\"last_login\"] ).days if user[\"last_login\"] else None }) return review def auto_disable_inactive(self, days_threshold=90): cutoff = datetime.utcnow() - timedelta(days=days_threshold) disabled = [] for user in self.idp.get_all_users(): if user.get(\"last_login\", datetime.min) self.idp.disable_user(user[\"email\"]) disabled.append(user[\"email\"]) return disabled Change Management Track and approve all infrastructure changes: change-management-pipeline.yaml change_management: required_for: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- code_deployments \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configuration_changes \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- access_policy_changes workflow: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- request: fields: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_description \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_assessment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollback_plan \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_completed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- review: required_approvals: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technical_reviewer \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_reviewer auto_approve: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk: low \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- owner: same_team \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- implementation: window: business_hours blackout_periods: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- end_of_month \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- holiday_season require_change_window: high_risk \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- verification: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events Change management API class ChangeManager: def __init__(self): self.changes = [] def create_change(self, request): change = { \"id\": str(uuid.uuid4()), \"description\": request[\"description\"], \"risk\": request.get(\"risk\", \"medium\"), \"requester\": request[\"requester\"], \"status\": \"pending_review\", \"created_at\": datetime.utcnow().isoformat(), \"approvals\": [], \"rollback_plan\": request[\"rollback_plan\"] } self.changes.append(change) self.notify_reviewers(change) return change def approve_change(self, change_id, reviewer, decision, comments): change = self.find_change(change_id) change[\"approvals\"].append({ \"reviewer\": reviewer, \"decision\": decision, \"comments\": comments, \"timestamp\": datetime.utcnow().isoformat() }) if decision == \"approved\": change[\"status\"] = \"approved\" self.schedule_implementation(change) else: change[\"status\"] = \"rejected\" def post_implementation_review(self, change_id): change = self.find_change(change_id) change[\"status\"] = \"completed\" change[\"completed_at\"] = datetime.utcnow().isoformat() Conclusion SOC 2 technical controls require systematic implementation across logging, access review, and change management. Implement immutable audit logging, automate access recertification, and enforce change management workflows. Continuous monitoring provides evidence for auditors and early detection of control failures. Automate evidence collection to reduce audit burden."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>SOC 2 Technical Controls</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>SOC 2 Overview </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Logging and Monitoring </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Comprehensive logging is the foundation of SOC 2: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.required_fields = [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -420,7 +476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"source_ip", "outcome", "correlation_id"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +528,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def log_access(self, user_id, action, resource, outcome, metadata=None):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -512,7 +580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"timestamp": datetime.utcnow().isoformat(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -558,7 +632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"action": action,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -604,7 +684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"source_ip": metadata.get("ip", "unknown"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -650,7 +736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"correlation_id": metadata.get("correlation_id", str(uuid.uuid4())),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -696,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"geo_location": metadata.get("geo"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -742,7 +840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.store_immutable(log_entry)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -834,7 +944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def store_immutable(self, log_entry):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -880,7 +996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Write to append-only log</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -926,7 +1048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f.write(json.dumps(log_entry) + "\n")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -972,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.send_to_siem(log_entry)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1015,7 +1149,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Automate periodic access reviews: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1061,7 +1201,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, identity_provider):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1107,7 +1253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.reviewers = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1153,7 +1305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"sales": "sales-director@example.com",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1199,7 +1357,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1245,7 +1409,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>users = self.idp.get_users_by_department(department)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1291,7 +1461,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"department": department,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1337,7 +1513,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"reviewer": self.reviewers[department],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1383,7 +1565,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1429,7 +1617,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>review["users"].append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1475,7 +1669,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"email": user["email"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1521,7 +1721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"last_login": user["last_login"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1567,7 +1773,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"days_since_last_access": (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1613,6 +1825,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>).days if user["last_login"] else None</p>
 <br>
 <br>
@@ -1636,7 +1851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1682,7 +1903,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def auto_disable_inactive(self, days_threshold=90):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1728,7 +1955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>disabled = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1774,7 +2007,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if user.get("last_login", datetime.min) < cutoff:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1820,7 +2059,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>disabled.append(user["email"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1866,6 +2111,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Change Management </p>
 <br>
 <br>
@@ -1886,7 +2134,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Track and approve all infrastructure changes: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1932,7 +2186,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>change_management:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1978,10 +2238,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- infrastructure_changes</p>
 <br>
 <br>
 <br>
@@ -2001,13 +2261,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- code_deployments</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- code_deployments</p>
 <br>
 <br>
 <br>
@@ -2024,7 +2284,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configuration_changes</p>
 <br>
 <br>
 <br>
@@ -2034,6 +2293,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- configuration_changes</p>
 <br>
 <br>
 <br>
@@ -2047,7 +2307,22 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- access_policy_changes</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- access_policy_changes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2368,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- request:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- request:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2139,10 +2420,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_description</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- change_description</p>
 <br>
 <br>
 <br>
@@ -2162,13 +2443,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_assessment</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk_assessment</p>
 <br>
 <br>
 <br>
@@ -2185,7 +2466,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollback_plan</p>
 <br>
 <br>
 <br>
@@ -2195,6 +2475,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- rollback_plan</p>
 <br>
 <br>
 <br>
@@ -2208,7 +2489,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_completed</p>
 <br>
 <br>
 <br>
@@ -2221,6 +2501,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- testing_completed</p>
 <br>
 <br>
 <br>
@@ -2231,7 +2512,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- review:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- review:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2277,7 +2576,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technical_reviewer</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- technical_reviewer</p>
 <br>
 <br>
 <br>
@@ -2300,7 +2602,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_reviewer</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- security_reviewer</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2346,7 +2654,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk: low</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- risk: low</p>
 <br>
 <br>
 <br>
@@ -2369,7 +2680,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- owner: same_team</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- owner: same_team</p>
 <br>
 <br>
 <br>
@@ -2392,7 +2706,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- implementation:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- implementation:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,6 +2758,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>blackout_periods:</p>
 <br>
 <br>
@@ -2461,7 +2784,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- end_of_month</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- end_of_month</p>
 <br>
 <br>
 <br>
@@ -2484,7 +2810,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- holiday_season</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- holiday_season</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2530,10 +2862,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- verification:</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- verification:</p>
 <br>
 <br>
 <br>
@@ -2553,13 +2885,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- monitoring_metrics_normal</p>
 <br>
 <br>
 <br>
@@ -2576,7 +2908,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed</p>
 <br>
 <br>
 <br>
@@ -2586,6 +2917,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- smoke_tests_passed</p>
 <br>
 <br>
 <br>
@@ -2599,7 +2931,22 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- no_security_events</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2645,7 +2992,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ChangeManager:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2691,7 +3044,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.changes = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2737,7 +3096,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>change = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2783,7 +3148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"description": request["description"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2829,7 +3200,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"requester": request["requester"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2875,7 +3252,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"created_at": datetime.utcnow().isoformat(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2921,7 +3304,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"rollback_plan": request["rollback_plan"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2967,7 +3356,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.changes.append(change)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3013,7 +3408,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return change</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3059,7 +3460,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>change = self.find_change(change_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3105,7 +3512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"reviewer": reviewer,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3151,7 +3564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"comments": comments,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3197,7 +3616,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3243,7 +3668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>change["status"] = "approved"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3289,7 +3720,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3335,7 +3772,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def post_implementation_review(self, change_id):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3381,7 +3824,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>change["status"] = "completed"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3427,7 +3876,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3460,8 +3915,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

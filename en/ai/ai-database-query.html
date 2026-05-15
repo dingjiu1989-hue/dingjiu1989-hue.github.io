@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/ai-database-query.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "6011",
+      "wordCount": "6736",
       "keywords": "Artificial Intelligence, Machine Learning",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/natural-language-to-sql-with-llms-2m2k"
       ],
-      "articleBody": "Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Introduction Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries \u2014 when properly configured with schema context, safety guards, and validation. How NL2SQL Works The core architecture is straightforward: User Question \u2192 Context Assembly \u2192 LLM SQL Generation \u2192 Query Validation \u2192 Execution \u2192 Result Formatting The critical step is **context assembly** \u2014 providing the LLM with enough database metadata to generate correct SQL. Schema Context The LLM needs to understand your database schema. A well-structured schema prompt includes: CREATE TABLE customers ( customer_id INTEGER PRIMARY KEY, first_name VARCHAR(100), last_name VARCHAR(100), email VARCHAR(255), signup_date DATE, country VARCHAR(50), lifetime_value DECIMAL(10,2) ); CREATE TABLE orders ( order_id INTEGER PRIMARY KEY, customer_id INTEGER REFERENCES customers(customer_id), order_date TIMESTAMP, total_amount DECIMAL(10,2), status VARCHAR(20) -- pending, shipped, delivered, cancelled ); CREATE TABLE order_items ( item_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), product_name VARCHAR(200), quantity INTEGER, unit_price DECIMAL(10,2) ); **Key additions for better accuracy:** * Column descriptions: `-- customer's two-letter ISO country code` * Value examples: `-- status options: pending, shipped, delivered, cancelled` * Relationship hints: `-- join via customer_id to get customer details` * Index hints: `-- indexed on order_date for range queries` def build_schema_context(tables): context_parts = [] for table in tables: ddl = f\"CREATE TABLE {table.name} (\\n\" for col in table.columns: ddl += f\" {col.name} {col.type} -- {col.description}\\n\" ddl += \");\" context_parts.append(ddl) Add sample rows for context on data patterns if table.sample_rows: context_parts.append(f\"-- Sample row: {table.sample_rows[0]}\") return \"\\n\\n\".join(context_parts) Few-Shot Examples For complex schemas, provide question-SQL pairs relevant to the query: few_shot_examples = [ { \"question\": \"Show me the top 5 customers by total spending\", \"query\": \"\"\" SELECT c.first_name || ' ' || c.last_name AS customer_name, SUM(o.total_amount) AS total_spent FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status != 'cancelled' GROUP BY c.customer_id, c.first_name, c.last_name ORDER BY total_spent DESC LIMIT 5 \"\"\" }, { \"question\": \"What was the monthly revenue for 2025?\", \"query\": \"\"\" SELECT DATE_TRUNC('month', o.order_date) AS month, SUM(o.total_amount) AS revenue FROM orders o WHERE o.status = 'delivered' AND o.order_date >= '2025-01-01' AND o.order_date GROUP BY month ORDER BY month \"\"\" } ] **Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question. SQL Generation Prompt The complete prompt combines schema, examples, and safety instructions: def build_nl2sql_prompt(question, schema, examples, dialect=\"postgresql\"): prompt = f\"\"\"You are a {dialect} SQL expert. Convert natural language questions into SQL queries. Database Schema: {schema} Rules: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use LIMIT for result size control 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Order results when ordering is implied 8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements Examples: \"\"\" for ex in examples: prompt += f\"\\nQ: {ex['question']}\\nSQL: {ex['query']}\\n\" prompt += f\"\\nQ: {question}\\nSQL:\" return prompt Query Validation Before executing generated SQL, validate it: def validate_sql(query, allowed_tables): errors = [] Safety check: no mutations forbidden_keywords = [\"DELETE\", \"UPDATE\", \"INSERT\", \"DROP\", \"ALTER\", \"TRUNCATE\", \"CREATE\"] for keyword in forbidden_keywords: if keyword in query.upper(): errors.append(f\"Forbidden operation: {keyword}\") Check table references parsed = sqlparse.parse(query)[0] used_tables = extract_tables(parsed) for table in used_tables: if table not in allowed_tables: errors.append(f\"Unauthorized table: {table}\") Syntax validation try: conn = get_dummy_connection(dialect) conn.execute(f\"EXPLAIN {query}\") except Exception as e: errors.append(f\"SQL syntax error: {str(e)}\") return errors Advanced Techniques Self-Correction Loop When the generated SQL fails or returns empty results, the system can self-correct: def nl2sql_with_correction(question, schema, max_attempts=3): for attempt in range(max_attempts): query = generate_sql(question, schema) errors = validate_sql(query) if not errors: try: results = execute_sql(query) if results: return format_results(question, query, results) else: feedback = \"The query returned no results. Try a broader search.\" except Exception as e: feedback = f\"Execution error: {str(e)}\" else: feedback = f\"Validation errors: {', '.join(errors)}\" question = f\"Original question: {question}\\nPrevious attempt failed: {feedback}\\nPlease fix the SQL query.\" Schema Linking For large schemas with many tables, first identify relevant tables before generating SQL: def identify_relevant_tables(question, all_tables, table_descriptions): prompt = f\"\"\" Question: {question} Available tables with descriptions: {table_descriptions} List only the tables needed to answer this question, comma-separated: \"\"\" response = call_llm(prompt) return [t.strip() for t in response.split(\",\")] This dramatically reduces context size and improves accuracy on large databases. Production Deployment **Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user. **Caching**: Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes. **Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency. **User experience**: Show the generated SQL to users (with a \"view query\" option), and allow them to provide feedback on results. Conclusion Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members."
+      "articleBody": "Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Natural Language to SQL with LLMs Introduction Natural language to SQL (NL2SQL) is one of the most impactful applications of LLMs in data analytics. It enables non-technical users to query databases using plain English, democratizing data access across organizations. While early NL2SQL systems were fragile, modern LLMs can generate accurate SQL for complex analytical queries \u2014 when properly configured with schema context, safety guards, and validation. How NL2SQL Works The core architecture is straightforward: User Question \u2192 Context Assembly \u2192 LLM SQL Generation \u2192 Query Validation \u2192 Execution \u2192 Result Formatting The critical step is **context assembly** \u2014 providing the LLM with enough database metadata to generate correct SQL. Schema Context The LLM needs to understand your database schema. A well-structured schema prompt includes: CREATE TABLE customers ( customer_id INTEGER PRIMARY KEY, first_name VARCHAR(100), last_name VARCHAR(100), email VARCHAR(255), signup_date DATE, country VARCHAR(50), lifetime_value DECIMAL(10,2) ); CREATE TABLE orders ( order_id INTEGER PRIMARY KEY, customer_id INTEGER REFERENCES customers(customer_id), order_date TIMESTAMP, total_amount DECIMAL(10,2), status VARCHAR(20) -- pending, shipped, delivered, cancelled ); CREATE TABLE order_items ( item_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), product_name VARCHAR(200), quantity INTEGER, unit_price DECIMAL(10,2) ); **Key additions for better accuracy:** * Column descriptions: `-- customer's two-letter ISO country code` * Value examples: `-- status options: pending, shipped, delivered, cancelled` * Relationship hints: `-- join via customer_id to get customer details` * Index hints: `-- indexed on order_date for range queries` def build_schema_context(tables): context_parts = [] for table in tables: ddl = f\"CREATE TABLE {table.name} (\\n\" for col in table.columns: ddl += f\" {col.name} {col.type} -- {col.description}\\n\" ddl += \");\" context_parts.append(ddl) Add sample rows for context on data patterns if table.sample_rows: context_parts.append(f\"-- Sample row: {table.sample_rows[0]}\") return \"\\n\\n\".join(context_parts) Few-Shot Examples For complex schemas, provide question-SQL pairs relevant to the query: few_shot_examples = [ { \"question\": \"Show me the top 5 customers by total spending\", \"query\": \"\"\" SELECT c.first_name || ' ' || c.last_name AS customer_name, SUM(o.total_amount) AS total_spent FROM customers c JOIN orders o ON c.customer_id = o.customer_id WHERE o.status != 'cancelled' GROUP BY c.customer_id, c.first_name, c.last_name ORDER BY total_spent DESC LIMIT 5 \"\"\" }, { \"question\": \"What was the monthly revenue for 2025?\", \"query\": \"\"\" SELECT DATE_TRUNC('month', o.order_date) AS month, SUM(o.total_amount) AS revenue FROM orders o WHERE o.status = 'delivered' AND o.order_date >= '2025-01-01' AND o.order_date GROUP BY month ORDER BY month \"\"\" } ] **Dynamic example retrieval** using embedding similarity improves accuracy significantly. Store question-query pairs in a vector database and retrieve the most relevant ones for each new question. SQL Generation Prompt The complete prompt combines schema, examples, and safety instructions: def build_nl2sql_prompt(question, schema, examples, dialect=\"postgresql\"): prompt = f\"\"\"You are a {dialect} SQL expert. Convert natural language questions into SQL queries. Database Schema: {schema} Rules: 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use LIMIT for result size control 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Order results when ordering is implied 8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements Examples: \"\"\" for ex in examples: prompt += f\"\\nQ: {ex['question']}\\nSQL: {ex['query']}\\n\" prompt += f\"\\nQ: {question}\\nSQL:\" return prompt Query Validation Before executing generated SQL, validate it: def validate_sql(query, allowed_tables): errors = [] Safety check: no mutations forbidden_keywords = [\"DELETE\", \"UPDATE\", \"INSERT\", \"DROP\", \"ALTER\", \"TRUNCATE\", \"CREATE\"] for keyword in forbidden_keywords: if keyword in query.upper(): errors.append(f\"Forbidden operation: {keyword}\") Check table references parsed = sqlparse.parse(query)[0] used_tables = extract_tables(parsed) for table in used_tables: if table not in allowed_tables: errors.append(f\"Unauthorized table: {table}\") Syntax validation try: conn = get_dummy_connection(dialect) conn.execute(f\"EXPLAIN {query}\") except Exception as e: errors.append(f\"SQL syntax error: {str(e)}\") return errors Advanced Techniques Self-Correction Loop When the generated SQL fails or returns empty results, the system can self-correct: def nl2sql_with_correction(question, schema, max_attempts=3): for attempt in range(max_attempts): query = generate_sql(question, schema) errors = validate_sql(query) if not errors: try: results = execute_sql(query) if results: return format_results(question, query, results) else: feedback = \"The query returned no results. Try a broader search.\" except Exception as e: feedback = f\"Execution error: {str(e)}\" else: feedback = f\"Validation errors: {', '.join(errors)}\" question = f\"Original question: {question}\\nPrevious attempt failed: {feedback}\\nPlease fix the SQL query.\" Schema Linking For large schemas with many tables, first identify relevant tables before generating SQL: def identify_relevant_tables(question, all_tables, table_descriptions): prompt = f\"\"\" Question: {question} Available tables with descriptions: {table_descriptions} List only the tables needed to answer this question, comma-separated: \"\"\" response = call_llm(prompt) return [t.strip() for t in response.split(\",\")] This dramatically reduces context size and improves accuracy on large databases. Production Deployment **Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user. **Caching**: Cache common NL2SQL conversions to reduce LLM costs, but invalidate when schema changes. **Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency. **User experience**: Show the generated SQL to users (with a \"view query\" option), and allow them to provide feedback on results. Conclusion Natural language to SQL with LLMs is production-ready for analytical queries. The key success factors are high-quality schema context, relevant few-shot examples, robust query validation, and a self-correction loop. Start with a limited set of tables, measure query accuracy, and expand as you gain confidence. This technology is transforming data access, making self-serve analytics a reality for non-technical team members."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>Natural Language to SQL with LLMs</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  How NL2SQL Works</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -308,7 +346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>User Question → Context Assembly → LLM SQL Generation → Query Validation → Execution → Result Formatting</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Schema Context</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -412,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE customers (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -464,7 +520,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>first_name VARCHAR(100),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -516,7 +578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email VARCHAR(255),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -568,7 +636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>country VARCHAR(50),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -620,7 +694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -672,7 +752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>order_id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -724,7 +810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>order_date TIMESTAMP,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -776,6 +868,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>status VARCHAR(20) -- pending, shipped, delivered, cancelled</p>
 <br>
 <br>
@@ -802,7 +897,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -854,7 +955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>item_id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -906,7 +1013,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>product_name VARCHAR(200),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1071,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>unit_price DECIMAL(10,2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1010,7 +1129,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Key additions for better accuracy:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1059,7 +1184,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Value examples: `-- status options: pending, shipped, delivered, cancelled`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1105,7 +1236,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Index hints: `-- indexed on order_date for range queries`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1157,7 +1294,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_parts = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1209,7 +1352,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ddl = f"CREATE TABLE {table.name} (\n"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1261,7 +1410,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ddl += f" {col.name} {col.type} -- {col.description}\n"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1313,7 +1468,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>context_parts.append(ddl)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1365,7 +1526,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if table.sample_rows:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1417,7 +1584,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return "\n\n".join(context_parts)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1469,7 +1642,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For complex schemas, provide question-SQL pairs relevant to the query:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1521,7 +1700,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1573,6 +1758,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"query": """</p>
 <br>
 <br>
@@ -1599,7 +1787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1651,7 +1845,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SUM(o.total_amount) AS total_spent</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1703,7 +1903,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JOIN orders o ON c.customer_id = o.customer_id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1755,7 +1961,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY c.customer_id, c.first_name, c.last_name</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1807,6 +2019,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LIMIT 5</p>
 <br>
 <br>
@@ -1833,7 +2048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1885,7 +2106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1937,7 +2164,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"query": """</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1989,7 +2222,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DATE_TRUNC('month', o.order_date) AS month,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2041,7 +2280,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM orders o</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2338,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AND o.order_date >= '2025-01-01'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2145,7 +2396,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY month</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2197,7 +2454,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2249,7 +2512,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2301,7 +2570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  SQL Generation Prompt</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2353,7 +2628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def build_nl2sql_prompt(question, schema, examples, dialect="postgresql"):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2405,7 +2686,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Database Schema:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2457,6 +2744,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rules:</p>
 <br>
 <br>
@@ -2483,10 +2773,10 @@
 <br>
 <br>
 <br>
-<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations</p>
 <br>
 <br>
 <br>
+<p>1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Return ONLY the SQL query, no explanations</p>
 <br>
 <br>
 <br>
@@ -2509,13 +2799,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use proper JOINs based on foreign key relationships</p>
 <br>
 <br>
 <br>
@@ -2535,7 +2825,6 @@
 <br>
 <br>
 <br>
-<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks</p>
 <br>
 <br>
 <br>
@@ -2545,6 +2834,7 @@
 <br>
 <br>
 <br>
+<p>3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Handle NULLs appropriately with COALESCE or IS NULL checks</p>
 <br>
 <br>
 <br>
@@ -2561,7 +2851,6 @@
 <br>
 <br>
 <br>
-<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed</p>
 <br>
 <br>
 <br>
@@ -2574,6 +2863,7 @@
 <br>
 <br>
 <br>
+<p>4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use appropriate aggregate functions (COUNT, SUM, AVG) when needed</p>
 <br>
 <br>
 <br>
@@ -2587,7 +2877,6 @@
 <br>
 <br>
 <br>
-<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data</p>
 <br>
 <br>
 <br>
@@ -2603,6 +2892,7 @@
 <br>
 <br>
 <br>
+<p>5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Always include filters to exclude irrelevant data</p>
 <br>
 <br>
 <br>
@@ -2613,7 +2903,6 @@
 <br>
 <br>
 <br>
-<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use LIMIT for result size control</p>
 <br>
 <br>
 <br>
@@ -2632,6 +2921,7 @@
 <br>
 <br>
 <br>
+<p>6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Use LIMIT for result size control</p>
 <br>
 <br>
 <br>
@@ -2639,7 +2929,6 @@
 <br>
 <br>
 <br>
-<p>7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Order results when ordering is implied</p>
 <br>
 <br>
 <br>
@@ -2661,11 +2950,39 @@
 <br>
 <br>
 <br>
+<p>7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Order results when ordering is implied</p>
 <br>
 <br>
 <br>
 <br>
-<p>8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Never use DELETE, UPDATE, INSERT, DROP, or ALTER statements</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2717,7 +3034,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2769,7 +3092,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>prompt += f"\nQ: {ex['question']}\nSQL: {ex['query']}\n"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2821,7 +3150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return prompt</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2873,7 +3208,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Before executing generated SQL, validate it:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2925,7 +3266,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>errors = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2977,7 +3324,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>forbidden_keywords = ["DELETE", "UPDATE", "INSERT", "DROP", "ALTER", "TRUNCATE", "CREATE"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3029,7 +3382,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if keyword in query.upper():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3081,7 +3440,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Check table references</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3133,7 +3498,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>used_tables = extract_tables(parsed)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3185,7 +3556,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if table not in allowed_tables:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3237,6 +3614,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Syntax validation</h1>
 <br>
 <br>
@@ -3263,7 +3643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>try:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3315,6 +3701,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>conn.execute(f"EXPLAIN {query}")</p>
 <br>
 <br>
@@ -3341,7 +3730,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>except Exception as e:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3393,7 +3788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return errors</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3445,7 +3846,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Self-Correction Loop</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3497,7 +3904,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def nl2sql_with_correction(question, schema, max_attempts=3):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3549,7 +3962,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>query = generate_sql(question, schema)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3601,7 +4020,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if not errors:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3653,7 +4078,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = execute_sql(query)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3705,6 +4136,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return format_results(question, query, results)</p>
 <br>
 <br>
@@ -3731,7 +4165,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3783,7 +4223,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>except Exception as e:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3835,7 +4281,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3887,7 +4339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>question = f"Original question: {question}\nPrevious attempt failed: {feedback}\nPlease fix the SQL query."</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3939,7 +4397,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For large schemas with many tables, first identify relevant tables before generating SQL:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3991,7 +4455,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>prompt = f"""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4043,7 +4513,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Available tables with descriptions:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4095,7 +4571,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>List only the tables needed to answer this question, comma-separated:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4147,7 +4629,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = call_llm(prompt)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4199,7 +4687,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This dramatically reduces context size and improves accuracy on large databases.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4251,7 +4745,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Security**: Always use a read-only database user, set statement timeouts, and implement rate limiting per user.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4303,7 +4803,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Monitoring**: Log all generated queries and user feedback. Track query success rate, execution time, and correction frequency.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4355,7 +4861,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Conclusion</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4393,9 +4905,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">

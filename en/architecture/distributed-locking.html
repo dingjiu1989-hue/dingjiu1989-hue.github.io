@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/distributed-locking.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1203",
+      "wordCount": "1263",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/distributed-locking.html"},
-      "articleBody": "Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. Lease-based locking is the most common pattern. The lock has a time-to-live (TTL). The holder must periodically renew the lease before it expires. If the holder crashes or is partitioned, the lease expires and another process can acquire the lock. This prevents permanent lock holder failures. The critical implementation detail is choosing an appropriate lease duration \u2014 too short causes unnecessary lock releases, too long extends recovery time after holder failure. Redis-based locking is popular for its simplicity and performance. SET NX EX implements a basic distributed lock atomically \u2014 set the key only if it does not exist, with an expiration. The Redlock algorithm extends this to multiple Redis nodes for fault tolerance. However, Redlock has been subject to debate. Martin Kleppmann's analysis identified scenarios where clock drift or process pauses (garbage collection) can violate mutual exclusion guarantees. ZooKeeper provides a stronger consistency model through its ZAB consensus protocol. Locks are implemented using ephemeral sequential znodes. Each process creates an ephemeral znode under a lock path. The process with the lowest sequence number holds the lock. Others watch the previous znode and get notified when it disappears. This provides strict mutual exclusion without expiration timing issues \u2014 the lock is released when the session ends, which ZooKeeper detects through heartbeats. The ZooKeeper approach handles process pauses correctly. If a lock holder experiences a long garbage collection pause, ZooKeeper will detect the heartbeat timeout and release the lock. Other processes can then acquire it. The original holder, upon resuming, will discover its lock is gone and can react accordingly. This eliminates the clock drift vulnerability inherent in Redis-based approaches. Etcd locks follow a similar pattern to ZooKeeper. Etcd offers the concurrency package with mutexes that use lease-based mechanisms. The lock is associated with a lease, and the lease TTL is refreshed by the holder. Session expiry handles holder failures. Etcd's Raft-based consensus ensures strong consistency. For Kubernetes-native environments, etcd locks are the natural choice. Fencing tokens address the fundamental problem with distributed locks: preventing stale lock holders from accessing the shared resource. A fencing token is a monotonically increasing number issued to the lock holder. The holder presents this token with each write request to the resource. The resource rejects writes with outdated tokens. Without fencing, a process that holds a stale lock (due to pause or partition) could corrupt data when it resumes and writes to the resource. Implementing fencing requires the resource to check the token. For example, a database table could have a lock_token column. Each write includes the token, and the database rejects writes where the stored token is higher than the provided one. This ensures that even if a stale lock holder attempts to write, the write is rejected. The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale."
+      "articleBody": "Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed Locking Mechanisms Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. Lease-based locking is the most common pattern. The lock has a time-to-live (TTL). The holder must periodically renew the lease before it expires. If the holder crashes or is partitioned, the lease expires and another process can acquire the lock. This prevents permanent lock holder failures. The critical implementation detail is choosing an appropriate lease duration \u2014 too short causes unnecessary lock releases, too long extends recovery time after holder failure. Redis-based locking is popular for its simplicity and performance. SET NX EX implements a basic distributed lock atomically \u2014 set the key only if it does not exist, with an expiration. The Redlock algorithm extends this to multiple Redis nodes for fault tolerance. However, Redlock has been subject to debate. Martin Kleppmann's analysis identified scenarios where clock drift or process pauses (garbage collection) can violate mutual exclusion guarantees. ZooKeeper provides a stronger consistency model through its ZAB consensus protocol. Locks are implemented using ephemeral sequential znodes. Each process creates an ephemeral znode under a lock path. The process with the lowest sequence number holds the lock. Others watch the previous znode and get notified when it disappears. This provides strict mutual exclusion without expiration timing issues \u2014 the lock is released when the session ends, which ZooKeeper detects through heartbeats. The ZooKeeper approach handles process pauses correctly. If a lock holder experiences a long garbage collection pause, ZooKeeper will detect the heartbeat timeout and release the lock. Other processes can then acquire it. The original holder, upon resuming, will discover its lock is gone and can react accordingly. This eliminates the clock drift vulnerability inherent in Redis-based approaches. Etcd locks follow a similar pattern to ZooKeeper. Etcd offers the concurrency package with mutexes that use lease-based mechanisms. The lock is associated with a lease, and the lease TTL is refreshed by the holder. Session expiry handles holder failures. Etcd's Raft-based consensus ensures strong consistency. For Kubernetes-native environments, etcd locks are the natural choice. Fencing tokens address the fundamental problem with distributed locks: preventing stale lock holders from accessing the shared resource. A fencing token is a monotonically increasing number issued to the lock holder. The holder presents this token with each write request to the resource. The resource rejects writes with outdated tokens. Without fencing, a process that holds a stale lock (due to pause or partition) could corrupt data when it resumes and writes to the resource. Implementing fencing requires the resource to check the token. For example, a database table could have a lock_token column. Each write includes the token, and the database rejects writes where the stored token is higher than the provided one. This ensures that even if a stale lock holder attempts to write, the write is rejected. The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. Optimistic concurrency is an alternative worth considering. Rather than acquiring a distributed lock, the application performs its operation and checks for conflicts. If a conflict is detected (row version, etag), it retries. This avoids distributed locking entirely for workloads where contention is low. Many distributed systems find that optimistic approaches with appropriate retry logic outperform pessimistic locking at scale."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Distributed Locking Mechanisms</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Distributed locking coordinates access to shared resources across multiple processes or machines. While single-node locking is well-understood, distributed environments introduce unique challenges: network partitions, process pauses, clock drift, and partial failures. Different locking approaches offer distinct tradeoffs between consistency, availability, and performance. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Redis-based locking is popular for its simplicity and performance. SET NX EX implements a basic distributed lock atomically — set the key only if it does not exist, with an expiration. The Redlock algorithm extends this to multiple Redis nodes for fault tolerance. However, Redlock has been subject to debate. Martin Kleppmann's analysis identified scenarios where clock drift or process pauses (garbage collection) can violate mutual exclusion guarantees. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The ZooKeeper approach handles process pauses correctly. If a lock holder experiences a long garbage collection pause, ZooKeeper will detect the heartbeat timeout and release the lock. Other processes can then acquire it. The original holder, upon resuming, will discover its lock is gone and can react accordingly. This eliminates the clock drift vulnerability inherent in Redis-based approaches. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -296,7 +337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Fencing tokens address the fundamental problem with distributed locks: preventing stale lock holders from accessing the shared resource. A fencing token is a monotonically increasing number issued to the lock holder. The holder presents this token with each write request to the resource. The resource rejects writes with outdated tokens. Without fencing, a process that holds a stale lock (due to pause or partition) could corrupt data when it resumes and writes to the resource. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The choice between locking mechanisms depends on consistency requirements. ZooKeeper and etcd provide strong consistency and proper fencing but require operating a consensus cluster. Redis provides high performance and availability but with weaker guarantees under failure scenarios. For idempotent operations where the cost of duplicate execution is acceptable, Redis locks suffice. For strictly exclusive access to shared resources, ZooKeeper or etcd with fencing tokens is necessary. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -369,8 +422,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
-      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

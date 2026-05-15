@@ -115,6 +115,9 @@ BOARD_NAMES_EN = {
     "tools": "Tool Recommendations",
     "ai": "AI & LLM Tutorials",
     "compare": "Tool Comparisons",
+    "security": "Security Guides",
+    "database": "Database Tutorials",
+    "architecture": "Architecture Patterns",
 }
 BOARD_NAMES_CN = {
     "tech": "技术教程",
@@ -122,6 +125,9 @@ BOARD_NAMES_CN = {
     "tools": "工具推荐",
     "ai": "AI教程",
     "compare": "对比评测",
+    "security": "安全指南",
+    "database": "数据库教程",
+    "architecture": "架构模式",
 }
 
 
@@ -146,16 +152,16 @@ def gen_llms_txt():
         "",
     ]
 
-    for board_id in ["tech", "sidehustle", "tools", "ai", "compare"]:
-        board = next((b for b in en_data["boards"] if b["id"] == board_id), None)
-        if not board:
-            continue
+    for board in en_data["boards"]:
         posts = board["posts"]
-        lines.append(f"## {BOARD_NAMES_EN[board_id]} ({len(posts)} articles)")
+        if not posts:
+            continue
+        board_name = BOARD_NAMES_EN.get(board["id"], board["id"].title())
+        lines.append(f"## {board_name} ({len(posts)} articles)")
         lines.append("")
         for art in posts:
-            url = f"{BASE}/en/{board_id}/{art['slug']}.html"
-            md_url = f"{BASE}/md/en/{board_id}/{art['slug']}.md"
+            url = f"{BASE}/en/{board['id']}/{art['slug']}.html"
+            md_url = f"{BASE}/md/en/{board['id']}/{art['slug']}.md"
             desc = art.get("description", "")[:120]
             lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
             if desc:
@@ -211,16 +217,16 @@ def gen_en_llms_txt(en_data):
         "",
     ]
 
-    for board_id in ["tech", "sidehustle", "tools", "ai", "compare"]:
-        board = next((b for b in en_data["boards"] if b["id"] == board_id), None)
-        if not board:
-            continue
+    for board in en_data["boards"]:
         posts = board["posts"]
-        lines.append(f"## {BOARD_NAMES_EN[board_id]} ({len(posts)} articles)")
+        if not posts:
+            continue
+        board_name = BOARD_NAMES_EN.get(board["id"], board["id"].title())
+        lines.append(f"## {board_name} ({len(posts)} articles)")
         lines.append("")
         for art in posts:
-            url = f"{BASE}/en/{board_id}/{art['slug']}.html"
-            md_url = f"{BASE}/md/en/{board_id}/{art['slug']}.md"
+            url = f"{BASE}/en/{board['id']}/{art['slug']}.html"
+            md_url = f"{BASE}/md/en/{board['id']}/{art['slug']}.md"
             desc = art.get("description", "")[:120]
             lines.append(f"- [{art['title']}]({url}) — [md]({md_url})")
             if desc:
@@ -276,6 +282,12 @@ def gen_llms_full():
             body = _extract(html)
             if not body:
                 continue
+            # Clean up: strip article title H1s (already in metadata header),
+            # compress consecutive blank lines, strip trailing whitespace
+            body = body.replace(f'# {art["title"]}\n', '')
+            body = body.replace(f'# {art["title"]} \n', '')
+            body = re.sub(r'\n{3,}', '\n\n', body)
+            body = body.strip()
             full_lines.append(f"## {art['title']}")
             full_lines.append(f"URL: {BASE}/en/{board['id']}/{art['slug']}.html")
             full_lines.append(f"Date: {art['date']} | Board: {board['id']}")
@@ -404,6 +416,7 @@ Allow: /
 # Bing's index powers ChatGPT, Copilot, DuckDuckGo, and other AI search.
 
 Sitemap: https://dingjiu1989-hue.github.io/sitemap.xml
+Sitemap: https://dingjiu1989-hue.github.io/images/sitemap.xml
 """
     (ROOT / "robots.txt").write_text(robots, encoding="utf-8")
     print("  robots.txt updated: 16 AI crawler rules")

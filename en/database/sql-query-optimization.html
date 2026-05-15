@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/sql-query-optimization.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4109",
+      "wordCount": "4741",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/sql-query-optimization-d57"
       ],
-      "articleBody": "SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization Why Query Optimization Matters A poorly written query can take seconds or minutes instead of milliseconds, consuming database resources and degrading the experience for all users. Optimizing queries is often the highest-ROI performance improvement you can make because it requires no infrastructure changes. Understanding EXPLAIN Every database has a query planner that decides how to execute your SQL. EXPLAIN shows you the plan. EXPLAIN ANALYZE SELECT u.name, COUNT(o.id) AS order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE u.created_at > '2026-01-01' GROUP BY u.id, u.name HAVING COUNT(o.id) > 5; Output analysis: Hash Join (cost=125.4..892.1 rows=342 width=72) Hash Cond: (u.id = o.user_id) -> Seq Scan on users u (cost=0.0..423.1 rows=1250 width=36) Filter: (created_at > '2026-01-01') -> Hash (cost=89.2..89.2 rows=2892 width=8) -> Seq Scan on orders o (cost=0.0..89.2 rows=2892 width=8) Key metrics to watch: | Metric | What It Means | Good | Bad | |--------|---------------|------|-----| | `cost` | Estimated cost (arbitrary units) | Low | High | | `rows` | Estimated rows returned | Accurate | Off by 10x+ | | `actual time` | Actual execution time | ms | seconds | | `Seq Scan` | Full table scan | Small tables | Large tables | | `Sort` | Explicit sort operation | Sorted data | Large sorts to disk | Indexing for Query Performance Covering Indexes An index that contains all columns needed by a query, enabling index-only scans: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query needs: id, email, status, created_at \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Instead of: CREATE INDEX idx_users_status ON users(status); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a covering index: CREATE INDEX idx_users_status_covering ON users(status) INCLUDE (email, created_at); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now this query uses an index-only scan: SELECT email, created_at FROM users WHERE status = 'active' ORDER BY created_at DESC; JOIN Optimization Nested Loop vs Hash Join vs Merge Join | Join Type | When It Is Used | Best For | |-----------|-----------------|----------| | Nested Loop | One table is small, other is indexed | Small result sets | | Hash Join | No useful index, medium tables | Unindexed joins | | Merge Join | Both tables sorted on join key | Large sorted datasets | Optimizing JOINs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- INEFFICIENT: Joining without indexes SELECT * FROM orders o JOIN customers c ON o.customer_id = c.id WHERE c.country = 'US'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index on the join column CREATE INDEX idx_orders_customer ON orders(customer_id); CREATE INDEX idx_customers_country ON customers(country); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now the planner can use indexes effectively Subquery vs CTE vs JOIN \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 1: Subquery SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count FROM users; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 2: Lateral join (often fastest) SELECT u.name, sq.order_count FROM users u LEFT JOIN LATERAL ( SELECT COUNT(*) AS order_count FROM orders WHERE user_id = u.id ) sq ON true; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 3: Regular JOIN + GROUP BY SELECT u.name, COUNT(o.id) AS order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id, u.name; For correlated subqueries, LATERAL joins are often the best choice because they can use indexes efficiently. Avoiding Common Anti-Patterns SELECT * (Especially with JOINs) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Selects all columns, may force heap lookups SELECT * FROM users JOIN orders ON users.id = orders.user_id; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Select only needed columns SELECT users.name, orders.total FROM users JOIN orders ON users.id = orders.user_id; Functions on Indexed Columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Function prevents index use SELECT * FROM users WHERE LOWER(email) = 'alice@example.com'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Use a proper case-insensitive index or column CREATE INDEX idx_users_email_lower ON users(LOWER(email)); SELECT * FROM users WHERE LOWER(email) = 'alice@example.com'; Implicit Type Conversion \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Type conversion prevents index use SELECT * FROM orders WHERE order_date = '2026-05-11'; -- text vs date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Explicit cast SELECT * FROM orders WHERE order_date = DATE '2026-05-11'; Pagination with OFFSET \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: OFFSET re-scans skipped rows SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 10000; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Keyset pagination (seek method) SELECT * FROM orders WHERE id > 10000 ORDER BY id LIMIT 20; Query Rewriting Examples \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BEFORE (Slow - 12s) SELECT p.*, (SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.rating >= 4) AS good_reviews FROM products p WHERE p.category_id = 5; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- AFTER (Fast - 0.3s) SELECT p.*, COALESCE(gr.count, 0) AS good_reviews FROM products p LEFT JOIN ( SELECT product_id, COUNT(*) AS count FROM reviews WHERE rating >= 4 GROUP BY product_id ) gr ON p.id = gr.product_id WHERE p.category_id = 5; Performance Budgets | Query Type | Target Latency | Max Rows Returned | |------------|---------------|-------------------| | Simple lookup (by PK) | Summary SQL query optimization starts with understanding the query plan through EXPLAIN ANALYZE. Ensure appropriate indexes exist for your query patterns, prefer covering indexes for index-only scans, avoid functions on indexed columns, replace OFFSET pagination with keyset pagination, and rewrite correlated subqueries as joins or lateral joins. Measure before and after each optimization to confirm the improvement."
+      "articleBody": "SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization SQL Query Optimization Why Query Optimization Matters A poorly written query can take seconds or minutes instead of milliseconds, consuming database resources and degrading the experience for all users. Optimizing queries is often the highest-ROI performance improvement you can make because it requires no infrastructure changes. Understanding EXPLAIN Every database has a query planner that decides how to execute your SQL. EXPLAIN shows you the plan. EXPLAIN ANALYZE SELECT u.name, COUNT(o.id) AS order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id WHERE u.created_at > '2026-01-01' GROUP BY u.id, u.name HAVING COUNT(o.id) > 5; Output analysis: Hash Join (cost=125.4..892.1 rows=342 width=72) Hash Cond: (u.id = o.user_id) -> Seq Scan on users u (cost=0.0..423.1 rows=1250 width=36) Filter: (created_at > '2026-01-01') -> Hash (cost=89.2..89.2 rows=2892 width=8) -> Seq Scan on orders o (cost=0.0..89.2 rows=2892 width=8) Key metrics to watch: | Metric | What It Means | Good | Bad | |--------|---------------|------|-----| | `cost` | Estimated cost (arbitrary units) | Low | High | | `rows` | Estimated rows returned | Accurate | Off by 10x+ | | `actual time` | Actual execution time | ms | seconds | | `Seq Scan` | Full table scan | Small tables | Large tables | | `Sort` | Explicit sort operation | Sorted data | Large sorts to disk | Indexing for Query Performance Covering Indexes An index that contains all columns needed by a query, enabling index-only scans: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query needs: id, email, status, created_at \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Instead of: CREATE INDEX idx_users_status ON users(status); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a covering index: CREATE INDEX idx_users_status_covering ON users(status) INCLUDE (email, created_at); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now this query uses an index-only scan: SELECT email, created_at FROM users WHERE status = 'active' ORDER BY created_at DESC; JOIN Optimization Nested Loop vs Hash Join vs Merge Join | Join Type | When It Is Used | Best For | |-----------|-----------------|----------| | Nested Loop | One table is small, other is indexed | Small result sets | | Hash Join | No useful index, medium tables | Unindexed joins | | Merge Join | Both tables sorted on join key | Large sorted datasets | Optimizing JOINs \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- INEFFICIENT: Joining without indexes SELECT * FROM orders o JOIN customers c ON o.customer_id = c.id WHERE c.country = 'US'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index on the join column CREATE INDEX idx_orders_customer ON orders(customer_id); CREATE INDEX idx_customers_country ON customers(country); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now the planner can use indexes effectively Subquery vs CTE vs JOIN \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 1: Subquery SELECT name, (SELECT COUNT(*) FROM orders WHERE user_id = users.id) AS order_count FROM users; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 2: Lateral join (often fastest) SELECT u.name, sq.order_count FROM users u LEFT JOIN LATERAL ( SELECT COUNT(*) AS order_count FROM orders WHERE user_id = u.id ) sq ON true; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 3: Regular JOIN + GROUP BY SELECT u.name, COUNT(o.id) AS order_count FROM users u LEFT JOIN orders o ON u.id = o.user_id GROUP BY u.id, u.name; For correlated subqueries, LATERAL joins are often the best choice because they can use indexes efficiently. Avoiding Common Anti-Patterns SELECT * (Especially with JOINs) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Selects all columns, may force heap lookups SELECT * FROM users JOIN orders ON users.id = orders.user_id; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Select only needed columns SELECT users.name, orders.total FROM users JOIN orders ON users.id = orders.user_id; Functions on Indexed Columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Function prevents index use SELECT * FROM users WHERE LOWER(email) = 'alice@example.com'; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Use a proper case-insensitive index or column CREATE INDEX idx_users_email_lower ON users(LOWER(email)); SELECT * FROM users WHERE LOWER(email) = 'alice@example.com'; Implicit Type Conversion \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Type conversion prevents index use SELECT * FROM orders WHERE order_date = '2026-05-11'; -- text vs date \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Explicit cast SELECT * FROM orders WHERE order_date = DATE '2026-05-11'; Pagination with OFFSET \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: OFFSET re-scans skipped rows SELECT * FROM orders ORDER BY id LIMIT 20 OFFSET 10000; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Keyset pagination (seek method) SELECT * FROM orders WHERE id > 10000 ORDER BY id LIMIT 20; Query Rewriting Examples \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BEFORE (Slow - 12s) SELECT p.*, (SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.rating >= 4) AS good_reviews FROM products p WHERE p.category_id = 5; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- AFTER (Fast - 0.3s) SELECT p.*, COALESCE(gr.count, 0) AS good_reviews FROM products p LEFT JOIN ( SELECT product_id, COUNT(*) AS count FROM reviews WHERE rating >= 4 GROUP BY product_id ) gr ON p.id = gr.product_id WHERE p.category_id = 5; Performance Budgets | Query Type | Target Latency | Max Rows Returned | |------------|---------------|-------------------| | Simple lookup (by PK) | Summary SQL query optimization starts with understanding the query plan through EXPLAIN ANALYZE. Ensure appropriate indexes exist for your query patterns, prefer covering indexes for index-only scans, avoid functions on indexed columns, replace OFFSET pagination with keyset pagination, and rewrite correlated subqueries as joins or lateral joins. Measure before and after each optimization to confirm the improvement."
     }
     </script>
     <script type="application/ld+json">
@@ -178,7 +178,36 @@
 <br>
 <br>
 <br>
+<h1>SQL Query Optimization</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Query Optimization Matters </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -218,6 +247,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Understanding EXPLAIN </p>
 <br>
 <br>
@@ -238,7 +270,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Every database has a query planner that decides how to execute your SQL. EXPLAIN shows you the plan. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -284,7 +322,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT u.name, COUNT(o.id) AS order_count</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -330,7 +374,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LEFT JOIN orders o ON u.id = o.user_id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -376,7 +426,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY u.id, u.name</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -422,7 +478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Output analysis: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -468,7 +530,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Hash Cond: (u.id = o.user_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -514,7 +582,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Filter: (created_at > '2026-01-01')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -560,7 +634,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>-> Seq Scan on orders o (cost=0.0..89.2 rows=2892 width=8)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -603,7 +683,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Metric | What It Means | Good | Bad | |--------|---------------|------|-----| | `cost` | Estimated cost (arbitrary units) | Low | High | | `rows` | Estimated rows returned | Accurate | Off by 10x+ | | `actual time` | Actual execution time | ms | seconds | | `Seq Scan` | Full table scan | Small tables | Large tables | | `Sort` | Explicit sort operation | Sorted data | Large sorts to disk | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -643,7 +729,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Covering Indexes </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -686,7 +778,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query needs: id, email, status, created_at</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query needs: id, email, status, created_at</p>
 <br>
 <br>
 <br>
@@ -709,7 +804,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Instead of:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Instead of:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -755,7 +856,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a covering index:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a covering index:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -801,6 +908,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON users(status) INCLUDE (email, created_at);</p>
 <br>
 <br>
@@ -824,7 +934,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now this query uses an index-only scan:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now this query uses an index-only scan:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -870,7 +986,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -916,7 +1038,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ORDER BY created_at DESC;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -959,6 +1087,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Nested Loop vs Hash Join vs Merge Join </p>
 <br>
 <br>
@@ -979,7 +1110,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Join Type | When It Is Used | Best For | |-----------|-----------------|----------| | Nested Loop | One table is small, other is indexed | Small result sets | | Hash Join | No useful index, medium tables | Unindexed joins | | Merge Join | Both tables sorted on join key | Large sorted datasets | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1022,7 +1159,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- INEFFICIENT: Joining without indexes</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- INEFFICIENT: Joining without indexes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1068,7 +1211,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM orders o</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1114,6 +1263,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE c.country = 'US';</p>
 <br>
 <br>
@@ -1137,7 +1289,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index on the join column</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Add index on the join column</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1183,6 +1341,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE INDEX idx_customers_country ON customers(country);</p>
 <br>
 <br>
@@ -1206,7 +1367,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now the planner can use indexes effectively</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Now the planner can use indexes effectively</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1252,7 +1419,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 1: Subquery</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 1: Subquery</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1298,6 +1471,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users;</p>
 <br>
 <br>
@@ -1321,7 +1497,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 2: Lateral join (often fastest)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 2: Lateral join (often fastest)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1367,7 +1549,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users u</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1413,7 +1601,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT COUNT(*) AS order_count</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1459,7 +1653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE user_id = u.id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1505,7 +1705,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 3: Regular JOIN + GROUP BY</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Option 3: Regular JOIN + GROUP BY</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1551,7 +1757,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users u</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1597,7 +1809,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GROUP BY u.id, u.name;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1640,7 +1858,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Avoiding Common Anti-Patterns </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1683,7 +1907,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Selects all columns, may force heap lookups</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Selects all columns, may force heap lookups</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1729,6 +1959,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>JOIN orders ON users.id = orders.user_id;</p>
 <br>
 <br>
@@ -1752,7 +1985,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Select only needed columns</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Select only needed columns</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1798,7 +2037,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1844,6 +2089,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Functions on Indexed Columns </p>
 <br>
 <br>
@@ -1867,7 +2115,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Function prevents index use</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Function prevents index use</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1913,6 +2167,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE LOWER(email) = 'alice@example.com';</p>
 <br>
 <br>
@@ -1936,7 +2193,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Use a proper case-insensitive index or column</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Use a proper case-insensitive index or column</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1982,7 +2245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM users WHERE LOWER(email) = 'alice@example.com';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2028,7 +2297,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Type conversion prevents index use</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: Type conversion prevents index use</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2052,6 +2327,9 @@
 <br>
 <br>
 <p>SELECT * FROM orders</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2097,7 +2375,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Explicit cast</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Explicit cast</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2121,6 +2405,9 @@
 <br>
 <br>
 <p>SELECT * FROM orders</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2166,6 +2453,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pagination with OFFSET </p>
 <br>
 <br>
@@ -2189,7 +2479,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: OFFSET re-scans skipped rows</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BAD: OFFSET re-scans skipped rows</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2235,7 +2531,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Keyset pagination (seek method)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- GOOD: Keyset pagination (seek method)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2281,7 +2583,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE id > 10000</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2327,7 +2635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>LIMIT 20;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2373,7 +2687,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BEFORE (Slow - 12s)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- BEFORE (Slow - 12s)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2419,7 +2739,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>(SELECT COUNT(*) FROM reviews r WHERE r.product_id = p.id AND r.rating >= 4) AS good_reviews</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2465,6 +2791,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE p.category_id = 5;</p>
 <br>
 <br>
@@ -2488,7 +2817,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- AFTER (Fast - 0.3s)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- AFTER (Fast - 0.3s)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2534,7 +2869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM products p</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2580,7 +2921,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT product_id, COUNT(*) AS count</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2626,7 +2973,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE rating >= 4</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2672,7 +3025,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) gr ON p.id = gr.product_id</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2718,7 +3077,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Performance Budgets </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2758,7 +3123,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2791,8 +3162,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

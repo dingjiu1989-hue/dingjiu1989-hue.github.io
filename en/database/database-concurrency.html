@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-concurrency.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3391",
+      "wordCount": "3873",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-concurrency.html"},
-      "articleBody": "Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Modern databases must handle thousands of concurrent transactions reading and writing the same rows. Concurrency control mechanisms ensure correctness while maximizing throughput. PostgreSQL's approach is built on Multi-Version Concurrency Control (MVCC). Multi-Version Concurrency Control (MVCC) MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time. Every row in PostgreSQL carries two hidden system columns: `xmin` (the transaction ID that created this version) and `xmax` (the transaction ID that deleted or updated this version). When a transaction reads a row, it checks visibility rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID This design means **readers never block writers, and writers never block readers**. It is the single most important property for OLTP workloads. Transaction Snapshots A transaction's snapshot captures which transactions were in-progress at the moment the snapshot was taken. The `REPEATABLE READ` isolation level uses snapshot semantics: BEGIN ISOLATION LEVEL REPEATABLE READ; SELECT * FROM accounts WHERE id = 1; -- sees snapshot at this moment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1 SELECT * FROM accounts WHERE id = 1; -- still sees the original snapshot COMMIT; Optimistic vs Pessimistic Locking Optimistic Locking Optimistic locking assumes conflicts are rare. The application reads a row, performs work, and checks that the row has not changed before writing. It is typically implemented with a version column: CREATE TABLE inventory ( id INTEGER PRIMARY KEY, quantity INTEGER, version INTEGER DEFAULT 1 ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity UPDATE inventory SET quantity = 5, version = version + 1 WHERE id = 42 AND version = 3; -- version from the read \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row \u2192 retry Optimistic locking works well when contention is low and transactions are short. It avoids holding database locks between application operations. Pessimistic Locking Pessimistic locking assumes conflicts are likely and acquires locks proactively: BEGIN; SELECT * FROM inventory WHERE id = 42 FOR UPDATE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write UPDATE inventory SET quantity = 5 WHERE id = 42; COMMIT; -- lock released PostgreSQL offers three row-level lock modes: * `FOR UPDATE`: Prevents other transactions from updating or deleting the row. * `FOR NO KEY UPDATE`: Weaker variant that allows concurrent key-column updates. * `FOR SHARE`: Allows concurrent reads but prevents updates. * `FOR KEY SHARE`: Prevents key-column deletions only. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency SELECT pg_advisory_lock(12345); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section SELECT pg_advisory_unlock(12345); Deadlock Detection A deadlock occurs when two or more transactions each hold locks the other needs: Transaction A: locks row 1, waits for row 2 Transaction B: locks row 2, waits for row 1 PostgreSQL's deadlock detector runs periodically (every `deadlock_timeout`, default 1 second). When it detects a cycle, it aborts one transaction: ERROR: deadlock detected DETAIL: Process 123 waits for ShareLock on transaction 456; blocked by process 456. Process 456 waits for ShareLock on transaction 123; blocked by process 123. HINT: See server log for query details. To minimize deadlocks: * **Access tables in a consistent order** across all transactions. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: SELECT * FROM inventory WHERE id = 42 FOR UPDATE NOWAIT; SELECT * FROM jobs ORDER BY priority LIMIT 1 FOR UPDATE SKIP LOCKED; Lock Monitoring The `pg_locks` view shows current lock state: SELECT locktype, relation::regclass, mode, granted, pid, virtualtransaction FROM pg_locks WHERE NOT granted; This query reveals which backends are waiting for locks and who holds them. The `pg_blocking_pids()` function helps identify blockers: SELECT pid, pg_blocking_pids(pid) AS blocked_by, state, query FROM pg_stat_activity WHERE state = 'active'; MVCC Bloat MVCC's strength creates a weakness: dead row versions accumulate. Old row versions remain until they become visible to no active snapshot. This is called bloat. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat SELECT schemaname, tablename, n_dead_tup, n_live_tup, ROUND(n_dead_tup * 100.0 / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_pct FROM pg_stat_user_tables ORDER BY dead_pct DESC; `VACUUM` reclaims space from dead tuples. `VACUUM FREEZE` prevents transaction ID wraparound, an operational imperative in PostgreSQL: VACUUM ANALYZE accounts; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup: VACUUM (VERBOSE, INDEX_CLEANUP ON) accounts; Summary PostgreSQL's MVCC provides the foundation: readers and writers coexist without blocking. On top of MVCC, row-level locks enable pessimistic patterns when needed. The key is choosing the right strategy for each operation and monitoring for deadlocks, long-held locks, and MVCC bloat. Proper concurrency control is what separates a smoothly scaling application from one that stalls under load."
+      "articleBody": "Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Database Concurrency Control: MVCC, Locking, and Deadlocks Modern databases must handle thousands of concurrent transactions reading and writing the same rows. Concurrency control mechanisms ensure correctness while maximizing throughput. PostgreSQL's approach is built on Multi-Version Concurrency Control (MVCC). Multi-Version Concurrency Control (MVCC) MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time. Every row in PostgreSQL carries two hidden system columns: `xmin` (the transaction ID that created this version) and `xmax` (the transaction ID that deleted or updated this version). When a transaction reads a row, it checks visibility rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID This design means **readers never block writers, and writers never block readers**. It is the single most important property for OLTP workloads. Transaction Snapshots A transaction's snapshot captures which transactions were in-progress at the moment the snapshot was taken. The `REPEATABLE READ` isolation level uses snapshot semantics: BEGIN ISOLATION LEVEL REPEATABLE READ; SELECT * FROM accounts WHERE id = 1; -- sees snapshot at this moment \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1 SELECT * FROM accounts WHERE id = 1; -- still sees the original snapshot COMMIT; Optimistic vs Pessimistic Locking Optimistic Locking Optimistic locking assumes conflicts are rare. The application reads a row, performs work, and checks that the row has not changed before writing. It is typically implemented with a version column: CREATE TABLE inventory ( id INTEGER PRIMARY KEY, quantity INTEGER, version INTEGER DEFAULT 1 ); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity UPDATE inventory SET quantity = 5, version = version + 1 WHERE id = 42 AND version = 3; -- version from the read \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row \u2192 retry Optimistic locking works well when contention is low and transactions are short. It avoids holding database locks between application operations. Pessimistic Locking Pessimistic locking assumes conflicts are likely and acquires locks proactively: BEGIN; SELECT * FROM inventory WHERE id = 42 FOR UPDATE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write UPDATE inventory SET quantity = 5 WHERE id = 42; COMMIT; -- lock released PostgreSQL offers three row-level lock modes: * `FOR UPDATE`: Prevents other transactions from updating or deleting the row. * `FOR NO KEY UPDATE`: Weaker variant that allows concurrent key-column updates. * `FOR SHARE`: Allows concurrent reads but prevents updates. * `FOR KEY SHARE`: Prevents key-column deletions only. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency SELECT pg_advisory_lock(12345); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section SELECT pg_advisory_unlock(12345); Deadlock Detection A deadlock occurs when two or more transactions each hold locks the other needs: Transaction A: locks row 1, waits for row 2 Transaction B: locks row 2, waits for row 1 PostgreSQL's deadlock detector runs periodically (every `deadlock_timeout`, default 1 second). When it detects a cycle, it aborts one transaction: ERROR: deadlock detected DETAIL: Process 123 waits for ShareLock on transaction 456; blocked by process 456. Process 456 waits for ShareLock on transaction 123; blocked by process 123. HINT: See server log for query details. To minimize deadlocks: * **Access tables in a consistent order** across all transactions. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: SELECT * FROM inventory WHERE id = 42 FOR UPDATE NOWAIT; SELECT * FROM jobs ORDER BY priority LIMIT 1 FOR UPDATE SKIP LOCKED; Lock Monitoring The `pg_locks` view shows current lock state: SELECT locktype, relation::regclass, mode, granted, pid, virtualtransaction FROM pg_locks WHERE NOT granted; This query reveals which backends are waiting for locks and who holds them. The `pg_blocking_pids()` function helps identify blockers: SELECT pid, pg_blocking_pids(pid) AS blocked_by, state, query FROM pg_stat_activity WHERE state = 'active'; MVCC Bloat MVCC's strength creates a weakness: dead row versions accumulate. Old row versions remain until they become visible to no active snapshot. This is called bloat. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat SELECT schemaname, tablename, n_dead_tup, n_live_tup, ROUND(n_dead_tup * 100.0 / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_pct FROM pg_stat_user_tables ORDER BY dead_pct DESC; `VACUUM` reclaims space from dead tuples. `VACUUM FREEZE` prevents transaction ID wraparound, an operational imperative in PostgreSQL: VACUUM ANALYZE accounts; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup: VACUUM (VERBOSE, INDEX_CLEANUP ON) accounts; Summary PostgreSQL's MVCC provides the foundation: readers and writers coexist without blocking. On top of MVCC, row-level locks enable pessimistic patterns when needed. The key is choosing the right strategy for each operation and monitoring for deadlocks, long-held locks, and MVCC bloat. Proper concurrency control is what separates a smoothly scaling application from one that stalls under load."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Database Concurrency Control: MVCC, Locking, and Deadlocks</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database Concurrency Control: MVCC, Locking, and Deadlocks </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Multi-Version Concurrency Control (MVCC) </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -279,7 +317,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and <= current transaction ID</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and <= current transaction ID</p>
 <br>
 <br>
 <br>
@@ -302,7 +343,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -345,6 +392,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transaction Snapshots </p>
 <br>
 <br>
@@ -365,7 +415,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A transaction's snapshot captures which transactions were in-progress at the moment the snapshot was taken. The `REPEATABLE READ` isolation level uses snapshot semantics: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -411,6 +467,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM accounts WHERE id = 1; -- sees snapshot at this moment</p>
 <br>
 <br>
@@ -434,7 +493,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -480,7 +545,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>COMMIT;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -523,6 +594,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Optimistic Locking </p>
 <br>
 <br>
@@ -543,7 +617,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Optimistic locking assumes conflicts are rare. The application reads a row, performs work, and checks that the row has not changed before writing. It is typically implemented with a version column: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -589,7 +669,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id INTEGER PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -635,7 +721,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>version INTEGER DEFAULT 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -681,7 +773,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42;</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42;</p>
 <br>
 <br>
 <br>
@@ -704,7 +799,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -750,7 +851,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SET quantity = 5, version = version + 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -796,7 +903,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row → retry</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row → retry</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -839,6 +952,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pessimistic Locking </p>
 <br>
 <br>
@@ -859,7 +975,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Pessimistic locking assumes conflicts are likely and acquires locks proactively: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -905,6 +1027,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM inventory WHERE id = 42 FOR UPDATE;</p>
 <br>
 <br>
@@ -928,7 +1053,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -974,7 +1105,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>COMMIT; -- lock released</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1020,7 +1157,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `FOR UPDATE`: Prevents other transactions from updating or deleting the row.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1060,7 +1203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* `FOR SHARE`: Allows concurrent reads but prevents updates.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1103,7 +1252,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1149,7 +1304,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1195,6 +1356,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Deadlock Detection </p>
 <br>
 <br>
@@ -1215,7 +1379,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A deadlock occurs when two or more transactions each hold locks the other needs: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1261,7 +1431,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transaction B: locks row 2, waits for row 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1307,7 +1483,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ERROR: deadlock detected</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1353,7 +1535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Process 456 waits for ShareLock on transaction 123; blocked by process 123.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1399,7 +1587,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>To minimize deadlocks: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1442,7 +1636,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1488,7 +1688,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM jobs ORDER BY priority LIMIT 1 FOR UPDATE SKIP LOCKED;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1531,7 +1737,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The `pg_locks` view shows current lock state: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1577,7 +1789,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pid, virtualtransaction</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1623,7 +1841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE NOT granted;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1669,7 +1893,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT pid, pg_blocking_pids(pid) AS blocked_by,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1715,7 +1945,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM pg_stat_activity</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1761,7 +1997,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>MVCC Bloat </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1804,7 +2046,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1850,7 +2098,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>n_dead_tup, n_live_tup,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1896,7 +2150,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM pg_stat_user_tables</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1942,7 +2202,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>`VACUUM` reclaims space from dead tuples. `VACUUM FREEZE` prevents transaction ID wraparound, an operational imperative in PostgreSQL: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1988,7 +2254,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2034,7 +2306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Summary </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2067,8 +2345,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

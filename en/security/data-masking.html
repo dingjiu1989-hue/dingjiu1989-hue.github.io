@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/data-masking.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "7210",
+      "wordCount": "8071",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/data-masking.html"},
-      "articleBody": "Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Introduction Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified \u2014 it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. Static Data Masking Static masking creates a sanitized copy of a production database for non-production use. import hashlib import random import string class StaticDataMasker: def __init__(self, seed=42): self.seed = seed self.rng = random.Random(seed) def mask_email(self, email): \"\"\"Generate a consistent fake email from the real one.\"\"\" local, domain = email.split('@') hash_obj = hashlib.sha256(email.encode()) fake_local = hash_obj.hexdigest()[:12] return f\"{fake_local}@masked-domain.com\" def mask_phone(self, phone): \"\"\"Mask phone number, keeping format but replacing digits.\"\"\" masked = [] for char in phone: if char.isdigit(): masked.append(str(self.rng.randint(0, 9))) else: masked.append(char) return ''.join(masked) def mask_credit_card(self, cc_number): \"\"\"Mask all but last 4 digits.\"\"\" clean = cc_number.replace(' ', '').replace('-', '') if len(clean) >= 4: masked = '*' * (len(clean) - 4) + clean[-4:] else: masked = clean return masked def mask_name(self, name): \"\"\"Replace name with a fake name.\"\"\" first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael'] last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones'] parts = name.split() if len(parts) >= 2: return f\"{self.rng.choice(first_names)} {self.rng.choice(last_names)}\" return self.rng.choice(first_names) SQL-Based Static Masking \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking CREATE TABLE users_masked AS SELECT id, md5(email) || '@masked.com' AS email, '***-***-' || RIGHT(phone, 4) AS phone, CASE WHEN position(' ' IN full_name) > 0 THEN 'User ' || id::text ELSE full_name END AS full_name, encode(sha256(ssn::bytea), 'hex') AS ssn FROM users_production; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables UPDATE customers SET email = 'customer_' || id || '@example.com', phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')), credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4)); Dynamic Data Masking Dynamic masking applies real-time transformations to query results without modifying the underlying data. PostgreSQL Dynamic Masking \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view CREATE VIEW users_redacted AS SELECT id, CASE WHEN current_user = 'admin' THEN email ELSE '***@***.com' END AS email, CASE WHEN current_user = 'admin' THEN phone ELSE regexp_replace(phone, '\\d(?=\\d{4})', '*', 'g') END AS phone, CASE WHEN current_user IN ('admin', 'support') THEN full_name ELSE CONCAT(LEFT(full_name, 1), '***') END AS full_name FROM users; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view GRANT SELECT ON users_redacted TO app_user; GRANT SELECT ON users_redacted TO support_agent; Application-Level Dynamic Masking from functools import wraps def mask_sensitive_fields(fields_to_mask): \"\"\"Decorator to dynamically mask sensitive fields in API responses.\"\"\" def decorator(func): @wraps(func) def wrapper(*args, **kwargs): result = func(*args, **kwargs) if isinstance(result, dict): for field in fields_to_mask: if field in result: value = result[field] if field in ('email', 'email_address'): local, domain = value.split('@') result[field] = f\"{local[0]}***@{domain}\" elif field in ('phone', 'phone_number'): result[field] = f\"***-***-{value[-4:]}\" elif field in ('ssn', 'social_security'): result[field] = f\"***-**-{value[-4:]}\" elif 'card' in field.lower(): result[field] = f\"****-****-****-{value[-4:]}\" return result return wrapper return decorator @mask_sensitive_fields(['email', 'phone', 'credit_card']) def get_user_profile(user_id): Returns full data; masking applied by decorator return { 'user_id': user_id, 'email': 'john.doe@example.com', 'phone': '555-123-4567', 'credit_card': '4111-1111-1111-1111', } Tokenization Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. class TokenizationService: def __init__(self, vault_client): self.vault = vault_client self.token_prefix = \"tok_\" def tokenize(self, sensitive_value, context): \"\"\"Replace sensitive value with a token.\"\"\" Generate unique token token_id = secrets.token_hex(16) token = f\"{self.token_prefix}{token_id}\" Store mapping in secure vault self.vault.store( f\"tokens/{token}\", { 'value': sensitive_value, 'context': context, 'created_at': datetime.utcnow().isoformat(), 'access_count': 0 } ) return token def detokenize(self, token, requester_role): \"\"\"Retrieve original value from token (if authorized).\"\"\" if not token.startswith(self.token_prefix): raise ValueError(\"Invalid token format\") if requester_role not in ['admin', 'auditor', 'compliance']: raise PermissionError(\"Not authorized to detokenize\") record = self.vault.retrieve(f\"tokens/{token}\") Increment access counter record['access_count'] += 1 record['last_accessed'] = datetime.utcnow().isoformat() self.vault.store(f\"tokens/{token}\", record) Log access self._audit_log('detokenize', token, requester_role) return record['value'] GDPR Compliance from datetime import datetime, timedelta class GDPRDataProcessor: RETENTION_PERIODS = { 'user_profile': timedelta(days=365), 'transaction_log': timedelta(days=730), 'session_log': timedelta(days=90), 'analytics': timedelta(days=180), } def mask_for_export(self, user_data): \"\"\"GDPR Article 20: data portability with masking.\"\"\" masked = { 'basic_info': { 'email': user_data['email'], 'username': user_data['username'] }, 'transactions': [ { 'date': t['date'], 'amount': t['amount'], 'reference': f\"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}\" } for t in user_data.get('transactions', []) ], 'communications': [ { 'date': c['date'], 'type': c['type'], 'content_snippet': c['content'][:100] if c.get('content') else None } for c in user_data.get('communications', []) ] } return masked def delete_user_data(self, user_id, databases): \"\"\"GDPR Article 17: right to erasure.\"\"\" deletion_log = [] for db in databases: try: db.delete_user(user_id) deletion_log.append({ 'database': db.name, 'status': 'deleted', 'timestamp': datetime.utcnow().isoformat() }) except Exception as e: deletion_log.append({ 'database': db.name, 'status': 'failed', 'error': str(e) }) return deletion_log Conclusion Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/data-masking-and-redaction-4p9d"
+      ],
+      "articleBody": "Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Data Masking and Redaction Introduction Data masking protects sensitive information by replacing it with realistic but fictional data. Unlike encryption, masked data is permanently de-identified \u2014 it cannot be reversed to recover the original value. Organizations use masking for development, testing, analytics, and compliance with privacy regulations like GDPR and CCPA. Static Data Masking Static masking creates a sanitized copy of a production database for non-production use. import hashlib import random import string class StaticDataMasker: def __init__(self, seed=42): self.seed = seed self.rng = random.Random(seed) def mask_email(self, email): \"\"\"Generate a consistent fake email from the real one.\"\"\" local, domain = email.split('@') hash_obj = hashlib.sha256(email.encode()) fake_local = hash_obj.hexdigest()[:12] return f\"{fake_local}@masked-domain.com\" def mask_phone(self, phone): \"\"\"Mask phone number, keeping format but replacing digits.\"\"\" masked = [] for char in phone: if char.isdigit(): masked.append(str(self.rng.randint(0, 9))) else: masked.append(char) return ''.join(masked) def mask_credit_card(self, cc_number): \"\"\"Mask all but last 4 digits.\"\"\" clean = cc_number.replace(' ', '').replace('-', '') if len(clean) >= 4: masked = '*' * (len(clean) - 4) + clean[-4:] else: masked = clean return masked def mask_name(self, name): \"\"\"Replace name with a fake name.\"\"\" first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael'] last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones'] parts = name.split() if len(parts) >= 2: return f\"{self.rng.choice(first_names)} {self.rng.choice(last_names)}\" return self.rng.choice(first_names) SQL-Based Static Masking \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking CREATE TABLE users_masked AS SELECT id, md5(email) || '@masked.com' AS email, '***-***-' || RIGHT(phone, 4) AS phone, CASE WHEN position(' ' IN full_name) > 0 THEN 'User ' || id::text ELSE full_name END AS full_name, encode(sha256(ssn::bytea), 'hex') AS ssn FROM users_production; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables UPDATE customers SET email = 'customer_' || id || '@example.com', phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')), credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4)); Dynamic Data Masking Dynamic masking applies real-time transformations to query results without modifying the underlying data. PostgreSQL Dynamic Masking \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view CREATE VIEW users_redacted AS SELECT id, CASE WHEN current_user = 'admin' THEN email ELSE '***@***.com' END AS email, CASE WHEN current_user = 'admin' THEN phone ELSE regexp_replace(phone, '\\d(?=\\d{4})', '*', 'g') END AS phone, CASE WHEN current_user IN ('admin', 'support') THEN full_name ELSE CONCAT(LEFT(full_name, 1), '***') END AS full_name FROM users; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view GRANT SELECT ON users_redacted TO app_user; GRANT SELECT ON users_redacted TO support_agent; Application-Level Dynamic Masking from functools import wraps def mask_sensitive_fields(fields_to_mask): \"\"\"Decorator to dynamically mask sensitive fields in API responses.\"\"\" def decorator(func): @wraps(func) def wrapper(*args, **kwargs): result = func(*args, **kwargs) if isinstance(result, dict): for field in fields_to_mask: if field in result: value = result[field] if field in ('email', 'email_address'): local, domain = value.split('@') result[field] = f\"{local[0]}***@{domain}\" elif field in ('phone', 'phone_number'): result[field] = f\"***-***-{value[-4:]}\" elif field in ('ssn', 'social_security'): result[field] = f\"***-**-{value[-4:]}\" elif 'card' in field.lower(): result[field] = f\"****-****-****-{value[-4:]}\" return result return wrapper return decorator @mask_sensitive_fields(['email', 'phone', 'credit_card']) def get_user_profile(user_id): Returns full data; masking applied by decorator return { 'user_id': user_id, 'email': 'john.doe@example.com', 'phone': '555-123-4567', 'credit_card': '4111-1111-1111-1111', } Tokenization Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. class TokenizationService: def __init__(self, vault_client): self.vault = vault_client self.token_prefix = \"tok_\" def tokenize(self, sensitive_value, context): \"\"\"Replace sensitive value with a token.\"\"\" Generate unique token token_id = secrets.token_hex(16) token = f\"{self.token_prefix}{token_id}\" Store mapping in secure vault self.vault.store( f\"tokens/{token}\", { 'value': sensitive_value, 'context': context, 'created_at': datetime.utcnow().isoformat(), 'access_count': 0 } ) return token def detokenize(self, token, requester_role): \"\"\"Retrieve original value from token (if authorized).\"\"\" if not token.startswith(self.token_prefix): raise ValueError(\"Invalid token format\") if requester_role not in ['admin', 'auditor', 'compliance']: raise PermissionError(\"Not authorized to detokenize\") record = self.vault.retrieve(f\"tokens/{token}\") Increment access counter record['access_count'] += 1 record['last_accessed'] = datetime.utcnow().isoformat() self.vault.store(f\"tokens/{token}\", record) Log access self._audit_log('detokenize', token, requester_role) return record['value'] GDPR Compliance from datetime import datetime, timedelta class GDPRDataProcessor: RETENTION_PERIODS = { 'user_profile': timedelta(days=365), 'transaction_log': timedelta(days=730), 'session_log': timedelta(days=90), 'analytics': timedelta(days=180), } def mask_for_export(self, user_data): \"\"\"GDPR Article 20: data portability with masking.\"\"\" masked = { 'basic_info': { 'email': user_data['email'], 'username': user_data['username'] }, 'transactions': [ { 'date': t['date'], 'amount': t['amount'], 'reference': f\"REF-{hashlib.sha256(t['reference'].encode()).hexdigest()[:8]}\" } for t in user_data.get('transactions', []) ], 'communications': [ { 'date': c['date'], 'type': c['type'], 'content_snippet': c['content'][:100] if c.get('content') else None } for c in user_data.get('communications', []) ] } return masked def delete_user_data(self, user_id, databases): \"\"\"GDPR Article 17: right to erasure.\"\"\" deletion_log = [] for db in databases: try: db.delete_user(user_id) deletion_log.append({ 'database': db.name, 'status': 'deleted', 'timestamp': datetime.utcnow().isoformat() }) except Exception as e: deletion_log.append({ 'database': db.name, 'status': 'failed', 'error': str(e) }) return deletion_log Conclusion Data masking is essential for privacy compliance and reducing the risk of data exposure. Use static masking for non-production environments, dynamic masking for real-time access control, and tokenization for scenarios requiring reversible de-identification. Always log access to sensitive data, enforce role-based masking policies, and ensure masking is consistent across all data stores and applications."
     }
     </script>
     <script type="application/ld+json">
@@ -228,7 +231,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Data Masking and Redaction</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Introduction </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -280,7 +318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Static Data Masking </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -332,7 +376,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import hashlib</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -384,7 +434,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import string</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -436,7 +492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, seed=42):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -488,7 +550,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.rng = random.Random(seed)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -540,7 +608,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Generate a consistent fake email from the real one."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -592,7 +666,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hash_obj = hashlib.sha256(email.encode())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -644,7 +724,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return f"{fake_local}@masked-domain.com"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -696,7 +782,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Mask phone number, keeping format but replacing digits."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -748,7 +840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for char in phone:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -800,6 +898,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>masked.append(str(self.rng.randint(0, 9)))</p>
 <br>
 <br>
@@ -826,7 +927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -878,7 +985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return ''.join(masked)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -930,7 +1043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Mask all but last 4 digits."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -982,7 +1101,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if len(clean) >= 4:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1034,7 +1159,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1086,7 +1217,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return masked</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1138,7 +1275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Replace name with a fake name."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1190,7 +1333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1242,7 +1391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if len(parts) >= 2:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1294,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return self.rng.choice(first_names)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1346,7 +1507,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1398,6 +1565,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT </p>
 <br>
 <br>
@@ -1424,7 +1594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>id,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1476,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'***-***-' || RIGHT(phone, 4) AS phone,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1528,7 +1710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'User ' || id::text</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1580,7 +1768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>full_name</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1632,7 +1826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>encode(sha256(ssn::bytea), 'hex') AS ssn</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1684,7 +1884,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1736,7 +1942,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email = 'customer_' || id || '@example.com',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1788,7 +2000,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4));</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1840,7 +2058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Dynamic masking applies real-time transformations to query results without modifying the underlying data. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1892,7 +2116,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1944,7 +2174,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1996,7 +2232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CASE </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2048,7 +2290,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ELSE '***@***.com'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2100,7 +2348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CASE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2152,7 +2406,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ELSE regexp_replace(phone, '\d(?=\d{4})', '*', 'g')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2204,7 +2464,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CASE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2256,7 +2522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ELSE CONCAT(LEFT(full_name, 1), '***')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2308,6 +2580,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM users;</p>
 <br>
 <br>
@@ -2334,7 +2609,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2386,7 +2667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GRANT SELECT ON users_redacted TO support_agent;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,7 +2725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from functools import wraps</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2490,7 +2783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Decorator to dynamically mask sensitive fields in API responses."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2542,7 +2841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@wraps(func)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2594,7 +2899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>result = func(*args, **kwargs)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2646,7 +2957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for field in fields_to_mask:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2698,7 +3015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = result[field]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2750,7 +3073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>local, domain = value.split('@')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2802,7 +3131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif field in ('phone', 'phone_number'):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2854,7 +3189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif field in ('ssn', 'social_security'):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2906,7 +3247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>elif 'card' in field.lower():</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2958,7 +3305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return result</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3010,7 +3363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return decorator</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3062,7 +3421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_user_profile(user_id):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3114,7 +3479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3166,7 +3537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'email': 'john.doe@example.com',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3218,6 +3595,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'credit_card': '4111-1111-1111-1111',</p>
 <br>
 <br>
@@ -3244,7 +3624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3296,7 +3682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3348,7 +3740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, vault_client):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3400,7 +3798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.token_prefix = "tok_"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3452,7 +3856,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Replace sensitive value with a token."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3504,7 +3914,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token_id = secrets.token_hex(16)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3556,7 +3972,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Store mapping in secure vault</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3608,6 +4030,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>f"tokens/{token}",</p>
 <br>
 <br>
@@ -3634,7 +4059,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3686,7 +4117,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'context': context,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3738,6 +4175,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'access_count': 0</p>
 <br>
 <br>
@@ -3764,7 +4204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3816,7 +4262,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return token</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3868,7 +4320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""Retrieve original value from token (if authorized)."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3920,7 +4378,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise ValueError("Invalid token format")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3972,7 +4436,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>raise PermissionError("Not authorized to detokenize")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4024,7 +4494,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Increment access counter</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4076,7 +4552,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>record['last_accessed'] = datetime.utcnow().isoformat()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4128,7 +4610,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Log access</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4180,7 +4668,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return record['value']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4232,7 +4726,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime, timedelta</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4284,7 +4784,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETENTION_PERIODS = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4336,7 +4842,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'transaction_log': timedelta(days=730),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4388,6 +4900,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'analytics': timedelta(days=180),</p>
 <br>
 <br>
@@ -4414,7 +4929,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4466,7 +4987,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""GDPR Article 20: data portability with masking."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4518,7 +5045,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'basic_info': {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4570,7 +5103,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'username': user_data['username']</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4622,6 +5161,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'transactions': [</p>
 <br>
 <br>
@@ -4648,7 +5190,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4700,7 +5248,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'amount': t['amount'],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4752,7 +5306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4804,7 +5364,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4856,7 +5422,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4908,7 +5480,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'type': c['type'],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4960,7 +5538,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5012,7 +5596,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5064,7 +5654,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return masked</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5116,7 +5712,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"""GDPR Article 17: right to erasure."""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5168,7 +5770,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>for db in databases:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5220,7 +5828,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>db.delete_user(user_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5272,7 +5886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'database': db.name,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5324,6 +5944,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'timestamp': datetime.utcnow().isoformat()</p>
 <br>
 <br>
@@ -5350,7 +5973,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5402,7 +6031,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>deletion_log.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5454,7 +6089,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'status': 'failed',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5506,7 +6147,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5558,7 +6205,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Conclusion </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -5597,8 +6250,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

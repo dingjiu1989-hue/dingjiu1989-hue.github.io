@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/change-data-capture.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3657",
+      "wordCount": "4093",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/change-data-capture.html"},
-      "articleBody": "Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC) is a pattern that captures row-level changes in a database and streams them to downstream consumers in real time. Unlike triggers or application-level dual-writes, CDC reads the database's transaction log, adding negligible overhead to production workloads. Why CDC? Traditional approaches to synchronizing databases have downsides: * **Triggers**: Add per-row overhead and operate within the transaction, slowing writes. * **Dual-writes**: Writing to two systems (database and cache, or database and search index) from the application is non-atomic; partial failures cause drift. * **Batch ETL**: Hourly or daily jobs introduce latency that many systems cannot tolerate. CDC solves these problems by making the database transaction log the source of truth and streaming changes as they occur. PostgreSQL Logical Replication PostgreSQL's built-in logical replication is the foundation for CDC. Unlike physical replication (which copies entire WAL segments and requires identical servers), logical replication streams decoded changes as row-level operations. Publisher Setup \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical SHOW wal_level; -- must be 'logical' \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication CREATE PUBLICATION cdc_pub FOR TABLE orders, order_items, payments; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows CREATE PUBLICATION cdc_pub_usa FOR TABLE orders WHERE (country = 'US'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations CREATE PUBLICATION cdc_pub_inserts FOR TABLE orders WITH (publish = 'insert'); Subscriber Setup The subscriber can be another PostgreSQL database or any consumer that speaks the `pgoutput` protocol: CREATE SUBSCRIPTION cdc_sub CONNECTION 'host=primary-db port=5432 dbname=proddb' PUBLICATION cdc_pub; Each logical replication slot tracks the WAL position, ensuring no data loss even if the consumer is offline for extended periods. Debezium Debezium is an open-source CDC platform built on Apache Kafka. It uses PostgreSQL's logical decoding plugin (`pgoutput` or `decoderbufs`) to capture changes and publishes each row change as a Kafka message. Debezium Connector Configuration { \"name\": \"postgres-connector\", \"config\": { \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\", \"database.hostname\": \"primary-db\", \"database.port\": \"5432\", \"database.user\": \"debezium\", \"database.password\": \"debezium\", \"database.dbname\": \"proddb\", \"database.server.name\": \"my-app\", \"plugin.name\": \"pgoutput\", \"slot.name\": \"debezium_slot\", \"table.include.list\": \"public.orders,public.order_items\", \"transforms\": \"unwrap\", \"transforms.unwrap.type\": \"io.debezium.transforms.ExtractNewRecordState\", \"decimal.handling.mode\": \"string\" } } Each change event has a standard envelope: { \"op\": \"c\", \"before\": null, \"after\": { \"id\": 1001, \"user_id\": 42, \"total\": \"299.99\", \"status\": \"pending\" }, \"source\": { \"db\": \"proddb\", \"table\": \"orders\", \"lsn\": 123456789, \"ts_ms\": 1717000000000 } } Operation codes: `c` (create), `u` (update), `d` (delete), `r` (snapshot). Schema Evolution Debezium publishes schema information to a separate Kafka topic. When your database schema evolves (column added, type changed), the schema registry tracks versions. Consumers can adapt dynamically. Stream Processing Integration CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or ksqlDB: // Kafka Streams CDC consumer example KStream orders = builder.stream( \"my-app.public.orders\", Consumed.with(Serdes.String(), orderSerde) ); orders .filter((key, order) -> order.status.equals(\"paid\")) .mapValues(order -> { order.status = \"processing\"; return order; }) .to(\"my-app.public.orders-processing\", Produced.with(Serdes.String(), orderSerde)); Materialized Cache CDC can keep a Redis cache or Elasticsearch index in sync with the database: PostgreSQL \u2192 Debezium \u2192 Kafka \u2192 Kafka Connect (Elasticsearch Sink) \u2192 Elasticsearch This architecture eliminates application-level cache-warming code. The cache is always consistent (within the replication lag, typically milliseconds). Logical Replication Slots Replication slots are the backbone of PostgreSQL CDC. They retain WAL segments until the consumer acknowledges receipt. Monitoring slot state is critical: SELECT slot_name, database, active, restart_lsn, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS wal_retained FROM pg_replication_slots; A stalled consumer causes WAL accumulation, potentially filling disk. Set up alerts on slot lag. CDC vs Triggers | Aspect | CDC (Logical Replication) | Triggers | |--------|--------------------------|----------| | Overhead | Minimal (WAL reading) | Per-row function execution | | Coupling | Asynchronous | Same transaction | | External consumers | Native via Kafka/Flink | Requires custom solution | | Schema changes | Managed via slot versioning | Manual trigger updates | | Backfill | Snapshot phase included | Requires separate mechanism | Anti-Patterns * **Writing CDC events back to the same database**: Creates infinite loops or logical confusion. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. CDC is the most robust approach for keeping secondary systems synchronized with a primary database. Combined with Kafka, it enables event-driven architectures where the database is the source of truth and every change is an event."
+      "articleBody": "Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing Change Data Capture (CDC) is a pattern that captures row-level changes in a database and streams them to downstream consumers in real time. Unlike triggers or application-level dual-writes, CDC reads the database's transaction log, adding negligible overhead to production workloads. Why CDC? Traditional approaches to synchronizing databases have downsides: * **Triggers**: Add per-row overhead and operate within the transaction, slowing writes. * **Dual-writes**: Writing to two systems (database and cache, or database and search index) from the application is non-atomic; partial failures cause drift. * **Batch ETL**: Hourly or daily jobs introduce latency that many systems cannot tolerate. CDC solves these problems by making the database transaction log the source of truth and streaming changes as they occur. PostgreSQL Logical Replication PostgreSQL's built-in logical replication is the foundation for CDC. Unlike physical replication (which copies entire WAL segments and requires identical servers), logical replication streams decoded changes as row-level operations. Publisher Setup \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical SHOW wal_level; -- must be 'logical' \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication CREATE PUBLICATION cdc_pub FOR TABLE orders, order_items, payments; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows CREATE PUBLICATION cdc_pub_usa FOR TABLE orders WHERE (country = 'US'); \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations CREATE PUBLICATION cdc_pub_inserts FOR TABLE orders WITH (publish = 'insert'); Subscriber Setup The subscriber can be another PostgreSQL database or any consumer that speaks the `pgoutput` protocol: CREATE SUBSCRIPTION cdc_sub CONNECTION 'host=primary-db port=5432 dbname=proddb' PUBLICATION cdc_pub; Each logical replication slot tracks the WAL position, ensuring no data loss even if the consumer is offline for extended periods. Debezium Debezium is an open-source CDC platform built on Apache Kafka. It uses PostgreSQL's logical decoding plugin (`pgoutput` or `decoderbufs`) to capture changes and publishes each row change as a Kafka message. Debezium Connector Configuration { \"name\": \"postgres-connector\", \"config\": { \"connector.class\": \"io.debezium.connector.postgresql.PostgresConnector\", \"database.hostname\": \"primary-db\", \"database.port\": \"5432\", \"database.user\": \"debezium\", \"database.password\": \"debezium\", \"database.dbname\": \"proddb\", \"database.server.name\": \"my-app\", \"plugin.name\": \"pgoutput\", \"slot.name\": \"debezium_slot\", \"table.include.list\": \"public.orders,public.order_items\", \"transforms\": \"unwrap\", \"transforms.unwrap.type\": \"io.debezium.transforms.ExtractNewRecordState\", \"decimal.handling.mode\": \"string\" } } Each change event has a standard envelope: { \"op\": \"c\", \"before\": null, \"after\": { \"id\": 1001, \"user_id\": 42, \"total\": \"299.99\", \"status\": \"pending\" }, \"source\": { \"db\": \"proddb\", \"table\": \"orders\", \"lsn\": 123456789, \"ts_ms\": 1717000000000 } } Operation codes: `c` (create), `u` (update), `d` (delete), `r` (snapshot). Schema Evolution Debezium publishes schema information to a separate Kafka topic. When your database schema evolves (column added, type changed), the schema registry tracks versions. Consumers can adapt dynamically. Stream Processing Integration CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or ksqlDB: // Kafka Streams CDC consumer example KStream orders = builder.stream( \"my-app.public.orders\", Consumed.with(Serdes.String(), orderSerde) ); orders .filter((key, order) -> order.status.equals(\"paid\")) .mapValues(order -> { order.status = \"processing\"; return order; }) .to(\"my-app.public.orders-processing\", Produced.with(Serdes.String(), orderSerde)); Materialized Cache CDC can keep a Redis cache or Elasticsearch index in sync with the database: PostgreSQL \u2192 Debezium \u2192 Kafka \u2192 Kafka Connect (Elasticsearch Sink) \u2192 Elasticsearch This architecture eliminates application-level cache-warming code. The cache is always consistent (within the replication lag, typically milliseconds). Logical Replication Slots Replication slots are the backbone of PostgreSQL CDC. They retain WAL segments until the consumer acknowledges receipt. Monitoring slot state is critical: SELECT slot_name, database, active, restart_lsn, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS wal_retained FROM pg_replication_slots; A stalled consumer causes WAL accumulation, potentially filling disk. Set up alerts on slot lag. CDC vs Triggers | Aspect | CDC (Logical Replication) | Triggers | |--------|--------------------------|----------| | Overhead | Minimal (WAL reading) | Per-row function execution | | Coupling | Asynchronous | Same transaction | | External consumers | Native via Kafka/Flink | Requires custom solution | | Schema changes | Managed via slot versioning | Manual trigger updates | | Backfill | Snapshot phase included | Requires separate mechanism | Anti-Patterns * **Writing CDC events back to the same database**: Creates infinite loops or logical confusion. 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. CDC is the most robust approach for keeping secondary systems synchronized with a primary database. Combined with Kafka, it enables event-driven architectures where the database is the source of truth and every change is an event."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Why CDC? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -259,6 +294,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Triggers**: Add per-row overhead and operate within the transaction, slowing writes.</p>
 <br>
 <br>
@@ -279,7 +317,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Dual-writes**: Writing to two systems (database and cache, or database and search index) from the application is non-atomic; partial failures cause drift.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -322,7 +366,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CDC solves these problems by making the database transaction log the source of truth and streaming changes as they occur. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -362,7 +412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PostgreSQL's built-in logical replication is the foundation for CDC. Unlike physical replication (which copies entire WAL segments and requires identical servers), logical replication streams decoded changes as row-level operations. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -405,7 +461,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -451,7 +513,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -497,7 +565,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -543,7 +617,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -589,7 +669,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WITH (publish = 'insert');</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -632,7 +718,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The subscriber can be another PostgreSQL database or any consumer that speaks the `pgoutput` protocol: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -678,7 +770,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CONNECTION 'host=primary-db port=5432 dbname=proddb'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -724,7 +822,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Each logical replication slot tracks the WAL position, ensuring no data loss even if the consumer is offline for extended periods. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -764,7 +868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Debezium is an open-source CDC platform built on Apache Kafka. It uses PostgreSQL's logical decoding plugin (`pgoutput` or `decoderbufs`) to capture changes and publishes each row change as a Kafka message. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -807,7 +917,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -853,7 +969,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"config": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -899,7 +1021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"database.hostname": "primary-db",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -945,7 +1073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"database.user": "debezium",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -991,7 +1125,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"database.dbname": "proddb",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1037,7 +1177,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"plugin.name": "pgoutput",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1083,7 +1229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"table.include.list": "public.orders,public.order_items",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1129,7 +1281,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1175,30 +1333,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1244,7 +1411,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1290,7 +1463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"before": null,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1336,7 +1515,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"id": 1001,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1382,7 +1567,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"total": "299.99",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1428,7 +1619,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1474,7 +1671,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"db": "proddb",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1520,7 +1723,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"lsn": 123456789,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1566,30 +1775,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1632,7 +1850,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Schema Evolution </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1672,6 +1896,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Stream Processing Integration </p>
 <br>
 <br>
@@ -1692,7 +1919,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or ksqlDB: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1738,7 +1971,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>KStream orders = builder.stream(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1784,7 +2023,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Consumed.with(Serdes.String(), orderSerde)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1830,7 +2075,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>orders</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1876,7 +2127,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.mapValues(order -> {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1922,7 +2179,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return order;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1968,7 +2231,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.to("my-app.public.orders-processing",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2014,6 +2283,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Materialized Cache </p>
 <br>
 <br>
@@ -2034,7 +2306,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CDC can keep a Redis cache or Elasticsearch index in sync with the database: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2080,7 +2358,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This architecture eliminates application-level cache-warming code. The cache is always consistent (within the replication lag, typically milliseconds). </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2120,7 +2404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Replication slots are the backbone of PostgreSQL CDC. They retain WAL segments until the consumer acknowledges receipt. Monitoring slot state is critical: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2166,7 +2456,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS wal_retained</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2212,7 +2508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A stalled consumer causes WAL accumulation, potentially filling disk. Set up alerts on slot lag. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2252,7 +2554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Aspect | CDC (Logical Replication) | Triggers | |--------|--------------------------|----------| | Overhead | Minimal (WAL reading) | Per-row function execution | | Coupling | Asynchronous | Same transaction | | External consumers | Native via Kafka/Flink | Requires custom solution | | Schema changes | Managed via slot versioning | Manual trigger updates | | Backfill | Snapshot phase included | Requires separate mechanism | </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2295,6 +2603,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Writing CDC events back to the same database**: Creates infinite loops or logical confusion.</p>
 <br>
 <br>
@@ -2315,7 +2626,13 @@
 <br>
 <br>
 <br>
-<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. </p>
+<br>
+<br>
+<br>
+<p>2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2348,8 +2665,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

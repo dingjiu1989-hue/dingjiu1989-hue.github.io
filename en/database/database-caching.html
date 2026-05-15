@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/database-caching.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1758",
+      "wordCount": "1947",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-caching.html"},
-      "articleBody": "Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Why Cache? Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. Caching Strategies Cache-Aside Application checks cache first, loads from database on miss: def get_user(user_id): cache_key = f\"user:{user_id}\" cached = redis.get(cache_key) if cached: return json.loads(cached) user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: redis.setex(cache_key, 3600, json.dumps(user)) return user Read-Through Cache sits between application and database. The cache itself loads from the database on miss. Write-Through Data is written to cache first, then to database. Ensures cache is always consistent. Write-Behind Data is written to cache and asynchronously batched to database. Fastest writes but risk of data loss. Cache Invalidation | Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes | Redis Integration import redis class CacheManager: def __init__(self): self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True) def get_or_compute(self, key, compute_func, ttl=3600): cached = self.redis.get(key) if cached: return json.loads(cached) value = compute_func() self.redis.setex(key, ttl, json.dumps(value)) return value Cache Stampede Prevention When a popular key expires, many requests may try to recompute simultaneously: def get_with_mutex(key, compute_func, ttl=3600): value = redis.get(key) if value: return json.loads(value) Try to acquire lock lock_key = f\"lock:{key}\" if redis.setnx(lock_key, \"1\"): redis.expire(lock_key, 10) value = compute_func() redis.setex(key, ttl, json.dumps(value)) redis.delete(lock_key) return value Wait for the other thread import time time.sleep(0.1) return json.loads(redis.get(key)) Conclusion Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable."
+      "articleBody": "Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Database Caching Why Cache? Caching reduces database load and improves response times. A good caching strategy can reduce database queries by 90% or more. Caching Strategies Cache-Aside Application checks cache first, loads from database on miss: def get_user(user_id): cache_key = f\"user:{user_id}\" cached = redis.get(cache_key) if cached: return json.loads(cached) user = db.query(\"SELECT * FROM users WHERE id = %s\", [user_id]) if user: redis.setex(cache_key, 3600, json.dumps(user)) return user Read-Through Cache sits between application and database. The cache itself loads from the database on miss. Write-Through Data is written to cache first, then to database. Ensures cache is always consistent. Write-Behind Data is written to cache and asynchronously batched to database. Fastest writes but risk of data loss. Cache Invalidation | Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes | Redis Integration import redis class CacheManager: def __init__(self): self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True) def get_or_compute(self, key, compute_func, ttl=3600): cached = self.redis.get(key) if cached: return json.loads(cached) value = compute_func() self.redis.setex(key, ttl, json.dumps(value)) return value Cache Stampede Prevention When a popular key expires, many requests may try to recompute simultaneously: def get_with_mutex(key, compute_func, ttl=3600): value = redis.get(key) if value: return json.loads(value) Try to acquire lock lock_key = f\"lock:{key}\" if redis.setnx(lock_key, \"1\"): redis.expire(lock_key, 10) value = compute_func() redis.setex(key, ttl, json.dumps(value)) redis.delete(lock_key) return value Wait for the other thread import time time.sleep(0.1) return json.loads(redis.get(key)) Conclusion Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Database Caching</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Cache? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Caching Strategies </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application checks cache first, loads from database on miss: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -302,7 +343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cache_key = f"user:{user_id}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -348,6 +395,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if cached:</p>
 <br>
 <br>
@@ -371,7 +421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(cached)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -417,7 +473,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if user:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -463,7 +525,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -506,7 +574,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cache sits between application and database. The cache itself loads from the database on miss. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -546,7 +620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Data is written to cache first, then to database. Ensures cache is always consistent. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -586,7 +666,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Data is written to cache and asynchronously batched to database. Fastest writes but risk of data loss. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -626,6 +712,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Strategy | Description | Best For | |----------|-------------|----------| | TTL | Automatic expiry | Most cases | | Key deletion | Delete on update | Write-through | | Versioned keys | Include version | Schema changes | </p>
 <br>
 <br>
@@ -646,7 +735,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Redis Integration </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -692,7 +787,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class CacheManager:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -738,7 +839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -784,7 +891,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cached = self.redis.get(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -830,6 +943,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(cached)</p>
 <br>
 <br>
@@ -853,7 +969,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = compute_func()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -899,7 +1021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return value</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -942,7 +1070,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When a popular key expires, many requests may try to recompute simultaneously: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -988,7 +1122,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>value = redis.get(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1034,7 +1174,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(value)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1080,7 +1226,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>lock_key = f"lock:{key}"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1126,7 +1278,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis.expire(lock_key, 10)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1172,7 +1330,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redis.setex(key, ttl, json.dumps(value))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1218,7 +1382,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return value</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1264,7 +1434,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import time</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1310,7 +1486,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return json.loads(redis.get(key))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1353,6 +1535,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Use cache-aside as the default pattern. Set appropriate TTLs. Implement mutex locking for cache stampede prevention. Monitor cache hit rates. Always have a fallback when cache is unavailable.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -1366,8 +1551,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

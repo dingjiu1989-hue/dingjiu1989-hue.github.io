@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/architecture/transaction-outbox.png",
       "datePublished": "2026-05-14",
       "dateModified": "2026-05-14",
-      "wordCount": "1176",
+      "wordCount": "1236",
       "keywords": "Architecture, System Design, Backend",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html"},
-      "articleBody": "Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process \u2014 the outbox publisher \u2014 reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. CDC-based implementation avoids polling overhead. Tools like Debezium read the database's transaction log (WAL in PostgreSQL, binlog in MySQL) and stream changes directly to Kafka. When the application inserts an event into the outbox table, Debezium captures the insert as a CDC event and publishes it to Kafka. This eliminates the need for a separate polling publisher and reduces latency to near-real-time. The trade-off is operational complexity \u2014 operating CDC infrastructure requires database expertise. The outbox publisher must handle several failure modes. If the publisher crashes after reading an event but before acknowledging publication, the event will be reprocessed. This requires at-least-once delivery semantics and idempotent consumers. If the broker is unavailable, the publisher should retry with exponential backoff. Dead-letter queues capture events that repeatedly fail to publish, preventing the outbox from blocking on problematic events. Ordering guarantees require careful consideration. Events published from the same outbox table can be ordered by creation timestamp within a partition. If the publisher processes events sequentially, order is preserved. Parallel processing requires partitioning by aggregate ID or correlation key to maintain causal ordering. CDC-based solutions typically preserve transaction commit order within the database's write-ahead log. Idempotent consumers are essential since at-least-once delivery means the same event may arrive multiple times. The consumer should maintain a deduplication table of processed event IDs with a unique constraint. Processing the same event twice should produce the same result. This is typically achieved through a combination of deduplication and making the business operation itself idempotent. The outbox pattern also solves the inverse dual-write problem: reliably consuming messages. The transactional inbox pattern stores incoming messages in an inbox table within the consumer's database. The consumer processes the message and marks it as processed, all within a single local transaction. This prevents the \"at-most-once\" processing scenario where the message is consumed successfully but the business operation fails. Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency."
+      "articleBody": "Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern Transactional Outbox Pattern The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. The core mechanism is elegant. Instead of publishing the event directly to the message broker at the time of the state change, the application writes both the aggregate data and the event record to the same database within a single local transaction. The event table serves as a buffer. A separate process \u2014 the outbox publisher \u2014 reads unpublished events, publishes them to the message broker, and marks them as published. This guarantees that every committed state change produces at least one event publication. Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. CDC-based implementation avoids polling overhead. Tools like Debezium read the database's transaction log (WAL in PostgreSQL, binlog in MySQL) and stream changes directly to Kafka. When the application inserts an event into the outbox table, Debezium captures the insert as a CDC event and publishes it to Kafka. This eliminates the need for a separate polling publisher and reduces latency to near-real-time. The trade-off is operational complexity \u2014 operating CDC infrastructure requires database expertise. The outbox publisher must handle several failure modes. If the publisher crashes after reading an event but before acknowledging publication, the event will be reprocessed. This requires at-least-once delivery semantics and idempotent consumers. If the broker is unavailable, the publisher should retry with exponential backoff. Dead-letter queues capture events that repeatedly fail to publish, preventing the outbox from blocking on problematic events. Ordering guarantees require careful consideration. Events published from the same outbox table can be ordered by creation timestamp within a partition. If the publisher processes events sequentially, order is preserved. Parallel processing requires partitioning by aggregate ID or correlation key to maintain causal ordering. CDC-based solutions typically preserve transaction commit order within the database's write-ahead log. Idempotent consumers are essential since at-least-once delivery means the same event may arrive multiple times. The consumer should maintain a deduplication table of processed event IDs with a unique constraint. Processing the same event twice should produce the same result. This is typically achieved through a combination of deduplication and making the business operation itself idempotent. The outbox pattern also solves the inverse dual-write problem: reliably consuming messages. The transactional inbox pattern stores incoming messages in an inbox table within the consumer's database. The consumer processes the message and marks it as processed, all within a single local transaction. This prevents the \"at-most-once\" processing scenario where the message is consumed successfully but the business operation fails. Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. The transactional outbox pattern is production-proven across organizations handling billions of events daily. It is the foundation of reliable event-driven architectures and a prerequisite for systems that require data consistency guarantees exceeding eventual consistency."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Transactional Outbox Pattern</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The outbox publisher must handle several failure modes. If the publisher crashes after reading an event but before acknowledging publication, the event will be reprocessed. This requires at-least-once delivery semantics and idempotent consumers. If the broker is unavailable, the publisher should retry with exponential backoff. Dead-letter queues capture events that repeatedly fail to publish, preventing the outbox from blocking on problematic events. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -296,7 +337,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Idempotent consumers are essential since at-least-once delivery means the same event may arrive multiple times. The consumer should maintain a deduplication table of processed event IDs with a unique constraint. Processing the same event twice should produce the same result. This is typically achieved through a combination of deduplication and making the business operation itself idempotent. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -336,7 +383,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -369,8 +422,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div>
-      <noscript><div class="related-grid"><a href="/en/architecture/caching-strategies.html" class="related-card">Caching Strategies and Patterns in Distributed Systems</a><a href="/en/architecture/circuit-breaker-pattern.html" class="related-card">Circuit Breaker Pattern: Building Resilient Systems</a><a href="/en/architecture/cqrs-pattern.html" class="related-card">CQRS Pattern: Command Query Responsibility Segregation</a><a href="/en/architecture/event-driven-architecture.html" class="related-card">Event-Driven Architecture: Patterns and Practice</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

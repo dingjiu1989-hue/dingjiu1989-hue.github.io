@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/incident-response.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4140",
+      "wordCount": "4751",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/incident-response-playbook-for-developers-nge"
       ],
-      "articleBody": "Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework. The NIST Incident Response Framework The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment. Phase 1: Preparation Preparation is the most important phase. Without preparation, every incident becomes a chaotic scramble. **Build a response team**: Identify who handles security incidents. The team should include a incident commander, a security analyst, a system owner, a communications lead, and a legal representative. **Create runbooks**: Document step-by-step procedures for common incident types: phishing, malware outbreak, data breach, ransomware, denial of service, and insider threat. **Set up tooling**: Ensure the team has access to: * Centralized logging (SIEM like Splunk, ELK, or Sentinel) * Endpoint detection and response (EDR like CrowdStrike or Defender) * Network monitoring and packet capture * Secure communication channels (Slack, Teams, or Signal) * Evidence collection tools (FTK Imager, Volatility, tcpdump) **Practice regularly**: Run tabletop exercises every quarter. Simulate a ransomware attack, a data exposure, or a compromised credential. Practice builds muscle memory. Phase 2: Detection and Analysis Detection relies on monitoring and alerting. Every alert is a potential incident candidate. **Alert sources**: * SIEM correlation rules detecting anomalous patterns * EDR alerts for malware execution or suspicious process behavior * Cloud provider alerts (GuardDuty, Security Command Center, Defender) * Application logs showing unusual error rates or access patterns * User reports of suspicious activity **Triage questions**: * What happened? What systems are affected? * When did it start? Is it ongoing? * What is the impact? Data loss? Service disruption? * Is this a true positive or a false alarm? * What severity level applies? **Severity classification**: * SEV-1: Critical. Active data exfiltration, ransomware, or service-wide compromise. Immediate response required. * SEV-2: High. Confirmed intrusion but contained. Credential compromise affecting multiple users. * SEV-3: Medium. Potential compromise under investigation. Phishing campaign targeting employees. * SEV-4: Low. Minor policy violations. Automated scans with no evidence of exploitation. Phase 3: Containment, Eradication, and Recovery Containment stops the attack from spreading. Eradication removes the attacker's presence. Recovery returns systems to normal operation. **Short-term containment**: * Disconnect affected systems from the network. * Disable compromised user accounts. * Block attacker IP addresses at the firewall. * Rotate credentials for affected services. Example: Block an IP at the firewall iptables -A INPUT -s 203.0.113.50 -j DROP Example: Disable a compromised AWS IAM user aws iam update-access-key \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--status Inactive \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--user-name compromised-user **Long-term containment**: * Apply security patches. * Implement additional monitoring for affected systems. * Deploy WAF rules to block attack patterns. **Eradication**: * Remove malware using EDR tools. * Rebuild compromised servers from known-good images. * Revoke all session tokens and API keys. * Reset root passwords and privileged credentials. **Recovery**: * Restore systems from clean backups. * Verify system integrity before returning to production. * Gradually reintroduce traffic while monitoring for recurrence. * Communicate recovery status to stakeholders. Phase 4: Post-Incident Activity The post-mortem is where the team learns from the incident and improves processes. **Post-mortem meeting**: Within one week of containment, gather everyone involved. Blameless culture is essential \u2014 the goal is to improve systems, not assign blame. **Post-mortem document**: * Timeline of the incident * Root cause analysis * What went well and what went wrong * Detection gaps and containment delays * Remediation items with owners and deadlines * Changes to runbooks, tooling, or architecture Post-Mortem: Service Credential Leak **Date**: 2026-04-15 **Severity**: SEV-2 Timeline \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC \u2014 GuardDuty alert for anomalous API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:25 \u2014 Triage begins \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:45 \u2014 Compromised key identified and revoked \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 10:30 \u2014 Containment confirmed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 \u2014 All affected resources rotated Root Cause GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug output. Logs were publicly accessible. Action Items \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30) Forensic Evidence Collection Proper evidence collection preserves data for legal action and root cause analysis. * Capture memory dumps using tools like LiME or Volatility before powering off systems. * Collect disk images using `dd` or FTK Imager rather than copying files live. * Record command output with timestamps using the `script` command. * Maintain chain of custody documentation for all evidence. Capture memory dump with LiME insmod lime.ko \"path=/evidence/memory.dump format=lime\" Capture disk image dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync Conclusion A well-practiced incident response process turns a potential disaster into a manageable event. Preparation separates professional teams from those that panic. Detection without response is just noise. And every incident, no matter how small, is an opportunity to improve."
+      "articleBody": "Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident Response Playbook for Developers Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework. The NIST Incident Response Framework The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment. Phase 1: Preparation Preparation is the most important phase. Without preparation, every incident becomes a chaotic scramble. **Build a response team**: Identify who handles security incidents. The team should include a incident commander, a security analyst, a system owner, a communications lead, and a legal representative. **Create runbooks**: Document step-by-step procedures for common incident types: phishing, malware outbreak, data breach, ransomware, denial of service, and insider threat. **Set up tooling**: Ensure the team has access to: * Centralized logging (SIEM like Splunk, ELK, or Sentinel) * Endpoint detection and response (EDR like CrowdStrike or Defender) * Network monitoring and packet capture * Secure communication channels (Slack, Teams, or Signal) * Evidence collection tools (FTK Imager, Volatility, tcpdump) **Practice regularly**: Run tabletop exercises every quarter. Simulate a ransomware attack, a data exposure, or a compromised credential. Practice builds muscle memory. Phase 2: Detection and Analysis Detection relies on monitoring and alerting. Every alert is a potential incident candidate. **Alert sources**: * SIEM correlation rules detecting anomalous patterns * EDR alerts for malware execution or suspicious process behavior * Cloud provider alerts (GuardDuty, Security Command Center, Defender) * Application logs showing unusual error rates or access patterns * User reports of suspicious activity **Triage questions**: * What happened? What systems are affected? * When did it start? Is it ongoing? * What is the impact? Data loss? Service disruption? * Is this a true positive or a false alarm? * What severity level applies? **Severity classification**: * SEV-1: Critical. Active data exfiltration, ransomware, or service-wide compromise. Immediate response required. * SEV-2: High. Confirmed intrusion but contained. Credential compromise affecting multiple users. * SEV-3: Medium. Potential compromise under investigation. Phishing campaign targeting employees. * SEV-4: Low. Minor policy violations. Automated scans with no evidence of exploitation. Phase 3: Containment, Eradication, and Recovery Containment stops the attack from spreading. Eradication removes the attacker's presence. Recovery returns systems to normal operation. **Short-term containment**: * Disconnect affected systems from the network. * Disable compromised user accounts. * Block attacker IP addresses at the firewall. * Rotate credentials for affected services. Example: Block an IP at the firewall iptables -A INPUT -s 203.0.113.50 -j DROP Example: Disable a compromised AWS IAM user aws iam update-access-key \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--status Inactive \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--user-name compromised-user **Long-term containment**: * Apply security patches. * Implement additional monitoring for affected systems. * Deploy WAF rules to block attack patterns. **Eradication**: * Remove malware using EDR tools. * Rebuild compromised servers from known-good images. * Revoke all session tokens and API keys. * Reset root passwords and privileged credentials. **Recovery**: * Restore systems from clean backups. * Verify system integrity before returning to production. * Gradually reintroduce traffic while monitoring for recurrence. * Communicate recovery status to stakeholders. Phase 4: Post-Incident Activity The post-mortem is where the team learns from the incident and improves processes. **Post-mortem meeting**: Within one week of containment, gather everyone involved. Blameless culture is essential \u2014 the goal is to improve systems, not assign blame. **Post-mortem document**: * Timeline of the incident * Root cause analysis * What went well and what went wrong * Detection gaps and containment delays * Remediation items with owners and deadlines * Changes to runbooks, tooling, or architecture Post-Mortem: Service Credential Leak **Date**: 2026-04-15 **Severity**: SEV-2 Timeline \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC \u2014 GuardDuty alert for anomalous API calls \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:25 \u2014 Triage begins \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:45 \u2014 Compromised key identified and revoked \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 10:30 \u2014 Containment confirmed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 \u2014 All affected resources rotated Root Cause GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug output. Logs were publicly accessible. Action Items \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30) Forensic Evidence Collection Proper evidence collection preserves data for legal action and root cause analysis. * Capture memory dumps using tools like LiME or Volatility before powering off systems. * Collect disk images using `dd` or FTK Imager rather than copying files live. * Record command output with timestamps using the `script` command. * Maintain chain of custody documentation for all evidence. Capture memory dump with LiME insmod lime.ko \"path=/evidence/memory.dump format=lime\" Capture disk image dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync Conclusion A well-practiced incident response process turns a potential disaster into a manageable event. Preparation separates professional teams from those that panic. Detection without response is just noise. And every incident, no matter how small, is an opportunity to improve."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>Incident Response Playbook for Developers</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Incident response is the structured process of handling security breaches and cyber attacks. Every development team needs a plan, because it is not a matter of if an incident will happen, but when. This article presents a practical incident response playbook based on the NIST SP 800-61 framework.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The NIST framework defines four phases: Preparation, Detection and Analysis, Containment Eradication and Recovery, and Post-Incident Activity. We add a fifth phase, Triage, between Detection and Containment.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -308,7 +346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Preparation is the most important phase. Without preparation, every incident becomes a chaotic scramble.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -360,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Create runbooks**: Document step-by-step procedures for common incident types: phishing, malware outbreak, data breach, ransomware, denial of service, and insider threat.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -412,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Centralized logging (SIEM like Splunk, ELK, or Sentinel)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -458,7 +514,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Network monitoring and packet capture</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -504,7 +566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Evidence collection tools (FTK Imager, Volatility, tcpdump)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -556,7 +624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Phase 2: Detection and Analysis</h3>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -608,7 +682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Alert sources**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -657,7 +737,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* EDR alerts for malware execution or suspicious process behavior</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -703,6 +789,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Application logs showing unusual error rates or access patterns</p>
 <br>
 <br>
@@ -726,7 +815,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* User reports of suspicious activity</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -778,7 +873,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* What happened? What systems are affected?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -824,7 +925,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* What is the impact? Data loss? Service disruption?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -870,7 +977,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* What severity level applies?</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -922,7 +1035,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* SEV-1: Critical. Active data exfiltration, ransomware, or service-wide compromise. Immediate response required.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -968,6 +1087,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* SEV-3: Medium. Potential compromise under investigation. Phishing campaign targeting employees.</p>
 <br>
 <br>
@@ -991,7 +1113,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* SEV-4: Low. Minor policy violations. Automated scans with no evidence of exploitation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1043,7 +1171,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Containment stops the attack from spreading. Eradication removes the attacker's presence. Recovery returns systems to normal operation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1095,7 +1229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Disconnect affected systems from the network.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1141,6 +1281,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Block attacker IP addresses at the firewall.</p>
 <br>
 <br>
@@ -1164,7 +1307,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Rotate credentials for affected services.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1216,7 +1365,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iptables -A INPUT -s 203.0.113.50 -j DROP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1268,6 +1423,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>aws iam update-access-key \</p>
 <br>
 <br>
@@ -1294,7 +1452,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--access-key-id AKIAIOSFODNN7EXAMPLE \</p>
 <br>
 <br>
 <br>
@@ -1320,7 +1481,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--status Inactive \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--status Inactive \</p>
 <br>
 <br>
 <br>
@@ -1346,7 +1510,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--user-name compromised-user</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--user-name compromised-user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1398,7 +1568,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Apply security patches.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1444,7 +1620,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Deploy WAF rules to block attack patterns.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1496,7 +1678,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Remove malware using EDR tools.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1542,6 +1730,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Revoke all session tokens and API keys.</p>
 <br>
 <br>
@@ -1565,7 +1756,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Reset root passwords and privileged credentials.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1617,7 +1814,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Restore systems from clean backups.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1663,6 +1866,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Gradually reintroduce traffic while monitoring for recurrence.</p>
 <br>
 <br>
@@ -1686,7 +1892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Communicate recovery status to stakeholders.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1738,7 +1950,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The post-mortem is where the team learns from the incident and improves processes.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1790,7 +2008,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Post-mortem document**:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1839,7 +2063,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Root cause analysis</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1885,7 +2115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Detection gaps and containment delays</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1931,7 +2167,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Changes to runbooks, tooling, or architecture</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1983,7 +2225,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Date**: 2026-04-15</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2035,6 +2283,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h3>Timeline</h3>
 <br>
 <br>
@@ -2061,10 +2312,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC — GuardDuty alert for anomalous API calls</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 2026-04-15 09:23 UTC — GuardDuty alert for anomalous API calls</p>
 <br>
 <br>
 <br>
@@ -2087,13 +2338,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:25 — Triage begins</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:25 — Triage begins</p>
 <br>
 <br>
 <br>
@@ -2113,7 +2364,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:45 — Compromised key identified and revoked</p>
 <br>
 <br>
 <br>
@@ -2123,6 +2373,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 09:45 — Compromised key identified and revoked</p>
 <br>
 <br>
 <br>
@@ -2139,7 +2390,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 10:30 — Containment confirmed</p>
 <br>
 <br>
 <br>
@@ -2152,6 +2402,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 10:30 — Containment confirmed</p>
 <br>
 <br>
 <br>
@@ -2165,7 +2416,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 — All affected resources rotated</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 14:00 — All affected resources rotated</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2217,7 +2486,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>GitHub Actions workflow accidentally logged AWS_SECRET_ACCESS_KEY to debug output. Logs were publicly accessible.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2269,7 +2544,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Remove debug logging from CI/CD workflows (owner: DevOps, due: 04-22)</p>
 <br>
 <br>
 <br>
@@ -2295,7 +2573,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Enable secret scanning on GitHub repository (owner: Security, due: 04-18)</p>
 <br>
 <br>
 <br>
@@ -2321,7 +2602,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [ ] Add alert for API keys used outside expected regions (owner: Platform, due: 04-30)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2373,7 +2660,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Proper evidence collection preserves data for legal action and root cause analysis.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2422,7 +2715,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Collect disk images using `dd` or FTK Imager rather than copying files live.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2468,7 +2767,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Maintain chain of custody documentation for all evidence.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2520,7 +2825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>insmod lime.ko "path=/evidence/memory.dump format=lime"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2572,7 +2883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dd if=/dev/sda of=/evidence/disk.img bs=4M conv=noerror,sync</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2624,6 +2941,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A well-practiced incident response process turns a potential disaster into a manageable event. Preparation separates professional teams from those that panic. Detection without response is just noise. And every incident, no matter how small, is an opportunity to improve.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2637,8 +2957,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

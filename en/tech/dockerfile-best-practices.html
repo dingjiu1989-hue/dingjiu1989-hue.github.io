@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tech/dockerfile-best-practices.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1036",
+      "wordCount": "1119",
       "keywords": "Technology, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/dockerfile-best-practices-for-production-1la2"
       ],
-      "articleBody": "Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds. Multi-Stage Builds Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies. Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages. Layer Caching Each Dockerfile instruction creates a cacheable layer. Order instructions from least to most frequently changing. Install system packages first, copy dependency manifests (package.json, requirements.txt), run package install, then copy application code. This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache. Security Best Practices Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root\u2014container escape vulnerabilities grant root access to the host. Use specific base image tags, not latest. Pin versions like python:3.12-slim instead of python:latest. Scan images for vulnerabilities with Docker Scout, Trivy, or Snyk. Remove package manager cache files in the same RUN instruction. Minimal Images Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries\u2014no shell, package manager, or utilities. This reduces attack surface and image size. Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly\u2014some Python packages have musl compatibility issues. Dockerignore Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments."
+      "articleBody": "Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Dockerfile Best Practices for Production Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds. Multi-Stage Builds Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies. Multi-stage builds dramatically reduce image size. A Go application might go from 1GB (with golang:1.21) to 20MB (with scratch). Python applications benefit from using slim base images in final stages. Layer Caching Each Dockerfile instruction creates a cacheable layer. Order instructions from least to most frequently changing. Install system packages first, copy dependency manifests (package.json, requirements.txt), run package install, then copy application code. This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache. Security Best Practices Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root\u2014container escape vulnerabilities grant root access to the host. Use specific base image tags, not latest. Pin versions like python:3.12-slim instead of python:latest. Scan images for vulnerabilities with Docker Scout, Trivy, or Snyk. Remove package manager cache files in the same RUN instruction. Minimal Images Use distroless or Alpine base images. Distroless images contain only the application and runtime libraries\u2014no shell, package manager, or utilities. This reduces attack surface and image size. Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly\u2014some Python packages have musl compatibility issues. Dockerignore Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments."
     }
     </script>
     <script type="application/ld+json">
@@ -231,7 +231,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>Dockerfile Best Practices for Production</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Writing efficient Dockerfiles reduces image size, improves build speed, and enhances security. These best practices apply to production container builds.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -283,7 +318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Multi-stage builds separate build and runtime environments. Use one stage with all build tools (compilers, package managers) and a second minimal stage for the runtime. The resulting image contains only the application binary and its runtime dependencies.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -335,7 +376,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Layer Caching</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -387,7 +434,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>This ordering means rebuilding after code changes only invalidates layers from the COPY instruction onward. Dependency installation (the slowest step) uses the cache.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -439,7 +492,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Run containers as non-root users. Create a user in the Dockerfile and switch with USER directive. Never run containers as root—container escape vulnerabilities grant root access to the host.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -491,7 +550,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Minimal Images</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -543,7 +608,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Alpine-based images are small (5MB base) but use musl libc instead of glibc. Test thoroughly—some Python packages have musl compatibility issues.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -595,6 +666,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Use .dockerignore to exclude unnecessary files from the build context. Exclude .git, node_modules, tests, documentation, and CI configuration. Smaller build contexts mean faster builds, especially in CI environments.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -608,8 +682,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div>
-      <noscript><div class="related-grid"><a href="/en/tech/api-gateway-implementation.html" class="related-card">API Gateway Implementation Guide</a><a href="/en/tech/chaos-engineering.html" class="related-card">Chaos Engineering: Principles and Practical Tools</a><a href="/en/tech/distributed-tracing.html" class="related-card">Distributed Tracing with OpenTelemetry</a><a href="/en/tech/github-actions-advanced.html" class="related-card">Advanced GitHub Actions Workflows</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

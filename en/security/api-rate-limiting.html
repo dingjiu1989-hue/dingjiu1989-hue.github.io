@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/api-rate-limiting.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "3386",
+      "wordCount": "3713",
       "keywords": "Security, Cybersecurity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/api-rate-limiting-implementation-3dap"
       ],
-      "articleBody": "API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation Why Rate Limiting Matters Rate limiting protects APIs from abuse, DoS attacks, and unintentional overload. It ensures fair usage and maintains service quality for all consumers. Rate Limiting Algorithms Token Bucket The most popular algorithm, allowing bursts while maintaining average limits: import time import threading class TokenBucket: def __init__(self, rate, capacity): self.rate = rate # Tokens per second self.capacity = capacity self.tokens = capacity self.last_refill = time.monotonic() self.lock = threading.Lock() def consume(self, tokens=1): with self.lock: self._refill() if self.tokens >= tokens: self.tokens -= tokens return True return False def _refill(self): now = time.monotonic() elapsed = now - self.last_refill self.tokens = min(self.capacity, self.tokens + elapsed * self.rate) self.last_refill = now Usage bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20 if bucket.consume(): process_request() else: return \"429 Too Many Requests\" Sliding Window Log More precise but memory-intensive: from collections import deque import time class SlidingWindowLog: def __init__(self, window_size=60, max_requests=100): self.window_size = window_size self.max_requests = max_requests self.log = deque() def allow_request(self): now = time.time() Remove expired entries while self.log and self.log[0] self.log.popleft() if len(self.log) self.log.append(now) return True return False Rate Limiting Headers Return standard headers for client feedback: def rate_limit_response(allowed, limit, remaining, reset): if allowed: return { \"X-RateLimit-Limit\": str(limit), \"X-RateLimit-Remaining\": str(remaining), \"X-RateLimit-Reset\": str(reset) } else: return { \"X-RateLimit-Limit\": str(limit), \"X-RateLimit-Remaining\": \"0\", \"Retry-After\": str(reset - int(time.time())) }, 429 Distributed Redis Implementation For multi-server deployments: import redis import time class RedisSlidingWindow: def __init__(self, redis_client): self.redis = redis_client def is_allowed(self, key, max_requests=100, window_seconds=60): now = int(time.time() * 1000) window_start = now - (window_seconds * 1000) pipeline = self.redis.pipeline() pipeline.zremrangebyscore(key, 0, window_start) pipeline.zcard(key) pipeline.zadd(key, {str(now): now}) pipeline.expire(key, window_seconds * 2) _, count, _, _ = pipeline.execute() return count Middleware Implementation const rateLimit = require(\"express-rate-limit\"); const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100, standardHeaders: true, legacyHeaders: false, message: { error: \"Too many requests, please try again later.\" }, keyGenerator: (req) => req.user?.id || req.ip, skip: (req) => req.headers[\"x-internal\"] === process.env.INTERNAL_TOKEN }); app.use(\"/api/\", apiLimiter); Conclusion Choose the right rate limiting algorithm for your use case. Token bucket works well for most APIs. Use Redis for distributed rate limiting across multiple servers. Always return clear rate limit headers so clients can self-regulate. Monitor rate limit hit rates to tune thresholds over time."
+      "articleBody": "API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation API Rate Limiting Implementation Why Rate Limiting Matters Rate limiting protects APIs from abuse, DoS attacks, and unintentional overload. It ensures fair usage and maintains service quality for all consumers. Rate Limiting Algorithms Token Bucket The most popular algorithm, allowing bursts while maintaining average limits: import time import threading class TokenBucket: def __init__(self, rate, capacity): self.rate = rate # Tokens per second self.capacity = capacity self.tokens = capacity self.last_refill = time.monotonic() self.lock = threading.Lock() def consume(self, tokens=1): with self.lock: self._refill() if self.tokens >= tokens: self.tokens -= tokens return True return False def _refill(self): now = time.monotonic() elapsed = now - self.last_refill self.tokens = min(self.capacity, self.tokens + elapsed * self.rate) self.last_refill = now Usage bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20 if bucket.consume(): process_request() else: return \"429 Too Many Requests\" Sliding Window Log More precise but memory-intensive: from collections import deque import time class SlidingWindowLog: def __init__(self, window_size=60, max_requests=100): self.window_size = window_size self.max_requests = max_requests self.log = deque() def allow_request(self): now = time.time() Remove expired entries while self.log and self.log[0] self.log.popleft() if len(self.log) self.log.append(now) return True return False Rate Limiting Headers Return standard headers for client feedback: def rate_limit_response(allowed, limit, remaining, reset): if allowed: return { \"X-RateLimit-Limit\": str(limit), \"X-RateLimit-Remaining\": str(remaining), \"X-RateLimit-Reset\": str(reset) } else: return { \"X-RateLimit-Limit\": str(limit), \"X-RateLimit-Remaining\": \"0\", \"Retry-After\": str(reset - int(time.time())) }, 429 Distributed Redis Implementation For multi-server deployments: import redis import time class RedisSlidingWindow: def __init__(self, redis_client): self.redis = redis_client def is_allowed(self, key, max_requests=100, window_seconds=60): now = int(time.time() * 1000) window_start = now - (window_seconds * 1000) pipeline = self.redis.pipeline() pipeline.zremrangebyscore(key, 0, window_start) pipeline.zcard(key) pipeline.zadd(key, {str(now): now}) pipeline.expire(key, window_seconds * 2) _, count, _, _ = pipeline.execute() return count Middleware Implementation const rateLimit = require(\"express-rate-limit\"); const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100, standardHeaders: true, legacyHeaders: false, message: { error: \"Too many requests, please try again later.\" }, keyGenerator: (req) => req.user?.id || req.ip, skip: (req) => req.headers[\"x-internal\"] === process.env.INTERNAL_TOKEN }); app.use(\"/api/\", apiLimiter); Conclusion Choose the right rate limiting algorithm for your use case. Token bucket works well for most APIs. Use Redis for distributed rate limiting across multiple servers. Always return clear rate limit headers so clients can self-regulate. Monitor rate limit hit rates to tune thresholds over time."
     }
     </script>
     <script type="application/ld+json">
@@ -230,7 +230,42 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<h1>API Rate Limiting Implementation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Why Rate Limiting Matters </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +317,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Rate Limiting Algorithms </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -334,6 +375,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The most popular algorithm, allowing bursts while maintaining average limits: </p>
 <br>
 <br>
@@ -360,7 +404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import time</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -412,7 +462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class TokenBucket:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -464,7 +520,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.rate = rate # Tokens per second</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -516,7 +578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.tokens = capacity</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -568,7 +636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.lock = threading.Lock()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -620,7 +694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>with self.lock:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -672,7 +752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if self.tokens >= tokens:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -724,6 +810,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return True</p>
 <br>
 <br>
@@ -750,7 +839,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return False</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -802,7 +897,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>now = time.monotonic()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -854,7 +955,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.tokens = min(self.capacity, </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -906,7 +1013,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.last_refill = now</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -958,7 +1071,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>bucket = TokenBucket(rate=10, capacity=20) # 10 req/s, burst 20</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1010,6 +1129,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>process_request()</p>
 <br>
 <br>
@@ -1036,7 +1158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1088,7 +1216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Sliding Window Log </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1140,6 +1274,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from collections import deque</p>
 <br>
 <br>
@@ -1166,7 +1303,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import time</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1218,7 +1361,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, window_size=60, max_requests=100):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1270,7 +1419,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.max_requests = max_requests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1322,7 +1477,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def allow_request(self):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1374,7 +1535,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Remove expired entries</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1426,7 +1593,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.log.popleft()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1478,7 +1651,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.log.append(now)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1530,7 +1709,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return False</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1582,7 +1767,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Return standard headers for client feedback: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1634,7 +1825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if allowed:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1686,7 +1883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"X-RateLimit-Limit": str(limit),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1738,7 +1941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"X-RateLimit-Reset": str(reset)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1790,7 +1999,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1842,7 +2057,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"X-RateLimit-Limit": str(limit),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1894,7 +2115,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Retry-After": str(reset - int(time.time()))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1946,7 +2173,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Distributed Redis Implementation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1998,7 +2231,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import redis</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2050,7 +2289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class RedisSlidingWindow:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2102,7 +2347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.redis = redis_client</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2154,7 +2405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>now = int(time.time() * 1000)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2206,7 +2463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pipeline = self.redis.pipeline()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2258,7 +2521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pipeline.zcard(key)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2310,7 +2579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pipeline.expire(key, window_seconds * 2)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2362,7 +2637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return count < max_requests</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2414,7 +2695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const rateLimit = require("express-rate-limit");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2466,7 +2753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>windowMs: 15 * 60 * 1000,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2518,7 +2811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>standardHeaders: true,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2570,7 +2869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>message: { error: "Too many requests, please try again later." },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2622,7 +2927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>skip: (req) => req.headers["x-internal"] === process.env.INTERNAL_TOKEN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2674,7 +2985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>app.use("/api/", apiLimiter);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2726,6 +3043,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Choose the right rate limiting algorithm for your use case. Token bucket works well for most APIs. Use Redis for distributed rate limiting across multiple servers. Always return clear rate limit headers so clients can self-regulate. Monitor rate limit hit rates to tune thresholds over time.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2739,8 +3059,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

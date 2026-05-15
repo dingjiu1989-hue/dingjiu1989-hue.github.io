@@ -39,14 +39,14 @@
       "headline": "Zero Trust Implementation",
       "description": "A practical guide to implementing Zero Trust architecture with micro-segmentation, least privilege, and continuous verification.",
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png",
-      "datePublished": "2026-05-12",
-      "dateModified": "2026-05-12",
-      "wordCount": "2552",
+      "datePublished": "2026-05-15",
+      "dateModified": "2026-05-15",
+      "wordCount": "2839",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/zero-trust-implementation.html"},
-      "articleBody": "Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Principles Zero Trust replaces the castle-and-moat model with \"never trust, always verify.\" Every request is authenticated, authorized, and inspected regardless of origin. Micro-Segmentation Divide your network into small, isolated zones. Each zone requires separate authentication. Terraform: AWS security group micro-segmentation resource \"aws_security_group\" \"app_to_db\" { name = \"app-db-ingress\" description = \"Allow app tier to database\" vpc_id = var.vpc_id ingress { from_port = 5432 to_port = 5432 protocol = \"tcp\" security_groups = [aws_security_group.app_tier.id] } egress { from_port = 0 to_port = 0 protocol = \"-1\" cidr_blocks = [\"0.0.0.0/0\"] } } Least Privilege Access Implement just-in-time (JIT) access with ephemeral credentials. JIT access broker from datetime import datetime, timedelta import boto3 def grant_just_in_time_access(user, resource, duration_minutes=60): iam = boto3.client(\"iam\") policy = { \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Allow\", \"Action\": resource[\"actions\"], \"Resource\": resource[\"arn\"], \"Condition\": { \"DateLessThan\": { \"aws:CurrentTime\": (datetime.utcnow() + timedelta(minutes=duration_minutes)).isoformat() } } }] } return iam.create_policy(PolicyName=f\"jit-{user}-{int(datetime.utcnow().timestamp())}\", PolicyDocument=json.dumps(policy)) Verify Every Request Every API call must be verified at the application layer. // Zero Trust API gateway middleware function zeroTrustMiddleware(req, res, next) { const context = { userId: req.headers[\"x-user-id\"], deviceId: req.headers[\"x-device-id\"], geo: req.headers[\"x-geo-location\"], time: Date.now(), path: req.path }; Promise.all([ verifyIdentity(context.userId), verifyDevice(context.deviceId), checkGeoPolicy(context.geo, context.path), checkTimePolicy(context.time) ]).then(([identity, device, geo, time]) => { if (identity && device && geo.allowed && time.allowed) { next(); } else { res.status(401).json({ error: \"Access denied\" }); } }); } Continuous Monitoring Log and analyze all access attempts in real time. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query SELECT user_id, COUNT(*) as attempts, COUNT(DISTINCT ip_address) as ips, COUNT(DISTINCT geo_location) as regions FROM access_logs WHERE timestamp > NOW() - INTERVAL '1 hour' AND denied = true GROUP BY user_id HAVING COUNT(*) > 10; Conclusion Zero Trust is an architectural shift, not a product. Start with a single application, implement micro-segmentation, enforce least privilege, and expand gradually. Measure progress by reduction in lateral movement capability and mean time to detect anomalies."
+      "articleBody": "Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Implementation Zero Trust Principles Zero Trust replaces the castle-and-moat model with \"never trust, always verify.\" Every request is authenticated, authorized, and inspected regardless of origin. Micro-Segmentation Divide your network into small, isolated zones. Each zone requires separate authentication. Terraform: AWS security group micro-segmentation resource \"aws_security_group\" \"app_to_db\" { name = \"app-db-ingress\" description = \"Allow app tier to database\" vpc_id = var.vpc_id ingress { from_port = 5432 to_port = 5432 protocol = \"tcp\" security_groups = [aws_security_group.app_tier.id] } egress { from_port = 0 to_port = 0 protocol = \"-1\" cidr_blocks = [\"0.0.0.0/0\"] } } Least Privilege Access Implement just-in-time (JIT) access with ephemeral credentials. JIT access broker from datetime import datetime, timedelta import boto3 def grant_just_in_time_access(user, resource, duration_minutes=60): iam = boto3.client(\"iam\") policy = { \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Allow\", \"Action\": resource[\"actions\"], \"Resource\": resource[\"arn\"], \"Condition\": { \"DateLessThan\": { \"aws:CurrentTime\": (datetime.utcnow() + timedelta(minutes=duration_minutes)).isoformat() } } }] } return iam.create_policy(PolicyName=f\"jit-{user}-{int(datetime.utcnow().timestamp())}\", PolicyDocument=json.dumps(policy)) Verify Every Request Every API call must be verified at the application layer. // Zero Trust API gateway middleware function zeroTrustMiddleware(req, res, next) { const context = { userId: req.headers[\"x-user-id\"], deviceId: req.headers[\"x-device-id\"], geo: req.headers[\"x-geo-location\"], time: Date.now(), path: req.path }; Promise.all([ verifyIdentity(context.userId), verifyDevice(context.deviceId), checkGeoPolicy(context.geo, context.path), checkTimePolicy(context.time) ]).then(([identity, device, geo, time]) => { if (identity && device && geo.allowed && time.allowed) { next(); } else { res.status(401).json({ error: \"Access denied\" }); } }); } Continuous Monitoring Log and analyze all access attempts in real time. \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query SELECT user_id, COUNT(*) as attempts, COUNT(DISTINCT ip_address) as ips, COUNT(DISTINCT geo_location) as regions FROM access_logs WHERE timestamp > NOW() - INTERVAL '1 hour' AND denied = true GROUP BY user_id HAVING COUNT(*) > 10; Conclusion Zero Trust is an architectural shift, not a product. Start with a single application, implement micro-segmentation, enforce least privilege, and expand gradually. Measure progress by reduction in lateral movement capability and mean time to detect anomalies."
     }
     </script>
     <script type="application/ld+json">
@@ -74,7 +74,7 @@
         <span class="tag-cat">DevOps</span>
         <span class="tag-cat">Cloud</span></div>
       <h1 class="article-title">Zero Trust Implementation</h1>
-      <div class="article-meta">Published 2026-05-12 · 0 views · 0 replies</div>
+      <div class="article-meta">Published 2026-05-15 · 0 views · 0 replies</div>
       <img class="article-cover" src="https://dingjiu1989-hue.github.io/images/covers/en/security/zero-trust-implementation.png" alt="Zero Trust Implementation" width="1200" height="630" loading="lazy">
       <div class="article-body"><h1>Zero Trust Implementation</h1>
 <br>
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Zero Trust Implementation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Zero Trust Principles </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Micro-Segmentation </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Divide your network into small, isolated zones. Each zone requires separate authentication. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>resource "aws_security_group" "app_to_db" {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>description = "Allow app tier to database"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ingress {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -420,7 +476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>to_port = 5432</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,6 +528,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>security_groups = [aws_security_group.app_tier.id]</p>
 <br>
 <br>
@@ -489,7 +554,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -535,7 +606,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from_port = 0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -581,7 +658,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>protocol = "-1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -627,30 +710,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -693,7 +785,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Implement just-in-time (JIT) access with ephemeral credentials. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -739,7 +837,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime, timedelta</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +889,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def grant_just_in_time_access(user, resource, duration_minutes=60):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -831,7 +941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>policy = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -877,7 +993,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Statement": [{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -923,7 +1045,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Action": resource["actions"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -969,7 +1097,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Condition": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1015,7 +1149,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"aws:CurrentTime": (datetime.utcnow() + </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1061,30 +1201,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1130,7 +1279,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1176,7 +1331,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PolicyDocument=json.dumps(policy))</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,7 +1380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Every API call must be verified at the application layer. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1265,7 +1432,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>function zeroTrustMiddleware(req, res, next) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1311,7 +1484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>userId: req.headers["x-user-id"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1357,7 +1536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>geo: req.headers["x-geo-location"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1403,7 +1588,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>path: req.path</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1449,7 +1640,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Promise.all([</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1495,7 +1692,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>verifyDevice(context.deviceId),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1541,7 +1744,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>checkTimePolicy(context.time)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1587,7 +1796,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (identity && device && geo.allowed && time.allowed) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1633,7 +1848,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>} else {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1679,7 +1900,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1725,7 +1952,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1768,6 +2001,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Log and analyze all access attempts in real time. </p>
 <br>
 <br>
@@ -1791,7 +2027,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Anomaly detection query</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1837,7 +2079,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>COUNT(DISTINCT ip_address) as ips,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1883,7 +2131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM access_logs</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1929,7 +2183,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AND denied = true</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1975,7 +2235,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>HAVING COUNT(*) > 10;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2018,6 +2284,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Zero Trust is an architectural shift, not a product. Start with a single application, implement micro-segmentation, enforce least privilege, and expand gradually. Measure progress by reduction in lateral movement capability and mean time to detect anomalies.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2031,8 +2300,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

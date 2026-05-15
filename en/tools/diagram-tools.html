@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/diagram-tools.png",
       "datePublished": "2026-05-11",
       "dateModified": "2026-05-11",
-      "wordCount": "4985",
+      "wordCount": "5476",
       "keywords": "Developer Tools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/best-diagram-as-code-tools-4n04"
       ],
-      "articleBody": "Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows. Why Diagram as Code Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools: * Store diagrams as plain text (diffable, reviewable in PRs). * Integrate with Markdown documentation. * Generate consistent output from the same source. * Can be run in CI/CD pipelines. * Work in any editor with syntax highlighting. Mermaid Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax. graph TD A[Client] -->|HTTP| B[Load Balancer] B --> C[Web Server 1] B --> D[Web Server 2] C --> E[(Database)] D --> E E --> F[Cache] graph TD A[Client] -->|HTTP| B[Load Balancer] B --> C[Web Server 1] B --> D[Web Server 2] C --> E[(Database)] D --> E E --> F[Cache] **Supported Diagram Types:** * Flowchart, Sequence diagram, Class diagram * State diagram, Entity Relationship diagram * Gantt chart, Pie chart, Git graph * User Journey, C4 diagram (decomposition) sequenceDiagram participant User participant API participant DB User->>API: POST /login API->>DB: SELECT user DB-->>API: user data API->>API: validate password API-->>User: JWT token **Pros**: Native GitHub/GitLab support, wide diagram type support, simple syntax, active development. **Cons**: Complex diagrams can be slow to render, limited layout control, can look generic. **Installation:** npm install -g @mermaid-js/mermaid-cli mmdc -i input.mmd -o output.png PlantUML PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support. @startuml actor User participant \"API Gateway\" as GW participant \"Auth Service\" as Auth database \"User DB\" as DB User -> GW: POST /auth/login GW -> Auth: validate credentials Auth -> DB: query user DB --> Auth: user record Auth --> GW: JWT token GW --> User: 200 OK @enduml **Supported Diagram Types:** * Sequence, Use Case, Class, Activity, Component * State, Deployment, Object, Timing, Wireframe * Archimate, Gantt, Mind Map, Work Breakdown * Network diagram, JSON/YAML visualization **Pros**: Most comprehensive diagram type support, mature and stable, powerful layout engine. **Cons**: Java dependency, syntax can be verbose, slower rendering than Mermaid. **Installation:** Using Docker docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml Or using the plantuml CLI with Java java -jar plantuml.jar diagram.puml Excalidraw Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly \"diagram as code,\" but the .excalidraw format is JSON and can be version controlled. **Pros**: Beautiful hand-drawn aesthetic, real-time collaboration, excellent for system design whiteboarding. **Cons**: Not text-based, no code generation, manual placement. Excalidraw has a CLI tool for embedding in workflows: npx @excalidraw/cli export diagram.excalidraw --output diagram.png Diagrams (Python) Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more. from diagrams import Diagram, Cluster from diagrams.aws.compute import EC2 from diagrams.aws.database import RDS from diagrams.aws.network import ELB with Diagram(\"Web Service\", show=False): lb = ELB(\"Load Balancer\") web = EC2(\"Web Server\") db = RDS(\"Database\") lb >> web >> db **Output Style:** Structured cloud architecture diagrams with official service icons. **Pros**: Python-based, official AWS/GCP/Azure icons, programmatic control. **Cons**: Limited to cloud architecture, not general-purpose diagramming. **Installation:** pip install diagrams python diagram.py # Generates diagram.png D2 D2 is a newer diagram-as-code language by Terrastruct, designed to address Mermaid's layout limitations. Client -> Load Balancer: HTTP Load Balancer -> Web Server 1 Load Balancer -> Web Server 2 Web Server 1 -> Database: SQL Web Server 2 -> Database: SQL Database -> Redis Cache: Cache read/write **Pros**: Better auto-layout than Mermaid, cleaner output, fast rendering, animated diagrams. **Cons**: Newer = smaller community, fewer integrations, limited diagram types. Comparison Table | Feature | Mermaid | PlantUML | Excalidraw | Diagrams | D2 | |---------|---------|----------|------------|----------|-----| | Language | JS-like | Java-like | JSON | Python | D2 DSL | | Diagram types | 10+ | 20+ | Free-form | Cloud arch | 5+ | | GitHub native | Yes | No | No | No | No | | CI/CD support | CLI | CLI | CLI | Python | CLI | | Layout quality | Good | Good | Manual | Algorithmic | Excellent | | Speed | Fast | Medium | N/A | Fast | Fast | | License | MIT | GPL | MIT | MIT | MPL | Integration with Documentation **Mermaid in Markdown:** graph LR A --> B B --> C Rendered automatically on GitHub, GitLab, and with Markdown renderers that support Mermaid. **In MkDocs with Material Theme:** mkdocs.yml markdown_extensions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences: custom_fences: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: mermaid class: mermaid **In VS Code:** // Preview Mermaid in VS Code \"extensions\": [\"bierner.markdown-mermaid\"] Recommendations * **For GitHub documentation**: Mermaid (native support, simplest syntax). * **For complex UML**: PlantUML (most diagram types, best UML support). * **For cloud architecture**: Diagrams (official icons, Python integration). * **For whiteboarding**: Excalidraw (best visual output for brainstorming). * **For polished output**: D2 (best auto-layout, modern tool). Summary Diagram-as-code tools have made technical diagrams maintainable and version-controllable. Mermaid is the most accessible choice with native GitHub support. PlantUML offers the widest diagram type coverage. D2 provides the best layout quality for modern tools. The key principle is to choose a tool that integrates with your existing documentation workflow -- if you already use Markdown in GitHub, Mermaid is the natural choice."
+      "articleBody": "Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Best Diagram as Code Tools Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows. Why Diagram as Code Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools: * Store diagrams as plain text (diffable, reviewable in PRs). * Integrate with Markdown documentation. * Generate consistent output from the same source. * Can be run in CI/CD pipelines. * Work in any editor with syntax highlighting. Mermaid Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax. graph TD A[Client] -->|HTTP| B[Load Balancer] B --> C[Web Server 1] B --> D[Web Server 2] C --> E[(Database)] D --> E E --> F[Cache] graph TD A[Client] -->|HTTP| B[Load Balancer] B --> C[Web Server 1] B --> D[Web Server 2] C --> E[(Database)] D --> E E --> F[Cache] **Supported Diagram Types:** * Flowchart, Sequence diagram, Class diagram * State diagram, Entity Relationship diagram * Gantt chart, Pie chart, Git graph * User Journey, C4 diagram (decomposition) sequenceDiagram participant User participant API participant DB User->>API: POST /login API->>DB: SELECT user DB-->>API: user data API->>API: validate password API-->>User: JWT token **Pros**: Native GitHub/GitLab support, wide diagram type support, simple syntax, active development. **Cons**: Complex diagrams can be slow to render, limited layout control, can look generic. **Installation:** npm install -g @mermaid-js/mermaid-cli mmdc -i input.mmd -o output.png PlantUML PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support. @startuml actor User participant \"API Gateway\" as GW participant \"Auth Service\" as Auth database \"User DB\" as DB User -> GW: POST /auth/login GW -> Auth: validate credentials Auth -> DB: query user DB --> Auth: user record Auth --> GW: JWT token GW --> User: 200 OK @enduml **Supported Diagram Types:** * Sequence, Use Case, Class, Activity, Component * State, Deployment, Object, Timing, Wireframe * Archimate, Gantt, Mind Map, Work Breakdown * Network diagram, JSON/YAML visualization **Pros**: Most comprehensive diagram type support, mature and stable, powerful layout engine. **Cons**: Java dependency, syntax can be verbose, slower rendering than Mermaid. **Installation:** Using Docker docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml Or using the plantuml CLI with Java java -jar plantuml.jar diagram.puml Excalidraw Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly \"diagram as code,\" but the .excalidraw format is JSON and can be version controlled. **Pros**: Beautiful hand-drawn aesthetic, real-time collaboration, excellent for system design whiteboarding. **Cons**: Not text-based, no code generation, manual placement. Excalidraw has a CLI tool for embedding in workflows: npx @excalidraw/cli export diagram.excalidraw --output diagram.png Diagrams (Python) Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more. from diagrams import Diagram, Cluster from diagrams.aws.compute import EC2 from diagrams.aws.database import RDS from diagrams.aws.network import ELB with Diagram(\"Web Service\", show=False): lb = ELB(\"Load Balancer\") web = EC2(\"Web Server\") db = RDS(\"Database\") lb >> web >> db **Output Style:** Structured cloud architecture diagrams with official service icons. **Pros**: Python-based, official AWS/GCP/Azure icons, programmatic control. **Cons**: Limited to cloud architecture, not general-purpose diagramming. **Installation:** pip install diagrams python diagram.py # Generates diagram.png D2 D2 is a newer diagram-as-code language by Terrastruct, designed to address Mermaid's layout limitations. Client -> Load Balancer: HTTP Load Balancer -> Web Server 1 Load Balancer -> Web Server 2 Web Server 1 -> Database: SQL Web Server 2 -> Database: SQL Database -> Redis Cache: Cache read/write **Pros**: Better auto-layout than Mermaid, cleaner output, fast rendering, animated diagrams. **Cons**: Newer = smaller community, fewer integrations, limited diagram types. Comparison Table | Feature | Mermaid | PlantUML | Excalidraw | Diagrams | D2 | |---------|---------|----------|------------|----------|-----| | Language | JS-like | Java-like | JSON | Python | D2 DSL | | Diagram types | 10+ | 20+ | Free-form | Cloud arch | 5+ | | GitHub native | Yes | No | No | No | No | | CI/CD support | CLI | CLI | CLI | Python | CLI | | Layout quality | Good | Good | Manual | Algorithmic | Excellent | | Speed | Fast | Medium | N/A | Fast | Fast | | License | MIT | GPL | MIT | MIT | MPL | Integration with Documentation **Mermaid in Markdown:** graph LR A --> B B --> C Rendered automatically on GitHub, GitLab, and with Markdown renderers that support Mermaid. **In MkDocs with Material Theme:** mkdocs.yml markdown_extensions: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences: custom_fences: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: mermaid class: mermaid **In VS Code:** // Preview Mermaid in VS Code \"extensions\": [\"bierner.markdown-mermaid\"] Recommendations * **For GitHub documentation**: Mermaid (native support, simplest syntax). * **For complex UML**: PlantUML (most diagram types, best UML support). * **For cloud architecture**: Diagrams (official icons, Python integration). * **For whiteboarding**: Excalidraw (best visual output for brainstorming). * **For polished output**: D2 (best auto-layout, modern tool). Summary Diagram-as-code tools have made technical diagrams maintainable and version-controllable. Mermaid is the most accessible choice with native GitHub support. PlantUML offers the widest diagram type coverage. D2 provides the best layout quality for modern tools. The key principle is to choose a tool that integrates with your existing documentation workflow -- if you already use Markdown in GitHub, Mermaid is the natural choice."
     }
     </script>
     <script type="application/ld+json">
@@ -204,7 +204,39 @@
 <br>
 <br>
 <br>
+<h1>Best Diagram as Code Tools</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Diagram-as-code tools let you create architecture diagrams, flowcharts, and sequence diagrams using text-based specifications. This approach offers version control, reproducibility, and seamless integration with documentation workflows.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Traditional diagram tools (draw.io, LucidChart) produce binary files that are difficult to version control and review. Diagram-as-code tools:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -305,7 +343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Integrate with Markdown documentation.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,6 +395,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Can be run in CI/CD pipelines.</p>
 <br>
 <br>
@@ -374,7 +421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Work in any editor with syntax highlighting.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -426,6 +479,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Mermaid is the most popular diagram-as-code tool, supported natively by GitHub, GitLab, and Notion. It renders diagrams from JavaScript-like syntax.</p>
 <br>
 <br>
@@ -452,7 +508,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>graph TD</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -504,7 +566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>B --> C[Web Server 1]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -556,7 +624,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>C --> E[(Database)]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -608,7 +682,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>E --> F[Cache]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -660,7 +740,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A[Client] -->|HTTP| B[Load Balancer]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -712,7 +798,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>B --> D[Web Server 2]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -764,6 +856,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>D --> E</p>
 <br>
 <br>
@@ -790,7 +885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>E --> F[Cache]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -842,7 +943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Flowchart, Sequence diagram, Class diagram</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -888,6 +995,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Gantt chart, Pie chart, Git graph</p>
 <br>
 <br>
@@ -911,7 +1021,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* User Journey, C4 diagram (decomposition)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -963,7 +1079,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>participant User</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1015,7 +1137,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>participant DB</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1067,7 +1195,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>API->>DB: SELECT user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1119,7 +1253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>API->>API: validate password</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1171,7 +1311,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros**: Native GitHub/GitLab support, wide diagram type support, simple syntax, active development.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1223,7 +1369,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Installation:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1275,7 +1427,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mmdc -i input.mmd -o output.png</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1327,7 +1485,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PlantUML is a mature diagram-as-code tool with Java-based rendering and extensive diagram type support.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1379,7 +1543,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>actor User</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1431,7 +1601,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>participant "Auth Service" as Auth</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1483,7 +1659,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>User -> GW: POST /auth/login</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1535,7 +1717,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Auth -> DB: query user</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1587,7 +1775,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Auth --> GW: JWT token</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1639,7 +1833,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@enduml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1691,7 +1891,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Sequence, Use Case, Class, Activity, Component</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1737,6 +1943,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Archimate, Gantt, Mind Map, Work Breakdown</p>
 <br>
 <br>
@@ -1760,7 +1969,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Network diagram, JSON/YAML visualization</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1812,6 +2027,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons**: Java dependency, syntax can be verbose, slower rendering than Mermaid.</p>
 <br>
 <br>
@@ -1838,7 +2056,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Installation:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1890,7 +2114,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>docker run -it --rm -v $(pwd):/data plantuml/plantuml diagram.puml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1942,7 +2172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>java -jar plantuml.jar diagram.puml</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1994,7 +2230,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Excalidraw is a whiteboard tool that produces hand-drawn style diagrams. It is not truly "diagram as code," but the .excalidraw format is JSON and can be version controlled.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2046,7 +2288,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons**: Not text-based, no code generation, manual placement.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2098,7 +2346,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>npx @excalidraw/cli export diagram.excalidraw --output diagram.png</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2150,7 +2404,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Diagrams is a Python library for creating cloud system architecture diagrams. It includes icons for AWS, GCP, Azure, Kubernetes, and more.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2202,7 +2462,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from diagrams.aws.compute import EC2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2254,7 +2520,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from diagrams.aws.network import ELB</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2306,7 +2578,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>lb = ELB("Load Balancer")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2358,7 +2636,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>db = RDS("Database")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2410,7 +2694,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Output Style:** Structured cloud architecture diagrams with official service icons.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2462,7 +2752,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Cons**: Limited to cloud architecture, not general-purpose diagramming.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2514,7 +2810,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>pip install diagrams</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2566,7 +2868,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  D2</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2618,7 +2926,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Client -> Load Balancer: HTTP</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2670,7 +2984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Load Balancer -> Web Server 2</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2722,7 +3042,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Web Server 2 -> Database: SQL</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2774,7 +3100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Pros**: Better auto-layout than Mermaid, cleaner output, fast rendering, animated diagrams.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2826,7 +3158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Comparison Table</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2878,7 +3216,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>|---------|---------|----------|------------|----------|-----|</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2930,7 +3274,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Diagram types | 10+ | 20+ | Free-form | Cloud arch | 5+ |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2982,7 +3332,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| CI/CD support | CLI | CLI | CLI | Python | CLI |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3034,7 +3390,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Speed | Fast | Medium | N/A | Fast | Fast |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3086,7 +3448,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Integration with Documentation</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3138,7 +3506,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>graph LR</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3190,7 +3564,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>B --> C</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3242,7 +3622,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**In MkDocs with Material Theme:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3294,6 +3680,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>markdown_extensions:</p>
 <br>
 <br>
@@ -3320,7 +3709,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences:</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- pymdownx.superfences:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3372,7 +3767,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: mermaid</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: mermaid</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3424,7 +3825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**In VS Code:**</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3476,7 +3883,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"extensions": ["bierner.markdown-mermaid"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3528,7 +3941,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **For GitHub documentation**: Mermaid (native support, simplest syntax).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3574,7 +3993,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **For cloud architecture**: Diagrams (official icons, Python integration).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3620,7 +4045,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **For polished output**: D2 (best auto-layout, modern tool).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3672,6 +4103,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Diagram-as-code tools have made technical diagrams maintainable and version-controllable. Mermaid is the most accessible choice with native GitHub support. PlantUML offers the widest diagram type coverage. D2 provides the best layout quality for modern tools. The key principle is to choose a tool that integrates with your existing documentation workflow -- if you already use Markdown in GitHub, Mermaid is the natural choice.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3685,8 +4119,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
-      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

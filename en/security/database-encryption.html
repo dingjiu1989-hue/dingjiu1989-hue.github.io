@@ -41,12 +41,15 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/database-encryption.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3897",
+      "wordCount": "4489",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/database-encryption.html"},
-      "articleBody": "Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Layers Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. Transparent Data Encryption (TDE) TDE encrypts the entire database at the storage layer: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server TDE CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256 ENCRYPTION BY SERVER CERTIFICATE DatabaseCert; ALTER DATABASE ProductionDB SET ENCRYPTION ON; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check encryption status SELECT DB_NAME(database_id) as DatabaseName, encryption_state_desc, percent_complete FROM sys.dm_database_encryption_keys; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL TDE (with pg_tde extension) CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider( 'file-vault', '{\"type\":\"file\",\"path\":\"/etc/postgresql/keys.json\"}' ); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Column-Level Encryption Encrypt specific sensitive columns: from cryptography.fernet import Fernet import base64 class ColumnEncryptor: def __init__(self, master_key): self.fernet = Fernet(master_key) def encrypt_column(self, value): if value is None: return None return self.fernet.encrypt(value.encode()).decode() def decrypt_column(self, encrypted_value): if encrypted_value is None: return None return self.fernet.decrypt(encrypted_value.encode()).decode() def searchable_encryption(self, value): \"\"\"Deterministic encryption for searchable columns\"\"\" from cryptography.hazmat.primitives import hashes digest = hashes.Hash(hashes.SHA256()) digest.update(value.encode()) digest.update(b\"deterministic_salt\") return digest.finalize().hex()[:32] Usage encryptor = ColumnEncryptor(os.environ[\"COLUMN_ENCRYPTION_KEY\"]) Encrypt PII before storage cursor.execute(\"\"\" INSERT INTO users (email, ssn, name) VALUES (%s, %s, %s) \"\"\", ( encryptor.encrypt_column(\"alice@example.com\"), encryptor.encrypt_column(\"123-45-6789\"), \"Alice\" )) Application-Level Encryption Encrypt data before it reaches the database: // Node.js application-level encryption const crypto = require(\"crypto\"); class ApplicationEncryptor { constructor(encryptionKey) { this.algorithm = \"aes-256-gcm\"; this.key = crypto.scryptSync(encryptionKey, \"salt\", 32); } encrypt(plaintext) { const iv = crypto.randomBytes(12); const cipher = crypto.createCipheriv(this.algorithm, this.key, iv); let encrypted = cipher.update(plaintext, \"utf8\", \"hex\"); encrypted += cipher.final(\"hex\"); const authTag = cipher.getAuthTag().toString(\"hex\"); return JSON.stringify({ iv: iv.toString(\"hex\"), data: encrypted, tag: authTag, version: 1 }); } decrypt(encrypted) { const { iv, data, tag } = JSON.parse(encrypted); const decipher = crypto.createDecipheriv( this.algorithm, this.key, Buffer.from(iv, \"hex\") ); decipher.setAuthTag(Buffer.from(tag, \"hex\")); let decrypted = decipher.update(data, \"hex\", \"utf8\"); decrypted += decipher.final(\"utf8\"); return decrypted; } } Key Management key_management: key_hierarchy: master_key: aws_kms / hsm database_key: encrypted_by_master_key column_keys: encrypted_by_database_key rotation: master_key: yearly database_key: monthly column_keys: on_demand access_control: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:key_owner \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:encrypt \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:decrypt audit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_key_usage_logged \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key_access_alerting \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unauthorized_access_blocked Performance Considerations \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Benchmark: Column-level vs TDE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TDE overhead: 1-3% performance impact \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Column-level overhead: 5-15% per encrypted column \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Indexes on encrypted columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Deterministic encryption allows exact match \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Order-preserving encryption allows range queries \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Homomorphic encryption allows computations (slow) CREATE INDEX idx_email_hash ON users (sha2(email, 256)); -- Searchable hash Conclusion Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS."
+      "sameAs": [
+    "https://dev.to/_6638a39c349d7e9c85ee20/database-encryption-42ec"
+      ],
+      "articleBody": "Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Database Encryption Layers Database encryption protects data at rest and in transit. Multiple layers provide defense in depth. Transparent Data Encryption (TDE) TDE encrypts the entire database at the storage layer: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server TDE CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256 ENCRYPTION BY SERVER CERTIFICATE DatabaseCert; ALTER DATABASE ProductionDB SET ENCRYPTION ON; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check encryption status SELECT DB_NAME(database_id) as DatabaseName, encryption_state_desc, percent_complete FROM sys.dm_database_encryption_keys; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL TDE (with pg_tde extension) CREATE EXTENSION pg_tde; SELECT pg_tde_add_database_key_provider( 'file-vault', '{\"type\":\"file\",\"path\":\"/etc/postgresql/keys.json\"}' ); SELECT pg_tde_set_principal_key('production-db-key', 'file-vault'); Column-Level Encryption Encrypt specific sensitive columns: from cryptography.fernet import Fernet import base64 class ColumnEncryptor: def __init__(self, master_key): self.fernet = Fernet(master_key) def encrypt_column(self, value): if value is None: return None return self.fernet.encrypt(value.encode()).decode() def decrypt_column(self, encrypted_value): if encrypted_value is None: return None return self.fernet.decrypt(encrypted_value.encode()).decode() def searchable_encryption(self, value): \"\"\"Deterministic encryption for searchable columns\"\"\" from cryptography.hazmat.primitives import hashes digest = hashes.Hash(hashes.SHA256()) digest.update(value.encode()) digest.update(b\"deterministic_salt\") return digest.finalize().hex()[:32] Usage encryptor = ColumnEncryptor(os.environ[\"COLUMN_ENCRYPTION_KEY\"]) Encrypt PII before storage cursor.execute(\"\"\" INSERT INTO users (email, ssn, name) VALUES (%s, %s, %s) \"\"\", ( encryptor.encrypt_column(\"alice@example.com\"), encryptor.encrypt_column(\"123-45-6789\"), \"Alice\" )) Application-Level Encryption Encrypt data before it reaches the database: // Node.js application-level encryption const crypto = require(\"crypto\"); class ApplicationEncryptor { constructor(encryptionKey) { this.algorithm = \"aes-256-gcm\"; this.key = crypto.scryptSync(encryptionKey, \"salt\", 32); } encrypt(plaintext) { const iv = crypto.randomBytes(12); const cipher = crypto.createCipheriv(this.algorithm, this.key, iv); let encrypted = cipher.update(plaintext, \"utf8\", \"hex\"); encrypted += cipher.final(\"hex\"); const authTag = cipher.getAuthTag().toString(\"hex\"); return JSON.stringify({ iv: iv.toString(\"hex\"), data: encrypted, tag: authTag, version: 1 }); } decrypt(encrypted) { const { iv, data, tag } = JSON.parse(encrypted); const decipher = crypto.createDecipheriv( this.algorithm, this.key, Buffer.from(iv, \"hex\") ); decipher.setAuthTag(Buffer.from(tag, \"hex\")); let decrypted = decipher.update(data, \"hex\", \"utf8\"); decrypted += decipher.final(\"utf8\"); return decrypted; } } Key Management key_management: key_hierarchy: master_key: aws_kms / hsm database_key: encrypted_by_master_key column_keys: encrypted_by_database_key rotation: master_key: yearly database_key: monthly column_keys: on_demand access_control: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:key_owner \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:encrypt \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:decrypt audit: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_key_usage_logged \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key_access_alerting \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unauthorized_access_blocked Performance Considerations \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Benchmark: Column-level vs TDE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TDE overhead: 1-3% performance impact \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Column-level overhead: 5-15% per encrypted column \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Indexes on encrypted columns \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Deterministic encryption allows exact match \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Order-preserving encryption allows range queries \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Homomorphic encryption allows computations (slow) CREATE INDEX idx_email_hash ON users (sha2(email, 256)); -- Searchable hash Conclusion Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +179,36 @@
 <br>
 <br>
 <br>
+<h1>Database Encryption</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Database Encryption Layers </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +248,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Transparent Data Encryption (TDE) </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -259,7 +297,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server TDE</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL Server TDE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -305,7 +349,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WITH ALGORITHM = AES_256</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -351,7 +401,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ALTER DATABASE ProductionDB</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -397,7 +453,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check encryption status</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Check encryption status</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -443,7 +505,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>encryption_state_desc,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -489,6 +557,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM sys.dm_database_encryption_keys;</p>
 <br>
 <br>
@@ -512,7 +583,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL TDE (with pg_tde extension)</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL TDE (with pg_tde extension)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -558,7 +635,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT pg_tde_add_database_key_provider(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -604,6 +687,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'{"type":"file","path":"/etc/postgresql/keys.json"}'</p>
 <br>
 <br>
@@ -627,7 +713,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,6 +765,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Column-Level Encryption </p>
 <br>
 <br>
@@ -693,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encrypt specific sensitive columns: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -739,7 +840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import base64</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -785,7 +892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, master_key):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -831,7 +944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def encrypt_column(self, value):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -877,7 +996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -923,7 +1048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def decrypt_column(self, encrypted_value):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -969,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1015,7 +1152,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def searchable_encryption(self, value):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1061,7 +1204,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from cryptography.hazmat.primitives import hashes</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1107,7 +1256,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>digest.update(value.encode())</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1153,7 +1308,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return digest.finalize().hex()[:32]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1199,7 +1360,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>encryptor = ColumnEncryptor(os.environ["COLUMN_ENCRYPTION_KEY"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1245,7 +1412,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cursor.execute("""</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1291,7 +1464,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>VALUES (%s, %s, %s)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1337,7 +1516,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>encryptor.encrypt_column("alice@example.com"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1383,7 +1568,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"Alice"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1429,6 +1620,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Application-Level Encryption </p>
 <br>
 <br>
@@ -1449,7 +1643,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Encrypt data before it reaches the database: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1495,7 +1695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const crypto = require("crypto");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1541,7 +1747,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>constructor(encryptionKey) {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1587,6 +1799,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>this.key = crypto.scryptSync(encryptionKey, "salt", 32);</p>
 <br>
 <br>
@@ -1610,7 +1825,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1656,7 +1877,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const iv = crypto.randomBytes(12);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1702,7 +1929,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>let encrypted = cipher.update(plaintext, "utf8", "hex");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1748,7 +1981,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const authTag = cipher.getAuthTag().toString("hex");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1794,7 +2033,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iv: iv.toString("hex"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1840,7 +2085,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tag: authTag,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1886,6 +2137,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
 <br>
 <br>
@@ -1909,7 +2163,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1955,7 +2215,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const { iv, data, tag } = JSON.parse(encrypted);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>this.algorithm,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2047,7 +2319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Buffer.from(iv, "hex")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>decipher.setAuthTag(Buffer.from(tag, "hex"));</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2139,7 +2423,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>decrypted += decipher.final("utf8");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2185,30 +2475,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2254,7 +2553,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>key_management:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2300,7 +2605,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>master_key: aws_kms / hsm</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2346,7 +2657,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>column_keys: encrypted_by_database_key</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2392,7 +2709,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>master_key: yearly</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2438,7 +2761,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>column_keys: on_demand</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2484,7 +2813,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:key_owner</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:key_owner</p>
 <br>
 <br>
 <br>
@@ -2507,7 +2839,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:encrypt</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:encrypt</p>
 <br>
 <br>
 <br>
@@ -2530,7 +2865,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:decrypt</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- kms:decrypt</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2576,7 +2917,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_key_usage_logged</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_key_usage_logged</p>
 <br>
 <br>
 <br>
@@ -2599,7 +2943,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key_access_alerting</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key_access_alerting</p>
 <br>
 <br>
 <br>
@@ -2622,7 +2969,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unauthorized_access_blocked</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- unauthorized_access_blocked</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2668,10 +3021,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Benchmark: Column-level vs TDE</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Benchmark: Column-level vs TDE</p>
 <br>
 <br>
 <br>
@@ -2691,13 +3044,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TDE overhead: 1-3% performance impact</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- TDE overhead: 1-3% performance impact</p>
 <br>
 <br>
 <br>
@@ -2714,7 +3067,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Column-level overhead: 5-15% per encrypted column</p>
 <br>
 <br>
 <br>
@@ -2724,6 +3076,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Column-level overhead: 5-15% per encrypted column</p>
 <br>
 <br>
 <br>
@@ -2737,7 +3090,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Indexes on encrypted columns</p>
 <br>
 <br>
 <br>
@@ -2750,6 +3102,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Indexes on encrypted columns</p>
 <br>
 <br>
 <br>
@@ -2760,7 +3113,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Deterministic encryption allows exact match</p>
 <br>
 <br>
 <br>
@@ -2776,6 +3128,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Deterministic encryption allows exact match</p>
 <br>
 <br>
 <br>
@@ -2783,7 +3136,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Order-preserving encryption allows range queries</p>
 <br>
 <br>
 <br>
@@ -2802,11 +3154,36 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Order-preserving encryption allows range queries</p>
 <br>
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Homomorphic encryption allows computations (slow)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Homomorphic encryption allows computations (slow)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2852,7 +3229,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ON users (sha2(email, 256)); -- Searchable hash</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2895,6 +3278,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Layer your database encryption strategy. Use TDE for bulk encryption with minimal performance impact. Use column-level encryption for specific PII fields. Use application-level encryption for the strongest protection. Manage keys carefully with a hierarchical key system and rotate regularly. Always encrypt data in transit with TLS.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2908,8 +3294,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

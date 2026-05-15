@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/dynamodb-vs-cassandra.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4551",
+      "wordCount": "5050",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/dynamodb-vs-cassandra.html"},
-      "articleBody": "DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB and Cassandra are both distributed, horizontally scalable NoSQL databases. They share a common heritage (both influenced by Amazon's Dynamo paper), but their implementations and operational models differ significantly. Data Model DynamoDB DynamoDB uses tables with items (rows) and attributes (columns). Each item must have a partition key and optionally a sort key: // DynamoDB table: Users // Partition key: user_id (String) // Sort key: created_at (Number) { \"user_id\": \"user_42\", \"created_at\": 1717000000, \"email\": \"alice@example.com\", \"name\": \"Alice\", \"address\": { \"city\": \"New York\", \"zip\": \"10001\" } } Key design rules: * The partition key determines which partition stores the item. * Items with the same partition key are stored together, ordered by sort key. * Query operations require the partition key; optional sort key conditions. * Secondary indexes can be local (same partition key, different sort key) or global (different partition key). DynamoDB query import boto3 client = boto3.client('dynamodb') response = client.query( TableName='Users', KeyConditionExpression='user_id = :uid', ExpressionAttributeValues={ ':uid': {'S': 'user_42'} } ) Cassandra Cassandra uses tables with rows and columns, but the data model is designed around query patterns. The PRIMARY KEY defines partitioning and clustering: CREATE TABLE users_by_email ( email TEXT PRIMARY KEY, user_id UUID, name TEXT, address TEXT ); CREATE TABLE orders_by_user ( user_id UUID, order_id UUID, total DECIMAL, created_at TIMESTAMP, PRIMARY KEY (user_id, created_at, order_id) ) WITH CLUSTERING ORDER BY (created_at DESC); Key design rules: * The first column in PRIMARY KEY is the partition key. * Subsequent columns are clustering columns that define sort order within a partition. * You model tables around your access patterns (query-first design). * Denormalization is expected and encouraged. Cassandra query from cassandra.cluster import Cluster cluster = Cluster(['127.0.0.1']) session = cluster.connect('mykeyspace') rows = session.execute( \"SELECT * FROM orders_by_user WHERE user_id = %s\", (user_id,) ) Consistency DynamoDB Consistency Levels | Level | Description | Cost | |-------|-------------|------| | Eventual | Reads may return stale data | 0.5 RCU per read | | Strong | Returns most up-to-date data | 1 RCU per read | | Transactional | Serial isolation for reads/writes | 2 RCU/WCU per operation | DynamoDB offers tunable consistency at the request level: Eventually consistent read (cheaper) response = client.get_item( TableName='Users', Key={'user_id': {'S': 'user_42'}}, ConsistentRead=False ) Strongly consistent read response = client.get_item( TableName='Users', Key={'user_id': {'S': 'user_42'}}, ConsistentRead=True ) Cassandra Consistency Levels Cassandra's consistency is tunable per query using the consistency level (CL): \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY QUORUM; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY ONE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY ALL; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY LOCAL_QUORUM; Scaling DynamoDB Scaling DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: Configure auto-scaling client.update_table( TableName='Users', ProvisionedThroughput={ 'ReadCapacityUnits': 100, 'WriteCapacityUnits': 100 } ) Or use on-demand mode (pay-per-request) No capacity planning needed, but higher per-request cost DynamoDB partitions are invisible to users. The service automatically splits partitions when they exceed 10 GB or when throughput exceeds 3000 RCU or 1000 WCU per partition. Cassandra Scaling Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: cassandra.yaml num_tokens: 256 initial_token: replication_factor: 3 Adding a node: Add node to cluster nodetool status nodetool join Rebalance data nodetool rebuild Scaling is linear: doubling nodes doubles throughput. No partitioning limits; the only constraint is disk space per node. Cost Comparison | Factor | DynamoDB | Cassandra | |--------|----------|-----------| | Infrastructure | Serverless (pay per request) | Self-managed or managed (AWS Keyspaces) | | Read cost | $0.00013 per RCU-hour | Server/cloud instance cost | | Write cost | $0.00065 per WCU-hour | Server/cloud instance cost | | Storage | $0.25 GB/month | EBS/gp3 cost (~$0.08/GB) | | Complex queries | Additional RCUs for scan | Single query cost | | Minimum cost | Free tier (25 GB, 25 RCU/WCU) | 3-node minimum cluster | When to Choose Which **Choose DynamoDB when**: * You are already in AWS and want managed, serverless operations. * Traffic patterns are unpredictable (on-demand mode). * You need single-digit-millisecond latency at any scale. * You prioritize operations simplicity over cost optimization. **Choose Cassandra when**: * You run on-premises or multi-cloud. * Traffic is predictable and cost optimization matters at scale. * You need custom compaction and repair strategies. * You want to avoid vendor lock-in. * Your queries require complex clustering and ordering within partitions. **Avoid both when**: * You need complex joins, aggregations, or ad-hoc queries. * ACID transactions across multiple records are critical. * Your data model has many-to-many relationships. DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice."
+      "articleBody": "DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost DynamoDB and Cassandra are both distributed, horizontally scalable NoSQL databases. They share a common heritage (both influenced by Amazon's Dynamo paper), but their implementations and operational models differ significantly. Data Model DynamoDB DynamoDB uses tables with items (rows) and attributes (columns). Each item must have a partition key and optionally a sort key: // DynamoDB table: Users // Partition key: user_id (String) // Sort key: created_at (Number) { \"user_id\": \"user_42\", \"created_at\": 1717000000, \"email\": \"alice@example.com\", \"name\": \"Alice\", \"address\": { \"city\": \"New York\", \"zip\": \"10001\" } } Key design rules: * The partition key determines which partition stores the item. * Items with the same partition key are stored together, ordered by sort key. * Query operations require the partition key; optional sort key conditions. * Secondary indexes can be local (same partition key, different sort key) or global (different partition key). DynamoDB query import boto3 client = boto3.client('dynamodb') response = client.query( TableName='Users', KeyConditionExpression='user_id = :uid', ExpressionAttributeValues={ ':uid': {'S': 'user_42'} } ) Cassandra Cassandra uses tables with rows and columns, but the data model is designed around query patterns. The PRIMARY KEY defines partitioning and clustering: CREATE TABLE users_by_email ( email TEXT PRIMARY KEY, user_id UUID, name TEXT, address TEXT ); CREATE TABLE orders_by_user ( user_id UUID, order_id UUID, total DECIMAL, created_at TIMESTAMP, PRIMARY KEY (user_id, created_at, order_id) ) WITH CLUSTERING ORDER BY (created_at DESC); Key design rules: * The first column in PRIMARY KEY is the partition key. * Subsequent columns are clustering columns that define sort order within a partition. * You model tables around your access patterns (query-first design). * Denormalization is expected and encouraged. Cassandra query from cassandra.cluster import Cluster cluster = Cluster(['127.0.0.1']) session = cluster.connect('mykeyspace') rows = session.execute( \"SELECT * FROM orders_by_user WHERE user_id = %s\", (user_id,) ) Consistency DynamoDB Consistency Levels | Level | Description | Cost | |-------|-------------|------| | Eventual | Reads may return stale data | 0.5 RCU per read | | Strong | Returns most up-to-date data | 1 RCU per read | | Transactional | Serial isolation for reads/writes | 2 RCU/WCU per operation | DynamoDB offers tunable consistency at the request level: Eventually consistent read (cheaper) response = client.get_item( TableName='Users', Key={'user_id': {'S': 'user_42'}}, ConsistentRead=False ) Strongly consistent read response = client.get_item( TableName='Users', Key={'user_id': {'S': 'user_42'}}, ConsistentRead=True ) Cassandra Consistency Levels Cassandra's consistency is tunable per query using the consistency level (CL): \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY QUORUM; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY ONE; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY ALL; \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter SELECT * FROM users WHERE email = 'alice@example.com' CONSISTENCY LOCAL_QUORUM; Scaling DynamoDB Scaling DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: Configure auto-scaling client.update_table( TableName='Users', ProvisionedThroughput={ 'ReadCapacityUnits': 100, 'WriteCapacityUnits': 100 } ) Or use on-demand mode (pay-per-request) No capacity planning needed, but higher per-request cost DynamoDB partitions are invisible to users. The service automatically splits partitions when they exceed 10 GB or when throughput exceeds 3000 RCU or 1000 WCU per partition. Cassandra Scaling Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: cassandra.yaml num_tokens: 256 initial_token: replication_factor: 3 Adding a node: Add node to cluster nodetool status nodetool join Rebalance data nodetool rebuild Scaling is linear: doubling nodes doubles throughput. No partitioning limits; the only constraint is disk space per node. Cost Comparison | Factor | DynamoDB | Cassandra | |--------|----------|-----------| | Infrastructure | Serverless (pay per request) | Self-managed or managed (AWS Keyspaces) | | Read cost | $0.00013 per RCU-hour | Server/cloud instance cost | | Write cost | $0.00065 per WCU-hour | Server/cloud instance cost | | Storage | $0.25 GB/month | EBS/gp3 cost (~$0.08/GB) | | Complex queries | Additional RCUs for scan | Single query cost | | Minimum cost | Free tier (25 GB, 25 RCU/WCU) | 3-node minimum cluster | When to Choose Which **Choose DynamoDB when**: * You are already in AWS and want managed, serverless operations. * Traffic patterns are unpredictable (on-demand mode). * You need single-digit-millisecond latency at any scale. * You prioritize operations simplicity over cost optimization. **Choose Cassandra when**: * You run on-premises or multi-cloud. * Traffic is predictable and cost optimization matters at scale. * You need custom compaction and repair strategies. * You want to avoid vendor lock-in. * Your queries require complex clustering and ordering within partitions. **Avoid both when**: * You need complex joins, aggregations, or ad-hoc queries. * ACID transactions across multiple records are critical. * Your data model has many-to-many relationships. DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>DynamoDB vs Cassandra: Data Model, Consistency, Scaling, and Cost </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Data Model </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB uses tables with items (rows) and attributes (columns). Each item must have a partition key and optionally a sort key: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -302,7 +343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Partition key: user_id (String)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -348,7 +395,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -394,7 +447,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"created_at": 1717000000,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -440,7 +499,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": "Alice",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -486,7 +551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"city": "New York",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -532,30 +603,39 @@
 <br>
 <br>
 <br>
-<p>}</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
 <p>}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -601,7 +681,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* The partition key determines which partition stores the item.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -641,6 +727,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Query operations require the partition key; optional sort key conditions.</p>
 <br>
 <br>
@@ -661,7 +750,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Secondary indexes can be local (same partition key, different sort key) or global (different partition key).</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -707,7 +802,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import boto3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -753,6 +854,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = client.query(</p>
 <br>
 <br>
@@ -776,7 +880,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TableName='Users',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -822,7 +932,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ExpressionAttributeValues={</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -868,7 +984,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -914,6 +1036,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cassandra </p>
 <br>
 <br>
@@ -934,7 +1059,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cassandra uses tables with rows and columns, but the data model is designed around query patterns. The PRIMARY KEY defines partitioning and clustering: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -980,6 +1111,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>email TEXT PRIMARY KEY,</p>
 <br>
 <br>
@@ -1003,7 +1137,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>user_id UUID,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1049,7 +1189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>address TEXT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1095,7 +1241,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE TABLE orders_by_user (</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1141,7 +1293,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>order_id UUID,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1187,7 +1345,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>created_at TIMESTAMP,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1233,7 +1397,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) WITH CLUSTERING ORDER BY (created_at DESC);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1279,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* The first column in PRIMARY KEY is the partition key.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1319,6 +1495,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You model tables around your access patterns (query-first design).</p>
 <br>
 <br>
@@ -1339,7 +1518,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Denormalization is expected and encouraged.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1385,7 +1570,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from cassandra.cluster import Cluster</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1431,7 +1622,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>session = cluster.connect('mykeyspace')</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1477,7 +1674,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"SELECT * FROM orders_by_user WHERE user_id = %s",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1523,7 +1726,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1566,7 +1775,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB Consistency Levels </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1606,7 +1821,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB offers tunable consistency at the request level: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1652,7 +1873,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = client.get_item(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1698,7 +1925,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Key={'user_id': {'S': 'user_42'}},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1744,7 +1977,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1790,6 +2029,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = client.get_item(</p>
 <br>
 <br>
@@ -1813,7 +2055,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>TableName='Users',</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1859,7 +2107,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ConsistentRead=True</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1905,7 +2159,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cassandra Consistency Levels </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1948,7 +2208,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- QUORUM: majority of replicas must respond</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1972,6 +2238,9 @@
 <br>
 <br>
 <p>SELECT * FROM users WHERE email = 'alice@example.com'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2017,7 +2286,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ONE: fastest, weakest guarantee</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2041,6 +2316,9 @@
 <br>
 <br>
 <p>SELECT * FROM users WHERE email = 'alice@example.com'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2086,7 +2364,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- ALL: strongest guarantee, slowest</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2110,6 +2394,9 @@
 <br>
 <br>
 <p>SELECT * FROM users WHERE email = 'alice@example.com'</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2155,7 +2442,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LOCAL_QUORUM: quorum within local datacenter</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2201,7 +2494,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CONSISTENCY LOCAL_QUORUM;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2244,6 +2543,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB Scaling </p>
 <br>
 <br>
@@ -2264,7 +2566,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB scales vertically by provisioning read and write capacity units (RCUs and WCUs). Auto-scaling adjusts capacity based on traffic: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2310,7 +2618,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client.update_table(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2356,7 +2670,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ProvisionedThroughput={</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2402,7 +2722,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>'WriteCapacityUnits': 100</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2448,7 +2774,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2494,7 +2826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>No capacity planning needed, but higher per-request cost</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2537,6 +2875,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cassandra Scaling </p>
 <br>
 <br>
@@ -2557,7 +2898,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cassandra scales horizontally by adding nodes. Data is distributed using consistent hashing: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2603,7 +2950,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>num_tokens: 256</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2649,7 +3002,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>replication_factor: 3</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2695,7 +3054,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Add node to cluster</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2741,7 +3106,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nodetool join</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2787,7 +3158,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nodetool rebuild</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2830,7 +3207,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cost Comparison </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2870,7 +3253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>When to Choose Which </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2913,7 +3302,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You are already in AWS and want managed, serverless operations.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2953,6 +3348,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need single-digit-millisecond latency at any scale.</p>
 <br>
 <br>
@@ -2973,7 +3371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You prioritize operations simplicity over cost optimization.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3019,7 +3423,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You run on-premises or multi-cloud.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3059,7 +3469,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need custom compaction and repair strategies.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3099,7 +3515,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Your queries require complex clustering and ordering within partitions.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3145,6 +3567,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* You need complex joins, aggregations, or ad-hoc queries.</p>
 <br>
 <br>
@@ -3165,7 +3590,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* ACID transactions across multiple records are critical.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3208,6 +3639,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DynamoDB and Cassandra are both excellent at what they do: high-throughput, scalable key-value and wide-column workloads. The choice depends on your operational preferences, cloud strategy, and cost sensitivity. For most applications starting out, a relational database with read replicas is the simpler and more flexible choice.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3221,8 +3655,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

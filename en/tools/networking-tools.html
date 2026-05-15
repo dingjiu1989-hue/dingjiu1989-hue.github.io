@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/tools/networking-tools.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "4811",
+      "wordCount": "5235",
       "keywords": "Technology, DevTools, Productivity",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/networking-tools-mtr-iperf-dig-nmap-wireshark-practical-guide-13ec"
       ],
-      "articleBody": "Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Introduction Network troubleshooting is a fundamental skill for developers and operations engineers. Whether diagnosing slow connections, DNS resolution failures, or firewall issues, the right tools make the difference between hours of frustration and minutes of focused debugging. This practical guide covers five essential networking tools: mtr, iperf, dig, nmap, and Wireshark. mtr (My Traceroute) Combines traceroute and ping in a single tool for continuous network path analysis: Basic usage mtr google.com mtr --report google.com # Run once and generate report mtr --report-cycles=10 google.com # 10 cycles for report Useful flags mtr --icmp google.com # Use ICMP instead of UDP mtr --tcp --port 443 api.example.com # TCP on specific port mtr --udp google.com # UDP probes mtr --no-dns 10.0.0.1 # Skip DNS resolution (faster) mtr --report-wide google.com # Wide output format For continuous monitoring mtr --interval 5 google.com # Update every 5 seconds **Interpreting output**: Look for hops with high loss% or latency spikes. The last hop before consistent loss is usually the problem. 100% loss at intermediate hops may be a firewall dropping probes, not an actual failure. iperf3 Network bandwidth measurement tool: Start server (on receiving end) iperf3 -s iperf3 -s -p 5201 Start client (on sending end) iperf3 -c server-address iperf3 -c server-address -p 5201 Advanced tests iperf3 -c server-address -t 30 # 30-second test iperf3 -c server-address -P 4 # 4 parallel streams iperf3 -c server-address -R # Reverse mode (server to client) iperf3 -c server-address -u -b 100M # UDP test at 100 Mbps Bidirectional test iperf3 -c server-address --bidir JSON output for automation iperf3 -c server-address -J > results.json Test specific TCP window size iperf3 -c server-address -w 64K **When to use**: Benchmark network throughput between instances, verify bandwidth limits, test VPN performance, identify congestion. Typical patterns: run iperf3 in server mode on one host, client mode on another. dig (DNS Lookup) The most powerful DNS troubleshooting tool: Basic lookup dig google.com dig @8.8.8.8 google.com # Query specific DNS server Query specific record types dig google.com A # IPv4 address dig google.com AAAA # IPv6 address dig google.com MX # Mail exchange dig google.com NS # Name servers dig google.com TXT # Text records (SPF, DKIM) dig google.com CNAME # Canonical name dig example.com SOA # Start of authority Advanced queries dig +short google.com # Short output dig +trace google.com # Trace delegation path dig +tcp google.com # Use TCP instead of UDP dig -x 8.8.8.8 # Reverse DNS lookup dig google.com ANY +noall +answer # Show only answer section dig +dnssec google.com # DNSSEC validation Batch queries from file dig -f domains.txt +short Check propagation dig @ns1.google.com google.com # Query authoritative server dig @8.8.8.8 google.com +stats # Show query statistics **Common debugging workflow**: Start with `dig +trace` to see the full resolution path, then query specific servers to isolate where resolution fails. nmap (Network Mapper) Port scanning and service discovery: Basic scans nmap scanme.nmap.org # Default scan (1000 ports) nmap -sS scanme.nmap.org # SYN stealth scan (needs root) nmap -sT scanme.nmap.org # TCP connect scan nmap -sU scanme.nmap.org # UDP scan Port specification nmap -p 80,443 example.com # Specific ports nmap -p- example.com # All 65535 ports (slow) nmap -p 1-1000 example.com # Port range nmap --top-ports 100 example.com # Most common ports Service detection nmap -sV example.com # Version detection nmap -O example.com # OS detection nmap -A example.com # Aggressive (OS, version, script, traceroute) Network discovery nmap -sn 192.168.1.0/24 # Ping sweep (find live hosts) nmap -sL 192.168.1.0/24 # List scan (DNS resolution only) Scripts nmap --script=http-title example.com nmap --script=ssl-enum-ciphers example.com nmap --script=vuln example.com --script-args=unsafe=1 Output formats nmap -oN scan.txt example.com # Normal nmap -oX scan.xml example.com # XML nmap -oG scan.grep example.com # Grepable Wireshark / tshark Deep packet inspection and analysis: tshark (CLI version of Wireshark) Capture on interface tshark -i eth0 tshark -i eth0 -c 100 # Capture 100 packets Capture filters (BPF syntax) tshark -i eth0 \"port 443\" tshark -i eth0 \"host 10.0.0.1\" tshark -i eth0 \"tcp port 80 or tcp port 443\" Display filters (more powerful) tshark -Y \"http.request.method == GET\" tshark -Y \"dns.qry.name contains example.com\" tshark -Y \"tcp.analysis.flags\" # TCP issues tshark -Y \"http.response.code >= 500\" Follow streams tshark -r capture.pcap -Y \"http\" -z follow,tcp,ascii,0 Statistics tshark -r capture.pcap -z io,stat,1 # IO graph tshark -r capture.pcap -z conv,tcp # TCP conversations Save filtered output tshark -r capture.pcap -Y \"dns\" -w dns-only.pcap **Wireshark filters**: `ip.src == 10.0.0.1 && tcp.port == 443`, `http.response.code >= 400`, `tls.handshake.type == 1` Quick Reference | Tool | Best For | Example Problem | |------|----------|----------------| | mtr | Path analysis, packet loss | \"Connection intermittent to API\" | | iperf3 | Bandwidth measurement | \"Slow file transfers to S3\" | | dig | DNS troubleshooting | \"Website not loading, DNS error\" | | nmap | Port scanning, discovery | \"Cannot connect to service, firewall?\" | | Wireshark | Deep packet inspection | \"API returns corrupted data\" | Recommendations * **First, check connectivity**: `ping` and `mtr` to verify basic reachability. * **DNS issues**: `dig +trace` to find where resolution fails. * **Performance issues**: `iperf3` to measure raw throughput between hosts. * **Firewall issues**: `nmap -sS -p ` to check port accessibility. * **Protocol issues**: `tshark -Y` display filters to inspect application-layer behavior. Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis."
+      "articleBody": "Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide Introduction Network troubleshooting is a fundamental skill for developers and operations engineers. Whether diagnosing slow connections, DNS resolution failures, or firewall issues, the right tools make the difference between hours of frustration and minutes of focused debugging. This practical guide covers five essential networking tools: mtr, iperf, dig, nmap, and Wireshark. mtr (My Traceroute) Combines traceroute and ping in a single tool for continuous network path analysis: Basic usage mtr google.com mtr --report google.com # Run once and generate report mtr --report-cycles=10 google.com # 10 cycles for report Useful flags mtr --icmp google.com # Use ICMP instead of UDP mtr --tcp --port 443 api.example.com # TCP on specific port mtr --udp google.com # UDP probes mtr --no-dns 10.0.0.1 # Skip DNS resolution (faster) mtr --report-wide google.com # Wide output format For continuous monitoring mtr --interval 5 google.com # Update every 5 seconds **Interpreting output**: Look for hops with high loss% or latency spikes. The last hop before consistent loss is usually the problem. 100% loss at intermediate hops may be a firewall dropping probes, not an actual failure. iperf3 Network bandwidth measurement tool: Start server (on receiving end) iperf3 -s iperf3 -s -p 5201 Start client (on sending end) iperf3 -c server-address iperf3 -c server-address -p 5201 Advanced tests iperf3 -c server-address -t 30 # 30-second test iperf3 -c server-address -P 4 # 4 parallel streams iperf3 -c server-address -R # Reverse mode (server to client) iperf3 -c server-address -u -b 100M # UDP test at 100 Mbps Bidirectional test iperf3 -c server-address --bidir JSON output for automation iperf3 -c server-address -J > results.json Test specific TCP window size iperf3 -c server-address -w 64K **When to use**: Benchmark network throughput between instances, verify bandwidth limits, test VPN performance, identify congestion. Typical patterns: run iperf3 in server mode on one host, client mode on another. dig (DNS Lookup) The most powerful DNS troubleshooting tool: Basic lookup dig google.com dig @8.8.8.8 google.com # Query specific DNS server Query specific record types dig google.com A # IPv4 address dig google.com AAAA # IPv6 address dig google.com MX # Mail exchange dig google.com NS # Name servers dig google.com TXT # Text records (SPF, DKIM) dig google.com CNAME # Canonical name dig example.com SOA # Start of authority Advanced queries dig +short google.com # Short output dig +trace google.com # Trace delegation path dig +tcp google.com # Use TCP instead of UDP dig -x 8.8.8.8 # Reverse DNS lookup dig google.com ANY +noall +answer # Show only answer section dig +dnssec google.com # DNSSEC validation Batch queries from file dig -f domains.txt +short Check propagation dig @ns1.google.com google.com # Query authoritative server dig @8.8.8.8 google.com +stats # Show query statistics **Common debugging workflow**: Start with `dig +trace` to see the full resolution path, then query specific servers to isolate where resolution fails. nmap (Network Mapper) Port scanning and service discovery: Basic scans nmap scanme.nmap.org # Default scan (1000 ports) nmap -sS scanme.nmap.org # SYN stealth scan (needs root) nmap -sT scanme.nmap.org # TCP connect scan nmap -sU scanme.nmap.org # UDP scan Port specification nmap -p 80,443 example.com # Specific ports nmap -p- example.com # All 65535 ports (slow) nmap -p 1-1000 example.com # Port range nmap --top-ports 100 example.com # Most common ports Service detection nmap -sV example.com # Version detection nmap -O example.com # OS detection nmap -A example.com # Aggressive (OS, version, script, traceroute) Network discovery nmap -sn 192.168.1.0/24 # Ping sweep (find live hosts) nmap -sL 192.168.1.0/24 # List scan (DNS resolution only) Scripts nmap --script=http-title example.com nmap --script=ssl-enum-ciphers example.com nmap --script=vuln example.com --script-args=unsafe=1 Output formats nmap -oN scan.txt example.com # Normal nmap -oX scan.xml example.com # XML nmap -oG scan.grep example.com # Grepable Wireshark / tshark Deep packet inspection and analysis: tshark (CLI version of Wireshark) Capture on interface tshark -i eth0 tshark -i eth0 -c 100 # Capture 100 packets Capture filters (BPF syntax) tshark -i eth0 \"port 443\" tshark -i eth0 \"host 10.0.0.1\" tshark -i eth0 \"tcp port 80 or tcp port 443\" Display filters (more powerful) tshark -Y \"http.request.method == GET\" tshark -Y \"dns.qry.name contains example.com\" tshark -Y \"tcp.analysis.flags\" # TCP issues tshark -Y \"http.response.code >= 500\" Follow streams tshark -r capture.pcap -Y \"http\" -z follow,tcp,ascii,0 Statistics tshark -r capture.pcap -z io,stat,1 # IO graph tshark -r capture.pcap -z conv,tcp # TCP conversations Save filtered output tshark -r capture.pcap -Y \"dns\" -w dns-only.pcap **Wireshark filters**: `ip.src == 10.0.0.1 && tcp.port == 443`, `http.response.code >= 400`, `tls.handshake.type == 1` Quick Reference | Tool | Best For | Example Problem | |------|----------|----------------| | mtr | Path analysis, packet loss | \"Connection intermittent to API\" | | iperf3 | Bandwidth measurement | \"Slow file transfers to S3\" | | dig | DNS troubleshooting | \"Website not loading, DNS error\" | | nmap | Port scanning, discovery | \"Cannot connect to service, firewall?\" | | Wireshark | Deep packet inspection | \"API returns corrupted data\" | Recommendations * **First, check connectivity**: `ping` and `mtr` to verify basic reachability. * **DNS issues**: `dig +trace` to find where resolution fails. * **Performance issues**: `iperf3` to measure raw throughput between hosts. * **Firewall issues**: `nmap -sS -p ` to check port accessibility. * **Protocol issues**: `tshark -Y` display filters to inspect application-layer behavior. Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis."
     }
     </script>
     <script type="application/ld+json">
@@ -205,7 +205,39 @@
 <br>
 <br>
 <br>
+<h1>Networking Tools: mtr, iperf, dig, nmap, Wireshark Practical Guide</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -257,7 +289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  mtr (My Traceroute)</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -309,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Basic usage</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -361,7 +405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mtr --report google.com # Run once and generate report</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -413,7 +463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Useful flags</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mtr --tcp --port 443 api.example.com # TCP on specific port</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -517,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>mtr --no-dns 10.0.0.1 # Skip DNS resolution (faster)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>For continuous monitoring</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -621,7 +695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Interpreting output**: Look for hops with high loss% or latency spikes. The last hop before consistent loss is usually the problem. 100% loss at intermediate hops may be a firewall dropping probes, not an actual failure.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,7 +753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Network bandwidth measurement tool:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -725,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iperf3 -s</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -777,7 +869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Start client (on sending end)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -829,7 +927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iperf3 -c server-address -p 5201</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -881,7 +985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iperf3 -c server-address -t 30 # 30-second test</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -933,7 +1043,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>iperf3 -c server-address -R # Reverse mode (server to client)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -985,7 +1101,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Bidirectional test</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1037,7 +1159,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>JSON output for automation</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1089,7 +1217,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Test specific TCP window size</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1141,7 +1275,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**When to use**: Benchmark network throughput between instances, verify bandwidth limits, test VPN performance, identify congestion. Typical patterns: run iperf3 in server mode on one host, client mode on another.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1193,7 +1333,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The most powerful DNS troubleshooting tool:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1245,7 +1391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig google.com</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1297,7 +1449,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Query specific record types</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1349,7 +1507,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig google.com AAAA # IPv6 address</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1401,7 +1565,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig google.com NS # Name servers</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1453,7 +1623,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig google.com CNAME # Canonical name</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1505,7 +1681,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Advanced queries</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1557,7 +1739,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig +trace google.com # Trace delegation path</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1609,7 +1797,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig -x 8.8.8.8 # Reverse DNS lookup</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1661,7 +1855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig +dnssec google.com # DNSSEC validation</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1713,7 +1913,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig -f domains.txt +short</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1765,7 +1971,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>dig @ns1.google.com google.com # Query authoritative server</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1817,7 +2029,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Common debugging workflow**: Start with `dig +trace` to see the full resolution path, then query specific servers to isolate where resolution fails.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1869,7 +2087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Port scanning and service discovery:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1921,7 +2145,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap scanme.nmap.org # Default scan (1000 ports)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1973,7 +2203,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -sT scanme.nmap.org # TCP connect scan</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2025,7 +2261,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Port specification</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2077,7 +2319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -p- example.com # All 65535 ports (slow)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2129,7 +2377,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap --top-ports 100 example.com # Most common ports</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2181,7 +2435,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -sV example.com # Version detection</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2233,7 +2493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -A example.com # Aggressive (OS, version, script, traceroute)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2285,7 +2551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -sn 192.168.1.0/24 # Ping sweep (find live hosts)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2337,7 +2609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Scripts</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,7 +2667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap --script=ssl-enum-ciphers example.com</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2441,7 +2725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Output formats</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2493,7 +2783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>nmap -oX scan.xml example.com # XML</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2545,7 +2841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Wireshark / tshark</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,7 +2899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>tshark (CLI version of Wireshark)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2649,7 +2957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -i eth0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2701,7 +3015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Capture filters (BPF syntax)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2753,7 +3073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -i eth0 "host 10.0.0.1"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2805,7 +3131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Display filters (more powerful)</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2857,7 +3189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -Y "dns.qry.name contains example.com"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2909,7 +3247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -Y "http.response.code >= 500"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2961,7 +3305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -r capture.pcap -Y "http" -z follow,tcp,ascii,0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3013,7 +3363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>tshark -r capture.pcap -z io,stat,1 # IO graph</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3065,7 +3421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Save filtered output</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3117,7 +3479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Wireshark filters**: `ip.src == 10.0.0.1 && tcp.port == 443`, `http.response.code >= 400`, `tls.handshake.type == 1`</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3169,7 +3537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Tool | Best For | Example Problem |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3595,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| mtr | Path analysis, packet loss | "Connection intermittent to API" |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3273,7 +3653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| dig | DNS troubleshooting | "Website not loading, DNS error" |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3325,7 +3711,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Wireshark | Deep packet inspection | "API returns corrupted data" |</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3377,7 +3769,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **First, check connectivity**: `ping` and `mtr` to verify basic reachability.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3423,6 +3821,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Performance issues**: `iperf3` to measure raw throughput between hosts.</p>
 <br>
 <br>
@@ -3446,7 +3847,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* **Firewall issues**: `nmap -sS -p ` to check port accessibility.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3495,6 +3902,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Mastering these five tools covers 95% of network troubleshooting scenarios. Start with mtr for path issues, dig for DNS, nmap for connectivity, iperf for performance, and Wireshark for deep protocol analysis.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -3508,8 +3918,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div>
-      <noscript><div class="related-grid"><a href="/en/tools/ci-cd-tools-comparison.html" class="related-card">CI/CD Tools Compared: GitHub Actions vs GitLab CI vs Jenkins</a><a href="/en/tools/code-review-tools.html" class="related-card">Code Review Tools and Best Practices</a><a href="/en/tools/collaboration-tools.html" class="related-card">Developer Collaboration Tools: Slack vs Discord vs Linear</a><a href="/en/tools/feature-flag-tools.html" class="related-card">Feature Flag Tools: LaunchDarkly vs Unleash vs Flagsmith</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

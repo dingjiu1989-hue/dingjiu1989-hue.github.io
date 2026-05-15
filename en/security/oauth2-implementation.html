@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/oauth2-implementation.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3443",
+      "wordCount": "3897",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/oauth2-implementation.html"},
-      "articleBody": "OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Fundamentals OAuth2 is the industry-standard protocol for authorization. It enables third-party applications to obtain limited access to user resources without exposing credentials. Grant Types Authorization Code Grant (with PKCE) The recommended flow for public clients: // PKCE code challenge generation const crypto = require(\"crypto\"); function generatePKCE() { const verifier = crypto.randomBytes(32) .toString(\"base64url\"); const challenge = crypto.createHash(\"sha256\") .update(verifier) .digest(\"base64url\"); return { verifier, challenge }; } // Authorization request const { verifier, challenge } = generatePKCE(); const authUrl = `https://auth.example.com/authorize? response_type=code& client_id=app123& redirect_uri=https://app.example.com/callback& code_challenge=${challenge}& code_challenge_method=S256& scope=openid%20profile`; // Token exchange async function exchangeCode(code, verifier) { const resp = await fetch(\"https://auth.example.com/token\", { method: \"POST\", headers: { \"Content-Type\": \"application/x-www-form-urlencoded\" }, body: new URLSearchParams({ grant_type: \"authorization_code\", code: code, client_id: \"app123\", code_verifier: verifier, redirect_uri: \"https://app.example.com/callback\" }) }); return resp.json(); } Client Credentials Grant For server-to-server communication: import requests def get_client_credentials_token(client_id, client_secret, scope): resp = requests.post( \"https://auth.example.com/token\", data={ \"grant_type\": \"client_credentials\", \"client_id\": client_id, \"client_secret\": client_secret, \"scope\": scope }, headers={\"Content-Type\": \"application/x-www-form-urlencoded\"} ) return resp.json()[\"access_token\"] Token Handling Access Token Validation // JWT verification middleware const jwt = require(\"jsonwebtoken\"); const jwksClient = require(\"jwks-rsa\"); const client = jwksClient({ jwksUri: \"https://auth.example.com/.well-known/jwks.json\" }); function verifyToken(req, res, next) { const authHeader = req.headers.authorization; if (!authHeader?.startsWith(\"Bearer \")) { return res.status(401).json({ error: \"Missing token\" }); } const token = authHeader.split(\" \")[1]; jwt.verify(token, (header, callback) => { client.getSigningKey(header.kid, (err, key) => { callback(err, key.getPublicKey()); }); }, { algorithms: [\"RS256\"], issuer: \"https://auth.example.com\", audience: \"https://api.example.com\" }, (err, decoded) => { if (err) return res.status(401).json({ error: \"Invalid token\" }); req.user = decoded; next(); }); } Refresh Token Rotation def rotate_refresh_token(old_token): Verify the old refresh token token_data = verify_refresh_token(old_token) Revoke the old token revoke_token(old_token) Issue new tokens new_access = create_access_token(token_data[\"user_id\"]) new_refresh = create_refresh_token(token_data[\"user_id\"]) return { \"access_token\": new_access, \"refresh_token\": new_refresh, \"expires_in\": 3600 } Best Practices oauth2_best_practices: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage Conclusion OAuth2 is complex but essential for modern authentication. PKCE makes authorization code flow safe for single-page apps. Use short-lived access tokens with refresh token rotation. Always validate tokens thoroughly on the server side. Keep your JWKS endpoint secure and rotate signing keys regularly."
+      "articleBody": "OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Implementation OAuth2 Fundamentals OAuth2 is the industry-standard protocol for authorization. It enables third-party applications to obtain limited access to user resources without exposing credentials. Grant Types Authorization Code Grant (with PKCE) The recommended flow for public clients: // PKCE code challenge generation const crypto = require(\"crypto\"); function generatePKCE() { const verifier = crypto.randomBytes(32) .toString(\"base64url\"); const challenge = crypto.createHash(\"sha256\") .update(verifier) .digest(\"base64url\"); return { verifier, challenge }; } // Authorization request const { verifier, challenge } = generatePKCE(); const authUrl = `https://auth.example.com/authorize? response_type=code& client_id=app123& redirect_uri=https://app.example.com/callback& code_challenge=${challenge}& code_challenge_method=S256& scope=openid%20profile`; // Token exchange async function exchangeCode(code, verifier) { const resp = await fetch(\"https://auth.example.com/token\", { method: \"POST\", headers: { \"Content-Type\": \"application/x-www-form-urlencoded\" }, body: new URLSearchParams({ grant_type: \"authorization_code\", code: code, client_id: \"app123\", code_verifier: verifier, redirect_uri: \"https://app.example.com/callback\" }) }); return resp.json(); } Client Credentials Grant For server-to-server communication: import requests def get_client_credentials_token(client_id, client_secret, scope): resp = requests.post( \"https://auth.example.com/token\", data={ \"grant_type\": \"client_credentials\", \"client_id\": client_id, \"client_secret\": client_secret, \"scope\": scope }, headers={\"Content-Type\": \"application/x-www-form-urlencoded\"} ) return resp.json()[\"access_token\"] Token Handling Access Token Validation // JWT verification middleware const jwt = require(\"jsonwebtoken\"); const jwksClient = require(\"jwks-rsa\"); const client = jwksClient({ jwksUri: \"https://auth.example.com/.well-known/jwks.json\" }); function verifyToken(req, res, next) { const authHeader = req.headers.authorization; if (!authHeader?.startsWith(\"Bearer \")) { return res.status(401).json({ error: \"Missing token\" }); } const token = authHeader.split(\" \")[1]; jwt.verify(token, (header, callback) => { client.getSigningKey(header.kid, (err, key) => { callback(err, key.getPublicKey()); }); }, { algorithms: [\"RS256\"], issuer: \"https://auth.example.com\", audience: \"https://api.example.com\" }, (err, decoded) => { if (err) return res.status(401).json({ error: \"Invalid token\" }); req.user = decoded; next(); }); } Refresh Token Rotation def rotate_refresh_token(old_token): Verify the old refresh token token_data = verify_refresh_token(old_token) Revoke the old token revoke_token(old_token) Issue new tokens new_access = create_access_token(token_data[\"user_id\"]) new_refresh = create_refresh_token(token_data[\"user_id\"]) return { \"access_token\": new_access, \"refresh_token\": new_refresh, \"expires_in\": 3600 } Best Practices oauth2_best_practices: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage) \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage Conclusion OAuth2 is complex but essential for modern authentication. PKCE makes authorization code flow safe for single-page apps. Use short-lived access tokens with refresh token rotation. Always validate tokens thoroughly on the server side. Keep your JWKS endpoint secure and rotate signing keys regularly."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>OAuth2 Implementation</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>OAuth2 Fundamentals </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Grant Types </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,7 +291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>The recommended flow for public clients: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -302,7 +343,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const crypto = require("crypto");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -348,7 +395,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const verifier = crypto.randomBytes(32)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -394,7 +447,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const challenge = crypto.createHash("sha256")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -440,7 +499,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>.digest("base64url");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -486,7 +551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -532,7 +603,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const { verifier, challenge } = generatePKCE();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -578,7 +655,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response_type=code&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -624,7 +707,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redirect_uri=https://app.example.com/callback&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -670,7 +759,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>code_challenge_method=S256&</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -716,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>// Token exchange</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -762,7 +863,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const resp = await fetch("https://auth.example.com/token", {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -808,7 +915,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>headers: { "Content-Type": "application/x-www-form-urlencoded" },</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -854,7 +967,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>grant_type: "authorization_code",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -900,7 +1019,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>client_id: "app123",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -946,7 +1071,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>redirect_uri: "https://app.example.com/callback"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -992,7 +1123,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1038,7 +1175,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1081,7 +1224,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>For server-to-server communication: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1127,7 +1276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_client_credentials_token(client_id, client_secret, scope):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1173,7 +1328,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"https://auth.example.com/token",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,7 +1380,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"grant_type": "client_credentials",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1265,7 +1432,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"client_secret": client_secret,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1311,7 +1484,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1357,7 +1536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1403,6 +1588,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Token Handling </p>
 <br>
 <br>
@@ -1423,7 +1611,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Access Token Validation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1469,7 +1663,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const jwt = require("jsonwebtoken");</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1515,7 +1715,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const client = jwksClient({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1561,7 +1767,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1607,7 +1819,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>const authHeader = req.headers.authorization;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1653,6 +1871,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return res.status(401).json({ error: "Missing token" });</p>
 <br>
 <br>
@@ -1676,7 +1897,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1722,7 +1949,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>jwt.verify(token, (header, callback) => {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1768,6 +2001,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>callback(err, key.getPublicKey());</p>
 <br>
 <br>
@@ -1791,7 +2027,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>});</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1837,7 +2079,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>algorithms: ["RS256"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1883,7 +2131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>audience: "https://api.example.com"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1929,7 +2183,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if (err) return res.status(401).json({ error: "Invalid token" });</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1975,7 +2235,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>next();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2021,7 +2287,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2067,7 +2339,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def rotate_refresh_token(old_token):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2113,7 +2391,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>token_data = verify_refresh_token(old_token)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2159,7 +2443,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>revoke_token(old_token)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2205,7 +2495,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>new_access = create_access_token(token_data["user_id"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2251,7 +2547,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2297,7 +2599,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"refresh_token": new_refresh,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2343,7 +2651,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,6 +2703,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>oauth2_best_practices:</p>
 <br>
 <br>
@@ -2412,10 +2729,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients</p>
 <br>
 <br>
 <br>
@@ -2435,13 +2752,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes)</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes)</p>
 <br>
 <br>
 <br>
@@ -2458,7 +2775,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation</p>
 <br>
 <br>
 <br>
@@ -2468,6 +2784,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation</p>
 <br>
 <br>
 <br>
@@ -2481,7 +2798,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing</p>
 <br>
 <br>
 <br>
@@ -2494,6 +2810,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing</p>
 <br>
 <br>
 <br>
@@ -2504,7 +2821,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf)</p>
 <br>
 <br>
 <br>
@@ -2520,6 +2836,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf)</p>
 <br>
 <br>
 <br>
@@ -2527,7 +2844,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage)</p>
 <br>
 <br>
 <br>
@@ -2546,11 +2862,11 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage)</p>
 <br>
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation</p>
 <br>
 <br>
 <br>
@@ -2572,8 +2888,36 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation</p>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2616,6 +2960,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>OAuth2 is complex but essential for modern authentication. PKCE makes authorization code flow safe for single-page apps. Use short-lived access tokens with refresh token rotation. Always validate tokens thoroughly on the server side. Keep your JWKS endpoint secure and rotate signing keys regularly.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2629,8 +2976,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

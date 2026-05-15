@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/stored-procedures.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3860",
+      "wordCount": "4249",
       "keywords": "Database, Backend, Data",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/stored-procedures.html"},
-      "articleBody": "Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored procedures and user-defined functions (UDFs) let you execute application logic inside the database engine. While they share similarities, their differences determine the right use case for each. Functions vs Procedures In PostgreSQL, the distinction is clearer since version 11 introduced `CREATE PROCEDURE`: | Aspect | Function (`FUNCTION`) | Procedure (`PROCEDURE`) | |--------|----------------------|------------------------| | Return value | Always returns a value | Can return nothing | | Called from SQL | Yes: `SELECT my_func()` | No: `CALL my_proc()` | | Transaction control | Cannot commit/rollback | Can commit/rollback | | Used in expressions | Yes | No | A typical function in PL/pgSQL: CREATE OR REPLACE FUNCTION calculate_discount( customer_id INTEGER, order_total NUMERIC ) RETURNS NUMERIC AS $$ DECLARE tier TEXT; discount NUMERIC := 0; BEGIN SELECT membership_tier INTO tier FROM customers WHERE id = customer_id; IF tier = 'gold' THEN discount := order_total * 0.20; ELSIF tier = 'silver' THEN discount := order_total * 0.10; END IF; RETURN discount; END; $$ LANGUAGE plpgsql IMMUTABLE; Calling it inline: SELECT id, total, calculate_discount(id, total) AS discount FROM orders WHERE status = 'pending'; A stored procedure for multi-step operations with transaction control: CREATE OR REPLACE PROCEDURE process_order_payment( p_order_id INTEGER, p_payment_method TEXT ) AS $$ DECLARE v_total NUMERIC; v_account_id INTEGER; BEGIN SELECT total, account_id INTO v_total, v_account_id FROM orders WHERE id = p_order_id; UPDATE accounts SET balance = balance - v_total WHERE id = v_account_id; INSERT INTO payments (order_id, method, amount, paid_at) VALUES (p_order_id, p_payment_method, v_total, NOW()); UPDATE orders SET status = 'paid' WHERE id = p_order_id; COMMIT; EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END; $$ LANGUAGE plpgsql; CALL process_order_payment(1001, 'credit_card'); Language Options PostgreSQL supports multiple procedural languages, each with distinct advantages. **PL/pgSQL** is the default. It is designed for PostgreSQL and offers tight integration with SQL, transparent cursor handling, and exception blocks. Use it for data-intensive logic where most work happens inside SQL statements. **PL/Python** (via `CREATE EXTENSION plpython3u`) allows Python logic inside the database. It is useful for business rules expressed naturally in Python, but it adds interpreter overhead and runs in a separate process. **PL/v8** supports JavaScript via V8. It is fast for compute-heavy functions but less commonly used in production. **PL/SQL** in Oracle and **T-SQL** in SQL Server are proprietary equivalents. T-SQL uses a `CREATE PROCEDURE` syntax with `SET` and `SELECT` semantics: CREATE OR ALTER PROCEDURE GetCustomerOrders @CustomerId INT, @MinTotal DECIMAL(10,2) = 0 AS BEGIN SET NOCOUNT ON; SELECT o.Id, o.OrderDate, o.Total FROM Orders o WHERE o.CustomerId = @CustomerId AND o.Total >= @MinTotal ORDER BY o.OrderDate DESC; END; EXEC GetCustomerOrders @CustomerId = 42, @MinTotal = 100; Security Considerations Procedures and functions can be powerful security tools or vectors. **Definer vs invoker permissions**: By default, functions execute with the privileges of their owner (`SECURITY DEFINER`). This allows controlled privilege escalation: CREATE OR REPLACE FUNCTION get_user_email(user_id INTEGER) RETURNS TEXT SECURITY DEFINER SET search_path = public AS $$ SELECT email FROM users WHERE id = user_id; $$ LANGUAGE sql; REVOKE ALL ON FUNCTION get_user_email FROM public; GRANT EXECUTE ON FUNCTION get_user_email TO app_readonly; Note the `SET search_path = public`. Without this, a `SECURITY DEFINER` function can be hijacked by temporarily altering `search_path` to load a malicious table named `users` in a different schema. **SQL injection** inside dynamic SQL within a procedure is a real risk. Always use `EXECUTE ... USING` for parameterized execution: CREATE FUNCTION search_products(query TEXT) RETURNS SETOF products AS $$ BEGIN RETURN QUERY EXECUTE 'SELECT * FROM products WHERE name ILIKE $1' USING '%' || query || '%'; END; $$ LANGUAGE plpgsql; Testing Database code deserves the same testing rigor as application code. The `db-tests` or `pgtap` framework enables unit tests: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgtap example SELECT plan(3); SELECT is(calculate_discount(1, 100.00), 20.00, 'Gold member gets 20% discount'); SELECT is(calculate_discount(2, 100.00), 10.00, 'Silver member gets 10% discount'); SELECT is(calculate_discount(3, 100.00), 0.00, 'Regular member gets no discount'); SELECT * FROM finish(); When to Use Stored Procedures Favor procedures when: * The operation spans multiple SQL statements requiring transaction control. * Data validation rules are best expressed close to the data. * You need consistent enforcement of business logic across multiple applications. * Network round trips must be minimized. Favor application code when: * The logic involves complex control flow across external services. * You need to version business logic independently of the database. * Testing frameworks are more mature in the application language. * The database CPU is already a bottleneck. A balanced architecture puts data-integrity rules in the database and complex orchestration in the application layer, using each environment for what it does best."
+      "articleBody": "Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored Procedures vs Functions: When to Use, Languages, Security Stored procedures and user-defined functions (UDFs) let you execute application logic inside the database engine. While they share similarities, their differences determine the right use case for each. Functions vs Procedures In PostgreSQL, the distinction is clearer since version 11 introduced `CREATE PROCEDURE`: | Aspect | Function (`FUNCTION`) | Procedure (`PROCEDURE`) | |--------|----------------------|------------------------| | Return value | Always returns a value | Can return nothing | | Called from SQL | Yes: `SELECT my_func()` | No: `CALL my_proc()` | | Transaction control | Cannot commit/rollback | Can commit/rollback | | Used in expressions | Yes | No | A typical function in PL/pgSQL: CREATE OR REPLACE FUNCTION calculate_discount( customer_id INTEGER, order_total NUMERIC ) RETURNS NUMERIC AS $$ DECLARE tier TEXT; discount NUMERIC := 0; BEGIN SELECT membership_tier INTO tier FROM customers WHERE id = customer_id; IF tier = 'gold' THEN discount := order_total * 0.20; ELSIF tier = 'silver' THEN discount := order_total * 0.10; END IF; RETURN discount; END; $$ LANGUAGE plpgsql IMMUTABLE; Calling it inline: SELECT id, total, calculate_discount(id, total) AS discount FROM orders WHERE status = 'pending'; A stored procedure for multi-step operations with transaction control: CREATE OR REPLACE PROCEDURE process_order_payment( p_order_id INTEGER, p_payment_method TEXT ) AS $$ DECLARE v_total NUMERIC; v_account_id INTEGER; BEGIN SELECT total, account_id INTO v_total, v_account_id FROM orders WHERE id = p_order_id; UPDATE accounts SET balance = balance - v_total WHERE id = v_account_id; INSERT INTO payments (order_id, method, amount, paid_at) VALUES (p_order_id, p_payment_method, v_total, NOW()); UPDATE orders SET status = 'paid' WHERE id = p_order_id; COMMIT; EXCEPTION WHEN OTHERS THEN ROLLBACK; RAISE; END; $$ LANGUAGE plpgsql; CALL process_order_payment(1001, 'credit_card'); Language Options PostgreSQL supports multiple procedural languages, each with distinct advantages. **PL/pgSQL** is the default. It is designed for PostgreSQL and offers tight integration with SQL, transparent cursor handling, and exception blocks. Use it for data-intensive logic where most work happens inside SQL statements. **PL/Python** (via `CREATE EXTENSION plpython3u`) allows Python logic inside the database. It is useful for business rules expressed naturally in Python, but it adds interpreter overhead and runs in a separate process. **PL/v8** supports JavaScript via V8. It is fast for compute-heavy functions but less commonly used in production. **PL/SQL** in Oracle and **T-SQL** in SQL Server are proprietary equivalents. T-SQL uses a `CREATE PROCEDURE` syntax with `SET` and `SELECT` semantics: CREATE OR ALTER PROCEDURE GetCustomerOrders @CustomerId INT, @MinTotal DECIMAL(10,2) = 0 AS BEGIN SET NOCOUNT ON; SELECT o.Id, o.OrderDate, o.Total FROM Orders o WHERE o.CustomerId = @CustomerId AND o.Total >= @MinTotal ORDER BY o.OrderDate DESC; END; EXEC GetCustomerOrders @CustomerId = 42, @MinTotal = 100; Security Considerations Procedures and functions can be powerful security tools or vectors. **Definer vs invoker permissions**: By default, functions execute with the privileges of their owner (`SECURITY DEFINER`). This allows controlled privilege escalation: CREATE OR REPLACE FUNCTION get_user_email(user_id INTEGER) RETURNS TEXT SECURITY DEFINER SET search_path = public AS $$ SELECT email FROM users WHERE id = user_id; $$ LANGUAGE sql; REVOKE ALL ON FUNCTION get_user_email FROM public; GRANT EXECUTE ON FUNCTION get_user_email TO app_readonly; Note the `SET search_path = public`. Without this, a `SECURITY DEFINER` function can be hijacked by temporarily altering `search_path` to load a malicious table named `users` in a different schema. **SQL injection** inside dynamic SQL within a procedure is a real risk. Always use `EXECUTE ... USING` for parameterized execution: CREATE FUNCTION search_products(query TEXT) RETURNS SETOF products AS $$ BEGIN RETURN QUERY EXECUTE 'SELECT * FROM products WHERE name ILIKE $1' USING '%' || query || '%'; END; $$ LANGUAGE plpgsql; Testing Database code deserves the same testing rigor as application code. The `db-tests` or `pgtap` framework enables unit tests: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgtap example SELECT plan(3); SELECT is(calculate_discount(1, 100.00), 20.00, 'Gold member gets 20% discount'); SELECT is(calculate_discount(2, 100.00), 10.00, 'Silver member gets 10% discount'); SELECT is(calculate_discount(3, 100.00), 0.00, 'Regular member gets no discount'); SELECT * FROM finish(); When to Use Stored Procedures Favor procedures when: * The operation spans multiple SQL statements requiring transaction control. * Data validation rules are best expressed close to the data. * You need consistent enforcement of business logic across multiple applications. * Network round trips must be minimized. Favor application code when: * The logic involves complex control flow across external services. * You need to version business logic independently of the database. * Testing frameworks are more mature in the application language. * The database CPU is already a bottleneck. A balanced architecture puts data-integrity rules in the database and complex orchestration in the application layer, using each environment for what it does best."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>Stored Procedures vs Functions: When to Use, Languages, Security</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Stored Procedures vs Functions: When to Use, Languages, Security </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,7 +245,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Functions vs Procedures </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -256,6 +291,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>| Aspect | Function (`FUNCTION`) | Procedure (`PROCEDURE`) | |--------|----------------------|------------------------| | Return value | Always returns a value | Can return nothing | | Called from SQL | Yes: `SELECT my_func()` | No: `CALL my_proc()` | | Transaction control | Cannot commit/rollback | Can commit/rollback | | Used in expressions | Yes | No | </p>
 <br>
 <br>
@@ -276,7 +314,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A typical function in PL/pgSQL: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -322,7 +366,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>customer_id INTEGER,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -368,6 +418,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>) RETURNS NUMERIC AS $$</p>
 <br>
 <br>
@@ -391,7 +444,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DECLARE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -437,6 +496,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>discount NUMERIC := 0;</p>
 <br>
 <br>
@@ -460,7 +522,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>BEGIN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -506,7 +574,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>IF tier = 'gold' THEN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -552,7 +626,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ELSIF tier = 'silver' THEN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -598,7 +678,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>END IF;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -644,7 +730,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>END;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -690,7 +782,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Calling it inline: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -736,7 +834,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM orders WHERE status = 'pending';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -782,7 +886,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>CREATE OR REPLACE PROCEDURE process_order_payment(</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -828,7 +938,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>p_payment_method TEXT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -874,7 +990,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DECLARE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -920,6 +1042,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>v_account_id INTEGER;</p>
 <br>
 <br>
@@ -943,7 +1068,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>BEGIN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -989,7 +1120,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>FROM orders WHERE id = p_order_id;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1035,7 +1172,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE id = v_account_id;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1081,7 +1224,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>VALUES (p_order_id, p_payment_method, v_total, NOW());</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1127,7 +1276,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>COMMIT;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1173,7 +1328,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ROLLBACK;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,6 +1380,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>END;</p>
 <br>
 <br>
@@ -1242,7 +1406,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>$$ LANGUAGE plpgsql;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1288,7 +1458,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Language Options </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1328,7 +1504,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**PL/pgSQL** is the default. It is designed for PostgreSQL and offers tight integration with SQL, transparent cursor handling, and exception blocks. Use it for data-intensive logic where most work happens inside SQL statements. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1368,6 +1550,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**PL/v8** supports JavaScript via V8. It is fast for compute-heavy functions but less commonly used in production. </p>
 <br>
 <br>
@@ -1388,7 +1573,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**PL/SQL** in Oracle and **T-SQL** in SQL Server are proprietary equivalents. T-SQL uses a `CREATE PROCEDURE` syntax with `SET` and `SELECT` semantics: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1434,7 +1625,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>@CustomerId INT,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1480,6 +1677,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>AS</p>
 <br>
 <br>
@@ -1503,7 +1703,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>BEGIN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1549,7 +1755,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT o.Id, o.OrderDate, o.Total</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1595,7 +1807,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>WHERE o.CustomerId = @CustomerId</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1641,6 +1859,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ORDER BY o.OrderDate DESC;</p>
 <br>
 <br>
@@ -1664,7 +1885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>END;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1710,7 +1937,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Security Considerations </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1750,7 +1983,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**Definer vs invoker permissions**: By default, functions execute with the privileges of their owner (`SECURITY DEFINER`). This allows controlled privilege escalation: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1796,7 +2035,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURNS TEXT</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1842,7 +2087,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SET search_path = public</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1888,7 +2139,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT email FROM users WHERE id = user_id;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1934,7 +2191,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>REVOKE ALL ON FUNCTION get_user_email FROM public;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1980,6 +2243,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Note the `SET search_path = public`. Without this, a `SECURITY DEFINER` function can be hijacked by temporarily altering `search_path` to load a malicious table named `users` in a different schema. </p>
 <br>
 <br>
@@ -2000,7 +2266,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>**SQL injection** inside dynamic SQL within a procedure is a real risk. Always use `EXECUTE ... USING` for parameterized execution: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2046,7 +2318,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURNS SETOF products AS $$</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2092,7 +2370,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>RETURN QUERY EXECUTE</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2138,7 +2422,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>USING '%' || query || '%';</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2184,7 +2474,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>$$ LANGUAGE plpgsql;</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2227,6 +2523,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Database code deserves the same testing rigor as application code. The `db-tests` or `pgtap` framework enables unit tests: </p>
 <br>
 <br>
@@ -2250,7 +2549,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgtap example</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- pgtap example</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2296,7 +2601,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT is(calculate_discount(1, 100.00), 20.00,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2342,7 +2653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT is(calculate_discount(2, 100.00), 10.00,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2388,7 +2705,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT is(calculate_discount(3, 100.00), 0.00,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2434,7 +2757,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SELECT * FROM finish();</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2477,7 +2806,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Favor procedures when: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2520,7 +2855,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Data validation rules are best expressed close to the data.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2560,7 +2901,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Network round trips must be minimized.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2606,7 +2953,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* The logic involves complex control flow across external services.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2646,7 +2999,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>* Testing frameworks are more mature in the application language.</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2689,6 +3048,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A balanced architecture puts data-integrity rules in the database and complex orchestration in the application layer, using each environment for what it does best.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2702,8 +3064,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/data-warehousing.html" class="related-card">Data Warehousing Concepts and Modern Tools</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

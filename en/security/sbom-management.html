@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/security/sbom-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "3753",
+      "wordCount": "4349",
       "keywords": "Security, DevOps, Cloud",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/security/sbom-management.html"},
-      "articleBody": "SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management What is an SBOM? A Software Bill of Materials (SBOM) is a detailed inventory of all components in a software application. It enables vulnerability tracking, license compliance, and supply chain risk management. SBOM Generation Generate SBOMs using SPDX or CycloneDX formats: Generate SBOM with Syft syft packages myapp:latest -o cyclonedx-json > sbom.cyclonedx.json syft packages myapp:latest -o spdx-json > sbom.spdx.json syft dir:./src -o cyclonedx-json > src-sbom.json Generate SBOM for multiple languages syft packages package-lock.json -o cyclonedx-json syft packages requirements.txt -o cyclonedx-json syft packages go.sum -o cyclonedx-json Programmatic SBOM generation import json def generate_sbom(packages, metadata): sbom = { \"bomFormat\": \"CycloneDX\", \"specVersion\": \"1.5\", \"version\": 1, \"metadata\": { \"timestamp\": datetime.utcnow().isoformat() + \"Z\", \"tools\": [{\"name\": \"custom-bom-generator\", \"version\": \"1.0\"}], \"component\": { \"type\": \"application\", \"name\": metadata[\"name\"], \"version\": metadata[\"version\"] } }, \"components\": [] } for pkg in packages: sbom[\"components\"].append({ \"type\": \"library\", \"name\": pkg[\"name\"], \"version\": pkg[\"version\"], \"purl\": pkg.get(\"purl\"), \"licenses\": pkg.get(\"licenses\", []), \"supplier\": pkg.get(\"supplier\", {}) }) return sbom SBOM Verification Verify SBOM integrity and completeness: sbom-verification-pipeline.yaml verification_steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: validate_format tool: cyclonedx-cli command: validate sbom.cyclonedx.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: check_completeness rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_version: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_purl: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- license_information_present: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependency_graph_complete: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify_signature tool: cosign command: cosign verify-blob --signature sbom.json.sig sbom.json Vulnerability Correlation Correlate SBOM components with known vulnerabilities: import requests class SBOMVulnerabilityCorrelator: def __init__(self): self.osv_api = \"https://api.osv.dev/v1/query\" def correlate(self, sbom): vulnerabilities = [] for component in sbom[\"components\"]: purl = component.get(\"purl\") if not purl: continue Query OSV database response = requests.post(self.osv_api, json={ \"package\": { \"purl\": purl }, \"version\": component[\"version\"] }) if response.status_code == 200: results = response.json() for vuln in results.get(\"vulns\", []): vulnerabilities.append({ \"component\": component[\"name\"], \"version\": component[\"version\"], \"vuln_id\": vuln[\"id\"], \"severity\": vuln.get(\"severity\", [{}])[0].get(\"score\", \"unknown\"), \"summary\": vuln.get(\"summary\", \"\") }) return vulnerabilities SBOM Storage and Management SBOM storage strategy sbom_storage: format: cyclonedx-json storage: s3://sbom-bucket/ retention: 90_days indexing: database: opensearch index_pattern: \"sbom-*\" fields: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.name \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.version \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.purl \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata.timestamp lifecycle: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: generated action: store_and_index \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: verified action: mark_verified \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: expired action: archive SBOM as Attestation Sign SBOM with cosign cosign attest-blob sbom.cyclonedx.json \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--signer \"identity\" \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json Verify attestation cosign verify-attestation --type cyclonedx sbom.cyclonedx.json Conclusion SBOMs are essential for supply chain security. Generate them automatically in your CI pipeline, verify their integrity, and correlate components with vulnerability databases. Store SBOMs alongside your artifacts and sign them for tamper evidence. Use SBOMs for compliance, vulnerability management, and incident response."
+      "articleBody": "SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management SBOM Management What is an SBOM? A Software Bill of Materials (SBOM) is a detailed inventory of all components in a software application. It enables vulnerability tracking, license compliance, and supply chain risk management. SBOM Generation Generate SBOMs using SPDX or CycloneDX formats: Generate SBOM with Syft syft packages myapp:latest -o cyclonedx-json > sbom.cyclonedx.json syft packages myapp:latest -o spdx-json > sbom.spdx.json syft dir:./src -o cyclonedx-json > src-sbom.json Generate SBOM for multiple languages syft packages package-lock.json -o cyclonedx-json syft packages requirements.txt -o cyclonedx-json syft packages go.sum -o cyclonedx-json Programmatic SBOM generation import json def generate_sbom(packages, metadata): sbom = { \"bomFormat\": \"CycloneDX\", \"specVersion\": \"1.5\", \"version\": 1, \"metadata\": { \"timestamp\": datetime.utcnow().isoformat() + \"Z\", \"tools\": [{\"name\": \"custom-bom-generator\", \"version\": \"1.0\"}], \"component\": { \"type\": \"application\", \"name\": metadata[\"name\"], \"version\": metadata[\"version\"] } }, \"components\": [] } for pkg in packages: sbom[\"components\"].append({ \"type\": \"library\", \"name\": pkg[\"name\"], \"version\": pkg[\"version\"], \"purl\": pkg.get(\"purl\"), \"licenses\": pkg.get(\"licenses\", []), \"supplier\": pkg.get(\"supplier\", {}) }) return sbom SBOM Verification Verify SBOM integrity and completeness: sbom-verification-pipeline.yaml verification_steps: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: validate_format tool: cyclonedx-cli command: validate sbom.cyclonedx.json \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: check_completeness rules: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_version: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_purl: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- license_information_present: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependency_graph_complete: true \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify_signature tool: cosign command: cosign verify-blob --signature sbom.json.sig sbom.json Vulnerability Correlation Correlate SBOM components with known vulnerabilities: import requests class SBOMVulnerabilityCorrelator: def __init__(self): self.osv_api = \"https://api.osv.dev/v1/query\" def correlate(self, sbom): vulnerabilities = [] for component in sbom[\"components\"]: purl = component.get(\"purl\") if not purl: continue Query OSV database response = requests.post(self.osv_api, json={ \"package\": { \"purl\": purl }, \"version\": component[\"version\"] }) if response.status_code == 200: results = response.json() for vuln in results.get(\"vulns\", []): vulnerabilities.append({ \"component\": component[\"name\"], \"version\": component[\"version\"], \"vuln_id\": vuln[\"id\"], \"severity\": vuln.get(\"severity\", [{}])[0].get(\"score\", \"unknown\"), \"summary\": vuln.get(\"summary\", \"\") }) return vulnerabilities SBOM Storage and Management SBOM storage strategy sbom_storage: format: cyclonedx-json storage: s3://sbom-bucket/ retention: 90_days indexing: database: opensearch index_pattern: \"sbom-*\" fields: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.name \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.version \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.purl \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata.timestamp lifecycle: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: generated action: store_and_index \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: verified action: mark_verified \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: expired action: archive SBOM as Attestation Sign SBOM with cosign cosign attest-blob sbom.cyclonedx.json \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--signer \"identity\" \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \\ \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json Verify attestation cosign verify-attestation --type cyclonedx sbom.cyclonedx.json Conclusion SBOMs are essential for supply chain security. Generate them automatically in your CI pipeline, verify their integrity, and correlate components with vulnerability databases. Store SBOMs alongside your artifacts and sign them for tamper evidence. Use SBOMs for compliance, vulnerability management, and incident response."
     }
     </script>
     <script type="application/ld+json">
@@ -176,7 +176,36 @@
 <br>
 <br>
 <br>
+<h1>SBOM Management</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>What is an SBOM? </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -216,6 +245,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SBOM Generation </p>
 <br>
 <br>
@@ -236,7 +268,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Generate SBOMs using SPDX or CycloneDX formats: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -282,7 +320,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>syft packages myapp:latest -o cyclonedx-json > sbom.cyclonedx.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -328,7 +372,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>syft dir:./src -o cyclonedx-json > src-sbom.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -374,7 +424,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>syft packages package-lock.json -o cyclonedx-json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -420,7 +476,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>syft packages go.sum -o cyclonedx-json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -466,7 +528,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -512,7 +580,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sbom = {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -558,7 +632,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"specVersion": "1.5",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -604,7 +684,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"metadata": {</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -650,7 +736,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"tools": [{"name": "custom-bom-generator", "version": "1.0"}],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -696,7 +788,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"type": "application",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -742,7 +840,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"version": metadata["version"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -788,7 +892,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -834,7 +944,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -880,7 +996,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sbom["components"].append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -926,7 +1048,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"name": pkg["name"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -972,7 +1100,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"purl": pkg.get("purl"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1018,6 +1152,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"supplier": pkg.get("supplier", {})</p>
 <br>
 <br>
@@ -1041,7 +1178,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1087,6 +1230,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SBOM Verification </p>
 <br>
 <br>
@@ -1107,7 +1253,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Verify SBOM integrity and completeness: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1153,6 +1305,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>verification_steps:</p>
 <br>
 <br>
@@ -1176,7 +1331,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: validate_format</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: validate_format</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1222,6 +1383,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>command: validate sbom.cyclonedx.json</p>
 <br>
 <br>
@@ -1245,7 +1409,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: check_completeness</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: check_completeness</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1291,10 +1461,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_version: true</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_version: true</p>
 <br>
 <br>
 <br>
@@ -1314,13 +1484,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_purl: true</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- all_packages_have_purl: true</p>
 <br>
 <br>
 <br>
@@ -1337,7 +1507,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- license_information_present: true</p>
 <br>
 <br>
 <br>
@@ -1347,6 +1516,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- license_information_present: true</p>
 <br>
 <br>
 <br>
@@ -1360,7 +1530,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependency_graph_complete: true</p>
 <br>
 <br>
 <br>
@@ -1373,6 +1542,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- dependency_graph_complete: true</p>
 <br>
 <br>
 <br>
@@ -1383,7 +1553,25 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify_signature</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: verify_signature</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1429,7 +1617,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>command: cosign verify-blob --signature sbom.json.sig sbom.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1472,7 +1666,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Correlate SBOM components with known vulnerabilities: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1518,7 +1718,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class SBOMVulnerabilityCorrelator:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1564,7 +1770,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.osv_api = "https://api.osv.dev/v1/query"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1610,7 +1822,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vulnerabilities = []</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1656,7 +1874,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>purl = component.get("purl")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1702,7 +1926,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>continue</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1748,7 +1978,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>response = requests.post(self.osv_api, json={</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1794,7 +2030,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"purl": purl</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1840,6 +2082,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"version": component["version"]</p>
 <br>
 <br>
@@ -1863,7 +2108,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1909,7 +2160,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = response.json()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1955,7 +2212,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>vulnerabilities.append({</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2001,7 +2264,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"version": component["version"],</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2047,7 +2316,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"severity": vuln.get("severity", [{}])[0].get("score", "unknown"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2093,7 +2368,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2139,7 +2420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SBOM Storage and Management </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2185,7 +2472,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sbom_storage:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2231,7 +2524,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>storage: s3://sbom-bucket/</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2277,7 +2576,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>indexing:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2323,7 +2628,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>index_pattern: "sbom-*"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2369,10 +2680,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.name</p>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.name</p>
 <br>
 <br>
 <br>
@@ -2392,13 +2703,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.version</p>
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.version</p>
 <br>
 <br>
 <br>
@@ -2415,7 +2726,6 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.purl</p>
 <br>
 <br>
 <br>
@@ -2425,6 +2735,7 @@
 <br>
 <br>
 <br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- component.purl</p>
 <br>
 <br>
 <br>
@@ -2438,7 +2749,22 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata.timestamp</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata.timestamp</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2484,7 +2810,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: generated</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: generated</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2530,7 +2862,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: verified</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: verified</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2576,7 +2914,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: expired</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- stage: expired</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2622,7 +2966,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SBOM as Attestation </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2668,6 +3018,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign attest-blob sbom.cyclonedx.json \</p>
 <br>
 <br>
@@ -2691,7 +3044,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--signer "identity" \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--signer "identity" \</p>
 <br>
 <br>
 <br>
@@ -2714,7 +3070,10 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--type cyclonedx \</p>
 <br>
 <br>
 <br>
@@ -2737,7 +3096,13 @@
 <br>
 <br>
 <br>
-<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json</p>
+<br>
+<br>
+<br>
+<p>\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--predicate sbom.cyclonedx.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2783,7 +3148,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>cosign verify-attestation --type cyclonedx sbom.cyclonedx.json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2826,6 +3197,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>SBOMs are essential for supply chain security. Generate them automatically in your CI pipeline, verify their integrity, and correlate components with vulnerability databases. Store SBOMs alongside your artifacts and sign them for tamper evidence. Use SBOMs for compliance, vulnerability management, and incident response.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -2839,8 +3213,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div>
-      <noscript><div class="related-grid"><a href="/en/security/blockchain-security.html" class="related-card">Blockchain and Smart Contract Security</a><a href="/en/security/cloud-security-basics.html" class="related-card">Cloud Security Basics: Shared Responsibility Model Explained</a><a href="/en/security/data-loss-prevention.html" class="related-card">Data Loss Prevention (DLP) Strategies</a><a href="/en/security/devsecops-pipeline.html" class="related-card">DevSecOps: Integrating Security into CI/CD</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

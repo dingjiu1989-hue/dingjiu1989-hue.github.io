@@ -41,12 +41,12 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/database/data-warehousing.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "1305",
+      "wordCount": "1445",
       "keywords": "Database, SQL",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/data-warehousing.html"},
-      "articleBody": "Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts A data warehouse centralizes data from multiple sources for analysis and reporting. It is optimized for read-heavy analytical queries. Star Schema A central fact table connected to dimension tables: CREATE TABLE fact_sales ( sale_id BIGSERIAL PRIMARY KEY, date_key INT REFERENCES dim_date(date_key), product_key INT REFERENCES dim_product(product_key), customer_key INT REFERENCES dim_customer(customer_key), quantity INT NOT NULL, unit_price DECIMAL(10,2) NOT NULL, total_amount DECIMAL(12,2) GENERATED ALWAYS AS (quantity * unit_price) STORED ); CREATE TABLE dim_date ( date_key INT PRIMARY KEY, date DATE NOT NULL, year SMALLINT, quarter SMALLINT, month SMALLINT, day SMALLINT, is_holiday BOOLEAN ); Snowflake Schema Normalized dimensions for storage efficiency. Dimensions are split into sub-dimensions, saving storage at the cost of more joins. ETL Pipeline class ETLPipeline: def extract(self, query): return pd.read_sql(query, self.source_engine, chunksize=10000) def transform(self, df): df = df.drop_duplicates(subset=[\"order_id\"]) df[\"order_date\"] = pd.to_datetime(df[\"order_date\"]) df[\"date_key\"] = df[\"order_date\"].dt.strftime(\"%Y%m%d\").astype(int) return df def load(self, df, table_name): df.to_sql(table_name, self.warehouse_engine, if_exists=\"append\", index=False) Modern Data Warehousing Cloud data warehouses like Snowflake and BigQuery separate storage and compute, enabling elastic scaling. Materialized views pre-compute aggregations for dashboard queries. Conclusion Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve."
+      "articleBody": "Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts and Modern Tools Data Warehousing Concepts A data warehouse centralizes data from multiple sources for analysis and reporting. It is optimized for read-heavy analytical queries. Star Schema A central fact table connected to dimension tables: CREATE TABLE fact_sales ( sale_id BIGSERIAL PRIMARY KEY, date_key INT REFERENCES dim_date(date_key), product_key INT REFERENCES dim_product(product_key), customer_key INT REFERENCES dim_customer(customer_key), quantity INT NOT NULL, unit_price DECIMAL(10,2) NOT NULL, total_amount DECIMAL(12,2) GENERATED ALWAYS AS (quantity * unit_price) STORED ); CREATE TABLE dim_date ( date_key INT PRIMARY KEY, date DATE NOT NULL, year SMALLINT, quarter SMALLINT, month SMALLINT, day SMALLINT, is_holiday BOOLEAN ); Snowflake Schema Normalized dimensions for storage efficiency. Dimensions are split into sub-dimensions, saving storage at the cost of more joins. ETL Pipeline class ETLPipeline: def extract(self, query): return pd.read_sql(query, self.source_engine, chunksize=10000) def transform(self, df): df = df.drop_duplicates(subset=[\"order_id\"]) df[\"order_date\"] = pd.to_datetime(df[\"order_date\"]) df[\"date_key\"] = df[\"order_date\"].dt.strftime(\"%Y%m%d\").astype(int) return df def load(self, df, table_name): df.to_sql(table_name, self.warehouse_engine, if_exists=\"append\", index=False) Modern Data Warehousing Cloud data warehouses like Snowflake and BigQuery separate storage and compute, enabling elastic scaling. Materialized views pre-compute aggregations for dashboard queries. Conclusion Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve."
     }
     </script>
     <script type="application/ld+json">
@@ -175,7 +175,36 @@
 <br>
 <br>
 <br>
+<h1>Data Warehousing Concepts and Modern Tools</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <p>Data Warehousing Concepts </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -215,6 +244,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Star Schema </p>
 <br>
 <br>
@@ -235,7 +267,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>A central fact table connected to dimension tables: </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -281,7 +319,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>sale_id BIGSERIAL PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -327,7 +371,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>product_key INT REFERENCES dim_product(product_key),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -373,7 +423,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>quantity INT NOT NULL,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -419,7 +475,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>total_amount DECIMAL(12,2) GENERATED ALWAYS AS </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +527,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>);</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -511,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>date_key INT PRIMARY KEY,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -557,7 +631,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>month SMALLINT, day SMALLINT, is_holiday BOOLEAN</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -603,7 +683,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Snowflake Schema </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -643,7 +729,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>ETL Pipeline </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -689,7 +781,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def extract(self, query):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -735,7 +833,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def transform(self, df):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -781,7 +885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>df["order_date"] = pd.to_datetime(df["order_date"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -827,7 +937,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return df</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -873,7 +989,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>df.to_sql(table_name, self.warehouse_engine, if_exists="append", index=False)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -916,7 +1038,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Cloud data warehouses like Snowflake and BigQuery separate storage and compute, enabling elastic scaling. Materialized views pre-compute aggregations for dashboard queries. </p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -956,6 +1084,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Design with star schema for performance. Build resilient ETL pipelines. Leverage cloud warehouses for elastic scaling. Start simple and evolve.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -969,8 +1100,6 @@
     <section class="related">
       <h3>Related Articles</h3>
       <div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/database-monitoring.html" class="related-card">Database Monitoring and Performance Alerting</a></div>
-      <noscript><div class="related-grid"><a href="/en/database/columnar-databases.html" class="related-card">Columnar Databases: When and How to Use Them</a><a href="/en/database/data-consistency-models.html" class="related-card">Data Consistency Models Explained</a><a href="/en/database/data-lake-vs-warehouse.html" class="related-card">Data Lake vs Data Warehouse vs Lakehouse</a><a href="/en/database/database-monitoring.html" class="related-card">Database Monitoring and Performance Alerting</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
     </section>
     
   </div>

@@ -41,7 +41,7 @@
       "image": "https://dingjiu1989-hue.github.io/images/covers/en/ai/llm-version-management.png",
       "datePublished": "2026-05-12",
       "dateModified": "2026-05-12",
-      "wordCount": "5534",
+      "wordCount": "6026",
       "keywords": "AI, Machine Learning, LLM",
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
@@ -49,7 +49,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/llm-version-management-model-registry-ab-testing-rollback-20fm"
       ],
-      "articleBody": "LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback Introduction LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute \"versions\" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production. Model Registry A model registry tracks metadata for every deployed model version: from datetime import datetime from enum import Enum import json class ModelStatus(Enum): STAGING = \"staging\" CANARY = \"canary\" PRODUCTION = \"production\" ROLLED_BACK = \"rolled_back\" DEPRECATED = \"deprecated\" class ModelRegistry: def __init__(self, storage_backend): self.storage = storage_backend def register_model(self, model_id: str, metadata: dict) -> dict: entry = { \"model_id\": model_id, \"provider\": metadata.get(\"provider\"), \"version\": metadata.get(\"version\"), \"description\": metadata.get(\"description\"), \"parameters\": metadata.get(\"parameters\", {}), \"system_prompt_hash\": metadata.get(\"system_prompt_hash\"), \"registered_at\": datetime.now().isoformat(), \"status\": ModelStatus.STAGING.value, \"evaluation_scores\": {}, \"deployment_history\": [], } self.storage.save(f\"models/{model_id}\", entry) return entry def promote(self, model_id: str, target_status: ModelStatus): entry = self.storage.load(f\"models/{model_id}\") entry[\"status\"] = target_status.value entry[\"deployment_history\"].append({ \"action\": f\"promoted_to_{target_status.value}\", \"timestamp\": datetime.now().isoformat(), }) self.storage.save(f\"models/{model_id}\", entry) def get_active_model(self) -> dict: \"\"\"Get the current production model.\"\"\" all_models = self.storage.load_all(\"models/*\") for model in sorted(all_models, key=lambda m: m[\"registered_at\"], reverse=True): if model[\"status\"] == ModelStatus.PRODUCTION.value: return model return None Usage registry = ModelRegistry(redis_client) registry.register_model(\"claude-sonnet-v4-1\", { \"provider\": \"anthropic\", \"version\": \"claude-sonnet-4-20260512\", \"parameters\": {\"temperature\": 0.7, \"max_tokens\": 4096}, }) A/B Testing Framework Compare model versions on live traffic with statistical significance: import random import hashlib class ModelABTest: def __init__(self, registry: ModelRegistry): self.registry = registry self.experiments = {} def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5): self.experiments[name] = { \"model_a\": model_a, \"model_b\": model_b, \"traffic_split\": traffic_split, \"started_at\": datetime.now().isoformat(), \"results\": {\"a\": {\"calls\": 0, \"errors\": 0, \"latency_ms\": []}, \"b\": {\"calls\": 0, \"errors\": 0, \"latency_ms\": []}}, } def select_model(self, experiment: str, user_id: str) -> str: exp = self.experiments[experiment] Deterministic assignment based on user_id hash hash_val = int(hashlib.md5(f\"{experiment}:{user_id}\".encode()).hexdigest(), 16) if (hash_val % 1000) / 1000 return exp[\"model_a\"], \"a\" return exp[\"model_b\"], \"b\" def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False): exp = self.experiments[experiment] exp[\"results\"][variant][\"calls\"] += 1 exp[\"results\"][variant][\"latency_ms\"].append(latency_ms) if error: exp[\"results\"][variant][\"errors\"] += 1 def get_winner(self, experiment: str) -> str | None: exp = self.experiments[experiment] results = exp[\"results\"] if results[\"a\"][\"calls\"] return None # Not enough data error_rate_a = results[\"a\"][\"errors\"] / results[\"a\"][\"calls\"] error_rate_b = results[\"b\"][\"errors\"] / results[\"b\"][\"calls\"] Simple decision: lower error rate wins if error_rate_a return exp[\"model_a\"] return exp[\"model_b\"] Gradual Rollout Deploy new models incrementally with automatic rollback: class GradualRollout: def __init__(self, registry: ModelRegistry, evaluation_fn): self.registry = registry self.evaluate = evaluation_fn async def deploy(self, model_id: str, stages: list[dict] = None): if stages is None: stages = [ {\"name\": \"canary\", \"traffic\": 0.01, \"duration_min\": 30, \"eval_threshold\": 0.9}, {\"name\": \"small\", \"traffic\": 0.10, \"duration_min\": 120, \"eval_threshold\": 0.95}, {\"name\": \"medium\", \"traffic\": 0.25, \"duration_min\": 360, \"eval_threshold\": 0.95}, {\"name\": \"large\", \"traffic\": 0.50, \"duration_min\": 720, \"eval_threshold\": 0.95}, {\"name\": \"full\", \"traffic\": 1.00, \"duration_min\": 0, \"eval_threshold\": 0.0}, ] for stage in stages: print(f\"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)\") self.registry.promote(model_id, ModelStatus.CANARY) await self._route_traffic(model_id, stage[\"traffic\"]) Wait for evaluation period await asyncio.sleep(stage[\"duration_min\"] * 60) Evaluate performance scores = await self.evaluate(model_id) if scores.get(\"overall\", 0) print(f\"Stage {stage['name']} failed evaluation. Rolling back.\") await self.rollback(model_id) return False self.registry.promote(model_id, ModelStatus.PRODUCTION) return True async def rollback(self, model_id: str): previous_model = self.registry.get_active_model() self.registry.promote(previous_model[\"model_id\"], ModelStatus.PRODUCTION) self.registry.promote(model_id, ModelStatus.ROLLED_BACK) print(f\"Rolled back to {previous_model['model_id']}\") Evaluation Gate Automated evaluation runs before any model promotion: class EvaluationGate: def __init__(self, test_suite: list[dict]): self.test_suite = test_suite # [{input, expected_output, metrics}] async def evaluate_model(self, model_fn) -> dict: results = {\"passed\": 0, \"failed\": 0, \"details\": []} for test in self.test_suite: output = await model_fn(test[\"input\"]) score = self._score_output(output, test) if score >= test.get(\"threshold\", 0.8): results[\"passed\"] += 1 else: results[\"failed\"] += 1 results[\"details\"].append({\"test\": test[\"input\"], \"score\": score}) results[\"pass_rate\"] = results[\"passed\"] / len(self.test_suite) return results def _score_output(self, output: str, test: dict) -> float: if \"expected_output\" in test: return self._similarity(output, test[\"expected_output\"]) return 0.0 Conclusion Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment."
+      "articleBody": "LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback LLM Version Management: Model Registry, A/B Testing, Rollback Introduction LLMs change frequently: new model releases, fine-tuned versions, updated system prompts, and modified retrieval pipelines all constitute \"versions\" of your AI system. Unlike traditional software where you can pin a dependency version, LLM behavior shifts with each API update. This article covers the tools and practices for managing LLM versions in production. Model Registry A model registry tracks metadata for every deployed model version: from datetime import datetime from enum import Enum import json class ModelStatus(Enum): STAGING = \"staging\" CANARY = \"canary\" PRODUCTION = \"production\" ROLLED_BACK = \"rolled_back\" DEPRECATED = \"deprecated\" class ModelRegistry: def __init__(self, storage_backend): self.storage = storage_backend def register_model(self, model_id: str, metadata: dict) -> dict: entry = { \"model_id\": model_id, \"provider\": metadata.get(\"provider\"), \"version\": metadata.get(\"version\"), \"description\": metadata.get(\"description\"), \"parameters\": metadata.get(\"parameters\", {}), \"system_prompt_hash\": metadata.get(\"system_prompt_hash\"), \"registered_at\": datetime.now().isoformat(), \"status\": ModelStatus.STAGING.value, \"evaluation_scores\": {}, \"deployment_history\": [], } self.storage.save(f\"models/{model_id}\", entry) return entry def promote(self, model_id: str, target_status: ModelStatus): entry = self.storage.load(f\"models/{model_id}\") entry[\"status\"] = target_status.value entry[\"deployment_history\"].append({ \"action\": f\"promoted_to_{target_status.value}\", \"timestamp\": datetime.now().isoformat(), }) self.storage.save(f\"models/{model_id}\", entry) def get_active_model(self) -> dict: \"\"\"Get the current production model.\"\"\" all_models = self.storage.load_all(\"models/*\") for model in sorted(all_models, key=lambda m: m[\"registered_at\"], reverse=True): if model[\"status\"] == ModelStatus.PRODUCTION.value: return model return None Usage registry = ModelRegistry(redis_client) registry.register_model(\"claude-sonnet-v4-1\", { \"provider\": \"anthropic\", \"version\": \"claude-sonnet-4-20260512\", \"parameters\": {\"temperature\": 0.7, \"max_tokens\": 4096}, }) A/B Testing Framework Compare model versions on live traffic with statistical significance: import random import hashlib class ModelABTest: def __init__(self, registry: ModelRegistry): self.registry = registry self.experiments = {} def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5): self.experiments[name] = { \"model_a\": model_a, \"model_b\": model_b, \"traffic_split\": traffic_split, \"started_at\": datetime.now().isoformat(), \"results\": {\"a\": {\"calls\": 0, \"errors\": 0, \"latency_ms\": []}, \"b\": {\"calls\": 0, \"errors\": 0, \"latency_ms\": []}}, } def select_model(self, experiment: str, user_id: str) -> str: exp = self.experiments[experiment] Deterministic assignment based on user_id hash hash_val = int(hashlib.md5(f\"{experiment}:{user_id}\".encode()).hexdigest(), 16) if (hash_val % 1000) / 1000 return exp[\"model_a\"], \"a\" return exp[\"model_b\"], \"b\" def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False): exp = self.experiments[experiment] exp[\"results\"][variant][\"calls\"] += 1 exp[\"results\"][variant][\"latency_ms\"].append(latency_ms) if error: exp[\"results\"][variant][\"errors\"] += 1 def get_winner(self, experiment: str) -> str | None: exp = self.experiments[experiment] results = exp[\"results\"] if results[\"a\"][\"calls\"] return None # Not enough data error_rate_a = results[\"a\"][\"errors\"] / results[\"a\"][\"calls\"] error_rate_b = results[\"b\"][\"errors\"] / results[\"b\"][\"calls\"] Simple decision: lower error rate wins if error_rate_a return exp[\"model_a\"] return exp[\"model_b\"] Gradual Rollout Deploy new models incrementally with automatic rollback: class GradualRollout: def __init__(self, registry: ModelRegistry, evaluation_fn): self.registry = registry self.evaluate = evaluation_fn async def deploy(self, model_id: str, stages: list[dict] = None): if stages is None: stages = [ {\"name\": \"canary\", \"traffic\": 0.01, \"duration_min\": 30, \"eval_threshold\": 0.9}, {\"name\": \"small\", \"traffic\": 0.10, \"duration_min\": 120, \"eval_threshold\": 0.95}, {\"name\": \"medium\", \"traffic\": 0.25, \"duration_min\": 360, \"eval_threshold\": 0.95}, {\"name\": \"large\", \"traffic\": 0.50, \"duration_min\": 720, \"eval_threshold\": 0.95}, {\"name\": \"full\", \"traffic\": 1.00, \"duration_min\": 0, \"eval_threshold\": 0.0}, ] for stage in stages: print(f\"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)\") self.registry.promote(model_id, ModelStatus.CANARY) await self._route_traffic(model_id, stage[\"traffic\"]) Wait for evaluation period await asyncio.sleep(stage[\"duration_min\"] * 60) Evaluate performance scores = await self.evaluate(model_id) if scores.get(\"overall\", 0) print(f\"Stage {stage['name']} failed evaluation. Rolling back.\") await self.rollback(model_id) return False self.registry.promote(model_id, ModelStatus.PRODUCTION) return True async def rollback(self, model_id: str): previous_model = self.registry.get_active_model() self.registry.promote(previous_model[\"model_id\"], ModelStatus.PRODUCTION) self.registry.promote(model_id, ModelStatus.ROLLED_BACK) print(f\"Rolled back to {previous_model['model_id']}\") Evaluation Gate Automated evaluation runs before any model promotion: class EvaluationGate: def __init__(self, test_suite: list[dict]): self.test_suite = test_suite # [{input, expected_output, metrics}] async def evaluate_model(self, model_fn) -> dict: results = {\"passed\": 0, \"failed\": 0, \"details\": []} for test in self.test_suite: output = await model_fn(test[\"input\"]) score = self._score_output(output, test) if score >= test.get(\"threshold\", 0.8): results[\"passed\"] += 1 else: results[\"failed\"] += 1 results[\"details\"].append({\"test\": test[\"input\"], \"score\": score}) results[\"pass_rate\"] = results[\"passed\"] / len(self.test_suite) return results def _score_output(self, output: str, test: dict) -> float: if \"expected_output\" in test: return self._similarity(output, test[\"expected_output\"]) return 0.0 Conclusion Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment."
     }
     </script>
     <script type="application/ld+json">
@@ -205,7 +205,39 @@
 <br>
 <br>
 <br>
+<h1>LLM Version Management: Model Registry, A/B Testing, Rollback</h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <h2>  Introduction</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -257,7 +289,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Model Registry</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -309,7 +347,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>from datetime import datetime</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -361,7 +405,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import json</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -413,7 +463,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>STAGING = "staging"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -465,7 +521,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>PRODUCTION = "production"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -517,7 +579,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>DEPRECATED = "deprecated"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -569,7 +637,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def __init__(self, storage_backend):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -621,7 +695,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def register_model(self, model_id: str, metadata: dict) -> dict:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -673,7 +753,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"model_id": model_id,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -725,7 +811,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"version": metadata.get("version"),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -777,7 +869,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"parameters": metadata.get("parameters", {}),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -829,7 +927,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"registered_at": datetime.now().isoformat(),</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -881,7 +985,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"evaluation_scores": {},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -933,6 +1043,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
 <br>
 <br>
@@ -959,7 +1072,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.storage.save(f"models/{model_id}", entry)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1011,7 +1130,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def promote(self, model_id: str, target_status: ModelStatus):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1063,7 +1188,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>entry["status"] = target_status.value</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1115,7 +1246,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"action": f"promoted_to_{target_status.value}",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1167,7 +1304,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1219,7 +1362,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def get_active_model(self) -> dict:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1271,7 +1420,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>all_models = self.storage.load_all("models/*")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1323,7 +1478,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if model["status"] == ModelStatus.PRODUCTION.value:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1375,7 +1536,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return None</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1427,7 +1594,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>registry = ModelRegistry(redis_client)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1479,7 +1652,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"provider": "anthropic",</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1531,7 +1710,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"parameters": {"temperature": 0.7, "max_tokens": 4096},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1583,7 +1768,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  A/B Testing Framework</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1635,7 +1826,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>import random</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1687,7 +1884,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class ModelABTest:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1739,7 +1942,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.registry = registry</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1791,7 +2000,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def start_experiment(self, name: str, model_a: str, model_b: str, traffic_split: float = 0.5):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1843,7 +2058,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"model_a": model_a,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1895,7 +2116,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"traffic_split": traffic_split,</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1947,7 +2174,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>"results": {"a": {"calls": 0, "errors": 0, "latency_ms": []},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -1999,7 +2232,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2051,7 +2290,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exp = self.experiments[experiment]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2103,7 +2348,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>hash_val = int(hashlib.md5(f"{experiment}:{user_id}".encode()).hexdigest(), 16)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2155,7 +2406,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return exp["model_a"], "a"</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2207,6 +2464,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>def record_result(self, experiment: str, variant: str, latency_ms: float, error: bool = False):</p>
 <br>
 <br>
@@ -2233,7 +2493,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exp = self.experiments[experiment]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2285,7 +2551,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exp["results"][variant]["latency_ms"].append(latency_ms)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2337,7 +2609,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exp["results"][variant]["errors"] += 1</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2389,7 +2667,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>exp = self.experiments[experiment]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2441,7 +2725,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if results["a"]["calls"] < 100 or results["b"]["calls"] < 100:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2493,7 +2783,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>error_rate_a = results["a"]["errors"] / results["a"]["calls"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2545,7 +2841,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h1>Simple decision: lower error rate wins</h1>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2597,7 +2899,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return exp["model_a"]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2649,7 +2957,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Gradual Rollout</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2701,7 +3015,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class GradualRollout:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2753,7 +3073,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.registry = registry</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2805,7 +3131,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>async def deploy(self, model_id: str, stages: list[dict] = None):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2857,7 +3189,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>stages = [</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2909,7 +3247,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"name": "small", "traffic": 0.10, "duration_min": 120, "eval_threshold": 0.95},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -2961,7 +3305,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>{"name": "large", "traffic": 0.50, "duration_min": 720, "eval_threshold": 0.95},</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3013,7 +3363,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3065,7 +3421,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Deploying to stage: {stage['name']} ({stage['traffic']*100}% traffic)")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3117,7 +3479,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>await self._route_traffic(model_id, stage["traffic"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3169,7 +3537,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>await asyncio.sleep(stage["duration_min"] * 60)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3221,7 +3595,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>scores = await self.evaluate(model_id)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3273,7 +3653,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>print(f"Stage {stage['name']} failed evaluation. Rolling back.")</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3325,7 +3711,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return False</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3377,7 +3769,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return True</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3429,7 +3827,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>previous_model = self.registry.get_active_model()</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3481,7 +3885,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.registry.promote(model_id, ModelStatus.ROLLED_BACK)</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3533,7 +3943,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <h2>  Evaluation Gate</h2>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3585,7 +4001,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>class EvaluationGate:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3637,7 +4059,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>self.test_suite = test_suite # [{input, expected_output, metrics}]</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3689,7 +4117,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results = {"passed": 0, "failed": 0, "details": []}</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3741,7 +4175,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>output = await model_fn(test["input"])</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3793,7 +4233,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if score >= test.get("threshold", 0.8):</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3845,7 +4291,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>else:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3897,7 +4349,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>results["details"].append({"test": test["input"], "score": score})</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -3949,7 +4407,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return results</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4001,7 +4465,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>if "expected_output" in test:</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4053,7 +4523,13 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>return 0.0</p>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -4105,6 +4581,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 <p>Treat LLM versions as managed artifacts, not API parameters. Use a model registry to track every version with its metadata, system prompt, and evaluation scores. Implement A/B testing to compare versions on live traffic. Deploy new models gradually through canary, small, medium, and full rollout stages with automated evaluation gates at each stage. Maintain the ability to roll back instantly when metrics degrade. This discipline makes LLM version management as reliable as traditional software deployment.</p></div>
     </article>
     <div style="margin:2rem 0;text-align:center;">
@@ -4117,9 +4596,7 @@
     </div>
     <section class="related">
       <h3>Related Articles</h3>
-      <div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div>
-      <noscript><div class="related-grid"><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a><a href="/en/ai/ai-agents-production.html" class="related-card">Deploying AI Agents to Production</a><a href="/en/ai/ai-testing-strategies.html" class="related-card">Testing Strategies for AI Applications</a></div></noscript>
-      <div id="related-posts" style="display:none;"></div>
+      <div class="related-grid"><a href="/en/ai/ai-recommendation-systems.html" class="related-card">AI Recommendation Systems: From Embeddings to Production</a><a href="/en/ai/langgraph-agent-workflows.html" class="related-card">Building Custom AI Agents with LangGraph: A Practical Guide</a><a href="/en/ai/ai-data-analysis.html" class="related-card">AI-Powered Data Analysis: Using LLMs for Data Science and Visualization</a><a href="/en/ai/n8n-ai-automation.html" class="related-card">Building AI Automation Workflows with n8n: A Practical Guide</a></div>
     </section>
     
     <section class="tools-callout" style="margin:2rem 0;padding:1.5rem;background:#eef2ff;border-radius:12px;border:1px solid #e0e7ff;">
