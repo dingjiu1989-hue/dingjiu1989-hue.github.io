@@ -607,6 +607,24 @@ def pull_gsc_data():
 # 7. Report Generation
 # ═══════════════════════════════════════════════════════════════════════════
 
+def load_bing_stats():
+    """Load latest Bing Webmaster stats if available."""
+    bing_file = DATA_DIR / "bing-stats.json"
+    if not bing_file.exists():
+        return {"available": False}
+    try:
+        data = json.loads(bing_file.read_text(encoding="utf-8"))
+        return {
+            "available": True,
+            "date": data.get("date"),
+            "url_quota": data.get("endpoints", {}).get("submission_quota", {}).get("data", {}),
+            "rank_traffic_count": len(data.get("endpoints", {}).get("rank_traffic", {}).get("data", [])),
+            "crawl": data.get("endpoints", {}).get("crawl_settings", {}).get("data", {}),
+        }
+    except Exception:
+        return {"available": False, "error": "Failed to parse bing-stats.json"}
+
+
 def load_previous_report():
     """Load previous report for trend comparison."""
     if HEALTH_FILE.exists():
@@ -644,6 +662,7 @@ def generate_report(sitemap, seo_tags, structured, pages, links, ai_health, gsc)
             "md_dir": ai_health["md_dir"],
         },
         "gsc": gsc,
+        "bing": load_bing_stats(),
         "warnings": [],
         "trend": {},
     }
@@ -667,6 +686,14 @@ def generate_report(sitemap, seo_tags, structured, pages, links, ai_health, gsc)
         )
     if ai_health.get("warnings"):
         report["warnings"].extend(ai_health["warnings"])
+    bing = load_bing_stats()
+    if bing.get("available"):
+        quota = bing.get("url_quota", {})
+        if isinstance(quota, dict) and quota.get("DailyQuota", 100) < 5:
+            report["warnings"].append("Bing URL submission daily quota nearly exhausted")
+        rank_count = bing.get("rank_traffic_count", 0)
+        if rank_count == 0:
+            report["info"] = report.get("info", "") + " Bing rank/traffic data not yet available (expected for new site)."
     if not gsc.get("available"):
         if gsc.get("error"):
             report["warnings"].append(

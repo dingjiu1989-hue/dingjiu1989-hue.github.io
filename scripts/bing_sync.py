@@ -155,10 +155,101 @@ def submit_new_urls():
     return ok
 
 
-def pull_search_performance():
-    """Pull search performance data from Bing."""
-    resp = api_get("GetRankAndTrafficStats", {"siteUrl": SITE})
-    return resp
+def pull_all_data():
+    """Pull all available data from Bing Webmaster API.
+    Saves to data/bing-stats.json for historical tracking.
+    """
+    now = datetime.now(timezone.utc).isoformat()
+    stats = {
+        "pulled_at": now,
+        "date": date.today().isoformat(),
+        "endpoints": {},
+    }
+
+    # All known working endpoints
+    endpoints = {
+        "rank_traffic": ("GetRankAndTrafficStats", {"siteUrl": SITE}),
+        "keyword_stats": ("GetKeywordStats", {"siteUrl": SITE}),
+        "crawl_settings": ("GetCrawlSettings", {"siteUrl": SITE}),
+        "crawl_issues": ("GetCrawlIssues", {"siteUrl": SITE}),
+        "submission_quota": ("GetUrlSubmissionQuota", {"siteUrl": SITE}),
+        "sitemaps": ("GetSitemapList", {"siteUrl": SITE}),
+    }
+
+    for name, (endpoint, params) in endpoints.items():
+        resp = api_get(endpoint, params)
+        d = resp.get("d", None)
+        err = resp.get("error") or resp.get("http_error")
+        if err:
+            stats["endpoints"][name] = {"status": "error", "error": str(err)[:200]}
+        elif d is not None:
+            if isinstance(d, list):
+                stats["endpoints"][name] = {"status": "ok", "count": len(d), "data": d}
+            elif isinstance(d, dict):
+                stats["endpoints"][name] = {"status": "ok", "data": d}
+            else:
+                stats["endpoints"][name] = {"status": "ok", "data": d}
+        else:
+            stats["endpoints"][name] = {"status": "unknown", "raw": json.dumps(resp)[:500]}
+
+    # Load previous stats for trend comparison
+    stats_file = DATA_DIR / "bing-stats.json"
+    previous = None
+    if stats_file.exists():
+        try:
+            previous = json.loads(stats_file.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    stats["previous_date"] = previous.get("date") if previous else None
+
+    # Save
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    stats_file.write_text(json.dumps(stats, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    return stats
+
+
+def print_data_summary(stats):
+    """Print a human-readable summary of pulled data."""
+    ep = stats.get("endpoints", {})
+
+    # Quota
+    quota = ep.get("submission_quota", {}).get("data", {})
+    if isinstance(quota, dict):
+        print(f"  URL Quota: {quota.get('DailyQuota', '?')}/day, {quota.get('MonthlyQuota','?')}/month")
+
+    # Sitemaps
+    sm = ep.get("sitemaps", {})
+    if sm.get("status") == "ok" and isinstance(sm.get("data"), list):
+        print(f"  Sitemaps: {len(sm['data'])} registered")
+        for s in sm["data"]:
+            if isinstance(s, dict):
+                print(f"    - {s.get('Url', s.get('url', '?'))[:80]}")
+
+    # Rank & Traffic
+    rt = ep.get("rank_traffic", {})
+    if rt.get("status") == "ok":
+        data = rt.get("data", [])
+        if isinstance(data, list) and data:
+            print(f"  Rank/Traffic: {len(data)} data points")
+            for item in data[:5]:
+                print(f"    {item}")
+        else:
+            print("  Rank/Traffic: no data yet (expected for new site)")
+
+    # Keywords
+    kw = ep.get("keyword_stats", {})
+    if kw.get("status") == "ok":
+        data = kw.get("data", [])
+        if isinstance(data, list) and data:
+            print(f"  Keywords: {len(data)} tracked")
+            for item in data[:5]:
+                print(f"    {item}")
+
+    # Crawl
+    cs = ep.get("crawl_settings", {})
+    if cs.get("status") == "ok":
+        print(f"  Crawl settings: {json.dumps(cs.get('data', {}))[:200]}")
 
 
 def main():
@@ -172,21 +263,12 @@ def main():
     print("[1/2] URL submission...")
     submit_new_urls()
 
-    # 2. Pull search performance
-    print("\n[2/2] Search performance...")
-    perf = pull_search_performance()
-    if "error" in perf:
-        print(f"  Error: {perf['error'][:120]}")
-    else:
-        d = perf.get("d", [])
-        if d:
-            print(f"  Data points: {len(d)}")
-            for item in d[:5]:
-                print(f"    {item}")
-        else:
-            print("  No search performance data yet (expected for new site)")
+    # 2. Pull all data
+    print("\n[2/3] Pulling Bing data...")
+    stats = pull_all_data()
+    print_data_summary(stats)
 
-    print("\nDone.")
+    print("\nDone. Data saved to data/bing-stats.json")
     return 0
 
 
