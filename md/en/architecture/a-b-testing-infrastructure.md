@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/a-b-testing-infrastructur
   
 
 
+# A/B Testing Infrastructure
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 A/B testing infrastructure enables organizations to make data-driven decisions by comparing user experiences against a control group. At its core, an A/B testing system must: consistently assign users to experiment groups, reliably track metrics for each group, perform statistical analysis to determine significance, and manage the lifecycle of experiments from creation to analysis. The infrastructure requirements scale with experiment volume, traffic, and statistical rigor. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Experiment assignment uses deterministic bucketing. A consistent hash of the use
   
   
   
+  
+  
+  
 
 
 The assignment infrastructure must handle overlapping experiments. Users may participate in multiple experiments simultaneously. Each experiment uses a unique salt or namespace in the hash computation, ensuring that participation in one experiment does not correlate with participation in another. This prevents interaction effects where users in variant A of experiment 1 are disproportionately likely to be in variant B of experiment 2. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Metrics collection is a two-phase process. The first phase captures exposure eve
   
   
   
+  
+  
+  
 
 
 Statistical analysis determines whether observed differences are significant. Frequentist approaches use hypothesis testing (t-test, chi-square) with p-values and confidence intervals. Bayesian approaches model the posterior distribution of the metric difference and report the probability that one variant outperforms another. Sequential testing methods allow continuous monitoring without inflating false positive rates — essential for stopping experiments early when results are clear. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Sample ratio mismatch (SRM) is a critical quality check. The actual assignment r
   
   
   
+  
+  
+  
 
 
 Novelty effects and carryover effects require attention. Novelty effects cause users to behave differently simply because something is new — the effect diminishes over time. Carryover effects occur when a user's experience in one experiment affects their behavior in a subsequent experiment. Mitigations include: running experiments long enough for novelty to wear off, implementing washout periods between experiments for the same user, and cross-experiment randomization that accounts for history. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Infrastructure must handle experiment lifecycle. Create: an experiment is define
   
   
   
+  
+  
+  
 
 
 Client-side experimentation introduces additional challenges. The experiment data must be available on the client for assignment, which exposes targeting rules and variant definitions. The assignment must happen before the user sees any content, making synchronous loading critical. Client-side events may be lost due to ad blockers, network failures, or page abandonment. Server-side supplementation provides a fallback for critical metrics. 
 
+  
+  
+  
   
   
   

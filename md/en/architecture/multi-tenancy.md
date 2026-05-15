@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/multi-tenancy.html
   
 
 
+# Multi-Tenancy Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Multi-tenancy is the architectural pattern where a single instance of software serves multiple customer organizations (tenants). The design choices around tenant isolation — how much tenants share and how much is dedicated — determine the system's security, scalability, operational complexity, and cost structure. Three primary isolation levels form a spectrum with distinct tradeoffs. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Database per tenant provides the strongest isolation. Each tenant gets its own d
   
   
   
+  
+  
+  
 
 
 Schema per tenant shares the database server but maintains separate schemas for each tenant. This provides moderate isolation — a schema is a namespace with its own tables and data. Connection pooling across schemas shares resources efficiently. Schema management becomes the challenge: each tenant's schema must be created and migrated independently. Tools can automate schema operations across all tenants, but schema divergence becomes a risk if tenants can have different schema versions. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Shared database (all tenants in the same tables) is the most cost-efficient appr
   
   
   
+  
+  
+  
 
 
 Tenant routing determines which tenant's data is accessed for each request. The tenant identifier is typically extracted from the authentication context (JWT claims, session data). For database-per-tenant, the tenant ID maps to a database connection. For schema-per-tenant, it maps to a schema name. For shared database, it becomes the WHERE clause filter. The routing infrastructure must be injected early in request processing — ideally at the middleware or API gateway layer — so that downstream code never has to think about multi-tenancy. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Tenant-aware connection pooling is critical for database-per-tenant architecture
   
   
   
+  
+  
+  
 
 
 Pricing models in multi-tenant systems typically distribute infrastructure costs according to tenant resource consumption. Per-tenant pricing requires metering: tracking CPU, storage, bandwidth, and request counts per tenant. Metering data should be aggregated in a reporting database and used for both billing and capacity planning. The pricing model should incentivize efficient resource usage — tenants that consume more should pay proportionally more. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Data isolation testing is essential for shared-database multi-tenancy. Automated
   
   
   
+  
+  
+  
 
 
 Tenant feature flags enable per-tenant configuration. Different tenants may require different feature sets, integration configurations, or compliance configurations. A tenant-level feature flag system allows rolling out features to specific tenants, maintaining tenant-specific customizations, and gradually migrating tenants between infrastructure tiers as their needs grow. 
 
+  
+  
+  
   
   
   

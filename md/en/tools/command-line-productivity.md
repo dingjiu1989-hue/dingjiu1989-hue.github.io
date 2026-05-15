@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/command-line-productivity.html
   
 
 
+# Command-Line Productivity: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ The command line remains the most powerful interface for development, operations
   
   
   
+  
+  
+  
 
 
 This article covers seven essential CLI productivity tools: fzf, ripgrep, jq, bat, tmux, zoxide, and lazygit.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ This article covers seven essential CLI productivity tools: fzf, ripgrep, jq, ba
   
   
   
+  
+  
+  
 
 
 fzf is a general-purpose fuzzy finder that pipes any list of items into an interactive search interface. It can search files, command history, processes, git branches, and virtually any text stream.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ fzf is a general-purpose fuzzy finder that pipes any list of items into an inter
   
   
   
+  
+  
+  
 
 
 vim $(fzf --preview 'bat --color=always {}')
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ vim $(fzf --preview 'bat --color=always {}')
   
   
   
+  
+  
+  
 
 
 kill -9 $(ps aux | fzf --header-lines=1 | awk '{print $2}')
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ kill -9 $(ps aux | fzf --header-lines=1 | awk '{print $2}')
   
   
   
+  
+  
+  
 
 
 git checkout $(git branch -a | fzf --height=40%)
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ fzf's key bindings enhance shell navigation: `Ctrl+T` pastes selected file paths
   
   
   
+  
+  
+  
 
 
 ##  ripgrep (rg): Blazingly Fast Code Search
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ ripgrep recursively searches through files with regex patterns, respecting .giti
   
   
   
+  
+  
+  
 
 
 # Search for pattern in current directory
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ rg "function getUsers" --type ts
   
   
   
+  
+  
+  
 
 
 # Search with context lines
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ rg "TODO" --context 3
   
   
   
+  
+  
+  
 
 
 # Search but exclude specific files
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ rg "password" --glob '!*.lock'
   
   
   
+  
+  
+  
 
 
 ripgrep output integrates with editors through the `--json` flag and supports PCRE2 regex features including lookaheads and backreferences. Combined with fzf, it provides instant code search across large repositories.
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ ripgrep output integrates with editors through the `--json` flag and supports PC
   
   
   
+  
+  
+  
 
 
 jq is a lightweight and flexible command-line JSON processor. It filters, transforms, and formats JSON data with a powerful expression language.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ jq is a lightweight and flexible command-line JSON processor. It filters, transf
   
   
   
+  
+  
+  
 
 
 cat data.json | jq '.'
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ cat data.json | jq '.'
   
   
   
+  
+  
+  
 
 
 curl -s https://api.github.com/repos/jqlang/jq | jq '{name, description, stars: .stargazers_count}'
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ curl -s https://api.github.com/repos/jqlang/jq | jq '{name, description, stars: 
   
   
   
+  
+  
+  
 
 
 cat logs.json | jq '.[] | select(.severity == "ERROR") | {timestamp, message}'
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ jq expressions range from simple field access to complex transformations with ma
   
   
   
+  
+  
+  
 
 
 ##  bat: cat with Syntax Highlighting
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ bat is a clone of cat with syntax highlighting, Git integration, and automatic p
   
   
   
+  
+  
+  
 
 
 bat --paging=never file.json
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ bat --style=plain file.py
   
   
   
+  
+  
+  
 
 
 bat --language=yaml config.yaml
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ bat integrates with other tools as a pager. Setting `BAT_THEME` in shell configu
   
   
   
+  
+  
+  
 
 
 ##  tmux: Terminal Multiplexer
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ tmux enables multiple terminal sessions within a single window, session persiste
   
   
   
+  
+  
+  
 
 
 tmux new -s project
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ tmux attach -t project
   
   
   
+  
+  
+  
 
 
 Essential tmux key bindings:
 
+  
+  
+  
   
   
   
@@ -1374,10 +1529,16 @@ Essential tmux key bindings:
   
   
   
+  
+  
+  
 
 
 * `Ctrl+B "` — Split pane horizontally.
 
+  
+  
+  
   
   
   
@@ -1426,6 +1587,9 @@ Essential tmux key bindings:
   
   
   
+  
+  
+  
 
 
 * `Ctrl+B ,` — Rename current window.
@@ -1452,10 +1616,16 @@ Essential tmux key bindings:
   
   
   
+  
+  
+  
 
 
 * `Ctrl+B [` — Enter scroll/copy mode.
 
+  
+  
+  
   
   
   
@@ -1510,10 +1680,16 @@ tmux configuration in `~/.tmux.conf` customizes key bindings, status bar, colors
   
   
   
+  
+  
+  
 
 
 ##  zoxide: Smarter Directory Navigation
 
+  
+  
+  
   
   
   
@@ -1568,10 +1744,16 @@ zoxide learns your directory usage patterns and allows jumping to frequently acc
   
   
   
+  
+  
+  
 
 
 z proj # Jump to ~/projects/my-project
 
+  
+  
+  
   
   
   
@@ -1626,10 +1808,16 @@ z proj/src # Jump to subdirectory
   
   
   
+  
+  
+  
 
 
 zi # Interactive selection with fzf
 
+  
+  
+  
   
   
   
@@ -1684,10 +1872,16 @@ zoxide replaces cd with a learning database: `z foo` navigates to the most relev
   
   
   
+  
+  
+  
 
 
 ##  lazygit: Terminal Git Interface
 
+  
+  
+  
   
   
   
@@ -1742,10 +1936,16 @@ lazygit provides a terminal-based Git interface with vim-like keybindings. It vi
   
   
   
+  
+  
+  
 
 
 lazygit
 
+  
+  
+  
   
   
   
@@ -1800,10 +2000,16 @@ Essential operations:
   
   
   
+  
+  
+  
 
 
 * Arrow keys navigate files and commits.
 
+  
+  
+  
   
   
   
@@ -1852,10 +2058,16 @@ Essential operations:
   
   
   
+  
+  
+  
 
 
 * `c` to commit, `p` to push.
 
+  
+  
+  
   
   
   
@@ -1904,6 +2116,9 @@ Essential operations:
   
   
   
+  
+  
+  
 
 
 * `d` to view diff of selected file.
@@ -1930,10 +2145,16 @@ Essential operations:
   
   
   
+  
+  
+  
 
 
 * `:` for custom commands.
 
+  
+  
+  
   
   
   
@@ -1988,10 +2209,16 @@ lazygit significantly reduces Git command memorization while providing visual fe
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

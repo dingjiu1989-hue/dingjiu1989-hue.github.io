@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/nodejs-streams-guide.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/nodejs-streams-guide.html">
+    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html">
+    <link rel="next" href="https://dingjiu1989-hue.github.io/en/tech/git-cheatsheet.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -53,7 +55,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/nodejs-streams-complete-guide-to-efficient-data-processing-39in"
       ],
-      "articleBody": "Node.js Streams are one of the most powerful and underused features of the platform. They enable processing large amounts of data without loading everything into memory \u2014 critical for file uploads, data pipelines, and HTTP responses. Yet most Node.js developers avoid streams because the API (even the modern pipeline-based one) has non-obvious patterns. This guide covers streams from the ground up with practical examples you can use today. The Four Stream Types TypeWhat It DoesExamplesKey Events/Methods ReadableProduces data that can be consumedfs.createReadStream, HTTP request (req), process.stdindata, end, error, pipe(), readable.read() WritableConsumes data that is written to itfs.createWriteStream, HTTP response (res), process.stdoutwrite(), end(), drain, finish TransformBoth reads and writes \u2014 modifies data in transitzlib.createGzip, crypto.createCipher, CSV parserSame as Readable + Writable, _transform() method DuplexIndependent read and write sides (like a telephone)net.Socket, TLS socket, WebSocketread() + write(), data flowing in both directions Pipeline API (Modern, Recommended) Best for: Any time you connect streams together. pipeline() handles cleanup and error propagation automatically \u2014 raw .pipe() does not. const { pipeline } = require('node:stream/promises'); const { createReadStream, createWriteStream } = require('node:fs'); const { createGzip } = require('node:zlib'); await pipeline( createReadStream('input.json'), createGzip(), createWriteStream('input.json.gz'), ); console.log('Pipeline succeeded \u2014 file compressed'); Real-World Use Cases 1. Streaming CSV Processing (Avoid OOM on Large Files) const { createReadStream } = require('node:fs'); const { parse } = require('csv-parse'); const { Transform } = require('node:stream'); // Process a 5GB CSV file with constant memory (~50MB) const results = []; createReadStream('massive-file.csv') .pipe(parse({ columns: true })) .pipe(new Transform({ objectMode: true, transform(row, encoding, callback) { // Process and optionally filter each row if (row.status === 'active') { this.push({ id: row.id, name: row.name }); } callback(); } })) .on('data', (row) => results.push(row)) .on('end', () => console.log(`Processed ${results.length} rows`)); 2. HTTP Streaming Large Responses // Instead of: res.json(allData) \u2014 loads all data into memory // Use: stream data to client as you produce it app.get('/api/export', async (req, res) => { res.setHeader('Content-Type', 'application/json'); res.write('['); let first = true; const cursor = db.collection('events').find().stream(); for await (const doc of cursor) { if (!first) res.write(','); res.write(JSON.stringify(doc)); first = false; } res.write(']'); res.end(); }); 3. Handling Backpressure Best practice: Respect the return value of write(). When write() returns false, the writable stream's internal buffer is full \u2014 pause reading until the drain event fires. const readStream = createReadStream('huge-file.bin'); const writeStream = createWriteStream('copy.bin'); readStream.on('data', (chunk) => { const canContinue = writeStream.write(chunk); if (!canContinue) { readStream.pause(); // Stop reading \u2014 buffer is full writeStream.once('drain', () => readStream.resume()); // Resume when drained } }); // Note: pipeline() handles this automatically \u2014 prefer it over manual piping Bottom line: Streams are essential for processing data that exceeds memory limits. The pipeline() API should be your default \u2014 it handles backpressure, error propagation, and cleanup correctly. Avoid raw .pipe() and .on('data') patterns unless you have a specific reason. See also: Caching Strategies and REST API Best Practices."
+      "articleBody": "Master Node.js streams: Readable, Writable, Transform, and Duplex. Real-world examples for file processing, HTTP streaming, CSV parsing, and backpressure handling. Avoid memory issues at scale."
     }
     </script>
     <script type="application/ld+json">
@@ -64,6 +66,34 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Node.js Streams: Complete Guide to Efficient Data Processing"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Node.js Streams: Complete Guide to Efficient Data Processing",
+      "description": "Master Node.js streams: Readable, Writable, Transform, and Duplex. Real-world examples for file processing, HTTP streaming, CSV parsing, and backpressure handling. Avoid memory issues at scale.",
+      "step": [
+          {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "Streaming CSV Processing (Avoid OOM on Large Files)",
+        "text": "const { createReadStream } = require('node:fs'); const { parse } = require('csv-parse'); const { Transform } = require('node:stream'); // Process a 5GB CSV file with constant memory (~50MB) const results = []; createReadStream('massive-file.csv') .pipe(parse({ columns: true })) .pipe(new Transform({"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "HTTP Streaming Large Responses",
+        "text": "// Instead of: res.json(allData) — loads all data into memory // Use: stream data to client as you produce it app.get('/api/export', async (req, res) => { res.setHeader('Content-Type', 'application/json'); res.write('['); let first = true; const cursor = db.collection('events').find().stream(); for "
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "Handling Backpressure",
+        "text": "Best practice: Respect the return value of write(). When write() returns false, the writable stream's internal buffer is full — pause reading until the drain event fires. const readStream = createReadStream('huge-file.bin'); const writeStream = createWriteStream('copy.bin'); readStream.on('data', (c"
+      }
       ]
     }
     </script>

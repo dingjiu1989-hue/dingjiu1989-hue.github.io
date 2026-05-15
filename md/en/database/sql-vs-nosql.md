@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/sql-vs-nosql.html
   
 
 
+# SQL vs NoSQL Decision Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Great Database Debate 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ The choice between SQL and NoSQL is one of the most consequential architectural 
   
   
   
+  
+  
+  
 
 
 Core Differences 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Core Differences
   
   
   
+  
+  
+  
 
 
 SQL Strengths 
 
+  
+  
+  
   
   
   
@@ -271,10 +315,16 @@ Complex Queries and Joins
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL excels at complex reporting queries
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- SQL excels at complex reporting queries
 
+  
+  
+  
   
   
   
@@ -323,10 +373,16 @@ SELECT
   
   
   
+  
+  
+  
 
 
 c.name AS customer_name,
 
+  
+  
+  
   
   
   
@@ -375,10 +431,16 @@ COUNT(o.id) AS order_count,
   
   
   
+  
+  
+  
 
 
 SUM(o.total) AS total_spent,
 
+  
+  
+  
   
   
   
@@ -427,10 +489,16 @@ AVG(o.total) AS avg_order_value
   
   
   
+  
+  
+  
 
 
 FROM customers c
 
+  
+  
+  
   
   
   
@@ -479,10 +547,16 @@ LEFT JOIN orders o ON c.id = o.customer_id
   
   
   
+  
+  
+  
 
 
 WHERE o.created_at >= '2026-01-01'
 
+  
+  
+  
   
   
   
@@ -531,10 +605,16 @@ GROUP BY c.id, c.name
   
   
   
+  
+  
+  
 
 
 HAVING COUNT(o.id) > 5
 
+  
+  
+  
   
   
   
@@ -583,10 +663,16 @@ ORDER BY total_spent DESC
   
   
   
+  
+  
+  
 
 
 LIMIT 10;
 
+  
+  
+  
   
   
   
@@ -632,10 +718,16 @@ Data Integrity
   
   
   
+  
+  
+  
 
 
 Referential integrity enforced at the database level: 
 
+  
+  
+  
   
   
   
@@ -684,10 +776,16 @@ ALTER TABLE orders
   
   
   
+  
+  
+  
 
 
 ADD CONSTRAINT fk_orders_customer
 
+  
+  
+  
   
   
   
@@ -736,6 +834,9 @@ FOREIGN KEY (customer_id) REFERENCES customers(id)
   
   
   
+  
+  
+  
 
 
 ON DELETE CASCADE;
@@ -762,10 +863,16 @@ ON DELETE CASCADE;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The database prevents:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- The database prevents:
 
+  
+  
+  
   
   
   
@@ -814,10 +921,16 @@ DELETE FROM customers WHERE id = 1;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If customer 1 has orders, this fails (or cascades)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If customer 1 has orders, this fails (or cascades)
 
+  
+  
+  
   
   
   
@@ -866,10 +979,16 @@ Transactions
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Multi-statement ACID transaction
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Multi-statement ACID transaction
 
+  
+  
+  
   
   
   
@@ -918,10 +1037,16 @@ BEGIN;
   
   
   
+  
+  
+  
 
 
 UPDATE inventory SET quantity = quantity - 1 WHERE product_id = 100 AND quantity > 0;
 
+  
+  
+  
   
   
   
@@ -970,10 +1095,16 @@ INSERT INTO order_items (order_id, product_id, quantity) VALUES (500, 100, 1);
   
   
   
+  
+  
+  
 
 
 COMMIT;
 
+  
+  
+  
   
   
   
@@ -1022,10 +1153,16 @@ When to Choose SQL
   
   
   
+  
+  
+  
 
 
 * **Data integrity is critical**: Financial systems, inventory, booking engines.
 
+  
+  
+  
   
   
   
@@ -1068,6 +1205,9 @@ When to Choose SQL
   
   
   
+  
+  
+  
 
 
 * **Ad-hoc queries**: Reporting and analytics with unpredictable query patterns.
@@ -1091,10 +1231,16 @@ When to Choose SQL
   
   
   
+  
+  
+  
 
 
 * **ACID transactions**: Multi-operation atomicity is required.
 
+  
+  
+  
   
   
   
@@ -1140,6 +1286,9 @@ When to Choose SQL
   
   
   
+  
+  
+  
 
 
 NoSQL Strengths 
@@ -1163,10 +1312,16 @@ NoSQL Strengths
   
   
   
+  
+  
+  
 
 
 Flexible Schema 
 
+  
+  
+  
   
   
   
@@ -1215,10 +1370,16 @@ Flexible Schema
   
   
   
+  
+  
+  
 
 
 db.users.insertOne({ name: "Alice", email: "alice@email.com" });
 
+  
+  
+  
   
   
   
@@ -1267,10 +1428,16 @@ db.users.insertOne({
   
   
   
+  
+  
+  
 
 
 name: "Bob",
 
+  
+  
+  
   
   
   
@@ -1319,10 +1486,16 @@ email: "bob@email.com",
   
   
   
+  
+  
+  
 
 
 phone: "+1234567890", // Extra field
 
+  
+  
+  
   
   
   
@@ -1371,10 +1544,16 @@ preferences: { // Nested object
   
   
   
+  
+  
+  
 
 
 theme: "dark",
 
+  
+  
+  
   
   
   
@@ -1423,10 +1602,16 @@ notifications: true
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1475,10 +1660,16 @@ notifications: true
   
   
   
+  
+  
+  
 
 
 Horizontal Scaling 
 
+  
+  
+  
   
   
   
@@ -1527,10 +1718,16 @@ Horizontal Scaling
   
   
   
+  
+  
+  
 
 
 sh.shardCollection("mydb.users", { "region": "hashed" })
 
+  
+  
+  
   
   
   
@@ -1579,10 +1776,16 @@ sh.shardCollection("mydb.users", { "region": "hashed" })
   
   
   
+  
+  
+  
 
 
 # Just add nodes to the cluster
 
+  
+  
+  
   
   
   
@@ -1631,10 +1834,16 @@ High Write Throughput
   
   
   
+  
+  
+  
 
 
 // DynamoDB: 10,000 writes/second per partition
 
+  
+  
+  
   
   
   
@@ -1683,10 +1892,16 @@ const params = {
   
   
   
+  
+  
+  
 
 
 TableName: 'events',
 
+  
+  
+  
   
   
   
@@ -1735,10 +1950,16 @@ Item: {
   
   
   
+  
+  
+  
 
 
 eventId: uuid(),
 
+  
+  
+  
   
   
   
@@ -1787,10 +2008,16 @@ type: 'page_view',
   
   
   
+  
+  
+  
 
 
 timestamp: Date.now(),
 
+  
+  
+  
   
   
   
@@ -1839,10 +2066,16 @@ userId: userId
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1891,10 +2124,16 @@ userId: userId
   
   
   
+  
+  
+  
 
 
 await docClient.put(params);
 
+  
+  
+  
   
   
   
@@ -1943,10 +2182,16 @@ Embedded Data (Avoiding Joins)
   
   
   
+  
+  
+  
 
 
 // MongoDB: embed related data in a single document
 
+  
+  
+  
   
   
   
@@ -1995,10 +2240,16 @@ Embedded Data (Avoiding Joins)
   
   
   
+  
+  
+  
 
 
 _id: "order_123",
 
+  
+  
+  
   
   
   
@@ -2047,10 +2298,16 @@ customer: {
   
   
   
+  
+  
+  
 
 
 id: "cust_456",
 
+  
+  
+  
   
   
   
@@ -2099,10 +2356,16 @@ name: "Alice",
   
   
   
+  
+  
+  
 
 
 email: "alice@email.com"
 
+  
+  
+  
   
   
   
@@ -2151,10 +2414,16 @@ email: "alice@email.com"
   
   
   
+  
+  
+  
 
 
 items: [
 
+  
+  
+  
   
   
   
@@ -2203,10 +2472,16 @@ items: [
   
   
   
+  
+  
+  
 
 
 { product: "Mouse", price: 25, quantity: 2 }
 
+  
+  
+  
   
   
   
@@ -2255,10 +2530,16 @@ items: [
   
   
   
+  
+  
+  
 
 
 total: 1250,
 
+  
+  
+  
   
   
   
@@ -2307,10 +2588,16 @@ shipping_address: {
   
   
   
+  
+  
+  
 
 
 street: "123 Main St",
 
+  
+  
+  
   
   
   
@@ -2359,29 +2646,6 @@ city: "San Francisco"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2389,6 +2653,38 @@ city: "San Francisco"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2437,10 +2733,16 @@ When to Choose NoSQL
   
   
   
+  
+  
+  
 
 
 * **Rapid prototyping**: Schema changes are frequent and unpredictable.
 
+  
+  
+  
   
   
   
@@ -2483,6 +2785,9 @@ When to Choose NoSQL
   
   
   
+  
+  
+  
 
 
 * **Hierarchical data**: One document often contains all related data.
@@ -2506,10 +2811,16 @@ When to Choose NoSQL
   
   
   
+  
+  
+  
 
 
 * **Global scale**: Need multi-region replication and automatic sharding.
 
+  
+  
+  
   
   
   
@@ -2555,10 +2866,16 @@ When to Choose NoSQL
   
   
   
+  
+  
+  
 
 
 Decision Matrix 
 
+  
+  
+  
   
   
   
@@ -2601,6 +2918,9 @@ Decision Matrix
   
   
   
+  
+  
+  
 
 
 Hybrid: Using Both 
@@ -2624,10 +2944,16 @@ Hybrid: Using Both
   
   
   
+  
+  
+  
 
 
 Many successful architectures use both SQL and NoSQL for different purposes: 
 
+  
+  
+  
   
   
   
@@ -2676,10 +3002,16 @@ Many successful architectures use both SQL and NoSQL for different purposes:
   
   
   
+  
+  
+  
 
 
 # Write to PostgreSQL (ACID guarantee)
 
+  
+  
+  
   
   
   
@@ -2728,10 +3060,16 @@ db.execute("""
   
   
   
+  
+  
+  
 
 
 INSERT INTO orders (id, customer_id, total)
 
+  
+  
+  
   
   
   
@@ -2780,10 +3118,16 @@ VALUES (%s, %s, %s)
   
   
   
+  
+  
+  
 
 
 """, [order_id, customer_id, total])
 
+  
+  
+  
   
   
   
@@ -2832,10 +3176,16 @@ VALUES (%s, %s, %s)
   
   
   
+  
+  
+  
 
 
 redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))
 
+  
+  
+  
   
   
   
@@ -2884,10 +3234,16 @@ redis.setex(f"order:{order_id}", 3600, json.dumps(order_data))
   
   
   
+  
+  
+  
 
 
 es.index(index='orders', id=order_id, body=order_data)
 
+  
+  
+  
   
   
   
@@ -2933,6 +3289,9 @@ Migration Paths
   
   
   
+  
+  
+  
 
 
 | Starting Point | Problem | Target | Strategy | |----------------|---------|--------|----------| | SQL | Scaling writes | NoSQL | Dual-write, then cut over | | NoSQL | Complex queries | SQL | Define schema, migrate data | | NoSQL | Data integrity issues | SQL | Add constraints, enforce at app level first | | SQL | Flexible schema needed | NoSQL | Start with embedded docs for polymorphic data | 
@@ -2956,10 +3315,16 @@ Migration Paths
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

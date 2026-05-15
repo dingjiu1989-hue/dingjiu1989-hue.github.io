@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/distributed-tracing-deep.
   
 
 
+# Distributed Tracing: Deep Dive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Distributed tracing reconstructs the path of a single request as it traverses multiple services, databases, and queues. Without tracing, understanding the performance of a distributed system requires correlating logs and metrics manually — a process that breaks down under complexity. Tracing provides an end-to-end view: which services were called, in what order, for how long, and whether they succeeded. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Trace context propagation is the mechanism that connects spans across service bo
   
   
   
+  
+  
+  
 
 
 Span attributes enrich individual spans with domain-specific information. Standard attributes include: HTTP method and URL, database query text (sanitized), message queue topic, and error details. Custom attributes add business context: customer tier, product category, payment amount. Every attribute increases storage cost, so attributes should be chosen carefully. The OpenTelemetry semantic conventions provide a standardized attribute namespace, ensuring consistent querying across different services and languages. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ The W3C Trace-Context specification standardizes trace propagation. It defines t
   
   
   
+  
+  
+  
 
 
 Sampling strategies manage the tradeoff between completeness and cost. Head-based sampling decides at the root of the trace whether to record all spans. It requires minimal coordination — each trace either is or is not sampled. The risk is that rare events (errors, slow traces) are underrepresented. Consistent probability sampling ensures that a fixed percentage of all traces are captured. GuardRails sampling overrides the probability for specific criteria: all error traces, traces from high-value customers, traces hitting specific endpoints. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Tail-based sampling addresses head-based sampling's blind spot. In tail-based sa
   
   
   
+  
+  
+  
 
 
 Distributed context propagation enables more than tracing. The baggage pattern carries arbitrary key-value pairs through the trace context (baggage header). This allows service-level configuration that follows the request: A/B test assignments, user region, request priority. Baggage items propagate automatically to all downstream services, enabling context-aware behavior without explicit parameter passing. The danger is accidentally propagating high-cardinality data, which multiplies storage costs across all observability pipelines. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Visualization tools make traces actionable. Trace views show the waterfall diagr
   
   
   
+  
+  
+  
 
 
 Tracing infrastructure components collect and process trace data. OpenTelemetry SDKs instrument the application and export spans. The OpenTelemetry Collector receives spans, processes them (sampling, attribute enrichment, batching), and exports to a backend. The backend (Jaeger, Tempo, Datadog) stores and indexes spans for querying. Each component must handle backpressure gracefully — if the backend is slow, the collector should buffer and retry rather than drop spans or slow down the application. 
 
+  
+  
+  
   
   
   

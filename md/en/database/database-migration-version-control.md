@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/database-migration-version-co
   
   
   
+  
+  
+  
+
+
+# Database Migration Version Control Strategies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Version-controlling database migrations is essential for reproducible deployments and team collaboration. Unlike application code, database schema changes are stateful—applying a migration changes the database permanently, and mistakes can cause data loss.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Version-controlling database migrations is essential for reproducible deployment
   
   
   
+  
+  
+  
 
 
 Flyway is the most popular Java-based migration tool, supporting SQL and Java migrations with version ordering. Liquibase offers XML, YAML, JSON, or SQL changelogs with rollback support. Alembic is the standard for Python/Flask/SQLAlchemy projects. Prisma Migrate handles migrations for the Prisma ORM with declarative schema management.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Flyway is the most popular Java-based migration tool, supporting SQL and Java mi
   
   
   
+  
+  
+  
 
 
 Consistent naming prevents confusion. Use a version prefix (V1__, V2__), a descriptive name (create_users_table), and a timestamp or sequence number. Flyway convention: V1__create_users_table.sql, V2__add_email_to_users.sql. Liquibase uses changelog files with unique IDs.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Include both forward and backward migrations where possible. Rollback migrations
   
   
   
+  
+  
+  
 
 
 ##  Migration Design Principles
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ One logical change per migration. If you need to add a column and create an inde
   
   
   
+  
+  
+  
 
 
 For large tables, batch DDL operations. Adding a column or index to a billion-row table may lock the table for hours. Use tools like pt-online-schema-change for zero-downtime migrations.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ For large tables, batch DDL operations. Adding a column or index to a billion-ro
   
   
   
+  
+  
+  
 
 
 Test every migration against a copy of production data. Automated CI pipelines should apply migrations, run integration tests, and verify rollbacks. Check column defaults, constraints, and foreign key behavior.
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Test rollbacks explicitly. A non-functional rollback is worse than no rollback b
   
   
   
+  
+  
+  
 
 
 ##  Team Workflow
@@ -465,10 +530,16 @@ Test rollbacks explicitly. A non-functional rollback is worse than no rollback b
   
   
   
+  
+  
+  
 
 
 The golden rule: never modify an existing migration that has been merged to the main branch. Always create a new migration for additional changes. This prevents inconsistent database states when different developers have applied different versions of the same migration.
 
+  
+  
+  
   
   
   

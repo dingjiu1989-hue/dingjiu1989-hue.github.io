@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-evaluation.html
   
 
 
+# RAG Evaluation: Retrieval Metrics, Generation Quality, End-to-End Testing, and Datasets
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Retrieval-Augmented Generation is the most popular architecture for production LLM applications. But evaluating RAG systems is notoriously difficult. You need to assess both the retrieval component and the generation component, then measure how they work together. Here is the practical evaluation framework.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Retrieval-Augmented Generation is the most popular architecture for production L
   
   
   
+  
+  
+  
 
 
 Retrieval quality determines the ceiling on your RAG system's performance. If the retriever fails to find relevant documents, the generator cannot produce good answers regardless of model quality.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ The primary retrieval metrics are hit rate and mean reciprocal rank. Hit rate me
   
   
   
+  
+  
+  
 
 
 Precision and recall at K are also useful. Precision at K measures how many of the top K results are relevant. Recall at K measures how many total relevant documents are found in the top K. For most RAG systems, recall at 5 or 10 is the most important metric because the LLM can handle some noise but benefits from comprehensive context.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Build a test set of at least 100 queries with known relevant documents. Use this
   
   
   
+  
+  
+  
 
 
 ##  Generation Quality
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Generation quality is subjective but measurable. The key dimensions are faithful
   
   
   
+  
+  
+  
 
 
 Faithfulness means the generated answer does not contradict the retrieved context. This is the most important metric for production RAG. Hallucinations that contradict the source documents break user trust. Measure faithfulness by checking whether each claim in the answer can be attributed to the retrieved documents.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Relevance means the answer addresses the user's question. An answer can be faith
   
   
   
+  
+  
+  
 
 
 Use LLM-as-judge for generation evaluation. Ask a strong model like Claude or GPT-4 to evaluate answers on these dimensions with a structured rubric. Provide the question, retrieved context, and generated answer. LLM-as-judge correlates reasonably well with human evaluation for RAG tasks.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Use LLM-as-judge for generation evaluation. Ask a strong model like Claude or GP
   
   
   
+  
+  
+  
 
 
 End-to-end tests validate the complete system. They catch integration issues that component-level tests miss, like a chunking change that breaks retrieval for certain query types.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Build a test suite of 50 to 200 queries covering your expected use cases. Includ
   
   
   
+  
+  
+  
 
 
 Define pass conditions for each test case. A test passes when the answer is faithful, relevant, and complete according to human judgment. Automate this with LLM-as-judge, but spot-check results manually.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Track the pass rate over time. Every change to chunking, embedding, retrieval pa
   
   
   
+  
+  
+  
 
 
 ##  Benchmark Datasets
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Several public datasets help benchmark RAG performance. The KILT benchmark cover
   
   
   
+  
+  
+  
 
 
 For domain-specific RAG, public benchmarks may not reflect your use case. Build your own dataset from your knowledge base. Have domain experts write 50 to 100 realistic questions and identify the correct answer with supporting document citations.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Synthetic data generation using LLMs can bootstrap your evaluation set. Generate
   
   
   
+  
+  
+  
 
 
 ##  Continuous Monitoring
 
+  
+  
+  
   
   
   
@@ -797,6 +892,9 @@ RAG evaluation is not a one-time activity. Deploy monitoring that tracks retriev
   
   
   
+  
+  
+  
 
 
 Log every query, retrieved document set, and generated answer. Sample logs for manual review. Track user feedback mechanisms like thumbs up or down. Correlate user satisfaction with retrieval metrics to identify systemic issues.
@@ -826,10 +924,16 @@ Log every query, retrieved document set, and generated answer. Sample logs for m
   
   
   
+  
+  
+  
 
 
 Track retrieval latency and generation latency separately. If retrieval becomes slow, users abandon even before generation starts. Set latency budgets and alert when thresholds are exceeded.
 
+  
+  
+  
   
   
   

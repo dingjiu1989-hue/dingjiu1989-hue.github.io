@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/gateway-vs-mesh.html
   
 
 
+# API Gateway vs Service Mesh
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 API Gateway and Service Mesh solve different problems but operate in overlapping territory, creating confusion about where each belongs. The API Gateway manages north-south traffic (client to service), while the Service Mesh manages east-west traffic (service to service). Understanding their distinct responsibilities, overlap, and coexistence patterns is essential for a well-architected system. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ The API Gateway is the single entry point for external clients. It handles cross
   
   
   
+  
+  
+  
 
 
 The Service Mesh operates transparently within the service mesh. It injects sidecar proxies (typically Envoy) alongside each service instance. The sidecar intercepts all network traffic and handles service-level concerns: mTLS between services, fine-grained traffic routing (canary, blue-green), circuit breaking, retries, telemetry collection, and access policies. Istio, Linkerd, and Consul Connect are leading implementations. The mesh is infrastructure-level — services are generally unaware of its existence. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Overlap occurs in several areas. Both can perform load balancing, traffic routin
   
   
   
+  
+  
+  
 
 
 Practical coexistence patterns have emerged. In the most common deployment, the API Gateway sits at the edge and forwards requests to an ingress gateway (part of the mesh), which then routes to the appropriate service through sidecar proxies. The gateway handles authentication, rate limiting, and request validation. The mesh handles service-to-service mTLS, traffic splitting, and telemetry. This separation of concerns avoids duplicating logic while ensuring each layer handles its appropriate responsibilities. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ A common mistake is treating the Service Mesh as a replacement for the API Gatew
   
   
   
+  
+  
+  
 
 
 Observability benefits significantly from using both. The gateway provides client-facing metrics: request rates per endpoint, error rates per API key, latency percentiles by client type. The mesh provides service-level metrics: dependency call graphs, error rates per service pair, detailed latency breakdowns including time spent in the proxy. Combined, these give complete visibility from client to database. 
 
+  
+  
+  
   
   
   

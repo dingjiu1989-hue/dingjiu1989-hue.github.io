@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/sentry-vs-datadog-apm.html
   
 
 
+# Sentry vs Datadog APM: Error Tracking & Performance
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Sentry vs Datadog APM: Observability Platforms Compared
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Error tracking and application performance monitoring are essential for producti
   
   
   
+  
+  
+  
 
 
 ### Core Focus and Philosophy
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Sentry is purpose-built for error tracking. Its core functionality revolves arou
   
   
   
+  
+  
+  
 
 
 Datadog APM is part of a comprehensive observability platform that includes infrastructure monitoring, log management, network performance, security, and real user monitoring. APM traces are deeply connected to metrics and logs (the three pillars of observability). Datadog excels at correlating application performance with infrastructure health, enabling holistic troubleshooting that spans the entire stack.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Datadog APM is part of a comprehensive observability platform that includes infr
   
   
   
+  
+  
+  
 
 
 Sentry is the gold standard for error tracking. It automatically groups errors using fingerprinting algorithms that intelligently merge similar issues. The issue stream provides filtering, assignment, and workflow integration with GitHub, Jira, and Slack. Source maps for minified JavaScript are automatically uploaded and resolved. Performance monitoring links slow transactions to specific errors.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Datadog APM captures errors within trace spans but error tracking is not its pri
   
   
   
+  
+  
+  
 
 
 ### Performance Monitoring
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Sentry Performance monitors transaction duration, database queries, external API
   
   
   
+  
+  
+  
 
 
 Datadog APM provides distributed tracing with full context propagation across services. Its Service Map visualizes service dependencies. Apdex scores, dashboards, and SLO monitoring are deeply integrated. Datadog monitors infrastructure metrics alongside traces, enabling correlation between performance degradation and CPU/memory anomalies. The depth of Datadog's APM is unmatched for complex microservice architectures.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Datadog APM provides distributed tracing with full context propagation across se
   
   
   
+  
+  
+  
 
 
 Sentry pricing is developer-based: Free plan includes 5,000 errors and 10,000 transactions per month. Team plan is $26/user/month. Business plan adds SSO, audit logs, and advanced integrations. Sentry's pricing is predictable and scales with team size rather than data volume.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Datadog APM pricing is volume-based: $31 per million indexed spans per month. In
   
   
   
+  
+  
+  
 
 
 ### Integration Ecosystem
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Sentry integrates with GitHub, GitLab, Bitbucket, Jira, Slack, PagerDuty, Opsgen
   
   
   
+  
+  
+  
 
 
 Datadog integrates with 700+ technologies. The integration value is the data correlation — combining APM traces with infrastructure metrics, logs, network data, and security signals. Datadog's webhook and API capabilities enable custom automation. The dashboard ecosystem is unmatched for creating cross-service operational views.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Datadog integrates with 700+ technologies. The integration value is the data cor
   
   
   
+  
+  
+  
 
 
 Choose Sentry when error tracking is the primary need, for small to medium engineering teams seeking actionable error insights, or when predictable per-developer pricing is preferred. Sentry's developer-first error tracking experience is best in class.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Choose Datadog APM when comprehensive observability spanning infrastructure, app
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

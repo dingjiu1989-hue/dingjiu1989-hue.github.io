@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/global-traffic-routing.ht
   
 
 
+# Global Traffic Routing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Global traffic routing directs user requests to the optimal backend location based on geography, latency, capacity, and availability. As applications scale to serve users worldwide, the routing infrastructure becomes a critical architectural component that determines latency, reliability, and operational flexibility. Multiple routing techniques — DNS-based, Anycast-based, and application-level — combine to provide comprehensive global traffic management. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ DNS-based routing is the most common approach for directing traffic to the neare
   
   
   
+  
+  
+  
 
 
 Latency-based routing uses real-time measurements to direct users to the fastest endpoint. The DNS service continuously probes each endpoint from multiple vantage points and builds a latency map. When a DNS query arrives, the resolver's approximate location is determined (from its IP address or EDNS Client Subnet), and the lowest-latency endpoint is returned. The latency map updates as network conditions change — an endpoint that becomes degraded will gradually receive less traffic as its measured latency increases. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Geo-proximity routing directs users based on physical distance rather than netwo
   
   
   
+  
+  
+  
 
 
 Anycast routing advertises the same IP address from multiple locations. The internet's Border Gateway Protocol (BGP) naturally routes each user to the nearest advertising location. Anycast provides automatic failover — if one location goes offline, BGP withdraws the route, and traffic automatically shifts to the next nearest location. Anycast is used by CDNs, DNS root servers, and global load balancers. The trade-off is that BGP routing is based on AS-path length, which approximates but does not guarantee optimal latency. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Global load balancers (GLBs) sit above regional load balancers and provide cross
   
   
   
+  
+  
+  
 
 
 Health-based routing removes unhealthy endpoints from the traffic pool. Each backend region is probed with health checks. If a region returns errors or is unresponsive, the routing system stops directing traffic to it. DNS-based health routing relies on DNS TTL — when a region fails, the DNS records are updated to remove or deprioritize the unhealthy endpoint. Clients with cached DNS records may continue hitting the failed region until the TTL expires, which is why short TTLs (60-120 seconds) are used for health-based routing. 
 
+  
+  
+  
   
   
   
@@ -314,6 +364,9 @@ Active-active vs active-passive configurations determine capacity utilization. A
   
   
   
+  
+  
+  
 
 
 Sticky sessions complicate global routing. If user sessions are stored locally in one region, routing that user to another region breaks their session. Solutions include: centralized session stores (Redis global, database-backed sessions), client-side sessions (JWT tokens with all session data), or session migration (transfer session state between regions on routing change). The simplest approach is to avoid session locality — design services as stateless with all state in shared data stores. 
@@ -337,10 +390,16 @@ Sticky sessions complicate global routing. If user sessions are stored locally i
   
   
   
+  
+  
+  
 
 
 Regional failover testing should be regular and automated. Chaos engineering exercises should verify that global routing correctly detects regional failures and shifts traffic. The failover should be tested in both directions and at different times of day to verify capacity assumptions. DNS propagation delays (due to TTL and resolver caching) should be measured and accounted for in recovery time objectives. Automated failover with manual approval provides a balance between speed and safety. 
 
+  
+  
+  
   
   
   

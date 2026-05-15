@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/online-courses.html
   
 
 
+# Creating Technical Courses
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Creating and selling technical courses is one of the highest-income paths for developer side hustles. A well-produced course can generate $10,000-$100,000+ in revenue. With platforms handling hosting, payment processing, and delivery, the barrier to entry has never been lower.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Creating and selling technical courses is one of the highest-income paths for de
   
   
   
+  
+  
+  
 
 
 The market for technical education is massive and growing:
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ The market for technical education is massive and growing:
   
   
   
+  
+  
+  
 
 
 * Companies pay for team training budgets.
 
+  
+  
+  
   
   
   
@@ -324,10 +371,16 @@ The market for technical education is massive and growing:
   
   
   
+  
+  
+  
 
 
 * Video content has higher perceived value than written content.
 
+  
+  
+  
   
   
   
@@ -382,10 +435,16 @@ A course teaching developers a specific, valuable skill at $99-299 per student i
   
   
   
+  
+  
+  
 
 
 ##  Choosing Your Course Topic
 
+  
+  
+  
   
   
   
@@ -440,10 +499,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 **Skill demand.** Is there a large audience actively trying to learn this skill? Check:
 
+  
+  
+  
   
   
   
@@ -495,10 +560,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * Number of YouTube tutorials (high = demand).
 
+  
+  
+  
   
   
   
@@ -547,10 +618,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * Questions on Stack Overflow and Reddit.
 
+  
+  
+  
   
   
   
@@ -605,10 +682,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 **Value density.** Can students build something meaningful from your course? A course teaching "Build a full-stack app with Next.js and Prisma" sells better than "Next.js basics." Students pay for outcomes, not information.
 
+  
+  
+  
   
   
   
@@ -663,10 +746,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * Full-stack development with specific stacks (Next.js + Prisma + Tailwind).
 
+  
+  
+  
   
   
   
@@ -715,10 +804,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * AI integration (building apps with OpenAI APIs, RAG pipelines).
 
+  
+  
+  
   
   
   
@@ -767,6 +862,9 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * Mobile development with React Native or Flutter.
@@ -793,10 +891,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 * DevOps and CI/CD pipeline building.
 
+  
+  
+  
   
   
   
@@ -851,10 +955,16 @@ The best course topics sit at the intersection of three factors:
   
   
   
+  
+  
+  
 
 
 A well-structured course follows a proven format:
 
+  
+  
+  
   
   
   
@@ -909,10 +1019,16 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 **2. Core concepts (20-25%).** Teach fundamentals with clear examples. Each concept should build on the previous one. Use diagrams and animations for abstract concepts.
 
+  
+  
+  
   
   
   
@@ -967,10 +1083,16 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 **4. Advanced topics (15-20%).** Production considerations, deployment, testing, performance optimization. These are the topics that separate a good course from a great one.
 
+  
+  
+  
   
   
   
@@ -1025,10 +1147,16 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 **Video length guidelines:**
 
+  
+  
+  
   
   
   
@@ -1080,6 +1208,9 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 * Individual videos: 5-15 minutes. Videos longer than 20 minutes have significantly lower completion rates.
@@ -1106,10 +1237,16 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 * Keep each video focused on one concept or step.
 
+  
+  
+  
   
   
   
@@ -1164,10 +1301,16 @@ A well-structured course follows a proven format:
   
   
   
+  
+  
+  
 
 
 Good production quality is important but does not need to be expensive:
 
+  
+  
+  
   
   
   
@@ -1222,10 +1365,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 **Screen recording.** Use ScreenFlow (Mac) or Camtasia (Windows). Record at 4K if possible. Clean up your desktop. Zoom into relevant areas. Hide notifications.
 
+  
+  
+  
   
   
   
@@ -1280,10 +1429,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 **Editing basics.** Remove long pauses, mistakes, and "umms." Add captions (automated tools make this easy). Use simple transitions. Each minute of final video takes 10-15 minutes of recording and editing.
 
+  
+  
+  
   
   
   
@@ -1338,10 +1493,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 **Self-hosted (highest profit margin):**
 
+  
+  
+  
   
   
   
@@ -1393,10 +1554,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 * These are all-in-one platforms handling hosting, payments, and student management.
 
+  
+  
+  
   
   
   
@@ -1445,10 +1612,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 * Pricing models vary ($29-99/month + transaction fees).
 
+  
+  
+  
   
   
   
@@ -1503,10 +1676,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 * **Udemy:** Massive built-in audience but 63% revenue share (97% if student comes through paid ads). No control over pricing (Udemy runs frequent sales).
 
+  
+  
+  
   
   
   
@@ -1555,10 +1734,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 * **Pluralsight:** Invitation-only for instructors. Higher quality standards but established audience.
 
+  
+  
+  
   
   
   
@@ -1613,10 +1798,16 @@ Good production quality is important but does not need to be expensive:
   
   
   
+  
+  
+  
 
 
 ##  Pricing
 
+  
+  
+  
   
   
   
@@ -1671,10 +1862,16 @@ Technical course pricing guidelines:
   
   
   
+  
+  
+  
 
 
 * **Short course** (2-4 hours): $29-49.
 
+  
+  
+  
   
   
   
@@ -1723,6 +1920,9 @@ Technical course pricing guidelines:
   
   
   
+  
+  
+  
 
 
 * **Comprehensive course** (8-15 hours): $199-299.
@@ -1749,10 +1949,16 @@ Technical course pricing guidelines:
   
   
   
+  
+  
+  
 
 
 * **Bundle or certification prep:** $299-499.
 
+  
+  
+  
   
   
   
@@ -1807,10 +2013,16 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
   
   
   
+  
+  
+  
 
 
 **Discounting strategy.** Launch at a discount (50% off for first week) to generate initial sales and reviews. Social proof (reviews and student count) drives future sales.
 
+  
+  
+  
   
   
   
@@ -1865,10 +2077,16 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
   
   
   
+  
+  
+  
 
 
 **Build an email list before you launch.** Offer a free mini-course or chapter in exchange for email signups. Launch to this list first.
 
+  
+  
+  
   
   
   
@@ -1923,10 +2141,16 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
   
   
   
+  
+  
+  
 
 
 **Content marketing.** Publish free tutorials related to your course on YouTube, Dev.to, or your blog. Include a call to action at the end.
 
+  
+  
+  
   
   
   
@@ -1981,10 +2205,16 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
   
   
   
+  
+  
+  
 
 
 **Community.** Create a Discord or Slack community for course students. Community adds ongoing value and reduces refund requests.
 
+  
+  
+  
   
   
   
@@ -2039,10 +2269,16 @@ Udemy pricing is different. Courses are typically priced at $19.99-49.99 due to 
   
   
   
+  
+  
+  
 
 
 Technical courses require maintenance:
 
+  
+  
+  
   
   
   
@@ -2094,6 +2330,9 @@ Technical courses require maintenance:
   
   
   
+  
+  
+  
 
 
 * Add new modules covering major updates.
@@ -2120,10 +2359,16 @@ Technical courses require maintenance:
   
   
   
+  
+  
+  
 
 
 * Archive outdated courses or mark them clearly.
 
+  
+  
+  
   
   
   
@@ -2178,10 +2423,16 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
   
   
   
+  
+  
+  
 
 
 ##  Revenue Expectations
 
+  
+  
+  
   
   
   
@@ -2236,6 +2487,9 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
   
   
   
+  
+  
+  
 
 
 * Month 1-3: $500-2,000 total.
@@ -2262,10 +2516,16 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
   
   
   
+  
+  
+  
 
 
 * Month 4-12: $200-500/month passive.
 
+  
+  
+  
   
   
   
@@ -2320,6 +2580,9 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
   
   
   
+  
+  
+  
 
 
 * Launch month: $5,000-20,000.
@@ -2346,10 +2609,16 @@ A 10% annual update effort (1-2 days per year for a 10-hour course) keeps conten
   
   
   
+  
+  
+  
 
 
 * Ongoing: $1,000-5,000/month passive.
 
+  
+  
+  
   
   
   
@@ -2404,10 +2673,16 @@ Top technical course creators earn $50,000-500,000+/year with a portfolio of cou
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

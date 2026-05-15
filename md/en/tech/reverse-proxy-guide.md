@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/reverse-proxy-guide.html
   
   
   
+  
+  
+  
+
+
+# Reverse Proxy Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A reverse proxy sits in front of your application servers, handling incoming requests and distributing them to backend services. It is essential for TLS termination, load balancing, caching, and security. This guide covers two of the most popular options: Nginx and Caddy.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ A reverse proxy sits in front of your application servers, handling incoming req
   
   
   
+  
+  
+  
 
 
 * **TLS termination**: Handle HTTPS once at the proxy layer.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ A reverse proxy sits in front of your application servers, handling incoming req
   
   
   
+  
+  
+  
 
 
 * **Caching**: Cache responses to reduce backend load.
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ A reverse proxy sits in front of your application servers, handling incoming req
   
   
   
+  
+  
+  
 
 
 * **Multiple services**: Route different paths to different backends from one domain.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ A reverse proxy sits in front of your application servers, handling incoming req
   
   
   
+  
+  
+  
 
 
 Nginx is the industry standard for reverse proxying. It is mature, highly performant, and extremely configurable.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Nginx is the industry standard for reverse proxying. It is mature, highly perfor
   
   
   
+  
+  
+  
 
 
 server {
 
+  
+  
+  
   
   
   
@@ -536,6 +604,9 @@ listen 80;
   
   
   
+  
+  
+  
 
 
 server_name app.example.com;
@@ -565,10 +636,16 @@ server_name app.example.com;
   
   
   
+  
+  
+  
 
 
 location / {
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ proxy_pass http://127.0.0.1:3000;
   
   
   
+  
+  
+  
 
 
 proxy_set_header Host $host;
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ proxy_set_header X-Real-IP $remote_addr;
   
   
   
+  
+  
+  
 
 
 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
+  
+  
+  
   
   
   
@@ -739,32 +828,6 @@ proxy_set_header X-Forwarded-Proto $scheme;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -772,6 +835,41 @@ proxy_set_header X-Forwarded-Proto $scheme;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ The `proxy_pass` directive sends requests to the backend. Always forward the ori
   
   
   
+  
+  
+  
 
 
 ### WebSocket Support
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ location /ws/ {
   
   
   
+  
+  
+  
 
 
 proxy_pass http://127.0.0.1:3001;
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ proxy_http_version 1.1;
   
   
   
+  
+  
+  
 
 
 proxy_set_header Upgrade $http_upgrade;
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ proxy_set_header Connection "upgrade";
   
   
   
+  
+  
+  
 
 
 proxy_set_header Host $host;
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ proxy_read_timeout 86400s;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1116,10 +1244,16 @@ The `Upgrade` and `Connection` headers are required for WebSocket connections. S
   
   
   
+  
+  
+  
 
 
 ### Load Balancing
 
+  
+  
+  
   
   
   
@@ -1174,10 +1308,16 @@ Distribute traffic across multiple backends:
   
   
   
+  
+  
+  
 
 
 upstream app_cluster {
 
+  
+  
+  
   
   
   
@@ -1232,10 +1372,16 @@ least_conn;
   
   
   
+  
+  
+  
 
 
 server 10.0.0.1:3000 weight=3;
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ server 10.0.0.2:3000;
   
   
   
+  
+  
+  
 
 
 server 10.0.0.3:3000 backup;
 
+  
+  
+  
   
   
   
@@ -1348,6 +1500,9 @@ server 10.0.0.3:3000 backup;
   
   
   
+  
+  
+  
 
 
 server {
@@ -1377,10 +1532,16 @@ server {
   
   
   
+  
+  
+  
 
 
 location / {
 
+  
+  
+  
   
   
   
@@ -1435,32 +1596,6 @@ proxy_pass http://app_cluster;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1468,6 +1603,41 @@ proxy_pass http://app_cluster;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1522,10 +1692,16 @@ Load balancing methods: `round-robin` (default), `least_conn` (fewest active con
   
   
   
+  
+  
+  
 
 
 ### Caching
 
+  
+  
+  
   
   
   
@@ -1580,10 +1756,16 @@ Cache responses from the backend:
   
   
   
+  
+  
+  
 
 
 proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=appcache:10m max_size=1g;
 
+  
+  
+  
   
   
   
@@ -1638,10 +1820,16 @@ server {
   
   
   
+  
+  
+  
 
 
 location / {
 
+  
+  
+  
   
   
   
@@ -1696,10 +1884,16 @@ proxy_cache appcache;
   
   
   
+  
+  
+  
 
 
 proxy_cache_valid 200 30m;
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ proxy_cache_valid 404 1m;
   
   
   
+  
+  
+  
 
 
 proxy_cache_use_stale error timeout updating;
 
+  
+  
+  
   
   
   
@@ -1812,32 +2012,6 @@ add_header X-Cache-Status $upstream_cache_status;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1845,6 +2019,41 @@ add_header X-Cache-Status $upstream_cache_status;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ The `$upstream_cache_status` header helps debug caching (HIT, MISS, STALE, etc.)
   
   
   
+  
+  
+  
 
 
 ##  Caddy Reverse Proxy
 
+  
+  
+  
   
   
   
@@ -1957,10 +2172,16 @@ Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go
   
   
   
+  
+  
+  
 
 
 ### Basic Reverse Proxy
 
+  
+  
+  
   
   
   
@@ -2015,10 +2236,16 @@ Caddy is a modern web server with automatic HTTPS, simpler configuration, and Go
   
   
   
+  
+  
+  
 
 
 app.example.com {
 
+  
+  
+  
   
   
   
@@ -2073,10 +2300,16 @@ reverse_proxy localhost:3000
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2131,6 +2364,9 @@ That is the entire configuration. Caddy automatically obtains and renews Let's E
   
   
   
+  
+  
+  
 
 
 ### Multiple Backends with Load Balancing
@@ -2160,10 +2396,16 @@ That is the entire configuration. Caddy automatically obtains and renews Let's E
   
   
   
+  
+  
+  
 
 
 app.example.com {
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ reverse_proxy 10.0.0.1:3000 10.0.0.2:3000 10.0.0.3:3000 {
   
   
   
+  
+  
+  
 
 
 lb_policy least_conn
 
+  
+  
+  
   
   
   
@@ -2276,6 +2524,9 @@ health_uri /health
   
   
   
+  
+  
+  
 
 
 health_interval 30s
@@ -2305,32 +2556,6 @@ health_interval 30s
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2338,6 +2563,41 @@ health_interval 30s
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ Caddy supports multiple load balancing policies: `random`, `least_conn`, `round_
   
   
   
+  
+  
+  
 
 
 ### Path-Based Routing
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ Route different paths to different services:
   
   
   
+  
+  
+  
 
 
 api.example.com {
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ reverse_proxy /api/* localhost:3000
   
   
   
+  
+  
+  
 
 
 reverse_proxy /auth/* localhost:3001
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ reverse_proxy localhost:3002 # default
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ reverse_proxy localhost:3002 # default
   
   
   
+  
+  
+  
 
 
 app.example.com {
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ reverse_proxy localhost:3000 {
   
   
   
+  
+  
+  
 
 
 header_up Host {host}
 
+  
+  
+  
   
   
   
@@ -2740,10 +3036,16 @@ header_up X-Real-IP {remote_host}
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2798,10 +3100,16 @@ header_up X-Real-IP {remote_host}
   
   
   
+  
+  
+  
 
 
 header {
 
+  
+  
+  
   
   
   
@@ -2856,6 +3164,9 @@ X-Frame-Options "SAMEORIGIN"
   
   
   
+  
+  
+  
 
 
 X-Content-Type-Options "nosniff"
@@ -2885,32 +3196,6 @@ X-Content-Type-Options "nosniff"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2918,6 +3203,41 @@ X-Content-Type-Options "nosniff"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2972,10 +3292,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 ##  Nginx vs Caddy: Comparison
 
+  
+  
+  
   
   
   
@@ -3030,10 +3356,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 |---------|-------|-------|
 
+  
+  
+  
   
   
   
@@ -3088,10 +3420,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 | TLS | Manual cert management | Automatic Let's Encrypt |
 
+  
+  
+  
   
   
   
@@ -3146,10 +3484,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 | Ecosystem | Vast (modules, guides) | Growing but smaller |
 
+  
+  
+  
   
   
   
@@ -3204,10 +3548,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 | Learning curve | Steep | Gentle |
 
+  
+  
+  
   
   
   
@@ -3262,10 +3612,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 | HTTP/3 | Supported | Supported |
 
+  
+  
+  
   
   
   
@@ -3320,10 +3676,16 @@ Caddy's `header` directive works for both request and response headers.
   
   
   
+  
+  
+  
 
 
 Regardless of which reverse proxy you choose, add these security headers:
 
+  
+  
+  
   
   
   
@@ -3378,10 +3740,16 @@ For Nginx:
   
   
   
+  
+  
+  
 
 
 add_header X-Frame-Options "SAMEORIGIN" always;
 
+  
+  
+  
   
   
   
@@ -3436,10 +3804,16 @@ add_header X-Content-Type-Options "nosniff" always;
   
   
   
+  
+  
+  
 
 
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 
+  
+  
+  
   
   
   
@@ -3494,10 +3868,16 @@ add_header Content-Security-Policy "default-src 'self';" always;
   
   
   
+  
+  
+  
 
 
 For Caddy:
 
+  
+  
+  
   
   
   
@@ -3552,10 +3932,16 @@ header {
   
   
   
+  
+  
+  
 
 
 X-Frame-Options "SAMEORIGIN"
 
+  
+  
+  
   
   
   
@@ -3610,6 +3996,9 @@ X-Content-Type-Options "nosniff"
   
   
   
+  
+  
+  
 
 
 Strict-Transport-Security "max-age=31536000; includeSubDomains"
@@ -3639,10 +4028,16 @@ Strict-Transport-Security "max-age=31536000; includeSubDomains"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3697,10 +4092,16 @@ Strict-Transport-Security "max-age=31536000; includeSubDomains"
   
   
   
+  
+  
+  
 
 
 Nginx:
 
+  
+  
+  
   
   
   
@@ -3755,10 +4156,16 @@ limit_req_zone $binary_remote_addr zone=api:10m rate=10r/s;
   
   
   
+  
+  
+  
 
 
 location /api/ {
 
+  
+  
+  
   
   
   
@@ -3813,6 +4220,9 @@ limit_req zone=api burst=20 nodelay;
   
   
   
+  
+  
+  
 
 
 proxy_pass http://backend;
@@ -3842,10 +4252,16 @@ proxy_pass http://backend;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3900,10 +4316,16 @@ Caddy:
   
   
   
+  
+  
+  
 
 
 app.example.com {
 
+  
+  
+  
   
   
   
@@ -3958,10 +4380,16 @@ rate_limit {
   
   
   
+  
+  
+  
 
 
 zone api {
 
+  
+  
+  
   
   
   
@@ -4016,10 +4444,16 @@ key {remote_host}
   
   
   
+  
+  
+  
 
 
 events 10
 
+  
+  
+  
   
   
   
@@ -4074,32 +4508,6 @@ window 1s
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -4107,6 +4515,41 @@ window 1s
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -4161,10 +4604,16 @@ reverse_proxy localhost:3000
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4219,6 +4668,9 @@ reverse_proxy localhost:3000
   
   
   
+  
+  
+  
 
 
 Nginx health checks require the Plus version or are handled externally (e.g., via Docker health checks). Caddy includes built-in active health checks that mark unhealthy backends as down and stop routing traffic to them.
@@ -4248,10 +4700,16 @@ Nginx health checks require the Plus version or are handled externally (e.g., vi
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

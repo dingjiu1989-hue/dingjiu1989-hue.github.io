@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/security/waf-comparison.html
   
   
   
+  
+  
+  
+
+
+# WAF Solutions Compared: Cloudflare, AWS WAF, ModSecurity, Akamai
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Web Application Firewalls (WAF) protect web applications from common attacks including SQL injection, XSS, and DDoS. WAFs analyze HTTP traffic and block malicious requests before they reach the application.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Web Application Firewalls (WAF) protect web applications from common attacks inc
   
   
   
+  
+  
+  
 
 
 Cloudflare offers the most accessible WAF. Integrated with CDN and DDoS protection. Managed rule sets for OWASP Top 10. Rate limiting and bot management. Free tier includes basic WAF rules. Pay-as-you-go pricing.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Cloudflare offers the most accessible WAF. Integrated with CDN and DDoS protecti
   
   
   
+  
+  
+  
 
 
 AWS WAF integrates with CloudFront, ALB, API Gateway, and AppSync. Managed rule groups from AWS and third parties. Custom rules using JSON. Web ACLs for fine-grained access control. Pricing per rule and per request.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ AWS WAF integrates with CloudFront, ALB, API Gateway, and AppSync. Managed rule 
   
   
   
+  
+  
+  
 
 
 ModSecurity is the leading open-source WAF engine. It works with Apache, Nginx, and IIS. Core Rule Set (CRS) provides OWASP Top 10 protection. Highly customizable. Requires manual configuration and tuning.
 
+  
+  
+  
   
   
   
@@ -335,6 +385,9 @@ ModSecurity is the leading open-source WAF engine. It works with Apache, Nginx, 
   
   
   
+  
+  
+  
 
 
 Akamai App & API Protector provides enterprise WAF with edge delivery. Advanced bot management and API protection. Machine learning-based attack detection. High cost. Best for large enterprises with global traffic.
@@ -361,10 +414,16 @@ Akamai App & API Protector provides enterprise WAF with edge delivery. Advanced 
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

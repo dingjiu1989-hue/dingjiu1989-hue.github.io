@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/indie-hacker-marketing.html
   
   
   
+  
+  
+  
+
+
+# Indie Hacker Marketing on a Zero Budget
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Indie hackers build and market products without marketing budgets. Success comes from leveraging personal brand, communities, and organic channels.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Indie hackers build and market products without marketing budgets. Success comes
   
   
   
+  
+  
+  
 
 
 Building in public shares your journey transparently. Post about your product, metrics, learnings, and failures on Twitter/X, LinkedIn, and your blog. People follow the story, not just the product.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Building in public creates natural marketing. Each post is a marketing touchpoin
   
   
   
+  
+  
+  
 
 
 ##  Content Marketing
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Write about problems your product solves. Blog posts, tutorials, and case studie
   
   
   
+  
+  
+  
 
 
 Repurpose content across platforms: blog post → Twitter thread → LinkedIn article → newsletter. Each format reaches a different audience. SEO content compounds—a well-ranked article brings traffic for years. Indie bloggers and small content sites can rank with focused, helpful content.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Repurpose content across platforms: blog post → Twitter thread → LinkedIn ar
   
   
   
+  
+  
+  
 
 
 Participate in communities where your target users gather. Indie Hackers, Hacker News, product-specific subreddits, and Slack/Discord communities. Be helpful first—answer questions, share knowledge, and build reputation.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ Product Hunt launches generate initial traffic and validation. Prepare early: bu
   
   
   
+  
+  
+  
 
 
 ##  Organic Channels
 
+  
+  
+  
   
   
   
@@ -504,6 +569,9 @@ SEO is the highest-ROI long-term channel. Target keywords with buying intent. Cr
   
   
   
+  
+  
+  
 
 
 Email newsletters convert better than any other channel. Start your newsletter before your product launches. Share valuable content regularly. Launch announcement to your list will outperform any social media post.
@@ -533,10 +601,16 @@ Email newsletters convert better than any other channel. Start your newsletter b
   
   
   
+  
+  
+  
 
 
 ##  Metrics
 
+  
+  
+  
   
   
   

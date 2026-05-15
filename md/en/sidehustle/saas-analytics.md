@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/saas-analytics.html
   
 
 
+# SaaS Analytics: Mixpanel, Amplitude, PostHog, Event Tracking, and Funnel Analysis
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Page views and visitor counts tell you nothing about your SaaS product. You need event-based analytics that tracks what users actually do. Here is how to choose and implement product analytics for your SaaS.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Page views and visitor counts tell you nothing about your SaaS product. You need
   
   
   
+  
+  
+  
 
 
 Traditional web analytics shows you where users come from and what pages they visit. Product analytics shows you what users do inside your application. Which features do they use? Where do they get stuck? Which actions predict retention?
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Without product analytics, you make product decisions based on anecdotes from lo
   
   
   
+  
+  
+  
 
 
 ##  Mixpanel: Mature and Comprehensive
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Mixpanel has been the market leader in product analytics for years. It offers ev
   
   
   
+  
+  
+  
 
 
 Mixpanel pricing is based on the volume of tracked events. The free tier allows 20 million events per month, which is generous for early-stage products. Paid plans start around $25 per month.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Mixpanel excels at retention analysis. You can create cohort tables that show wh
   
   
   
+  
+  
+  
 
 
 ##  Amplitude: Behavioral Analytics Leader
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Amplitude is similar to Mixpanel but emphasizes behavioral analytics and user se
   
   
   
+  
+  
+  
 
 
 Amplitude's path analysis shows the sequences users follow through your product. You can see the most common paths to activation, or identify paths that lead to churn.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Pricing is similar to Mixpanel, with a generous free tier and usage-based paid p
   
   
   
+  
+  
+  
 
 
 ##  PostHog: Open-Source Alternative
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ PostHog is the open-source product analytics platform. You can self-host it, whi
   
   
   
+  
+  
+  
 
 
 PostHog includes event tracking, session recording, feature flags, and A/B testing. Having feature flags integrated with analytics is powerful: you can roll out features to specific segments and measure impact in one platform.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Self-hosting PostHog requires infrastructure management. The cloud-hosted versio
   
   
   
+  
+  
+  
 
 
 ##  Event Tracking Best Practices
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Good analytics starts with good event tracking. Define a consistent naming conve
   
   
   
+  
+  
+  
 
 
 Track these events in every SaaS product: signup, onboarding step completion, first key action, feature used, upgrade, downgrade, cancel, and payment failure. These are the minimum events for understanding your funnel.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Use properties to enrich events. A `project_created` event should include proper
   
   
   
+  
+  
+  
 
 
 ##  Funnel Analysis
 
+  
+  
+  
   
   
   
@@ -797,6 +892,9 @@ Funnels show conversion rates between sequential steps. The classic SaaS funnel 
   
   
   
+  
+  
+  
 
 
 Analyze each step drop-off. A 90% drop from landing page to signup means your value proposition is unclear or your signup form is too long. A 50% drop during onboarding means the setup process is too complex.
@@ -826,10 +924,16 @@ Analyze each step drop-off. A 90% drop from landing page to signup means your va
   
   
   
+  
+  
+  
 
 
 Fix one step at a time. Run an A/B test on the page with the highest drop-off. Measure improvement before moving to the next step. Incremental improvements compound: five 10% improvements yield a 61% overall improvement.
 
+  
+  
+  
   
   
   

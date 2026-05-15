@@ -63,8 +63,31 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-data-analysis.html
   
 
 
+# AI-Powered Data Analysis: Using LLMs for Data Science and Visualization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Why LLMs for Data Analysis?
 
+  
+  
+  
   
   
   
@@ -95,10 +118,16 @@ Traditional data analysis workflows require proficiency in Python (pandas, NumPy
   
   
   
+  
+  
+  
 
 
 In 2026, three approaches dominate: AI-assisted coding (Copilot in Jupyter), natural language to visualization (ChatGPT Code Interpreter/Advanced Data Analysis), and agent-driven analysis (AutoGPT-style pipeline agents).
 
+  
+  
+  
   
   
   
@@ -129,10 +158,16 @@ In 2026, three approaches dominate: AI-assisted coding (Copilot in Jupyter), nat
   
   
   
+  
+  
+  
 
 
 For the examples below, you need Python 3.10+ with these libraries:
 
+  
+  
+  
   
   
   
@@ -163,10 +198,16 @@ pip install pandas numpy matplotlib seaborn openai python-dotenv
   
   
   
+  
+  
+  
 
 
 Load your API key and prepare a sample dataset:
 
+  
+  
+  
   
   
   
@@ -194,10 +235,16 @@ import pandas as pd
   
   
   
+  
+  
+  
 
 
 import numpy as np
 
+  
+  
+  
   
   
   
@@ -225,10 +272,16 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI()
 
+  
+  
+  
   
   
   
@@ -253,10 +306,16 @@ df = pd.read_csv("sales_data.csv")
   
   
   
+  
+  
+  
 
 
 print(df.head())
 
+  
+  
+  
   
   
   
@@ -287,10 +346,16 @@ print(df.head())
   
   
   
+  
+  
+  
 
 
 Instead of remembering pandas syntax, describe the cleaning step:
 
+  
+  
+  
   
   
   
@@ -318,10 +383,16 @@ prompt = "The DataFrame has columns X. Missing values: Y. Write Python code to c
   
   
   
+  
+  
+  
 
 
 response = client.chat.completions.create(model="gpt-4o", messages=[...], temperature=0.1)
 
+  
+  
+  
   
   
   
@@ -346,10 +417,16 @@ code = response.choices[0].message.content
   
   
   
+  
+  
+  
 
 
 exec(code)
 
+  
+  
+  
   
   
   
@@ -380,10 +457,16 @@ This pattern — describe, generate, execute — lets you clean datasets without
   
   
   
+  
+  
+  
 
 
 ##  Exploratory Analysis with AI
 
+  
+  
+  
   
   
   
@@ -414,10 +497,16 @@ LLMs excel at suggesting what to explore. Feed them column metadata and ask for 
   
   
   
+  
+  
+  
 
 
 ##  Statistical Testing Made Simple
 
+  
+  
+  
   
   
   
@@ -448,10 +537,16 @@ Statistical tests are powerful but easy to misapply. LLMs handle selection and i
   
   
   
+  
+  
+  
 
 
 ##  Data Visualization with AI
 
+  
+  
+  
   
   
   
@@ -482,10 +577,16 @@ Generate publication-quality charts from natural language descriptions. The LLM 
   
   
   
+  
+  
+  
 
 
 ##  Agent-Based Analysis Pipelines
 
+  
+  
+  
   
   
   
@@ -516,10 +617,16 @@ Chain multiple LLM calls into an agent pipeline for complex analysis. The agent 
   
   
   
+  
+  
+  
 
 
 ##  Real-World Use Cases
 
+  
+  
+  
   
   
   
@@ -550,10 +657,16 @@ Marketing analytics: An e-commerce team reduced weekly reporting from 6 hours to
   
   
   
+  
+  
+  
 
 
 Financial analysis: A fintech startup uses LLMs to generate portfolio risk reports. The model reads position data, runs Value-at-Risk calculations, and produces narrative explanations with charts.
 
+  
+  
+  
   
   
   
@@ -584,10 +697,16 @@ Healthcare research: Researchers explore clinical trial data with LLMs, which su
   
   
   
+  
+  
+  
 
 
 ##  Limitations and Best Practices
 
+  
+  
+  
   
   
   
@@ -618,10 +737,16 @@ Always validate generated code in a sandbox. Statistical interpretations can be 
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

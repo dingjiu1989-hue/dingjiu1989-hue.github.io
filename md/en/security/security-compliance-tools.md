@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/security/security-compliance-tools.htm
   
   
   
+  
+  
+  
+
+
+# Security Compliance Automation: SOC 2, ISO 27001, HIPAA Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Security compliance tools automate the collection, monitoring, and reporting required for compliance frameworks. They reduce the manual effort of audit preparation and continuous compliance.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Security compliance tools automate the collection, monitoring, and reporting req
   
   
   
+  
+  
+  
 
 
 SOC 2: Vanta, Drata, and Secureframe automate evidence collection, policy management, and continuous monitoring. They integrate with AWS, GCP, Azure, GitHub, and common SaaS tools. Automated control testing runs daily.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ ISO 27001: StandardFusion and ISMS.online manage the ISMS, risk register, and au
   
   
   
+  
+  
+  
 
 
 HIPAA: Compliancy Group and Hipaa Secure Now provide gap analysis, policy templates, and audit support. They focus on the administrative, physical, and technical safeguards required by HIPAA.
 
+  
+  
+  
   
   
   
@@ -283,6 +327,9 @@ HIPAA: Compliancy Group and Hipaa Secure Now provide gap analysis, policy templa
   
   
   
+  
+  
+  
 
 
 Automated evidence collection gathers logs, configurations, and access reviews without manual effort. Continuous monitoring detects compliance drift in real-time. Policy management distributes and tracks acceptance of security policies.
@@ -309,10 +356,16 @@ Automated evidence collection gathers logs, configurations, and access reviews w
   
   
   
+  
+  
+  
 
 
 ##  Implementation
 
+  
+  
+  
   
   
   

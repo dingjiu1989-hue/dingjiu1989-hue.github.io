@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/sqlite-vs-duckdb.html
   
 
 
+# SQLite vs DuckDB: OLTP vs OLAP for Embedded Analytics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SQLite vs DuckDB: Choosing the Right Embedded Database
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ SQLite and DuckDB are both embedded databases that require no server process, bu
   
   
   
+  
+  
+  
 
 
 ### Architecture and Design Philosophy
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ SQLite is designed for OLTP (Online Transaction Processing), optimized for low-l
   
   
   
+  
+  
+  
 
 
 DuckDB, by contrast, is an OLAP (Online Analytical Processing) database built for columnar storage and vectorized execution. It processes data in batches rather than row by row, making it orders of magnitude faster for aggregate queries, joins over large datasets, and analytical workloads. DuckDB is designed for data science, ETL pipelines, and in-process analytics.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ DuckDB, by contrast, is an OLAP (Online Analytical Processing) database built fo
   
   
   
+  
+  
+  
 
 
 The performance divergence becomes clear with concrete examples. A `SELECT COUNT(*) FROM sales WHERE region = 'EU'` on a 100-million-row table might take SQLite 30-60 seconds with a full table scan, while DuckDB completes it in under a second thanks to column pruning and vectorized execution.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 ### Feature Comparison
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Battle-tested ACID compliance with WAL mode
 
+  
+  
+  
   
   
   
@@ -501,10 +566,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Ubiquitous — built into every smartphone and browser
 
+  
+  
+  
   
   
   
@@ -553,6 +624,9 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Full-text search via FTS5 extension
@@ -579,10 +653,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * JSON support with json1 extension
 
+  
+  
+  
   
   
   
@@ -637,10 +717,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Columnar storage with compression (up to 10x space savings)
 
+  
+  
+  
   
   
   
@@ -689,10 +775,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Direct query on Parquet, CSV, and JSON files
 
+  
+  
+  
   
   
   
@@ -741,6 +833,9 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Full SQL:2011 support including CTEs and window functions
@@ -767,10 +862,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 * Seamless Python/R integration via PyArrow
 
+  
+  
+  
   
   
   
@@ -825,10 +926,16 @@ SQLite shines for transactional patterns: `INSERT INTO users VALUES (...)` compl
   
   
   
+  
+  
+  
 
 
 Choose SQLite when building mobile apps, IoT edge devices, desktop applications, or small web backends needing reliable local storage. It is ideal for workloads under 100GB with predominantly transactional access patterns.
 
+  
+  
+  
   
   
   
@@ -883,10 +990,16 @@ Choose DuckDB for data transformation pipelines, interactive data exploration in
   
   
   
+  
+  
+  
 
 
 ### Real-World Example
 
+  
+  
+  
   
   
   
@@ -941,10 +1054,16 @@ Consider a sales analytics dashboard. A Flask app using SQLite for user sessions
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

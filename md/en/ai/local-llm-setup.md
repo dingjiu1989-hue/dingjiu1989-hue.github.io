@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/local-llm-setup.html
   
 
 
+# Running LLMs Locally
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Running large language models locally has become practical thanks to quantizatio
   
   
   
+  
+  
+  
 
 
 ##  Ollama
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Running large language models locally has become practical thanks to quantizatio
   
   
   
+  
+  
+  
 
 
 ### Installation
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Running large language models locally has become practical thanks to quantizatio
   
   
   
+  
+  
+  
 
 
 brew install ollama
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ brew install ollama
   
   
   
+  
+  
+  
 
 
 curl -fsSL https://ollama.ai/install.sh | sh
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ curl -fsSL https://ollama.ai/install.sh | sh
   
   
   
+  
+  
+  
 
 
 # Download from https://ollama.ai/download
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ curl -fsSL https://ollama.ai/install.sh | sh
   
   
   
+  
+  
+  
 
 
 Ollama makes running a model a single command:
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Ollama makes running a model a single command:
   
   
   
+  
+  
+  
 
 
 ollama run llama3.2:3b
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ ollama run llama3.2:3b
   
   
   
+  
+  
+  
 
 
 ollama list
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ ollama list
   
   
   
+  
+  
+  
 
 
 ollama pull mistral:7b
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ ollama pull mistral:7b
   
   
   
+  
+  
+  
 
 
 | Model | Size | RAM Required | Best For |
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ ollama pull mistral:7b
   
   
   
+  
+  
+  
 
 
 | Llama 3.2 3B | 2.0 GB | 4 GB | Fast responses, simple tasks |
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ ollama pull mistral:7b
   
   
   
+  
+  
+  
 
 
 | Mistral 7B | 4.1 GB | 8 GB | Code, reasoning, instruction following |
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ ollama pull mistral:7b
   
   
   
+  
+  
+  
 
 
 | Mixtral 8x7B | 26 GB | 48 GB | High quality, close to GPT-3.5 |
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ ollama pull mistral:7b
   
   
   
+  
+  
+  
 
 
 ### Using Ollama Programmatically
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ Ollama provides a REST API at `http://localhost:11434`:
   
   
   
+  
+  
+  
 
 
 import requests
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ response = requests.post("http://localhost:11434/api/generate", json={
   
   
   
+  
+  
+  
 
 
 "model": "llama3.2:3b",
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ response = requests.post("http://localhost:11434/api/generate", json={
   
   
   
+  
+  
+  
 
 
 "stream": False
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ response = requests.post("http://localhost:11434/api/generate", json={
   
   
   
+  
+  
+  
 
 
 print(response.json()["response"])
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ Or use the official Python library:
   
   
   
+  
+  
+  
 
 
 import ollama
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ response = ollama.chat(model="llama3.2:3b", messages=[
   
   
   
+  
+  
+  
 
 
 {"role": "user", "content": "What is the capital of France?"}
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ response = ollama.chat(model="llama3.2:3b", messages=[
   
   
   
+  
+  
+  
 
 
 print(response["message"]["content"])
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ print(response["message"]["content"])
   
   
   
+  
+  
+  
 
 
 Create custom models with system prompts and parameters:
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ FROM llama3.1:8b
   
   
   
+  
+  
+  
 
 
 # Set system prompt
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ SYSTEM "You are a helpful coding assistant. Provide concise code examples."
   
   
   
+  
+  
+  
 
 
 # Configure parameters
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ PARAMETER temperature 0.3
   
   
   
+  
+  
+  
 
 
 PARAMETER top_p 0.9
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ Build and run:
   
   
   
+  
+  
+  
 
 
 ollama create my-coding-assistant -f Modelfile
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 ##  LM Studio
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 ### Key Features
 
+  
+  
+  
   
   
   
@@ -1838,10 +2041,16 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 * **GUI chat interface**: Familiar ChatGPT-like experience
 
+  
+  
+  
   
   
   
@@ -1890,6 +2099,9 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 * **Model configuration**: Easy sliders for context length, GPU offloading, and temperature
@@ -1916,10 +2128,16 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 * **Multi-model support**: Load multiple models and switch between them
 
+  
+  
+  
   
   
   
@@ -1974,6 +2192,9 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 * Download from [lmstudio.ai](https://lmstudio.ai)
@@ -2003,39 +2224,16 @@ ollama run my-coding-assistant
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Open the app and browse the model catalog
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Download a model (start with Llama 3.2 3B or Mistral 7B)
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Open the app and browse the model catalog
 
+  
+  
+  
   
   
   
@@ -2063,8 +2261,43 @@ ollama run my-coding-assistant
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Load the model and start chatting
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Download a model (start with Llama 3.2 3B or Mistral 7B)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Load the model and start chatting
+
+  
+  
+  
   
   
   
@@ -2119,10 +2352,16 @@ ollama run my-coding-assistant
   
   
   
+  
+  
+  
 
 
 LM Studio can serve models via an OpenAI-compatible API:
 
+  
+  
+  
   
   
   
@@ -2177,10 +2416,16 @@ http://localhost:1234/v1/chat/completions
   
   
   
+  
+  
+  
 
 
 This means any tool that works with OpenAI's API can use your local model by changing the base URL:
 
+  
+  
+  
   
   
   
@@ -2235,10 +2480,16 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI(
 
+  
+  
+  
   
   
   
@@ -2293,6 +2544,9 @@ base_url="http://localhost:1234/v1",
   
   
   
+  
+  
+  
 
 
 api_key="not-needed"
@@ -2322,10 +2576,16 @@ api_key="not-needed"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2380,10 +2640,16 @@ response = client.chat.completions.create(
   
   
   
+  
+  
+  
 
 
 model="local-model",
 
+  
+  
+  
   
   
   
@@ -2438,10 +2704,16 @@ messages=[{"role": "user", "content": "Hello!"}]
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2496,10 +2768,16 @@ messages=[{"role": "user", "content": "Hello!"}]
   
   
   
+  
+  
+  
 
 
 ### Quantization Levels
 
+  
+  
+  
   
   
   
@@ -2554,10 +2832,16 @@ Quantization reduces model size at the cost of some accuracy:
   
   
   
+  
+  
+  
 
 
 * **Q4_K_M**: Best balance of quality and size (4-bit, recommended)
 
+  
+  
+  
   
   
   
@@ -2606,6 +2890,9 @@ Quantization reduces model size at the cost of some accuracy:
   
   
   
+  
+  
+  
 
 
 * **Q8_0**: Near-full quality, 2x RAM requirement
@@ -2632,10 +2919,16 @@ Quantization reduces model size at the cost of some accuracy:
   
   
   
+  
+  
+  
 
 
 * **Q2_K**: Minimal RAM, noticeable quality loss
 
+  
+  
+  
   
   
   
@@ -2690,10 +2983,16 @@ Rule of thumb: each quantization step roughly doubles model size but improves qu
   
   
   
+  
+  
+  
 
 
 ### GPU Acceleration
 
+  
+  
+  
   
   
   
@@ -2748,10 +3047,16 @@ Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (App
   
   
   
+  
+  
+  
 
 
 # Ollama uses Metal automatically on Apple Silicon
 
+  
+  
+  
   
   
   
@@ -2806,10 +3111,16 @@ Both Ollama and LM Studio support GPU acceleration via CUDA (NVIDIA), Metal (App
   
   
   
+  
+  
+  
 
 
 # Check which device is being used
 
+  
+  
+  
   
   
   
@@ -2864,10 +3175,16 @@ ollama run llama3.2:3b --verbose
   
   
   
+  
+  
+  
 
 
 ### Context Window
 
+  
+  
+  
   
   
   
@@ -2922,10 +3239,16 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 * 7B model: ~8 GB total
 
+  
+  
+  
   
   
   
@@ -2974,10 +3297,16 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 * 70B model: ~48 GB total
 
+  
+  
+  
   
   
   
@@ -3032,10 +3361,16 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 * **Privacy-sensitive data**: Medical records, legal documents, personal information
 
+  
+  
+  
   
   
   
@@ -3084,6 +3419,9 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 * **Cost-sensitive workloads**: High-volume batch processing
@@ -3110,10 +3448,16 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 * **Experimentation**: Rapid testing of different models without API costs
 
+  
+  
+  
   
   
   
@@ -3165,10 +3509,16 @@ Larger context windows consume more memory. A 128K context with Q4_K_M requires 
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

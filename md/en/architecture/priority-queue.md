@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/priority-queue.html
   
   
   
+  
+  
+  
+
+
+# Priority Queue Pattern for Message Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The priority queue pattern ensures that higher-priority messages are processed before lower-priority ones. This is essential when system resources are limited and some messages are time-sensitive or business-critical.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ The priority queue pattern ensures that higher-priority messages are processed b
   
   
   
+  
+  
+  
 
 
 Each message is assigned a priority value. The message broker sorts messages by priority and delivers the highest-priority messages first. Lower-priority messages may experience increased latency during high-load periods.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Most standard message queues (SQS, RabbitMQ, Kafka) do not natively support prio
   
   
   
+  
+  
+  
 
 
 ##  Implementation with Multiple Queues
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Create separate queues for each priority level (high, medium, low). Producers se
   
   
   
+  
+  
+  
 
 
 The multi-queue approach allows different processing policies per priority level. High-priority queues can have more consumer instances, shorter timeouts, and dedicated monitoring.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ The multi-queue approach allows different processing policies per priority level
   
   
   
+  
+  
+  
 
 
 Some brokers support priority queues natively. RabbitMQ's priority queue plugin allows you to set the priority field on messages. The broker delivers messages in priority order. However, this adds overhead and can impact throughput.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Some brokers support priority queues natively. RabbitMQ's priority queue plugin 
   
   
   
+  
+  
+  
 
 
 Priority queues can cause starvation—low-priority messages may never be processed if high-priority messages keep arriving. Implement aging mechanisms that increase the effective priority of waiting messages over time. This ensures all messages eventually get processed.
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Another approach reserves minimum processing capacity for low-priority messages.
   
   
   
+  
+  
+  
 
 
 ##  Use Cases
 
+  
+  
+  
   
   
   

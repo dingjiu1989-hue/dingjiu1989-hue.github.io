@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/nextjs-vs-remix.html
   
 
 
+# Next.js vs Remix vs Astro
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ The modern web framework landscape offers three compelling options built on Reac
   
   
   
+  
+  
+  
 
 
 ##  Next.js
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
   
   
   
+  
+  
+  
 
 
 **Architecture:**
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
   
   
   
+  
+  
+  
 
 
 * Server Components run exclusively on the server, reducing client-side JavaScript
 
+  
+  
+  
   
   
   
@@ -382,6 +435,9 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
   
   
   
+  
+  
+  
 
 
 * Server Actions handle form submissions and mutations
@@ -408,10 +464,16 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
   
   
   
+  
+  
+  
 
 
 * Multiple rendering modes: Static (SSG), Server-side (SSR), Incremental Static Regeneration (ISR), and Streaming
 
+  
+  
+  
   
   
   
@@ -466,10 +528,16 @@ Next.js, developed by Vercel, is the most popular React framework and has evolve
   
   
   
+  
+  
+  
 
 
 // App Router: data fetching in Server Components
 
+  
+  
+  
   
   
   
@@ -524,10 +592,16 @@ async function ProductPage({ params }: { params: { id: string } }) {
   
   
   
+  
+  
+  
 
 
 const product = await db.product.findUnique({
 
+  
+  
+  
   
   
   
@@ -582,6 +656,9 @@ where: { id: params.id },
   
   
   
+  
+  
+  
 
 
 include: { reviews: true }
@@ -611,10 +688,16 @@ include: { reviews: true }
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -672,6 +755,9 @@ return (
   
   
   
+  
+  
+  
 
 
 # {product.name}
@@ -701,10 +787,16 @@ return (
   
   
   
+  
+  
+  
 
 
 {product.description}
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ return (
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Strongest image optimization pipeline
 
+  
+  
+  
   
   
   
@@ -878,6 +982,9 @@ return (
   
   
   
+  
+  
+  
 
 
 * Vercel's deployment platform integration
@@ -904,10 +1011,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Largest community and most learning resources
 
+  
+  
+  
   
   
   
@@ -962,10 +1075,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Framework is coupled to Vercel for some features (ISR, image optimization)
 
+  
+  
+  
   
   
   
@@ -1014,6 +1133,9 @@ return (
   
   
   
+  
+  
+  
 
 
 * Routing flexibility constraints compared to Remix
@@ -1040,10 +1162,16 @@ return (
   
   
   
+  
+  
+  
 
 
 * Global `layout.tsx` caching can be confusing
 
+  
+  
+  
   
   
   
@@ -1098,10 +1226,16 @@ return (
   
   
   
+  
+  
+  
 
 
 Remix (now maintained by Shopify) focuses on web fundamentals — using the platform's request/response model rather than abstracting it away.
 
+  
+  
+  
   
   
   
@@ -1156,10 +1290,16 @@ Remix (now maintained by Shopify) focuses on web fundamentals — using the plat
   
   
   
+  
+  
+  
 
 
 * Nested routes with parallel data loading
 
+  
+  
+  
   
   
   
@@ -1208,10 +1348,16 @@ Remix (now maintained by Shopify) focuses on web fundamentals — using the plat
   
   
   
+  
+  
+  
 
 
 * Progressive enhancement is a core principle
 
+  
+  
+  
   
   
   
@@ -1260,10 +1406,16 @@ Remix (now maintained by Shopify) focuses on web fundamentals — using the plat
   
   
   
+  
+  
+  
 
 
 * Streaming via deferred data
 
+  
+  
+  
   
   
   
@@ -1318,10 +1470,16 @@ Remix (now maintained by Shopify) focuses on web fundamentals — using the plat
   
   
   
+  
+  
+  
 
 
 // Remix loader — runs on the server, parallel for all matched routes
 
+  
+  
+  
   
   
   
@@ -1376,10 +1534,16 @@ export async function loader({ params }: LoaderFunctionArgs) {
   
   
   
+  
+  
+  
 
 
 const product = await db.product.findUnique({
 
+  
+  
+  
   
   
   
@@ -1434,6 +1598,9 @@ where: { id: params.id },
   
   
   
+  
+  
+  
 
 
 include: { reviews: true }
@@ -1463,10 +1630,16 @@ include: { reviews: true }
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1521,6 +1694,9 @@ if (!product) {
   
   
   
+  
+  
+  
 
 
 throw new Response("Not Found", { status: 404 });
@@ -1550,10 +1726,16 @@ throw new Response("Not Found", { status: 404 });
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1608,10 +1790,16 @@ return defer({
   
   
   
+  
+  
+  
 
 
 product,
 
+  
+  
+  
   
   
   
@@ -1666,10 +1854,16 @@ reviews: product.reviews,
   
   
   
+  
+  
+  
 
 
 analytics: fetchAnalytics(product.id) // Will stream in
 
+  
+  
+  
   
   
   
@@ -1724,10 +1918,16 @@ analytics: fetchAnalytics(product.id) // Will stream in
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1782,10 +1982,16 @@ export default function Product() {
   
   
   
+  
+  
+  
 
 
 const { product, reviews, analytics } = useLoaderData();
 
+  
+  
+  
   
   
   
@@ -1843,10 +2049,16 @@ return (
   
   
   
+  
+  
+  
 
 
 # {product.name}
 
+  
+  
+  
   
   
   
@@ -1907,6 +2119,9 @@ return (
   
   
   
+  
+  
+  
 
 
 Loading analytics...
@@ -1933,10 +2148,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 }>
 
+  
+  
+  
   
   
   
@@ -2003,10 +2224,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2061,10 +2288,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -2116,10 +2349,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 * Excellent progressive enhancement and forms
 
+  
+  
+  
   
   
   
@@ -2168,10 +2407,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 * Error boundaries at every route level
 
+  
+  
+  
   
   
   
@@ -2226,10 +2471,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 * Smaller ecosystem than Next.js
 
+  
+  
+  
   
   
   
@@ -2278,6 +2529,9 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 * Less tooling and community content
@@ -2304,10 +2558,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 * Image optimization requires manual configuration
 
+  
+  
+  
   
   
   
@@ -2362,10 +2622,16 @@ Loading analytics...
   
   
   
+  
+  
+  
 
 
 Astro takes a content-first approach — it's a "multi-page application" framework that minimizes JavaScript by default.
 
+  
+  
+  
   
   
   
@@ -2420,10 +2686,16 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   
   
   
+  
+  
+  
 
 
 * Zero JS by default — only ship what's needed
 
+  
+  
+  
   
   
   
@@ -2472,10 +2744,16 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   
   
   
+  
+  
+  
 
 
 * Multi-framework support (React, Vue, Svelte, Solid components in one project)
 
+  
+  
+  
   
   
   
@@ -2524,10 +2802,16 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   
   
   
+  
+  
+  
 
 
 * Static-first with server endpoints for dynamic data
 
+  
+  
+  
   
   
   
@@ -2582,10 +2866,16 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
   
   
   
@@ -2640,10 +2930,16 @@ Astro takes a content-first approach — it's a "multi-page application" framewo
   
   
   
+  
+  
+  
 
 
 import Layout from "../layouts/Layout.astro";
 
+  
+  
+  
   
   
   
@@ -2698,10 +2994,16 @@ import ProductCard from "../components/ProductCard";
   
   
   
+  
+  
+  
 
 
 const products = await db.product.findMany({
 
+  
+  
+  
   
   
   
@@ -2756,10 +3058,16 @@ where: { published: true },
   
   
   
+  
+  
+  
 
 
 orderBy: { createdAt: "desc" }
 
+  
+  
+  
   
   
   
@@ -2814,6 +3122,9 @@ orderBy: { createdAt: "desc" }
   
   
   
+  
+  
+  
 
 
 const pageTitle = "Our Products";
@@ -2843,10 +3154,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\---
 
+  
+  
+  
   
   
   
@@ -2907,10 +3224,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 {products.map(product => (
 
+  
+  
+  
   
   
   
@@ -2974,10 +3297,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -3029,10 +3358,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * Content collections provide excellent MDX/Markdown authoring
 
+  
+  
+  
   
   
   
@@ -3081,10 +3416,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * Best choice for content-heavy sites
 
+  
+  
+  
   
   
   
@@ -3139,10 +3480,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * Not ideal for highly dynamic, app-like experiences
 
+  
+  
+  
   
   
   
@@ -3191,6 +3538,9 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * View transitions and SPA-like navigation are less mature
@@ -3217,10 +3567,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * Interactive islands add complexity compared to SSR-only approaches
 
+  
+  
+  
   
   
   
@@ -3275,10 +3631,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 | Aspect | Next.js | Remix | Astro |
 
+  
+  
+  
   
   
   
@@ -3333,10 +3695,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 | Rendering | SSG/SSR/ISR/Streaming | SSR + Streaming | SSG (SSR optional) |
 
+  
+  
+  
   
   
   
@@ -3391,10 +3759,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 | Client JS | Minimal with RSC | Minimal by design | Zero by default |
 
+  
+  
+  
   
   
   
@@ -3449,10 +3823,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 | Image optimization | Built-in (via Vercel) | Manual | Built-in (Sharp) |
 
+  
+  
+  
   
   
   
@@ -3507,10 +3887,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 | Best for | Full-stack apps | Web apps, e-commerce | Content sites, blogs |
 
+  
+  
+  
   
   
   
@@ -3565,10 +3951,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 **Choose Next.js when:**
 
+  
+  
+  
   
   
   
@@ -3620,10 +4012,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You want the largest ecosystem and community
 
+  
+  
+  
   
   
   
@@ -3672,10 +4070,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You need advanced image optimization and ISR
 
+  
+  
+  
   
   
   
@@ -3730,10 +4134,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You want a web-standards-first approach
 
+  
+  
+  
   
   
   
@@ -3782,6 +4192,9 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You value progressive enhancement and accessibility
@@ -3808,10 +4221,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You need nested layouts with parallel data loading
 
+  
+  
+  
   
   
   
@@ -3866,10 +4285,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You're building a content-focused site (blog, docs, marketing)
 
+  
+  
+  
   
   
   
@@ -3918,10 +4343,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 * You're using multiple UI frameworks in one project
 
+  
+  
+  
   
   
   
@@ -3973,10 +4404,16 @@ const pageTitle = "Our Products";
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

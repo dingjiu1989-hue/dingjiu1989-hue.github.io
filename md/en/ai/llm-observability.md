@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-observability.html
   
 
 
+# LLM Observability: Tracing, Token Tracking, Latency Monitoring, and Cost Attribution
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Production LLM applications fail in ways traditional monitoring does not capture. You need observability that tracks prompts, responses, tokens, latency, and costs across every model call. Here is the LLM observability framework.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Production LLM applications fail in ways traditional monitoring does not capture
   
   
   
+  
+  
+  
 
 
 Traditional application monitoring tracks request volume, error rates, and response times. LLM applications need all of that plus token counts, model versions, prompt templates, and generation parameters.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ LLM failures are subtle. The API returns 200 OK, but the response is hallucinate
   
   
   
+  
+  
+  
 
 
 LLM costs are non-trivial. A single GPT-4 call can cost cents, but thousands of calls per day add up to real money. Without token tracking, you cannot attribute costs to users, features, or prompt templates.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ LLM costs are non-trivial. A single GPT-4 call can cost cents, but thousands of 
   
   
   
+  
+  
+  
 
 
 Distributed tracing for LLM applications should capture the full lifecycle of each request: the user input, the system prompt, any retrieved context, the model parameters, the response, and post-processing.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Each trace should include a unique request ID that correlates the user session, 
   
   
   
+  
+  
+  
 
 
 Instrument your LLM calls with OpenTelemetry. Add spans for each stage: retrieval, prompt assembly, model inference, response parsing, and guardrail checks. This gives you granular latency data for each component.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Use an observability platform that supports LLM-specific data. LangSmith, Weight
   
   
   
+  
+  
+  
 
 
 ##  Token Tracking
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Token usage is the currency of LLM applications. Track input tokens, output toke
   
   
   
+  
+  
+  
 
 
 Log token usage per model, per user, and per feature. This tells you which features are driving costs and which users are consuming the most. An expensive feature with low engagement might need optimization or removal.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Track token usage trends over time. If token consumption per request is increasi
   
   
   
+  
+  
+  
 
 
 Monitor token limits. If your output frequently gets truncated because it exceeds max_tokens, your use case needs either longer context or shorter responses. Both are actionable signals.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Monitor token limits. If your output frequently gets truncated because it exceed
   
   
   
+  
+  
+  
 
 
 LLM latency varies wildly. Same model, same prompt, same token count can take 500 milliseconds or 5 seconds depending on server load and request queuing.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Measure end-to-end latency per request and break it down into components: networ
   
   
   
+  
+  
+  
 
 
 Set latency budgets per feature. A chatbot needs responses in under 2 seconds. A batch summarization job can tolerate 30 seconds. Alert when features exceed their latency budgets.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Monitor percentile latency, not averages. P50 might be 1 second while P95 is 8 s
   
   
   
+  
+  
+  
 
 
 ##  Cost Attribution
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Cost attribution answers the question: where is the money going? Tag every LLM c
   
   
   
+  
+  
+  
 
 
 Report costs per feature monthly. If your code generation feature costs $500 per month and your chat feature costs $5,000 per month, you can make informed decisions about optimization priorities.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ Set cost alerts per feature. If a feature suddenly doubles in cost, something ch
   
   
   
+  
+  
+  
 
 
 Track cost per user session. A user that generates $2 in LLM costs per session needs to generate at least that much in revenue or value. Unprofitable user segments might need different pricing or feature limits.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Track cost per user session. A user that generates $2 in LLM costs per session n
   
   
   
+  
+  
+  
 
 
 Define alert thresholds for the metrics that matter. Response time exceeds 5 seconds for P95. Error rate exceeds 2%. Cost per day exceeds a threshold. Tokens per request exceed expected range.
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ When an alert fires, the trace data should let you identify the problematic requ
   
   
   
+  
+  
+  
 
 
 Build runbooks for common LLM failures. Model down: failover to a fallback model. High latency: reduce max_tokens or switch to a smaller model. Cost spike: identify the source and apply rate limits.
 
+  
+  
+  
   
   
   

@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/devcontainer-setup.html
   
 
 
+# Dev Containers: devcontainer.json, Features, Dotfiles, and GitHub Codespaces
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Development containers (dev containers) provide consistent, reproducible develop
   
   
   
+  
+  
+  
 
 
 This article covers devcontainer.json configuration, features, dotfiles integration, remote development workflows, and GitHub Codespaces.
 
+  
+  
+  
   
   
   
@@ -275,6 +316,9 @@ This article covers devcontainer.json configuration, features, dotfiles integrat
   
   
   
+  
+  
+  
 
 
 The dev container specification, maintained by the Community Specification Contributor Agreement, defines a standard format for configuring development containers. The primary configuration file is `.devcontainer/devcontainer.json` at the repository root.
@@ -304,10 +348,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "postCreateCommand": "npm install",
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "vscode": {
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "dbaeumer.vscode-eslint",
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "ms-vscode.vscode-typescript-next"
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 "settings": {
 
+  
+  
+  
   
   
   
@@ -710,32 +796,6 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -768,6 +828,41 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -797,10 +892,16 @@ The dev container specification, maintained by the Community Specification Contr
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ The `image` property specifies the base container image. Alternatively, `build` 
   
   
   
+  
+  
+  
 
 
 ##  Base Images and Features
 
+  
+  
+  
   
   
   
@@ -913,6 +1020,9 @@ Microsoft maintains a library of pre-built dev container base images: `javascrip
   
   
   
+  
+  
+  
 
 
 Features are self-contained, shareable units of configuration that install additional tools into a dev container. The features repository includes CLI tools (Azure CLI, AWS CLI, Docker-in-Docker), language runtimes (Ruby, PHP, Elixir), and databases (PostgreSQL, SQLite, Redis).
@@ -942,10 +1052,16 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
+  
+  
+  
 
 
 "features": {
 
+  
+  
+  
   
   
   
@@ -1058,6 +1180,9 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
+  
+  
+  
 
 
 "version": "20"
@@ -1087,10 +1212,16 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1145,6 +1276,9 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
+  
+  
+  
 
 
 "ghcr.io/devcontainers/features/aws-cli:1": {}
@@ -1174,32 +1308,6 @@ Features are self-contained, shareable units of configuration that install addit
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1207,6 +1315,41 @@ Features are self-contained, shareable units of configuration that install addit
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ Features are versioned and published as OCI artifacts. The community contributes
   
   
   
+  
+  
+  
 
 
 ##  Dotfiles Integration
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ Dotfiles — configuration files for shell, editors, and tools — can be automa
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ Dotfiles — configuration files for shell, editors, and tools — can be automa
   
   
   
+  
+  
+  
 
 
 "dotfilesInstallCommand": "./install.sh",
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ Dotfiles — configuration files for shell, editors, and tools — can be automa
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ The dotfiles repository typically contains shell configuration (.zshrc, .bashrc)
   
   
   
+  
+  
+  
 
 
 This feature enables personalized development environments within the standardized container, balancing consistency with individual preferences.
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ This feature enables personalized development environments within the standardiz
   
   
   
+  
+  
+  
 
 
 Dev containers support four connection modes:
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ Docker (local): The container runs on the local Docker daemon. VS Code's Remote 
   
   
   
+  
+  
+  
 
 
 Docker (remote SSH): The container runs on a remote Docker host accessed via SSH. Useful for development on powerful remote machines without transferring local setup.
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ Dev Tunnel: VS Code tunnels through firewalls to connect to a dev container on a
   
   
   
+  
+  
+  
 
 
 Codespaces: GitHub managed remote dev containers in the cloud.
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ Codespaces: GitHub managed remote dev containers in the cloud.
   
   
   
+  
+  
+  
 
 
 devcontainer open .
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ devcontainer open .
   
   
   
+  
+  
+  
 
 
 devcontainer build --workspace-folder . --image-name my-devcontainer
 
+  
+  
+  
   
   
   
@@ -1841,10 +2044,16 @@ devcontainer build --workspace-folder . --image-name my-devcontainer
   
   
   
+  
+  
+  
 
 
 GitHub Codespaces provides cloud-hosted dev containers integrated directly with GitHub repositories. When `devcontainer.json` exists in a repository, Codespaces automatically provisions a container with the specified configuration.
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 * Prebuilds: Pre-build containers on push to reduce startup time.
 
+  
+  
+  
   
   
   
@@ -1951,6 +2166,9 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 * Core hours billing: Consumption-based pricing for compute resources.
@@ -1977,10 +2195,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 * VS Code and browser-based editors.
 
+  
+  
+  
   
   
   
@@ -2035,10 +2259,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "image": "mcr.microsoft.com/devcontainers/universal:2",
 
+  
+  
+  
   
   
   
@@ -2093,10 +2323,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "cpus": 4,
 
+  
+  
+  
   
   
   
@@ -2151,10 +2387,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "storage": "32gb"
 
+  
+  
+  
   
   
   
@@ -2209,10 +2451,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "forwardPorts": [8080],
 
+  
+  
+  
   
   
   
@@ -2267,10 +2515,16 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "8080": {
 
+  
+  
+  
   
   
   
@@ -2325,6 +2579,9 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 "onAutoForward": "notify"
@@ -2354,32 +2611,6 @@ Codespaces supports:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2412,10 +2643,48 @@ Codespaces supports:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2470,10 +2739,16 @@ Prebuilds significantly improve the Codespaces experience. A GitHub Actions work
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   
@@ -2528,10 +2803,16 @@ Keep devcontainer.json in the repository root for broadest tool compatibility. P
   
   
   
+  
+  
+  
 
 
 * `onCreateCommand`: Runs when container is first created.
 
+  
+  
+  
   
   
   
@@ -2580,6 +2861,9 @@ Keep devcontainer.json in the repository root for broadest tool compatibility. P
   
   
   
+  
+  
+  
 
 
 * `postCreateCommand`: Runs after container creation completes.
@@ -2606,10 +2890,16 @@ Keep devcontainer.json in the repository root for broadest tool compatibility. P
   
   
   
+  
+  
+  
 
 
 * `postStartCommand`: Runs each time container starts.
 
+  
+  
+  
   
   
   
@@ -2664,10 +2954,16 @@ Minimize image size by using specific base images rather than the universal imag
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

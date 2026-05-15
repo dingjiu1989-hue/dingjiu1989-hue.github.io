@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/routing-slip.html
   
   
   
+  
+  
+  
+
+
+# Routing Slip Pattern for Dynamic Message Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The routing slip pattern processes a message through a predefined sequence of processing steps, where the path is determined at runtime. Think of it as a delivery route for messages—each stop adds value or transformation before sending the message to the next destination.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ The routing slip pattern processes a message through a predefined sequence of pr
   
   
   
+  
+  
+  
 
 
 The routing slip is attached to the message as metadata. It contains an ordered list of processing steps. After each step completes, the processing component reads the next destination from the routing slip and forwards the message. When all steps are complete, the message reaches its final destination.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ The routing slip is attached to the message as metadata. It contains an ordered 
   
   
   
+  
+  
+  
 
 
 The routing slip is typically implemented as a JSON array or a comma-separated list of endpoint addresses. Each processing step inspects the slip, performs its operation, removes the current step from the list, and forwards the message to the next address.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ In Apache Camel, routing slips are a built-in Enterprise Integration Pattern (EI
   
   
   
+  
+  
+  
 
 
 ##  Dynamic Routing vs Static Pipelines
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Static processing pipelines hardcode the sequence of steps. Every message follow
   
   
   
+  
+  
+  
 
 
 For example, a payment message might follow the path: validate → enrich → fraud check → process. A simple status check message might skip enrichment and fraud check entirely.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ For example, a payment message might follow the path: validate → enrich → fr
   
   
   
+  
+  
+  
 
 
 Data transformation pipelines where different data sources need different enrichment steps. Document approval workflows where the approval chain depends on document type and value. Multi-step provisioning processes where the required steps depend on the requested resources.
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Data transformation pipelines where different data sources need different enrich
   
   
   
+  
+  
+  
 
 
 If a step fails, the message should go to a dead letter queue with its routing slip intact. The failure context includes which step failed and what steps remain. After fixing the issue, operators can resume processing from the failed step by modifying the routing slip.
@@ -465,10 +530,16 @@ If a step fails, the message should go to a dead letter queue with its routing s
   
   
   
+  
+  
+  
 
 
 ##  Monitoring
 
+  
+  
+  
   
   
   

@@ -35,7 +35,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/security/input-validation.html">
-    <meta name="robots" content="index, follow">
+    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/security/zero-trust-networking.html">
+    <link rel="next" href="https://dingjiu1989-hue.github.io/en/security/web-security-fundamentals-2026.html">
+    <meta name="robots" content="noindex, follow">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,7 +55,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/input-validation-deep-dive-16he"
       ],
-      "articleBody": "Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Input Validation Deep Dive Introduction Input validation is the first line of defense against injection attacks. Every piece of data entering an application \u2014 form fields, HTTP headers, URL parameters, file uploads, API payloads \u2014 must be validated before processing. The principle is simple: never trust user input. Whitelist vs Blacklist Whitelist (Allowlist) Validation Whitelist validation defines what is allowed and rejects everything else. It is far more secure than blacklisting. import re Whitelist: only allow specific characters def validate_username_whitelist(username): \"\"\"Allow only alphanumeric, underscore, and hyphen.\"\"\" pattern = r'^[a-zA-Z0-9_-]{3,32}$' if not re.match(pattern, username): raise ValueError( f\"Username '{username}' contains invalid characters. \" \"Only letters, numbers, underscores, and hyphens are allowed.\" ) return username Whitelist for country codes ALLOWED_COUNTRIES = {'US', 'CA', 'GB', 'DE', 'FR', 'JP'} def validate_country_code(code): if code.upper() not in ALLOWED_COUNTRIES: raise ValueError(f\"Country '{code}' is not in the allowed list\") return code.upper() Blacklist (Blocklist) Validation Blacklist validation attempts to block known malicious patterns. It is inherently fragile because attackers constantly discover new bypass techniques. WEAK: Blacklist approach (easily bypassed) def validate_input_blacklist(input_string): Easily bypassed \u2014 attacker uses alternative syntax blocklist = ['"
+      "articleBody": "In-depth guide to input validation covering whitelist vs blacklist approaches, sanitization techniques, encoding strategies, and common bypass methods."
     }
     </script>
     <script type="application/ld+json">

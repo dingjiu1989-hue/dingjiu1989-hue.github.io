@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/terraform-state-management.html
   
   
   
+  
+  
+  
+
+
+# Terraform State Management: Remote State, Locking, Migration, and Workspaces
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Terraform state is the mapping between resources defined in configuration and th
   
   
   
+  
+  
+  
 
 
 This article covers Terraform state fundamentals, remote backends, state locking, migration strategies, workspaces, and Terragrunt for managing complex multi-environment deployments.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ This article covers Terraform state fundamentals, remote backends, state locking
   
   
   
+  
+  
+  
 
 
 State serves multiple critical functions: mapping configuration to real-world resources, tracking metadata such as resource dependencies and attributes, improving performance by caching attribute values, and enabling collaboration through shared state files.
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Without state, Terraform would need to query every cloud provider API to underst
   
   
   
+  
+  
+  
 
 
 State files are sensitive. They often contain plaintext values of resource attributes, including database passwords, access keys, and connection strings. State must be treated as a security artifact and stored in encrypted backends.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ State files are sensitive. They often contain plaintext values of resource attri
   
   
   
+  
+  
+  
 
 
 Local state stores `terraform.tfstate` on the filesystem. This works for personal projects but fails for team collaboration. Remote backends solve this by storing state in a shared, durable location with locking support.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ terraform {
   
   
   
+  
+  
+  
 
 
 backend "s3" {
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ bucket = "my-terraform-state"
   
   
   
+  
+  
+  
 
 
 key = "prod/network/terraform.tfstate"
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ region = "us-west-2"
   
   
   
+  
+  
+  
 
 
 encrypt = true
 
+  
+  
+  
   
   
   
@@ -652,32 +732,6 @@ dynamodb_table = "terraform-state-lock"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -685,6 +739,41 @@ dynamodb_table = "terraform-state-lock"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Common backends include S3 (with DynamoDB locking), Azure Storage (with blob lea
   
   
   
+  
+  
+  
 
 
 ##  State Locking and Consistency
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ State locking prevents concurrent operations from corrupting state. When a user 
   
   
   
+  
+  
+  
 
 
 Force unlocking is occasionally necessary — typically when a CI pipeline crashes while holding a lock. The `terraform force-unlock ` command releases stuck locks, but should be used with caution as it risks concurrent state modifications.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ State locking does not prevent all conflicts. Terraform's plan file represents t
   
   
   
+  
+  
+  
 
 
 ##  State Migration
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Migrating state between backends is common when consolidating environments or ch
   
   
   
+  
+  
+  
 
 
 Migrating resources between state files is more involved. The `terraform state mv` command moves resources between states or renames resource addresses. Splitting state files involves creating a new configuration, importing existing resources, and removing them from the original state with `terraform state rm`.
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ For large-scale migrations involving hundreds of resources, automation through s
   
   
   
+  
+  
+  
 
 
 ##  Workspaces and Environment Management
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ Terraform workspaces allow managing multiple environments with the same configur
   
   
   
+  
+  
+  
 
 
 terraform workspace new staging
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ terraform workspace select production
   
   
   
+  
+  
+  
 
 
 terraform apply
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ Workspace names are referenced in configuration as `${terraform.workspace}`. How
   
   
   
+  
+  
+  
 
 
 ##  Terragrunt: Orchestrating Multiple Terraform Configurations
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ Terragrunt, from Gruntwork, addresses Terraform's limitations for multi-environm
   
   
   
+  
+  
+  
 
 
 # terragrunt.hcl
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ remote_state {
   
   
   
+  
+  
+  
 
 
 backend = "s3"
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ config = {
   
   
   
+  
+  
+  
 
 
 bucket = "my-terraform-state-${get_env("ACCOUNT_ID")}"
 
+  
+  
+  
   
   
   
@@ -1377,6 +1532,9 @@ key = "${path_relative_to_include()}/terraform.tfstate"
   
   
   
+  
+  
+  
 
 
 region = "us-east-1"
@@ -1406,32 +1564,6 @@ region = "us-east-1"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1439,6 +1571,41 @@ region = "us-east-1"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ Terragrunt's `dependency` blocks define module relationships, ensuring infrastru
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

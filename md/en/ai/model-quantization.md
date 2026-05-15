@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/ai/model-quantization.html
   
   
   
+  
+  
+  
+
+
+# Model Quantization: Making LLMs Smaller and Faster
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Model quantization reduces the precision of neural network weights, making models smaller and faster with minimal accuracy loss. This enables running large language models on consumer hardware, edge devices, and cost-effective inference servers.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Model quantization reduces the precision of neural network weights, making model
   
   
   
+  
+  
+  
 
 
 Models are typically trained in FP32 (32-bit floating point) or BF16 (16-bit bfloat). Quantization converts weights to lower precision: INT8 (8-bit), INT4 (4-bit), or even 2-bit. Weight size decreases proportionally—INT4 uses 1/8 the memory of FP32.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Quantization introduces quantization error. The trade-off is between compression
   
   
   
+  
+  
+  
 
 
 ##  Post-Training Quantization
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ GPTQ (Generative Pre-Trained Quantizer) uses one-shot weight quantization based 
   
   
   
+  
+  
+  
 
 
 AWQ (Activation-aware Weight Quantization) protects important weights based on activation magnitudes. It identifies 1% of "salient" weights and keeps them at higher precision. AWQ typically outperforms GPTQ on small models and multilingual tasks.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Bitsandbytes integrates with Hugging Face Transformers for easy quantization. Lo
   
   
   
+  
+  
+  
 
 
 ##  GGUF and llama.cpp
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ GGUF is the quantization format for llama.cpp, enabling local LLM inference on C
   
   
   
+  
+  
+  
 
 
 llama.cpp runs quantized models efficiently on CPU, Apple Silicon, and GPU. It supports metal acceleration on Mac, CUDA on NVIDIA, and Vulkan on AMD. GGUF models are widely available on Hugging Face.
 
+  
+  
+  
   
   
   
@@ -504,10 +569,16 @@ llama.cpp runs quantized models efficiently on CPU, Apple Silicon, and GPU. It s
   
   
   
+  
+  
+  
 
 
 QAT (Quantization-Aware Training) simulates quantization during training, producing models that maintain higher accuracy after quantization. The training process inserts fake quantization operations that model the quantization error.
 
+  
+  
+  
   
   
   
@@ -562,10 +633,16 @@ QAT requires full training infrastructure and access to the original training da
   
   
   
+  
+  
+  
 
 
 ##  Deployment Decisions
 
+  
+  
+  
   
   
   

@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/digital-products.html
   
 
 
+# Selling Digital Products as a Developer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Digital Products for Developers
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Digital products offer developers a path to passive income by leveraging existin
   
   
   
+  
+  
+  
 
 
 ### Code Templates and Starter Kits
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Paid starter kits and project templates are the most popular digital products fo
   
   
   
+  
+  
+  
 
 
 Successful starter kits solve a specific pain point. "Next.js SaaS Starter with Stripe, Supabase, and Resend" targets a clear audience. Include comprehensive documentation, setup scripts, and example environment configurations. The value proposition is saving 40+ hours of initial setup time.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Consider offering multiple tiers: a basic version with core features, a pro vers
   
   
   
+  
+  
+  
 
 
 ### UI Components and Design Assets
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ UI component libraries are evergreen products. If you've built a polished set of
   
   
   
+  
+  
+  
 
 
 Technical requirements for component products: TypeScript types, comprehensive storybook documentation, theme customization, and accessibility compliance. Test in multiple browsers and frameworks. A $29 component pack targeting Tailwind CSS developers can generate consistent monthly revenue with minimal maintenance.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Technical requirements for component products: TypeScript types, comprehensive s
   
   
   
+  
+  
+  
 
 
 Premium educational content targets developers who need structured learning. A course on "Building a SaaS from Zero to Revenue" priced at $199 can generate significant revenue if it delivers genuine value. The key differentiator is production experience — developers pay for frameworks they can apply immediately.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Course structure should include: video walkthroughs (15-20 minutes each for focu
   
   
   
+  
+  
+  
 
 
 Platform choices: Gumroad provides a simple sales experience. Podia offers course hosting with drip content. Teachable provides the most features for premium courses. Self-hosting with Stripe gives maximum control but requires more setup.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Platform choices: Gumroad provides a simple sales experience. Podia offers cours
   
   
   
+  
+  
+  
 
 
 Developer tools with freemium models generate sustainable income. VS Code extensions (snippets, formatters, integrations), browser extensions for developer workflows, and CLI tools that solve specific problems can all be monetized.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ The freemium model works: provide core functionality free, charge for premium fe
   
   
   
+  
+  
+  
 
 
 Distribution matters more than product quality for developer tools. Product Hunt launch, GitHub trending, Hacker News, and developer newsletters drive initial adoption. SEO via documentation pages provides ongoing discovery.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Distribution matters more than product quality for developer tools. Product Hunt
   
   
   
+  
+  
+  
 
 
 Gumroad is the default platform for digital products with 8.5% + $0.30 per sale. It handles payment processing, hosting, and delivery. Lemon Squeezy offers similar functionality at $5/transaction plus 2.9% + $0.30. For higher-volume sales, self-hosting with Stripe saves platform fees.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ GitHub Sponsors enables monetizing open source projects directly. The GitHub Mar
   
   
   
+  
+  
+  
 
 
 ### Pricing Strategy
 
+  
+  
+  
   
   
   
@@ -797,6 +892,9 @@ Price based on value, not effort. A starter kit that saves 40 hours of developme
   
   
   
+  
+  
+  
 
 
 Use anchoring on pricing pages: show three tiers with the middle option as your target. Limited-time launch discounts drive initial sales and create urgency. Bundle complementary products at a discount to increase average order value.
@@ -826,10 +924,16 @@ Use anchoring on pricing pages: show three tiers with the middle option as your 
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

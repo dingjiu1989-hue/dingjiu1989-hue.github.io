@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tech/web-performance-optimization.html
   
   
   
+  
+  
+  
+
+
+# Web Performance Optimization Techniques 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Web performance directly affects user experience, conversion rates, and search rankings. Modern optimization techniques address multiple performance dimensions.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Web performance directly affects user experience, conversion rates, and search r
   
   
   
+  
+  
+  
 
 
 Google's Core Web Vitals measure real-world user experience. Largest Contentful Paint (LCP) measures loading—target under 2.5 seconds. First Input Delay (FID) measures interactivity—target under 100ms. Cumulative Layout Shift (CLS) measures visual stability—target under 0.1.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Optimize LCP by preloading critical resources (hero images, fonts), using respon
   
   
   
+  
+  
+  
 
 
 ##  Resource Optimization
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Compress images aggressively. WebP and AVIF formats provide 25-50% size reductio
   
   
   
+  
+  
+  
 
 
 Minimize JavaScript bundles. Remove unused code with tree shaking. Use dynamic imports for route-based code splitting. Defer non-critical JavaScript with defer or async attributes. Preload critical CSS and inline above-the-fold styles.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Minimize JavaScript bundles. Remove unused code with tree shaking. Use dynamic i
   
   
   
+  
+  
+  
 
 
 Implement a multi-level caching strategy. Browser caching with Cache-Control headers. CDN caching with edge caching and cache invalidation. Service Worker caching with cache-first, network-first, or stale-while-revalidate strategies.
 
+  
+  
+  
   
   
   
@@ -446,6 +505,9 @@ Use CDN cache headers (s-maxage, stale-while-revalidate) for optimal edge cachin
   
   
   
+  
+  
+  
 
 
 ##  Monitoring
@@ -475,10 +537,16 @@ Use CDN cache headers (s-maxage, stale-while-revalidate) for optimal edge cachin
   
   
   
+  
+  
+  
 
 
 Measure performance with Real User Monitoring (RUM) using the Navigation Timing API, Performance Observer, and web-vitals library. Set up performance budgets to prevent regressions. Alert on Core Web Vitals degradation.
 
+  
+  
+  
   
   
   

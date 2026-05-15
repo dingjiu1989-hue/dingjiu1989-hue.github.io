@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/new-sql-databases.html
   
   
   
+  
+  
+  
+
+
+# NewSQL Databases: Combining SQL with Horizontal Scaling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 NewSQL databases combine the ACID guarantees and SQL query capabilities of traditional relational databases with the horizontal scalability of NoSQL systems. They address a fundamental limitation of traditional databases: scaling beyond a single node without sacrificing consistency.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ NewSQL databases combine the ACID guarantees and SQL query capabilities of tradi
   
   
   
+  
+  
+  
 
 
 CockroachDB is a distributed SQL database designed for cloud-native applications. It automatically replicates and distributes data across nodes, handles node failures transparently, and supports standard PostgreSQL-compatible SQL.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ CockroachDB uses a consensus protocol (Raft) to maintain consistency across repl
   
   
   
+  
+  
+  
 
 
 Its geo-partitioning feature allows data to be stored in specific geographic locations for latency optimization and data residency compliance. A table can specify that EU customer data is stored only on EU nodes.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Its geo-partitioning feature allows data to be stored in specific geographic loc
   
   
   
+  
+  
+  
 
 
 YugabyteDB is an open-source distributed SQL database that supports both PostgreSQL and Cassandra-compatible APIs. It uses a document store at its core with a distributed transaction layer on top.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ YugabyteDB's architecture separates compute from storage. The query layer handle
   
   
   
+  
+  
+  
 
 
 ##  Google Spanner
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Google Spanner is the original NewSQL database, running on Google's global infra
   
   
   
+  
+  
+  
 
 
 Spanner combines automatic sharding, synchronous replication, and atomic clocks for consistency. It handles automatic failover, data rebalancing, and geo-distribution transparently. The trade-off is vendor lock-in and higher cost.
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Spanner combines automatic sharding, synchronous replication, and atomic clocks 
   
   
   
+  
+  
+  
 
 
 Use NewSQL when you need ACID transactions across multiple nodes, when your application requires standard SQL, and when you anticipate scaling beyond a single database node. NewSQL is ideal for financial systems, multi-tenant SaaS platforms, and globally distributed applications.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Avoid NewSQL for simple key-value workloads (Redis is simpler), write-heavy time
   
   
   
+  
+  
+  
 
 
 ##  Operational Considerations
 
+  
+  
+  
   
   
   

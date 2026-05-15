@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/exit-strategies.html
   
 
 
+# SaaS Exit Strategies: Acquisition, IPO, Lifestyle, Acqui-Hire
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  SaaS Exit Strategies for Founders
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Every SaaS founder should understand potential exit paths, even if an exit is ye
   
   
   
+  
+  
+  
 
 
 ### Acquisition Exits
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Acquisition is the most common SaaS exit path. A larger company acquires your pr
   
   
   
+  
+  
+  
 
 
 Acquisition-ready SaaS metrics include: ARR above $1 million (minimum for serious acquirer interest), growth rate above 30% YoY, gross margin above 70%, net revenue retention above 100%, and low customer concentration (no single customer over 10% of revenue).
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Finding acquirers: strategic acquirers (companies in adjacent markets seeking te
   
   
   
+  
+  
+  
 
 
 The acquisition process typically takes 6-12 months from initial outreach to close. Prepare a data room with: financial statements (3 years), MRR/ARR breakdowns, churn analysis, customer contracts, technical architecture documentation, team structure, and intellectual property documentation. Work with a SaaS-focused M&A; advisor for optimal outcomes.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ The acquisition process typically takes 6-12 months from initial outreach to clo
   
   
   
+  
+  
+  
 
 
 Not every SaaS needs to exit. A lifestyle business generates sufficient income for the founder without outside investment or acquisition pressure. Many bootstrapped SaaS companies follow this path, providing consistent income with minimal stress.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Benefits of the lifestyle path: complete autonomy, no investor pressure, flexibl
   
   
   
+  
+  
+  
 
 
 Running a lifestyle SaaS requires different metrics focus: profitability over growth, sustainable customer acquisition cost (CAC payback under 12 months), and systems that reduce founder involvement. Automate operations, build a reliable team, and create processes that run without you. The goal is a business that generates income with your oversight but not your daily labor.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Running a lifestyle SaaS requires different metrics focus: profitability over gr
   
   
   
+  
+  
+  
 
 
 Acqui-hire is acquisition primarily for the team rather than the product. A larger company acquires your startup for $500,000-2 million per founder, typically with retention bonuses and employment contracts. The acquirer gains engineering talent with domain expertise.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Acqui-hire works for early-stage SaaS (under $500K ARR) where the team's experti
   
   
   
+  
+  
+  
 
 
 Preparing for acqui-hire: build a strong engineering brand, develop deep domain expertise, maintain good relationships with larger companies in your space, and keep your team small and high-quality. Acqui-hires typically happen when the larger company needs specific expertise they can't hire easily.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Preparing for acqui-hire: build a strong engineering brand, develop deep domain 
   
   
   
+  
+  
+  
 
 
 Clean cap table and legal structure: no ambiguous equity grants, proper intellectual property assignment, complete corporate records. Investors and acquirers will conduct thorough due diligence — address issues early.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Customer contracts should be assignable: ensure contracts don't have change-of-c
   
   
   
+  
+  
+  
 
 
 IP protection: trademarks for product name and logo, patents for novel technology (if applicable), copyright registration for critical source code (selectively), and domain name ownership in a transferable account.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ IP protection: trademarks for product name and logo, patents for novel technolog
   
   
   
+  
+  
+  
 
 
 Market timing matters for exit valuation. SaaS valuations correlate with public market SaaS multiples. Monitor BVP Cloud Index or similar benchmarks. Exit when multiples are favorable and your growth metrics are strong.
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Personal readiness: are you ready for the post-exition commitment? Acquisitions 
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

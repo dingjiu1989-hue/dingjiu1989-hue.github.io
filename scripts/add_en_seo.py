@@ -237,7 +237,124 @@ def add_hreflang():
 
 # ── Run ─────────────────────────────────────────────────────────────────
 
+def regenerate_sitemap():
+    """Regenerate entire sitemap with tiered priorities based on content depth.
+
+    Priority tiers:
+      1.0 — Homepages
+      0.9 — Category/board index pages, long-form articles (10K+ text)
+      0.8 — Substantial articles (5K-10K text, or with HowTo/FAQ schema)
+      0.7 — Standard articles (2K-5K text)
+      Excluded — Thin articles (< 2K text, already noindex)
+    """
+    en_data = json.loads(EN_ARTICLES_JSON.read_text(encoding='utf-8'))
+
+    # Build full URL list: (url, changefreq, priority, hreflangs)
+    urls = []
+
+    # Homepages — priority 1.0
+    urls.append((f'{BASE}/', 'daily', '1.0', [
+        f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>',
+        f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}/en/"/>',
+    ]))
+    urls.append((f'{BASE}/en/', 'daily', '1.0', [
+        f'<xhtml:link rel="alternate" hreflang="en" href="{BASE}/en/"/>',
+        f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{BASE}/"/>',
+    ]))
+
+    # Category pages — priority 0.9
+    for board in en_data['boards']:
+        en_cat = f'{BASE}/en/{board["id"]}/'
+        cn_cat = f'{BASE}/{board["id"]}/'
+        cn_exists = _cn_exists(board['id'])
+        hreflangs = [f'<xhtml:link rel="alternate" hreflang="en" href="{en_cat}"/>']
+        if cn_exists:
+            hreflangs.append(f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_cat}"/>')
+        urls.append((en_cat, 'daily', '0.9', hreflangs))
+        if cn_exists:
+            urls.append((cn_cat, 'daily', '0.9', [
+                f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{cn_cat}"/>',
+                f'<xhtml:link rel="alternate" hreflang="en" href="{en_cat}"/>',
+            ]))
+
+    # Articles — tiered by content depth
+    for board in en_data['boards']:
+        for art in board['posts']:
+            art_en = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
+            html_path = ROOT / 'en' / board['id'] / f'{art["slug"]}.html'
+
+            # Skip articles that don't exist on disk
+            if not html_path.exists():
+                continue
+
+            html = html_path.read_text(encoding='utf-8')
+
+            # Skip noindex articles
+            if 'noindex' in html and '<meta name="robots" content="noindex' in html:
+                continue
+
+            # Determine priority from file size (proxy for content depth)
+            fsize = html_path.stat().st_size
+            if fsize > 18000:
+                priority = '0.9'
+                freq = 'weekly'
+            elif fsize > 12000:
+                priority = '0.8'
+                freq = 'weekly'
+            else:
+                priority = '0.7'
+                freq = 'monthly'
+
+            # Hreflang
+            hreflangs = [f'<xhtml:link rel="alternate" hreflang="en" href="{art_en}"/>']
+            if _cn_exists(board['id'], art['slug']):
+                art_cn = f'{BASE}/{board["id"]}/{art["slug"]}.html'
+                hreflangs.append(f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{art_cn}"/>')
+
+            urls.append((art_en, freq, priority, hreflangs))
+
+    # AI discovery files
+    ai_files = [
+        (f'{BASE}/llms.txt', 'weekly', '0.8'),
+        (f'{BASE}/en/llms.txt', 'weekly', '0.8'),
+        (f'{BASE}/llms-full.txt', 'weekly', '0.6'),
+        (f'{BASE}/llms-full-cn.txt', 'weekly', '0.6'),
+        (f'{BASE}/en/llms-full.txt', 'weekly', '0.6'),
+        (f'{BASE}/en/feed.xml', 'weekly', '0.6'),
+        (f'{BASE}/feed.xml', 'weekly', '0.6'),
+        (f'{BASE}/en/feed.json', 'weekly', '0.6'),
+        (f'{BASE}/feed.json', 'weekly', '0.6'),
+        (f'{BASE}/images/sitemap.xml', 'weekly', '0.5'),
+        (f'{BASE}/robots.txt', 'weekly', '0.5'),
+    ]
+    for ai_url, freq, priority in ai_files:
+        urls.append((ai_url, freq, priority, []))
+
+    # Build XML
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>']
+    lines.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">')
+    for url, freq, priority, hreflangs in urls:
+        lines.append('  <url>')
+        lines.append(f'    <loc>{url}</loc>')
+        lines.append(f'    <changefreq>{freq}</changefreq>')
+        lines.append(f'    <priority>{priority}</priority>')
+        lines.append(f'    <lastmod>{TODAY}</lastmod>')
+        for h in hreflangs:
+            lines.append(f'    {h}')
+        lines.append('  </url>')
+    lines.append('</urlset>')
+
+    SITEMAP.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+
+    # Summary stats
+    p09 = sum(1 for _, _, p, _ in urls if p == '0.9')
+    p08 = sum(1 for _, _, p, _ in urls if p == '0.8')
+    p07 = sum(1 for _, _, p, _ in urls if p == '0.7')
+    print(f'  Sitemap regenerated: {len(urls)} URLs ({p09}x0.9, {p08}x0.8, {p07}x0.7)')
+    print(f'  Thin articles excluded (noindex)')
+
+
 if __name__ == '__main__':
-    update_sitemap()
+    regenerate_sitemap()
     add_hreflang()
     print('\nDone.')

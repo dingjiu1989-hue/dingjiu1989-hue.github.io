@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html">
+    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/database/wide-column-databases.html">
+    <link rel="next" href="https://dingjiu1989-hue.github.io/en/database/postgresql-vs-mysql-2026.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -50,7 +52,7 @@
       "author": {"@type": "Person", "name": "SourceHub"},
       "publisher": {"@type": "Organization", "name": "SourceHub", "logo": {"@type": "ImageObject", "url": "https://dingjiu1989-hue.github.io/images/logo.png"}},
       "mainEntityOfPage": {"@type": "WebPage", "@id": "https://dingjiu1989-hue.github.io/en/database/database-foreign-key-constraints.html"},
-      "articleBody": "Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign Key Constraints: Referential Integrity in Practice Foreign key constraints enforce referential integrity between related tables. They guarantee that a value in one table has a corresponding value in another. Without foreign keys, applications must enforce relationships, which is error-prone. Referential Actions ON DELETE CASCADE automatically deletes related rows when the parent row is deleted. Use when child rows have no meaning without the parent. Be careful with cascading deletes in deep relationship chains. ON DELETE SET NULL sets the foreign key column to NULL when the parent is deleted. Use when the relationship is optional and child rows should survive parent deletion. ON DELETE RESTRICT prevents deletion of the parent if child rows exist. This is the safest default\u2014it prevents accidental data loss. Performance Foreign keys add overhead to INSERT, UPDATE, and DELETE operations. Each write validates that referenced rows exist. The overhead is typically small but matters for bulk operations. Indexes on foreign key columns are essential. Without indexes, each write to the parent table triggers a full table scan on the child table. PostgreSQL does not automatically index foreign keys; MySQL InnoDB does. Practical Guidelines Use foreign keys to enforce relationships that are business rules. Skip them for high-volume logging tables where referential integrity is not critical. Always index foreign key columns. Consider deferrable constraints for bulk load operations."
+      "articleBody": "Master foreign key constraints: referential actions, performance impact, and real-world integrity patterns."
     }
     </script>
     <script type="application/ld+json">

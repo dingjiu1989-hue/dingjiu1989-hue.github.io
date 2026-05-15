@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/database-slow-query-optimizat
   
   
   
+  
+  
+  
+
+
+# Slow Query Optimization: Analysis, Indexing, and Rewriting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Slow queries are the most common cause of database performance problems. A single slow query can consume database resources and degrade performance for all users. Systematic optimization requires measuring, analyzing, and fixing queries methodically.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Slow queries are the most common cause of database performance problems. A singl
   
   
   
+  
+  
+  
 
 
 pg_stat_statements in PostgreSQL and performance_schema in MySQL track query execution statistics. Query these views for total execution time, calls, and mean time per query. Sort by total time to find the queries consuming the most database resources.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Set a slow query log threshold. Log queries exceeding 100ms in development, 200m
   
   
   
+  
+  
+  
 
 
 ##  Reading EXPLAIN Plans
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ EXPLAIN ANALYZE executes the query and shows actual execution times. Key indicat
   
   
   
+  
+  
+  
 
 
 Poor plan indicators: actual rows diverging significantly from estimated rows suggests stale statistics. High buffer usage (shared hit vs shared read) indicates inefficient cache usage. Execution time dominated by a single node suggests a bottleneck.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Poor plan indicators: actual rows diverging significantly from estimated rows su
   
   
   
+  
+  
+  
 
 
 Examine query WHERE clauses, JOIN conditions, and ORDER BY columns. Create indexes that match the query access pattern. A B-tree index works best for equality and range conditions. Composite indexes should match query filter order—put equality conditions first, range conditions last.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Covering indexes include all columns needed by a query, eliminating table access
   
   
   
+  
+  
+  
 
 
 Remove unused indexes. Indexes slow writes and consume storage. Use pg_stat_user_indexes to find indexes never used for index scans. Drop them carefully—one at a time—monitoring for query regression.
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Remove unused indexes. Indexes slow writes and consume storage. Use pg_stat_user
   
   
   
+  
+  
+  
 
 
 Sometimes the query itself needs restructuring. Common optimizations: replace multiple OR conditions with IN or UNION. Replace correlated subqueries with JOINs or window functions. Use EXISTS instead of IN for large subquery result sets.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Avoid functions on indexed columns in WHERE clauses—WHERE DATE(created_at) = '
   
   
   
+  
+  
+  
 
 
 ##  Maintenance
 
+  
+  
+  
   
   
   

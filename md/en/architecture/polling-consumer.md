@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/polling-consumer.html
   
   
   
+  
+  
+  
+
+
+# Polling Consumer vs Event-Driven Consumer
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Consumers in distributed systems retrieve messages through two primary mechanisms: polling (pull) and event-driven (push). Each approach has distinct trade-offs for latency, resource usage, and implementation complexity.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Consumers in distributed systems retrieve messages through two primary mechanism
   
   
   
+  
+  
+  
 
 
 A polling consumer periodically checks a queue or endpoint for new messages. The consumer controls the polling frequency, which determines the trade-off between latency (how quickly messages are received) and resource cost (API calls, CPU usage).
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Polling is simple to implement and provides natural backpressure—if the consum
   
   
   
+  
+  
+  
 
 
 The main drawback is latency. A consumer polling every 30 seconds may wait up to 30 seconds to receive time-sensitive messages. Increasing polling frequency reduces latency but increases infrastructure costs.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ The main drawback is latency. A consumer polling every 30 seconds may wait up to
   
   
   
+  
+  
+  
 
 
 An event-driven consumer receives messages as they arrive. The producer or broker pushes messages to the consumer through webhooks, streaming connections, or long-polling. This approach provides minimal latency—messages are processed as soon as they are published.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Event-driven consumers require persistent connections (WebSocket, gRPC stream, o
   
   
   
+  
+  
+  
 
 
 ##  Hybrid Approach
 
+  
+  
+  
   
   
   
@@ -387,6 +443,9 @@ Many systems combine both patterns. Use push for time-sensitive notifications an
   
   
   
+  
+  
+  
 
 
 ##  Choosing the Right Pattern
@@ -413,10 +472,16 @@ Many systems combine both patterns. Use push for time-sensitive notifications an
   
   
   
+  
+  
+  
 
 
 Choose polling when latency requirements are relaxed (minutes, not seconds), the consumer needs strict rate control, or the message source does not support push. Choose push when low latency is critical, the consumer can scale to handle peak load, or real-time updates are a product requirement.
 
+  
+  
+  
   
   
   

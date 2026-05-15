@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/time-series-databases.html
   
 
 
+# Time Series Databases (InfluxDB, TimescaleDB, ClickHouse)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Time-Series Data 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Time-series data is a sequence of data points indexed by time. Examples include 
   
   
   
+  
+  
+  
 
 
 Database Comparison 
 
+  
+  
+  
   
   
   
@@ -222,6 +260,9 @@ Database Comparison
   
   
   
+  
+  
+  
 
 
 InfluxDB 
@@ -245,10 +286,16 @@ InfluxDB
   
   
   
+  
+  
+  
 
 
 Purpose-built time-series with automatic downsampling: 
 
+  
+  
+  
   
   
   
@@ -297,10 +344,16 @@ from influxdb_client import InfluxDBClient
   
   
   
+  
+  
+  
 
 
 client = InfluxDBClient(url="http://localhost:8086", token="my-token")
 
+  
+  
+  
   
   
   
@@ -349,10 +402,16 @@ write_api = client.write_api()
   
   
   
+  
+  
+  
 
 
 p = Point("cpu").tag("host", "server01").field("usage_user", 45.2)
 
+  
+  
+  
   
   
   
@@ -401,6 +460,9 @@ write_api.write(bucket="metrics", record=p)
   
   
   
+  
+  
+  
 
 
 TimescaleDB 
@@ -424,10 +486,16 @@ TimescaleDB
   
   
   
+  
+  
+  
 
 
 PostgreSQL extension with hypertables: 
 
+  
+  
+  
   
   
   
@@ -476,10 +544,16 @@ CREATE TABLE sensor_data (
   
   
   
+  
+  
+  
 
 
 time TIMESTAMPTZ NOT NULL,
 
+  
+  
+  
   
   
   
@@ -528,10 +602,16 @@ device_id INTEGER,
   
   
   
+  
+  
+  
 
 
 temperature DOUBLE PRECISION
 
+  
+  
+  
   
   
   
@@ -580,10 +660,16 @@ temperature DOUBLE PRECISION
   
   
   
+  
+  
+  
 
 
 SELECT create_hypertable('sensor_data', 'time');
 
+  
+  
+  
   
   
   
@@ -632,10 +718,16 @@ SELECT time_bucket('5m', time) AS bucket,
   
   
   
+  
+  
+  
 
 
 AVG(temperature) FROM sensor_data
 
+  
+  
+  
   
   
   
@@ -684,10 +776,16 @@ WHERE time > NOW() - INTERVAL '24h'
   
   
   
+  
+  
+  
 
 
 GROUP BY bucket;
 
+  
+  
+  
   
   
   
@@ -733,6 +831,9 @@ Performance
   
   
   
+  
+  
+  
 
 
 For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB wins on SQL compatibility. Choose based on your query patterns and ecosystem requirements. 
@@ -756,10 +857,16 @@ For 1 billion rows, QuestDB and InfluxDB lead on write throughput. TimescaleDB w
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

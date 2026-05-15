@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/remote-freelancing-guide.ht
   
   
   
+  
+  
+  
+
+
+# Remote Freelancing Guide: Finding Clients and Scaling Income
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Remote freelancing offers location independence, income potential, and career flexibility. Success requires client acquisition, effective pricing, and scalable operations.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Remote freelancing offers location independence, income potential, and career fl
   
   
   
+  
+  
+  
 
 
 Upwork and Toptal provide access to global clients. Build a professional profile with relevant experience and portfolio. Start with smaller projects to build ratings. Gradually increase rates. Niche expertise commands premium rates.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Direct outreach to companies in your niche is more effective than platform appli
   
   
   
+  
+  
+  
 
 
 ##  Pricing Strategies
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Hourly billing is simple but limits income. Value-based pricing aligns fees with
   
   
   
+  
+  
+  
 
 
 ##  Scaling
 
+  
+  
+  
   
   
   

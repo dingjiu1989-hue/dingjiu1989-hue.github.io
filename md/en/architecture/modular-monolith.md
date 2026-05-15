@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/modular-monolith.html
   
 
 
+# Modular Monolith Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 A modular monolith is a single deployment unit composed of well-defined modules with strict boundaries, explicit dependencies, and encapsulated internals. It captures the architectural benefits of microservices — separation of concerns, bounded contexts, independent evolvability — without the operational cost of distributed systems. For many organizations, it represents the optimal middle ground between a naive monolith and a premature microservice decomposition. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Module boundaries are the central design challenge. Each module should represent
   
   
   
+  
+  
+  
 
 
 Dependency rules must be explicit and enforced. A common pattern is to establish a strict layered dependency graph: presentation modules depend on application modules, which depend on domain modules, which depend on infrastructure modules. Circular dependencies between modules are forbidden. Tools like ArchUnit (Java), modules in Go, or dependency-cruiser (Node.js) can enforce these rules in CI pipelines, preventing boundary erosion over time. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ In-process communication offers significant advantages over inter-service calls.
   
   
   
+  
+  
+  
 
 
 However, in-process communication requires discipline. Modules must not share internal state or bypass each other's public APIs. A common anti-pattern is modules reaching directly into shared databases or calling internal methods through reflection or backdoors. The module boundary must be treated as seriously as a network boundary would be in a microservice architecture. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ The future extraction path is an explicit design consideration. Each module shou
   
   
   
+  
+  
+  
 
 
 Testing benefits are substantial. Integration tests can cover cross-module flows without network mocking, deployment complexity, or environment orchestration. A single process can run the entire system for end-to-end tests, making test suites orders of magnitude faster than their distributed counterparts. 
 
+  
+  
+  
   
   
   

@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/react-server-components.html
   
   
   
+  
+  
+  
+
+
+# React Server Components
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 React Server Components (RSC) represent a paradigm shift in React's execution model. Unlike traditional React components that always run in the browser, Server Components execute exclusively on the server. They can access data sources directly, reduce client-side JavaScript, and enable streaming responses. This article explores the architecture, patterns, and practical implications of RSC.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ React Server Components (RSC) represent a paradigm shift in React's execution mo
   
   
   
+  
+  
+  
 
 
 Server Components run once on the server during rendering. They can be async functions that directly await data from databases, file systems, or APIs. The server executes the component, produces a serializable description of the output, and sends it to the client. The client never receives the Server Component's code.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ This is fundamentally different from Server-Side Rendering (SSR). SSR renders co
   
   
   
+  
+  
+  
 
 
 ##  Streaming
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Server Components support streaming. The server can send parts of the page as th
   
   
   
+  
+  
+  
 
 
 Streaming is achieved through React's Suspense boundaries. A component wrapped in `}>` allows the server to stream the fallback immediately and replace it with the component's output when ready. This creates a progressive rendering experience without complex client-side loading states.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Streaming is achieved through React's Suspense boundaries. A component wrapped i
   
   
   
+  
+  
+  
 
 
 Server Components can fetch data directly without building API endpoints. A component can connect to a database, read from the file system, or call external APIs. The data fetching code runs only on the server, eliminating the need to expose data access services to the client.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Data fetching in Server Components is natural and direct. You write `const data 
   
   
   
+  
+  
+  
 
 
 ##  Client Boundaries
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ The boundary between Server and Client Components is marked by `'use client'`. E
   
   
   
+  
+  
+  
 
 
 Client Components are still rendered on the server for the initial HTML (like SSR) but are hydrated on the client. They can import other Client Components but cannot import Server Components. Server Components can import and render Client Components, passing serializable props.
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ The placement of client boundaries is a key architectural decision. Pushing boun
   
   
   
+  
+  
+  
 
 
 ##  Bundle Size Impact
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ The most significant practical benefit of Server Components is reduced bundle si
   
   
   
+  
+  
+  
 
 
 For example, a blog post rendered with a markdown library on the server sends only the HTML to the client. The markdown library, which could be hundreds of kilobytes, is never downloaded by the browser. The cumulative impact across an application can reduce bundle sizes by 30-50%.
 
+  
+  
+  
   
   
   
@@ -710,6 +796,9 @@ For example, a blog post rendered with a markdown library on the server sends on
   
   
   
+  
+  
+  
 
 
 Server Components change how you think about component architecture. Components are no longer always interactive—they are primarily data transformers that produce UI. The mental model shifts from "components as interactive widgets" to "components as UI functions" that can optionally add interactivity.
@@ -739,10 +828,16 @@ Server Components change how you think about component architecture. Components 
   
   
   
+  
+  
+  
 
 
 This model encourages a more data-oriented architecture. Components fetch and render data in the same place. The data flow is clear and predictable. There is less ceremony around data fetching, state management, and prop drilling.
 
+  
+  
+  
   
   
   

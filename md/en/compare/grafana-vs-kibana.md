@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/compare/grafana-vs-kibana.html
   
   
   
+  
+  
+  
+
+
+# Grafana vs Kibana: Dashboard and Visualization Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Grafana and Kibana are the leading dashboard and visualization tools for observability data. Grafana focuses on time-series data and metrics monitoring. Kibana is the visualization layer for the Elastic Stack (Elasticsearch, Logstash, Kibana).
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Grafana and Kibana are the leading dashboard and visualization tools for observa
   
   
   
+  
+  
+  
 
 
 Grafana supports the widest range of data sources: Prometheus, Graphite, InfluxDB, PostgreSQL, MySQL, AWS CloudWatch, Azure Monitor, Google Cloud Monitoring, Elasticsearch, and many more through plugins. This flexibility makes Grafana the universal dashboard tool for heterogeneous environments.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Kibana primarily works with Elasticsearch. This tight integration is a strength 
   
   
   
+  
+  
+  
 
 
 ##  Visualization
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Grafana provides highly customizable time-series panels, graphs, heatmaps, and g
   
   
   
+  
+  
+  
 
 
 Kibana provides Lens (drag-and-drop visualizations), Vega-based custom visualizations, and Maps (geospatial analytics). The Discover interface enables ad-hoc log exploration. Kibana's dashboard sharing and embedding options are more limited than Grafana's.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Kibana provides Lens (drag-and-drop visualizations), Vega-based custom visualiza
   
   
   
+  
+  
+  
 
 
 Grafana integrates deeply with the LGTM stack (Loki for logs, Grafana Tempo for traces, Grafana Mimir for metrics). The Explore interface provides unified log, metric, and trace querying. Grafana Cloud offers managed observability.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ Kibana excels in the Elastic ecosystem. Application Performance Monitoring (APM)
   
   
   
+  
+  
+  
 
 
 ##  Deployment
 
+  
+  
+  
   
   
   
@@ -504,6 +569,9 @@ Grafana is available as open source, Grafana Cloud (managed), or Grafana Enterpr
   
   
   
+  
+  
+  
 
 
 Kibana is included with the Elastic Stack. Deployment options include Elastic Cloud (managed), self-hosted, or Docker. Kibana configuration is tightly coupled to Elasticsearch cluster topology.
@@ -533,10 +601,16 @@ Kibana is included with the Elastic Stack. Deployment options include Elastic Cl
   
   
   
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
   
   
   

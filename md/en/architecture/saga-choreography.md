@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/saga-choreography.html
   
 
 
+# Saga Choreography Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Saga choreography distributes saga execution across participating services through event-driven coordination. There is no central coordinator — each service performs its local transaction, publishes an event, and subscribes to events that trigger its next action. This decentralized approach maximizes autonomy and minimizes coupling, making it attractive for systems where team independence and service evolution are paramount. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ In a choreographed saga, each service owns its part of the workflow. When the Or
   
   
   
+  
+  
+  
 
 
 The strength of choreography is that each service only knows about its own domain events. New services can be added by subscribing to existing events and publishing new ones — no existing service needs to change. This makes choreography highly extensible and aligned with bounded context boundaries. Each team can evolve its service independently as long as event contracts remain compatible. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Error handling in choreography is decentralized but nontrivial. If the Payment S
   
   
   
+  
+  
+  
 
 
 Consider the order cancellation scenario. The Order Service publishes OrderCancelled. The Payment Service initiates a refund. The Inventory Service releases stock. The Shipping Service cancels the shipment if not yet dispatched. Each service independently handles cancellation. If any compensation fails, that service must retry or escalate. There is no central authority that can enforce the complete compensation sequence. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Monitoring is the most significant challenge. In a choreographed saga, there is 
   
   
   
+  
+  
+  
 
 
 Debugging failures requires correlating events across service boundaries. When a saga stalls — a step does not produce the expected event — the cause may be in any participating service. The monitoring team must trace through event logs to find the missing event. This is significantly harder than checking the orchestrator's state in an orchestrated saga. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ When should choreography be preferred over orchestration? Choreography suits sag
   
   
   
+  
+  
+  
 
 
 Domain characteristics matter. Sagas where each step is independently useful and compensatable lend themselves to choreography. Sagas that require conditional branching or complex coordination logic are better served by orchestration. A good rule of thumb: if you can describe the saga as a simple linear chain of events, choreography may suffice. If the saga requires any "or," "if," or "while" logic, orchestration is safer. 
 
+  
+  
+  
   
   
   

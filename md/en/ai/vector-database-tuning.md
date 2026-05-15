@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/vector-database-tuning.html
   
 
 
+# Vector Database Tuning: Index Parameters, Search Configuration, and Hybrid Search
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Vector databases are the backbone of modern RAG applications. But default configurations rarely give optimal results. Tuning your vector database for your specific data distribution and query patterns can improve recall by 20% or more while reducing latency. Here is the tuning guide.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Vector databases are the backbone of modern RAG applications. But default config
   
   
   
+  
+  
+  
 
 
 Vector databases support multiple index types, each with different trade-offs between search speed, memory usage, and recall accuracy.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ HNSW Hierarchical Navigable Small World is the default choice for most applicati
   
   
   
+  
+  
+  
 
 
 IVF Inverted File Index is more memory-efficient than HNSW. It partitions vectors into clusters and searches only the nearest clusters during query. IVF requires more tuning to balance speed and accuracy but uses significantly less memory.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ There is no universal best index. HNSW is a safe starting point for most applica
   
   
   
+  
+  
+  
 
 
 ##  HNSW Parameter Tuning
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ HNSW has two critical parameters: M and ef_construction. M controls the number o
   
   
   
+  
+  
+  
 
 
 Ef_construction controls the dynamic candidate list size during index construction. Higher values produce better recall at the cost of slower index building. Start with 200 and adjust based on your build time tolerance.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ The search-time parameter ef controls the candidate list size during query. High
   
   
   
+  
+  
+  
 
 
 ##  Distance Metrics
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ The choice of distance metric affects both retrieval quality and performance. Co
   
   
   
+  
+  
+  
 
 
 L2 Euclidean distance measures straight-line distance in vector space. For normalized embeddings, cosine similarity and L2 produce equivalent rankings because normalization maps Euclidean distances to cosine similarity. For unnormalized embeddings, the choice matters.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Inner product works well for embeddings trained with inner product loss function
   
   
   
+  
+  
+  
 
 
 Use the distance metric that matches your embedding model's training objective. Check the documentation for your embedding model. Using the wrong metric silently degrades retrieval quality by 5-15%.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Use the distance metric that matches your embedding model's training objective. 
   
   
   
+  
+  
+  
 
 
 Beyond index type and parameters, search configuration affects quality. The number of results returned top_k is the most important setting.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Optimal top_k depends on your RAG pipeline. If the LLM can handle large context 
   
   
   
+  
+  
+  
 
 
 Consider rescoring after initial retrieval. Run a fast initial search with a small ef to get 50 candidates, then rescore those candidates with a more accurate method or a different model. This two-stage approach balances speed and quality.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Filters and pre-filters affect search behavior. Pre-filtering before vector sear
   
   
   
+  
+  
+  
 
 
 ##  Hybrid Search
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Hybrid search combines vector similarity with keyword matching. It catches exact
   
   
   
+  
+  
+  
 
 
 Implement hybrid search with weighted scoring: assign a weight to vector similarity score and a weight to keyword score, then combine them. Start with 70% vector, 30% keyword and adjust based on your query analysis.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ BM25 is the standard keyword scoring algorithm. It works well for exact term mat
   
   
   
+  
+  
+  
 
 
 Analyze your query patterns to tune the hybrid weight. Queries with specific terminology benefit more from keyword weight. Conversational queries benefit more from vector weight. If possible, tune the weight per query type.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Analyze your query patterns to tune the hybrid weight. Queries with specific ter
   
   
   
+  
+  
+  
 
 
 Vector database performance degrades over time as data is added and updated. Monitor recall, latency, and memory usage monthly.
 
+  
+  
+  
   
   
   
@@ -971,6 +1084,9 @@ Rebuild indexes periodically. Index fragmentation reduces performance over time.
   
   
   
+  
+  
+  
 
 
 Vacuum deleted vectors. Deleted vectors in IVF and HNSW indexes are marked but not removed. Over time, these phantom entries degrade performance. Regular cleanup restores index efficiency.
@@ -1000,10 +1116,16 @@ Vacuum deleted vectors. Deleted vectors in IVF and HNSW indexes are marked but n
   
   
   
+  
+  
+  
 
 
 Test index changes on a production copy before deploying. A parameter change that improves recall by 5% but doubles latency is not an improvement if latency was already marginal.
 
+  
+  
+  
   
   
   

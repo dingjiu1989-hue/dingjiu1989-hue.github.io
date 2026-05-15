@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/bulkhead-pattern.html
   
 
 
+# Bulkhead Pattern for Resilience
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The Bulkhead pattern is a resilience strategy inspired by ship design: just as a ship's watertight compartments prevent a single hull breach from sinking the entire vessel, the Bulkhead pattern isolates components of a software system so that a failure in one part does not cascade to others. By partitioning resources into isolated pools, the Bulkhead pattern ensures that a misbehaving component cannot exhaust shared resources and bring down the entire system. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Core Concept
   
   
   
+  
+  
+  
 
 
 In a system without bulkheads, all requests compete for the same thread pool, database connection pool, or memory space. If one service becomes slow or unresponsive, its threads are held for extended periods. Eventually, the shared thread pool is exhausted, and all other services become unavailable—a catastrophic failure cascade. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Bulkheads prevent this by allocating dedicated resource pools to different compo
   
   
   
+  
+  
+  
 
 
 Thread Pool Bulkheads 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ The most common implementation is thread pool isolation. Each downstream depende
   
   
   
+  
+  
+  
 
 
 Java's ExecutorService, .NET's TaskScheduler, and Python's ThreadPoolExecutor all support creating isolated pools. Resilience libraries like Hystrix and Resilience4j provide ready-made bulkhead implementations with monitoring and configuration capabilities. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Semaphore Bulkheads
   
   
   
+  
+  
+  
 
 
 An alternative to thread pools is semaphore-based isolation. Rather than dedicating threads, semaphore bulkheads limit the number of concurrent calls to a dependency. If the semaphore's permits are exhausted, subsequent calls are rejected immediately without consuming a thread. Semaphore bulkheads are lightweight and suitable for non-blocking or asynchronous code paths. 
 
+  
+  
+  
   
   
   
@@ -360,10 +416,16 @@ The trade-off is that semaphore bulkheads do not provide thread isolation. They 
   
   
   
+  
+  
+  
 
 
 Circuit Breaker Integration 
 
+  
+  
+  
   
   
   
@@ -406,10 +468,16 @@ Bulkheads work synergistically with circuit breakers. While bulkheads limit reso
   
   
   
+  
+  
+  
 
 
 This combination is the foundation of modern resilience engineering. Libraries like Resilience4j provide bulkhead, circuit breaker, rate limiter, retry, and time limiter as composable decorators, allowing teams to build sophisticated resilience policies from simple building blocks. 
 
+  
+  
+  
   
   
   
@@ -452,6 +520,9 @@ Configuration Best Practices
   
   
   
+  
+  
+  
 
 
 Proper bulkhead sizing requires understanding your system's concurrency model and traffic patterns. A good starting point is to set bulkhead sizes based on the maximum expected concurrent requests to each dependency, plus headroom. Monitoring is essential: track bulkhead rejection rates, thread utilization, and queue depths to tune sizes over time. 
@@ -475,10 +546,16 @@ Proper bulkhead sizing requires understanding your system's concurrency model an
   
   
   
+  
+  
+  
 
 
 Bulkheads should also have sensible fallback behaviors. When a bulkhead is full, rejected requests can be queued (with a timeout), failed fast, or routed to a degraded fallback. The choice depends on the criticality of the dependency and the user experience requirements. 
 
+  
+  
+  
   
   
   

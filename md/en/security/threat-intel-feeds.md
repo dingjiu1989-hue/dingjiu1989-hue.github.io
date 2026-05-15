@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/threat-intel-feeds.html
   
 
 
+# Threat Intelligence Feeds
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Threat Intelligence Fundamentals 
 
+  
+  
+  
   
   
   
@@ -176,6 +208,9 @@ Threat intelligence transforms raw data into actionable security insights. Feeds
   
   
   
+  
+  
+  
 
 
 STIX and TAXII Standards 
@@ -199,10 +234,16 @@ STIX and TAXII Standards
   
   
   
+  
+  
+  
 
 
 STIX (Structured Threat Information Expression) and TAXII (Trusted Automated Exchange of Intelligence Indicators) are the industry standards for threat intelligence exchange. 
 
+  
+  
+  
   
   
   
@@ -251,10 +292,16 @@ from stix2 import Indicator, Bundle, TAXIICollectionSource
   
   
   
+  
+  
+  
 
 
 from taxii2client import Collection
 
+  
+  
+  
   
   
   
@@ -303,10 +350,16 @@ from taxii2client import Collection
   
   
   
+  
+  
+  
 
 
 indicator = Indicator(
 
+  
+  
+  
   
   
   
@@ -355,10 +408,16 @@ name="Malicious IP",
   
   
   
+  
+  
+  
 
 
 indicator_types=["malicious-activity"],
 
+  
+  
+  
   
   
   
@@ -407,10 +466,16 @@ pattern="[ipv4-addr:value = '203.0.113.5']",
   
   
   
+  
+  
+  
 
 
 pattern_type="stix",
 
+  
+  
+  
   
   
   
@@ -459,10 +524,16 @@ valid_from="2026-01-01T00:00:00Z"
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -511,10 +582,16 @@ valid_from="2026-01-01T00:00:00Z"
   
   
   
+  
+  
+  
 
 
 bundle = Bundle(indicator)
 
+  
+  
+  
   
   
   
@@ -563,10 +640,16 @@ print(bundle.serialize(pretty=True))
   
   
   
+  
+  
+  
 
 
 # Consume from TAXII feed
 
+  
+  
+  
   
   
   
@@ -615,10 +698,16 @@ collection = Collection("https://taxii.example.com/collections/123")
   
   
   
+  
+  
+  
 
 
 source = TAXIICollectionSource(collection)
 
+  
+  
+  
   
   
   
@@ -667,10 +756,16 @@ for indicator in source.query():
   
   
   
+  
+  
+  
 
 
 print(indicator["name"], indicator["pattern"])
 
+  
+  
+  
   
   
   
@@ -716,10 +811,16 @@ Feed Integration with SIEM
   
   
   
+  
+  
+  
 
 
 Ingest feeds into your SIEM for correlation: 
 
+  
+  
+  
   
   
   
@@ -768,10 +869,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 from elasticsearch import Elasticsearch
 
+  
+  
+  
   
   
   
@@ -820,10 +927,16 @@ class ThreatIntelIngestor:
   
   
   
+  
+  
+  
 
 
 def __init__(self, es_host="localhost:9200"):
 
+  
+  
+  
   
   
   
@@ -872,10 +985,16 @@ self.es = Elasticsearch([es_host])
   
   
   
+  
+  
+  
 
 
 def fetch_and_index(self, feed_url, feed_name):
 
+  
+  
+  
   
   
   
@@ -924,10 +1043,16 @@ resp = requests.get(feed_url, headers={"Accept": "application/stix+json"})
   
   
   
+  
+  
+  
 
 
 indicators = resp.json().get("objects", [])
 
+  
+  
+  
   
   
   
@@ -976,10 +1101,16 @@ for ioc in indicators:
   
   
   
+  
+  
+  
 
 
 doc = {
 
+  
+  
+  
   
   
   
@@ -1028,10 +1159,16 @@ doc = {
   
   
   
+  
+  
+  
 
 
 "type": ioc.get("type"),
 
+  
+  
+  
   
   
   
@@ -1080,10 +1217,16 @@ doc = {
   
   
   
+  
+  
+  
 
 
 "severity": ioc.get("confidence", 50),
 
+  
+  
+  
   
   
   
@@ -1132,10 +1275,16 @@ doc = {
   
   
   
+  
+  
+  
 
 
 "ingested_at": "now"
 
+  
+  
+  
   
   
   
@@ -1184,10 +1333,16 @@ doc = {
   
   
   
+  
+  
+  
 
 
 self.es.index(index="threat-intel", body=doc)
 
+  
+  
+  
   
   
   
@@ -1236,6 +1391,9 @@ print(f"Ingested {len(indicators)} indicators from {feed_name}")
   
   
   
+  
+  
+  
 
 
 IOC Scoring 
@@ -1259,10 +1417,16 @@ IOC Scoring
   
   
   
+  
+  
+  
 
 
 Not all indicators are equally reliable. Implement scoring: 
 
+  
+  
+  
   
   
   
@@ -1311,10 +1475,16 @@ def score_indicator(ioc, context):
   
   
   
+  
+  
+  
 
 
 score = 50 # Base score
 
+  
+  
+  
   
   
   
@@ -1363,10 +1533,16 @@ score = 50 # Base score
   
   
   
+  
+  
+  
 
 
 age_days = (datetime.utcnow() - ioc.valid_from).days
 
+  
+  
+  
   
   
   
@@ -1415,10 +1591,16 @@ score -= min(age_days * 2, 30)
   
   
   
+  
+  
+  
 
 
 # Multiple feeds increase confidence
 
+  
+  
+  
   
   
   
@@ -1467,10 +1649,16 @@ feed_count = len(ioc.get("sources", []))
   
   
   
+  
+  
+  
 
 
 score += feed_count * 10
 
+  
+  
+  
   
   
   
@@ -1519,10 +1707,16 @@ score += feed_count * 10
   
   
   
+  
+  
+  
 
 
 if context.get("industry") in ioc.get("target_industries", []):
 
+  
+  
+  
   
   
   
@@ -1571,10 +1765,16 @@ score += 20
   
   
   
+  
+  
+  
 
 
 return min(max(score, 0), 100)
 
+  
+  
+  
   
   
   
@@ -1620,10 +1820,16 @@ Feed Quality Metrics
   
   
   
+  
+  
+  
 
 
 Evaluate feeds on these criteria: 
 
+  
+  
+  
   
   
   
@@ -1666,6 +1872,9 @@ Evaluate feeds on these criteria:
   
   
   
+  
+  
+  
 
 
 Automated Blocking 
@@ -1689,10 +1898,16 @@ Automated Blocking
   
   
   
+  
+  
+  
 
 
 High-confidence indicators can trigger automated blocking: 
 
+  
+  
+  
   
   
   
@@ -1741,6 +1956,9 @@ High-confidence indicators can trigger automated blocking:
   
   
   
+  
+  
+  
 
 
 automation_rules:
@@ -1767,10 +1985,16 @@ automation_rules:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: block_malicious_ips
 
+  
+  
+  
   
   
   
@@ -1819,6 +2043,9 @@ trigger: new_indicator
   
   
   
+  
+  
+  
 
 
 conditions:
@@ -1845,36 +2072,45 @@ conditions:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: ">= 80"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- indicator_type: ipv4-addr
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- score: ">= 80"
+
+  
+  
+  
   
   
   
@@ -1923,10 +2159,16 @@ actions:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- update_firewall:
 
+  
+  
+  
   
   
   
@@ -1975,6 +2217,9 @@ action: deny
   
   
   
+  
+  
+  
 
 
 source: indicator.value
@@ -2001,10 +2246,16 @@ source: indicator.value
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- alert:
 
+  
+  
+  
   
   
   
@@ -2053,6 +2304,9 @@ severity: high
   
   
   
+  
+  
+  
 
 
 channel: security-operations
@@ -2079,10 +2333,16 @@ channel: security-operations
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

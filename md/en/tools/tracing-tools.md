@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/tracing-tools.html
   
 
 
+# Tracing Tools: Jaeger, Zipkin, Tempo, OpenTelemetry Collector
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Distributed tracing is essential for understanding request flows across microser
   
   
   
+  
+  
+  
 
 
 ##  OpenTelemetry Collector
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ The foundation for modern observability — receives, processes, and exports tel
   
   
   
+  
+  
+  
 
 
 # otel-collector-config.yaml
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ receivers:
   
   
   
+  
+  
+  
 
 
 otlp:
 
+  
+  
+  
   
   
   
@@ -391,6 +444,9 @@ protocols:
   
   
   
+  
+  
+  
 
 
 grpc:
@@ -420,10 +476,16 @@ grpc:
   
   
   
+  
+  
+  
 
 
 endpoint: 0.0.0.0:4317
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ http:
   
   
   
+  
+  
+  
 
 
 endpoint: 0.0.0.0:4318
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ processors:
   
   
   
+  
+  
+  
 
 
 batch:
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ timeout: 1s
   
   
   
+  
+  
+  
 
 
 send_batch_size: 1024
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ memory_limiter:
   
   
   
+  
+  
+  
 
 
 check_interval: 1s
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ limit_mib: 512
   
   
   
+  
+  
+  
 
 
 attributes:
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ actions:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key: environment
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- key: environment
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ value: production
   
   
   
+  
+  
+  
 
 
 action: insert
 
+  
+  
+  
   
   
   
@@ -884,6 +988,9 @@ filter:
   
   
   
+  
+  
+  
 
 
 error_mode: ignore
@@ -913,10 +1020,16 @@ error_mode: ignore
   
   
   
+  
+  
+  
 
 
 traces:
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ span:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'attributes["http.method"] == "OPTIONS"'
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- 'attributes["http.method"] == "OPTIONS"'
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ span:
   
   
   
+  
+  
+  
 
 
 probabilistic_sampler:
 
+  
+  
+  
   
   
   
@@ -1087,6 +1212,9 @@ sampling_percentage: 10 # Only send 10% of traces
   
   
   
+  
+  
+  
 
 
 exporters:
@@ -1116,10 +1244,16 @@ exporters:
   
   
   
+  
+  
+  
 
 
 otlp:
 
+  
+  
+  
   
   
   
@@ -1174,10 +1308,16 @@ endpoint: jaeger:4317
   
   
   
+  
+  
+  
 
 
 tls:
 
+  
+  
+  
   
   
   
@@ -1232,10 +1372,16 @@ insecure: true
   
   
   
+  
+  
+  
 
 
 prometheus:
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ endpoint: 0.0.0.0:8889
   
   
   
+  
+  
+  
 
 
 debug:
 
+  
+  
+  
   
   
   
@@ -1348,10 +1500,16 @@ verbosity: detailed
   
   
   
+  
+  
+  
 
 
 service:
 
+  
+  
+  
   
   
   
@@ -1406,6 +1564,9 @@ pipelines:
   
   
   
+  
+  
+  
 
 
 traces:
@@ -1435,10 +1596,16 @@ traces:
   
   
   
+  
+  
+  
 
 
 receivers: [otlp]
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ processors: [memory_limiter, batch, attributes, filter, probabilistic_sampler]
   
   
   
+  
+  
+  
 
 
 exporters: [otlp, debug]
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ metrics:
   
   
   
+  
+  
+  
 
 
 receivers: [otlp]
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ processors: [batch]
   
   
   
+  
+  
+  
 
 
 exporters: [prometheus]
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ exporters: [prometheus]
   
   
   
+  
+  
+  
 
 
 otelcol --config otel-collector-config.yaml
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ otelcol --config otel-collector-config.yaml
   
   
   
+  
+  
+  
 
 
 docker run -v $(pwd)/otel-collector-config.yaml:/etc/otel/config.yaml otel/opentelemetry-collector-contrib
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ docker run -v $(pwd)/otel-collector-config.yaml:/etc/otel/config.yaml otel/opent
   
   
   
+  
+  
+  
 
 
 ##  Jaeger
 
+  
+  
+  
   
   
   
@@ -1841,6 +2044,9 @@ Uber's distributed tracing system, now a CNCF graduated project:
   
   
   
+  
+  
+  
 
 
 # docker-compose.yml
@@ -1870,10 +2076,16 @@ Uber's distributed tracing system, now a CNCF graduated project:
   
   
   
+  
+  
+  
 
 
 services:
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ jaeger:
   
   
   
+  
+  
+  
 
 
 image: jaegertracing/all-in-one:latest
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ environment:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- COLLECTOR_OTLP_ENABLED=true
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- COLLECTOR_OTLP_ENABLED=true
 
+  
+  
+  
   
   
   
@@ -2044,39 +2268,16 @@ ports:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "16686:16686" # UI
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4317:4317" # OTLP gRPC
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "16686:16686" # UI
 
+  
+  
+  
   
   
   
@@ -2104,8 +2305,43 @@ ports:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4317:4317" # OTLP gRPC
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "4318:4318" # OTLP HTTP
+
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ ports:
   
   
   
+  
+  
+  
 
 
 from opentelemetry import trace
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ from opentelemetry.sdk.trace import TracerProvider
   
   
   
+  
+  
+  
 
 
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExport
   
   
   
+  
+  
+  
 
 
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
 
+  
+  
+  
   
   
   
@@ -2334,6 +2588,9 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
   
   
   
+  
+  
+  
 
 
 # Set up tracing
@@ -2363,10 +2620,16 @@ from opentelemetry.instrumentation.requests import RequestsInstrumentor
   
   
   
+  
+  
+  
 
 
 provider = TracerProvider()
 
+  
+  
+  
   
   
   
@@ -2421,10 +2684,16 @@ processor = BatchSpanProcessor(OTLPSpanExporter(
   
   
   
+  
+  
+  
 
 
 endpoint="http://jaeger:4317",
 
+  
+  
+  
   
   
   
@@ -2479,10 +2748,16 @@ insecure=True,
   
   
   
+  
+  
+  
 
 
 ))
 
+  
+  
+  
   
   
   
@@ -2537,10 +2812,16 @@ provider.add_span_processor(processor)
   
   
   
+  
+  
+  
 
 
 trace.set_tracer_provider(provider)
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 FlaskInstrumentor().instrument()
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ RequestsInstrumentor().instrument()
   
   
   
+  
+  
+  
 
 
 # Manual instrumentation
 
+  
+  
+  
   
   
   
@@ -2711,10 +3004,16 @@ from opentelemetry import trace
   
   
   
+  
+  
+  
 
 
 tracer = trace.get_tracer(__name__)
 
+  
+  
+  
   
   
   
@@ -2769,10 +3068,16 @@ tracer = trace.get_tracer(__name__)
   
   
   
+  
+  
+  
 
 
 def get_order(order_id):
 
+  
+  
+  
   
   
   
@@ -2827,10 +3132,16 @@ with tracer.start_as_current_span("process_order") as span:
   
   
   
+  
+  
+  
 
 
 span.set_attribute("order.id", order_id)
 
+  
+  
+  
   
   
   
@@ -2885,10 +3196,16 @@ span.set_attribute("order.value", 99.50)
   
   
   
+  
+  
+  
 
 
 with tracer.start_as_current_span("validate_cache") as child:
 
+  
+  
+  
   
   
   
@@ -2943,10 +3260,16 @@ cached = cache.get(order_id)
   
   
   
+  
+  
+  
 
 
 child.set_attribute("cache.hit", cached is not None)
 
+  
+  
+  
   
   
   
@@ -3001,10 +3324,16 @@ with tracer.start_as_current_span("query_database") as db_span:
   
   
   
+  
+  
+  
 
 
 order = db.query("SELECT * FROM orders WHERE id = ?", order_id)
 
+  
+  
+  
   
   
   
@@ -3059,10 +3388,16 @@ db_span.set_attribute("db.rows", 1)
   
   
   
+  
+  
+  
 
 
 return order
 
+  
+  
+  
   
   
   
@@ -3117,10 +3452,16 @@ return order
   
   
   
+  
+  
+  
 
 
 ##  Tempo (Grafana Tempo)
 
+  
+  
+  
   
   
   
@@ -3175,10 +3516,16 @@ Grafana's tracing backend with object storage for cost-effective retention:
   
   
   
+  
+  
+  
 
 
 # tempo-config.yaml
 
+  
+  
+  
   
   
   
@@ -3233,10 +3580,16 @@ server:
   
   
   
+  
+  
+  
 
 
 http_listen_port: 3200
 
+  
+  
+  
   
   
   
@@ -3291,10 +3644,16 @@ distributor:
   
   
   
+  
+  
+  
 
 
 receivers:
 
+  
+  
+  
   
   
   
@@ -3349,10 +3708,16 @@ otlp:
   
   
   
+  
+  
+  
 
 
 protocols:
 
+  
+  
+  
   
   
   
@@ -3407,10 +3772,16 @@ grpc:
   
   
   
+  
+  
+  
 
 
 endpoint: 0.0.0.0:4317
 
+  
+  
+  
   
   
   
@@ -3465,10 +3836,16 @@ ingester:
   
   
   
+  
+  
+  
 
 
 trace_idle_period: 10s
 
+  
+  
+  
   
   
   
@@ -3523,10 +3900,16 @@ max_block_duration: 5m
   
   
   
+  
+  
+  
 
 
 storage:
 
+  
+  
+  
   
   
   
@@ -3581,10 +3964,16 @@ trace:
   
   
   
+  
+  
+  
 
 
 backend: s3
 
+  
+  
+  
   
   
   
@@ -3639,10 +4028,16 @@ s3:
   
   
   
+  
+  
+  
 
 
 bucket: grafana-tempo-data
 
+  
+  
+  
   
   
   
@@ -3697,10 +4092,16 @@ endpoint: s3.us-east-1.amazonaws.com
   
   
   
+  
+  
+  
 
 
 access_key: ${AWS_ACCESS_KEY_ID}
 
+  
+  
+  
   
   
   
@@ -3755,10 +4156,16 @@ secret_key: ${AWS_SECRET_ACCESS_KEY}
   
   
   
+  
+  
+  
 
 
 pool:
 
+  
+  
+  
   
   
   
@@ -3813,10 +4220,16 @@ max_workers: 100
   
   
   
+  
+  
+  
 
 
 queue_depth: 10000
 
+  
+  
+  
   
   
   
@@ -3871,10 +4284,16 @@ compactor:
   
   
   
+  
+  
+  
 
 
 compaction:
 
+  
+  
+  
   
   
   
@@ -3929,10 +4348,16 @@ block_retention: 336h # 14 days
   
   
   
+  
+  
+  
 
 
 querier:
 
+  
+  
+  
   
   
   
@@ -3987,10 +4412,16 @@ search:
   
   
   
+  
+  
+  
 
 
 max_duration: 168h # 7 days of searchable data
 
+  
+  
+  
   
   
   
@@ -4045,10 +4476,16 @@ max_duration: 168h # 7 days of searchable data
   
   
   
+  
+  
+  
 
 
 docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest
 
+  
+  
+  
   
   
   
@@ -4103,10 +4540,16 @@ docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest
   
   
   
+  
+  
+  
 
 
 # Grafana datasource: Tempo
 
+  
+  
+  
   
   
   
@@ -4161,10 +4604,16 @@ docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest
   
   
   
+  
+  
+  
 
 
 # { resource.service.name = "payment-service" && span.http.status_code >= 500 }
 
+  
+  
+  
   
   
   
@@ -4219,10 +4668,16 @@ docker run -v $(pwd)/tempo-config.yaml:/etc/tempo.yaml grafana/tempo:latest
   
   
   
+  
+  
+  
 
 
 ##  Zipkin
 
+  
+  
+  
   
   
   
@@ -4277,10 +4732,16 @@ Twitter's distributed tracing system (original inspiration for OpenTracing):
   
   
   
+  
+  
+  
 
 
 # docker-compose.yml
 
+  
+  
+  
   
   
   
@@ -4335,10 +4796,16 @@ services:
   
   
   
+  
+  
+  
 
 
 zipkin:
 
+  
+  
+  
   
   
   
@@ -4393,6 +4860,9 @@ image: openzipkin/zipkin:latest
   
   
   
+  
+  
+  
 
 
 ports:
@@ -4422,10 +4892,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "9411:9411"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- "9411:9411"
 
+  
+  
+  
   
   
   
@@ -4480,10 +4956,16 @@ ports:
   
   
   
+  
+  
+  
 
 
 from opentelemetry.exporter.zipkin.json import ZipkinExporter
 
+  
+  
+  
   
   
   
@@ -4538,10 +5020,16 @@ zipkin_exporter = ZipkinExporter(
   
   
   
+  
+  
+  
 
 
 endpoint="http://zipkin:9411/api/v2/spans",
 
+  
+  
+  
   
   
   
@@ -4596,10 +5084,16 @@ endpoint="http://zipkin:9411/api/v2/spans",
   
   
   
+  
+  
+  
 
 
 provider = TracerProvider()
 
+  
+  
+  
   
   
   
@@ -4654,10 +5148,16 @@ provider.add_span_processor(BatchSpanProcessor(zipkin_exporter))
   
   
   
+  
+  
+  
 
 
 trace.set_tracer_provider(provider)
 
+  
+  
+  
   
   
   
@@ -4712,10 +5212,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 | Feature | Jaeger | Zipkin | Tempo | OTel Collector |
 
+  
+  
+  
   
   
   
@@ -4770,10 +5276,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 | Storage | Cassandra, ES, Badger | Cassandra, ES, in-memory | S3, GCS, Azure | N/A (pass-through) |
 
+  
+  
+  
   
   
   
@@ -4828,10 +5340,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 | Query language | Tags/JSON | Tags | TraceQL | N/A |
 
+  
+  
+  
   
   
   
@@ -4886,10 +5404,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 | Sampling | Head, tail | Head | Head | Head, tail |
 
+  
+  
+  
   
   
   
@@ -4944,10 +5468,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -4999,10 +5529,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 * **Grafana ecosystem**: Tempo for seamless integration with Grafana dashboards and Loki logs. TraceQL is powerful.
 
+  
+  
+  
   
   
   
@@ -5051,10 +5587,16 @@ trace.set_tracer_provider(provider)
   
   
   
+  
+  
+  
 
 
 * **Data pipeline**: OpenTelemetry Collector as the central hub for receiving and routing all telemetry.
 
+  
+  
+  
   
   
   

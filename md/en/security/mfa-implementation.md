@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/mfa-implementation.html
   
 
 
+# MFA Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 MFA Fundamentals 
 
+  
+  
+  
   
   
   
@@ -176,6 +208,9 @@ Multi-factor authentication requires two or more factors: something you know (pa
   
   
   
+  
+  
+  
 
 
 TOTP Implementation 
@@ -199,10 +234,16 @@ TOTP Implementation
   
   
   
+  
+  
+  
 
 
 Time-based One-Time Passwords (TOTP) are the most widely deployed MFA method: 
 
+  
+  
+  
   
   
   
@@ -251,10 +292,16 @@ import pyotp
   
   
   
+  
+  
+  
 
 
 import qrcode
 
+  
+  
+  
   
   
   
@@ -303,10 +350,16 @@ import io
   
   
   
+  
+  
+  
 
 
 import base64
 
+  
+  
+  
   
   
   
@@ -355,10 +408,16 @@ class TOTPManager:
   
   
   
+  
+  
+  
 
 
 def __init__(self, issuer="Example Corp"):
 
+  
+  
+  
   
   
   
@@ -407,10 +466,16 @@ self.issuer = issuer
   
   
   
+  
+  
+  
 
 
 def generate_secret(self):
 
+  
+  
+  
   
   
   
@@ -459,6 +524,9 @@ return pyotp.random_base32()
   
   
   
+  
+  
+  
 
 
 def get_provisioning_uri(self, email, secret):
@@ -485,10 +553,16 @@ def get_provisioning_uri(self, email, secret):
   
   
   
+  
+  
+  
 
 
 totp = pyotp.TOTP(secret)
 
+  
+  
+  
   
   
   
@@ -537,10 +611,16 @@ return totp.provisioning_uri(name=email, issuer_name=self.issuer)
   
   
   
+  
+  
+  
 
 
 def generate_qr(self, email, secret):
 
+  
+  
+  
   
   
   
@@ -589,10 +669,16 @@ uri = self.get_provisioning_uri(email, secret)
   
   
   
+  
+  
+  
 
 
 qr = qrcode.make(uri)
 
+  
+  
+  
   
   
   
@@ -641,10 +727,16 @@ buf = io.BytesIO()
   
   
   
+  
+  
+  
 
 
 qr.save(buf, format="PNG")
 
+  
+  
+  
   
   
   
@@ -693,6 +785,9 @@ return base64.b64encode(buf.getvalue()).decode()
   
   
   
+  
+  
+  
 
 
 def verify_code(self, secret, code):
@@ -719,10 +814,16 @@ def verify_code(self, secret, code):
   
   
   
+  
+  
+  
 
 
 totp = pyotp.TOTP(secret)
 
+  
+  
+  
   
   
   
@@ -771,10 +872,16 @@ totp = pyotp.TOTP(secret)
   
   
   
+  
+  
+  
 
 
 return totp.verify(code, valid_window=1)
 
+  
+  
+  
   
   
   
@@ -823,10 +930,16 @@ def get_current_code(self, secret):
   
   
   
+  
+  
+  
 
 
 totp = pyotp.TOTP(secret)
 
+  
+  
+  
   
   
   
@@ -875,10 +988,16 @@ return totp.now()
   
   
   
+  
+  
+  
 
 
 SMS-Based MFA 
 
+  
+  
+  
   
   
   
@@ -927,10 +1046,16 @@ import random
   
   
   
+  
+  
+  
 
 
 import string
 
+  
+  
+  
   
   
   
@@ -979,10 +1104,16 @@ class SMSMFAManager:
   
   
   
+  
+  
+  
 
 
 def __init__(self, sms_provider):
 
+  
+  
+  
   
   
   
@@ -1031,10 +1162,16 @@ self.sms_provider = sms_provider
   
   
   
+  
+  
+  
 
 
 self.codes = {} # phone -> {code, expires_at}
 
+  
+  
+  
   
   
   
@@ -1083,10 +1220,16 @@ def send_code(self, phone):
   
   
   
+  
+  
+  
 
 
 code = ''.join(random.choices(string.digits, k=6))
 
+  
+  
+  
   
   
   
@@ -1135,10 +1278,16 @@ expiry = datetime.utcnow() + timedelta(minutes=5)
   
   
   
+  
+  
+  
 
 
 self.codes[phone] = {"code": code, "expires_at": expiry}
 
+  
+  
+  
   
   
   
@@ -1187,10 +1336,16 @@ self.sms_provider.send(phone, f"Your code is: {code}")
   
   
   
+  
+  
+  
 
 
 return True
 
+  
+  
+  
   
   
   
@@ -1239,10 +1394,16 @@ def verify_code(self, phone, code):
   
   
   
+  
+  
+  
 
 
 stored = self.codes.get(phone)
 
+  
+  
+  
   
   
   
@@ -1291,10 +1452,16 @@ if not stored:
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -1343,6 +1510,9 @@ if datetime.utcnow() > stored["expires_at"]:
   
   
   
+  
+  
+  
 
 
 del self.codes[phone]
@@ -1369,10 +1539,16 @@ del self.codes[phone]
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -1421,10 +1597,16 @@ if stored["code"] != code:
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -1473,10 +1655,16 @@ del self.codes[phone]
   
   
   
+  
+  
+  
 
 
 return True
 
+  
+  
+  
   
   
   
@@ -1525,10 +1713,16 @@ Push Notification MFA
   
   
   
+  
+  
+  
 
 
 // Server-side push notification
 
+  
+  
+  
   
   
   
@@ -1577,10 +1771,16 @@ async function sendPushChallenge(userId, deviceToken) {
   
   
   
+  
+  
+  
 
 
 const challenge = crypto.randomUUID();
 
+  
+  
+  
   
   
   
@@ -1629,10 +1829,16 @@ const challenge = crypto.randomUUID();
   
   
   
+  
+  
+  
 
 
 await redis.set(
 
+  
+  
+  
   
   
   
@@ -1681,10 +1887,16 @@ await redis.set(
   
   
   
+  
+  
+  
 
 
 userId,
 
+  
+  
+  
   
   
   
@@ -1733,10 +1945,16 @@ userId,
   
   
   
+  
+  
+  
 
 
 120 // 2 minute expiry
 
+  
+  
+  
   
   
   
@@ -1785,10 +2003,16 @@ userId,
   
   
   
+  
+  
+  
 
 
 // Send push notification
 
+  
+  
+  
   
   
   
@@ -1837,10 +2061,16 @@ await admin.messaging().send({
   
   
   
+  
+  
+  
 
 
 token: deviceToken,
 
+  
+  
+  
   
   
   
@@ -1889,10 +2119,16 @@ data: {
   
   
   
+  
+  
+  
 
 
 type: "MFA_CHALLENGE",
 
+  
+  
+  
   
   
   
@@ -1941,10 +2177,16 @@ challenge: challenge,
   
   
   
+  
+  
+  
 
 
 appName: "Example App",
 
+  
+  
+  
   
   
   
@@ -1993,6 +2235,9 @@ timestamp: Date.now().toString()
   
   
   
+  
+  
+  
 
 
 }
@@ -2019,10 +2264,16 @@ timestamp: Date.now().toString()
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2071,10 +2322,16 @@ return challenge;
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2123,10 +2380,16 @@ return challenge;
   
   
   
+  
+  
+  
 
 
 async function respondToChallenge(challengeId, approved) {
 
+  
+  
+  
   
   
   
@@ -2175,10 +2438,16 @@ await fetch("/api/auth/mfa/push/respond", {
   
   
   
+  
+  
+  
 
 
 method: "POST",
 
+  
+  
+  
   
   
   
@@ -2227,10 +2496,16 @@ body: JSON.stringify({
   
   
   
+  
+  
+  
 
 
 challenge: challengeId,
 
+  
+  
+  
   
   
   
@@ -2279,10 +2554,16 @@ approved: approved,
   
   
   
+  
+  
+  
 
 
 deviceId: deviceId
 
+  
+  
+  
   
   
   
@@ -2331,10 +2612,16 @@ deviceId: deviceId
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2383,6 +2670,9 @@ deviceId: deviceId
   
   
   
+  
+  
+  
 
 
 Backup Codes 
@@ -2406,10 +2696,16 @@ Backup Codes
   
   
   
+  
+  
+  
 
 
 Always provide backup codes when users enroll in MFA: 
 
+  
+  
+  
   
   
   
@@ -2458,10 +2754,16 @@ def generate_backup_codes(count=10):
   
   
   
+  
+  
+  
 
 
 codes = []
 
+  
+  
+  
   
   
   
@@ -2510,10 +2812,16 @@ for _ in range(count):
   
   
   
+  
+  
+  
 
 
 code = '-'.join([
 
+  
+  
+  
   
   
   
@@ -2562,10 +2870,16 @@ code = '-'.join([
   
   
   
+  
+  
+  
 
 
 for _ in range(3)
 
+  
+  
+  
   
   
   
@@ -2614,10 +2928,16 @@ for _ in range(3)
   
   
   
+  
+  
+  
 
 
 hashed = hashlib.sha256(code.encode()).hexdigest()
 
+  
+  
+  
   
   
   
@@ -2666,10 +2986,16 @@ codes.append({"raw": code, "hashed": hashed})
   
   
   
+  
+  
+  
 
 
 return codes
 
+  
+  
+  
   
   
   
@@ -2718,10 +3044,16 @@ Enforcement Strategy
   
   
   
+  
+  
+  
 
 
 mfa_enforcement:
 
+  
+  
+  
   
   
   
@@ -2770,10 +3102,16 @@ all_users: true
   
   
   
+  
+  
+  
 
 
 grace_period: 30_days
 
+  
+  
+  
   
   
   
@@ -2822,6 +3160,9 @@ exclude_service_accounts: true
   
   
   
+  
+  
+  
 
 
 risk_based_prompting:
@@ -2848,36 +3189,16 @@ risk_based_prompting:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_device: prompt_mfa
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_location: prompt_mfa
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_device: prompt_mfa
 
+  
+  
+  
   
   
   
@@ -2902,8 +3223,40 @@ risk_based_prompting:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sensitive_action: require_mfa
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- new_location: prompt_mfa
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- sensitive_action: require_mfa
+
+  
+  
+  
   
   
   
@@ -2952,10 +3305,16 @@ recovery:
   
   
   
+  
+  
+  
 
 
 backup_codes: 10
 
+  
+  
+  
   
   
   
@@ -3004,6 +3363,9 @@ admin_recovery: "verify_with_id"
   
   
   
+  
+  
+  
 
 
 recovery_timeout: 24_hours
@@ -3030,10 +3392,16 @@ recovery_timeout: 24_hours
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

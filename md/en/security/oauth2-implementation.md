@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/oauth2-implementation.html
   
 
 
+# OAuth2 Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 OAuth2 Fundamentals 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ OAuth2 is the industry-standard protocol for authorization. It enables third-par
   
   
   
+  
+  
+  
 
 
 Grant Types 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Authorization Code Grant (with PKCE)
   
   
   
+  
+  
+  
 
 
 The recommended flow for public clients: 
 
+  
+  
+  
   
   
   
@@ -274,10 +318,16 @@ The recommended flow for public clients:
   
   
   
+  
+  
+  
 
 
 const crypto = require("crypto");
 
+  
+  
+  
   
   
   
@@ -326,10 +376,16 @@ function generatePKCE() {
   
   
   
+  
+  
+  
 
 
 const verifier = crypto.randomBytes(32)
 
+  
+  
+  
   
   
   
@@ -378,10 +434,16 @@ const verifier = crypto.randomBytes(32)
   
   
   
+  
+  
+  
 
 
 const challenge = crypto.createHash("sha256")
 
+  
+  
+  
   
   
   
@@ -430,10 +492,16 @@ const challenge = crypto.createHash("sha256")
   
   
   
+  
+  
+  
 
 
 .digest("base64url");
 
+  
+  
+  
   
   
   
@@ -482,10 +550,16 @@ return { verifier, challenge };
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -534,10 +608,16 @@ return { verifier, challenge };
   
   
   
+  
+  
+  
 
 
 const { verifier, challenge } = generatePKCE();
 
+  
+  
+  
   
   
   
@@ -586,10 +666,16 @@ const authUrl = `https://auth.example.com/authorize?
   
   
   
+  
+  
+  
 
 
 response_type=code&
 
+  
+  
+  
   
   
   
@@ -638,10 +724,16 @@ client_id=app123&
   
   
   
+  
+  
+  
 
 
 redirect_uri=https://app.example.com/callback&
 
+  
+  
+  
   
   
   
@@ -690,10 +782,16 @@ code_challenge=${challenge}&
   
   
   
+  
+  
+  
 
 
 code_challenge_method=S256&
 
+  
+  
+  
   
   
   
@@ -742,10 +840,16 @@ scope=openid%20profile`;
   
   
   
+  
+  
+  
 
 
 // Token exchange
 
+  
+  
+  
   
   
   
@@ -794,10 +898,16 @@ async function exchangeCode(code, verifier) {
   
   
   
+  
+  
+  
 
 
 const resp = await fetch("https://auth.example.com/token", {
 
+  
+  
+  
   
   
   
@@ -846,10 +956,16 @@ method: "POST",
   
   
   
+  
+  
+  
 
 
 headers: { "Content-Type": "application/x-www-form-urlencoded" },
 
+  
+  
+  
   
   
   
@@ -898,10 +1014,16 @@ body: new URLSearchParams({
   
   
   
+  
+  
+  
 
 
 grant_type: "authorization_code",
 
+  
+  
+  
   
   
   
@@ -950,10 +1072,16 @@ code: code,
   
   
   
+  
+  
+  
 
 
 client_id: "app123",
 
+  
+  
+  
   
   
   
@@ -1002,10 +1130,16 @@ code_verifier: verifier,
   
   
   
+  
+  
+  
 
 
 redirect_uri: "https://app.example.com/callback"
 
+  
+  
+  
   
   
   
@@ -1054,10 +1188,16 @@ redirect_uri: "https://app.example.com/callback"
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1106,10 +1246,16 @@ return resp.json();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1155,10 +1301,16 @@ Client Credentials Grant
   
   
   
+  
+  
+  
 
 
 For server-to-server communication: 
 
+  
+  
+  
   
   
   
@@ -1207,10 +1359,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 def get_client_credentials_token(client_id, client_secret, scope):
 
+  
+  
+  
   
   
   
@@ -1259,10 +1417,16 @@ resp = requests.post(
   
   
   
+  
+  
+  
 
 
 "https://auth.example.com/token",
 
+  
+  
+  
   
   
   
@@ -1311,10 +1475,16 @@ data={
   
   
   
+  
+  
+  
 
 
 "grant_type": "client_credentials",
 
+  
+  
+  
   
   
   
@@ -1363,10 +1533,16 @@ data={
   
   
   
+  
+  
+  
 
 
 "client_secret": client_secret,
 
+  
+  
+  
   
   
   
@@ -1415,10 +1591,16 @@ data={
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1467,10 +1649,16 @@ headers={"Content-Type": "application/x-www-form-urlencoded"}
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1519,6 +1707,9 @@ return resp.json()["access_token"]
   
   
   
+  
+  
+  
 
 
 Token Handling 
@@ -1542,10 +1733,16 @@ Token Handling
   
   
   
+  
+  
+  
 
 
 Access Token Validation 
 
+  
+  
+  
   
   
   
@@ -1594,10 +1791,16 @@ Access Token Validation
   
   
   
+  
+  
+  
 
 
 const jwt = require("jsonwebtoken");
 
+  
+  
+  
   
   
   
@@ -1646,10 +1849,16 @@ const jwksClient = require("jwks-rsa");
   
   
   
+  
+  
+  
 
 
 const client = jwksClient({
 
+  
+  
+  
   
   
   
@@ -1698,10 +1907,16 @@ jwksUri: "https://auth.example.com/.well-known/jwks.json"
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1750,10 +1965,16 @@ function verifyToken(req, res, next) {
   
   
   
+  
+  
+  
 
 
 const authHeader = req.headers.authorization;
 
+  
+  
+  
   
   
   
@@ -1802,6 +2023,9 @@ if (!authHeader?.startsWith("Bearer ")) {
   
   
   
+  
+  
+  
 
 
 return res.status(401).json({ error: "Missing token" });
@@ -1828,10 +2052,16 @@ return res.status(401).json({ error: "Missing token" });
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1880,10 +2110,16 @@ const token = authHeader.split(" ")[1];
   
   
   
+  
+  
+  
 
 
 jwt.verify(token, (header, callback) => {
 
+  
+  
+  
   
   
   
@@ -1932,6 +2168,9 @@ client.getSigningKey(header.kid, (err, key) => {
   
   
   
+  
+  
+  
 
 
 callback(err, key.getPublicKey());
@@ -1958,10 +2197,16 @@ callback(err, key.getPublicKey());
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2010,10 +2255,16 @@ callback(err, key.getPublicKey());
   
   
   
+  
+  
+  
 
 
 algorithms: ["RS256"],
 
+  
+  
+  
   
   
   
@@ -2062,10 +2313,16 @@ issuer: "https://auth.example.com",
   
   
   
+  
+  
+  
 
 
 audience: "https://api.example.com"
 
+  
+  
+  
   
   
   
@@ -2114,10 +2371,16 @@ audience: "https://api.example.com"
   
   
   
+  
+  
+  
 
 
 if (err) return res.status(401).json({ error: "Invalid token" });
 
+  
+  
+  
   
   
   
@@ -2166,10 +2429,16 @@ req.user = decoded;
   
   
   
+  
+  
+  
 
 
 next();
 
+  
+  
+  
   
   
   
@@ -2218,10 +2487,16 @@ next();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2270,10 +2545,16 @@ Refresh Token Rotation
   
   
   
+  
+  
+  
 
 
 def rotate_refresh_token(old_token):
 
+  
+  
+  
   
   
   
@@ -2322,10 +2603,16 @@ def rotate_refresh_token(old_token):
   
   
   
+  
+  
+  
 
 
 token_data = verify_refresh_token(old_token)
 
+  
+  
+  
   
   
   
@@ -2374,10 +2661,16 @@ token_data = verify_refresh_token(old_token)
   
   
   
+  
+  
+  
 
 
 revoke_token(old_token)
 
+  
+  
+  
   
   
   
@@ -2426,10 +2719,16 @@ revoke_token(old_token)
   
   
   
+  
+  
+  
 
 
 new_access = create_access_token(token_data["user_id"])
 
+  
+  
+  
   
   
   
@@ -2478,10 +2777,16 @@ new_refresh = create_refresh_token(token_data["user_id"])
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -2530,10 +2835,16 @@ return {
   
   
   
+  
+  
+  
 
 
 "refresh_token": new_refresh,
 
+  
+  
+  
   
   
   
@@ -2582,10 +2893,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2634,6 +2951,9 @@ Best Practices
   
   
   
+  
+  
+  
 
 
 oauth2_best_practices:
@@ -2660,36 +2980,16 @@ oauth2_best_practices:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Always use PKCE for public clients
 
+  
+  
+  
   
   
   
@@ -2714,34 +3014,11 @@ oauth2_best_practices:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use short-lived access tokens (15-60 minutes)
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing
-
   
   
   
@@ -2766,34 +3043,11 @@ oauth2_best_practices:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement refresh token rotation
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage)
-
   
   
   
@@ -2818,7 +3072,7 @@ oauth2_best_practices:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Use RS256 or ES256 for JWT signing
 
   
   
@@ -2842,10 +3096,103 @@ oauth2_best_practices:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Validate all claims (iss, aud, exp, nbf)
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Store tokens securely (httpOnly cookies, secure storage)
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Implement token revocation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Log all token issuance and usage
+
+  
+  
+  
   
   
   
@@ -2872,6 +3219,9 @@ oauth2_best_practices:
 
 Conclusion 
 
+  
+  
+  
   
   
   

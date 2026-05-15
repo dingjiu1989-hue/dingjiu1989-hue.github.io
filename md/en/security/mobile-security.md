@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/security/mobile-security.html
   
 
 
+# Mobile Application Security Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Mobile applications handle sensitive data and run in untrusted environments. Users download apps from various sources, connect to public Wi-Fi, and often jailbreak or root their devices. This guide covers the key security practices for mobile application development, based on the OWASP Mobile Top 10 and industry best practices.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Mobile applications handle sensitive data and run in untrusted environments. Use
   
   
   
+  
+  
+  
 
 
 The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Understanding these risks is the first step toward mitigating them.
 
+  
+  
+  
   
   
   
@@ -275,39 +316,16 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Data Storage**: Storing sensitive data in shared preferences, SQLite databases without encryption, or external storage.
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Communication**: Transmitting data over unencrypted channels or accepting invalid TLS certificates.
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Data Storage**: Storing sensitive data in shared preferences, SQLite databases without encryption, or external storage.
 
+  
+  
+  
   
   
   
@@ -335,37 +353,11 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Authentication**: Weak authentication mechanisms, missing session management, or hardcoded credentials.
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Communication**: Transmitting data over unencrypted channels or accepting invalid TLS certificates.
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insufficient Cryptography**: Using weak algorithms, hardcoded encryption keys, or improper random number generation.
-
   
   
   
@@ -393,37 +385,11 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
 
 
-6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Authorization**: Insecure direct object references and privilege escalation through client-side manipulation.
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Authentication**: Weak authentication mechanisms, missing session management, or hardcoded credentials.
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Client Code Quality**: Buffer overflows, memory leaks, and other code quality issues leading to security vulnerabilities.
-
   
   
   
@@ -451,37 +417,11 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
 
 
-8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Code Tampering**: Binary patching, resource modification, and method swizzling.
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insufficient Cryptography**: Using weak algorithms, hardcoded encryption keys, or improper random number generation.
 
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-9\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reverse Engineering**: Decompilation and analysis of application code.
-
   
   
   
@@ -509,8 +449,139 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
 
 
-10\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Extraneous Functionality**: Hidden backdoors, debug endpoints, or test code left in production builds.
+6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Insecure Authorization**: Insecure direct object references and privilege escalation through client-side manipulation.
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Client Code Quality**: Buffer overflows, memory leaks, and other code quality issues leading to security vulnerabilities.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+8\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Code Tampering**: Binary patching, resource modification, and method swizzling.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+9\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Reverse Engineering**: Decompilation and analysis of application code.
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+10\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Extraneous Functionality**: Hidden backdoors, debug endpoints, or test code left in production builds.
+
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ The OWASP Mobile Top 10 is the authoritative list of mobile security risks. Unde
   
   
   
+  
+  
+  
 
 
 Mobile apps are distributed as binaries that run on user devices. Without protection, attackers can decompile the app and analyze its logic.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Mobile apps are distributed as binaries that run on user devices. Without protec
   
   
   
+  
+  
+  
 
 
 ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename classes, methods, and fields to meaningless names and remove unused code.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ ProGuard and R8 shrink, optimize, and obfuscate Android bytecode. They rename cl
   
   
   
+  
+  
+  
 
 
 android {
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ buildTypes {
   
   
   
+  
+  
+  
 
 
 release {
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ minifyEnabled true
   
   
   
+  
+  
+  
 
 
 shrinkResources true
 
+  
+  
+  
   
   
   
@@ -855,6 +956,9 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
+  
+  
+  
 
 
 'proguard-rules.pro'
@@ -884,32 +988,6 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -942,10 +1020,48 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
+  
+  
+  
 
 
 # Keep model classes used by Gson serialization
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
+  
+  
+  
 
 
 # Keep logging in debug but strip in release
 
+  
+  
+  
   
   
   
@@ -1116,10 +1244,16 @@ proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
   
   
   
+  
+  
+  
 
 
 public static boolean isLoggable(java.lang.String, int);
 
+  
+  
+  
   
   
   
@@ -1174,6 +1308,9 @@ public static int v(...);
   
   
   
+  
+  
+  
 
 
 public static int d(...);
@@ -1203,10 +1340,16 @@ public static int d(...);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ public static int d(...);
   
   
   
+  
+  
+  
 
 
 iOS apps are harder to reverse engineer than Android APKs due to the compiled ARM binary, but they are not immune. Use these techniques:
 
+  
+  
+  
   
   
   
@@ -1316,10 +1465,16 @@ iOS apps are harder to reverse engineer than Android APKs due to the compiled AR
   
   
   
+  
+  
+  
 
 
 * Enable compiler optimizations (`-O2` or `-Os`).
 
+  
+  
+  
   
   
   
@@ -1368,10 +1523,16 @@ iOS apps are harder to reverse engineer than Android APKs due to the compiled AR
   
   
   
+  
+  
+  
 
 
 * Encrypt string literals at compile time.
 
+  
+  
+  
   
   
   
@@ -1426,10 +1587,16 @@ iOS apps are harder to reverse engineer than Android APKs due to the compiled AR
   
   
   
+  
+  
+  
 
 
 struct ObfuscatedString {
 
+  
+  
+  
   
   
   
@@ -1484,10 +1651,16 @@ private let encrypted: [UInt8]
   
   
   
+  
+  
+  
 
 
 private let key: UInt8
 
+  
+  
+  
   
   
   
@@ -1542,6 +1715,9 @@ func decrypt() -> String {
   
   
   
+  
+  
+  
 
 
 return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? ""
@@ -1571,32 +1747,6 @@ return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? ""
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1604,6 +1754,41 @@ return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? ""
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1658,10 +1843,16 @@ return String(bytes: encrypted.map { $0 ^ key }, encoding: .utf8) ?? ""
   
   
   
+  
+  
+  
 
 
 let apiKey = ObfuscatedString(
 
+  
+  
+  
   
   
   
@@ -1716,10 +1907,16 @@ encrypted: [0x34, 0x56, 0x78], // XOR-encoded
   
   
   
+  
+  
+  
 
 
 key: 0xAB
 
+  
+  
+  
   
   
   
@@ -1774,10 +1971,16 @@ key: 0xAB
   
   
   
+  
+  
+  
 
 
 ##  Certificate Pinning
 
+  
+  
+  
   
   
   
@@ -1832,10 +2035,16 @@ Mobile apps must protect against man-in-the-middle (MITM) attacks, even when the
   
   
   
+  
+  
+  
 
 
 ### What Certificate Pinning Does
 
+  
+  
+  
   
   
   
@@ -1890,10 +2099,16 @@ Certificate pinning hardcodes the expected server certificate or public key in t
   
   
   
+  
+  
+  
 
 
 ### Implementation
 
+  
+  
+  
   
   
   
@@ -1948,10 +2163,16 @@ Certificate pinning hardcodes the expected server certificate or public key in t
   
   
   
+  
+  
+  
 
 
 // Certificate pinning with OkHttp
 
+  
+  
+  
   
   
   
@@ -2006,10 +2227,16 @@ val certificatePinner = CertificatePinner.Builder()
   
   
   
+  
+  
+  
 
 
 .add("api.example.com",
 
+  
+  
+  
   
   
   
@@ -2064,10 +2291,16 @@ val certificatePinner = CertificatePinner.Builder()
   
   
   
+  
+  
+  
 
 
 .build()
 
+  
+  
+  
   
   
   
@@ -2122,6 +2355,9 @@ val client = OkHttpClient.Builder()
   
   
   
+  
+  
+  
 
 
 .certificatePinner(certificatePinner)
@@ -2151,10 +2387,16 @@ val client = OkHttpClient.Builder()
   
   
   
+  
+  
+  
 
 
 .build()
 
+  
+  
+  
   
   
   
@@ -2209,10 +2451,16 @@ val client = OkHttpClient.Builder()
   
   
   
+  
+  
+  
 
 
 // Certificate pinning in URLSession delegate
 
+  
+  
+  
   
   
   
@@ -2267,10 +2515,16 @@ func urlSession(_ session: URLSession,
   
   
   
+  
+  
+  
 
 
 didReceive challenge: URLAuthenticationChallenge,
 
+  
+  
+  
   
   
   
@@ -2325,10 +2579,16 @@ completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential
   
   
   
+  
+  
+  
 
 
 guard challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust,
 
+  
+  
+  
   
   
   
@@ -2383,10 +2643,16 @@ let serverTrust = challenge.protectionSpace.serverTrust else {
   
   
   
+  
+  
+  
 
 
 completionHandler(.performDefaultHandling, nil)
 
+  
+  
+  
   
   
   
@@ -2441,10 +2707,16 @@ return
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2499,10 +2771,16 @@ return
   
   
   
+  
+  
+  
 
 
 let pinnedCertData = pinnedCertificateData()
 
+  
+  
+  
   
   
   
@@ -2557,10 +2835,16 @@ if let serverCert = SecTrustGetCertificateAtIndex(serverTrust, 0) {
   
   
   
+  
+  
+  
 
 
 let serverCertData = SecCertificateCopyData(serverCert) as Data
 
+  
+  
+  
   
   
   
@@ -2615,10 +2899,16 @@ if serverCertData == pinnedCertData {
   
   
   
+  
+  
+  
 
 
 completionHandler(.useCredential, URLCredential(trust: serverTrust))
 
+  
+  
+  
   
   
   
@@ -2673,6 +2963,9 @@ completionHandler(.useCredential, URLCredential(trust: serverTrust))
   
   
   
+  
+  
+  
 
 
 completionHandler(.cancelAuthenticationChallenge, nil)
@@ -2702,32 +2995,6 @@ completionHandler(.cancelAuthenticationChallenge, nil)
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2760,10 +3027,48 @@ completionHandler(.cancelAuthenticationChallenge, nil)
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2818,10 +3123,16 @@ completionHandler(.cancelAuthenticationChallenge, nil)
   
   
   
+  
+  
+  
 
 
 Certificate pinning breaks when you rotate certificates. Plan for updates:
 
+  
+  
+  
   
   
   
@@ -2873,10 +3184,16 @@ Certificate pinning breaks when you rotate certificates. Plan for updates:
   
   
   
+  
+  
+  
 
 
 * Include a backup pin for a second CA in case the primary certificate expires.
 
+  
+  
+  
   
   
   
@@ -2925,10 +3242,16 @@ Certificate pinning breaks when you rotate certificates. Plan for updates:
   
   
   
+  
+  
+  
 
 
 * Consider using certificate transparency instead of pinning for some environments.
 
+  
+  
+  
   
   
   
@@ -2983,10 +3306,16 @@ Certificate pinning breaks when you rotate certificates. Plan for updates:
   
   
   
+  
+  
+  
 
 
 Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.
 
+  
+  
+  
   
   
   
@@ -3041,10 +3370,16 @@ Mobile OS platforms provide secure storage mechanisms that encrypt data at rest.
   
   
   
+  
+  
+  
 
 
 // Using EncryptedSharedPreferences
 
+  
+  
+  
   
   
   
@@ -3099,6 +3434,9 @@ val masterKey = MasterKey.Builder(context)
   
   
   
+  
+  
+  
 
 
 .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
@@ -3128,10 +3466,16 @@ val masterKey = MasterKey.Builder(context)
   
   
   
+  
+  
+  
 
 
 .build()
 
+  
+  
+  
   
   
   
@@ -3186,10 +3530,16 @@ val sharedPreferences = EncryptedSharedPreferences.create(
   
   
   
+  
+  
+  
 
 
 context,
 
+  
+  
+  
   
   
   
@@ -3244,10 +3594,16 @@ context,
   
   
   
+  
+  
+  
 
 
 masterKey,
 
+  
+  
+  
   
   
   
@@ -3302,6 +3658,9 @@ EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
   
   
   
+  
+  
+  
 
 
 EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
@@ -3331,10 +3690,16 @@ EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3389,10 +3754,16 @@ sharedPreferences.edit()
   
   
   
+  
+  
+  
 
 
 .putString("auth_token", token)
 
+  
+  
+  
   
   
   
@@ -3447,10 +3818,16 @@ sharedPreferences.edit()
   
   
   
+  
+  
+  
 
 
 ### Android Keystore
 
+  
+  
+  
   
   
   
@@ -3505,10 +3882,16 @@ The Android Keystore stores cryptographic keys in a hardware-backed environment 
   
   
   
+  
+  
+  
 
 
 // Generate a key in Android Keystore
 
+  
+  
+  
   
   
   
@@ -3563,10 +3946,16 @@ val keyGenerator = KeyGenerator.getInstance(
   
   
   
+  
+  
+  
 
 
 KeyProperties.KEY_ALGORITHM_AES,
 
+  
+  
+  
   
   
   
@@ -3621,10 +4010,16 @@ KeyProperties.KEY_ALGORITHM_AES,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3679,10 +4074,16 @@ val spec = KeyGenParameterSpec.Builder(
   
   
   
+  
+  
+  
 
 
 "app_key",
 
+  
+  
+  
   
   
   
@@ -3737,10 +4138,16 @@ KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -3795,10 +4202,16 @@ KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
   
   
   
+  
+  
+  
 
 
 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
 
+  
+  
+  
   
   
   
@@ -3853,10 +4266,16 @@ KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
   
   
   
+  
+  
+  
 
 
 .build()
 
+  
+  
+  
   
   
   
@@ -3911,10 +4330,16 @@ keyGenerator.init(spec)
   
   
   
+  
+  
+  
 
 
 val secretKey = keyGenerator.generateKey()
 
+  
+  
+  
   
   
   
@@ -3969,10 +4394,16 @@ val secretKey = keyGenerator.generateKey()
   
   
   
+  
+  
+  
 
 
 iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data using device-specific keys that never leave the Secure Enclave.
 
+  
+  
+  
   
   
   
@@ -4027,10 +4458,16 @@ iOS Keychain is the secure storage mechanism on Apple devices. It encrypts data 
   
   
   
+  
+  
+  
 
 
 let query: [String: Any] = [
 
+  
+  
+  
   
   
   
@@ -4085,10 +4522,16 @@ kSecClass as String: kSecClassGenericPassword,
   
   
   
+  
+  
+  
 
 
 kSecAttrAccount as String: "auth_token",
 
+  
+  
+  
   
   
   
@@ -4143,10 +4586,16 @@ kSecAttrService as String: "com.example.app",
   
   
   
+  
+  
+  
 
 
 kSecValueData as String: tokenData,
 
+  
+  
+  
   
   
   
@@ -4201,10 +4650,16 @@ kSecAttrAccessControl as String: SecAccessControlCreateWithFlags(
   
   
   
+  
+  
+  
 
 
 nil,
 
+  
+  
+  
   
   
   
@@ -4259,10 +4714,16 @@ kSecAttrApplicationTag,
   
   
   
+  
+  
+  
 
 
 .biometryCurrentSet,
 
+  
+  
+  
   
   
   
@@ -4317,6 +4778,9 @@ nil
   
   
   
+  
+  
+  
 
 
 )
@@ -4346,10 +4810,16 @@ nil
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -4404,10 +4874,16 @@ SecItemAdd(query as CFDictionary, nil)
   
   
   
+  
+  
+  
 
 
 ##  Runtime Protection
 
+  
+  
+  
   
   
   
@@ -4462,10 +4938,16 @@ Runtime protection defends against tampering while the app is running.
   
   
   
+  
+  
+  
 
 
 ### Root/Jailbreak Detection
 
+  
+  
+  
   
   
   
@@ -4520,10 +5002,16 @@ Runtime protection defends against tampering while the app is running.
   
   
   
+  
+  
+  
 
 
 fun isDeviceRooted(): Boolean {
 
+  
+  
+  
   
   
   
@@ -4578,10 +5066,16 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 "/system/app/Superuser.apk",
 
+  
+  
+  
   
   
   
@@ -4636,10 +5130,16 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 "/system/bin/su",
 
+  
+  
+  
   
   
   
@@ -4694,10 +5194,16 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 "/data/local/xbin/su",
 
+  
+  
+  
   
   
   
@@ -4752,10 +5258,16 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 "/system/sd/xbin/su",
 
+  
+  
+  
   
   
   
@@ -4810,10 +5322,16 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 "/data/local/su"
 
+  
+  
+  
   
   
   
@@ -4868,6 +5386,9 @@ val rootPaths = listOf(
   
   
   
+  
+  
+  
 
 
 return rootPaths.any { File(it).exists() }
@@ -4897,10 +5418,16 @@ return rootPaths.any { File(it).exists() }
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4955,10 +5482,16 @@ return rootPaths.any { File(it).exists() }
   
   
   
+  
+  
+  
 
 
 func isDeviceJailbroken() -> Bool {
 
+  
+  
+  
   
   
   
@@ -5013,10 +5546,16 @@ let jbPaths = [
   
   
   
+  
+  
+  
 
 
 "/Applications/Cydia.app",
 
+  
+  
+  
   
   
   
@@ -5071,10 +5610,16 @@ let jbPaths = [
   
   
   
+  
+  
+  
 
 
 "/bin/bash",
 
+  
+  
+  
   
   
   
@@ -5129,10 +5674,16 @@ let jbPaths = [
   
   
   
+  
+  
+  
 
 
 "/etc/apt",
 
+  
+  
+  
   
   
   
@@ -5187,10 +5738,16 @@ let jbPaths = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -5245,10 +5802,16 @@ return jbPaths.contains { FileManager.default.fileExists(atPath: $0) }
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -5303,10 +5866,16 @@ Never terminate the app immediately on detecting a compromised device. This give
   
   
   
+  
+  
+  
 
 
 ### Debugger Detection
 
+  
+  
+  
   
   
   
@@ -5361,10 +5930,16 @@ Never terminate the app immediately on detecting a compromised device. This give
   
   
   
+  
+  
+  
 
 
 func isDebuggerAttached() -> Bool {
 
+  
+  
+  
   
   
   
@@ -5419,10 +5994,16 @@ var name: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()]
   
   
   
+  
+  
+  
 
 
 var info = kinfo_proc()
 
+  
+  
+  
   
   
   
@@ -5477,10 +6058,16 @@ var infoSize = MemoryLayout.size
   
   
   
+  
+  
+  
 
 
 sysctl(&name;, 4, &info;, &infoSize;, nil, 0)
 
+  
+  
+  
   
   
   
@@ -5535,6 +6122,9 @@ return (info.kp_proc.p_flag & P_TRACED) != 0
   
   
   
+  
+  
+  
 
 
 }
@@ -5564,10 +6154,16 @@ return (info.kp_proc.p_flag & P_TRACED) != 0
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

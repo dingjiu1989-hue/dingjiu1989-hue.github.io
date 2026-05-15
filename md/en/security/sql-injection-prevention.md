@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/security/sql-injection-prevention.html
   
   
   
+  
+  
+  
+
+
+# SQL Injection Prevention Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Understanding SQL Injection 
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ SQL injection is a code injection technique where an attacker inserts malicious 
   
   
   
+  
+  
+  
 
 
 How It Works 
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Consider a vulnerable login query built by string concatenation:
   
   
   
+  
+  
+  
 
 
 String query = "SELECT * FROM users WHERE email = '" + email + "' AND password = '" + password + "'";
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ An attacker providing `email = admin@example.com' --` comments out the password 
   
   
   
+  
+  
+  
 
 
 Defense Layer 1: Parameterized Queries 
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Parameterized queries (also called prepared statements) separate SQL logic from 
   
   
   
+  
+  
+  
 
 
 Node.js (mysql2) 
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ const mysql = require('mysql2/promise');
   
   
   
+  
+  
+  
 
 
 const connection = await mysql.createConnection({ /* config */ });
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ const [rows] = await connection.execute(
   
   
   
+  
+  
+  
 
 
 'SELECT * FROM users WHERE email = ? AND password_hash = ?',
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ const [rows] = await connection.execute(
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Python (psycopg2)
   
   
   
+  
+  
+  
 
 
 import psycopg2
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ conn = psycopg2.connect("dbname=test user=postgres")
   
   
   
+  
+  
+  
 
 
 cur = conn.cursor()
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 "SELECT * FROM users WHERE email = %s AND status = %s",
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ cur.execute(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ Java (JDBC)
   
   
   
+  
+  
+  
 
 
 String sql = "SELECT * FROM products WHERE category = ? AND price < ?";
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ PreparedStatement stmt = connection.prepareStatement(sql);
   
   
   
+  
+  
+  
 
 
 stmt.setString(1, category);
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ stmt.setBigDecimal(2, maxPrice);
   
   
   
+  
+  
+  
 
 
 ResultSet rs = stmt.executeQuery();
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ Go (database/sql)
   
   
   
+  
+  
+  
 
 
 rows, err := db.Query(
 
+  
+  
+  
   
   
   
@@ -1116,6 +1244,9 @@ rows, err := db.Query(
   
   
   
+  
+  
+  
 
 
 email, true,
@@ -1145,10 +1276,16 @@ email, true,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ Defense Layer 2: ORM Protections
   
   
   
+  
+  
+  
 
 
 Modern ORMs provide built-in protection against SQL injection when used correctly. 
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ Django ORM
   
   
   
+  
+  
+  
 
 
 # Safe: ORM parameterizes automatically
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ users = User.objects.filter(email=user_input, is_active=True)
   
   
   
+  
+  
+  
 
 
 # Safe: Raw queries with parameters
 
+  
+  
+  
   
   
   
@@ -1377,6 +1532,9 @@ users = User.objects.raw(
   
   
   
+  
+  
+  
 
 
 'SELECT * FROM auth_user WHERE email = %s', [user_input]
@@ -1406,10 +1564,16 @@ users = User.objects.raw(
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1464,10 +1628,16 @@ users = User.objects.raw(
   
   
   
+  
+  
+  
 
 
 users = User.objects.raw(f'SELECT * FROM auth_user WHERE email = "{user_input}"')
 
+  
+  
+  
   
   
   
@@ -1522,6 +1692,9 @@ SQLAlchemy
   
   
   
+  
+  
+  
 
 
 # Safe
@@ -1551,10 +1724,16 @@ SQLAlchemy
   
   
   
+  
+  
+  
 
 
 result = session.execute(
 
+  
+  
+  
   
   
   
@@ -1609,6 +1788,9 @@ text("SELECT * FROM users WHERE email = :email"),
   
   
   
+  
+  
+  
 
 
 {"email": user_input}
@@ -1638,10 +1820,16 @@ text("SELECT * FROM users WHERE email = :email"),
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1696,10 +1884,16 @@ text("SELECT * FROM users WHERE email = :email"),
   
   
   
+  
+  
+  
 
 
 result = session.execute(
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ text(f"SELECT * FROM users WHERE email = '{user_input}'")
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1812,10 +2012,16 @@ Defense Layer 3: Input Validation
   
   
   
+  
+  
+  
 
 
 Parameterized queries prevent SQL injection in most cases, but input validation provides defense in depth. 
 
+  
+  
+  
   
   
   
@@ -1870,10 +2076,16 @@ import re
   
   
   
+  
+  
+  
 
 
 def validate_username(username):
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ def validate_username(username):
   
   
   
+  
+  
+  
 
 
 if not re.match(r'^[a-zA-Z0-9_]{3,30}$', username):
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ raise ValueError("Invalid username format")
   
   
   
+  
+  
+  
 
 
 return username
 
+  
+  
+  
   
   
   
@@ -2044,10 +2268,16 @@ Defense Layer 4: Stored Procedures
   
   
   
+  
+  
+  
 
 
 Stored procedures can add an abstraction layer between queries and user input. 
 
+  
+  
+  
   
   
   
@@ -2102,10 +2332,16 @@ CREATE PROCEDURE GetUserByEmail(IN user_email VARCHAR(255))
   
   
   
+  
+  
+  
 
 
 BEGIN
 
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ SELECT id, username, email
   
   
   
+  
+  
+  
 
 
 FROM users
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ WHERE email = user_email AND deleted_at IS NULL;
   
   
   
+  
+  
+  
 
 
 END
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ cursor.callproc('GetUserByEmail', [email])
   
   
   
+  
+  
+  
 
 
 Note that stored procedures must still use parameterized calls internally. A stored procedure that concatenates strings is still vulnerable. 
 
+  
+  
+  
   
   
   
@@ -2334,10 +2588,16 @@ Defense Layer 5: Least Privilege
   
   
   
+  
+  
+  
 
 
 Limit database account permissions so that a successful injection causes minimal damage: 
 
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ Limit database account permissions so that a successful injection causes minimal
   
   
   
+  
+  
+  
 
 
 Never use the database root or admin account for application connections. 
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ Advanced Threats
   
   
   
+  
+  
+  
 
 
 Second-Order SQL Injection 
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ Data stored in the database can later be used unsafely in a different query. Par
   
   
   
+  
+  
+  
 
 
 Blind SQL Injection 
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ Attackers infer information through boolean or time-based responses. Use uniform
   
   
   
+  
+  
+  
 
 
 Detection Tools 
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ Detection Tools
   
   
   
+  
+  
+  
 
 
 # Scan Go code for string concatenation in SQL queries
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ semgrep --config "p/sql-injection" .
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

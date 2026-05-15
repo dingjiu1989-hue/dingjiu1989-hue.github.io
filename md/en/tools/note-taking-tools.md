@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/note-taking-tools.html
   
 
 
+# Developer Note Taking Tools
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Developers have unique note-taking requirements: code snippets with syntax highlighting, technical diagrams, system design notes, and integration with development workflows. This guide evaluates the best tools for developer knowledge management.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Developers have unique note-taking requirements: code snippets with syntax highl
   
   
   
+  
+  
+  
 
 
 A developer note-taking tool should support:
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ A developer note-taking tool should support:
   
   
   
+  
+  
+  
 
 
 * Markdown as a primary format (for portability and Git versioning).
 
+  
+  
+  
   
   
   
@@ -324,6 +371,9 @@ A developer note-taking tool should support:
   
   
   
+  
+  
+  
 
 
 * Internal linking between notes (bi-directional).
@@ -350,10 +400,16 @@ A developer note-taking tool should support:
   
   
   
+  
+  
+  
 
 
 * Extensibility (APIs, plugins, or custom scripts).
 
+  
+  
+  
   
   
   
@@ -408,10 +464,16 @@ A developer note-taking tool should support:
   
   
   
+  
+  
+  
 
 
 Obsidian is the leading personal knowledge management tool for developers. It treats each note as a plain Markdown file on your local filesystem.
 
+  
+  
+  
   
   
   
@@ -466,10 +528,16 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 * Vim keybindings built-in.
 
+  
+  
+  
   
   
   
@@ -518,10 +586,16 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 * Mermaid diagram support (flowcharts, sequence diagrams, Gantt).
 
+  
+  
+  
   
   
   
@@ -570,6 +644,9 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 * Git plugin for version control of your notes.
@@ -596,10 +673,16 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 * Graph view for visualizing note connections.
 
+  
+  
+  
   
   
   
@@ -654,6 +737,9 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 ##  Endpoints
@@ -683,39 +769,48 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[POST /api/users]] - Create user
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [[GET /api/users/:id]] - Get user details
+
+  
+  
+  
   
   
   
@@ -770,10 +865,16 @@ Obsidian is the leading personal knowledge management tool for developers. It tr
   
   
   
+  
+  
+  
 
 
 CREATE TABLE users (
 
+  
+  
+  
   
   
   
@@ -828,10 +929,16 @@ id UUID PRIMARY KEY,
   
   
   
+  
+  
+  
 
 
 email VARCHAR(255) UNIQUE
 
+  
+  
+  
   
   
   
@@ -886,10 +993,16 @@ email VARCHAR(255) UNIQUE
   
   
   
+  
+  
+  
 
 
 ##  Architecture
 
+  
+  
+  
   
   
   
@@ -944,10 +1057,16 @@ graph LR
   
   
   
+  
+  
+  
 
 
 Client --> API
 
+  
+  
+  
   
   
   
@@ -1002,10 +1121,16 @@ API --> DB[(Database)]
   
   
   
+  
+  
+  
 
 
 API --> Cache[(Redis)]
 
+  
+  
+  
   
   
   
@@ -1060,10 +1185,16 @@ API --> Cache[(Redis)]
   
   
   
+  
+  
+  
 
 
 ##  Logseq
 
+  
+  
+  
   
   
   
@@ -1118,10 +1249,16 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
   
   
   
+  
+  
+  
 
 
 **Key Developer Features:**
 
+  
+  
+  
   
   
   
@@ -1173,10 +1310,16 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
   
   
   
+  
+  
+  
 
 
 * Block-level referencing (reference specific code snippets).
 
+  
+  
+  
   
   
   
@@ -1225,6 +1368,9 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
   
   
   
+  
+  
+  
 
 
 * Task management with priorities.
@@ -1251,10 +1397,16 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
   
   
   
+  
+  
+  
 
 
 * Git-based sync.
 
+  
+  
+  
   
   
   
@@ -1309,10 +1461,16 @@ Logseq is an open-source knowledge management tool using an outliner paradigm. N
   
   
   
+  
+  
+  
 
 
 ##  Notion
 
+  
+  
+  
   
   
   
@@ -1367,10 +1525,16 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 **Key Developer Features:**
 
+  
+  
+  
   
   
   
@@ -1422,10 +1586,16 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 * Code blocks with copy button.
 
+  
+  
+  
   
   
   
@@ -1474,6 +1644,9 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 * Sprint planning templates.
@@ -1500,10 +1673,16 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 * Documentation wikis with sidebar navigation.
 
+  
+  
+  
   
   
   
@@ -1558,10 +1737,16 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 **Cons**: No local storage (cloud-only), no Vim mode, can be slow with large databases.
 
+  
+  
+  
   
   
   
@@ -1616,10 +1801,16 @@ Notion is the most versatile workspace tool, combining notes, databases, wikis, 
   
   
   
+  
+  
+  
 
 
 Dendron is a VS Code extension that provides hierarchical note-taking. It treats notes like a file system with lookup-based navigation.
 
+  
+  
+  
   
   
   
@@ -1674,10 +1865,16 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
   
   
   
+  
+  
+  
 
 
 * Fully integrated into VS Code (editor, keybindings, extensions).
 
+  
+  
+  
   
   
   
@@ -1726,10 +1923,16 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
   
   
   
+  
+  
+  
 
 
 * Schema support (define note structure by hierarchy).
 
+  
+  
+  
   
   
   
@@ -1778,10 +1981,16 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
   
   
   
+  
+  
+  
 
 
 * Completely local and open source.
 
+  
+  
+  
   
   
   
@@ -1836,10 +2045,16 @@ Dendron is a VS Code extension that provides hierarchical note-taking. It treats
   
   
   
+  
+  
+  
 
 
 dev.python.fastapi.setup
 
+  
+  
+  
   
   
   
@@ -1894,10 +2109,16 @@ dev.python.fastapi.authentication
   
   
   
+  
+  
+  
 
 
 dev.docker.compose.production
 
+  
+  
+  
   
   
   
@@ -1952,10 +2173,16 @@ dev.aws.s3.bucket-policies
   
   
   
+  
+  
+  
 
 
 **Use for**: Structured technical reference, API documentation, system design reference.
 
+  
+  
+  
   
   
   
@@ -2010,10 +2237,16 @@ dev.aws.s3.bucket-policies
   
   
   
+  
+  
+  
 
 
 Boost Note is an open-source Markdown editor designed for developers, with a focus on code snippets and team collaboration.
 
+  
+  
+  
   
   
   
@@ -2068,10 +2301,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 * Multi-folder support.
 
+  
+  
+  
   
   
   
@@ -2120,10 +2359,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 * Team workspace.
 
+  
+  
+  
   
   
   
@@ -2172,10 +2417,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 * Dark theme.
 
+  
+  
+  
   
   
   
@@ -2230,10 +2481,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 | Feature | Obsidian | Logseq | Notion | Dendron | Boost Note |
 
+  
+  
+  
   
   
   
@@ -2288,10 +2545,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 | Local storage | Yes (plain MD) | Yes | No | Yes | Yes |
 
+  
+  
+  
   
   
   
@@ -2346,10 +2609,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 | Code blocks | Excellent | Excellent | Good | Excellent | Good |
 
+  
+  
+  
   
   
   
@@ -2404,10 +2673,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 | Graph view | Yes | Yes | No | No | No |
 
+  
+  
+  
   
   
   
@@ -2462,10 +2737,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 | Open source | No | Yes | No | Yes | Yes |
 
+  
+  
+  
   
   
   
@@ -2520,10 +2801,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 ##  Workflow Integration
 
+  
+  
+  
   
   
   
@@ -2578,10 +2865,16 @@ Boost Note is an open-source Markdown editor designed for developers, with a foc
   
   
   
+  
+  
+  
 
 
 For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git repository:
 
+  
+  
+  
   
   
   
@@ -2636,10 +2929,16 @@ For local-first tools (Obsidian, Logseq, Dendron), store your notes in a Git rep
   
   
   
+  
+  
+  
 
 
 mkdir ~/notes && cd ~/notes
 
+  
+  
+  
   
   
   
@@ -2694,10 +2993,16 @@ git init
   
   
   
+  
+  
+  
 
 
 git remote add origin https://github.com/you/notes.git
 
+  
+  
+  
   
   
   
@@ -2752,10 +3057,16 @@ git remote add origin https://github.com/you/notes.git
   
   
   
+  
+  
+  
 
 
 git add -A
 
+  
+  
+  
   
   
   
@@ -2810,10 +3121,16 @@ git commit -m "Daily notes backup: $(date +%Y-%m-%d)"
   
   
   
+  
+  
+  
 
 
 git push
 
+  
+  
+  
   
   
   
@@ -2868,10 +3185,16 @@ Automate with a cron job or Obsidian's Git plugin.
   
   
   
+  
+  
+  
 
 
 ### CLI Note Taking
 
+  
+  
+  
   
   
   
@@ -2926,10 +3249,16 @@ For quick terminal notes:
   
   
   
+  
+  
+  
 
 
 # Using a simple shell function
 
+  
+  
+  
   
   
   
@@ -2984,10 +3313,16 @@ function note() {
   
   
   
+  
+  
+  
 
 
 echo "## $(date '+%Y-%m-%d %H:%M')" >> ~/notes/scratchpad.md
 
+  
+  
+  
   
   
   
@@ -3042,10 +3377,16 @@ echo "$@" >> ~/notes/scratchpad.md
   
   
   
+  
+  
+  
 
 
 echo "" >> ~/notes/scratchpad.md
 
+  
+  
+  
   
   
   
@@ -3100,10 +3441,16 @@ echo "" >> ~/notes/scratchpad.md
   
   
   
+  
+  
+  
 
 
 # Usage
 
+  
+  
+  
   
   
   
@@ -3158,10 +3505,16 @@ note "Remember to check the RDS backup schedule"
   
   
   
+  
+  
+  
 
 
 ### Knowledge Base from Code Comments
 
+  
+  
+  
   
   
   
@@ -3216,10 +3569,16 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -3271,10 +3630,16 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
   
   
   
+  
+  
+  
 
 
 * **VS Code users**: Dendron for seamless editor integration.
 
+  
+  
+  
   
   
   
@@ -3323,10 +3688,16 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
   
   
   
+  
+  
+  
 
 
 * **Research and journaling**: Logseq for block-level citations.
 
+  
+  
+  
   
   
   
@@ -3378,10 +3749,16 @@ Some developers integrate notes with their codebase. Jupyter Notebooks combine c
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

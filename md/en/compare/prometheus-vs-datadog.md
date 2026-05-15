@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/compare/prometheus-vs-datadog.html
   
   
   
+  
+  
+  
+
+
+# Prometheus vs Datadog: Monitoring Platform Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prometheus and Datadog represent two approaches to monitoring: open-source self-hosted vs SaaS platform. Prometheus is the CNCF-graduated metrics and alerting toolkit. Datadog is a comprehensive SaaS observability platform covering metrics, traces, logs, and application performance.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Prometheus and Datadog represent two approaches to monitoring: open-source self-
   
   
   
+  
+  
+  
 
 
 Prometheus scrapes metrics from instrumented targets at configurable intervals. The pull model means Prometheus controls the collection schedule. Targets expose metrics via HTTP endpoints. Prometheus stores data in a local time-series database. Long-term storage requires external systems (Thanos, Cortex, Mimir).
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Datadog uses an agent-based push model. The Datadog Agent runs on each host and 
   
   
   
+  
+  
+  
 
 
 ##  Metrics Management
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Prometheus uses a dimensional data model with metric names and key-value labels.
   
   
   
+  
+  
+  
 
 
 Datadog uses metrics with tags (similar to labels). The query language supports arithmetic, aggregation, and function application across tagged metrics. Datadog Metrics without Limits controls cardinality and cost.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Datadog uses metrics with tags (similar to labels). The query language supports 
   
   
   
+  
+  
+  
 
 
 Prometheus Alertmanager handles alert deduplication, grouping, silencing, and routing. Alertmanager sends notifications to email, PagerDuty, Slack, and webhooks. Alert routing rules determine who gets notified based on alert labels.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ Datadog Monitors provide alerting with automatic anomaly detection, forecast ale
   
   
   
+  
+  
+  
 
 
 ##  Coverage
 
+  
+  
+  
   
   
   
@@ -504,10 +569,16 @@ Prometheus covers metrics monitoring. Logs and traces require separate tools (Lo
   
   
   
+  
+  
+  
 
 
 Datadog is a unified observability platform. Infrastructure monitoring, APM, log management, synthetic monitoring, and real user monitoring are integrated. Correlation between metrics, traces, and logs is seamless.
 
+  
+  
+  
   
   
   
@@ -562,10 +633,16 @@ Datadog is a unified observability platform. Infrastructure monitoring, APM, log
   
   
   
+  
+  
+  
 
 
 Prometheus is free and open source. Infrastructure costs scale with data volume and retention. Operational expertise is required. Thanos/Mimir add complexity but enable long-term retention at scale.
 
+  
+  
+  
   
   
   
@@ -620,10 +697,16 @@ Datadog pricing is per-host or per-volume. Costs scale with infrastructure size 
   
   
   
+  
+  
+  
 
 
 ##  Recommendation
 
+  
+  
+  
   
   
   

@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="alternate" hreflang="en" href="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html">
     <link rel="canonical" href="https://dingjiu1989-hue.github.io/en/tech/typescript-advanced-patterns.html">
+    <link rel="prev" href="https://dingjiu1989-hue.github.io/en/tech/react-server-components-guide.html">
+    <link rel="next" href="https://dingjiu1989-hue.github.io/en/tech/git-cheatsheet.html">
     <meta name="robots" content="index, follow">
     <script type="application/ld+json">
     {
@@ -53,7 +55,7 @@
       "sameAs": [
     "https://dev.to/_6638a39c349d7e9c85ee20/advanced-typescript-patterns-generics-mapped-types-and-template-literals-3hje"
       ],
-      "articleBody": "TypeScript's type system is a programming language in its own right. Once you go beyond basic annotations, you can encode invariants into types that make entire categories of bugs impossible. Here are the advanced patterns that level up your TypeScript in 2026. 1. Conditional Types Conditional types select types based on a condition \u2014 like a ternary operator at the type level. type IsString&lt;T&gt; = T extends string ? true : false; type A = IsString&lt;\"hello\"&gt;; // true type B = IsString&lt;number&gt;; // false // Real example: extract the array element type type ArrayElement&lt;T&gt; = T extends (infer U)[] ? U : never; type Item = ArrayElement&lt;string[]&gt;; // string 2. Mapped Types Mapped types transform existing types by iterating over their keys. // Make all properties optional type Partial&lt;T&gt; = { [K in keyof T]?: T[K] }; // Make all properties readonly type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }; // Real example: pick nullable fields type Nullable&lt;T&gt; = { [K in keyof T]: T[K] | null }; 3. Template Literal Types Construct types from string patterns \u2014 powerful for typed routing and event systems. type EventName = \"click\" | \"focus\" | \"blur\"; type Handler = `on${Capitalize&lt;EventName&gt;}`; // \"onClick\" | \"onFocus\" | \"onBlur\" // Real example: typed API routes type Route = `/api/${string}`; type UserRoute = `/api/users/${number}`; const route: UserRoute = \"/api/users/42\"; // OK const bad: UserRoute = \"/api/users/abc\"; // Error 4. The infer Keyword Extract and capture types from other types during conditional type checks. // Extract return type of a function type ReturnType&lt;T&gt; = T extends (...args: any[]) => infer R ? R : never; // Extract the promise resolved type type Awaited&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T; // Real example: extract component props type Props&lt;C&gt; = C extends React.ComponentType&lt;infer P&gt; ? P : never; 5. Branded Types (Nominal Typing) TypeScript uses structural typing, but sometimes you want nominal types \u2014 two strings that are not interchangeable. type UserId = string & { readonly __brand: \"UserId\" }; type OrderId = string & { readonly __brand: \"OrderId\" }; function createUserId(id: string): UserId { return id as UserId; } function getUser(id: UserId) { /* ... */ } getUser(createUserId(\"abc\")); // OK getUser(\"abc\"); // Error \u2014 plain string is not a UserId 6. Discriminated Unions The most useful pattern in TypeScript. Model states exhaustively with a discriminator field. type RequestState&lt;T&gt; = | { status: \"idle\" } | { status: \"loading\" } | { status: \"success\"; data: T } | { status: \"error\"; error: Error }; function render&lt;T&gt;(state: RequestState&lt;T&gt;) { switch (state.status) { case \"idle\": return \"Ready\"; case \"loading\": return \"Loading...\"; case \"success\": return state.data; // T \u2014 narrowed! case \"error\": return state.error.message; // Error \u2014 narrowed! } } 7. Builder Pattern with Type Safety class QueryBuilder&lt; T extends Record&lt;string, unknown&gt;, Selected extends keyof T | \"*\" = \"*\", WhereClause extends Partial&lt;T&gt; = {} &gt; { select&lt;K extends keyof T&gt;(...cols: K[]): QueryBuilder&lt;T, K, WhereClause&gt; { return this as any; } where(conditions: Partial&lt;T&gt;): QueryBuilder&lt;T, Selected, Partial&lt;T&gt;&gt; { return this as any; } } Quick Reference: When to Use What PatternUse Case Conditional TypesTransform types based on conditions Mapped TypesBulk-modify object property types Template Literal TypesString-pattern-based types (routes, events) inferExtract embedded types Branded TypesDistinguish same-shape types semantically Discriminated UnionsExhaustive state modeling (async, forms) Bottom line: Advanced TypeScript patterns let you catch bugs at compile time instead of runtime. Discriminated unions and branded types alone will eliminate entire categories of bugs. See also: TypeScript ORM comparison and tRPC for end-to-end types."
+      "articleBody": "Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer."
     }
     </script>
     <script type="application/ld+json">
@@ -64,6 +66,58 @@
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dingjiu1989-hue.github.io/en/"},
         {"@type": "ListItem", "position": 2, "name": "Tech Tutorials", "item": "https://dingjiu1989-hue.github.io/en/tech/"},
         {"@type": "ListItem", "position": 3, "name": "Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals"}
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Advanced TypeScript Patterns: Generics, Mapped Types, and Template Literals",
+      "description": "Go beyond basic TypeScript with advanced patterns: conditional types, mapped types, template literal types, infer, and brand types. Real examples that make your code safer.",
+      "step": [
+          {
+        "@type": "HowToStep",
+        "position": "1",
+        "name": "Conditional Types",
+        "text": "Conditional types select types based on a condition — like a ternary operator at the type level. type IsString&lt;T&gt; = T extends string ? true : false; type A = IsString&lt;\"hello\"&gt;; // true type B = IsString&lt;number&gt;; // false // Real example: extract the array element type type ArrayEle"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "2",
+        "name": "Mapped Types",
+        "text": "Mapped types transform existing types by iterating over their keys. // Make all properties optional type Partial&lt;T&gt; = { [K in keyof T]?: T[K] }; // Make all properties readonly type Readonly&lt;T&gt; = { readonly [K in keyof T]: T[K] }; // Real example: pick nullable fields type Nullable&lt;T&"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "3",
+        "name": "Template Literal Types",
+        "text": "Construct types from string patterns — powerful for typed routing and event systems. type EventName = \"click\" | \"focus\" | \"blur\"; type Handler = `on${Capitalize&lt;EventName&gt;}`; // \"onClick\" | \"onFocus\" | \"onBlur\" // Real example: typed API routes type Route = `/api/${string}`; type UserRoute = `"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "4",
+        "name": "The infer Keyword",
+        "text": "Extract and capture types from other types during conditional type checks. // Extract return type of a function type ReturnType&lt;T&gt; = T extends (...args: any[]) => infer R ? R : never; // Extract the promise resolved type type Awaited&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T; // Real"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "5",
+        "name": "Branded Types (Nominal Typing)",
+        "text": "TypeScript uses structural typing, but sometimes you want nominal types — two strings that are not interchangeable. type UserId = string & { readonly __brand: \"UserId\" }; type OrderId = string & { readonly __brand: \"OrderId\" }; function createUserId(id: string): UserId { return id as UserId; } funct"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "6",
+        "name": "Discriminated Unions",
+        "text": "The most useful pattern in TypeScript. Model states exhaustively with a discriminator field. type RequestState&lt;T&gt; = | { status: \"idle\" } | { status: \"loading\" } | { status: \"success\"; data: T } | { status: \"error\"; error: Error }; function render&lt;T&gt;(state: RequestState&lt;T&gt;) { switch"
+      },
+      {
+        "@type": "HowToStep",
+        "position": "7",
+        "name": "Builder Pattern with Type Safety",
+        "text": "class QueryBuilder&lt; T extends Record&lt;string, unknown&gt;, Selected extends keyof T | \"*\" = \"*\", WhereClause extends Partial&lt;T&gt; = {} &gt; { select&lt;K extends keyof T&gt;(...cols: K[]): QueryBuilder&lt;T, K, WhereClause&gt; { return this as any; } where(conditions: Partial&lt;T&gt;): Que"
+      }
       ]
     }
     </script>

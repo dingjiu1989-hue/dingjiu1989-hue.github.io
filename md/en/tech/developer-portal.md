@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/developer-portal.html
   
   
   
+  
+  
+  
+
+
+# Developer Portal
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 A developer portal is a centralized platform that provides developers with the tools, documentation, and services they need to build and operate software. In modern platform engineering, the developer portal is the primary interface between the platform team and application teams. This article covers Backstage, API catalogs, service catalogs, and developer portal best practices.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ A developer portal is a centralized platform that provides developers with the t
   
   
   
+  
+  
+  
 
 
 As organizations grow, the number of services, APIs, tools, and internal resources multiplies. Developers struggle to find what they need. Documentation is scattered across wikis and documents. Service ownership is unclear. Onboarding new team members takes weeks.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ A developer portal addresses these challenges by providing a single entry point 
   
   
   
+  
+  
+  
 
 
 ##  Backstage
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Backstage is an open-source developer portal platform created by Spotify and now
   
   
   
+  
+  
+  
 
 
 The Backstage service catalog is the central feature. It provides a uniform view of all services, their ownership, metadata, and relationships. Each service has a "catalog entity" defined in YAML, typically stored in the service's repository. The catalog is populated through automated ingestion.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Backstage software templates automate service creation. A template defines the p
   
   
   
+  
+  
+  
 
 
 ##  API Catalog
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ An API catalog provides a searchable directory of all APIs in the organization. 
   
   
   
+  
+  
+  
 
 
 The API catalog helps developers discover existing APIs before building new ones. This reduces duplication and promotes reuse. API consumers can find the right API for their needs, understand how to use it, and see its reliability guarantees.
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ API catalog management should be automated. When an API changes, the catalog sho
   
   
   
+  
+  
+  
 
 
 ##  Service Catalog
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ A service catalog extends beyond APIs to cover all services in the organization.
   
   
   
+  
+  
+  
 
 
 The service catalog answers questions like: Who owns this service? What does it depend on? What depends on it? Where is its source code? How do I deploy it? How do I debug it? Having these answers in a central location dramatically reduces onboarding time and incident response time.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Service dependency visualization shows relationships between services. This help
   
   
   
+  
+  
+  
 
 
 ##  Developer Self-Service
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Developer portals enable self-service actions. Developers can create new service
   
   
   
+  
+  
+  
 
 
 Backstage software templates implement self-service. Each template automates the creation of a new service with standardized tooling, security policies, and observability. The developer provides a few inputs (service name, team, database type) and the template creates everything.
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ Self-service reduces the platform team's support burden. Developers get what the
   
   
   
+  
+  
+  
 
 
 ##  Documentation Hub
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ A developer portal centralizes all developer documentation. Tech docs (API refer
   
   
   
+  
+  
+  
 
 
 Backstage's TechDocs plugin renders Markdown documentation within the portal. Documentation is stored alongside source code in each service's repository. This keeps docs close to the code and supports documentation-as-code workflows.
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ The documentation hub should support robust search across all documentation sour
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   
@@ -942,6 +1052,9 @@ Start with the service catalog as the core feature. Add capabilities incremental
   
   
   
+  
+  
+  
 
 
 Ensure ownership metadata is accurate and current. Every service should have an identified owner and team. Stale ownership information undermines trust in the portal. Automated ownership verification prevents staleness.
@@ -971,10 +1084,16 @@ Ensure ownership metadata is accurate and current. Every service should have an 
   
   
   
+  
+  
+  
 
 
 Keep the portal fast and responsive. Developers will not use a slow portal. Search results should return in milliseconds. Page loads should be under a second. A poor user experience defeats the portal's purpose.
 
+  
+  
+  
   
   
   

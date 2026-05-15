@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/git-advanced-techniques.html
   
   
   
+  
+  
+  
+
+
+# Advanced Git Techniques for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Git powers modern software development, but most developers only use a fraction of its capabilities. Advanced Git techniques save time and solve complex version control problems.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Git powers modern software development, but most developers only use a fraction 
   
   
   
+  
+  
+  
 
 
 Interactive rebase (git rebase -i) rewrites commit history by squashing, reordering, or editing commits. Use it to clean up messy history before merging. Common operations: squash fixup commits, reorder commits for logical progression, edit commit messages, and split large commits.
 
+  
+  
+  
   
   
   
@@ -304,6 +348,9 @@ Interactive rebase rewrites history. Never rebase commits that have been pushed 
   
   
   
+  
+  
+  
 
 
 ##  Git Bisect
@@ -333,10 +380,16 @@ Interactive rebase rewrites history. Never rebase commits that have been pushed 
   
   
   
+  
+  
+  
 
 
 Git bisect finds the commit that introduced a bug through binary search. Start with git bisect start, mark the current commit as bad (git bisect bad), mark a known-good commit as good (git bisect good ). Git checks out the midpoint commit. Test it and mark as good or bad. Repeat until Git identifies the first bad commit.
 
+  
+  
+  
   
   
   

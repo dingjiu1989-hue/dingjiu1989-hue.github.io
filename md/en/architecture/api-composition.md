@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-composition.html
   
 
 
+# API Composition and Aggregation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 API composition addresses a fundamental challenge in distributed architectures: how to aggregate data from multiple backend services into a single, efficient client response. In a monolithic application, the database can join tables across domains with a single query. In a microservice architecture, each service owns its data, and aggregation must happen at the application layer. Three primary patterns address this: the API composition layer, GraphQL federation, and the Backend for Frontend (BFF) pattern. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ The API composition layer is a dedicated service that orchestrates calls to down
   
   
   
+  
+  
+  
 
 
 The N+1 query problem manifests in API composition when the composer fetches a list from one service, then iterates over each item to fetch details from another. Batch endpoints or GraphQL DataLoader patterns mitigate this by collecting keys and making batched requests. For example, instead of fetching each order's customer details individually, the composer collects all customer IDs and makes a single batch request to the customer service. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ GraphQL federation provides an alternative approach where multiple services expo
   
   
   
+  
+  
+  
 
 
 The Backend for Frontend (BFF) pattern creates dedicated backend services for each client type. A mobile BFF might return a coarser payload optimized for bandwidth, while a web BFF returns a richer payload suitable for desktop browsers. Each BFF owns its aggregation logic, reducing the risk of breaking one client's experience when optimizing for another. The BFF pattern often incorporates API composition as one of its responsibilities, but extends it to include client-specific concerns like data transformation, caching strategy, and authentication. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Data consistency challenges arise in all composition patterns. When the composer
   
   
   
+  
+  
+  
 
 
 Caching at the composition layer can dramatically improve performance and reduce downstream load. The composer can cache aggregated responses or its individual downstream calls. Cache invalidation becomes complex when data changes affect multiple cached responses — a product price change may invalidate cache entries in the product detail, search results, and order history compositions. 
 
+  
+  
+  
   
   
   

@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/database-index-types.html
   
   
   
+  
+  
+  
+
+
+# B-Tree, Hash, GiST, GIN: Index Type Selection Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database indexes accelerate queries by providing fast lookup paths. Different index types optimize for different query patterns. Choosing the wrong index type wastes storage and may not improve query performance.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Database indexes accelerate queries by providing fast lookup paths. Different in
   
   
   
+  
+  
+  
 
 
 B-Tree is the default and most versatile index type. It supports equality, range, sorting, and pattern matching queries. B-Tree indexes organize data in a balanced tree structure where leaf nodes contain sorted data values.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Use B-Tree for: primary key lookups, range queries (>, <, BETWEEN), ORDER BY sor
   
   
   
+  
+  
+  
 
 
 Performance characteristics: O(log n) lookup time. Insert and delete cost O(log n) with page splits. B-Tree is the best general-purpose index and should be your default choice.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Performance characteristics: O(log n) lookup time. Insert and delete cost O(log 
   
   
   
+  
+  
+  
 
 
 Hash indexes support only equality lookups (=, IN). They compute a hash of the index key and store the hash value. Hash indexes are smaller than B-Tree for the same data because they store fixed-length hash values.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Use Hash indexes for: exact-match lookups where range queries are never needed. 
   
   
   
+  
+  
+  
 
 
 PostgreSQL's hash indexes are now WAL-logged and crash-safe (since PostgreSQL 10). They were historically discouraged but are production-ready in modern versions. Benchmark B-Tree vs Hash for your specific workload before choosing.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ PostgreSQL's hash indexes are now WAL-logged and crash-safe (since PostgreSQL 10
   
   
   
+  
+  
+  
 
 
 GiST (Generalized Search Tree) supports complex data types: geometric data, full-text search, range types, and nearest-neighbor searches. GiST is an extensible index framework—different operators provide different capabilities.
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Use GiST for: geospatial queries with PostGIS, range type overlap (&& operator),
   
   
   
+  
+  
+  
 
 
 Trade-offs: GiST indexes are larger than B-Tree and slower to build. Query performance varies by operator class. GiST has higher write overhead.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Trade-offs: GiST indexes are larger than B-Tree and slower to build. Query perfo
   
   
   
+  
+  
+  
 
 
 GIN (Generalized Inverted Index) is designed for composite values: arrays, JSONB, full-text vectors. GIN stores mappings from component values to rows containing them.
 
+  
+  
+  
   
   
   
@@ -543,6 +617,9 @@ Use GIN for: JSONB queries (? and @> operators), array containment (array @> val
   
   
   
+  
+  
+  
 
 
 GIN indexes have fast query speed but slow writes. Use fastupdate setting for write-heavy workloads—it buffers index entries and bulk-inserts them. GIN indexes are significantly larger than B-Tree.
@@ -569,10 +646,16 @@ GIN indexes have fast query speed but slow writes. Use fastupdate setting for wr
   
   
   
+  
+  
+  
 
 
 ##  Choosing
 
+  
+  
+  
   
   
   

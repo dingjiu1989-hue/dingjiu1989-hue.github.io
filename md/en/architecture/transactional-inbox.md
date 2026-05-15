@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transactional-inbox.html
   
   
   
+  
+  
+  
+
+
+# Transactional Inbox Pattern for Reliable Messaging
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The transactional inbox pattern ensures reliable message processing by storing incoming messages in a persistent inbox before processing them. This guarantees at-least-once processing without duplicating work during retries.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ The transactional inbox pattern ensures reliable message processing by storing i
   
   
   
+  
+  
+  
 
 
 In distributed systems, messages can be delivered multiple times. Network failures, consumer crashes, and broker retries all cause duplicate deliveries without the producer knowing. Without the inbox pattern, duplicate messages cause duplicate side effects—charging a customer twice, creating duplicate records.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ In distributed systems, messages can be delivered multiple times. Network failur
   
   
   
+  
+  
+  
 
 
 When a message arrives, the consumer first checks if it exists in the inbox by its unique message ID. If it is new, the consumer stores the message in the inbox table and then processes it. If the message ID already exists, the consumer skips processing (idempotent consumption).
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ The inbox is typically a database table with a unique constraint on message ID. 
   
   
   
+  
+  
+  
 
 
 ##  Inbox Table Schema
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ A minimal inbox table contains: message_id (UUID, primary key), message_type, pa
   
   
   
+  
+  
+  
 
 
 ##  Relationship to Transactional Outbox
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ The transactional inbox and outbox are complementary. The outbox pattern ensures
   
   
   
+  
+  
+  
 
 
 ##  Implementation Considerations
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Periodically clean up processed inbox records to prevent table growth. Archive a
   
   
   
+  
+  
+  
 
 
 ##  Idempotency Keys
 
+  
+  
+  
   
   
   

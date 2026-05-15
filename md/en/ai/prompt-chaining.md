@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/prompt-chaining.html
   
 
 
+# Prompt Chaining: Decomposition, Parallel Execution, State Management
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Prompt chaining connects multiple LLM calls into pipelines where each step refin
   
   
   
+  
+  
+  
 
 
 ##  Task Decomposition
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ The first step in prompt chaining is breaking a complex task into discrete, inde
   
   
   
+  
+  
+  
 
 
 def decompose_task(complex_request: str) -> list[dict]:
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ def decompose_task(complex_request: str) -> list[dict]:
   
   
   
+  
+  
+  
 
 
 plan = call_llm("""
 
+  
+  
+  
   
   
   
@@ -391,39 +444,16 @@ Break this request into sequential steps. For each step, specify:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step_name: short description
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- input_description: what this step needs
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- step_name: short description
 
+  
+  
+  
   
   
   
@@ -451,7 +481,7 @@ Break this request into sequential steps. For each step, specify:
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- output_format: what this step produces
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- input_description: what this step needs
 
   
   
@@ -478,10 +508,48 @@ Break this request into sequential steps. For each step, specify:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validation_criteria: how to verify correctness
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- output_format: what this step produces
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- validation_criteria: how to verify correctness
+
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Request: """ + complex_request)
   
   
   
+  
+  
+  
 
 
 return parse_steps(plan)
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ return parse_steps(plan)
   
   
   
+  
+  
+  
 
 
 steps = [
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ steps = [
   
   
   
+  
+  
+  
 
 
 {"name": "write_headline", "input": "keyword_list", "output": "headline"},
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ steps = [
   
   
   
+  
+  
+  
 
 
 {"name": "write_cta", "input": "description", "output": "cta_text"},
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ steps = [
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ Each step has a narrow focus. Narrow prompts produce more reliable outputs than 
   
   
   
+  
+  
+  
 
 
 ##  Sequential Chain Execution
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ Once decomposed, execute steps in order, passing outputs as inputs:
   
   
   
+  
+  
+  
 
 
 class ChainStep:
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ def __init__(self, name: str, prompt_template: str, inputs: list[str]):
   
   
   
+  
+  
+  
 
 
 self.name = name
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ self.prompt_template = prompt_template
   
   
   
+  
+  
+  
 
 
 self.inputs = inputs
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ class SequentialChain:
   
   
   
+  
+  
+  
 
 
 def __init__(self, steps: list[ChainStep]):
 
+  
+  
+  
   
   
   
@@ -1116,6 +1244,9 @@ self.steps = steps
   
   
   
+  
+  
+  
 
 
 async def execute(self, initial_inputs: dict) -> dict:
@@ -1145,10 +1276,16 @@ async def execute(self, initial_inputs: dict) -> dict:
   
   
   
+  
+  
+  
 
 
 state = dict(initial_inputs)
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ for step in self.steps:
   
   
   
+  
+  
+  
 
 
 resolved = {name: state[name] for name in step.inputs}
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ prompt = step.prompt_template.format(**resolved)
   
   
   
+  
+  
+  
 
 
 output = await call_llm_async(prompt)
 
+  
+  
+  
   
   
   
@@ -1319,6 +1468,9 @@ state[step.name] = output
   
   
   
+  
+  
+  
 
 
 await self.validate_step(step, output)
@@ -1348,10 +1500,16 @@ await self.validate_step(step, output)
   
   
   
+  
+  
+  
 
 
 return state
 
+  
+  
+  
   
   
   
@@ -1406,10 +1564,16 @@ async def validate_step(self, step: ChainStep, output: str):
   
   
   
+  
+  
+  
 
 
 validation = call_llm(f"Validate this {step.name} output: {output}")
 
+  
+  
+  
   
   
   
@@ -1464,10 +1628,16 @@ if "FAIL" in validation:
   
   
   
+  
+  
+  
 
 
 raise ChainValidationError(f"Step {step.name} failed validation: {validation}")
 
+  
+  
+  
   
   
   
@@ -1522,10 +1692,16 @@ raise ChainValidationError(f"Step {step.name} failed validation: {validation}")
   
   
   
+  
+  
+  
 
 
 When steps are independent, execute them concurrently to reduce wall-clock time:
 
+  
+  
+  
   
   
   
@@ -1580,10 +1756,16 @@ import asyncio
   
   
   
+  
+  
+  
 
 
 async def parallel_chain(initial_inputs: dict, parallel_groups: list[list[ChainStep]]):
 
+  
+  
+  
   
   
   
@@ -1638,10 +1820,16 @@ state = dict(initial_inputs)
   
   
   
+  
+  
+  
 
 
 for group in parallel_groups:
 
+  
+  
+  
   
   
   
@@ -1696,10 +1884,16 @@ results = await asyncio.gather(
   
   
   
+  
+  
+  
 
 
 *[execute_single_step(step, state) for step in group],
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ return_exceptions=True,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1812,10 +2012,16 @@ for step, result in zip(group, results):
   
   
   
+  
+  
+  
 
 
 if isinstance(result, Exception):
 
+  
+  
+  
   
   
   
@@ -1870,10 +2076,16 @@ raise ChainError(f"Step {step.name} failed: {result}")
   
   
   
+  
+  
+  
 
 
 state[step.name] = result
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ return state
   
   
   
+  
+  
+  
 
 
 # Example: generate three sections of a report simultaneously
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ parallel_groups = [
   
   
   
+  
+  
+  
 
 
 [
 
+  
+  
+  
   
   
   
@@ -2044,10 +2268,16 @@ ChainStep("market_analysis", market_template, ["industry"]),
   
   
   
+  
+  
+  
 
 
 ChainStep("financial_analysis", financial_template, ["industry"]),
 
+  
+  
+  
   
   
   
@@ -2102,10 +2332,16 @@ ChainStep("competitive_analysis", competitive_template, ["industry"]),
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ ChainStep("competitive_analysis", competitive_template, ["industry"]),
   
   
   
+  
+  
+  
 
 
 ChainStep("executive_summary", summary_template, ["market_analysis", "financial_analysis", "competitive_analysis"]),
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ ChainStep("executive_summary", summary_template, ["market_analysis", "financial_
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ ChainStep("executive_summary", summary_template, ["market_analysis", "financial_
   
   
   
+  
+  
+  
 
 
 Chains accumulate state as they execute. A formal state machine approach prevents data loss and enables error recovery:
 
+  
+  
+  
   
   
   
@@ -2334,10 +2588,16 @@ from dataclasses import dataclass, field
   
   
   
+  
+  
+  
 
 
 from typing import Any, Optional
 
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ from typing import Any, Optional
   
   
   
+  
+  
+  
 
 
 class ChainState:
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ inputs: dict[str, Any] = field(default_factory=dict)
   
   
   
+  
+  
+  
 
 
 outputs: dict[str, Any] = field(default_factory=dict)
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ errors: dict[str, str] = field(default_factory=dict)
   
   
   
+  
+  
+  
 
 
 metadata: dict[str, Any] = field(default_factory=dict)
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ def set_output(self, step: str, value: Any):
   
   
   
+  
+  
+  
 
 
 self.outputs[step] = value
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ self.metadata[f"{step}_completed_at"] = time.time()
   
   
   
+  
+  
+  
 
 
 def get(self, key: str) -> Optional[Any]:
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ return self.outputs.get(key) or self.inputs.get(key)
   
   
   
+  
+  
+  
 
 
 def snapshot(self) -> dict:
 
+  
+  
+  
   
   
   
@@ -2740,10 +3036,16 @@ return {"outputs": self.outputs, "errors": self.errors}
   
   
   
+  
+  
+  
 
 
 def restore(self, snapshot: dict):
 
+  
+  
+  
   
   
   
@@ -2798,10 +3100,16 @@ self.outputs.update(snapshot.get("outputs", {}))
   
   
   
+  
+  
+  
 
 
 self.errors.update(snapshot.get("errors", {}))
 
+  
+  
+  
   
   
   
@@ -2856,10 +3164,16 @@ self.errors.update(snapshot.get("errors", {}))
   
   
   
+  
+  
+  
 
 
 When a step fails, the chain should attempt recovery rather than aborting entirely:
 
+  
+  
+  
   
   
   
@@ -2914,10 +3228,16 @@ async def execute_with_recovery(step: ChainStep, state: ChainState, max_retries=
   
   
   
+  
+  
+  
 
 
 for attempt in range(max_retries + 1):
 
+  
+  
+  
   
   
   
@@ -2972,10 +3292,16 @@ try:
   
   
   
+  
+  
+  
 
 
 result = await execute_single_step(step, state.outputs)
 
+  
+  
+  
   
   
   
@@ -3030,10 +3356,16 @@ state.set_output(step.name, result)
   
   
   
+  
+  
+  
 
 
 return result
 
+  
+  
+  
   
   
   
@@ -3088,10 +3420,16 @@ except ValidationError as e:
   
   
   
+  
+  
+  
 
 
 if attempt == max_retries:
 
+  
+  
+  
   
   
   
@@ -3146,10 +3484,16 @@ if attempt == max_retries:
   
   
   
+  
+  
+  
 
 
 fallback = await execute_fallback(step, state)
 
+  
+  
+  
   
   
   
@@ -3204,10 +3548,16 @@ state.set_output(step.name, fallback)
   
   
   
+  
+  
+  
 
 
 state.errors[step.name] = f"Used fallback after {attempt} retries"
 
+  
+  
+  
   
   
   
@@ -3262,6 +3612,9 @@ return fallback
   
   
   
+  
+  
+  
 
 
 state.metadata[f"{step.name}_retry_{attempt}"] = str(e)
@@ -3291,10 +3644,16 @@ state.metadata[f"{step.name}_retry_{attempt}"] = str(e)
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

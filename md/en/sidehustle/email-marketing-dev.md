@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/email-marketing-dev.html
   
 
 
+# Email Marketing for Developers: Mailchimp, ConvertKit, Automation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Email Marketing for Developers
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Email marketing remains the highest-ROI channel for developer products. Unlike s
   
   
   
+  
+  
+  
 
 
 ### Choosing an Email Platform
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Mailchimp is the most widely recognized platform, offering a generous free tier 
   
   
   
+  
+  
+  
 
 
 ConvertKit is purpose-built for creators and has become the default for developer newsletter authors. Its strengths are simplicity (text-focused emails perform better than HTML designs for developer audiences), powerful automation (tagging, segments, sequences), and a clean API. ConvertKit's free tier includes up to 1,000 subscribers.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Loops focuses on SaaS transactional and product emails. Its API-first approach, 
   
   
   
+  
+  
+  
 
 
 ### Building Your Email List
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Lead magnets convert visitors into subscribers. For developer audiences, effecti
   
   
   
+  
+  
+  
 
 
 Optimize signup forms for developer preferences: minimal fields (email only), clear privacy commitment, and specific frequency expectations. Place signup forms in high-visibility locations: end of blog posts, sidebar, navigation bar, and as inline CTAs within content. Exit-intent popups can capture leaving visitors.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ API-based signup enables custom integrations. Use your platform's API to create 
   
   
   
+  
+  
+  
 
 
 ### Email Sequences and Automation
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Welcome sequences activate new subscribers. A standard developer-oriented welcom
   
   
   
+  
+  
+  
 
 
 Product onboarding sequences convert free users to paid. Trigger based on user behavior: signup, first login, feature usage milestones, and inactivity. Behavior-triggered emails significantly outperform scheduled broadcasts. Use your product analytics (PostHog) data to trigger ConvertKit automation.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Transactional emails keep users engaged with product updates, billing notificati
   
   
   
+  
+  
+  
 
 
 ### Writing Effective Developer Emails
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Developer audiences prefer substance over marketing language. Write in a convers
   
   
   
+  
+  
+  
 
 
 Keep emails focused on a single topic with clear structure. Short paragraphs (2-3 sentences), generous whitespace, and scannable formatting. Include code snippets when relevant — they increase engagement from developer readers.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Personalization goes beyond first names. Segment by interest: tag subscribers ba
   
   
   
+  
+  
+  
 
 
 ### Metrics and Optimization
 
+  
+  
+  
   
   
   
@@ -739,6 +828,9 @@ Track open rate (target 25-40% for developer lists), click-through rate (target 
   
   
   
+  
+  
+  
 
 
 Clean your list quarterly — remove inactive subscribers who haven't opened in 90 days. List hygiene improves deliverability and engagement metrics. Re-engagement campaigns (tempt dormant subscribers with exclusive content) recover some inactive users before removal.
@@ -768,10 +860,16 @@ Clean your list quarterly — remove inactive subscribers who haven't opened in 
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

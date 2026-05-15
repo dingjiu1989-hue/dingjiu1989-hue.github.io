@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/security/encryption-key-management.htm
   
   
   
+  
+  
+  
+
+
+# Encryption Key Management Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Encryption key management is the foundation of data security. Strong encryption with weak key management provides no real security—the keys are the single point of failure.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Encryption key management is the foundation of data security. Strong encryption 
   
   
   
+  
+  
+  
 
 
 Key generation: Use cryptographically secure random number generators. Generate keys on hardware security modules (HSM) or using approved libraries. Key strength: AES-256 for symmetric encryption, RSA-3072 or ECC P-384 for asymmetric encryption.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Key distribution: Securely transfer keys to authorized systems. Never transmit k
   
   
   
+  
+  
+  
 
 
 Key storage: Store keys separately from encrypted data. Production keys in HSMs or key management services. Development keys in secure vaults (HashiCorp Vault, AWS Secrets Manager). Never store keys in code, config files, or environment variables.
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Key rotation: Rotate keys on a regular schedule (annually for most keys, monthly
   
   
   
+  
+  
+  
 
 
 Key revocation: Revoke compromised keys immediately. Key revocation lists distributed to all authorized systems. Grace period for key replacement. Audit key revocation events.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Key revocation: Revoke compromised keys immediately. Key revocation lists distri
   
   
   
+  
+  
+  
 
 
 HSMs are dedicated hardware for cryptographic operations. They provide tamper-resistant key storage and certified random number generation. Cloud HSMs (AWS CloudHSM, Azure Dedicated HSM) provide HSM capabilities as a service.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ HSMs perform encryption/decryption operations without exposing keys. Keys never 
   
   
   
+  
+  
+  
 
 
 ##  Cloud KMS
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Cloud key management services (AWS KMS, Azure Key Vault, GCP Cloud KMS) provide 
   
   
   
+  
+  
+  
 
 
 Envelope encryption encrypts data with a data encryption key (DEK), then encrypts the DEK with a key encryption key (KEK) stored in KMS. This allows high-performance encryption with centralized key management. KMS handles KEK management; applications manage DEKs.
 
+  
+  
+  
   
   
   
@@ -491,10 +559,16 @@ Envelope encryption encrypts data with a data encryption key (DEK), then encrypt
   
   
   
+  
+  
+  
 
 
 Never hardcode keys. Use environment variables for development. Use secrets management tools (HashiCorp Vault, AWS Secrets Manager) for production. Vault provides dynamic secrets, automatic rotation, and audit logging.
 
+  
+  
+  
   
   
   
@@ -543,10 +617,16 @@ Hashicorp Vault is the most popular secrets management tool. It stores API keys,
   
   
   
+  
+  
+  
 
 
 ##  Auditing
 
+  
+  
+  
   
   
   

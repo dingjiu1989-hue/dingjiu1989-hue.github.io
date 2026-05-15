@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/cost-per-request.html
   
 
 
+# Cost Per Request Modeling
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Cost per request modeling decomposes infrastructure costs into the cost of serving a single request. This metric enables data-driven optimization: if a request costs \$0.001 and you serve 100 million requests per month, a 20% reduction saves \$20,000 monthly. More importantly, understanding per-request costs reveals which features, endpoints, or user segments are profitable and which may need rethinking. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Compute cost is calculated from the resources consumed during request processing
   
   
   
+  
+  
+  
 
 
 Storage cost includes database capacity, object storage, and caching layers. A request that reads 10 KB of product data, writes 2 KB of order data, and caches the result for 60 seconds has a direct storage cost plus the amortized cost of the storage infrastructure. Database IOPS and provisioned throughput costs are usually larger than raw storage costs. For relational databases, each request's storage cost must account for the total database cost divided across all served requests, not just the marginal cost. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Network cost is often the easiest to quantify. Cloud providers charge for inter-
   
   
   
+  
+  
+  
 
 
 Database per-request cost depends on query complexity and data volume. A simple primary key lookup costs less than a full-text search or a join across multiple tables. Write operations generally cost more than reads — they require transaction log writes, index updates, and replication. The database cost per request should include: query CPU time, IOPS consumed, data transfer, and a proportional share of the database instance cost. For serverless databases (Aurora Serverless, DynamoDB on-demand), per-request costs are directly observable. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Optimization strategies target the highest-cost components first. Instrument eve
   
   
   
+  
+  
+  
 
 
 Caching reduces all cost dimensions simultaneously. A cached response eliminates compute, storage, and network costs for the downstream services. Cache hit ratio directly multiplies cost savings. A 99% cache hit ratio means the full request cost is paid for only 1% of requests. The cache layer itself has a cost (Redis nodes, CDN bandwidth), but this is typically far smaller than the cost of serving requests from origin. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Request batching reduces per-request overhead. Instead of making 20 individual r
   
   
   
+  
+  
+  
 
 
 Cost attribution requires distributed tracing metadata. Each trace span should carry cost-related attributes: service name, instance type, data size processed, cache hit status, and database query cost. The tracing system can then sum costs across spans to compute end-to-end per-request cost. This correlation enables architects to identify the most expensive path for any request and target optimization efforts effectively. 
 
+  
+  
+  
   
   
   

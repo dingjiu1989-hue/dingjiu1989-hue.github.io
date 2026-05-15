@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/rest-api-design.html
   
 
 
+# REST API Design Best Practices
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 REST (Representational State Transfer) remains the dominant architectural style for web APIs. A well-designed REST API is intuitive, consistent, and easy to maintain. This article covers the core principles and practical guidelines for designing REST APIs that developers love to use. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Use Consistent Resource Naming
   
   
   
+  
+  
+  
 
 
 Your API endpoints represent resources. Use nouns, not verbs, and stick to a consistent naming convention. 
 
+  
+  
+  
   
   
   
@@ -228,10 +266,16 @@ GET /users # Good
   
   
   
+  
+  
+  
 
 
 GET /getUsers # Bad
 
+  
+  
+  
   
   
   
@@ -280,6 +324,9 @@ POST /createUser # Bad
   
   
   
+  
+  
+  
 
 
 Use plural nouns for collections (`/users`, `/orders`) and nest resources to express relationships (`/users/123/orders`). Avoid deep nesting beyond two or three levels. If you find yourself nesting four levels deep, consider flattening the structure or using query parameters. 
@@ -303,10 +350,16 @@ Use plural nouns for collections (`/users`, `/orders`) and nest resources to exp
   
   
   
+  
+  
+  
 
 
 Leverage HTTP Methods Correctly 
 
+  
+  
+  
   
   
   
@@ -352,10 +405,16 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
   
   
   
+  
+  
+  
 
 
 * `GET` — Retrieve a resource or collection. Idempotent and safe.
 
+  
+  
+  
   
   
   
@@ -398,6 +457,9 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
   
   
   
+  
+  
+  
 
 
 * `PUT` — Replace an entire resource. Idempotent.
@@ -421,10 +483,16 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
   
   
   
+  
+  
+  
 
 
 * `PATCH` — Partially update a resource. Idempotent when used with merge-style patches.
 
+  
+  
+  
   
   
   
@@ -470,6 +538,9 @@ Each HTTP method has a specific semantic meaning. Use them correctly:
   
   
   
+  
+  
+  
 
 
 A common mistake is using POST for everything. Proper method usage makes your API self-documenting and allows HTTP clients to make intelligent caching and retry decisions. 
@@ -493,10 +564,16 @@ A common mistake is using POST for everything. Proper method usage makes your AP
   
   
   
+  
+  
+  
 
 
 Use Proper HTTP Status Codes 
 
+  
+  
+  
   
   
   
@@ -542,10 +619,16 @@ Your API should return meaningful status codes. Group them logically:
   
   
   
+  
+  
+  
 
 
 * **2xx Success**: `200 OK` for successful GET/PUT/PATCH, `201 Created` for POST, `204 No Content` for DELETE.
 
+  
+  
+  
   
   
   
@@ -588,10 +671,16 @@ Your API should return meaningful status codes. Group them logically:
   
   
   
+  
+  
+  
 
 
 * **4xx Client Error**: `400 Bad Request` for malformed input, `401 Unauthorized` when authentication is missing, `403 Forbidden` when the user lacks permission, `404 Not Found`, `409 Conflict` for duplicate resources, `422 Unprocessable Entity` for validation errors.
 
+  
+  
+  
   
   
   
@@ -637,10 +726,16 @@ Your API should return meaningful status codes. Group them logically:
   
   
   
+  
+  
+  
 
 
 Returning `200 OK` for everything forces API consumers to inspect the response body to determine success or failure. This defeats the purpose of HTTP status codes. 
 
+  
+  
+  
   
   
   
@@ -683,10 +778,16 @@ Pagination, Filtering, and Sorting
   
   
   
+  
+  
+  
 
 
 Collections should always support pagination, filtering, and sorting. 
 
+  
+  
+  
   
   
   
@@ -735,10 +836,16 @@ GET /users?page=2&per;_page=20
   
   
   
+  
+  
+  
 
 
 GET /users?sort=created_atℴ=desc
 
+  
+  
+  
   
   
   
@@ -787,6 +894,9 @@ GET /users?filter[status]=active
   
   
   
+  
+  
+  
 
 
 Return pagination metadata in the response: 
@@ -813,10 +923,16 @@ Return pagination metadata in the response:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -865,10 +981,16 @@ Return pagination metadata in the response:
   
   
   
+  
+  
+  
 
 
 "pagination": {
 
+  
+  
+  
   
   
   
@@ -917,10 +1039,16 @@ Return pagination metadata in the response:
   
   
   
+  
+  
+  
 
 
 "per_page": 20,
 
+  
+  
+  
   
   
   
@@ -969,6 +1097,9 @@ Return pagination metadata in the response:
   
   
   
+  
+  
+  
 
 
 "total_pages": 8
@@ -995,29 +1126,6 @@ Return pagination metadata in the response:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1025,6 +1133,38 @@ Return pagination metadata in the response:
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1070,10 +1210,16 @@ Using cursor-based pagination is recommended for large, frequently updated datas
   
   
   
+  
+  
+  
 
 
 Consistent Error Responses 
 
+  
+  
+  
   
   
   
@@ -1119,10 +1265,16 @@ Design a standard error response format and use it everywhere:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1171,10 +1323,16 @@ Design a standard error response format and use it everywhere:
   
   
   
+  
+  
+  
 
 
 "code": "VALIDATION_ERROR",
 
+  
+  
+  
   
   
   
@@ -1223,10 +1381,16 @@ Design a standard error response format and use it everywhere:
   
   
   
+  
+  
+  
 
 
 "details": [
 
+  
+  
+  
   
   
   
@@ -1275,6 +1439,9 @@ Design a standard error response format and use it everywhere:
   
   
   
+  
+  
+  
 
 
 ]
@@ -1301,29 +1468,6 @@ Design a standard error response format and use it everywhere:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1331,6 +1475,38 @@ Design a standard error response format and use it everywhere:
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1376,6 +1552,9 @@ Include a machine-readable error code, a human-readable message, and detailed va
   
   
   
+  
+  
+  
 
 
 Versioning 
@@ -1399,10 +1578,16 @@ Versioning
   
   
   
+  
+  
+  
 
 
 APIs evolve. Plan for it from day one. The simplest approach is URL-based versioning: 
 
+  
+  
+  
   
   
   
@@ -1451,10 +1636,16 @@ APIs evolve. Plan for it from day one. The simplest approach is URL-based versio
   
   
   
+  
+  
+  
 
 
 /api/v2/users
 
+  
+  
+  
   
   
   
@@ -1500,6 +1691,9 @@ Header-based versioning (e.g., `Accept: application/vnd.myapi.v1+json`) is more 
   
   
   
+  
+  
+  
 
 
 Use HATEOAS for Discoverability 
@@ -1523,10 +1717,16 @@ Use HATEOAS for Discoverability
   
   
   
+  
+  
+  
 
 
 HATEOAS (Hypermedia as the Engine of Application State) includes links in responses to guide clients: 
 
+  
+  
+  
   
   
   
@@ -1575,10 +1775,16 @@ HATEOAS (Hypermedia as the Engine of Application State) includes links in respon
   
   
   
+  
+  
+  
 
 
 "id": 123,
 
+  
+  
+  
   
   
   
@@ -1627,10 +1833,16 @@ HATEOAS (Hypermedia as the Engine of Application State) includes links in respon
   
   
   
+  
+  
+  
 
 
 "_links": {
 
+  
+  
+  
   
   
   
@@ -1679,6 +1891,9 @@ HATEOAS (Hypermedia as the Engine of Application State) includes links in respon
   
   
   
+  
+  
+  
 
 
 "orders": { "href": "/users/123/orders" }
@@ -1705,29 +1920,6 @@ HATEOAS (Hypermedia as the Engine of Application State) includes links in respon
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1735,6 +1927,38 @@ HATEOAS (Hypermedia as the Engine of Application State) includes links in respon
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1780,6 +2004,9 @@ While many APIs skip HATEOAS, it significantly improves discoverability and redu
   
   
   
+  
+  
+  
 
 
 Authentication and Authorization 
@@ -1803,10 +2030,16 @@ Authentication and Authorization
   
   
   
+  
+  
+  
 
 
 Use industry-standard authentication mechanisms. Token-based auth (JWT) is the most common choice for REST APIs. Include tokens in the `Authorization` header: 
 
+  
+  
+  
   
   
   
@@ -1855,10 +2088,16 @@ Authorization: Bearer
   
   
   
+  
+  
+  
 
 
 Use scopes or claims within the token to implement fine-grained authorization. Always use HTTPS in production to protect tokens and data in transit. 
 
+  
+  
+  
   
   
   
@@ -1901,10 +2140,16 @@ Rate Limiting
   
   
   
+  
+  
+  
 
 
 Protect your API from abuse by implementing rate limiting. Return rate limit information in response headers: 
 
+  
+  
+  
   
   
   
@@ -1953,10 +2198,16 @@ X-RateLimit-Limit: 100
   
   
   
+  
+  
+  
 
 
 X-RateLimit-Remaining: 42
 
+  
+  
+  
   
   
   
@@ -2005,10 +2256,16 @@ X-RateLimit-Reset: 1640995200
   
   
   
+  
+  
+  
 
 
 When a client exceeds the limit, return `429 Too Many Requests` with a `Retry-After` header. 
 
+  
+  
+  
   
   
   
@@ -2051,6 +2308,9 @@ Documentation
   
   
   
+  
+  
+  
 
 
 An API is only as good as its documentation. Use OpenAPI/Swagger to document your API. Generate interactive documentation that allows developers to test endpoints directly from the browser. Keep your documentation in sync with your implementation by using a code-first approach where the OpenAPI spec is generated from annotations in your code. 
@@ -2074,10 +2334,16 @@ An API is only as good as its documentation. Use OpenAPI/Swagger to document you
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

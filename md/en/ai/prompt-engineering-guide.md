@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/ai/prompt-engineering-guide.html
   
   
   
+  
+  
+  
+
+
+# Prompt Engineering Guide for LLMs
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Prompt engineering is the art of crafting inputs to large language models to produce desired outputs. Effective prompting significantly improves output quality, consistency, and reliability.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Prompt engineering is the art of crafting inputs to large language models to pro
   
   
   
+  
+  
+  
 
 
 Zero-shot prompting gives the model a task description without examples. The model relies on its training data to understand and execute the request. Be specific about the output format, tone, and constraints.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Structure zero-shot prompts with clear instructions, context, and expected outpu
   
   
   
+  
+  
+  
 
 
 ##  Few-Shot Prompting
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Few-shot prompting provides examples of desired inputs and outputs. Three to fiv
   
   
   
+  
+  
+  
 
 
 Select diverse examples that cover edge cases. Order examples from simple to complex. Include examples of what NOT to do for improved accuracy. Few-shot prompting is particularly effective for classification, extraction, and formatting tasks.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Select diverse examples that cover edge cases. Order examples from simple to com
   
   
   
+  
+  
+  
 
 
 Chain-of-thought prompting asks the model to show its reasoning step by step. This improves accuracy on complex reasoning tasks. Add "Let's think step by step" or provide a chain-of-thought example.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ For math and logic problems, chain-of-thought dramatically improves accuracy fro
   
   
   
+  
+  
+  
 
 
 ##  Structured Output
 
+  
+  
+  
   
   
   
@@ -504,6 +569,9 @@ Request structured output formats explicitly. "Return a JSON array of objects" o
   
   
   
+  
+  
+  
 
 
 For critical applications, use function calling or structured output APIs (available with GPT-4 Turbo and Claude 3). These guarantee structured responses matching your schema, eliminating parsing errors.
@@ -533,10 +601,16 @@ For critical applications, use function calling or structured output APIs (avail
   
   
   
+  
+  
+  
 
 
 ##  Iterative Refinement
 
+  
+  
+  
   
   
   

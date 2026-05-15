@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/nginx-vs-caddy.html
   
 
 
+# Nginx vs Caddy: Web Server Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Nginx vs Caddy: Web Servers for Modern Applications
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Web servers are foundational to application delivery, and the choice between Ngi
   
   
   
+  
+  
+  
 
 
 ### Configuration Philosophy
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Nginx configuration is powerful but notoriously complex. A typical Nginx configu
   
   
   
+  
+  
+  
 
 
 Caddy configuration is minimalist by design. The Caddyfile uses a hierarchical block syntax where common patterns require minimal typing. A basic reverse proxy is `example.com { reverse_proxy localhost:3000 }`. Automatic HTTPS is built-in with no configuration required. Caddy v2 supports JSON configuration for programmatic management and API-driven deployments.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Caddy configuration is minimalist by design. The Caddyfile uses a hierarchical b
   
   
   
+  
+  
+  
 
 
 Nginx requires manual SSL certificate management. certbot provides Let's Encrypt integration, but it requires separate cron jobs or systemd timers for renewal. Multi-domain certificates, OCSP stapling, and HSTS headers require explicit configuration. SNI-based multiple certificate management adds complexity.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Caddy pioneered automatic HTTPS as a default feature. Caddy obtains and renews L
   
   
   
+  
+  
+  
 
 
 ### Performance Characteristics
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Nginx is engineered for maximum performance. Its event-driven, asynchronous arch
   
   
   
+  
+  
+  
 
 
 Caddy is written in Go and its performance reflects Go's runtime characteristics. For typical web workloads (hundreds to low thousands of concurrent connections), Caddy performs comparably to Nginx. At extreme scale (10,000+ concurrent connections), Nginx has an edge in memory efficiency and latency. Caddy's TLS handshake performance is excellent due to Go's optimized crypto/tls package.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Caddy is written in Go and its performance reflects Go's runtime characteristics
   
   
   
+  
+  
+  
 
 
 Nginx has a vast module ecosystem, but modules must be compiled into the binary. Dynamic modules (.so files) are available since Nginx 1.9.11 but version compatibility is strict. Popular modules include PageSpeed, HTTP/2, RTMP streaming, and Brotli compression. Adding modules requires recompilation or using modular Nginx builds.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Caddy's plugin system is more developer-friendly. Plugins are Go modules that ca
   
   
   
+  
+  
+  
 
 
 ### When to Choose Each
 
+  
+  
+  
   
   
   
@@ -623,6 +700,9 @@ Choose Nginx for high-traffic deployments, environments requiring fine-grained p
   
   
   
+  
+  
+  
 
 
 Choose Caddy for projects where developer experience and security matter most, when automatic HTTPS simplifies operations, for small to medium deployments, or when rapid configuration iteration is valuable.
@@ -652,10 +732,16 @@ Choose Caddy for projects where developer experience and security matter most, w
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/database-isolation-levels.htm
   
   
   
+  
+  
+  
+
+
+# Database Isolation Levels and Anomalies
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Isolation levels define how transaction concurrency is managed in a database. Higher isolation levels prevent more anomalies but reduce concurrency. Lower isolation levels increase performance at the cost of data consistency.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Isolation levels define how transaction concurrency is managed in a database. Hi
   
   
   
+  
+  
+  
 
 
 Read uncommitted is the lowest isolation level. A transaction can read data written by another uncommitted transaction. This exposes dirty reads—reading data that may be rolled back.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ This level is rarely used in production. It is appropriate only when reading app
   
   
   
+  
+  
+  
 
 
 ##  Read Committed
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Read committed prevents dirty reads. A transaction only sees data that was commi
   
   
   
+  
+  
+  
 
 
 Read committed does not prevent non-repeatable reads. If a transaction reads the same row twice, it may see different values if another transaction committed an update between the reads. This level also does not prevent phantom reads.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Read committed does not prevent non-repeatable reads. If a transaction reads the
   
   
   
+  
+  
+  
 
 
 Repeatable read ensures that if a transaction reads a row multiple times, it sees the same data. The database locks read rows or uses multi-version concurrency control to provide consistent snapshots.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Repeatable read is the default in MySQL/InnoDB. It prevents dirty reads and non-
   
   
   
+  
+  
+  
 
 
 ##  Serializable
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Serializable is the highest isolation level. Transactions execute as if they ran
   
   
   
+  
+  
+  
 
 
 Serializable achieves this through either pessimistic locking (transactions block) or optimistic concurrency control (transactions abort and retry on conflicts). The trade-off is throughput—serializable isolation reduces concurrent transaction throughput.
 
+  
+  
+  
   
   
   
@@ -491,6 +559,9 @@ Serializable achieves this through either pessimistic locking (transactions bloc
   
   
   
+  
+  
+  
 
 
 Dirty read: reading uncommitted data that may be rolled back. Non-repeatable read: reading the same row twice and getting different values. Phantom read: a range query returns different rows when re-executed. Lost update: two transactions read the same value, modify it independently, and the second overwrites the first. Write skew: two transactions read overlapping data and make conflicting writes based on stale reads.
@@ -517,10 +588,16 @@ Dirty read: reading uncommitted data that may be rolled back. Non-repeatable rea
   
   
   
+  
+  
+  
 
 
 ##  Choosing an Isolation Level
 
+  
+  
+  
   
   
   

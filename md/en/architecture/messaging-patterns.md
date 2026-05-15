@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/messaging-patterns.html
   
 
 
+# Messaging Patterns: Pub/Sub and Request/Reply
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Messaging is the backbone of distributed systems. It enables services to communicate asynchronously, decouple dependencies, and build resilient architectures. This article covers the two most fundamental messaging patterns: publish-subscribe and request-reply. 
 
+  
+  
+  
   
   
   
@@ -157,6 +189,9 @@ Messaging is the backbone of distributed systems. It enables services to communi
 
 The Case for Messaging 
 
+  
+  
+  
   
   
   
@@ -202,10 +237,16 @@ Direct HTTP calls between services create tight coupling. When Service A calls S
   
   
   
+  
+  
+  
 
 
 * Service A must know Service B's location and API contract.
 
+  
+  
+  
   
   
   
@@ -248,10 +289,16 @@ Direct HTTP calls between services create tight coupling. When Service A calls S
   
   
   
+  
+  
+  
 
 
 * If Service B is down, Service A fails.
 
+  
+  
+  
   
   
   
@@ -297,10 +344,16 @@ Direct HTTP calls between services create tight coupling. When Service A calls S
   
   
   
+  
+  
+  
 
 
 Messaging intermediaries (message brokers like Kafka, RabbitMQ, SQS, or Pub/Sub) solve these problems by decoupling senders from receivers. 
 
+  
+  
+  
   
   
   
@@ -343,10 +396,16 @@ Publish-Subscribe (Pub/Sub)
   
   
   
+  
+  
+  
 
 
 In the pub/sub pattern, publishers send messages to a topic without knowing who the subscribers are. Subscribers receive messages from topics they have subscribed to. 
 
+  
+  
+  
   
   
   
@@ -395,10 +454,16 @@ In the pub/sub pattern, publishers send messages to a topic without knowing who 
   
   
   
+  
+  
+  
 
 
 -> [Subscriber B]
 
+  
+  
+  
   
   
   
@@ -447,10 +512,16 @@ In the pub/sub pattern, publishers send messages to a topic without knowing who 
   
   
   
+  
+  
+  
 
 
 How Pub/Sub Works 
 
+  
+  
+  
   
   
   
@@ -496,10 +567,16 @@ How Pub/Sub Works
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Publishers** send messages to a topic. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Subscribers** register interest in a topic and receive all messages published to it. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Each subscriber receives a copy of every message (fan-out delivery). 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Publishers** send messages to a topic. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Subscribers** register interest in a topic and receive all messages published to it. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Each subscriber receives a copy of every message (fan-out delivery). 
 
+  
+  
+  
   
   
   
@@ -542,10 +619,16 @@ Use Cases
   
   
   
+  
+  
+  
 
 
 **Event notification.** When a user signs up, publish a `UserRegistered` event. Multiple subscribers react: the email service sends a welcome email, the analytics service records the event, the CRM service creates a contact. 
 
+  
+  
+  
   
   
   
@@ -588,6 +671,9 @@ Use Cases
   
   
   
+  
+  
+  
 
 
 **Log aggregation.** Multiple services publish log entries to a central topic. A log processing service stores and indexes them. 
@@ -611,10 +697,16 @@ Use Cases
   
   
   
+  
+  
+  
 
 
 Example with Kafka 
 
+  
+  
+  
   
   
   
@@ -663,10 +755,16 @@ Example with Kafka
   
   
   
+  
+  
+  
 
 
 producer.send('order-events', {
 
+  
+  
+  
   
   
   
@@ -715,10 +813,16 @@ producer.send('order-events', {
   
   
   
+  
+  
+  
 
 
 'order_id': '123',
 
+  
+  
+  
   
   
   
@@ -767,10 +871,16 @@ producer.send('order-events', {
   
   
   
+  
+  
+  
 
 
 'total': 99.99
 
+  
+  
+  
   
   
   
@@ -819,10 +929,16 @@ producer.send('order-events', {
   
   
   
+  
+  
+  
 
 
 # Subscriber
 
+  
+  
+  
   
   
   
@@ -871,10 +987,16 @@ producer.send('order-events', {
   
   
   
+  
+  
+  
 
 
 def handle_order_placed(event):
 
+  
+  
+  
   
   
   
@@ -923,10 +1045,16 @@ if event['type'] == 'OrderPlaced':
   
   
   
+  
+  
+  
 
 
 inventory_service.reserve_inventory(event['order_id'])
 
+  
+  
+  
   
   
   
@@ -975,10 +1103,16 @@ notification_service.send_confirmation(event['customer_id'])
   
   
   
+  
+  
+  
 
 
 Pub/Sub is ideal for one-to-many communication where the publisher does not need a response. 
 
+  
+  
+  
   
   
   
@@ -1021,6 +1155,9 @@ Request-Reply
   
   
   
+  
+  
+  
 
 
 The request-reply pattern is fundamentally different from pub/sub. A sender sends a request and expects a response. The two are correlated so the sender knows which response goes with which request. 
@@ -1044,10 +1181,16 @@ The request-reply pattern is fundamentally different from pub/sub. A sender send
   
   
   
+  
+  
+  
 
 
 In messaging systems, request-reply requires correlation: 
 
+  
+  
+  
   
   
   
@@ -1096,10 +1239,16 @@ In messaging systems, request-reply requires correlation:
   
   
   
+  
+  
+  
 
 
-[Requestor] <\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Reply Queue] <\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Replier]
+[Requestor] <\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Reply Queue] <\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- [Replier]
 
+  
+  
+  
   
   
   
@@ -1145,10 +1294,16 @@ Correlation ID
   
   
   
+  
+  
+  
 
 
 The key mechanism is the correlation ID. The requestor includes a unique ID in the request message. The replier includes the same ID in the reply message. The requestor uses this ID to match replies to pending requests. 
 
+  
+  
+  
   
   
   
@@ -1197,10 +1352,16 @@ The key mechanism is the correlation ID. The requestor includes a unique ID in t
   
   
   
+  
+  
+  
 
 
 correlation_id = str(uuid.uuid4())
 
+  
+  
+  
   
   
   
@@ -1249,10 +1410,16 @@ reply_queue = f"reply-{correlation_id}"
   
   
   
+  
+  
+  
 
 
 message = {
 
+  
+  
+  
   
   
   
@@ -1301,6 +1468,9 @@ message = {
   
   
   
+  
+  
+  
 
 
 'payload': {'user_id': '123', 'amount': 100}
@@ -1327,10 +1497,16 @@ message = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1379,10 +1555,16 @@ request_queue.send(message)
   
   
   
+  
+  
+  
 
 
 # Wait for reply on the reply queue
 
+  
+  
+  
   
   
   
@@ -1431,10 +1613,16 @@ reply = reply_queue.receive(timeout=30)
   
   
   
+  
+  
+  
 
 
 # Replier
 
+  
+  
+  
   
   
   
@@ -1483,10 +1671,16 @@ def handle_request(message):
   
   
   
+  
+  
+  
 
 
 result = process(message['payload'])
 
+  
+  
+  
   
   
   
@@ -1535,10 +1729,16 @@ reply = {
   
   
   
+  
+  
+  
 
 
 'correlation_id': message['correlation_id'],
 
+  
+  
+  
   
   
   
@@ -1587,10 +1787,16 @@ reply = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1639,10 +1845,16 @@ reply_queue.send(reply)
   
   
   
+  
+  
+  
 
 
 Use Cases 
 
+  
+  
+  
   
   
   
@@ -1685,10 +1897,16 @@ Use Cases
   
   
   
+  
+  
+  
 
 
 **Long-running operations.** Submit a job, get back a job ID, check progress, and eventually receive the result. The reply might arrive minutes or hours later. 
 
+  
+  
+  
   
   
   
@@ -1731,10 +1949,16 @@ Pub/Sub vs. Request-Reply
   
   
   
+  
+  
+  
 
 
 | Aspect | Pub/Sub | Request-Reply | |--------|---------|---------------| | Communication | One-to-many | One-to-one | | Response expected? | No | Yes | | Coupling | Very loose | Moderate | | Use case | Event notification, broadcasting | Remote procedure, query | | Message ordering | Per partition/topic | Per conversation | | Error handling | Dead letter queue | Timeout + retry | 
 
+  
+  
+  
   
   
   
@@ -1777,10 +2001,16 @@ Choosing a Message Broker
   
   
   
+  
+  
+  
 
 
 **Apache Kafka:** Best for high-throughput event streaming, log aggregation, and event sourcing. Messages are persisted and replayable. Excellent for building event-driven architectures. 
 
+  
+  
+  
   
   
   
@@ -1823,10 +2053,16 @@ Choosing a Message Broker
   
   
   
+  
+  
+  
 
 
 **Amazon SQS/SNS:** Fully managed. SQS for request-reply, SNS for pub/sub. No infrastructure to manage. Good for AWS-native applications. 
 
+  
+  
+  
   
   
   
@@ -1869,10 +2105,16 @@ Choosing a Message Broker
   
   
   
+  
+  
+  
 
 
 Advanced Patterns 
 
+  
+  
+  
   
   
   
@@ -1915,10 +2157,16 @@ Advanced Patterns
   
   
   
+  
+  
+  
 
 
 **Message bridging.** Forward messages between different messaging systems. For example, consume from SQS and publish to Kafka for long-term storage. 
 
+  
+  
+  
   
   
   
@@ -1961,10 +2209,16 @@ Advanced Patterns
   
   
   
+  
+  
+  
 
 
 Common Pitfalls 
 
+  
+  
+  
   
   
   
@@ -2007,10 +2261,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 **Idempotency.** Messages may be delivered more than once. Ensure your message handlers are idempotent. Use idempotency keys or deduplication. 
 
+  
+  
+  
   
   
   
@@ -2053,10 +2313,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

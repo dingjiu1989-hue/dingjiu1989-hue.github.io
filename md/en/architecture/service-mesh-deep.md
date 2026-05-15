@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/service-mesh-deep.html
   
 
 
+# Service Mesh Deep Dive
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 A service mesh is a dedicated infrastructure layer for handling service-to-service communication in a microservice architecture. It moves communication logic out of application code and into a proxy sidecar, providing observability, security, and reliability features without requiring changes to application code. This article compares the leading service mesh implementations and examines core capabilities. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ How a Service Mesh Works
   
   
   
+  
+  
+  
 
 
 A service mesh consists of two components: a data plane and a control plane. The data plane is composed of lightweight proxy sidecars deployed alongside each service instance. These proxies intercept all network traffic in and out of their service, enforcing routing rules, collecting metrics, and managing encryption. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ The control plane manages the configuration of the data plane proxies. It distri
   
   
   
+  
+  
+  
 
 
 Istio 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Istio is the most feature-rich service mesh, using Envoy proxies in its data pla
   
   
   
+  
+  
+  
 
 
 Istio's primary strength is its breadth of features. However, this comes at the cost of complexity. Istio has a steep learning curve, and its resource consumption (both CPU and memory) is higher than alternatives. For organizations that need advanced traffic management and have dedicated platform teams, Istio is the most capable choice. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Linkerd
   
   
   
+  
+  
+  
 
 
 Linkerd takes a different philosophy: simplicity and performance. It uses a lightweight Rust-based proxy (linkerd-proxy) instead of Envoy. The result is significantly lower resource consumption—typically half the CPU and memory of Istio—while still providing essential service mesh capabilities. 
 
+  
+  
+  
   
   
   
@@ -360,10 +416,16 @@ Linkerd automatically enables mTLS between all meshed pods, provides golden metr
   
   
   
+  
+  
+  
 
 
 Consul Connect 
 
+  
+  
+  
   
   
   
@@ -406,10 +468,16 @@ HashiCorp's Consul Connect integrates service mesh capabilities into the Consul 
   
   
   
+  
+  
+  
 
 
 Consul Connect provides service segmentation, intention-based access control, and mTLS. Its integration with Consul's service discovery and key-value store makes it attractive for organizations already using Consul. 
 
+  
+  
+  
   
   
   
@@ -452,10 +520,16 @@ mTLS
   
   
   
+  
+  
+  
 
 
 Mutual TLS (mTLS) ensures that all service-to-service communication is both encrypted and authenticated. Each service has a certificate verifying its identity, and both sides of a connection verify each other's certificates before exchanging data. The service mesh automates certificate issuance, rotation, and verification—application code does not need to manage TLS. 
 
+  
+  
+  
   
   
   
@@ -498,10 +572,16 @@ Service mesh mTLS prevents man-in-the-middle attacks, ensures that only authoriz
   
   
   
+  
+  
+  
 
 
 Traffic Splitting 
 
+  
+  
+  
   
   
   
@@ -544,10 +624,16 @@ Traffic splitting allows operators to route a percentage of traffic to different
   
   
   
+  
+  
+  
 
 
 Choosing a Service Mesh 
 
+  
+  
+  
   
   
   

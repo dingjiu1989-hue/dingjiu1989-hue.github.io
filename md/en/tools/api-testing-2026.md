@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/api-testing-2026.html
   
 
 
+# API Testing Tools: Bruno, Hoppscotch, Postman, Insomnia in 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ API testing tools have evolved from simple request builders to full-featured col
   
   
   
+  
+  
+  
 
 
 ##  Bruno
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Bruno is a Git-friendly API client that stores collections as plain text files:
   
   
   
+  
+  
+  
 
 
 # Collection directory structure
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ bruno/
   
   
   
+  
+  
+  
 
 
 my-api/
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ request.bru # Individual request
   
   
   
+  
+  
+  
 
 
 collection.bru # Collection metadata
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ collection.bru # Collection metadata
   
   
   
+  
+  
+  
 
 
 meta {
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ name: Get Users
   
   
   
+  
+  
+  
 
 
 type: http
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ seq: 1
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ get {
   
   
   
+  
+  
+  
 
 
 url: https://api.example.com/users
 
+  
+  
+  
   
   
   
@@ -681,6 +764,9 @@ body: none
   
   
   
+  
+  
+  
 
 
 auth: bearer
@@ -710,10 +796,16 @@ auth: bearer
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ headers {
   
   
   
+  
+  
+  
 
 
 Authorization: {{authToken}}
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ Content-Type: application/json
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ script:pre-request {
   
   
   
+  
+  
+  
 
 
 // JavaScript pre-request scripts
 
+  
+  
+  
   
   
   
@@ -942,6 +1052,9 @@ const timestamp = new Date().toISOString();
   
   
   
+  
+  
+  
 
 
 bru.setVar("timestamp", timestamp);
@@ -971,10 +1084,16 @@ bru.setVar("timestamp", timestamp);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ script:post-response {
   
   
   
+  
+  
+  
 
 
 // Assertions
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ expect(res.status).to.equal(200);
   
   
   
+  
+  
+  
 
 
 expect(res.body.data).to.be.an('array');
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ bru.setVar("userId", res.body.data[0].id);
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ bru.setVar("userId", res.body.data[0].id);
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: No cloud sync, smaller community, fewer collaboration features than Postman.
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ bru.setVar("userId", res.body.data[0].id);
   
   
   
+  
+  
+  
 
 
 A web-based, open-source API development platform:
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 "name": "User API",
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 "endpoint": "https://api.example.com/users",
 
+  
+  
+  
   
   
   
@@ -1551,6 +1724,9 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 { "key": "page", "value": "1", "active": true }
@@ -1580,10 +1756,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1638,6 +1820,9 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 { "key": "Authorization", "value": "Bearer {{token}}" }
@@ -1667,10 +1852,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 "testScript": "// validate response"
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -1841,10 +2044,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 "variables": {
 
+  
+  
+  
   
   
   
@@ -1957,6 +2172,9 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 "token": ""
@@ -1986,32 +2204,6 @@ A web-based, open-source API development platform:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2019,6 +2211,41 @@ A web-based, open-source API development platform:
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2073,10 +2300,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2131,10 +2364,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Web-based (limited offline without PWA), fewer integrations than Postman.
 
+  
+  
+  
   
   
   
@@ -2189,10 +2428,16 @@ A web-based, open-source API development platform:
   
   
   
+  
+  
+  
 
 
 The enterprise standard with comprehensive features:
 
+  
+  
+  
   
   
   
@@ -2247,10 +2492,16 @@ The enterprise standard with comprehensive features:
   
   
   
+  
+  
+  
 
 
 pm.environment.set("timestamp", new Date().toISOString());
 
+  
+  
+  
   
   
   
@@ -2305,10 +2556,16 @@ pm.variables.set("computedToken", crypto.createHash("sha256")
   
   
   
+  
+  
+  
 
 
 .update(pm.environment.get("secret") + Date.now())
 
+  
+  
+  
   
   
   
@@ -2363,10 +2620,16 @@ pm.variables.set("computedToken", crypto.createHash("sha256")
   
   
   
+  
+  
+  
 
 
 // Postman test script
 
+  
+  
+  
   
   
   
@@ -2421,6 +2684,9 @@ pm.test("Status code is 200", () => {
   
   
   
+  
+  
+  
 
 
 pm.response.to.have.status(200);
@@ -2450,10 +2716,16 @@ pm.response.to.have.status(200);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ pm.test("Response has required fields", () => {
   
   
   
+  
+  
+  
 
 
 const jsonData = pm.response.json();
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ pm.expect(jsonData).to.have.property("users");
   
   
   
+  
+  
+  
 
 
 pm.expect(jsonData.users).to.be.an("array");
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ pm.expect(jsonData.users[0]).to.have.all.keys(["id", "name", "email"]);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ pm.test("Response time is acceptable", () => {
   
   
   
+  
+  
+  
 
 
 pm.expect(pm.response.responseTime).to.be.below(500);
 
+  
+  
+  
   
   
   
@@ -2740,10 +3036,16 @@ pm.expect(pm.response.responseTime).to.be.below(500);
   
   
   
+  
+  
+  
 
 
 // Collection runner automation
 
+  
+  
+  
   
   
   
@@ -2798,39 +3100,16 @@ pm-collection run user-api.postman_collection.json
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--environment prod.postman_environment.json
 
+  
+  
+  
   
   
   
@@ -2858,7 +3137,7 @@ pm-collection run user-api.postman_collection.json
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--iteration-count 10
 
   
   
@@ -2885,10 +3164,48 @@ pm-collection run user-api.postman_collection.json
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--data test-data.csv
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--reporters cli,json,junit
+
+  
+  
+  
   
   
   
@@ -2943,10 +3260,16 @@ pm-collection run user-api.postman_collection.json
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Heavy resource usage, account required, can be overwhelming, recent UI changes have been controversial.
 
+  
+  
+  
   
   
   
@@ -3001,10 +3324,16 @@ pm-collection run user-api.postman_collection.json
   
   
   
+  
+  
+  
 
 
 Kong's API client with excellent GraphQL support:
 
+  
+  
+  
   
   
   
@@ -3059,10 +3388,16 @@ Kong's API client with excellent GraphQL support:
   
   
   
+  
+  
+  
 
 
 query GetUser($id: ID!) {
 
+  
+  
+  
   
   
   
@@ -3117,10 +3452,16 @@ user(id: $id) {
   
   
   
+  
+  
+  
 
 
 id
 
+  
+  
+  
   
   
   
@@ -3175,10 +3516,16 @@ name
   
   
   
+  
+  
+  
 
 
 email
 
+  
+  
+  
   
   
   
@@ -3233,10 +3580,16 @@ posts {
   
   
   
+  
+  
+  
 
 
 title
 
+  
+  
+  
   
   
   
@@ -3291,6 +3644,9 @@ comments {
   
   
   
+  
+  
+  
 
 
 content
@@ -3320,32 +3676,6 @@ content
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3378,6 +3708,41 @@ content
   
   
   
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -3407,10 +3772,16 @@ content
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3465,10 +3836,16 @@ content
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -3523,10 +3900,16 @@ content
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3581,10 +3964,16 @@ Insomnia's plugin system extends functionality:
   
   
   
+  
+  
+  
 
 
 // Insomnia plugin
 
+  
+  
+  
   
   
   
@@ -3639,10 +4028,16 @@ module.exports.templateTags = [
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -3697,10 +4092,16 @@ name: "jwt",
   
   
   
+  
+  
+  
 
 
 displayName: "JWT Token",
 
+  
+  
+  
   
   
   
@@ -3755,10 +4156,16 @@ description: "Generate a signed JWT",
   
   
   
+  
+  
+  
 
 
 args: [
 
+  
+  
+  
   
   
   
@@ -3813,10 +4220,16 @@ args: [
   
   
   
+  
+  
+  
 
 
 { type: "string", displayName: "Payload" },
 
+  
+  
+  
   
   
   
@@ -3871,10 +4284,16 @@ args: [
   
   
   
+  
+  
+  
 
 
 async run(context, secret, payload) {
 
+  
+  
+  
   
   
   
@@ -3929,6 +4348,9 @@ const jwt = require("jsonwebtoken");
   
   
   
+  
+  
+  
 
 
 return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
@@ -3958,32 +4380,6 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3991,6 +4387,41 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -4045,10 +4476,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 **Strengths**: Clean UI, excellent GraphQL support, plugin system, local data (no cloud required by default), unit testing feature.
 
+  
+  
+  
   
   
   
@@ -4103,10 +4540,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 | Feature | Bruno | Hoppscotch | Postman | Insomnia |
 
+  
+  
+  
   
   
   
@@ -4161,10 +4604,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 | Local-first | Yes | Partial (PWA) | No | Yes |
 
+  
+  
+  
   
   
   
@@ -4219,10 +4668,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 | GraphQL | Basic | Good | Good | Excellent |
 
+  
+  
+  
   
   
   
@@ -4277,10 +4732,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 | CI/CLI | Via Bruno CLI | Via scripts | Newman | Inso CLI |
 
+  
+  
+  
   
   
   
@@ -4335,10 +4796,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 | Open source | Yes | Yes | No | Yes |
 
+  
+  
+  
   
   
   
@@ -4393,10 +4860,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -4448,10 +4921,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 * **Quick testing**: Hoppscotch for ad-hoc API testing without installation.
 
+  
+  
+  
   
   
   
@@ -4500,10 +4979,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 * **GraphQL-heavy projects**: Insomnia for its superior GraphQL editor and schema exploration.
 
+  
+  
+  
   
   
   
@@ -4552,10 +5037,16 @@ return jwt.sign(JSON.parse(payload), secret, { expiresIn: "1h" });
   
   
   
+  
+  
+  
 
 
 * **Privacy-conscious**: Bruno or Hoppscotch (self-hosted) for local-only data.
 
+  
+  
+  
   
   
   

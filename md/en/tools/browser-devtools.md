@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/tools/browser-devtools.html
   
   
   
+  
+  
+  
+
+
+# Browser DevTools: Advanced Debugging Techniques
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Browser DevTools are essential for web development. Beyond basic inspection, advanced features help debug complex issues and optimize performance.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Browser DevTools are essential for web development. Beyond basic inspection, adv
   
   
   
+  
+  
+  
 
 
 The Console panel provides JavaScript REPL. Use console.assert, console.group, and console.table for structured logging. Blackbox scripts to ignore third-party code in stack traces. Live expressions evaluate JavaScript continuously.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Source panel sets breakpoints: line breakpoints, conditional breakpoints, XHR/fe
   
   
   
+  
+  
+  
 
 
 ##  Network Panel
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ The Network panel shows all network requests. Waterfall charts visualize timing 
   
   
   
+  
+  
+  
 
 
 Request blocking simulates missing resources. Import/export HAR files for sharing request data. Throttling simulates slow connections (Slow 3G, Fast 3G, custom). Profile network activity during page load for Web Vitals optimization.
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Request blocking simulates missing resources. Import/export HAR files for sharin
   
   
   
+  
+  
+  
 
 
 Performance recordings capture a timeline of page activity. FPS, CPU, and network bars show resource usage over time. Flame charts visualize JavaScript call stacks. Frame analysis identifies jank and frame drops.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ Timing breakdown: Loading (resource loading), Scripting (JavaScript execution), 
   
   
   
+  
+  
+  
 
 
 ##  Memory Panel
 
+  
+  
+  
   
   
   
@@ -504,6 +569,9 @@ JavaScript heap snapshot collects object references and memory usage. Allocation
   
   
   
+  
+  
+  
 
 
 Find detached DOM nodes (elements removed from DOM but retained in JavaScript). Check closure variables that may leak memory. Compare heap snapshots before and after user actions to detect leaks. Monitor garbage collection frequency.
@@ -533,10 +601,16 @@ Find detached DOM nodes (elements removed from DOM but retained in JavaScript). 
   
   
   
+  
+  
+  
 
 
 ##  Elements and Styles
 
+  
+  
+  
   
   
   

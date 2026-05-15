@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/metric-collection.html
   
   
   
+  
+  
+  
+
+
+# Metric Collection
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Metric collection is the practice of gathering numerical measurements from applications and infrastructure. Metrics provide insight into system health, performance, and usage patterns. This article covers the three main collection approaches—agent-based, pull-based, and push-based—along with cardinality management and best practices.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Metric collection is the practice of gathering numerical measurements from appli
   
   
   
+  
+  
+  
 
 
 Metrics fall into several categories. System metrics measure infrastructure: CPU usage, memory consumption, disk I/O, network traffic. Application metrics measure software behavior: request rate, error rate, response time, queue depth. Business metrics measure business outcomes: orders per minute, active users, revenue.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Each metric has a name, value, timestamp, and optional dimensions (labels or tag
   
   
   
+  
+  
+  
 
 
 ##  Agent-Based Collection
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Agent-based collection runs a monitoring agent on each node. The agent collects 
   
   
   
+  
+  
+  
 
 
 Agents handle local aggregation and buffering, reducing the load on the central system. They can collect metrics that are only available locally (detailed process information, log file sizes). The agent's configuration controls which metrics are collected and at what frequency.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Agent-based collection is reliable—the agent continues collecting even if the 
   
   
   
+  
+  
+  
 
 
 ##  Pull-Based Collection
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Pull-based collection (also called scrape-based) has the monitoring system perio
   
   
   
+  
+  
+  
 
 
 Pull-based collection simplifies discovery. Prometheus queries a service discovery mechanism (Kubernetes, Consul) to find targets. New targets are automatically discovered and scraped. Scaling is straightforward: add scrapers to handle more targets.
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ The pull model works well for batch workloads and scheduled jobs that are not al
   
   
   
+  
+  
+  
 
 
 ##  Push-Based Collection
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Push-based collection has services actively send metrics to a central collector.
   
   
   
+  
+  
+  
 
 
 Push-based collection is simpler to implement in application code—just send metrics to a known address. It works well for ephemeral services and serverless functions that may not be running when a pull-based system tries to scrape them.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ The trade-off is reliability. If the central collector is unavailable, metrics m
   
   
   
+  
+  
+  
 
 
 ##  Cardinality Management
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Metric cardinality refers to the number of unique dimension combinations. Each d
   
   
   
+  
+  
+  
 
 
 High cardinality causes performance problems. Monitoring systems struggle with millions of time series. Storage costs increase. Query performance degrades. The monitoring system may reject high-cardinality metrics entirely.
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ Cardinality management limits uncontrolled dimension explosion. Avoid putting hi
   
   
   
+  
+  
+  
 
 
 ##  Collection Frequency
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ Collection frequency balances granularity against cost. High-frequency collectio
   
   
   
+  
+  
+  
 
 
 The appropriate frequency depends on the metric type. System metrics benefit from high frequency to detect brief CPU or memory spikes. Business metrics are typically fine with lower frequency. Different metrics can have different collection intervals.
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ The appropriate frequency depends on the metric type. System metrics benefit fro
   
   
   
+  
+  
+  
 
 
 Use consistent metric naming conventions. Follow a hierarchical naming structure: `service.layer.operation.unit` (e.g., `orders.api.create.latency_seconds`). Include meaningful dimensions while avoiding cardinality explosion.
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ Define metric types clearly. Counters increase monotonically (total requests). G
   
   
   
+  
+  
+  
 
 
 Instrument all services from the start. Adding metrics after deployment is harder than building them in. Establish SLIs (Service Level Indicators) for each service and monitor them consistently. Correlate metrics with deployment events to identify performance regressions.
 
+  
+  
+  
   
   
   

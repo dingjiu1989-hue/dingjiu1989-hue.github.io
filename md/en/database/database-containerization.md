@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/database-containerization.htm
   
 
 
+# Databases in Containers: StatefulSets, Persistent Volumes, and Backup
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Databases in Containers: StatefulSets, Persistent Volumes, and Backup 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Running databases in containers was once considered an anti-pattern, but modern 
   
   
   
+  
+  
+  
 
 
 StatefulSets vs Deployments 
 
+  
+  
+  
   
   
   
@@ -225,10 +263,16 @@ Kubernetes Deployments are designed for stateless applications. StatefulSets are
   
   
   
+  
+  
+  
 
 
 apiVersion: apps/v1
 
+  
+  
+  
   
   
   
@@ -277,10 +321,16 @@ kind: StatefulSet
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -329,10 +379,16 @@ name: postgres
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -381,10 +437,16 @@ serviceName: postgres
   
   
   
+  
+  
+  
 
 
 replicas: 3
 
+  
+  
+  
   
   
   
@@ -433,10 +495,16 @@ selector:
   
   
   
+  
+  
+  
 
 
 matchLabels:
 
+  
+  
+  
   
   
   
@@ -485,6 +553,9 @@ app: postgres
   
   
   
+  
+  
+  
 
 
 template:
@@ -511,10 +582,16 @@ template:
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -563,6 +640,9 @@ labels:
   
   
   
+  
+  
+  
 
 
 app: postgres
@@ -589,10 +669,16 @@ app: postgres
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -641,10 +727,16 @@ containers:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgres
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: postgres
 
+  
+  
+  
   
   
   
@@ -693,6 +785,9 @@ image: postgres:16
   
   
   
+  
+  
+  
 
 
 ports:
@@ -719,10 +814,16 @@ ports:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 5432
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- containerPort: 5432
 
+  
+  
+  
   
   
   
@@ -771,10 +872,16 @@ env:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: POSTGRES_PASSWORD
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: POSTGRES_PASSWORD
 
+  
+  
+  
   
   
   
@@ -823,10 +930,16 @@ valueFrom:
   
   
   
+  
+  
+  
 
 
 secretKeyRef:
 
+  
+  
+  
   
   
   
@@ -875,10 +988,16 @@ name: pg-secret
   
   
   
+  
+  
+  
 
 
 key: password
 
+  
+  
+  
   
   
   
@@ -927,10 +1046,16 @@ volumeMounts:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data
 
+  
+  
+  
   
   
   
@@ -979,6 +1104,9 @@ mountPath: /var/lib/postgresql/data
   
   
   
+  
+  
+  
 
 
 volumeClaimTemplates:
@@ -1005,10 +1133,16 @@ volumeClaimTemplates:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- metadata:
 
+  
+  
+  
   
   
   
@@ -1057,10 +1191,16 @@ name: data
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1109,10 +1249,16 @@ accessModes: [ "ReadWriteOnce" ]
   
   
   
+  
+  
+  
 
 
 storageClassName: "fast-ssd"
 
+  
+  
+  
   
   
   
@@ -1161,10 +1307,16 @@ resources:
   
   
   
+  
+  
+  
 
 
 requests:
 
+  
+  
+  
   
   
   
@@ -1213,10 +1365,16 @@ storage: 100Gi
   
   
   
+  
+  
+  
 
 
 StatefulSets provide: 
 
+  
+  
+  
   
   
   
@@ -1262,10 +1420,16 @@ StatefulSets provide:
   
   
   
+  
+  
+  
 
 
 * Ordered, graceful deployment and scaling.
 
+  
+  
+  
   
   
   
@@ -1311,6 +1475,9 @@ StatefulSets provide:
   
   
   
+  
+  
+  
 
 
 PersistentVolumes and Storage Classes 
@@ -1334,10 +1501,16 @@ PersistentVolumes and Storage Classes
   
   
   
+  
+  
+  
 
 
 Database storage requires careful configuration of PersistentVolumes: 
 
+  
+  
+  
   
   
   
@@ -1386,6 +1559,9 @@ apiVersion: storage.k8s.io/v1
   
   
   
+  
+  
+  
 
 
 kind: StorageClass
@@ -1412,10 +1588,16 @@ kind: StorageClass
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -1464,10 +1646,16 @@ name: fast-ssd
   
   
   
+  
+  
+  
 
 
 provisioner: ebs.csi.aws.com
 
+  
+  
+  
   
   
   
@@ -1516,10 +1704,16 @@ parameters:
   
   
   
+  
+  
+  
 
 
 type: gp3
 
+  
+  
+  
   
   
   
@@ -1568,10 +1762,16 @@ iops: "3000"
   
   
   
+  
+  
+  
 
 
 throughput: "125"
 
+  
+  
+  
   
   
   
@@ -1620,10 +1820,16 @@ reclaimPolicy: Retain
   
   
   
+  
+  
+  
 
 
 Access Modes 
 
+  
+  
+  
   
   
   
@@ -1666,10 +1872,16 @@ Access Modes
   
   
   
+  
+  
+  
 
 
 CloudNativePG Operator 
 
+  
+  
+  
   
   
   
@@ -1715,10 +1927,16 @@ The CloudNativePG operator is the most mature Kubernetes operator for PostgreSQL
   
   
   
+  
+  
+  
 
 
 apiVersion: postgresql.cnpg.io/v1
 
+  
+  
+  
   
   
   
@@ -1767,10 +1985,16 @@ kind: Cluster
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -1819,10 +2043,16 @@ name: myapp-db
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -1871,10 +2101,16 @@ instances: 3
   
   
   
+  
+  
+  
 
 
 imageName: ghcr.io/cloudnative-pg/postgresql:16
 
+  
+  
+  
   
   
   
@@ -1923,10 +2159,16 @@ storage:
   
   
   
+  
+  
+  
 
 
 size: 100Gi
 
+  
+  
+  
   
   
   
@@ -1975,10 +2217,16 @@ storageClass: fast-ssd
   
   
   
+  
+  
+  
 
 
 backup:
 
+  
+  
+  
   
   
   
@@ -2027,10 +2275,16 @@ barmanObjectStore:
   
   
   
+  
+  
+  
 
 
 destinationPath: s3://myapp-backups/
 
+  
+  
+  
   
   
   
@@ -2079,6 +2333,9 @@ s3Credentials:
   
   
   
+  
+  
+  
 
 
 accessKeyId:
@@ -2105,10 +2362,16 @@ accessKeyId:
   
   
   
+  
+  
+  
 
 
 name: aws-creds
 
+  
+  
+  
   
   
   
@@ -2157,10 +2420,16 @@ key: access-key
   
   
   
+  
+  
+  
 
 
 secretAccessKey:
 
+  
+  
+  
   
   
   
@@ -2209,10 +2478,16 @@ name: aws-creds
   
   
   
+  
+  
+  
 
 
 key: secret-key
 
+  
+  
+  
   
   
   
@@ -2261,10 +2536,16 @@ wal:
   
   
   
+  
+  
+  
 
 
 compression: gzip
 
+  
+  
+  
   
   
   
@@ -2313,10 +2594,16 @@ retentionPolicy: "30d"
   
   
   
+  
+  
+  
 
 
 monitoring:
 
+  
+  
+  
   
   
   
@@ -2365,6 +2652,9 @@ enablePodMonitor: true
   
   
   
+  
+  
+  
 
 
 resources:
@@ -2391,10 +2681,16 @@ resources:
   
   
   
+  
+  
+  
 
 
 requests:
 
+  
+  
+  
   
   
   
@@ -2443,6 +2739,9 @@ memory: "4Gi"
   
   
   
+  
+  
+  
 
 
 cpu: "2"
@@ -2469,10 +2768,16 @@ cpu: "2"
   
   
   
+  
+  
+  
 
 
 limits:
 
+  
+  
+  
   
   
   
@@ -2521,10 +2826,16 @@ memory: "8Gi"
   
   
   
+  
+  
+  
 
 
 cpu: "4"
 
+  
+  
+  
   
   
   
@@ -2573,10 +2884,16 @@ Automated Failover
   
   
   
+  
+  
+  
 
 
 # Simulate pod failure to test failover
 
+  
+  
+  
   
   
   
@@ -2625,6 +2942,9 @@ kubectl delete pod myapp-db-0
   
   
   
+  
+  
+  
 
 
 # Operator automatically:
@@ -2651,36 +2971,16 @@ kubectl delete pod myapp-db-0
   
   
   
-
-
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Detects primary is gone
 
+  
+  
+  
   
   
   
@@ -2705,8 +3005,40 @@ kubectl delete pod myapp-db-0
   
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Promotes the most advanced replica
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Updates the service to point to new primary
+
+  
+  
+  
   
   
   
@@ -2755,6 +3087,9 @@ kubectl delete pod myapp-db-0
   
   
   
+  
+  
+  
 
 
 Backup in Containers 
@@ -2778,10 +3113,16 @@ Backup in Containers
   
   
   
+  
+  
+  
 
 
 Volume Snapshots 
 
+  
+  
+  
   
   
   
@@ -2830,6 +3171,9 @@ apiVersion: snapshot.storage.k8s.io/v1
   
   
   
+  
+  
+  
 
 
 kind: VolumeSnapshot
@@ -2856,10 +3200,16 @@ kind: VolumeSnapshot
   
   
   
+  
+  
+  
 
 
 metadata:
 
+  
+  
+  
   
   
   
@@ -2908,10 +3258,16 @@ name: postgres-weekly-snapshot
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -2960,10 +3316,16 @@ volumeSnapshotClassName: csi-aws-vsc
   
   
   
+  
+  
+  
 
 
 source:
 
+  
+  
+  
   
   
   
@@ -3012,10 +3374,16 @@ persistentVolumeClaimName: data-myapp-db-0
   
   
   
+  
+  
+  
 
 
 WAL Archiving to S3 
 
+  
+  
+  
   
   
   
@@ -3064,10 +3432,16 @@ apiVersion: postgresql.cnpg.io/v1
   
   
   
+  
+  
+  
 
 
 kind: ScheduledBackup
 
+  
+  
+  
   
   
   
@@ -3116,6 +3490,9 @@ metadata:
   
   
   
+  
+  
+  
 
 
 name: myapp-db-backup
@@ -3142,10 +3519,16 @@ name: myapp-db-backup
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -3194,10 +3577,16 @@ schedule: "0 0 * * *"
   
   
   
+  
+  
+  
 
 
 backupOwnerReference: self
 
+  
+  
+  
   
   
   
@@ -3246,10 +3635,16 @@ cluster:
   
   
   
+  
+  
+  
 
 
 name: myapp-db
 
+  
+  
+  
   
   
   
@@ -3295,6 +3690,9 @@ Performance Considerations
   
   
   
+  
+  
+  
 
 
 Network Overhead 
@@ -3318,10 +3716,16 @@ Network Overhead
   
   
   
+  
+  
+  
 
 
 Container networking adds latency vs bare metal: 
 
+  
+  
+  
   
   
   
@@ -3370,10 +3774,16 @@ Container networking adds latency vs bare metal:
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -3422,10 +3832,16 @@ template:
   
   
   
+  
+  
+  
 
 
 spec:
 
+  
+  
+  
   
   
   
@@ -3474,10 +3890,16 @@ hostNetwork: true
   
   
   
+  
+  
+  
 
 
 dnsPolicy: ClusterFirstWithHostNet
 
+  
+  
+  
   
   
   
@@ -3523,10 +3945,16 @@ Resource Limits
   
   
   
+  
+  
+  
 
 
 Setting proper resource limits prevents CPU throttling: 
 
+  
+  
+  
   
   
   
@@ -3575,10 +4003,16 @@ resources:
   
   
   
+  
+  
+  
 
 
 requests:
 
+  
+  
+  
   
   
   
@@ -3627,10 +4061,16 @@ cpu: "4"
   
   
   
+  
+  
+  
 
 
 memory: "16Gi"
 
+  
+  
+  
   
   
   
@@ -3679,10 +4119,16 @@ limits:
   
   
   
+  
+  
+  
 
 
 cpu: "8" # PostgreSQL bursts here normally
 
+  
+  
+  
   
   
   
@@ -3731,10 +4177,16 @@ memory: "24Gi" # Allocate extra for OS cache (effective_cache_size)
   
   
   
+  
+  
+  
 
 
 Tuning for Kubernetes 
 
+  
+  
+  
   
   
   
@@ -3783,10 +4235,16 @@ Tuning for Kubernetes
   
   
   
+  
+  
+  
 
 
 shared_buffers = '4GB' # 25% of container memory limit
 
+  
+  
+  
   
   
   
@@ -3835,10 +4293,16 @@ effective_cache_size = '12GB' # 75% of container memory limit
   
   
   
+  
+  
+  
 
 
 work_mem = '64MB'
 
+  
+  
+  
   
   
   
@@ -3887,10 +4351,16 @@ maintenance_work_mem = '1GB'
   
   
   
+  
+  
+  
 
 
 wal_buffers = '64MB'
 
+  
+  
+  
   
   
   
@@ -3939,6 +4409,9 @@ random_page_cost = 1.1 # SSD in containers
   
   
   
+  
+  
+  
 
 
 Anti-Patterns to Avoid 
@@ -3962,10 +4435,16 @@ Anti-Patterns to Avoid
   
   
   
+  
+  
+  
 
 
 EmptyDir for Data 
 
+  
+  
+  
   
   
   
@@ -4014,6 +4493,9 @@ EmptyDir for Data
   
   
   
+  
+  
+  
 
 
 volumes:
@@ -4040,10 +4522,16 @@ volumes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: data
 
+  
+  
+  
   
   
   
@@ -4092,10 +4580,16 @@ emptyDir: {}
   
   
   
+  
+  
+  
 
 
 Always use PersistentVolumeClaims. 
 
+  
+  
+  
   
   
   
@@ -4138,6 +4632,9 @@ Multiple Writable Replicas
   
   
   
+  
+  
+  
 
 
 Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the same PVC cause data corruption. 
@@ -4161,10 +4658,16 @@ Without proper clustering (Patroni, Stolon, CNPG), multiple replicas with the sa
   
   
   
+  
+  
+  
 
 
 Using Deployments 
 
+  
+  
+  
   
   
   
@@ -4213,10 +4716,16 @@ Using Deployments
   
   
   
+  
+  
+  
 
 
 apiVersion: apps/v1
 
+  
+  
+  
   
   
   
@@ -4265,6 +4774,9 @@ kind: Deployment
   
   
   
+  
+  
+  
 
 
 Always use StatefulSets for databases. 
@@ -4288,10 +4800,16 @@ Always use StatefulSets for databases.
   
   
   
+  
+  
+  
 
 
 Monitoring 
 
+  
+  
+  
   
   
   
@@ -4340,10 +4858,16 @@ Monitoring
   
   
   
+  
+  
+  
 
 
 kubectl get pods -l app=postgres
 
+  
+  
+  
   
   
   
@@ -4392,10 +4916,16 @@ kubectl get pods -l app=postgres
   
   
   
+  
+  
+  
 
 
 kubectl get pvc -l app=postgres
 
+  
+  
+  
   
   
   
@@ -4444,10 +4974,16 @@ kubectl get pvc -l app=postgres
   
   
   
+  
+  
+  
 
 
 kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"
 
+  
+  
+  
   
   
   
@@ -4496,10 +5032,16 @@ kubectl exec myapp-db-1 -- psql -c "SELECT * FROM pg_stat_archiver;"
   
   
   
+  
+  
+  
 
 
 kubectl logs -n postgres-operator deployment/postgres-operator
 
+  
+  
+  
   
   
   
@@ -4545,10 +5087,16 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 **Containerize your database when**: 
 
+  
+  
+  
   
   
   
@@ -4594,10 +5142,16 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 * You need environment parity and GitOps workflows.
 
+  
+  
+  
   
   
   
@@ -4640,10 +5194,16 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 * Your team has Kubernetes expertise.
 
+  
+  
+  
   
   
   
@@ -4692,10 +5252,16 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 * You lack operational Kubernetes expertise.
 
+  
+  
+  
   
   
   
@@ -4738,6 +5304,9 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 * You need the simplicity of managed services (RDS, Cloud SQL).
@@ -4761,10 +5330,16 @@ When to Containerize
   
   
   
+  
+  
+  
 
 
 * Your team prefers a dedicated DBA toolset.
 
+  
+  
+  
   
   
   

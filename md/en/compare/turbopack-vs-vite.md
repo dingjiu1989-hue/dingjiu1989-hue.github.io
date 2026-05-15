@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/turbopack-vs-vite.html
   
 
 
+# Turbopack vs Vite
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Turbopack and Vite are the two leading next-generation JavaScript build tools. B
   
   
   
+  
+  
+  
 
 
 ##  Architecture
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Turbopack and Vite are the two leading next-generation JavaScript build tools. B
   
   
   
+  
+  
+  
 
 
 Vite uses a two-tier architecture:
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Vite uses a two-tier architecture:
   
   
   
+  
+  
+  
 
 
 * **Production**: Rollup handles the final build for maximum compatibility and tree-shaking
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Vite uses a two-tier architecture:
   
   
   
+  
+  
+  
 
 
 import { defineConfig } from "vite";
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ import react from "@vitejs/plugin-react";
   
   
   
+  
+  
+  
 
 
 export default defineConfig({
 
+  
+  
+  
   
   
   
@@ -504,10 +569,16 @@ plugins: [react()],
   
   
   
+  
+  
+  
 
 
 build: {
 
+  
+  
+  
   
   
   
@@ -562,10 +633,16 @@ rollupOptions: {
   
   
   
+  
+  
+  
 
 
 output: {
 
+  
+  
+  
   
   
   
@@ -620,6 +697,9 @@ manualChunks: {
   
   
   
+  
+  
+  
 
 
 vendor: ["react", "react-dom"],
@@ -649,32 +729,6 @@ vendor: ["react", "react-dom"],
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -707,6 +761,41 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
+
+
+},
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 },
@@ -736,10 +825,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -794,10 +889,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -849,10 +950,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 * Extensive plugin ecosystem (hundreds of plugins)
 
+  
+  
+  
   
   
   
@@ -901,10 +1008,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 * Instant HMR through native ESM
 
+  
+  
+  
   
   
   
@@ -959,10 +1072,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 * Two different bundlers for dev and production (potential inconsistencies)
 
+  
+  
+  
   
   
   
@@ -1011,10 +1130,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 * Large monorepos can experience slowdowns
 
+  
+  
+  
   
   
   
@@ -1069,10 +1194,16 @@ vendor: ["react", "react-dom"],
   
   
   
+  
+  
+  
 
 
 Turbopack is built in Rust for maximum performance:
 
+  
+  
+  
   
   
   
@@ -1124,6 +1255,9 @@ Turbopack is built in Rust for maximum performance:
   
   
   
+  
+  
+  
 
 
 * **Function-level caching**: Individual module functions are cached, not entire files
@@ -1150,10 +1284,16 @@ Turbopack is built in Rust for maximum performance:
   
   
   
+  
+  
+  
 
 
 * **Parallel processing**: Leverages all CPU cores efficiently
 
+  
+  
+  
   
   
   
@@ -1208,10 +1348,16 @@ Turbopack is built in Rust for maximum performance:
   
   
   
+  
+  
+  
 
 
 module.exports = {
 
+  
+  
+  
   
   
   
@@ -1266,10 +1412,16 @@ experimental: {
   
   
   
+  
+  
+  
 
 
 turbo: {
 
+  
+  
+  
   
   
   
@@ -1324,6 +1476,9 @@ rules: {
   
   
   
+  
+  
+  
 
 
 "*.svg": ["@svgr/webpack"],
@@ -1353,32 +1508,6 @@ rules: {
   
   
   
-
-
-},
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1411,10 +1540,48 @@ rules: {
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+},
+
+  
+  
+  
   
   
   
@@ -1469,10 +1636,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -1524,10 +1697,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 * Incremental computation means subsequent builds are near-instant
 
+  
+  
+  
   
   
   
@@ -1576,10 +1755,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 * Function-level caching for extreme performance
 
+  
+  
+  
   
   
   
@@ -1634,10 +1819,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 * Currently limited to Next.js ecosystem
 
+  
+  
+  
   
   
   
@@ -1686,6 +1877,9 @@ rules: {
   
   
   
+  
+  
+  
 
 
 * Newer and less battle-tested
@@ -1712,10 +1906,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 * Documentation is still maturing
 
+  
+  
+  
   
   
   
@@ -1770,10 +1970,16 @@ rules: {
   
   
   
+  
+  
+  
 
 
 In real-world projects, benchmarks show:
 
+  
+  
+  
   
   
   
@@ -1828,10 +2034,16 @@ In real-world projects, benchmarks show:
   
   
   
+  
+  
+  
 
 
 |-----------|------|-----------|
 
+  
+  
+  
   
   
   
@@ -1886,10 +2098,16 @@ In real-world projects, benchmarks show:
   
   
   
+  
+  
+  
 
 
 | Cold start (large app) | ~2-5s | ~500ms-2s |
 
+  
+  
+  
   
   
   
@@ -1944,10 +2162,16 @@ In real-world projects, benchmarks show:
   
   
   
+  
+  
+  
 
 
 | Production build (small) | ~2s | N/A (Next.js only) |
 
+  
+  
+  
   
   
   
@@ -2002,10 +2226,16 @@ In real-world projects, benchmarks show:
   
   
   
+  
+  
+  
 
 
 Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR speeds are comparable for most practical purposes.
 
+  
+  
+  
   
   
   
@@ -2060,10 +2290,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 **Vite** has the richest plugin ecosystem, with hundreds of plugins available. Many Rollup plugins are compatible with Vite's production build. Popular plugins include:
 
+  
+  
+  
   
   
   
@@ -2115,10 +2351,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * @vitejs/plugin-vue (SFC compilation)
 
+  
+  
+  
   
   
   
@@ -2167,6 +2409,9 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * vite-plugin-pwa (Progressive Web Apps)
@@ -2193,10 +2438,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * vite-plugin-svg-icons
 
+  
+  
+  
   
   
   
@@ -2251,10 +2502,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 ##  Framework Support
 
+  
+  
+  
   
   
   
@@ -2309,10 +2566,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * React (via create-vite with react template)
 
+  
+  
+  
   
   
   
@@ -2361,10 +2624,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * Svelte (SvelteKit uses Vite)
 
+  
+  
+  
   
   
   
@@ -2413,10 +2682,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 * Lit, Preact, Qwik, vanilla JS
 
+  
+  
+  
   
   
   
@@ -2471,10 +2746,16 @@ Turbopack is faster in cold start scenarios due to Rust's compilation speed. HMR
   
   
   
+  
+  
+  
 
 
 ##  Development Server Features
 
+  
+  
+  
   
   
   
@@ -2529,10 +2810,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 | Feature | Vite | Turbopack |
 
+  
+  
+  
   
   
   
@@ -2587,10 +2874,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 | HMR | Instant (ESM-based) | Near-instant |
 
+  
+  
+  
   
   
   
@@ -2645,10 +2938,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 | TypeScript | Transpilation (no type-checking) | Transpilation (no type-checking) |
 
+  
+  
+  
   
   
   
@@ -2703,10 +3002,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 | Asset URL handling | Built-in | Built-in |
 
+  
+  
+  
   
   
   
@@ -2761,10 +3066,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 | HTTPS | Built-in | Built-in |
 
+  
+  
+  
   
   
   
@@ -2819,10 +3130,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 **Moving to Vite** from webpack: Use `vite-plugin-webpack` for gradual migration, or rewrite the config (most webpack configs translate directly). Community migration guides exist for CRA, Vue CLI, and Svelte.
 
+  
+  
+  
   
   
   
@@ -2877,10 +3194,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 ##  When to Choose What
 
+  
+  
+  
   
   
   
@@ -2935,10 +3258,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 * You're building a non-Next.js project (Vue, Svelte, vanilla JS)
 
+  
+  
+  
   
   
   
@@ -2987,10 +3316,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 * You want a mature, production-proven tool
 
+  
+  
+  
   
   
   
@@ -3039,10 +3374,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 * You want framework-agnostic tooling
 
+  
+  
+  
   
   
   
@@ -3097,10 +3438,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 * You're using Next.js (it's the default recommendation)
 
+  
+  
+  
   
   
   
@@ -3149,10 +3496,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 * You want tight integration with Next.js features (RSC, App Router)
 
+  
+  
+  
   
   
   
@@ -3204,10 +3557,16 @@ Both tools offer excellent development experiences:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/sidecar-pattern.html
   
   
   
+  
+  
+  
+
+
+# Sidecar Pattern in Microservices Architecture
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The sidecar pattern is a microservices architectural pattern where a helper component (the sidecar) is deployed alongside a main service. The sidecar shares the same lifecycle as the parent service but operates as a separate process, providing supporting features such as logging, monitoring, networking, and service mesh functionality.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ The sidecar pattern is a microservices architectural pattern where a helper comp
   
   
   
+  
+  
+  
 
 
 In containerized environments, the sidecar runs in the same pod or deployment unit as the main application container. Both containers share the same network namespace and storage volumes, enabling the sidecar to intercept traffic, collect logs, and manage configuration without modification to the application code.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ The main service communicates with the sidecar through localhost, eliminating ne
   
   
   
+  
+  
+  
 
 
 ##  Common Use Cases
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Service mesh proxies like Envoy and Linkerd are the most prominent examples of t
   
   
   
+  
+  
+  
 
 
 Other use cases include log collection sidecars that tail application logs and forward them to centralized logging systems, configuration reloaders that watch configuration stores and restart services when config changes, and monitoring agents that collect metrics and send them to observability platforms.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Other use cases include log collection sidecars that tail application logs and f
   
   
   
+  
+  
+  
 
 
 The sidecar pattern provides strong separation of concerns—application developers focus on business logic while infrastructure teams manage sidecars. It enables polyglot environments where each service uses its preferred language and framework while sharing common infrastructure.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ The main drawback is resource overhead. Each service instance requires additiona
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   

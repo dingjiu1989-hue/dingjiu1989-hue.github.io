@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/elk-stack-setup.html
   
   
   
+  
+  
+  
+
+
+# ELK Stack Setup: Elasticsearch, Logstash, Kibana, and Pipeline Optimization
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ The ELK Stack — Elasticsearch, Logstash, and Kibana — is the most widely dep
   
   
   
+  
+  
+  
 
 
 This article covers ELK stack setup, Logstash pipeline configuration, performance tuning, and index lifecycle management (ILM).
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ This article covers ELK stack setup, Logstash pipeline configuration, performanc
   
   
   
+  
+  
+  
 
 
 Elasticsearch is a distributed, RESTful search and analytics engine built on Apache Lucene. Data is organized into indices, which are collections of documents. Each index is divided into shards, which are distributed across nodes in a cluster.
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ A production Elasticsearch cluster should have a minimum of three master-eligibl
   
   
   
+  
+  
+  
 
 
 Key configuration parameters include `indices.memory.index_buffer_size`, `thread_pool.search.queue_size`, and `discovery.seed_hosts` for cluster formation. The `elasticsearch.yml` configuration file controls all node-level settings.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Mapping defines how documents and their fields are stored and indexed. Dynamic m
   
   
   
+  
+  
+  
 
 
 ##  Logstash: Data Processing Pipeline
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Logstash is a server-side data processing pipeline that ingests data from multip
   
   
   
+  
+  
+  
 
 
 input {
 
+  
+  
+  
   
   
   
@@ -536,6 +604,9 @@ beats {
   
   
   
+  
+  
+  
 
 
 port => 5044
@@ -565,32 +636,6 @@ port => 5044
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -598,6 +643,41 @@ port => 5044
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ filter {
   
   
   
+  
+  
+  
 
 
 grok {
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ match => { "message" => "%{COMBINEDAPACHELOG}" }
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -768,6 +860,9 @@ geoip {
   
   
   
+  
+  
+  
 
 
 source => "clientip"
@@ -797,10 +892,16 @@ source => "clientip"
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -855,6 +956,9 @@ date {
   
   
   
+  
+  
+  
 
 
 match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]
@@ -884,32 +988,6 @@ match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -917,6 +995,41 @@ match => ["timestamp", "dd/MMM/yyyy:HH:mm:ss Z"]
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ output {
   
   
   
+  
+  
+  
 
 
 elasticsearch {
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ hosts => ["https://elasticsearch:9200"]
   
   
   
+  
+  
+  
 
 
 index => "apache-logs-%{+YYYY.MM.dd}"
 
+  
+  
+  
   
   
   
@@ -1087,6 +1212,9 @@ ssl => true
   
   
   
+  
+  
+  
 
 
 cacert => "/etc/logstash/certs/http_ca.crt"
@@ -1116,32 +1244,6 @@ cacert => "/etc/logstash/certs/http_ca.crt"
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1149,6 +1251,41 @@ cacert => "/etc/logstash/certs/http_ca.crt"
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ The grok filter is the most powerful Logstash plugin, parsing unstructured log d
   
   
   
+  
+  
+  
 
 
 ##  Kibana: Visualization and Exploration
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ Kibana provides the user interface for the ELK stack. The Discover tab allows ad
   
   
   
+  
+  
+  
 
 
 Lens is Kibana's drag-and-drop visualization builder, enabling rapid dashboard creation without learning aggregation syntax. Canvas provides pixel-perfect infographic-style presentations. Maps visualizes geospatial data with multiple layers.
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ Kibana Alerting provides rule types for threshold conditions, anomaly detection,
   
   
   
+  
+  
+  
 
 
 ##  Performance Tuning
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ Elasticsearch performance tuning begins with shard sizing: 20-40 GB per shard is
   
   
   
+  
+  
+  
 
 
 Heap size should be set to no more than 50% of available RAM, with a hard cap of 31 GB (above which compressed object pointers are disabled in the JVM). The `_forcemerge` API merges segments after indexing completes, improving query performance.
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ Logstash performance depends on pipeline workers, batch size, and batch delay. S
   
   
   
+  
+  
+  
 
 
 ##  Index Lifecycle Management
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "phases": {
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "min_age": "0ms",
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "rollover": { "max_size": "50GB", "max_age": "30d" }
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "min_age": "30d",
 
+  
+  
+  
   
   
   
@@ -1841,10 +2044,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "min_age": "90d",
 
+  
+  
+  
   
   
   
@@ -1957,10 +2172,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2015,10 +2236,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 "min_age": "365d",
 
+  
+  
+  
   
   
   
@@ -2073,32 +2300,6 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2131,6 +2332,41 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
+
+
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 }
@@ -2160,10 +2396,16 @@ ILM automates index management through policy-driven phases: hot, warm, cold, fr
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ ILM reduces manual index management overhead, optimizes storage costs, and ensur
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

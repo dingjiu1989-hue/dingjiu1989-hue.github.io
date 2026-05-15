@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-image-generation.html
   
 
 
+# AI Image Generation Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ AI image generation has evolved from producing surreal, flawed images to creatin
   
   
   
+  
+  
+  
 
 
 ##  Platform Comparison
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ AI image generation has evolved from producing surreal, flawed images to creatin
   
   
   
+  
+  
+  
 
 
 OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text within images — a task that stumps most other models.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 * Best-in-class prompt adherence
 
+  
+  
+  
   
   
   
@@ -385,6 +438,9 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 * Integrated with ChatGPT for iterative refinement
@@ -411,10 +467,16 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 * Strong safety filters prevent problematic outputs
 
+  
+  
+  
   
   
   
@@ -469,10 +531,16 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 * Less stylistic variety than Midjourney
 
+  
+  
+  
   
   
   
@@ -521,10 +589,16 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 * Lower maximum resolution (1024x1792 or 1792x1024)
 
+  
+  
+  
   
   
   
@@ -579,10 +653,16 @@ OpenAI's DALL-E 3 excels at understanding complex prompts and rendering text wit
   
   
   
+  
+  
+  
 
 
 from openai import OpenAI
 
+  
+  
+  
   
   
   
@@ -637,10 +717,16 @@ client = OpenAI()
   
   
   
+  
+  
+  
 
 
 response = client.images.generate(
 
+  
+  
+  
   
   
   
@@ -695,10 +781,16 @@ model="dall-e-3",
   
   
   
+  
+  
+  
 
 
 prompt="A photorealistic coffee cup on a wooden table, morning sunlight from a window, steam rising in curls, shallow depth of field",
 
+  
+  
+  
   
   
   
@@ -753,10 +845,16 @@ size="1792x1024",
   
   
   
+  
+  
+  
 
 
 quality="hd",
 
+  
+  
+  
   
   
   
@@ -811,10 +909,16 @@ n=1
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -869,10 +973,16 @@ n=1
   
   
   
+  
+  
+  
 
 
 Midjourney produces the most artistically striking images, with a distinctive aesthetic that many prefer for creative work.
 
+  
+  
+  
   
   
   
@@ -927,10 +1037,16 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Superior artistic quality and composition
 
+  
+  
+  
   
   
   
@@ -979,6 +1095,9 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Strong community with shared prompt libraries
@@ -1005,10 +1124,16 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Consistent character generation with "cref" parameter
 
+  
+  
+  
   
   
   
@@ -1063,10 +1188,16 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Requires Discord to use (no dedicated API)
 
+  
+  
+  
   
   
   
@@ -1115,6 +1246,9 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Weaker at rendering text and complex scenes
@@ -1141,10 +1275,16 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 * Steeper learning curve for parameters
 
+  
+  
+  
   
   
   
@@ -1199,10 +1339,16 @@ Midjourney produces the most artistically striking images, with a distinctive ae
   
   
   
+  
+  
+  
 
 
 ### Stable Diffusion
 
+  
+  
+  
   
   
   
@@ -1257,10 +1403,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -1312,10 +1464,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 * Run locally with full privacy
 
+  
+  
+  
   
   
   
@@ -1364,6 +1522,9 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 * Vast ecosystem of community models and extensions
@@ -1390,10 +1551,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 * ControlNet for precise spatial control
 
+  
+  
+  
   
   
   
@@ -1448,10 +1615,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 * Requires technical setup for best results
 
+  
+  
+  
   
   
   
@@ -1500,10 +1673,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 * Requires GPU for reasonable speed
 
+  
+  
+  
   
   
   
@@ -1558,10 +1737,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 ##  Prompt Engineering for Images
 
+  
+  
+  
   
   
   
@@ -1616,10 +1801,16 @@ Stable Diffusion is the open-source option, offering maximum control and customi
   
   
   
+  
+  
+  
 
 
 A well-structured image prompt has these components:
 
+  
+  
+  
   
   
   
@@ -1674,10 +1865,16 @@ A well-structured image prompt has these components:
   
   
   
+  
+  
+  
 
 
 **Example:**
 
+  
+  
+  
   
   
   
@@ -1732,10 +1929,16 @@ A well-structured image prompt has these components:
   
   
   
+  
+  
+  
 
 
 ### Negative Prompts
 
+  
+  
+  
   
   
   
@@ -1790,10 +1993,16 @@ In Stable Diffusion and Midjourney, negative prompts specify what to avoid:
   
   
   
+  
+  
+  
 
 
 Negative prompt: ugly, deformed, blurry, low quality, extra limbs, bad anatomy, watermark, text, signature
 
+  
+  
+  
   
   
   
@@ -1848,10 +2057,16 @@ Midjourney uses the `--no` parameter: `--no text, watermark, blurry`
   
   
   
+  
+  
+  
 
 
 ### Style Modifiers
 
+  
+  
+  
   
   
   
@@ -1906,10 +2121,16 @@ Different styles dramatically change output:
   
   
   
+  
+  
+  
 
 
 * **Photographic**: "photorealistic, f/2.8 aperture, 85mm lens, natural lighting, RAW format"
 
+  
+  
+  
   
   
   
@@ -1958,6 +2179,9 @@ Different styles dramatically change output:
   
   
   
+  
+  
+  
 
 
 * **Oil painting**: "oil on canvas, impasto texture, dramatic chiaroscuro, classical composition"
@@ -1984,10 +2208,16 @@ Different styles dramatically change output:
   
   
   
+  
+  
+  
 
 
 * **Anime**: "anime style, cel-shaded, Studio Ghibli inspired, soft pastel colors"
 
+  
+  
+  
   
   
   
@@ -2042,10 +2272,16 @@ Different styles dramatically change output:
   
   
   
+  
+  
+  
 
 
 ### ControlNet (Stable Diffusion)
 
+  
+  
+  
   
   
   
@@ -2100,10 +2336,16 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 * **Canny edge detection**: Use an edge map to control composition
 
+  
+  
+  
   
   
   
@@ -2152,6 +2394,9 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 * **Depth maps**: Control 3D layout
@@ -2178,10 +2423,16 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 * **Normal maps**: Control surface details
 
+  
+  
+  
   
   
   
@@ -2236,6 +2487,9 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 * **Inpainting**: Replace specific regions of an image while preserving the rest
@@ -2262,10 +2516,16 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 * **Outpainting**: Extend an image beyond its original boundaries
 
+  
+  
+  
   
   
   
@@ -2320,10 +2580,16 @@ ControlNet provides spatial control over image generation:
   
   
   
+  
+  
+  
 
 
 Create a small adapter that generates specific characters, objects, or styles:
 
+  
+  
+  
   
   
   
@@ -2378,10 +2644,16 @@ Create a small adapter that generates specific characters, objects, or styles:
   
   
   
+  
+  
+  
 
 
 from diffusers import StableDiffusionXLPipeline
 
+  
+  
+  
   
   
   
@@ -2436,10 +2708,16 @@ import torch
   
   
   
+  
+  
+  
 
 
 pipe = StableDiffusionXLPipeline.from_pretrained(
 
+  
+  
+  
   
   
   
@@ -2494,10 +2772,16 @@ pipe = StableDiffusionXLPipeline.from_pretrained(
   
   
   
+  
+  
+  
 
 
 torch_dtype=torch.float16
 
+  
+  
+  
   
   
   
@@ -2552,10 +2836,16 @@ torch_dtype=torch.float16
   
   
   
+  
+  
+  
 
 
 pipe.load_lora_weights("path/to/lora-weights")
 
+  
+  
+  
   
   
   
@@ -2610,10 +2900,16 @@ pipe.to("cuda")
   
   
   
+  
+  
+  
 
 
 image = pipe("a character in a garden, anime style").images[0]
 
+  
+  
+  
   
   
   
@@ -2668,10 +2964,16 @@ image = pipe("a character in a garden, anime style").images[0]
   
   
   
+  
+  
+  
 
 
 A production image generation pipeline:
 
+  
+  
+  
   
   
   
@@ -2726,39 +3028,16 @@ A production image generation pipeline:
   
   
   
-
-
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Prompt construction**: Build structured prompt with all components
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Multi-seed generation**: Generate 4-8 variations with different seeds
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Prompt construction**: Build structured prompt with all components
 
+  
+  
+  
   
   
   
@@ -2786,7 +3065,7 @@ A production image generation pipeline:
   
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Selection and refinement**: Upscale the best result, make targeted edits
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Multi-seed generation**: Generate 4-8 variations with different seeds
 
   
   
@@ -2813,10 +3092,48 @@ A production image generation pipeline:
   
   
   
+  
+  
+  
 
 
-5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-processing**: Adjust colors, add overlays, resize for destination
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Selection and refinement**: Upscale the best result, make targeted edits
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-processing**: Adjust colors, add overlays, resize for destination
+
+  
+  
+  
   
   
   
@@ -2846,6 +3163,9 @@ A production image generation pipeline:
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

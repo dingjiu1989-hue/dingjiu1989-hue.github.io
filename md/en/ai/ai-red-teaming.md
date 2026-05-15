@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-red-teaming.html
   
 
 
+# AI Red Teaming: Adversarial Testing, Jailbreak Attempts, Safety Evaluation, and Automated Testing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Red teaming is essential for shipping trustworthy AI applications. You must understand how your system can be attacked before malicious actors find the vulnerabilities. Here is the practical guide to AI red teaming.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Red teaming is essential for shipping trustworthy AI applications. You must unde
   
   
   
+  
+  
+  
 
 
 AI red teaming tests your application against adversarial inputs designed to bypass safety measures, extract sensitive information, or cause harmful outputs. It is not a one-time audit. It is an ongoing practice that evolves as attack techniques evolve.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ The main categories of attacks are prompt injection, jailbreaking, data extracti
   
   
   
+  
+  
+  
 
 
 ##  Adversarial Testing Methodologies
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Manual red teaming starts with domain experts trying to break the system. Have a
   
   
   
+  
+  
+  
 
 
 Create a testing framework with attack categories. Category examples: role-playing attacks where the user pretends to be a different persona, hypothetical scenarios that trick the model into producing harmful content, encoded requests using base64 or other encoding, and multilingual attacks that exploit weaker safety training in specific languages.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ For each attack category, develop specific test cases. A role-playing attack mig
   
   
   
+  
+  
+  
 
 
 Document every successful attack in detail. Record the exact input, the model response, and the vulnerability it exposed. This documentation drives your defense improvements.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Document every successful attack in detail. Record the exact input, the model re
   
   
   
+  
+  
+  
 
 
 Jailbreak attempts follow recognizable patterns. Most involve reframing the request to bypass safety classifiers. Common patterns include character roleplay, academic research framing, and hypothetical scenarios.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Build a jailbreak classifier that flags suspicious inputs before they reach the 
   
   
   
+  
+  
+  
 
 
 Monitor for jailbreak success. If responses deviate from expected patterns like suddenly agreeing to produce harmful content after refusing similar requests, investigate immediately. A successful jailbreak is a security incident.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Monitor for jailbreak success. If responses deviate from expected patterns like 
   
   
   
+  
+  
+  
 
 
 Safety evaluation tests whether the model produces harmful content when it should refuse. This is distinct from jailbreak testing, which tests whether safety measures can be bypassed.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Define your safety categories based on your application's risk profile. Common c
   
   
   
+  
+  
+  
 
 
 Build safety test datasets for each category. Include clear violation requests, borderline requests, and benign requests that might be falsely flagged. Track both failure rate refusal rate and false positive rate.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Set safety thresholds based on your risk tolerance. A medical application needs 
   
   
   
+  
+  
+  
 
 
 ##  Automated Red Teaming
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Manual red teaming does not scale. Automated red teaming uses LLMs to generate a
   
   
   
+  
+  
+  
 
 
 Automated tools like Garak, PyRIT, and Giskard generate thousands of adversarial inputs across multiple attack categories. They run these against your application and report success rates.
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ The advantage of automation is breadth. A manual team might test 100 attack vari
   
   
   
+  
+  
+  
 
 
 The disadvantage is depth. Automated attacks lack the creativity of determined human attackers. The best approach combines automated breadth with manual depth.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ The disadvantage is depth. Automated attacks lack the creativity of determined h
   
   
   
+  
+  
+  
 
 
 Red teaming should not be an afterthought. Integrate it into your development lifecycle from the start.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Run automated red teaming on every build. A CI/CD pipeline step that runs advers
   
   
   
+  
+  
+  
 
 
 Schedule regular manual red teaming sessions. Monthly sessions with focused attack categories. Rotate categories so each area gets attention every quarter.
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ Track vulnerability discovery and remediation. How many vulnerabilities were fou
   
   
   
+  
+  
+  
 
 
 ##  Incident Response Planning
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ Despite your best efforts, some attacks will succeed. Prepare for that reality.
   
   
   
+  
+  
+  
 
 
 Define incident severity levels for AI safety incidents. Level 1: a single user received a mildly inappropriate response. Resolve within hours. Level 5: a widespread data extraction or harmful content generation. Requires immediate takedown.
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ Have a rollback plan. If a successful attack reveals a systemic vulnerability, y
   
   
   
+  
+  
+  
 
 
 Document lessons learned after every incident. What allowed the attack to succeed? What would have prevented it? How can detection be improved? Each incident should make your system more resilient.
 
+  
+  
+  
   
   
   

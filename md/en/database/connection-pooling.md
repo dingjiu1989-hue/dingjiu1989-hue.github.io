@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/connection-pooling.html
   
 
 
+# Connection Pooling Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Why Connection Pooling Matters 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Creating database connections is expensive: TCP handshake, SSL negotiation, and 
   
   
   
+  
+  
+  
 
 
 How Pools Work 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ A pool maintains a set of open connections. When a thread requests one, an idle 
   
   
   
+  
+  
+  
 
 
 Pool Configuration 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Pool Configuration
   
   
   
+  
+  
+  
 
 
 HikariCP (Java) 
 
+  
+  
+  
   
   
   
@@ -320,10 +370,16 @@ spring.datasource.hikari:
   
   
   
+  
+  
+  
 
 
 maximum-pool-size: 20
 
+  
+  
+  
   
   
   
@@ -372,10 +428,16 @@ minimum-idle: 5
   
   
   
+  
+  
+  
 
 
 connection-timeout: 30000
 
+  
+  
+  
   
   
   
@@ -424,10 +486,16 @@ max-lifetime: 1800000
   
   
   
+  
+  
+  
 
 
 PgBouncer (PostgreSQL) 
 
+  
+  
+  
   
   
   
@@ -476,10 +544,16 @@ PgBouncer (PostgreSQL)
   
   
   
+  
+  
+  
 
 
 pool_mode = transaction
 
+  
+  
+  
   
   
   
@@ -528,10 +602,16 @@ default_pool_size = 25
   
   
   
+  
+  
+  
 
 
 max_client_conn = 100
 
+  
+  
+  
   
   
   
@@ -577,10 +657,16 @@ Pgbouncer sits between application and database. Transaction mode returns connec
   
   
   
+  
+  
+  
 
 
 Sizing Formula 
 
+  
+  
+  
   
   
   
@@ -629,6 +715,9 @@ pool_size = (core_count * 2) + effective_spindle_count
   
   
   
+  
+  
+  
 
 
 For 8 CPU cores with SSD: 17 connections. More connections causes context switching overhead. 
@@ -652,10 +741,16 @@ For 8 CPU cores with SSD: 17 connections. More connections causes context switch
   
   
   
+  
+  
+  
 
 
 Monitoring 
 
+  
+  
+  
   
   
   
@@ -704,10 +799,16 @@ SELECT state, count(*) FROM pg_stat_activity
   
   
   
+  
+  
+  
 
 
 WHERE backend_type = 'client backend' GROUP BY state;
 
+  
+  
+  
   
   
   
@@ -753,10 +854,16 @@ Monitor for idle-in-transaction connections and pool exhaustion.
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

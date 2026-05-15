@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/database-concurrency.html
   
 
 
+# Database Concurrency Control: MVCC, Locking, and Deadlocks
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Concurrency Control: MVCC, Locking, and Deadlocks 
 
+  
+  
+  
   
   
   
@@ -176,6 +208,9 @@ Modern databases must handle thousands of concurrent transactions reading and wr
   
   
   
+  
+  
+  
 
 
 Multi-Version Concurrency Control (MVCC) 
@@ -199,10 +234,16 @@ Multi-Version Concurrency Control (MVCC)
   
   
   
+  
+  
+  
 
 
 MVCC is the foundation of concurrency in PostgreSQL and Oracle. Instead of locking rows for readers, MVCC preserves multiple versions of each row. Each transaction sees a snapshot of data as it existed at that transaction's start time. 
 
+  
+  
+  
   
   
   
@@ -248,36 +289,45 @@ Every row in PostgreSQL carries two hidden system columns: `xmin` (the transacti
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and <= current transaction ID
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmin must be committed and <= current transaction ID
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- xmax must be uncommitted or > current transaction ID
+
+  
+  
+  
   
   
   
@@ -323,6 +373,9 @@ This design means **readers never block writers, and writers never block readers
   
   
   
+  
+  
+  
 
 
 Transaction Snapshots 
@@ -346,10 +399,16 @@ Transaction Snapshots
   
   
   
+  
+  
+  
 
 
 A transaction's snapshot captures which transactions were in-progress at the moment the snapshot was taken. The `REPEATABLE READ` isolation level uses snapshot semantics: 
 
+  
+  
+  
   
   
   
@@ -398,6 +457,9 @@ BEGIN ISOLATION LEVEL REPEATABLE READ;
   
   
   
+  
+  
+  
 
 
 SELECT * FROM accounts WHERE id = 1; -- sees snapshot at this moment
@@ -424,10 +486,16 @@ SELECT * FROM accounts WHERE id = 1; -- sees snapshot at this moment
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Another transaction updates and commits account 1
 
+  
+  
+  
   
   
   
@@ -476,10 +544,16 @@ SELECT * FROM accounts WHERE id = 1; -- still sees the original snapshot
   
   
   
+  
+  
+  
 
 
 COMMIT;
 
+  
+  
+  
   
   
   
@@ -525,6 +599,9 @@ Optimistic vs Pessimistic Locking
   
   
   
+  
+  
+  
 
 
 Optimistic Locking 
@@ -548,10 +625,16 @@ Optimistic Locking
   
   
   
+  
+  
+  
 
 
 Optimistic locking assumes conflicts are rare. The application reads a row, performs work, and checks that the row has not changed before writing. It is typically implemented with a version column: 
 
+  
+  
+  
   
   
   
@@ -600,10 +683,16 @@ CREATE TABLE inventory (
   
   
   
+  
+  
+  
 
 
 id INTEGER PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -652,10 +741,16 @@ quantity INTEGER,
   
   
   
+  
+  
+  
 
 
 version INTEGER DEFAULT 1
 
+  
+  
+  
   
   
   
@@ -704,36 +799,45 @@ version INTEGER DEFAULT 1
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42;
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application reads: SELECT quantity, version FROM inventory WHERE id = 42;
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Application computes new quantity
+
+  
+  
+  
   
   
   
@@ -782,10 +886,16 @@ UPDATE inventory
   
   
   
+  
+  
+  
 
 
 SET quantity = 5, version = version + 1
 
+  
+  
+  
   
   
   
@@ -834,10 +944,16 @@ WHERE id = 42 AND version = 3; -- version from the read
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row → retry
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- If 0 rows updated, another transaction changed the row → retry
 
+  
+  
+  
   
   
   
@@ -883,6 +999,9 @@ Optimistic locking works well when contention is low and transactions are short.
   
   
   
+  
+  
+  
 
 
 Pessimistic Locking 
@@ -906,10 +1025,16 @@ Pessimistic Locking
   
   
   
+  
+  
+  
 
 
 Pessimistic locking assumes conflicts are likely and acquires locks proactively: 
 
+  
+  
+  
   
   
   
@@ -958,6 +1083,9 @@ BEGIN;
   
   
   
+  
+  
+  
 
 
 SELECT * FROM inventory WHERE id = 42 FOR UPDATE;
@@ -984,10 +1112,16 @@ SELECT * FROM inventory WHERE id = 42 FOR UPDATE;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Hold the lock, do application work, then write
 
+  
+  
+  
   
   
   
@@ -1036,10 +1170,16 @@ UPDATE inventory SET quantity = 5 WHERE id = 42;
   
   
   
+  
+  
+  
 
 
 COMMIT; -- lock released
 
+  
+  
+  
   
   
   
@@ -1088,10 +1228,16 @@ PostgreSQL offers three row-level lock modes:
   
   
   
+  
+  
+  
 
 
 * `FOR UPDATE`: Prevents other transactions from updating or deleting the row.
 
+  
+  
+  
   
   
   
@@ -1134,10 +1280,16 @@ PostgreSQL offers three row-level lock modes:
   
   
   
+  
+  
+  
 
 
 * `FOR SHARE`: Allows concurrent reads but prevents updates.
 
+  
+  
+  
   
   
   
@@ -1183,10 +1335,16 @@ PostgreSQL offers three row-level lock modes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Advisory locks for application-level concurrency
 
+  
+  
+  
   
   
   
@@ -1235,10 +1393,16 @@ SELECT pg_advisory_lock(12345);
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- critical section
 
+  
+  
+  
   
   
   
@@ -1287,6 +1451,9 @@ SELECT pg_advisory_unlock(12345);
   
   
   
+  
+  
+  
 
 
 Deadlock Detection 
@@ -1310,10 +1477,16 @@ Deadlock Detection
   
   
   
+  
+  
+  
 
 
 A deadlock occurs when two or more transactions each hold locks the other needs: 
 
+  
+  
+  
   
   
   
@@ -1362,10 +1535,16 @@ Transaction A: locks row 1, waits for row 2
   
   
   
+  
+  
+  
 
 
 Transaction B: locks row 2, waits for row 1
 
+  
+  
+  
   
   
   
@@ -1414,10 +1593,16 @@ PostgreSQL's deadlock detector runs periodically (every `deadlock_timeout`, defa
   
   
   
+  
+  
+  
 
 
 ERROR: deadlock detected
 
+  
+  
+  
   
   
   
@@ -1466,10 +1651,16 @@ DETAIL: Process 123 waits for ShareLock on transaction 456; blocked by process 4
   
   
   
+  
+  
+  
 
 
 Process 456 waits for ShareLock on transaction 123; blocked by process 123.
 
+  
+  
+  
   
   
   
@@ -1518,10 +1709,16 @@ HINT: See server log for query details.
   
   
   
+  
+  
+  
 
 
 To minimize deadlocks: 
 
+  
+  
+  
   
   
   
@@ -1567,10 +1764,16 @@ To minimize deadlocks:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Keep transactions short** to reduce the window for conflicts. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Use `NOWAIT` or `SKIP LOCKED`** to fail fast instead of waiting: 
 
+  
+  
+  
   
   
   
@@ -1619,10 +1822,16 @@ SELECT * FROM inventory WHERE id = 42 FOR UPDATE NOWAIT;
   
   
   
+  
+  
+  
 
 
 SELECT * FROM jobs ORDER BY priority LIMIT 1 FOR UPDATE SKIP LOCKED;
 
+  
+  
+  
   
   
   
@@ -1668,10 +1877,16 @@ Lock Monitoring
   
   
   
+  
+  
+  
 
 
 The `pg_locks` view shows current lock state: 
 
+  
+  
+  
   
   
   
@@ -1720,10 +1935,16 @@ SELECT locktype, relation::regclass, mode, granted,
   
   
   
+  
+  
+  
 
 
 pid, virtualtransaction
 
+  
+  
+  
   
   
   
@@ -1772,10 +1993,16 @@ FROM pg_locks
   
   
   
+  
+  
+  
 
 
 WHERE NOT granted;
 
+  
+  
+  
   
   
   
@@ -1824,10 +2051,16 @@ This query reveals which backends are waiting for locks and who holds them. The 
   
   
   
+  
+  
+  
 
 
 SELECT pid, pg_blocking_pids(pid) AS blocked_by,
 
+  
+  
+  
   
   
   
@@ -1876,10 +2109,16 @@ state, query
   
   
   
+  
+  
+  
 
 
 FROM pg_stat_activity
 
+  
+  
+  
   
   
   
@@ -1928,10 +2167,16 @@ WHERE state = 'active';
   
   
   
+  
+  
+  
 
 
 MVCC Bloat 
 
+  
+  
+  
   
   
   
@@ -1977,10 +2222,16 @@ MVCC's strength creates a weakness: dead row versions accumulate. Old row versio
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Query to estimate table bloat
 
+  
+  
+  
   
   
   
@@ -2029,10 +2280,16 @@ SELECT schemaname, tablename,
   
   
   
+  
+  
+  
 
 
 n_dead_tup, n_live_tup,
 
+  
+  
+  
   
   
   
@@ -2081,10 +2338,16 @@ ROUND(n_dead_tup * 100.0 / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_pct
   
   
   
+  
+  
+  
 
 
 FROM pg_stat_user_tables
 
+  
+  
+  
   
   
   
@@ -2133,10 +2396,16 @@ ORDER BY dead_pct DESC;
   
   
   
+  
+  
+  
 
 
 `VACUUM` reclaims space from dead tuples. `VACUUM FREEZE` prevents transaction ID wraparound, an operational imperative in PostgreSQL: 
 
+  
+  
+  
   
   
   
@@ -2185,10 +2454,16 @@ VACUUM ANALYZE accounts;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup:
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For aggressive cleanup:
 
+  
+  
+  
   
   
   
@@ -2237,10 +2512,16 @@ VACUUM (VERBOSE, INDEX_CLEANUP ON) accounts;
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

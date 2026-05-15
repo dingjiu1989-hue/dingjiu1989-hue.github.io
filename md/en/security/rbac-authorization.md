@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/security/rbac-authorization.html
   
   
   
+  
+  
+  
+
+
+# RBAC Authorization Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 What Is RBAC? 
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Role-Based Access Control (RBAC) is an authorization model where permissions are
   
   
   
+  
+  
+  
 
 
 Core RBAC Concepts 
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Core RBAC Concepts
   
   
   
+  
+  
+  
 
 
 The RBAC Model 
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Level 1: Flat RBAC
   
   
   
+  
+  
+  
 
 
 Users are assigned roles, and roles have permissions. This simple structure works for most applications. 
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Users ──< Role Assignment >── Roles ──< Permission Assignment >─�
   
   
   
+  
+  
+  
 
 
 Level 2: Hierarchical RBAC 
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Roles can inherit permissions from other roles. For example, an Admin role inher
   
   
   
+  
+  
+  
 
 
 Admin ──inherits──> Editor ──inherits──> Viewer
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Database Schema
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Core RBAC tables
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Core RBAC tables
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ CREATE TABLE roles (
   
   
   
+  
+  
+  
 
 
 id SERIAL PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -652,6 +732,9 @@ name VARCHAR(50) UNIQUE NOT NULL,
   
   
   
+  
+  
+  
 
 
 description TEXT
@@ -681,10 +764,16 @@ description TEXT
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ CREATE TABLE permissions (
   
   
   
+  
+  
+  
 
 
 id SERIAL PRIMARY KEY,
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ resource VARCHAR(50) NOT NULL,
   
   
   
+  
+  
+  
 
 
 action VARCHAR(20) NOT NULL,
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ UNIQUE(resource, action)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ CREATE TABLE role_permissions (
   
   
   
+  
+  
+  
 
 
 role_id INTEGER REFERENCES roles(id),
 
+  
+  
+  
   
   
   
@@ -971,6 +1084,9 @@ permission_id INTEGER REFERENCES permissions(id),
   
   
   
+  
+  
+  
 
 
 PRIMARY KEY (role_id, permission_id)
@@ -1000,10 +1116,16 @@ PRIMARY KEY (role_id, permission_id)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ CREATE TABLE user_roles (
   
   
   
+  
+  
+  
 
 
 user_id INTEGER REFERENCES users(id),
 
+  
+  
+  
   
   
   
@@ -1116,10 +1244,16 @@ role_id INTEGER REFERENCES roles(id),
   
   
   
+  
+  
+  
 
 
 granted_by INTEGER REFERENCES users(id),
 
+  
+  
+  
   
   
   
@@ -1174,10 +1308,16 @@ granted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   
   
   
+  
+  
+  
 
 
 PRIMARY KEY (user_id, role_id)
 
+  
+  
+  
   
   
   
@@ -1232,10 +1372,16 @@ PRIMARY KEY (user_id, role_id)
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For hierarchical RBAC
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- For hierarchical RBAC
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ CREATE TABLE role_hierarchy (
   
   
   
+  
+  
+  
 
 
 parent_role_id INTEGER REFERENCES roles(id),
 
+  
+  
+  
   
   
   
@@ -1348,6 +1500,9 @@ child_role_id INTEGER REFERENCES roles(id),
   
   
   
+  
+  
+  
 
 
 PRIMARY KEY (parent_role_id, child_role_id)
@@ -1377,10 +1532,16 @@ PRIMARY KEY (parent_role_id, child_role_id)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ Implementation Patterns
   
   
   
+  
+  
+  
 
 
 Node.js / Express Middleware 
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ Node.js / Express Middleware
   
   
   
+  
+  
+  
 
 
 const PERMISSIONS = {
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ ARTICLE: {
   
   
   
+  
+  
+  
 
 
 CREATE: 'article:create',
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ READ: 'article:read',
   
   
   
+  
+  
+  
 
 
 UPDATE: 'article:update',
 
+  
+  
+  
   
   
   
@@ -1667,6 +1852,9 @@ DELETE: 'article:delete',
   
   
   
+  
+  
+  
 
 
 PUBLISH: 'article:publish'
@@ -1696,10 +1884,16 @@ PUBLISH: 'article:publish'
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ USER: {
   
   
   
+  
+  
+  
 
 
 LIST: 'user:list',
 
+  
+  
+  
   
   
   
@@ -1812,6 +2012,9 @@ MANAGE: 'user:manage'
   
   
   
+  
+  
+  
 
 
 }
@@ -1841,10 +2044,16 @@ MANAGE: 'user:manage'
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ MANAGE: 'user:manage'
   
   
   
+  
+  
+  
 
 
 const ROLES = {
 
+  
+  
+  
   
   
   
@@ -1957,10 +2172,16 @@ viewer: {
   
   
   
+  
+  
+  
 
 
 permissions: ['article:read'],
 
+  
+  
+  
   
   
   
@@ -2015,10 +2236,16 @@ inherits: []
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2073,10 +2300,16 @@ editor: {
   
   
   
+  
+  
+  
 
 
 permissions: ['article:create', 'article:update'],
 
+  
+  
+  
   
   
   
@@ -2131,10 +2364,16 @@ inherits: ['viewer']
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2189,10 +2428,16 @@ admin: {
   
   
   
+  
+  
+  
 
 
 permissions: [
 
+  
+  
+  
   
   
   
@@ -2247,10 +2492,16 @@ permissions: [
   
   
   
+  
+  
+  
 
 
 'user:list', 'user:manage'
 
+  
+  
+  
   
   
   
@@ -2305,10 +2556,16 @@ permissions: [
   
   
   
+  
+  
+  
 
 
 inherits: ['editor']
 
+  
+  
+  
   
   
   
@@ -2363,10 +2620,16 @@ inherits: ['editor']
   
   
   
+  
+  
+  
 
 
 };
 
+  
+  
+  
   
   
   
@@ -2421,10 +2684,16 @@ inherits: ['editor']
   
   
   
+  
+  
+  
 
 
 function authorize(...requiredPermissions) {
 
+  
+  
+  
   
   
   
@@ -2479,10 +2748,16 @@ return (req, res, next) => {
   
   
   
+  
+  
+  
 
 
 const userRoles = req.user.roles;
 
+  
+  
+  
   
   
   
@@ -2537,10 +2812,16 @@ const userPermissions = getUserPermissions(userRoles);
   
   
   
+  
+  
+  
 
 
 const hasPermission = requiredPermissions.every(
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ p => userPermissions.includes(p)
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ if (!hasPermission) {
   
   
   
+  
+  
+  
 
 
 return res.status(403).json({
 
+  
+  
+  
   
   
   
@@ -2711,6 +3004,9 @@ error: 'Insufficient permissions'
   
   
   
+  
+  
+  
 
 
 });
@@ -2740,10 +3036,16 @@ error: 'Insufficient permissions'
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2798,6 +3100,9 @@ next();
   
   
   
+  
+  
+  
 
 
 };
@@ -2827,10 +3132,16 @@ next();
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -2885,6 +3196,9 @@ next();
   
   
   
+  
+  
+  
 
 
 app.post('/api/articles',
@@ -2914,10 +3228,16 @@ app.post('/api/articles',
   
   
   
+  
+  
+  
 
 
 authenticate,
 
+  
+  
+  
   
   
   
@@ -2972,6 +3292,9 @@ authorize(PERMISSIONS.ARTICLE.CREATE),
   
   
   
+  
+  
+  
 
 
 createArticle
@@ -3001,10 +3324,16 @@ createArticle
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -3059,10 +3388,16 @@ app.delete('/api/articles/:id',
   
   
   
+  
+  
+  
 
 
 authenticate,
 
+  
+  
+  
   
   
   
@@ -3117,10 +3452,16 @@ authorize(PERMISSIONS.ARTICLE.DELETE),
   
   
   
+  
+  
+  
 
 
 deleteArticle
 
+  
+  
+  
   
   
   
@@ -3175,10 +3516,16 @@ deleteArticle
   
   
   
+  
+  
+  
 
 
 Python / FastAPI 
 
+  
+  
+  
   
   
   
@@ -3233,10 +3580,16 @@ from enum import Enum
   
   
   
+  
+  
+  
 
 
 from functools import wraps
 
+  
+  
+  
   
   
   
@@ -3291,10 +3644,16 @@ from fastapi import HTTPException, Depends
   
   
   
+  
+  
+  
 
 
 class Permission(Enum):
 
+  
+  
+  
   
   
   
@@ -3349,10 +3708,16 @@ ARTICLE_CREATE = "article:create"
   
   
   
+  
+  
+  
 
 
 ARTICLE_READ = "article:read"
 
+  
+  
+  
   
   
   
@@ -3407,10 +3772,16 @@ ARTICLE_UPDATE = "article:update"
   
   
   
+  
+  
+  
 
 
 ARTICLE_DELETE = "article:delete"
 
+  
+  
+  
   
   
   
@@ -3465,10 +3836,16 @@ USER_MANAGE = "user:manage"
   
   
   
+  
+  
+  
 
 
 ROLE_PERMISSIONS = {
 
+  
+  
+  
   
   
   
@@ -3523,10 +3900,16 @@ ROLE_PERMISSIONS = {
   
   
   
+  
+  
+  
 
 
 "editor": {
 
+  
+  
+  
   
   
   
@@ -3581,10 +3964,16 @@ Permission.ARTICLE_READ,
   
   
   
+  
+  
+  
 
 
 Permission.ARTICLE_CREATE,
 
+  
+  
+  
   
   
   
@@ -3639,10 +4028,16 @@ Permission.ARTICLE_UPDATE,
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3697,10 +4092,16 @@ Permission.ARTICLE_UPDATE,
   
   
   
+  
+  
+  
 
 
 Permission.ARTICLE_READ,
 
+  
+  
+  
   
   
   
@@ -3755,10 +4156,16 @@ Permission.ARTICLE_CREATE,
   
   
   
+  
+  
+  
 
 
 Permission.ARTICLE_UPDATE,
 
+  
+  
+  
   
   
   
@@ -3813,10 +4220,16 @@ Permission.ARTICLE_DELETE,
   
   
   
+  
+  
+  
 
 
 Permission.USER_MANAGE,
 
+  
+  
+  
   
   
   
@@ -3871,10 +4284,16 @@ Permission.USER_MANAGE,
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3929,10 +4348,16 @@ def require_permission(permission: Permission):
   
   
   
+  
+  
+  
 
 
 def decorator(func):
 
+  
+  
+  
   
   
   
@@ -3987,10 +4412,16 @@ def decorator(func):
   
   
   
+  
+  
+  
 
 
 async def wrapper(*args, **kwargs):
 
+  
+  
+  
   
   
   
@@ -4045,10 +4476,16 @@ user = kwargs.get('current_user')
   
   
   
+  
+  
+  
 
 
 if not user:
 
+  
+  
+  
   
   
   
@@ -4103,10 +4540,16 @@ raise HTTPException(status_code=401)
   
   
   
+  
+  
+  
 
 
 user_perms = ROLE_PERMISSIONS.get(user.role, set())
 
+  
+  
+  
   
   
   
@@ -4161,10 +4604,16 @@ if permission not in user_perms:
   
   
   
+  
+  
+  
 
 
 raise HTTPException(
 
+  
+  
+  
   
   
   
@@ -4219,10 +4668,16 @@ status_code=403,
   
   
   
+  
+  
+  
 
 
 detail="Insufficient permissions"
 
+  
+  
+  
   
   
   
@@ -4277,10 +4732,16 @@ detail="Insufficient permissions"
   
   
   
+  
+  
+  
 
 
 return await func(*args, **kwargs)
 
+  
+  
+  
   
   
   
@@ -4335,10 +4796,16 @@ return wrapper
   
   
   
+  
+  
+  
 
 
 return decorator
 
+  
+  
+  
   
   
   
@@ -4393,10 +4860,16 @@ return decorator
   
   
   
+  
+  
+  
 
 
 @app.delete("/articles/{article_id}")
 
+  
+  
+  
   
   
   
@@ -4451,10 +4924,16 @@ return decorator
   
   
   
+  
+  
+  
 
 
 async def delete_article(article_id: int, current_user = Depends(get_current_user)):
 
+  
+  
+  
   
   
   
@@ -4509,10 +4988,16 @@ async def delete_article(article_id: int, current_user = Depends(get_current_use
   
   
   
+  
+  
+  
 
 
 pass
 
+  
+  
+  
   
   
   
@@ -4567,10 +5052,16 @@ Attribute-Based Access Control (ABAC)
   
   
   
+  
+  
+  
 
 
 For more granular control, extend RBAC with ABAC policies that consider resource attributes and context: 
 
+  
+  
+  
   
   
   
@@ -4625,10 +5116,16 @@ def can_access_resource(user, resource, action):
   
   
   
+  
+  
+  
 
 
 """Check RBAC first, then ABAC policies."""
 
+  
+  
+  
   
   
   
@@ -4683,6 +5180,9 @@ def can_access_resource(user, resource, action):
   
   
   
+  
+  
+  
 
 
 if not has_role_permission(user.role, action):
@@ -4712,10 +5212,16 @@ if not has_role_permission(user.role, action):
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -4770,10 +5276,16 @@ return False
   
   
   
+  
+  
+  
 
 
 policies = {
 
+  
+  
+  
   
   
   
@@ -4828,10 +5340,16 @@ policies = {
   
   
   
+  
+  
+  
 
 
 ('article:update', 'article'): lambda u, r: r.author_id == u.id,
 
+  
+  
+  
   
   
   
@@ -4886,10 +5404,16 @@ policies = {
   
   
   
+  
+  
+  
 
 
 ('article:update', 'article'): lambda u, r: 'admin' in u.roles,
 
+  
+  
+  
   
   
   
@@ -4944,6 +5468,9 @@ policies = {
   
   
   
+  
+  
+  
 
 
 ('article:delete', 'article'): lambda u, r: r.author_id == u.id,
@@ -4973,10 +5500,16 @@ policies = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -5031,10 +5564,16 @@ policy = policies.get((action, resource.type))
   
   
   
+  
+  
+  
 
 
 if policy:
 
+  
+  
+  
   
   
   
@@ -5089,10 +5628,16 @@ return policy(user, resource)
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -5147,10 +5692,16 @@ Performance Optimization
   
   
   
+  
+  
+  
 
 
 Cache resolved permissions to avoid repeated database queries: 
 
+  
+  
+  
   
   
   
@@ -5205,10 +5756,16 @@ import redis
   
   
   
+  
+  
+  
 
 
 import json
 
+  
+  
+  
   
   
   
@@ -5263,10 +5820,16 @@ r = redis.Redis()
   
   
   
+  
+  
+  
 
 
 def get_cached_permissions(user_id):
 
+  
+  
+  
   
   
   
@@ -5321,10 +5884,16 @@ cache_key = f"perms:{user_id}"
   
   
   
+  
+  
+  
 
 
 cached = r.get(cache_key)
 
+  
+  
+  
   
   
   
@@ -5379,10 +5948,16 @@ if cached:
   
   
   
+  
+  
+  
 
 
 return json.loads(cached)
 
+  
+  
+  
   
   
   
@@ -5437,10 +6012,16 @@ permissions = resolve_user_permissions(user_id)
   
   
   
+  
+  
+  
 
 
 r.setex(cache_key, 300, json.dumps(permissions)) # 5 min TTL
 
+  
+  
+  
   
   
   
@@ -5495,10 +6076,16 @@ return permissions
   
   
   
+  
+  
+  
 
 
 Audit Logging 
 
+  
+  
+  
   
   
   
@@ -5553,10 +6140,16 @@ Every authorization decision should be logged:
   
   
   
+  
+  
+  
 
 
 def log_authorization(user_id, action, resource, granted, reason=""):
 
+  
+  
+  
   
   
   
@@ -5611,10 +6204,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 "timestamp": datetime.utcnow().isoformat(),
 
+  
+  
+  
   
   
   
@@ -5669,10 +6268,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 "action": action,
 
+  
+  
+  
   
   
   
@@ -5727,10 +6332,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 "granted": granted,
 
+  
+  
+  
   
   
   
@@ -5785,10 +6396,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 "source_ip": request.remote_addr
 
+  
+  
+  
   
   
   
@@ -5843,10 +6460,16 @@ log_entry = {
   
   
   
+  
+  
+  
 
 
 audit_logger.info(json.dumps(log_entry))
 
+  
+  
+  
   
   
   
@@ -5901,10 +6524,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 * **Role explosion**: Too many fine-grained roles become unmanageable. Aim for 5-10 roles maximum.
 
+  
+  
+  
   
   
   
@@ -5959,10 +6588,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 * **Missing negative permissions**: RBAC naturally handles allow rules. For deny rules, evaluate deny before allow.
 
+  
+  
+  
   
   
   
@@ -6017,10 +6652,16 @@ Common Pitfalls
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

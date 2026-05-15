@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-evaluation-metrics.html
   
 
 
+# LLM Evaluation Metrics
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Evaluating large language models is fundamentally different from evaluating trad
   
   
   
+  
+  
+  
 
 
 ##  Classification Metrics
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ For classification tasks — sentiment analysis, intent detection, topic classif
   
   
   
+  
+  
+  
 
 
 * **Accuracy**: Overall correct predictions, but misleading for imbalanced datasets
 
+  
+  
+  
   
   
   
@@ -327,10 +374,16 @@ For classification tasks — sentiment analysis, intent detection, topic classif
   
   
   
+  
+  
+  
 
 
 * **Recall**: Of actual positive items, how many were caught?
 
+  
+  
+  
   
   
   
@@ -379,10 +432,16 @@ For classification tasks — sentiment analysis, intent detection, topic classif
   
   
   
+  
+  
+  
 
 
 * **Confusion Matrix**: Shows which classes are commonly confused
 
+  
+  
+  
   
   
   
@@ -437,10 +496,16 @@ Example calculation for an intent classification task:
   
   
   
+  
+  
+  
 
 
 True Positives: 850 | False Positives: 50
 
+  
+  
+  
   
   
   
@@ -495,10 +560,16 @@ False Negatives: 100 | True Negatives: 4000
   
   
   
+  
+  
+  
 
 
 Precision = 850/(850+50) = 0.944
 
+  
+  
+  
   
   
   
@@ -553,10 +624,16 @@ Recall = 850/(850+100) = 0.895
   
   
   
+  
+  
+  
 
 
 F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919
 
+  
+  
+  
   
   
   
@@ -611,10 +688,16 @@ F1 = 2 * (0.944*0.895)/(0.944+0.895) = 0.919
   
   
   
+  
+  
+  
 
 
 ### ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
 
+  
+  
+  
   
   
   
@@ -669,10 +752,16 @@ ROUGE measures the overlap between generated text and reference text, primarily 
   
   
   
+  
+  
+  
 
 
 * **ROUGE-N**: Overlap of n-grams (ROUGE-1 for unigrams, ROUGE-2 for bigrams)
 
+  
+  
+  
   
   
   
@@ -721,10 +810,16 @@ ROUGE measures the overlap between generated text and reference text, primarily 
   
   
   
+  
+  
+  
 
 
 * **ROUGE-Skip-Bigram**: Bigrams that can have gaps
 
+  
+  
+  
   
   
   
@@ -779,10 +874,16 @@ ROUGE correlates reasonably with human judgment for extractive summarization but
   
   
   
+  
+  
+  
 
 
 ### BLEU (Bilingual Evaluation Understudy)
 
+  
+  
+  
   
   
   
@@ -837,10 +938,16 @@ BLEU measures precision of n-gram overlap, primarily for translation:
   
   
   
+  
+  
+  
 
 
 * Scores range from 0 to 1 (or 0-100)
 
+  
+  
+  
   
   
   
@@ -889,10 +996,16 @@ BLEU measures precision of n-gram overlap, primarily for translation:
   
   
   
+  
+  
+  
 
 
 * Includes a brevity penalty to prevent short outputs
 
+  
+  
+  
   
   
   
@@ -947,10 +1060,16 @@ BLEU has known limitations: it favors literal translations over fluent ones and 
   
   
   
+  
+  
+  
 
 
 ### Perplexity
 
+  
+  
+  
   
   
   
@@ -1005,10 +1124,16 @@ Perplexity measures how well the model predicts a sequence — lower is better. 
   
   
   
+  
+  
+  
 
 
 Perplexity = exp(-1/N * Σ log P(token_i | context))
 
+  
+  
+  
   
   
   
@@ -1063,10 +1188,16 @@ Perplexity is useful for comparing models on the same dataset but cannot compare
   
   
   
+  
+  
+  
 
 
 ##  Task-Specific Benchmarks
 
+  
+  
+  
   
   
   
@@ -1121,10 +1252,16 @@ Standardized benchmarks enable model-to-model comparison:
   
   
   
+  
+  
+  
 
 
 * **MMLU** (Massive Multitask Language Understanding): 57 subjects from high school to professional level
 
+  
+  
+  
   
   
   
@@ -1173,10 +1310,16 @@ Standardized benchmarks enable model-to-model comparison:
   
   
   
+  
+  
+  
 
 
 * **GSM8K**: Grade school math word problems
 
+  
+  
+  
   
   
   
@@ -1225,6 +1368,9 @@ Standardized benchmarks enable model-to-model comparison:
   
   
   
+  
+  
+  
 
 
 * **TruthfulQA**: Measuring truthfulness and hallucination
@@ -1251,10 +1397,16 @@ Standardized benchmarks enable model-to-model comparison:
   
   
   
+  
+  
+  
 
 
 * **BIG-Bench**: 204 diverse tasks
 
+  
+  
+  
   
   
   
@@ -1309,10 +1461,16 @@ When reporting benchmark scores, always include the exact evaluation setup (few-
   
   
   
+  
+  
+  
 
 
 ##  LLM-as-Judge Evaluation
 
+  
+  
+  
   
   
   
@@ -1367,10 +1525,16 @@ Using an LLM to evaluate another LLM's outputs has become the standard approach 
   
   
   
+  
+  
+  
 
 
 judge_prompt = """
 
+  
+  
+  
   
   
   
@@ -1425,39 +1589,16 @@ You are evaluating a response for quality. Rate the response on:
   
   
   
-
-
-1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Helpfulness (1-5): Does it address the user's question?
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Accuracy (1-5): Is the information factually correct?
+1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Helpfulness (1-5): Does it address the user's question?
 
+  
+  
+  
   
   
   
@@ -1485,7 +1626,7 @@ You are evaluating a response for quality. Rate the response on:
   
 
 
-3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Harmlessness (1-5): Does it avoid harmful content?
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Accuracy (1-5): Is the information factually correct?
 
   
   
@@ -1512,10 +1653,48 @@ You are evaluating a response for quality. Rate the response on:
   
   
   
+  
+  
+  
 
 
-4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness (1-5): Does it cover all aspects of the question?
+3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Harmlessness (1-5): Does it avoid harmful content?
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Completeness (1-5): Does it cover all aspects of the question?
+
+  
+  
+  
   
   
   
@@ -1570,10 +1749,16 @@ User query: {query}
   
   
   
+  
+  
+  
 
 
 Response to evaluate: {response}
 
+  
+  
+  
   
   
   
@@ -1628,10 +1813,16 @@ Output a JSON object with scores and brief reasoning.
   
   
   
+  
+  
+  
 
 
 """
 
+  
+  
+  
   
   
   
@@ -1686,10 +1877,16 @@ Output a JSON object with scores and brief reasoning.
   
   
   
+  
+  
+  
 
 
 ##  Human Evaluation
 
+  
+  
+  
   
   
   
@@ -1744,10 +1941,16 @@ Despite automation advances, human evaluation remains the gold standard:
   
   
   
+  
+  
+  
 
 
 * **Side-by-side comparison**: Raters choose the better output from two models (A/B testing)
 
+  
+  
+  
   
   
   
@@ -1796,6 +1999,9 @@ Despite automation advances, human evaluation remains the gold standard:
   
   
   
+  
+  
+  
 
 
 * **Chat evaluation**: Raters interact with models in free-form conversation
@@ -1822,10 +2028,16 @@ Despite automation advances, human evaluation remains the gold standard:
   
   
   
+  
+  
+  
 
 
 * **Error annotation**: Raters categorize specific failure modes
 
+  
+  
+  
   
   
   
@@ -1880,10 +2092,16 @@ A good annotation rubric defines each score level with concrete examples. For a 
   
   
   
+  
+  
+  
 
 
 ##  Evaluation in Production
 
+  
+  
+  
   
   
   
@@ -1938,10 +2156,16 @@ Production evaluation goes beyond benchmarks:
   
   
   
+  
+  
+  
 
 
 * **A/B testing**: Compare model versions on live traffic with statistical significance
 
+  
+  
+  
   
   
   
@@ -1990,10 +2214,16 @@ Production evaluation goes beyond benchmarks:
   
   
   
+  
+  
+  
 
 
 * **Outcome metrics**: Task completion rate, time-to-resolution, user satisfaction surveys
 
+  
+  
+  
   
   
   
@@ -2045,10 +2275,16 @@ Production evaluation goes beyond benchmarks:
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

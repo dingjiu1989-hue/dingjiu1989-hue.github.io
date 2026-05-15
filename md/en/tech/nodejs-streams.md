@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/nodejs-streams.html
   
   
   
+  
+  
+  
+
+
+# Node.js Streams
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Node.js streams are one of the most powerful yet misunderstood features of the platform. Streams enable processing of data piece by piece rather than loading entire datasets into memory. This makes them essential for handling large files, network communication, and data processing pipelines. This article covers the four stream types, backpressure, and the pipeline API.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Node.js streams are one of the most powerful yet misunderstood features of the p
   
   
   
+  
+  
+  
 
 
 Node.js has four fundamental stream types. Readable streams produce data that can be consumed. Writable streams consume data. Transform streams read data, transform it, and write the transformed data. Duplex streams implement both readable and writable interfaces independently.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Readable streams include `fs.createReadStream` for files, HTTP request objects, 
   
   
   
+  
+  
+  
 
 
 ##  Reading from Streams
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Readable streams operate in two modes: flowing and paused. In flowing mode, data
   
   
   
+  
+  
+  
 
 
 For example, reading a file line by line uses `readline` with a file stream: `const rl = readline.createInterface({ input: fs.createReadStream('file.txt') })`. This processes the file one line at a time without loading the entire file into memory.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ For example, reading a file line by line uses `readline` with a file stream: `co
   
   
   
+  
+  
+  
 
 
 Writing to a writable stream uses the `write()` method, which returns a boolean indicating whether the internal buffer is full. A `false` return signals that the consumer cannot keep up—this is backpressure. The `'drain'` event fires when the buffer is ready for more data.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ The `end()` method signals that no more data will be written. After `end()`, the
   
   
   
+  
+  
+  
 
 
 ##  Transform Streams
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Transform streams implement both readable and writable interfaces. They receive 
   
   
   
+  
+  
+  
 
 
 Implementing a custom transform stream requires implementing the `_transform()` method. Each chunk arrives via `_transform`, and you push the transformed result. The `_flush()` method handles remaining data when the input stream ends. This pattern is used by `zlib`, `crypto`, and user-defined stream processors.
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Implementing a custom transform stream requires implementing the `_transform()` 
   
   
   
+  
+  
+  
 
 
 Backpressure is the mechanism that regulates data flow between fast producers and slow consumers. When a writable stream's internal buffer exceeds `highWaterMark`, `write()` returns `false`. The readable stream should pause until `'drain'` fires, preventing memory exhaustion.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Improper backpressure handling is a common source of memory issues in Node.js ap
   
   
   
+  
+  
+  
 
 
 ##  The Pipeline API
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ The `stream.pipeline()` function chains multiple streams together, handling back
   
   
   
+  
+  
+  
 
 
 The pipeline API is the recommended way to compose streams:
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ const { pipeline } = require('stream/promises');
   
   
   
+  
+  
+  
 
 
 await pipeline(
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ fs.createReadStream('input.gz'),
   
   
   
+  
+  
+  
 
 
 zlib.createGunzip(),
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ fs.createWriteStream('output.txt')
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ This decompresses a gzipped file with proper backpressure and error handling—s
   
   
   
+  
+  
+  
 
 
 ##  Error Handling
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ Stream errors must be handled explicitly. An unhandled `'error'` event on a stre
   
   
   
+  
+  
+  
 
 
 Streams also emit `'close'` when the stream and its underlying resources are closed. The `'close'` event is guaranteed to fire even if an error occurred, making it suitable for cleanup logic. The `destroyed` property indicates whether the stream has been destroyed.
 
+  
+  
+  
   
   
   

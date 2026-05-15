@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/llm-api-design.html
   
 
 
+# LLM API Design: Streaming, Structured Output, Error Handling, Rate Limits
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Designing APIs that wrap large language models requires handling concerns that t
   
   
   
+  
+  
+  
 
 
 ##  Streaming Responses
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Streaming is the standard way to return LLM outputs. Instead of waiting for the 
   
   
   
+  
+  
+  
 
 
 from fastapi import FastAPI, Request
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ from fastapi.responses import StreamingResponse
   
   
   
+  
+  
+  
 
 
 from anthropic import AsyncAnthropic
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ import asyncio
   
   
   
+  
+  
+  
 
 
 app = FastAPI()
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ client = AsyncAnthropic(api_key="sk-ant-...")
   
   
   
+  
+  
+  
 
 
 async def generate_stream(prompt: str):
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ async with client.messages.stream(
   
   
   
+  
+  
+  
 
 
 model="claude-sonnet-4-20260512",
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ max_tokens=4096,
   
   
   
+  
+  
+  
 
 
 messages=[{"role": "user", "content": prompt}],
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ messages=[{"role": "user", "content": prompt}],
   
   
   
+  
+  
+  
 
 
 async for chunk in stream:
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ if chunk.type == "content_block_delta":
   
   
   
+  
+  
+  
 
 
 yield f"data: {chunk.delta.text}\n\n"
 
+  
+  
+  
   
   
   
@@ -739,6 +828,9 @@ yield f"data: {chunk.delta.text}\n\n"
   
   
   
+  
+  
+  
 
 
 async def chat(request: Request):
@@ -768,10 +860,16 @@ async def chat(request: Request):
   
   
   
+  
+  
+  
 
 
 body = await request.json()
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ return StreamingResponse(
   
   
   
+  
+  
+  
 
 
 generate_stream(body["prompt"]),
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ media_type="text/event-stream",
   
   
   
+  
+  
+  
 
 
 headers={
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ headers={
   
   
   
+  
+  
+  
 
 
 "Connection": "keep-alive",
 
+  
+  
+  
   
   
   
@@ -1000,6 +1116,9 @@ headers={
   
   
   
+  
+  
+  
 
 
 },
@@ -1029,10 +1148,16 @@ headers={
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ The Server-Sent Events protocol is the most compatible streaming format. Each `d
   
   
   
+  
+  
+  
 
 
 ##  Structured Output
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ Raw LLM text is unreliable for programmatic consumption. Use structured output m
   
   
   
+  
+  
+  
 
 
 from pydantic import BaseModel
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ from openai import OpenAI
   
   
   
+  
+  
+  
 
 
 client = OpenAI()
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ class ExtractedEntity(BaseModel):
   
   
   
+  
+  
+  
 
 
 name: str
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ type: str
   
   
   
+  
+  
+  
 
 
 confidence: float
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ source_text: str
   
   
   
+  
+  
+  
 
 
 class ExtractionResult(BaseModel):
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ entities: list[ExtractedEntity]
   
   
   
+  
+  
+  
 
 
 summary: str
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ language: str
   
   
   
+  
+  
+  
 
 
 response = client.beta.chat.completions.parse(
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ model="gpt-4o",
   
   
   
+  
+  
+  
 
 
 messages=[
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ messages=[
   
   
   
+  
+  
+  
 
 
 {"role": "user", "content": user_text},
 
+  
+  
+  
   
   
   
@@ -1667,6 +1852,9 @@ messages=[
   
   
   
+  
+  
+  
 
 
 response_format=ExtractionResult,
@@ -1696,10 +1884,16 @@ response_format=ExtractionResult,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ result: ExtractionResult = response.choices[0].message.parsed
   
   
   
+  
+  
+  
 
 
 When the API does not support native structured output, use a two-step approach: request JSON in the prompt, then validate and re-request on failure:
 
+  
+  
+  
   
   
   
@@ -1812,10 +2012,16 @@ import json
   
   
   
+  
+  
+  
 
 
 from pydantic import ValidationError
 
+  
+  
+  
   
   
   
@@ -1870,10 +2076,16 @@ def safe_structured_generate(prompt: str, schema: type[BaseModel], max_retries=3
   
   
   
+  
+  
+  
 
 
 for attempt in range(max_retries):
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ raw = call_llm(prompt + "\n\nRespond in valid JSON matching this schema: " + str
   
   
   
+  
+  
+  
 
 
 try:
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ parsed = json.loads(clean_json(raw))
   
   
   
+  
+  
+  
 
 
 return schema.model_validate(parsed)
 
+  
+  
+  
   
   
   
@@ -2044,6 +2268,9 @@ except (json.JSONDecodeError, ValidationError) as e:
   
   
   
+  
+  
+  
 
 
 if attempt == max_retries - 1:
@@ -2073,10 +2300,16 @@ if attempt == max_retries - 1:
   
   
   
+  
+  
+  
 
 
 raise
 
+  
+  
+  
   
   
   
@@ -2131,10 +2364,16 @@ prompt += f"\n\nPrevious attempt failed: {e}. Please fix the JSON."
   
   
   
+  
+  
+  
 
 
 return None
 
+  
+  
+  
   
   
   
@@ -2189,6 +2428,9 @@ return None
   
   
   
+  
+  
+  
 
 
 LLM APIs fail in distinctive ways. Build a retry strategy around each failure mode:
@@ -2218,10 +2460,16 @@ LLM APIs fail in distinctive ways. Build a retry strategy around each failure mo
   
   
   
+  
+  
+  
 
 
 import time
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_excep
   
   
   
+  
+  
+  
 
 
 class RateLimitError(Exception): pass
 
+  
+  
+  
   
   
   
@@ -2334,10 +2588,16 @@ class ContextWindowExceeded(Exception): pass
   
   
   
+  
+  
+  
 
 
 class ContentFilterError(Exception): pass
 
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ class ContentFilterError(Exception): pass
   
   
   
+  
+  
+  
 
 
 stop=stop_after_attempt(3),
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ wait=wait_exponential(multiplier=1, min=2, max=30),
   
   
   
+  
+  
+  
 
 
 retry=retry_if_exception_type(RateLimitError),
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ retry=retry_if_exception_type(RateLimitError),
   
   
   
+  
+  
+  
 
 
 def call_with_retry(prompt: str) -> str:
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ try:
   
   
   
+  
+  
+  
 
 
 response = client.messages.create(model="claude-sonnet-4-20260512", max_tokens=1024, messages=[{"role": "user", "content": prompt}])
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ return response.content[0].text
   
   
   
+  
+  
+  
 
 
 except APIStatusError as e:
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ if e.status_code == 429:
   
   
   
+  
+  
+  
 
 
 retry_after = int(e.response.headers.get("retry-after", 5))
 
+  
+  
+  
   
   
   
@@ -2740,10 +3036,16 @@ time.sleep(retry_after)
   
   
   
+  
+  
+  
 
 
 raise RateLimitError from e
 
+  
+  
+  
   
   
   
@@ -2798,10 +3100,16 @@ elif e.status_code == 400 and "context_length_exceeded" in str(e):
   
   
   
+  
+  
+  
 
 
 raise ContextWindowExceeded from e
 
+  
+  
+  
   
   
   
@@ -2856,10 +3164,16 @@ elif e.status_code == 400 and "content_filter" in str(e):
   
   
   
+  
+  
+  
 
 
 raise ContentFilterError from e
 
+  
+  
+  
   
   
   
@@ -2914,10 +3228,16 @@ raise
   
   
   
+  
+  
+  
 
 
 Each error type deserves a different handler: rate limits get exponential backoff, context windows trigger input truncation, and content filter errors should be logged and escalated.
 
+  
+  
+  
   
   
   
@@ -2972,10 +3292,16 @@ Each error type deserves a different handler: rate limits get exponential backof
   
   
   
+  
+  
+  
 
 
 Protect your API from abuse and cost spikes with layered rate limiting:
 
+  
+  
+  
   
   
   
@@ -3030,10 +3356,16 @@ from fastapi import HTTPException
   
   
   
+  
+  
+  
 
 
 import time
 
+  
+  
+  
   
   
   
@@ -3088,10 +3420,16 @@ from collections import defaultdict
   
   
   
+  
+  
+  
 
 
 class RateLimiter:
 
+  
+  
+  
   
   
   
@@ -3146,10 +3484,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 self.tokens_per_second = 10
 
+  
+  
+  
   
   
   
@@ -3204,10 +3548,16 @@ self.burst_limit = 20
   
   
   
+  
+  
+  
 
 
 self.cost_per_token = 0.000003
 
+  
+  
+  
   
   
   
@@ -3262,10 +3612,16 @@ self.daily_budget = 10.0
   
   
   
+  
+  
+  
 
 
 self.user_usage = defaultdict(float)
 
+  
+  
+  
   
   
   
@@ -3320,10 +3676,16 @@ async def check(self, user_id: str, estimated_tokens: int):
   
   
   
+  
+  
+  
 
 
 cost = estimated_tokens * self.cost_per_token
 
+  
+  
+  
   
   
   
@@ -3378,10 +3740,16 @@ if self.user_usage[user_id] + cost > self.daily_budget:
   
   
   
+  
+  
+  
 
 
 raise HTTPException(status_code=429, detail="Daily budget exceeded")
 
+  
+  
+  
   
   
   
@@ -3436,10 +3804,16 @@ self.user_usage[user_id] += cost
   
   
   
+  
+  
+  
 
 
 def get_usage(self, user_id: str) -> dict:
 
+  
+  
+  
   
   
   
@@ -3494,10 +3868,16 @@ return {"cost": self.user_usage[user_id], "budget": self.daily_budget}
   
   
   
+  
+  
+  
 
 
 rate_limiter = RateLimiter()
 
+  
+  
+  
   
   
   
@@ -3552,10 +3932,16 @@ rate_limiter = RateLimiter()
   
   
   
+  
+  
+  
 
 
 async def chat(request: Request):
 
+  
+  
+  
   
   
   
@@ -3610,10 +3996,16 @@ user_id = request.headers.get("X-User-Id")
   
   
   
+  
+  
+  
 
 
 body = await request.json()
 
+  
+  
+  
   
   
   
@@ -3668,10 +4060,16 @@ estimated = len(body["prompt"].split()) * 2 + int(body.get("max_tokens", 1024))
   
   
   
+  
+  
+  
 
 
 await rate_limiter.check(user_id, estimated)
 
+  
+  
+  
   
   
   
@@ -3726,10 +4124,16 @@ return await generate_response(body["prompt"])
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

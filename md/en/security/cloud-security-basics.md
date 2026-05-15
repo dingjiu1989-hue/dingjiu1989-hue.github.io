@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/security/cloud-security-basics.html
   
 
 
+# Cloud Security Basics: Shared Responsibility Model Explained
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The shared responsibility model is the foundational concept in cloud security. It defines what the cloud provider secures versus what the customer must secure. Misunderstanding this boundary is the root cause of most cloud data breaches.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ The shared responsibility model is the foundational concept in cloud security. I
   
   
   
+  
+  
+  
 
 
 Every major cloud provider — AWS, Google Cloud, and Azure — operates under a shared responsibility model. The provider secures the infrastructure that runs the services. The customer secures everything they deploy on top of that infrastructure.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Every major cloud provider — AWS, Google Cloud, and Azure — operates under a
   
   
   
+  
+  
+  
 
 
 **GCP shared responsibility**: Google secures the physical infrastructure, storage, networking, and encryption-at-rest infrastructure. The customer secures their data classifications, access policies, application configurations, and identity management.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Every major cloud provider — AWS, Google Cloud, and Azure — operates under a
   
   
   
+  
+  
+  
 
 
 ##  Identity and Access Management (IAM)
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ IAM is the gatekeeper of your cloud environment. Every API call to a cloud provi
   
   
   
+  
+  
+  
 
 
 ### AWS IAM
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 "Statement": [
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 "Effect": "Allow",
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 "Resource": [
 
+  
+  
+  
   
   
   
@@ -681,6 +764,9 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 "arn:aws:s3:::example-bucket/*"
@@ -710,10 +796,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -768,6 +860,9 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 ]
@@ -797,10 +892,16 @@ AWS IAM uses policies written in JSON to grant or deny permissions. Policies att
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ Best practices for IAM:
   
   
   
+  
+  
+  
 
 
 * Apply the principle of least privilege. Grant only the permissions a role or user needs.
 
+  
+  
+  
   
   
   
@@ -907,6 +1014,9 @@ Best practices for IAM:
   
   
   
+  
+  
+  
 
 
 * Enable AWS IAM Access Analyzer to identify unused permissions.
@@ -933,10 +1043,16 @@ Best practices for IAM:
   
   
   
+  
+  
+  
 
 
 * Require multi-factor authentication for the root account and all privileged users.
 
+  
+  
+  
   
   
   
@@ -991,10 +1107,16 @@ Best practices for IAM:
   
   
   
+  
+  
+  
 
 
 GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, Editor, Viewer) are broad. Predefined roles are service-specific and more granular.
 
+  
+  
+  
   
   
   
@@ -1049,6 +1171,9 @@ GCP IAM uses roles that are collections of permissions. Primitive roles (Owner, 
   
   
   
+  
+  
+  
 
 
 gcloud projects add-iam-policy-binding my-project \
@@ -1078,39 +1203,48 @@ gcloud projects add-iam-policy-binding my-project \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:sa@my-project.iam.gserviceaccount.com" \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="roles/storage.objectViewer"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--member="serviceAccount:sa@my-project.iam.gserviceaccount.com" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role="roles/storage.objectViewer"
+
+  
+  
+  
   
   
   
@@ -1165,10 +1299,16 @@ gcloud projects add-iam-policy-binding my-project \
   
   
   
+  
+  
+  
 
 
 Azure uses Role-Based Access Control with built-in or custom roles. Roles are assigned at management group, subscription, resource group, or resource scope.
 
+  
+  
+  
   
   
   
@@ -1223,39 +1363,16 @@ az role assignment create \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--assignee user@example.com \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role "Reader" \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--assignee user@example.com \
 
+  
+  
+  
   
   
   
@@ -1283,8 +1400,43 @@ az role assignment create \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--scope "/subscriptions/SUB_ID/resourceGroups/RG"
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--role "Reader" \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--scope "/subscriptions/SUB_ID/resourceGroups/RG"
+
+  
+  
+  
   
   
   
@@ -1339,10 +1491,16 @@ az role assignment create \
   
   
   
+  
+  
+  
 
 
 Cloud virtual networks need traffic filtering at multiple layers.
 
+  
+  
+  
   
   
   
@@ -1397,10 +1555,16 @@ Cloud virtual networks need traffic filtering at multiple layers.
   
   
   
+  
+  
+  
 
 
 **GCP Firewall Rules**: Applied at the VPC network level. They can be ingress or egress rules with allow or deny actions. Rules include source and destination IP ranges, protocols, and ports.
 
+  
+  
+  
   
   
   
@@ -1455,10 +1619,16 @@ Cloud virtual networks need traffic filtering at multiple layers.
   
   
   
+  
+  
+  
 
 
 ##  Cloud Security Services
 
+  
+  
+  
   
   
   
@@ -1513,10 +1683,16 @@ Cloud virtual networks need traffic filtering at multiple layers.
   
   
   
+  
+  
+  
 
 
 CloudTrail records every API call made in your AWS account. It logs the caller identity, time, source IP, request parameters, and response elements. Enable CloudTrail in all regions and use a single trail for all accounts in AWS Organizations.
 
+  
+  
+  
   
   
   
@@ -1571,10 +1747,16 @@ CloudTrail records every API call made in your AWS account. It logs the caller i
   
   
   
+  
+  
+  
 
 
 GuardDuty is a threat detection service that analyzes CloudTrail events, VPC flow logs, and DNS logs. It uses machine learning to detect unusual behavior such as crypto mining activity, anomalous API calls, or compromised credentials.
 
+  
+  
+  
   
   
   
@@ -1629,10 +1811,16 @@ GuardDuty is a threat detection service that analyzes CloudTrail events, VPC flo
   
   
   
+  
+  
+  
 
 
 Security Command Center provides threat detection, vulnerability scanning, and asset inventory for GCP. It surfaces misconfigurations like public buckets, open firewall ports, and IAM policy violations.
 
+  
+  
+  
   
   
   
@@ -1687,10 +1875,16 @@ Security Command Center provides threat detection, vulnerability scanning, and a
   
   
   
+  
+  
+  
 
 
 Azure Defender (formerly Azure Security Center) provides unified security management and advanced threat protection across hybrid cloud workloads. It includes just-in-time VM access, file integrity monitoring, and vulnerability assessments.
 
+  
+  
+  
   
   
   
@@ -1745,10 +1939,16 @@ Azure Defender (formerly Azure Security Center) provides unified security manage
   
   
   
+  
+  
+  
 
 
 Encryption key management differs across providers:
 
+  
+  
+  
   
   
   
@@ -1800,6 +2000,9 @@ Encryption key management differs across providers:
   
   
   
+  
+  
+  
 
 
 * **GCP Cloud KMS**: Similar capabilities with Cloud HSM option for FIPS 140-2 Level 3 validation.
@@ -1826,10 +2029,16 @@ Encryption key management differs across providers:
   
   
   
+  
+  
+  
 
 
 * **Azure Key Vault**: Stores keys, secrets, and certificates. Integrates with Azure Disk Encryption, SQL Server TDE, and App Service.
 
+  
+  
+  
   
   
   
@@ -1884,10 +2093,16 @@ Never store secrets in code, configuration files, or environment variables expos
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

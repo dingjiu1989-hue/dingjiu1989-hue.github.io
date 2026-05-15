@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/infrastructure-composability.html
   
   
   
+  
+  
+  
+
+
+# Infrastructure Composability
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Infrastructure composability is the practice of building infrastructure as reusable, composable components. Instead of duplicating infrastructure definitions across projects, teams create modular components that can be combined and configured for different use cases. This approach reduces duplication, enforces consistency, and accelerates infrastructure delivery.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Infrastructure composability is the practice of building infrastructure as reusa
   
   
   
+  
+  
+  
 
 
 Without composability, every project or environment defines infrastructure from scratch. Configuration is duplicated with slight variations. Updates must be applied to every copy. Inconsistencies accumulate as copies drift. This is the infrastructure equivalent of copy-paste programming.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Composability addresses these problems by defining infrastructure components onc
   
   
   
+  
+  
+  
 
 
 ##  Terraform Modules
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Terraform modules are the most common implementation of infrastructure composabi
   
   
   
+  
+  
+  
 
 
 A well-designed module has a clear purpose and composable interface. The "VPC" module creates a VPC with subnets, route tables, and NAT gateways. It accepts variables for CIDR blocks, availability zones, and tagging conventions. It outputs VPC IDs and subnet IDs for use by other modules.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Modules should be versioned and published to a module registry. Terraform Cloud,
   
   
   
+  
+  
+  
 
 
 ##  Component Design Principles
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Good infrastructure components follow design principles similar to good software
   
   
   
+  
+  
+  
 
 
 Components should be composable: they work together without tight coupling. A compute module does not need to know about the database module's internals—it just needs the database connection string, which is passed as an input variable. This loose coupling allows components to evolve independently.
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Components should support multiple environments through configuration, not dupli
   
   
   
+  
+  
+  
 
 
 ##  Reusable Components
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Common reusable components include networking (VPC, subnets, DNS), compute (ECS,
   
   
   
+  
+  
+  
 
 
 Each component should be thoroughly tested before publication. Terratest and `terraform validate` provide automated testing of Terraform modules. Tests verify that the module creates the expected resources with the expected configurations.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Components should include monitoring and alerting as part of their definition. A
   
   
   
+  
+  
+  
 
 
 ##  Environment Management
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Composable infrastructure supports consistent environment management. Each envir
   
   
   
+  
+  
+  
 
 
 Terragrunt and Terraform workspaces provide environment management on top of Terraform modules. They handle state file separation, variable interpolation, and configuration inheritance. This allows a single module definition to power multiple environments with consistent behavior.
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ Terragrunt and Terraform workspaces provide environment management on top of Ter
   
   
   
+  
+  
+  
 
 
 Infrastructure components benefit from CI/CD pipelines. When a module changes, the pipeline runs tests, publishes a new version, and creates a release tag. Consuming projects upgrade their module version when ready.
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ Infrastructure pipelines should include plan and apply stages. The plan stage sh
   
   
   
+  
+  
+  
 
 
 ##  Organizational Adoption
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ Adopting infrastructure composability requires organizational investment. Teams 
   
   
   
+  
+  
+  
 
 
 A platform engineering team often owns the shared infrastructure components. They maintain module quality, versioning, and documentation. Application teams compose modules to create their infrastructure. This division of responsibility leverages infrastructure expertise while enabling application team autonomy.
 
+  
+  
+  
   
   
   

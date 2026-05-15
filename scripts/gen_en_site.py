@@ -13364,11 +13364,9 @@ def make_article_html(art, board_id, board_name, all_posts):
         sameas_entries = ',\n    '.join(f'"{u}"' for u in sameas_urls)
         sameas_json = f',\n      "sameAs": [\n    {sameas_entries}\n      ]'
 
-    # articleBody: plain text for AI crawlers
-    body_html_all = get_body(slug, board_id)
-    body_text = re.sub(r'<[^>]+>', '', body_html_all)
-    body_text = re.sub(r'\s+', ' ', body_text).strip()
-    body_json = json.dumps(body_text[:200000])
+    # articleBody: use description as semantic signal (not full text)
+    # Full content is already in HTML body + llms-full.txt + /md/ — no need to inline it twice
+    body_json = json.dumps(art['description'])
 
     # FAQ Schema for articles that have Q&A sections
     faq_schema = ''
@@ -13392,10 +13390,62 @@ def make_article_html(art, board_id, board_name, all_posts):
     }}
     </script>'''
 
-    # Article schema with AI-optimized properties
-    body_len = len(get_body(slug, board_id))
+    # HowTo schema for articles with step-by-step instructions
+    body_html = get_body(slug, board_id)
+    howto_schema = ''
+    # Find numbered h2/h3 headings: "1. Title", "Step 1: Title", etc.
+    step_headings = re.findall(r'<h[23][^>]*>\s*(\d+)[\.\:\)]\s*([^<]+)</h[23]>', body_html)
+    if len(step_headings) >= 3:
+        # Extract step text between headings
+        parts = re.split(r'<h[23][^>]*>\s*\d+[\.\:\)]\s*[^<]+</h[23]>', body_html)
+        steps = []
+        for i, (num, name) in enumerate(step_headings[:10]):  # max 10 steps
+            name_clean = name.strip().replace('"', '\\"')
+            # Grab text after this heading until next heading
+            step_body = parts[i + 1] if i + 1 < len(parts) else ''
+            step_text = re.sub(r'<[^>]+>', ' ', step_body)
+            step_text = re.sub(r'\s+', ' ', step_text).strip()[:300]
+            step_text = step_text.replace('"', '\\"')
+            steps.append(f'''      {{
+        "@type": "HowToStep",
+        "position": "{num}",
+        "name": "{name_clean}",
+        "text": "{step_text}"
+      }}''')
+        howto_steps_json = ',\n'.join(steps)
+        howto_schema = f'''
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "{art['title']}",
+      "description": "{art['description']}",
+      "step": [
+    {howto_steps_json}
+      ]
+    }}
+    </script>'''
+    body_len = len(body_html)
     word_est = max(300, body_len // 5)  # rough estimate from body chars
+
+    # Thin content guard: noindex articles under 2K chars plain text to protect site quality
+    body_text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', '', body_html)).strip()
+    body_text_len = len(body_text)
+    robots_meta = 'noindex, follow' if body_text_len < 2000 else 'index, follow'
     same_board = [p for p in all_posts if p['board_id'] == board_id and p['slug'] != slug]
+
+    # Prev/next intra-board navigation for crawl depth
+    same_sorted = sorted(same_board, key=lambda p: p.get('date', ''), reverse=True)
+    all_sorted = sorted(same_sorted + [art], key=lambda p: p.get('date', ''), reverse=True)
+    idx = next(i for i, p in enumerate(all_sorted) if p['slug'] == slug)
+    prev_next = ''
+    if idx > 0:
+        prev_p = all_sorted[idx - 1]
+        prev_next += f'\n    <link rel="prev" href="{BASE}/en/{board_id}/{prev_p["slug"]}.html">'
+    if idx < len(all_sorted) - 1:
+        next_p = all_sorted[idx + 1]
+        prev_next += f'\n    <link rel="next" href="{BASE}/en/{board_id}/{next_p["slug"]}.html">'
+
     other_board = [p for p in all_posts if p['board_id'] != board_id and p['slug'] != slug]
     related = (same_board + other_board)[:4]
     related_html = ''
@@ -13452,8 +13502,8 @@ def make_article_html(art, board_id, board_name, all_posts):
     <meta name="description" content="{art['description']}">
     <link rel="stylesheet" href="/css/style.css">
 {cn_hreflang}    <link rel="alternate" hreflang="en" href="{en_url}">
-    <link rel="canonical" href="{art_url}">
-    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{art_url}">{prev_next}
+    <meta name="robots" content="{robots_meta}">
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",
@@ -13481,7 +13531,7 @@ def make_article_html(art, board_id, board_name, all_posts):
         {{"@type": "ListItem", "position": 3, "name": "{art['title']}"}}
       ]
     }}
-    </script>{faq_schema}
+    </script>{faq_schema}{howto_schema}
     <script type="application/ld+json">
     {{
       "@context": "https://schema.org",

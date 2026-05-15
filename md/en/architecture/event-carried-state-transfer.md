@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/architecture/event-carried-state-trans
   
   
   
+  
+  
+  
+
+
+# Event-Carried State Transfer Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Event-carried state transfer is a messaging pattern where events include the full state needed by consumers, eliminating the need for consumers to query the producer for additional data. This reduces synchronous dependencies and improves system resilience.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Event-carried state transfer is a messaging pattern where events include the ful
   
   
   
+  
+  
+  
 
 
 When a service publishes an event about a domain entity, it includes all relevant state in the event payload. A UserCreated event contains the user's name, email, role, and other attributes. The consumer that needs this information has it immediately without making an additional API call.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ This is a departure from traditional event design, where events contain only ide
   
   
   
+  
+  
+  
 
 
 ##  Benefits
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Event-carried state transfer eliminates synchronous dependencies. If the produce
   
   
   
+  
+  
+  
 
 
 System resilience improves because consumers are self-sufficient. A consumer can rebuild its state entirely from the event stream without accessing the producer's API.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ System resilience improves because consumers are self-sufficient. A consumer can
   
   
   
+  
+  
+  
 
 
 Events become larger, increasing message broker storage and network bandwidth. Schema evolution is more complex because event payloads now contain more fields. Event producers must anticipate what consumers need, which requires coordination.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Stale data is a concern. If the producer updates its internal state after publis
   
   
   
+  
+  
+  
 
 
 ##  When to Use
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ Use event-carried state transfer when consumer independence is a priority, when 
   
   
   
+  
+  
+  
 
 
 ##  Best Practices
 
+  
+  
+  
   
   
   

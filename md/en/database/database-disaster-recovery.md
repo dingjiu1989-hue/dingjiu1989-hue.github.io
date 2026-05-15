@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/database-disaster-recovery.ht
   
 
 
+# Database Disaster Recovery: RPO, RTO, Cross-Region Replication
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Database Disaster Recovery: RPO, RTO, Cross-Region Replication 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Disaster recovery (DR) ensures your database can survive catastrophic events: re
   
   
   
+  
+  
+  
 
 
 RPO and RTO 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Two metrics define DR requirements:
   
   
   
+  
+  
+  
 
 
 **Recovery Point Objective (RPO)**: The maximum acceptable data loss measured in time. An RPO of 1 hour means you can lose at most 1 hour of data. 
 
+  
+  
+  
   
   
   
@@ -268,6 +312,9 @@ Two metrics define DR requirements:
   
   
   
+  
+  
+  
 
 
 | Scenario | RPO | RTO | Strategy | |----------|-----|-----|----------| | Internal tool | 24 hours | 24 hours | Daily backups, restore | | E-commerce | 5 minutes | 1 hour | Cross-region replication | | Financial trading | 0 (zero loss) | 5 minutes | Synchronous replication + DR site | 
@@ -291,10 +338,16 @@ Two metrics define DR requirements:
   
   
   
+  
+  
+  
 
 
 Cross-Region Replication 
 
+  
+  
+  
   
   
   
@@ -340,10 +393,16 @@ PostgreSQL Logical Replication Across Regions
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On primary (us-east-1)
 
+  
+  
+  
   
   
   
@@ -392,10 +451,16 @@ CREATE PUBLICATION dr_pub FOR ALL TABLES;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- On standby (us-west-2)
 
+  
+  
+  
   
   
   
@@ -444,10 +509,16 @@ CREATE SUBSCRIPTION dr_sub
   
   
   
+  
+  
+  
 
 
 CONNECTION 'host=primary-us-east-1.example.com port=5432 dbname=proddb'
 
+  
+  
+  
   
   
   
@@ -496,10 +567,16 @@ PUBLICATION dr_pub
   
   
   
+  
+  
+  
 
 
 WITH (copy_data = true, connect = true, create_slot = true);
 
+  
+  
+  
   
   
   
@@ -548,10 +625,16 @@ Logical replication works across regions with asynchronous delivery. Monitor lag
   
   
   
+  
+  
+  
 
 
 SELECT pg_size_pretty(
 
+  
+  
+  
   
   
   
@@ -600,10 +683,16 @@ pg_wal_lsn_diff(
   
   
   
+  
+  
+  
 
 
 pg_current_wal_lsn(),
 
+  
+  
+  
   
   
   
@@ -652,10 +741,16 @@ replay_lsn
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -704,10 +799,16 @@ replay_lsn
   
   
   
+  
+  
+  
 
 
 FROM pg_stat_replication
 
+  
+  
+  
   
   
   
@@ -756,10 +857,16 @@ WHERE application_name = 'dr_sub';
   
   
   
+  
+  
+  
 
 
 AWS RDS Cross-Region Read Replicas 
 
+  
+  
+  
   
   
   
@@ -808,6 +915,9 @@ AWS RDS Cross-Region Read Replicas
   
   
   
+  
+  
+  
 
 
 aws rds create-db-instance-read-replica \
@@ -834,36 +944,16 @@ aws rds create-db-instance-read-replica \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \
 
+  
+  
+  
   
   
   
@@ -888,7 +978,7 @@ aws rds create-db-instance-read-replica \
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--source-db-instance-identifier mydb \
 
   
   
@@ -912,10 +1002,45 @@ aws rds create-db-instance-read-replica \
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2 \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-class db.r6g.large
+
+  
+  
+  
   
   
   
@@ -964,6 +1089,9 @@ aws rds create-db-instance-read-replica \
   
   
   
+  
+  
+  
 
 
 aws rds promote-read-replica \
@@ -990,36 +1118,45 @@ aws rds promote-read-replica \
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--db-instance-identifier mydb-dr \
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--region us-west-2
+
+  
+  
+  
   
   
   
@@ -1065,10 +1202,16 @@ Multi-Region with Patroni
   
   
   
+  
+  
+  
 
 
 Patroni can manage clusters across regions with careful configuration: 
 
+  
+  
+  
   
   
   
@@ -1117,10 +1260,16 @@ Patroni can manage clusters across regions with careful configuration:
   
   
   
+  
+  
+  
 
 
 scope: myapp
 
+  
+  
+  
   
   
   
@@ -1169,10 +1318,16 @@ namespace: /service/
   
   
   
+  
+  
+  
 
 
 name: pg-dr-node-1
 
+  
+  
+  
   
   
   
@@ -1221,10 +1376,16 @@ consul:
   
   
   
+  
+  
+  
 
 
 host: dr-consul.service.consul:8500
 
+  
+  
+  
   
   
   
@@ -1273,10 +1434,16 @@ host: dr-consul.service.consul:8500
   
   
   
+  
+  
+  
 
 
 tags:
 
+  
+  
+  
   
   
   
@@ -1325,6 +1492,9 @@ nofailover: true # DR site should not automatically become primary
   
   
   
+  
+  
+  
 
 
 Backup-Based DR 
@@ -1348,10 +1518,16 @@ Backup-Based DR
   
   
   
+  
+  
+  
 
 
 For cost-sensitive environments, backups plus WAL archiving to S3 provide DR: 
 
+  
+  
+  
   
   
   
@@ -1400,10 +1576,16 @@ For cost-sensitive environments, backups plus WAL archiving to S3 provide DR:
   
   
   
+  
+  
+  
 
 
 archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'
 
+  
+  
+  
   
   
   
@@ -1452,10 +1634,16 @@ archive_command = 'aws s3 cp %p s3://myapp-wal-dr/region/us-east-1/%f'
   
   
   
+  
+  
+  
 
 
 pg_restore --dbname=proddb /backups/dr/latest_full.dump
 
+  
+  
+  
   
   
   
@@ -1504,6 +1692,9 @@ pg_receivewal --directory /backups/dr/wal
   
   
   
+  
+  
+  
 
 
 Recovery Workflow 
@@ -1530,10 +1721,16 @@ Recovery Workflow
   
   
   
+  
+  
+  
 
 
 #!/bin/bash
 
+  
+  
+  
   
   
   
@@ -1582,10 +1779,16 @@ Recovery Workflow
   
   
   
+  
+  
+  
 
 
-# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup
+# 1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Restore latest full backup
 
+  
+  
+  
   
   
   
@@ -1634,10 +1837,16 @@ pgbackrest --stanza=prod --db-path=/var/lib/postgresql/dr restore
   
   
   
+  
+  
+  
 
 
-# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target
+# 2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Set recovery target
 
+  
+  
+  
   
   
   
@@ -1686,10 +1895,16 @@ cat >> /var/lib/postgresql/dr/postgresql.conf << EOF
   
   
   
+  
+  
+  
 
 
 restore_command = 'aws s3 cp s3://myapp-wal-dr/region/us-east-1/%f %p'
 
+  
+  
+  
   
   
   
@@ -1738,10 +1953,16 @@ recovery_target_time = '2026-05-12 10:00:00 UTC'
   
   
   
+  
+  
+  
 
 
 recovery_target_action = promote
 
+  
+  
+  
   
   
   
@@ -1790,10 +2011,16 @@ EOF
   
   
   
+  
+  
+  
 
 
-# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover
+# 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Start and recover
 
+  
+  
+  
   
   
   
@@ -1842,10 +2069,16 @@ pg_ctl start -D /var/lib/postgresql/dr
   
   
   
+  
+  
+  
 
 
-# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity
+# 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. Verify data integrity
 
+  
+  
+  
   
   
   
@@ -1894,10 +2127,16 @@ psql -c "SELECT count(*) FROM critical_table;"
   
   
   
+  
+  
+  
 
 
 psql -c "SELECT max(created_at) FROM orders;"
 
+  
+  
+  
   
   
   
@@ -1943,6 +2182,9 @@ Backup Testing
   
   
   
+  
+  
+  
 
 
 Backups are worthless until proven restorable. Regular testing is mandatory. 
@@ -1966,10 +2208,16 @@ Backups are worthless until proven restorable. Regular testing is mandatory.
   
   
   
+  
+  
+  
 
 
 Automated Restore Test 
 
+  
+  
+  
   
   
   
@@ -2018,10 +2266,16 @@ Automated Restore Test
   
   
   
+  
+  
+  
 
 
 # Weekly restore test
 
+  
+  
+  
   
   
   
@@ -2070,10 +2324,16 @@ set -euo pipefail
   
   
   
+  
+  
+  
 
 
 TEST_DIR=/tmp/dr_test_$(date +%Y%m%d)
 
+  
+  
+  
   
   
   
@@ -2122,10 +2382,16 @@ LOG_FILE=$TEST_DIR/restore.log
   
   
   
+  
+  
+  
 
 
 mkdir -p $TEST_DIR
 
+  
+  
+  
   
   
   
@@ -2174,10 +2440,16 @@ echo "=== DR Restore Test $(date) ===" >> $LOG_FILE
   
   
   
+  
+  
+  
 
 
 # Full restore
 
+  
+  
+  
   
   
   
@@ -2226,10 +2498,16 @@ pgbackrest --stanza=prod --db-path=$TEST_DIR/data restore >> $LOG_FILE 2>&1
   
   
   
+  
+  
+  
 
 
 # Start database
 
+  
+  
+  
   
   
   
@@ -2278,10 +2556,16 @@ pg_ctl -D $TEST_DIR/data -l $TEST_DIR/pg.log start >> $LOG_FILE 2>&1
   
   
   
+  
+  
+  
 
 
 sleep 5
 
+  
+  
+  
   
   
   
@@ -2330,10 +2614,16 @@ sleep 5
   
   
   
+  
+  
+  
 
 
 echo "Database size:"
 
+  
+  
+  
   
   
   
@@ -2382,6 +2672,9 @@ psql -p 5433 -c "SELECT pg_size_pretty(pg_database_size('proddb'));"
   
   
   
+  
+  
+  
 
 
 echo "Row counts:"
@@ -2408,10 +2701,16 @@ echo "Row counts:"
   
   
   
+  
+  
+  
 
 
 psql -p 5433 -c "
 
+  
+  
+  
   
   
   
@@ -2460,10 +2759,16 @@ SELECT 'users' as tbl, count(*) FROM users
   
   
   
+  
+  
+  
 
 
 UNION ALL
 
+  
+  
+  
   
   
   
@@ -2512,10 +2817,16 @@ SELECT 'orders', count(*) FROM orders
   
   
   
+  
+  
+  
 
 
 UNION ALL
 
+  
+  
+  
   
   
   
@@ -2564,10 +2875,16 @@ SELECT 'payments', count(*) FROM payments;
   
   
   
+  
+  
+  
 
 
 "
 
+  
+  
+  
   
   
   
@@ -2616,10 +2933,16 @@ echo "Max dates (data freshness):"
   
   
   
+  
+  
+  
 
 
 psql -p 5433 -c "
 
+  
+  
+  
   
   
   
@@ -2668,10 +2991,16 @@ SELECT 'users' as tbl, max(created_at) FROM users
   
   
   
+  
+  
+  
 
 
 UNION ALL
 
+  
+  
+  
   
   
   
@@ -2720,10 +3049,16 @@ SELECT 'orders', max(created_at) FROM orders;
   
   
   
+  
+  
+  
 
 
 "
 
+  
+  
+  
   
   
   
@@ -2772,10 +3107,16 @@ SELECT 'orders', max(created_at) FROM orders;
   
   
   
+  
+  
+  
 
 
 pg_ctl -D $TEST_DIR/data stop >> $LOG_FILE 2>&1
 
+  
+  
+  
   
   
   
@@ -2824,10 +3165,16 @@ rm -rf $TEST_DIR
   
   
   
+  
+  
+  
 
 
 echo "=== Test Complete ===" >> $LOG_FILE
 
+  
+  
+  
   
   
   
@@ -2876,10 +3223,16 @@ Schedule this via cron:
   
   
   
+  
+  
+  
 
 
 0 2 * * 0 /usr/local/bin/dr_restore_test.sh
 
+  
+  
+  
   
   
   
@@ -2925,10 +3278,16 @@ DR Plan Components
   
   
   
+  
+  
+  
 
 
 A complete DR plan should document: 
 
+  
+  
+  
   
   
   
@@ -2974,10 +3333,16 @@ A complete DR plan should document:
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **RTO and RPO targets**: Specific to each data tier. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Runbook**: Step-by-step recovery procedures. 4\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **DR site details**: Region, connection strings, credentials. 5\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Validation steps**: How to verify the recovery succeeded. 6\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Communication plan**: Internal and external notifications. 7\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Post-mortem process**: How to document and improve. 
 
+  
+  
+  
   
   
   
@@ -3020,6 +3385,9 @@ Disaster Scenarios and Mitigations
   
   
   
+  
+  
+  
 
 
 | Scenario | Mitigation | RPO Impact | |----------|------------|------------| | Region outage | Cross-region replica promotion | RPO = replication lag | | Accidental DROP TABLE | PITR to before the statement | RPO = time since last WAL backup | | Ransomware | Immutable WAL backups | RPO depends on backup frequency | | Data corruption | Replay WAL; keep multiple backups | Dependent on detection time | 
@@ -3043,10 +3411,16 @@ Disaster Scenarios and Mitigations
   
   
   
+  
+  
+  
 
 
 Testing DR with Chaos Engineering 
 
+  
+  
+  
   
   
   
@@ -3095,10 +3469,16 @@ Testing DR with Chaos Engineering
   
   
   
+  
+  
+  
 
 
 iptables -A INPUT -s dr-test-region -j DROP
 
+  
+  
+  
   
   
   
@@ -3147,10 +3527,16 @@ iptables -A INPUT -s dr-test-region -j DROP
   
   
   
+  
+  
+  
 
 
 ./dr_failover.sh --target us-west-2
 
+  
+  
+  
   
   
   
@@ -3199,10 +3585,16 @@ iptables -A INPUT -s dr-test-region -j DROP
   
   
   
+  
+  
+  
 
 
 curl -f https://dr-api.myapp.com/health
 
+  
+  
+  
   
   
   
@@ -3251,10 +3643,16 @@ curl -f https://dr-api.myapp.com/health
   
   
   
+  
+  
+  
 
 
 ./dr_failback.sh --target us-east-1
 
+  
+  
+  
   
   
   
@@ -3303,10 +3701,16 @@ curl -f https://dr-api.myapp.com/health
   
   
   
+  
+  
+  
 
 
 iptables -D INPUT -s dr-test-region -j DROP
 
+  
+  
+  
   
   
   

@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/product-hunt-launch.html
   
 
 
+# Product Hunt Launch Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Product Hunt is the most important launch platform for developer tools and digital products. A successful launch can generate thousands of visitors, hundreds of signups, and valuable early customers. This guide covers everything you need to know to plan and execute a successful Product Hunt launch.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Product Hunt is the most important launch platform for developer tools and digit
   
   
   
+  
+  
+  
 
 
 Product Hunt is more than a launch platform -- it is a community of early adopters, investors, journalists, and other founders. A #1 Product of the Day listing provides:
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 * **Validation.** Being featured on Product Hunt signals quality to potential customers and investors.
 
+  
+  
+  
   
   
   
@@ -324,10 +371,16 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 * **Press and investor attention.** Journalists and VCs monitor Product Hunt daily.
 
+  
+  
+  
   
   
   
@@ -382,10 +435,16 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 **Build your Product Hunt profile.** Complete your maker profile with a professional photo, bio, and links. Follow other makers and engage with their products. Being active before your launch day is crucial.
 
+  
+  
+  
   
   
   
@@ -440,10 +499,16 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 * Chris Messina (invented the hashtag, active hunter).
 
+  
+  
+  
   
   
   
@@ -492,6 +557,9 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 * Senior tech journalists.
@@ -518,10 +586,16 @@ Product Hunt is more than a launch platform -- it is a community of early adopte
   
   
   
+  
+  
+  
 
 
 * Founders of popular products who you have relationships with.
 
+  
+  
+  
   
   
   
@@ -576,10 +650,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 **Gather your assets:**
 
+  
+  
+  
   
   
   
@@ -631,10 +711,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * **Description** (one paragraph, 2-3 sentences): What your product does, who it is for, and why it is different.
 
+  
+  
+  
   
   
   
@@ -683,10 +769,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * **Video/GIF** (30-60 seconds showing the core functionality). Products with a demo GIF get 2-3x more engagement.
 
+  
+  
+  
   
   
   
@@ -735,10 +827,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * **First comment** (written by the maker, tells the story behind the product).
 
+  
+  
+  
   
   
   
@@ -793,10 +891,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Your email subscribers (your most reliable supporters).
 
+  
+  
+  
   
   
   
@@ -845,10 +949,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Friends, family, and colleagues.
 
+  
+  
+  
   
   
   
@@ -897,10 +1007,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Developer community members.
 
+  
+  
+  
   
   
   
@@ -955,10 +1071,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 ##  Launch Day Execution
 
+  
+  
+  
   
   
   
@@ -1013,10 +1135,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * **Submit at 12:01 AM PT.** This gives you the full day to accumulate upvotes.
 
+  
+  
+  
   
   
   
@@ -1065,10 +1193,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * **Notify your launch list with a specific time.** "Please upvote at 12:01 AM PT."
 
+  
+  
+  
   
   
   
@@ -1123,10 +1257,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 **Engage with every comment.** Reply to every comment on your Product Hunt page within the first 6 hours. Thank each commenter. Answer questions thoroughly. Engagement drives the Product Hunt algorithm.
 
+  
+  
+  
   
   
   
@@ -1181,10 +1321,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Why you built this (the problem).
 
+  
+  
+  
   
   
   
@@ -1233,6 +1379,9 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * What makes it different.
@@ -1259,10 +1408,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * A call to action (try it, give feedback).
 
+  
+  
+  
   
   
   
@@ -1317,10 +1472,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 ##  Driving Traffic to Your Launch
 
+  
+  
+  
   
   
   
@@ -1375,10 +1536,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 **Twitter/X:**
 
+  
+  
+  
   
   
   
@@ -1430,10 +1597,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Thread about your launch story.
 
+  
+  
+  
   
   
   
@@ -1482,10 +1655,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * DM your followers asking for support.
 
+  
+  
+  
   
   
   
@@ -1540,10 +1719,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Reddit: Post in relevant subreddits (r/webdev, r/SideProject, r/SaaS). Follow each subreddit's self-promotion rules.
 
+  
+  
+  
   
   
   
@@ -1592,6 +1777,9 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * LinkedIn: Post about your launch journey.
@@ -1618,10 +1806,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 * Dev.to: Write a post about building and launching your product.
 
+  
+  
+  
   
   
   
@@ -1676,10 +1870,16 @@ If you cannot find a hunter, you can self-hunt. It is less effective but perfect
   
   
   
+  
+  
+  
 
 
 ##  What a #1 Product of the Day Looks Like
 
+  
+  
+  
   
   
   
@@ -1734,10 +1934,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 * **Upvotes needed:** 400-800 for #1 Product of the Day (varies by day of week and competition).
 
+  
+  
+  
   
   
   
@@ -1786,6 +1992,9 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 * **Conversion rate:** 5-15% of Product Hunt visitors sign up for your product.
@@ -1812,10 +2021,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 * **Retention:** 10-30% of those signups become active users.
 
+  
+  
+  
   
   
   
@@ -1870,10 +2085,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 **Day 2-3:** Follow up with everyone who supported you. Thank them personally if possible.
 
+  
+  
+  
   
   
   
@@ -1928,10 +2149,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 **Week 2-4:** Reach out to users who signed up during launch. Get feedback. Convert them to paying customers.
 
+  
+  
+  
   
   
   
@@ -1986,10 +2213,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 ##  Common Launch Mistakes
 
+  
+  
+  
   
   
   
@@ -2044,10 +2277,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 **Not having a landing page ready.** A significant portion of Product Hunt visitors will click through to your site. Your landing page must be optimized for conversion (see the landing page conversion article).
 
+  
+  
+  
   
   
   
@@ -2102,10 +2341,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 **Being inactive on launch day.** You need to engage with comments for the full day. Do not launch on a day when you are unavailable.
 
+  
+  
+  
   
   
   
@@ -2160,10 +2405,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 **Launching too early.** Your product should be functional and valuable. A half-baked product generates negative reviews that persist on your Product Hunt page forever.
 
+  
+  
+  
   
   
   
@@ -2218,10 +2469,16 @@ Based on analysis of hundreds of launches:
   
   
   
+  
+  
+  
 
 
 If a #1 Product of the Day launch is too ambitious, consider:
 
+  
+  
+  
   
   
   
@@ -2276,10 +2533,16 @@ If a #1 Product of the Day launch is too ambitious, consider:
   
   
   
+  
+  
+  
 
 
 **Product Hunt Golden Kitty Awards.** Year-end awards for the best products. Being nominated is itself valuable.
 
+  
+  
+  
   
   
   
@@ -2334,10 +2597,16 @@ If a #1 Product of the Day launch is too ambitious, consider:
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

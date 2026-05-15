@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/open-source-business.html
   
 
 
+# Open Source Business Models: Sponsorship, Dual License, Hosted
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Open Source Business Models for Developers
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Open source software powers the modern tech stack, but building a sustainable bu
   
   
   
+  
+  
+  
 
 
 ### Sponsorship Model
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ GitHub Sponsors, Open Collective, and Patreon enable community-funded open sourc
   
   
   
+  
+  
+  
 
 
 To make sponsorship work, treat it as a product. Create tiered sponsorship levels with clear benefits: sponsor badges in README, priority issue responses, feature voting, or direct access to maintainers. Companies sponsoring projects at $500+/month expect professional support: SLAs, security vulnerability handling, and quarterly roadmaps.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ The challenge with sponsorship is revenue unpredictability. Supplement sponsorsh
   
   
   
+  
+  
+  
 
 
 ### Dual License Model
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ The dual license model offers the project under two licenses: a copyleft open so
   
   
   
+  
+  
+  
 
 
 The open source license satisfies community expectations while the commercial license generates revenue from companies that need to embed the software in proprietary products. This model works when: 1) the software is infrastructure that companies must distribute, 2) there's no viable free alternative, and 3) switching costs are high.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Success requires clearly differentiating the licenses and making the commercial 
   
   
   
+  
+  
+  
 
 
 ### Open Core / Hosted Version
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ The open core model provides a free, core version while monetizing premium featu
   
   
   
+  
+  
+  
 
 
 The hosted version (SaaS) model offers open source software as a managed service. Supabase (Firebase alternative), Plane (project management), and Appwrite (backend platform) all provide open source software with paid cloud hosting. Users self-host for free or pay for managed infrastructure.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ The key to open core is drawing the line between free and paid features. The fre
   
   
   
+  
+  
+  
 
 
 ### Choosing Your Model
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ The right model depends on your project type. Developer tools with broad appeal 
   
   
   
+  
+  
+  
 
 
 Consider your target users. Individual developers can't pay much but drive adoption. Enterprise teams have budgets but require evaluation. A common pattern is free for individuals, paid for teams: provide the software freely, charge for team features (SSO, audit logs, role-based access) and managed hosting.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Consider your target users. Individual developers can't pay much but drive adopt
   
   
   
+  
+  
+  
 
 
 Choose your open source license carefully. SSPL (MongoDB), BSL (MariaDB), and Elastic License 2.0 are source-available licenses that restrict cloud providers from offering competing services. Traditional licenses (MIT, Apache 2.0, GPL, AGPL) don't offer this protection.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Community backlash is a risk when changing licenses. MongoDB's move from AGPL to
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

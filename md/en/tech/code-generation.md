@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/code-generation.html
   
   
   
+  
+  
+  
+
+
+# Code Generation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Code generation automates the creation of repetitive, boilerplate code. It enforces consistency, reduces human error, and accelerates development. This article explores the major code generation approaches: scaffolding tools, API client generation, GraphQL code generation, and custom template engines.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Code generation automates the creation of repetitive, boilerplate code. It enfor
   
   
   
+  
+  
+  
 
 
 Scaffolding tools generate initial project structures with pre-configured build systems, directory layouts, and common dependencies. They eliminate the repetitive setup that every project requires and ensure consistent project structures across the organization.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Popular scaffolding tools include Yeoman (JavaScript), Cookiecutter (Python), an
   
   
   
+  
+  
+  
 
 
 Organizations should invest in custom scaffolding templates that encode their specific conventions, preferred libraries, security policies, and CI/CD configurations. A standardized scaffold reduces onboarding time and ensures every project follows the same patterns.
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Organizations should invest in custom scaffolding templates that encode their sp
   
   
   
+  
+  
+  
 
 
 OpenAPI specifications enable automatic generation of both server and client code. Tools like OpenAPI Generator and Swagger Codegen read an OpenAPI spec and generate type definitions, API client libraries, server stubs, and documentation.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Server-side code generation produces controllers and service interfaces. The dev
   
   
   
+  
+  
+  
 
 
 Client-side code generation produces type-safe API clients. Generated clients include request/response types, endpoint methods, and serialization logic. This eliminates manual HTTP client code that is error-prone and tedious to maintain. When the API changes, regenerating the client highlights all affected code.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Client-side code generation produces type-safe API clients. Generated clients in
   
   
   
+  
+  
+  
 
 
 GraphQL's typed schema makes it an ideal candidate for code generation. Tools like GraphQL Code Generator read a GraphQL schema and generate TypeScript types, React hooks, and resolver types.
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Generated TypeScript types provide compile-time safety for GraphQL operations. W
   
   
   
+  
+  
+  
 
 
 For React applications, GraphQL Code Generator generates typed hooks for each query and mutation. The generated hooks include response types, variable types, and loading state types. This eliminates manual type annotation and ensures the frontend types always match the schema.
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ For React applications, GraphQL Code Generator generates typed hooks for each qu
   
   
   
+  
+  
+  
 
 
 Custom code generation uses template engines to generate files from templates and data. A template is a text file with placeholders that the engine fills with generated content. Mustache, Handlebars, and EJS are popular template engines.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Templates can generate any text-based file: source code, configuration files, do
   
   
   
+  
+  
+  
 
 
 Custom templates are most valuable for generating repetitive code within a project. Common examples include creating new components following a consistent pattern, generating CRUD endpoints for each database table, and creating test files that mirror source file structure.
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Custom templates are most valuable for generating repetitive code within a proje
   
   
   
+  
+  
+  
 
 
 Generated code should be clearly marked as generated. Include a comment at the top of generated files indicating they are auto-generated and the source command used. This prevents developers from manually editing generated files—changes would be lost on regeneration.
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ Version control for generated code depends on the context. API client libraries 
   
   
   
+  
+  
+  
 
 
 Regeneration should be automated and part of the build process. When an API specification changes, a CI pipeline regenerates the client code and runs tests. Any compilation errors from the regeneration are caught immediately.
 
+  
+  
+  
   
   
   

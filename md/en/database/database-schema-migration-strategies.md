@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/database/database-schema-migration-str
   
   
   
+  
+  
+  
+
+
+# Database Schema Migration: Version Control, Rollback, and Zero-Downtime
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Database schema changes in production require careful planning. Unlike application code, database changes are stateful—they modify existing data and structures. A bad migration can cause downtime, data loss, or performance degradation.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Database schema changes in production require careful planning. Unlike applicati
   
   
   
+  
+  
+  
 
 
 Treat database schemas as code. Every migration is a file in version control. Use a migration tool (Flyway, Liquibase, Alembic, Prisma Migrate) that tracks which migrations have been applied. The migration tool maintains a tracking table in the database.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ Migration naming convention: use timestamps or sequential numbers: 20260512_crea
   
   
   
+  
+  
+  
 
 
 ##  Migration Patterns
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Expand-migrate-contract is the standard pattern for zero-downtime migrations. Ph
   
   
   
+  
+  
+  
 
 
 Backward-compatible migrations are safe to deploy at any time. Adding a nullable column is backward-compatible. Adding a column with NOT NULL requires a default value. Renaming a column requires a multi-phase migration—add the new name, dual-write, backfill, then remove the old name.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Backward-compatible migrations are safe to deploy at any time. Adding a nullable
   
   
   
+  
+  
+  
 
 
 Every migration needs a rollback script. Test rollbacks before production deployment—they are harder to get right than forward migrations. Rollback of data migrations (backfilling, transformation) requires extra care because data may have changed since the forward migration.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ Flyway supports undo migrations with naming convention. Liquibase supports rollb
   
   
   
+  
+  
+  
 
 
 ##  Performance Considerations
 
+  
+  
+  
   
   
   
@@ -439,6 +501,9 @@ Large migrations lock tables. Adding a column with a default value locks the tab
   
   
   
+  
+  
+  
 
 
 Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replication lag. Pause if lag exceeds threshold. Set statement_timeout to prevent runaway queries. Run during low-traffic periods.
@@ -465,10 +530,16 @@ Batch data migrations: backfill 1000-10000 rows per transaction. Monitor replica
   
   
   
+  
+  
+  
 
 
 ##  Production Checklist
 
+  
+  
+  
   
   
   

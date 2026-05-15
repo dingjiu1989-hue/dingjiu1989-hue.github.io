@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/solo-dev-productivity.html
   
 
 
+# Solo Developer Productivity: Time Management, Automation, Outsourcing, and Scope Control
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 As a solo developer, your time is your scarcest resource. You cannot compete with teams by working more hours. You compete by working on the right things, automating everything possible, and saying no to distractions. Here is the productivity system for solo developers.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ As a solo developer, your time is your scarcest resource. You cannot compete wit
   
   
   
+  
+  
+  
 
 
 The most productive solo developers work in deep focus blocks, not scattered throughout the day. Protect four hours per day for focused work. No meetings, no email, no social media. This is when you build the product.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Use time blocking. Schedule your day in 90-minute focus blocks with 15-minute br
   
   
   
+  
+  
+  
 
 
 The Pomodoro Technique works well for coding. Twenty-five minutes of focused work, five minutes break. After four pomodoros, take a longer break. This rhythm prevents burnout and maintains quality.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Track your time for one week. Use Toggl or a simple notebook. You will be shocke
   
   
   
+  
+  
+  
 
 
 ##  What to Automate
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Automation is the solo developer's force multiplier. Anything you do more than t
   
   
   
+  
+  
+  
 
 
 Deployment should be one command or automatic on git push. Use CI/CD from day one. GitHub Actions, Vercel, or Railway handle this with minimal setup. Manual deployment is a waste of time and a source of errors.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Infrastructure provisioning should be scripted. Use Terraform, Pulumi, or your p
   
   
   
+  
+  
+  
 
 
 Code generation for boilerplate. Use scaffolding tools for new projects, new API endpoints, and new database migrations. The time saved on repetitive coding adds up to hours per week.
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Background tasks should be automated. Backups, log rotation, certificate renewal
   
   
   
+  
+  
+  
 
 
 ##  Smart Outsourcing
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Solo does not mean doing everything yourself. Strategic outsourcing lets you foc
   
   
   
+  
+  
+  
 
 
 Design is the first thing to outsource. Solo developers are rarely great designers. Use Dribbble or Contra to find freelance designers for landing pages, UI components, and branding. A $500 investment in design dramatically improves conversion and user perception.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Content writing for marketing materials. Writing product descriptions, landing p
   
   
   
+  
+  
+  
 
 
 Customer support for tier-one questions. When you have enough users, a part-time support person handling basic questions frees hours per day. Document common answers so anyone can handle them.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ What never to outsource: core product architecture, critical business logic, and
   
   
   
+  
+  
+  
 
 
 ##  Scope Control
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Scope creep is the solo developer's biggest threat. Every feature you add delays
   
   
   
+  
+  
+  
 
 
 Use the Eisenhower Matrix for feature requests. Urgent and important: do now. Important but not urgent: schedule for next iteration. Urgent but not important: delegate or defer. Neither: never do.
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Learn to say no gracefully. "That is a great idea. I have added it to the roadma
   
   
   
+  
+  
+  
 
 
 Set a launch date and stick to it. A mediocre product launched today is better than a perfect product launched never. You can iterate after launch. You cannot iterate before launch.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ Set a launch date and stick to it. A mediocre product launched today is better t
   
   
   
+  
+  
+  
 
 
 Productivity is not about hours worked. It is about output per hour. Energy management trumps time management.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Exercise, sleep, and nutrition directly affect coding quality. A well-rested dev
   
   
   
+  
+  
+  
 
 
 Take one full day off per week. No coding, no email, no product thinking. Creative insights often come during rest. And burnout is the fastest way to zero productivity.
 
+  
+  
+  
   
   
   

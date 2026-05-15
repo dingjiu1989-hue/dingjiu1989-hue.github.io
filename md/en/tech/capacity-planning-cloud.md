@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/capacity-planning-cloud.html
   
   
   
+  
+  
+  
+
+
+# Cloud Capacity Planning: Auto-Scaling, Reserved Instances, Spot Instances, and Demand Forecasting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Capacity planning in the cloud is fundamentally different from traditional on-pr
   
   
   
+  
+  
+  
 
 
 This article covers auto-scaling strategies, reserved and spot instances, demand forecasting, and cost optimization.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ This article covers auto-scaling strategies, reserved and spot instances, demand
   
   
   
+  
+  
+  
 
 
 Auto-scaling is the primary mechanism for matching capacity to demand in the cloud. Effective auto-scaling requires careful configuration of scaling policies, cooldown periods, and instance warm-up times.
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Target tracking policies maintain a metric at a specified target value. For exam
   
   
   
+  
+  
+  
 
 
 Step scaling policies allow different scaling adjustments based on the magnitude of metric deviation. A 10% CPU increase might add one instance, while a 30% increase adds five. This provides proportional responses without over-provisioning.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Predictive scaling uses machine learning to forecast demand and schedule scaling
   
   
   
+  
+  
+  
 
 
 Key considerations include:
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Key considerations include:
   
   
   
+  
+  
+  
 
 
 * Scale-in protection: Prevent termination of instances running critical tasks.
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Key considerations include:
   
   
   
+  
+  
+  
 
 
 ##  Reserved Instances
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Reserved Instances (RIs) provide significant discounts (30-60%) in exchange for 
   
   
   
+  
+  
+  
 
 
 Standard RIs commit to a specific instance family, region, and payment option. Convertible RIs allow changing instance attributes during the term, providing flexibility at a slightly lower discount. Scheduled RIs launch within a specified time window, useful for predictable batch workloads.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Payment options range from no upfront (highest effective discount rate) to all u
   
   
   
+  
+  
+  
 
 
 Reserved instance planning requires careful capacity forecasting. Over-provisioning RIs wastes money on unused capacity. Under-provisioning leaves cost savings on the table. A hybrid approach — RIs for baseline capacity plus spot or on-demand for variable demand — balances cost and flexibility.
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Reserved instance planning requires careful capacity forecasting. Over-provision
   
   
   
+  
+  
+  
 
 
 Spot instances offer 60-90% discounts over on-demand pricing but can be reclaimed by the provider with two minutes notice. They are ideal for fault-tolerant, stateless, and interruptible workloads.
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ Best use cases for spot instances include:
   
   
   
+  
+  
+  
 
 
 * Batch processing and data analytics jobs.
 
+  
+  
+  
   
   
   
@@ -826,10 +924,16 @@ Best use cases for spot instances include:
   
   
   
+  
+  
+  
 
 
 * Stateless web servers behind load balancers.
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ Best use cases for spot instances include:
   
   
   
+  
+  
+  
 
 
 * Kubernetes node pools with cluster autoscaler support.
 
+  
+  
+  
   
   
   
@@ -942,10 +1052,16 @@ Strategies for managing spot interruptions include:
   
   
   
+  
+  
+  
 
 
 * Use diverse instance types and sizes across multiple availability zones.
 
+  
+  
+  
   
   
   
@@ -1000,10 +1116,16 @@ Strategies for managing spot interruptions include:
   
   
   
+  
+  
+  
 
 
 * Use spot fleet or instance allocation strategies.
 
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ Strategies for managing spot interruptions include:
   
   
   
+  
+  
+  
 
 
 * Set maximum spot price based on willingness to pay.
 
+  
+  
+  
   
   
   
@@ -1116,10 +1244,16 @@ Spot Instance Advisor provides pricing history and interruption rate data for in
   
   
   
+  
+  
+  
 
 
 ##  Demand Forecasting
 
+  
+  
+  
   
   
   
@@ -1174,10 +1308,16 @@ Capacity planning requires understanding future demand. Several forecasting appr
   
   
   
+  
+  
+  
 
 
 Time series analysis decomposes traffic into trend, seasonality, and residual components. Weekly and daily patterns are common in SaaS applications. Tools like Facebook Prophet, Amazon Forecast, or custom ARIMA models generate capacity projections.
 
+  
+  
+  
   
   
   
@@ -1232,10 +1372,16 @@ Leading indicators correlate with future demand. New user sign-ups predict futur
   
   
   
+  
+  
+  
 
 
 Buffer planning adds headroom above forecasted demand. A common practice is planning for peak load plus 20-30% buffer. Automated scaling handles within-buffer variability, while the buffer handles forecast errors.
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ Buffer planning adds headroom above forecasted demand. A common practice is plan
   
   
   
+  
+  
+  
 
 
 Right-sizing is the ongoing process of matching instance sizes to workload requirements. Cloud providers offer right-sizing recommendations based on historical utilization data. A typical pattern is identifying instances consistently below 20% utilization and downgrading them.
 
+  
+  
+  
   
   
   
@@ -1348,6 +1500,9 @@ Savings plans provide AWS's flexible discount model: committed compute spend ($/
   
   
   
+  
+  
+  
 
 
 Elasticsearch and database capacity planning requires special attention — these stateful services cannot scale as rapidly as stateless compute. Pre-provisioning for peak load with automated storage scaling is the standard approach.
@@ -1377,10 +1532,16 @@ Elasticsearch and database capacity planning requires special attention — thes
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

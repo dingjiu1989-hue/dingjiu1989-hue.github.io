@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/sidehustle/multi-tenant-implementation
   
 
 
+# Multi-Tenant SaaS: Isolation Strategies, Tenant Routing, Pricing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Multi-Tenant SaaS: Architecture and Implementation
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Multi-tenancy is the foundation of SaaS architecture, allowing a single applicat
   
   
   
+  
+  
+  
 
 
 ### Tenant Isolation Strategies
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Multi-tenancy is the foundation of SaaS architecture, allowing a single applicat
   
   
   
+  
+  
+  
 
 
 **Schema per tenant** uses a single database with separate schemas per tenant. PostgreSQL schemas provide good isolation with shared connection pooling. Schema creation is lightweight, supporting thousands of tenants per database. Migration deployment requires updating all schemas, which can be slow at scale.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Multi-tenancy is the foundation of SaaS architecture, allowing a single applicat
   
   
   
+  
+  
+  
 
 
 ### Choosing an Isolation Strategy
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Start with shared schema and RLS for early-stage SaaS. It provides the simplest 
   
   
   
+  
+  
+  
 
 
 Add schema-per-tenant as you grow to hundreds of customers. This provides better data isolation and per-tenant backup capabilities. Use PostgreSQL schemas with dynamic search_path configuration.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Database-per-tenant is for enterprise customers with compliance requirements (HI
   
   
   
+  
+  
+  
 
 
 ### Tenant Routing
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Tenant routing directs users to the correct data partition. Subdomain-based rout
   
   
   
+  
+  
+  
 
 
 Implement a middleware that resolves the tenant from the request and configures the database connection accordingly. For shared schema, set `app.tenant_id` via `SET SESSION` in PostgreSQL. For schema-per-tenant, switch the schema search path. For database-per-tenant, select the appropriate connection pool.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Caching tenant metadata (database connections, schema names, feature flags) redu
   
   
   
+  
+  
+  
 
 
 ### Multi-Tenant Pricing Models
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Per-seat pricing charges per user per month. Simple to understand but penalizes 
   
   
   
+  
+  
+  
 
 
 Usage-based pricing charges per resource consumed (API calls, storage, compute). Aligns cost with value but introduces unpredictable billing. AWS and Stripe use usage-based components in their SaaS pricing.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Tiered pricing offers feature-based plans. Free tier for evaluation (limited fea
   
   
   
+  
+  
+  
 
 
 ### Implementation Considerations
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Connection pooling is critical for multi-tenant architectures. PgBouncer in tran
   
   
   
+  
+  
+  
 
 
 Backup strategies differ by isolation level: shared schema requires point-in-time recovery for the entire database (all tenants restored together). Schema-per-tenant can back up individual schemas. Database-per-tenant provides the most granular backup and restore capabilities.
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Tenant monitoring tracks per-tenant resource usage, error rates, and performance
   
   
   
+  
+  
+  
 
 
 ### Conclusion
 
+  
+  
+  
   
   
   

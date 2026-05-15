@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/change-data-capture.html
   
 
 
+# Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Change Data Capture (CDC): Debezium, Logical Replication, and Stream Processing 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Change Data Capture (CDC) is a pattern that captures row-level changes in a data
   
   
   
+  
+  
+  
 
 
 Why CDC? 
 
+  
+  
+  
   
   
   
@@ -225,6 +263,9 @@ Traditional approaches to synchronizing databases have downsides:
   
   
   
+  
+  
+  
 
 
 * **Triggers**: Add per-row overhead and operate within the transaction, slowing writes.
@@ -248,10 +289,16 @@ Traditional approaches to synchronizing databases have downsides:
   
   
   
+  
+  
+  
 
 
 * **Dual-writes**: Writing to two systems (database and cache, or database and search index) from the application is non-atomic; partial failures cause drift.
 
+  
+  
+  
   
   
   
@@ -297,10 +344,16 @@ Traditional approaches to synchronizing databases have downsides:
   
   
   
+  
+  
+  
 
 
 CDC solves these problems by making the database transaction log the source of truth and streaming changes as they occur. 
 
+  
+  
+  
   
   
   
@@ -343,10 +396,16 @@ PostgreSQL Logical Replication
   
   
   
+  
+  
+  
 
 
 PostgreSQL's built-in logical replication is the foundation for CDC. Unlike physical replication (which copies entire WAL segments and requires identical servers), logical replication streams decoded changes as row-level operations. 
 
+  
+  
+  
   
   
   
@@ -392,10 +451,16 @@ Publisher Setup
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- wal_level must be logical
 
+  
+  
+  
   
   
   
@@ -444,10 +509,16 @@ SHOW wal_level; -- must be 'logical'
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a publication
 
+  
+  
+  
   
   
   
@@ -496,10 +567,16 @@ CREATE PUBLICATION cdc_pub FOR TABLE orders, order_items, payments;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Optionally filter rows
 
+  
+  
+  
   
   
   
@@ -548,10 +625,16 @@ CREATE PUBLICATION cdc_pub_usa FOR TABLE orders WHERE (country = 'US');
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Specify publish operations
 
+  
+  
+  
   
   
   
@@ -600,10 +683,16 @@ CREATE PUBLICATION cdc_pub_inserts FOR TABLE orders
   
   
   
+  
+  
+  
 
 
 WITH (publish = 'insert');
 
+  
+  
+  
   
   
   
@@ -649,10 +738,16 @@ Subscriber Setup
   
   
   
+  
+  
+  
 
 
 The subscriber can be another PostgreSQL database or any consumer that speaks the `pgoutput` protocol: 
 
+  
+  
+  
   
   
   
@@ -701,10 +796,16 @@ CREATE SUBSCRIPTION cdc_sub
   
   
   
+  
+  
+  
 
 
 CONNECTION 'host=primary-db port=5432 dbname=proddb'
 
+  
+  
+  
   
   
   
@@ -753,10 +854,16 @@ PUBLICATION cdc_pub;
   
   
   
+  
+  
+  
 
 
 Each logical replication slot tracks the WAL position, ensuring no data loss even if the consumer is offline for extended periods. 
 
+  
+  
+  
   
   
   
@@ -799,10 +906,16 @@ Debezium
   
   
   
+  
+  
+  
 
 
 Debezium is an open-source CDC platform built on Apache Kafka. It uses PostgreSQL's logical decoding plugin (`pgoutput` or `decoderbufs`) to capture changes and publishes each row change as a Kafka message. 
 
+  
+  
+  
   
   
   
@@ -848,10 +961,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -900,10 +1019,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "config": {
 
+  
+  
+  
   
   
   
@@ -952,10 +1077,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "database.hostname": "primary-db",
 
+  
+  
+  
   
   
   
@@ -1004,10 +1135,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "database.user": "debezium",
 
+  
+  
+  
   
   
   
@@ -1056,10 +1193,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "database.dbname": "proddb",
 
+  
+  
+  
   
   
   
@@ -1108,10 +1251,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "plugin.name": "pgoutput",
 
+  
+  
+  
   
   
   
@@ -1160,10 +1309,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "table.include.list": "public.orders,public.order_items",
 
+  
+  
+  
   
   
   
@@ -1212,10 +1367,16 @@ Debezium Connector Configuration
   
   
   
+  
+  
+  
 
 
 "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
 
+  
+  
+  
   
   
   
@@ -1264,29 +1425,6 @@ Debezium Connector Configuration
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1294,6 +1432,38 @@ Debezium Connector Configuration
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1342,10 +1512,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1394,10 +1570,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 "before": null,
 
+  
+  
+  
   
   
   
@@ -1446,10 +1628,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 "id": 1001,
 
+  
+  
+  
   
   
   
@@ -1498,10 +1686,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 "total": "299.99",
 
+  
+  
+  
   
   
   
@@ -1550,10 +1744,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -1602,10 +1802,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 "db": "proddb",
 
+  
+  
+  
   
   
   
@@ -1654,10 +1860,16 @@ Each change event has a standard envelope:
   
   
   
+  
+  
+  
 
 
 "lsn": 123456789,
 
+  
+  
+  
   
   
   
@@ -1706,29 +1918,6 @@ Each change event has a standard envelope:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1736,6 +1925,38 @@ Each change event has a standard envelope:
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1781,10 +2002,16 @@ Operation codes: `c` (create), `u` (update), `d` (delete), `r` (snapshot).
   
   
   
+  
+  
+  
 
 
 Schema Evolution 
 
+  
+  
+  
   
   
   
@@ -1827,6 +2054,9 @@ Debezium publishes schema information to a separate Kafka topic. When your datab
   
   
   
+  
+  
+  
 
 
 Stream Processing Integration 
@@ -1850,10 +2080,16 @@ Stream Processing Integration
   
   
   
+  
+  
+  
 
 
 CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or ksqlDB: 
 
+  
+  
+  
   
   
   
@@ -1902,10 +2138,16 @@ CDC naturally feeds into stream processors like Apache Flink, Kafka Streams, or 
   
   
   
+  
+  
+  
 
 
 KStream orders = builder.stream(
 
+  
+  
+  
   
   
   
@@ -1954,10 +2196,16 @@ KStream orders = builder.stream(
   
   
   
+  
+  
+  
 
 
 Consumed.with(Serdes.String(), orderSerde)
 
+  
+  
+  
   
   
   
@@ -2006,10 +2254,16 @@ Consumed.with(Serdes.String(), orderSerde)
   
   
   
+  
+  
+  
 
 
 orders
 
+  
+  
+  
   
   
   
@@ -2058,10 +2312,16 @@ orders
   
   
   
+  
+  
+  
 
 
 .mapValues(order -> {
 
+  
+  
+  
   
   
   
@@ -2110,10 +2370,16 @@ order.status = "processing";
   
   
   
+  
+  
+  
 
 
 return order;
 
+  
+  
+  
   
   
   
@@ -2162,10 +2428,16 @@ return order;
   
   
   
+  
+  
+  
 
 
 .to("my-app.public.orders-processing",
 
+  
+  
+  
   
   
   
@@ -2214,6 +2486,9 @@ Produced.with(Serdes.String(), orderSerde));
   
   
   
+  
+  
+  
 
 
 Materialized Cache 
@@ -2237,10 +2512,16 @@ Materialized Cache
   
   
   
+  
+  
+  
 
 
 CDC can keep a Redis cache or Elasticsearch index in sync with the database: 
 
+  
+  
+  
   
   
   
@@ -2289,10 +2570,16 @@ PostgreSQL → Debezium → Kafka → Kafka Connect (Elasticsearch Sink) → Ela
   
   
   
+  
+  
+  
 
 
 This architecture eliminates application-level cache-warming code. The cache is always consistent (within the replication lag, typically milliseconds). 
 
+  
+  
+  
   
   
   
@@ -2335,10 +2622,16 @@ Logical Replication Slots
   
   
   
+  
+  
+  
 
 
 Replication slots are the backbone of PostgreSQL CDC. They retain WAL segments until the consumer acknowledges receipt. Monitoring slot state is critical: 
 
+  
+  
+  
   
   
   
@@ -2387,10 +2680,16 @@ SELECT slot_name, database, active, restart_lsn,
   
   
   
+  
+  
+  
 
 
 pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(), restart_lsn)) AS wal_retained
 
+  
+  
+  
   
   
   
@@ -2439,10 +2738,16 @@ FROM pg_replication_slots;
   
   
   
+  
+  
+  
 
 
 A stalled consumer causes WAL accumulation, potentially filling disk. Set up alerts on slot lag. 
 
+  
+  
+  
   
   
   
@@ -2485,10 +2790,16 @@ CDC vs Triggers
   
   
   
+  
+  
+  
 
 
 | Aspect | CDC (Logical Replication) | Triggers | |--------|--------------------------|----------| | Overhead | Minimal (WAL reading) | Per-row function execution | | Coupling | Asynchronous | Same transaction | | External consumers | Native via Kafka/Flink | Requires custom solution | | Schema changes | Managed via slot versioning | Manual trigger updates | | Backfill | Snapshot phase included | Requires separate mechanism | 
 
+  
+  
+  
   
   
   
@@ -2534,6 +2845,9 @@ Anti-Patterns
   
   
   
+  
+  
+  
 
 
 * **Writing CDC events back to the same database**: Creates infinite loops or logical confusion.
@@ -2557,10 +2871,16 @@ Anti-Patterns
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Using CDC as a general-purpose event bus**: CDC captures row changes, not domain events. Use an explicit event store for domain events. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Ignoring initial snapshots**: Debezium takes a consistent snapshot before streaming changes. Large tables may require tuning of snapshot chunk sizes and lock timeouts. 
 
+  
+  
+  
   
   
   

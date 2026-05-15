@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/api-gateway-patterns.html
   
 
 
+# API Gateway Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 An API gateway is a server that acts as the single entry point for client requests in a microservice architecture. It receives client requests, routes them to appropriate backend services, aggregates responses, and enforces cross-cutting concerns like authentication, rate limiting, and logging. This article examines the core API gateway patterns and their implementation considerations. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Routing
   
   
   
+  
+  
+  
 
 
 The fundamental API gateway pattern is routing. The gateway inspects incoming requests and forwards them to the appropriate backend service based on URL path, headers, or other attributes. For example, `/api/users/*` routes to the user service, and `/api/orders/*` routes to the order service. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Routing in the gateway decouples clients from backend service locations. Clients
   
   
   
+  
+  
+  
 
 
 API Aggregation 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ The aggregation pattern combines responses from multiple backend services into a
   
   
   
+  
+  
+  
 
 
 Aggregation reduces round trips for clients, which is especially valuable for mobile applications on unreliable networks. The gateway handles error aggregation—if one service fails, the gateway can return partial data, retry, or fail gracefully depending on the use case. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Implementing aggregation requires careful timeout configuration. The gateway sho
   
   
   
+  
+  
+  
 
 
 Authentication and Authorization 
 
+  
+  
+  
   
   
   
@@ -360,10 +416,16 @@ Centralizing authentication in the gateway simplifies security. The gateway vali
   
   
   
+  
+  
+  
 
 
 The gateway can handle token translation: accepting an OAuth2 token from the client and generating a short-lived service token for backend communication. It can also enforce IP whitelisting, API key validation, and rate limiting based on authenticated user identity. 
 
+  
+  
+  
   
   
   
@@ -406,10 +468,16 @@ Rate Limiting
   
   
   
+  
+  
+  
 
 
 Rate limiting at the gateway protects backend services from overload. The gateway tracks request rates per client, IP, or API key and rejects requests that exceed configured limits. Common algorithms include token bucket, leaky bucket, and sliding window counters. 
 
+  
+  
+  
   
   
   
@@ -452,10 +520,16 @@ Distributed rate limiting requires a shared store like Redis to track counters a
   
   
   
+  
+  
+  
 
 
 Cross-Cutting Concerns 
 
+  
+  
+  
   
   
   
@@ -498,10 +572,16 @@ The gateway is the natural place to implement cross-cutting concerns. Request lo
   
   
   
+  
+  
+  
 
 
 The gateway can also handle protocol translation: accepting REST requests and forwarding them as gRPC calls, or converting between different serialization formats. This enables backend services to use optimal protocols while maintaining client compatibility. 
 
+  
+  
+  
   
   
   
@@ -544,10 +624,16 @@ Implementation Options
   
   
   
+  
+  
+  
 
 
 Several implementation options exist for API gateways. Kong and Tyk are purpose-built gateway platforms with plugin ecosystems. Envoy and Nginx are high-performance proxies suitable for custom gateway implementations. AWS API Gateway, Azure API Management, and Google Apigee are managed cloud gateway services. 
 
+  
+  
+  
   
   
   
@@ -590,10 +676,16 @@ Custom gateway implementations using frameworks like Spring Cloud Gateway or Exp
   
   
   
+  
+  
+  
 
 
 Gateway vs Service Mesh 
 
+  
+  
+  
   
   
   
@@ -636,10 +728,16 @@ API gateways and service meshes serve different purposes but overlap in function
   
   
   
+  
+  
+  
 
 
 A common architecture uses both: an API gateway for external traffic management and a service mesh for internal traffic. The gateway focuses on client-facing concerns, while the mesh handles inter-service communication. This layered approach provides comprehensive traffic management across all communication boundaries. 
 
+  
+  
+  
   
   
   

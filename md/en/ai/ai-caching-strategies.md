@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/ai-caching-strategies.html
   
 
 
+# AI Caching Strategies: Semantic Caching, Cache Invalidation, Cost Reduction, and Latency Improvement
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 LLM API calls are expensive and slow. The average GPT-4 response costs about a cent and takes seconds. For production applications serving thousands of users, caching is not optional. It is an economic necessity. Here is how to cache AI responses effectively.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ LLM API calls are expensive and slow. The average GPT-4 response costs about a c
   
   
   
+  
+  
+  
 
 
 Without caching, every user query hits the LLM API. This means every query costs money, every query takes seconds, and your API costs scale linearly with usage.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ With caching, repeated or similar queries return instant, free responses. For ap
   
   
   
+  
+  
+  
 
 
 Caching also improves consistency. LLMs are non-deterministic. The same prompt can produce different responses each time. Caching ensures users see consistent answers to the same question, which builds trust.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Caching also improves consistency. LLMs are non-deterministic. The same prompt c
   
   
   
+  
+  
+  
 
 
 Exact match caching is the simplest approach. Hash the input and use it as a cache key. If the exact same prompt is seen again, return the cached response.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ This works well for applications with a fixed set of queries or templates. A cod
   
   
   
+  
+  
+  
 
 
 Implement exact match caching with Redis or Memcached. Set a TTL based on how often the underlying knowledge changes. For static documentation, a TTL of 24 hours is reasonable. For rapidly changing data, reduce the TTL to minutes.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ The limitation is obvious: exact match catches only identical queries. "How do I
   
   
   
+  
+  
+  
 
 
 ##  Semantic Caching
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Semantic caching uses embeddings to find similar queries. When a query arrives, 
   
   
   
+  
+  
+  
 
 
 The threshold for semantic similarity depends on your use case. A cosine similarity of 0.95 or higher indicates effectively identical queries. Between 0.85 and 0.95, consider the context: minor wording differences may still warrant the same response.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Semantic caching requires a vector database. Pinecone, Weaviate, or pgvector wit
   
   
   
+  
+  
+  
 
 
 The trade-off is latency and cost. Computing embeddings adds milliseconds to each query. Searching the vector index adds more. The semantic cache must be fast enough that the overhead does not exceed the savings from avoided API calls.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ The trade-off is latency and cost. Computing embeddings adds milliseconds to eac
   
   
   
+  
+  
+  
 
 
 Stale responses are worse than no cache. An AI assistant giving outdated information erodes trust and can cause real problems if the information involves pricing, policies, or technical specifications.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Invalidate cache entries when the underlying knowledge changes. If you update yo
   
   
   
+  
+  
+  
 
 
 Time-based invalidation is simpler but less precise. Set TTLs based on data freshness requirements. Pricing information might have a one-hour TTL. General knowledge might have a 24-hour TTL. Company-specific policies might be somewhere in between.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ For semantic caches, invalidation is trickier. A single document update can affe
   
   
   
+  
+  
+  
 
 
 ##  Multi-Tier Caching
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ A multi-tier caching strategy balances cost, latency, and freshness. Implement t
   
   
   
+  
+  
+  
 
 
 Exact match cache: Redis with short TTL. Catches repeated identical queries. Sub-millisecond lookup. This tier handles the most common case.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ Semantic cache: Vector database with medium TTL. Catches similar but non-identic
   
   
   
+  
+  
+  
 
 
 Model response cache: Cache the raw API response for identical prompts. This tier is useful when prompt caching APIs like Anthropic's prompt caching apply. It reduces costs but does not reduce latency since the API call still happens.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Model response cache: Cache the raw API response for identical prompts. This tie
   
   
   
+  
+  
+  
 
 
 Streaming responses complicate caching. If you stream tokens to the user, you cannot serve a cached response because streaming implies new content generation.
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ The solution is to cache complete responses and serve them as non-streaming when
   
   
   
+  
+  
+  
 
 
 Alternatively, use a hybrid approach. Serve cached responses instantly for common queries and stream fresh responses for unique queries. Most users do not need streaming for simple factual questions.
 
+  
+  
+  
   
   
   
@@ -1029,6 +1148,9 @@ Alternatively, use a hybrid approach. Serve cached responses instantly for commo
   
   
   
+  
+  
+  
 
 
 Track cache hit rate, average response time, and API cost savings. A well-tuned cache should achieve 40% to 60% hit rate for typical chatbot applications. Each percentage point improvement in hit rate translates directly to cost savings.
@@ -1058,10 +1180,16 @@ Track cache hit rate, average response time, and API cost savings. A well-tuned 
   
   
   
+  
+  
+  
 
 
 Monitor cache freshness. If users complain about outdated information, your TTLs are too long or invalidation is incomplete. If your hit rate is low but freshness is high, your TTLs are too short and you are leaving savings on the table.
 
+  
+  
+  
   
   
   

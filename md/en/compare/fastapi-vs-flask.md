@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/fastapi-vs-flask.html
   
 
 
+# FastAPI vs Flask vs Django
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Python offers three dominant web frameworks: Flask (the micro-framework), Django
   
   
   
+  
+  
+  
 
 
 ##  Flask
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Flask is the veteran micro-framework, known for its simplicity and flexibility.
   
   
   
+  
+  
+  
 
 
 **Core philosophy:** Give developers the essentials — routing, request handling, templating — and let them choose everything else.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ from flask import Flask, request, jsonify
   
   
   
+  
+  
+  
 
 
 app = Flask(__name__)
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ app = Flask(__name__)
   
   
   
+  
+  
+  
 
 
 def get_user(user_id):
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ user = query_db("SELECT * FROM users WHERE id = ?", [user_id])
   
   
   
+  
+  
+  
 
 
 if user is None:
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ return jsonify({"error": "Not found"}), 404
   
   
   
+  
+  
+  
 
 
 return jsonify(user)
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * Minimal learning curve — basic understanding of Python suffices
 
+  
+  
+  
   
   
   
@@ -617,6 +694,9 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * Huge ecosystem of extensions (Flask-SQLAlchemy, Flask-Login, Flask-Admin)
@@ -643,10 +723,16 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * Excellent for small to medium applications
 
+  
+  
+  
   
   
   
@@ -701,10 +787,16 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * No built-in async support (flask async views were added but are limited compared to FastAPI)
 
+  
+  
+  
   
   
   
@@ -753,6 +845,9 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * "Batteries not included" means more decisions and potential inconsistencies
@@ -779,10 +874,16 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 * WSGI-only, cannot take full advantage of async Python
 
+  
+  
+  
   
   
   
@@ -837,10 +938,16 @@ return jsonify(user)
   
   
   
+  
+  
+  
 
 
 Django is the "batteries-included" framework, providing everything you need for a data-driven web application.
 
+  
+  
+  
   
   
   
@@ -895,10 +1002,16 @@ Django is the "batteries-included" framework, providing everything you need for 
   
   
   
+  
+  
+  
 
 
 # models.py
 
+  
+  
+  
   
   
   
@@ -953,10 +1066,16 @@ from django.db import models
   
   
   
+  
+  
+  
 
 
 class User(models.Model):
 
+  
+  
+  
   
   
   
@@ -1011,10 +1130,16 @@ email = models.EmailField(unique=True)
   
   
   
+  
+  
+  
 
 
 name = models.CharField(max_length=100)
 
+  
+  
+  
   
   
   
@@ -1069,10 +1194,16 @@ created_at = models.DateTimeField(auto_now_add=True)
   
   
   
+  
+  
+  
 
 
 # views.py
 
+  
+  
+  
   
   
   
@@ -1127,10 +1258,16 @@ from rest_framework.decorators import api_view
   
   
   
+  
+  
+  
 
 
 from rest_framework.response import Response
 
+  
+  
+  
   
   
   
@@ -1185,10 +1322,16 @@ from rest_framework.response import Response
   
   
   
+  
+  
+  
 
 
 def get_user(request, user_id):
 
+  
+  
+  
   
   
   
@@ -1243,10 +1386,16 @@ try:
   
   
   
+  
+  
+  
 
 
 user = User.objects.get(pk=user_id)
 
+  
+  
+  
   
   
   
@@ -1301,10 +1450,16 @@ return Response({"id": user.id, "name": user.name, "email": user.email})
   
   
   
+  
+  
+  
 
 
 except User.DoesNotExist:
 
+  
+  
+  
   
   
   
@@ -1359,10 +1514,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -1414,10 +1575,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 * Excellent admin interface generated from models
 
+  
+  
+  
   
   
   
@@ -1466,10 +1633,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 * Large community and extensive documentation
 
+  
+  
+  
   
   
   
@@ -1524,10 +1697,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 * Heavy and opinionated — hard to deviate from Django's way
 
+  
+  
+  
   
   
   
@@ -1576,6 +1755,9 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 * ORM is powerful but can be slow for complex queries
@@ -1602,10 +1784,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 * Async support is relatively new and not as seamless as FastAPI
 
+  
+  
+  
   
   
   
@@ -1660,10 +1848,16 @@ return Response({"error": "Not found"}, status=404)
   
   
   
+  
+  
+  
 
 
 FastAPI is the modern contender, built around Python type hints and async/await.
 
+  
+  
+  
   
   
   
@@ -1718,10 +1912,16 @@ FastAPI is the modern contender, built around Python type hints and async/await.
   
   
   
+  
+  
+  
 
 
 from fastapi import FastAPI, HTTPException
 
+  
+  
+  
   
   
   
@@ -1776,10 +1976,16 @@ from pydantic import BaseModel
   
   
   
+  
+  
+  
 
 
 app = FastAPI()
 
+  
+  
+  
   
   
   
@@ -1834,10 +2040,16 @@ class UserResponse(BaseModel):
   
   
   
+  
+  
+  
 
 
 id: int
 
+  
+  
+  
   
   
   
@@ -1892,10 +2104,16 @@ name: str
   
   
   
+  
+  
+  
 
 
 email: str
 
+  
+  
+  
   
   
   
@@ -1950,10 +2168,16 @@ email: str
   
   
   
+  
+  
+  
 
 
 async def get_user(user_id: int):
 
+  
+  
+  
   
   
   
@@ -2008,10 +2232,16 @@ user = await db.fetch_one("SELECT * FROM users WHERE id = :id", {"id": user_id})
   
   
   
+  
+  
+  
 
 
 if user is None:
 
+  
+  
+  
   
   
   
@@ -2066,10 +2296,16 @@ raise HTTPException(status_code=404, detail="Not found")
   
   
   
+  
+  
+  
 
 
 return user
 
+  
+  
+  
   
   
   
@@ -2124,10 +2360,16 @@ return user
   
   
   
+  
+  
+  
 
 
 * Automatic OpenAPI/Swagger documentation from type hints
 
+  
+  
+  
   
   
   
@@ -2176,10 +2418,16 @@ return user
   
   
   
+  
+  
+  
 
 
 * Pydantic integration for request/response validation
 
+  
+  
+  
   
   
   
@@ -2228,10 +2476,16 @@ return user
   
   
   
+  
+  
+  
 
 
 * Modern Python features (type hints, dataclasses, async/await)
 
+  
+  
+  
   
   
   
@@ -2286,10 +2540,16 @@ return user
   
   
   
+  
+  
+  
 
 
 * Younger ecosystem than Django or Flask
 
+  
+  
+  
   
   
   
@@ -2338,6 +2598,9 @@ return user
   
   
   
+  
+  
+  
 
 
 * Less suitable for traditional server-rendered HTML applications
@@ -2364,10 +2627,16 @@ return user
   
   
   
+  
+  
+  
 
 
 * ORM choices (SQLAlchemy, Tortoise-ORM) require additional setup
 
+  
+  
+  
   
   
   
@@ -2422,10 +2691,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Aspect | Flask | Django | FastAPI |
 
+  
+  
+  
   
   
   
@@ -2480,10 +2755,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Type | Micro-framework | Full-stack | API-focused |
 
+  
+  
+  
   
   
   
@@ -2538,10 +2819,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Validation | Manual | Django Forms/Pydantic | Auto (Pydantic) |
 
+  
+  
+  
   
   
   
@@ -2596,10 +2883,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Admin panel | Extensions | Built-in admin | Extensions |
 
+  
+  
+  
   
   
   
@@ -2654,10 +2947,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Performance | Moderate | Moderate | High |
 
+  
+  
+  
   
   
   
@@ -2712,10 +3011,16 @@ return user
   
   
   
+  
+  
+  
 
 
 | Best for | Small apps, APIs | Full-stack apps | High-performance APIs |
 
+  
+  
+  
   
   
   
@@ -2770,10 +3075,16 @@ return user
   
   
   
+  
+  
+  
 
 
 FastAPI's async-native architecture gives it a significant performance advantage for I/O-bound workloads:
 
+  
+  
+  
   
   
   
@@ -2825,6 +3136,9 @@ FastAPI's async-native architecture gives it a significant performance advantage
   
   
   
+  
+  
+  
 
 
 * **Django** (with Gunicorn): ~3,000-5,000 requests/second
@@ -2851,10 +3165,16 @@ FastAPI's async-native architecture gives it a significant performance advantage
   
   
   
+  
+  
+  
 
 
 * **Flask** (with Gunicorn): ~2,000-4,000 requests/second
 
+  
+  
+  
   
   
   
@@ -2909,10 +3229,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 ##  When to Choose What
 
+  
+  
+  
   
   
   
@@ -2967,10 +3293,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You need a simple, lightweight application
 
+  
+  
+  
   
   
   
@@ -3019,10 +3351,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You're building a small microservice or API
 
+  
+  
+  
   
   
   
@@ -3071,10 +3409,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You're prototyping and want the fastest setup
 
+  
+  
+  
   
   
   
@@ -3129,10 +3473,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You're building a data-driven web application with complex models
 
+  
+  
+  
   
   
   
@@ -3181,10 +3531,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * Your application has authentication, content management, and user management needs
 
+  
+  
+  
   
   
   
@@ -3233,10 +3589,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You're building a content management system or e-commerce platform
 
+  
+  
+  
   
   
   
@@ -3291,10 +3653,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You're building a high-performance API or microservice
 
+  
+  
+  
   
   
   
@@ -3343,6 +3711,9 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * You need async support for WebSockets or streaming
@@ -3369,10 +3740,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 * Your API serves AI/ML models (FastAPI's async model serving is excellent)
 
+  
+  
+  
   
   
   
@@ -3424,10 +3801,16 @@ For CPU-bound tasks, the difference narrows since Python's GIL still applies.
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

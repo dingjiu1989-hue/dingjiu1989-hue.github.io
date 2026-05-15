@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/security/data-masking.html
   
   
   
+  
+  
+  
+
+
+# Data Masking and Redaction
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Data masking protects sensitive information by replacing it with realistic but f
   
   
   
+  
+  
+  
 
 
 Static Data Masking 
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Static masking creates a sanitized copy of a production database for non-product
   
   
   
+  
+  
+  
 
 
 import hashlib
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ import random
   
   
   
+  
+  
+  
 
 
 import string
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ class StaticDataMasker:
   
   
   
+  
+  
+  
 
 
 def __init__(self, seed=42):
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ self.seed = seed
   
   
   
+  
+  
+  
 
 
 self.rng = random.Random(seed)
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ def mask_email(self, email):
   
   
   
+  
+  
+  
 
 
 """Generate a consistent fake email from the real one."""
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ local, domain = email.split('@')
   
   
   
+  
+  
+  
 
 
 hash_obj = hashlib.sha256(email.encode())
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ fake_local = hash_obj.hexdigest()[:12]
   
   
   
+  
+  
+  
 
 
 return f"{fake_local}@masked-domain.com"
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ def mask_phone(self, phone):
   
   
   
+  
+  
+  
 
 
 """Mask phone number, keeping format but replacing digits."""
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ masked = []
   
   
   
+  
+  
+  
 
 
 for char in phone:
 
+  
+  
+  
   
   
   
@@ -826,6 +924,9 @@ if char.isdigit():
   
   
   
+  
+  
+  
 
 
 masked.append(str(self.rng.randint(0, 9)))
@@ -855,10 +956,16 @@ masked.append(str(self.rng.randint(0, 9)))
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ masked.append(char)
   
   
   
+  
+  
+  
 
 
 return ''.join(masked)
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ def mask_credit_card(self, cc_number):
   
   
   
+  
+  
+  
 
 
 """Mask all but last 4 digits."""
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ clean = cc_number.replace(' ', '').replace('-', '')
   
   
   
+  
+  
+  
 
 
 if len(clean) >= 4:
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ masked = '*' * (len(clean) - 4) + clean[-4:]
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ masked = clean
   
   
   
+  
+  
+  
 
 
 return masked
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ def mask_name(self, name):
   
   
   
+  
+  
+  
 
 
 """Replace name with a fake name."""
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ first_names = ['John', 'Jane', 'Alex', 'Sarah', 'Michael']
   
   
   
+  
+  
+  
 
 
 last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones']
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ parts = name.split()
   
   
   
+  
+  
+  
 
 
 if len(parts) >= 2:
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ return f"{self.rng.choice(first_names)} {self.rng.choice(last_names)}"
   
   
   
+  
+  
+  
 
 
 return self.rng.choice(first_names)
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ SQL-Based Static Masking
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- PostgreSQL static masking
 
+  
+  
+  
   
   
   
@@ -1493,6 +1660,9 @@ CREATE TABLE users_masked AS
   
   
   
+  
+  
+  
 
 
 SELECT 
@@ -1522,10 +1692,16 @@ SELECT
   
   
   
+  
+  
+  
 
 
 id,
 
+  
+  
+  
   
   
   
@@ -1580,10 +1756,16 @@ md5(email) || '@masked.com' AS email,
   
   
   
+  
+  
+  
 
 
 '***-***-' || RIGHT(phone, 4) AS phone,
 
+  
+  
+  
   
   
   
@@ -1638,10 +1820,16 @@ CASE WHEN position(' ' IN full_name) > 0 THEN
   
   
   
+  
+  
+  
 
 
 'User ' || id::text
 
+  
+  
+  
   
   
   
@@ -1696,10 +1884,16 @@ ELSE
   
   
   
+  
+  
+  
 
 
 full_name
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ END AS full_name,
   
   
   
+  
+  
+  
 
 
 encode(sha256(ssn::bytea), 'hex') AS ssn
 
+  
+  
+  
   
   
   
@@ -1812,10 +2012,16 @@ FROM users_production;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Consistent masking across tables
 
+  
+  
+  
   
   
   
@@ -1870,10 +2076,16 @@ UPDATE customers SET
   
   
   
+  
+  
+  
 
 
 email = 'customer_' || id || '@example.com',
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ phone = CONCAT('555-', LPAD((id % 10000)::text, 4, '0')),
   
   
   
+  
+  
+  
 
 
 credit_card = CONCAT('XXXX-XXXX-XXXX-', RIGHT(credit_card, 4));
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ Dynamic Data Masking
   
   
   
+  
+  
+  
 
 
 Dynamic masking applies real-time transformations to query results without modifying the underlying data. 
 
+  
+  
+  
   
   
   
@@ -2044,10 +2268,16 @@ PostgreSQL Dynamic Masking
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Create a masked view
 
+  
+  
+  
   
   
   
@@ -2102,10 +2332,16 @@ CREATE VIEW users_redacted AS
   
   
   
+  
+  
+  
 
 
 SELECT
 
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ id,
   
   
   
+  
+  
+  
 
 
 CASE 
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ WHEN current_user = 'admin' THEN email
   
   
   
+  
+  
+  
 
 
 ELSE '***@***.com'
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ END AS email,
   
   
   
+  
+  
+  
 
 
 CASE
 
+  
+  
+  
   
   
   
@@ -2334,10 +2588,16 @@ WHEN current_user = 'admin' THEN phone
   
   
   
+  
+  
+  
 
 
 ELSE regexp_replace(phone, '\d(?=\d{4})', '*', 'g')
 
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ END AS phone,
   
   
   
+  
+  
+  
 
 
 CASE
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ WHEN current_user IN ('admin', 'support') THEN full_name
   
   
   
+  
+  
+  
 
 
 ELSE CONCAT(LEFT(full_name, 1), '***')
 
+  
+  
+  
   
   
   
@@ -2508,6 +2780,9 @@ END AS full_name
   
   
   
+  
+  
+  
 
 
 FROM users;
@@ -2537,10 +2812,16 @@ FROM users;
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Grant access to masked view
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ GRANT SELECT ON users_redacted TO app_user;
   
   
   
+  
+  
+  
 
 
 GRANT SELECT ON users_redacted TO support_agent;
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ Application-Level Dynamic Masking
   
   
   
+  
+  
+  
 
 
 from functools import wraps
 
+  
+  
+  
   
   
   
@@ -2711,10 +3004,16 @@ def mask_sensitive_fields(fields_to_mask):
   
   
   
+  
+  
+  
 
 
 """Decorator to dynamically mask sensitive fields in API responses."""
 
+  
+  
+  
   
   
   
@@ -2769,10 +3068,16 @@ def decorator(func):
   
   
   
+  
+  
+  
 
 
 @wraps(func)
 
+  
+  
+  
   
   
   
@@ -2827,10 +3132,16 @@ def wrapper(*args, **kwargs):
   
   
   
+  
+  
+  
 
 
 result = func(*args, **kwargs)
 
+  
+  
+  
   
   
   
@@ -2885,10 +3196,16 @@ if isinstance(result, dict):
   
   
   
+  
+  
+  
 
 
 for field in fields_to_mask:
 
+  
+  
+  
   
   
   
@@ -2943,10 +3260,16 @@ if field in result:
   
   
   
+  
+  
+  
 
 
 value = result[field]
 
+  
+  
+  
   
   
   
@@ -3001,10 +3324,16 @@ if field in ('email', 'email_address'):
   
   
   
+  
+  
+  
 
 
 local, domain = value.split('@')
 
+  
+  
+  
   
   
   
@@ -3059,10 +3388,16 @@ result[field] = f"{local[0]}***@{domain}"
   
   
   
+  
+  
+  
 
 
 elif field in ('phone', 'phone_number'):
 
+  
+  
+  
   
   
   
@@ -3117,10 +3452,16 @@ result[field] = f"***-***-{value[-4:]}"
   
   
   
+  
+  
+  
 
 
 elif field in ('ssn', 'social_security'):
 
+  
+  
+  
   
   
   
@@ -3175,10 +3516,16 @@ result[field] = f"***-**-{value[-4:]}"
   
   
   
+  
+  
+  
 
 
 elif 'card' in field.lower():
 
+  
+  
+  
   
   
   
@@ -3233,10 +3580,16 @@ result[field] = f"****-****-****-{value[-4:]}"
   
   
   
+  
+  
+  
 
 
 return result
 
+  
+  
+  
   
   
   
@@ -3291,10 +3644,16 @@ return wrapper
   
   
   
+  
+  
+  
 
 
 return decorator
 
+  
+  
+  
   
   
   
@@ -3349,10 +3708,16 @@ return decorator
   
   
   
+  
+  
+  
 
 
 def get_user_profile(user_id):
 
+  
+  
+  
   
   
   
@@ -3407,10 +3772,16 @@ def get_user_profile(user_id):
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -3465,10 +3836,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'email': 'john.doe@example.com',
 
+  
+  
+  
   
   
   
@@ -3523,6 +3900,9 @@ return {
   
   
   
+  
+  
+  
 
 
 'credit_card': '4111-1111-1111-1111',
@@ -3552,10 +3932,16 @@ return {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3610,10 +3996,16 @@ Tokenization
   
   
   
+  
+  
+  
 
 
 Tokenization replaces sensitive data with non-sensitive placeholders (tokens) while storing the mapping in a secure vault. 
 
+  
+  
+  
   
   
   
@@ -3668,10 +4060,16 @@ class TokenizationService:
   
   
   
+  
+  
+  
 
 
 def __init__(self, vault_client):
 
+  
+  
+  
   
   
   
@@ -3726,10 +4124,16 @@ self.vault = vault_client
   
   
   
+  
+  
+  
 
 
 self.token_prefix = "tok_"
 
+  
+  
+  
   
   
   
@@ -3784,10 +4188,16 @@ def tokenize(self, sensitive_value, context):
   
   
   
+  
+  
+  
 
 
 """Replace sensitive value with a token."""
 
+  
+  
+  
   
   
   
@@ -3842,10 +4252,16 @@ def tokenize(self, sensitive_value, context):
   
   
   
+  
+  
+  
 
 
 token_id = secrets.token_hex(16)
 
+  
+  
+  
   
   
   
@@ -3900,10 +4316,16 @@ token = f"{self.token_prefix}{token_id}"
   
   
   
+  
+  
+  
 
 
 # Store mapping in secure vault
 
+  
+  
+  
   
   
   
@@ -3958,6 +4380,9 @@ self.vault.store(
   
   
   
+  
+  
+  
 
 
 f"tokens/{token}",
@@ -3987,10 +4412,16 @@ f"tokens/{token}",
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -4045,10 +4476,16 @@ f"tokens/{token}",
   
   
   
+  
+  
+  
 
 
 'context': context,
 
+  
+  
+  
   
   
   
@@ -4103,6 +4540,9 @@ f"tokens/{token}",
   
   
   
+  
+  
+  
 
 
 'access_count': 0
@@ -4132,10 +4572,16 @@ f"tokens/{token}",
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4190,10 +4636,16 @@ f"tokens/{token}",
   
   
   
+  
+  
+  
 
 
 return token
 
+  
+  
+  
   
   
   
@@ -4248,10 +4700,16 @@ def detokenize(self, token, requester_role):
   
   
   
+  
+  
+  
 
 
 """Retrieve original value from token (if authorized)."""
 
+  
+  
+  
   
   
   
@@ -4306,10 +4764,16 @@ if not token.startswith(self.token_prefix):
   
   
   
+  
+  
+  
 
 
 raise ValueError("Invalid token format")
 
+  
+  
+  
   
   
   
@@ -4364,10 +4828,16 @@ if requester_role not in ['admin', 'auditor', 'compliance']:
   
   
   
+  
+  
+  
 
 
 raise PermissionError("Not authorized to detokenize")
 
+  
+  
+  
   
   
   
@@ -4422,10 +4892,16 @@ record = self.vault.retrieve(f"tokens/{token}")
   
   
   
+  
+  
+  
 
 
 # Increment access counter
 
+  
+  
+  
   
   
   
@@ -4480,10 +4956,16 @@ record['access_count'] += 1
   
   
   
+  
+  
+  
 
 
 record['last_accessed'] = datetime.utcnow().isoformat()
 
+  
+  
+  
   
   
   
@@ -4538,10 +5020,16 @@ self.vault.store(f"tokens/{token}", record)
   
   
   
+  
+  
+  
 
 
 # Log access
 
+  
+  
+  
   
   
   
@@ -4596,10 +5084,16 @@ self._audit_log('detokenize', token, requester_role)
   
   
   
+  
+  
+  
 
 
 return record['value']
 
+  
+  
+  
   
   
   
@@ -4654,10 +5148,16 @@ GDPR Compliance
   
   
   
+  
+  
+  
 
 
 from datetime import datetime, timedelta
 
+  
+  
+  
   
   
   
@@ -4712,10 +5212,16 @@ class GDPRDataProcessor:
   
   
   
+  
+  
+  
 
 
 RETENTION_PERIODS = {
 
+  
+  
+  
   
   
   
@@ -4770,10 +5276,16 @@ RETENTION_PERIODS = {
   
   
   
+  
+  
+  
 
 
 'transaction_log': timedelta(days=730),
 
+  
+  
+  
   
   
   
@@ -4828,6 +5340,9 @@ RETENTION_PERIODS = {
   
   
   
+  
+  
+  
 
 
 'analytics': timedelta(days=180),
@@ -4857,10 +5372,16 @@ RETENTION_PERIODS = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -4915,10 +5436,16 @@ def mask_for_export(self, user_data):
   
   
   
+  
+  
+  
 
 
 """GDPR Article 20: data portability with masking."""
 
+  
+  
+  
   
   
   
@@ -4973,10 +5500,16 @@ masked = {
   
   
   
+  
+  
+  
 
 
 'basic_info': {
 
+  
+  
+  
   
   
   
@@ -5031,10 +5564,16 @@ masked = {
   
   
   
+  
+  
+  
 
 
 'username': user_data['username']
 
+  
+  
+  
   
   
   
@@ -5089,6 +5628,9 @@ masked = {
   
   
   
+  
+  
+  
 
 
 'transactions': [
@@ -5118,10 +5660,16 @@ masked = {
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -5176,10 +5724,16 @@ masked = {
   
   
   
+  
+  
+  
 
 
 'amount': t['amount'],
 
+  
+  
+  
   
   
   
@@ -5234,10 +5788,16 @@ masked = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -5292,10 +5852,16 @@ for t in user_data.get('transactions', [])
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -5350,10 +5916,16 @@ for t in user_data.get('transactions', [])
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -5408,10 +5980,16 @@ for t in user_data.get('transactions', [])
   
   
   
+  
+  
+  
 
 
 'type': c['type'],
 
+  
+  
+  
   
   
   
@@ -5466,10 +6044,16 @@ for t in user_data.get('transactions', [])
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -5524,10 +6108,16 @@ for c in user_data.get('communications', [])
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -5582,10 +6172,16 @@ for c in user_data.get('communications', [])
   
   
   
+  
+  
+  
 
 
 return masked
 
+  
+  
+  
   
   
   
@@ -5640,10 +6236,16 @@ def delete_user_data(self, user_id, databases):
   
   
   
+  
+  
+  
 
 
 """GDPR Article 17: right to erasure."""
 
+  
+  
+  
   
   
   
@@ -5698,10 +6300,16 @@ deletion_log = []
   
   
   
+  
+  
+  
 
 
 for db in databases:
 
+  
+  
+  
   
   
   
@@ -5756,10 +6364,16 @@ try:
   
   
   
+  
+  
+  
 
 
 db.delete_user(user_id)
 
+  
+  
+  
   
   
   
@@ -5814,10 +6428,16 @@ deletion_log.append({
   
   
   
+  
+  
+  
 
 
 'database': db.name,
 
+  
+  
+  
   
   
   
@@ -5872,6 +6492,9 @@ deletion_log.append({
   
   
   
+  
+  
+  
 
 
 'timestamp': datetime.utcnow().isoformat()
@@ -5901,10 +6524,16 @@ deletion_log.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -5959,10 +6588,16 @@ except Exception as e:
   
   
   
+  
+  
+  
 
 
 deletion_log.append({
 
+  
+  
+  
   
   
   
@@ -6017,10 +6652,16 @@ deletion_log.append({
   
   
   
+  
+  
+  
 
 
 'status': 'failed',
 
+  
+  
+  
   
   
   
@@ -6075,10 +6716,16 @@ deletion_log.append({
   
   
   
+  
+  
+  
 
 
 })
 
+  
+  
+  
   
   
   
@@ -6133,10 +6780,16 @@ return deletion_log
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

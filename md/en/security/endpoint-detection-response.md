@@ -127,10 +127,42 @@ url: https://dingjiu1989-hue.github.io/en/security/endpoint-detection-response.h
   
   
   
+  
+  
+  
+
+
+# EDR: Endpoint Detection and Response Solutions
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Endpoint Detection and Response (EDR) protects workstations, servers, and cloud instances from advanced threats. Unlike traditional antivirus that detects known malware signatures, EDR monitors behavioral patterns to detect novel and sophisticated attacks.
 
+  
+  
+  
   
   
   
@@ -179,10 +211,16 @@ Endpoint Detection and Response (EDR) protects workstations, servers, and cloud 
   
   
   
+  
+  
+  
 
 
 EDR agents run on endpoints, collecting system events: process creation, file changes, registry modifications, network connections, and memory access. Event data is sent to a central analysis platform where behavioral analytics identify malicious patterns.
 
+  
+  
+  
   
   
   
@@ -231,10 +269,16 @@ When a threat is detected, EDR provides real-time alerting with context: what ha
   
   
   
+  
+  
+  
 
 
 ##  Key Capabilities
 
+  
+  
+  
   
   
   
@@ -283,10 +327,16 @@ Behavioral threat detection uses machine learning to identify malicious behavior
   
   
   
+  
+  
+  
 
 
 Root cause analysis traces an attack from initial compromise to lateral movement and data exfiltration. Remote response isolates infected endpoints, terminates malicious processes, and quarantines files. Forensic data collection preserves evidence for analysis.
 
+  
+  
+  
   
   
   
@@ -335,10 +385,16 @@ Root cause analysis traces an attack from initial compromise to lateral movement
   
   
   
+  
+  
+  
 
 
 Traditional antivirus matches file signatures against known malware databases. It is ineffective against zero-day attacks, polymorphic malware, and fileless attacks. EDR detects suspicious behavior regardless of whether the file has a known signature.
 
+  
+  
+  
   
   
   
@@ -387,10 +443,16 @@ EDR does not replace antivirus—it supplements it. Most EDR solutions include a
   
   
   
+  
+  
+  
 
 
 ##  Top EDR Solutions
 
+  
+  
+  
   
   
   
@@ -439,10 +501,16 @@ CrowdStrike Falcon is the market leader with cloud-native architecture and AI-dr
   
   
   
+  
+  
+  
 
 
 ##  Deployment Considerations
 
+  
+  
+  
   
   
   
@@ -491,6 +559,9 @@ EDR requires continuous agent communication with the analysis platform. Network 
   
   
   
+  
+  
+  
 
 
 Resource overhead varies by vendor and configuration. CPU and memory usage typically ranges from 1-5%. Test performance impact on production workloads before wide deployment. Exclude EDR from specific resource-intensive processes if needed.
@@ -517,10 +588,16 @@ Resource overhead varies by vendor and configuration. CPU and memory usage typic
   
   
   
+  
+  
+  
 
 
 ##  Incident Response Workflow
 
+  
+  
+  
   
   
   

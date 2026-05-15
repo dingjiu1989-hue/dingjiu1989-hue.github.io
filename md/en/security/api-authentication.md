@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/security/api-authentication.html
   
   
   
+  
+  
+  
+
+
+# API Authentication Methods
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Introduction 
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ API authentication verifies the identity of clients calling your API. Choosing t
   
   
   
+  
+  
+  
 
 
 API Keys 
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ API keys are the simplest form of API authentication. A static token is issued t
   
   
   
+  
+  
+  
 
 
 from fastapi import FastAPI, HTTPException, Depends
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ from fastapi.security import APIKeyHeader
   
   
   
+  
+  
+  
 
 
 app = FastAPI()
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ api_key_header = APIKeyHeader(name="X-API-Key")
   
   
   
+  
+  
+  
 
 
 API_KEYS = {
 
+  
+  
+  
   
   
   
@@ -478,6 +540,9 @@ API_KEYS = {
   
   
   
+  
+  
+  
 
 
 "sk-test-e5f6g7h8": {"client": "test-client", "scopes": ["read:test"]},
@@ -507,10 +572,16 @@ API_KEYS = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ def validate_api_key(api_key: str = Depends(api_key_header)):
   
   
   
+  
+  
+  
 
 
 if api_key not in API_KEYS:
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ raise HTTPException(status_code=403, detail="Invalid API key")
   
   
   
+  
+  
+  
 
 
 return API_KEYS[api_key]
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ return API_KEYS[api_key]
   
   
   
+  
+  
+  
 
 
 def get_transactions(client=Depends(validate_api_key)):
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ if "read:transactions" not in client["scopes"]:
   
   
   
+  
+  
+  
 
 
 raise HTTPException(status_code=403, detail="Insufficient permissions")
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ return {"transactions": [...]}
   
   
   
+  
+  
+  
 
 
 **Pros**: Simple, fast, easy to revoke. **Cons**: Static keys can leak, no identity delegation, limited granularity. 
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ OAuth2 Client Credentials
   
   
   
+  
+  
+  
 
 
 The OAuth2 client credentials grant is designed for server-to-server communication where the client is the resource owner. 
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ import requests
   
   
   
+  
+  
+  
 
 
 from authlib.integrations.requests_client import OAuth2Session
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ from authlib.integrations.requests_client import OAuth2Session
   
   
   
+  
+  
+  
 
 
 client = OAuth2Session(
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ client_id='my-service',
   
   
   
+  
+  
+  
 
 
 client_secret='my-secret',
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ scope='read:orders write:orders'
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ scope='read:orders write:orders'
   
   
   
+  
+  
+  
 
 
 token = client.fetch_token(
 
+  
+  
+  
   
   
   
@@ -1203,6 +1340,9 @@ url='https://auth.example.com/oauth/token',
   
   
   
+  
+  
+  
 
 
 grant_type='client_credentials'
@@ -1232,10 +1372,16 @@ grant_type='client_credentials'
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ grant_type='client_credentials'
   
   
   
+  
+  
+  
 
 
 response = client.get(
 
+  
+  
+  
   
   
   
@@ -1348,6 +1500,9 @@ response = client.get(
   
   
   
+  
+  
+  
 
 
 headers={'Accept': 'application/json'}
@@ -1377,10 +1532,16 @@ headers={'Accept': 'application/json'}
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ Server-side token validation:
   
   
   
+  
+  
+  
 
 
 import jwt
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ from jwt import PyJWKClient
   
   
   
+  
+  
+  
 
 
 JWKS_URL = "https://auth.example.com/.well-known/jwks.json"
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ def validate_bearer_token(token: str):
   
   
   
+  
+  
+  
 
 
 jwks_client = PyJWKClient(JWKS_URL)
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ signing_key = jwks_client.get_signing_key_from_jwt(token)
   
   
   
+  
+  
+  
 
 
 payload = jwt.decode(
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ token,
   
   
   
+  
+  
+  
 
 
 signing_key.key,
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ algorithms=["RS256"],
   
   
   
+  
+  
+  
 
 
 audience="https://api.example.com",
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ issuer="https://auth.example.com",
   
   
   
+  
+  
+  
 
 
 options={"verify_exp": True}
 
+  
+  
+  
   
   
   
@@ -1841,10 +2044,16 @@ options={"verify_exp": True}
   
   
   
+  
+  
+  
 
 
 # Validate scopes
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ token_scopes = payload.get("scope", "").split()
   
   
   
+  
+  
+  
 
 
 required_scopes = {"read:orders"}
 
+  
+  
+  
   
   
   
@@ -1957,10 +2172,16 @@ if not required_scopes.issubset(set(token_scopes)):
   
   
   
+  
+  
+  
 
 
 raise PermissionError("Insufficient scope")
 
+  
+  
+  
   
   
   
@@ -2015,10 +2236,16 @@ return payload
   
   
   
+  
+  
+  
 
 
 Mutual TLS (mTLS) 
 
+  
+  
+  
   
   
   
@@ -2073,10 +2300,16 @@ mTLS extends TLS so that both client and server present certificates, establishi
   
   
   
+  
+  
+  
 
 
 # Generate client certificate
 
+  
+  
+  
   
   
   
@@ -2131,10 +2364,16 @@ openssl req -newkey rsa:2048 -nodes \
   
   
   
+  
+  
+  
 
 
 -keyout client-key.pem \
 
+  
+  
+  
   
   
   
@@ -2189,10 +2428,16 @@ openssl req -newkey rsa:2048 -nodes \
   
   
   
+  
+  
+  
 
 
 -subj "/CN=payment-service.production.internal"
 
+  
+  
+  
   
   
   
@@ -2247,10 +2492,16 @@ openssl req -newkey rsa:2048 -nodes \
   
   
   
+  
+  
+  
 
 
 openssl x509 -req -in client-csr.pem \
 
+  
+  
+  
   
   
   
@@ -2305,10 +2556,16 @@ openssl x509 -req -in client-csr.pem \
   
   
   
+  
+  
+  
 
 
 -CAcreateserial -out client-cert.pem \
 
+  
+  
+  
   
   
   
@@ -2363,10 +2620,16 @@ openssl x509 -req -in client-csr.pem \
   
   
   
+  
+  
+  
 
 
 # Configure server for mTLS (Nginx)
 
+  
+  
+  
   
   
   
@@ -2421,10 +2684,16 @@ server {
   
   
   
+  
+  
+  
 
 
 listen 443 ssl;
 
+  
+  
+  
   
   
   
@@ -2479,10 +2748,16 @@ ssl_certificate /etc/nginx/server-cert.pem;
   
   
   
+  
+  
+  
 
 
 ssl_certificate_key /etc/nginx/server-key.pem;
 
+  
+  
+  
   
   
   
@@ -2537,10 +2812,16 @@ ssl_client_certificate /etc/nginx/ca-cert.pem;
   
   
   
+  
+  
+  
 
 
 ssl_verify_client on;
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ ssl_verify_depth 2;
   
   
   
+  
+  
+  
 
 
 location /api/ {
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ location /api/ {
   
   
   
+  
+  
+  
 
 
 proxy_set_header X-Client-CN $ssl_client_s_dn;
 
+  
+  
+  
   
   
   
@@ -2711,6 +3004,9 @@ proxy_set_header X-Client-Verify $ssl_client_verify;
   
   
   
+  
+  
+  
 
 
 proxy_pass http://backend;
@@ -2740,32 +3036,6 @@ proxy_pass http://backend;
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2773,6 +3043,41 @@ proxy_pass http://backend;
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2827,10 +3132,16 @@ proxy_pass http://backend;
   
   
   
+  
+  
+  
 
 
 from flask import Flask, request
 
+  
+  
+  
   
   
   
@@ -2885,10 +3196,16 @@ app = Flask(__name__)
   
   
   
+  
+  
+  
 
 
 @app.route('/api/data')
 
+  
+  
+  
   
   
   
@@ -2943,10 +3260,16 @@ def api_data():
   
   
   
+  
+  
+  
 
 
 client_cn = request.headers.get('X-Client-CN')
 
+  
+  
+  
   
   
   
@@ -3001,10 +3324,16 @@ client_verify = request.headers.get('X-Client-Verify')
   
   
   
+  
+  
+  
 
 
 if client_verify != 'SUCCESS':
 
+  
+  
+  
   
   
   
@@ -3059,10 +3388,16 @@ return {"error": "TLS verification failed"}, 403
   
   
   
+  
+  
+  
 
 
 # Authorize based on client certificate CN
 
+  
+  
+  
   
   
   
@@ -3117,10 +3452,16 @@ allowed_clients = {
   
   
   
+  
+  
+  
 
 
 'payment-service.production.internal': ['read:transactions'],
 
+  
+  
+  
   
   
   
@@ -3175,10 +3516,16 @@ allowed_clients = {
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3233,10 +3580,16 @@ if client_cn not in allowed_clients:
   
   
   
+  
+  
+  
 
 
 return {"error": "Unauthorized client"}, 403
 
+  
+  
+  
   
   
   
@@ -3291,10 +3644,16 @@ return {"data": "sensitive data"}
   
   
   
+  
+  
+  
 
 
 HMAC Signing 
 
+  
+  
+  
   
   
   
@@ -3349,10 +3708,16 @@ HMAC signing creates request-specific signatures that prevent tampering and repl
   
   
   
+  
+  
+  
 
 
 import hmac
 
+  
+  
+  
   
   
   
@@ -3407,10 +3772,16 @@ import hashlib
   
   
   
+  
+  
+  
 
 
 import time
 
+  
+  
+  
   
   
   
@@ -3465,10 +3836,16 @@ from typing import Dict
   
   
   
+  
+  
+  
 
 
 class HMACAuthClient:
 
+  
+  
+  
   
   
   
@@ -3523,10 +3900,16 @@ def __init__(self, api_key: str, api_secret: str):
   
   
   
+  
+  
+  
 
 
 self.api_key = api_key
 
+  
+  
+  
   
   
   
@@ -3581,10 +3964,16 @@ self.api_secret = api_secret.encode()
   
   
   
+  
+  
+  
 
 
 def sign_request(self, method: str, path: str, body: bytes = b'') -> Dict[str, str]:
 
+  
+  
+  
   
   
   
@@ -3639,10 +4028,16 @@ timestamp = str(int(time.time()))
   
   
   
+  
+  
+  
 
 
 nonce = secrets.token_hex(8)
 
+  
+  
+  
   
   
   
@@ -3697,10 +4092,16 @@ nonce = secrets.token_hex(8)
   
   
   
+  
+  
+  
 
 
 message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
 
+  
+  
+  
   
   
   
@@ -3755,10 +4156,16 @@ signature = hmac.new(
   
   
   
+  
+  
+  
 
 
 self.api_secret,
 
+  
+  
+  
   
   
   
@@ -3813,10 +4220,16 @@ message,
   
   
   
+  
+  
+  
 
 
 hashlib.sha256
 
+  
+  
+  
   
   
   
@@ -3871,10 +4284,16 @@ hashlib.sha256
   
   
   
+  
+  
+  
 
 
 return {
 
+  
+  
+  
   
   
   
@@ -3929,10 +4348,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'X-Timestamp': timestamp,
 
+  
+  
+  
   
   
   
@@ -3987,10 +4412,16 @@ return {
   
   
   
+  
+  
+  
 
 
 'X-Signature': signature,
 
+  
+  
+  
   
   
   
@@ -4045,10 +4476,16 @@ return {
   
   
   
+  
+  
+  
 
 
 class HMACAuthServer:
 
+  
+  
+  
   
   
   
@@ -4103,10 +4540,16 @@ def __init__(self):
   
   
   
+  
+  
+  
 
 
 self.secrets = {"client-1": "supersecret123"}
 
+  
+  
+  
   
   
   
@@ -4161,10 +4604,16 @@ self.nonce_store = set()
   
   
   
+  
+  
+  
 
 
 def verify_request(self, method, path, headers, body):
 
+  
+  
+  
   
   
   
@@ -4219,10 +4668,16 @@ api_key = headers.get('X-API-Key')
   
   
   
+  
+  
+  
 
 
 timestamp = headers.get('X-Timestamp')
 
+  
+  
+  
   
   
   
@@ -4277,10 +4732,16 @@ nonce = headers.get('X-Nonce')
   
   
   
+  
+  
+  
 
 
 signature = headers.get('X-Signature')
 
+  
+  
+  
   
   
   
@@ -4335,10 +4796,16 @@ signature = headers.get('X-Signature')
   
   
   
+  
+  
+  
 
 
 if int(time.time()) - int(timestamp) > 300:
 
+  
+  
+  
   
   
   
@@ -4393,10 +4860,16 @@ return False # Expired
   
   
   
+  
+  
+  
 
 
 if nonce in self.nonce_store:
 
+  
+  
+  
   
   
   
@@ -4451,10 +4924,16 @@ return False # Replay
   
   
   
+  
+  
+  
 
 
 self.nonce_store.add(nonce)
 
+  
+  
+  
   
   
   
@@ -4509,10 +4988,16 @@ self.nonce_store.add(nonce)
   
   
   
+  
+  
+  
 
 
 secret = self.secrets.get(api_key)
 
+  
+  
+  
   
   
   
@@ -4567,10 +5052,16 @@ if not secret:
   
   
   
+  
+  
+  
 
 
 return False
 
+  
+  
+  
   
   
   
@@ -4625,10 +5116,16 @@ message = f"{method}\n{path}\n{timestamp}\n{nonce}\n".encode() + body
   
   
   
+  
+  
+  
 
 
 expected = hmac.new(secret.encode(), message, hashlib.sha256).hexdigest()
 
+  
+  
+  
   
   
   
@@ -4683,10 +5180,16 @@ return hmac.compare_digest(expected, signature)
   
   
   
+  
+  
+  
 
 
 Choosing the Right Method 
 
+  
+  
+  
   
   
   
@@ -4741,10 +5244,16 @@ Choosing the Right Method
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

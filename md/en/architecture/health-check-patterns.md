@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/health-check-patterns.htm
   
 
 
+# Health Check Patterns
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Health checks are the mechanism by which orchestration platforms and load balancers determine whether an application instance is capable of serving requests. Two distinct check types serve different purposes: liveness and readiness. Understanding the difference and implementing them correctly is essential for reliable deployments, self-healing infrastructure, and graceful degradation. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ Liveness probes determine whether the application process is alive. If a livenes
   
   
   
+  
+  
+  
 
 
 The danger of aggressive liveness probes is the "restart loop of death." If the application becomes slow due to a dependency outage, and the liveness probe times out, the orchestrator restarts the process. The new process immediately encounters the same dependency outage, fails again, and gets restarted in a loop. This not only fails to solve the problem but compounds it by adding startup overhead. Liveness probes should be conservative — use a longer interval (30 seconds) with high failure thresholds. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Readiness probes determine whether the application is ready to accept traffic. I
   
   
   
+  
+  
+  
 
 
 Custom health checks beyond basic TCP/HTTP probes provide richer information. A good practice is to implement a health check endpoint that returns structured information about each dependency. The endpoint might return HTTP 200 when all dependencies are healthy, 503 when critical dependencies are unavailable, and include details about which dependencies are degraded. This allows operators and automation to understand the system's health state precisely. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Dependency health assessment requires careful categorization. Critical dependenc
   
   
   
+  
+  
+  
 
 
 Graceful degradation is the architectural counterpart to health checks. When a dependency fails, the application should degrade functionality rather than fail entirely. For example, when the product recommendation service is down, the product page should still serve basic product information and reviews, with the recommendation section showing a fallback or being hidden. Health check endpoints should report degraded status when such fallback modes are active. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ Deployment health checks follow a specific sequence. During startup, the livenes
   
   
   
+  
+  
+  
 
 
 Observability integration enriches health checks. Log each health state transition. Expose health check results as metrics (up/down per dependency). Alert on health state changes, not just complete failures. A dependency that is flapping between healthy and unhealthy indicates a more subtle problem than a dependency that is simply up or down — it suggests degraded performance or intermittent connectivity issues. 
 
+  
+  
+  
   
   
   

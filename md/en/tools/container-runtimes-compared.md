@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/container-runtimes-compared.html
   
 
 
+# Container Runtimes Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Container runtimes are the engines that actually run containers. While Docker is the most well-known, alternatives like Podman and containerd have gained significant traction. Understanding the differences helps you choose the right runtime for your use case.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Container runtimes are the engines that actually run containers. While Docker is
   
   
   
+  
+  
+  
 
 
 A container runtime manages the lifecycle of containers -- pulling images, creating container filesystems, and running processes in isolated environments. Runtimes exist at two levels:
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ A container runtime manages the lifecycle of containers -- pulling images, creat
   
   
   
+  
+  
+  
 
 
 * **High-level runtimes**: Docker, containerd, Podman -- provide a user-facing API and image management.
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ Most developers interact with high-level runtimes. The low-level runtime handles
   
   
   
+  
+  
+  
 
 
 ##  Docker
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 **Pros:**
 
+  
+  
+  
   
   
   
@@ -443,10 +502,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 * Extensive documentation and troubleshooting resources.
 
+  
+  
+  
   
   
   
@@ -495,6 +560,9 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 * Vast image registry (Docker Hub).
@@ -521,10 +589,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 * Widest platform support (Linux, macOS, Windows).
 
+  
+  
+  
   
   
   
@@ -579,10 +653,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 * Daemon-based architecture with root privileges by default.
 
+  
+  
+  
   
   
   
@@ -631,10 +711,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 * Slower startup than containerd alone.
 
+  
+  
+  
   
   
   
@@ -689,10 +775,16 @@ Docker is the original developer-friendly container platform. It bundles build t
   
   
   
+  
+  
+  
 
 
 # Typical Docker workflow
 
+  
+  
+  
   
   
   
@@ -747,10 +839,16 @@ docker build -t myapp .
   
   
   
+  
+  
+  
 
 
 docker run -d -p 3000:3000 myapp
 
+  
+  
+  
   
   
   
@@ -805,10 +903,16 @@ docker compose up -d # Multi-service
   
   
   
+  
+  
+  
 
 
 ##  Podman
 
+  
+  
+  
   
   
   
@@ -863,10 +967,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 **Pros:**
 
+  
+  
+  
   
   
   
@@ -918,10 +1028,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 * Rootless by default -- containers run with user privileges.
 
+  
+  
+  
   
   
   
@@ -970,6 +1086,9 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 * Support for pods (like Kubernetes) -- start multiple containers together.
@@ -996,10 +1115,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 * Built-in systemd integration for running containers as services.
 
+  
+  
+  
   
   
   
@@ -1054,10 +1179,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 * Smaller ecosystem and community compared to Docker.
 
+  
+  
+  
   
   
   
@@ -1106,10 +1237,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 * Docker Compose support requires `podman-compose` (third-party).
 
+  
+  
+  
   
   
   
@@ -1164,10 +1301,16 @@ Podman is a daemonless container engine developed by Red Hat. It is designed as 
   
   
   
+  
+  
+  
 
 
 # Podman commands mirror Docker
 
+  
+  
+  
   
   
   
@@ -1222,10 +1365,16 @@ podman build -t myapp .
   
   
   
+  
+  
+  
 
 
 podman run -d -p 3000:3000 myapp
 
+  
+  
+  
   
   
   
@@ -1280,10 +1429,16 @@ podman run -d -p 3000:3000 myapp
   
   
   
+  
+  
+  
 
 
 podman pod create --name my-pod -p 3000:3000
 
+  
+  
+  
   
   
   
@@ -1338,10 +1493,16 @@ podman run --pod my-pod -d myapp
   
   
   
+  
+  
+  
 
 
 ##  containerd
 
+  
+  
+  
   
   
   
@@ -1396,10 +1557,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 **Pros:**
 
+  
+  
+  
   
   
   
@@ -1451,10 +1618,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 * Built into Kubernetes via CRI (Container Runtime Interface).
 
+  
+  
+  
   
   
   
@@ -1503,10 +1676,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 * Stable and battle-tested (core of Docker Engine).
 
+  
+  
+  
   
   
   
@@ -1561,10 +1740,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 * No developer-friendly CLI -- mostly used through higher-level tools.
 
+  
+  
+  
   
   
   
@@ -1613,10 +1798,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 * No Docker Compose equivalent.
 
+  
+  
+  
   
   
   
@@ -1671,10 +1862,16 @@ containerd is the industry-standard container runtime, used internally by Docker
   
   
   
+  
+  
+  
 
 
 # interact with containerd directly using ctr or nerdctl
 
+  
+  
+  
   
   
   
@@ -1729,10 +1926,16 @@ sudo ctr images pull docker.io/library/alpine:latest
   
   
   
+  
+  
+  
 
 
 sudo ctr run --rm -t docker.io/library/alpine:latest alpine sh
 
+  
+  
+  
   
   
   
@@ -1787,10 +1990,16 @@ sudo ctr run --rm -t docker.io/library/alpine:latest alpine sh
   
   
   
+  
+  
+  
 
 
 nerdctl run -d -p 3000:3000 myapp
 
+  
+  
+  
   
   
   
@@ -1845,10 +2054,16 @@ nerdctl run -d -p 3000:3000 myapp
   
   
   
+  
+  
+  
 
 
 CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Interface) compliance.
 
+  
+  
+  
   
   
   
@@ -1903,10 +2118,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 * Purpose-built for Kubernetes -- minimal attack surface.
 
+  
+  
+  
   
   
   
@@ -1955,6 +2176,9 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 * Built-in metrics for monitoring.
@@ -1981,10 +2205,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 * Kubelet integration without extra daemons.
 
+  
+  
+  
   
   
   
@@ -2039,6 +2269,9 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 * Not designed for standalone use.
@@ -2065,10 +2298,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 * Smaller ecosystem than containerd.
 
+  
+  
+  
   
   
   
@@ -2123,10 +2362,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 ##  Performance Comparison
 
+  
+  
+  
   
   
   
@@ -2181,10 +2426,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 |---------|-----------|-----------------|-----------------|--------------|
 
+  
+  
+  
   
   
   
@@ -2239,10 +2490,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 | Podman | Fast | ~250ms | ~10MB (daemonless) | Negligible |
 
+  
+  
+  
   
   
   
@@ -2297,10 +2554,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 | CRI-O | Fast | ~200ms | ~20MB | Negligible |
 
+  
+  
+  
   
   
   
@@ -2355,10 +2618,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 | Runtime | Rootless by Default | Seccomp by Default | AppArmor/SELinux | User Namespace Support |
 
+  
+  
+  
   
   
   
@@ -2413,10 +2682,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 | Docker | Optional | Yes | Yes | Yes |
 
+  
+  
+  
   
   
   
@@ -2471,10 +2746,16 @@ CRI-O is a Kubernetes-specific runtime optimized for CRI (Container Runtime Inte
   
   
   
+  
+  
+  
 
 
 | containerd | Via CRI config | Via CRI config | Via CRI config | Via CRI config |
 
+  
+  
+  
   
   
   
@@ -2529,10 +2810,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 ##  Docker vs Podman: Detailed Comparison
 
+  
+  
+  
   
   
   
@@ -2587,10 +2874,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 |---------|--------|--------|
 
+  
+  
+  
   
   
   
@@ -2645,10 +2938,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 | Root privileges | Required by default | Rootless by default |
 
+  
+  
+  
   
   
   
@@ -2703,10 +3002,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 | Pod support | Via Docker Compose | Native |
 
+  
+  
+  
   
   
   
@@ -2761,10 +3066,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 | Docker Hub images | All | All (needs docker.io prefix) |
 
+  
+  
+  
   
   
   
@@ -2819,10 +3130,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 ##  Migration Guide
 
+  
+  
+  
   
   
   
@@ -2877,10 +3194,16 @@ Podman's rootless-by-default model provides the strongest security posture for d
   
   
   
+  
+  
+  
 
 
 # On Fedora/RHEL
 
+  
+  
+  
   
   
   
@@ -2935,10 +3258,16 @@ sudo dnf install podman podman-docker
   
   
   
+  
+  
+  
 
 
 # The podman-docker package provides the /usr/bin/docker symlink
 
+  
+  
+  
   
   
   
@@ -2993,10 +3322,16 @@ sudo dnf install podman podman-docker
   
   
   
+  
+  
+  
 
 
 podman info
 
+  
+  
+  
   
   
   
@@ -3051,10 +3386,16 @@ alias docker=podman
   
   
   
+  
+  
+  
 
 
 docker run hello-world
 
+  
+  
+  
   
   
   
@@ -3109,10 +3450,16 @@ docker run hello-world
   
   
   
+  
+  
+  
 
 
 # Install containerd
 
+  
+  
+  
   
   
   
@@ -3167,10 +3514,16 @@ sudo apt install containerd
   
   
   
+  
+  
+  
 
 
 # Install nerdctl (Docker-compatible CLI)
 
+  
+  
+  
   
   
   
@@ -3225,6 +3578,9 @@ wget https://github.com/containerd/nerdctl/releases/download/v1.7/nerdctl-1.7-li
   
   
   
+  
+  
+  
 
 
 sudo tar -C /usr/local/bin -xzf nerdctl-1.7-linux-amd64.tar.gz
@@ -3254,10 +3610,16 @@ sudo tar -C /usr/local/bin -xzf nerdctl-1.7-linux-amd64.tar.gz
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

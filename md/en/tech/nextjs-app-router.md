@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/tech/nextjs-app-router.html
   
   
   
+  
+  
+  
+
+
+# Next.js App Router
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Next.js App Router represents a fundamental shift in how React applications are structured. Introduced in Next.js 13 and refined through subsequent releases, the App Router replaces the Pages Router with a new paradigm built on React Server Components, nested layouts, and file-based routing conventions. This article explores the architecture, patterns, and best practices for the App Router.
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Next.js App Router represents a fundamental shift in how React applications are 
   
   
   
+  
+  
+  
 
 
 The App Router uses a file-system based routing where folders define routes and files define UI components. A `page.tsx` file defines the UI for a route segment. A `layout.tsx` file defines a layout that wraps child routes. This convention creates a clear, predictable project structure.
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Special files provide route-level configuration. `loading.tsx` defines loading U
   
   
   
+  
+  
+  
 
 
 ##  React Server Components
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ The App Router defaults to React Server Components. Server components render on 
   
   
   
+  
+  
+  
 
 
 Server components reduce the JavaScript bundle size because their code never reaches the browser. Libraries for date formatting, markdown parsing, or data access are executed only on the server. The client receives only the rendered output, resulting in smaller bundles and faster page loads.
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Server components reduce the JavaScript bundle size because their code never rea
   
   
   
+  
+  
+  
 
 
 When you need interactivity, event handlers, state, or browser APIs, you mark a component with `'use client'`. Client components are hydrated on the browser and behave like traditional React components. The boundary between server and client components is explicit—you choose which parts of your UI need interactivity.
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Best practice is to push client boundaries as far down the tree as possible. Kee
   
   
   
+  
+  
+  
 
 
 ##  Layouts and Templates
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Layouts are UI components that persist across route transitions. A `layout.tsx` 
   
   
   
+  
+  
+  
 
 
 Templates are similar to layouts but re-mount on each navigation. They are useful for UI that should reset state on navigation, such as page-level animations or analytics tracking. Templates are defined with `template.tsx` files.
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Templates are similar to layouts but re-mount on each navigation. They are usefu
   
   
   
+  
+  
+  
 
 
 The App Router automatically creates loading boundaries from `loading.tsx` files. These files define fallback UI shown while the page data loads. Next.js uses streaming Suspense to progressively render page content as data becomes available. The result is a fast initial page load with progressive enhancement as data arrives.
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Error boundaries from `error.tsx` files catch errors in the component tree and d
   
   
   
+  
+  
+  
 
 
 ##  Data Fetching Patterns
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Server components can directly `await` data fetching functions. Next.js extends 
   
   
   
+  
+  
+  
 
 
 Parallel data fetching with `Promise.all` reduces load times by fetching independent data simultaneously. Sequential fetching is appropriate when one fetch depends on another's result. The App Router also supports streaming, where the page progressively renders as each piece of data arrives.
 
+  
+  
+  
   
   
   

@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/text-editors-compared.html
   
 
 
+# Text Editors Compared
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The text editor is a developer's most personal tool. VS Code dominates the market, but NeoVim, Zed, and JetBrains IDEs each have passionate followings. This comparison helps you choose based on your workflow and priorities.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ The text editor is a developer's most personal tool. VS Code dominates the marke
   
   
   
+  
+  
+  
 
 
 Microsoft's VS Code is the most widely used editor in 2026, with over 70% market share among developers.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * Vast extension ecosystem (40,000+ extensions).
 
+  
+  
+  
   
   
   
@@ -327,10 +374,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * Built-in terminal, debugger, and Git integration.
 
+  
+  
+  
   
   
   
@@ -379,6 +432,9 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * GitHub Copilot integration.
@@ -405,10 +461,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * Settings Sync across devices.
 
+  
+  
+  
   
   
   
@@ -463,10 +525,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * Can be resource-heavy (memory usage often exceeds 500MB).
 
+  
+  
+  
   
   
   
@@ -515,10 +583,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 * Telemetry concerns (though most can be disabled).
 
+  
+  
+  
   
   
   
@@ -570,10 +644,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -628,10 +708,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 "editor.fontLigatures": true,
 
+  
+  
+  
   
   
   
@@ -686,10 +772,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 "editor.formatOnSave": true,
 
+  
+  
+  
   
   
   
@@ -744,10 +836,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 "workbench.startupEditor": "none",
 
+  
+  
+  
   
   
   
@@ -802,10 +900,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -860,10 +964,16 @@ Microsoft's VS Code is the most widely used editor in 2026, with over 70% market
   
   
   
+  
+  
+  
 
 
 ##  NeoVim
 
+  
+  
+  
   
   
   
@@ -918,10 +1028,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -973,10 +1089,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 * Modal editing (efficient for text manipulation).
 
+  
+  
+  
   
   
   
@@ -1025,10 +1147,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 * LSP support via `nvim-lspconfig`.
 
+  
+  
+  
   
   
   
@@ -1077,10 +1205,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 * Active plugin community.
 
+  
+  
+  
   
   
   
@@ -1135,10 +1269,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 * Steep learning curve (modal editing is initially slower).
 
+  
+  
+  
   
   
   
@@ -1187,10 +1327,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
 * Plugins can conflict or break on updates.
 
+  
+  
+  
   
   
   
@@ -1242,10 +1388,16 @@ NeoVim is a modern fork of Vim with a vibrant plugin ecosystem and Lua-based con
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- init.lua (modern NeoVim configuration)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- init.lua (modern NeoVim configuration)
 
+  
+  
+  
   
   
   
@@ -1300,10 +1452,16 @@ local lspconfig = require('lspconfig')
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LSP setup
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- LSP setup
 
+  
+  
+  
   
   
   
@@ -1358,10 +1516,16 @@ lspconfig.ts_ls.setup({
   
   
   
+  
+  
+  
 
 
 on_attach = function(client, bufnr)
 
+  
+  
+  
   
   
   
@@ -1416,10 +1580,16 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
   
   
   
+  
+  
+  
 
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 
+  
+  
+  
   
   
   
@@ -1474,6 +1644,9 @@ end
   
   
   
+  
+  
+  
 
 
 })
@@ -1503,10 +1676,16 @@ end
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Plugin manager (lazy.nvim)
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- Plugin manager (lazy.nvim)
 
+  
+  
+  
   
   
   
@@ -1561,10 +1740,16 @@ require('lazy').setup({
   
   
   
+  
+  
+  
 
 
 'folke/tokyonight.nvim',
 
+  
+  
+  
   
   
   
@@ -1619,6 +1804,9 @@ require('lazy').setup({
   
   
   
+  
+  
+  
 
 
 'williamboman/mason.nvim',
@@ -1648,10 +1836,16 @@ require('lazy').setup({
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1706,6 +1900,9 @@ require('lazy').setup({
   
   
   
+  
+  
+  
 
 
 dependencies = { 'nvim-lua/plenary.nvim' }
@@ -1735,10 +1932,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -1793,10 +1996,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 **Plugins Needed:**
 
+  
+  
+  
   
   
   
@@ -1851,10 +2060,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 |---------|--------|
 
+  
+  
+  
   
   
   
@@ -1909,10 +2124,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 | Autocomplete | nvim-cmp |
 
+  
+  
+  
   
   
   
@@ -1967,10 +2188,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 | Fuzzy finder | telescope.nvim |
 
+  
+  
+  
   
   
   
@@ -2025,10 +2252,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 | Status line | lualine.nvim |
 
+  
+  
+  
   
   
   
@@ -2083,10 +2316,16 @@ dependencies = { 'nvim-lua/plenary.nvim' }
   
   
   
+  
+  
+  
 
 
 ##  Zed
 
+  
+  
+  
   
   
   
@@ -2141,10 +2380,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -2196,10 +2441,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * GPU-accelerated UI (60fps scrolling).
 
+  
+  
+  
   
   
   
@@ -2248,10 +2499,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * LSP integration out of the box.
 
+  
+  
+  
   
   
   
@@ -2300,10 +2557,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * Low memory footprint.
 
+  
+  
+  
   
   
   
@@ -2358,10 +2621,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * Newer, smaller ecosystem and community.
 
+  
+  
+  
   
   
   
@@ -2410,6 +2679,9 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * Only available on macOS and Linux (alpha).
@@ -2436,10 +2708,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 * Fewer themes and customization options.
 
+  
+  
+  
   
   
   
@@ -2494,10 +2772,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2552,10 +2836,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 "font_family": "JetBrains Mono",
 
+  
+  
+  
   
   
   
@@ -2610,10 +2900,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 "soft_wrap": "editor_width",
 
+  
+  
+  
   
   
   
@@ -2668,10 +2964,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 "tab_size": 2,
 
+  
+  
+  
   
   
   
@@ -2726,10 +3028,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 "diagnostics": false,
 
+  
+  
+  
   
   
   
@@ -2784,10 +3092,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -2842,10 +3156,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 "typescript-language-server": {},
 
+  
+  
+  
   
   
   
@@ -2900,32 +3220,6 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2933,6 +3227,41 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2987,10 +3316,16 @@ Zed is a new editor built in Rust with GPU-accelerated rendering. It was created
   
   
   
+  
+  
+  
 
 
 ##  JetBrains IDEs
 
+  
+  
+  
   
   
   
@@ -3045,10 +3380,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -3100,10 +3441,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Deep framework support (Spring, React, Django).
 
+  
+  
+  
   
   
   
@@ -3152,10 +3499,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Database tools built-in.
 
+  
+  
+  
   
   
   
@@ -3204,10 +3557,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Static analysis catches errors before runtime.
 
+  
+  
+  
   
   
   
@@ -3262,10 +3621,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Heavy resource usage (often uses 2GB+ RAM).
 
+  
+  
+  
   
   
   
@@ -3314,6 +3679,9 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Paid licenses ($249/year for all tools).
@@ -3340,10 +3708,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * Different IDE per language.
 
+  
+  
+  
   
   
   
@@ -3398,10 +3772,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 ##  Performance Comparison
 
+  
+  
+  
   
   
   
@@ -3456,10 +3836,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 |--------|-------------|---------------|-------------------|-------------|
 
+  
+  
+  
   
   
   
@@ -3514,10 +3900,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 | NeoVim | <0.5s | 30MB | 60MB | ~15MB |
 
+  
+  
+  
   
   
   
@@ -3572,10 +3964,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 | JetBrains | 10-20s | 600MB | 1.5GB | ~800MB |
 
+  
+  
+  
   
   
   
@@ -3630,10 +4028,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 | Aspect | VS Code | NeoVim | Zed | JetBrains |
 
+  
+  
+  
   
   
   
@@ -3688,10 +4092,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 | Config format | JSON (settings.json) | Lua (init.lua) | JSON (settings.json) | GUI + XML |
 
+  
+  
+  
   
   
   
@@ -3746,10 +4156,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 | Customization | High | Maximum | Medium | High |
 
+  
+  
+  
   
   
   
@@ -3804,10 +4220,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -3859,10 +4281,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * **Keyboard efficiency enthusiasts**: Invest time in NeoVim (highest long-term productivity for terminal work).
 
+  
+  
+  
   
   
   
@@ -3911,6 +4339,9 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * **Enterprise Java/C#/Kotlin**: JetBrains (best language-specific tooling).
@@ -3937,10 +4368,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 * **Full-stack web**: VS Code or JetBrains WebStorm.
 
+  
+  
+  
   
   
   
@@ -3992,10 +4429,16 @@ JetBrains offers language-specific IDEs (IntelliJ IDEA, WebStorm, PyCharm, GoLan
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

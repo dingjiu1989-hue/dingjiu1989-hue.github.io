@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/database/etl-pipelines.html
   
 
 
+# Building ETL Pipelines: A Practical Guide
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ETL Pipeline Fundamentals 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ ETL (Extract, Transform, Load) pipelines move data from source systems to data w
   
   
   
+  
+  
+  
 
 
 Batch vs Streaming 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ Batch Processing
   
   
   
+  
+  
+  
 
 
 Process data at scheduled intervals. Simpler, cheaper, and easier to test: 
 
+  
+  
+  
   
   
   
@@ -274,10 +318,16 @@ def extract_orders():
   
   
   
+  
+  
+  
 
 
 return pd.read_sql("SELECT * FROM orders WHERE date = CURRENT_DATE", conn)
 
+  
+  
+  
   
   
   
@@ -326,10 +376,16 @@ def transform_orders(df):
   
   
   
+  
+  
+  
 
 
 df['total'] = df['quantity'] * df['price']
 
+  
+  
+  
   
   
   
@@ -378,10 +434,16 @@ return df
   
   
   
+  
+  
+  
 
 
 def load_orders(df):
 
+  
+  
+  
   
   
   
@@ -430,10 +492,16 @@ df.to_sql('daily_orders', warehouse_conn, if_exists='append')
   
   
   
+  
+  
+  
 
 
 Stream Processing 
 
+  
+  
+  
   
   
   
@@ -476,10 +544,16 @@ Process data as it arrives with millisecond latency. Use for real-time dashboard
   
   
   
+  
+  
+  
 
 
 Orchestration with Airflow 
 
+  
+  
+  
   
   
   
@@ -528,10 +602,16 @@ with DAG('orders_etl', schedule_interval='0 6 * * *'):
   
   
   
+  
+  
+  
 
 
 extract = PythonOperator(task_id='extract', python_callable=extract_orders)
 
+  
+  
+  
   
   
   
@@ -580,10 +660,16 @@ transform = PythonOperator(task_id='transform', python_callable=transform_orders
   
   
   
+  
+  
+  
 
 
 load = PythonOperator(task_id='load', python_callable=load_orders)
 
+  
+  
+  
   
   
   
@@ -632,6 +718,9 @@ extract >> transform >> load
   
   
   
+  
+  
+  
 
 
 Transformation with dbt 
@@ -658,10 +747,16 @@ Transformation with dbt
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- models/staging/stg_orders.sql
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- models/staging/stg_orders.sql
 
+  
+  
+  
   
   
   
@@ -710,10 +805,16 @@ with source as (
   
   
   
+  
+  
+  
 
 
 select * from {{ source('ecommerce', 'orders') }}
 
+  
+  
+  
   
   
   
@@ -762,10 +863,16 @@ select * from {{ source('ecommerce', 'orders') }}
   
   
   
+  
+  
+  
 
 
 select id as order_id, customer_id, amount from source
 
+  
+  
+  
   
   
   
@@ -814,6 +921,9 @@ Data Quality
   
   
   
+  
+  
+  
 
 
 data_quality_checks:
@@ -840,10 +950,16 @@ data_quality_checks:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- check: row_count > 1000
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- check: row_count > 1000
 
+  
+  
+  
   
   
   
@@ -892,10 +1008,16 @@ severity: critical
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- check: max_timestamp >= yesterday
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- check: max_timestamp >= yesterday
 
+  
+  
+  
   
   
   
@@ -944,10 +1066,16 @@ severity: warning
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   

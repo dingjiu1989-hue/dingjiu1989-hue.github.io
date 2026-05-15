@@ -156,10 +156,45 @@ url: https://dingjiu1989-hue.github.io/en/ai/multimodal-models.html
   
   
   
+  
+  
+  
+
+
+# Multimodal AI Models: Vision, Audio, and Text
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 Multimodal AI models process and generate multiple data types—text, images, audio, and video—within a single architecture. These models represent a significant advancement beyond text-only LLMs.
 
+  
+  
+  
   
   
   
@@ -214,10 +249,16 @@ Multimodal AI models process and generate multiple data types—text, images, au
   
   
   
+  
+  
+  
 
 
 Multimodal models encode different modalities into a shared representation space. A vision encoder (ViT, CLIP) processes images into embeddings. An audio encoder processes speech and sound. A text tokenizer processes language. All embeddings map to the same space where the LLM processes them.
 
+  
+  
+  
   
   
   
@@ -272,10 +313,16 @@ Training uses paired data: image-caption pairs, video-text pairs, audio-transcri
   
   
   
+  
+  
+  
 
 
 ##  Vision-Language Models
 
+  
+  
+  
   
   
   
@@ -330,10 +377,16 @@ GPT-4V, Claude 3, and Gemini process images alongside text. They can describe im
   
   
   
+  
+  
+  
 
 
 Use cases include document analysis (invoices, receipts, forms), content moderation (image safety checking), visual Q&A;, and accessibility (image descriptions for screen readers). Prompt vision models with specific tasks: "Extract all text from this receipt" or "Describe the data trend in this chart."
 
+  
+  
+  
   
   
   
@@ -388,10 +441,16 @@ Use cases include document analysis (invoices, receipts, forms), content moderat
   
   
   
+  
+  
+  
 
 
 Whisper (OpenAI) transcribes speech to text. Eleven Labs generates realistic speech from text. Multimodal models integrate speech understanding and generation. Audio capabilities enable voice interfaces, transcription, translation, and audio content analysis.
 
+  
+  
+  
   
   
   
@@ -446,10 +505,16 @@ Processing audio requires careful handling of temporal context. Longer audio is 
   
   
   
+  
+  
+  
 
 
 ##  Video Understanding
 
+  
+  
+  
   
   
   
@@ -504,6 +569,9 @@ Video models process sequences of frames with temporal attention. They understan
   
   
   
+  
+  
+  
 
 
 Video applications include content moderation, video summarization, surveillance analysis, and automated video description. Frame sampling strategy (uniform, keyframe-based, or adaptive) affects both accuracy and cost.
@@ -533,10 +601,16 @@ Video applications include content moderation, video summarization, surveillance
   
   
   
+  
+  
+  
 
 
 ##  Multimodal Generation
 
+  
+  
+  
   
   
   

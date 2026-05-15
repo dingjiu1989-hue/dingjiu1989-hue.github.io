@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/rag-chunking-strategies.html
   
 
 
+# RAG Chunking Strategies: Semantic Chunking, Overlapping, Recursive Splitting
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Document chunking is the foundation of any RAG system. How you split documents i
   
   
   
+  
+  
+  
 
 
 ##  Naive Fixed-Size Chunking
 
+  
+  
+  
   
   
   
@@ -275,6 +316,9 @@ The simplest approach splits text every N characters or tokens:
   
   
   
+  
+  
+  
 
 
 def fixed_size_chunks(text: str, chunk_size: int = 512, overlap: int = 64) -> list[str]:
@@ -304,10 +348,16 @@ def fixed_size_chunks(text: str, chunk_size: int = 512, overlap: int = 64) -> li
   
   
   
+  
+  
+  
 
 
 chunks = []
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ start = 0
   
   
   
+  
+  
+  
 
 
 while start < len(text):
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ end = start + chunk_size
   
   
   
+  
+  
+  
 
 
 chunk = text[start:end]
 
+  
+  
+  
   
   
   
@@ -478,6 +540,9 @@ chunks.append(chunk)
   
   
   
+  
+  
+  
 
 
 start = end - overlap
@@ -507,10 +572,16 @@ start = end - overlap
   
   
   
+  
+  
+  
 
 
 return chunks
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Fixed-size chunking is fast and predictable. However, it frequently splits in th
   
   
   
+  
+  
+  
 
 
 ##  Recursive Character Text Splitter
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ LangChain's RecursiveCharacterTextSplitter tries to split on natural boundaries 
   
   
   
+  
+  
+  
 
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ splitter = RecursiveCharacterTextSplitter(
   
   
   
+  
+  
+  
 
 
 chunk_size=512,
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ chunk_overlap=64,
   
   
   
+  
+  
+  
 
 
 separators=["\n\n", "\n", ".", " ", ""],
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ keep_separator=True,
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ chunks = splitter.split_text(long_document)
   
   
   
+  
+  
+  
 
 
 The algorithm tries each separator in order. It first attempts to split on paragraph boundaries (`\n\n`). If a paragraph exceeds the chunk size, it splits on line breaks, then sentences, then spaces. This preserves as much natural structure as possible.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ The algorithm tries each separator in order. It first attempts to split on parag
   
   
   
+  
+  
+  
 
 
 Semantic chunking uses embedding similarity to detect natural boundaries:
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ import numpy as np
   
   
   
+  
+  
+  
 
 
 from sentence_transformers import SentenceTransformer
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ model = SentenceTransformer("all-MiniLM-L6-v2")
   
   
   
+  
+  
+  
 
 
 def semantic_chunk(text: str, threshold: float = 0.7) -> list[str]:
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ sentences = split_into_sentences(text)
   
   
   
+  
+  
+  
 
 
 chunks = []
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ current_chunk = [sentences[0]]
   
   
   
+  
+  
+  
 
 
 for i in range(1, len(sentences)):
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ for i in range(1, len(sentences)):
   
   
   
+  
+  
+  
 
 
 emb_current = model.encode(" ".join(current_chunk[-3:]))
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ emb_next = model.encode(sentences[i])
   
   
   
+  
+  
+  
 
 
 similarity = cosine_similarity(emb_current, emb_next)
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ if similarity < threshold or len(" ".join(current_chunk)) > 1000:
   
   
   
+  
+  
+  
 
 
 chunks.append(" ".join(current_chunk))
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ current_chunk = [sentences[i]]
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ current_chunk.append(sentences[i])
   
   
   
+  
+  
+  
 
 
 if current_chunk:
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ chunks.append(" ".join(current_chunk))
   
   
   
+  
+  
+  
 
 
 return chunks
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ Semantic chunking produces chunks that are internally coherent: each chunk discu
   
   
   
+  
+  
+  
 
 
 ##  Chunking by Document Structure
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ When documents have known structures (headings, sections), use the structure to 
   
   
   
+  
+  
+  
 
 
 import re
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ def structure_aware_chunk(markdown_text: str) -> list[dict]:
   
   
   
+  
+  
+  
 
 
 chunks = []
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ current_section = {"heading": "Introduction", "content": []}
   
   
   
+  
+  
+  
 
 
 for line in markdown_text.split("\n"):
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ heading_match = re.match(r"^(#{1,3})\s+(.+)$", line)
   
   
   
+  
+  
+  
 
 
 if heading_match:
 
+  
+  
+  
   
   
   
@@ -1841,10 +2044,16 @@ if current_section["content"]:
   
   
   
+  
+  
+  
 
 
 chunks.append(current_section)
 
+  
+  
+  
   
   
   
@@ -1899,10 +2108,16 @@ current_section = {
   
   
   
+  
+  
+  
 
 
 "heading": heading_match.group(2),
 
+  
+  
+  
   
   
   
@@ -1957,10 +2172,16 @@ current_section = {
   
   
   
+  
+  
+  
 
 
 "content": [],
 
+  
+  
+  
   
   
   
@@ -2015,10 +2236,16 @@ current_section = {
   
   
   
+  
+  
+  
 
 
 else:
 
+  
+  
+  
   
   
   
@@ -2073,10 +2300,16 @@ current_section["content"].append(line)
   
   
   
+  
+  
+  
 
 
 if current_section["content"]:
 
+  
+  
+  
   
   
   
@@ -2131,10 +2364,16 @@ chunks.append(current_section)
   
   
   
+  
+  
+  
 
 
 return chunks
 
+  
+  
+  
   
   
   
@@ -2189,10 +2428,16 @@ Structure-aware chunking preserves document hierarchy. Each chunk retains a head
   
   
   
+  
+  
+  
 
 
 ##  Sliding Window with Overlap
 
+  
+  
+  
   
   
   
@@ -2247,10 +2492,16 @@ Overlap between adjacent chunks prevents information loss at boundaries:
   
   
   
+  
+  
+  
 
 
 def sliding_window_chunks(text: str, window: int = 512, stride: int = 384) -> list[str]:
 
+  
+  
+  
   
   
   
@@ -2305,10 +2556,16 @@ chunks = []
   
   
   
+  
+  
+  
 
 
 for i in range(0, len(text) - window + 1, stride):
 
+  
+  
+  
   
   
   
@@ -2363,10 +2620,16 @@ chunks.append(text[i:i + window])
   
   
   
+  
+  
+  
 
 
 return chunks
 
+  
+  
+  
   
   
   
@@ -2421,10 +2684,16 @@ A 512-token window with 384-token stride means each adjacent pair overlaps by 12
   
   
   
+  
+  
+  
 
 
 ##  Choosing the Right Strategy
 
+  
+  
+  
   
   
   
@@ -2479,10 +2748,16 @@ A 512-token window with 384-token stride means each adjacent pair overlaps by 12
   
   
   
+  
+  
+  
 
 
 |----------|----------|------|------|
 
+  
+  
+  
   
   
   
@@ -2537,10 +2812,16 @@ A 512-token window with 384-token stride means each adjacent pair overlaps by 12
   
   
   
+  
+  
+  
 
 
 | Recursive | General purpose | Natural boundaries | May still break context |
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ A 512-token window with 384-token stride means each adjacent pair overlaps by 12
   
   
   
+  
+  
+  
 
 
 | Structure-aware | Markdown, HTML, code | Preserves hierarchy | Requires structured input |
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ A 512-token window with 384-token stride means each adjacent pair overlaps by 12
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

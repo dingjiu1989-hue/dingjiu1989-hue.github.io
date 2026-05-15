@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/compare/solid-vs-qwik.html
   
 
 
+# Solid.js vs Qwik
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Solid.js and Qwik represent the cutting edge of web framework design. Both chall
   
   
   
+  
+  
+  
 
 
 ##  Solid.js
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Solid.js was created by Ryan Carniato and pioneered the concept of fine-grained 
   
   
   
+  
+  
+  
 
 
 **How it works:**
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Solid compiles your JSX into real DOM nodes wrapped in reactive computations. Wh
   
   
   
+  
+  
+  
 
 
 import { createSignal } from "solid-js";
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ function Counter() {
   
   
   
+  
+  
+  
 
 
 const [count, setCount] = createSignal(0);
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ const doubleCount = () => count() * 2;
   
   
   
+  
+  
+  
 
 
 return (
 
+  
+  
+  
   
   
   
@@ -510,10 +575,16 @@ Count: {count()}
   
   
   
+  
+  
+  
 
 
 Double: {doubleCount()}
 
+  
+  
+  
   
   
   
@@ -571,6 +642,9 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 );
@@ -600,10 +674,16 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -658,10 +738,16 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * **Signals**: Reactive primitives (`createSignal`) that track state
 
+  
+  
+  
   
   
   
@@ -710,6 +796,9 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * **Memos**: Cached derived values that only recompute when dependencies change (`createMemo`)
@@ -736,10 +825,16 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 * **No virtual DOM**: Direct DOM manipulation via compilation
 
+  
+  
+  
   
   
   
@@ -794,10 +889,16 @@ setCount(c => c + 1)}>+1
   
   
   
+  
+  
+  
 
 
 import { createSignal, createEffect, createMemo } from "solid-js";
 
+  
+  
+  
   
   
   
@@ -852,10 +953,16 @@ const [todos, setTodos] = createSignal([]);
   
   
   
+  
+  
+  
 
 
 const [filter, setFilter] = createSignal("all");
 
+  
+  
+  
   
   
   
@@ -910,10 +1017,16 @@ const filteredTodos = createMemo(() => {
   
   
   
+  
+  
+  
 
 
 switch (filter()) {
 
+  
+  
+  
   
   
   
@@ -968,10 +1081,16 @@ case "active": return todos().filter(t => !t.done);
   
   
   
+  
+  
+  
 
 
 case "completed": return todos().filter(t => t.done);
 
+  
+  
+  
   
   
   
@@ -1026,6 +1145,9 @@ default: return todos();
   
   
   
+  
+  
+  
 
 
 }
@@ -1055,10 +1177,16 @@ default: return todos();
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1113,10 +1241,16 @@ default: return todos();
   
   
   
+  
+  
+  
 
 
 createEffect(() => {
 
+  
+  
+  
   
   
   
@@ -1171,10 +1305,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1229,10 +1369,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * Best-in-class runtime performance (no virtual DOM overhead)
 
+  
+  
+  
   
   
   
@@ -1281,10 +1427,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * Small bundle size (~7KB gzipped)
 
+  
+  
+  
   
   
   
@@ -1333,6 +1485,9 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * React-compatible JSX (similar mental model to React)
@@ -1359,10 +1514,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * SolidStart meta-framework for full-stack applications
 
+  
+  
+  
   
   
   
@@ -1417,10 +1578,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * Smaller ecosystem than React
 
+  
+  
+  
   
   
   
@@ -1469,6 +1636,9 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * JSX without re-rendering requires mental model shift from React
@@ -1495,10 +1665,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 * Less community content and learning resources
 
+  
+  
+  
   
   
   
@@ -1553,10 +1729,16 @@ console.log(`Showing ${filteredTodos().length} todos`);
   
   
   
+  
+  
+  
 
 
 Qwik was created by Misko Hevery (creator of Angular) and introduces the concept of resumability.
 
+  
+  
+  
   
   
   
@@ -1611,10 +1793,16 @@ Qwik was created by Misko Hevery (creator of Angular) and introduces the concept
   
   
   
+  
+  
+  
 
 
 Qwik serializes application state on the server and sends minimal JavaScript to the client. Instead of downloading and executing the application to "rehydrate" it, Qwik "resumes" execution on the client — picking up exactly where the server left off.
 
+  
+  
+  
   
   
   
@@ -1669,10 +1857,16 @@ import { component$, useSignal, $ } from "@builder.io/qwik";
   
   
   
+  
+  
+  
 
 
 export const Counter = component$(() => {
 
+  
+  
+  
   
   
   
@@ -1727,10 +1921,16 @@ const count = useSignal(0);
   
   
   
+  
+  
+  
 
 
 return (
 
+  
+  
+  
   
   
   
@@ -1788,10 +1988,16 @@ Count: {count.value}
   
   
   
+  
+  
+  
 
 
 count.value++)}>+1
 
+  
+  
+  
   
   
   
@@ -1849,10 +2055,16 @@ count.value++)}>+1
   
   
   
+  
+  
+  
 
 
 });
 
+  
+  
+  
   
   
   
@@ -1907,10 +2119,16 @@ count.value++)}>+1
   
   
   
+  
+  
+  
 
 
 * **Resumability**: Serialize listener registrations and state, resume without re-executing
 
+  
+  
+  
   
   
   
@@ -1959,10 +2177,16 @@ count.value++)}>+1
   
   
   
+  
+  
+  
 
 
 * **`component$`**: Lazy-loadable component boundary
 
+  
+  
+  
   
   
   
@@ -2011,10 +2235,16 @@ count.value++)}>+1
   
   
   
+  
+  
+  
 
 
 * **Prefetching**: Predicts user interactions and preloads handlers
 
+  
+  
+  
   
   
   
@@ -2069,10 +2299,16 @@ count.value++)}>+1
   
   
   
+  
+  
+  
 
 
 import { component$, useStore } from "@builder.io/qwik";
 
+  
+  
+  
   
   
   
@@ -2127,10 +2363,16 @@ export const TodoApp = component$(() => {
   
   
   
+  
+  
+  
 
 
 const state = useStore({ todos: [], filter: "all" });
 
+  
+  
+  
   
   
   
@@ -2188,10 +2430,16 @@ return (
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2246,10 +2494,16 @@ return (
   
   
   
+  
+  
+  
 
 
 // Only loaded when the user clicks this button
 
+  
+  
+  
   
   
   
@@ -2304,10 +2558,16 @@ const data = await fetch("/api/todos");
   
   
   
+  
+  
+  
 
 
 state.todos = await data.json();
 
+  
+  
+  
   
   
   
@@ -2362,10 +2622,16 @@ state.todos = await data.json();
   
   
   
+  
+  
+  
 
 
 Load Todos
 
+  
+  
+  
   
   
   
@@ -2429,10 +2695,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 );
 
+  
+  
+  
   
   
   
@@ -2487,10 +2759,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 **Strengths:**
 
+  
+  
+  
   
   
   
@@ -2542,10 +2820,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Automatic code splitting per event handler
 
+  
+  
+  
   
   
   
@@ -2594,6 +2878,9 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Scales to complex applications with no performance cliff
@@ -2620,10 +2907,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Qwik City meta-framework with routing and data loading
 
+  
+  
+  
   
   
   
@@ -2678,10 +2971,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Most complex mental model of any framework
 
+  
+  
+  
   
   
   
@@ -2730,10 +3029,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Smallest ecosystem and community
 
+  
+  
+  
   
   
   
@@ -2782,10 +3087,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 * Resumability debugging is harder than traditional approaches
 
+  
+  
+  
   
   
   
@@ -2840,10 +3151,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 | Metric | Solid.js | Qwik |
 
+  
+  
+  
   
   
   
@@ -2898,10 +3215,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 | First Load JS | ~7KB + app code | ~1KB + critical app code |
 
+  
+  
+  
   
   
   
@@ -2956,10 +3279,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 | Memory usage | Low | Lowest |
 
+  
+  
+  
   
   
   
@@ -3014,10 +3343,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 | Time to Interactive | Excellent | Best in class |
 
+  
+  
+  
   
   
   
@@ -3072,10 +3407,16 @@ Load Todos
   
   
   
+  
+  
+  
 
 
 Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load performance (JavaScript size).
 
+  
+  
+  
   
   
   
@@ -3130,10 +3471,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 | Aspect | Solid | Qwik |
 
+  
+  
+  
   
   
   
@@ -3188,10 +3535,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 | Meta-framework | SolidStart | Qwik City |
 
+  
+  
+  
   
   
   
@@ -3246,10 +3599,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 | Data loading | Server load functions | Route loaders |
 
+  
+  
+  
   
   
   
@@ -3304,10 +3663,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 | Deployment | Node, serverless, static | Node, serverless, static |
 
+  
+  
+  
   
   
   
@@ -3362,10 +3727,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 | State management | Solid stores, signals | useStore, useContext |
 
+  
+  
+  
   
   
   
@@ -3420,10 +3791,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 **Choose Solid.js when:**
 
+  
+  
+  
   
   
   
@@ -3475,10 +3852,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * You're building a highly interactive application with frequent updates
 
+  
+  
+  
   
   
   
@@ -3527,6 +3910,9 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * You want to minimize bundle size in a traditional SPA
@@ -3553,10 +3939,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * Your team knows React and wants a familiar but faster alternative
 
+  
+  
+  
   
   
   
@@ -3611,10 +4003,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * Initial page load performance is critical
 
+  
+  
+  
   
   
   
@@ -3663,6 +4061,9 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * You need to support slow connections or low-end devices
@@ -3689,10 +4090,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 * You want the most advanced code-splitting available
 
+  
+  
+  
   
   
   
@@ -3744,10 +4151,16 @@ Solid.js wins on runtime performance (DOM updates). Qwik wins on initial load pe
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   

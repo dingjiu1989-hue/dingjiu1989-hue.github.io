@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/architecture/transaction-outbox.html
   
 
 
+# Transactional Outbox Pattern
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The transactional outbox pattern solves one of the most pervasive problems in event-driven architectures: the dual-write problem. When a service must both update its database and publish an event (or send a message), these two operations cannot be atomic across different systems. The outbox pattern ensures that the database write and message publication are eventually consistent without requiring distributed transactions or two-phase commit. 
 
+  
+  
+  
   
   
   
@@ -176,10 +208,16 @@ The core mechanism is elegant. Instead of publishing the event directly to the m
   
   
   
+  
+  
+  
 
 
 Implementation variations depend on the database and event bus. In relational databases, the outbox table contains columns for event ID, aggregate type, aggregate ID, event type, payload (typically JSON or Avro), and a processed flag. A composite index on processed status and creation time allows efficient polling. The outbox publisher runs as a background thread, scheduled job, or change data capture (CDC) consumer. 
 
+  
+  
+  
   
   
   
@@ -222,10 +260,16 @@ CDC-based implementation avoids polling overhead. Tools like Debezium read the d
   
   
   
+  
+  
+  
 
 
 The outbox publisher must handle several failure modes. If the publisher crashes after reading an event but before acknowledging publication, the event will be reprocessed. This requires at-least-once delivery semantics and idempotent consumers. If the broker is unavailable, the publisher should retry with exponential backoff. Dead-letter queues capture events that repeatedly fail to publish, preventing the outbox from blocking on problematic events. 
 
+  
+  
+  
   
   
   
@@ -268,10 +312,16 @@ Ordering guarantees require careful consideration. Events published from the sam
   
   
   
+  
+  
+  
 
 
 Idempotent consumers are essential since at-least-once delivery means the same event may arrive multiple times. The consumer should maintain a deduplication table of processed event IDs with a unique constraint. Processing the same event twice should produce the same result. This is typically achieved through a combination of deduplication and making the business operation itself idempotent. 
 
+  
+  
+  
   
   
   
@@ -314,10 +364,16 @@ The outbox pattern also solves the inverse dual-write problem: reliably consumin
   
   
   
+  
+  
+  
 
 
 Performance considerations include outbox table cleanup. Over time, the outbox table accumulates processed events that are no longer needed. A background cleanup job should delete processed events that are older than a retention threshold. Partitioning the outbox table by date enables efficient bulk deletion. 
 
+  
+  
+  
   
   
   

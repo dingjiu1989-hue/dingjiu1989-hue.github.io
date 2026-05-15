@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/monorepo-tools.html
   
 
 
+# Monorepo Tools: Turborepo, Nx, Bazel, Lage Comparison
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Monorepos — storing multiple projects in a single repository — offer simplif
   
   
   
+  
+  
+  
 
 
 ##  Turborepo
 
+  
+  
+  
   
   
   
@@ -275,6 +316,9 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 // turbo.json
@@ -304,10 +348,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "pipeline": {
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "dependsOn": ["^build"],
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "cache": {
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "outputMode": "new-only"
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "dependsOn": ["build"],
 
+  
+  
+  
   
   
   
@@ -710,6 +796,9 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "inputs": ["src/**", "*.test.ts"]
@@ -739,10 +828,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -797,6 +892,9 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "outputs": []
@@ -826,10 +924,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -884,10 +988,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 "cache": false,
 
+  
+  
+  
   
   
   
@@ -942,32 +1052,6 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -1000,10 +1084,48 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -1058,10 +1180,16 @@ Vercel's build orchestrator focuses on caching and task scheduling:
   
   
   
+  
+  
+  
 
 
 turbo run build
 
+  
+  
+  
   
   
   
@@ -1116,10 +1244,16 @@ turbo run build
   
   
   
+  
+  
+  
 
 
 turbo run build --parallel
 
+  
+  
+  
   
   
   
@@ -1174,10 +1308,16 @@ turbo run build --parallel
   
   
   
+  
+  
+  
 
 
 turbo run build --dry
 
+  
+  
+  
   
   
   
@@ -1232,10 +1372,16 @@ turbo run build --dry
   
   
   
+  
+  
+  
 
 
 turbo run build --filter=packages/core...
 
+  
+  
+  
   
   
   
@@ -1290,10 +1436,16 @@ turbo run build --filter=packages/core...
   
   
   
+  
+  
+  
 
 
 turbo run build --remote-only
 
+  
+  
+  
   
   
   
@@ -1348,10 +1500,16 @@ turbo run build --remote-only
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Limited to JavaScript/TypeScript ecosystem, less sophisticated dependency graph analysis than Nx, remote caching requires Vercel.
 
+  
+  
+  
   
   
   
@@ -1406,10 +1564,16 @@ turbo run build --remote-only
   
   
   
+  
+  
+  
 
 
 Nx provides build orchestration with powerful code generation and dependency analysis:
 
+  
+  
+  
   
   
   
@@ -1464,10 +1628,16 @@ Nx provides build orchestration with powerful code generation and dependency ana
   
   
   
+  
+  
+  
 
 
 npx create-nx-workspace@latest myorg
 
+  
+  
+  
   
   
   
@@ -1522,10 +1692,16 @@ npx create-nx-workspace@latest myorg
   
   
   
+  
+  
+  
 
 
 nx g @nx/next:app my-app
 
+  
+  
+  
   
   
   
@@ -1580,10 +1756,16 @@ nx g @nx/react:lib shared-ui
   
   
   
+  
+  
+  
 
 
 nx g @nx/node:lib api-interfaces
 
+  
+  
+  
   
   
   
@@ -1638,10 +1820,16 @@ nx g @nx/node:lib api-interfaces
   
   
   
+  
+  
+  
 
 
 nx run-many -t build test lint
 
+  
+  
+  
   
   
   
@@ -1696,10 +1884,16 @@ nx run-many -t build test lint
   
   
   
+  
+  
+  
 
 
 nx graph
 
+  
+  
+  
   
   
   
@@ -1754,10 +1948,16 @@ nx graph
   
   
   
+  
+  
+  
 
 
 nx affected:test --base=main
 
+  
+  
+  
   
   
   
@@ -1812,10 +2012,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -1870,10 +2076,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 "default": {
 
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 "options": {
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 "parallel": 5,
 
+  
+  
+  
   
   
   
@@ -2044,32 +2268,6 @@ nx affected:test --base=main
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2077,6 +2275,41 @@ nx affected:test --base=main
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2106,6 +2339,9 @@ nx affected:test --base=main
 
 },
 
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 "build": {
 
+  
+  
+  
   
   
   
@@ -2218,6 +2460,9 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 "inputs": ["!{projectRoot}/test/**/*"]
@@ -2247,32 +2492,6 @@ nx affected:test --base=main
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -2305,10 +2524,48 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -2363,10 +2620,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 **Weaknesses**: Steeper learning curve, configuration overhead for simple projects, opinionated directory structure, Nx Cloud costs for advanced features.
 
+  
+  
+  
   
   
   
@@ -2421,10 +2684,16 @@ nx affected:test --base=main
   
   
   
+  
+  
+  
 
 
 Google's build system prioritizes correctness and hermetic builds:
 
+  
+  
+  
   
   
   
@@ -2479,10 +2748,16 @@ Google's build system prioritizes correctness and hermetic builds:
   
   
   
+  
+  
+  
 
 
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
+  
+  
+  
   
   
   
@@ -2537,10 +2812,16 @@ npm_link_all_packages(name = "node_modules")
   
   
   
+  
+  
+  
 
 
 load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 
+  
+  
+  
   
   
   
@@ -2595,10 +2876,16 @@ ts_project(
   
   
   
+  
+  
+  
 
 
 name = "core",
 
+  
+  
+  
   
   
   
@@ -2653,10 +2940,16 @@ srcs = glob(["src/**/*.ts"]),
   
   
   
+  
+  
+  
 
 
 deps = [
 
+  
+  
+  
   
   
   
@@ -2711,10 +3004,16 @@ deps = [
   
   
   
+  
+  
+  
 
 
 "@npm//lodash",
 
+  
+  
+  
   
   
   
@@ -2769,10 +3068,16 @@ deps = [
   
   
   
+  
+  
+  
 
 
 ],
 
+  
+  
+  
   
   
   
@@ -2827,6 +3132,9 @@ tsconfig = "//:tsconfig",
   
   
   
+  
+  
+  
 
 
 out_dir = "dist",
@@ -2856,10 +3164,16 @@ out_dir = "dist",
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -2914,10 +3228,16 @@ out_dir = "dist",
   
   
   
+  
+  
+  
 
 
 load("@rules_python//python:defs.bzl", "py_binary")
 
+  
+  
+  
   
   
   
@@ -2972,10 +3292,16 @@ py_binary(
   
   
   
+  
+  
+  
 
 
 name = "data_pipeline",
 
+  
+  
+  
   
   
   
@@ -3030,10 +3356,16 @@ srcs = ["pipeline.py"],
   
   
   
+  
+  
+  
 
 
 deps = ["@pypi//pandas"],
 
+  
+  
+  
   
   
   
@@ -3088,10 +3420,16 @@ deps = ["@pypi//pandas"],
   
   
   
+  
+  
+  
 
 
 # Build with caching and parallelism
 
+  
+  
+  
   
   
   
@@ -3146,10 +3484,16 @@ bazel build //packages/core:all
   
   
   
+  
+  
+  
 
 
 # Run tests
 
+  
+  
+  
   
   
   
@@ -3204,10 +3548,16 @@ bazel test //packages/...
   
   
   
+  
+  
+  
 
 
 # Query dependency graph
 
+  
+  
+  
   
   
   
@@ -3262,10 +3612,16 @@ bazel query "deps(//packages/core)"
   
   
   
+  
+  
+  
 
 
 # Remote execution
 
+  
+  
+  
   
   
   
@@ -3320,10 +3676,16 @@ bazel build --config=remote //...
   
   
   
+  
+  
+  
 
 
 **Strengths**: Correct by design (hermetic builds), polyglot (JS, Python, Go, Java in one repo), remote build execution, fine-grained caching, handles largest monorepos.
 
+  
+  
+  
   
   
   
@@ -3378,10 +3740,16 @@ bazel build --config=remote //...
   
   
   
+  
+  
+  
 
 
 ##  Lage
 
+  
+  
+  
   
   
   
@@ -3436,10 +3804,16 @@ Microsoft's task runner focused on simplicity:
   
   
   
+  
+  
+  
 
 
 // lage.config.js
 
+  
+  
+  
   
   
   
@@ -3494,10 +3868,16 @@ module.exports = {
   
   
   
+  
+  
+  
 
 
 pipeline: {
 
+  
+  
+  
   
   
   
@@ -3552,10 +3932,16 @@ build: ["^build"],
   
   
   
+  
+  
+  
 
 
 test: ["build"],
 
+  
+  
+  
   
   
   
@@ -3610,10 +3996,16 @@ lint: [],
   
   
   
+  
+  
+  
 
 
 typecheck: [],
 
+  
+  
+  
   
   
   
@@ -3668,10 +4060,16 @@ typecheck: [],
   
   
   
+  
+  
+  
 
 
 npmClient: "pnpm",
 
+  
+  
+  
   
   
   
@@ -3726,10 +4124,16 @@ cache: true,
   
   
   
+  
+  
+  
 
 
 concurrency: 8,
 
+  
+  
+  
   
   
   
@@ -3784,10 +4188,16 @@ concurrency: 8,
   
   
   
+  
+  
+  
 
 
 # Run the build pipeline
 
+  
+  
+  
   
   
   
@@ -3842,10 +4252,16 @@ lage build
   
   
   
+  
+  
+  
 
 
 # Run tests
 
+  
+  
+  
   
   
   
@@ -3900,10 +4316,16 @@ lage test
   
   
   
+  
+  
+  
 
 
 # Show execution plan
 
+  
+  
+  
   
   
   
@@ -3958,10 +4380,16 @@ lage build --dry
   
   
   
+  
+  
+  
 
 
 # Filter by scope
 
+  
+  
+  
   
   
   
@@ -4016,10 +4444,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 **Strengths**: Simple configuration, fast, good Microsoft-ecosystem integration, incremental builds, lightweight.
 
+  
+  
+  
   
   
   
@@ -4074,10 +4508,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 ##  Comparison
 
+  
+  
+  
   
   
   
@@ -4132,10 +4572,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 |---------|-----------|-----|-------|------|
 
+  
+  
+  
   
   
   
@@ -4190,10 +4636,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 | Caching | File-level | File-level | Content-addressed | File-level |
 
+  
+  
+  
   
   
   
@@ -4248,10 +4700,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 | Polyglot | No | Yes | Yes | No |
 
+  
+  
+  
   
   
   
@@ -4306,10 +4764,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 | Learning curve | Low | Medium | High | Low |
 
+  
+  
+  
   
   
   
@@ -4364,10 +4828,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 ##  Recommendations
 
+  
+  
+  
   
   
   
@@ -4419,10 +4889,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 * **Need code generation**: Nx reduces boilerplate significantly for large teams.
 
+  
+  
+  
   
   
   
@@ -4471,10 +4947,16 @@ lage build --scope packages/core
   
   
   
+  
+  
+  
 
 
 * **Maximum scale and correctness**: Bazel for massive monorepos with strict build requirements.
 
+  
+  
+  
   
   
   

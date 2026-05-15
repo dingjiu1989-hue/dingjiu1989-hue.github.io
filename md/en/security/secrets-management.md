@@ -188,10 +188,48 @@ url: https://dingjiu1989-hue.github.io/en/security/secrets-management.html
   
   
   
+  
+  
+  
+
+
+# Secrets Management for Developers
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
 
 The Secrets Problem 
 
+  
+  
+  
   
   
   
@@ -246,10 +284,16 @@ Every application depends on secrets: API keys, database passwords, encryption k
   
   
   
+  
+  
+  
 
 
 Where Secrets Go Wrong 
 
+  
+  
+  
   
   
   
@@ -304,10 +348,16 @@ Where Secrets Go Wrong
   
   
   
+  
+  
+  
 
 
 The Vault Pattern 
 
+  
+  
+  
   
   
   
@@ -362,10 +412,16 @@ A secrets vault is a centralized service that stores, manages, and audits access
   
   
   
+  
+  
+  
 
 
 HashiCorp Vault 
 
+  
+  
+  
   
   
   
@@ -420,10 +476,16 @@ HashiCorp Vault
   
   
   
+  
+  
+  
 
 
 vault server -dev
 
+  
+  
+  
   
   
   
@@ -478,10 +540,16 @@ vault server -dev
   
   
   
+  
+  
+  
 
 
 vault kv put secret/database \
 
+  
+  
+  
   
   
   
@@ -536,10 +604,16 @@ host=db.example.com \
   
   
   
+  
+  
+  
 
 
 port=5432 \
 
+  
+  
+  
   
   
   
@@ -594,10 +668,16 @@ username=app_user \
   
   
   
+  
+  
+  
 
 
 password=$(openssl rand -base64 32)
 
+  
+  
+  
   
   
   
@@ -652,10 +732,16 @@ password=$(openssl rand -base64 32)
   
   
   
+  
+  
+  
 
 
 vault kv get secret/database
 
+  
+  
+  
   
   
   
@@ -710,10 +796,16 @@ Vault Integration with Application Code
   
   
   
+  
+  
+  
 
 
 import hvac
 
+  
+  
+  
   
   
   
@@ -768,10 +860,16 @@ client = hvac.Client(url='https://vault.example.com',
   
   
   
+  
+  
+  
 
 
 token=get_vault_token())
 
+  
+  
+  
   
   
   
@@ -826,6 +924,9 @@ secret = client.secrets.kv.read_secret_version(
   
   
   
+  
+  
+  
 
 
 path='database'
@@ -855,10 +956,16 @@ path='database'
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ db_password = secret['data']['data']['password']
   
   
   
+  
+  
+  
 
 
 # Use the secret to connect
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ conn = psycopg2.connect(
   
   
   
+  
+  
+  
 
 
 host=secret['data']['data']['host'],
 
+  
+  
+  
   
   
   
@@ -1029,10 +1148,16 @@ password=db_password
   
   
   
+  
+  
+  
 
 
 )
 
+  
+  
+  
   
   
   
@@ -1087,10 +1212,16 @@ Cloud-Native Solutions
   
   
   
+  
+  
+  
 
 
 AWS Secrets Manager 
 
+  
+  
+  
   
   
   
@@ -1145,10 +1276,16 @@ import boto3
   
   
   
+  
+  
+  
 
 
 from botocore.exceptions import ClientError
 
+  
+  
+  
   
   
   
@@ -1203,10 +1340,16 @@ def get_secret(secret_name):
   
   
   
+  
+  
+  
 
 
 client = boto3.client('secretsmanager')
 
+  
+  
+  
   
   
   
@@ -1261,10 +1404,16 @@ response = client.get_secret_value(SecretId=secret_name)
   
   
   
+  
+  
+  
 
 
 return json.loads(response['SecretString'])
 
+  
+  
+  
   
   
   
@@ -1319,10 +1468,16 @@ return json.loads(response['SecretString'])
   
   
   
+  
+  
+  
 
 
 db_creds = get_secret('prod/database/credentials')
 
+  
+  
+  
   
   
   
@@ -1377,10 +1532,16 @@ GCP Secret Manager
   
   
   
+  
+  
+  
 
 
 from google.cloud import secretmanager
 
+  
+  
+  
   
   
   
@@ -1435,10 +1596,16 @@ def access_secret_version(secret_id, version_id="latest"):
   
   
   
+  
+  
+  
 
 
 client = secretmanager.SecretManagerServiceClient()
 
+  
+  
+  
   
   
   
@@ -1493,10 +1660,16 @@ name = f"projects/my-project/secrets/{secret_id}/versions/{version_id}"
   
   
   
+  
+  
+  
 
 
 response = client.access_secret_version(name=name)
 
+  
+  
+  
   
   
   
@@ -1551,10 +1724,16 @@ return response.payload.data.decode("UTF-8")
   
   
   
+  
+  
+  
 
 
 Secrets in CI/CD 
 
+  
+  
+  
   
   
   
@@ -1609,10 +1788,16 @@ Never store secrets in repository CI/CD configuration files that are committed t
   
   
   
+  
+  
+  
 
 
 | Platform | How to Store Secrets | |----------|---------------------| | GitHub Actions | Settings > Secrets and variables > Actions | | GitLab CI | Settings > CI/CD > Variables | | CircleCI | Project Settings > Environment Variables | | Jenkins | Manage Jenkins > Credentials | 
 
+  
+  
+  
   
   
   
@@ -1667,10 +1852,16 @@ Never store secrets in repository CI/CD configuration files that are committed t
   
   
   
+  
+  
+  
 
 
 name: Deploy
 
+  
+  
+  
   
   
   
@@ -1725,10 +1916,16 @@ on: [push]
   
   
   
+  
+  
+  
 
 
 jobs:
 
+  
+  
+  
   
   
   
@@ -1783,10 +1980,16 @@ deploy:
   
   
   
+  
+  
+  
 
 
 runs-on: ubuntu-latest
 
+  
+  
+  
   
   
   
@@ -1841,39 +2044,48 @@ steps:
   
   
   
-
-
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to production
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- uses: actions/checkout@v4
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- name: Deploy to production
+
+  
+  
+  
   
   
   
@@ -1928,10 +2140,16 @@ env:
   
   
   
+  
+  
+  
 
 
 DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
+  
+  
+  
   
   
   
@@ -1986,10 +2204,16 @@ API_KEY: ${{ secrets.API_KEY }}
   
   
   
+  
+  
+  
 
 
 run: ./deploy.sh
 
+  
+  
+  
   
   
   
@@ -2044,10 +2268,16 @@ Detecting Secret Leaks
   
   
   
+  
+  
+  
 
 
 Pre-Commit Hooks 
 
+  
+  
+  
   
   
   
@@ -2102,10 +2332,16 @@ Use tools like `git-secrets` or `truffleHog` as pre-commit hooks:
   
   
   
+  
+  
+  
 
 
 # Install git-secrets
 
+  
+  
+  
   
   
   
@@ -2160,10 +2396,16 @@ brew install git-secrets
   
   
   
+  
+  
+  
 
 
 git secrets --install
 
+  
+  
+  
   
   
   
@@ -2218,10 +2460,16 @@ git secrets --register-aws
   
   
   
+  
+  
+  
 
 
 # Scan for secrets before commit
 
+  
+  
+  
   
   
   
@@ -2276,10 +2524,16 @@ git secrets --register-aws
   
   
   
+  
+  
+  
 
 
 # .git/hooks/pre-commit
 
+  
+  
+  
   
   
   
@@ -2334,10 +2588,16 @@ git secrets --scan
   
   
   
+  
+  
+  
 
 
 Scanning Repositories 
 
+  
+  
+  
   
   
   
@@ -2392,10 +2652,16 @@ Scanning Repositories
   
   
   
+  
+  
+  
 
 
 trufflehog git https://github.com/example/repo.git
 
+  
+  
+  
   
   
   
@@ -2450,10 +2716,16 @@ trufflehog git https://github.com/example/repo.git
   
   
   
+  
+  
+  
 
 
 gitleaks detect --source . --verbose
 
+  
+  
+  
   
   
   
@@ -2508,10 +2780,16 @@ Rotation and Expiration
   
   
   
+  
+  
+  
 
 
 Secrets should have a limited lifetime. Implement automatic rotation: 
 
+  
+  
+  
   
   
   
@@ -2566,10 +2844,16 @@ Secrets should have a limited lifetime. Implement automatic rotation:
   
   
   
+  
+  
+  
 
 
 * **API keys**: Rotate immediately if compromised, regularly every 180 days.
 
+  
+  
+  
   
   
   
@@ -2624,10 +2908,16 @@ Secrets should have a limited lifetime. Implement automatic rotation:
   
   
   
+  
+  
+  
 
 
 * **SSH keys**: Rotate on employee departure or annually.
 
+  
+  
+  
   
   
   
@@ -2682,10 +2972,16 @@ Secrets should have a limited lifetime. Implement automatic rotation:
   
   
   
+  
+  
+  
 
 
 # Phase 1: Update app to accept both old and new passwords
 
+  
+  
+  
   
   
   
@@ -2740,10 +3036,16 @@ Secrets should have a limited lifetime. Implement automatic rotation:
   
   
   
+  
+  
+  
 
 
 # Phase 3: Update app to use only new password
 
+  
+  
+  
   
   
   
@@ -2798,10 +3100,16 @@ Secrets should have a limited lifetime. Implement automatic rotation:
   
   
   
+  
+  
+  
 
 
 The Principle of Least Privilege 
 
+  
+  
+  
   
   
   
@@ -2856,10 +3164,16 @@ Secrets should be scoped to what a particular service or developer needs:
   
   
   
+  
+  
+  
 
 
 * Each microservice gets its own set of secrets, not shared credentials.
 
+  
+  
+  
   
   
   
@@ -2914,10 +3228,16 @@ Secrets should be scoped to what a particular service or developer needs:
   
   
   
+  
+  
+  
 
 
 * Service accounts have the minimum permissions required for their function.
 
+  
+  
+  
   
   
   
@@ -2972,10 +3292,16 @@ Secrets should be scoped to what a particular service or developer needs:
   
   
   
+  
+  
+  
 
 
 Summary 
 
+  
+  
+  
   
   
   

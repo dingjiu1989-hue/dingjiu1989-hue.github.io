@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/terminal-emulators.html
   
 
 
+# Best Terminal Emulators 2026
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 The terminal emulator is one of the most frequently used tools in a developer's workflow. Modern terminal emulators offer GPU acceleration, split panes, session management, and even AI integration. This guide compares the best options in 2026.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ The terminal emulator is one of the most frequently used tools in a developer's 
   
   
   
+  
+  
+  
 
 
 * **Performance**: Smooth scrolling, fast rendering, low latency.
 
+  
+  
+  
   
   
   
@@ -269,10 +310,16 @@ The terminal emulator is one of the most frequently used tools in a developer's 
   
   
   
+  
+  
+  
 
 
 * **Customization**: Themes, fonts, keybindings.
 
+  
+  
+  
   
   
   
@@ -321,10 +368,16 @@ The terminal emulator is one of the most frequently used tools in a developer's 
   
   
   
+  
+  
+  
 
 
 * **Platform**: Native macOS, Linux, and Windows support.
 
+  
+  
+  
   
   
   
@@ -379,10 +432,16 @@ The terminal emulator is one of the most frequently used tools in a developer's 
   
   
   
+  
+  
+  
 
 
 iTerm2 is the default choice for macOS developers. It has been the gold standard for years with extensive feature coverage.
 
+  
+  
+  
   
   
   
@@ -437,10 +496,16 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 * Split panes (vertical and horizontal).
 
+  
+  
+  
   
   
   
@@ -489,10 +554,16 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 * Search with regex support.
 
+  
+  
+  
   
   
   
@@ -541,10 +612,16 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 * Triggers for automatic actions on output.
 
+  
+  
+  
   
   
   
@@ -593,6 +670,9 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 * Image display in terminal (Sixel/IMG cat).
@@ -619,10 +699,16 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 * Built-in password manager.
 
+  
+  
+  
   
   
   
@@ -677,10 +763,16 @@ iTerm2 is the default choice for macOS developers. It has been the gold standard
   
   
   
+  
+  
+  
 
 
 # Install
 
+  
+  
+  
   
   
   
@@ -735,6 +827,9 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
   
   
   
+  
+  
+  
 
 
 # Then use features like:
@@ -764,39 +859,16 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
   
   
   
-
-
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Mark directories: Cmd+Shift+M
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Jump to marks: Cmd+Shift+Up/Down
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Mark directories: Cmd+Shift+M
 
+  
+  
+  
   
   
   
@@ -824,8 +896,43 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
   
 
 
-# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Search with regex: Cmd+F (then enable Regex)
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Jump to marks: Cmd+Shift+Up/Down
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\- Search with regex: Cmd+F (then enable Regex)
+
+  
+  
+  
   
   
   
@@ -880,10 +987,16 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
   
   
   
+  
+  
+  
 
 
 **Cons**: macOS only, can feel cluttered, resource usage is moderate.
 
+  
+  
+  
   
   
   
@@ -938,10 +1051,16 @@ curl -L https://iterm2.com/misc/install_shell_integration.sh | bash
   
   
   
+  
+  
+  
 
 
 Warp is a modern, Rust-based terminal with built-in AI features and a block-based command editor.
 
+  
+  
+  
   
   
   
@@ -996,10 +1115,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 * Block-based output (each command and its output is a block).
 
+  
+  
+  
   
   
   
@@ -1048,10 +1173,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 * Smart autocomplete (IDE-like suggestions).
 
+  
+  
+  
   
   
   
@@ -1100,10 +1231,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 * Split panes with drag-and-drop.
 
+  
+  
+  
   
   
   
@@ -1152,10 +1289,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 * Custom themes.
 
+  
+  
+  
   
   
   
@@ -1210,10 +1353,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 # Type: "find all node processes and kill them"
 
+  
+  
+  
   
   
   
@@ -1268,10 +1417,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 **Pros**: Beautiful UI, AI features, modern architecture, smart autocomplete.
 
+  
+  
+  
   
   
   
@@ -1326,10 +1481,16 @@ Warp is a modern, Rust-based terminal with built-in AI features and a block-base
   
   
   
+  
+  
+  
 
 
 ##  Alacritty
 
+  
+  
+  
   
   
   
@@ -1384,10 +1545,16 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   
   
   
+  
+  
+  
 
 
 **Key Features:**
 
+  
+  
+  
   
   
   
@@ -1439,10 +1606,16 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   
   
   
+  
+  
+  
 
 
 * Vi mode (keyboard-driven cursor movement).
 
+  
+  
+  
   
   
   
@@ -1491,6 +1664,9 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   
   
   
+  
+  
+  
 
 
 * True color and ligature support.
@@ -1517,10 +1693,16 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   
   
   
+  
+  
+  
 
 
 * YAML/TOML configuration (version 0.13+).
 
+  
+  
+  
   
   
   
@@ -1575,10 +1757,16 @@ Alacritty is a minimalist, GPU-accelerated terminal emulator focused on performa
   
   
   
+  
+  
+  
 
 
 [window]
 
+  
+  
+  
   
   
   
@@ -1633,10 +1821,16 @@ opacity = 0.95
   
   
   
+  
+  
+  
 
 
 padding = { x = 8, y = 8 }
 
+  
+  
+  
   
   
   
@@ -1691,10 +1885,16 @@ padding = { x = 8, y = 8 }
   
   
   
+  
+  
+  
 
 
 size = 14
 
+  
+  
+  
   
   
   
@@ -1749,10 +1949,16 @@ family = "JetBrains Mono"
   
   
   
+  
+  
+  
 
 
 normal = { family = "JetBrains Mono" }
 
+  
+  
+  
   
   
   
@@ -1807,10 +2013,16 @@ normal = { family = "JetBrains Mono" }
   
   
   
+  
+  
+  
 
 
 primary = { background = "#282a36", foreground = "#f8f8f2" }
 
+  
+  
+  
   
   
   
@@ -1865,10 +2077,16 @@ cursor = { text = "#44475a", cursor = "#f8f8f2" }
   
   
   
+  
+  
+  
 
 
 [terminal]
 
+  
+  
+  
   
   
   
@@ -1923,10 +2141,16 @@ shell = { program = "/bin/zsh" }
   
   
   
+  
+  
+  
 
 
 **Pros**: Fastest rendering, minimal resource usage, cross-platform.
 
+  
+  
+  
   
   
   
@@ -1981,10 +2205,16 @@ shell = { program = "/bin/zsh" }
   
   
   
+  
+  
+  
 
 
 ##  Kitty
 
+  
+  
+  
   
   
   
@@ -2039,10 +2269,16 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
   
   
   
+  
+  
+  
 
 
 **Key Features:**
 
+  
+  
+  
   
   
   
@@ -2094,10 +2330,16 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
   
   
   
+  
+  
+  
 
 
 * Built-in tabs and split panes.
 
+  
+  
+  
   
   
   
@@ -2146,10 +2388,16 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
   
   
   
+  
+  
+  
 
 
 * Remote file browsing via SSH (using kitty + kitten).
 
+  
+  
+  
   
   
   
@@ -2198,10 +2446,16 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
   
   
   
+  
+  
+  
 
 
 * Fully keyboard-driven.
 
+  
+  
+  
   
   
   
@@ -2256,10 +2510,16 @@ Kitty is a GPU-accelerated terminal focused on performance and features. It supp
   
   
   
+  
+  
+  
 
 
 kitty +kitten icat image.png # Display image in terminal
 
+  
+  
+  
   
   
   
@@ -2314,10 +2574,16 @@ kitty +kitten hyperlinked_grep # Search with hyperlinks
   
   
   
+  
+  
+  
 
 
 kitty +kitten diff file1 file2 # Diff viewer
 
+  
+  
+  
   
   
   
@@ -2372,10 +2638,16 @@ kitty +kitten diff file1 file2 # Diff viewer
   
   
   
+  
+  
+  
 
 
 font_family JetBrains Mono
 
+  
+  
+  
   
   
   
@@ -2430,10 +2702,16 @@ font_size 14
   
   
   
+  
+  
+  
 
 
 enable_audio_bell no
 
+  
+  
+  
   
   
   
@@ -2488,10 +2766,16 @@ hide_window_decorations titlebar-only
   
   
   
+  
+  
+  
 
 
 tab_bar_edge top
 
+  
+  
+  
   
   
   
@@ -2546,10 +2830,16 @@ shell_integration enabled
   
   
   
+  
+  
+  
 
 
 **Pros**: GPU-accelerated with features (tabs, splits), image display, remote file browsing.
 
+  
+  
+  
   
   
   
@@ -2604,10 +2894,16 @@ shell_integration enabled
   
   
   
+  
+  
+  
 
 
 ##  Windows Terminal
 
+  
+  
+  
   
   
   
@@ -2662,10 +2958,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 **Key Features:**
 
+  
+  
+  
   
   
   
@@ -2717,10 +3019,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 * GPU-accelerated text rendering.
 
+  
+  
+  
   
   
   
@@ -2769,10 +3077,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 * Quake mode (dropdown).
 
+  
+  
+  
   
   
   
@@ -2821,10 +3135,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 * Unicode and emoji support.
 
+  
+  
+  
   
   
   
@@ -2876,10 +3196,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -2934,10 +3260,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 "profiles": {
 
+  
+  
+  
   
   
   
@@ -2992,10 +3324,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 "fontFace": "Cascadia Code",
 
+  
+  
+  
   
   
   
@@ -3050,10 +3388,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 "acrylicOpacity": 0.8,
 
+  
+  
+  
   
   
   
@@ -3108,10 +3452,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 },
 
+  
+  
+  
   
   
   
@@ -3166,10 +3516,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 {
 
+  
+  
+  
   
   
   
@@ -3224,6 +3580,9 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 "source": "Windows.Terminal.Wsl"
@@ -3253,10 +3612,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 }
 
+  
+  
+  
   
   
   
@@ -3311,32 +3676,6 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
-
-
-}
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
@@ -3344,6 +3683,41 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
 
 }
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+}
+
+  
+  
+  
   
   
   
@@ -3398,10 +3772,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 **Cons**: Windows only, PowerShell defaults can be slower.
 
+  
+  
+  
   
   
   
@@ -3456,10 +3836,16 @@ Windows Terminal is Microsoft's modern terminal application, highly recommended 
   
   
   
+  
+  
+  
 
 
 Hyper is an Electron-based terminal built with web technologies. It uses HTML/CSS for rendering, making it highly customizable.
 
+  
+  
+  
   
   
   
@@ -3514,10 +3900,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 **Cons**: Significant overhead (Electron), slower than native terminals.
 
+  
+  
+  
   
   
   
@@ -3572,10 +3964,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 | Terminal | Platform | GPU Accel | Tabs | Splits | Config Format | Resource Usage |
 
+  
+  
+  
   
   
   
@@ -3630,10 +4028,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 | iTerm2 | macOS | Partial | Yes | Yes | GUI + Plist | Moderate |
 
+  
+  
+  
   
   
   
@@ -3688,10 +4092,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 | Alacritty | Win/Mac/Linux | Yes (OpenGL) | No | No | TOML | Very Low |
 
+  
+  
+  
   
   
   
@@ -3746,10 +4156,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 | Windows Terminal | Windows | Yes | Yes | Yes | JSON | Low |
 
+  
+  
+  
   
   
   
@@ -3804,10 +4220,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 ##  Ecosystem Integration
 
+  
+  
+  
   
   
   
@@ -3862,10 +4284,16 @@ Hyper is an Electron-based terminal built with web technologies. It uses HTML/CS
   
   
   
+  
+  
+  
 
 
 # Works with any terminal
 
+  
+  
+  
   
   
   
@@ -3920,10 +4348,16 @@ tmux new -s myproject
   
   
   
+  
+  
+  
 
 
 tmux attach -t myproject # Reattach later
 
+  
+  
+  
   
   
   
@@ -3978,10 +4412,16 @@ tmux attach -t myproject # Reattach later
   
   
   
+  
+  
+  
 
 
 Ctrl-b % # Vertical split
 
+  
+  
+  
   
   
   
@@ -4036,10 +4476,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 **Shell Choice:**
 
+  
+  
+  
   
   
   
@@ -4094,10 +4540,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 |-------|------|------|
 
+  
+  
+  
   
   
   
@@ -4152,10 +4604,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 | Fish | Autosuggestions, web config | Not POSIX-compliant |
 
+  
+  
+  
   
   
   
@@ -4210,10 +4668,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 | NuShell | Structured data pipelines | Newer, smaller ecosystem |
 
+  
+  
+  
   
   
   
@@ -4268,10 +4732,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 * **macOS users**: iTerm2 for feature completeness, Warp for modern UX, Alacritty for performance.
 
+  
+  
+  
   
   
   
@@ -4320,6 +4790,9 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 * **Windows users**: Windows Terminal (best platform integration).
@@ -4346,10 +4819,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 * **Performance maximizers**: Alacritty + tmux.
 
+  
+  
+  
   
   
   
@@ -4401,10 +4880,16 @@ Ctrl-b " # Horizontal split
   
   
   
+  
+  
+  
 
 
 ##  Summary
 
+  
+  
+  
   
   
   

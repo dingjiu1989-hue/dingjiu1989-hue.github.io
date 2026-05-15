@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/tools/database-management-tools.html
   
 
 
+# Database Management Tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 ##  Introduction
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Database management tools are essential for developers, DBAs, and data analysts.
   
   
   
+  
+  
+  
 
 
 This article compares five database management tools: DBeaver, TablePlus, DataGrip, pgAdmin, and MongoDB Compass.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ This article compares five database management tools: DBeaver, TablePlus, DataGr
   
   
   
+  
+  
+  
 
 
 DBeaver is a free, open-source universal database client supporting virtually any database with a JDBC driver. It supports MySQL, PostgreSQL, Oracle, SQL Server, SQLite, MongoDB, Cassandra, Redis, and over 80 other databases.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ DBeaver's feature set includes:
   
   
   
+  
+  
+  
 
 
 * SQL editor with syntax highlighting, auto-completion, and formatting.
 
+  
+  
+  
   
   
   
@@ -385,10 +438,16 @@ DBeaver's feature set includes:
   
   
   
+  
+  
+  
 
 
 * ER diagram generation from existing schemas.
 
+  
+  
+  
   
   
   
@@ -437,10 +496,16 @@ DBeaver's feature set includes:
   
   
   
+  
+  
+  
 
 
 * SSH tunneling and SSL connection support.
 
+  
+  
+  
   
   
   
@@ -492,10 +557,16 @@ DBeaver's feature set includes:
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DBeaver's smart auto-completion suggests columns, tables, and functions
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DBeaver's smart auto-completion suggests columns, tables, and functions
 
+  
+  
+  
   
   
   
@@ -550,10 +621,16 @@ SELECT u.name, COUNT(o.id) AS order_count
   
   
   
+  
+  
+  
 
 
 FROM users u
 
+  
+  
+  
   
   
   
@@ -608,10 +685,16 @@ LEFT JOIN orders o ON u.id = o.user_id
   
   
   
+  
+  
+  
 
 
 GROUP BY u.name
 
+  
+  
+  
   
   
   
@@ -666,10 +749,16 @@ HAVING COUNT(o.id) > 5;
   
   
   
+  
+  
+  
 
 
 DBeaver Enterprise adds support for MongoDB, Cassandra, Redis, and BigQuery — features worth the cost for teams working across relational and NoSQL databases. The free Community edition handles relational databases comprehensively.
 
+  
+  
+  
   
   
   
@@ -724,10 +813,16 @@ The main drawback is a somewhat dated Java Swing interface and occasional perfor
   
   
   
+  
+  
+  
 
 
 ##  TablePlus: Modern Native Database Client
 
+  
+  
+  
   
   
   
@@ -782,10 +877,16 @@ TablePlus is a modern, native database management tool for macOS and Windows. It
   
   
   
+  
+  
+  
 
 
 TablePlus emphasizes performance with native GUI rendering, multi-tab interface, and connection grouping. The filtered browsing allows real-time search across thousands of rows with minimal latency.
 
+  
+  
+  
   
   
   
@@ -840,10 +941,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Inline data editing directly in result grids.
 
+  
+  
+  
   
   
   
@@ -892,10 +999,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * SSH tunneling, SSL support, and socket connections.
 
+  
+  
+  
   
   
   
@@ -944,10 +1057,16 @@ Key features include:
   
   
   
+  
+  
+  
 
 
 * Database structure editing (add/remove columns, indexes, foreign keys).
 
+  
+  
+  
   
   
   
@@ -1002,10 +1121,16 @@ TablePlus' text-editing mode for large text fields and JSON viewer for JSON colu
   
   
   
+  
+  
+  
 
 
 TablePlus operates on a paid license model per platform. The free version limits the number of open tabs and connections.
 
+  
+  
+  
   
   
   
@@ -1060,10 +1185,16 @@ TablePlus operates on a paid license model per platform. The free version limits
   
   
   
+  
+  
+  
 
 
 DataGrip, from JetBrains, is a professional database IDE built on the IntelliJ platform. It shares code completion, refactoring, and navigation features familiar to IntelliJ IDEA users.
 
+  
+  
+  
   
   
   
@@ -1118,10 +1249,16 @@ DataGrip's SQL editor is its strongest feature. Context-aware completion suggest
   
   
   
+  
+  
+  
 
 
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DataGrip detects and highlights potential issues in real time
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-- DataGrip detects and highlights potential issues in real time
 
+  
+  
+  
   
   
   
@@ -1176,10 +1313,16 @@ SELECT u.name, o.*
   
   
   
+  
+  
+  
 
 
 FROM users u
 
+  
+  
+  
   
   
   
@@ -1234,10 +1377,16 @@ JOIN orders o ON u.id = o.user_id -- DataGrip suggests index on user_id
   
   
   
+  
+  
+  
 
 
 WHERE o.created_at > NOW() - INTERVAL '7 days'
 
+  
+  
+  
   
   
   
@@ -1292,10 +1441,16 @@ Additional features include schema diff and migration generation, version contro
   
   
   
+  
+  
+  
 
 
 DataGrip supports PostgreSQL, MySQL, SQL Server, Oracle, SQLite, and MongoDB (via plugin). The main disadvantage is cost — DataGrip requires a paid subscription, though JetBrains All Products Pack includes it.
 
+  
+  
+  
   
   
   
@@ -1350,10 +1505,16 @@ DataGrip supports PostgreSQL, MySQL, SQL Server, Oracle, SQLite, and MongoDB (vi
   
   
   
+  
+  
+  
 
 
 pgAdmin is the official administration and management tool for PostgreSQL. It provides a web-based interface with comprehensive PostgreSQL-specific features.
 
+  
+  
+  
   
   
   
@@ -1408,10 +1569,16 @@ pgAdmin's dashboard shows server status, active connections, transactions, and l
   
   
   
+  
+  
+  
 
 
 PostgreSQL-specific features include:
 
+  
+  
+  
   
   
   
@@ -1463,10 +1630,16 @@ PostgreSQL-specific features include:
   
   
   
+  
+  
+  
 
 
 * Replication slot monitoring.
 
+  
+  
+  
   
   
   
@@ -1515,6 +1688,9 @@ PostgreSQL-specific features include:
   
   
   
+  
+  
+  
 
 
 * PGBouncer connection pooling integration.
@@ -1541,10 +1717,16 @@ PostgreSQL-specific features include:
   
   
   
+  
+  
+  
 
 
 * Query plan visualization with cost analysis.
 
+  
+  
+  
   
   
   
@@ -1599,10 +1781,16 @@ pgAdmin 4's web-based architecture allows running as a shared service accessible
   
   
   
+  
+  
+  
 
 
 ##  MongoDB Compass
 
+  
+  
+  
   
   
   
@@ -1657,10 +1845,16 @@ MongoDB Compass is the official GUI for MongoDB. It provides schema visualizatio
   
   
   
+  
+  
+  
 
 
 The Schema tab analyzes collection documents and displays field type distributions and value ranges. The Explain tab shows query execution plans with index usage analysis and performance metrics.
 
+  
+  
+  
   
   
   
@@ -1715,10 +1909,16 @@ The Schema tab analyzes collection documents and displays field type distributio
   
   
   
+  
+  
+  
 
 
 [
 
+  
+  
+  
   
   
   
@@ -1773,10 +1973,16 @@ The Schema tab analyzes collection documents and displays field type distributio
   
   
   
+  
+  
+  
 
 
 { $group: { _id: "$region", count: { $sum: 1 } } },
 
+  
+  
+  
   
   
   
@@ -1831,10 +2037,16 @@ The Schema tab analyzes collection documents and displays field type distributio
   
   
   
+  
+  
+  
 
 
 ]
 
+  
+  
+  
   
   
   
@@ -1889,10 +2101,16 @@ Compass supports CRUD operations, index management, document validation rule edi
   
   
   
+  
+  
+  
 
 
 ##  Conclusion
 
+  
+  
+  
   
   
   
@@ -1947,10 +2165,16 @@ Compass supports CRUD operations, index management, document validation rule edi
   
   
   
+  
+  
+  
 
 
 |---|---|---|---|---|
 
+  
+  
+  
   
   
   
@@ -2005,10 +2229,16 @@ Compass supports CRUD operations, index management, document validation rule edi
   
   
   
+  
+  
+  
 
 
 | TablePlus | 15+ databases | macOS, Windows | Paid | Modern native experience |
 
+  
+  
+  
   
   
   
@@ -2063,6 +2293,9 @@ Compass supports CRUD operations, index management, document validation rule edi
   
   
   
+  
+  
+  
 
 
 | pgAdmin | PostgreSQL | Web-based | Free | PostgreSQL administration |
@@ -2092,10 +2325,16 @@ Compass supports CRUD operations, index management, document validation rule edi
   
   
   
+  
+  
+  
 
 
 | MongoDB Compass | MongoDB | Cross-platform | Free/Enterprise | MongoDB management |
 
+  
+  
+  
   
   
   

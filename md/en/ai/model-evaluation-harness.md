@@ -161,8 +161,43 @@ url: https://dingjiu1989-hue.github.io/en/ai/model-evaluation-harness.html
   
 
 
+# Model Evaluation: Benchmarks, Human Evaluation, LLM-as-Judge, and A/B Testing in Production
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Choosing the right model for your application is not about picking the most powerful one. It is about picking the model that delivers sufficient quality at acceptable cost and latency. Here is how to build a model evaluation pipeline that gives you data-driven answers.
 
+  
+  
+  
   
   
   
@@ -217,10 +252,16 @@ Choosing the right model for your application is not about picking the most powe
   
   
   
+  
+  
+  
 
 
 Model selection based on leaderboard scores or blog posts is unreliable. A model that scores highest on MMLU might perform poorly on your specific task. Your data distribution, prompt structure, and quality requirements are unique.
 
+  
+  
+  
   
   
   
@@ -275,10 +316,16 @@ Systematic evaluation removes guesswork. You define what "good" means for your a
   
   
   
+  
+  
+  
 
 
 Evaluation also catches regressions. New model versions from the same provider may have different behavior. Your evaluation suite tells you whether upgrading helps or hurts.
 
+  
+  
+  
   
   
   
@@ -333,10 +380,16 @@ Evaluation also catches regressions. New model versions from the same provider m
   
   
   
+  
+  
+  
 
 
 Public benchmarks like MMLU, HumanEval, and GSM8K measure general capabilities. They are useful for initial model screening but do not predict task-specific performance. A model strong on coding benchmarks may still fail at your customer support task.
 
+  
+  
+  
   
   
   
@@ -391,10 +444,16 @@ Build task-specific benchmarks from your own data. Create 100 to 500 examples re
   
   
   
+  
+  
+  
 
 
 Cover edge cases in your benchmarks. Include examples with ambiguous inputs, multi-step reasoning, conflicting instructions, and inputs near token limits. These edge cases often reveal model weaknesses that standard examples miss.
 
+  
+  
+  
   
   
   
@@ -449,10 +508,16 @@ Automate benchmark execution. When evaluating a new model, your pipeline should 
   
   
   
+  
+  
+  
 
 
 ##  Human Evaluation
 
+  
+  
+  
   
   
   
@@ -507,10 +572,16 @@ Human evaluation is the gold standard for quality assessment but is expensive an
   
   
   
+  
+  
+  
 
 
 Define clear evaluation criteria before starting. Rate each response on relevance, accuracy, completeness, and tone. Use a Likert scale of 1 to 5 with detailed rubrics for each score. Ambiguous criteria produce unreliable evaluations.
 
+  
+  
+  
   
   
   
@@ -565,10 +636,16 @@ Use at least three evaluators per example to average out individual bias. Inter-
   
   
   
+  
+  
+  
 
 
 Focus human evaluation on the examples where automated metrics disagree. If LLM-as-judge and model-based scores consistently agree, human review adds little value. Reserve humans for the edge cases that automated systems cannot handle.
 
+  
+  
+  
   
   
   
@@ -623,10 +700,16 @@ Focus human evaluation on the examples where automated metrics disagree. If LLM-
   
   
   
+  
+  
+  
 
 
 LLM-as-judge uses a strong model to evaluate other models' outputs. Provide the judge model with the task input, the candidate response, and a scoring rubric. The judge returns scores and sometimes explanations.
 
+  
+  
+  
   
   
   
@@ -681,10 +764,16 @@ Choose your judge model carefully. Use a model that is clearly more capable than
   
   
   
+  
+  
+  
 
 
 LLM-as-judge has known biases. It favors longer responses, responses from its own family, and responses that match its style. Mitigate these biases by randomizing response order and using reference answers.
 
+  
+  
+  
   
   
   
@@ -739,10 +828,16 @@ Validate your LLM-as-judge setup against human evaluation. Run a pilot where hum
   
   
   
+  
+  
+  
 
 
 ##  A/B Testing in Production
 
+  
+  
+  
   
   
   
@@ -797,10 +892,16 @@ Benchmarks and offline evaluation measure controllable quality. They cannot meas
   
   
   
+  
+  
+  
 
 
 Run A/B tests where a percentage of traffic goes to a candidate model while the rest stays on the current model. Measure user engagement metrics: session duration, return rate, conversion rate, and support ticket volume.
 
+  
+  
+  
   
   
   
@@ -855,10 +956,16 @@ Define your success metric before starting. For a chatbot, success might be fewe
   
   
   
+  
+  
+  
 
 
 Run tests for sufficient duration. One week minimum, two weeks for statistically significant results. User behavior varies by day of week, so a full week captures that cycle.
 
+  
+  
+  
   
   
   
@@ -913,10 +1020,16 @@ Monitor secondary metrics during the test. A model that increases conversion but
   
   
   
+  
+  
+  
 
 
 ##  Building Your Evaluation Pipeline
 
+  
+  
+  
   
   
   
@@ -971,10 +1084,16 @@ Start simple. Create a benchmark of 50 task-specific examples. Run human evaluat
   
   
   
+  
+  
+  
 
 
 Add automated evaluation as your application matures. Integrate LLM-as-judge into your CI/CD pipeline so every model change runs through evaluation before deployment.
 
+  
+  
+  
   
   
   

@@ -132,8 +132,40 @@ url: https://dingjiu1989-hue.github.io/en/security/waf-implementation.html
   
 
 
+# Web Application Firewall Implementation
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
 Introduction 
 
+  
+  
+  
   
   
   
@@ -176,6 +208,9 @@ A Web Application Firewall (WAF) is a security layer that monitors, filters, and
   
   
   
+  
+  
+  
 
 
 ModSecurity and OWASP CRS 
@@ -199,10 +234,16 @@ ModSecurity and OWASP CRS
   
   
   
+  
+  
+  
 
 
 ModSecurity is the most widely deployed open-source WAF engine. It operates as a module within web servers like Apache, Nginx, and IIS, or as a reverse proxy. The OWASP Core Rule Set (CRS) provides generic attack detection rules. 
 
+  
+  
+  
   
   
   
@@ -254,10 +295,16 @@ ModSecurity is the most widely deployed open-source WAF engine. It operates as a
   
   
   
+  
+  
+  
 
 
 SecRuleEngine On
 
+  
+  
+  
   
   
   
@@ -306,10 +353,16 @@ SecRequestBodyAccess On
   
   
   
+  
+  
+  
 
 
 SecResponseBodyAccess On
 
+  
+  
+  
   
   
   
@@ -358,10 +411,16 @@ SecDataDir /tmp/modsecurity/data
   
   
   
+  
+  
+  
 
 
 # Include OWASP CRS
 
+  
+  
+  
   
   
   
@@ -410,10 +469,16 @@ Include /etc/modsecurity/crs/crs-setup.conf
   
   
   
+  
+  
+  
 
 
 Include /etc/modsecurity/crs/rules/*.conf
 
+  
+  
+  
   
   
   
@@ -462,10 +527,16 @@ Include /etc/modsecurity/crs/rules/*.conf
   
   
   
+  
+  
+  
 
 
 SecRule REQUEST_HEADERS:User-Agent "@pmFromFile /etc/modsecurity/blocked-agents.txt" \
 
+  
+  
+  
   
   
   
@@ -517,10 +588,16 @@ SecRule REQUEST_HEADERS:User-Agent "@pmFromFile /etc/modsecurity/blocked-agents.
   
   
   
+  
+  
+  
 
 
 CRS includes rules for SQL injection (942xxx), XSS (941xxx), LFI (931xxx), RFI (932xxx), and more. Each rule set is categorized by phase and severity. 
 
+  
+  
+  
   
   
   
@@ -563,10 +640,16 @@ Custom Rule Writing
   
   
   
+  
+  
+  
 
 
 Custom rules extend the WAF to handle application-specific threats or business logic. ModSecurity rules consist of three components: variables, operators, and actions. 
 
+  
+  
+  
   
   
   
@@ -615,10 +698,16 @@ Custom rules extend the WAF to handle application-specific threats or business l
   
   
   
+  
+  
+  
 
 
 SecRule REQUEST_URI "@beginsWith /api/checkout" \
 
+  
+  
+  
   
   
   
@@ -667,10 +756,16 @@ SecRule REQUEST_URI "@beginsWith /api/checkout" \
   
   
   
+  
+  
+  
 
 
 msg:'Checkout parameter tampering detected',\
 
+  
+  
+  
   
   
   
@@ -719,10 +814,16 @@ chain"
   
   
   
+  
+  
+  
 
 
 SecRule ARGS:quantity "!@rx ^[0-9]+$"
 
+  
+  
+  
   
   
   
@@ -771,10 +872,16 @@ SecRule ARGS:quantity "!@rx ^[0-9]+$"
   
   
   
+  
+  
+  
 
 
 SecRule IP:COUNT "@gt 100" \
 
+  
+  
+  
   
   
   
@@ -823,10 +930,16 @@ SecRule IP:COUNT "@gt 100" \
   
   
   
+  
+  
+  
 
 
 msg:'Rate limit exceeded',\
 
+  
+  
+  
   
   
   
@@ -875,10 +988,16 @@ setvar:ip.rate_limit=1,\
   
   
   
+  
+  
+  
 
 
 expirevar:ip.rate_limit=60"
 
+  
+  
+  
   
   
   
@@ -927,10 +1046,16 @@ SecAction "id:1000004,phase:5,nolog,\
   
   
   
+  
+  
+  
 
 
 initcol:ip=%{REMOTE_ADDR},\
 
+  
+  
+  
   
   
   
@@ -979,10 +1104,16 @@ setvar:ip.count=+1"
   
   
   
+  
+  
+  
 
 
 False Positive Tuning 
 
+  
+  
+  
   
   
   
@@ -1028,6 +1159,9 @@ Overly aggressive WAF rules generate false positives that block legitimate traff
   
   
   
+  
+  
+  
 
 
 * **Deploy in detection-only mode** initially to identify false positives without impacting production.
@@ -1051,10 +1185,16 @@ Overly aggressive WAF rules generate false positives that block legitimate traff
   
   
   
+  
+  
+  
 
 
-2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analyze audit logs** for blocked requests that appear legitimate. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable specific rules** or adjust paranoia levels. 
+2\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Analyze audit logs** for blocked requests that appear legitimate. 3\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\. **Disable specific rules** or adjust paranoia levels. 
 
+  
+  
+  
   
   
   
@@ -1103,10 +1243,16 @@ Overly aggressive WAF rules generate false positives that block legitimate traff
   
   
   
+  
+  
+  
 
 
 SecAction \
 
+  
+  
+  
   
   
   
@@ -1155,10 +1301,16 @@ SecAction \
   
   
   
+  
+  
+  
 
 
 phase:1,\
 
+  
+  
+  
   
   
   
@@ -1207,10 +1359,16 @@ nolog,\
   
   
   
+  
+  
+  
 
 
 pass,\
 
+  
+  
+  
   
   
   
@@ -1259,10 +1417,16 @@ t:none,\
   
   
   
+  
+  
+  
 
 
 setvar:tx.paranoia_level=2"
 
+  
+  
+  
   
   
   
@@ -1311,10 +1475,16 @@ setvar:tx.paranoia_level=2"
   
   
   
+  
+  
+  
 
 
 SecRuleRemoveById 942100
 
+  
+  
+  
   
   
   
@@ -1363,10 +1533,16 @@ SecRuleRemoveById 942100
   
   
   
+  
+  
+  
 
 
 SecRule REQUEST_URI "@beginsWith /api/public" \
 
+  
+  
+  
   
   
   
@@ -1415,10 +1591,16 @@ SecRule REQUEST_URI "@beginsWith /api/public" \
   
   
   
+  
+  
+  
 
 
 Performance Impact 
 
+  
+  
+  
   
   
   
@@ -1464,10 +1646,16 @@ WAF inspection introduces latency. Key optimization strategies:
   
   
   
+  
+  
+  
 
 
 * **Request body limits**: Large request bodies increase processing time. Set practical limits.
 
+  
+  
+  
   
   
   
@@ -1510,10 +1698,16 @@ WAF inspection introduces latency. Key optimization strategies:
   
   
   
+  
+  
+  
 
 
 * **Rule ordering**: Place cheaper checks (URI matching) before expensive ones (regex).
 
+  
+  
+  
   
   
   
@@ -1562,10 +1756,16 @@ WAF inspection introduces latency. Key optimization strategies:
   
   
   
+  
+  
+  
 
 
-SecRule REQUEST_URI "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|png|css|js|ico)$" \
+SecRule REQUEST_URI "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\.(jpg|png|css|js|ico)$" \
 
+  
+  
+  
   
   
   
@@ -1614,6 +1814,9 @@ SecRule REQUEST_URI "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   
   
+  
+  
+  
 
 
 Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1-3ms per request on modern hardware. Full inspection at paranoia level 4 can add 10-20ms. 
@@ -1637,10 +1840,16 @@ Benchmarking shows ModSecurity with CRS at paranoia level 2 adds approximately 1
   
   
   
+  
+  
+  
 
 
 Conclusion 
 
+  
+  
+  
   
   
   
