@@ -315,6 +315,51 @@ def regenerate_sitemap():
             lastmod = art.get('lastActive', art.get('date', TODAY))
             urls.append((art_en, freq, priority, lastmod, hreflangs))
 
+    # Chinese articles from root articles.json
+    cn_json = ROOT / 'articles.json'
+    en_slugs = set()  # track which slugs already have EN entries
+    for url_tuple in urls:
+        url, _, _, _, _ = url_tuple
+        m = re.search(r'/en/([^/]+)/([^/]+)\.html', url)
+        if m:
+            en_slugs.add((m.group(1), m.group(2)))
+
+    if cn_json.exists():
+        cn_data = json.loads(cn_json.read_text(encoding='utf-8'))
+        for board in cn_data.get('boards', []):
+            for art in board.get('posts', []):
+                art_cn = f'{BASE}/{board["id"]}/{art["slug"]}.html'
+                html_path = ROOT / board['id'] / f'{art["slug"]}.html'
+
+                if not html_path.exists():
+                    continue
+
+                html = html_path.read_text(encoding='utf-8')
+                if 'noindex' in html and '<meta name="robots" content="noindex' in html:
+                    continue
+
+                fsize = html_path.stat().st_size
+                if fsize > 18000:
+                    priority = '0.9'
+                    freq = 'weekly'
+                elif fsize > 12000:
+                    priority = '0.8'
+                    freq = 'weekly'
+                else:
+                    priority = '0.7'
+                    freq = 'monthly'
+
+                lastmod = art.get('lastActive', art.get('date', TODAY))
+
+                # Build hreflang
+                hreflangs = [f'<xhtml:link rel="alternate" hreflang="zh-CN" href="{art_cn}"/>']
+                art_en = f'{BASE}/en/{board["id"]}/{art["slug"]}.html'
+                en_html_path = ROOT / 'en' / board['id'] / f'{art["slug"]}.html'
+                if en_html_path.exists():
+                    hreflangs.append(f'<xhtml:link rel="alternate" hreflang="en" href="{art_en}"/>')
+
+                urls.append((art_cn, freq, priority, lastmod, hreflangs))
+
     # AI discovery files
     ai_files = [
         (f'{BASE}/llms.txt', 'weekly', '0.8'),
@@ -326,6 +371,8 @@ def regenerate_sitemap():
         (f'{BASE}/feed.xml', 'weekly', '0.6'),
         (f'{BASE}/en/feed.json', 'weekly', '0.6'),
         (f'{BASE}/feed.json', 'weekly', '0.6'),
+        (f'{BASE}/all.html', 'weekly', '0.6'),
+        (f'{BASE}/en/all.html', 'weekly', '0.6'),
         (f'{BASE}/images/sitemap.xml', 'weekly', '0.5'),
         (f'{BASE}/robots.txt', 'weekly', '0.5'),
     ]
